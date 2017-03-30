@@ -40,10 +40,11 @@
 				  <button ion-button disabled="true">Request Sent
 				  </button>
 			  </ion-col>
-			  <ion-col offset-33  *ngIf="status === 2">
+				<ion-col offset-33  *ngIf="status === 2">
 				  <button ion-button disabled="true">Rejected
 				  </button>
 			  </ion-col>
+
 			  <ion-col offset-10 *ngIf="status === 1">
 				  <button ion-button disabled="true">Connected
 				  </button>
@@ -59,7 +60,7 @@
 				</button>
 		  </ion-row>
 		  <ion-row>
-		  		<button ion-button (click)="communityMember()" color="dark" full clear>Communities
+		  		<button ion-button (click)="communityMember()"  color="dark" full clear>Communities
 				</button>
 		  </ion-row>
 		  <ion-row>
@@ -69,9 +70,8 @@
 		  <ion-row>
 		  		<ion-col>
 			  		<div *ngIf(connectLists)>
-					<ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
-
-			  		</div>
+						<ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
+					</div>
 		  		</ion-col>
 		  </ion-row>
 	  </ion-card>
@@ -231,7 +231,6 @@
               <p>{{community.description}}</p>
           </ion-card-content>
 	</ion-card>
-	</div>
-
+	</div>	
 </ion-content>
 	

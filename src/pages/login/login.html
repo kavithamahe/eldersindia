@@ -6,25 +6,34 @@
 -->
 <ion-content padding>
 <form (ngSubmit)="login()">
-<ion-list>
-<img src="assets/img/elder-logo.png" >
+<ion-list class="login-pages">
+<img src="assets/img/elder-logo.png" class="logo" /><!--
 <ion-item>
     <ion-label color="primary" floating>Email Address</ion-label>
-    <ion-input name="email" [(ngModel)]="registerCredentials.email"></ion-input>
+    <ion-input name="email" [(ngModel)]="registerCredentials.email" class="lock-icon"></ion-input>
 </ion-item>
 <ion-item>    
     <ion-label color="primary" floating >Password</ion-label>
     <ion-input name="password" type="password" [(ngModel)]="registerCredentials.password"></ion-input>
+  </ion-item>-->
+  <ion-item>
+    <ion-input name="email" type="text"  placeholder="Email" [(ngModel)]="registerCredentials.email"></ion-input>
   </ion-item>
+   <ion-item>
+    <ion-input name="password" type="password" placeholder="Username" [(ngModel)]="registerCredentials.password"></ion-input>
+  </ion-item>
+
    <br>
   <ion-fab center edge>
-  <button ion-fab color="primary">  <ion-icon name="arrow-forward"></ion-icon>
+  <button ion-fab color="primary">  <ion-icon name="md-arrow-forward"></ion-icon>
 </button>
 </ion-fab>
 </ion-list>
-</form><br>
-<ion-item padding>
-<button ion-button full (click)="forgotPassword()">Forgot Password</button>  
+</form>
+<br>
+<ion-item  class="bg-back">
+<button ion-button full (click)="forgotPassword()" class="forgot-pass">Forgot Password?</button>  
 </ion-item>
 
 </ion-content>
+      
