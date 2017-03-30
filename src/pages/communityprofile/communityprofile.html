@@ -141,11 +141,11 @@
 	      			<ion-row>
 	      				<ion-col>
 	        				<ion-avatar item-left>
-	          					<img [src]="imageUrl+community?.community_logo" (click)="userProfiles()">
+	          					<img [src]="imageUrl+community?.community_logo" (click)="goBackToCommunity()">
 	        				</ion-avatar>
 	        			</ion-col><br>
 	        			<ion-col width-20>
-	          				<h2 (click)="userProfile()" class="header">{{community.community_name}}</h2>
+	          				<h2 (click)="goBackToCommunity()" class="header">{{community.community_name}}</h2>
 	          				<p>{{community.created_at}}</p>
 						</ion-col>
 						<ion-col offset-50>
@@ -223,7 +223,7 @@
             <ion-card-title>
               <ion-row>
                 <ion-col>
-                  <p style="color:#387ef5" (click)="getCommunity()">{{community.community_name}}</p>
+                  <p style="color:#387ef5" (click)="goBackToCommunity()">{{community.community_name}}</p>
                 </ion-col>
                
              </ion-row> 
