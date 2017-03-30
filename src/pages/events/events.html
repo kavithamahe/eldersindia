@@ -1,0 +1,37 @@
+<!--
+  Generated template for the Events page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Events</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<ion-card *ngFor="let events of eventsLists" >
+<div (click)="viewEvents(events?.id)">
+ <img src="{{imageUrl+events?.featured_image}}" [hidden]="!events?.featured_image">
+  <ion-item>   
+    <h2 class="primary-color">{{events?.title}}</h2>
+    <p><ion-icon ios="ios-person" md="md-person"></ion-icon> {{events?.author_name }} | {{events?.created_at | date :"MMM dd y"}}</p>
+  </ion-item>
+  <ion-card-content>
+    <p [innerHTML]="events?.description | words : 60 : '...'"></p>
+  </ion-card-content>
+  </div>
+</ion-card>
+</ion-content>

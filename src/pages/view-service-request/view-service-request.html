@@ -1,0 +1,51 @@
+<!--
+  Generated template for the ViewServiceRequest page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>View Service Request</ion-title>    
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<ion-card>
+  <ion-card-content>
+  <ion-grid *ngFor="let viewService of viewServiceRequestInfo">
+  <ion-row>
+    <ion-col width-50>Contact person</ion-col>
+    <ion-col width-50>{{viewService?.contact_name}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col width-50>Contact No</ion-col>
+    <ion-col width-50>{{viewService?.contact_number}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col width-50>Service provider name</ion-col>
+    <ion-col width-50>{{viewService?.service_provider}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col width-50>Request date and time</ion-col>
+    <ion-col width-50>{{viewService?.Request_dateAndTime | date:'dd/M/yyyy h:m a'}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col width-50>Type of problem</ion-col>
+    <ion-col width-50>{{viewService?.problem}}</ion-col>
+  </ion-row>
+  </ion-grid>
+  </ion-card-content>
+</ion-card>
+</ion-content>

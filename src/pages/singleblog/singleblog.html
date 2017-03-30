@@ -1,0 +1,69 @@
+<!--
+  Generated template for the Blogs page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>{{singleBlogInfo?.details?.title}}</ion-title>    
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<ion-card>
+
+  <ion-item>
+    <ion-avatar item-left>
+      <img src="{{imageUrl+singleBlogInfo?.details?.avatar}}" [hidden]="!singleBlogInfo?.details?.avatar">
+    </ion-avatar>
+    <h2 class="primary-color">{{singleBlogInfo?.details?.title}}</h2>
+    <p><ion-icon ios="ios-person" md="md-person"></ion-icon> {{singleBlogInfo?.details?.author_name }} | {{singleBlogInfo?.details?.created_at | date :"MMM dd y"}}</p>
+  </ion-item>
+  <hr>
+  <img src="{{imageUrl+singleBlogInfo?.details?.banner_image}}" [hidden]="!singleBlogInfo?.details?.banner_image">
+  <ion-card-content>
+    <p [innerHTML]="singleBlogInfo?.details?.description"></p>
+  </ion-card-content>
+ <ion-row (click)="leaveComment()">
+    <ion-col>
+      <button ion-button icon-left clear small>
+        <ion-icon name="text"></ion-icon>
+        <div> Comment</div>
+      </button>
+    </ion-col>
+  </ion-row>
+<ion-list [hidden]="showComment">  
+
+  <ion-item>
+    <ion-textarea placeholder="Comment" [(ngModel)]="comment"></ion-textarea>
+  </ion-item>
+  <ion-item>
+  <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)">Submit</button>
+  </ion-item>
+  
+  <ion-item *ngFor="let viewComments of viewCommentsList">
+    <ion-avatar item-left>
+      <img src="{{imageUrl+viewComments?.avatar}}" [hidden]="!viewComments?.avatar">
+    </ion-avatar>
+    <h2 class="primary-color">{{viewComments?.user_name}}</h2>
+    <p>{{viewComments?.created_at | date :"MMM dd y"}}</p>
+    <p>{{viewComments?.comment}}</p>
+    <button ion-button icon-right clear end small item-right *ngIf="user_id==viewComments?.user_id" (click)="deleteComment(viewComments?.id)">
+<ion-icon ios="ios-trash" md="md-trash"></ion-icon>      
+      </button>
+  </ion-item>
+</ion-list>
+</ion-card>
+
+</ion-content>

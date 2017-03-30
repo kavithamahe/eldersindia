@@ -1,0 +1,78 @@
+<!--
+  Generated template for the CreateBlog page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Create Blog</ion-title>    
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<ion-list>
+
+  <ion-item>
+    <ion-label stacked>Blog Title: *</ion-label>
+    <ion-input type="text" [(ngModel)]="title"></ion-input>
+  </ion-item>
+
+<ion-item>
+    <ion-label stacked>Category: *</ion-label>
+    <ion-select [(ngModel)]="category">
+      <ion-option *ngFor="let categories of categoriesList" [value]="categories.name">{{categories.name}}</ion-option>     
+    </ion-select>
+  </ion-item>
+
+	<ion-item>
+	    <ion-label stacked>Highlights:</ion-label>
+	    <ion-textarea [(ngModel)]="highlights"></ion-textarea>
+	</ion-item>
+
+	<ion-item>
+	    <ion-label stacked>Description: *</ion-label>
+	    <ion-textarea [(ngModel)]="description"></ion-textarea>
+	</ion-item>
+    <ion-item>
+    <ion-label stacked>Featured Image:</ion-label>
+    <ion-input type="file"></ion-input>
+    </ion-item>
+    <ion-item>
+    <ion-label stacked>Banner Image:</ion-label>
+    <ion-input type="file"></ion-input>
+    </ion-item>
+    <ion-item>
+    <ion-label stacked>Tags:</ion-label>
+    <ion-input type="text" [(ngModel)]="tags"></ion-input>
+        
+    </ion-item>
+  <div radio-group [(ngModel)]="allowComments">
+  <ion-list-header>
+    Allow Comments:
+  </ion-list-header>
+  <ion-item>
+    <ion-label>Yes</ion-label>
+    <ion-radio value="Yes"></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>No</ion-label>
+    <ion-radio value="No"></ion-radio>
+  </ion-item> 
+</div>
+<button ion-button icon-left full (click)="createBlog()">
+  Send
+</button>
+</ion-list>
+
+</ion-content>

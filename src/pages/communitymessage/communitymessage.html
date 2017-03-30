@@ -1,0 +1,55 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Compose
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button  color="dark" clear (click)="dismiss()">
+        
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<form [formGroup]="authForm">
+		<ion-card padding>
+  			<ion-list>
+      			<ion-row>
+		        	<ion-label>To</ion-label>
+		    	</ion-row>
+		    	<ion-row>
+			       	<button ion-button outline color="dark" light full class="message">{{member_name}}
+			       	</button>
+	       		</ion-row>
+	       		<ion-row>
+		        	<ion-label>Subject</ion-label>
+		        </ion-row>
+		        <ion-row>
+		        	<ion-input type="text" class="message" formControlName="subject"
+		            [class.invalid]="!authForm.controls.subject.valid && (authForm.controls.subject.dirty )"></ion-input>
+		        </ion-row>
+	            	<div *ngIf="!authForm.controls.subject.valid  && (authForm.controls.subject.dirty || submitAttempt)">
+	                	<p class="valid">This field is required</p>
+           			</div>
+	       		<ion-row>
+		        	<ion-label>Message</ion-label>
+		        </ion-row>
+		        <ion-row>
+	       			<ion-textarea type="text" class="message" formControlName="message"
+			            [class.invalid]="!authForm.controls.message.valid && (authForm.controls.message.dirty )"></ion-textarea>
+			    </ion-row>
+            	<div *ngIf="!authForm.controls.message.valid  && (authForm.controls.message.dirty || submitAttempt)">
+                	<p class="valid">This field is required</p>
+           		</div>
+	       			 <br>
+     			<button ion-button (click)="accessGallery()" color="dark" outline>
+     			<ion-icon name="add"></ion-icon>Attachment</button>
+      			<button ion-button (click)="sendMessage()"><ion-icon name="send"></ion-icon>Send
+      			</button>
+			</ion-list>
+  		</ion-card>
+  	</form>
+</ion-content>

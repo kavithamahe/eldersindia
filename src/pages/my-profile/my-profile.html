@@ -1,0 +1,113 @@
+<!--
+  Generated template for the MyProfile page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>my-profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+<ion-item>
+
+	<ion-row>
+	<ion-col item-left class="borderClass">Details</ion-col>
+	<ion-col offset-50 class="borderClass"><button ion-button item-right color="secondary" icon-only (click)="editProfile()"><ion-icon ios="ios-create" md="md-create"></ion-icon></button></ion-col>
+
+	</ion-row>
+</ion-item>
+<ion-item *ngIf="user_type =='sponsor'">
+	<ion-row>
+	    <ion-col width-50 text-left text-wrap><div>Sponsor Name</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div>{{profileData?.name}}</div></ion-col>
+    </ion-row>
+
+    <ion-row>
+	    <ion-col width-50 text-left text-wrap><div>Designation</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div>{{profileData?.designation}}</div></ion-col>
+    </ion-row>
+
+    <ion-row>
+	    <ion-col width-50 text-left text-wrap><div>Employee Id</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div>{{profileData?.employee_id}}</div></ion-col>
+    </ion-row>
+
+    <ion-row>
+	    <ion-col width-50 text-left text-wrap><div>Mobile Number</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div>{{profileData?.mobile}}</div></ion-col>
+    </ion-row>
+    <ion-row>
+	    <ion-col width-50 text-left text-wrap><div>Personal Email</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div>{{profileData?.personal_email}}</div></ion-col>
+    </ion-row>
+    <ion-row>
+	    <ion-col width-50 text-left text-wrap><div>Location</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div>{{profileData?.locationName}}</div></ion-col>
+    </ion-row>
+    <ion-row>
+	    <ion-col width-50 text-left text-wrap><div>DOB</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div>{{profileData?.dob}}</div></ion-col>
+    </ion-row>
+    <ion-row>
+	    <ion-col width-50 text-left text-wrap><div>Email</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div>{{profileData?.official_email}}</div></ion-col>
+    </ion-row>
+    <ion-row>
+	    <ion-col width-50 text-left text-wrap><div>User Type</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div>{{profileData?.user_type}}</div></ion-col>
+    </ion-row>
+    <ion-row>
+	    <ion-col width-50 text-left text-wrap><div>Last Modified</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div>{{profileData?.updated_at}}</div></ion-col>
+    </ion-row>
+
+</ion-item>
+
+<ion-item *ngIf="user_type =='elder'">
+	<ion-row>
+	    <ion-col><div>Name</div></ion-col>
+	    <ion-col><div>{{profileData?.name}}</div></ion-col>
+    </ion-row>
+
+    <ion-row>
+	    <ion-col><div>Gender</div></ion-col>
+	    <ion-col><div>{{profileData?.gender}}</div></ion-col>
+    </ion-row>
+
+    <ion-row>
+	    <ion-col><div>Mobile Number</div></ion-col>
+	    <ion-col><div>{{profileData?.mobile}}</div></ion-col>
+    </ion-row>
+    <ion-row>
+	    <ion-col><div>Personal Email</div></ion-col>
+	    <ion-col><div>{{profileData?.personal_email}}</div></ion-col>
+    </ion-row>
+    <ion-row>
+	    <ion-col><div>DOB</div></ion-col>
+	    <ion-col><div>{{profileData?.dob}}</div></ion-col>
+    </ion-row>
+
+    <ion-row>
+	    <ion-col><div>Address</div></ion-col>
+	    <ion-col><div>{{profileData?.address}}</div></ion-col>
+    </ion-row>
+    
+    <ion-row>
+	    <ion-col><div>Email</div></ion-col>
+	    <ion-col><div>{{profileData?.email}}</div></ion-col>
+    </ion-row>
+    <ion-row>
+	    <ion-col><div>User Type</div></ion-col>
+	    <ion-col><div>{{profileData?.user_type}}</div></ion-col>
+    </ion-row>
+    <ion-row>
+	    <ion-col><div>Last Modified</div></ion-col>
+	    <ion-col><div>{{profileData?.updated_at}}</div></ion-col>
+    </ion-row>
+
+</ion-item>
+</ion-content>

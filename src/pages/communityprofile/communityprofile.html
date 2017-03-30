@@ -1,0 +1,237 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Community</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div>
+	  <ion-card>
+		  <ion-row>
+			  <ion-col offset-33>
+				  	<ion-item>
+					  <ion-avatar>
+					  	<img [src]="imageUrl+communityProfileData?.avatar">
+					  </ion-avatar>
+					</ion-item>
+			  </ion-col>
+		  </ion-row>
+		  <ion-row>
+			  <ion-col offset-33>
+				  <p>{{communityProfileData?.name}}</p>
+			  </ion-col>
+		  </ion-row>
+		  <ion-row>
+			  <ion-col offset-33 *ngIf="status === 3">
+				  <button ion-button (click)="connectMember(communityProfileData)">CONNECT
+				  </button>
+			  </ion-col >
+			  <ion-col offset-33  *ngIf ="status === 0">
+				  <button ion-button disabled="true">Request Sent
+				  </button>
+			  </ion-col>
+			  <ion-col offset-33  *ngIf="status === 2">
+				  <button ion-button disabled="true">Rejected
+				  </button>
+			  </ion-col>
+			  <ion-col offset-10 *ngIf="status === 1">
+				  <button ion-button disabled="true">Connected
+				  </button>
+			  </ion-col>
+			  <ion-col *ngIf="status === 1">
+				  <button ion-button (click)="messageModel(communityProfileData)">Message
+				  </button>
+			  </ion-col>
+			 
+		  </ion-row>
+		  <ion-row>
+		  		<button ion-button (click)="activityMember()" color="dark" full clear>Activity
+				</button>
+		  </ion-row>
+		  <ion-row>
+		  		<button ion-button (click)="communityMember()" color="dark" full clear>Communities
+				</button>
+		  </ion-row>
+		  <ion-row>
+		  		<button ion-button  (click)="connectList()" color="dark" full clear>Connections
+				</button>
+		  </ion-row>
+		  <ion-row>
+		  		<ion-col>
+			  		<div *ngIf(connectLists)>
+					<ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
+
+			  		</div>
+		  		</ion-col>
+		  </ion-row>
+	  </ion-card>
+	</div>
+  	<div *ngIf(activityLists)>
+ 		<div>
+		  	<ion-card>
+				<ion-item class="edit">
+			  		<ion-icon name="create"></ion-icon>
+			  		Update Status
+			  	</ion-item>
+			  	   <hr><br>
+			  	  	<ion-card-content>
+					  	<div class="three">
+				      		<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in you mind?">
+				      		</ion-textarea>
+				    	</div>
+		    		</ion-card-content>
+		    		<ion-card-content>
+		    			<ion-row>
+							<ion-col offset-20>
+								<button ion-button (click)="accessGallery()" class="video">
+									<ion-icon name="image">
+									</ion-icon>Add Photos</button>
+							 			<img [src]="base64Image" *ngIf="base64Image" />
+							</ion-col>
+						</ion-row>
+		    				<br>
+		       			<ion-row>
+							<ion-col offset-20>
+								<button ion-button (click)="addVideos()" medium class="video">
+								<ion-icon name="videocam">
+								</ion-icon>Add Videos</button>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col offset-20>
+								<div *ngIf(addVideo)>
+									<ion-item  class="video" >
+										<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
+										</ion-input>
+									</ion-item>
+								</div>
+							</ion-col>
+						</ion-row>
+		   					<hr>
+		        	</ion-card-content>
+		        	<ion-card-content>
+						<ion-row>
+			    			<ion-col offset-67>
+			    				<div>
+									<button ion-button medium (click)="addUserPosts(communityProfileData.id)" 
+									class="post">
+										<ion-icon name="send"></ion-icon>Post
+									</button>
+								</div>
+							</ion-col>
+						</ion-row>
+					</ion-card-content>
+				</ion-card>
+			</div>
+
+ 	 <ion-list *ngFor="let community of communityProfile; let i=index">
+ 		<div>
+ 			<ion-card>
+				<ion-item>
+	      			<ion-row>
+	      				<ion-col>
+	        				<ion-avatar item-left>
+	          					<img [src]="imageUrl+community?.community_logo" (click)="userProfiles()">
+	        				</ion-avatar>
+	        			</ion-col><br>
+	        			<ion-col width-20>
+	          				<h2 (click)="userProfile()" class="header">{{community.community_name}}</h2>
+	          				<p>{{community.created_at}}</p>
+						</ion-col>
+						<ion-col offset-50>
+			        		<!-- <button ion-button color="dark" clear (click)="itemDetails()">
+			          			<ion-icon  item-left name="arrow-dropdown"></ion-icon>
+			          		</button>
+	          		<div *ngIf(itemComments)>
+	          			<button  ion-button full color="light" >Block</button>
+	          			<button  ion-button full color="light" >Report</button>
+	          		</div> -->
+	          			</ion-col>
+	       			</ion-row>
+	    		</ion-item>
+		      	<ion-card-content>
+		          	<p>{{community.post_message}}</p><br>
+		          	<img  [src]="imageUrl+community?.post_image" 
+		          	[hidden]="!community?.post_image">
+		       	</ion-card-content>
+	       		<ion-card-content>
+					 <iframe [hidden]="!community?.post_video" height="190" onload="this.width=screen.width" [src]="sanitizer.bypassSecurityTrustResourceUrl(community?.post_video)" frameborder="0" ></iframe>
+	       		</ion-card-content>
+	       	 	<ion-card-content>
+	      			<ion-row>
+		        		<ion-col width-15>
+		          			<button class="hover" ion-button outline (click)="addLikes(community.id)" color="light">
+		            			<ion-icon  name="heart"></ion-icon>{{community.likes}}
+		          			</button>
+		        		</ion-col>
+		        		<!-- <ion-col>
+		          			<button class="hover" ion-button outline color="light">
+		            			<ion-icon name="share"></ion-icon>
+		          			</button>
+		        		</ion-col> -->
+		        		<ion-col width-80>
+		          			<button ion-button class="comment" color="dark" clear (click)="addDetails(i)">
+		          				{{community.comment_count}}Comments.....
+		          			</button>
+		          		</ion-col>
+	      			</ion-row>
+	      			<div *ngIf="i==showblock">
+	      				<ion-item >
+							<div *ngFor="let comment of community.comments">
+	      						<ion-row class="send">
+	      							<ion-avatar item-left>
+	      								<img [src]="imageUrl+comment.profile_image">
+	      							</ion-avatar>
+	      							<ion-col>{{comment.comments}}</ion-col>
+	      							<button ion-button (click)="deleteComment(comment.comments_id)" color="dark" clear>
+	      								<ion-icon name="trash"></ion-icon>
+	      							</button>
+	      						</ion-row><br>
+	      					</div>
+	      				</ion-item>
+	      				<ion-item>
+				   			<ion-label floating>Enter Comments...</ion-label>
+				   				<ion-textarea [(ngModel)]="comment"></ion-textarea>
+				 		</ion-item>
+	  						<button  ion-button (click)="sendPost(community.id)" color="secondary" full>Post Comment</button>
+	  						<button  ion-button (click)="addDetails(i)" color="light" full>Cancel</button>
+	      			</div>
+	      		</ion-card-content>
+	    	</ion-card>
+		</div>
+	</ion-list>
+	</div>
+	<div *ngIf(communityMembers)>
+	<ion-card *ngFor="let community of getCommunityMembers; let i=index">
+ 		 <img  [src]="imageUrl+community?.banner">
+          <ion-item>
+            <ion-thumbnail>
+              <img [src]="imageUrl+community?.logo">
+            </ion-thumbnail>
+          </ion-item>
+          <ion-card-content>
+            <ion-card-title>
+              <ion-row>
+                <ion-col>
+                  <p style="color:#387ef5" (click)="getCommunity()">{{community.community_name}}</p>
+                </ion-col>
+               
+             </ion-row> 
+            </ion-card-title>
+              <p>{{community.description}}</p>
+          </ion-card-content>
+	</ion-card>
+	</div>
+
+</ion-content>
+	

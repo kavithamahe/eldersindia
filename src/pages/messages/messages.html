@@ -1,0 +1,72 @@
+<!--
+  Generated template for the Messages page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+--><ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Messages</ion-title>
+    <ion-buttons right (click)="createMessage()">    
+      <button ion-button icon-only>
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<div padding>
+  <ion-segment [(ngModel)]="messages">
+    <ion-segment-button value="inbox" color="orange" (click)="onInit()">
+      Inbox
+    </ion-segment-button>
+    <ion-segment-button value="sent" color="primary" (click)="sent()">
+      Sent
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<div [ngSwitch]="messages">
+  <ion-list *ngSwitchCase="'sent'">
+  <ion-card>
+    <ion-item *ngFor="let sent of sentInfo?.data" (click)="viewMessages(sent?.id)">
+    <ion-avatar item-left>
+      <img src="{{imageUrl+sent?.avatar}}">
+    </ion-avatar>
+    <h2>{{sent?.name}}</h2>
+    <p>{{sent?.subject | words : 10 : '...'}}</p>
+    <p>{{sent?.message | words : 10 : '...'}}</p>
+  </ion-item>
+  </ion-card>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'inbox'">
+  <ion-card>
+     <ion-item *ngFor="let inbox of inboxInfo?.data" (click)="viewMessages(inbox?.id)">
+    <ion-avatar item-left>
+      <img src="{{imageUrl+inbox?.avatar}}">
+    </ion-avatar>
+    <h2>{{inbox?.author_name}}</h2>
+    <p>{{inbox?.subject | words : 10 : '...'}}</p>
+    <p>{{inbox?.message | words : 10 : '...'}}</p>
+    <p>{{inbox?.created_at | date :'MMM dd y'}}</p>
+  </ion-item>
+  </ion-card>
+  </ion-list>
+
+</div>
+
+
+
+</ion-content>

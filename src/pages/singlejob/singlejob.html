@@ -1,0 +1,70 @@
+<!--
+  Generated template for the Blogs page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center><span *ngFor="let title of singleJobInfo">{{title?.title}} </span></ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<ion-card *ngFor="let singleJob of singleJobInfo">
+
+<!--  <ion-item>
+    <ion-avatar item-left>
+      <img src="assets/img/headshot.jpg">
+    </ion-avatar>
+    <h2 class="primary-color">Marty McFly</h2>
+    <p>November 5, 1955</p>
+  </ion-item>-->
+
+  <ion-list>
+  <ion-item>
+    <ion-thumbnail item-left>
+      <img [hidden]="!singleJob?.user?.avatar" [src]="imageUrl+singleJob?.user?.avatar">
+    </ion-thumbnail>
+    <h2 class="primary-color">{{singleJob?.title}}</h2>
+    <p>{{singleJob?.company_name}}</p>
+    <p><span *ngIf="singleJob?.created_at">{{singleJob?.created_at | date :'MMM dd y'}}</span></p>
+  </ion-item>
+</ion-list>
+  <hr>
+  <!--applyJob(singleJob?.id)-->
+  <button ion-button full color="orange" (click)="applyJob(singleJob?.id)">Apply</button>
+  <hr>
+
+  <ion-card-content>
+     <p *ngIf="singleJob?.functional_area">Functional Area:<ion-badge color="green" *ngFor="let funArea of singleJob?.functional_area">{{funArea?.name}}</ion-badge> </p>
+     <p *ngIf="singleJob?.skills">Skills:<ion-badge color="green" *ngFor="let skills of singleJob?.skills">{{skills?.skills}}</ion-badge> </p>
+
+     <h3 class="primary-color" item-right>Job Description</h3>
+  <p [innerHtml]="singleJob?.description"></p>
+  </ion-card-content><hr>
+  <ion-item><h2 class="primary-color">Job summary</h2></ion-item>
+ 
+<hr>
+<ion-grid>
+  <ion-row>
+    <ion-col width-33><span class="primary-color">Company</span> <br> {{singleJob?.company_name}}</ion-col>
+     <ion-col width-33><span class="primary-color">Location</span> <br>  <span *ngFor="let locations of singleJob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></ion-col>
+      <ion-col width-33><span class="primary-color">Job Type </span> <br> <span *ngFor="let jobType of singleJob?.job_type; let isLast2=last">{{jobType?.name}}{{isLast2 ? '' : ', '}}</span></ion-col>
+  </ion-row>
+</ion-grid>
+
+<br>
+</ion-card>
+</ion-content>

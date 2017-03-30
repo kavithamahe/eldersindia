@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Community</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-toolbar no-border-top>
+      <ion-segment [(ngModel)]="community">
+        <ion-segment-button (click)="myCommunity()" value="mycommunity">
+          My Community
+        </ion-segment-button>
+        <ion-segment-button (click)="otherCommunity(community.uid)" value="othercommunity">
+          Recommended Community
+        </ion-segment-button>
+        
+      </ion-segment>
+    </ion-toolbar>
+
+    <div [ngSwitch]="community">
+      <ion-list *ngSwitchCase="'mycommunity'">
+        <ion-card>
+          <ion-list>
+            <ion-item>
+              <ion-label>select category</ion-label>
+                <ion-select  (ionChange)='getCategory($event)' >
+                  <ion-option *ngFor="let category of categoryLists" 
+                  value={{category.id}}>{{category.name}}
+                  </ion-option>
+                </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+        <ion-card *ngFor="let community of communitylists; let i= index">
+          <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner" >
+          <ion-item>
+            <ion-thumbnail>
+              <img [src]="imageUrl+community?.logo">
+            </ion-thumbnail>
+          </ion-item>
+          <ion-card-content>
+            <ion-card-title>
+              <ion-row>
+                <ion-col>
+                  <p style="color:#387ef5" (click)="getPost(community.id)">{{community.community_name}}</p>
+                </ion-col>
+                <ion-col [hidden]="!community.category_name"> 
+                  <button ion-button color="danger">{{community.category_name}}</button>  
+                </ion-col>
+             </ion-row> 
+            </ion-card-title>
+              <p>{{community.description}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'othercommunity'">
+        <ion-card>
+          <ion-list>
+            <ion-item>
+              <ion-label>select category</ion-label>
+                <ion-select (ionChange)='setCategory($event)'>
+                  <ion-option *ngFor="let category of categoryLists" 
+                    value={{category.id}}> {{category.name}}
+                  </ion-option>
+                </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+        <ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
+        <ion-card *ngFor="let community of communitylists; let i= index">
+          <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner">
+            <ion-item >
+              <ion-thumbnail [hidden]="!community?.logo">
+                <img [src]="imageUrl+community?.logo">
+              </ion-thumbnail>
+            </ion-item>
+            <ion-card-content>
+              <ion-card-title>
+                <p  style="color:#387ef5" (click)="getPost(community.id)">{{community.community_name}}</p>
+              </ion-card-title>
+                <p>{{community.description}}</p>
+            </ion-card-content>
+        </ion-card>
+      </ion-list>
+    </div>
+   	 <!-- <ion-infinite-scroll (infinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+     -->
+</ion-content>
+  

@@ -1,0 +1,247 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+
+my-theme{
+	ion-menu{
+	background : color($colors,secondary);
+	}
+}
+.primary-color
+{
+	color:#1976d2 !important;
+}
+
+.ios, .md {
+
+
+
+.demo{
+	background-color:#F2610D;
+	font-size:14px;
+	color:#ffffff;
+}
+.demo:hover{
+	border-color:#0969e8;
+}
+.one{
+	background-color:#0066CC;
+	font-size:14px;
+	color:#ffffff;
+}
+
+.three
+{
+	border: 2px solid #80bfff;
+    border-radius: 35px;
+}
+.hover:hover{
+	border-color: #e86509;
+}
+.comment{
+	border: 2px solid #f2f2f2;
+
+}
+
+ion-content{
+	background-color: #e6f2ff;
+}
+.post
+{
+	background-color: #ff4000;
+	border-radius: 35px;
+}
+.post:hover{
+		background-color: #ff4000;
+
+}
+
+.edit{
+	color: #004d99;
+	font-size: 22px;
+}
+
+.valid{
+	color:red;
+}
+
+.comment{
+	border: 2px solid  #f2f2f2;
+	padding:20px;
+}
+.header{
+	color: #387ef5;
+}
+.video{
+	width:200px;
+	border-radius: 35px;
+	border: 2px solid #a59e95;
+	height:50px;
+}
+.send{
+	border: 2px solid #f2f2f2;
+}
+
+
+page-elders {
+.three
+{
+	border: 2px solid  #f2f2f2;
+    border-radius: 40px;
+    background-color:  #ffffff;
+
+}
+.valid{
+		color:red;
+}
+.address
+{
+	border: 2px solid  #f2f2f2;
+    border-radius: 25px;
+    background-color:  #ffffff;
+}
+.main{
+	padding-left:40px;
+	padding-right:40px;
+}
+.personal{
+	width:170px;
+	background-color:  #3385ff;
+	font-size:18px;
+	color:#ffffff;
+}
+ .error-box {
+        color: red;
+    }
+     
+    .error-border {
+        color: red;
+    }
+.emergency{
+	width:200px;
+	background-color: #3385ff;
+	font-size:18px;
+	color:#ffffff;
+}
+ion-content{
+	background-color:  #e6f0ff;
+
+}
+.add{
+	color:#ff751a;
+	font-size :16px;
+}
+.add:hover{
+	color:#005ce6;
+}
+.person{
+	width:70px;
+	height:70px;
+	background-color:#ff8000;
+}
+.person:hover{
+	background-color:#ff8000;
+}
+.back{
+	width:70px;
+	height:70px;
+}
+}
+page-manage {
+ion-content{
+background-color:#e6f2ff;
+	
+}
+
+ion-list{
+	text-align:left;
+}
+.depend{
+	padding:5px;
+}
+p{
+	font-size:18px;
+}
+}
+}
+.dependent-modal{
+position: absolute;
+top: 60px;
+left: 25px;
+display: block;
+width: 80%;
+height: 25%;
+background-color:primary;
+padding-top:25px;	
+}
+
+.ion-modal {
+position: absolute;
+top: 60px;
+left: 25px;
+display: block;
+width: 90%;
+height: 90%;
+background-color:light;
+}
+.service_request {
+
+border-radius: 20px;
+border :2px solid green;
+
+}
+.alert-message{
+	overflow-y: none !important;
+}
+
+
+.slide_height{
+	height: auto !important;
+}
+
+.rupee{
+	background-position:left;
+	width:10px;
+	height:14px;
+	background-image:url('http://i.stack.imgur.com/vJZ9m.png');
+	display:block;
+	background-repeat:no-repeat;
+	padding-bottom:25px
+}
+.depend{
+	border-radius: 20px;
+    border :2px solid green;
+
+}
+
+ion-content{
+    background-image: url('../../assets/img/bg.jpg');
+}
+
+
+.my-side-menu,{
+ background: #333 !important;
+}
+.my-list-item{
+ background: #333 !important;
+ color:#fff !important;
+ border:#564545 !important;
+}
+
+.list-md .item-block .item-inner {
+    border-bottom: none !important;
+}

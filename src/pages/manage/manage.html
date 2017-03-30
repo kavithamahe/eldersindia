@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-navbar>
+  <ion-row>
+   <ion-col width-10><div>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon> 
+    </button>
+    </div>
+    </ion-col>
+    <ion-col width-40><div>
+     <button ion-button icon-only menuToggle>
+      <ion-icon name="home"></ion-icon> 
+    </button>
+    </div>
+    </ion-col>
+    <ion-col width-50 center><div>
+    <ion-title>
+      Manage Dependents
+    </ion-title>
+    </div>
+    </ion-col>
+    <ion-col end><div>
+     <button ion-button icon-only menuToggle>
+      <ion-icon name="arrow-back"></ion-icon> 
+    </button>
+    </div>
+    </ion-col>
+    <ion-col end><div>
+     <button clear color="dark" ion-button icon-only (click)="addElder()">
+      <ion-icon name="ios-person-add"></ion-icon> 
+    </button>
+    </div>
+    </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+  
+
+
+<ion-content padding>
+    
+  <div *ngFor="let manage of manages; let i=index">
+   
+        <ion-card>
+        <ion-row>
+        <ion-col width-10>
+         <button ion-button color="dark" clear (click)="toggleDetails(i)">
+          <ion-icon item-left name="person">{{manage.relation}}</ion-icon>
+          </button>
+          </ion-col>
+          <ion-col offset-50>
+          <button ion-button (click)="editElder(manage)" color="dark" clear><ion-icon name="create"></ion-icon>
+          </button>
+          </ion-col>
+          <ion-col>
+          <button ion-button (click)="deleteElder(manage.id)" color="dark" clear><ion-icon name="trash"></ion-icon>
+          </button>
+          </ion-col>
+          </ion-row>
+        </ion-card>
+              
+        <ion-card *ngIf="i==showblock">
+          <ion-list>
+            <p><ion-icon  class="depend" item-left name="person">
+            </ion-icon>{{manage.name}}</p>
+            <p><ion-icon class="depend" item-left name="call">
+            </ion-icon>{{manage.mobile}}</p>
+            <p><ion-icon class="depend" item-left 
+            name="calendar"></ion-icon>{{manage.dob}}</p>
+            <p><ion-icon class="depend" item-left 
+            name="pin"></ion-icon>{{manage.city}}</p>
+            <p><ion-icon class="depend" item-left 
+            name="pin"></ion-icon>{{manage.address}}</p>
+            <p><ion-icon class="depend" item-left 
+            name="briefcase"></ion-icon>{{manage.service}}</p>
+           </ion-list>
+        </ion-card>
+      
+       
+       </div>
+  
+     
+  </ion-content>

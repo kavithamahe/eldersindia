@@ -1,0 +1,51 @@
+<!--
+  Generated template for the SubcategoryList page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>{{serviceTitle}}</ion-title>    
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<ion-card class="subcategory-list" *ngFor="let service_list of sublists.lists">
+    <ion-item>
+        <ion-thumbnail style="width: 30px; height: 30px;" item-left>
+          <img [src]= "logoUrl+service_list?.logo">
+        </ion-thumbnail>
+        <ion-row>
+        <ion-col>
+        <h2>{{service_list.name}}</h2>
+        </ion-col>
+        <ion-col>
+        <button item-right  ion-button small item-right (click)="serviceInfo(service_list)">info</button>
+        </ion-col>
+        </ion-row>
+          <ion-row>
+          <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline"               halfStarIconName="star-half" starIconName="star" nullable="false" 
+                (ngModelChange)="onModelChange($event)">        
+          </rating>
+          
+      </ion-row>
+
+        <ion-row><span class="rupee"></span><ion-col>{{service_list.service_cost}}</ion-col></ion-row> 
+    </ion-item>
+     <ion-item>
+     <button ion-button item-left (click)="openModal('scheduleModal',service_list.id)"> Schedule Request</button>
+     <button ion-button item-right (click)="instantRequest(service_list.id)"> Instant Request</button>
+     </ion-item>
+  </ion-card>
+</ion-content>

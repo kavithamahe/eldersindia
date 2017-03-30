@@ -1,0 +1,2006 @@
+//colors
+$color_denim_approx: #1d6ab2;
+$white: #fff;
+$color_flamingo_approx: #fe5722;
+$color_blue_bayoux_approx: #4c5e70;
+$color_fun_blue_approx: #135b9e;
+$color_yellow_sea_approx: #f7ae00;
+$color_pewter_approx: #94a7ac;
+$color_tapa_approx: #777;
+$color_zircon_approx: #f3f7ff;
+$black_15: rgba(0, 0, 0, 0.15);
+$color_mariner_approx: #1976d2;
+$color_curious_blue_approx: #3085dc;
+$color_chilean_fire_approx: #f97500;
+$color_clementine_approx: #ee7000;
+$color_la_palma_approx: #37a402;
+$color_congress_blue_approx: #004784;
+$color_iron_approx: #d2dadb;
+$color_gallery_approx: #eee;
+$color_st_tropaz_approx: #286090;
+$black: #000;
+$color_gray_nurse_approx: #eaeaea;
+$color_star_dust_30_approx: rgba(155,155,155,0.3);
+$white_90: rgba(255,255,255,0.9);
+$black_10: rgba(0,0,0,0.1);
+$white_50: rgba(255, 255, 255, 0.5);
+$white_80: rgba(255,255,255,0.8);
+$color_black_squeeze_approx: #f3f7f9;
+$color_vanilla_ice_approx: #f2dede;
+$color_steel_blue_approx: #337ab7;
+$color_celeste_approx: #ccc;
+$black_20: rgba(0,0,0,.2);
+$white_95: rgba(255,255,255,.95);
+$color_cornflower_blue_approx: #62a8ea;
+$color_emerald_approx: #46be8a;
+$color_viking_approx: #57c7d4;
+$color_sandy_brown_approx: #f2a654;
+$color_bittersweet_approx: #f96868;
+$color_baltic_sea_approx: #2b2b2b;
+$color_wild_sand_approx: #f5f5f5;
+$color_hawkes_blue_approx: #d4eaff;
+$color_sail_approx: #aed7ff;
+$black_25: rgba(0, 0, 0, 0.25);
+$color_royal_blue_approx: rgb(66, 127, 237);
+$color_endeavour_approx: #005eb1;
+$color_mountain_meadow_approx: #0fc176;
+$color_mountain_mist_approx: rgb(153, 153, 153);
+$color_alto_approx: rgb(217, 217, 217);
+$black_4_70588: rgba(0, 0, 0, 0.0470588);
+$mercury: rgb(229, 229, 229);
+$concrete: #f2f2f2;
+$color_pattens_blue_approx: #deefff;
+$color_japanese_laurel_approx: #090;
+$color_storm_dust_approx: #666;
+$color_fuscous_gray_approx: #555;
+$color_persian_green_approx: #0aa699;
+$color_eminence_approx: #6c3483;
+$color_limeade_approx: #77b003;
+$color_pickled_bluewood_approx: #2c3e50;
+$color_flush_mahogany_approx: #c0392b;
+$color_cinnabar_approx: #e74c3c;
+$color_studio_approx: #8e44ad;
+$color_boston_blue_approx: #2980b9;
+$color_niagara_approx: #16a085;
+$color_ochre_approx: #ca6f1e;
+$color_eucalyptus_approx: #1e8449;
+$color_genoa_approx: #117a65;
+$color_ebony_clay_approx: #212f3c;
+$color_evening_sea_approx: #0b5345;
+$color_peru_tan_approx: #873600;
+$color_sahara_approx: #b7950b;
+$color_quill_gray_13_approx: rgba(212, 209, 209, 0.13);
+$color_mine_shaft_12_approx: rgba(51, 51, 51, 0.12);
+$color_rich_gold_approx: #ab5100;
+
+//fonts
+$font_0: Open Sans;
+$font_1: sans-serif !important;
+$font_2: Arial;
+$font_3: Helvetica;
+$font_4: sans-serif;
+$font_5: Roboto;
+
+//urls
+$url_0: url(../img/bg.jpg);
+$url_1: url(../img/mail-icon.png);
+$url_2: url(../img/lock-icon.png);
+$url_3: url(../images/arrow_down.png);
+$url_4: url(../images/arrow_up.png);
+$url_5: url(http://www.scottgood.com/jsg/blog.nsf/images/arrowdown.gif);
+
+//@extend-elements
+//original selectors
+//.arrow_box::after, .arrow_box::before
+%extend_1 {
+	border: medium solid transparent;
+	bottom: 99%;
+	content: " ";
+	height: 0;
+	left: 8%;
+	pointer-events: none;
+	position: absolute;
+	width: 0;
+}
+
+//original selectors
+//.ac-container input:checked +label, .ac-container input:checked +label:hover
+%extend_2 {
+	background: $color_chilean_fire_approx;
+	color: $white;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 0 0 1px $color_star_dust_30_approx, 0 2px 2px $black_10;
+}
+
+//original selectors
+//.ac-container label:hover:after, .ac-container input:checked +label:hover:after
+%extend_3 {
+	content: '';
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	right: 13px;
+	top: 7px;
+	background: transparent $url_3 no-repeat center center;
+}
+
+
+@charset "utf-8";
+body {
+	background: $color_zircon_approx $url_0 no-repeat center top;
+	font-size: 15px !important;
+	font-family: $font_0, $font_1;
+	color: $color_tapa_approx;
+}
+header {
+	padding: 15px 0;
+	background: $color_denim_approx;
+	margin-bottom: 10px;
+	> div > div > div {
+		> h1 {
+			margin: 0;
+			padding: 0;
+			font-size: 20px;
+			color: $white;
+		}
+		> a {
+			color: $white;
+			text-decoration: none;
+			font-size: 18px;
+			&:hover {
+				color: $color_flamingo_approx;
+			}
+		}
+	}
+}
+.header-mobile-account {
+	background: $color_blue_bayoux_approx;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 4px;
+	margin-bottom: 20px;
+	> .head-text {
+		> h4 {
+			color: $white;
+			margin: 0;
+		}
+		> p {
+			color: $white;
+			margin-bottom: 0;
+		}
+	}
+}
+.main {
+	max-width: 320px;
+	margin: 0 auto 0;
+}
+.top-home {
+	margin-left: 15px;
+}
+h3 {
+	text-align: center;
+	line-height: 300%;
+	margin: 0;
+	padding: 0;
+}
+.form-control {
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 25px;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 0 10px 0 $black_15;
+	text-align: left;
+	font-size: 16px;
+}
+label {
+	text-align: center;
+	display: block;
+	border: none !important;
+}
+.login-logo {
+	padding-top: 50px;
+}
+.btn-primary {
+	background: $color_mariner_approx;
+	border: 1px solid $color_mariner_approx;
+	color: $white !important;
+}
+.btn-blue {
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 50%;
+	font-family: $font_2;
+	color: $white;
+	font-size: 20px;
+	background: $color_mariner_approx;
+	line-height: 25px;
+	text-align: center;
+	text-decoration: none;
+	width: 60px;
+	height: 60px;
+	&:hover {
+		background: $color_curious_blue_approx;
+		text-decoration: none;
+		color: $white;
+	}
+}
+.panel-act-plus {
+	position: relative;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 0;
+	border: 1px solid $white;
+	margin-bottom: 5px;
+	> {
+		.panel-body {
+			font-size: 16px !important;
+			padding-top: 5px;
+			font-size: 15px;
+			> h2 {
+				font-size: 18px;
+				margin: 0 0 5px;
+				padding: 0;
+				> a {
+					color: $color_baltic_sea_approx;
+					text-decoration: none;
+					&:hover {
+						color: $color_flamingo_approx;
+					}
+				}
+			}
+			> .panel-act-plus-image {
+				display: block;
+				text-align: center;
+				background-color: $color_wild_sand_approx;
+				border: 1px solid $color_alto_approx;
+				> img {
+					max-width: 100%;
+				}
+			}
+		}
+		.dropdown {
+			position: absolute;
+			top: 5px;
+			right: 15px;
+			> span > span {
+				font-size: 10px;
+			}
+			> .dropdown-menu {
+				left: initial;
+				right: 0;
+				//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+				border-radius: 2px;
+			}
+		}
+		.panel-act-plus-tags {
+			position: absolute;
+			top: 35px;
+			right: -3px;
+			> ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				&:hover {
+					//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+					box-shadow: 0 0 3px $black;
+					//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+					box-shadow: 0 0 3px $black_25;
+					> li {
+						padding: 5px 15px 5px 10px;
+						width: auto;
+						cursor: pointer;
+						margin-left: auto;
+						background-color: $white;
+					}
+				}
+				> li {
+					display: block;
+					right: 0;
+					width: 0;
+					padding: 5px 0;
+					background-color: $color_wild_sand_approx;
+					font-size: 15px;
+					overflow: hidden;
+					&.home::after {
+						border-right: 3px solid $color_endeavour_approx;
+					}
+					&.health::after {
+						border-right: 3px solid $color_mountain_meadow_approx;
+					}
+					&:first-child {
+						padding: 5px 15px 5px 10px;
+						width: auto;
+						cursor: pointer;
+						margin-left: auto;
+					}
+					&:hover {
+						background-color: $color_royal_blue_approx;
+						color: $white;
+					}
+					&.home:hover {
+						background: $color_endeavour_approx;
+					}
+					&.health:hover {
+						background: $color_mountain_meadow_approx;
+					}
+				}
+				> li::after {
+					content: "";
+					position: absolute;
+					top: 0;
+					right: 0;
+					height: 100%;
+					border-right: 3px solid $color_royal_blue_approx;
+				}
+			}
+		}
+		.panel-heading {
+			background-color: $white;
+			border-width: 0;
+			margin-top: 0;
+			padding-bottom: 5px;
+			> img {
+				margin-right: 15px;
+				width: 50px;
+				height: 50px;
+			}
+			> h3 {
+				line-height: 20px;
+				margin-bottom: 8px;
+				font-size: 16px;
+				font-weight: 700;
+				text-align: left;
+				color: $color_mariner_approx;
+			}
+			> h5 {
+				color: $color_mountain_mist_approx;
+				font-size: 14px;
+				font-weight: 400;
+				margin: 0;
+				padding: 0;
+			}
+		}
+		.panel-footer {
+			background-color: $white;
+			border-width: 0;
+			font-size: 14px;
+			font-weight: 700;
+			min-height: 54px;
+			> {
+				.btn {
+					float: left;
+					margin-right: 8px;
+					> i {
+						color: $color_mountain_mist_approx;
+					}
+					> span {
+						color: $color_mountain_mist_approx;
+					}
+				}
+				.input-placeholder {
+					display: block;
+					margin-left: 98px;
+					color: $color_mountain_mist_approx;
+					font-size: 12px;
+					font-weight: 400;
+					padding: 8px 6px 7px;
+					border: 1px solid $color_alto_approx;
+					//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+					border-radius: 2px;
+					//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+					box-shadow: $black_4_70588 0 1px 0 0;
+				}
+			}
+		}
+		.panel-act-plus-comment {
+			display: none;
+			padding: 10px 20px 15px;
+			border-top: 1px solid $mercury;
+			background-color: $color_wild_sand_approx;
+			> .panel-act-plus-textarea {
+				float: right;
+				width: calc(100% - 56px);
+				> textarea {
+					display: block;
+					width: 100%;
+					background-color: $white;
+					border: 1px solid $color_alto_approx;
+					//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+					box-shadow: $black_4_70588 0 1px 0 0;
+					resize: vertical;
+				}
+				> .btn {
+					margin-top: 10px;
+					margin-right: 8px;
+					font-size: 15px;
+					width: 100%;
+				}
+			}
+		}
+	}
+	.btn {
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 3px;
+	}
+	.btn-default {
+		border: 1px solid $color_alto_approx;
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: $black_4_70588 0 1px 0 0;
+		&:hover {
+			background-color: $white;
+			border-color: $color_chilean_fire_approx;
+			i {
+				color: $color_chilean_fire_approx;
+			}
+			span {
+				color: $color_chilean_fire_approx;
+			}
+		}
+		&:focus {
+			background-color: $white;
+			border-color: $color_chilean_fire_approx;
+		}
+		&:active {
+			background-color: $white;
+			border-color: $color_chilean_fire_approx;
+		}
+	}
+	&.panel-act-plus-show-comment > {
+		.panel-act-plus-comment {
+			display: block;
+		}
+		.panel-footer > .input-placeholder {
+			display: none;
+		}
+	}
+}
+.pro-info {
+	word-wrap: break-word;
+	> p {
+		color: $white;
+		font-size: 15px;
+		padding: 0 0 5px;
+		color: $color_pewter_approx;
+		margin: 0;
+		padding: 0 0 5px 0;
+		> a {
+			color: $color_flamingo_approx;
+		}
+		&.small > span {
+			font-size: 13px;
+			font-weight: 400;
+			line-height: 30px;
+		}
+	}
+	> h1 {
+		font-size: 16px;
+		margin: 0;
+		padding: 0;
+		display: inline;
+	}
+	> h2 {
+		margin: -10px 0 0;
+		padding: 0;
+		> i {
+			font-size: 14px;
+			color: $color_yellow_sea_approx;
+		}
+	}
+}
+.btn-orange {
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 50%;
+	font-family: $font_2;
+	color: $white;
+	font-size: 20px;
+	background: $color_chilean_fire_approx;
+	line-height: 25px;
+	text-align: center;
+	text-decoration: none;
+	width: 60px;
+	height: 60px;
+	&:hover {
+		background: $color_clementine_approx;
+		text-decoration: none;
+		color: $white;
+	}
+}
+.btn-orange-one {
+	background: $color_chilean_fire_approx;
+	border: 1px solid $color_chilean_fire_approx;
+	color: $white !important;
+	&:hover {
+		background: $color_clementine_approx;
+		text-decoration: none;
+		color: $white;
+	}
+}
+.list-des {
+	width: 100%;
+	float: left;
+	margin-top: 10px;
+	ul {
+		float: left;
+		width: 100%;
+		padding-left: 0;
+		li {
+			float: left;
+			width: 100%;
+			list-style-type: none;
+			label {
+				float: left;
+				width: 50%;
+				font-size: 14px;
+				font-weight: 600;
+				text-align: left;
+			}
+			p {
+				float: left;
+				width: 50%;
+				font-size: 15px;
+				font-weight: 400;
+				text-align: left;
+			}
+		}
+	}
+}
+.btn-green {
+	background: $color_la_palma_approx;
+	border: 1px solid $color_la_palma_approx;
+	color: $white !important;
+	&:hover {
+		background: $color_la_palma_approx;
+		text-decoration: none;
+		color: $white;
+	}
+}
+.heading::before {
+	border-left: 1px solid $color_mariner_approx;
+	content: "";
+	display: inline-block;
+	height: 8px;
+	left: 0;
+	position: absolute;
+	top: 22px;
+}
+.heading::after {
+	border-left: 1px solid $color_mariner_approx;
+	content: "";
+	display: inline-block;
+	height: 8px;
+	position: absolute;
+	right: 0;
+	top: 22px;
+}
+#HomeHeading {
+	margin-top: 0;
+}
+.heading {
+	border-bottom: 1px solid $color_mariner_approx;
+	color: $white;
+	font-size: 16px;
+	height: 26px;
+	margin: 0 0 44px !important;
+	overflow: visible;
+	padding: 0;
+	position: relative;
+	text-align: center;
+	span {
+		background: $color_mariner_approx none repeat scroll 0 0;
+		border: 1px solid $color_mariner_approx;
+		display: inline-block;
+		font-family: $font_2, $font_3, $font_4;
+		font-weight: normal;
+		height: 40px;
+		line-height: 36px;
+		padding: 0 30px;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 4px;
+	}
+}
+.add-button {
+	margin: 15px 0 0;
+	a {
+		color: $color_chilean_fire_approx;
+		font-size: 16px;
+		&:hover {
+			color: $color_mariner_approx;
+			text-decoration: none;
+		}
+	}
+}
+.update-box {
+	border-bottom: 1px solid $color_gallery_approx;
+	margin-bottom: 15px;
+	> p {
+		color: $color_congress_blue_approx;
+		font-family: $font_0, $font_4;
+		font-size: 17px;
+		font-weight: 400;
+		margin: 0;
+		padding-bottom: 5px;
+	}
+}
+.arrow_box::before {
+	border-color: rgba(210, 218, 219, 0) rgba(210, 218, 219, 0) $color_iron_approx;
+	border-width: 9px;
+	margin-left: -9px;
+	@extend %extend_1;
+}
+.arrow_box::after {
+	@extend %extend_1;
+}
+.arrow_box {
+	background: $white none repeat scroll 0 0;
+	position: relative;
+}
+.top-bor {
+	border-top: 1px solid $color_gallery_approx;
+	margin-top: 10px;
+}
+.post-text {
+	background: $color_flamingo_approx;
+	color: $white;
+	width: 30%;
+	margin-top: 10px;
+	float: right;
+	padding: 7px;
+	border: none;
+	cursor: pointer;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 5px;
+	font-size: 15px;
+	font-weight: 400;
+	margin-bottom: 15px;
+}
+.imgup {
+	background: $color_st_tropaz_approx;
+	color: $white;
+	width: 100%;
+	padding: 7px;
+	border: none;
+	cursor: pointer;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 5px;
+	font-size: 15px;
+	font-weight: 400;
+	margin-bottom: 15px;
+}
+#upload-file-selector {
+	display: none;
+}
+.feed-post {
+	background: $white;
+	padding: 8px;
+	h3 {
+		color: $color_mariner_approx;
+		font-size: 16px;
+		font-weight: 700;
+		line-height: 20px;
+		margin-bottom: 8px;
+		text-align: left;
+	}
+}
+.margin-correction {
+	margin-right: 10px;
+}
+.mail-icon {
+	background: $white $url_1 no-repeat 20px 14px;
+	height: auto;
+	padding: 14px 14px 14px 68px;
+}
+.lock-icon {
+	background: $white $url_2 no-repeat 24px 6px;
+	height: auto;
+	padding: 14px 14px 14px 68px;
+}
+.no-icon {
+	padding: 10px 20px;
+	height: auto;
+	font-size: 13px;
+}
+.header {
+	height: 60px;
+}
+.ac-container {
+	width: 100%;
+	margin: 10px auto 30px auto;
+	text-align: left;
+	label {
+		font-family: $font_5, $font_4;
+		padding: 5px 20px;
+		position: relative;
+		z-index: 20;
+		display: block;
+		height: 30px;
+		cursor: pointer;
+		color: $black;
+		line-height: 20px;
+		font-size: 15px;
+		background: $white;
+		background: linear-gradient(top, $white 1%, $color_gray_nurse_approx 100%);
+		filter: progid:dximagetransform.microsoft.gradient(startcolorstr='$white', endcolorstr='$color_gray_nurse_approx', gradienttype=0 );
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: 0 0 0 1px $color_star_dust_30_approx, 1px 0 0 0 $white_90 inset, 0 2px 2px $black_10;
+		text-align: left;
+		font-weight: 400;
+		&:hover {
+			background: $white;
+			&:after {
+				@extend %extend_3;
+			}
+		}
+	}
+	input {
+		display: none;
+		&:checked {
+			+ label {
+				@extend %extend_2;
+				&:hover {
+					@extend %extend_2;
+					&:after {
+						@extend %extend_3;
+						background-image: $url_4;
+					}
+				}
+			}
+			~ article {
+				//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+				transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+				//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+				box-shadow: 0 0 0 1px $color_star_dust_30_approx;
+				&.ac-small {
+					height: 220px;
+				}
+				&.ac-medium {
+					height: 180px;
+				}
+				&.ac-large {
+					height: 230px;
+				}
+			}
+		}
+	}
+	article {
+		background: $white_50;
+		margin-top: -1px;
+		overflow: hidden;
+		height: 0;
+		position: relative;
+		z-index: 10;
+		//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+		transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+		p {
+			font-style: italic;
+			color: $color_tapa_approx;
+			line-height: 23px;
+			font-size: 14px;
+			padding: 20px;
+			//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+			text-shadow: 1px 1px 1px $white_80;
+		}
+	}
+}
+.action-buttons {
+	margin-bottom: 15px;
+	margin-top: 10px;
+}
+.example-modal {
+	display: block;
+	width: 100%;
+	padding: 35px 15px;
+	background-color: $color_black_squeeze_approx;
+	.modal {
+		position: relative;
+		top: auto;
+		right: auto;
+		bottom: auto;
+		left: auto;
+		z-index: 1;
+		display: block;
+		.modal-dialog {
+			width: auto;
+			max-width: 600px;
+			margin: 15px auto;
+		}
+	}
+}
+.modal-footer {
+	background: $color_vanilla_ice_approx;
+	padding: 6px 20px 20px;
+	border-top: none;
+}
+.modals-headers {
+	background: $color_steel_blue_approx!important;
+	color: $white !important;
+	padding: 10px !important;
+	h4 {
+		color: $white !important;
+		font-size: 20px !important;
+		text-align: center;
+	}
+	i {
+		color: $white !important;
+		font-size: 28px !important;
+		font-weight: 400 !important;
+	}
+}
+.select-style {
+	padding: 0;
+	margin: 0;
+	border: 1px solid $color_celeste_approx;
+	width: 100%;
+	height: 40px !important;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 3px;
+	overflow: hidden;
+	background-color: $white;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 25px;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 0 10px 0 $black_15;
+	background: $white $url_5 no-repeat 90% 50%;
+	select {
+		padding: 5px 8px;
+		width: 100%;
+		height: 40px !important;
+		border: none;
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: none;
+		background-color: transparent;
+		background-image: none;
+		appearance: none;
+		&:focus {
+			outline: none;
+		}
+		option {
+			padding: 5px;
+		}
+	}
+}
+.modal-content {
+	border: none;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 4px;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 2px 12px $black_20;
+}
+.modal-header {
+	padding: 15px 20px;
+	border-bottom: none;
+	.close {
+		margin-top: 1px;
+	}
+}
+.modal-body {
+	padding: 20px;
+}
+.modal-top {
+	margin: 0 auto;
+}
+.modal-center {
+	display: flex;
+	height: 100%;
+	margin: 0 auto;
+	justify-content: center;
+	flex-flow: column nowrap;
+	align-content: center;
+}
+.modal-bottom {
+	display: flex;
+	height: 100%;
+	margin: 0 auto;
+	justify-content: flex-end;
+	flex-flow: column nowrap;
+	align-content: center;
+}
+.modal-sidebar {
+	position: absolute;
+	right: 0;
+	display: flex;
+	height: 100%;
+	margin: 0;
+	background-color: $white;
+	justify-content: center;
+	flex-flow: column nowrap;
+	align-content: center;
+	.modal-content {
+		background-color: transparent;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 0;
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: none;
+	}
+	.modal-header {
+		border-bottom: none;
+	}
+	.modal-footer {
+		border-top: none;
+	}
+	button.close {
+		position: fixed;
+		top: 20px;
+		right: 20px;
+	}
+}
+.modal {
+	&.modal-fade-in-scale-up {
+		.modal-dialog {
+			opacity: 0;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all .3s ease 0s;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: scale(.7);
+		}
+		&.in .modal-dialog {
+			opacity: 1;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: scale(1);
+		}
+	}
+	&.modal-slide-in-right {
+		.modal-dialog {
+			opacity: 0;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all .3s cubic-bezier(.25, .5, .5, .9) 0s;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: translate(20%, 0);
+		}
+		&.in .modal-dialog {
+			opacity: 1;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: translate(0, 0);
+		}
+	}
+	&.modal-slide-from-bottom {
+		.modal-dialog {
+			opacity: 0;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all .3s ease 0s;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: translate(0, 20%);
+		}
+		&.in .modal-dialog {
+			opacity: 1;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: translate(0, 0);
+		}
+	}
+	&.modal-newspaper {
+		.modal-dialog {
+			opacity: 0;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all .5s ease 0s;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: scale(0) rotate(720deg);
+		}
+		&.in .modal-dialog {
+			opacity: 1;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: scale(1) rotate(0);
+		}
+	}
+	&.modal-fall {
+		//Instead of the line below you could use @include perspective($p)
+		perspective: 1300px;
+		.modal-dialog {
+			opacity: 0;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: translateZ(600px) rotateX(20deg);
+			//Instead of the line below you could use @include transform-style($style)
+			transform-style: preserve-3d;
+		}
+		&.in .modal-dialog {
+			opacity: 1;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all .3s ease-in 0s;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: translateZ(0) rotateX(0);
+		}
+	}
+	&.modal-side-fall {
+		//Instead of the line below you could use @include perspective($p)
+		perspective: 1300px;
+		.modal-dialog {
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: translate(30%) translateZ(600px) rotate(10deg);
+			//Instead of the line below you could use @include transform-style($style)
+			transform-style: preserve-3d;
+		}
+		&.in .modal-dialog {
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all .3s ease-in 0s;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: translate(0) translateZ(0) rotate(0);
+		}
+	}
+	&.modal-3d-flip-horizontal {
+		//Instead of the line below you could use @include perspective($p)
+		perspective: 1300px;
+		.modal-dialog {
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all .3s ease 0s;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: rotateY(-70deg);
+			//Instead of the line below you could use @include transform-style($style)
+			transform-style: preserve-3d;
+		}
+		&.in .modal-dialog {
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: rotateY(0);
+		}
+	}
+	&.modal-3d-flip-vertical {
+		//Instead of the line below you could use @include perspective($p)
+		perspective: 1300px;
+		.modal-dialog {
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all .3s ease 0s;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: rotateX(-70deg);
+			//Instead of the line below you could use @include transform-style($style)
+			transform-style: preserve-3d;
+		}
+		&.in .modal-dialog {
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: rotateX(0);
+		}
+	}
+	&.modal-3d-sign {
+		//Instead of the line below you could use @include perspective($p)
+		perspective: 1300px;
+		.modal-dialog {
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all .3s ease 0s;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: rotateX(-60deg);
+			//Instead of the line below you could use @include transform-origin($origin-x, $origin-y, $origin-z, $only3d)
+			transform-origin: 50% 0 0;
+			//Instead of the line below you could use @include transform-style($style)
+			transform-style: preserve-3d;
+		}
+		&.in .modal-dialog {
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: rotateX(0);
+		}
+	}
+	&.modal-super-scaled {
+		.modal-dialog {
+			opacity: 0;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all .3s ease 0s;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: scale(2);
+		}
+		&.in .modal-dialog {
+			opacity: 1;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: scale(1);
+		}
+	}
+	&.modal-just-me {
+		.modal-dialog {
+			opacity: 0;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all .3s ease 0s;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: scale(.8);
+		}
+		.modal-backdrop {
+			background-color: $white;
+		}
+		&.in {
+			background: $white;
+			.modal-dialog {
+				opacity: 1;
+				//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+				transform: scale(1);
+			}
+			.modal-backdrop {
+				opacity: 1;
+			}
+		}
+	}
+	&.modal-3d-slit {
+		//Instead of the line below you could use @include perspective($p)
+		perspective: 1300px;
+		.modal-dialog {
+			opacity: 0;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all .5s ease 0s;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: translateZ(-3000px) rotateY(90deg);
+			//Instead of the line below you could use @include transform-style($style)
+			transform-style: preserve-3d;
+		}
+		&.in .modal-dialog {
+			animation-name: slit;
+			animation-duration: .7s;
+			animation-timing-function: ease-out;
+			animation-fill-mode: forwards;
+		}
+	}
+	&.modal-rotate-from-bottom {
+		//Instead of the line below you could use @include perspective($p)
+		perspective: 1300px;
+		.modal-dialog {
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all .3s ease-out 0s;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: translateY(100%) rotateX(90deg);
+			//Instead of the line below you could use @include transform-origin($origin-x, $origin-y, $origin-z, $only3d)
+			transform-origin: 0 100% 0;
+			//Instead of the line below you could use @include transform-style($style)
+			transform-style: preserve-3d;
+		}
+		&.in .modal-dialog {
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: translateY(0) rotateX(0);
+		}
+	}
+	&.modal-rotate-from-left {
+		//Instead of the line below you could use @include perspective($p)
+		perspective: 1300px;
+		.modal-dialog {
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all .3s ease-out 0s;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: translateZ(100px) translateX(-30%) rotateY(90deg);
+			//Instead of the line below you could use @include transform-origin($origin-x, $origin-y, $origin-z, $only3d)
+			transform-origin: 0 100% 0;
+			//Instead of the line below you could use @include transform-style($style)
+			transform-style: preserve-3d;
+		}
+		&.in .modal-dialog {
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: translateZ(0) translateX(0) rotateY(0);
+		}
+	}
+	&.fade .modal-dialog.modal-sidebar {
+		//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+		transform: translate(25%, 0);
+	}
+	&.in .modal-dialog.modal-sidebar {
+		//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+		transform: translate(0, 0);
+	}
+}
+.modal-fill-in {
+	background-color: transparent;
+	&.in {
+		background-color: $white_95;
+		opacity: 1;
+	}
+	.modal-dialog {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		margin: 0 auto;
+		justify-content: center;
+		flex-flow: column nowrap;
+		align-content: center;
+		align-items: center;
+	}
+	.modal-content {
+		background-color: transparent;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 0;
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: none;
+	}
+	.modal-header {
+		border-bottom: none;
+	}
+	.modal-footer {
+		border-top: none;
+	}
+}
+@media(min-width:768px) {
+	.modal-fill-in .modal-dialog {
+		> * {
+			width: 600px;
+		}
+		&.modal-sm > * {
+			width: 300px;
+		}
+		button.close {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			z-index: 1;
+			filter: alpha(opacity=50);
+			opacity: .5;
+			//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+			transform: translate(0, 0);
+		}
+	}
+}
+@media(min-width:992px) {
+	.modal-fill-in .modal-dialog.modal-lg > * {
+		width: 900px;
+	}
+}
+.job-full {
+	margin-top: 0;
+	background: $white;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 4px;
+}
+.job-desc {
+	padding: 10px;
+	> figure {
+		margin-right: 10px;
+		margin-bottom: 10px;
+		> img {
+			width: 100px;
+		}
+	}
+	> h2 {
+		font-size: 16px;
+		margin: 0;
+		padding: 0;
+		color: $color_baltic_sea_approx;
+		font-weight: 600;
+	}
+	> h4 {
+		font-size: 14px;
+		color: $color_denim_approx;
+		margin: 0;
+		padding: 0;
+	}
+	> h3 {
+		color: $color_denim_approx;
+		font-size: 17px;
+		font-weight: 600;
+		margin: 0;
+		padding: 0;
+		text-align: left;
+	}
+	> p {
+		font-size: 15px;
+		line-height: 21px;
+		strong {
+			color: $color_denim_approx;
+		}
+	}
+	> ol > li {
+		font-size: 15px;
+		line-height: 21px;
+	}
+	> div > h5 {
+		color: $color_denim_approx;
+		font-size: 16px;
+	}
+}
+.pro-img {
+	margin-bottom: 15px;
+}
+.connection-box {
+	> figure {
+		margin-right: 10px;
+		margin-bottom: 10px;
+		> img {
+			width: 50px;
+			height: 50px;
+		}
+	}
+	> h2 {
+		font-size: 15px;
+		font-weight: 600;
+		margin: 0 0 5px;
+		padding: 0;
+		display: inline-block;
+		color: $color_denim_approx;
+	}
+	> h4 {
+		font-size: 15px;
+		font-weight: 400;
+		margin: 0 0 5px;
+		padding: 0;
+		color: $color_flamingo_approx;
+	}
+	> p {
+		font-size: 14px;
+		margin: 0 0 5px;
+		padding: 0;
+		> span {
+			margin-left: 10px;
+		}
+	}
+	> a.btn {
+		float: right;
+		margin-left: 5px;
+	}
+}
+.post-form {
+	background: $color_hawkes_blue_approx;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	> div > div > form > input.form-control {
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: none;
+		border: 1px solid $color_sail_approx;
+		&:focus {
+			border: 1px solid $color_denim_approx;
+		}
+	}
+}
+.activity-begins {
+	margin-top: 10px;
+}
+.cet-date {
+	display: block;
+	text-align: center;
+	width: 100%;
+}
+@media(min-width: 992px) {
+	.panel-act-plus > .panel-act-plus-comment > .panel-act-plus-textarea > .btn {
+		width: auto;
+	}
+}
+.mess-user-info {
+	padding-left: 0;
+	padding-right: 0;
+	background: $white;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-top: -10px;
+	> figure {
+		padding-left: 15px;
+		margin-right: 10px;
+		> img {
+			width: 50px;
+			height: 50px;
+		}
+	}
+	> h2 {
+		margin: 10px 0 0;
+		padding: 0;
+		font-size: 14px;
+		color: $black;
+	}
+	> p {
+		color: $color_japanese_laurel_approx;
+		font-size: 12px;
+	}
+}
+.control-label {
+	font-size: 15px;
+	font-weight: 600;
+	color: $color_denim_approx;
+}
+.service-form-box {
+	background: $white;
+	padding: 20px;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 4px;
+}
+.chat-window {
+	bottom: 0;
+	position: fixed;
+	float: right;
+	margin-left: 10px;
+	> div > .panel {
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 5px 5px 0 0;
+	}
+}
+.icon_minim {
+	padding: 2px 10px;
+}
+.msg_container_base {
+	background: $mercury;
+	margin: 0;
+	padding: 0 10px 10px;
+	max-height: 300px;
+	overflow-x: hidden;
+}
+.top-bar {
+	background: $color_storm_dust_approx;
+	color: $white;
+	padding: 10px;
+	position: relative;
+	overflow: hidden;
+}
+.msg_receive {
+	padding-left: 0;
+	margin-left: 0;
+}
+.msg_sent {
+	padding-bottom: 20px !important;
+	margin-right: 0;
+	> time {
+		float: right;
+	}
+}
+.messages {
+	background: $white;
+	padding: 10px;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 2px;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 1px 2px $black_20;
+	max-width: 100%;
+	> p {
+		font-size: 14px;
+		margin: 0 0 0.2rem 0;
+	}
+	> time {
+		font-size: 11px;
+		color: $color_mountain_mist_approx;
+	}
+}
+.msg_container {
+	padding: 10px;
+	overflow: hidden;
+	display: flex;
+}
+.avatar {
+	position: relative;
+}
+.base_sent {
+	justify-content: flex-end;
+	align-items: flex-end;
+}
+.msg_container_base::-webkit-scrollbar-track {
+	background-color: $color_wild_sand_approx;
+}
+.msg_container_base::-webkit-scrollbar {
+	width: 12px;
+	background-color: $color_wild_sand_approx;
+}
+.msg_container_base::-webkit-scrollbar-thumb {
+	background-color: $color_fuscous_gray_approx;
+}
+.community-begins {
+	margin-top: -10px;
+	padding-left: 0;
+	padding-right: 0;
+	> ul > li {
+		background: $white;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid $concrete;
+	}
+}
+.community-info {
+	> h2 {
+		font-size: 15px;
+		margin: 10px 0 0;
+		padding: 0;
+		line-height: 25px;
+		color: $color_denim_approx;
+		font-weight: 600;
+	}
+	> h4 {
+		font-size: 14px;
+		margin: 0;
+		padding: 0;
+		line-height: 20px;
+		color: $color_tapa_approx;
+	}
+}
+@media screen and(max-width:768px) {
+	header {
+		padding: 15px 0;
+		background: $color_denim_approx;
+		margin-bottom: 10px;
+		> div > div > div {
+			> h1 {
+				margin: 0;
+				padding: 0;
+				font-size: 20px;
+				color: $white;
+			}
+			> a {
+				color: $white;
+				text-decoration: none;
+				font-size: 18px;
+				&:hover {
+					color: $color_flamingo_approx;
+				}
+			}
+		}
+	}
+	.header-mobile-account {
+		background: $color_blue_bayoux_approx;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 4px;
+		margin-bottom: 20px;
+		> .head-text {
+			> h4 {
+				color: $white;
+				margin: 0;
+			}
+			> p {
+				color: $white;
+				margin-bottom: 0;
+			}
+		}
+	}
+	.table-overflow {
+		width: 330px;
+		overflow: scroll;
+		overflow-y: hidden;
+		> table {
+			background: $white;
+		}
+	}
+	.provider {
+		background: $white;
+		padding: 20px;
+	}
+	.pro-img {
+		margin-bottom: 15px;
+	}
+	.pro-info {
+		> h1 {
+			font-size: 16px;
+			margin: 0;
+			padding: 0;
+			display: inline;
+		}
+		> h2 {
+			margin: -10px 0 0;
+			padding: 0;
+			> i {
+				font-size: 14px;
+				color: $color_yellow_sea_approx;
+			}
+		}
+		> p {
+			color: $color_pewter_approx;
+			margin: 0;
+			padding: 0 0 5px 0;
+			> a {
+				color: $color_flamingo_approx;
+			}
+		}
+	}
+	.provider-lists > ul > li {
+		margin-bottom: 10px;
+		border: 2px solid $white;
+		&:hover {
+			border: 2px solid $color_fun_blue_approx;
+		}
+	}
+}
+@media screen and(max-width:375px) {
+	header {
+		padding: 15px 0;
+		background: $color_denim_approx;
+		margin-bottom: 0;
+		min-height: 56px;
+		width: 100%;
+		> div > div > div {
+			> h1 {
+				margin: 0;
+				padding: 0;
+				font-size: 20px;
+				color: $white;
+			}
+			> a {
+				color: $white;
+				text-decoration: none;
+				font-size: 21px;
+				&:hover {
+					color: $color_flamingo_approx;
+				}
+			}
+		}
+	}
+	.header-mobile-account {
+		background: $color_blue_bayoux_approx;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 4px;
+		margin-bottom: 20px;
+		> .head-text {
+			> h4 {
+				color: $white;
+				margin: 0;
+			}
+			> p {
+				color: $white;
+				margin-bottom: 0;
+			}
+		}
+	}
+	.table-overflow {
+		width: 330px;
+		overflow: scroll;
+		overflow-y: hidden;
+		> table {
+			background: $white;
+		}
+	}
+	.provider {
+		background: $white;
+		padding: 20px;
+	}
+	.pro-img {
+		margin-bottom: 15px;
+	}
+	.pro-info {
+		> h1 {
+			color: $color_denim_approx;
+			font-size: 16px;
+			margin: 0;
+			padding: 0;
+			display: inline;
+		}
+		> h2 {
+			margin: -10px 0 0;
+			padding: 0;
+			> i {
+				font-size: 14px;
+				color: $color_yellow_sea_approx;
+			}
+		}
+		> p {
+			color: $color_tapa_approx;
+			font-size: 15px;
+			font-weight: 400;
+			margin: 0;
+			padding: 0 0 5px 0;
+			> a {
+				font-size: 14px;
+				color: $color_flamingo_approx;
+			}
+		}
+	}
+	.provider-lists > ul > li {
+		margin-bottom: 10px;
+		border: 2px solid $white;
+		&:hover {
+			border: 2px solid $color_fun_blue_approx;
+		}
+	}
+}
+.white-bg {
+	background: $white;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.micro-content {
+	> h1 {
+		font-size: 18px;
+		margin: 15px 0 10px;
+		padding: 0;
+		line-height: 24px;
+		color: $color_denim_approx;
+	}
+	> p {
+		font-size: 13px;
+	}
+	> .panel-group > .panel-default {
+		border: 1px solid $color_chilean_fire_approx;
+		> .panel-heading {
+			background: $color_chilean_fire_approx;
+			color: $white;
+			> h4 > a {
+				text-decoration: none;
+			}
+		}
+	}
+}
+.category-box {
+	color: $white;
+	min-height: 100px;
+	text-align: center;
+	> a {
+		color: $white;
+		display: block;
+		padding: 15px;
+		> i {
+			font-size: 40px;
+		}
+		> h2 {
+			color: $white;
+			font-size: 18px;
+		}
+	}
+}
+.orange {
+	background: $color_flamingo_approx;
+	color: $white;
+}
+.green {
+	background: $color_persian_green_approx;
+	color: $white;
+}
+.blue {
+	background: $color_denim_approx;
+	color: $white;
+}
+.purple {
+	background: $color_eminence_approx;
+	color: $white;
+}
+.red {
+	background: $color_limeade_approx;
+	color: $white;
+}
+.grey {
+	background: $color_pickled_bluewood_approx;
+	color: $white;
+}
+.aqua {
+	background: $color_curious_blue_approx none repeat scroll 0 0;
+}
+.sub-category-box {
+	//Instead of the line below you could use @include column-gap($width)
+	column-gap: 15px;
+	margin: 15px 0 0;
+}
+.sub-category {
+	margin: 0;
+	padding: 0;
+	> li {
+		color: $white;
+		font-size: 22px;
+		display: inline-block;
+		padding: 10px;
+		margin-bottom: 20px;
+		width: 100% !important;
+		&:first-child {
+			background: $color_flush_mahogany_approx;
+		}
+		&:nth-child(2) {
+			background: $color_cinnabar_approx;
+		}
+		&:nth-child(3) {
+			background: $color_studio_approx;
+		}
+		&:nth-child(4) {
+			background: $color_boston_blue_approx;
+		}
+		&:nth-child(5) {
+			background: $color_niagara_approx;
+		}
+		&:nth-child(6) {
+			background: $color_ochre_approx;
+		}
+		&:nth-child(7) {
+			background: $color_eucalyptus_approx;
+		}
+		&:nth-child(8) {
+			background: $color_pickled_bluewood_approx;
+		}
+		&:nth-child(9) {
+			background: $color_genoa_approx;
+		}
+		&:nth-child(10) {
+			background: $color_ebony_clay_approx;
+		}
+		&:nth-child(11) {
+			background: $color_evening_sea_approx;
+		}
+		&:nth-child(12) {
+			background: $color_eminence_approx;
+		}
+		&:nth-child(13) {
+			background: $color_peru_tan_approx;
+		}
+		&:nth-child(14) {
+			background: $color_sahara_approx;
+		}
+		> ul {
+			margin-bottom: 20px;
+			list-style: none;
+			margin-left: 0;
+			padding-left: 15px;
+			> li {
+				line-height: 18px;
+				border-bottom: 1px solid $color_quill_gray_13_approx;
+				padding-bottom: 10px;
+				&:before {
+					content: "";
+					border-color: transparent $white;
+					border-style: solid;
+					border-width: 5px 0 5px 5px;
+					display: block;
+					height: 0;
+					width: 0;
+					left: -15px;
+					top: 16px;
+					position: relative;
+				}
+				> a {
+					color: $white;
+					text-decoration: none;
+					font-size: 16px;
+					&:hover {
+						color: $white;
+					}
+				}
+			}
+		}
+		&.title-subt span {
+			background: $color_mine_shaft_12_approx;
+			color: $white;
+			width: 100%;
+			display: block;
+			padding-left: 5px;
+		}
+	}
+}
+.back-icon {
+	color: $white !important;
+	float: right;
+	margin-right: -23px;
+}
+.list-botm {
+	margin-bottom: 15px !important;
+}
+.ins-req {
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 2px;
+	background: $color_rich_gold_approx;
+	float: right;
+	margin-right: 3px;
+	margin-bottom: 10px;
+	color: $black;
+	font-size: 13px;
+	padding: 4px;
+}
+.sch-req {
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 2px;
+	background: $color_rich_gold_approx;
+	float: right;
+	margin-right: 3px;
+	margin-bottom: 10px;
+	color: $black;
+	font-size: 13px;
+	padding: 4px;
+}
+form > button {
+	text-align: center;
+}
+.panel-body p {
+	line-height: 25px;
+}
+.example-modal-top .center {
+	top: 0;
+	//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+	transform: translate(-50%, 0);
+}
+.example-modal-bottom .center {
+	top: auto;
+	bottom: 0;
+	//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+	transform: translate(-50%, 0);
+}
+.modal-primary .modal-header {
+	background-color: $color_cornflower_blue_approx;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 4px 4px 0 0;
+	* {
+		color: $white;
+	}
+	.close {
+		opacity: .6;
+	}
+}
+.modal-success .modal-header {
+	background-color: $color_emerald_approx;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 4px 4px 0 0;
+	* {
+		color: $white;
+	}
+	.close {
+		opacity: .6;
+	}
+}
+.modal-info .modal-header {
+	background-color: $color_viking_approx;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 4px 4px 0 0;
+	* {
+		color: $white;
+	}
+	.close {
+		opacity: .6;
+	}
+}
+.modal-warning .modal-header {
+	background-color: $color_sandy_brown_approx;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 4px 4px 0 0;
+	* {
+		color: $white;
+	}
+	.close {
+		opacity: .6;
+	}
+}
+.modal-danger .modal-header {
+	background-color: $color_bittersweet_approx;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 4px 4px 0 0;
+	* {
+		color: $white;
+	}
+	.close {
+		opacity: .6;
+	}
+}
+ul.connections > li {
+	background: $white;
+	padding: 10px;
+	border-bottom: 1px solid $color_wild_sand_approx;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: none;
+	&:first-child {
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 4px 4px 0 0;
+	}
+	&:last-child {
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 0 0 4px 4px;
+	}
+}
+.message-box > a {
+	display: block;
+	background: $white;
+	padding: 10px;
+	text-decoration: none;
+	border-bottom: 1px solid $concrete;
+	> figure {
+		margin-right: 10px;
+		margin-bottom: 0;
+	}
+	> h2 {
+		margin: 0 0 5px;
+		padding: 0;
+		font-size: 15px;
+		font-weight: 600;
+		color: $color_denim_approx;
+		display: inline-block;
+	}
+	> h3 {
+		margin: 0;
+		padding: 0;
+		font-size: 12px;
+		color: $color_mountain_mist_approx;
+		display: inline-block;
+		font-weight: 400;
+		line-height: 20px;
+	}
+	> p {
+		margin: 0;
+		padding: 0;
+		font-size: 14px;
+		color: $color_mountain_mist_approx;
+	}
+	&:hover {
+		background: $color_pattens_blue_approx;
+	}
+}
+.service-form > div {
+	> label {
+		text-align: left !important;
+	}
+	> div > label {
+		text-align: left !important;
+	}
+}
+.community-action > a {
+	margin-top: 15px;
+}
+.list-group-item.active {
+	background: $color_mariner_approx;
+	&:focus {
+		background: $color_mariner_approx;
+	}
+	&:hover {
+		background: $color_mariner_approx;
+	}
+}
+.block-info a {
+	font-size: 15px !important;
+	font-weight: 400;
+}
