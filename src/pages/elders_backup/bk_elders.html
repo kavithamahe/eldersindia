@@ -1,0 +1,352 @@
+<!-- <ion-header>
+  <ion-navbar>
+  <ion-row>
+   <ion-col width-10><div>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon> 
+    </button>
+    </div>
+    </ion-col>
+    <ion-col width-40><div>
+     <button ion-button icon-only menuToggle>
+      <ion-icon name="home"></ion-icon> 
+    </button>
+    </div>
+    </ion-col>
+    <ion-col width-50><div>
+    <ion-title>
+      Elders Onboarding
+    </ion-title>
+    </div>
+    </ion-col>
+    <ion-col end><div>
+     <button ion-button icon-only menuToggle>
+      <ion-icon name="ios-arrow-back"></ion-icon> 
+    </button>
+    </div>
+    </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+ <form [formGroup]="authForm">
+  <div>
+    <ion-row>
+      <ion-col offset-25>
+        <ion-card class="personal" padding>Personal Details</ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="main">
+  <ion-row>
+    <ion-col width-50>
+      <ion-item  class="three">
+         <ion-label>Relationship</ion-label>
+          <ion-select  [(ngModel)]="relation"   [ngModelOptions]="{standalone: true}">
+            <ion-option *ngIf="relation" value={{relation}}>{{relation}}</ion-option>
+             
+          </ion-select>
+      </ion-item>
+    </ion-col>
+    
+    <ion-col width-50>
+        <div  class="three">
+            <ion-input  type="text" formControlName="elderName"
+            [class.invalid]="!authForm.controls.elderName.valid && (authForm.controls.elderName.dirty)" placeholder="Elders Name" value={{elderName}}>
+              
+            </ion-input>
+        </div>
+       <div *ngIf="!authForm.controls.elderName.valid  && (authForm.controls.elderName.dirty)">
+                <p class="valid">Please enter name</p>
+      </div> 
+      </ion-col>
+    
+    </ion-row>
+    </div>
+    <div class="main">
+      <ion-row>
+        <ion-col width-50>
+          <ion-item  class="three">
+              <ion-label>Services</ion-label>
+              <ion-select  [(ngModel)]="services"  [ngModelOptions]="{standalone: true}">
+                
+                <ion-option *ngIf="services" value={{services}}>{{services}}</ion-option>
+               
+              </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col width-50>
+            <div  class="three">
+                <ion-input type="text" formControlName="number"
+            [class.invalid]="!authForm.controls.number.valid && (authForm.controls.number.dirty)" placeholder="Contact Number" value={{contactNumber}}>
+                </ion-input>
+            </div>
+            <div  *ngIf="!authForm.controls.number.valid  && (authForm.controls.number.dirty)">
+                <p class="valid">Please enter number</p>
+            </div>
+          </ion-col>
+      </ion-row>
+    </div>
+    <div class="main">
+   <ion-row>
+   <ion-col width-50>
+   <ion-card  class="date" padding>Date of Birth</ion-card>
+   </ion-col>
+    <ion-col width-50>
+    <ion-item class="address">
+    
+    
+       
+          
+       
+    
+                <!-- <ion-input type="text" formControlName="dob"
+            [class.invalid]="!authForm.controls.dob.valid && (authForm.controls.dob.dirty)" placeholder="Date of birth" value={{dob}}>
+                </ion-input> -->
+                <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="today" [ngModelOptions]="{standalone: true}"></ion-datetime>
+          
+           <!--  <div  *ngIf="!authForm.controls.dob.valid  && (authForm.controls.dob.dirty)">
+                <p class="valid">Please enter dob</p>
+            </div> -->
+           
+           
+
+          
+     </ion-item>  
+     
+    </ion-col>
+            </ion-row>
+            </div>
+    <div class="main">
+      <ion-row>
+        <ion-col>
+          <div class="address">
+            <ion-input  type="text" formControlName="address"
+            [class.invalid]="!authForm.controls.address.valid && (authForm.controls.address.dirty)" placeholder="Address" value={{address}}>
+            </ion-input>
+          </div>
+          <div *ngIf="!authForm.controls.address.valid  && (authForm.controls.address.dirty)">
+                <p class="valid">Please enter address</p>
+          </div>
+        </ion-col>
+      </ion-row>
+  </div>
+  <div class="main">
+    <ion-row>
+      <ion-col width-50>
+          <div  class="three">
+            <ion-input formControlName="city"
+            [class.invalid]="!authForm.controls.city.valid && (authForm.controls.city.dirty)" placeholder="City" value={{city}}></ion-input>
+          </div>
+          <div *ngIf="!authForm.controls.city.valid  && (authForm.controls.city.dirty)">
+                <p class="valid">Please enter city</p>
+          </div>
+        </ion-col>
+        <ion-col width-50>
+           <div  class="three">
+              <ion-input formControlName="state"
+            [class.invalid]="!authForm.controls.state.valid && (authForm.controls.state.dirty)" type="text" placeholder="State" value={{state}}></ion-input>
+           </div>
+           <div *ngIf="!authForm.controls.state.valid  && (authForm.controls.state.dirty)">
+                <p class="valid">Please enter state</p>
+           </div>
+        </ion-col>
+      </ion-row>
+  </div>
+  <div>
+    <ion-row>
+      <ion-col offset-25>
+        <ion-card class="emergency" padding>Emergency Contacts</ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="main">
+      <ion-row  *ngFor="let list of lists; let i=index">
+      <ion-col width-50>
+        <ion-item  class="three">
+            <ion-label></ion-label>
+              <ion-select  [(ngModel)]="emergency"  [ngModelOptions]="{standalone: true}">
+                <ion-option *ngIf="emergency" value={{emergency}}>{{emergency}}</ion-option>
+            </ion-select>
+        </ion-item>
+        </ion-col>
+        <ion-col width-50>
+          <div  class="three">
+              <ion-input type="text" formControlName="numbers"
+            [class.invalid]="!authForm.controls.numbers.valid && (authForm.controls.numbers.dirty)"  placeholder="Contact Number" value={{number}}>
+             </ion-input>
+          </div>
+          <div *ngIf="!authForm.controls.numbers.valid  && (authForm.controls.numbers.dirty)">
+                <p class="valid">Please enter number</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="main">
+      <ion-row>
+        <ion-col width-50>
+          <button class="add" (click)="addMores()" ion-button icon-left clear>
+            <ion-icon name="ios-add"></ion-icon>
+             Add More
+          </button>
+        </ion-col>
+        <ion-col width-50>
+          <button class="add" (click)="removes()" ion-button icon-left clear>
+            <ion-icon name="ios-close"></ion-icon>Remove
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
+    
+  <div>
+    <ion-row>
+      <ion-col offset-25>
+        <ion-card class="emergency" padding>Experience Details</ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="main">
+    <ion-row *ngFor="let experience of elderExperience; let i=index">
+      <ion-col width-50>
+        <ion-item  class="three">
+          <ion-label>Industry</ion-label>
+            <ion-select [class.invalid]="!authForm.controls.functional_area.valid && (authForm.controls.functional_area.dirty)" formControlName="functional_area" 
+            [(ngModel)]="functional_area">
+              <ion-option  *ngFor="let experiences of functionalArea" value={{experiences.id}}>{{experiences.name}}
+              </ion-option>
+            </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col width-50>
+        <div  class="three">
+            <ion-input type="text" formControlName="experienceYears"
+            [class.invalid]="!authForm.controls.experienceYears.valid && (authForm.controls.experienceYears.dirty)" placeholder="Total Experience" value={{experience.year}}></ion-input>
+        </div>
+        <div *ngIf="!authForm.controls.experienceYears.valid  && (authForm.controls.experienceYears.dirty)">
+                <p class="valid">Please enter years</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="main">
+      <ion-row>
+        <ion-col width-50>
+          <button class="add" (click)="addMore()" ion-button icon-left clear>
+            <ion-icon name="ios-add"></ion-icon>Add More
+          </button>
+        </ion-col>
+        <ion-col width-50>
+          <button class="add" (click)="remov()" ion-button icon-left clear>
+            <ion-icon name="ios-close"></ion-icon>Remove
+          </button>
+        </ion-col>
+      </ion-row>
+  </div>
+  <div>
+    <ion-row>
+      <ion-col offset-25>
+        <ion-card class="emergency" padding>Educational Details</ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="main">
+    <ion-row  *ngFor="let item of items; let i=index">
+      <ion-col  width-50>
+        <ion-item class="three">
+          <ion-label>Graduation</ion-label>
+            <ion-select [class.invalid]="!authForm.controls.elderGraduation.valid && (authForm.controls.elderGraduation.dirty)" formControlName="elderGraduation" 
+            [(ngModel)]="elderGraduation[i]" >
+              <ion-option *ngFor="let education of educational"  value={{education.value}}>{{education.label}}
+              </ion-option>
+            </ion-select>
+        </ion-item>
+        </ion-col>
+        <ion-col width-50>
+          <ion-item  class="three">
+            <ion-label>specialization</ion-label>
+            <ion-select [class.invalid]="!authForm.controls.elderSpecialization.valid && (authForm.controls.elderSpecialization.dirty)" formControlName="elderSpecialization" 
+            [(ngModel)]="elderSpecialization">
+              <ion-option  *ngFor="let specialization of specializations" value={{specialization.value}}>{{specialization.label}}
+              </ion-option>
+            </ion-select>
+        </ion-item>
+        </ion-col>
+      </ion-row>
+  </div>
+  <div class="main">
+      <ion-row  *ngFor="let item of items; let i=index">
+        <ion-col>
+          <div class="address">
+            <ion-input  type="text" formControlName="college"
+            [class.invalid]="!authForm.controls.college.valid && (authForm.controls.college.dirty)" placeholder="College/University" value={{college}}>
+            </ion-input>
+          </div>
+          <div *ngIf="!authForm.controls.college.valid  && (authForm.controls.college.dirty)">
+                <p class="valid">Please enter col/univ</p>
+          </div>
+        </ion-col>
+      </ion-row>
+  </div>
+  
+  <div class="main">
+      <ion-row>
+        <ion-col width-50>
+          <button class="add" (click)="Add()" ion-button icon-left clear>
+            <ion-icon name="ios-add"></ion-icon>Add More
+          </button>
+        </ion-col>
+        <ion-col width-50>
+          <button class="add" (click)="remove()" ion-button icon-left clear>
+            <ion-icon name="ios-close"></ion-icon>Remove
+          </button>
+        </ion-col>
+      </ion-row>
+  </div>
+  <div  *ngIf="this.fuctionality != 'edit' ">
+  <div>
+     <ion-row>
+      <ion-col offset-25>
+        <ion-card class="emergency" padding>Login Details</ion-card>
+      </ion-col>
+    </ion-row>
+    </div>
+    <div class="main">
+    <ion-row>
+      <ion-col width-50>
+          <div  class="three">
+            <ion-input formControlName="email"
+            [class.invalid]="!authForm.controls.email.valid && (authForm.controls.email.dirty)" placeholder="Email" value={{email}}></ion-input>
+          </div>
+          <div *ngIf="!authForm.controls.email.valid  && (authForm.controls.email.dirty)">
+                <p class="valid">Please enter Email</p>
+          </div>
+        </ion-col>
+        <ion-col width-50>
+           <div  class="three">
+              <ion-input formControlName="password"
+            [class.invalid]="!authForm.controls.password.valid && (authForm.controls.password.dirty)" type="text" placeholder="Password" value={{password}}></ion-input>
+           </div>
+           <div *ngIf="!authForm.controls.password.valid  && (authForm.controls.password.dirty)">
+                <p class="valid">Please enter password</p>
+           </div>
+        </ion-col>
+      </ion-row>
+  </div>
+  </div>
+  <div class="main">
+      <ion-row>
+        <ion-col>
+          <button (click)="cancel()" class="person" ion-button icon-left round>
+            <ion-icon name="ios-close"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col offset-50>
+          <!-- <button [disabled]="!authForm.valid" (click)="Submit()" class="back" ion-button icon-left round> -->
+          <button  (click)="Submit()" class="back" ion-button icon-left round>
+            <ion-icon name="ios-arrow-round-forward"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+  </div>
+  </form>
+</ion-content> -->

@@ -64,8 +64,8 @@ export class ManagePage {
   }
  
 
-  editElder(editData){
-    let data={fuctionality:"edit","editData":editData};
+  editElder(elderId){
+    let data={"fuctionality":"edit","editData":elderId};
     this.nav.push(EldersPage,data);
   }
 
