@@ -15,7 +15,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-toolbar no-border-top>
+
       <ion-segment [(ngModel)]="community">
         <ion-segment-button (click)="myCommunity()" value="mycommunity">
           My Community
@@ -25,7 +25,8 @@
         </ion-segment-button>
         
       </ion-segment>
-    </ion-toolbar>
+				  
+
 
     <div [ngSwitch]="community">
       <ion-list *ngSwitchCase="'mycommunity'">
@@ -42,25 +43,28 @@
           </ion-list>
         </ion-card>
         <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-        <ion-card *ngFor="let community of communitylists; let i= index">
-          <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner" >
-          <ion-item>
-            <ion-thumbnail>
-              <img [src]="imageUrl+community?.logo">
+        <ion-card style="position:relative;" *ngFor="let community of communitylists; let i= index">
+          <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner" />
+ 
+            <ion-thumbnail class="thamb-lins">
+              <img [src]="imageUrl+community?.logo"/>
             </ion-thumbnail>
-          </ion-item>
+     
           <ion-card-content>
             <ion-card-title>
               <ion-row>
-                <ion-col>
-                  <p style="color:#387ef5" (click)="getPost(community.id)">{{community.community_name}}</p>
+                <ion-col style="padding-left:0px !important; padding-bottom:0px !important;">
+                  <p class="tid-cd"(click)="getPost(community.id)">{{community.community_name}}</p>
+						  
+															  
+																						  
                 </ion-col>
-                <ion-col [hidden]="!community.category_name"> 
-                  <button ion-button color="danger">{{community.category_name}}</button>  
-                </ion-col>
+                <span [hidden]="!community.category_name"> 
+                <label class="labels-bds"> {{community.category_name}}</label>
+                </span>
              </ion-row> 
             </ion-card-title>
-              <p>{{community.description}}</p>
+              <p class="ssdsd">{{community.description}}</p>
           </ion-card-content>
         </ion-card>
       </ion-list>
@@ -71,8 +75,8 @@
             <ion-item>
               <ion-label>select category</ion-label>
                 <ion-select (ionChange)='setCategory($event)'>
-                  <ion-option *ngFor="let category of categoryLists" 
-                    value={{category.id}}> {{category.name}}
+                  <ion-option *ngFor="let category of categoryLists" value={{category.id}}> {{category.name}}
+															
                   </ion-option>
                 </ion-select>
             </ion-item>
@@ -80,10 +84,11 @@
         </ion-card>
         <ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
         <ion-card *ngFor="let community of communitylists; let i= index">
-          <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner">
-            <ion-item >
+          <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner" />
+		  
+            <ion-item>
               <ion-thumbnail [hidden]="!community?.logo">
-                <img [src]="imageUrl+community?.logo">
+                <img [src]="imageUrl+community?.logo"/>
               </ion-thumbnail>
             </ion-item>
             <ion-card-content>
@@ -95,6 +100,7 @@
         </ion-card>
       </ion-list>
     </div>
+	
    	 <!-- <ion-infinite-scroll (infinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>

@@ -6,7 +6,7 @@ import { Camera } from 'ionic-native';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CommunityprofilePage } from '../communityprofile/communityprofile';
 import { CommunityServices } from '../../providers/community-services';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser/';
 
 
 @Component({
@@ -34,7 +34,7 @@ export class CommunityPage {
     show_member:any;
     token:any;
     community_id:any;
-  constructor(private sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+  constructor(public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
     this.nav=nav;
 
     this.storage.ready().then(() => {
@@ -87,6 +87,12 @@ export class CommunityPage {
       console.log(err);
     });
   }
+
+  cleanURL(oldURL: string): any  {
+    console.log("vidweo url: ",oldURL);
+  let url = oldURL.replace("watch?v=", "")
+ return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+}
 
   addDetails(event){
     this.comment="";

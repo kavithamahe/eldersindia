@@ -15,7 +15,8 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 my-theme{
 	ion-menu{
 	background : color($colors,secondary);
@@ -28,7 +29,7 @@ my-theme{
 
 .ios, .md {
 
-
+page-community {
 
 .demo{
 	background-color:#F2610D;
@@ -74,10 +75,14 @@ ion-content{
 	color: #004d99;
 	font-size: 22px;
 }
-
-.valid{
-	color:red;
+h2{
+	font-size: 18px;
 }
+p{
+	font-size: 18px;
+}
+
+
 
 .comment{
 	border: 2px solid  #f2f2f2;
@@ -95,7 +100,7 @@ ion-content{
 .send{
 	border: 2px solid #f2f2f2;
 }
-
+}
 
 page-elders {
 .three
@@ -213,7 +218,7 @@ border :2px solid green;
 	height: auto !important;
 }
 
-.rupee{
+/*.rupee{
 	background-position:left;
 	width:10px;
 	height:14px;
@@ -221,7 +226,7 @@ border :2px solid green;
 	display:block;
 	background-repeat:no-repeat;
 	padding-bottom:25px
-}
+}*/
 .depend{
 	border-radius: 20px;
     border :2px solid green;
@@ -236,12 +241,221 @@ ion-content{
 .my-side-menu,{
  background: #333 !important;
 }
-.my-list-item{
- background: #333 !important;
- color:#fff !important;
- border:#564545 !important;
-}
+
 
 .list-md .item-block .item-inner {
     border-bottom: none !important;
 }
+/*-------------------------------------Common  css -------------------------------------*/
+.service-bg0												{height:auto !important;    min-height: 100px; background-color:#77b003; height: auto !important; margin-left:8px;margin-top:5px;width:95%;position: relative;}
+.service-bg1												{height:auto !important;     min-height: 100px;background-color:#0AA699; height: auto !important; margin-left:8px;width: 95%;position: relative;}
+.service-bg2												{height:auto !important;     min-height: 100px;background-color:#FE5722; height: auto !important; margin-left:8px;width: 95%;position: relative;}
+.service-bg3												{height:auto !important;     min-height: 100px;background-color:#3498DB; height: auto !important; margin-left:8px;width: 95%;position: relative;}
+.service-bg4												{height:auto !important;    min-height: 100px; background-color:#FFB6C1; height: auto !important; margin-left:8px;width: 95%;position: relative;}
+.service-bg5												{height:auto !important;     min-height: 100px;background-color:#9370DB; height: auto !important; margin-left:8px;width: 95%;position: relative;}
+.service-bg6												{height:auto !important;     min-height: 100px;background-color:#808000; height: auto !important; margin-left:8px;width: 95%;position: relative;}
+.ftbtb p                                                    {color:#fff; font-size:18px; font-weight:400;text-transform:capitalize;}
+.btn-warnings											    {background-color:#f0ad4e;border-color:#eea236;color:#fff;font-size:13px !important;text-transform:capitalize;}
+.btn-infos												    {background-color:#5bc0de;border-color:#46b8da;color:#fff;font-size:13px !important;text-transform:capitalize;}
+.info													    {font-size:13px !important;text-transform:capitalize !important;}
+.btn-defaults												{background-color:#ccc !important;border-color:#333;color:#666;font-size:13px !important;text-transform:capitalize; margin-top:10px; margin-right:10px; float:right;}
+.btn-primarys												{background-color:#337AB7 !important;border-color:#333;color:#fff;font-size:13px !important;text-transform:capitalize;margin-top:10px; float:right;margin-right:10px;}
+.toolbar-background-md										{background:#337ab7; }
+.ion-modal													{left:8px !important; background:#F8F8FF; margin-top:6px;}
+page-modal-page ion-input									{border:none !important;}
+page-service-info ion-input									{border:none !important;}
+.view-storedet												{padding:10px;}
+.view-storedet h2											{color:#1d6ab2;font-size:18px;padding:0; margin-bottom:0px !important;}
+.view-storedet p											{color:#708090;font-size:15px;line-height:24px; padding:0; margin-bottom:0px !important;margin-top:0px !important;}
+.close-iconss > .bar-button-default .ion-md-close-circle    {color:#c2c2c2!important; font-size:18px;margin-top:-11px;}
+.close-iconss > .bar-button-default .ion-ios-close-circle-outline{color:#c2c2c2!important; font-size:18px;}
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{ boder:none !important; box-shadow:none;}
+.label-lb													{font-size:15px !important;font-weight:400;padding-bottom:0px;text-align:center; margin-top:0px !important;}
+.toolbar-title-md											{color:#fff !important; text-align:left; }
+.service-bg0:before 										{content:"\f015";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#fff;
+															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
+.service-bg1:before 										{content:"\f0f8";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#fff;
+															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
+.service-bg2:before 										{content:"\f155";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#fff;
+															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
+.service-bg3:before 										{content:"\f02d";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#fff;
+															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
+.service-bg4:before 										{content:"\f1e4";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#fff;
+															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
+.service-bg5:before 										{content:"\f0d1";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#fff;
+															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
+.service-bg6:before 										{content:"\f0f7";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#fff;
+															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
+.brder-cor .button-ios										{background:#F97500; color:#fff !important; font-size:15px !important;text-transform:capitalize;}
+.brder-cor .button-ios										{color:#fff;font-size:15px;}
+.brder-cor .button-md										{background:#F97500; color:#fff !important; font-size:15px !important; text-transform:capitalize;}
+span.mails-cont												{float:left;}
+span.mails-cont i 											{float:left; color:#858D9B; font-size:15px;padding-top: 5px; padding-right:5px;}
+span.mails-cont p 											{float:left; color:#858D9B; font-size:15px;}
+page-service-info .service_request							{boder:none !important;}
+.segment-md .segment-button									{background:#1976d2; color:#fff;}
+.segment-md .segment-button.activated, .segment-md .segment-button.segment-activated{ background:#f97500; color:#fff; border-bottom:2px solid #f27201; }
+.thamb-lins													{bottom:145px;height:80px;left:12px;position:absolute;width:80px;z-index: 999 !important; }
+.thamb-lins img												{border:3px solid #fff;}
+.tid-cd 											        {color:#1976d2 !important;font-size:15px !important;font-weight:400 !important;text-align:left !important; float:left;}
+.labels-bds													{background:#6495ED;border-right:2px solid #fff;color:#fff;float:left;font-size:12px;padding:3px;position:absolute;
+															right: 0;top:195px;width:auto;}
+/*-------------------------------------Common  css end -------------------------------------*/
+
+
+
+
+
+/*-------------------------------------Android platform css -------------------------------------*/
+ion-content													{background-image: url('../../assets/img/bg.jpg');   font-size:15px;  color:#777 !important;}
+.primary-color 												{color:#1976d2 !important; font-size:15px !important;}
+.card-md p 													{color:#777;font-size:15px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
+														     margin: 0 0 2px;}
+ion-app.md													{font-family: 'Open Sans', sans-serif !important; }
+ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !important;}
+.blogs-div h2												{color:#1976d2;white-space: nowrap;font-family: "Open Sans",sans-serif !important; overflow:hidden;font-size:16px;
+															 font-weight:700;line-height:20px;text-align:left;}
+.my-list-item												{background:#333!important;color:#999 !important;border-bottom:1px solid #444 !important; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);}
+.login-pages .item-ios									    {background:none;}
+.forgot-pass												{background:none !important;  color:#337ab7 !important;font-family: 'Open Sans', sans-serif !important; font-size:15px; }
+.bg-back													{background:none !important; border-bottom:none !important;}
+.text-input-wp  											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size: 18px;
+															 font-weight:400; color:#555;}
+.list-ios .item-block .item-inner							{border-bottom:none;}
+page-service-info .service_request							{border:none !important;}
+
+/*-------------------------------------Android platform css end-------------------------------------*/
+
+
+
+/*-------------------------------------ios platform css -------------------------------------*/
+ion-content													{background-image: url('../../assets/img/bg.jpg');   font-size:15px;  color:#777 !important;}
+.card-ios p													{color: #777;font-size:15px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
+															 margin: 0 0 2px;}
+ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !important}
+.login-pages .item-wp										{background:none;}
+.forgot-pass												{background:none !important;  color:#337ab7 !important;font-family: 'Open Sans', sans-serif !important; font-size:15px; }
+.bg-bac												        {background:none !important; border-bottom:none !important;}
+.text-input-md  											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15);   margin-left: 9px !important; padding:5px 10px 10px 20px;font-size: 18px;
+.service-bg													{ height:auto !important;}															 font-weight:400; color:#555;}
+.text-input-ios   											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size: 18px;
+															 font-weight:400; color:#555;}
+												 
+.text-input-ios   											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size: 18px;
+															 font-weight:400; color:#555;}
+.toolbar-ios ion-title										{padding: 0 50px 1px;}
+.label-ios[stacked]											{margin-bottom:0px;}
+.label-ios													{line-height:14px;}
+/*-------------------------------------ios platform css end-------------------------------------*/
+
+/*-------------------------------------Windows platform css -------------------------------------*/
+ion-content													{background-image: url('../../assets/img/bg.jpg');   font-size:15px;  color:#777 !important;}
+.card-wp p													{color: #777;font-size:15px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
+															 margin: 0 0 2px;}
+ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !important;}
+.login-pages img.logo										{margin-top:70px;}	
+.login-pages .item-md										{background:none;}										
+.login-pages .item-md										{background:none;}
+.forgot-pass 												{background:none !important;box-shadow:none; color:#337ab7 !important;font-family: 'Open Sans', sans-serif !important; margin-top:10px; font-size:15px !important; text-transform:capitalize; }
+.bg-back .item-inner										{background:none !important; border-bottom:none !important;}
+.text-input-wp  											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size: 18px;
+        													 font-weight:400; color:#555;}
+.service-bg													{height:auto !important;}
+
+												 
+/*-------------------------------------Windows platform css end-------------------------------------*/
+
+
+
+
+
+
+
+/*-------------------------------------Android platform css -------------------------------------*/
+
+.my-list-item												{background:#333!important;color:#999 !important;text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);     -moz-border-bottom-colors: none;
+															-moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: #444 currentcolor #111 !important;
+														     border-image: none; border-style: solid none;border-width: 1px medium;position: relative}
+.label-md													{font-size:14px;line-height:15px;overflow:hidden;padding-right:1px;text-indent:5px;text-overflow:ellipsis;white-space:nowrap;}
+.menu-inner													{margin-top:57px;}
+.header-md													{z-index:999;}
+.header														{height:55px;}
+.item-select												{padding-left:0px; text-align:center; }
+.sub-cate													{background:#C0392B;box-shadow:none;border-radius:0px;}
+.sub-cate > .list-md > .item-md								{background:#c0392b !important; padding-left:0px; }
+.sub-cate > .list-md > .item-md	> .label-md				    {margin:0px !important;}
+.sub-cate .item-inner										{border-bottom: 1px solid rgba(212, 209, 209, 0.13);} 
+
+
+
+/*-------------------------------------Android platform css end-------------------------------------*/
+
+
+/*-------------------------------------ios platform css -------------------------------------*/
+.label-ios													{font-size:14px;line-height:15px;overflow:hidden;padding-right:1px;text-indent:5px;text-overflow:ellipsis;white-space:nowrap;}
+.item-inner													{background:none !important;}
+.toolbar-title-ios											{font-size:19px; font-weight:400;}
+.sub-cate													{background:none !important;box-shadow:none;border-radius:0px; width:94%; margin-left:11px; margin-top:10px; padding-left:0px;}
+.bar-button-ios												{font-size:15px;}
+.sub-cate .list-ios										    {padding-left:0px; margin-bottom:0px;}
+.bar-button-ios[icon-only] ion-icon							{font-size:15px;}
+.sub-cate > .input-wrapper									{background:#C0392B !important;}
+.sub-cate > .input-wrapper >.item-ios						{background:none;}
+.sub-cate .item-inner 										{border-bottom:none !important; background:#16A085!important;padding-right:0px !important;}
+.sub-cate .item-inner .input-wrapper .label-ios				{margin:0px;padding-right:0px !important; position:relative;}
+.sub-cate .item-inner .input-wrapper .label-ios h2 .title-ios .toolbar-title{ background: rgba(51, 51, 51, 0.12); font-size:20px; font-weight:400; 
+															 color:#fff;display:block;height:45px;line-height:45px;width:100%; text-align:left; padding-left:5px}
+.sub-cate .list-ios p									    {border-bottom:1px solid rgba(212, 209, 209, 0.13); width:100%; color: #fff; font-size:16px; padding-bottom:8px;
+															 font-size: 16px;text-decoration:none;margin-left:0px; position:relative; border-bottom:1px solid rgba(212, 209, 209, 0.13) !important;}
+.item-block										            {border-bottom:1px solid rgba(212, 209, 209, 0.13) !important;}
+.item-select												{font-size:14px !important;}
+.marg-info													{padding:50px; float:left; margin-top:10px;}
+.item-ios.item-block .item-inner							{ }
+.label-ios													{font-size:15px;}
+.alert-ios .alert-wrapper									{background:#f8ffff;}
+.alert-message												{display:none;}
+.alert-wrapper > .alert-head > h2							{margin-top:0px; color:#fff; }
+.alert-wrapper > .alert-head								{background:#1D6AB2;}
+.alert-ios .alert-radio-label								{padding:5px 5px 5px 10px;}
+.alert-ios .alert-tappable									{height:35px;border-bottom:1px dashed #ccc;}
+.alert-ios .alert-radio-group, .alert-ios .alert-checkbox-group{max-height:250px !important; overflow-y:scroll !important;}
+.alert-ios .alert-button									{font-weight:normal !important; font-size:15px;}
+.item-inner > .input-wrapper > .label-ios h2				{font-size:15px;color:#1d6ab2;text-transform:capitalize;}
+.rupee 														{color:#777 ; position:relative;}
+.item-inner > .input-wrapper > .label-ios					{color:#777;font-size:14px; }
+.rupee:before 										        {content:"\f156";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#777;
+														     font-size:16px;padding-right:0.5em;position:absolute;top:7px;left:0%;}
+.toolbar-background-ios										{ background:#337ab7; color:#fff !important;}
+.toolbar-title-ios											{color:#fff;}
+.item-ios .item-button									    {height:30px !important;}
+.hei-head > .toolbar-background-md                          {height:42px !important;}
+.tittles-md .toolbar-title-md								{margin-top:-18px !important;font-size:17px !important; text-align:center;}
+.tittles-md .toolbar-title-ios                              {font-size:17px !important;}
+.hei-head > .toolbar-background-md > .toolbar-md			{height:45px !important;}
+.header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before{ background:none;}
+
+
+
+
+/*-------------------------------------ios platform css end-------------------------------------*/
+/*-------------------------------------Android platform css -------------------------------------*/
+.sub-cate .item-inner .input-wrapper .label-md			   {margin:0px !important; background:none !important;}
+.sub-cate .item-inner .input-wrapper .label-md h2 .title-md{background: rgba(51, 51, 51, 0.12); font-size:20px; font-weight:400; 
+															 color:#fff;display:block;height:45px;line-height:45px;width:100%; text-align:left; padding-left:5px}
+.sub-cate .item-inner .input-wrapper .item-md              {background:none; manage:0px !important;}
+.sub-cate .item-inner .input-wrapper .list-md              {margin:0px; padding-left:0px;}
+.sub-cate .item-inner .input-wrapper .label-md p           {color:#fff;font-size:16px;margin-left:0;padding-bottom:0px;position:relative;text-decoration:none;width:100%; padding-left:0 !important}
+.sub-cate .item-inner .input-wrapper .label-md h2 .title-md .toolbar-title-md{ color:#fff !important; padding:0px !important;;}
+.alert-md .alert-head									   {padding: 4px 10px 10px;}
+.headbg													   {background:#4169E1; font-size:15px;}
+.body-clr												   {background:#fff;}
+.popup-mds > .ion-label									   {font-size:15px; text-align:center;}
+.item-inner > .input-wrapper > .label-md h2				   {font-size:15px;color:#1d6ab2;text-transform:capitalize;}
+.item-inner > .input-wrapper > .label-md				   {color:#777;font-size:14px}
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ bottom:4px;}
+.marg-info img											   {border:3px solid #FFE4E1; box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);}
+.item-md .item-button									   {height:30px;}
+.text-input-md											   { font-size:15px;}
+/*-------------------------------------Android platform css end-------------------------------------*/
+
+
