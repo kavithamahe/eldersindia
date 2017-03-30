@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController,LoadingController, NavParams,Nav } from 'ionic-angular';
-
+import { Component } from '@angular/core';
+import { NavController,LoadingController, NavParams} from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 
 import { CommunityServices } from '../../providers/community-services';
@@ -102,16 +102,24 @@ authForm : FormGroup;
   elder_emergency:any=[];
   elder_experience:any=[];
   elder_education:any=[];
-
+  imageUrl:any;
+  user_id:any;
+  token:any;
 //-------------------END---------------------------------//
 
-  constructor(public nav: NavController, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
+  constructor(public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
 
       // this.getElderMasterDetails();
 
-
+    this.storage.ready().then(() => {
+      storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      storage.get('id').then((id) => { this.user_id=id;});
+      storage.get('token').then((token) => { this.token=token; 
+      this.sponsor_id=this.user_id;
+      })
+    }); 
     this.today = "";
-     this.sponsor_id="1";
+     
      this.job_interest=false;
 
         this.authForm = formBuilder.group({
