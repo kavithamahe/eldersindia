@@ -106,6 +106,11 @@ connectMember(id,name){
 }
 //------------//
 
+getConnectLists(data){
+   this.connectlist = {"searchValue":data}
+   return this.http.post(`${this.getCommunityPostsUrl }getConnectionList`,this.connectlist,this.options)
+      .map(res =>res.json());
+}
 getConnectList(){
    this.connectlist = {"searchValue":""}
    return this.http.post(`${this.getCommunityPostsUrl }getConnectionList`,this.connectlist,this.options)
@@ -197,7 +202,7 @@ sendMessage(id,attachment,subject,message){
   }
 
   getElderMasterDetails(){
-   this. body = {"get":["FunctionalArea","Educational","Specialization","Locations","AreaofInterest","Skills"]};
+   this. body = {"get":["Relations","InService","FunctionalArea","Educational","Specialization","Locations","AreaofInterest","Skills"]};
      return this.http.post(`${this.getCommunityPostsUrl }getElderMasterDetails`,this.body,this.options)
     .map(res =>res.json());
   }
