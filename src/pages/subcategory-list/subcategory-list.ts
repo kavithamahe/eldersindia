@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import { ServiceInfoPage } from '../service-info/service-info';
 import { ModalContentPage } from '../modal-page/modal-page';
-import { DashboardPage } from '../../pages/dashboard/dashboard';
+//import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ServiceProvider } from '../../providers/service-provider';
 /*
   Generated class for the SubcategoryList page.
