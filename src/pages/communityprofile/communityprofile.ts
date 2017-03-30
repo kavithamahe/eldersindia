@@ -275,6 +275,10 @@ export class CommunityprofilePage {
   })
   }
   
+  getCommunity(){
+  this.nav.pop();
+  }
+  
   userProfile(){
     this.nav.pop();
   }

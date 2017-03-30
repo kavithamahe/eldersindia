@@ -15,7 +15,7 @@
 </ion-header>
   
 <ion-content>
-  	<!-- <div padding>
+  	<!--<div padding>
 	    <ion-toolbar no-border-top>
 	      <ion-segment>
 	        <ion-segment-button  class="demo" >
@@ -26,8 +26,8 @@
 	        </ion-segment-button>
 	      </ion-segment>
 	    </ion-toolbar>
-  	</div>
-  	 -->
+  	</div>-->
+	   
   	<div  *ngIf="userType == 'sponsor'">
 	  	<ion-card>
 	  		<ion-card-content>
@@ -49,7 +49,7 @@
 					</ion-row>
 					<ion-row>
 		    			<ion-col>
-		    				<div >
+		    				<div>
 								<ion-item *ngFor="let member of members">
 									<ion-avatar>
 										<img (click)="membersProfile(member.uid)" 
@@ -68,15 +68,15 @@
 			</ion-card-content>
 		</ion-card>
 	</div>
-	
-	  	<ion-card>
+ 
+	<ion-card>
 		  	<ion-item class="edit">
 			  	<ion-icon name="create"></ion-icon>
 			  		Update Status
 			</ion-item>
 			  	   <hr><br>
 			  	<ion-card-content>
-					<div  class="three">
+					<div class="three">
 				      	<ion-input [(ngModel)]="post" type="text" placeholder="Whats in you mind?"></ion-input>
 				    </div>
 		    	</ion-card-content>

@@ -31,9 +31,9 @@
 </ion-header>
 
 <ion-content padding>
-<button class = "myblock" *ngFor="let service of services"  id = {{service.id}} class="menu1" ion-button full (click)="subCategory(service)">
+<button class ="myblock" *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full (click)="subCategory(service)" class="ftbtb service-bg{{i}}">
 <ion-col>
-<p><ion-icon  name="ios-home"></ion-icon></p>
+<!--<p><ion-icon  name="ios-home"></ion-icon></p>-->
 <p>{{service.service}}</p>
 </ion-col>
 </button>
