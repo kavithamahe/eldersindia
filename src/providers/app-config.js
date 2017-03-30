@@ -21,8 +21,8 @@ var AppConfig = (function () {
         this.http = http;
         /*imageUrl="http://183.82.33.232:8097/";
         rooturl="http://183.82.33.232:8097/api/"; */
-        this.imageUrl = "http://192.168.1.21:8000/";
-        this.rooturl = "http://192.168.1.21:8000/api/";
+        this.imageUrl = "http://192.168.1.20:8000/";
+        this.rooturl = "http://192.168.1.20:8000/api/";
     }
     AppConfig.prototype.setImageurl = function () {
         return this.imageUrl;

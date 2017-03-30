@@ -22,23 +22,28 @@
 
 
 <ion-content padding>
-<ion-item *ngIf="subcategories?.info">
+<ion-item>
       <ion-label>Location</ion-label>
-      <ion-select [(ngModel)]="elderLocation" (ionChange)='locationChanged()'>
-        <ion-option *ngFor = "let location of locations" value={{location.id}}>{{location.location}}
+      <ion-select [(ngModel)]="elderLocation" class="sub-cate-slec" (ionChange)='locationChanged()'>
+        <ion-option class="sub-cate-slec" *ngFor = "let location of locations" value={{location.id}}>{{location.location}}
         </ion-option>
       </ion-select>
 </ion-item>
-<ion-card *ngFor = "let subcategory of subcategories.info" [color]="subcategory.color">
+<ion-item *ngFor = "let subcategory of subcategories.info" [color]="subcategory.color" class="sub-cate">
 	<h2><ion-title>{{subcategory.name}}</ion-title></h2>
-	<ion-list>
-	  <button *ngFor="let service of subcategory.services" ion-item (click)="openSelected(service)">
-	    <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
-	    {{ service.name }}<hr> 
-	  </button> 
+	<ion-list *ngFor="let service of subcategory.services" ion-item (click)="itemSelected(service)" no-border>
+	 <!-- <button > -->
+	    <div class="sub-cate">
+	   <p>  <ion-icon ios="md-arrow-dropright" md="md-arrow-dropright"></ion-icon>  {{ service.name }}</p>
+	   </div>
+	  <!--</button> -->
 	</ion-list>
-</ion-card>
-<ion-card *ngIf="!subcategories?.info">
-  {{emptyRecord}}
-</ion-card>
+</ion-item>
+<!--updated 3/22/2017-->
+ <ion-card padding *ngIf="!subcategories?.info">
+     <ion-card-content>
+     {{emptyRecord}}
+     </ion-card-content>
+  </ion-card>
+<!-- till this-->  
 </ion-content>

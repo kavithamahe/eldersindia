@@ -200,9 +200,16 @@ export class CommunityprofilePage {
      
   }
   setItems(ev) {
+     var val = ev.target.value;
    
     
-    this.connectList();
+    this.communityServices.getConnectLists(val).subscribe(users => {
+     console.log(users);
+  },
+   err =>{
+    
+    this.communityServices.showErrorToast(err);
+  })
    
   }
   
@@ -275,10 +282,17 @@ export class CommunityprofilePage {
   })
   }
   
+  getCommunity(){
+  this.nav.pop();
+  }
+  
   userProfile(){
     this.nav.pop();
   }
    userProfiles(){
+    this.nav.pop();
+  }
+  getCommunity(){
     this.nav.pop();
   }
   public dashboardPage()

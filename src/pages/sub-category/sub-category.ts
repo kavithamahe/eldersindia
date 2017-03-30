@@ -87,7 +87,7 @@ locationChanged(){
     this.loadSubCategory(locationBasedData);
   }
 
-openSelected(serviceData) {
+itemSelected(serviceData) {
     let location_id = this.elderLocation;
     let service = serviceData;
     if(this.elderLocation==""){
