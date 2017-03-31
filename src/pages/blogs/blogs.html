@@ -28,7 +28,7 @@
 <ion-content padding>
 <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)">
 
-  <ion-item >
+  <ion-item text-wrap>
     <ion-avatar item-left>
       <img src="{{imageUrl+blogs?.avatar}}" [hidden]="!blogs?.avatar">
     </ion-avatar>

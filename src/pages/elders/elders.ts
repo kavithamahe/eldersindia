@@ -105,6 +105,7 @@ authForm : FormGroup;
   imageUrl:any;
   user_id:any;
   token:any;
+  elderInfo:any;
 //-------------------END---------------------------------//
 
   constructor(public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {

@@ -22,9 +22,10 @@ jobId:number;
 imageUrl:any;
 token:any;
 messageObj:any;
-toAddress:any;
 subject:any;
 message:any;
+skills:any=['skills','venkat'];
+toAddress:any=[];
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public messagesService:MessagesService) {
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});

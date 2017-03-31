@@ -25,7 +25,6 @@ import { AppliedJobsPage } from '../pages/applied-jobs/applied-jobs';
 import { MessagesPage } from '../pages/messages/messages';
 import { CreateMessagePage } from '../pages/create-message/create-message';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
-import { MyservicesPage } from '../pages/myservices/myservices';
 import { ServiceprovidersPage } from '../pages/serviceproviders/serviceproviders';
 import { ServicerequestPage } from '../pages/servicerequest/servicerequest';
 import { ViewServiceRequestPage } from '../pages/view-service-request/view-service-request';
@@ -84,7 +83,6 @@ import { ServiceProvider } from '../providers/service-provider';
     MessagesPage,
     CreateMessagePage,
     ViewMessagesPage,
-    MyservicesPage,
     ServiceprovidersPage,
     ServicerequestPage,
     ViewServiceRequestPage,
@@ -132,7 +130,6 @@ import { ServiceProvider } from '../providers/service-provider';
     MessagesPage,
     CreateMessagePage,
     ViewMessagesPage,
-    MyservicesPage,
     ServiceprovidersPage,
     ServicerequestPage,
     ViewServiceRequestPage,
