@@ -131,11 +131,22 @@ loadSubcategoryList(subCategory_id,location_id){
 
 @Component({
   template: `
-  <div class="dependent-modal">
+<div class="ion-modal modal-popups">
 <ion-header>
+<ion-toolbar class="hei-head">
+    <ion-title color="primary" class="tittles-md">
+      Dependent List
+    </ion-title>
+    <ion-buttons start item-right class="close-iconss">
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon ios="ios-close-circle-outline" md="md-close-circle" ></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="popup-mds">
   <ion-row>
       <ion-item >
             <ion-label>Select Dependent</ion-label>

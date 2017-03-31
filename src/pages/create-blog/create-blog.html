@@ -30,7 +30,7 @@
 
 <ion-item>
     <ion-label stacked>Category: *</ion-label>
-    <ion-select [(ngModel)]="category">
+    <ion-select class="select-brd" [(ngModel)]="category">
       <ion-option *ngFor="let categories of categoriesList" [value]="categories.name">{{categories.name}}</ion-option>     
     </ion-select>
   </ion-item>
