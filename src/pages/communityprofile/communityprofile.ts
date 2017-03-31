@@ -292,9 +292,7 @@ export class CommunityprofilePage {
    userProfiles(){
     this.nav.pop();
   }
-  getCommunity(){
-    this.nav.pop();
-  }
+  
   public dashboardPage()
   {
     this.nav.setRoot(DashboardPage);
