@@ -33,7 +33,7 @@
       <img src="{{imageUrl+blogs?.avatar}}" [hidden]="!blogs?.avatar">
     </ion-avatar>
     <h2 class="primary-color pro-info">{{blogs.title}}</h2>
-    <p><ion-icon ios="ios-person" md="md-person"></ion-icon> {{blogs.author_name }} | {{blogs.created_at | date :"MMM dd y"}}</p>
+    <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{blogs.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{blogs.created_at | date :"MMM dd y"}}</p>
     
   </ion-item>
 

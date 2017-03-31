@@ -5,63 +5,72 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>my-profile</ion-title>
+<ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>My Profile</ion-title>    
   </ion-navbar>
 
 </ion-header>
-<ion-content padding>
+<ion-content>
 <ion-item>
 
 	<ion-row>
-	<ion-col item-left class="borderClass">Details</ion-col>
-	<ion-col offset-50 class="borderClass"><button ion-button item-right color="secondary" icon-only (click)="editProfile()"><ion-icon ios="ios-create" md="md-create"></ion-icon></button></ion-col>
+	<ion-col width-80 item-left class="borderClass head-mar"><h2 class="edit-pro">Details</h2></ion-col>
+	<ion-col width-20 class="borderClass"><button ion-button item-right color="secondary" icon-only (click)="editProfile()"><i class="fa fa-pencil-square-o editicoan" aria-hidden="true"></i></button></ion-col>
 
 	</ion-row>
 </ion-item>
 <ion-item *ngIf="user_type =='sponsor'">
 	<ion-row>
-	    <ion-col width-50 text-left text-wrap><div>Sponsor Name</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div class="labels-lb">Sponsor Name</div></ion-col>
 	    <ion-col width-50 text-left text-wrap><div>{{profileData?.name}}</div></ion-col>
     </ion-row>
 
     <ion-row>
-	    <ion-col width-50 text-left text-wrap><div>Designation</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div class="labels-lb">Designation</div></ion-col>
 	    <ion-col width-50 text-left text-wrap><div>{{profileData?.designation}}</div></ion-col>
     </ion-row>
 
     <ion-row>
-	    <ion-col width-50 text-left text-wrap><div>Employee Id</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div class="labels-lb">Employee Id</div></ion-col>
 	    <ion-col width-50 text-left text-wrap><div>{{profileData?.employee_id}}</div></ion-col>
     </ion-row>
 
     <ion-row>
-	    <ion-col width-50 text-left text-wrap><div>Mobile Number</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div class="labels-lb">Mobile Number</div></ion-col>
 	    <ion-col width-50 text-left text-wrap><div>{{profileData?.mobile}}</div></ion-col>
     </ion-row>
     <ion-row>
-	    <ion-col width-50 text-left text-wrap><div>Personal Email</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div class="labels-lb">Personal Email</div></ion-col>
 	    <ion-col width-50 text-left text-wrap><div>{{profileData?.personal_email}}</div></ion-col>
     </ion-row>
     <ion-row>
-	    <ion-col width-50 text-left text-wrap><div>Location</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div class="labels-lb">Location</div></ion-col>
 	    <ion-col width-50 text-left text-wrap><div>{{profileData?.locationName}}</div></ion-col>
     </ion-row>
     <ion-row>
-	    <ion-col width-50 text-left text-wrap><div>DOB</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div class="labels-lb">DOB</div></ion-col>
 	    <ion-col width-50 text-left text-wrap><div>{{profileData?.dob}}</div></ion-col>
     </ion-row>
     <ion-row>
-	    <ion-col width-50 text-left text-wrap><div>Email</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div class="labels-lb">Email</div></ion-col>
 	    <ion-col width-50 text-left text-wrap><div>{{profileData?.official_email}}</div></ion-col>
     </ion-row>
     <ion-row>
-	    <ion-col width-50 text-left text-wrap><div>User Type</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div class="labels-lb">User Type</div></ion-col>
 	    <ion-col width-50 text-left text-wrap><div>{{profileData?.user_type}}</div></ion-col>
     </ion-row>
     <ion-row>
-	    <ion-col width-50 text-left text-wrap><div>Last Modified</div></ion-col>
+	    <ion-col width-50 text-left text-wrap><div class="labels-lb">Last Modified</div></ion-col>
 	    <ion-col width-50 text-left text-wrap><div>{{profileData?.updated_at}}</div></ion-col>
     </ion-row>
 
@@ -111,3 +120,8 @@
 
 </ion-item>
 </ion-content>
+
+<style>
+.label-md{ margin:0px !important;}
+
+</style>

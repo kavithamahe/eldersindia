@@ -38,11 +38,11 @@
 <ion-grid class="dashboard">
   <ion-row>
 
-    <ion-col width-50 text-center  (click)="makeCall(ambulance)">
+    <ion-col width-50 class="ambulance" text-center  (click)="makeCall(ambulance)">
     <i class="fa fa-ambulance fa-5x"></i><br>
     AMBULANCE
     </ion-col>
-    <ion-col width-50 text-center (click)="makeCall(police)">
+    <ion-col width-50 class="police" text-center (click)="makeCall(police)">
     <i class="fa fa-users fa-5x"></i><br>
     POLICE</ion-col>
   </ion-row>
@@ -50,11 +50,11 @@
 <ion-grid class="dashboard">
   <ion-row>
 
-    <ion-col width-50 text-center (click)="hooter()">
+    <ion-col width-50 class="hooter" text-center (click)="hooter()">
     <i class="fa fa-bell-o fa-5x"></i><br>
     HOOTER
     </ion-col>
-    <ion-col width-50 text-center (click)="makeCall(call_sponsor)">
+    <ion-col width-50 class="call-sponsor" text-center (click)="makeCall(call_sponsor)">
     <img src="assets/img/headshot.jpg" class="img-circle">
     CALL SPONSOR</ion-col>
   </ion-row>
@@ -63,31 +63,31 @@
  <ion-grid class="dashboard">
   <ion-row>
 
-    <ion-col width-50 text-center (click)="servicesPage()">
+    <ion-col width-50 class="services" text-center (click)="servicesPage()">
     <i class="fa fa-cog fa-5x"></i><br>
     SERVICES
     </ion-col>
-    <ion-col width-50 text-center (click)="jobsPage()">
+    <ion-col width-50 class="jobs" text-center (click)="jobsPage()">
     <i class="fa fa-cubes fa-5x"></i><br>
     JOBS</ion-col>
   </ion-row>
 </ion-grid>
 <ion-grid class="dashboard">
   <ion-row>
-    <ion-col width-50 text-center (click)="communityPage()">
+    <ion-col width-50 class="community" text-center (click)="communityPage()">
     <i class="fa fa-universal-access fa-5x"></i><br>
     COMMUNITY</ion-col>
-    <ion-col width-50 text-center (click)="blogsPage()">
+    <ion-col width-50 class="blogs" text-center (click)="blogsPage()">
     <i class="fa fa-rss fa-5x"></i><br>
     BLOGS</ion-col>
   </ion-row>
 </ion-grid>
 <ion-grid class="dashboard">
   <ion-row>
-    <ion-col width-50 text-center (click)="connectionsPage()">
+    <ion-col width-50 class="connection" text-center (click)="connectionsPage()">
      <i class="fa fa-sitemap fa-5x"></i><br>
      CONNECTIONS</ion-col>
-    <ion-col width-50 text-center (click)="messagesPage()">
+    <ion-col width-50 class="messagess" text-center (click)="messagesPage()">
    <i class="fa fa-envelope-o fa-5x"></i><br>
     MESSAGES</ion-col>
   </ion-row>
