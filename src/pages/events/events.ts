@@ -37,8 +37,8 @@ eventScrollLists:any;
     loader.present();
    this.eventsService.eventsList().subscribe(
      (eventsList) => {
-      this.eventsLists=eventsList.result.data;
-      console.log(this.eventsLists);  
+      this.eventsLists=eventsList.result.data;        
+      this.nextPageURL=eventsList.result.next_page_url;   
     },
     (err) => { 
         if(err.status===401)
