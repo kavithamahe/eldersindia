@@ -34,7 +34,7 @@ export class MyApp {
 
   // make HelloIonicPage the root (or first) page
 
-  rootPage: any =  BlogsPage;
+  rootPage: any =  ManagePage;
   pages: Array<{title: string, component: any}>;
 
   constructor(
