@@ -157,15 +157,55 @@
 	          	<p>{{user.post_message}}</p><br>
 	          	<img  [src]="imageUrl+user?.post_image" [hidden]="!user?.post_image">
 	       	</ion-card-content>
-	        <ion-card-content  [hidden]="!user?.post_video">
+	        <ion-card-content>
 
-	         <!-- <iframe [hidden]="!user?.post_video" height="190" onload="this.width=screen.width" [src]="sanitizer.bypassSecurityTrustResourceUrl(user?.post_video)" frameborder="0" ></iframe> -->
+	        <!--  <iframe [hidden]="!user?.post_video" height="190" onload="this.width=screen.width" [src]="sanitizer.bypassSecurityTrustResourceUrl(http://www.youtube.com/watch?v=uiws904iuEQ)" frameborder="0" ></iframe> -->
 
-	        <!--  <iframe  [hidden]="!user?.post_video"  width="420" height="315" [src]="cleanURL(user.post_video)" frameborder="0" allowfullscreen></iframe> -->
+	         <iframe  width="420" height="315" [src]="cleanURL(user?.post_video)" frameborder="0" ></iframe>
+		       <!--  <video  style="width:400px" >
+				<source src="http://player.vimeo.com/external/85569724.sd.mp4?s=43df5df0d733011263687d20a47557e4" type="video/mp4"/>
+				</video> -->
 
-				<video controls><source 
-	          	[src]="cleanURL(user?.post_video)" /></video>
-	          	<!--  <source src="http://player.vimeo.com/external/85569724.sd.mp4?s=43df5df0d733011263687d20a47557e4" type="video/mp4"/> -->
+<!-- 
+				<video> 
+	          	
+	          	 <source src="http://www.dailymotion.com/video/x2f4zt5_dunya-news-winds-force-plane-to-land-almost-sideways-at-leeds-airport_news">
+	          	 </video> -->
+	          	<!--  <iframe src="http://www.dailymotion.com/embed/video/x2f4zt5_dunya-news-winds-force-plane-to-land-almost-sideways-at-leeds-airport_news" width=\"480\" height=\"269\" frameborder=\"0\" allowfullscreen></iframe>" -->
+
+	          		
+
+
+
+	          	<!--  <iframe src=\"https:\/\/player.vimeo.com\/video\/210073083\" width=\"480\" height=\"270\" frameborder=\"0\" title=\"The New Vimeo Player (You Know, For Videos)\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>" -->
+
+	          	<!--  <video  (click)="toggleVideo()" #videoPlayer>
+				        <source src="https://ia902505.us.archive.org/7/items/Birds021/Birds%2002-1.m4v" type="video/mp4" />
+				        Browser not supported
+				    </video> 
+				          <video controls="controls" preload="metadata"  webkit-playsinline="webkit-playsinline" class="videoPlayer"><source 
+				          [src]="sanitizer.bypassSecurityTrustResourceUrl(user?.post_video)" type="video/mp4"/></video>-->
+                          
+                    <!--  <video controls="controls" preload="metadata" webkit-playsinline="webkit-playsinline" class="videoPlayer"><source src="https://vimeo.com/video/210073083"
+                      type="video/mp4"/></video>
+ -->
+	          	 <!-- <Video
+			         
+			          src="http://www.dailymotion.com/video/x2f4zt5_dunya-news-winds-force-plane-to-land-almost-sideways-at-leeds-airport_news"
+			          
+			          height="300"></Video> -->
+
+			           <iframe width="560" height="315"                 
+			           src="https://vimeo.com/197933516" frameborder="0" >
+			           	
+			           </iframe> 
+			           
+
+
+
+			           
+
+
 	       	</ion-card-content>
 	       	 
 	       	<ion-card-content>

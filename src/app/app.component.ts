@@ -11,7 +11,6 @@ import { ConnectionsPage } from '../pages/connections/connections';
 import { JobboardPage } from '../pages/jobboard/jobboard';
 import { AppliedJobsPage } from '../pages/applied-jobs/applied-jobs';
 import { MessagesPage } from '../pages/messages/messages';
-import { MyservicesPage } from '../pages/myservices/myservices';
 import { ServiceprovidersPage } from '../pages/serviceproviders/serviceproviders';
 import { ServicerequestPage } from '../pages/servicerequest/servicerequest';
 import { BlogsPage } from '../pages/blogs/blogs';
@@ -33,7 +32,6 @@ import { MyProfilePage } from '../pages/my-profile/my-profile';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // make HelloIonicPage the root (or first) page
   rootPage: any =  ManagePage;
   pages: Array<{title: string, component: any}>;
 
@@ -55,7 +53,6 @@ export class MyApp {
       { title: 'Job Board', component: JobboardPage },
       { title: 'Applied Jobs', component: AppliedJobsPage },
       { title: 'Messages', component: MessagesPage },
-      { title: 'My Services', component: MyservicesPage },
       { title: 'Service Providers', component: ServiceprovidersPage },
       { title: 'Service Requests', component: ServicerequestPage },
       { title: 'Blogs', component: BlogsPage },

@@ -39,4 +39,10 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'getNewsEventsDetails/'+eventsId,_request,this.options)
       .map(res => res.json()); 
    }
+   eventsscroll(nextPageURL) 
+   {  
+   let _request= {"search":{"title":""},"postType":"events"};
+    return this.http.post(nextPageURL,_request,this.options)
+      .map(res => res.json()); 
+   }
 }

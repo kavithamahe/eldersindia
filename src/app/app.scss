@@ -100,6 +100,7 @@ p{
 .send{
 	border: 2px solid #f2f2f2;
 }
+
 }
 
 page-elders {
@@ -299,7 +300,44 @@ page-service-info .service_request							{boder:none !important;}
 .thamb-lins img												{border:3px solid #fff;}
 .tid-cd 											        {color:#1976d2 !important;font-size:15px !important;font-weight:400 !important;text-align:left !important; float:left;}
 .labels-bds													{background:#6495ED;border-right:2px solid #fff;color:#fff;float:left;font-size:12px;padding:3px;position:absolute;
-															right: 0;top:195px;width:auto;}
+															 right: 0;top:195px;width:auto;}
+.services > i 												{color:#5dade2 !important;}
+.jobs > i													{color:#e74c3c !important;}
+.community > i 												{color:#1976d2 !important;}
+.connection > i 											{color:#58d68d !important;}
+.blogs > i													{color:#F4A460 !important;}
+.messagess > i												{color:#FA8072 !important;}
+.ambulance > i												{color:#BDB76B !important;}
+.police > i													{color:#008B8B !important;}
+.hooter > i													{color:#DEB887 !important;}
+.hooter > i													{color:#DEB887 !important;}
+.call-sponsor > i 											{color:	#9370DB !important;}
+.dashboard > ion-row ion-col:hover							{background:#2c3e50;}
+.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{}
+.button-md-secondary										{background:none; color:#333;box-shadow:none;}
+.label-md													{margin:0px !important;}
+.label-ios													{margin:0px !important;}
+.item-md [item-left], .item-md [item-right]					{margin:0px !important;}
+.edit-pro													{color: #1976d2 !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    line-height: 25px !important;
+    margin-bottom: 8px !important;
+    text-align: left !important;}
+.item-ios{ padding-left:0px !important;}
+.label-ios .head-mar h2.edit-pro{ margin-top:20px !important;}
+.editicoan{font-size:18px !important;}
+.labels-lb{color:#00CED1; font-weight:600; font-size:14px;}
+page-my-profile ion-col{ border-left:1px solid #F0F8FF !important;}
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-active) .item-inner{ border-bottom:none;}
+ .select-brd{border: 1px solid #ccc !important;
+    border-radius: 25px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    margin-left: 8px !important;
+    padding:10px 10px 10px 20px;}
 /*-------------------------------------Common  css end -------------------------------------*/
 
 
@@ -323,6 +361,9 @@ ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !import
 															 font-weight:400; color:#555;}
 .list-ios .item-block .item-inner							{border-bottom:none;}
 page-service-info .service_request							{border:none !important;}
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{ border-bottom:none;}
+.item-md													{background:#fff;}
+.liste-name													{ font-size:17px !important; font-weight:400; height:25px; padding-left:10px; padding-top:5px;}
 
 /*-------------------------------------Android platform css end-------------------------------------*/
 
@@ -336,7 +377,7 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .login-pages .item-wp										{background:none;}
 .forgot-pass												{background:none !important;  color:#337ab7 !important;font-family: 'Open Sans', sans-serif !important; font-size:15px; }
 .bg-bac												        {background:none !important; border-bottom:none !important;}
-.text-input-md  											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15);   margin-left: 9px !important; padding:5px 10px 10px 20px;font-size: 18px;
+.text-input-md  											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15);   margin-left:8px !important; padding:5px 10px 10px 20px;font-size: 18px;
 .service-bg													{ height:auto !important;}															 font-weight:400; color:#555;}
 .text-input-ios   											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size: 18px;
 															 font-weight:400; color:#555;}
@@ -395,7 +436,7 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .label-ios													{font-size:14px;line-height:15px;overflow:hidden;padding-right:1px;text-indent:5px;text-overflow:ellipsis;white-space:nowrap;}
 .item-inner													{background:none !important;}
 .toolbar-title-ios											{font-size:19px; font-weight:400;}
-.sub-cate													{background:none !important;box-shadow:none;border-radius:0px; width:94%; margin-left:11px; margin-top:10px; padding-left:0px;}
+.sub-cate													{background:none !important;box-shadow:none;border-radius:0px; width:94%; margin-left:11px; margin-top:2px; padding-left:0px;}
 .bar-button-ios												{font-size:15px;}
 .sub-cate .list-ios										    {padding-left:0px; margin-bottom:0px;}
 .bar-button-ios[icon-only] ion-icon							{font-size:15px;}
@@ -410,7 +451,7 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .item-block										            {border-bottom:1px solid rgba(212, 209, 209, 0.13) !important;}
 .item-select												{font-size:14px !important;}
 .marg-info													{padding:50px; float:left; margin-top:10px;}
-.item-ios.item-block .item-inner							{ }
+.item-ios.item-block .item-inner							{ border-bottom:none; margin-left:5px; }
 .label-ios													{font-size:15px;}
 .alert-ios .alert-wrapper									{background:#f8ffff;}
 .alert-message												{display:none;}
@@ -433,7 +474,10 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .tittles-md .toolbar-title-ios                              {font-size:17px !important;}
 .hei-head > .toolbar-background-md > .toolbar-md			{height:45px !important;}
 .header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before{ background:none;}
-
+.item-ios [item-left]										{margin:0px !important;}
+.button-ios-secondary										{background:none; color:#333;}
+.mar-top													{margin-top:10px;}
+.timedate													{font-size:13px !important; color:#A9A9A9 !important;}
 
 
 
@@ -455,7 +499,14 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ bottom:4px;}
 .marg-info img											   {border:3px solid #FFE4E1; box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);}
 .item-md .item-button									   {height:30px;}
-.text-input-md											   { font-size:15px;}
+.text-input-md											   {font-size:15px;}
+.item-md												   {padding-left:2px;}
+page-dashboard .dashboard								   {padding:25px 0px !important;}
 /*-------------------------------------Android platform css end-------------------------------------*/
 
 
+//venkat
+.item-inner {
+border-bottom-color: transparent !important;
+box-shadow: none !important;
+}

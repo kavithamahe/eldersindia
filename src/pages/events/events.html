@@ -25,8 +25,8 @@
 <ion-card *ngFor="let events of eventsLists" >
 <div (click)="viewEvents(events?.id)">
  <img src="{{imageUrl+events?.featured_image}}" [hidden]="!events?.featured_image">
-  <ion-item>   
-    <h2 class="primary-color">{{events?.title}}</h2>
+  <ion-item text-wrap>   
+    <h2 class="primary-color feed-post" >{{events?.title}}</h2>
     <p><ion-icon ios="ios-person" md="md-person"></ion-icon> {{events?.author_name }} | {{events?.created_at | date :"MMM dd y"}}</p>
   </ion-item>
   <ion-card-content>
@@ -34,4 +34,7 @@
   </ion-card-content>
   </div>
 </ion-card>
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
 </ion-content>

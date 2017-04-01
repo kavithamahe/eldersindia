@@ -25,7 +25,7 @@
 <ion-card *ngFor="let news of newsLists" >
 <div (click)="viewNews(news?.id)">
  <img src="{{imageUrl+news?.featured_image}}" [hidden]="!news?.featured_image">
-  <ion-item>   
+  <ion-item text-wrap>   
     <h2 class="primary-color">{{news?.title}}</h2>
     <p><ion-icon ios="ios-person" md="md-person"></ion-icon> {{news?.author_name }} | {{news?.created_at | date :"MMM dd y"}}</p>
   </ion-item>
@@ -34,4 +34,8 @@
   </ion-card-content>
   </div>
 </ion-card>
+
+ <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
 </ion-content>

@@ -89,7 +89,9 @@ manageDependentData:any=[];
       
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+
       storage.get('user_type_id').then((id) => { this.sponsor_id=id;});
+
       storage.get('token').then((token) => { this.token=token; 
         
         this.fuctionality=navParams.get("fuctionality");

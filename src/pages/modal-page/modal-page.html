@@ -1,64 +1,67 @@
-<div class="ion-modal">
+<div class="ion-modal modal-popups">
 <ion-header>
-  <ion-toolbar>
-    <ion-title color="primary">
+  <ion-toolbar class="hei-head">
+    <ion-title color="primary" class="tittles-md">
       Request Services
     </ion-title>
-    <ion-buttons start>
+    <ion-buttons start item-right class="close-iconss">
       <button ion-button (click)="dismiss()">
         <span ion-text color="primary" showWhen="ios">Cancel</span>
-        <ion-icon name="md-close" showWhen="android,windows,ios"></ion-icon>
+        <ion-icon ios="ios-close-circle-outline" md="md-close-circle" ></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="popup-mds">
   <form [formGroup]="modalForm">
           
-          <ion-item *ngIf="!modalForm.controls.problem.valid  && (modalForm.controls.problem.dirty || submitAttempt)">
+          
+			<ion-label stacked class="label-lb">Describe The Problem</ion-label>
+          <ion-input type="text" formControlName="problem" ></ion-input>
+		  <ion-item *ngIf="!modalForm.controls.problem.valid  && (modalForm.controls.problem.dirty || submitAttempt)">
                 <p style="color: #ea6153;">Please enter problem description minimum of five character</p>
             </ion-item>
-          <ion-input placeholder ="Describe The Problem" type="text" formControlName="problem" ></ion-input>
           <br>
           
+          <ion-item>
+           <ion-label stacked class="label-lb">Date</ion-label>
+           <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" formControlName ="date"></ion-datetime>
+          </ion-item>
           <ion-item *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">
                 <p style="color: #ea6153;">Please select the date.</p>
             </ion-item>
-          <ion-item class = "service_request" >
-           <ion-label inline>Date</ion-label>
-           <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" formControlName ="date"></ion-datetime>
-          </ion-item><br>
+			<br>
 
-          <ion-item *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">
-                <p style="color: #ea6153;">Please select the time.</p>
-            </ion-item>
-
-          <ion-item class = "service_request" >
-            <ion-label inline>Time</ion-label>
+          <ion-item>
+            <ion-label stacked class="label-lb">Time</ion-label>
             <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" formControlName ="time"></ion-datetime>
-          </ion-item><br>
+          </ion-item>
+		  <ion-item *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">
+                <p style="color: #ea6153;">Please select the time.</p>
+          </ion-item>
+		<br>
 
-
-          <ion-item *ngIf="!modalForm.controls.contact.valid  && (modalForm.controls.contact.dirty || submitAttempt)">
+		  <ion-label stacked class="label-lb">Alternate Contact Number</ion-label>
+          <ion-input type="text" formControlName="contact"></ion-input>
+		    <ion-item *ngIf="!modalForm.controls.contact.valid  && (modalForm.controls.contact.dirty || submitAttempt)">
                 <p style="color: #ea6153;">Please enter 10 digit mobile number.</p>
             </ion-item>
-          <ion-input placeholder ="Alternate Contact Number" type="text" formControlName="contact"></ion-input><br>
+			<br>
           
-
-          <ion-item *ngIf="!modalForm.controls.dependents.valid  && (modalForm.controls.dependents.dirty || submitAttempt)">
-                <p style="color: #ea6153;">Please select the Dependent.</p>
-            </ion-item>
           <ion-item *ngIf = "userType =='sponsor'">
-            <ion-label stacked>Select Dependent</ion-label>
+            <ion-label stacked class="label-lb">Select Dependent</ion-label>
             <ion-select formControlName="dependents">
               <ion-option *ngFor = "let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}}
               </ion-option>
             </ion-select>
           </ion-item>
+		  <ion-item *ngIf="!modalForm.controls.dependents.valid  && (modalForm.controls.dependents.dirty || submitAttempt)">
+                <p style="color: #ea6153;">Please select the Dependent.</p>
+            </ion-item>
           <ion-row>
-          <ion-col><button ion-button item-left small (click)="dismiss()">close</button></ion-col>
-          <ion-col offset-33><button ion-button item-right small (click)="submit()">Submit</button></ion-col>
+          <ion-col><button ion-button item-left small (click)="dismiss()"class="btn-defaults">close</button></ion-col>
+          <ion-col offset-33><button ion-button item-right small (click)="submit()" class="btn-primarys">Submit</button></ion-col>
           </ion-row>
         <!-- </form> -->
       <!-- </div> -->
@@ -66,3 +69,7 @@
 
 </ion-content>
 </div>
+<style>
+ion-content{ background:none !important;}
+.scroll-content{overflow-y:hidden !important;}
+</style>

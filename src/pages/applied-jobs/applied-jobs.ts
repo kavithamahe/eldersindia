@@ -33,9 +33,8 @@ imageUrl:string;
  	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
    this.jobBoardService.appliedJobs().subscribe(
-     (appliedJobs) => {
-      
-      this.appliedJobsList=appliedJobs.result.info.data;     
+     (appliedJobs) => {      
+      this.appliedJobsList=appliedJobs.result.info.data; 
     },
     (err) => { 
         if(err.status===401)

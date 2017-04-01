@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { NavController, NavParams,AlertController,LoadingController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
@@ -14,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser/';
   templateUrl: 'community.html',
   
 })
+
 export class CommunityPage {
     userType:any;
     addComments: boolean;
@@ -34,6 +35,7 @@ export class CommunityPage {
     show_member:any;
     token:any;
     community_id:any;
+   @ViewChild('videoPlayer') videoplayer: any;
   constructor(public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
     this.nav=nav;
 
@@ -55,6 +57,11 @@ export class CommunityPage {
  // for (let i = 0; i < 30; i++) {
  //      this.users.push( this.users.length );
  //    }
+}
+
+
+toggleVideo(event: any) {
+    this.videoplayer.nativeElement.play();
 }
 
  // doInfinite(infiniteScroll) {
@@ -89,8 +96,19 @@ export class CommunityPage {
   }
 
   cleanURL(oldURL: string): any  {
-    console.log("vidweo url: ",oldURL);
-  let url = oldURL.replace("watch?v=", "")
+   
+    // http://www.dailymotion.com/video/
+  let url;
+  
+  url = oldURL.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
+  // url = oldURL.replace("https://www.youtube.com/watch?v=_OBlgSz8sSM","https://www.youtube.com/embed/_OBlgSz8sSM");
+  url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/"); 
+   console.log("vidweo url: ",oldURL);
+  url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
+  url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
+  url = oldURL.replace("http://www.youtube.com/embed/watch/","http://www.youtube.com/embed/");
+  url = oldURL.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
+  // url = oldURL.replace("http://www.youtube.com/embed/watch/", "http://www.youtube.com/embed/")
  return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
 
@@ -167,6 +185,7 @@ export class CommunityPage {
     loader.present();
    this.communityServices.addLike(id).subscribe(data =>{
      this.showToast(data.result);
+      this.communityList(this.community_id);
    },
      err =>{
     
