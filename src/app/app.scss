@@ -394,7 +394,8 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .label-ios													{line-height:14px;}
 .service-req												{color:#1d6ab2 !important;display:inline;font-size:16px !important;margin: 0;padding:0;}
 .req-viewlist												{font-size:14px !important; font-weight:600 !important; color:#008B8B;}
-.err-reds													{ font-size:12px !important; color:red !important; text-align:right !important; padding-right:25px !important; line-height:20px !important; }
+.err-reds													{font-size:12px !important; color:red !important; text-align:right !important; padding-right:25px !important; line-height:20px !important; margin:0px; }
+.mails-left													{margin-left:10px !important; }
 /*-------------------------------------ios platform css end-------------------------------------*/
 
 /*-------------------------------------Windows platform css -------------------------------------*/

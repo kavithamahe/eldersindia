@@ -48,10 +48,10 @@
   <ion-item>
     <ion-textarea placeholder="Comment" formControlName="comment"></ion-textarea>
   </ion-item>
-  <p *ngIf="!commentForm.controls.comment.valid && (commentForm.controls.comment.dirty || submitAttempt)" style="color: #ea6153;">Please enter comment.</p>
+  <p *ngIf="!commentForm.controls.comment.valid && (commentForm.controls.comment.dirty || submitAttempt)" class="err-reds">Please enter comment.</p>
   </form>
-  <ion-item>
-  <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)">Submit</button>
+  <ion-item text-right>
+  <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)" >Submit</button>
   </ion-item>
   
   <ion-item *ngFor="let viewComments of viewCommentsList">
