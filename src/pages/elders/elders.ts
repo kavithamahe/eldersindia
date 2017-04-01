@@ -113,7 +113,7 @@ authForm : FormGroup;
 
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      storage.get('id').then((id) => { this.user_id=id;});
+      storage.get('user_type_id').then((id) => { this.user_id=id;});
       storage.get('token').then((token) => { this.token=token; 
       this.sponsor_id=this.user_id;
       })

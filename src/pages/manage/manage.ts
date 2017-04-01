@@ -56,7 +56,20 @@ export class ManagePage {
     }
 
   }
-
+ getItems(ev) {
+    
+    var val = ev.target.value;
+     this.communityServices.searchManageLists(val).subscribe(manages =>{
+     
+      this.manages=manages.result.info.data;
+     },
+     err =>{
+    this.manages = [];
+    this.communityServices.showErrorToast(err);
+  })
+    
+   
+  }
     
   addElder(){
     let data={fuctionality:"add"};

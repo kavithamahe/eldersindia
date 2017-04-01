@@ -36,6 +36,8 @@ export class CommunityprofilePage {
     name:any;
     token:any;
     profile_uid:any;
+    connectionList:any;
+    allConnections:any;
   constructor(public nav: NavController, public storage:Storage, public viewCtrl: ViewController,private sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
        this.activityLists = true;
       this.nav=nav;
@@ -63,7 +65,22 @@ export class CommunityprofilePage {
     modal.present();
   }
   
+ cleanURL(oldURL: string): any  {
+    console.log("vidweo url: ",oldURL);
+    // http://www.dailymotion.com/video/
+  // let url = oldURL.replace("watch?v=", "")
+  let url;
+  url = oldURL.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
+  
+  url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
+  url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
+    url = oldURL.replace("https://www.youtube.com/watch?v=aUN6RPMIoeo","https://www.youtube.com/embed/aUN6RPMIoeo"); 
 
+  url = oldURL.replace("http://www.youtube.com/embed/watch/","http://www.youtube.com/embed/");
+  url = oldURL.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
+  // url = oldURL.replace("http://www.youtube.com/embed/watch/", "http://www.youtube.com/embed/")
+ return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+}
   accessGallery(){
    Camera.getPicture({
      sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
@@ -182,7 +199,7 @@ export class CommunityprofilePage {
  // }
   connectList(){
     this.communityServices.getConnectList().subscribe(users => {
-     console.log(users);
+       this.allConnections=users.result.info.list;  
   },
    err =>{
     
@@ -204,7 +221,7 @@ export class CommunityprofilePage {
    
     
     this.communityServices.getConnectLists(val).subscribe(users => {
-     console.log(users);
+     this.allConnections=users.result.info.list; 
   },
    err =>{
     
@@ -219,6 +236,7 @@ export class CommunityprofilePage {
     loader.present();
    this.communityServices.addLike(id).subscribe(data =>{
      this.showToast(data.result);
+     this.profileCommunity(this.profile_uid);
    },
      err =>{
     
@@ -282,9 +300,7 @@ export class CommunityprofilePage {
   })
   }
   
-  getCommunity(){
-  this.nav.pop();
-  }
+ 
   
   userProfile(){
     this.nav.pop();

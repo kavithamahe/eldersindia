@@ -38,6 +38,7 @@
 
 
 <ion-content padding>
+ <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     
   <div *ngFor="let manage of manages; let i=index">
    
@@ -67,8 +68,8 @@
             </ion-icon>{{manage.mobile}}</p>
             <p><ion-icon class="depend" item-left 
             name="calendar"></ion-icon>{{manage.dob}}</p>
-            <p><ion-icon class="depend" item-left 
-            name="pin"></ion-icon>{{manage.city}}</p>
+           <!--  <p><ion-icon class="depend" item-left 
+            name="pin"></ion-icon>{{manage.city}}</p> -->
             <p><ion-icon class="depend" item-left 
             name="pin"></ion-icon>{{manage.address}}</p>
             <p><ion-icon class="depend" item-left 
