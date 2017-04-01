@@ -13,54 +13,57 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="popup-mds">
+<ion-content class="popup-mds" style=" background:#fff;">
   <form [formGroup]="modalForm">
           
           
 			<ion-label stacked class="label-lb">Describe The Problem</ion-label>
           <ion-input type="text" formControlName="problem" ></ion-input>
 		  <ion-item *ngIf="!modalForm.controls.problem.valid  && (modalForm.controls.problem.dirty || submitAttempt)">
-                <p style="color: #ea6153;">Please enter problem description minimum of five character</p>
+                <p class="err-reds">This field is required</p>
             </ion-item>
-          <br>
+     
           
-          <ion-item>
-           <ion-label stacked class="label-lb">Date</ion-label>
-           <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" formControlName ="date"></ion-datetime>
+          
+           <ion-label stacked class="label-lb" style="padding-bottom:10px;">Date</ion-label>
+		   <ion-item>
+           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" formControlName ="date"></ion-datetime>
           </ion-item>
           <ion-item *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">
-                <p style="color: #ea6153;">Please select the date.</p>
+                <p class="err-reds">This field is required</p>
             </ion-item>
-			<br>
+		
 
-          <ion-item>
-            <ion-label stacked class="label-lb">Time</ion-label>
-            <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" formControlName ="time"></ion-datetime>
+          
+            <ion-label stacked class="label-lb" style="padding-bottom:10px;">Time</ion-label>
+			<ion-item>
+            <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" formControlName ="time" class="select-brd"></ion-datetime>
           </ion-item>
 		  <ion-item *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">
-                <p style="color: #ea6153;">Please select the time.</p>
+                <p class="err-reds">This field is required</p>
           </ion-item>
-		<br>
+		
 
 		  <ion-label stacked class="label-lb">Alternate Contact Number</ion-label>
+
           <ion-input type="text" formControlName="contact"></ion-input>
 		    <ion-item *ngIf="!modalForm.controls.contact.valid  && (modalForm.controls.contact.dirty || submitAttempt)">
-                <p style="color: #ea6153;">Please enter 10 digit mobile number.</p>
+                <p class="err-reds">This field is required</p>
             </ion-item>
-			<br>
+		
           
-          <ion-item *ngIf = "userType =='sponsor'">
-            <ion-label stacked class="label-lb">Select Dependent</ion-label>
-            <ion-select formControlName="dependents">
+		     <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb" style=" margin-bottom:10px; padding-bottom:10px;">Select Dependent</ion-label>
+			 <ion-item *ngIf = "userType =='sponsor'">
+              <ion-select formControlName="dependents" class="select-brd">
               <ion-option *ngFor = "let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}}
               </ion-option>
             </ion-select>
           </ion-item>
 		  <ion-item *ngIf="!modalForm.controls.dependents.valid  && (modalForm.controls.dependents.dirty || submitAttempt)">
-                <p style="color: #ea6153;">Please select the Dependent.</p>
+                <p class="err-reds">This field is required</p>
             </ion-item>
           <ion-row>
-          <ion-col><button ion-button item-left small (click)="dismiss()"class="btn-defaults">close</button></ion-col>
+          <ion-col><button ion-button item-left small (click)="dismiss()" class="btn-defaults">close</button></ion-col>
           <ion-col offset-33><button ion-button item-right small (click)="submit()" class="btn-primarys">Submit</button></ion-col>
           </ion-row>
         <!-- </form> -->
@@ -70,6 +73,8 @@
 </ion-content>
 </div>
 <style>
+.item-md													{background:none !important;}
 ion-content{ background:none !important;}
 .scroll-content{overflow-y:hidden !important;}
+ion-select{ width:100% !important;}
 </style>

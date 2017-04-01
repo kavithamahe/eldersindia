@@ -28,7 +28,7 @@
       <img src="{{imageUrl+singleBlogInfo?.details?.avatar}}" [hidden]="!singleBlogInfo?.details?.avatar">
     </ion-avatar>
     <h2 class="primary-color">{{singleBlogInfo?.details?.title}}</h2>
-    <p><ion-icon ios="ios-person" md="md-person"></ion-icon> {{singleBlogInfo?.details?.author_name }} | {{singleBlogInfo?.details?.created_at | date :"MMM dd y"}}</p>
+    <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{singleBlogInfo?.details?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i>  {{singleBlogInfo?.details?.created_at | date :"MMM dd y"}}</p>
   </ion-item>
   <hr>
   <img src="{{imageUrl+singleBlogInfo?.details?.banner_image}}" [hidden]="!singleBlogInfo?.details?.banner_image">
@@ -48,10 +48,10 @@
   <ion-item>
     <ion-textarea placeholder="Comment" formControlName="comment"></ion-textarea>
   </ion-item>
-  <p *ngIf="!commentForm.controls.comment.valid && (commentForm.controls.comment.dirty || submitAttempt)" style="color: #ea6153;">Please enter comment.</p>
+  <p *ngIf="!commentForm.controls.comment.valid && (commentForm.controls.comment.dirty || submitAttempt)" class="err-reds">Please enter comment.</p>
   </form>
-  <ion-item>
-  <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)">Submit</button>
+  <ion-item text-right>
+  <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)" >Submit</button>
   </ion-item>
   
   <ion-item *ngFor="let viewComments of viewCommentsList">
@@ -59,7 +59,7 @@
       <img src="{{imageUrl+viewComments?.avatar}}" [hidden]="!viewComments?.avatar">
     </ion-avatar>
     <h2 class="primary-color">{{viewComments?.user_name}}</h2>
-    <p>{{viewComments?.created_at | date :"MMM dd y"}}</p>
+    <p class="timedate">{{viewComments?.created_at | date :"MMM dd y"}}</p>
     <p>{{viewComments?.comment}}</p>
     <button ion-button icon-right clear end small item-right *ngIf="user_id==viewComments?.user_id" (click)="deleteComment(viewComments?.id)">
 <ion-icon ios="ios-trash" md="md-trash"></ion-icon>      

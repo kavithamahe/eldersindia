@@ -74,34 +74,32 @@
 			  	<ion-icon name="create"></ion-icon>
 			  		Update Status
 			</ion-item>
-			  	   <hr><br>
-			  	<ion-card-content>
-					<div class="three">
-				      	<ion-input [(ngModel)]="post" type="text" placeholder="Whats in you mind?"></ion-input>
+			  	   <hr>
+			  	<ion-card-content style="padding:0px !important;">
+					<div>
+				      	<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in you mind?"></ion-textarea>
 				    </div>
 		    	</ion-card-content>
 		    		
-		    	<ion-card-content>
+		    	<ion-card-content style="padding:0px !important;">
 		    		<ion-row>
-						<ion-col offset-20>
+						<ion-col>
 							<button ion-button (click)="accessGallery()" class="video">
-								<ion-icon name="image">
-								</ion-icon>Add Photos
+								<i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Add Photos
 							</button>
 							 	<img [src]="base64Image" *ngIf="base64Image" />
 						</ion-col>
 					</ion-row>
-		    			<br>
+		    		
 		       		<ion-row>
-						<ion-col offset-20>
+						<ion-col>
 							<button ion-button (click)="addVideos()" medium class="video">
-								<ion-icon name="videocam">
-								</ion-icon>Add Videos
+								<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp;Add Videos
 							</button>
 						</ion-col>
 					</ion-row>
 					<ion-row>
-						<ion-col offset-20>
+						<ion-col>
 						<div *ngIf(addVideo)>
 							<ion-item  class="video" >
 								<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
@@ -110,15 +108,15 @@
 						</div>
 						</ion-col>
 					</ion-row>
-		   				<hr>
+		   			
 		        </ion-card-content>
-		        <ion-card-content>
+		        <ion-card-content style="padding:0px !important;">
 					<ion-row>
-		    			<ion-col offset-67>
-		    				<div>
-								<button ion-button medium (click)="postCommunity(communityDetailData?.id)" 
+		    			<ion-col text-right>
+		    			<div>
+								<button ion-button medium style=" width:100%" (click)="postCommunity(communityDetailData?.id)" 
 								class="post">
-									<ion-icon name="send"></ion-icon>Post
+									<i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp; Post
 								</button>
 							</div>
 						</ion-col>
@@ -157,55 +155,15 @@
 	          	<p>{{user.post_message}}</p><br>
 	          	<img  [src]="imageUrl+user?.post_image" [hidden]="!user?.post_image">
 	       	</ion-card-content>
-	        <ion-card-content>
+	        <ion-card-content  [hidden]="!user?.post_video">
 
-	        <!--  <iframe [hidden]="!user?.post_video" height="190" onload="this.width=screen.width" [src]="sanitizer.bypassSecurityTrustResourceUrl(http://www.youtube.com/watch?v=uiws904iuEQ)" frameborder="0" ></iframe> -->
+	         <!-- <iframe [hidden]="!user?.post_video" height="190" onload="this.width=screen.width" [src]="sanitizer.bypassSecurityTrustResourceUrl(user?.post_video)" frameborder="0" ></iframe> -->
 
-	         <iframe  width="420" height="315" [src]="cleanURL(user?.post_video)" frameborder="0" ></iframe>
-		       <!--  <video  style="width:400px" >
-				<source src="http://player.vimeo.com/external/85569724.sd.mp4?s=43df5df0d733011263687d20a47557e4" type="video/mp4"/>
-				</video> -->
+	        <!--  <iframe  [hidden]="!user?.post_video"  width="420" height="315" [src]="cleanURL(user.post_video)" frameborder="0" allowfullscreen></iframe> -->
 
-<!-- 
-				<video> 
-	          	
-	          	 <source src="http://www.dailymotion.com/video/x2f4zt5_dunya-news-winds-force-plane-to-land-almost-sideways-at-leeds-airport_news">
-	          	 </video> -->
-	          	<!--  <iframe src="http://www.dailymotion.com/embed/video/x2f4zt5_dunya-news-winds-force-plane-to-land-almost-sideways-at-leeds-airport_news" width=\"480\" height=\"269\" frameborder=\"0\" allowfullscreen></iframe>" -->
-
-	          		
-
-
-
-	          	<!--  <iframe src=\"https:\/\/player.vimeo.com\/video\/210073083\" width=\"480\" height=\"270\" frameborder=\"0\" title=\"The New Vimeo Player (You Know, For Videos)\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>" -->
-
-	          	<!--  <video  (click)="toggleVideo()" #videoPlayer>
-				        <source src="https://ia902505.us.archive.org/7/items/Birds021/Birds%2002-1.m4v" type="video/mp4" />
-				        Browser not supported
-				    </video> 
-				          <video controls="controls" preload="metadata"  webkit-playsinline="webkit-playsinline" class="videoPlayer"><source 
-				          [src]="sanitizer.bypassSecurityTrustResourceUrl(user?.post_video)" type="video/mp4"/></video>-->
-                          
-                    <!--  <video controls="controls" preload="metadata" webkit-playsinline="webkit-playsinline" class="videoPlayer"><source src="https://vimeo.com/video/210073083"
-                      type="video/mp4"/></video>
- -->
-	          	 <!-- <Video
-			         
-			          src="http://www.dailymotion.com/video/x2f4zt5_dunya-news-winds-force-plane-to-land-almost-sideways-at-leeds-airport_news"
-			          
-			          height="300"></Video> -->
-
-			           <iframe width="560" height="315"                 
-			           src="https://vimeo.com/197933516" frameborder="0" >
-			           	
-			           </iframe> 
-			           
-
-
-
-			           
-
-
+				<video controls><source 
+	          	[src]="cleanURL(user?.post_video)" /></video>
+	          	<!--  <source src="http://player.vimeo.com/external/85569724.sd.mp4?s=43df5df0d733011263687d20a47557e4" type="video/mp4"/> -->
 	       	</ion-card-content>
 	       	 
 	       	<ion-card-content>
