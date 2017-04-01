@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-content padding>
-<form (ngSubmit)="login()">
+<form (ngSubmit)="login()" [formGroup]="loginForm">
 <ion-list class="login-pages">
 <img src="assets/img/elder-logo.png" class="logo" /><!--
 <ion-item>
@@ -17,12 +17,15 @@
     <ion-input name="password" type="password" [(ngModel)]="registerCredentials.password"></ion-input>
   </ion-item>-->
   <ion-item>
-    <ion-input name="email" type="text"  placeholder="Email" [(ngModel)]="registerCredentials.email"></ion-input>
+    <ion-input name="email" type="text" formControlName="email"  placeholder="Email" ></ion-input>
   </ion-item>
+  
+   <p *ngIf="!loginForm.controls.email.valid && (loginForm.controls.email.dirty || submitAttempt)" style="color: #ea6153;">Please enter email.</p>
+  
    <ion-item>
-    <ion-input name="password" type="password" placeholder="Username" [(ngModel)]="registerCredentials.password"></ion-input>
+    <ion-input name="password" type="password" formControlName="password" placeholder="Password"></ion-input>
   </ion-item>
-
+  <p *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)" style="color: #ea6153;">Please enter password.</p>
    <br>
   <ion-fab center edge>
   <button ion-fab color="primary">  <ion-icon name="md-arrow-forward"></ion-icon>

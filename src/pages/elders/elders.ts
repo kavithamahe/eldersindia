@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController,LoadingController, NavParams} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
-import * as moment from 'moment';
 
 import { CommunityServices } from '../../providers/community-services';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
