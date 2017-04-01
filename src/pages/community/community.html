@@ -74,34 +74,32 @@
 			  	<ion-icon name="create"></ion-icon>
 			  		Update Status
 			</ion-item>
-			  	   <hr><br>
-			  	<ion-card-content>
-					<div class="three">
-				      	<ion-input [(ngModel)]="post" type="text" placeholder="Whats in you mind?"></ion-input>
+			  	   <hr>
+			  	<ion-card-content style="padding:0px !important;">
+					<div>
+				      	<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in you mind?"></ion-textarea>
 				    </div>
 		    	</ion-card-content>
 		    		
-		    	<ion-card-content>
+		    	<ion-card-content style="padding:0px !important;">
 		    		<ion-row>
-						<ion-col offset-20>
+						<ion-col>
 							<button ion-button (click)="accessGallery()" class="video">
-								<ion-icon name="image">
-								</ion-icon>Add Photos
+								<i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Add Photos
 							</button>
 							 	<img [src]="base64Image" *ngIf="base64Image" />
 						</ion-col>
 					</ion-row>
-		    			<br>
+		    		
 		       		<ion-row>
-						<ion-col offset-20>
+						<ion-col>
 							<button ion-button (click)="addVideos()" medium class="video">
-								<ion-icon name="videocam">
-								</ion-icon>Add Videos
+								<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp;Add Videos
 							</button>
 						</ion-col>
 					</ion-row>
 					<ion-row>
-						<ion-col offset-20>
+						<ion-col>
 						<div *ngIf(addVideo)>
 							<ion-item  class="video" >
 								<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
@@ -110,17 +108,17 @@
 						</div>
 						</ion-col>
 					</ion-row>
-		   				<hr>
+		   			
 		        </ion-card-content>
-		        <ion-card-content>
+		        <ion-card-content style="padding:0px !important;">
 					<ion-row>
-		    			<ion-col offset-67>
-		    				<div>
+		    			<ion-col text-right>
+		    			
 								<button ion-button medium (click)="postCommunity(communityDetailData?.id)" 
 								class="post">
-									<ion-icon name="send"></ion-icon>Post
+									<i class="fa fa-paper-plane-o" aria-hidden="true"></i> Post
 								</button>
-							</div>
+							
 						</ion-col>
 					</ion-row>
 				</ion-card-content>
