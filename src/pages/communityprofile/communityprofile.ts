@@ -299,16 +299,8 @@ export class CommunityprofilePage {
     this.communityServices.showErrorToast(err);
   })
   }
-  
- 
-  
-  userProfile(){
-    this.nav.pop();
-  }
-   userProfiles(){
-    this.nav.pop();
-  }
-  getCommunity(){
+
+  goBackToCommunity(){
     this.nav.pop();
   }
   public dashboardPage()

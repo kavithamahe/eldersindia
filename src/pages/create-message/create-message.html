@@ -23,9 +23,19 @@
 
 <ion-content padding>
 <ion-list>
-
+<div class="tag" >
+<!-- <ion-card> -->
+    <rl-tag-input
+     [ngModelOptions]="{standalone: true}"
+    [addOnBlur]="false"
+    [autocomplete]="true"
+    [autocompleteItems]="skills"
+    [(ngModel)]="toAddress"
+    placeholder="To">
+  </rl-tag-input>
+</div>
   <ion-item>
-    <ion-input type="text" placeholder="To" [(ngModel)]="toAddress"></ion-input>
+   
   </ion-item>
 
   <ion-item>

@@ -18,7 +18,9 @@ import { EventsService } from '../../providers/events-service';
 export class EventsPage {
 token:string;
 imageUrl:string;
-eventsLists:any;
+eventsLists:any[]=[];
+nextPageURL:any='';
+eventScrollLists:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public eventsService:EventsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -27,7 +29,7 @@ eventsLists:any;
     })
 
   });
-  
+ 
   }
   public eventsList()
   { 
@@ -35,8 +37,8 @@ eventsLists:any;
     loader.present();
    this.eventsService.eventsList().subscribe(
      (eventsList) => {
-      this.eventsLists=eventsList.result.data;
-      console.log(this.eventsLists);  
+      this.eventsLists=eventsList.result.data;        
+      this.nextPageURL=eventsList.result.next_page_url;   
     },
     (err) => { 
         if(err.status===401)
@@ -70,5 +72,39 @@ eventsLists:any;
   {
    this.navCtrl.push(ViewEventsPage, {eventsId});
   }
-
+  doInfinite(infiniteScroll) {
+    setTimeout(() => {      
+      if(this.nextPageURL!=null && this.nextPageURL!='')
+      {
+       this.newsscroll();
+      }
+      else{
+        infiniteScroll.enable(false);
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
+  newsscroll()
+  {
+     this.eventsService.eventsscroll(this.nextPageURL).subscribe(
+     (eventsscroll) => {
+      this.eventScrollLists=eventsscroll.result.data;
+      for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
+        this.eventsLists.push(this.eventScrollLists[i]);
+        }
+      
+       this.nextPageURL=eventsscroll.result.next_page_url;     
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
+  }
 }

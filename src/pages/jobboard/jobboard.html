@@ -37,4 +37,9 @@
   <button ion-button color="orange" small (click)="viewJob(jobBoard?.id)">More Info</button>
   </ion-card-content>
 </ion-card>
+<ion-card *ngIf="emptyRecordSet">
+<ion-card-content>
+{{emptyRecordSet}}
+</ion-card-content>
+</ion-card>
 </ion-content>

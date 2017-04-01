@@ -12,12 +12,14 @@
 
 </ion-header>
 
-<ion-content padding>
-<ion-row><ion-col>
+<ion-content padding style="background:#fff;">
+<ion-row style=" border-bottom:1px solid #ccc;">
+<ion-col>
 	<ion-title>
-    <img alt="logo" height="40"   [src]="logoUrl+profileData?.logo" > 
-   </ion-title></ion-col>
-   <ion-col>{{profileData?.company_name}}</ion-col>
+    <img alt="logo" height="50" width="50" class="mar-top" style=" border:1px solid #ccc;"  [src]="logoUrl+profileData?.logo" > 
+   </ion-title>
+   </ion-col>
+   <ion-col><p class="edit-pro">{{profileData?.company_name}}</p></ion-col>
    </ion-row>
 
 	<form [formGroup]="edit_profile_Form">
@@ -27,7 +29,7 @@
         </ion-item>
 		<ion-item>
 		<ion-label floating *ngIf="user_type =='elder' ">Name</ion-label>
-		<ion-label floating *ngIf="user_type =='sponsor' ">Sponsor Name</ion-label>
+		<ion-label class="liste-name" floating *ngIf="user_type =='sponsor' ">Sponsor Name</ion-label>
 	    <ion-input type="text" formControlName="name"></ion-input>
 	    </ion-item>
 
@@ -46,7 +48,7 @@
            		<p style="color: #ea6153;">Please enter 10-digit valid number</p>
         </ion-item>
         <ion-item *ngIf="user_type =='sponsor' ">
-		<ion-label floating>Designation</ion-label>
+		<ion-label floating class="liste-name">Designation</ion-label>
 	    <ion-input disabled="true" type="text" formControlName="designation"></ion-input>
 	    </ion-item>
 	    <br>	    
@@ -55,33 +57,33 @@
            		<p style="color: #ea6153;">Please enter 10-digit valid number</p>
         </ion-item>
         <ion-item>
-		<ion-label floating>Mobile Number</ion-label>
+		<ion-label floating class="liste-name">Mobile Number</ion-label>
 	    <ion-input type="text" formControlName="mobile_number"></ion-input>
 	    </ion-item>
 	    <br>
         
 		<ion-item>
-		<ion-label floating>Location</ion-label>
+		<ion-label floating class="liste-name">Location</ion-label>
 	    <ion-input disabled="true" type="text" formControlName="location"></ion-input>
 	    </ion-item>
 	    <br>
 
 
 		<ion-item>
-		<ion-label floating>DOB</ion-label>
+		<ion-label floating class="liste-name">DOB</ion-label>
 	    <ion-input type="text" formControlName="dob"></ion-input>
 	    </ion-item>
 	    <br>
 
 
 		<ion-item>
-		<ion-label floating>Email</ion-label>
+		<ion-label floating class="liste-name">Email</ion-label>
 	    <ion-input disabled="true" type="text" formControlName="email"></ion-input>
 	    </ion-item>
 	    <br>
 
 	    <ion-item>
-		<ion-label floating>User Type</ion-label>
+		<ion-label floating class="liste-name">User Type</ion-label>
 	    <ion-input disabled="true" type="text" formControlName="user_type"></ion-input>
 	    </ion-item>
 	    <br>
@@ -94,9 +96,21 @@
  		</ion-item>
 
 	  	<ion-row>
-	         <ion-col><button ion-button item-left small (click)="dismiss()">Cancel</button></ion-col>
-	         <ion-col offset-33><button ion-button item-right small (click)="updateProfile()">Update</button></ion-col>
+	         <ion-col><button class="btn-defaults" ion-button item-left small (click)="dismiss()">Cancel</button></ion-col>
+	         <ion-col offset-33><button class="btn-primarys"ion-button item-right small (click)="updateProfile()">Update</button></ion-col>
 	    </ion-row>
 </form>
 
 </ion-content>
+
+<style>
+.text-input-md{ margin:0px;}
+.item-block{ border-bottom:none !important;}
+.item-inner {
+border-bottom-color: transparent !important;
+box-shadow: none !important;
+}
+.item-ios.item-block .item-inner{ border-bottom:none !important;}
+.item-ios.item-label-stacked .text-input, .item-ios.item-label-floating .text-input{ font-size:14px !important;margin-left:8px !important;
+   }
+</style>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-
+import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { EditProfilePage } from '../edit-profile/edit-profile';
 import { ServiceProvider } from '../../providers/service-provider';
 
@@ -34,6 +34,10 @@ user_type:any ;
 
   editProfile(){
   	this.navCtrl.push(EditProfilePage,{profileData:this.profileData});
+  }
+   public dashboardPage()
+  {
+    this.navCtrl.setRoot(DashboardPage);
   }
   
 }
