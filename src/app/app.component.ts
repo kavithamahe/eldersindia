@@ -34,7 +34,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make HelloIonicPage the root (or first) page
-  rootPage: any =  LoginPage;
+  rootPage: any =  ManagePage;
   pages: Array<{title: string, component: any}>;
 
   constructor(
@@ -45,7 +45,7 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [        
-      //{ title: 'Login', component: LoginPage },
+      { title: 'Login', component: LoginPage },
       { title: 'Dashboard', component: DashboardPage },      
       { title: 'Profile', component: MyProfilePage },
       { title: 'Change Password', component: ChangePasswordPage },

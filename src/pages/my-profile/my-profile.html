@@ -6,8 +6,18 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>my-profile</ion-title>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>My Profile</ion-title>
   </ion-navbar>
 
 </ion-header>
