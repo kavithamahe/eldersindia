@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController,ToastController } from 'ionic-angular';
 //import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { BlogListService } from '../../providers/blog-list-service';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -26,7 +27,9 @@ comment:any;
 showComment:any;
 viewCommentsList:any;
 user_id:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public blogListService:BlogListService,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
+commentForm: FormGroup;
+submitAttempt: boolean = false;
+  constructor(public formBuilder: FormBuilder,public navCtrl: NavController, public navParams: NavParams,public blogListService:BlogListService,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('id').then((id) => { this.user_id=id;});
@@ -36,6 +39,9 @@ user_id:any;
       this.viewComments(this.blogId);
       })
   	});
+    this.commentForm = formBuilder.group({
+        comment: ['', Validators.compose([Validators.required])]
+         });
     this.showComment=true;
   }
   public leaveComment()
@@ -65,12 +71,19 @@ user_id:any;
   }
   public blogComment(blogId)
   {
+    if(!this.commentForm.valid){
+      this.submitAttempt = true;
+    }else{
+      this.submitAttempt = false;
+      this.comment = this.commentForm.value.comment; 
+
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     this.commandObj={"comment":this.comment};
     this.blogListService.blogComment(blogId,this.commandObj).subscribe(
      (blogComment) => {
        this.viewComments(this.blogId);
+       this.commentForm.reset();
      this.showToaster(blogComment.result);   
     },
     (err) => { 
@@ -84,8 +97,9 @@ user_id:any;
         }
       }
     );
-    this.comment='';
+    
      loader.dismiss();
+   }
   }
   public viewComments(blogId)
   {

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Platform,NavController, NavParams,AlertController, LoadingController, ModalController, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { Device, LocalNotifications } from 'ionic-native';
+import { LocalNotifications } from 'ionic-native';
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { Login } from '../../models/login';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -25,13 +26,24 @@ export class LoginPage {
   mailID:any;
   newPassword:any;
   id:any;
+  loginForm: FormGroup;
+  submitAttempt: boolean = false;
   registerCredentials = {email: '', password: ''};
-  constructor(public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
+  constructor(public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
  
+    this.loginForm = formBuilder.group({
+        email: ['', Validators.compose([Validators.required])],
+        password: ['', Validators.compose([Validators.required])]
+         });
   }
    public login() {  
+    if(!this.loginForm.valid){
+      this.submitAttempt = true;
+    }else{
+      this.submitAttempt = false;
+      this.registerCredentials.email = this.loginForm.value.email; 
+      this.registerCredentials.password = this.loginForm.value.password; 
     
-     console.log('Device UUID is: ' + Device.uuid);
      let loader = this.loadingCtrl.create({
       content: "Please wait..."
     });     
@@ -76,6 +88,7 @@ export class LoginPage {
     },
   )
     loader.dismiss();
+  }
   }
   showToaster(message)
   {
