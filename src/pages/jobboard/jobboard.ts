@@ -23,6 +23,7 @@ jobBoardInfo:any;
 user_type:any;
 user_type_id:any;
 jobDependentId:any;
+emptyRecordSet:any='';
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public jobBoardService:JobBoardService,public modalCtrl: ModalController) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -41,11 +42,13 @@ jobDependentId:any;
     this.jobBoardService.jobsList().subscribe(
      (jobBoard) => {
       this.jobBoardInfo=jobBoard.result.info.data; 
+      this.emptyRecordSet='';
     },
     (err) => { 
         if(err.status===401)
         {
         this.showToaster(JSON.parse(err._body).error);
+        this.emptyRecordSet=JSON.parse(err._body).error;
         }
         else
         {
