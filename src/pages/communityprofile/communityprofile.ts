@@ -299,6 +299,25 @@ export class CommunityprofilePage {
     this.communityServices.showErrorToast(err);
   })
   }
+  showConfirm(DeleteId) {
+    let confirm = this.alertCtrl.create({
+     
+      message: 'Are you agree to delete this manage dependent?',
+      buttons: [
+        {
+          text: 'Cancel',
+         },
+        {
+          text: 'Ok',
+          handler: () => {
+           this.deleteComment(DeleteId);
+          
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 
   goBackToCommunity(){
     this.nav.pop();

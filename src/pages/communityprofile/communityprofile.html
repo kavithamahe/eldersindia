@@ -68,7 +68,10 @@
 		  		<button ion-button  (click)="connectList()" color="dark" full clear>Connections
 				</button>
 		  </ion-row>
-		  <ion-list *ngIf(connectLists)>
+		  </ion-card>
+	</div>
+
+		  <div *ngIf(connectLists)>
 		 
 		  	<ion-row>
 		  		<ion-col>
@@ -79,8 +82,8 @@
 		  		</ion-col>
 		    </ion-row>
 		   
-		<div *ngFor="let all of allConnections?.data; let islast=last;">
-   
+		<ion-card *ngFor="let all of allConnections?.data; let islast=last;">
+   	
 	    <ion-row>
 	    	<ion-col width-20>
 	    		<ion-avatar item-left>
@@ -96,10 +99,10 @@
       
    		</ion-row>    
   
-    	</div> 
-	</ion-list>
-	</ion-card>
+    	</ion-card>
 	</div>
+	
+	
   	<div *ngIf(activityLists)>
  		<div>
 		  	<ion-card>
@@ -220,7 +223,7 @@
 	      								[hidden]="!comment.profile_image">
 	      							</ion-avatar>
 	      							<ion-col>{{comment.comments}}</ion-col>
-	      							<button ion-button (click)="deleteComment(comment.comments_id)" color="dark" clear>
+	      							<button ion-button (click)="showConfirm(comment.comments_id)" color="dark" clear>
 	      								<ion-icon name="trash"></ion-icon>
 	      							</button>
 	      						</ion-row><br>

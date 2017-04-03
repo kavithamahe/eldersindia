@@ -55,10 +55,28 @@ export class CommunityPage {
         this.itemComments=false;
         loader.dismiss();
         this.userType="sponsor";
- // for (let i = 0; i < 30; i++) {
- //      this.users.push( this.users.length );
- //    }
+
 }
+
+showConfirm(DeleteId) {
+    let confirm = this.alertCtrl.create({
+     
+      message: 'Are you agree to delete this manage dependent?',
+      buttons: [
+        {
+          text: 'Cancel',
+         },
+        {
+          text: 'Ok',
+          handler: () => {
+           this.deleteComment(DeleteId);
+          
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 
 
  // doInfinite(infiniteScroll) {
