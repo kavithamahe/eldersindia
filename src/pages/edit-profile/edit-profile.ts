@@ -82,9 +82,4 @@ file: File;
     })
   }
 
-  viewDidLoad() {
-    
-    console.log('ionViewDidLoad EditProfilePage');
-  }
-
 }

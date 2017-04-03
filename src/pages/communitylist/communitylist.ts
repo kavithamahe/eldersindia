@@ -26,6 +26,9 @@ export class CommunitylistPage {
   categoryName:any;
   token:any;
   id:any;
+  nextPageURL:any='';
+  eventScrollLists:any;
+
   constructor(public nav: NavController,public storage:Storage, public navParams: NavParams,platform: Platform,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
      this.isAndroid = platform.is('android');
      this.searchData = "";
@@ -48,6 +51,7 @@ export class CommunitylistPage {
       subscribe(mycommunity => {
       this.communitylists = mycommunity.result.info.data;
       this.categoryLists = mycommunity.result.get.communityCategory;
+      this.nextPageURL=mycommunity.result.info.next_page_url;
   },
    err =>{
     this.communitylists =[];
@@ -62,6 +66,8 @@ export class CommunitylistPage {
       subscribe(mycommunity => {
       this.communitylists = mycommunity.result.info.data;
       this.categoryLists = mycommunity.result.get.communityCategory;
+      this.nextPageURL=mycommunity.result.info.next_page_url;
+
   },
    err =>{
     this.communitylists =[];
@@ -106,16 +112,34 @@ export class CommunitylistPage {
     this.communityServices.showErrorToast(err);
   })
   }
-
-  //  doInfinite(infiniteScroll:any) {
-  //    console.log('doInfinite, start is currently '+this.start);
-  //    this.start+=50;
-     
-  //   this.myCommunity().then(()=>{
-  //      infiniteScroll.complete();
-  //    });
-     
-  // }
+  doInfinite(infiniteScroll) {
+    setTimeout(() => {      
+      if(this.nextPageURL!=null && this.nextPageURL!='')
+      {
+       this.newsscroll();
+      }
+      else{
+        infiniteScroll.enable(false);
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
+  newsscroll()
+  {
+     this.communityServices.eventsscroll(this.nextPageURL).subscribe(
+     (eventsscroll) => {
+      this.eventScrollLists=eventsscroll.result.info.data;
+      for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
+        this.communitylists.push(this.eventScrollLists[i]);
+        }
+      
+       this.nextPageURL=eventsscroll.result.info.next_page_url;     
+    },
+    err =>{
+   
+    this.communityServices.showErrorToast(err);
+  });
+  }
 
 public dashboardPage()
   {
