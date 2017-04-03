@@ -87,8 +87,8 @@
           <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner" />
 		  
             <ion-item>
-              <ion-thumbnail [hidden]="!community?.logo">
-                <img [src]="imageUrl+community?.logo"/>
+              <ion-thumbnail>
+                <img [src]="imageUrl+community?.logo"  [hidden]="!community?.logo"/>
               </ion-thumbnail>
             </ion-item>
             <ion-card-content>
@@ -101,9 +101,8 @@
       </ion-list>
     </div>
 	
-   	 <!-- <ion-infinite-scroll (infinite)="doInfinite($event)">
+   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
-     -->
 </ion-content>
   

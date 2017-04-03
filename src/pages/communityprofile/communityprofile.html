@@ -21,7 +21,8 @@
 			  <ion-col offset-33>
 				  	<ion-item>
 					  <ion-avatar>
-					  	<img [src]="imageUrl+communityProfileData?.avatar">
+					  	<img [src]="imageUrl+communityProfileData?.avatar" 
+					  	[hidden]="!communityProfileData?.avatar">
 					  </ion-avatar>
 					</ion-item>
 			  </ion-col>
@@ -40,7 +41,7 @@
 				  <button ion-button disabled="true">Request Sent
 				  </button>
 			  </ion-col>
-				<ion-col offset-33  *ngIf="status === 2">
+			  <ion-col offset-33  *ngIf="status === 2">
 				  <button ion-button disabled="true">Rejected
 				  </button>
 			  </ion-col>
@@ -164,7 +165,9 @@
 	      			<ion-row>
 	      				<ion-col>
 	        				<ion-avatar item-left>
-	          					<img [src]="imageUrl+community?.community_logo" (click)="goBackToCommunity()">
+	          					<img [src]="imageUrl+community?.community_logo" 
+	          					[hidden]="!community?.community_logo"
+	          					(click)="goBackToCommunity()">
 	        				</ion-avatar>
 	        			</ion-col><br>
 	        			<ion-col width-20>
@@ -213,7 +216,8 @@
 							<div *ngFor="let comment of community.comments">
 	      						<ion-row class="send">
 	      							<ion-avatar item-left>
-	      								<img [src]="imageUrl+comment.profile_image">
+	      								<img [src]="imageUrl+comment.profile_image" 
+	      								[hidden]="!comment.profile_image">
 	      							</ion-avatar>
 	      							<ion-col>{{comment.comments}}</ion-col>
 	      							<button ion-button (click)="deleteComment(comment.comments_id)" color="dark" clear>
