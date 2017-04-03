@@ -27,62 +27,63 @@
 
   <div class="main">
   <ion-row>
-    <ion-col width-50>
+    
       <ion-item  class="three">
          <ion-label>Relationship</ion-label>
           <ion-select  [(ngModel)]="elder_relation"   [ngModelOptions]="{standalone: true}">
             <ion-option  *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
             </ion-select>
       </ion-item>
-    </ion-col>
-    <ion-col width-50>
+    </ion-row>
+    <ion-row>
         <div  class="three">
             <ion-input  type="text" formControlName="elder_name"
             [class.invalid]="!authForm.controls.elder_name.valid && (authForm.controls.elder_name.dirty)" placeholder="Elders Name" value={{elder_name}}>
-              
+        
             </ion-input>
         </div>
          <div *ngIf="!authForm.controls.elder_name.valid  && (authForm.controls.elder_name.dirty)">
                   <p class="valid">Please enter name</p>
         </div> 
-    </ion-col>
+    
     </ion-row>
     </div>
 
     <div class="main">
       <ion-row>
-        <ion-col width-50>
+        
           <ion-item  class="three">
               <ion-label>Services</ion-label>
               <ion-select  [(ngModel)]="elder_service"  [ngModelOptions]="{standalone: true}">
                <ion-option *ngFor="let service of in_service" value={{service.value}}>{{service.label}}</ion-option>
               </ion-select>
           </ion-item>
-        </ion-col>
-        <ion-col width-50>
+        </ion-row>
+        <ion-row>
             <div  class="three">
                 <ion-input type="text" formControlName="elder_number"
-            [class.invalid]="!authForm.controls.elder_number.valid && (authForm.controls.elder_number.dirty)" placeholder="Contact Number" value={{contactNumber}}>
+            [class.invalid]="!authForm.controls.elder_number.valid && (authForm.controls.elder_number.dirty)" placeholder="Contact Number" value={{elder_number}}>
                 </ion-input>
             </div>
             <div  *ngIf="!authForm.controls.elder_number.valid  && (authForm.controls.elder_number.dirty)">
                 <p class="valid">Please enter number</p>
             </div>
-          </ion-col>
+          
       </ion-row>
     </div>
 
   <div class="main">
     <ion-row>
-      <ion-col width-50>
+    
         <ion-card  class="date" padding>Date of Birth
         </ion-card>
-      </ion-col>
-      <ion-col width-50>
+    </ion-row>
+    <ion-row>
+      
         <ion-item class="address">
         <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="elder_dob" [ngModelOptions]="{standalone: true}"></ion-datetime>
         </ion-item>  
-      </ion-col>
+      
     </ion-row>
   </div>
 
@@ -122,41 +123,44 @@
     </ion-row>
   </div>
   <div class="main">
-      <ion-row  *ngFor="let item of emergency_list; let i=index">
-      <ion-col width-50>
-        <ion-item  class="three">
-            <ion-label></ion-label>
-              <ion-select  [(ngModel)]="emergency_name[i]"  [ngModelOptions]="{standalone: true}">
-                <ion-option value="police">Police</ion-option>
-                <ion-option value="ambulance">Ambulance</ion-option>
-                <ion-option value="son">Son</ion-option>
-            </ion-select>
-        </ion-item>
-        </ion-col>
-        <ion-col width-50>
-          <div  class="three">
-              <ion-input type="text" [(ngModel)]="emergency_no[i]"  [ngModelOptions]="{standalone: true}" placeholder="Contact Number" value={{number}}>
-             </ion-input>
-          </div>
-          <div *ngIf="!authForm.controls.emergency_numbers.valid  && (authForm.controls.emergency_numbers.dirty)">
-                <p class="valid">Please enter number</p>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col width-50>
-          <button class="add" (click)="addEmergency()" ion-button icon-left clear>
-            <ion-icon name="ios-add"></ion-icon>
-             Add More
-          </button>
-        </ion-col>
-        <ion-col width-50>
-          <button class="add" (click)="removeEmergency()" ion-button icon-left clear>
-            <ion-icon name="ios-close"></ion-icon>Remove
-          </button>
-        </ion-col>
-      </ion-row>
+      <ion-col  *ngFor="let item of emergency_list; let i=index">
+          <ion-row>
+            <ion-item  class="three">
+                <ion-label>{{emergency_name[i]}}</ion-label>
+                  <ion-select placeholder="select" [(ngModel)]="emergency_name[i]"  [ngModelOptions]="{standalone: true}">
+                    <ion-option value="police">Police</ion-option>
+                    <ion-option value="hospital">Hospital</ion-option>
+                    <ion-option value="ambulance">Ambulance</ion-option>
+                    <ion-option value="son">Son</ion-option>
+                </ion-select>
+            </ion-item>
+            </ion-row>
+            <ion-row>
+              <div  class="three">
+                  <ion-input type="text" [(ngModel)]="emergency_no[i]"  [ngModelOptions]="{standalone: true}" placeholder="Contact Number">
+                 </ion-input>
+              </div>
+              <div *ngIf="!authForm.controls.emergency_numbers.valid  && (authForm.controls.emergency_numbers.dirty)">
+                    <p class="valid">Please enter number</p>
+              </div>
+          </ion-row>
+
+            <ion-row>
+            <ion-col width-50>
+              <button class="add" (click)="addEmergency()" ion-button icon-left clear>
+                <ion-icon name="ios-add"></ion-icon>
+                 Add More
+              </button>
+            </ion-col>
+            <ion-col width-50>
+              <button class="add" (click)="removeEmergency()" ion-button icon-left clear>
+                <ion-icon name="ios-close"></ion-icon>Remove
+              </button>
+            </ion-col>
+          </ion-row>
+      </ion-col>
   </div>
+
   <div class="main">
     <ion-item>
       <ion-label>Interested in Elder job opportunities?</ion-label>
@@ -168,23 +172,23 @@
 
  <div class="main">
   <ion-row>
-    <ion-col width-50>
+  
       <ion-item  class="three">
          <ion-label>Interest</ion-label>
           <ion-select  [(ngModel)]="area_of_interest"   [ngModelOptions]="{standalone: true}">
-            <ion-option  *ngFor="let interest of areaOfInterest" value={{interest.value}}>{{interest.label}}</ion-option>
+            <ion-option  *ngFor="let interest of areaOfInterest" >{{interest.label}}</ion-option>
             </ion-select>
       </ion-item>
-    </ion-col>
-    <ion-col width-50>
+    </ion-row>
+    <ion-row>
         <ion-item  class="three">
          <ion-label>Job Type</ion-label>
           <ion-select  [(ngModel)]="job_type"   [ngModelOptions]="{standalone: true}">
-            <ion-option  value="full_time">Full TIme</ion-option>
-            <ion-option  value="part_time">Part TIme</ion-option>
+            <ion-option  value="full time">Full TIme</ion-option>
+            <ion-option  value="part time">Part TIme</ion-option>
             </ion-select>
       </ion-item>
-    </ion-col>
+  
     </ion-row>
     </div>
 <div class="tag" >
@@ -206,23 +210,24 @@
       </ion-col>
     </ion-row>
     <ion-col  *ngFor="let item of experience_list; let i=index" >
-    <ion-row  >
-      <ion-col  width-50>
+       <ion-row>
+    
         <ion-item class="three">
           <ion-label>Industry</ion-label>
             <ion-select [(ngModel)]="experience_industry[i]" [ngModelOptions]="{standalone: true}">
-              <ion-option *ngFor="let industry of functionalArea"  value={{industry.id}} selected="item?.select">{{industry.name}}
+              <ion-option *ngFor="let industry of functionalArea"  selected="item?.select" value={{industry.id}}>{{industry.name}}
               </ion-option>
             </ion-select>
         </ion-item>
-        </ion-col>
-        <ion-col width-50>
+        </ion-row>
+        
+        <ion-row>
           <ion-item  class="three">
             
-            <ion-input [(ngModel)]="experience_years[i]" [ngModelOptions]="{standalone: true}"type="text" placeholder="Total Years" >
+            <ion-input [(ngModel)]="experience_years[i]" [ngModelOptions]="{standalone: true}"type="text" placeholder="Total Years" value={{experience_years}}>
             </ion-input>
         </ion-item>
-        </ion-col>
+    
       </ion-row>
       <ion-row>
             <ion-item  class="three">
@@ -231,7 +236,7 @@
             </ion-input>
            </ion-item>
       </ion-row>
-      </ion-col>
+  
       <ion-row>
         <ion-col width-50>
           <button class="add" (click)="addExperience(i)" ion-button icon-left clear>
@@ -244,6 +249,7 @@
           </button>
         </ion-col>
       </ion-row>
+      </ion-col>
   </div>
 
   <!-- Educational Details-->
@@ -256,24 +262,24 @@
     </ion-row>
     <ion-col  *ngFor="let item of education_list; let i=index" >
     <ion-row  >
-      <ion-col  width-50>
+      
         <ion-item class="three">
           <ion-label>Graduation</ion-label>
             <ion-select [(ngModel)]="education_graduation[i]" [ngModelOptions]="{standalone: true}">
-              <ion-option *ngFor="let education of educations"  value={{education.value}} selected="item?.select">{{education.label}}
+              <ion-option *ngFor="let education of educations" value={{education.value}}>{{education.label}}
               </ion-option>
             </ion-select>
         </ion-item>
-        </ion-col>
-        <ion-col width-50>
+        </ion-row>
+        <ion-row>
           <ion-item  class="three">
             <ion-label>Specialization</ion-label>
               <ion-select [(ngModel)]="education_specialization[i]" [ngModelOptions]="{standalone: true}">
-              <ion-option *ngFor="let specialization of specializations"  value={{specialization.value}} selected="item?.select">{{specialization.label}}
+              <ion-option *ngFor="let specialization of specializations" value={{specialization.value}}>{{specialization.label}}
               </ion-option>
             </ion-select>
         </ion-item>
-        </ion-col>
+        
       </ion-row>
       <ion-row>
             <ion-item  class="three">
@@ -296,10 +302,9 @@
         </ion-col>
       </ion-row>
   </div>
+  </div>
 
   <!--END-->
-
-</div>
   
   <div  *ngIf="this.fuctionality != 'edit' ">
   <div>
@@ -311,38 +316,38 @@
     </div>
     <div class="main">
     <ion-row>
-      <ion-col width-50>
+      
           <div  class="three">
-            <ion-input formControlName="email"
-            [class.invalid]="!authForm.controls.email.valid && (authForm.controls.email.dirty)" placeholder="Email" value={{email}}></ion-input>
+            <ion-input formControlName="elder_email"
+            [class.invalid]="!authForm.controls.elder_email.valid && (authForm.controls.elder_email.dirty)" placeholder="Email" value={{elder_email}}></ion-input>
           </div>
-          <div *ngIf="!authForm.controls.email.valid  && (authForm.controls.email.dirty)">
+          <div *ngIf="!authForm.controls.elder_email.valid  && (authForm.controls.elder_email.dirty)">
                 <p class="valid">Please enter Email</p>
           </div>
-        </ion-col>
-        <ion-col width-50>
+        </ion-row>
+        <ion-row>
            <div  class="three">
-              <ion-input formControlName="password"
-            [class.invalid]="!authForm.controls.password.valid && (authForm.controls.password.dirty)" type="text" placeholder="Password" value={{password}}></ion-input>
+              <ion-input formControlName="elder_password"
+            [class.invalid]="!authForm.controls.elder_password.valid && (authForm.controls.elder_password.dirty)" type="text" placeholder="Password" value={{elder_password}}></ion-input>
            </div>
-           <div *ngIf="!authForm.controls.password.valid  && (authForm.controls.password.dirty)">
+           <div *ngIf="!authForm.controls.elder_password.valid  && (authForm.controls.elder_password.dirty)">
                 <p class="valid">Please enter password</p>
            </div>
-        </ion-col>
+    
       </ion-row>
   </div>
   </div>
   <div class="main">
       <ion-row>
         <ion-col>
-          <button (click)="cancel()" class="person" ion-button icon-left round>
-            <ion-icon name="ios-close"></ion-icon>
+          <button (click)="cancel()" class="person" ion-button icon-left >
+            <ion-icon name="ios-close"></ion-icon>Cancel
           </button>
         </ion-col>
         <ion-col offset-50>
           <!--  <button [disabled]="!authForm.valid" (click)="Submit()" class="back" ion-button icon-left round> -->
-          <button  (click)="addDependent()" class="back" ion-button icon-left round>
-            <ion-icon name="ios-arrow-round-forward"></ion-icon>
+          <button  (click)="addDependent()" small class="back" ion-button icon-left >
+            <ion-icon name="ios-arrow-round-forward"></ion-icon>Submit
           </button>
         </ion-col>
       </ion-row>

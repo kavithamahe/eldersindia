@@ -13,53 +13,17 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 export class EldersPage {
 authForm : FormGroup;
 
-  functionalArea:any;
-  educations:any;
-  specializations:any;
-  locations:any;
-  areaOfInterest:any;
-  // skills:any;
-  in_service:any;
-  relations:any;
- 
+  //---------------add functionality start-----------------------//
 
-  gender: string = "f";
-  service:string;
-  education:any;
-  adds:any;
-  elder:any;
-  datas:any=[{name:""}];
-  lists:any=[{name:""}];
-  items:any=[{name:""}];
-  experience:any=[];
-  
-  elderId:any;
-  elderName:String="";
-  contactNumber:String="";
-  city:String="";
-  state:String="";
-  services:String="";
-  address:String="";
-  graduation:String = "";
-  elderSpecialization:String = "";
-  relation:String = "";
-  years:String = "";
-  college:String = "";
-  number:String = "";
-  
-  fuctionality:String = "";
-  dob:any;
-  email:String = "";
-  password:String = "";
-  today:any;
-  sponser_id:any;
-  educationDetails:any;
-  location:any;
-  functional_area:any = [{functional_id:""}];
-  elderExperience:any = [{year:""}];
-
-
-  //---------------edit start-----------------------//
+functionalArea:any;
+educations:any=[];
+specializations:any=[];
+locations:any=[];
+areaOfInterest:any;
+in_service:any;
+relations:any=[];
+fuctionality:String = "";
+sponser_id:any;
 
   emergency_name:any = [];
   emergency_no:any =[];
@@ -70,6 +34,10 @@ authForm : FormGroup;
   industry_experience:any = [{year:""}];
   functional_duration:any ="";
   sponsor_id:any;
+
+  elder_email:any="";
+  elder_password:any="";
+  elder_id:any="";
   elder_relation:any="";
   elder_name:any="";
   elder_service:any="";
@@ -108,18 +76,35 @@ authForm : FormGroup;
   elderInfo:any;
 //-------------------END---------------------------------//
 
+
+//------------------Edit Functionality start------------------------//
+manageDependentData:any=[];
+
+//-----------------------END-------------------//
+
   constructor(public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
 
       // this.getElderMasterDetails();
-
-    this.storage.ready().then(() => {
+      
+      this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      storage.get('user_type_id').then((id) => { this.user_id=id;});
+
+      storage.get('user_type_id').then((id) => { this.sponsor_id=id;});
+
       storage.get('token').then((token) => { this.token=token; 
-      this.sponsor_id=this.user_id;
+        
+        this.fuctionality=navParams.get("fuctionality");
+      
+      if(this.fuctionality == 'edit'){
+
+          if(navParams.get("editData")!= null){
+            // let dependent = navParams.get("editData");
+            this.loadManageDependentData(navParams.get("editData").id);
+         }
+        }
       })
     }); 
-    this.today = "";
+    // this.today = "";
      
      this.job_interest=false;
 
@@ -128,8 +113,8 @@ authForm : FormGroup;
         elder_number : ['', Validators.compose([Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
-        email: ['', Validators.compose([Validators.required])],
-        password:['', Validators.compose([Validators.required])],
+        elder_email: ['', Validators.compose([Validators.required])],
+        elder_password:['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
         emergency_numbers: ['', Validators.compose([Validators.required])],
         experienceYears: ['', Validators.compose([Validators.required])],
@@ -140,55 +125,85 @@ authForm : FormGroup;
         functional_duration: ['', Validators.compose([Validators.required])]
               });
 
-      this.fuctionality=navParams.get("fuctionality");
-      
-  //     if(this.fuctionality == 'edit'){
-
-  //         if(navParams.get("editData")!= null){
-  //         this.elderId = navParams.get("editData").id;
-  //         this.elderName=navParams.get("editData").name;
-  //         this.contactNumber=navParams.get("editData").mobile;
-  //         this.dob=navParams.get("editData").dob;
-  //         this.email=navParams.get("editData").email;
-  //         this.password=navParams.get("editData").password;
-  //         this.city=navParams.get("editData").city_name;
-  //         this.location=navParams.get("editData").city;
-  //         this.relation=navParams.get("editData").relation;
-  //         this.services=navParams.get("editData").service;
-  //         this.address=navParams.get("editData").address;   
-  //         if(navParams.get("editData").education[0] === undefined || navParams.get("editData").education[0] == "undefined"){
-  //         this.graduation = null;  
-  //         }
-  //         else{
-  //         this.elderGraduation=navParams.get("editData").education;  
-  //         this.elderSpecialization=navParams.get("editData").education[0].specialization;
-  //         this.college=navParams.get("editData").education[0].university;
-  //         }
-  //         if(navParams.get("editData").experience[0] === undefined || navParams.get("editData").experience[0] == "undefined"){
-  //         this.graduation = null;  
-  //         }
-  //         else{
-  //         this.elderExperience.pop();
-  //         this.elderExperience.push(navParams.get("editData").experience); 
-  //         console.log(this.elderExperience);
-  //         this.functional_area.pop();
-  //         for(let i=0; i < this.elderExperience.length; i++){
-  //            this.functional_area.push({functional_id:this.elderExperience[i].functional_id});
-  //            console.log(this.functional_area[0].functional_id);
-  //         }
-         
-  //         }
-  //        if(navParams.get("editData").emergency[0] === undefined || navParams.get("editData").emergency[0] == "undefined"){
-  //         this.graduation = null;  
-  //         }
-  //         else{
-  //            this.emergency=navParams.get("editData").emergency[0].person;
-  //         this.number=navParams.get("editData").emergency[0].mobile; 
-  //         }
-  //       }
   // }
+
   this.nav=nav;
 }
+
+ loadManageDependentData(elderId){
+
+   this.communityServices.getElder(elderId).subscribe(
+       elder=>{
+          
+          this.manageDependentData = elder.result.info[0];
+              // this.manageDependentData = data[0] ;
+              
+          this.elder_id = this.manageDependentData.id;
+          this.elder_name= this.manageDependentData.name;
+          this.elder_service = this.manageDependentData.in_service;
+          this.elder_number= this.manageDependentData.mobile;
+          this.elder_dob= this.getDate(this.manageDependentData.dob);
+          this.elder_email= this.manageDependentData.email;
+          this.elder_password= this.manageDependentData.password;
+          this.elder_location = this.manageDependentData.location;        
+          this.elder_relation = this.manageDependentData.relation;
+          this.elder_address= this.manageDependentData.address;   
+
+          let emergency = this.manageDependentData.emergency;
+          for(let i = 0; i < emergency.length;i++)
+          {
+            this.emergency_name.push(emergency[i].person);
+            this.emergency_no.push(emergency[i].mobile);
+            this.emergency_list.pop();
+            this.emergency_list.push({emergency:[i]});
+          }
+          
+          this.job_interest = this.manageDependentData.job_interested;
+
+          if(this.job_interest){
+            console.log("interested in job");
+            this.area_of_interest = this.manageDependentData.area_interest;
+            this.job_type = this.manageDependentData.job_type;
+
+            let experiences = this.manageDependentData.experience;
+            console.log(experiences);
+            if(experiences[0].functional_id != undefined || experiences[0].functional_id == null  )
+            {
+              for(let i = 0; i < experiences.length;i++)
+              {
+                this.experience_industry.push(experiences[i].functional_id);
+                this.experience_years.push(experiences[i].year);
+                this.experience_duration.push(experiences[i].duration);
+                this.experience_list.pop();
+                this.experience_list.push({experience:[i]});
+              }  
+            }
+
+            let educations =  this.manageDependentData.education;
+            if(educations[0].graduation != undefined || educations[0].graduation == null  )
+            {
+              for(let i = 0; i < educations.length;i++)
+              {
+                this.education_graduation.push(educations[i].graduation);
+                this.education_specialization.push(educations[i].specialization);
+                this.education_college.push(educations[i].university);
+;
+                this.education_list.pop();
+                this.education_list.push({education:[i]});
+              }  
+            }
+          }
+        },
+         err =>{
+            this.communityServices.showErrorToast(err);
+            })
+ }
+
+ getDate(datepar){
+     var dateParts = datepar.split("-").reverse().join("-");
+     // let date = dateParts[2]+"-"+dateParts[1]+"-"+dateParts[0];
+     return dateParts;
+  }
 
 
  getElderMasterDetails(){
@@ -211,16 +226,13 @@ authForm : FormGroup;
                      err =>{
                     this.communityServices.showErrorToast(err);
                   })
+       
 
    }
 
-   ngOnInit() {
-     this.getElderMasterDetails();
-        }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EldersPage');
-  }
+   ionViewWillEnter(){
+        this.getElderMasterDetails();
+      }
 
   addEmergency(){
     this.emergency_list.push({emergency:""});
@@ -245,29 +257,24 @@ authForm : FormGroup;
   }
 
   getElderSkills(){
-// [{"skill":"account"},{"skill":"maths"}]
     for(let i=0;i<this.skill_set.length;i++){
       this.elder_skills.push({"skill":this.skill_set[i]})  
     }
   }
 
   getEmergencyNumber(){
-// [{"id":1,"person":"police","mobile":"100"}]
       for(let i=0;i<this.emergency_no.length;i++){
             this.elder_emergency.push({"id":(i+1),"person":this.emergency_name[i],"mobile":this.emergency_no[i]})  
           }
   }
 
   getElderExperience(){
-    // [{"industry":1,"year":"5","duration":"2010-2015"}]
     for(let i=0;i<this.experience_industry.length;i++){
-      // alert(this.experience_industry[i]);
             this.elder_experience.push({"industry":this.experience_industry[i],"year":this.experience_years[i],"duration":this.experience_duration[i]})  
           }
   }
 
   getElderEducation(){
-    // [{"graduation":"B.A","specialization":"Maths","university":"KLU"}]
     for(let i=0;i<this.education_graduation.length;i++){
             this.elder_education.push({"graduation":this.education_graduation[i],"specialization":this.education_specialization[i],"university":this.education_college[i]})  
           }
@@ -293,9 +300,9 @@ authForm : FormGroup;
     let education_data = this.elder_education;
 
     let dependentData = {"info":
-                          [{"email":this.authForm.value.email,
+                          [{"email":this.authForm.value.elder_email,
                           "relation":this.elder_relation,
-                          "password":this.authForm.value.password,
+                          "password":this.authForm.value.elder_password,
                           "name":this.authForm.value.elder_name,
                           "dob":this.elder_dob,
                           "mobile":this.authForm.value.elder_number,
@@ -312,7 +319,7 @@ authForm : FormGroup;
                           "job_interested":this.job_interest
                           }]
                         }
-    console.log("elder details:",dependentData);
+    
 
 
 
@@ -322,8 +329,9 @@ authForm : FormGroup;
 
                         //-------------------modified----------------------------//
 
-      // if(this.fuctionality=="edit")
-      // {
+      if(this.fuctionality=="edit")
+      {
+        console.log("elder details:",dependentData);
       //         this.communityServices.editSubmit().subscribe(elders =>{
       //           console.log(elders);    
       //    },
@@ -331,9 +339,9 @@ authForm : FormGroup;
       //           this.communityServices.showErrorToast(err);
       //     })
    
-      // }
-      // else
-      //   {
+      }
+      else
+        {
          this.communityServices.addSubmit(dependentData).subscribe(
            elders=>{
               console.log(elders);
@@ -341,7 +349,7 @@ authForm : FormGroup;
            err =>{
               this.communityServices.showErrorToast(err);
               })
-        // }
+        }
     this.nav.pop();
   }
 

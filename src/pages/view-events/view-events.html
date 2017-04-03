@@ -23,8 +23,8 @@
 <ion-content padding>
 <ion-card>
   <ion-item>   
-    <h2 class="primary-color">{{eventsInfo?.title}}</h2>
-    <p><ion-icon ios="ios-person" md="md-person"></ion-icon> {{eventsInfo?.author_name }} | {{eventsInfo?.created_at | date :"MMM dd y"}}</p>
+    <h2 class="primary-color pro-info">{{eventsInfo?.title}}</h2>
+    <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i>  {{eventsInfo?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{eventsInfo?.created_at | date :"MMM dd y"}}</p>
   </ion-item>
 <img src="{{imageUrl+eventsInfo?.featured_image}}" [hidden]="!eventsInfo?.featured_image">
   <ion-card-content>

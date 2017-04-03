@@ -26,8 +26,8 @@
 <div (click)="viewNews(news?.id)">
  <img src="{{imageUrl+news?.featured_image}}" [hidden]="!news?.featured_image">
   <ion-item text-wrap>   
-    <h2 class="primary-color">{{news?.title}}</h2>
-    <p><ion-icon ios="ios-person" md="md-person"></ion-icon> {{news?.author_name }} | {{news?.created_at | date :"MMM dd y"}}</p>
+    <h2 class="primary-color pro-info">{{news?.title}}</h2>
+    <p class="timedate"><ion-icon ios="ios-person" md="md-person"></ion-icon> {{news?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{news?.created_at | date :"MMM dd y"}}</p>
   </ion-item>
   <ion-card-content>
     <p [innerHTML]="news?.description | words : 60 : '...'"></p>

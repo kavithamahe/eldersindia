@@ -214,6 +214,12 @@ sendMessage(id,attachment,subject,message){
     .map(res =>res.json());
   }
 
+  getElder(elder_id){
+    let elderData = {"elderId":elder_id};
+    return this.http.post(`${this.getCommunityPostsUrl }getElderListById`,elderData,this.options)
+    .map(res =>res.json());
+  }
+
   getElderMasterDetails(){
    this. body = {"get":["Relations","InService","FunctionalArea","Educational","Specialization","Locations","AreaofInterest","Skills"]};
      return this.http.post(`${this.getCommunityPostsUrl }getElderMasterDetails`,this.body,this.options)

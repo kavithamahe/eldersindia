@@ -157,8 +157,8 @@ loadSubcategoryList(subCategory_id,location_id){
           </ion-item>
   </ion-row>
   <ion-row>
-  <ion-col><button ion-button item-left small (click)="dismiss()">close</button></ion-col>
-  <ion-col offset-33><button ion-button item-right small (click)="submit()">Submit</button></ion-col>
+  <ion-col><button ion-button class="btn-defaults" item-left small (click)="dismiss()">Cancel</button></ion-col>
+  <ion-col offset-33><button class="btn-primarys" ion-button item-right small (click)="submit()">Submit</button></ion-col>
   </ion-row>
 </ion-content>
 </div>

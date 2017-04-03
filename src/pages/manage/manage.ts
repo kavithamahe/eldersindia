@@ -77,8 +77,8 @@ export class ManagePage {
   }
  
 
-  editElder(elderId){
-    let data={"fuctionality":"edit","editData":elderId};
+  editElder(elder){
+    let data={"fuctionality":"edit","editData":elder};
     this.nav.push(EldersPage,data);
   }
 
@@ -101,6 +101,10 @@ export class ManagePage {
       });
       toast.present();
    }
+
+   ionViewDidEnter(){
+    this.manageDetail();
+  }
 
 
 }

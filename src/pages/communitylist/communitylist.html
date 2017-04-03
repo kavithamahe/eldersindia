@@ -13,10 +13,8 @@
     <ion-title text-center>Community</ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content>
-
-      <ion-segment [(ngModel)]="community">
+     <ion-segment [(ngModel)]="community">
         <ion-segment-button (click)="myCommunity()" value="mycommunity">
           My Community
         </ion-segment-button>
@@ -25,9 +23,6 @@
         </ion-segment-button>
         
       </ion-segment>
-				  
-
-
     <div [ngSwitch]="community">
       <ion-list *ngSwitchCase="'mycommunity'">
         <ion-card>
