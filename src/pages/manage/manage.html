@@ -38,14 +38,14 @@
    
         <ion-card class="des-card">
         <ion-row>
-        <ion-col width-70>
-         <button ion-button color="dark" clear (click)="toggleDetails(i)">
-         <i class="fa fa-user-circle-o name-person"></i><p name="person" class="name-elder">{{manage.relation}}<p>
+        <ion-col width-75>
+         <button ion-button color="dark" clear (click)="toggleDetails(i)" style="margin:0px!important;">
+         <i class="fa fa-user name-person"></i><p name="person" class="name-elder">{{manage.relation}}<p>
           </button>
           </ion-col>
-          <ion-col width-30>
-          <button ion-button (click)="editElder(manage)" color="dark" clear><i class="fa fa-pencil-square-o" name="create"></i></button>
-		  <button ion-button (click)="deleteElder(manage.id)" color="dark" clear><i class="fa fa-trash-o" name="trash"></i></button>
+          <ion-col width-25>
+          <button ion-button (click)="editElder(manage)" color="dark" clear style="padding:2px;"><i class="fa fa-pencil-square-o edit-eld" name="create"></i></button>
+		  <button ion-button (click)="deleteElder(manage.id)" color="dark" clear style="padding:2px;"><i class="fa fa-trash-o trash-del" name="trash"></i></button>
           </ion-col>
          
           </ion-row>
@@ -73,3 +73,7 @@
   
      
   </ion-content>
+  <style>
+.button-ios{margin:0px !important;}
+  
+  </style>

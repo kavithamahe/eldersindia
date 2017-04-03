@@ -38,14 +38,15 @@
           </ion-list>
         </ion-card>
         <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-        <ion-card style="position:relative;" *ngFor="let community of communitylists; let i= index">
+        <ion-card *ngFor="let community of communitylists; let i= index">
+		<div class="community-img">
           <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner" />
  
             <ion-thumbnail class="thamb-lins">
               <img [src]="imageUrl+community?.logo"/>
             </ion-thumbnail>
-     
-          <ion-card-content>
+     </div>
+          <ion-card-content style="position:relative;">
             <ion-card-title>
               <ion-row>
                 <ion-col style="padding-left:0px !important; padding-bottom:0px !important;">
