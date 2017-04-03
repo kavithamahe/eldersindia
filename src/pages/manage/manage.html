@@ -19,45 +19,37 @@
     </ion-title>
     </div>
     </ion-col>
-    <ion-col end><div>
-    
-    </div>
-    </ion-col>
-    <ion-col end><div>
+
+   <!-- <ion-col end>
+	<div>
      <button clear color="dark" ion-button icon-only (click)="addElder()">
       <ion-icon name="ios-person-add"></ion-icon> 
     </button>
     </div>
-    </ion-col>
+    </ion-col>-->
     </ion-row>
   </ion-navbar>
 </ion-header>
-  
-
-
 <ion-content padding>
+<br/>
  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     
   <div *ngFor="let manage of manages; let i=index">
    
-        <ion-card>
+        <ion-card class="des-card">
         <ion-row>
-        <ion-col width-10>
-         <button ion-button color="dark" clear (click)="toggleDetails(i)">
-          <ion-icon item-left name="person">{{manage.relation}}</ion-icon>
+        <ion-col width-75>
+         <button ion-button color="dark" clear (click)="toggleDetails(i)" style="margin:0px!important;">
+         <i class="fa fa-user name-person"></i><p name="person" class="name-elder">{{manage.relation}}<p>
           </button>
           </ion-col>
-          <ion-col offset-50>
-          <button ion-button (click)="editElder(manage)" color="dark" clear><ion-icon name="create"></ion-icon>
-          </button>
-          </ion-col>
-          <ion-col>
-          <button ion-button (click)="deleteElder(manage.id)" color="dark" clear><ion-icon name="trash"></ion-icon>
-          </button>
+          <ion-col width-25>
+          <button ion-button (click)="editElder(manage)" color="dark" clear style="padding:2px;"><i class="fa fa-pencil-square-o edit-eld" name="create"></i></button>
+		  <button ion-button (click)="deleteElder(manage.id)" color="dark" clear style="padding:2px;"><i class="fa fa-trash-o trash-del" name="trash"></i></button>
           </ion-col>
           </ion-row>
         </ion-card>
-              
+        
         <ion-card *ngIf="i==showblock">
           <ion-list>
             <p><ion-icon  class="depend" item-left name="person">
@@ -80,3 +72,7 @@
   
      
   </ion-content>
+  <style>
+.button-ios{margin:0px !important;}
+  
+  </style>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,LoadingController, NavParams,ToastController  } from 'ionic-angular';
+import { NavController,LoadingController, NavParams,ToastController,AlertController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { EldersPage } from '../elders/elders';
 
@@ -21,7 +21,7 @@ export class ManagePage {
   imageUrl:any;
   user_id:any;
   token:any;
-  constructor(public nav: NavController,public storage:Storage, public navParams: NavParams,public toastCtrl: ToastController,public loadingCtrl: LoadingController,public communityServices: CommunityServices) {
+  constructor(public alertCtrl: AlertController, public nav: NavController,public storage:Storage, public navParams: NavParams,public toastCtrl: ToastController,public loadingCtrl: LoadingController,public communityServices: CommunityServices) {
    this.nav=nav;
    this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -32,7 +32,24 @@ export class ManagePage {
     });   
            
     }
-
+   showConfirm(DeleteId) {
+    let confirm = this.alertCtrl.create({
+     subTitle: 'Are you agree to delete this manage dependent?',
+      buttons: [
+        {
+          text: 'Cancel',
+         },
+        {
+          text: 'Agree',
+          handler: () => {
+           this.deleteElder(DeleteId);
+           this.manageDetail();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
   manageDetail(){
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();

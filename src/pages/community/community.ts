@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component} from '@angular/core';
 import { NavController, NavParams,AlertController,LoadingController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
@@ -35,7 +35,8 @@ export class CommunityPage {
     show_member:any;
     token:any;
     community_id:any;
-   @ViewChild('videoPlayer') videoplayer: any;
+
+  
   constructor(public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
     this.nav=nav;
 
@@ -54,15 +55,28 @@ export class CommunityPage {
         this.itemComments=false;
         loader.dismiss();
         this.userType="sponsor";
- // for (let i = 0; i < 30; i++) {
- //      this.users.push( this.users.length );
- //    }
+
 }
 
+showConfirm(DeleteId) {
+    let confirm = this.alertCtrl.create({
+     subTitle: 'Are you agree to delete this comment?',
+       buttons: [
+        {
+          text: 'Cancel',
+         },
+        {
+          text: 'Ok',
+          handler: () => {
+           this.deleteComment(DeleteId);
+          
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 
-toggleVideo(event: any) {
-    this.videoplayer.nativeElement.play();
-}
 
  // doInfinite(infiniteScroll) {
  //    console.log('Begin async operation');

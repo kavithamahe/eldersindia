@@ -66,6 +66,12 @@ myCommunity(data){
      return this.http.post(`${this.getCommunityPostsUrl }myCommunity`,this.body,this.options)
       .map(res =>res.json());
 }
+ eventsscroll(nextPageURL) 
+   {  
+  this.body= {"uid": this.user_id, "search": "", "view": "grid", "get": ["communityCategory"]}
+    return this.http.post(nextPageURL,this.body,this.options)
+      .map(res => res.json()); 
+   }
 
 getCommunity(category){
   this.body = {"uid": this.user_id, "search": "","s_category": category,  "view": "grid", "get": ["communityCategory"]}
@@ -116,6 +122,7 @@ getConnectList(){
    return this.http.post(`${this.getCommunityPostsUrl }getConnectionList`,this.connectlist,this.options)
       .map(res =>res.json());
 }
+
 getCommunityMembers(){
     return this.http.post(`${this.getCommunityPostsUrl }getCommunityMembers`,"",this.options)
       .map(res =>res.json());
