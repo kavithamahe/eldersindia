@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component} from '@angular/core';
 import { NavController, NavParams,AlertController,LoadingController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
@@ -35,7 +35,7 @@ export class CommunityPage {
     show_member:any;
     token:any;
     community_id:any;
-    
+
   
   constructor(public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
     this.nav=nav;
