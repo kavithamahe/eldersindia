@@ -47,6 +47,7 @@ token:any;
   editProfile(){
   	this.navCtrl.push(EditProfilePage,{profileData:this.profileData});
   }
+
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);
