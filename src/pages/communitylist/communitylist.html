@@ -13,8 +13,8 @@
     <ion-title text-center>Community</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
-     <ion-segment [(ngModel)]="community">
+<ion-content class="segments-info">
+     <ion-segment [(ngModel)]="community" class="segment-top">
         <ion-segment-button (click)="myCommunity()" value="mycommunity">
           My Community
         </ion-segment-button>
@@ -47,16 +47,18 @@
               <img [src]="imageUrl+community?.logo" (click)="getPost(community.id)" 
               [hidden]="!community?.logo" />
             </ion-thumbnail>
+							  <ion-card-title>
+                <span [hidden]="!community.category_name"> 
+                <label class="labels-bds"> {{community.category_name}}</label>
+                </span>
+				  </ion-card-title>
      </div>
-          <ion-card-content style="position:relative;">
+          <ion-card-content class="thamb-texts">
             <ion-card-title>
               <ion-row>
                 <ion-col style="padding-left:0px !important; padding-bottom:0px !important;">
                   <p class="tid-cd"(click)="getPost(community.id)">{{community.community_name}}</p>
-						    </ion-col>
-                <span [hidden]="!community.category_name"> 
-                <label class="labels-bds"> {{community.category_name}}</label>
-                </span>
+             </ion-col>
              </ion-row> 
             </ion-card-title>
               <p class="ssdsd">{{community.description}}</p>
@@ -79,19 +81,19 @@
         </ion-card>
         <ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
         <ion-card *ngFor="let community of communitylists; let i= index">
-          <img  [src]="imageUrl+community?.banner" (click)="getPost(community.id)"
-          [hidden]="!community?.banner" />
-		  
-            <ion-item>
-              <ion-thumbnail>
-                <img [src]="imageUrl+community?.logo" (click)="getPost(community.id)" 
-                [hidden]="!community?.logo"/>
+
+		<div class="community-img">
+          <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner" />
+		    <ion-thumbnail class="thamb-lins">
+                <img [src]="imageUrl+community?.logo"  [hidden]="!community?.logo"/>
               </ion-thumbnail>
-            </ion-item>
-            <ion-card-content>
-              <ion-card-title>
-                <p  style="color:#387ef5" (click)="getPost(community.id)">{{community.community_name}}</p>
+			  <ion-card-title>
+                <p  class="labels-bds" (click)="getPost(community.id)">{{community.community_name}}</p>
               </ion-card-title>
+			   </div>
+         
+            <ion-card-content class="thamb-texts">
+              
                 <p>{{community.description}}</p>
             </ion-card-content>
         </ion-card>

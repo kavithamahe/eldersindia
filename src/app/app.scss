@@ -279,8 +279,8 @@ page-service-info .service_request							{boder:none !important;}
 .thamb-lins													{bottom:-18px;left:12px;position:absolute;z-index: 999 !important; }
 .thamb-lins img												{border:3px solid #fff; height:80px;width:90px; border-radius:3px;box-shadow: 0 0 5px #888}
 .tid-cd 											        {color:#1976d2 !important;font-size:15px !important;font-weight:400 !important;text-align:left !important; float:left;}
-.labels-bds													{background:#6495ED;border-right:2px solid #fff;color:#fff;float:left;font-size:12px;padding:3px;position:absolute;
-															 right: 0;top:195px;width:auto;}
+.labels-bds													{background:rgba(19, 19, 20, 0.58) !important;border-right:3px solid red !important;color:#fff !important;float:left;font-size:13px !important;padding:8px;position:absolute;
+															 right: 0;bottom:35px;width:auto;}
 .services > i 												{color:#5dade2 !important;}
 .jobs > i													{color:#e74c3c !important;}
 .community > i 												{color:#1976d2 !important;}
@@ -418,10 +418,13 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .subcategory-list											{padding:5px;}
 .ios page-community .video, .md page-community .video		{width:100%; border:none; height:40px;}
 .community-img												{position:relative;}
+
+.ios ion-nav > .ion-page > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-nav > .ion-page > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-tab > .ion-page > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-tabs > .ion-page.tab-subpage > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-menu > .menu-inner > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-menu > .menu-inner > ion-header > ion-content.statusbar-padding:first-child .scroll-content{padding-top:0px !important;}
 /*-------------------------------------Android platform css end-------------------------------------*/
 
 
 /*-------------------------------------ios platform css -------------------------------------*/
+.thamb-texts												{ position:relative;}
 .label-ios													{font-size:14px;line-height:15px;overflow:hidden;padding-right:1px;text-indent:5px;text-overflow:ellipsis;white-space:nowrap;}
 .item-inner													{background:none !important;}
 .toolbar-title-ios											{font-size:19px; font-weight:400;}
@@ -437,7 +440,7 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 															 color:#fff;display:block;height:45px;line-height:45px;width:100%; text-align:left; padding-left:5px}
 .sub-cate .list-ios p									    { width:100%; color: #fff; font-size:16px; padding-bottom:8px;
 															 font-size: 16px;text-decoration:none;margin-left:0px; position:relative;/* border-bottom:1px solid rgba(212, 209, 209, 0.13) !important;*/}
-.item-block										            {border-bottom:1px solid rgba(212, 209, 209, 0.13) !important;}
+.item-block										            {/*border-bottom:1px solid rgba(212, 209, 209, 0.13) !important;*/}
 .item-select												{font-size:14px !important;}
 .marg-info													{padding:50px; float:left; margin-top:10px;}
 .item-ios.item-block .item-inner							{ border-bottom:none; margin-left:5px; }
@@ -469,16 +472,13 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .timedate													{font-size:13px !important; color:#A9A9A9 !important;}
 .pro-info													{padding-top:10px;}
 ion-select													{max-width:100% !important;}
-.liste-names {
-    font-size:16px !important;
-    font-weight: 400;
-    height:30px;
-    padding-left: 10px;
-    padding-top: 5px;
-}
-
+.liste-names 												{font-size:16px !important;font-weight: 400;height:30px;padding-left: 10px;padding-top: 5px;}
+.segment-ios .segment-button.segment-activated				{background:#FB7500; padding-left:5px !important;}
+.fant-size > .item-inner > .input-wrapper > .label-ios      {font-size:16px !important; padding-top:0px !important;line-height:25px !important; text-indent:10px !important;}
+.segments-info .segment-top .segment-ios .segment-button.segment-activated{margin-top:10px; border:1px solid red;}
 /*-------------------------------------ios platform css end-------------------------------------*/
 /*-------------------------------------Android platform css -------------------------------------*/
+.fant-size > .item-inner > .input-wrapper > .label-md      {font-size:16px !important;padding-top:0px !important; line-height:25px !important; text-indent:10px !important;}
 .sub-cate .item-inner .input-wrapper .label-md			   {margin:0px !important; background:none !important;}
 .sub-cate .item-inner .input-wrapper .label-md h2 .title-md{background: rgba(51, 51, 51, 0.12); font-size:20px; font-weight:400; 
 															 color:#fff;display:block;height:45px;line-height:45px;width:100%; text-align:left; padding-left:5px}
