@@ -116,12 +116,12 @@ showConfirm(DeleteId) {
   
   url = oldURL.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
   // url = oldURL.replace("https://www.youtube.com/watch?v=_OBlgSz8sSM","https://www.youtube.com/embed/_OBlgSz8sSM");
-  url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/"); 
-   console.log("vidweo url: ",oldURL);
-  url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
-  url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
-  url = oldURL.replace("http://www.youtube.com/embed/watch/","http://www.youtube.com/embed/");
-  url = oldURL.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
+  // url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/"); 
+  //  console.log("vidweo url: ",oldURL);
+  // url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
+  // url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
+  // url = oldURL.replace("http://www.youtube.com/embed/watch/","http://www.youtube.com/embed/");
+  // url = oldURL.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
   // url = oldURL.replace("http://www.youtube.com/embed/watch/", "http://www.youtube.com/embed/")
  return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }

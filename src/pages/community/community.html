@@ -47,24 +47,24 @@
 					<ion-row>
 						<h2 style="color:#387ef5">Members</h2>
 					</ion-row>
-					<ion-row>
-		    			<ion-col>
-		    				<div>
-								<ion-item *ngFor="let member of members">
-									<ion-avatar  [hidden]="!member?.avatar">
+						<ion-row>
+		    			<ion-col *ngFor="let member of members">
+		    				
+								<ion-item >
+									<ion-avatar>
 										<img (click)="membersProfile(member.uid)" 
-										[src]="imageUrl+member?.avatar">
+										[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar">
 									</ion-avatar>
 
 								</ion-item>
 								<ion-item  *ngIf="!show_member">
 										<p>No Members Joined Yet</p>
 							    </ion-item>
-							</div>
+							
 							
 						</ion-col>
-						
-					</ion-row>
+						</ion-row>
+					
 			</ion-card-content>
 		</ion-card>
 	</div>
