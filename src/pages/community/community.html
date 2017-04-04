@@ -51,7 +51,7 @@
 		    			<ion-col>
 		    				<div>
 								<ion-item *ngFor="let member of members">
-									<ion-avatar>
+									<ion-avatar  [hidden]="!member?.avatar">
 										<img (click)="membersProfile(member.uid)" 
 										[src]="imageUrl+member?.avatar">
 									</ion-avatar>
