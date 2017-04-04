@@ -226,10 +226,8 @@ sendMessage(id,attachment,subject,message){
   }
 
 
-  editSubmit(){
-    this.edit={"info":[{"id":17,"sponsor_id":"7","name":"asdf","avatar":null,"relation":"father","gender":"","dob":"2017-03-02","mobile":"09597009544","mobile_verified":1,"email":"sponsssssor@ec.dev","email_verified":1,"in_service":0,"job_interested":1,"address":"velachery chennai","city":"chennai","state":"Tamilnadu","status":1,"created_at":"2017-03-06 13:06:59","updated_at":"2017-03-06 18:36:59","city_name":"chennai","state_name":"Tamilnadu","service":"Retired","experience":[{"id":13,"elder_id":17,"functional_id":8,"functional_other":"","year":"3","duration":"","status":1,"created_at":"2017-03-06 13:06:59","updated_at":"2017-03-06 13:06:59"}],"education":[{"id":12,"elder_id":17,"graduation":"B.Arch","graduation_other":"","specialization":"Chemistry","specialization_other":"","university":"anna university","status":1,"created_at":"2017-03-06 13:06:59","updated_at":"2017-03-06 13:06:59"}],"emergency":[{"id":16,"elder_id":17,"person":"police","mobile":"9597009544","status":1,"created_at":"2017-03-06 13:06:59","updated_at":"2017-03-06 13:06:59"}]}]}
-
-    return this.http.post(`${this.getCommunityPostsUrl }elderEdit`,this.edit,this.options)
+  editSubmit(editedDependentData){
+    return this.http.post(`${this.getCommunityPostsUrl }elderEdit`,editedDependentData,this.options)
     .map(res =>res.json());
 
   }

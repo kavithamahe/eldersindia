@@ -33,9 +33,8 @@ file: File;
   constructor(public loadingCtrl: LoadingController,public formBuilder:FormBuilder,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
 
       this.profileData = navParams.get("profileData");
-      this.logoUrl = "http://183.82.33.232:8097/";
+
       this.user_type = this.profileData.user_type;
-    console.log(this.logoUrl+this.profileData.logo);
 
      this.edit_profile_Form = formBuilder.group({
         name: [this.profileData.name,Validators.compose([Validators.minLength(6), Validators.required])],
