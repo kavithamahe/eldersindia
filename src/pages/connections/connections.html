@@ -48,12 +48,13 @@
     <img src="{{imageUrl+request?.avatar}}" [hidden]="!request?.avatar">
     </ion-avatar></ion-col>
     <ion-col width-67>
-    <h6 class="primary-color">{{request?.connections?.name}} </h6>
-    <p>{{request?.connections?.company_name}}</p>
-    <p>
+    <h6 class="name-conne">{{request?.connections?.name}} </h6>
+    <p class="connection-pages">{{request?.connections?.company_name}}</p>
+    <p class="connection-page">
     <ion-icon ios="ios-briefcase" md="md-briefcase" [hidden]="!request?.connections?.designation"></ion-icon>  {{request?.connections?.designation}} 
-    <ion-icon ios="ios-call" md="md-call" [hidden]="!request?.connections?.mobile"></ion-icon> {{request?.connections?.mobile}}
+   
     </p>
+	<p class="connection-page"> <ion-icon ios="ios-call" md="md-call" [hidden]="!request?.connections?.mobile"></ion-icon> {{request?.connections?.mobile}}</p>
     </ion-col>
       <ion-col width-20> 
       <button ion-button icon-only small color="secondary" (click)="connectionStatus(request?.connection_id,1)">
@@ -84,12 +85,13 @@
     <img src="{{imageUrl+all?.avatar}}" [hidden]="!all?.avatar">
     </ion-avatar></ion-col>
     <ion-col width-67>
-    <h6 class="primary-color">{{all?.connections?.name}} </h6>
-    <p>{{all?.connections?.company_name}}</p>
-    <p>
+    <h6 class="name-conne">{{all?.connections?.name}} </h6>
+    <p class="connection-pages">{{all?.connections?.company_name}}</p>
+    <p class="connection-page">
     <ion-icon ios="ios-briefcase" md="md-briefcase" [hidden]="!all?.connections?.designation"></ion-icon> {{all?.connections?.designation}}
-    <ion-icon ios="ios-call" md="md-call" [hidden]="!all?.connections?.mobile"></ion-icon>  {{all?.connections?.mobile}}
+    
     </p>
+	<p class="connection-page"><ion-icon ios="ios-call" md="md-call" [hidden]="!all?.connections?.mobile"></ion-icon>  {{all?.connections?.mobile}}</p>
     </ion-col>
       <ion-col width-20> 
       <button ion-button icon-only small color="secondary">

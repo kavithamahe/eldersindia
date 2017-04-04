@@ -45,11 +45,7 @@ page-community {
 	color:#ffffff;
 }
 
-.three
-{
-	border: 2px solid #80bfff;
-    border-radius: 35px;
-}
+
 .hover:hover{
 	border-color: #e86509;
 }
@@ -104,32 +100,13 @@ p{
 }
 
 page-elders {
-.three
-{
-	border: 2px solid  #f2f2f2;
-    border-radius: 40px;
-    background-color:  #ffffff;
 
-}
 .valid{
 		color:red;
 }
-.address
-{
-	border: 2px solid  #f2f2f2;
-    border-radius: 25px;
-    background-color:  #ffffff;
-}
-.main{
-	padding-left:40px;
-	padding-right:40px;
-}
-.personal{
-	width:170px;
-	background-color:  #3385ff;
-	font-size:18px;
-	color:#ffffff;
-}
+
+
+
  .error-box {
         color: red;
     }
@@ -294,13 +271,16 @@ span.mails-cont												{float:left;}
 span.mails-cont i 											{float:left; color:#858D9B; font-size:15px;padding-top: 5px; padding-right:5px;}
 span.mails-cont p 											{float:left; color:#858D9B; font-size:15px;}
 page-service-info .service_request							{boder:none !important;}
-.segment-md .segment-button									{background:#1976d2; color:#fff;}
+.segment-md .segment-button									{background:#1D6AB2; color:#fff;}
+.connection-page											{margin:0px !important; font-size:13px !important; font-weight:400 !important; color:#777; }
+.connection-pages											{color:#fe5722 !important; margin:0px !important;}
+.name-conne													{font-size:18px !important; color:#1976d2 !important; margin-bottom:2px; }
 .segment-md .segment-button.activated, .segment-md .segment-button.segment-activated{ background:#f97500; color:#fff; border-bottom:2px solid #f27201; }
-.thamb-lins													{bottom:145px;height:80px;left:12px;position:absolute;width:80px;z-index: 999 !important; }
-.thamb-lins img												{border:3px solid #fff;}
+.thamb-lins													{bottom:-18px;left:12px;position:absolute;z-index: 999 !important; }
+.thamb-lins img												{border:3px solid #fff; height:80px;width:90px; border-radius:3px;box-shadow: 0 0 5px #888}
 .tid-cd 											        {color:#1976d2 !important;font-size:15px !important;font-weight:400 !important;text-align:left !important; float:left;}
-.labels-bds													{background:#6495ED;border-right:2px solid #fff;color:#fff;float:left;font-size:12px;padding:3px;position:absolute;
-															 right: 0;top:195px;width:auto;}
+.labels-bds													{background:rgba(19, 19, 20, 0.58) !important;border-right:3px solid red !important;color:#fff !important;float:left;font-size:13px !important;padding:8px;position:absolute;
+															 right: 0;bottom:35px;width:auto;}
 .services > i 												{color:#5dade2 !important;}
 .jobs > i													{color:#e74c3c !important;}
 .community > i 												{color:#1976d2 !important;}
@@ -330,14 +310,18 @@ page-service-info .service_request							{boder:none !important;}
 .labels-lb{color:#00CED1; font-weight:600; font-size:14px;}
 page-my-profile ion-col{ border-left:1px solid #F0F8FF !important;}
 .item-md.item-input.ng-valid.input-has-value:not(.input-has-active) .item-inner{ border-bottom:none;}
- .select-brd{border: 1px solid #ccc !important;
+ .select-brd{border: 1px solid #ccc !important; width:95%;
     border-radius: 25px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
     color: #555;
     font-size: 18px;
     font-weight: 400;
     margin-left: 8px !important;
-    padding:10px 10px 10px 20px;}
+    padding:7px 10px 10px 20px !important;}
+.rating{ padding-left:0px !important; margin:0px!important; padding-top:5px;}
+ul.rating li{ padding:5px 0px !important;}
+.select-text{ font-size:15px !important;}
+.detalis-elder{ text-align:center;box-shadow:none; font-size:16px !important; font-weight:600 !important; color:#1976d2 !important; background:#fff; border-radius:3px; padding:4px;}
 /*-------------------------------------Common  css end -------------------------------------*/
 
 
@@ -347,7 +331,7 @@ page-my-profile ion-col{ border-left:1px solid #F0F8FF !important;}
 /*-------------------------------------Android platform css -------------------------------------*/
 ion-content													{background-image: url('../../assets/img/bg.jpg');   font-size:15px;  color:#777 !important;}
 .primary-color 												{color:#1976d2 !important; font-size:15px !important;}
-.card-md p 													{color:#777;font-size:15px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
+.card-md p 													{color:#777;font-size:14px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
 														     margin: 0 0 2px;}
 ion-app.md													{font-family: 'Open Sans', sans-serif !important; }
 ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !important;}
@@ -362,7 +346,7 @@ ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !import
 .list-ios .item-block .item-inner							{border-bottom:none;}
 page-service-info .service_request							{border:none !important;}
 .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{ border-bottom:none;}
-.item-md													{background:#fff;}
+
 .liste-name													{ font-size:17px !important; font-weight:400; height:25px; padding-left:10px; padding-top:5px;}
 
 /*-------------------------------------Android platform css end-------------------------------------*/
@@ -371,7 +355,7 @@ page-service-info .service_request							{border:none !important;}
 
 /*-------------------------------------ios platform css -------------------------------------*/
 ion-content													{background-image: url('../../assets/img/bg.jpg');   font-size:15px;  color:#777 !important;}
-.card-ios p													{color: #777;font-size:15px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
+.card-ios p													{color: #777;font-size:14px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
 															 margin: 0 0 2px;}
 ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !important}
 .login-pages .item-wp										{background:none;}
@@ -381,12 +365,17 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .service-bg													{ height:auto !important;}															 font-weight:400; color:#555;}
 .text-input-ios   											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size: 18px;
 															 font-weight:400; color:#555;}
-												 
+.call-us												    {color:#00897b!important; font-size:18px;}
 .text-input-ios   											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size: 18px;
 															 font-weight:400; color:#555;}
 .toolbar-ios ion-title										{padding: 0 50px 1px;}
 .label-ios[stacked]											{margin-bottom:0px;}
 .label-ios													{line-height:14px;}
+.service-req												{color:#1d6ab2 !important;display:inline;font-size:16px !important;margin: 0;padding:0;}
+.req-viewlist												{font-size:14px !important; font-weight:600 !important; color:#008B8B;}
+.err-reds													{font-size:12px !important; font-weight:600 !important; color:red !important; text-align:right !important; padding-right:25px !important; margin:0px; }
+.mails-left													{margin-left:10px !important; }
+.change-pass												{ border-radius:20px; width:95%; height:35px; margin-left:5px;}
 /*-------------------------------------ios platform css end-------------------------------------*/
 
 /*-------------------------------------Windows platform css -------------------------------------*/
@@ -417,7 +406,7 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .my-list-item												{background:#333!important;color:#999 !important;text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);     -moz-border-bottom-colors: none;
 															-moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: #444 currentcolor #111 !important;
 														     border-image: none; border-style: solid none;border-width: 1px medium;position: relative}
-.label-md													{font-size:14px;line-height:15px;overflow:hidden;padding-right:1px;text-indent:5px;text-overflow:ellipsis;white-space:nowrap;}
+.label-md													{font-size:14px;line-height:15px;overflow:hidden;padding-right:1px;text-indent:5px;text-overflow:ellipsis;white-space:nowrap; padding-top:15px;}
 .menu-inner													{margin-top:57px;}
 .header-md													{z-index:999;}
 .header														{height:55px;}
@@ -426,19 +415,22 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .sub-cate > .list-md > .item-md								{background:#c0392b !important; padding-left:0px; }
 .sub-cate > .list-md > .item-md	> .label-md				    {margin:0px !important;}
 .sub-cate .item-inner										{border-bottom: 1px solid rgba(212, 209, 209, 0.13);} 
+.subcategory-list											{padding:5px;}
+.ios page-community .video, .md page-community .video		{width:100%; border:none; height:40px;}
+.community-img												{position:relative;}
 
-
-
+.ios ion-nav > .ion-page > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-nav > .ion-page > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-tab > .ion-page > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-tabs > .ion-page.tab-subpage > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-menu > .menu-inner > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-menu > .menu-inner > ion-header > ion-content.statusbar-padding:first-child .scroll-content{padding-top:0px !important;}
 /*-------------------------------------Android platform css end-------------------------------------*/
 
 
 /*-------------------------------------ios platform css -------------------------------------*/
+.thamb-texts												{ position:relative;}
 .label-ios													{font-size:14px;line-height:15px;overflow:hidden;padding-right:1px;text-indent:5px;text-overflow:ellipsis;white-space:nowrap;}
 .item-inner													{background:none !important;}
 .toolbar-title-ios											{font-size:19px; font-weight:400;}
 .sub-cate													{background:none !important;box-shadow:none;border-radius:0px; width:94%; margin-left:11px; margin-top:2px; padding-left:0px;}
 .bar-button-ios												{font-size:15px;}
-.sub-cate .list-ios										    {padding-left:0px; margin-bottom:0px;}
+.sub-cate .list-ios										    {padding-left:0px; margin-bottom:0px; background:repeat;}
 .bar-button-ios[icon-only] ion-icon							{font-size:15px;}
 .sub-cate > .input-wrapper									{background:#C0392B !important;}
 .sub-cate > .input-wrapper >.item-ios						{background:none;}
@@ -446,9 +438,9 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .sub-cate .item-inner .input-wrapper .label-ios				{margin:0px;padding-right:0px !important; position:relative;}
 .sub-cate .item-inner .input-wrapper .label-ios h2 .title-ios .toolbar-title{ background: rgba(51, 51, 51, 0.12); font-size:20px; font-weight:400; 
 															 color:#fff;display:block;height:45px;line-height:45px;width:100%; text-align:left; padding-left:5px}
-.sub-cate .list-ios p									    {border-bottom:1px solid rgba(212, 209, 209, 0.13); width:100%; color: #fff; font-size:16px; padding-bottom:8px;
-															 font-size: 16px;text-decoration:none;margin-left:0px; position:relative; border-bottom:1px solid rgba(212, 209, 209, 0.13) !important;}
-.item-block										            {border-bottom:1px solid rgba(212, 209, 209, 0.13) !important;}
+.sub-cate .list-ios p									    { width:100%; color: #fff; font-size:16px; padding-bottom:8px;
+															 font-size: 16px;text-decoration:none;margin-left:0px; position:relative;/* border-bottom:1px solid rgba(212, 209, 209, 0.13) !important;*/}
+.item-block										            {/*border-bottom:1px solid rgba(212, 209, 209, 0.13) !important;*/}
 .item-select												{font-size:14px !important;}
 .marg-info													{padding:50px; float:left; margin-top:10px;}
 .item-ios.item-block .item-inner							{ border-bottom:none; margin-left:5px; }
@@ -478,11 +470,15 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .button-ios-secondary										{background:none; color:#333;}
 .mar-top													{margin-top:10px;}
 .timedate													{font-size:13px !important; color:#A9A9A9 !important;}
-
-
-
+.pro-info													{padding-top:10px;}
+ion-select													{max-width:100% !important;}
+.liste-names 												{font-size:16px !important;font-weight: 400;height:30px;padding-left: 10px;padding-top: 5px;}
+.segment-ios .segment-button.segment-activated				{background:#FB7500; padding-left:5px !important;}
+.fant-size > .item-inner > .input-wrapper > .label-ios      {font-size:16px !important; padding-top:0px !important;line-height:25px !important; text-indent:10px !important;}
+.segments-info .segment-top .segment-ios .segment-button.segment-activated{margin-top:10px; border:1px solid red;}
 /*-------------------------------------ios platform css end-------------------------------------*/
 /*-------------------------------------Android platform css -------------------------------------*/
+.fant-size > .item-inner > .input-wrapper > .label-md      {font-size:16px !important;padding-top:0px !important; line-height:25px !important; text-indent:10px !important;}
 .sub-cate .item-inner .input-wrapper .label-md			   {margin:0px !important; background:none !important;}
 .sub-cate .item-inner .input-wrapper .label-md h2 .title-md{background: rgba(51, 51, 51, 0.12); font-size:20px; font-weight:400; 
 															 color:#fff;display:block;height:45px;line-height:45px;width:100%; text-align:left; padding-left:5px}
@@ -502,6 +498,15 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .text-input-md											   {font-size:15px;}
 .item-md												   {padding-left:2px;}
 page-dashboard .dashboard								   {padding:25px 0px !important;}
+.des-card												   {background:#fff	!important;}
+.name-person											   {font-size:15px !important;  font-weight:600;color:#6A5ACD; float:left;}
+.name-elder												   {color:#777!important;float: left;
+    font-size:16px !important;
+    font-weight: 400 !important;
+    padding-left: 10px !important;
+    text-transform: capitalize;}
+.edit-eld												   { color:#1E90FF; padding:3px; font-size:17px !important; border-radius:3px; width:20px; height:20px;}
+.trash-del												   {color:red; padding:3px;font-size:17px !important; border-radius:3px; width:20px; height:20px;}
 /*-------------------------------------Android platform css end-------------------------------------*/
 
 

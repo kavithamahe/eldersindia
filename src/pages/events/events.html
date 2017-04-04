@@ -26,8 +26,8 @@
 <div (click)="viewEvents(events?.id)">
  <img src="{{imageUrl+events?.featured_image}}" [hidden]="!events?.featured_image">
   <ion-item text-wrap>   
-    <h2 class="primary-color feed-post" >{{events?.title}}</h2>
-    <p><ion-icon ios="ios-person" md="md-person"></ion-icon> {{events?.author_name }} | {{events?.created_at | date :"MMM dd y"}}</p>
+    <h2 class="primary-color feed-post pro-info" >{{events?.title}}</h2>
+    <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{events?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{events?.created_at | date :"MMM dd y"}}</p>
   </ion-item>
   <ion-card-content>
     <p [innerHTML]="events?.description | words : 60 : '...'"></p>

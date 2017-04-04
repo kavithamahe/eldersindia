@@ -38,4 +38,9 @@
   <button ion-button color="orange" small (click)="viewJob(appliedJobs?.id)">More Info</button>
   </ion-card-content>
 </ion-card>
+<ion-card>
+<ion-card-content *ngIf="appliedJobsList?.length<=0">
+<p>No Record Found.</p>
+</ion-card-content>
+</ion-card>
 </ion-content>

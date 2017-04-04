@@ -28,15 +28,15 @@
 
 <ion-content padding>
 <ion-card *ngFor="let service of serviceRequestInfo?.data">
-  <ion-card-content>
+  <ion-card-content style=" padding:0px;">
   <ion-grid>
    <ion-row>
     <ion-col width-><img src="{{imageUrl}}{{service?.logo}}"></ion-col>
 
     <ion-col width-50 (click)="viewRequest(service?.id)">
-    <h2>{{service?.vendor_name}}</h2>
+    <h2 class="service-req">{{service?.vendor_name}}</h2>
     <p *ngIf="(service?.enquiry_date!='0000-00-00 00:00:00')">{{service?.enquiry_date | date :'MMM dd y'}}</p></ion-col>
-    <ion-col width-10><ion-icon name="call" larger></ion-icon></ion-col>
+    <ion-col width-10><a href="#" class="call-us"><i class="fa fa-phone-square" aria-hidden="true"></i></a></ion-col>
   </ion-row>
   <p>{{service?.enquiry_about}}</p>
   </ion-grid>

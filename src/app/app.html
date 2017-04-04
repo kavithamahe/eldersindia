@@ -10,10 +10,13 @@
 
   <ion-content class="side-item-md my-side-menu">
     <ion-list>
-      <button class="side-item-md my-list-item" ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      <button class="side-item-md my-list-item fant-size" ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
     </ion-list>
+	
+	<br/>
+	<br/>
   </ion-content>
 
 </ion-menu>

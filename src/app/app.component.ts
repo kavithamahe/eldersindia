@@ -32,7 +32,10 @@ import { MyProfilePage } from '../pages/my-profile/my-profile';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any =  ManagePage;
+  // make HelloIonicPage the root (or first) page
+
+  rootPage: any =  CommunitylistPage;
+
   pages: Array<{title: string, component: any}>;
 
   constructor(
@@ -43,7 +46,7 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [        
-      { title: 'Login', component: LoginPage },
+     // { title: 'Login', component: LoginPage },
       { title: 'Dashboard', component: DashboardPage },      
       { title: 'Profile', component: MyProfilePage },
       { title: 'Change Password', component: ChangePasswordPage },
