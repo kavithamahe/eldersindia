@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,LoadingController, NavParams,ToastController,AlertController   } from 'ionic-angular';
+import { NavController,LoadingController, NavParams,ToastController,AlertController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { EldersPage } from '../elders/elders';
 
@@ -34,8 +34,7 @@ export class ManagePage {
     }
    showConfirm(DeleteId) {
     let confirm = this.alertCtrl.create({
-     
-      message: 'Are you agree to delete this manage dependent?',
+     subTitle: 'Are you agree to delete this manage dependent?',
       buttons: [
         {
           text: 'Cancel',

@@ -39,10 +39,12 @@
         </ion-card>
         <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
         <ion-card style="position:relative;" *ngFor="let community of communitylists; let i= index">
-          <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner" />
+          <img  [src]="imageUrl+community?.banner" (click)="getPost(community.id)"
+          [hidden]="!community?.banner" />
  
             <ion-thumbnail class="thamb-lins">
-              <img [src]="imageUrl+community?.logo"/>
+              <img [src]="imageUrl+community?.logo" (click)="getPost(community.id)" 
+              [hidden]="!community?.logo" />
             </ion-thumbnail>
      
           <ion-card-content>
@@ -50,10 +52,7 @@
               <ion-row>
                 <ion-col style="padding-left:0px !important; padding-bottom:0px !important;">
                   <p class="tid-cd"(click)="getPost(community.id)">{{community.community_name}}</p>
-						  
-															  
-																						  
-                </ion-col>
+						    </ion-col>
                 <span [hidden]="!community.category_name"> 
                 <label class="labels-bds"> {{community.category_name}}</label>
                 </span>
@@ -79,11 +78,13 @@
         </ion-card>
         <ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
         <ion-card *ngFor="let community of communitylists; let i= index">
-          <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner" />
+          <img  [src]="imageUrl+community?.banner" (click)="getPost(community.id)"
+          [hidden]="!community?.banner" />
 		  
             <ion-item>
               <ion-thumbnail>
-                <img [src]="imageUrl+community?.logo"  [hidden]="!community?.logo"/>
+                <img [src]="imageUrl+community?.logo" (click)="getPost(community.id)" 
+                [hidden]="!community?.logo"/>
               </ion-thumbnail>
             </ion-item>
             <ion-card-content>

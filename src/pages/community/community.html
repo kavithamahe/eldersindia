@@ -124,24 +124,22 @@
 				</ion-card-content>
 			</ion-card>
 	<ion-list  *ngFor="let user of users; let i=index">	
- 	
- 	<div>
- 	
- 		<ion-card>
-			<ion-item>
-	      		<ion-row>
-	      			<ion-col>
-	        			<ion-avatar item-left>
-	          				<img [src]="imageUrl+user?.avatar" [hidden]="!user?.avatar" 
-	          				(click)="communityProfiles(user.uid)">
-	        			</ion-avatar>
-	        		</ion-col><br>
-	        		<ion-col width-20>
-		          		<h2 (click)="communityProfile(user.uid)" class="header">{{user.name}}
-		          		<p><ion-icon name="time"></ion-icon>{{user.created_at}}</p>
-		          		</h2>
-					</ion-col>
-					<ion-col offset-50>
+ 		<div>
+ 			<ion-card>
+				<ion-item>
+	      			<ion-row>
+	      				<ion-col>
+	        				<ion-avatar item-left>
+	          					<img [src]="imageUrl+user?.avatar" [hidden]="!user?.avatar" 
+	          					(click)="communityProfiles(user.uid)">
+	        				</ion-avatar>
+	        			</ion-col><br>
+	        			<ion-col width-20>
+			          		<h2 (click)="communityProfile(user.uid)" class="header">{{user.name}}
+			          		<p><ion-icon name="time"></ion-icon>{{user.created_at}}</p>
+			          		</h2>
+						</ion-col>
+						<ion-col offset-50>
 		        		<!-- <button ion-button color="dark" clear (click)="itemDetails()">
 		          			<ion-icon  item-left name="arrow-dropdown"></ion-icon>
 		          		</button>
@@ -149,20 +147,19 @@
 	          			<button  ion-button full color="light" >Block</button>
 	          			<button  ion-button full color="light" >Report</button>
 	          		</div> -->
-	          		</ion-col>
-	       		</ion-row>
-	    	</ion-item>
-	      	<ion-card-content>
-	          	<p>{{user.post_message}}</p><br>
-	          	<img  [src]="imageUrl+user?.post_image" [hidden]="!user?.post_image">
-	       	</ion-card-content>
-
-	        <ion-card-content>
+	          			</ion-col>
+	       			</ion-row>
+	    		</ion-item>
+	      		<ion-card-content>
+		          	<p>{{user.post_message}}</p><br>
+		          	<img  [src]="imageUrl+user?.post_image" [hidden]="!user?.post_image">
+	       		</ion-card-content>
+				<ion-card-content>
 
 	        <!--  <iframe [hidden]="!user?.post_video" height="190" onload="this.width=screen.width" [src]="sanitizer.bypassSecurityTrustResourceUrl(http://www.youtube.com/watch?v=uiws904iuEQ)" frameborder="0" ></iframe> -->
 
-	         <iframe [src]="cleanURL(user?.post_video)" frameborder="0" >
-	         </iframe>
+	         		<iframe [src]="cleanURL(user?.post_video)" frameborder="0" >
+	         		</iframe>
 		       <!--  <video  style="width:400px" >
 				<source src="http://player.vimeo.com/external/85569724.sd.mp4?s=43df5df0d733011263687d20a47557e4" type="video/mp4"/>
 				</video> -->
@@ -233,31 +230,28 @@
 	          			</button>
 	          		</ion-col>
 	      		</ion-row>
-	      		<div *ngIf="i==showblock">
-	      		<ion-item >
-					<div *ngFor="let comment of user.comments">
-	      				<ion-row class="send">
-		      					<ion-avatar item-left>
-		      					 	<img [src]="imageUrl+comment?.profile_image" 
-		      						[hidden]="!comment?.profile_image" >
-			      				</ion-avatar>
-	      					<ion-col>
-	      						{{comment.comments}}
-	      					</ion-col>
-		      					<button ion-button (click)="showConfirm(comment.comments_id)" 
-		      					color="dark" clear>
-		      					<ion-icon name="trash"></ion-icon></button>
-	      				</ion-row><br>
+	      			<div *ngIf="i==showblock">
+	      				<ion-item >
+							<div *ngFor="let comment of user.comments">
+	      						<ion-row class="send">
+		      						<ion-avatar item-left>
+		      					 		<img [src]="imageUrl+comment?.profile_image" 
+		      							[hidden]="!comment?.profile_image" >
+			      					</ion-avatar>
+	      							<ion-col>{{comment.comments}}</ion-col>
+		      						<button ion-button (click)="showConfirm(comment.comments_id)" 
+		      						color="dark" clear><ion-icon name="trash"></ion-icon></button>
+	      						</ion-row><br>
+	      					</div>
+	      				</ion-item>
+	      				<ion-item>
+				   			<ion-label floating>Enter Comments...</ion-label>
+				   			<ion-textarea [(ngModel)]="comment"></ion-textarea>
+						</ion-item>
+  							<button  ion-button (click)="sendPost(user.id)" color="secondary" full>Post Comment</button>
+  							<button  ion-button (click)="addDetails(i)" color="light" full>Cancel
+  							</button>
 	      			</div>
-	      		</ion-item>
-	      		<ion-item>
-				   	<ion-label floating>Enter Comments...</ion-label>
-				   	<ion-textarea [(ngModel)]="comment"></ion-textarea>
-				</ion-item>
-  					<button  ion-button (click)="sendPost(user.id)" color="secondary" full>Post Comment</button>
-  					<button  ion-button (click)="addDetails(i)" color="light" full>Cancel
-  					</button>
-	      	</div>
 	    	</ion-card-content>
 		</ion-card>
 	</div>

@@ -70,40 +70,32 @@
 		  </ion-row>
 		  </ion-card>
 	</div>
-
-		  <div *ngIf(connectLists)>
-		 
-		  	<ion-row>
-		  		<ion-col>
-			  		<div >
-						<ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
-					</div>
-
-		  		</ion-col>
-		    </ion-row>
-		   
+	<div *ngIf(connectLists)>
+		<ion-row>
+		  	<ion-col>
+			  	<div>
+					<ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
+				</div>
+			</ion-col>
+		</ion-row>
 		<ion-card *ngFor="let all of allConnections?.data; let islast=last;">
-   	
-	    <ion-row>
-	    	<ion-col width-20>
-	    		<ion-avatar item-left>
-	    			<img src="{{imageUrl+all?.avatar}}" [hidden]="!all?.avatar">
-	    		</ion-avatar>
-	    	</ion-col>
-    		<ion-col width-67>
-    			<h1 class="primary-color">{{all?.connections?.name}} </h1>
-    				<p>{{all?.connections?.company_name}}</p>
-    				<p><ion-icon ios="ios-briefcase" md="md-briefcase" [hidden]="!all?.connections?.designation"></ion-icon> {{all?.connections?.designation}}</p>
- 					<p><ion-icon ios="ios-call" md="md-call" [hidden]="!all?.connections?.mobile"></ion-icon>  {{all?.connections?.mobile}}</p>
-    		</ion-col>
-      
-   		</ion-row>    
-  
-    	</ion-card>
+   			<ion-row>
+	    		<ion-col width-20>
+	    			<ion-avatar item-left>
+	    				<img src="{{imageUrl+all?.avatar}}" [hidden]="!all?.avatar">
+	    			</ion-avatar>
+	    		</ion-col>
+    			<ion-col width-67>
+    				<h1 class="primary-color">{{all?.connections?.name}} </h1>
+	    				<p>{{all?.connections?.company_name}}</p>
+	    				<p><ion-icon ios="ios-briefcase" md="md-briefcase" [hidden]="!all?.connections?.designation"></ion-icon> {{all?.connections?.designation}}</p>
+	 					<p><ion-icon ios="ios-call" md="md-call" [hidden]="!all?.connections?.mobile"></ion-icon>  {{all?.connections?.mobile}}</p>
+    			</ion-col>
+      		</ion-row>    
+  		</ion-card>
 	</div>
 	
-	
-  	<div *ngIf(activityLists)>
+	<div *ngIf(activityLists)>
  		<div>
 		  	<ion-card>
 				<ion-item class="edit">
@@ -194,7 +186,9 @@
 		          	[hidden]="!community?.post_image">
 		       	</ion-card-content>
 	       		<ion-card-content>
-					   <iframe  [hidden]="!community?.post_video"  width="420" height="315" [src]="cleanURL(community?.post_video)" frameborder="0" allowfullscreen></iframe>
+					   <iframe  [hidden]="!community?.post_video" 
+					   [src]="cleanURL(community?.post_video)" frameborder="0" allowfullscreen>
+					   </iframe>
 	       		</ion-card-content>
 	       	 	<ion-card-content>
 	      			<ion-row>
@@ -243,22 +237,23 @@
 	</div>
 	<div *ngIf(communityMembers)>
 	<ion-card *ngFor="let community of getCommunityMembers; let i=index">
- 		 <img  [src]="imageUrl+community?.banner">
+ 		 <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner">
           <ion-item>
             <ion-thumbnail>
-              <img [src]="imageUrl+community?.logo">
+              <img [src]="imageUrl+community?.logo" [hidden]="!community?.logo">
             </ion-thumbnail>
           </ion-item>
           <ion-card-content>
             <ion-card-title>
               <ion-row>
                 <ion-col>
-                  <p style="color:#387ef5" (click)="goBackToCommunity()">{{community.community_name}}</p>
+                  <p style="color:#387ef5" (click)="goBackToCommunity()" 
+                  [hidden]="!community.community_name">{{community.community_name}}</p>
                 </ion-col>
                
              </ion-row> 
             </ion-card-title>
-              <p>{{community.description}}</p>
+              <p [hidden]="!community.description">{{community.description}}</p>
           </ion-card-content>
 	</ion-card>
 	</div>	

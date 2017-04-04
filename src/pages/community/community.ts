@@ -60,9 +60,8 @@ export class CommunityPage {
 
 showConfirm(DeleteId) {
     let confirm = this.alertCtrl.create({
-     
-      message: 'Are you agree to delete this manage dependent?',
-      buttons: [
+     subTitle: 'Are you agree to delete this comment?',
+       buttons: [
         {
           text: 'Cancel',
          },
