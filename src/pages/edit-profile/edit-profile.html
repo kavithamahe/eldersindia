@@ -24,51 +24,52 @@
 
 	<form [formGroup]="edit_profile_Form">
 
-		<ion-item *ngIf="!edit_profile_Form.controls.name.valid  && (edit_profile_Form.controls.name.touched || submitAttempt)">
-           		<p style="color: #ea6153;">Please enter a valid Name</p>
-        </ion-item>
+		
+		
+		<ion-label class="liste-edit" *ngIf="user_type =='elder' ">Name</ion-label>
+		<ion-label class="liste-edit" *ngIf="user_type =='sponsor' ">Sponsor Name</ion-label>
 		<ion-item>
-		<ion-label floating *ngIf="user_type =='elder' ">Name</ion-label>
-		<ion-label class="liste-name" floating *ngIf="user_type =='sponsor' ">Sponsor Name</ion-label>
 	    <ion-input type="text" formControlName="name"></ion-input>
 	    </ion-item>
+		<p *ngIf="!edit_profile_Form.controls.name.valid  && (edit_profile_Form.controls.name.touched || submitAttempt)" class="err-reds">Please enter a valid Name</p>
+        
 
-		<ion-item *ngIf="!edit_profile_Form.controls.gender.valid  && (edit_profile_Form.controls.gender.touched || submitAttempt)">
-           		<p style="color: #ea6153;">Please select your Gender</p>
-        </ion-item>
+	<ion-label class="liste-edit">Gender</ion-label>
 		<ion-item *ngIf="user_type =='elder' ">
-		<ion-label floating>Gender</ion-label>
-	    <ion-select formControlName="gender">
+		<ion-select formControlName="gender">
 	    <ion-option value="male">Male</ion-option>
 	    <ion-option value="female">Female</ion-option>
 	    </ion-select>
 	    </ion-item>
 
-		<ion-item *ngIf="!edit_profile_Form.controls.mobile_number.valid  && (edit_profile_Form.controls.mobile_number.touched || submitAttempt)">
-           		<p style="color: #ea6153;">Please enter 10-digit valid number</p>
-        </ion-item>
+           		<p class="err-reds" *ngIf="!edit_profile_Form.controls.gender.valid  && (edit_profile_Form.controls.gender.touched || submitAttempt)">Please select your Gender</p>
+      
+
         <ion-item *ngIf="user_type =='sponsor' ">
-		<ion-label floating class="liste-name">Designation</ion-label>
+        <ion-label class="liste-edit">Designation</ion-label>
 	    <ion-input type="text" formControlName="designation"></ion-input>
 	    </ion-item>
-	    <br>	    
+		
+           		<p class="err-reds" *ngIf="!edit_profile_Form.controls.mobile_number.valid  && (edit_profile_Form.controls.mobile_number.touched || submitAttempt)">Please enter 10-digit valid number</p>
+ 
+		    
 
-	   	<ion-item *ngIf="!edit_profile_Form.controls.mobile_number.valid  && (edit_profile_Form.controls.mobile_number.touched || submitAttempt)">
-           		<p style="color: #ea6153;">Please enter 10-digit valid number</p>
-        </ion-item>
+	<ion-label class="liste-edit">Mobile Number</ion-label>
         <ion-item>
-		<ion-label floating class="liste-name">Mobile Number</ion-label>
-	    <ion-input type="text" formControlName="mobile_number"></ion-input>
+		 <ion-input type="text" formControlName="mobile_number"></ion-input>
 	    </ion-item>
-	    <br>
-        
+		   
+           		<p class="err-reds" *ngIf="!edit_profile_Form.controls.mobile_number.valid  && (edit_profile_Form.controls.mobile_number.touched || submitAttempt)">Please enter 10-digit valid number</p>
+   
+	 
+        <!-- <ion-label class="liste-edit">Location</ion-label> -->
 		<ion-item>
 		<ion-label floating class="liste-name">Location</ion-label>
 	    <ion-input type="text" formControlName="location"></ion-input>
 	    </ion-item>
-	    <br>
+	    
 
-
+<!-- <ion-label class="liste-edit">DOB</ion-label> -->
 		<ion-item>
 		<ion-label floating class="liste-name">DOB</ion-label>
 	    <!-- <ion-input type="text" formControlName="dob"></ion-input> -->
@@ -76,30 +77,28 @@
 	    	
 	    </ion-datetime>
 	    </ion-item>
-	    <br>
+	 
 
-
+<!-- <ion-label class="liste-edit">Email</ion-label> -->
 		<ion-item>
 		<ion-label floating class="liste-name">Email</ion-label>
 	    <ion-input type="text" formControlName="email"></ion-input>
 	    </ion-item>
-	    <br>
-
+	 
+<!-- <ion-label class="liste-edit">User Type</ion-label> -->
 	    <ion-item>
 		<ion-label floating class="liste-name">User Type</ion-label>
 	    <ion-input type="text" formControlName="user_type"></ion-input>
 	    </ion-item>
-	    <br>
+	  
 
 	    <ion-item>
 	    <ion-row>
-	    <button ion-button color="primary" (click)="accessGallery()">Browse..</button>
-	    </ion-row>
-	    <ion-row>
+	    <button ion-button class="uploadimg" color="primary" (click)="accessGallery()"><i class="fa fa-upload"></i>&nbsp; Browse...</button>
  			<img [src]="base64Image" *ngIf="base64Image" />
  			</ion-row>
  		</ion-item>
-
+		<hr/>
 	  	<ion-row>
 	         <ion-col><button class="btn-defaults" ion-button item-left small (click)="dismiss()">Cancel</button></ion-col>
 	         <ion-col offset-33><button class="btn-primarys"ion-button item-right small (click)="updateProfile()">Update</button></ion-col>
@@ -113,9 +112,7 @@
 .item-block{ border-bottom:none !important;}
 .item-inner {
 border-bottom-color: transparent !important;
-box-shadow: none !important;
-}
+box-shadow: none !important;}
 .item-ios.item-block .item-inner{ border-bottom:none !important;}
-.item-ios.item-label-stacked .text-input, .item-ios.item-label-floating .text-input{ font-size:14px !important;margin-left:8px !important;
-   }
+.item-ios.item-label-stacked .text-input, .item-ios.item-label-floating .text-input{ font-size:14px !important;margin-left:8px !important;}
 </style>

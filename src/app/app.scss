@@ -17,33 +17,14 @@
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
-my-theme{
-	ion-menu{
-	background : color($colors,secondary);
-	}
+my-theme													{
+ion-menu													{background : color($colors,secondary);}
 }
-.primary-color
-{
-	color:#1976d2 !important;
-}
-
-.ios, .md {
-
-page-community {
-
-.demo{
-	background-color:#F2610D;
-	font-size:14px;
-	color:#ffffff;
-}
-.demo:hover{
-	border-color:#0969e8;
-}
-.one{
-	background-color:#0066CC;
-	font-size:14px;
-	color:#ffffff;
-}
+.primary-color												{color:#1976d2 !important;}
+.ios, .md 													{page-community {
+.demo														{background-color:#F2610D;font-size:14px;color:#ffffff;}
+.demo:hover													{border-color:#0969e8;}
+.one														{background-color:#0066CC;font-size:14px;color:#ffffff;}
 
 
 .hover:hover{
@@ -266,21 +247,29 @@ page-service-info ion-input									{border:none !important;}
 															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
 .brder-cor .button-ios										{background:#F97500; color:#fff !important; font-size:15px !important;text-transform:capitalize;}
 .brder-cor .button-ios										{color:#fff;font-size:15px;}
-.brder-cor .button-md										{background:#F97500; color:#fff !important; font-size:15px !important; text-transform:capitalize;}
+.brder-cor .button-md										{background:#F97500; color:#fff !important; font-size:15px !important; text-transform:capitalize; border-radius:3px;}
 span.mails-cont												{float:left;}
 span.mails-cont i 											{float:left; color:#858D9B; font-size:15px;padding-top: 5px; padding-right:5px;}
 span.mails-cont p 											{float:left; color:#858D9B; font-size:15px;}
 page-service-info .service_request							{boder:none !important;}
-.segment-md .segment-button									{background:#1D6AB2; color:#fff;}
+.segment-md .segment-button									{background:#1D6AB2; color:#fff; border-bottom:2px solid #1D6AB2;}
 .connection-page											{margin:0px !important; font-size:13px !important; font-weight:400 !important; color:#777; }
 .connection-pages											{color:#fe5722 !important; margin:0px !important;}
 .name-conne													{font-size:18px !important; color:#1976d2 !important; margin-bottom:2px; }
 .segment-md .segment-button.activated, .segment-md .segment-button.segment-activated{ background:#f97500; color:#fff; border-bottom:2px solid #f27201; }
 .thamb-lins													{bottom:-18px;left:12px;position:absolute;z-index: 999 !important; }
 .thamb-lins img												{border:3px solid #fff; height:80px;width:90px; border-radius:3px;box-shadow: 0 0 5px #888}
-.tid-cd 											        {color:#1976d2 !important;font-size:15px !important;font-weight:400 !important;text-align:left !important; float:left;}
+.tid-cd 											        {color:#025fa9 !important;font-size:17px !important;font-weight:400 !important;text-align:left !important; float:left;}
 .labels-bds													{background:rgba(19, 19, 20, 0.58) !important;border-right:3px solid red !important;color:#fff !important;float:left;font-size:13px !important;padding:8px;position:absolute;
 															 right: 0;bottom:35px;width:auto;}
+.wel-comemem											    {color:#025fa9 !important;font-family: "Open Sans",sans-serif;font-size:17px !important;margin: 0; padding:0 0 10px;}
+.likecolor													{color:#1e90ff !important;}
+.time-datem													{color:#666 !important; font-size:12px !important;}
+.edit-ld													{}
+.liste-edit													{font-size:15px !important;line-height:35px !important;padding:0 !important;text-align:center !important;}
+.but-colo													{padding:8px !important;height:25px !important; width:auto!important; border:1px solid #ccc !important;}
+.num-of														{color:red !important; font-size:13px !important;}
+.comm-cl													{color:#1E90FF !important; font-size:14px !important;}
 .services > i 												{color:#5dade2 !important;}
 .jobs > i													{color:#e74c3c !important;}
 .community > i 												{color:#1976d2 !important;}
@@ -298,30 +287,22 @@ page-service-info .service_request							{boder:none !important;}
 .label-md													{margin:0px !important;}
 .label-ios													{margin:0px !important;}
 .item-md [item-left], .item-md [item-right]					{margin:0px !important;}
-.edit-pro													{color: #1976d2 !important;
-    font-size: 16px !important;
-    font-weight: 700 !important;
-    line-height: 25px !important;
-    margin-bottom: 8px !important;
-    text-align: left !important;}
-.item-ios{ padding-left:0px !important;}
-.label-ios .head-mar h2.edit-pro{ margin-top:20px !important;}
-.editicoan{font-size:18px !important;}
-.labels-lb{color:#00CED1; font-weight:600; font-size:14px;}
-page-my-profile ion-col{ border-left:1px solid #F0F8FF !important;}
+.edit-pro													{color:#1976d2 !important;font-size:16px !important;font-weight:700 !important; line-height:25px !important;
+															 margin-bottom: 8px !important;text-align: left !important;}
+.item-ios													{padding-left:0px !important;}
+.label-ios .head-mar h2.edit-pro							{margin-top:20px !important;}
+.editicoan													{font-size:18px !important;}
+.labels-lb													{color:#00CED1; font-weight:400; font-size:16px;}
+.feed-post													{color:#777 !important;font-size:15px !important;font-weight:400 !important;line-height:25px !important;padding: 0 !important;}
+page-my-profile ion-col										{ border-left:1px solid #F0F8FF !important;}
 .item-md.item-input.ng-valid.input-has-value:not(.input-has-active) .item-inner{ border-bottom:none;}
- .select-brd{border: 1px solid #ccc !important; width:95%;
-    border-radius: 25px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
-    color: #555;
-    font-size: 18px;
-    font-weight: 400;
-    margin-left: 8px !important;
-    padding:7px 10px 10px 20px !important;}
-.rating{ padding-left:0px !important; margin:0px!important; padding-top:5px;}
-ul.rating li{ padding:5px 0px !important;}
-.select-text{ font-size:15px !important;}
-.detalis-elder{ text-align:center;box-shadow:none; font-size:16px !important; font-weight:600 !important; color:#1976d2 !important; background:#fff; border-radius:3px; padding:4px;}
+.select-brd													{border:1px solid #ccc !important; width:95%;border-radius:25px;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+															  color:#555;font-size:18px;font-weight:400;margin-left:8px !important; padding:7px 10px 10px 20px !important;}
+.rating														{padding-left:0px !important; margin:0px!important; padding-top:5px;}
+ul.rating li												{padding:5px 0px !important;}
+.select-text												{font-size:15px !important;}
+.members													{font-size:15px !important;}
+.detalis-elder												{text-align:center;box-shadow:none; font-size:16px !important; font-weight:600 !important; color:#1976d2 !important; background:#fff; border-radius:3px; padding:4px;}
 /*-------------------------------------Common  css end -------------------------------------*/
 
 
@@ -373,9 +354,13 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .label-ios													{line-height:14px;}
 .service-req												{color:#1d6ab2 !important;display:inline;font-size:16px !important;margin: 0;padding:0;}
 .req-viewlist												{font-size:14px !important; font-weight:600 !important; color:#008B8B;}
-.err-reds													{font-size:12px !important; font-weight:600 !important; color:red !important; text-align:right !important; padding-right:25px !important; margin:0px; }
+.err-reds													{font-size:12px !important; font-weight:400 !important; color:red !important; text-align:right !important; padding-right:25px !important; margin:0px; }
 .mails-left													{margin-left:10px !important; }
-.change-pass												{ border-radius:20px; width:95%; height:35px; margin-left:5px;}
+.change-pass												{border-radius:20px; width:95%; height:35px; margin-left:5px;}
+.segment-ios .segment-button								{border:none !important; }
+.segment-ios .segment-button.segment-activated				{margin-top:10px;}
+.segment-ios .segment-button								{margin-top:10px;background:#1D6AB2; color:#fff !important; padding-left:10px;}
+.uploadimg													{height:35px !important; width:95%; border-radius:25px !important;}
 /*-------------------------------------ios platform css end-------------------------------------*/
 
 /*-------------------------------------Windows platform css -------------------------------------*/
@@ -438,7 +423,7 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .sub-cate .item-inner .input-wrapper .label-ios				{margin:0px;padding-right:0px !important; position:relative;}
 .sub-cate .item-inner .input-wrapper .label-ios h2 .title-ios .toolbar-title{ background: rgba(51, 51, 51, 0.12); font-size:20px; font-weight:400; 
 															 color:#fff;display:block;height:45px;line-height:45px;width:100%; text-align:left; padding-left:5px}
-.sub-cate .list-ios p									    { width:100%; color: #fff; font-size:16px; padding-bottom:8px;
+.sub-cate .list-ios p									    {width:100%; color: #fff; font-size:16px; padding-bottom:8px;
 															 font-size: 16px;text-decoration:none;margin-left:0px; position:relative;/* border-bottom:1px solid rgba(212, 209, 209, 0.13) !important;*/}
 .item-block										            {/*border-bottom:1px solid rgba(212, 209, 209, 0.13) !important;*/}
 .item-select												{font-size:14px !important;}
@@ -478,29 +463,29 @@ ion-select													{max-width:100% !important;}
 .segments-info .segment-top .segment-ios .segment-button.segment-activated{margin-top:10px; border:1px solid red;}
 /*-------------------------------------ios platform css end-------------------------------------*/
 /*-------------------------------------Android platform css -------------------------------------*/
-.fant-size > .item-inner > .input-wrapper > .label-md      {font-size:16px !important;padding-top:0px !important; line-height:25px !important; text-indent:10px !important;}
-.sub-cate .item-inner .input-wrapper .label-md			   {margin:0px !important; background:none !important;}
-.sub-cate .item-inner .input-wrapper .label-md h2 .title-md{background: rgba(51, 51, 51, 0.12); font-size:20px; font-weight:400; 
+.fant-size > .item-inner > .input-wrapper > .label-md       {font-size:16px !important;padding-top:0px !important; line-height:25px !important; text-indent:10px !important;}
+.sub-cate .item-inner .input-wrapper .label-md			    {margin:0px !important; background:none !important;}
+.sub-cate .item-inner .input-wrapper .label-md h2 .title-md {background: rgba(51, 51, 51, 0.12); font-size:20px; font-weight:400; 
 															 color:#fff;display:block;height:45px;line-height:45px;width:100%; text-align:left; padding-left:5px}
-.sub-cate .item-inner .input-wrapper .item-md              {background:none; manage:0px !important;}
-.sub-cate .item-inner .input-wrapper .list-md              {margin:0px; padding-left:0px;}
-.sub-cate .item-inner .input-wrapper .label-md p           {color:#fff;font-size:16px;margin-left:0;padding-bottom:0px;position:relative;text-decoration:none;width:100%; padding-left:0 !important}
+.sub-cate .item-inner .input-wrapper .item-md               {background:none; manage:0px !important;}
+.sub-cate .item-inner .input-wrapper .list-md               {margin:0px; padding-left:0px;}
+.sub-cate .item-inner .input-wrapper .label-md p            {color:#fff;font-size:16px;margin-left:0;padding-bottom:0px;position:relative;text-decoration:none;width:100%; padding-left:0 !important}
 .sub-cate .item-inner .input-wrapper .label-md h2 .title-md .toolbar-title-md{ color:#fff !important; padding:0px !important;;}
-.alert-md .alert-head									   {padding: 4px 10px 10px;}
-.headbg													   {background:#4169E1; font-size:15px;}
-.body-clr												   {background:#fff;}
-.popup-mds > .ion-label									   {font-size:15px; text-align:center;}
-.item-inner > .input-wrapper > .label-md h2				   {font-size:15px;color:#1d6ab2;text-transform:capitalize;}
-.item-inner > .input-wrapper > .label-md				   {color:#777;font-size:14px}
+.alert-md .alert-head									    {padding: 4px 10px 10px;}
+.headbg													    {background:#4169E1; font-size:15px;}
+.body-clr												    {background:#fff;}
+.popup-mds > .ion-label									    {font-size:15px; text-align:center;}
+.item-inner > .input-wrapper > .label-md h2				    {font-size:15px;color:#1d6ab2;text-transform:capitalize;}
+.item-inner > .input-wrapper > .label-md				    {color:#777;font-size:14px}
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ bottom:4px;}
-.marg-info img											   {border:3px solid #FFE4E1; box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);}
-.item-md .item-button									   {height:30px;}
-.text-input-md											   {font-size:15px;}
-.item-md												   {padding-left:2px;}
-page-dashboard .dashboard								   {padding:25px 0px !important;}
-.des-card												   {background:#fff	!important;}
-.name-person											   {font-size:15px !important;  font-weight:600;color:#6A5ACD; float:left;}
-.name-elder												   {color:#777!important;float: left;
+.marg-info img											    {border:3px solid #FFE4E1; box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);}
+.item-md .item-button									    {height:30px;}
+.text-input-md											    {font-size:15px;}
+.item-md												    {padding-left:2px;}
+page-dashboard .dashboard								    {padding:25px 0px !important;}
+.des-card												    {background:#fff	!important;}
+.name-person											    {font-size:15px !important;  font-weight:600;color:#6A5ACD; float:left;}
+.name-elder												    {color:#777!important;float: left;
     font-size:16px !important;
     font-weight: 400 !important;
     padding-left: 10px !important;
@@ -511,7 +496,4 @@ page-dashboard .dashboard								   {padding:25px 0px !important;}
 
 
 //venkat
-.item-inner {
-border-bottom-color: transparent !important;
-box-shadow: none !important;
-}
+.item-inner 											   {border-bottom-color: transparent !important;box-shadow: none !important;}
