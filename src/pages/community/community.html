@@ -31,22 +31,26 @@
   	<div  *ngIf="userType == 'sponsor'">
 	  	<ion-card>
 	  		<ion-card-content>
-				<h2 style="color:#387ef5">Welcome to {{communityDetailData?.community_name}}
-				</h2>
-		         <p class="cont">{{communityDetailData?.description}}</p>
+				<h2 class="wel-comemem">Welcome to {{communityDetailData?.community_name}}</h2>
+			
+		         <p class="members">{{communityDetailData?.description}}</p>
 			</ion-card-content>
-			<ion-card-content >
+			<hr/>
+			<ion-card-content>
 					<ion-row>
-		    			<ion-col offset-67>
+		    			<ion-col>
 		    				<div *ngIf="!communityDetailData?.isJoined">
-								<button ion-button medium (click)="joinCommunity(communityDetailData.id)" 
+								<button ion-button small (click)="joinCommunity(communityDetailData.id)" 
 								class="post">Join</button>
 							</div>
+						
 						</ion-col>
+						
 					</ion-row>
 					<ion-row>
-						<h2 style="color:#387ef5">Members</h2>
+						<h2 class="wel-comemem">Members</h2>
 					</ion-row>
+
 						<ion-row>
 		    			<ion-col *ngFor="let member of members">
 		    				
@@ -71,14 +75,14 @@
  
 	<ion-card>
 		  	<ion-item class="edit">
-			  	<ion-icon name="create"></ion-icon>
+			  	<i class="fa fa-pencil-square-o"></i>
 			  		Update Status
 			</ion-item>
 			  	   <hr>
 			  	<ion-card-content style="padding:0px !important;">
-					<div>
+				
 				      	<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in you mind?"></ion-textarea>
-				    </div>
+				  
 		    	</ion-card-content>
 		    		
 		    	<ion-card-content style="padding:0px !important;">
@@ -214,8 +218,8 @@
 	       	<ion-card-content>
 	      		<ion-row>
 	        		<ion-col width-15>
-	          			<button class="hover" ion-button outline (click)="addLikes(user.id)" color="light">
-	            			<ion-icon  name="heart"></ion-icon>{{user.likes}}
+	          			<button class="hover but-colo" ion-button outline (click)="addLikes(user.id)">
+	            			<i class="fa fa-heart likecolor"></i> &nbsp; <p class="num-of">{{user.likes}}</p>
 	          			</button>
 	        		</ion-col>
 	        		<!-- <ion-col>
@@ -224,9 +228,9 @@
 	          			</button>
 	        		</ion-col> -->
 	        		<ion-col width-80>
-	          			<button ion-button class="comment" color="dark" clear 
+	          			<button ion-button class="comment but-colo" color="dark" clear 
 	          			(click)="addDetails(i)">
-	          				{{user.comment_count}} Comments....
+	          				<p class="num-of">{{user.comment_count}} Comments...</p>
 	          			</button>
 	          		</ion-col>
 	      		</ion-row>
@@ -261,4 +265,8 @@
  </ion-infinite-scroll> -->
   </ion-list>
 </ion-content>
+<style>
+.text-input-ios{}
+
+</style>
 	

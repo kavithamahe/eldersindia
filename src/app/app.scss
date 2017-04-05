@@ -271,16 +271,20 @@ span.mails-cont												{float:left;}
 span.mails-cont i 											{float:left; color:#858D9B; font-size:15px;padding-top: 5px; padding-right:5px;}
 span.mails-cont p 											{float:left; color:#858D9B; font-size:15px;}
 page-service-info .service_request							{boder:none !important;}
-.segment-md .segment-button									{background:#1D6AB2; color:#fff;}
+.segment-md .segment-button									{background:#1D6AB2; color:#fff; border-bottom:2px solid #1D6AB2;}
 .connection-page											{margin:0px !important; font-size:13px !important; font-weight:400 !important; color:#777; }
 .connection-pages											{color:#fe5722 !important; margin:0px !important;}
 .name-conne													{font-size:18px !important; color:#1976d2 !important; margin-bottom:2px; }
 .segment-md .segment-button.activated, .segment-md .segment-button.segment-activated{ background:#f97500; color:#fff; border-bottom:2px solid #f27201; }
 .thamb-lins													{bottom:-18px;left:12px;position:absolute;z-index: 999 !important; }
 .thamb-lins img												{border:3px solid #fff; height:80px;width:90px; border-radius:3px;box-shadow: 0 0 5px #888}
-.tid-cd 											        {color:#1976d2 !important;font-size:15px !important;font-weight:400 !important;text-align:left !important; float:left;}
+.tid-cd 											        {color:#025fa9 !important;font-size:17px !important;font-weight:400 !important;text-align:left !important; float:left;}
 .labels-bds													{background:rgba(19, 19, 20, 0.58) !important;border-right:3px solid red !important;color:#fff !important;float:left;font-size:13px !important;padding:8px;position:absolute;
 															 right: 0;bottom:35px;width:auto;}
+.wel-comemem											    {color:#025fa9;font-family: "Open Sans",sans-serif;font-size:17px !important;margin: 0; padding:0 0 10px;}
+.likecolor													{color:#ff5722 !important;}
+.but-colo													{padding:5px !important;height:25px !important; width:auto!important; }
+.num-of														{color:#6495ED !important; font-size:13px !important;}
 .services > i 												{color:#5dade2 !important;}
 .jobs > i													{color:#e74c3c !important;}
 .community > i 												{color:#1976d2 !important;}
@@ -321,6 +325,7 @@ page-my-profile ion-col{ border-left:1px solid #F0F8FF !important;}
 .rating{ padding-left:0px !important; margin:0px!important; padding-top:5px;}
 ul.rating li{ padding:5px 0px !important;}
 .select-text{ font-size:15px !important;}
+.members{ font-size:15px !important;}
 .detalis-elder{ text-align:center;box-shadow:none; font-size:16px !important; font-weight:600 !important; color:#1976d2 !important; background:#fff; border-radius:3px; padding:4px;}
 /*-------------------------------------Common  css end -------------------------------------*/
 
@@ -375,7 +380,10 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .req-viewlist												{font-size:14px !important; font-weight:600 !important; color:#008B8B;}
 .err-reds													{font-size:12px !important; font-weight:600 !important; color:red !important; text-align:right !important; padding-right:25px !important; margin:0px; }
 .mails-left													{margin-left:10px !important; }
-.change-pass												{ border-radius:20px; width:95%; height:35px; margin-left:5px;}
+.change-pass												{border-radius:20px; width:95%; height:35px; margin-left:5px;}
+.segment-ios .segment-button								{border:none !important; }
+.segment-ios .segment-button.segment-activated				{margin-top:10px;}
+.segment-ios .segment-button								{margin-top:10px;background:#1D6AB2; color:#fff !important; padding-left:10px;}
 /*-------------------------------------ios platform css end-------------------------------------*/
 
 /*-------------------------------------Windows platform css -------------------------------------*/
