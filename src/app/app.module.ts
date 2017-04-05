@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { TruncateModule } from 'ng2-truncate';
 import {RlTagInputModule} from 'angular2-tag-input';
-
+import { Ng2CompleterModule } from "ng2-completer";
 
 //Venkatesh
 import { LoginPage } from '../pages/login/login';
@@ -109,7 +109,8 @@ import { ServiceProvider } from '../providers/service-provider';
     IonicModule.forRoot(MyApp,AppConfig),
     TruncateModule,
     RlTagInputModule,
-    Ionic2RatingModule 
+    Ionic2RatingModule,
+    Ng2CompleterModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

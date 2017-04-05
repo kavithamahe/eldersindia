@@ -52,11 +52,8 @@
     <ion-label stacked class="liste-names">Banner Image:</ion-label>
     <ion-input type="file"></ion-input>
     </ion-item>
-    <ion-item>
     <ion-label stacked class="liste-names">Tags:</ion-label>
-    <ion-input type="text" [(ngModel)]="tags"></ion-input>
-        
-    </ion-item>
+    <rl-tag-input [(ngModel)]="tagsModel" [addOnBlur]="true" [addOnEnter]="true" [autocomplete]="true"  [autocompleteItems]="tags" placeholder="Tags"></rl-tag-input>
   <div radio-group [(ngModel)]="allowComments">
   <ion-list-header style=" background:#fff; margin-bottom:0px;">
    <p class="liste-names"> Allow Comments:</p>

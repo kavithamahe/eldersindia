@@ -24,21 +24,23 @@ messageId:any;
 toAddress:any;
 subject:any;
 message:any;
+viewType:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   	this.messages="inbox";
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
       this.messageId=navParams.get("messageId");
-  		this.onInit(this.messageId);
+      this.viewType=navParams.get("viewType");
+  		this.onInit(this.messageId,this.viewType);
       })
   	});
   }
-  onInit(messageId)
+  onInit(messageId,viewType)
   {
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.messagesService.viewMessages(messageId).subscribe(
+    this.messagesService.viewMessages(messageId,viewType).subscribe(
      (viewMessages) => {
       this.veiwMessagesInfo=viewMessages.result.details;  
       console.log(this.veiwMessagesInfo);

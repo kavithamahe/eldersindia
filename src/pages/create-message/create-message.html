@@ -23,17 +23,9 @@
 
 <ion-content padding>
 <ion-list>
-<div class="tag" >
-<!-- <ion-card> -->
-    <rl-tag-input
-     [ngModelOptions]="{standalone: true}"
-    [addOnBlur]="false"
-    [autocomplete]="true"
-    [autocompleteItems]="skills"
-    [(ngModel)]="toAddress"
-    placeholder="To">
-  </rl-tag-input>
-</div>
+
+            <ng2-completer [(ngModel)]="toAddress" [datasource]="friendsList" placeholder="To" [minSearchLength]="0"></ng2-completer>
+
   <ion-item>
    
   </ion-item>

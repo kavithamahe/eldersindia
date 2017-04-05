@@ -34,7 +34,7 @@ export class MyApp {
 
   // make HelloIonicPage the root (or first) page
 
-  rootPage: any =  CommunitylistPage;
+  rootPage: any =  MessagesPage;
 
   pages: Array<{title: string, component: any}>;
 
