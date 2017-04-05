@@ -35,7 +35,8 @@ export class CommunityPage {
     show_member:any;
     token:any;
     community_id:any;
-
+    nextPageURL:any='';
+    eventScrollLists:any;
   
   constructor(public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
     this.nav=nav;
@@ -115,13 +116,13 @@ showConfirm(DeleteId) {
   let url;
   
   url = oldURL.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
-  // url = oldURL.replace("https://www.youtube.com/watch?v=_OBlgSz8sSM","https://www.youtube.com/embed/_OBlgSz8sSM");
-  // url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/"); 
-  //  console.log("vidweo url: ",oldURL);
-  // url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
-  // url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
-  // url = oldURL.replace("http://www.youtube.com/embed/watch/","http://www.youtube.com/embed/");
-  // url = oldURL.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
+  url = oldURL.replace("https://www.youtube.com/watch?v=_OBlgSz8sSM","https://www.youtube.com/embed/_OBlgSz8sSM");
+  url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/"); 
+   console.log("vidweo url: ",oldURL);
+  url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
+  url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
+  url = oldURL.replace("http://www.youtube.com/embed/watch/","http://www.youtube.com/embed/");
+  url = oldURL.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
   // url = oldURL.replace("http://www.youtube.com/embed/watch/", "http://www.youtube.com/embed/")
  return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
@@ -168,6 +169,7 @@ showConfirm(DeleteId) {
   joinCommunity(id){
     this.communityServices.joinCommunity(id).subscribe(users => {
       this.showToast(users.result);
+      this.communityDetail(id);
   },
    err =>{
     this.communityServices.showErrorToast(err);
@@ -187,12 +189,42 @@ showConfirm(DeleteId) {
  communityList(id){
      this.communityServices.getCommunityPost(id).subscribe (users => {
       this.users = users.result.info.lists.data;
+      // this.nextPageURL=users.result.info.lists.next_page_url;
+
       },
    err =>{
     
     this.communityServices.showErrorToast(err);
   })
    }
+  //    doInfinite(infiniteScroll) {
+  //   setTimeout(() => {      
+  //     if(this.nextPageURL!=null && this.nextPageURL!='')
+  //     {
+  //      this.newsscroll();
+  //     }
+  //     else{
+  //       infiniteScroll.enable(false);
+  //     }
+  //     infiniteScroll.complete();
+  //   }, 500);
+  // }
+  // newsscroll()
+  // {
+  //    this.communityServices.eventsscrolls(this.nextPageURL).subscribe(
+  //    (eventsscroll) => {
+  //     this.eventScrollLists=eventsscroll.result.info.data;
+  //     for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
+  //       this.users.push(this.eventScrollLists[i]);
+  //       }
+      
+  //      this.nextPageURL=eventsscroll.result.info.lists.next_page_url;     
+  //   },
+  //   err =>{
+   
+  //   this.communityServices.showErrorToast(err);
+  // });
+  // }
  
   addLikes(id){
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     

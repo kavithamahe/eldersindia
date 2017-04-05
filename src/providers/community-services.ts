@@ -143,6 +143,7 @@ sendMessage(id,attachment,subject,message){
     return this.http.post(`${this.getCommunityPostsUrl }getCommunityPosts`,{"info": {"community": id, "post": 0, "comPostId": ""}},this.options)
      .map(res => res.json());
      }
+     
 
   userProfile(id){
     this.body = {"user_id":id,"post":0}
