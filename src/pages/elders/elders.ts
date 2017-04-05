@@ -22,7 +22,7 @@ locations:any=[];
 areaOfInterest:any;
 in_service:any;
 relations:any=[];
-fuctionality:String = "";
+functionality:String = "";
 sponser_id:any;
 
   emergency_name:any = [];
@@ -80,6 +80,11 @@ sponser_id:any;
 //------------------Edit Functionality start------------------------//
 manageDependentData:any=[];
 
+education_data:any;
+experience_data:any;
+emergency_data:any;
+skill_data:any;
+
 //-----------------------END-------------------//
 
   constructor(public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
@@ -93,9 +98,9 @@ manageDependentData:any=[];
 
       storage.get('token').then((token) => { this.token=token; 
         
-        this.fuctionality=navParams.get("fuctionality");
+        this.functionality=navParams.get("fuctionality");
       
-      if(this.fuctionality == 'edit'){
+      if(this.functionality == 'edit'){
 
           if(navParams.get("editData")!= null){
             // let dependent = navParams.get("editData");
@@ -150,14 +155,16 @@ manageDependentData:any=[];
           this.elder_address= this.manageDependentData.address;   
 
           let emergency = this.manageDependentData.emergency;
-          for(let i = 0; i < emergency.length;i++)
-          {
-            this.emergency_name.push(emergency[i].person);
-            this.emergency_no.push(emergency[i].mobile);
+          if(emergency.length != 0 ){
             this.emergency_list.pop();
-            this.emergency_list.push({emergency:[i]});
+            for(let i = 0; i < emergency.length;i++)
+            {
+              this.emergency_name.push(emergency[i].person);
+              this.emergency_no.push(emergency[i].mobile);
+              this.emergency_list.push({emergency:[i]});
+
+            }
           }
-          
           this.job_interest = this.manageDependentData.job_interested;
 
           if(this.job_interest){
@@ -166,29 +173,34 @@ manageDependentData:any=[];
             this.job_type = this.manageDependentData.job_type;
 
             let experiences = this.manageDependentData.experience;
-            console.log(experiences);
-            if(experiences[0].functional_id != undefined || experiences[0].functional_id == null  )
+            // console.log(this.manageDependentData.experience);
+            if(experiences.length != 0)
             {
+              this.experience_list.pop();
               for(let i = 0; i < experiences.length;i++)
               {
                 this.experience_industry.push(experiences[i].functional_id);
                 this.experience_years.push(experiences[i].year);
                 this.experience_duration.push(experiences[i].duration);
-                this.experience_list.pop();
                 this.experience_list.push({experience:[i]});
               }  
             }
 
+            let skills = this.manageDependentData.skills;
+            if(skills.length != 0){
+              for(let i=0 ; i< skills.length ; i++){
+                this.skill_set.push(skills[i].skill);
+              }
+             }
             let educations =  this.manageDependentData.education;
-            if(educations[0].graduation != undefined || educations[0].graduation == null  )
+            if(educations.length != 0)
             {
+              this.education_list.pop();
               for(let i = 0; i < educations.length;i++)
               {
                 this.education_graduation.push(educations[i].graduation);
                 this.education_specialization.push(educations[i].specialization);
                 this.education_college.push(educations[i].university);
-;
-                this.education_list.pop();
                 this.education_list.push({education:[i]});
               }  
             }
@@ -246,7 +258,7 @@ manageDependentData:any=[];
     this.experience_list.push({experience:""});
   }
   removeExperience(){
-    this.experience_list.pop({experience:""});
+    this.experience_list.pop();
   }
 
   addEducation(){
@@ -257,47 +269,71 @@ manageDependentData:any=[];
   }
 
   getElderSkills(){
-    for(let i=0;i<this.skill_set.length;i++){
-      this.elder_skills.push({"skill":this.skill_set[i]})  
+     if(this.functionality !="edit"){
+      for(let i=0;i<this.skill_set.length;i++){
+        this.elder_skills.push({"skill":this.skill_set[i]})  
+      }
+    }else{
+
+      for(let i=0;i<this.skill_set.length;i++){
+        this.elder_skills.push({"elder_id":this.elder_id,"skill":this.skill_set[i]})  
+      }
     }
   }
 
   getEmergencyNumber(){
+    if(this.functionality != "edit"){
       for(let i=0;i<this.emergency_no.length;i++){
             this.elder_emergency.push({"id":(i+1),"person":this.emergency_name[i],"mobile":this.emergency_no[i]})  
           }
+        }
+  else{
+    for(let i=0;i<this.emergency_no.length;i++){
+            this.elder_emergency.push({"elder_id":this.elder_id,"person":this.emergency_name[i],"mobile":this.emergency_no[i]})  
+          }
+       }
   }
 
   getElderExperience(){
-    for(let i=0;i<this.experience_industry.length;i++){
+    if(this.functionality != "edit"){
+      for(let i=0;i<this.experience_industry.length;i++){
             this.elder_experience.push({"industry":this.experience_industry[i],"year":this.experience_years[i],"duration":this.experience_duration[i]})  
+            }
+      }else{
+        for(let i=0;i<this.experience_industry.length;i++){
+            this.elder_experience.push({"elder_id":this.elder_id,"functional_id":this.experience_industry[i],"year":this.experience_years[i],"duration":this.experience_duration[i]})
           }
+      }
   }
 
   getElderEducation(){
+    if(this.functionality != "edit"){
     for(let i=0;i<this.education_graduation.length;i++){
             this.elder_education.push({"graduation":this.education_graduation[i],"specialization":this.education_specialization[i],"university":this.education_college[i]})  
           }
+       }
+       else{
+         for(let i=0;i<this.education_graduation.length;i++){
+           console.log("data pushed..!")
+            this.elder_education.push({"elder_id":this.elder_id,"graduation":this.education_graduation[i],"specialization":this.education_specialization[i],"university":this.education_college[i]})  
+          }
+       }
   }
 
   addDependent(){
-
-
     //---------------------------------edited-------------------------------//
 
-    // alert(this.job_interest);
-
     this.getElderSkills();
-    let skill_data= this.elder_skills;
+    this.skill_data= this.elder_skills;
 
     this.getEmergencyNumber();
-    let emergency_data = this.elder_emergency;
+    this.emergency_data = this.elder_emergency;
 
     this.getElderExperience();
-    let experience_data = this.elder_experience;
+    this.experience_data = this.elder_experience;
 
     this.getElderEducation();
-    let education_data = this.elder_education;
+    this.education_data = this.elder_education;
 
     let dependentData = {"info":
                           [{"email":this.authForm.value.elder_email,
@@ -311,33 +347,63 @@ manageDependentData:any=[];
                           "location":this.elder_location,
                           "area_interest":this.area_of_interest,
                           "job_type":this.job_type,
-                          "skills":skill_data,
-                          "emergency":emergency_data,
-                          "experience":experience_data,
-                          "education":education_data,
+                          "skills":this.skill_data,
+                          "emergency":this.emergency_data,
+                          "experience":this.experience_data,
+                          "education":this.education_data,
                           "sponsor_id":this.sponsor_id,
                           "job_interested":this.job_interest
                           }]
-                        }
+                        };
     
-
-
-
-
-
-
-
                         //-------------------modified----------------------------//
 
-      if(this.fuctionality=="edit")
+      if(this.functionality=="edit")
       {
-        console.log("elder details:",dependentData);
-      //         this.communityServices.editSubmit().subscribe(elders =>{
-      //           console.log(elders);    
-      //    },
-      //    err =>{
-      //           this.communityServices.showErrorToast(err);
-      //     })
+        if(this.authForm.value.elder_name != ""){
+            this.elder_name = this.authForm.value.elder_name;
+        }
+        if(this.authForm.value.elder_number != ""){
+            this.elder_number = this.authForm.value.elder_number;
+        }
+        if(this.authForm.value.elder_address != ""){
+            this.elder_address = this.authForm.value.elder_address;
+        }
+
+        let editedData ={"info":
+        [{"id":this.elder_id,
+        "area_interest":this.area_of_interest,
+        "location":this.elder_location,
+        "job_type":this.job_type,        
+        "sponsor_id":this.sponsor_id,
+        "name":this.elder_name,
+        "avatar":this.manageDependentData.avatar,
+        "relation":this.elder_relation,
+        "gender":this.manageDependentData.gender,
+        "dob":this.elder_dob,
+        "mobile":this.elder_number,
+        "email":this.elder_email,
+        "in_service":this.elder_service,
+        "job_interested":this.job_interest,
+        "address":this.elder_address,
+        "city":this.manageDependentData.city,
+        "state":this.manageDependentData.state,
+        "status":this.manageDependentData.status,
+        "created_at":this.manageDependentData.created_at,
+        "city_name":this.manageDependentData.city_name,
+        "state_name":this.manageDependentData.state_name,
+        "skills":this.skill_data,
+        "emergency":this.emergency_data,
+        "experience":this.experience_data,
+        "education":this.education_data
+      }]};
+        
+        this.communityServices.editSubmit(editedData).subscribe(elders =>{
+                console.log(elders);    
+         },
+         err =>{
+                this.communityServices.showErrorToast(err);
+          })
    
       }
       else
@@ -351,15 +417,17 @@ manageDependentData:any=[];
               })
         }
     this.nav.pop();
-  }
+
+}
 
  cancel(){
-   this.nav.pop();
- }    
-public dashboardPage()
-  {
-    this.nav.setRoot(DashboardPage);
-  }
+     this.nav.pop();
+   }    
+
+ dashboardPage()
+    {
+      this.nav.setRoot(DashboardPage);
+    }
 }
 
 

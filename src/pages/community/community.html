@@ -31,54 +31,58 @@
   	<div  *ngIf="userType == 'sponsor'">
 	  	<ion-card>
 	  		<ion-card-content>
-				<h2 style="color:#387ef5">Welcome to {{communityDetailData?.community_name}}
-				</h2>
-		         <p class="cont">{{communityDetailData?.description}}</p>
+				<h2 class="wel-comemem">Welcome to {{communityDetailData?.community_name}}</h2>
+			
+		         <p class="members">{{communityDetailData?.description}}</p>
 			</ion-card-content>
-			<ion-card-content >
-					<ion-row>
-		    			<ion-col offset-67>
-		    				<div *ngIf="!communityDetailData?.isJoined">
-								<button ion-button medium (click)="joinCommunity(communityDetailData.id)" 
-								class="post">Join</button>
-							</div>
-						</ion-col>
-					</ion-row>
-					<ion-row>
-						<h2 style="color:#387ef5">Members</h2>
-					</ion-row>
+			<hr/>
+			<ion-card-content>
 					<ion-row>
 		    			<ion-col>
-		    				<div>
-								<ion-item *ngFor="let member of members">
+		    				<div *ngIf="!communityDetailData?.isJoined">
+								<button ion-button small (click)="joinCommunity(communityDetailData.id)" 
+								class="post">Join</button>
+							</div>
+						
+						</ion-col>
+						
+					</ion-row>
+					<ion-row>
+						<h2 class="wel-comemem">Members</h2>
+					</ion-row>
+
+						<ion-row>
+		    			<ion-col *ngFor="let member of members">
+		    				
+								<ion-item >
 									<ion-avatar>
 										<img (click)="membersProfile(member.uid)" 
-										[src]="imageUrl+member?.avatar">
+										[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar">
 									</ion-avatar>
 
 								</ion-item>
 								<ion-item  *ngIf="!show_member">
 										<p>No Members Joined Yet</p>
 							    </ion-item>
-							</div>
+							
 							
 						</ion-col>
-						
-					</ion-row>
+						</ion-row>
+					
 			</ion-card-content>
 		</ion-card>
 	</div>
  
 	<ion-card>
-		  	<ion-item class="edit">
-			  	<ion-icon name="create"></ion-icon>
-			  		Update Status
+		  	<ion-item>
+			  
+			  		<h2 class="wel-comemem"><i class="fa fa-pencil-square-o"></i> &nbsp;Update Status</h2>
 			</ion-item>
 			  	   <hr>
 			  	<ion-card-content style="padding:0px !important;">
-					<div>
+				
 				      	<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in you mind?"></ion-textarea>
-				    </div>
+				  
 		    	</ion-card-content>
 		    		
 		    	<ion-card-content style="padding:0px !important;">
@@ -136,7 +140,7 @@
 	        			</ion-col><br>
 	        			<ion-col width-20>
 			          		<h2 (click)="communityProfile(user.uid)" class="header">{{user.name}}
-			          		<p><ion-icon name="time"></ion-icon>{{user.created_at}}</p>
+			          		<p class="time-datem"><ion-icon name="time"></ion-icon>{{user.created_at}}</p>
 			          		</h2>
 						</ion-col>
 						<ion-col offset-50>
@@ -151,7 +155,7 @@
 	       			</ion-row>
 	    		</ion-item>
 	      		<ion-card-content>
-		          	<p>{{user.post_message}}</p><br>
+		          	<p class="feed-post">{{user.post_message}}</p><br>
 		          	<img  [src]="imageUrl+user?.post_image" [hidden]="!user?.post_image">
 	       		</ion-card-content>
 				<ion-card-content>
@@ -214,8 +218,8 @@
 	       	<ion-card-content>
 	      		<ion-row>
 	        		<ion-col width-15>
-	          			<button class="hover" ion-button outline (click)="addLikes(user.id)" color="light">
-	            			<ion-icon  name="heart"></ion-icon>{{user.likes}}
+	          			<button class="hover but-colo" ion-button outline (click)="addLikes(user.id)">
+	            			<i class="fa fa-heart-o likecolor"></i> &nbsp; <p class="num-of">{{user.likes}}</p>
 	          			</button>
 	        		</ion-col>
 	        		<!-- <ion-col>
@@ -224,9 +228,9 @@
 	          			</button>
 	        		</ion-col> -->
 	        		<ion-col width-80>
-	          			<button ion-button class="comment" color="dark" clear 
+	          			<button ion-button class="comment but-colo" color="dark" clear 
 	          			(click)="addDetails(i)">
-	          				{{user.comment_count}} Comments....
+	          				<span style="color:red; font-size:13px;">{{user.comment_count}}</span> &nbsp;<p class="comm-cl"> Comments...</p>
 	          			</button>
 	          		</ion-col>
 	      		</ion-row>
@@ -255,10 +259,14 @@
 	    	</ion-card-content>
 		</ion-card>
 	</div>
-<!-- 	
-	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+	
+<!-- 	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll> -->
   </ion-list>
 </ion-content>
+<style>
+.text-input-ios{}
+
+</style>
 	
