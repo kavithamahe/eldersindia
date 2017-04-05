@@ -22,6 +22,7 @@ rootUrl:any;
     this.storage.set('rooturl',this.appConfig.setrooturl());
     storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl;});
    });
+  this.rootUrl = this.appConfig.setrooturl();
   this.headers = new Headers();
   this.headers.append('Content-Type', 'application/json');
   }

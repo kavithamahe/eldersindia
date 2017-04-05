@@ -53,7 +53,7 @@ token:any;
     this.navCtrl.setRoot(DashboardPage);
   }
   
-  ionViewDidEnter(){
+  ionViewWillEnter(){
     this.loadMyProfile();
   }
 }

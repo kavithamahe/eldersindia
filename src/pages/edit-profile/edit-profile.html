@@ -49,7 +49,7 @@
         </ion-item>
         <ion-item *ngIf="user_type =='sponsor' ">
 		<ion-label floating class="liste-name">Designation</ion-label>
-	    <ion-input disabled="true" type="text" formControlName="designation"></ion-input>
+	    <ion-input type="text" formControlName="designation"></ion-input>
 	    </ion-item>
 	    <br>	    
 
@@ -64,33 +64,40 @@
         
 		<ion-item>
 		<ion-label floating class="liste-name">Location</ion-label>
-	    <ion-input disabled="true" type="text" formControlName="location"></ion-input>
+	    <ion-input type="text" formControlName="location"></ion-input>
 	    </ion-item>
 	    <br>
 
 
 		<ion-item>
 		<ion-label floating class="liste-name">DOB</ion-label>
-	    <ion-input type="text" formControlName="dob"></ion-input>
+	    <!-- <ion-input type="text" formControlName="dob"></ion-input> -->
+	    <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" [(ngModel)]="user_dob" [ngModelOptions]="{standalone: true}">
+	    	
+	    </ion-datetime>
 	    </ion-item>
 	    <br>
 
 
 		<ion-item>
 		<ion-label floating class="liste-name">Email</ion-label>
-	    <ion-input disabled="true" type="text" formControlName="email"></ion-input>
+	    <ion-input type="text" formControlName="email"></ion-input>
 	    </ion-item>
 	    <br>
 
 	    <ion-item>
 		<ion-label floating class="liste-name">User Type</ion-label>
-	    <ion-input disabled="true" type="text" formControlName="user_type"></ion-input>
+	    <ion-input type="text" formControlName="user_type"></ion-input>
 	    </ion-item>
 	    <br>
 
 	    <ion-item>
+	    <ion-row>
 	    <button ion-button color="primary" (click)="accessGallery()">Browse..</button>
+	    </ion-row>
+	    <ion-row>
  			<img [src]="base64Image" *ngIf="base64Image" />
+ 			</ion-row>
  		</ion-item>
 
 	  	<ion-row>

@@ -38,7 +38,7 @@ export class SubcategoryListPage {
       this.service_id = navParams.get("service").id;
       this.serviceTitle = navParams.get("service").name;   
       // this.userType = "elder";
-      this.rate = 3.5;
+      this.rate = 3;
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.logoUrl=imageurl;});
       storage.get('user_type').then((user_type) => { this.userType=user_type;});
@@ -94,7 +94,7 @@ loadSubcategoryList(subCategory_id,location_id){
 
   openModal(modalPage,vendor_id){
     if(modalPage == "instant"){
-      this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists});
+      this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,service:this.serviceTitle});
     }else{
       this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists});
     }
@@ -167,12 +167,14 @@ loadSubcategoryList(subCategory_id,location_id){
 export class InstantRequestModalPage {
   dependentLists:any;
   dependentData:any;
+  service:any;
 
   constructor(
     public params: NavParams,
     public viewCtrl: ViewController
   ) {
     this.dependentLists = this.params.get('dependentList');
+    this.service = this.params.get('service')
   }
 
   dismiss() {
@@ -180,7 +182,9 @@ export class InstantRequestModalPage {
   }
   submit(){
     let dependent_model = this.dependentData;
-    let serviceRequestData = {"problem": "", "datetime": "", "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile};
+    let date = new Date();
+    console.log(date);
+    let serviceRequestData = {"problem": this.service, "datetime": "", "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile};
     this.viewCtrl.dismiss(serviceRequestData);
   }
 }

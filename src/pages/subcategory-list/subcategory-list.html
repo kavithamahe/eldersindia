@@ -33,7 +33,7 @@
 			  </rating>
 			  
 		  </ion-row>
-		    <ion-row><span class="rupee"></span><ion-col>{{service_list.service_cost}}</ion-col></ion-row> 
+		    <ion-row><span class="rupee"></span><ion-col>{{service_list.service_cost - service_list.percentage_cost}}</ion-col></ion-row> 
 		    <button ion-button small item-right (click)="serviceInfo(service_list)" class="info">Info</button>
 		</ion-item>
 		 <ion-item>

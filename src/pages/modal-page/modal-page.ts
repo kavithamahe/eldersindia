@@ -56,12 +56,15 @@ export class ModalContentPage {
       this.submitAttempt = true;
     }else{
       this.submitAttempt = false;
-      this.dependent = this.modalForm.value.dependents;
+      
       if(this.userType != 'sponsor'){
       this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.modalForm.value.dependents;
     }
       
-      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentid": this.dependent, "mobile": this.modalForm.value.contact};
+      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentId": this.dependent, "mobile": this.modalForm.value.contact};
+      console.log(serviceData);
       this.viewCtrl.dismiss(serviceData);
     } 
   }
