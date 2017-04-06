@@ -21,7 +21,7 @@ body: any;
 token:any; 
 rootUrl:any;
   constructor(public http: Http, public storage:Storage,public toastCtrl:ToastController) {
-    this.storage.ready().then(() => {
+this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
@@ -29,11 +29,11 @@ rootUrl:any;
     this.head = new RequestOptions({ headers: this.headers });
        })    
     storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; });
-   });
-  }
+   });  
+}
 
 webServiceCall(serviceName,bodyData){
-  console.log("serviceName"+this.rootUrl);
+  console.log("URL"+this.rootUrl);
   return this.http.post(this.rootUrl+serviceName, bodyData, this.head)
     .map(res => res.json());
 }

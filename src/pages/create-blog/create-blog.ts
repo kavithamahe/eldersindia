@@ -26,9 +26,10 @@ category:any;
 title:any;
 highlights:any;
 description:any;
-tags:any;
+tags:any=[];
 allowComments:any;
 items:any;
+tagsModel:any=[];
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
       this.tags = ['Pizza', 'Pasta', 'Parmesan'];
     this.storage.ready().then(() => {
@@ -66,9 +67,11 @@ items:any;
   {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
+    console.log(this.tagsModel);
     this.blogObject={ "category":this.category,"allow_comment":this.allowComments,"title":this.title,"highlights":this.highlights,
         "description":this.description,"featured_image":"","banner_image":"","tags[0][id]":"2",
         "tags[0][name]":"Healthcare","tags[1][name]":"hai"};
+        
     this.blogListService.createBlog(this.blogObject).subscribe(
      (createBlog) => {
       this.showToaster(createBlog.result);

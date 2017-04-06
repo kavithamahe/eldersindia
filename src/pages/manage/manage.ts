@@ -34,7 +34,7 @@ export class ManagePage {
     }
    showConfirm(DeleteId) {
     let confirm = this.alertCtrl.create({
-     subTitle: 'Are you agree to delete this manage dependent?',
+     subTitle: 'Confirm Deletion',
       buttons: [
         {
           text: 'Cancel',

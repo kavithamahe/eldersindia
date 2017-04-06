@@ -37,7 +37,7 @@ export class ModalContentPage {
         problem: ['',Validators.compose([Validators.minLength(5), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
         date: ['',Validators.compose([Validators.required])],
         time: ['',Validators.compose([Validators.required])],
-        contact: ['',Validators.compose([Validators.minLength(10), Validators.pattern('[0-9]*'), Validators.required])],
+        contact: ['',Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.pattern('[0-9]*'), Validators.required])],
         dependents: ['',Validators.compose([Validators.required])]
         
     });
@@ -56,12 +56,15 @@ export class ModalContentPage {
       this.submitAttempt = true;
     }else{
       this.submitAttempt = false;
-      this.dependent = this.modalForm.value.dependents;
+      
       if(this.userType != 'sponsor'){
       this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.modalForm.value.dependents;
     }
       
-      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentid": this.dependent, "mobile": this.modalForm.value.contact};
+      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
+      console.log(serviceData);
       this.viewCtrl.dismiss(serviceData);
     } 
   }

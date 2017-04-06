@@ -116,7 +116,7 @@ export class CommunitylistPage {
     setTimeout(() => {      
       if(this.nextPageURL!=null && this.nextPageURL!='')
       {
-       this.newsscroll();
+       this.communityscroll();
       }
       else{
         infiniteScroll.enable(false);
@@ -124,7 +124,7 @@ export class CommunitylistPage {
       infiniteScroll.complete();
     }, 500);
   }
-  newsscroll()
+  communityscroll()
   {
      this.communityServices.eventsscroll(this.nextPageURL).subscribe(
      (eventsscroll) => {

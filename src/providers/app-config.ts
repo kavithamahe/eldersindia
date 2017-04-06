@@ -23,8 +23,9 @@ export class AppConfig {
   {
   	return this.imageUrl; 
   }
-  setrooturl()
+  public setrooturl()
   {
+    console.log("app"+this.rooturl);
   	return this.rooturl; 
   }
   

@@ -191,7 +191,8 @@
 
 	        <!--  <iframe [hidden]="!user?.post_video" height="190" onload="this.width=screen.width" [src]="sanitizer.bypassSecurityTrustResourceUrl(http://www.youtube.com/watch?v=uiws904iuEQ)" frameborder="0" ></iframe> -->
 
-	         		<iframe [src]="cleanURL(user?.post_video)" frameborder="0" >
+	         		<iframe [src]="cleanURL(user?.post_video)" frameborder="0" 
+	         		[hidden]="!user?.post_video">
 	         		</iframe>
 		       <!--  <video  style="width:400px" >
 				<source src="http://player.vimeo.com/external/85569724.sd.mp4?s=43df5df0d733011263687d20a47557e4" type="video/mp4"/>
@@ -226,8 +227,8 @@
 			          
 			          height="300"></Video> -->
 
-			          <!--  <iframe width="560" height="315"                 
-			           src="https://vimeo.com/197933516" frameborder="0" >
+			        <!--    <iframe width="560" height="315"                 
+			           src="https://www.youtube.com/embed/pNFu3JMV-y4" frameborder="0" >
 			           	
 			           </iframe> 
 			            -->

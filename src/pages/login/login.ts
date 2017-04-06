@@ -30,7 +30,9 @@ export class LoginPage {
   submitAttempt: boolean = false;
   registerCredentials = {email: '', password: ''};
   constructor(public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
- 
+  this.storage.ready().then(() => { 
+    
+    });
     this.loginForm = formBuilder.group({
         email: ['', Validators.compose([Validators.required])],
         password: ['', Validators.compose([Validators.required])]
@@ -51,7 +53,11 @@ export class LoginPage {
 
    	this.loginUser.loginload(this.registerCredentials).subscribe(     
       (loginuser) => {
-         
+         if(loginuser['details']['user_type'] == 'elder'){
+           this.loginUser.currentUser("elder");
+         }else{
+           this.loginUser.currentUser("sponsor");
+         }
          this.storage.ready().then(() => {
            this.storage.clear();
          this.storage.set('id', loginuser['details']['id']);

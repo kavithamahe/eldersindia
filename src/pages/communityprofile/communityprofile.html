@@ -72,7 +72,7 @@
 		  </ion-row>
 		  </ion-card>
 	</div>
-	<div *ngIf(connectLists)>
+	<ion-card *ngIf(connectLists)>
 		<ion-row>
 		  	<ion-col>
 			  	<div>
@@ -95,7 +95,7 @@
     			</ion-col>
       		</ion-row>    
   		</ion-card>
-	</div>
+	</ion-card>
 	
 	<div *ngIf(activityLists)>
  		<div>
@@ -227,6 +227,7 @@
 				 		</ion-item>
 	  						<button style="width:100%;" class="secon-sdms" ion-button (click)="sendPost(community.id)" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp;Post Comment</button>
 	  						<!--<button  ion-button (click)="addDetails(i)" color="light" full>Cancel</button>-->
+
 	      			</div>
 	      		</ion-card-content>
 	    	</ion-card>
