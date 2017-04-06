@@ -49,12 +49,11 @@
     </ion-avatar></ion-col>
     <ion-col width-67>
     <h6 class="name-conne">{{request?.connections?.name}} </h6>
-    <p class="connection-pages">{{request?.connections?.company_name}}</p>
-    <p class="connection-page">
-    <ion-icon ios="ios-briefcase" md="md-briefcase" [hidden]="!request?.connections?.designation"></ion-icon>  {{request?.connections?.designation}} 
-   
+    <p class="connection-pages"><i class="fa fa-inbox"> </i> {{request?.connections?.email}}</p>
+    <p class="connection-page" [hidden]="!request?.connections?.location">
+    <i class="fa fa-map-marker"></i> {{request?.connections?.location}}    
     </p>
-	<p class="connection-page"> <ion-icon ios="ios-call" md="md-call" [hidden]="!request?.connections?.mobile"></ion-icon> {{request?.connections?.mobile}}</p>
+	
     </ion-col>
       <ion-col width-20> 
       <button ion-button icon-only small color="secondary" (click)="connectionStatus(request?.connection_id,1)">
@@ -86,12 +85,11 @@
     </ion-avatar></ion-col>
     <ion-col width-67>
     <h6 class="name-conne">{{all?.connections?.name}} </h6>
-    <p class="connection-pages">{{all?.connections?.company_name}}</p>
-    <p class="connection-page">
-    <ion-icon ios="ios-briefcase" md="md-briefcase" [hidden]="!all?.connections?.designation"></ion-icon> {{all?.connections?.designation}}
-    
+    <p class="connection-pages"><i class="fa fa-inbox"> </i> {{all?.connections?.email}}</p>
+    <p class="connection-page" [hidden]="!all?.connections?.location">
+    <i class="fa fa-map-marker"></i> {{all?.connections?.location}}    
     </p>
-	<p class="connection-page"><ion-icon ios="ios-call" md="md-call" [hidden]="!all?.connections?.mobile"></ion-icon>  {{all?.connections?.mobile}}</p>
+	
     </ion-col>
       <ion-col width-20> 
       <button ion-button icon-only small color="secondary">

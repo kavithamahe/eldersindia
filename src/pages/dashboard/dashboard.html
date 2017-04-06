@@ -34,7 +34,8 @@
 
 
 <ion-content padding class="dashboard">
-<div  *ngIf="user_type=='elder'">
+<!--*ngIf="user_type=='elder'" -->
+<div *ngIf="user_type=='elder'" >
 <ion-grid class="dashboard">
   <ion-row>
 
@@ -55,7 +56,8 @@
     HOOTER
     </ion-col>
     <ion-col width-50 class="call-sponsor" text-center (click)="makeCall(call_sponsor)">
-    <img src="assets/img/headshot.jpg" class="img-circle">
+	<i class="fa fa-phone-square fa-5x"></i><br/>
+    <!--<img src="assets/img/headshot.jpg" class="img-circle">-->
     CALL SPONSOR</ion-col>
   </ion-row>
 </ion-grid>
