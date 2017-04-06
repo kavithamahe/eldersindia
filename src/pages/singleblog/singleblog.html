@@ -30,7 +30,7 @@
     <h2 class="primary-color">{{singleBlogInfo?.details?.title}}</h2>
     <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{singleBlogInfo?.details?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i>  {{singleBlogInfo?.details?.created_at | date :"MMM dd y"}}</p>
   </ion-item>
-  <hr>
+
   <img src="{{imageUrl+singleBlogInfo?.details?.banner_image}}" [hidden]="!singleBlogInfo?.details?.banner_image">
   <ion-card-content>
     <p [innerHTML]="singleBlogInfo?.details?.description"></p>
@@ -53,14 +53,14 @@
   <ion-item text-right>
   <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)" >Submit</button>
   </ion-item>
-  
+  <hr/>
   <ion-item *ngFor="let viewComments of viewCommentsList">
     <ion-avatar item-left>
       <img src="{{imageUrl+viewComments?.avatar}}" [hidden]="!viewComments?.avatar">
     </ion-avatar>
     <h2 class="primary-color">{{viewComments?.user_name}}</h2>
     <p class="timedate">{{viewComments?.created_at | date :"MMM dd y"}}</p>
-    <p>{{viewComments?.comment}}</p>
+    <p class="page-down">{{viewComments?.comment}}</p>
     <button ion-button icon-right clear end small item-right *ngIf="user_id==viewComments?.user_id" (click)="deleteComment(viewComments?.id)">
 <ion-icon ios="ios-trash" md="md-trash"></ion-icon>      
       </button>
@@ -69,3 +69,7 @@
 </ion-card>
 
 </ion-content>
+<style>
+.list-md .item-input:last-child{ border-bottom:0px !important;}
+
+</style>

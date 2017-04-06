@@ -49,25 +49,24 @@
           </ion-col>
           </ion-row>
         </ion-card>
-        
-        <ion-card *ngIf="i==showblock">
-          <ion-list>
-            <p><ion-icon  class="depend" item-left name="person">
-            </ion-icon>{{manage.name}}</p>
-            <p><ion-icon class="depend" item-left name="call">
-            </ion-icon>{{manage.mobile}}</p>
-            <p><ion-icon class="depend" item-left 
-            name="calendar"></ion-icon>{{manage.dob}}</p>
+      
+        <ion-card *ngIf="i==showblock" style="padding:10px;">
+			
+          <ion-list class="listed-det">
+	
+            <p><i class="fa fa-user userioc"></i>&nbsp;{{manage.name}}</p>
+            <p><i class="fa fa-phone userioc"></i>&nbsp;{{manage.mobile}}</p>
+            <p><i class="fa fa-calendar userioc"></i>&nbsp;{{manage.dob}}</p>
            <!--  <p><ion-icon class="depend" item-left 
             name="pin"></ion-icon>{{manage.city}}</p> -->
-            <p><ion-icon class="depend" item-left 
-            name="pin"></ion-icon>{{manage.address}}</p>
-            <p><ion-icon class="depend" item-left 
-            name="briefcase"></ion-icon>{{manage.service}}</p>
+            <p><i class="fa fa-map-marker userioc"></i>&nbsp;{{manage.address}}</p>
+            <p><i class="fa fa-suitcase userioc"></i>&nbsp;{{manage.service}}</p>
+		
            </ion-list>
+		
         </ion-card>
-      
-       
+   
+ 
        </div>
   
      

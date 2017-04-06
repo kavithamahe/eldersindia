@@ -34,7 +34,7 @@
 		<p *ngIf="!edit_profile_Form.controls.name.valid  && (edit_profile_Form.controls.name.touched || submitAttempt)" class="err-reds">Please enter a valid Name</p>
         
 
-	<ion-label class="liste-edit">Gender</ion-label>
+	<ion-label *ngIf="user_type =='elder' " class="liste-edit">Gender</ion-label>
 		<ion-item *ngIf="user_type =='elder' ">
 		<ion-select formControlName="gender">
 	    <ion-option value="male">Male</ion-option>
@@ -44,7 +44,7 @@
 
            		<p class="err-reds" *ngIf="!edit_profile_Form.controls.gender.valid  && (edit_profile_Form.controls.gender.touched || submitAttempt)">Please select your Gender</p>
       
-	<ion-label class="liste-edit">Designation</ion-label>
+	<ion-label *ngIf="user_type =='sponsor' " class="liste-edit">Designation</ion-label>
         <ion-item *ngIf="user_type =='sponsor' ">
 		
 	    <ion-input disabled="true" type="text" formControlName="designation"></ion-input>

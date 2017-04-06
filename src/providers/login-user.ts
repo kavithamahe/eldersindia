@@ -28,7 +28,7 @@ rootUrl:any;
   loginload(credentials) {
    let _request= {"email": credentials.email,
   "password": credentials.password}
-    return this.http.post(this.rootUrl+'login',_request,this.headers)
+    return this.http.post('http://192.168.1.20:8000/api/login',_request,this.headers)
       .map(res => res.json());
  
   }
