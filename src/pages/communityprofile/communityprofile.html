@@ -65,7 +65,7 @@
 				</button>
 		  </ion-row>
 		  <ion-row>
-		  		<button ion-button  (click)="connectList()" color="dark" full clear>Connections
+		  		<button ion-button  (click)="connectList(communityProfileData?.id,'')" color="dark" full clear>Connections
 				</button>
 		  </ion-row>
 		  </ion-card>
@@ -74,7 +74,9 @@
 		<ion-row>
 		  	<ion-col>
 			  	<div>
-					<ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
+					<ion-searchbar (ionInput)="setItems($event)">
+						
+					</ion-searchbar>
 				</div>
 			</ion-col>
 		</ion-row>
@@ -82,11 +84,12 @@
    			<ion-row>
 	    		<ion-col width-20>
 	    			<ion-avatar item-left>
-	    				<img src="{{imageUrl+all?.avatar}}" [hidden]="!all?.avatar">
+	    				<img src="{{imageUrl+all?.avatar}}" [hidden]="!all?.avatar" 
+	    				(click)="loadThisPage(all?.id)">
 	    			</ion-avatar>
 	    		</ion-col>
     			<ion-col width-67>
-    				<h1 class="primary-color">{{all?.connections?.name}} </h1>
+    				<h1 class="primary-color" (click)="loadThisPage(all?.id)">{{all?.connections?.name}} </h1>
 	    				<p>{{all?.connections?.company_name}}</p>
 	    				<p><ion-icon ios="ios-briefcase" md="md-briefcase" [hidden]="!all?.connections?.designation"></ion-icon> {{all?.connections?.designation}}</p>
 	 					<p><ion-icon ios="ios-call" md="md-call" [hidden]="!all?.connections?.mobile"></ion-icon>  {{all?.connections?.mobile}}</p>

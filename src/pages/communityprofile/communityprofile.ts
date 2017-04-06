@@ -38,22 +38,32 @@ export class CommunityprofilePage {
     profile_uid:any;
     connectionList:any;
     allConnections:any;
-  constructor(public nav: NavController, public storage:Storage, public viewCtrl: ViewController,private sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
-       this.activityLists = true;
-      this.nav=nav;
-      this.status = false;
-      this.request_sent = false;
+    user_id:any;
 
+  constructor(public nav: NavController, public storage:Storage, public viewCtrl: ViewController,private sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+       
+      this.nav=nav;
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      storage.get('token').then((token) => { this.token=token; 
-      })
+      storage.get('token').then((token) => { this.token=token;})
     });
+      
+      this.profile_uid=navParams.get("profile_uid");
+      this.loadThisPage(this.profile_uid);
+  }
+
+  loadThisPage(id){
+    this.communityProfile=[];
+    this.communityProfileData=[];
+    this.status=[];
+     this.connectLists = false;
+      this.activityLists = true;
+      this.status = false;
+      this.request_sent = false;
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
       loader.present();
-      this.profile_uid=navParams.get("profile_uid");
-      this.profileCommunity(this.profile_uid);
-      this.memberProfile(this.profile_uid);
+      this.profileCommunity(id);
+      this.memberProfile(id);
       
       this.addComments=false;
       this.itemComments=false;
@@ -137,6 +147,7 @@ export class CommunityprofilePage {
     this.communityServices.memberProfileData(member_id).subscribe(users => {
       this.communityProfileData = users.result.info.profile_details;
       this.status = users.result.info.approve_status.status;
+      this.user_id = this.communityProfileData.id;
   },
    err =>{
     
@@ -197,8 +208,8 @@ export class CommunityprofilePage {
  //       this.communityMembers = true;
  //     }
  // }
-  connectList(){
-    this.communityServices.getConnectList().subscribe(users => {
+  connectList(id,val){
+    this.communityServices.getConnectLists(id,val).subscribe(users => {
        this.allConnections=users.result.info.list;  
   },
    err =>{
@@ -207,26 +218,36 @@ export class CommunityprofilePage {
   })
     this.activityLists = false;
     this.communityMembers = false;
+     this.connectLists = true;
 
-     if (this.connectLists) {
-        this.connectLists = false;
+    //  if (this.connectLists) {
+    //     this.connectLists = false;
        
-    } else {
-       this.connectLists = true;
-     }
+    // } else {
+    //    this.connectLists = true;
+    //  }
      
   }
+//   connectMemberList(id){
+// this. profileCommunity(id);
+// this.memberProfile(id);
+// this.connectLists = false;
+// this.activityLists = true;
+
+
+//   }
   setItems(ev) {
      var val = ev.target.value;
-   
+     let id = this.user_id;
+   this.connectList(id,val);
     
-    this.communityServices.getConnectLists(val).subscribe(users => {
-     this.allConnections=users.result.info.list; 
-  },
-   err =>{
+  //   this.communityServices.getConnectLists(val).subscribe(users => {
+  //    this.allConnections=users.result.info.list; 
+  // },
+  //  err =>{
     
-    this.communityServices.showErrorToast(err);
-  })
+  //   this.communityServices.showErrorToast(err);
+  // })
    
   }
   

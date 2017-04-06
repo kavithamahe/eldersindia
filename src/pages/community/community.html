@@ -58,8 +58,9 @@
 									<ion-avatar>
 										<img (click)="membersProfile(member.uid)" 
 										[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar">
+										<p style="font-size:10px; color:#1d6ab2; text-align: left;" 
+										(click)="membersProfile(member.uid)">{{member?.name}}</p>
 									</ion-avatar>
-
 								</ion-item>
 								<ion-item  *ngIf="!show_member">
 										<p>No Members Joined Yet</p>
@@ -261,7 +262,7 @@
 		</ion-card>
 	</div>
 	
-<!-- 	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+	<!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll> -->
   </ion-list>

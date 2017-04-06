@@ -83,18 +83,19 @@
         <ion-card *ngFor="let community of communitylists; let i= index">
 
 		<div class="community-img">
-          <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner" />
+          <img  [src]="imageUrl+community?.banner" (click)="getPost(community.id) 
+          [hidden]="!community?.banner" />
 		    <ion-thumbnail class="thamb-lins">
-                <img [src]="imageUrl+community?.logo"  [hidden]="!community?.logo"/>
+                <img [src]="imageUrl+community?.logo" (click)="getPost(community.id) 
+                [hidden]="!community?.logo"/>
               </ion-thumbnail>
 			  <ion-card-title>
-                <p  class="labels-bds" (click)="getPost(community.id)">{{community.community_name}}</p>
+                <p  class="labels-bds" (click)="getPost(community.id)">{{community.community_name}}
+                </p>
               </ion-card-title>
 			   </div>
-         
-            <ion-card-content class="thamb-texts">
-              
-                <p>{{community.description}}</p>
+         <ion-card-content class="thamb-texts">
+              <p>{{community.description}}</p>
             </ion-card-content>
         </ion-card>
       </ion-list>
