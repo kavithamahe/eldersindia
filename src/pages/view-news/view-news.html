@@ -26,7 +26,7 @@
 <div>
   <ion-item>   
     <h2 class="primary-color pro-info">{{NewsInfo?.title}}</h2>
-    <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{NewsInfo?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{NewsInfo?.created_at | date :"MMM dd y"}}</p>
+    <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{NewsInfo?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{NewsInfo?.post_date | date :"MMM dd y"}}</p>
   </ion-item>
 <img src="{{imageUrl+NewsInfo?.featured_image}}" [hidden]="!NewsInfo?.featured_image">
   <ion-card-content>

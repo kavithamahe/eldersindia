@@ -34,7 +34,7 @@ user_id:number;
  {
   
    let _request= {"search":{"location":[],"functional_area":[]},"get":["FunctionalArea","Location","SkillSet"],"info":{"uid":this.user_id}};
-    return this.http.post('http://192.168.1.21:8000/api/'+'getJobList',_request,this.options)
+    return this.http.post(this.rootUrl+'getJobList',_request,this.options)
       .map(res => res.json()); 
   }
  singleJob(jobId) 
