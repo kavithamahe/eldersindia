@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams ,ToastController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {CallNumber, Vibration} from 'ionic-native';
 
@@ -26,7 +26,7 @@ export class DashboardPage {
   police:any;
   ambulance:any;
   call_sponsor:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage) {
+  constructor(public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
   	this.storage.ready().then(() => {
       storage.get('token').then((token) => { this.token=token;  })
       storage.get('user_type').then((user_type) => { this.user_type=user_type;  })
@@ -67,13 +67,29 @@ export class DashboardPage {
   }
   public makeCall(number)
   {
+    if(number)
+    {
     CallNumber.callNumber(number, true)
   .then(() => console.log('Launched dialer!'))
   .catch(() => console.log('Error launching dialer'));
+   }
+   else
+   {
+    this.showToaster("There is no contact nuber");
+   }
   }
   public hooter()
   {
     Vibration.vibrate(5000);
     
+  }
+  public showToaster(message)
+  {
+   let toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000,
+        position: 'top'
+        });
+   toast.present();
   }
 }

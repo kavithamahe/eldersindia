@@ -25,12 +25,10 @@ rootUrl:any;
 
 
   constructor(public http: Http, public storage:Storage, public appConfig:AppConfig) {
-  this.storage.ready().then(() => {   
-    console.log("cal"+this.appConfig.setrooturl());
+  this.storage.ready().then(() => { 
     this.storage.set('rooturl',this.appConfig.setrooturl());
     this.storage.set('imageurl',this.appConfig.setImageurl()); 
    });
-  
   this.rootUrl=this.appConfig.setrooturl();
   this.headers = new Headers();
   this.headers.append('Content-Type', 'application/json');
