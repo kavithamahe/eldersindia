@@ -75,9 +75,9 @@ sentInfo:any;
     );
     loader.dismiss();
   }
-  public viewMessages(messageId)
+  public viewMessages(messageId,viewType)
   {
-  this.navCtrl.push(ViewMessagesPage, {messageId});
+  this.navCtrl.push(ViewMessagesPage, {messageId,viewType});
   }
   public showToaster(message)
   {

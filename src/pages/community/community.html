@@ -74,9 +74,9 @@
 	</div>
  
 	<ion-card>
-		  	<ion-item class="edit">
-			  	<i class="fa fa-pencil-square-o"></i>
-			  		Update Status
+		  	<ion-item>
+			  
+			  		<h2 class="wel-comemem"><i class="fa fa-pencil-square-o"></i> &nbsp;Update Status</h2>
 			</ion-item>
 			  	   <hr>
 			  	<ion-card-content style="padding:0px !important;">
@@ -140,7 +140,7 @@
 	        			</ion-col><br>
 	        			<ion-col width-20>
 			          		<h2 (click)="communityProfile(user.uid)" class="header">{{user.name}}
-			          		<p><ion-icon name="time"></ion-icon>{{user.created_at}}</p>
+			          		<p class="time-datem"><ion-icon name="time"></ion-icon>{{user.created_at}}</p>
 			          		</h2>
 						</ion-col>
 						<ion-col offset-50>
@@ -155,7 +155,7 @@
 	       			</ion-row>
 	    		</ion-item>
 	      		<ion-card-content>
-		          	<p>{{user.post_message}}</p><br>
+		          	<p class="feed-post">{{user.post_message}}</p><br>
 		          	<img  [src]="imageUrl+user?.post_image" [hidden]="!user?.post_image">
 	       		</ion-card-content>
 				<ion-card-content>
@@ -220,7 +220,7 @@
 	      		<ion-row>
 	        		<ion-col width-15>
 	          			<button class="hover but-colo" ion-button outline (click)="addLikes(user.id)">
-	            			<i class="fa fa-heart likecolor"></i> &nbsp; <p class="num-of">{{user.likes}}</p>
+	            			<i class="fa fa-heart-o likecolor"></i> &nbsp; <p class="num-of">{{user.likes}}</p>
 	          			</button>
 	        		</ion-col>
 	        		<!-- <ion-col>
@@ -231,7 +231,7 @@
 	        		<ion-col width-80>
 	          			<button ion-button class="comment but-colo" color="dark" clear 
 	          			(click)="addDetails(i)">
-	          				<p class="num-of">{{user.comment_count}} Comments...</p>
+	          				<span style="color:red; font-size:13px;">{{user.comment_count}}</span> &nbsp;<p class="comm-cl"> Comments...</p>
 	          			</button>
 	          		</ion-col>
 	      		</ion-row>
