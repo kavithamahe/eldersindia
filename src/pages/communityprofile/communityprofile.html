@@ -70,7 +70,7 @@
 		  </ion-row>
 		  </ion-card>
 	</div>
-	<div *ngIf(connectLists)>
+	<ion-card *ngIf(connectLists)>
 		<ion-row>
 		  	<ion-col>
 			  	<div>
@@ -93,7 +93,7 @@
     			</ion-col>
       		</ion-row>    
   		</ion-card>
-	</div>
+	</ion-card>
 	
 	<div *ngIf(activityLists)>
  		<div>
@@ -228,7 +228,8 @@
 				   				<ion-textarea [(ngModel)]="comment"></ion-textarea>
 				 		</ion-item>
 	  						<button  ion-button (click)="sendPost(community.id)" color="secondary" full>Post Comment</button>
-	  						<button  ion-button (click)="addDetails(i)" color="light" full>Cancel</button>
+	  						<button  ion-button (click)="addDetails(i)" color="light" full>Cancel
+	  						</button>
 	      			</div>
 	      		</ion-card-content>
 	    	</ion-card>

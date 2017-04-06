@@ -61,7 +61,7 @@ export class CommunityPage {
 
 showConfirm(DeleteId) {
     let confirm = this.alertCtrl.create({
-     subTitle: 'Are you agree to delete this comment?',
+     subTitle: 'Confirm Deletion?',
        buttons: [
         {
           text: 'Cancel',
@@ -115,13 +115,13 @@ showConfirm(DeleteId) {
     // http://www.dailymotion.com/video/
   let url;
   
-  url = oldURL.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
-  url = oldURL.replace("https://www.youtube.com/watch?v=_OBlgSz8sSM","https://www.youtube.com/embed/_OBlgSz8sSM");
-  url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/"); 
-   console.log("vidweo url: ",oldURL);
-  url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
-  url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
-  url = oldURL.replace("http://www.youtube.com/embed/watch/","http://www.youtube.com/embed/");
+  // url = oldURL.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
+  // url = oldURL.replace("https://www.youtube.com/watch?v=_OBlgSz8sSM","https://www.youtube.com/embed/_OBlgSz8sSM");
+  // url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/"); 
+  //  console.log("vidweo url: ",oldURL);
+  // url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
+  // url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
+  url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/");
   url = oldURL.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
   // url = oldURL.replace("http://www.youtube.com/embed/watch/", "http://www.youtube.com/embed/")
  return this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -256,10 +256,7 @@ showConfirm(DeleteId) {
      this.showToast(datas.result);
      this.comment="";
      this.communityList(this.community_id);
-     // this.showblock= null;
-    
-
-   },
+     },
      err =>{
     
     this.communityServices.showErrorToast(err);
