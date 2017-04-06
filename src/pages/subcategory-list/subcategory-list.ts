@@ -50,6 +50,7 @@ export class SubcategoryListPage {
       this.loadSubcategoryList(this.service_id,this.location_id);  
       });
     });
+
     }
     
 loadSubcategoryList(subCategory_id,location_id){
@@ -182,9 +183,14 @@ export class InstantRequestModalPage {
   }
   submit(){
     let dependent_model = this.dependentData;
-    let date = new Date();
-    console.log(date);
-    let serviceRequestData = {"problem": this.service, "datetime": "", "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile};
+    // let date = new Date();
+    let d = new Date();
+
+    let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
+    d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+    console.log(d,datestring);
+
+    let serviceRequestData = {"problem": this.service, "datetime": datestring, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile};
     this.viewCtrl.dismiss(serviceRequestData);
   }
 }

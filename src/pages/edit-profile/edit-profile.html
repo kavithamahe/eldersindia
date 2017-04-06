@@ -16,7 +16,7 @@
 <ion-row style=" border-bottom:1px solid #ccc;">
 <ion-col>
 	<ion-title>
-    <img alt="logo" height="50" width="50" class="mar-top" style=" border:1px solid #ccc;"  [src]="logoUrl+profileData?.logo" > 
+    <img alt="logo" height="50" width="50" class="mar-top" style=" border:1px solid #ccc;"  [src]="imageURL+profileData?.logo" > 
    </ion-title>
    </ion-col>
    <ion-col><p class="edit-pro">{{profileData?.company_name}}</p></ion-col>
@@ -34,7 +34,7 @@
 		<p *ngIf="!edit_profile_Form.controls.name.valid  && (edit_profile_Form.controls.name.touched || submitAttempt)" class="err-reds">Please enter a valid Name</p>
         
 
-	<ion-label class="liste-edit">Gender</ion-label>
+	<ion-label *ngIf="user_type =='elder' " class="liste-edit">Gender</ion-label>
 		<ion-item *ngIf="user_type =='elder' ">
 		<ion-select formControlName="gender">
 	    <ion-option value="male">Male</ion-option>
@@ -44,9 +44,8 @@
 
            		<p class="err-reds" *ngIf="!edit_profile_Form.controls.gender.valid  && (edit_profile_Form.controls.gender.touched || submitAttempt)">Please select your Gender</p>
       
-
+		<ion-label *ngIf="user_type =='sponsor' " class="liste-edit">Designation</ion-label>
         <ion-item *ngIf="user_type =='sponsor' ">
-        <ion-label class="liste-edit">Designation</ion-label>
 	    <ion-input type="text" formControlName="designation"></ion-input>
 	    </ion-item>
 		
@@ -62,32 +61,26 @@
            		<p class="err-reds" *ngIf="!edit_profile_Form.controls.mobile_number.valid  && (edit_profile_Form.controls.mobile_number.touched || submitAttempt)">Please enter 10-digit valid number</p>
    
 	 
-        <!-- <ion-label class="liste-edit">Location</ion-label> -->
+        <ion-label class="liste-edit">Location</ion-label>
 		<ion-item>
-		<ion-label floating class="liste-name">Location</ion-label>
 	    <ion-input type="text" formControlName="location"></ion-input>
 	    </ion-item>
 	    
 
-<!-- <ion-label class="liste-edit">DOB</ion-label> -->
+		<ion-label class="liste-edit">DOB</ion-label>
 		<ion-item>
-		<ion-label floating class="liste-name">DOB</ion-label>
-	    <!-- <ion-input type="text" formControlName="dob"></ion-input> -->
-	    <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" [(ngModel)]="user_dob" [ngModelOptions]="{standalone: true}">
-	    	
+	    <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" [(ngModel)]="user_dob" [ngModelOptions]="{standalone: true}">
 	    </ion-datetime>
 	    </ion-item>
 	 
 
-<!-- <ion-label class="liste-edit">Email</ion-label> -->
+		<ion-label class="liste-edit">Email</ion-label>
 		<ion-item>
-		<ion-label floating class="liste-name">Email</ion-label>
 	    <ion-input type="text" formControlName="email"></ion-input>
 	    </ion-item>
 	 
-<!-- <ion-label class="liste-edit">User Type</ion-label> -->
+		<ion-label class="liste-edit">User Type</ion-label>
 	    <ion-item>
-		<ion-label floating class="liste-name">User Type</ion-label>
 	    <ion-input type="text" formControlName="user_type"></ion-input>
 	    </ion-item>
 	  
@@ -95,10 +88,10 @@
 	    <ion-item>
 	    <ion-row>
 	    <button ion-button class="uploadimg" color="primary" (click)="accessGallery()"><i class="fa fa-upload"></i>&nbsp; Browse...</button>
- 			<img [src]="base64Image" *ngIf="base64Image" />
- 			</ion-row>
+		<img [src]="base64Image" *ngIf="base64Image" />
+		</ion-row>
  		</ion-item>
-		<hr/>
+<hr/>
 	  	<ion-row>
 	         <ion-col><button class="btn-defaults" ion-button item-left small (click)="dismiss()">Cancel</button></ion-col>
 	         <ion-col offset-33><button class="btn-primarys"ion-button item-right small (click)="updateProfile()">Update</button></ion-col>

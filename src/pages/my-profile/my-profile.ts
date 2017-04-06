@@ -44,6 +44,12 @@ token:any;
   })
   }
 
+  getDate(datepar){
+     var dateParts = datepar.split("-").reverse().join("-");
+     // let date = dateParts[2]+"-"+dateParts[1]+"-"+dateParts[0];
+     return dateParts;
+  }
+
   editProfile(){
   	this.navCtrl.push(EditProfilePage,{profileData:this.profileData});
   }

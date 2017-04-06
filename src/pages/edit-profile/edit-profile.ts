@@ -43,7 +43,7 @@ user_dob:any
 
     });
       this.profileData = navParams.get("profileData");
-      this.user_dob = this.getDate(this.profileData.dob);
+      this.user_dob = this.profileData.dob;//this.getDate(this.profileData.dob);
 
       this.user_type = this.profileData.user_type;
      this.edit_profile_Form = formBuilder.group({

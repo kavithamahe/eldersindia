@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 
 import { Platform, MenuController, Nav } from 'ionic-angular';
 
@@ -25,6 +25,9 @@ import { ManagePage } from '../pages/manage/manage';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 
+import { LoginUser } from '../providers/login-user';
+import { Subscription }   from 'rxjs/Subscription';
+
 @Component({//selector:'my-theme',
   templateUrl: 'app.html'
 
@@ -34,35 +37,70 @@ export class MyApp {
 
   // make HelloIonicPage the root (or first) page
 
-  rootPage: any =  CommunitylistPage;
+    @Input() astronaut: string;
+  user_logged = '<no user announced>';
+  // confirmed = false;
+  // announced = false;
+  subscription: Subscription;
+
+  rootPage: any =  LoginPage;
 
   pages: Array<{title: string, component: any}>;
 
   constructor(
     public platform: Platform,
-    public menu: MenuController
+    public menu: MenuController,
+    private userLogin: LoginUser
   ) {
-    this.initializeApp();
+// set our app's pages on user based
 
-    // set our app's pages
-    this.pages = [        
-     // { title: 'Login', component: LoginPage },
-      { title: 'Dashboard', component: DashboardPage },      
-      { title: 'Profile', component: MyProfilePage },
-      { title: 'Change Password', component: ChangePasswordPage },
-      { title: 'Manage Dependents', component: ManagePage },
-      { title: 'Community', component: CommunitylistPage },
-      { title: 'Connections', component: ConnectionsPage },
-      { title: 'Job Board', component: JobboardPage },
-      { title: 'Applied Jobs', component: AppliedJobsPage },
-      { title: 'Messages', component: MessagesPage },
-      { title: 'Service Providers', component: ServiceprovidersPage },
-      { title: 'Service Requests', component: ServicerequestPage },
-      { title: 'Blogs', component: BlogsPage },
-      { title: 'News', component: NewsPage },
-      { title: 'Events', component: EventsPage },
-      { title: 'Logout', component: LogoutPage },
-    ];
+      this.subscription = userLogin.userEntered$.subscribe(
+      userData => {
+        this.user_logged = userData;
+        console.log("from login page:",this.user_logged)
+        if(this.user_logged == 'elder'){
+          this.pages = [];
+          this.pages.push(
+                          { title: 'Dashboard', component: DashboardPage },      
+                          { title: 'Profile', component: MyProfilePage },
+                          { title: 'Change Password', component: ChangePasswordPage },
+                          { title: 'Manage Dependents', component: ManagePage },
+                          { title: 'Community', component: CommunitylistPage },
+                          { title: 'Connections', component: ConnectionsPage },
+                          { title: 'Job Board', component: JobboardPage },
+                          { title: 'Applied Jobs', component: AppliedJobsPage },
+                          { title: 'Messages', component: MessagesPage },
+                          { title: 'Service Providers', component: ServiceprovidersPage },
+                          { title: 'Service Requests', component: ServicerequestPage },
+                          { title: 'Blogs', component: BlogsPage },
+                          { title: 'News', component: NewsPage },
+                          { title: 'Events', component: EventsPage },
+                          { title: 'Logout', component: LogoutPage },
+                        );
+      }else{
+          this.pages = [];
+          this.pages.push(
+                          { title: 'Dashboard', component: DashboardPage },      
+                          { title: 'Profile', component: MyProfilePage },
+                          { title: 'Change Password', component: ChangePasswordPage },
+                          { title: 'Community', component: CommunitylistPage },
+                          { title: 'Connections', component: ConnectionsPage },
+                          { title: 'Job Board', component: JobboardPage },
+                          { title: 'Applied Jobs', component: AppliedJobsPage },
+                          { title: 'Messages', component: MessagesPage },
+                          { title: 'Service Providers', component: ServiceprovidersPage },
+                          { title: 'Service Requests', component: ServicerequestPage },
+                          { title: 'Blogs', component: BlogsPage },
+                          { title: 'News', component: NewsPage },
+                          { title: 'Events', component: EventsPage },
+                          { title: 'Logout', component: LogoutPage },
+                          );  
+        }
+    });
+
+
+    this.initializeApp();
+    
   }
 
   initializeApp() {
