@@ -71,6 +71,7 @@ tagsModel:any=[];
     this.blogObject={ "category":this.category,"allow_comment":this.allowComments,"title":this.title,"highlights":this.highlights,
         "description":this.description,"featured_image":"","banner_image":"","tags[0][id]":"2",
         "tags[0][name]":"Healthcare","tags[1][name]":"hai"};
+        
     this.blogListService.createBlog(this.blogObject).subscribe(
      (createBlog) => {
       this.showToaster(createBlog.result);
