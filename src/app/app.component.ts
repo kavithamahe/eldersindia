@@ -33,8 +33,8 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make HelloIonicPage the root (or first) page
-  removeMenu:any=['Profile'];
-  rootPage: any =  MessagesPage;
+  
+  rootPage: any =  ConnectionsPage;
 
   pages: Array<{title: string, component: any}>;
 

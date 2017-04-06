@@ -17,15 +17,12 @@ export class LoginUser {
 headers:any;
 rootUrl:any;
   constructor(public http: Http, public storage:Storage, public appConfig:AppConfig) {
-  this.storage.ready().then(() => {   
-    console.log("cal"+this.appConfig.setrooturl());
+  this.storage.ready().then(() => { 
     this.storage.set('rooturl',this.appConfig.setrooturl());
-    this.storage.set('imageurl',this.appConfig.setImageurl()).then(()=>
-      this.storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl;
-     // this.rootUrl=this.appConfig.setrooturl();
-   })
-      ); 
+    this.storage.set('imageurl',this.appConfig.setImageurl()); 
+   // storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; });
    });
+  this.rootUrl=this.appConfig.setrooturl();
   this.headers = new Headers();
   this.headers.append('Content-Type', 'application/json');
   }
