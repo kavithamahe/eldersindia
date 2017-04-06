@@ -112,16 +112,12 @@ connectMember(id,name){
 }
 //------------//
 
-getConnectLists(data){
-   this.connectlist = {"searchValue":data}
+getConnectLists(id,data){
+   this.connectlist = {"id":id,"searchValue":data}
    return this.http.post(`${this.getCommunityPostsUrl }getConnectionList`,this.connectlist,this.options)
       .map(res =>res.json());
 }
-getConnectList(){
-   this.connectlist = {"searchValue":""}
-   return this.http.post(`${this.getCommunityPostsUrl }getConnectionList`,this.connectlist,this.options)
-      .map(res =>res.json());
-}
+
 
 getCommunityMembers(){
     return this.http.post(`${this.getCommunityPostsUrl }getCommunityMembers`,"",this.options)
