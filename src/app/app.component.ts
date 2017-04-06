@@ -45,7 +45,6 @@ export class MyApp {
 
   rootPage: any =  LoginPage;
 
-
   pages: Array<{title: string, component: any}>;
 
   constructor(

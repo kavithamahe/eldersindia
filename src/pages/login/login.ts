@@ -29,6 +29,9 @@ export class LoginPage {
   loginForm: FormGroup;
   submitAttempt: boolean = false;
   registerCredentials = {email: '', password: ''};
+  callSponsor:any=0;
+  ambulance:any=0;
+  police:any=0;
   constructor(public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
   this.storage.ready().then(() => { 
     
@@ -66,16 +69,30 @@ export class LoginPage {
          this.storage.set('user_type', loginuser['details']['user_type']);
          this.storage.set('user_type_id', loginuser['details']['user_type_id']);
          this.storage.set('avatar', loginuser['details']['avatar']);
-         if(loginuser['details']['user_type']=='elder')
+         if(loginuser['details']['user_type']=='elder' && (loginuser.details.emergency_contacts.length>0))
          {
-         this.storage.set('call_sponsor', loginuser.details.emergency_contacts[0].call_sponsor);
-         this.storage.set('ambulance', loginuser.details.emergency_contacts[0].ambulance);
-         this.storage.set('police', loginuser.details.emergency_contacts[0].police);
+         if(loginuser.details.emergency_contacts[0].call_sponsor!='undefined')
+         {
+          this.callSponsor= loginuser.details.emergency_contacts[0].call_sponsor;
+          console.log("callSponsor"+this.callSponsor);
+         }
+         
+         if(loginuser.details.emergency_contacts[0].ambulance!='undefined')
+         {
+           this.ambulance=loginuser.details.emergency_contacts[0].ambulance;
+         }
+         if(loginuser.details.emergency_contacts[0].police!='undefined')
+         {
+           this.police=loginuser.details.emergency_contacts[0].police;
+         }
+         this.storage.set('call_sponsor', this.callSponsor);
+         this.storage.set('ambulance', this.ambulance);
+         this.storage.set('police', this.police);
          }
          this.storage.set('token', loginuser['token']);
          this.storage.set('imageurl',this.appConfig.setImageurl());
          this.storage.set('rooturl',this.appConfig.setrooturl());
-         
+         this.storage.set('islogin',1);
        })
         // alert(loginuser['token']);
         this.navCtrl.setRoot(DashboardPage);

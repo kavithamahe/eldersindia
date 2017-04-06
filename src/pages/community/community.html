@@ -50,11 +50,10 @@
 					<ion-row>
 						<h2 class="wel-comemem">Members</h2>
 					</ion-row>
-
-						<ion-row>
-		    			<ion-col *ngFor="let member of members">
+						<!--<ion-row>
+		    			<ion-col *ngFor="let member of members" text-wrap>
 		    				
-								<ion-item >
+								<ion-item text-wrap>
 									<ion-avatar>
 										<img (click)="membersProfile(member.uid)" 
 										[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar">
@@ -67,7 +66,38 @@
 							
 							
 						</ion-col>
-						</ion-row>
+					</ion-row>-->
+                    
+		    			<!--<div *ngFor="let member of members" text-wrap>
+		    				
+								<ion-item text-wrap class="memb-list">
+									<ion-avatar>
+										<img (click)="membersProfile(member.uid)" 
+										[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar">
+									</ion-avatar>
+
+								</ion-item>
+								<ion-item  *ngIf="!show_member">
+										<p>No Members Joined Yet</p>
+							    </ion-item>
+							
+							
+						</div>-->
+                         <div *ngFor="let member of members" text-wrap>
+		    				
+								<ion-item text-wrap class="memb-list">
+									<ion-avatar>
+										<img (click)="membersProfile(member.uid)" 
+										[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar">
+									</ion-avatar>
+
+								</ion-item>
+								<ion-item  *ngIf="!show_member">
+										<p>No Members Joined Yet</p>
+							    </ion-item>
+							
+							
+						</div>
 					
 			</ion-card-content>
 		</ion-card>
@@ -118,8 +148,7 @@
 					<ion-row>
 		    			<ion-col text-right>
 		    				<div>
-								<button ion-button medium style=" width:100%" (click)="postCommunity(communityDetailData?.id)" 
-								class="post">
+								<button ion-button medium style=" width:100%" (click)="postCommunity(communityDetailData?.id)" class="post">
 									<i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp; Post
 								</button>
 							</div>
@@ -140,7 +169,7 @@
 	        			</ion-col><br>
 	        			<ion-col width-20>
 			          		<h2 (click)="communityProfile(user.uid)" class="header">{{user.name}}
-			          		<p class="time-datem"><ion-icon name="time"></ion-icon>{{user.created_at}}</p>
+			          		<p class="time-datem"><i class="fa fa-calendar-o"></i> &nbsp;{{user.created_at}}</p>
 			          		</h2>
 						</ion-col>
 						<ion-col offset-50>
@@ -236,26 +265,29 @@
 	          		</ion-col>
 	      		</ion-row>
 	      			<div *ngIf="i==showblock">
-	      				<ion-item >
-							<div *ngFor="let comment of user.comments">
-	      						<ion-row class="send">
-		      						<ion-avatar item-left>
+			
+	      				<ion-item>
+							<ion-row *ngFor="let comment of user.comments" class="comm-posted">
+									<ion-avatar>
 		      					 		<img [src]="imageUrl+comment?.profile_image" 
 		      							[hidden]="!comment?.profile_image" >
 			      					</ion-avatar>
-	      							<ion-col>{{comment.comments}}</ion-col>
-		      						<button ion-button (click)="showConfirm(comment.comments_id)" 
-		      						color="dark" clear><ion-icon name="trash"></ion-icon></button>
-	      						</ion-row><br>
-	      					</div>
-	      				</ion-item>
+	      							<ion-item text-wrap style="padding-top:0px;"><p class="cmmpost">{{comment.comments}}</p></ion-item>
+		      						<button ion-button class="trash-icon" (click)="showConfirm(comment.comments_id)" 
+		      						color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+										
+	      						</ion-row>
+							
+	      					</ion-item>
+						<hr/>
+							<ion-label class="liste-edit">Enter Comments...</ion-label>
 	      				<ion-item>
-				   			<ion-label floating>Enter Comments...</ion-label>
-				   			<ion-textarea [(ngModel)]="comment"></ion-textarea>
+				   		
+				   			<ion-textarea [(ngModel)]="comment" style=" margin:0px !important;"></ion-textarea>
 						</ion-item>
-  							<button  ion-button (click)="sendPost(user.id)" color="secondary" full>Post Comment</button>
-  							<button  ion-button (click)="addDetails(i)" color="light" full>Cancel
-  							</button>
+  							<button  ion-button (click)="sendPost(user.id)" style="width:100%;" class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp;Post Comment</button>
+  							<!--<button  ion-button (click)="addDetails(i)" color="light" full>Cancel
+  							</button>-->
 	      			</div>
 	    	</ion-card-content>
 		</ion-card>
