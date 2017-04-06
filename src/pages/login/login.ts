@@ -30,7 +30,9 @@ export class LoginPage {
   submitAttempt: boolean = false;
   registerCredentials = {email: '', password: ''};
   constructor(public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
- 
+  this.storage.ready().then(() => { 
+    
+    });
     this.loginForm = formBuilder.group({
         email: ['', Validators.compose([Validators.required])],
         password: ['', Validators.compose([Validators.required])]

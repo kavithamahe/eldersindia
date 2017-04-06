@@ -38,8 +38,8 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'listSent',_request,this.options)
       .map(res => res.json()); 
   }
-  viewMessages(messageId) {  
-   let _request= {};
+  viewMessages(messageId,viewType) {  
+   let _request= {"viewType":viewType};
     return this.http.post(this.rootUrl+'getInboxMessageDetails/'+messageId,_request,this.options)
       .map(res => res.json()); 
   }
@@ -47,6 +47,12 @@ rootUrl:any;
   {
     let _request= messageObject;
     return this.http.post(this.rootUrl+'sendMessage',_request,this.options)
+      .map(res => res.json()); 
+  }
+  getFriendsList()
+  {
+     let _request= {};
+    return this.http.post(this.rootUrl+'getConnections',_request,this.options)
       .map(res => res.json()); 
   }
 }

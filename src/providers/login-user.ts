@@ -26,22 +26,25 @@ rootUrl:any;
 
   constructor(public http: Http, public storage:Storage, public appConfig:AppConfig) {
   this.storage.ready().then(() => {   
-    this.storage.set('imageurl',this.appConfig.setImageurl());
+    console.log("cal"+this.appConfig.setrooturl());
     this.storage.set('rooturl',this.appConfig.setrooturl());
-    storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl;});
+    this.storage.set('imageurl',this.appConfig.setImageurl()); 
    });
-  this.rootUrl = 'http://192.168.1.20:8000/api/'
+  
+  this.rootUrl=this.appConfig.setrooturl();
   this.headers = new Headers();
   this.headers.append('Content-Type', 'application/json');
   }
+  
   loginload(credentials) {
    let _request= {"email": credentials.email,
   "password": credentials.password}
-    return this.http.post('http://192.168.1.20:8000/api/login',_request,this.headers)
+
+    return this.http.post(this.rootUrl+'login',_request,this.headers)
       .map(res => res.json());
  
   }
-    // Service message commands
+    // setting user on login 
   currentUser(user: string) {
     this.userSource.next(user);
   }

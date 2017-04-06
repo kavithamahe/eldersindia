@@ -302,7 +302,7 @@ export class CommunityprofilePage {
   showConfirm(DeleteId) {
     let confirm = this.alertCtrl.create({
      
-     subTitle: 'Are you agree to delete this comment?',
+     subTitle: 'Confirm Deletion?',
       buttons: [
         {
           text: 'Cancel',

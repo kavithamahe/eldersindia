@@ -37,13 +37,14 @@ export class MyApp {
 
   // make HelloIonicPage the root (or first) page
 
-    @Input() astronaut: string;
+//-------userbased login-------------//
+
   user_logged = '<no user announced>';
-  // confirmed = false;
-  // announced = false;
   subscription: Subscription;
+//----------------------------------//
 
   rootPage: any =  LoginPage;
+
 
   pages: Array<{title: string, component: any}>;
 
