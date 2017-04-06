@@ -28,7 +28,7 @@ rootUrl:any;
   loginload(credentials) {
    let _request= {"email": credentials.email,
   "password": credentials.password}
-    return this.http.post(this.rootUrl+'login',_request,this.headers)
+    return this.http.post(this.appConfig.setrooturl()+'login',_request,this.headers)
       .map(res => res.json());
  
   }
