@@ -264,8 +264,13 @@ skill_data:any;
   addEducation(){
     this.education_list.push({education:""});
   }
-  removeEducation(){
-   this.education_list.pop({education:""}); 
+  removeEducation(index){
+   this.education_list.splice(index,1);
+   this.education_graduation.splice(index,1);
+   this.education_specialization.splice(index,1);
+   this.education_college.splice(index,1);
+
+   console.log(this.education_list,this.education_graduation,this.education_specialization,this.education_college)
   }
 
   getElderSkills(){

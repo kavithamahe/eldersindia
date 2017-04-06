@@ -146,6 +146,9 @@
       </button>
       <div *ngIf(showDetails)>
 		<p>{{vendorList?.vendorDetails?.address}}</p>
+    <p>{{vendorList?.vendorDetails?.email}}</p>
+    <p>{{vendorList?.vendorDetails?.contact_name}}</p>
+    <p>{{vendorList?.vendorDetails?.contact_number}}</p>
       </div>
 	   <div *ngIf(!vendorList?.vendorDetails?.address)>
 			<p>"No Address Deatails To Display"</p>		  

@@ -187,11 +187,16 @@
 
       <div>
           <ion-row>
-            <ion-col offset-25>
-              <ion-card class="emergency" padding>Educational Details</ion-card>
+            <ion-col>
+              <ion-card class="emergency" padding >Educational Details</ion-card>
             </ion-col>
           </ion-row>
-          <ion-col  *ngFor="let item of education_list; let i=index" >
+          <ion-card  *ngFor="let item of education_list; let i=index" >
+          
+              <button class="add" (click)="removeEducation(i)" ion-button icon-only align-right>
+                <ion-icon name="ios-close"></ion-icon>
+              </button>
+            
             <ion-item>
               <ion-label>Graduation</ion-label>
                 <ion-select [(ngModel)]="education_graduation[i]" [ngModelOptions]="{standalone: true}">
@@ -211,20 +216,16 @@
             
                 <ion-input [(ngModel)]="education_college[i]" [ngModelOptions]="{standalone: true}" type="text">
                 </ion-input>
+
+                <ion-row>
+          </ion-row>
             
-          </ion-col>
-          <ion-row>
-            <ion-col width-50>
-              <button class="add" (click)="addEducation()" ion-button icon-left clear>
+          </ion-card>
+          <ion-col>
+              <button class="add" (click)="addEducation()" ion-button full >
                 <ion-icon name="ios-add"></ion-icon>Add More
               </button>
             </ion-col>
-            <ion-col width-50>
-              <button class="add" (click)="removeEducation()" ion-button icon-left clear>
-                <ion-icon name="ios-close"></ion-icon>Remove
-              </button>
-            </ion-col>
-          </ion-row>
       </div>
     </div>
 

@@ -56,7 +56,11 @@ export class LoginPage {
 
    	this.loginUser.loginload(this.registerCredentials).subscribe(     
       (loginuser) => {
-         
+         if(loginuser['details']['user_type'] == 'elder'){
+           this.loginUser.currentUser("elder");
+         }else{
+           this.loginUser.currentUser("sponsor");
+         }
          this.storage.ready().then(() => {
            this.storage.clear();
          this.storage.set('id', loginuser['details']['id']);

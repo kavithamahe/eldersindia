@@ -38,7 +38,7 @@ export class SubcategoryListPage {
       this.service_id = navParams.get("service").id;
       this.serviceTitle = navParams.get("service").name;   
       // this.userType = "elder";
-      this.rate = 3.5;
+      this.rate = 3;
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.logoUrl=imageurl;});
       storage.get('user_type').then((user_type) => { this.userType=user_type;});
@@ -50,6 +50,7 @@ export class SubcategoryListPage {
       this.loadSubcategoryList(this.service_id,this.location_id);  
       });
     });
+
     }
     
 loadSubcategoryList(subCategory_id,location_id){
@@ -94,7 +95,7 @@ loadSubcategoryList(subCategory_id,location_id){
 
   openModal(modalPage,vendor_id){
     if(modalPage == "instant"){
-      this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists});
+      this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,service:this.serviceTitle});
     }else{
       this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists});
     }
@@ -167,12 +168,14 @@ loadSubcategoryList(subCategory_id,location_id){
 export class InstantRequestModalPage {
   dependentLists:any;
   dependentData:any;
+  service:any;
 
   constructor(
     public params: NavParams,
     public viewCtrl: ViewController
   ) {
     this.dependentLists = this.params.get('dependentList');
+    this.service = this.params.get('service')
   }
 
   dismiss() {
@@ -180,7 +183,14 @@ export class InstantRequestModalPage {
   }
   submit(){
     let dependent_model = this.dependentData;
-    let serviceRequestData = {"problem": "", "datetime": "", "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile};
+    // let date = new Date();
+    let d = new Date();
+
+    let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
+    d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+    console.log(d,datestring);
+
+    let serviceRequestData = {"problem": this.service, "datetime": datestring, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile};
     this.viewCtrl.dismiss(serviceRequestData);
   }
 }

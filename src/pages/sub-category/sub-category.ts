@@ -31,7 +31,7 @@ subCategoryTitle:any;
 
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
 
-      this.elderLocation ="1";
+      this.elderLocation ="";
       this.subCategoryId = navPara.get("subcategory").id;
       this.subCategoryTitle = navPara.get("subcategory").service;
     
