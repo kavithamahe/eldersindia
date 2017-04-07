@@ -32,13 +32,7 @@ export class CommunitylistPage {
   constructor(public nav: NavController,public storage:Storage, public navParams: NavParams,platform: Platform,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
      this.isAndroid = platform.is('android');
      // this.searchData = "";
-      this.storage.ready().then(() => {
-      storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      storage.get('id').then((id) => { this.id=id; })
-      storage.get('token').then((token) => { this.token=token;
-      // this.myCommunity(this.searchData);
-      })
-    });
+      
 
      
    }
@@ -149,7 +143,13 @@ public dashboardPage()
   }
 ionViewWillEnter (){
   
-  this.myCommunity("");
+  this.storage.ready().then(() => {
+      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      this.storage.get('id').then((id) => { this.id=id; })
+      this.storage.get('token').then((token) => { this.token=token;
+      this.myCommunity("");
+      })
+    });
 }
 
 }

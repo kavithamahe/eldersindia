@@ -8,8 +8,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 
 @Component({
   selector: 'page-elders',
-  templateUrl: 'elders.html',
-  providers:[CommunityServices]
+  templateUrl: 'elders.html'
 })
 export class EldersPage {
 authForm : FormGroup;

@@ -43,7 +43,7 @@ export class MyApp {
   subscription: Subscription;
 //----------------------------------//
 
-  rootPage: any =  ManagePage;
+  rootPage: any =  LoginPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -98,24 +98,6 @@ export class MyApp {
                           );  
         }
     });
-this.pages = [];
-          this.pages.push(
-                          { title: 'Dashboard', component: DashboardPage },      
-                          { title: 'Profile', component: MyProfilePage },
-                          { title: 'Change Password', component: ChangePasswordPage },
-                          { title: 'Manage Dependents', component: ManagePage },
-                          { title: 'Community', component: CommunitylistPage },
-                          { title: 'Connections', component: ConnectionsPage },
-                          { title: 'Job Board', component: JobboardPage },
-                          { title: 'Applied Jobs', component: AppliedJobsPage },
-                          { title: 'Messages', component: MessagesPage },
-                          { title: 'Service Providers', component: ServiceprovidersPage },
-                          { title: 'Service Requests', component: ServicerequestPage },
-                          { title: 'Blogs', component: BlogsPage },
-                          { title: 'News', component: NewsPage },
-                          { title: 'Events', component: EventsPage },
-                          { title: 'Logout', component: LogoutPage },
-                        );
 
     this.initializeApp();
     
@@ -136,7 +118,7 @@ this.pages = [];
           
           let confirmAlert = this.alertCtrl.create({
           title: 'Log Out',
-          message: "Confirm Logout",
+          subTitle: "Confirm Logout",
           buttons: [{
             text: 'NO',
             handler: () => {

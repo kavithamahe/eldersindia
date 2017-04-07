@@ -24,7 +24,7 @@
 	<ion-card class="subcategory-list" *ngFor="let service_list of sublists.lists">
 		<ion-item>
 		    <ion-thumbnail style="width: 30px; height: 30px;" item-left>
-		      <img [src]= "logoUrl+list?.logo">
+		      <img [src]= "logoUrl+service_list?.logo">
 		    </ion-thumbnail>	 
 		    <h2>{{service_list.name}}</h2>
 			 <p>
