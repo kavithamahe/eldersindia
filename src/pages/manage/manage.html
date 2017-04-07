@@ -33,7 +33,11 @@
 <ion-content padding>
 <br/>
  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-    
+    <div>
+     <button clear style="color:red;" ion-button icon-only round (click)="addElder()">
+      <ion-icon name="ios-person-add"></ion-icon> 
+    </button>
+    </div>
   <div *ngFor="let manage of manages; let i=index">
    
         <ion-card class="des-card">
