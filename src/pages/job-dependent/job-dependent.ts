@@ -12,7 +12,8 @@ import { JobBoardService } from '../../providers/job-board-service';
 */
 @Component({
   selector: 'page-job-dependent',
-  templateUrl: 'job-dependent.html'
+  templateUrl: 'job-dependent.html',
+  providers:[JobBoardService]
 })
 export class JobDependentPage {
 token:any;

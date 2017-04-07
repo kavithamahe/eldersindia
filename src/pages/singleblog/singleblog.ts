@@ -15,7 +15,8 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 
 @Component({
   selector: 'page-singleblog',
-  templateUrl: 'singleblog.html'
+  templateUrl: 'singleblog.html',
+  providers:[BlogListService]
 })
 export class SingleblogPage {
 blogId:number;

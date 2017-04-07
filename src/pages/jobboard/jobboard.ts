@@ -14,7 +14,8 @@ import { JobDependentPage } from '../../pages/job-dependent/job-dependent';
 */
 @Component({
   selector: 'page-jobboard',
-  templateUrl: 'jobboard.html'
+  templateUrl: 'jobboard.html',
+  providers:[JobBoardService]
 })
 export class JobboardPage {
 imageUrl:any;

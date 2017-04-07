@@ -12,7 +12,8 @@ import { ServiceRequestService } from '../../providers/service-request-service';
 */
 @Component({
   selector: 'page-view-service-request',
-  templateUrl: 'view-service-request.html'
+  templateUrl: 'view-service-request.html',
+  providers:[ServiceRequestService]
 })
 export class ViewServiceRequestPage {
 imageUrl:any;

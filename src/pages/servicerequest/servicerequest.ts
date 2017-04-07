@@ -13,7 +13,8 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 */
 @Component({
   selector: 'page-servicerequest',
-  templateUrl: 'servicerequest.html'
+  templateUrl: 'servicerequest.html',
+  providers:[ServiceRequestService]
 })
 export class ServicerequestPage {
 imageUrl:any;

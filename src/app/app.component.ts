@@ -99,7 +99,6 @@ export class MyApp {
         }
     });
 
-
     this.initializeApp();
     
   }
@@ -119,7 +118,7 @@ export class MyApp {
           
           let confirmAlert = this.alertCtrl.create({
           title: 'Log Out',
-          message: "Confirm Logout",
+          subTitle: "Confirm Logout",
           buttons: [{
             text: 'NO',
             handler: () => {

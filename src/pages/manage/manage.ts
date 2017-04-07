@@ -9,8 +9,7 @@ import { CommunityServices } from '../../providers/community-services';
 
 @Component({
   selector: 'page-manage',
-  templateUrl: 'manage.html',
-  providers:[CommunityServices]
+  templateUrl: 'manage.html'
 })
 export class ManagePage {
   manageLists:boolean;
@@ -24,14 +23,7 @@ export class ManagePage {
   user_id:any;
   token:any;
   constructor(public alertCtrl: AlertController, public nav: NavController,public storage:Storage, public navParams: NavParams,public toastCtrl: ToastController,public loadingCtrl: LoadingController,public communityServices: CommunityServices) {
-   this.nav=nav;
-   this.storage.ready().then(() => {
-      storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      storage.get('id').then((id) => { this.user_id=id;});
-      storage.get('token').then((token) => { this.token=token; 
-       this.manageDetail();
-      })
-    });   
+   this.nav=nav;  
            
     }
    showConfirm(DeleteId) {
@@ -117,8 +109,14 @@ export class ManagePage {
       toast.present();
    }
 
-   ionViewDidEnter(){
-    this.manageDetail();
+   ionViewWillEnter(){
+     this.storage.ready().then(() => {
+      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      this.storage.get('id').then((id) => { this.user_id=id;});
+      this.storage.get('token').then((token) => { this.token=token; 
+       this.manageDetail();
+      })
+    });   
   }
   public dashboardPage()
   {

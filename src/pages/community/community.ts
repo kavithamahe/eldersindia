@@ -11,8 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser/';
 
 @Component({
   selector: 'page-community',
-  templateUrl: 'community.html',
-  
+  templateUrl: 'community.html'
 })
 
 export class CommunityPage {

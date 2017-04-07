@@ -10,13 +10,13 @@ import { Ng2CompleterModule } from "ng2-completer";
 import { LoginPage } from '../pages/login/login';
 import { AppConfig } from '../providers/app-config';
 import { LoginUser } from '../providers/login-user';
-import { ConnectionsService } from '../providers/connections-service';
-import { MessagesService } from '../providers/messages-service';
-import { JobBoardService } from '../providers/job-board-service';
-import { ServiceRequestService } from '../providers/service-request-service';
-import { BlogListService } from '../providers/blog-list-service';
-import { NewsService } from '../providers/news-service';
-import { EventsService } from '../providers/events-service';
+// { ConnectionsService } from '../providers/connections-service';
+//import { MessagesService } from '../providers/messages-service';
+//import { JobBoardService } from '../providers/job-board-service';
+//import { ServiceRequestService } from '../providers/service-request-service';
+//import { BlogListService } from '../providers/blog-list-service';
+//import { NewsService } from '../providers/news-service';
+//import { EventsService } from '../providers/events-service';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { ConnectionsPage } from '../pages/connections/connections';
 import { JobboardPage } from '../pages/jobboard/jobboard';
@@ -153,6 +153,7 @@ import { ServiceProvider } from '../providers/service-provider';
     EditProfilePage,
     ChangePasswordPage
   ],
-    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
+    //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
 })
 export class AppModule {}

@@ -30,26 +30,31 @@ base64Image:any;
 avatar:any="";
 file: File;
 imageURL:any;
-user_dob:any
+user_dob:any;
+updateData:any;
+
 
   constructor(public storage:Storage,public loadingCtrl: LoadingController,public formBuilder:FormBuilder,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
 
+      this.profileData = navParams.get("profileData");
+      
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;
-        this.avatar = this.profileData.avatar;
+      this.avatar = this.profileData.avatar;
       this.base64Image = this.imageURL+this.profileData.avatar;
       console.log(this.base64Image);
     });
 
     });
-      this.profileData = navParams.get("profileData");
+      
       this.user_dob = this.profileData.dob;//this.getDate(this.profileData.dob);
 
       this.user_type = this.profileData.user_type;
+      // this.gender = this.profileData.gender;
      this.edit_profile_Form = formBuilder.group({
         name: [this.profileData.name,Validators.compose([Validators.required])],
         designation: [{value:this.profileData.designation,disabled: true},Validators.compose([Validators.minLength(3), Validators.required])],
-        gender: ["male",Validators.compose([Validators.required])],
+        gender: [this.profileData.gender,Validators.compose([Validators.required])],
         mobile_number: [this.profileData.mobile,Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.required])],
         location: [{value:this.profileData.locationName,disabled:true},Validators.compose([Validators.required])],
         // dob: ['',Validators.compose([Validators.required])],
@@ -86,8 +91,14 @@ user_dob:any
 
  updateProfile(){
     let data = this.edit_profile_Form.value;
-    let updateData = {name: data.name ,mobile:data.mobile_number,dob:this.user_dob ,app:"",avatar1:this.avatar};
-    this.providerService.webServiceCall(`myaccountEdit`,updateData)
+//     if(this.user_type == 'elder'){
+this.updateData = {name: data.name,gender:data.gender,mobile:data.mobile_number,dob:this.user_dob ,app:"",avatar1:this.avatar};
+//     }else{
+// this.updateData = {name: data.name,mobile:data.mobile_number,dob:this.user_dob ,app:"",avatar1:this.avatar};
+    // }
+    // 
+    
+    this.providerService.webServiceCall(`myaccountEdit`,this.updateData)
     .subscribe(data=>{
       console.log(data);
       this.dismiss();

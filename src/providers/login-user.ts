@@ -43,6 +43,7 @@ rootUrl:any;
   }
     // setting user on login 
   currentUser(user: string) {
+    console.log("user logged:",user);
     this.userSource.next(user);
   }
 }

@@ -15,22 +15,24 @@ headers;
 token:string;
 options:any;
 rootUrl:any;
-user_id:number;
-
-    constructor(public http: Http, public storage:Storage) {
-    this.storage.ready().then(() => {
+user_id:any;
+  constructor(public http: Http,public storage:Storage) {
+   this.storage.ready().then(() => {
+     storage.get('id').then((id) => { this.user_id=id;
+       });
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
     this.headers.append('Authorization', 'Bearer ' + this.token);
     this.options = new RequestOptions({ headers: this.headers });
-       })    
-    storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; });
-    storage.get('id').then((id) => { this.user_id=id; });
+     })    
+   
+     storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; });
    });
   }
-
-  allConnections() {  
+  
+  allConnections() 
+  {
    let _request= {"user_id":this.user_id,"searchValue":""};
     return this.http.post(this.rootUrl+'getConnectionList',_request,this.options)
       .map(res => res.json()); 
