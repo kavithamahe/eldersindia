@@ -60,7 +60,7 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 
 import { Ionic2RatingModule } from 'ionic2-rating';
-import { ServiceProvider } from '../providers/service-provider';
+// import { ServiceProvider } from '../providers/service-provider';
 
 
 
@@ -153,6 +153,6 @@ import { ServiceProvider } from '../providers/service-provider';
     EditProfilePage,
     ChangePasswordPage
   ],
-    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
+    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceRequestService,Storage] // Add GithubUsers provider
 })
 export class AppModule {}

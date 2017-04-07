@@ -12,7 +12,8 @@ import { ServiceProvider } from '../../providers/service-provider';
 */
 @Component({
   selector: 'page-edit-profile',
-  templateUrl: 'edit-profile.html'
+  templateUrl: 'edit-profile.html',
+  providers:[ServiceProvider]
 })
 export class EditProfilePage {
 
@@ -36,7 +37,7 @@ user_dob:any
 
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;
-        this.avatar = this.profileData.avatar;
+      this.avatar = this.profileData.avatar;
       this.base64Image = this.imageURL+this.profileData.avatar;
       console.log(this.base64Image);
     });

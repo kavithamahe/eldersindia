@@ -150,7 +150,7 @@
     <p>{{vendorList?.vendorDetails?.contact_name}}</p>
     <p>{{vendorList?.vendorDetails?.contact_number}}</p>
       </div>
-	   <div [hidden]=(!vendorList?.vendorDetails?.address)>
+	   <div *ngIf(!vendorList?.vendorDetails?.address)>
 			<p>"No Address Deatails To Display"</p>		  
       </div>
 	   </ion-col>
