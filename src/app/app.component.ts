@@ -59,7 +59,7 @@ export class MyApp {
       userData => {
         this.user_logged = userData;
         console.log("from login page:",this.user_logged)
-        if(this.user_logged == 'elder'){
+        if(this.user_logged == 'sponsor'){
           this.pages = [];
           this.pages.push(
                           { title: 'Dashboard', component: DashboardPage },      
