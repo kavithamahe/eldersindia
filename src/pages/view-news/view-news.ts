@@ -12,7 +12,8 @@ import { NewsService } from '../../providers/news-service';
 */
 @Component({
   selector: 'page-view-news',
-  templateUrl: 'view-news.html'
+  templateUrl: 'view-news.html',
+  providers:[NewsService]
 })
 export class ViewNewsPage {
 token:string;

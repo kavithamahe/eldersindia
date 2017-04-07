@@ -14,7 +14,8 @@ import { JobDependentPage } from '../../pages/job-dependent/job-dependent';
 */
 @Component({
   selector: 'page-singlejob',
-  templateUrl: 'singlejob.html'
+  templateUrl: 'singlejob.html',
+  providers:[JobBoardService]
 })
 export class SinglejobPage {
 jobId:number;

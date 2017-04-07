@@ -13,7 +13,8 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 */
 @Component({
   selector: 'page-create-blog',
-  templateUrl: 'create-blog.html'
+  templateUrl: 'create-blog.html',
+  providers:[BlogListService]
   
 })
 export class CreateBlogPage {

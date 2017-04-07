@@ -14,7 +14,8 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 */
 @Component({
   selector: 'page-change-password',
-  templateUrl: 'change-password.html'
+  templateUrl: 'change-password.html',
+  providers:[ServiceProvider]
 })
 export class ChangePasswordPage {
 

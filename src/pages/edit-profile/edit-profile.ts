@@ -12,7 +12,8 @@ import { ServiceProvider } from '../../providers/service-provider';
 */
 @Component({
   selector: 'page-edit-profile',
-  templateUrl: 'edit-profile.html'
+  templateUrl: 'edit-profile.html',
+  providers:[ServiceProvider]
 })
 export class EditProfilePage {
 

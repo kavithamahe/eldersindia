@@ -12,7 +12,8 @@ import { EventsService } from '../../providers/events-service';
 */
 @Component({
   selector: 'page-view-events',
-  templateUrl: 'view-events.html'
+  templateUrl: 'view-events.html',
+  providers:[EventsService]
 })
 export class ViewEventsPage {
 token:string;

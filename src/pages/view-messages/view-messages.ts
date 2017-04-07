@@ -13,7 +13,8 @@ import { MessagesService } from '../../providers/messages-service';
 */
 @Component({
   selector: 'page-view-messages',
-  templateUrl: 'view-messages.html'
+  templateUrl: 'view-messages.html',
+  providers:[MessagesService]
 })
 export class ViewMessagesPage {
 messages:any;

@@ -15,7 +15,8 @@ import { MessagesService } from '../../providers/messages-service';
 */
 @Component({
   selector: 'page-create-message',
-  templateUrl: 'create-message.html'
+  templateUrl: 'create-message.html',
+  providers:[MessagesService]
 })
 export class CreateMessagePage {
 jobId:number;

@@ -13,7 +13,8 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 */
 @Component({
   selector: 'page-applied-jobs',
-  templateUrl: 'applied-jobs.html'
+  templateUrl: 'applied-jobs.html',
+  providers:[JobBoardService]
 })
 export class AppliedJobsPage {
 appliedJobsList:any;

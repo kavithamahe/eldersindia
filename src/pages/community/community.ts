@@ -12,7 +12,7 @@ import { DomSanitizer } from '@angular/platform-browser/';
 @Component({
   selector: 'page-community',
   templateUrl: 'community.html',
-  
+  providers:[CommunityServices]
 })
 
 export class CommunityPage {

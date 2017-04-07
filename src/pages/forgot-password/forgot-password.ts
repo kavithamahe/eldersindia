@@ -10,7 +10,8 @@ import { ServiceProvider } from '../../providers/service-provider';
 */
 @Component({
   selector: 'page-forgot-password',
-  templateUrl: 'forgot-password.html'
+  templateUrl: 'forgot-password.html',
+  providers:[ServiceProvider]
 })
 
 export class ForgotPasswordPage {

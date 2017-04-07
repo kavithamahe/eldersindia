@@ -17,7 +17,8 @@ import { ForgotPasswordPage } from '../forgot-password/forgot-password';
   Ionic pages and navigation.
 */
 @Component({
-   templateUrl: 'login.html'
+   templateUrl: 'login.html',
+   providers:[LoginUser]
 })
 export class LoginPage {
   loginuser: Login[];
@@ -93,9 +94,10 @@ export class LoginPage {
          this.storage.set('imageurl',this.appConfig.setImageurl());
          this.storage.set('rooturl',this.appConfig.setrooturl());
          this.storage.set('islogin',1);
+          this.navCtrl.setRoot(DashboardPage);
        })
         // alert(loginuser['token']);
-        this.navCtrl.setRoot(DashboardPage);
+       
     },
 
     (err) => { 
