@@ -31,13 +31,28 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
+  
+ 
+   <!--  <ion-fab center edge>
+  <button ion-fab mini color="primary" (click)="addElder()"> <ion-icon name="md-person-add">
+    
+  </ion-icon>
+</button>
+</ion-fab> -->
+
 <br/>
- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-    <div>
-     <button clear style="color:red;" ion-button icon-only round (click)="addElder()">
+ <ion-searchbar (ionInput)="getItems($event)">
+   
+ </ion-searchbar>
+ <div right edge>
+    <button ion-fab mini (click)="addElder()"><ion-icon name="md-person-add"></ion-icon></button>
+    </div>
+   <!--  <div>
+     <button style="color:red;" ion-button icon-only round end (click)="addElder()">
       <ion-icon name="ios-person-add"></ion-icon> 
     </button>
-    </div>
+    </div> -->
+
   <div *ngFor="let manage of manages; let i=index">
    
         <ion-card class="des-card">

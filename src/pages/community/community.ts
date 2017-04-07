@@ -149,6 +149,7 @@ showConfirm(DeleteId) {
     this.communityServices.joinCommunity(id).subscribe(users => {
       this.showToast(users.result);
       this.communityDetail(id);
+      this.nav.pop();
   },
    err =>{
     this.communityServices.showErrorToast(err);
@@ -211,11 +212,7 @@ showConfirm(DeleteId) {
    this.communityServices.addLike(id).subscribe(data =>{
      this.showToast(data.result);
       this.communityList(this.community_id);
-   },
-     err =>{
-    
-    this.communityServices.showErrorToast(err);
-  })
+   })
     loader.dismiss();
   }
   

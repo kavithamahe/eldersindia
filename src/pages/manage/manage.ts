@@ -8,7 +8,8 @@ import { CommunityServices } from '../../providers/community-services';
 
 @Component({
   selector: 'page-manage',
-  templateUrl: 'manage.html'
+  templateUrl: 'manage.html',
+  providers:[CommunityServices]
 })
 export class ManagePage {
   manageLists:boolean;
@@ -56,11 +57,7 @@ export class ManagePage {
       this.communityServices.manageLists().subscribe(manages =>{
      
       this.manages=manages.result.info.data;
-     },
-     err =>{
-    
-    this.communityServices.showErrorToast(err);
-  })
+     })
       loader.dismiss();
    }
 
