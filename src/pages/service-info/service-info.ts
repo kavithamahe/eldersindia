@@ -13,7 +13,8 @@ import { ServiceProvider } from '../../providers/service-provider';
 */
 @Component({
   selector: 'page-service-info',
-  templateUrl: 'service-info.html'
+  templateUrl: 'service-info.html',
+  providers:[ServiceProvider]
 })
 export class ServiceInfoPage {
 

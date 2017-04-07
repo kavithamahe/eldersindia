@@ -60,7 +60,7 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 
 import { Ionic2RatingModule } from 'ionic2-rating';
-// import { ServiceProvider } from '../providers/service-provider';
+import { ServiceProvider } from '../providers/service-provider';
 
 
 
