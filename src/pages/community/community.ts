@@ -212,7 +212,19 @@ showConfirm(DeleteId) {
    this.communityServices.addLike(id).subscribe(data =>{
      this.showToast(data.result);
       this.communityList(this.community_id);
-   })
+   },
+     err =>{
+        if(err.status===401){
+      this.showToast(JSON.parse(err._body).error);
+    }
+    else if(err.status===500){
+      this.communityList(this.community_id);
+    }
+    else{
+      this.communityServices.showErrorToast(err);  
+    }
+    
+  })
     loader.dismiss();
   }
   
