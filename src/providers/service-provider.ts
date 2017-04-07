@@ -29,6 +29,7 @@ this.storage.ready().then(() => {
     this.head = new RequestOptions({ headers: this.headers });
        })    
     storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; });
+    console.log("constructor call");
    });  
 }
 

@@ -15,7 +15,8 @@ import { CreateBlogPage } from '../../pages/create-blog/create-blog';
 */
 @Component({
   selector: 'page-blogs',
-  templateUrl: 'blogs.html'
+  templateUrl: 'blogs.html',
+  providers:[BlogListService]
 })
 export class BlogsPage {
 blogsList:any;

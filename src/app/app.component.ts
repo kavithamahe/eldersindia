@@ -99,7 +99,6 @@ export class MyApp {
         }
     });
 
-
     this.initializeApp();
     
   }
@@ -116,6 +115,7 @@ export class MyApp {
         if (this.nav.canGoBack()){ //Can we go back?
           this.nav.pop();
         }else{
+<<<<<<< HEAD
                 
                 let confirmAlert = this.alertCtrl.create({
                 title: 'Log Out',
@@ -139,6 +139,31 @@ export class MyApp {
               });
               confirmAlert.present();
               }
+=======
+          
+          let confirmAlert = this.alertCtrl.create({
+          title: 'Log Out',
+          subTitle: "Confirm Logout",
+          buttons: [{
+            text: 'NO',
+            handler: () => {
+              //TODO: Your logic here
+              // self.nav.push(PushMessagePage, {message: data.message});
+              // this.platform.exitApp(); //Exit from app
+              this.nav.setRoot(DashboardPage);
+            }
+          }, {
+            text: 'OK',
+            handler: () => {
+              //TODO: Your logic here
+              // self.nav.push(PushMessagePage, {message: data.message});
+              this.platform.exitApp(); //Exit from app
+            }
+          }]
+        });
+        confirmAlert.present();
+        }
+>>>>>>> 502922fa8ee9ee56e515f88cce71b8393f2e3803
       });
     });
   }

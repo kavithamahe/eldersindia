@@ -26,6 +26,7 @@ token:any;
 
   constructor(public storage:Storage,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {  }
 
+
   loadMyProfile(){
     this.providerService.webServiceCall(`myaccount`,"")
   .subscribe(data =>{

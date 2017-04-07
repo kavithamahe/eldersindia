@@ -14,10 +14,12 @@ import { LoginPage } from '../../pages/login/login';
   templateUrl: 'logout.html'
 })
 export class LogoutPage {
-
+token:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage) {    
-  	this.storage.ready().then(() => {
+  	this.storage.clear();
+    this.storage.ready().then(() => {
      this.storage.clear();
+     this.storage.set('id','');
      this.navCtrl.setRoot(LoginPage);
  });
    }

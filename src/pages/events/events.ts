@@ -13,7 +13,8 @@ import { EventsService } from '../../providers/events-service';
 */
 @Component({
   selector: 'page-events',
-  templateUrl: 'events.html'
+  templateUrl: 'events.html',
+  providers:[EventsService]
 })
 export class EventsPage {
 token:string;

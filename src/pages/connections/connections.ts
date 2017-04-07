@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-import { ConnectionsService } from '../../providers/connections-service';
+
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { ConnectionsService } from '../../providers/connections-service';
 /*
   Generated class for the Connections page.
 
@@ -11,27 +12,31 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
   Ionic pages and navigation.
 */
 @Component({
-  templateUrl: 'connections.html'
+  templateUrl: 'connections.html',
+  providers:[ConnectionsService]
 })
 export class ConnectionsPage {
 connections:string;  
 messages:any;
-token:string;
+token:string='';
 imageUrl:string;
-allConnectionsInfo:any;
-receivedRquestInfo:any;
-orgReceivedRquestInfo:any;
-connectionStatusInfo:any;
-orgAllConnectionsInfo:any;
-infiniteReceivedRquestInfo:any;
+allConnectionsInfo:any=[];
+receivedRquestInfo:any=[];
+orgReceivedRquestInfo:any=[];
+connectionStatusInfo:any=[];
+orgAllConnectionsInfo:any=[];
+infiniteReceivedRquestInfo:any=[];
 nextURL;any;
+user_id:any;
    constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public connectionsService:ConnectionsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.connections="all";
     this.messages="inbox";
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+       storage.get('id').then((id) => { this.user_id=id;
+       });
+
       storage.get('token').then((token) => { this.token=token; 
-      // this.blogId=navParams.get("blogId");
       this.onInit();
       })
     });

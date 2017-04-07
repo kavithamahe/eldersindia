@@ -15,7 +15,8 @@ import { CreateMessagePage } from '../../pages/create-message/create-message';
 */
 @Component({
   selector: 'page-messages',
-  templateUrl: 'messages.html'
+  templateUrl: 'messages.html',
+  providers:[MessagesService]
 })
 export class MessagesPage {
 messages:any;

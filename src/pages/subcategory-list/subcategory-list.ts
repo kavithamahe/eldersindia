@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import { ServiceInfoPage } from '../service-info/service-info';
 import { ModalContentPage } from '../modal-page/modal-page';
-//import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ServiceProvider } from '../../providers/service-provider';
 /*
   Generated class for the SubcategoryList page.
@@ -110,7 +110,10 @@ loadSubcategoryList(subCategory_id,location_id){
     
     this.modal.present();
   }
-
+  public dashboardPage()
+  {
+    this.navCtrl.setRoot(DashboardPage);
+  }
   serviceRequestCall(service_request_data,vendorId){
    
     let requestServiceData = {"location_id":this.location_id,"vendor_id":vendorId, "category_id":this.serviceData.category_id, "sub_category_id":this.serviceData.sub_category_id, "service_id":this.serviceData.service_id, "problem":service_request_data.problem, "datetime":service_request_data.datetime, "dependentid":service_request_data.dependentId, "mobile":service_request_data.mobile_no}

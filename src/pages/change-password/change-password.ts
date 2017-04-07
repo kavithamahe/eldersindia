@@ -14,7 +14,8 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 */
 @Component({
   selector: 'page-change-password',
-  templateUrl: 'change-password.html'
+  templateUrl: 'change-password.html',
+  providers:[ServiceProvider]
 })
 export class ChangePasswordPage {
 
@@ -40,6 +41,8 @@ change_password_Form: FormGroup;
    }
 
   submit() {
+    if(this.change_password_Form.valid){
+
     if(this.change_password_Form.value.newPassword != this.change_password_Form.value.re_enterPassword){
       this.password_submit = true;
       this.submitAttempt = false;
@@ -63,8 +66,10 @@ change_password_Form: FormGroup;
 		      
 	    })
     } 
+  }else{
+    this.submitAttempt = true;
   }
-
+}
   dismiss(){
   	this.password_submit = false;
   	this.submitAttempt = false;

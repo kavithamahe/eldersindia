@@ -30,7 +30,7 @@ rootUrl:any;
   serviceRequestList() 
   {
   
-   let _request= {"searchValue":"","status":""};
+   let _request= {"info":{"list":true,"searchValue":"","status":""}};
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
   }
