@@ -52,10 +52,10 @@ user_dob:any
         designation: [{value:this.profileData.designation,disabled: true},Validators.compose([Validators.minLength(3), Validators.required])],
         gender: ["male",Validators.compose([Validators.required])],
         mobile_number: [this.profileData.mobile,Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.required])],
-        location: [this.profileData.locationName,Validators.compose([Validators.required])],
+        location: [{value:this.profileData.locationName,disabled:true},Validators.compose([Validators.required])],
         // dob: ['',Validators.compose([Validators.required])],
-        email: [this.profileData.email,Validators.compose([Validators.minLength(6), Validators.required])],
-        user_type: [this.profileData.user_type,Validators.compose([Validators.required])]        
+        email: [{value:this.profileData.email,disabled:true},Validators.compose([Validators.minLength(6), Validators.required])],
+        user_type: [{value:this.profileData.user_type,disabled:true},Validators.compose([Validators.required])]        
     });
      
    

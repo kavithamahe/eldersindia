@@ -26,12 +26,7 @@ token:any;
 
   constructor(public storage:Storage,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
   
-  this.storage.ready().then(() => {
-      storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;});
-      storage.get('token').then((token) => { this.token=token; 
-      this.loadMyProfile();
-      })
-    });
+  
   }
 
   loadMyProfile(){
@@ -61,6 +56,11 @@ token:any;
   }
   
   ionViewWillEnter(){
-    this.loadMyProfile();
+    this.storage.ready().then(() => {
+      this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;});
+      this.storage.get('token').then((token) => { this.token=token; 
+      this.loadMyProfile();
+      })
+    });
   }
 }

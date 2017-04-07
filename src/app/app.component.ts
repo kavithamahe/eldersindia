@@ -1,6 +1,6 @@
-import { Component, ViewChild, Input } from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 
-import { Platform, MenuController, Nav } from 'ionic-angular';
+import { Platform, MenuController, Nav, AlertController } from 'ionic-angular';
 
 import { StatusBar, Splashscreen } from 'ionic-native';
 
@@ -50,7 +50,8 @@ export class MyApp {
   constructor(
     public platform: Platform,
     public menu: MenuController,
-    private userLogin: LoginUser
+    private userLogin: LoginUser,
+    public alertCtrl: AlertController
   ) {
 // set our app's pages on user based
 
@@ -58,7 +59,7 @@ export class MyApp {
       userData => {
         this.user_logged = userData;
         console.log("from login page:",this.user_logged)
-        if(this.user_logged == 'elder'){
+        if(this.user_logged == 'sponsor'){
           this.pages = [];
           this.pages.push(
                           { title: 'Dashboard', component: DashboardPage },      
@@ -104,11 +105,41 @@ export class MyApp {
   }
 
   initializeApp() {
+
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
+      this.platform.registerBackButtonAction(() => {
+        // let nav = this.app.getActiveNav();
+        if (this.nav.canGoBack()){ //Can we go back?
+          this.nav.pop();
+        }else{
+          
+          let confirmAlert = this.alertCtrl.create({
+          title: 'Log Out',
+          message: "Confirm Logout",
+          buttons: [{
+            text: 'NO',
+            handler: () => {
+              //TODO: Your logic here
+              // self.nav.push(PushMessagePage, {message: data.message});
+              // this.platform.exitApp(); //Exit from app
+              this.nav.setRoot(DashboardPage);
+            }
+          }, {
+            text: 'OK',
+            handler: () => {
+              //TODO: Your logic here
+              // self.nav.push(PushMessagePage, {message: data.message});
+              this.platform.exitApp(); //Exit from app
+            }
+          }]
+        });
+        confirmAlert.present();
+        }
+      });
     });
   }
 

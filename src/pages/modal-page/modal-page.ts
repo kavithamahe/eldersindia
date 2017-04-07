@@ -14,8 +14,7 @@ import { Storage } from '@ionic/storage';
 */
 @Component({
   selector: 'page-modal-page',
-  templateUrl: 'modal-page.html',
-  providers:[ServiceProvider]
+  templateUrl: 'modal-page.html'
 })
 export class ModalContentPage {
 

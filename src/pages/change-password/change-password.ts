@@ -35,8 +35,14 @@ change_password_Form: FormGroup;
     });
 
    }
+   reEnter(){
+     console.log("re enter password is focused..!");
+     this.password_submit = false;
+   }
 
   submit() {
+    if(this.change_password_Form.valid){
+
     if(this.change_password_Form.value.newPassword != this.change_password_Form.value.re_enterPassword){
       this.password_submit = true;
       this.submitAttempt = false;
@@ -51,11 +57,19 @@ change_password_Form: FormGroup;
           this.dismiss();
 	    },
 		    error =>{
-		      this.service.showErrorToast(error);
+          if(error.status===401){
+      this.service.showToast(JSON.parse(error._body).error);  
+      }
+      else{
+       this.service.showToast("Please try again later..!");   
+      }
+		      
 	    })
     } 
+  }else{
+    this.submitAttempt = true;
   }
-
+}
   dismiss(){
   	this.password_submit = false;
   	this.submitAttempt = false;
@@ -67,6 +81,10 @@ change_password_Form: FormGroup;
   {
     this.navCtrl.setRoot(DashboardPage);
   }
+
+  // showPassword(input: any): any {
+  //  input.type = input.type === 'password' ?  'text' : 'password';
+  // }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChangePasswordPage');

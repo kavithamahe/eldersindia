@@ -8,8 +8,7 @@ import { CommunityServices } from '../../providers/community-services';
 
 @Component({
   selector: 'page-communitymessage',
-  templateUrl: 'communitymessage.html',
-  providers:[CommunityServices]
+  templateUrl: 'communitymessage.html'
 })
 export class CommunitymessagePage {
 	 authForm : FormGroup;

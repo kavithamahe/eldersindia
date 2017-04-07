@@ -17,8 +17,7 @@ import { ForgotPasswordPage } from '../forgot-password/forgot-password';
   Ionic pages and navigation.
 */
 @Component({
-   templateUrl: 'login.html',
-   providers:[LoginUser]
+   templateUrl: 'login.html'
 })
 export class LoginPage {
   loginuser: Login[];

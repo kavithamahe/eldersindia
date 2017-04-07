@@ -11,8 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser/';
 
 @Component({
   selector: 'page-community',
-  templateUrl: 'community.html',
-  providers:[CommunityServices]
+  templateUrl: 'community.html'
 })
 
 export class CommunityPage {
@@ -37,7 +36,7 @@ export class CommunityPage {
     community_id:any;
     nextPageURL:any='';
     eventScrollLists:any;
-  
+    
   constructor(public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
     this.nav=nav;
 
@@ -78,27 +77,6 @@ showConfirm(DeleteId) {
     confirm.present();
   }
 
-
- // doInfinite(infiniteScroll) {
- //    console.log('Begin async operation');
-
- //    setTimeout(() => {
- //      for (let i = 0; i < 30; i++) {
- //        this.users.push( this.users.length );
- //      }
-
- //      console.log('Async operation has ended');
- //      infiniteScroll.complete();
- //    }, 500);
- //  }
-
-// communityDetail(){
-  
-//       this.communityServices.communityDetail().subscribe(detail =>{
-//       this.detail = detail.result.info.members.data;
-//    });
-       
-//   }
   accessGallery(){
    Camera.getPicture({
      sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
@@ -250,6 +228,8 @@ showConfirm(DeleteId) {
    }
 
   sendPost(id1){
+    if(this.comment != ""){
+
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
      this.communityServices.sendPosts(id1,this.comment).subscribe(datas =>{
@@ -262,11 +242,15 @@ showConfirm(DeleteId) {
     this.communityServices.showErrorToast(err);
   })
      loader.dismiss();
+   }else{
+     this.showToast("Enter Comments and Post");
+   }
+     
   }
 
   postCommunity(id){
-    let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
-    loader.present();
+     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+     loader.present();
      this.communityServices.postCommunity(id,this.base64Image,this.videoUrl,this.post).subscribe(datas =>{
      this.showToast(datas.result);
      this.communityList(id);

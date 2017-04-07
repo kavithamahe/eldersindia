@@ -10,8 +10,7 @@ import { CommunityServices } from '../../providers/community-services';
 @Component({
 
   selector: 'page-communitylist',
-  templateUrl: 'communitylist.html',
-  providers:[CommunityServices]
+  templateUrl: 'communitylist.html'
 })
 export class CommunitylistPage {
 
