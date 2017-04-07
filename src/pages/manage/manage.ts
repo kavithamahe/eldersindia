@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import { NavController,LoadingController, NavParams,ToastController,AlertController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { EldersPage } from '../elders/elders';
+import { DashboardPage } from '../../pages/dashboard/dashboard';
 
 import { CommunityServices } from '../../providers/community-services';
 
 
 @Component({
   selector: 'page-manage',
-  templateUrl: 'manage.html'
+  templateUrl: 'manage.html',
+  providers:[CommunityServices]
 })
 export class ManagePage {
   manageLists:boolean;
@@ -56,11 +58,7 @@ export class ManagePage {
       this.communityServices.manageLists().subscribe(manages =>{
      
       this.manages=manages.result.info.data;
-     },
-     err =>{
-    
-    this.communityServices.showErrorToast(err);
-  })
+     })
       loader.dismiss();
    }
 
@@ -121,6 +119,10 @@ export class ManagePage {
 
    ionViewDidEnter(){
     this.manageDetail();
+  }
+  public dashboardPage()
+  {
+    this.nav.setRoot(DashboardPage);
   }
 
 

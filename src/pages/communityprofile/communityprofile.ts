@@ -220,35 +220,12 @@ export class CommunityprofilePage {
     this.communityMembers = false;
      this.connectLists = true;
 
-    //  if (this.connectLists) {
-    //     this.connectLists = false;
-       
-    // } else {
-    //    this.connectLists = true;
-    //  }
-     
   }
-//   connectMemberList(id){
-// this. profileCommunity(id);
-// this.memberProfile(id);
-// this.connectLists = false;
-// this.activityLists = true;
 
-
-//   }
   setItems(ev) {
      var val = ev.target.value;
      let id = this.user_id;
    this.connectList(id,val);
-    
-  //   this.communityServices.getConnectLists(val).subscribe(users => {
-  //    this.allConnections=users.result.info.list; 
-  // },
-  //  err =>{
-    
-  //   this.communityServices.showErrorToast(err);
-  // })
-   
   }
   
 

@@ -31,12 +31,12 @@ export class CommunitylistPage {
 
   constructor(public nav: NavController,public storage:Storage, public navParams: NavParams,platform: Platform,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
      this.isAndroid = platform.is('android');
-     this.searchData = "";
+     // this.searchData = "";
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('id').then((id) => { this.id=id; })
       storage.get('token').then((token) => { this.token=token;
-      this.myCommunity(this.searchData);
+      // this.myCommunity(this.searchData);
       })
     });
 
@@ -46,7 +46,8 @@ export class CommunitylistPage {
     this.nav.push(CommunityPage,{community_id:id});
   }
   myCommunity(searchData){
-    
+    this.communitylists =[];
+    this.categoryLists=[]
       this.communityServices.myCommunity(searchData).
       subscribe(mycommunity => {
       this.communitylists = mycommunity.result.info.data;
@@ -60,9 +61,10 @@ export class CommunitylistPage {
 
   }
 
-  otherCommunity(searchData){
-
-      this.communityServices.recommendedCommunity(searchData).
+  otherCommunity(data){
+      this.communitylists=[];
+      this.categoryLists=[];
+      this.communityServices.recommendedCommunity(data).
       subscribe(mycommunity => {
       this.communitylists = mycommunity.result.info.data;
       this.categoryLists = mycommunity.result.get.communityCategory;
@@ -145,6 +147,9 @@ public dashboardPage()
   {
     this.nav.setRoot(DashboardPage);
   }
-
+ionViewWillEnter (){
+  
+  this.myCommunity("");
+}
 
 }
