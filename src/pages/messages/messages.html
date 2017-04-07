@@ -39,8 +39,8 @@
 
 <div [ngSwitch]="messages">
   <ion-list *ngSwitchCase="'sent'">
-  <ion-card>
-    <ion-item *ngFor="let sent of sentInfo?.data" (click)="viewMessages(sent?.id,'sent')">
+  <ion-card *ngFor="let sent of sentInfo?.data" (click)="viewMessages(sent?.id,'sent')">
+    <ion-item>
     <ion-avatar item-left>
       <img src="{{imageUrl+sent?.avatar}}">
     </ion-avatar>
@@ -52,8 +52,8 @@
   </ion-list>
 
   <ion-list *ngSwitchCase="'inbox'">
-  <ion-card>
-     <ion-item *ngFor="let inbox of inboxInfo?.data" (click)="viewMessages(inbox?.id,'inbox')">
+  <ion-card *ngFor="let inbox of inboxInfo?.data" (click)="viewMessages(inbox?.id,'inbox')">
+     <ion-item>
     <ion-avatar item-left>
       <img src="{{imageUrl+inbox?.avatar}}">
     </ion-avatar>

@@ -148,6 +148,7 @@ showConfirm(DeleteId) {
     this.communityServices.joinCommunity(id).subscribe(users => {
       this.showToast(users.result);
       this.communityDetail(id);
+      this.nav.pop();
   },
    err =>{
     this.communityServices.showErrorToast(err);
@@ -212,8 +213,16 @@ showConfirm(DeleteId) {
       this.communityList(this.community_id);
    },
      err =>{
+        if(err.status===401){
+      this.showToast(JSON.parse(err._body).error);
+    }
+    else if(err.status===500){
+      this.communityList(this.community_id);
+    }
+    else{
+      this.communityServices.showErrorToast(err);  
+    }
     
-    this.communityServices.showErrorToast(err);
   })
     loader.dismiss();
   }

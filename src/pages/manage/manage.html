@@ -1,43 +1,41 @@
 <ion-header>
-  <ion-navbar>
-  <ion-row>
-   <ion-col width-10><div>
-    <button ion-button icon-only menuToggle>
-      <ion-icon name="menu"></ion-icon> 
-    </button>
-    </div>
-    </ion-col>
-    <ion-col width-40><div>
-     <button ion-button icon-only menuToggle>
-      <ion-icon name="home"></ion-icon> 
-    </button>
-    </div>
-    </ion-col>
-    <ion-col width-50 center><div>
-    <ion-title>
-      Manage Dependents
-    </ion-title>
-    </div>
-    </ion-col>
-
-   <!-- <ion-col end>
-	<div>
-     <button clear color="dark" ion-button icon-only (click)="addElder()">
-      <ion-icon name="ios-person-add"></ion-icon> 
-    </button>
-    </div>
-    </ion-col>-->
-    </ion-row>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Manage Dependents</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
+  
+ 
+   <!--  <ion-fab center edge>
+  <button ion-fab mini color="primary" (click)="addElder()"> <ion-icon name="md-person-add">
+    
+  </ion-icon>
+</button>
+</ion-fab> -->
+
 <br/>
- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-    <div>
-     <button clear style="color:red;" ion-button icon-only round (click)="addElder()">
+ <ion-searchbar (ionInput)="getItems($event)">
+   
+ </ion-searchbar>
+ <div right edge>
+    <button ion-fab mini (click)="addElder()"><ion-icon name="md-person-add"></ion-icon></button>
+    </div>
+   <!--  <div>
+     <button style="color:red;" ion-button icon-only round end (click)="addElder()">
       <ion-icon name="ios-person-add"></ion-icon> 
     </button>
-    </div>
+    </div> -->
+
   <div *ngFor="let manage of manages; let i=index">
    
         <ion-card class="des-card">

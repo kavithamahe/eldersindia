@@ -267,7 +267,10 @@ page-service-info .service_request							{boder:none !important;}
 .likecolor													{color:#1e90ff !important;}
 .time-datem													{color:#666 !important; font-size:12px !important;}
 .edit-ld													{}
+.personal-d p												{box-shadow:none !important; font-size:17px !important; color:#025fa9 !important; text-align:center;margin:0px !important;}
 .alert-md .alert-sub-title									{color:#fff !important;}
+.add-btn													{background:#1D6AB2; font-size:13px; color:#fff; border-radius:25px; width:90%;}
+.rem-btn													{background:#ccc;font-size:13px; color:#333; border-radius:25px;width:90%;}
 .alert-ios .alert-sub-title									{color:#fff !important;}
 .list-mess													{background:#E6E6FA;border-bottom:1px solid #f8f8ff !important;font-size:15px;margin:0 !important;text-transform:capitalize;}
 .list-mess .button-inner									{text-align:left;}
@@ -300,6 +303,7 @@ box-shadow:         0px 0px 3px 0px rgba(50, 50, 50, 0.17);}
 .hooter > i													{color:#DEB887 !important;}
 .hooter > i													{color:#DEB887 !important;}
 .call-sponsor > i 											{color:	#9370DB !important;}
+.text-input-ios												{font-size:15px !important;}
 .dashboard > ion-row ion-col:hover							{background:#2c3e50;}
 .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{}
 .button-md-secondary										{background:none; color:#333;box-shadow:none;}
@@ -316,7 +320,7 @@ box-shadow:         0px 0px 3px 0px rgba(50, 50, 50, 0.17);}
 page-my-profile ion-col										{ border-left:1px solid #F0F8FF !important;}
 .item-md.item-input.ng-valid.input-has-value:not(.input-has-active) .item-inner{ border-bottom:none;}
 .select-brd													{border:1px solid #ccc !important; width:95%;border-radius:25px;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
-															  color:#555;font-size:18px;font-weight:400;margin-left:8px !important; padding:7px 10px 10px 20px !important;}
+															  color:#555;font-size:18px;font-weight:400;margin-left:8px !important; padding:7px 10px 9px 20px !important;}
 .rating														{padding-left:0px !important; margin:0px!important; padding-top:5px;}
 ul.rating li												{padding:5px 0px !important;}
 .select-text												{font-size:15px !important;}
