@@ -38,7 +38,7 @@
           </ion-list>
         </ion-card>
         <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-        <ion-card style="position:relative;" *ngFor="let community of communitylists; let i= index">
+        <ion-card style="position:relative;" *ngFor="let community of communitylists; let i= index" (click)="getPost(community.id)">
         <div class="community-img">
           <img  [src]="imageUrl+community?.banner" (click)="getPost(community.id)"
           [hidden]="!community?.banner" />
@@ -61,7 +61,7 @@
              </ion-col>
              </ion-row> 
             </ion-card-title>
-              <p class="ssdsd">{{community.description}}</p>
+              <p class="ssdsd">{{community.description | words : 60 : '...'}}</p>
           </ion-card-content>
         </ion-card>
       </ion-list>
@@ -104,7 +104,7 @@
              </ion-col>
              </ion-row> 
             </ion-card-title>
-              <p class="ssdsd">{{community.description}}</p>
+              <p class="ssdsd">{{community.description | words : 60 : '...'}}</p>
           </ion-card-content>
         </ion-card>
       </ion-list>
