@@ -142,8 +142,9 @@ public dashboardPage()
     this.nav.setRoot(DashboardPage);
   }
 ionViewWillEnter (){
-  
+
   this.storage.ready().then(() => {
+
       this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       this.storage.get('id').then((id) => { this.id=id; })
       this.storage.get('token').then((token) => { this.token=token;

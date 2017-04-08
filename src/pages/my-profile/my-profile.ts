@@ -23,10 +23,8 @@ user_type:any ;
 imageURL:any;
 token:any;
 
-  constructor(public storage:Storage,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
-  
-  
-  }
+  constructor(public storage:Storage,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {  }
+
 
   loadMyProfile(){
     this.providerService.webServiceCall(`myaccount`,"")

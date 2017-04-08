@@ -13,14 +13,14 @@
 </ion-header>
 
 <ion-content padding style="background:#fff;">
-<ion-row style=" border-bottom:1px solid #ccc;">
-<ion-col>
-	<ion-title>
-    <img alt="logo" height="50" width="50" class="mar-top" style=" border:1px solid #ccc;"  [src]="imageURL+profileData?.logo" > 
-   </ion-title>
-   </ion-col>
-   <ion-col><p class="edit-pro">{{profileData?.company_name}}</p></ion-col>
-   </ion-row>
+	<ion-row style=" border-bottom:1px solid #ccc;" *ngIf="user_type =='sponsor' ">
+		<ion-col>
+			<ion-title>
+				<img alt="logo" height="50" width="50" class="mar-top" style=" border:1px solid #ccc;"  [src]="imageURL+profileData?.logo" > 
+			</ion-title>
+		</ion-col>
+		<ion-col><p class="edit-pro">{{profileData?.company_name}}</p></ion-col>
+	</ion-row>
 
 	<form [formGroup]="edit_profile_Form">
 
