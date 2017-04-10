@@ -179,6 +179,7 @@ export class CommunityprofilePage {
    
     this.communityServices.connectMember(user.id,user.name).subscribe(users => {
        this.showToast(users.result.info);
+        this.memberProfile(user.id);
        this.request_sent = true;
 
       },
