@@ -6,9 +6,9 @@
       </button>
     </ion-buttons>
     <ion-buttons left>
-    <button ion-button icon-only (click)="dashboardPage()">
-        <ion-icon name="home"></ion-icon>
-      </button>
+	    <button ion-button icon-only (click)="dashboardPage()">
+	        <ion-icon name="home"></ion-icon>
+	    </button>
     </ion-buttons>
     <ion-title text-center>Community</ion-title>
   </ion-navbar>
@@ -106,13 +106,13 @@
  
 	<ion-card>
 		  	<ion-item>
-			  
-			  		<h2 class="wel-comemem"><i class="fa fa-pencil-square-o"></i> &nbsp;Update Status</h2>
+			 	<h2 class="wel-comemem"><i class="fa fa-pencil-square-o"></i> &nbsp;Update Status
+			 	</h2>
 			</ion-item>
 			  	   <hr>
 			  	<ion-card-content style="padding:0px !important;">
 				
-				      	<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in you mind?"></ion-textarea>
+				      <ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in you mind?"></ion-textarea>
 				  
 		    	</ion-card-content>
 		    		
@@ -135,12 +135,12 @@
 					</ion-row>
 					<ion-row>
 						<ion-col>
-						<div *ngIf(addVideo)>
-							<ion-item  class="video" >
-								<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
-								</ion-input>
-							</ion-item>
-						</div>
+							<div *ngIf(addVideo)>
+								<ion-item  class="video" >
+									<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
+									</ion-input>
+								</ion-item>
+							</div>
 						</ion-col>
 					</ion-row>
 		   			
