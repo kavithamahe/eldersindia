@@ -79,17 +79,17 @@ export class CommunityprofilePage {
     console.log("vidweo url: ",oldURL);
     // http://www.dailymotion.com/video/
   // let url = oldURL.replace("watch?v=", "")
-  let url;
-  url = oldURL.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
+  // let url;
+  // url = oldURL.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
   
-  url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
-  url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
-    url = oldURL.replace("https://www.youtube.com/watch?v=aUN6RPMIoeo","https://www.youtube.com/embed/aUN6RPMIoeo"); 
+  // url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
+  // url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
+  //   url = oldURL.replace("https://www.youtube.com/watch?v=aUN6RPMIoeo","https://www.youtube.com/embed/aUN6RPMIoeo"); 
 
-  url = oldURL.replace("http://www.youtube.com/embed/watch/","http://www.youtube.com/embed/");
-  url = oldURL.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
+  // url = oldURL.replace("http://www.youtube.com/embed/watch/","http://www.youtube.com/embed/");
+  // url = oldURL.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
   // url = oldURL.replace("http://www.youtube.com/embed/watch/", "http://www.youtube.com/embed/")
- return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+ // return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
   accessGallery(){
    Camera.getPicture({
@@ -179,6 +179,7 @@ export class CommunityprofilePage {
    
     this.communityServices.connectMember(user.id,user.name).subscribe(users => {
        this.showToast(users.result.info);
+        this.memberProfile(user.id);
        this.request_sent = true;
 
       },

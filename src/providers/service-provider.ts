@@ -29,12 +29,12 @@ this.storage.ready().then(() => {
     this.head = new RequestOptions({ headers: this.headers });
        })    
     storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; });
-    console.log("constructor call");
+    //console.log("constructor call");
    });  
 }
 
 webServiceCall(serviceName,bodyData){
-  console.log("URL"+this.rootUrl);
+  //console.log("URL"+this.rootUrl);
   return this.http.post(this.rootUrl+serviceName, bodyData, this.head)
     .map(res => res.json());
 }

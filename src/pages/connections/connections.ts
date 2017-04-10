@@ -28,6 +28,8 @@ orgAllConnectionsInfo:any=[];
 infiniteReceivedRquestInfo:any=[];
 nextURL;any;
 user_id:any;
+nextPageURL1:any='';
+allConnectionScrollLists:any=[];
    constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public connectionsService:ConnectionsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.connections="all";
     this.messages="inbox";
@@ -47,9 +49,11 @@ user_id:any;
     loader.present();
     this.connectionsService.allConnections().subscribe(
      (allConnections) => {
-      this.allConnectionsInfo=allConnections.result.info.list;  
-      this.orgAllConnectionsInfo=allConnections.result.info.list;
-      this.nextURL=allConnections.result.info.list.next_page_url;        
+      this.allConnectionsInfo=allConnections.result.info.list.data;  
+      this.orgAllConnectionsInfo=allConnections.result.info.list.data;
+      this.nextPageURL1=allConnections.result.info.list.next_page_url; 
+      console.log("onload");
+      console.log(this.allConnectionsInfo);      
     },
     (err) => { 
         if(err.status===401)
@@ -116,12 +120,12 @@ user_id:any;
     } else {*/
       // Get the searched users from github
       this.connectionsService.searchConnection(term).subscribe(searchConnection => {
-        this.allConnectionsInfo= searchConnection.result.info.list;
+        this.allConnectionsInfo= searchConnection.result.info.list.data;
       });
    // }
   }
 
-  public doInfinite1(infiniteScroll) {
+  public doInfinite2(infiniteScroll) {
     console.log('Begin async operation');
     if(this.nextURL==null)
     {
@@ -160,5 +164,48 @@ user_id:any;
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);
+  }
+   doInfinite1(infiniteScroll) {
+     console.log("scroll call");
+      console.log(this.allConnectionsInfo);
+    setTimeout(() => {      
+      if(this.nextPageURL1!=null && this.nextPageURL1!='')
+      {
+       this.allConnectionScroll();
+      }
+      else{
+          console.log("end scroll");
+          console.log(this.allConnectionsInfo);
+        infiniteScroll.enable(false);
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
+  allConnectionScroll()
+  {
+   
+     this.connectionsService.allConnectionScroll(this.nextPageURL1).subscribe(
+     (allConnectionScroll) => {
+      this.allConnectionScrollLists=allConnectionScroll.result.info.list.data;  
+      // console.log(this.allConnectionScrollLists);
+      for (let i = 0; i < Object.keys(this.allConnectionScrollLists).length; i++) {
+        console.log("loop"+i);
+        this.allConnectionsInfo.push(this.allConnectionScrollLists[i]);
+        // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
+        }
+      
+       this.nextPageURL1=allConnectionScroll.result.info.list.next_page_url;   
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
   }
 }

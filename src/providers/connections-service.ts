@@ -57,4 +57,10 @@ user_id:any;
     return this.http.post(nextURL,_request,this.options)
       .map(res => res.json()); 
   }
+  allConnectionScroll(nextPageURL)
+   {
+    let _request= {"user_id":this.user_id,"searchValue":""};
+    return this.http.post(nextPageURL,_request,this.options)
+      .map(res => res.json()); 
+   }
 }

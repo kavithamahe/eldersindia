@@ -25,6 +25,8 @@ user_type:any;
 user_type_id:any;
 jobDependentId:any;
 emptyRecordSet:any='';
+nextPageURL:any='';
+jobBoardScrollLists:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public jobBoardService:JobBoardService,public modalCtrl: ModalController) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -43,6 +45,7 @@ emptyRecordSet:any='';
     this.jobBoardService.jobsList().subscribe(
      (jobBoard) => {
       this.jobBoardInfo=jobBoard.result.info.data; 
+      this.nextPageURL=jobBoard.result.info.next_page_url;
       this.emptyRecordSet='';
     },
     (err) => { 
@@ -120,5 +123,43 @@ emptyRecordSet:any='';
      this.callApplyJob(jobId,this.jobDependentId);
      });
     modal.present();
+  }
+
+  doInfinite(infiniteScroll) {
+    setTimeout(() => {      
+      if(this.nextPageURL!=null && this.nextPageURL!='')
+      {
+       this.jobBoardscroll();
+      }
+      else{
+        infiniteScroll.enable(false);
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
+  jobBoardscroll()
+  {
+
+     this.jobBoardService.JobBoardscroll(this.nextPageURL).subscribe(
+     (JobBoardscroll) => {
+      this.jobBoardScrollLists=JobBoardscroll.result.info.data;
+
+      for (let i = 0; i < Object.keys(this.jobBoardScrollLists).length; i++) {
+        this.jobBoardInfo.push(this.jobBoardScrollLists[i]);
+        }
+      
+       this.nextPageURL=JobBoardscroll.result.info.next_page_url;     
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
   }
 }
