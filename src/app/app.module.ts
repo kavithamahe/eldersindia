@@ -153,6 +153,7 @@ import { ServiceProvider } from '../providers/service-provider';
     EditProfilePage,
     ChangePasswordPage
   ],
+
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
      providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
 })
