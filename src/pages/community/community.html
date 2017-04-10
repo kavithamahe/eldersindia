@@ -188,7 +188,7 @@
 		          	<p class="feed-post">{{user.post_message}}</p><br>
 		          	<img  [src]="imageUrl+user?.post_image" [hidden]="!user?.post_image">
 	       		</ion-card-content>
-				<ion-card-content>
+				<ion-card-content *ngIf="user?.post_video">
 
 	        <!--  <iframe [hidden]="!user?.post_video" height="190" onload="this.width=screen.width" [src]="sanitizer.bypassSecurityTrustResourceUrl(http://www.youtube.com/watch?v=uiws904iuEQ)" frameborder="0" ></iframe> -->
 

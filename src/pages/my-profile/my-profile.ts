@@ -14,8 +14,7 @@ import { Storage } from '@ionic/storage';
 */
 @Component({
   selector: 'page-my-profile',
-  templateUrl: 'my-profile.html',
-  providers:[ServiceProvider]
+  templateUrl: 'my-profile.html'
 })
 export class MyProfilePage {
 

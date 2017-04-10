@@ -20,6 +20,8 @@ export class AppliedJobsPage {
 appliedJobsList:any;
 token:string;
 imageUrl:string;
+nextPageURL:any='';
+appliedJobScrollLists:any;
    constructor(public navCtrl: NavController, public navParams: NavParams,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -67,5 +69,42 @@ imageUrl:string;
   public viewJob(jobId)
   {
    this.navCtrl.push(SinglejobPage, {jobId});
+  }
+   doInfinite(infiniteScroll) {
+    setTimeout(() => {      
+      if(this.nextPageURL!=null && this.nextPageURL!='')
+      {
+       this.appliedJobscroll();
+      }
+      else{
+        infiniteScroll.enable(false);
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
+  appliedJobscroll()
+  {
+
+     this.jobBoardService.appliedJobscroll(this.nextPageURL).subscribe(
+     (appliedJobscroll) => {
+      this.appliedJobScrollLists=appliedJobscroll.result.info.data;
+
+      for (let i = 0; i < Object.keys(this.appliedJobScrollLists).length; i++) {
+        this.appliedJobsList.push(this.appliedJobScrollLists[i]);
+        }
+      
+       this.nextPageURL=appliedJobscroll.result.info.next_page_url;     
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
   }
 }

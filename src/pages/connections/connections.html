@@ -17,11 +17,11 @@
       </button>
     </ion-buttons>
     <ion-title text-center>Connections</ion-title>
-    <ion-buttons right>    
+   <!-- <ion-buttons right>    
       <button ion-button icon-only>
        <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons>-->
   </ion-navbar>
 </ion-header>
 
@@ -66,7 +66,7 @@
     </ion-row>
     </ion-grid>    
     </div>
-    <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
+    <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="Loading more data...">
@@ -76,7 +76,7 @@
 
   <ion-list *ngSwitchCase="'all'">
     <ion-searchbar (input)="search($event)"></ion-searchbar>
-    <div *ngFor="let all of allConnectionsInfo?.data; let islast=last;">
+    <div *ngFor="let all of allConnectionsInfo; let islast=last;">
     <ion-grid>
     <ion-row>
     <ion-col width-20>
@@ -98,7 +98,10 @@
     </ion-col>
     </ion-row>    
     </ion-grid>
-    </div>    
+    </div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>    
   </ion-list>
 
 </div>

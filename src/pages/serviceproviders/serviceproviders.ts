@@ -15,8 +15,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 */
 @Component({
   selector: 'page-serviceproviders',
-  templateUrl: 'serviceproviders.html',
-  providers:[ServiceProvider]
+  templateUrl: 'serviceproviders.html'
 })
 export class ServiceprovidersPage {
  services:any = [];

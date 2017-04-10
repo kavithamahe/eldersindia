@@ -14,7 +14,7 @@ import { ServiceProvider } from '../../providers/service-provider';
 */
 @Component({
   templateUrl: 'subcategory-list.html',
-  providers :[ModalContentPage,ServiceProvider]
+  providers :[ModalContentPage]
 })
 export class SubcategoryListPage {
 

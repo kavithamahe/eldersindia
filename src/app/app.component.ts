@@ -62,9 +62,7 @@ export class MyApp {
         if(this.user_logged == 'sponsor'){
           this.pages = [];
           this.pages.push(
-                          { title: 'Dashboard', component: DashboardPage },      
-                          { title: 'Profile', component: MyProfilePage },
-                          { title: 'Change Password', component: ChangePasswordPage },
+                          { title: 'Dashboard', component: DashboardPage },    
                           { title: 'Manage Dependents', component: ManagePage },
                           { title: 'Community', component: CommunitylistPage },
                           { title: 'Connections', component: ConnectionsPage },
@@ -76,14 +74,15 @@ export class MyApp {
                           { title: 'Blogs', component: BlogsPage },
                           { title: 'News', component: NewsPage },
                           { title: 'Events', component: EventsPage },
+                          { title: 'Profile', component: MyProfilePage },
+                          { title: 'Change Password', component: ChangePasswordPage },
                           { title: 'Logout', component: LogoutPage },
                         );
       }else{
           this.pages = [];
           this.pages.push(
-                          { title: 'Dashboard', component: DashboardPage },      
-                          { title: 'Profile', component: MyProfilePage },
-                          { title: 'Change Password', component: ChangePasswordPage },
+                          { title: 'Dashboard', component: DashboardPage },    
+                          // { title: 'Manage Dependents', component: ManagePage },
                           { title: 'Community', component: CommunitylistPage },
                           { title: 'Connections', component: ConnectionsPage },
                           { title: 'Job Board', component: JobboardPage },
@@ -94,6 +93,8 @@ export class MyApp {
                           { title: 'Blogs', component: BlogsPage },
                           { title: 'News', component: NewsPage },
                           { title: 'Events', component: EventsPage },
+                          { title: 'Profile', component: MyProfilePage },
+                          { title: 'Change Password', component: ChangePasswordPage },
                           { title: 'Logout', component: LogoutPage },
                           );  
         }
@@ -118,8 +119,8 @@ export class MyApp {
 // <<<<<<< HEAD
                 
                 let confirmAlert = this.alertCtrl.create({
-                title: 'Log Out',
-                subTitle: "Confirm Logout",
+               // title: 'Log Out',
+                subTitle: "Are you sure to Logout",
                 buttons: [{
                   text: 'NO',
                   handler: () => {
@@ -133,8 +134,8 @@ export class MyApp {
                   handler: () => {
                     //TODO: Your logic here
                     // self.nav.push(PushMessagePage, {message: data.message});
-                    // this.platform.exitApp(); //Exit from app
-                    this.nav.setRoot(LogoutPage);
+                    this.platform.exitApp(); //Exit from app
+                    // this.nav.setRoot(LogoutPage);
                   }
                 }]
               });
