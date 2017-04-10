@@ -32,7 +32,7 @@
     <h2 class="primary-color">{{appliedJobs?.title}}</h2>
     <p [hidden]="!appliedJobs?.job_type">Job Type : {{appliedJobs?.job_type}}</p>
     <ion-badge color="green" [hidden]="!appliedJobs?.skills">{{appliedJobs?.skills}}</ion-badge> 
-    <p [innerHTML]="appliedJobs?.description"></p>
+    <p [innerHTML]="appliedJobs?.description | words : 60 : '...'"></p>
   	
   	<br>
   <button ion-button color="orange" small (click)="viewJob(appliedJobs?.id)">More Info</button>

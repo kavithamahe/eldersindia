@@ -13,8 +13,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 */
 @Component({
   selector: 'page-sub-category',
-  templateUrl: 'sub-category.html',
-  providers:[ServiceProvider]
+  templateUrl: 'sub-category.html'
 })
 export class SubCategoryPage {
 
