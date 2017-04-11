@@ -81,7 +81,6 @@ export class DashboardPage {
   public hooter()
   {
     Vibration.vibrate(5000);
-    
   }
   public showToaster(message)
   {

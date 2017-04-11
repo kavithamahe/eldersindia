@@ -8,7 +8,7 @@
     <ion-buttons left>
     <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
-      </button>
+    </button>
     </ion-buttons>
     <ion-title text-center>Community</ion-title>
   </ion-navbar>
@@ -51,17 +51,17 @@
                 <span [hidden]="!community.category_name"> 
                 <label class="labels-bds"> {{community.category_name}}</label>
                 </span>
-				  </ion-card-title>
-     </div>
+				        </ion-card-title>
+        </div>
           <ion-card-content class="thamb-texts">
             <ion-card-title>
               <ion-row>
                 <ion-col style="padding-left:0px !important; padding-bottom:0px !important;">
-                  <p class="tid-cd"(click)="getPost(community.id)">{{community.community_name}}</p>
-             </ion-col>
+                  <p class="tid-cd" (click)="getPost(community.id)">{{community.community_name}}</p>
+                </ion-col>
              </ion-row> 
             </ion-card-title>
-              <p class="ssdsd">{{community.description | words : 60 : '...'}}</p>
+             <!--  <p class="ssdsd">{{community.description | words : 60 : '...'}}</p> -->
           </ion-card-content>
         </ion-card>
       </ion-list>
@@ -104,7 +104,7 @@
              </ion-col>
              </ion-row> 
             </ion-card-title>
-              <p class="ssdsd">{{community.description | words : 60 : '...'}}</p>
+             <!--  <p class="ssdsd">{{community.description | words : 60 : '...'}}</p> -->
           </ion-card-content>
         </ion-card>
       </ion-list>
