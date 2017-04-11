@@ -255,6 +255,7 @@ export class CommunityprofilePage {
   }
 
   sendPost(id1){
+     if(this.comment != ""){
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
      this.communityServices.sendPosts(id1,this.comment).subscribe(datas =>{
@@ -268,7 +269,12 @@ export class CommunityprofilePage {
     this.communityServices.showErrorToast(err);
   })
      loader.dismiss();
+  }else{
+     this.showToast("Enter Comments and Post");
+   }
+     
   }
+  
 
    addUserPosts(id){
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     

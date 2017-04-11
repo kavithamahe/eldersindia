@@ -243,10 +243,12 @@
 	<div *ngIf(communityMembers)>
 	<ion-card *ngFor="let community of getCommunityMembers; let i=index">
 	<div class="community-img">
- 		 <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner" />
+ 		 <img (click)="goBackToCommunity()" [src]="imageUrl+community?.banner" 
+ 		 [hidden]="!community?.banner" />
       
             <ion-thumbnail class="thamb-lins">
-              <img [src]="imageUrl+community?.logo" [hidden]="!community?.logo">
+              <img (click)="goBackToCommunity()" [src]="imageUrl+community?.logo" 
+              [hidden]="!community?.logo">
             </ion-thumbnail>
          
 		  </div>
@@ -260,7 +262,7 @@
                
              </ion-row> 
             </ion-card-title>
-              <p class="ssdsd" [hidden]="!community.description">{{community.description}}</p>
+             <!--  <p class="ssdsd" [hidden]="!community.description">{{community.description}}</p> -->
           </ion-card-content>
 	</ion-card>
 	</div>	

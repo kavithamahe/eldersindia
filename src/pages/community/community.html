@@ -43,9 +43,7 @@
 								<button ion-button small (click)="joinCommunity(communityDetailData.id)" 
 								class="post">Join</button>
 							</div>
-						
 						</ion-col>
-						
 					</ion-row>
 					<ion-row>
 						<h2 class="wel-comemem">Members</h2>
@@ -157,6 +155,7 @@
 					</ion-row>
 				</ion-card-content>
 			</ion-card>
+			
 	<ion-list  *ngFor="let user of users; let i=index">	
  		<div>
  			<ion-card>
@@ -191,10 +190,10 @@
 				<ion-card-content *ngIf="user?.post_video">
 
 	        <!--  <iframe [hidden]="!user?.post_video" height="190" onload="this.width=screen.width" [src]="sanitizer.bypassSecurityTrustResourceUrl(http://www.youtube.com/watch?v=uiws904iuEQ)" frameborder="0" ></iframe> -->
-
+<!-- 
 	         		<iframe [src]="cleanURL(user?.post_video)" frameborder="0" 
 	         		[hidden]="!user?.post_video">
-	         		</iframe>
+	         		</iframe> -->
 		       <!--  <video  style="width:400px" >
 				<source src="http://player.vimeo.com/external/85569724.sd.mp4?s=43df5df0d733011263687d20a47557e4" type="video/mp4"/>
 				</video> -->
@@ -249,8 +248,7 @@
 	       	<ion-card-content>
 	      		<ion-row>
 	        		<ion-col width-15>
-	          			<button class="hover but-colo" ion-button outline (click)="addLikes(user.id)">
-	            			<i class="fa fa-heart-o likecolor"></i> &nbsp; <p class="num-of">{{user.likes}}</p>
+	          			<button class="hover but-colo" ion-button outline (click)="addLikes(user.id)"><i class="fa fa-heart-o likecolor"></i> &nbsp; <p class="num-of">{{user.likes}}</p>
 	          			</button>
 	        		</ion-col>
 	        		<!-- <ion-col>
@@ -266,7 +264,6 @@
 	          		</ion-col>
 	      		</ion-row>
 	      			<div *ngIf="i==showblock">
-			
 	      				<ion-item>
 							<ion-row *ngFor="let comment of user.comments" class="comm-posted">
 									<ion-avatar>
@@ -276,15 +273,13 @@
 	      							<ion-item text-wrap style="padding-top:0px;"><p class="cmmpost">{{comment.comments}}</p></ion-item>
 		      						<button ion-button class="trash-icon" (click)="showConfirm(comment.comments_id)" 
 		      						color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
-										
-	      						</ion-row>
-							
-	      					</ion-item>
+							</ion-row>
+						</ion-item>
 						<hr/>
 							<ion-label class="liste-edit">Enter Comments...</ion-label>
 	      				<ion-item>
-				   		
-				   			<ion-textarea [(ngModel)]="comment" style=" margin:0px !important;"></ion-textarea>
+				   			<ion-textarea [(ngModel)]="comment" style=" margin:0px !important;">
+				   		    </ion-textarea>
 						</ion-item>
   							<button  ion-button (click)="sendPost(user.id)" style="width:100%;" class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp;Post Comment</button>
   							<!--<button  ion-button (click)="addDetails(i)" color="light" full>Cancel
