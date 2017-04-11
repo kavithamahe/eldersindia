@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
-import { TruncateModule } from 'ng2-truncate';
+//import { TruncateModule } from 'ng2-truncate';
 import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
 
@@ -107,7 +107,7 @@ import { ServiceProvider } from '../providers/service-provider';
   ],
   imports: [
     IonicModule.forRoot(MyApp,AppConfig),
-    TruncateModule,
+ //   TruncateModule,
     RlTagInputModule,
     Ionic2RatingModule,
     Ng2CompleterModule
