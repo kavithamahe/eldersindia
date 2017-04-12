@@ -147,12 +147,8 @@
 								</div>
 							</ion-col>
 						</ion-row>
-		   				
-		        	</ion-card-content>
-		        	
-					
-					
-				</ion-card>
+		   			</ion-card-content>
+		    </ion-card>
 			</div>
 
  	 <ion-list *ngFor="let community of communityProfile; let i=index">
@@ -188,9 +184,9 @@
 		          	[hidden]="!community?.post_image">
 		       	</ion-card-content>
 	       		<ion-card-content>
-					   <iframe  [hidden]="!community?.post_video" 
-					   [src]="cleanURL(community?.post_video)" frameborder="0" allowfullscreen>
-					   </iframe>
+					<iframe [src]="cleanURL(community?.post_video)" frameborder="0" 
+	         		[hidden]="!community?.post_video">
+	         		</iframe>
 	       		</ion-card-content>
 	       	 	<ion-card-content>
 	      			<ion-row>
@@ -228,8 +224,8 @@
 	      						<hr/>
 	      				<ion-label class="liste-edit">Enter Comments...</ion-label>
 	      				<ion-item>
-				   			
-				   				<ion-textarea [(ngModel)]="comment" style=" margin:0px !important;"></ion-textarea>
+				   			<ion-textarea [(ngModel)]="comment" style=" margin:0px !important;">
+				   			</ion-textarea>
 				 		</ion-item>
 	  						<button style="width:100%;" class="secon-sdms" ion-button (click)="sendPost(community.id)" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp;Post Comment</button>
 	  						<!--<button  ion-button (click)="addDetails(i)" color="light" full>Cancel</button>-->
@@ -241,7 +237,7 @@
 	</ion-list>
 	</div>
 	<div *ngIf(communityMembers)>
-	<ion-card *ngFor="let community of getCommunityMembers; let i=index">
+	<ion-card *ngFor="let community of getCommunityMembers">
 	<div class="community-img">
  		 <img (click)="goBackToCommunity()" [src]="imageUrl+community?.banner" 
  		 [hidden]="!community?.banner" />
@@ -259,10 +255,9 @@
                   <p class="tid-cd"(click)="goBackToCommunity()" 
                   [hidden]="!community.community_name">{{community.community_name}}</p>
                 </ion-col>
-               
-             </ion-row> 
+              </ion-row> 
             </ion-card-title>
-             <!--  <p class="ssdsd" [hidden]="!community.description">{{community.description}}</p> -->
+              <p class="ssdsd" [hidden]="!community.description">{{community.description}}</p>
           </ion-card-content>
 	</ion-card>
 	</div>	

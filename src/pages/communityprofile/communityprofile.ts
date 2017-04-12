@@ -40,7 +40,7 @@ export class CommunityprofilePage {
     allConnections:any;
     user_id:any;
 
-  constructor(public nav: NavController, public storage:Storage, public viewCtrl: ViewController,private sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+  constructor(public nav: NavController, public storage:Storage, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
        
       this.nav=nav;
       this.storage.ready().then(() => {
@@ -75,21 +75,19 @@ export class CommunityprofilePage {
     modal.present();
   }
   
- cleanURL(oldURL: string): any  {
-    console.log("vidweo url: ",oldURL);
-    // http://www.dailymotion.com/video/
-  // let url = oldURL.replace("watch?v=", "")
-  // let url;
-  // url = oldURL.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
-  
-  // url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
-  // url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
-  //   url = oldURL.replace("https://www.youtube.com/watch?v=aUN6RPMIoeo","https://www.youtube.com/embed/aUN6RPMIoeo"); 
 
-  // url = oldURL.replace("http://www.youtube.com/embed/watch/","http://www.youtube.com/embed/");
-  // url = oldURL.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
-  // url = oldURL.replace("http://www.youtube.com/embed/watch/", "http://www.youtube.com/embed/")
- // return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  cleanURL(oldURL: string): any  {
+    if(oldURL !=null){  
+      let url1 = oldURL.replace('https://www.youtube.com/watch?v=','https://www.youtube.com/embed/');
+  
+    let url2 = url1.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
+ 
+    let url = url2.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
+ return this.sanitizer.bypassSecurityTrustResourceUrl(url);}
+   else{
+     return null;
+   }
+  
 }
   accessGallery(){
    Camera.getPicture({
