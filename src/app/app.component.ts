@@ -43,7 +43,7 @@ export class MyApp {
   subscription: Subscription;
 //----------------------------------//
 
-  rootPage: any =  ServiceprovidersPage;
+  rootPage: any =  LoginPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -62,7 +62,7 @@ export class MyApp {
         if(this.user_logged == 'sponsor'){
           this.pages = [];
           this.pages.push(
-                          { title: 'Dashboard', component: DashboardPage },    
+                          { title: 'Dashboard', component: DashboardPage},    
                           { title: 'Manage Dependents', component: ManagePage },
                           { title: 'Community', component: CommunitylistPage },
                           { title: 'Connections', component: ConnectionsPage },

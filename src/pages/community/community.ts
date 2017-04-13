@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 
+
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CommunityprofilePage } from '../communityprofile/communityprofile';
 import { CommunityServices } from '../../providers/community-services';
@@ -13,7 +14,8 @@ import { DomSanitizer } from '@angular/platform-browser/';
 
 @Component({
   selector: 'page-community',
-  templateUrl: 'community.html'
+  templateUrl: 'community.html',
+  // providers : [CommunityServices]
 })
 
 export class CommunityPage {
@@ -93,21 +95,20 @@ showConfirm(DeleteId) {
   }
 
   cleanURL(oldURL: string): any  {
+    if(oldURL !=null){ 
+      let url1 = oldURL.replace('https://www.youtube.com/watch?v=','https://www.youtube.com/embed/');
+    
+      let url2 = url1.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
    
-    // http://www.dailymotion.com/video/
-  let url;
+      let url = url2.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
+      return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    }
+    else{
+      return null;
+    }
   
-  url = oldURL.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
-  url = oldURL.replace("https://www.youtube.com/watch?v=_OBlgSz8sSM","https://www.youtube.com/embed/_OBlgSz8sSM");
-  url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/"); 
-   console.log("vidweo url: ",oldURL);
-  url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
-  url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
-  url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/");
-  url = oldURL.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
-  // url = oldURL.replace("http://www.youtube.com/embed/watch/", "http://www.youtube.com/embed/")
- return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
+
 
   addDetails(event){
     this.comment="";
@@ -137,7 +138,7 @@ showConfirm(DeleteId) {
   }
 
   communityDetail(id1){
-    this.communityServices.communityDetail(id1).subscribe(users => {
+      this.communityServices.communityDetail(id1).subscribe(users => {
       this.communityDetailData = users.result.info;
       this.members =  users.result.info.members;
       this.show_member = this.members.length;
@@ -159,7 +160,6 @@ showConfirm(DeleteId) {
   })
   }
   communityProfile(id){
-
      this.nav.push(CommunityprofilePage,{profile_uid:id});
   }
   communityProfiles(id){

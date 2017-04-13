@@ -11,6 +11,11 @@
     </button>
     </ion-buttons>
     <ion-title text-center>Community</ion-title>
+    <ion-buttons right>
+    <button ion-button icon-only (click)="searchCall(searchButton)">
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content class="segments-info">
@@ -21,11 +26,10 @@
         <ion-segment-button (click)="otherCommunity('')" value="othercommunity">
           Recommended Community
         </ion-segment-button>
-        
       </ion-segment>
     <div [ngSwitch]="community">
       <ion-list *ngSwitchCase="'mycommunity'">
-        <ion-card>
+        <ion-card *ngIf(searchButton)>
           <ion-list>
             <ion-item>
               <ion-label>select category</ion-label>
@@ -37,74 +41,59 @@
             </ion-item>
           </ion-list>
         </ion-card>
-        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-        <ion-card style="position:relative;" *ngFor="let community of communitylists; let i= index" (click)="getPost(community.id)">
-        <div class="community-img">
-          <img  [src]="imageUrl+community?.banner" (click)="getPost(community.id)"
-          [hidden]="!community?.banner" />
-
-            <ion-thumbnail class="thamb-lins">
-              <img [src]="imageUrl+community?.logo" (click)="getPost(community.id)" 
-              [hidden]="!community?.logo" />
-            </ion-thumbnail>
-							  <ion-card-title>
-                <span [hidden]="!community.category_name"> 
-                <label class="labels-bds"> {{community.category_name}}</label>
-                </span>
-				        </ion-card-title>
+        <div *ngIf(searchButton)>
+          <ion-searchbar [(ngModel)]="searchTextBox" (ionInput)="getItems($event)"></ion-searchbar>
         </div>
-          <ion-card-content class="thamb-texts">
-            <ion-card-title>
-              <ion-row>
-                <ion-col style="padding-left:0px !important; padding-bottom:0px !important;">
-                  <p class="tid-cd" (click)="getPost(community.id)">{{community.community_name}}</p>
-                </ion-col>
-             </ion-row> 
-            </ion-card-title>
-             <!--  <p class="ssdsd">{{community.description | words : 60 : '...'}}</p> -->
-          </ion-card-content>
+        <ion-card style="position:relative;" *ngFor="let community of communitylists; let i= index" 
+        (click)="getPost(community.id)">
+          <div class="community-img">
+              <img  [src]="imageUrl+community?.banner" [hidden]="!community?.banner" />
+                <span [hidden]="!community.category_name"> 
+                  <label class="labels-bds"> {{community.category_name}}</label>
+                </span>
+				  </div>
+            <ion-card-content class="thamb-texts">
+                <ion-row>
+                  <ion-col style="padding-left:0px !important; padding-bottom:0px !important;">
+                    <p class="tid-cd" (click)="getPost(community.id)">{{community.community_name}}
+                    </p>
+                  </ion-col>
+                </ion-row> 
+            </ion-card-content>
         </ion-card>
       </ion-list>
 
       <ion-list *ngSwitchCase="'othercommunity'">
-        <ion-card>
+        <ion-card *ngIf(searchButton)>
           <ion-list>
             <ion-item>
-              <ion-label>select category</ion-label>
+                <ion-label>select category</ion-label>
                 <ion-select (ionChange)='setCategory($event)'>
                   <ion-option *ngFor="let category of categoryLists" value={{category.id}}> {{category.name}}
-															
-                  </ion-option>
+									</ion-option>
                 </ion-select>
             </ion-item>
           </ion-list>
         </ion-card>
-        <ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
+        <div *ngIf(searchButton)>
+          <ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
+        </div>
         <ion-card *ngFor="let community of communitylists">
-
-		 <div class="community-img">
-          <img  [src]="imageUrl+community?.banner" (click)="getPost(community.id)"
-          [hidden]="!community?.banner" />
-
-            <ion-thumbnail class="thamb-lins">
-              <img [src]="imageUrl+community?.logo" (click)="getPost(community.id)" 
-              [hidden]="!community?.logo" />
-            </ion-thumbnail>
-                <ion-card-title>
-                <span [hidden]="!community.category_name"> 
+          <div class="community-img">
+            <img  [src]="imageUrl+community?.banner" (click)="getPost(community.id)"
+            [hidden]="!community?.banner" />
+              <span [hidden]="!community.category_name"> 
                 <label class="labels-bds"> {{community.category_name}}</label>
-                </span>
-          </ion-card-title>
-     </div>
+              </span>
+          </div>
           <ion-card-content class="thamb-texts">
             <ion-card-title>
               <ion-row>
                 <ion-col style="padding-left:0px !important; padding-bottom:0px !important;">
                   <p class="tid-cd"(click)="getPost(community.id)">{{community.community_name}}</p>
-             </ion-col>
-             </ion-row> 
+                </ion-col>
+              </ion-row> 
             </ion-card-title>
-             <!--  <p class="ssdsd">{{community.description | words : 60 : '...'}}</p> -->
           </ion-card-content>
         </ion-card>
       </ion-list>
@@ -112,6 +101,6 @@
 	
    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
+  </ion-infinite-scroll>
 </ion-content>
   
