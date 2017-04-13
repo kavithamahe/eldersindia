@@ -87,7 +87,7 @@
 								<ion-col>
 									<button ion-button style="width:100%;" icon-only 
 								(click)="accessGallery()" class="video comm-listpag"><i class="fa fa-picture-o"></i>&nbsp;</button>
-								 			<img [src]="base64Image" *ngIf="base64Image" />
+								 	<img [src]="base64Image" *ngIf="base64Image" />
 								</ion-col>
 							</ion-row>
 		    				<ion-row>
@@ -158,7 +158,8 @@
 	       	 		<ion-card-content>
 	      				<ion-row>
 		        			<ion-col width-15>
-			          			<button class="hover but-colo" ion-button outline (click)="addLikes(community.id)" color="light">
+			          			<button class="hover but-colo" ion-button outline 
+			          			(click)="addLikes(community.id)" color="light">
 			            			<i class="fa fa-heart-o likecolor"></i> &nbsp; <p class="num-of">{{community.likes}}</p>
 			          			</button>
 		        			</ion-col>
@@ -190,7 +191,8 @@
 	      						<hr/>
 	      					<ion-label class="liste-edit">Enter Comments...</ion-label>
 	      						<ion-item>
-						   			<ion-textarea [(ngModel)]="comment" style=" margin:0px !important;">
+						   			<ion-textarea [(ngModel)]="comment" 
+						   			style=" margin:0px !important;">
 						   			</ion-textarea>
 						 		</ion-item>
 	  								<button style="width:100%;" class="secon-sdms" ion-button (click)="sendPost(community.id)" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp;Post Comment
