@@ -3,6 +3,8 @@ import { NavController, NavParams, ModalController, ViewController,AlertControll
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Platform } from 'ionic-angular';
+
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CommunitymessagePage } from '../communitymessage/communitymessage';
@@ -39,9 +41,11 @@ export class CommunityprofilePage {
     connectionList:any;
     allConnections:any;
     user_id:any;
+    community: String = "activity";
+  isAndroid: boolean = false;
 
-  constructor(public nav: NavController, public storage:Storage, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
-       
+  constructor(public nav: NavController,platform: Platform, public storage:Storage, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+        this.isAndroid = platform.is('android');
       this.nav=nav;
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -56,8 +60,8 @@ export class CommunityprofilePage {
     this.communityProfile=[];
     this.communityProfileData=[];
     this.status=[];
-     this.connectLists = false;
-      this.activityLists = true;
+     // this.connectLists = false;
+     //  this.activityLists = true;
       this.status = false;
       this.request_sent = false;
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -153,7 +157,7 @@ export class CommunityprofilePage {
   })
 
   }
-  communityMember(){
+  Communities(){
     this.communityServices.getCommunityMembers().subscribe(users => {
       this.getCommunityMembers=users.result.data;
      
@@ -162,14 +166,14 @@ export class CommunityprofilePage {
     
     this.communityServices.showErrorToast(err);
   })
-    this.activityLists = false;
-    this.connectLists = false;
-     if (this.communityMembers) {
-        this.communityMembers = false;
+    // this.activityLists = false;
+    // this.connectLists = false;
+    //  if (this.communityMembers) {
+    //     this.communityMembers = false;
        
-    } else {
-       this.communityMembers = true;
-     }
+    // } else {
+    //    this.communityMembers = true;
+    //  }
     
  }
   
@@ -186,28 +190,19 @@ export class CommunityprofilePage {
     this.communityServices.showErrorToast(err);
   })
  }
- activityMember(){
-   this.connectLists = false;
-   this.communityMembers = false;
-
-   if (this.activityLists) {
-        this.activityLists = false;
-       
-    } else {
-       this.activityLists = true;
-     }
- }
- // communityMember(){
- //   this.activityLists = false;
+ // activityMember(){
  //   this.connectLists = false;
- //   if (this.communityMembers) {
- //        this.communityMembers = false;
+ //   this.communityMembers = false;
+
+ //   if (this.activityLists) {
+ //        this.activityLists = false;
        
  //    } else {
- //       this.communityMembers = true;
+ //       this.activityLists = true;
  //     }
  // }
-  connectList(id,val){
+
+  Connections(id,val){
     this.communityServices.getConnectLists(id,val).subscribe(users => {
        this.allConnections=users.result.info.list;  
   },
@@ -215,16 +210,12 @@ export class CommunityprofilePage {
     
     this.communityServices.showErrorToast(err);
   })
-    this.activityLists = false;
-    this.communityMembers = false;
-     this.connectLists = true;
-
-  }
+    }
 
   setItems(ev) {
      var val = ev.target.value;
      let id = this.user_id;
-   this.connectList(id,val);
+   this.Connections(id,val);
   }
   
 

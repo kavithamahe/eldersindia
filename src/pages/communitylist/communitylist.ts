@@ -28,17 +28,21 @@ export class CommunitylistPage {
   id:any;
   nextPageURL:any='';
   eventScrollLists:any;
-
+  searchButton:boolean=false;
+  searchValue:any;
+  searchTextBox:any='';
   constructor(public nav: NavController,public storage:Storage, public navParams: NavParams,platform: Platform,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
      this.isAndroid = platform.is('android');
      // this.searchData = "";
-      
-
-     
    }
+   searchCall(searchValue){
+     this.searchButton=!searchValue;
+   }
+ 
   getPost(id){
     this.nav.push(CommunityPage,{community_id:id});
   }
+ 
   myCommunity(searchData){
     this.communitylists =[];
     this.categoryLists=[]
@@ -142,6 +146,7 @@ public dashboardPage()
     this.nav.setRoot(DashboardPage);
   }
 ionViewWillEnter (){
+  
 
   this.storage.ready().then(() => {
 

@@ -44,11 +44,9 @@ export class CommunitymessagePage {
        this.authForm.reset();
       },
    err =>{
-    
     this.communityServices.showErrorToast(err);
   })
-
-  	if(!this.authForm.valid){
+    if(!this.authForm.valid){
   		this.submitAttempt = true;
   	}
   	else{
@@ -67,6 +65,4 @@ export class CommunitymessagePage {
       console.log(err);
     });
   }
-
-
 }
