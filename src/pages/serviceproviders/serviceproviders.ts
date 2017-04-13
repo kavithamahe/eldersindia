@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, NgModule} from '@angular/core'
+import {BrowserModule} from '@angular/platform-browser'
 // import { Device, LocalNotifications } from 'ionic-native';
 import { Platform, NavController,LoadingController,ModalController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -36,6 +37,13 @@ export class ServiceprovidersPage {
     
     
     // alert('Device UUID is: ' + Device.uuid);
+  }
+
+   onChange(event: any, input: any) {
+    let files = [].slice.call(event.target.files);
+    console.log("file lists: ",files);
+    input.value = files.map(f => f.name).join(', ');
+    console.log("files selected: ",input.value);
   }
 
   loadServiceProvider(){

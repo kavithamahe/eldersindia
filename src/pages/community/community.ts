@@ -1,7 +1,9 @@
 import { Component} from '@angular/core';
 import { NavController, NavParams,AlertController,LoadingController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { Camera } from 'ionic-native';
+
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CommunityprofilePage } from '../communityprofile/communityprofile';
@@ -29,7 +31,9 @@ export class CommunityPage {
     user:any;
     communityDetailData:any;
     members:any;
-    base64Image:any;
+
+    base64Image={};
+
     isJoined:any;
     show_member:any;
     token:any;
@@ -37,7 +41,7 @@ export class CommunityPage {
     nextPageURL:any='';
     eventScrollLists:any;
     
-  constructor(public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+  constructor(private transfer: Transfer,private camera: Camera, public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
     this.nav=nav;
 
     this.storage.ready().then(() => {
@@ -236,6 +240,17 @@ showConfirm(DeleteId) {
       toast.present();
    }
 
+
+   onChange(event: any, input: any) {
+    let files = [].slice.call(event.target.files);
+    this.base64Image = files[0];
+    console.log("file lists: ",this.base64Image);
+    // let filee = files[0];
+    input.value = files.map(f => f.name).join(', ');
+    console.log("files selected: ",input.value);
+  }
+
+
   sendPost(id1){
     if(this.comment != ""){
 
@@ -258,6 +273,8 @@ showConfirm(DeleteId) {
   }
 
   postCommunity(id){
+    console.log("file lists: ",this.base64Image);
+    // let file = 
      let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
      loader.present();
      this.communityServices.postCommunity(id,this.base64Image,this.videoUrl,this.post).subscribe(datas =>{

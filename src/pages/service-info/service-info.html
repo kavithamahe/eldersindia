@@ -21,11 +21,14 @@
 </ion-header>
 
 <ion-content padding class="marg-info">
-	<ion-slides class="slide_height" #ghbslides [options]="slideOptions" pager autoplay:300>
-	    <ion-slide *ngFor="let slide of vendorList.banners">
-	      <img [src]="url+slide?.banner" class="slide-image"/>
-	    </ion-slide>  
-	</ion-slides>
+  <div *ngIf="vendorList?.banners">
+  <ion-slides class="slide_height" initialSlide="0" loop="true" pager="true" autoplay="3000">
+      <ion-slide *ngFor="let slide of vendorList.banners">
+        <img [src]="url+slide?.banner" class="slide-image"/>
+      </ion-slide>  
+  </ion-slides>  
+  </div>
+	
 	<div class="view-storedet">
       <h2> Welcome to {{vendorList?.vendorDetails?.name}}</h2>
       <p> {{vendorList?.vendorDetails?.description}} </p>

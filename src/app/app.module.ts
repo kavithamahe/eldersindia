@@ -2,9 +2,12 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
-//import { TruncateModule } from 'ng2-truncate';
+import { TruncateModule } from 'ng2-truncate';
 import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
+import {BrowserModule} from '@angular/platform-browser';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 
 //Venkatesh
 import { LoginPage } from '../pages/login/login';
@@ -58,6 +61,7 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
+import { SubCategoryServicePage } from '../pages/sub-category-service/sub-category-service';
 
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service-provider';
@@ -92,6 +96,7 @@ import { ServiceProvider } from '../providers/service-provider';
     LogoutPage,
     JobDependentPage,
     SubCategoryPage,
+    SubCategoryServicePage,
     SubcategoryListPage,
     ServiceInfoPage,
     ModalContentPage,
@@ -107,10 +112,11 @@ import { ServiceProvider } from '../providers/service-provider';
   ],
   imports: [
     IonicModule.forRoot(MyApp,AppConfig),
- //   TruncateModule,
+    TruncateModule,
     RlTagInputModule,
     Ionic2RatingModule,
-    Ng2CompleterModule
+    Ng2CompleterModule,
+    BrowserModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -140,6 +146,7 @@ import { ServiceProvider } from '../providers/service-provider';
     LogoutPage,
     JobDependentPage,
     SubCategoryPage,
+    SubCategoryServicePage,
     SubcategoryListPage,
     ServiceInfoPage,
     ModalContentPage,
@@ -155,6 +162,6 @@ import { ServiceProvider } from '../providers/service-provider';
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
+     providers: [Transfer,Camera,{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
 })
 export class AppModule {}

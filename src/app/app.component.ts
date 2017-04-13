@@ -43,7 +43,7 @@ export class MyApp {
   subscription: Subscription;
 //----------------------------------//
 
-  rootPage: any =  LoginPage;
+  rootPage: any =  ServiceprovidersPage;
 
   pages: Array<{title: string, component: any}>;
 
