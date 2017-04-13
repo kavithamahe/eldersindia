@@ -112,9 +112,13 @@
 							</button>
 							 	<img [src]="base64Image" *ngIf="base64Image" />
 						</ion-col>
-					</ion-row>
-		    		
-		       		<ion-row>
+					</ion-row> 
+					<div>
+				    <!--   <h2>Hello {{name}}</h2> -->
+				      <input type="file" multiple (change)="onChange($event, showFileNames)" />
+				      <input #showFileNames />
+				    </div>		    		
+	       		<ion-row>
 						<ion-col>
 							<button ion-button (click)="addVideos()" icon-only medium class="video">
 								<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp;

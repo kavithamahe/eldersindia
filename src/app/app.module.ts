@@ -5,7 +5,7 @@ import { MyApp } from './app.component';
 import { TruncateModule } from 'ng2-truncate';
 import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
-
+import {BrowserModule} from '@angular/platform-browser';
 //Venkatesh
 import { LoginPage } from '../pages/login/login';
 import { AppConfig } from '../providers/app-config';
@@ -58,6 +58,7 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
+import { SubCategoryServicePage } from '../pages/sub-category-service/sub-category-service';
 
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service-provider';
@@ -92,6 +93,7 @@ import { ServiceProvider } from '../providers/service-provider';
     LogoutPage,
     JobDependentPage,
     SubCategoryPage,
+    SubCategoryServicePage,
     SubcategoryListPage,
     ServiceInfoPage,
     ModalContentPage,
@@ -110,7 +112,8 @@ import { ServiceProvider } from '../providers/service-provider';
     TruncateModule,
     RlTagInputModule,
     Ionic2RatingModule,
-    Ng2CompleterModule
+    Ng2CompleterModule,
+    BrowserModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -140,6 +143,7 @@ import { ServiceProvider } from '../providers/service-provider';
     LogoutPage,
     JobDependentPage,
     SubCategoryPage,
+    SubCategoryServicePage,
     SubcategoryListPage,
     ServiceInfoPage,
     ModalContentPage,

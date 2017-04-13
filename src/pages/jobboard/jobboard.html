@@ -31,10 +31,10 @@
     <h2 class="primary-color">{{jobBoard?.title}}</h2>
     <p *ngIf="jobBoard?.job_type">Job Type: {{jobBoard?.job_type}}</p>
      <ion-badge color="green" *ngIf="jobBoard?.skills">{{jobBoard?.skills}}</ion-badge> 
-    <p [innerHTML]="jobBoard?.description | words : 60 : '...'"></p>
+   
   
-  <button ion-button color="primary" small (click)="applyJob(jobBoard?.id)">Apply</button>
-  <button ion-button color="orange" small (click)="viewJob(jobBoard?.id)">More Info</button>
+  <button ion-button color="primary" full (click)="applyJob(jobBoard?.id)">Apply</button>
+  <button ion-button color="orange" full (click)="viewJob(jobBoard?.id)">More Info</button>
   </ion-card-content>
 </ion-card>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
