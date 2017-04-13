@@ -204,7 +204,8 @@ export class CommunityprofilePage {
 
   Connections(id,val){
     this.communityServices.getConnectLists(id,val).subscribe(users => {
-       this.allConnections=users.result.info.list;  
+       this.allConnections=users.result.info.list;
+ 
   },
    err =>{
     
