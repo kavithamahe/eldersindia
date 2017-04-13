@@ -185,11 +185,6 @@ sendMessage(id,attachment,subject,message){
   }
 
   postCommunity(id,image,videoUrl,posts){
-    console.log("image in servicecall page: ",image);
-    // this.headers = new Headers();
-    // this.headers.append('Content-Type', 'undefined');
-    // this.headers.append('Authorization', 'Bearer ' + this.token);
-    // this.options = new RequestOptions({ headers: this.headers });
      this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts }
 
 

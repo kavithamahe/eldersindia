@@ -6,9 +6,6 @@ import { TruncateModule } from 'ng2-truncate';
 import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
 import {BrowserModule} from '@angular/platform-browser';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-
 //Venkatesh
 import { LoginPage } from '../pages/login/login';
 import { AppConfig } from '../providers/app-config';
@@ -162,6 +159,6 @@ import { ServiceProvider } from '../providers/service-provider';
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [Transfer,Camera,{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
 })
 export class AppModule {}

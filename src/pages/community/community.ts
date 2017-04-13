@@ -1,10 +1,7 @@
 import { Component} from '@angular/core';
 import { NavController, NavParams,AlertController,LoadingController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-
+import { Camera } from 'ionic-native';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CommunityprofilePage } from '../communityprofile/communityprofile';
@@ -14,8 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser/';
 
 @Component({
   selector: 'page-community',
-  templateUrl: 'community.html',
-  // providers : [CommunityServices]
+  templateUrl: 'community.html'
 })
 
 export class CommunityPage {
@@ -33,9 +29,7 @@ export class CommunityPage {
     user:any;
     communityDetailData:any;
     members:any;
-
-    base64Image={};
-
+    base64Image:any;
     isJoined:any;
     show_member:any;
     token:any;
@@ -43,7 +37,7 @@ export class CommunityPage {
     nextPageURL:any='';
     eventScrollLists:any;
     
-  constructor(private transfer: Transfer,private camera: Camera, public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+  constructor(public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
     this.nav=nav;
 
     this.storage.ready().then(() => {
@@ -95,20 +89,21 @@ showConfirm(DeleteId) {
   }
 
   cleanURL(oldURL: string): any  {
-    if(oldURL !=null){ 
-      let url1 = oldURL.replace('https://www.youtube.com/watch?v=','https://www.youtube.com/embed/');
-    
-      let url2 = url1.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
    
-      let url = url2.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
-      return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-    }
-    else{
-      return null;
-    }
+    // http://www.dailymotion.com/video/
+  let url;
   
+  url = oldURL.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
+  url = oldURL.replace("https://www.youtube.com/watch?v=_OBlgSz8sSM","https://www.youtube.com/embed/_OBlgSz8sSM");
+  url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/"); 
+   console.log("vidweo url: ",oldURL);
+  url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
+  url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
+  url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/");
+  url = oldURL.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
+  // url = oldURL.replace("http://www.youtube.com/embed/watch/", "http://www.youtube.com/embed/")
+ return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
-
 
   addDetails(event){
     this.comment="";
@@ -138,7 +133,7 @@ showConfirm(DeleteId) {
   }
 
   communityDetail(id1){
-      this.communityServices.communityDetail(id1).subscribe(users => {
+    this.communityServices.communityDetail(id1).subscribe(users => {
       this.communityDetailData = users.result.info;
       this.members =  users.result.info.members;
       this.show_member = this.members.length;
@@ -160,6 +155,7 @@ showConfirm(DeleteId) {
   })
   }
   communityProfile(id){
+
      this.nav.push(CommunityprofilePage,{profile_uid:id});
   }
   communityProfiles(id){
@@ -245,11 +241,9 @@ showConfirm(DeleteId) {
     let files = [].slice.call(event.target.files);
     this.base64Image = files[0];
     console.log("file lists: ",this.base64Image);
-    // let filee = files[0];
     input.value = files.map(f => f.name).join(', ');
     console.log("files selected: ",input.value);
   }
-
 
   sendPost(id1){
     if(this.comment != ""){
@@ -274,7 +268,6 @@ showConfirm(DeleteId) {
 
   postCommunity(id){
     console.log("file lists: ",this.base64Image);
-    // let file = 
      let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
      loader.present();
      this.communityServices.postCommunity(id,this.base64Image,this.videoUrl,this.post).subscribe(datas =>{
