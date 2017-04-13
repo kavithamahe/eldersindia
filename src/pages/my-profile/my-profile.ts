@@ -14,8 +14,7 @@ import { Storage } from '@ionic/storage';
 */
 @Component({
   selector: 'page-my-profile',
-  templateUrl: 'my-profile.html',
-  providers:[ServiceProvider]
+  templateUrl: 'my-profile.html'
 })
 export class MyProfilePage {
 
@@ -24,10 +23,8 @@ user_type:any ;
 imageURL:any;
 token:any;
 
-  constructor(public storage:Storage,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
-  
-  
-  }
+  constructor(public storage:Storage,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {  }
+
 
   loadMyProfile(){
     this.providerService.webServiceCall(`myaccount`,"")

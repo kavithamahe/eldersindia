@@ -93,12 +93,12 @@ showConfirm(DeleteId) {
     // http://www.dailymotion.com/video/
   let url;
   
-  // url = oldURL.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
-  // url = oldURL.replace("https://www.youtube.com/watch?v=_OBlgSz8sSM","https://www.youtube.com/embed/_OBlgSz8sSM");
-  // url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/"); 
-  //  console.log("vidweo url: ",oldURL);
-  // url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
-  // url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
+  url = oldURL.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
+  url = oldURL.replace("https://www.youtube.com/watch?v=_OBlgSz8sSM","https://www.youtube.com/embed/_OBlgSz8sSM");
+  url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/"); 
+   console.log("vidweo url: ",oldURL);
+  url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
+  url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
   url = oldURL.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/");
   url = oldURL.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
   // url = oldURL.replace("http://www.youtube.com/embed/watch/", "http://www.youtube.com/embed/")
@@ -236,6 +236,15 @@ showConfirm(DeleteId) {
       toast.present();
    }
 
+
+   onChange(event: any, input: any) {
+    let files = [].slice.call(event.target.files);
+    this.base64Image = files[0];
+    console.log("file lists: ",this.base64Image);
+    input.value = files.map(f => f.name).join(', ');
+    console.log("files selected: ",input.value);
+  }
+
   sendPost(id1){
     if(this.comment != ""){
 
@@ -258,6 +267,7 @@ showConfirm(DeleteId) {
   }
 
   postCommunity(id){
+    console.log("file lists: ",this.base64Image);
      let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
      loader.present();
      this.communityServices.postCommunity(id,this.base64Image,this.videoUrl,this.post).subscribe(datas =>{

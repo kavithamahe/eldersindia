@@ -3,6 +3,8 @@ import { NavController, NavParams, ModalController, ViewController,AlertControll
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Platform } from 'ionic-angular';
+
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CommunitymessagePage } from '../communitymessage/communitymessage';
@@ -39,9 +41,11 @@ export class CommunityprofilePage {
     connectionList:any;
     allConnections:any;
     user_id:any;
+    community: String = "activity";
+  isAndroid: boolean = false;
 
-  constructor(public nav: NavController, public storage:Storage, public viewCtrl: ViewController,private sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
-       
+  constructor(public nav: NavController,platform: Platform, public storage:Storage, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+        this.isAndroid = platform.is('android');
       this.nav=nav;
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -56,8 +60,8 @@ export class CommunityprofilePage {
     this.communityProfile=[];
     this.communityProfileData=[];
     this.status=[];
-     this.connectLists = false;
-      this.activityLists = true;
+     // this.connectLists = false;
+     //  this.activityLists = true;
       this.status = false;
       this.request_sent = false;
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -75,21 +79,19 @@ export class CommunityprofilePage {
     modal.present();
   }
   
- cleanURL(oldURL: string): any  {
-    console.log("vidweo url: ",oldURL);
-    // http://www.dailymotion.com/video/
-  // let url = oldURL.replace("watch?v=", "")
-  let url;
-  url = oldURL.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
-  
-  url = oldURL.replace("http://www.youtube.com","http://www.youtube.com/embed");
-  url = oldURL.replace("http://www.youtube.com/embed/","http://www.youtube.com/embed/");
-    url = oldURL.replace("https://www.youtube.com/watch?v=aUN6RPMIoeo","https://www.youtube.com/embed/aUN6RPMIoeo"); 
 
-  url = oldURL.replace("http://www.youtube.com/embed/watch/","http://www.youtube.com/embed/");
-  url = oldURL.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
-  // url = oldURL.replace("http://www.youtube.com/embed/watch/", "http://www.youtube.com/embed/")
- return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  cleanURL(oldURL: string): any  {
+    if(oldURL !=null){  
+      let url1 = oldURL.replace('https://www.youtube.com/watch?v=','https://www.youtube.com/embed/');
+  
+    let url2 = url1.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
+ 
+    let url = url2.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
+ return this.sanitizer.bypassSecurityTrustResourceUrl(url);}
+   else{
+     return null;
+   }
+  
 }
   accessGallery(){
    Camera.getPicture({
@@ -155,7 +157,7 @@ export class CommunityprofilePage {
   })
 
   }
-  communityMember(){
+  Communities(){
     this.communityServices.getCommunityMembers().subscribe(users => {
       this.getCommunityMembers=users.result.data;
      
@@ -164,14 +166,14 @@ export class CommunityprofilePage {
     
     this.communityServices.showErrorToast(err);
   })
-    this.activityLists = false;
-    this.connectLists = false;
-     if (this.communityMembers) {
-        this.communityMembers = false;
+    // this.activityLists = false;
+    // this.connectLists = false;
+    //  if (this.communityMembers) {
+    //     this.communityMembers = false;
        
-    } else {
-       this.communityMembers = true;
-     }
+    // } else {
+    //    this.communityMembers = true;
+    //  }
     
  }
   
@@ -179,6 +181,7 @@ export class CommunityprofilePage {
    
     this.communityServices.connectMember(user.id,user.name).subscribe(users => {
        this.showToast(users.result.info);
+        this.memberProfile(user.id);
        this.request_sent = true;
 
       },
@@ -187,28 +190,19 @@ export class CommunityprofilePage {
     this.communityServices.showErrorToast(err);
   })
  }
- activityMember(){
-   this.connectLists = false;
-   this.communityMembers = false;
-
-   if (this.activityLists) {
-        this.activityLists = false;
-       
-    } else {
-       this.activityLists = true;
-     }
- }
- // communityMember(){
- //   this.activityLists = false;
+ // activityMember(){
  //   this.connectLists = false;
- //   if (this.communityMembers) {
- //        this.communityMembers = false;
+ //   this.communityMembers = false;
+
+ //   if (this.activityLists) {
+ //        this.activityLists = false;
        
  //    } else {
- //       this.communityMembers = true;
+ //       this.activityLists = true;
  //     }
  // }
-  connectList(id,val){
+
+  Connections(id,val){
     this.communityServices.getConnectLists(id,val).subscribe(users => {
        this.allConnections=users.result.info.list;  
   },
@@ -216,16 +210,12 @@ export class CommunityprofilePage {
     
     this.communityServices.showErrorToast(err);
   })
-    this.activityLists = false;
-    this.communityMembers = false;
-     this.connectLists = true;
-
-  }
+    }
 
   setItems(ev) {
      var val = ev.target.value;
      let id = this.user_id;
-   this.connectList(id,val);
+   this.Connections(id,val);
   }
   
 
@@ -254,6 +244,7 @@ export class CommunityprofilePage {
   }
 
   sendPost(id1){
+     if(this.comment != ""){
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
      this.communityServices.sendPosts(id1,this.comment).subscribe(datas =>{
@@ -267,7 +258,12 @@ export class CommunityprofilePage {
     this.communityServices.showErrorToast(err);
   })
      loader.dismiss();
+  }else{
+     this.showToast("Enter Comments and Post");
+   }
+     
   }
+  
 
    addUserPosts(id){
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     

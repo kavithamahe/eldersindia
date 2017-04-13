@@ -24,8 +24,8 @@
     <ion-select [(ngModel)]="dependent">
       <ion-option *ngFor="let dependent of getDependentList" [value]="dependent?.id">{{dependent?.name}}</ion-option>    </ion-select>
   </ion-item>
-  <ion-item ion-right>
-  <button ion-button color="primary" (click)="submitDependent()">Secondary</button>
+  <ion-item>
+  <button ion-button full color="primary" (click)="submitDependent()">Submit</button>
   </ion-item>
 </ion-list>
 

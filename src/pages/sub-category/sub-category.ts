@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { LoadingController, NavController, NavParams } from 'ionic-angular';
 
 
-import { SubcategoryListPage } from '../subcategory-list/subcategory-list';
+import { SubCategoryServicePage } from '../sub-category-service/sub-category-service';
 import { ServiceProvider } from '../../providers/service-provider';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 /*
@@ -87,17 +87,16 @@ locationChanged(){
     this.loadSubCategory(locationBasedData);
   }
 
-itemSelected(serviceData) {
-    let location_id = this.elderLocation;
-    let service = serviceData;
+openSelected(sub_category_Data){
+let location_id = this.elderLocation;
+    let sub_service = sub_category_Data;
     if(this.elderLocation==""){
       this.providerService.showToast("Please Select the Location!");
     }else{
-    this.navCtrl.push(SubcategoryListPage,{location_id,service});  
+    this.navCtrl.push(SubCategoryServicePage,{location_id,sub_service});  
     }
-      
   }
-  
+
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);

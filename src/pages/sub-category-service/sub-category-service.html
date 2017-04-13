@@ -1,0 +1,41 @@
+<!--
+  Generated template for the SubCategoryService page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>{{subcategory.name}}</ion-title>    
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content padding>
+	<ion-item *ngFor="let service of subcategory.services" (click)="itemSelected(service)" [color]="subcategory.color" class="sub-cate">
+		<ion-card>
+		    <ion-card-content>
+		   {{ service.name }}
+		   </ion-card-content> 
+		</ion-card>
+	</ion-item>
+
+<!--updated 3/22/2017-->
+ <ion-card padding *ngIf="!subcategory.services">
+     <ion-card-content>
+     {{emptyRecord}}
+     </ion-card-content>
+  </ion-card>
+<!-- till this-->  
+</ion-content>

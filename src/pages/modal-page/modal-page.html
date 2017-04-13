@@ -20,7 +20,7 @@
 			<ion-label stacked class="label-lb">Describe The Problem</ion-label>
           <ion-input type="text" formControlName="problem" ></ion-input>
 		  <ion-item *ngIf="!modalForm.controls.problem.valid  && (modalForm.controls.problem.dirty || submitAttempt)">
-                <p class="err-reds">This field is required</p>
+                <p class="err-reds">Please enter the describe problem</p>
             </ion-item>
      
           
@@ -30,7 +30,7 @@
            <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" formControlName ="date"></ion-datetime>
           </ion-item>
           <ion-item *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">
-                <p class="err-reds">This field is required</p>
+                <p class="err-reds">Please enter the date</p>
             </ion-item>
 		
 
@@ -40,7 +40,7 @@
             <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" formControlName ="time" class="select-brd"></ion-datetime>
           </ion-item>
 		  <ion-item *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">
-                <p class="err-reds">This field is required</p>
+                <p class="err-reds">Please enter the time</p>
           </ion-item>
 		
 
@@ -48,7 +48,7 @@
 
           <ion-input type="text" formControlName="contact"></ion-input>
 		    <ion-item *ngIf="!modalForm.controls.contact.valid  && (modalForm.controls.contact.dirty || submitAttempt)">
-                <p class="err-reds">This field is required</p>
+                <p class="err-reds">Please enter the alternate contact number</p>
             </ion-item>
 		
           
@@ -60,7 +60,7 @@
             </ion-select>
           </ion-item>
 		  <ion-item *ngIf="!modalForm.controls.dependents.valid  && (modalForm.controls.dependents.dirty || submitAttempt)">
-                <p class="err-reds">This field is required</p>
+                <p class="err-reds">Please select the dependents</p>
             </ion-item>
           <ion-row>
           <ion-col><button ion-button item-left small (click)="dismiss()" class="btn-defaults">close</button></ion-col>

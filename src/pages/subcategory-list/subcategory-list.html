@@ -21,10 +21,11 @@
 </ion-header>
 
 <ion-content padding>
-	<ion-card class="subcategory-list" *ngFor="let service_list of sublists.lists">
-		<ion-item>
+	<ion-card style = "background:#FE6263" class="subcategory-list" *ngFor="let service_list of sublists.lists">
+		<ion-card>
+		<ion-item style="left:50px">
 		    <ion-thumbnail style="width: 30px; height: 30px;" item-left>
-		      <img [src]= "logoUrl+list?.logo">
+		      <img [src]= "logoUrl+service_list?.logo">
 		    </ion-thumbnail>	 
 		    <h2>{{service_list.name}}</h2>
 			 <p>
@@ -33,11 +34,12 @@
 			  </rating>
 		 	 </p>
 		    <p><i class="fa fa-inr" aria-hidden="true"></i> {{service_list.service_cost - service_list.percentage_cost}}</p> 
-		    <button ion-button small item-right (click)="serviceInfo(service_list)" class="info">Info</button>
-		</ion-item>
-		 <ion-item>
-		 <button ion-button item-left (click)="openModal('scheduleModal',service_list.id)" class="btn-warnings"> Schedule Request</button>
-		 <button ion-button item-right (click)="instantRequest(service_list.id)" class="btn-infos"> Instant Request</button>
 		 </ion-item>
+		 </ion-card>
+		 <ion-card>
+		 <button ion-button full (click)="serviceInfo(service_list)" class="info">Info</button>
+		 <button ion-button full (click)="openModal('scheduleModal',service_list.id)" class="btn-warnings"> Schedule Request</button>
+		 <button ion-button full (click)="instantRequest(service_list.id)" class="btn-infos"> Instant Request</button>
+		 </ion-card>
 	</ion-card>
 </ion-content>

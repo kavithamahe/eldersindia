@@ -65,8 +65,9 @@ dependent:any;
         });
    toast.present();
   }
-dismiss() {
-   this.viewCtrl.dismiss();
+dismiss() { 
+  let data={'dependent':''};
+   this.viewCtrl.dismiss(data);
  }
  submitDependent()
  {

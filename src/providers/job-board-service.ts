@@ -65,4 +65,16 @@ user_id:number;
     return this.http.post(this.rootUrl+'getDependants',_request,this.options)
       .map(res => res.json()); 
   }
+  JobBoardscroll(nextPageURL)
+   {
+    let _request= {"search":{"location":[],"functional_area":[]},"get":["FunctionalArea","Location","SkillSet"],"info":{"uid":this.user_id}};
+    return this.http.post(nextPageURL,_request,this.options)
+      .map(res => res.json()); 
+   }
+   appliedJobscroll(nextPageURL)
+   {
+    let _request= {"search":"","info":{"uid":this.user_id}};
+    return this.http.post(nextPageURL,_request,this.options)
+      .map(res => res.json()); 
+   }
 }

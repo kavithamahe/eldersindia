@@ -31,14 +31,11 @@
       </ion-select>
 </ion-item>
 <ion-item *ngFor = "let subcategory of subcategories.info" [color]="subcategory.color" class="sub-cate">
-	<h2><ion-title>{{subcategory.name}}</ion-title></h2>
-	<ion-list *ngFor="let service of subcategory.services" ion-item (click)="itemSelected(service)" no-border>
-	 <!-- <button > -->
-	    <div class="sub-cate">
-	   <p>  <ion-icon ios="md-arrow-dropright" md="md-arrow-dropright"></ion-icon>  {{ service.name }}</p>
-	   </div>
-	  <!--</button> -->
-	</ion-list>
+	<ion-card (click)="openSelected(subcategory)"> 
+    <ion-card-content>
+    {{subcategory.name}} 
+    </ion-card-content>
+  </ion-card>
 </ion-item>
 <!--updated 3/22/2017-->
  <ion-card padding *ngIf="!subcategories?.info">
