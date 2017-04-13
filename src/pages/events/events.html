@@ -29,9 +29,9 @@
     <h2 class="primary-color feed-post pro-info" >{{events?.title}}</h2>
     <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{events?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{events?.post_date | date :"MMM dd y"}}</p>
   </ion-item>
-  <ion-card-content>
+  <!--<ion-card-content>
     <p [innerHTML]="events?.description | words : 60 : '...'"></p>
-  </ion-card-content>
+  </ion-card-content>-->
   </div>
 </ion-card>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

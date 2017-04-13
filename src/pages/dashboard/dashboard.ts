@@ -26,6 +26,7 @@ export class DashboardPage {
   police:any;
   ambulance:any;
   call_sponsor:any;
+  hooterOn:boolean=false;
   constructor(public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
   	this.storage.ready().then(() => {
       storage.get('token').then((token) => { this.token=token;  })
@@ -78,9 +79,20 @@ export class DashboardPage {
     this.showToaster("There is no contact nuber");
    }
   }
-  public hooter()
+  public hooter(hooterOn)
   {
-    Vibration.vibrate(5000);
+
+    if(!hooterOn)
+    {
+       this.hooterOn=!hooterOn;
+    Vibration.vibrate(60000);
+    
+    }
+    else
+    {
+      Vibration.vibrate(0);
+      this.hooterOn=!hooterOn;
+    } 
     
   }
   public showToaster(message)

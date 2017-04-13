@@ -62,7 +62,7 @@ export class MyApp {
         if(this.user_logged == 'sponsor'){
           this.pages = [];
           this.pages.push(
-                          { title: 'Dashboard', component: DashboardPage },    
+                          { title: 'Dashboard', component: DashboardPage},    
                           { title: 'Manage Dependents', component: ManagePage },
                           { title: 'Community', component: CommunitylistPage },
                           { title: 'Connections', component: ConnectionsPage },
