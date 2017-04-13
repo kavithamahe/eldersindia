@@ -81,7 +81,6 @@ export class DashboardPage {
   }
   public hooter(hooterOn)
   {
-
     if(!hooterOn)
     {
        this.hooterOn=!hooterOn;
@@ -92,8 +91,7 @@ export class DashboardPage {
     {
       Vibration.vibrate(0);
       this.hooterOn=!hooterOn;
-    } 
-    
+    }   
   }
   public showToaster(message)
   {

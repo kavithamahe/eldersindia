@@ -23,6 +23,7 @@
     "@ionic-native/call-number": "^3.4.4",
     "@ionic-native/vibration": "^3.4.4",
     "@ionic-native/video-player": "^3.4.4",
+    "@ionic-native/youtube-video-player": "^3.4.4",
     "@ionic/storage": "^1.1.9",
     "angular2-tag-input": "^1.2.3",
     "bootstrap": "^3.3.7",

@@ -30,11 +30,20 @@
 	   
   	<div  *ngIf="userType == 'sponsor'">
 	  	<ion-card>
-	  		<ion-card-content>
-				<h2 class="wel-comemem">Welcome to {{communityDetailData?.community_name}}</h2>
-			
-		         <p class="members">{{communityDetailData?.description}}</p>
-			</ion-card-content>
+	  		<ion-row>
+	  			<ion-col width-20>
+	  				<ion-item>
+	  					<ion-avatar item-left>
+	  						<img [src]="imageUrl+communityDetailData?.logo" 
+	  						[hidden]="!communityDetailData?.logo">
+	  					</ion-avatar>
+	  				</ion-item>
+	  			</ion-col>
+	  			<ion-col>
+		  			<h2 class="wel-comemem">Welcome to {{communityDetailData?.community_name}}</h2>
+					<p class="members">{{communityDetailData?.description}}</p>
+				</ion-col>
+			</ion-row>
 			<hr/>
 			<ion-card-content>
 					<ion-row>
@@ -43,9 +52,7 @@
 								<button ion-button small (click)="joinCommunity(communityDetailData.id)" 
 								class="post">Join</button>
 							</div>
-						
 						</ion-col>
-						
 					</ion-row>
 					<ion-row>
 						<h2 class="wel-comemem">Members</h2>
@@ -69,35 +76,17 @@
 						</ion-col>
 					</ion-row>-->
                     
-		    			<!--<div *ngFor="let member of members" text-wrap>
-		    				
-								<ion-item text-wrap class="memb-list">
-									<ion-avatar>
-										<img (click)="membersProfile(member.uid)" 
-										[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar">
-									</ion-avatar>
-
-								</ion-item>
-								<ion-item  *ngIf="!show_member">
-										<p>No Members Joined Yet</p>
-							    </ion-item>
-							
-							
-						</div>-->
+		    		
                          <div *ngFor="let member of members" text-wrap>
-		    				
-								<ion-item text-wrap class="memb-list">
+		    					<ion-item text-wrap class="memb-list">
 									<ion-avatar>
 										<img (click)="membersProfile(member.uid)" 
 										[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar">
 									</ion-avatar>
-									
 								</ion-item>
 								<ion-item  *ngIf="!show_member">
-										<p>No Members Joined Yet</p>
+									<p>No Members Joined Yet</p>
 							    </ion-item>
-							
-							
 						</div>
 					
 			</ion-card-content>
@@ -111,25 +100,24 @@
 			</ion-item>
 			  	   <hr>
 			  	<ion-card-content style="padding:0px !important;">
-				
-				      <ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in you mind?"></ion-textarea>
-				  
-		    	</ion-card-content>
+					<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
+					</ion-textarea>
+				</ion-card-content>
 		    		
 		    	<ion-card-content style="padding:0px !important;">
-		    		<!-- <ion-row>
+		    		<ion-row>
 						<ion-col>
-							<button ion-button (click)="accessGallery()" class="video">
-								<i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Add Photos
+							<button ion-button (click)="accessGallery()" icon-only class="video">
+								<i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;
 							</button>
 							 	<img [src]="base64Image" *ngIf="base64Image" />
 						</ion-col>
-					</ion-row> -->
+					</ion-row>
 		    		
 		       		<ion-row>
 						<ion-col>
-							<button ion-button (click)="addVideos()" medium class="video">
-								<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp;Add Videos
+							<button ion-button (click)="addVideos()" icon-only medium class="video">
+								<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp;
 							</button>
 						</ion-col>
 					</ion-row>
@@ -143,21 +131,22 @@
 							</div>
 						</ion-col>
 					</ion-row>
-		   			
-		        </ion-card-content>
+		   		</ion-card-content>
 		        <ion-card-content style="padding:0px !important;">
 					<ion-row>
 		    			<ion-col text-right>
 		    				<div>
-								<button ion-button medium style=" width:100%" (click)="postCommunity(communityDetailData?.id)" class="post">
-									<i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp; Post
+								<button ion-button icon-only medium style=" width:100%" 
+								(click)="postCommunity(communityDetailData?.id)" class="post">
+									<i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp; 
 								</button>
 							</div>
 						</ion-col>
 					</ion-row>
 				</ion-card-content>
 			</ion-card>
-	<ion-list  *ngFor="let user of users; let i=index">	
+			
+	<ion-list *ngFor="let user of users; let i=index">	
  		<div>
  			<ion-card>
 				<ion-item>
@@ -189,68 +178,15 @@
 		          	<img  [src]="imageUrl+user?.post_image" [hidden]="!user?.post_image">
 	       		</ion-card-content>
 				<ion-card-content *ngIf="user?.post_video">
-
-	        <!--  <iframe [hidden]="!user?.post_video" height="190" onload="this.width=screen.width" [src]="sanitizer.bypassSecurityTrustResourceUrl(http://www.youtube.com/watch?v=uiws904iuEQ)" frameborder="0" ></iframe> -->
-
-	         		<iframe [src]="cleanURL(user?.post_video)" frameborder="0" 
+					<iframe [src]="cleanURL(user?.post_video)" frameborder="0" 
 	         		[hidden]="!user?.post_video">
 	         		</iframe>
-		       <!--  <video  style="width:400px" >
-				<source src="http://player.vimeo.com/external/85569724.sd.mp4?s=43df5df0d733011263687d20a47557e4" type="video/mp4"/>
-				</video> -->
-
-<!-- 
-				<video> 
-	          	
-	          	 <source src="http://www.dailymotion.com/video/x2f4zt5_dunya-news-winds-force-plane-to-land-almost-sideways-at-leeds-airport_news">
-	          	 </video> -->
-	          	<!--  <iframe src="http://www.dailymotion.com/embed/video/x2f4zt5_dunya-news-winds-force-plane-to-land-almost-sideways-at-leeds-airport_news" width=\"480\" height=\"269\" frameborder=\"0\" allowfullscreen></iframe>" -->
-
-	          		
-
-
-
-	          	<!--  <iframe src=\"https:\/\/player.vimeo.com\/video\/210073083\" width=\"480\" height=\"270\" frameborder=\"0\" title=\"The New Vimeo Player (You Know, For Videos)\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>" -->
-
-	          	<!--  <video  (click)="toggleVideo()" #videoPlayer>
-				        <source src="https://ia902505.us.archive.org/7/items/Birds021/Birds%2002-1.m4v" type="video/mp4" />
-				        Browser not supported
-				    </video> 
-				          <video controls="controls" preload="metadata"  webkit-playsinline="webkit-playsinline" class="videoPlayer"><source 
-				          [src]="sanitizer.bypassSecurityTrustResourceUrl(user?.post_video)" type="video/mp4"/></video>-->
-                          
-                    <!--  <video controls="controls" preload="metadata" webkit-playsinline="webkit-playsinline" class="videoPlayer"><source src="https://vimeo.com/video/210073083"
-                      type="video/mp4"/></video>
- -->
-	          	 <!-- <Video
-			         
-			          src="http://www.dailymotion.com/video/x2f4zt5_dunya-news-winds-force-plane-to-land-almost-sideways-at-leeds-airport_news"
-			          
-			          height="300"></Video> -->
-
-			        <!--    <iframe width="560" height="315"                 
-			           src="https://www.youtube.com/embed/pNFu3JMV-y4" frameborder="0" >
-			           	
-			           </iframe> 
-			            -->
-
-
-
-
-	         <!-- <iframe [hidden]="!user?.post_video" height="190" onload="this.width=screen.width" [src]="sanitizer.bypassSecurityTrustResourceUrl(user?.post_video)" frameborder="0" ></iframe> -->
-
-	        <!--  <iframe  [hidden]="!user?.post_video"  width="420" height="315" [src]="cleanURL(user.post_video)" frameborder="0" allowfullscreen></iframe> -->
-
-				<!-- <video controls><source 
-	          	[src]="cleanURL(user?.post_video)" /></video> -->
-	          	<!--  <source src="http://player.vimeo.com/external/85569724.sd.mp4?s=43df5df0d733011263687d20a47557e4" type="video/mp4"/> -->
-	       	</ion-card-content>
+	         	</ion-card-content>
 	       	 
 	       	<ion-card-content>
 	      		<ion-row>
 	        		<ion-col width-15>
-	          			<button class="hover but-colo" ion-button outline (click)="addLikes(user.id)">
-	            			<i class="fa fa-heart-o likecolor"></i> &nbsp; <p class="num-of">{{user.likes}}</p>
+	          			<button class="hover but-colo" ion-button outline (click)="addLikes(user.id)"><i class="fa fa-heart-o likecolor"></i> &nbsp; <p class="num-of">{{user.likes}}</p>
 	          			</button>
 	        		</ion-col>
 	        		<!-- <ion-col>
@@ -266,7 +202,6 @@
 	          		</ion-col>
 	      		</ion-row>
 	      			<div *ngIf="i==showblock">
-			
 	      				<ion-item>
 							<ion-row *ngFor="let comment of user.comments" class="comm-posted">
 									<ion-avatar>
@@ -276,17 +211,16 @@
 	      							<ion-item text-wrap style="padding-top:0px;"><p class="cmmpost">{{comment.comments}}</p></ion-item>
 		      						<button ion-button class="trash-icon" (click)="showConfirm(comment.comments_id)" 
 		      						color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
-										
-	      						</ion-row>
-							
-	      					</ion-item>
+							</ion-row>
+						</ion-item>
 						<hr/>
 							<ion-label class="liste-edit">Enter Comments...</ion-label>
 	      				<ion-item>
-				   		
-				   			<ion-textarea [(ngModel)]="comment" style=" margin:0px !important;"></ion-textarea>
+				   			<ion-textarea [(ngModel)]="comment" style=" margin:0px !important;">
+				   		    </ion-textarea>
 						</ion-item>
-  							<button  ion-button (click)="sendPost(user.id)" style="width:100%;" class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp;Post Comment</button>
+  							<button  ion-button (click)="sendPost(user.id)" style="width:100%;" 
+  							class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp;Post Comment</button>
   							<!--<button  ion-button (click)="addDetails(i)" color="light" full>Cancel
   							</button>-->
 	      			</div>
