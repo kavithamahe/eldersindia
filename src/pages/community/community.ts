@@ -102,8 +102,7 @@ showConfirm(DeleteId) {
     else{
       return null;
     }
-  
-}
+  }
 
 
   addDetails(event){

@@ -114,6 +114,7 @@ export class MyApp {
       this.platform.registerBackButtonAction(() => {
         // let nav = this.app.getActiveNav();
         if (this.nav.canGoBack()){ //Can we go back?
+          console.log(this.nav.getActive().name);
           this.nav.pop();
         }else{
 // <<<<<<< HEAD

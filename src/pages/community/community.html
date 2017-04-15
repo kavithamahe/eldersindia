@@ -77,16 +77,16 @@
 					</ion-row>-->
                     
 		    		
-                         <div *ngFor="let member of members" text-wrap>
-		    					<ion-item text-wrap class="memb-list">
-									<ion-avatar>
-										<img (click)="membersProfile(member.uid)" 
+                        <div *ngFor="let member of members" text-wrap>
+		    				<ion-item text-wrap class="memb-list">
+								<ion-avatar>
+									<img (click)="membersProfile(member.uid)" 
 										[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar">
-									</ion-avatar>
-								</ion-item>
-								<ion-item  *ngIf="!show_member">
-									<p>No Members Joined Yet</p>
-							    </ion-item>
+								</ion-avatar>
+							</ion-item>
+							<ion-item  *ngIf="!show_member">
+								<p>No Members Joined Yet</p>
+							</ion-item>
 						</div>
 					
 			</ion-card-content>
@@ -112,9 +112,13 @@
 							</button>
 							 	<img [src]="base64Image" *ngIf="base64Image" />
 						</ion-col>
-					</ion-row>
-		    		
-		       		<ion-row>
+					</ion-row> 
+					<div>
+				    <!--   <h2>Hello {{name}}</h2> -->
+				      <input type="file" multiple (change)="onChange($event, showFileNames)" />
+				      <input #showFileNames />
+				    </div>		    		
+	       		<ion-row>
 						<ion-col>
 							<button ion-button (click)="addVideos()" icon-only medium class="video">
 								<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp;

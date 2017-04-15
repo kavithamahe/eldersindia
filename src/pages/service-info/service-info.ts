@@ -115,16 +115,22 @@ userType:any;
 
 ngViewInit() {
     this.sliderOptions = {
+      // initialSlide: 0,
+      // loop: true,
+      // direction: 'horizontal',
+      // pager: true,
+      // paginationType:'fraction',
+      // speed: 300,
+      // autoplay: 300,
+      // slidesPerView:2,
+      //   effect: 'cube',
+      //   // fade: {
+      //   //     crossFade: true
+      //   // }
       initialSlide: 0,
-      loop: true,
-      direction: 'horizontal',
-      pager: true,
-      speed: 300,
-      autoplay: 300,
-        effect: 'fade',
-        fade: {
-            crossFade: true
-        }
+    loop: true,
+    autoplay:2000,
+    autoplayDisableOnInteraction: false
     }
     this.slider.startAutoplay();
 };
