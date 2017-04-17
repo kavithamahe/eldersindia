@@ -29,7 +29,9 @@ infiniteReceivedRquestInfo:any=[];
 nextURL;any;
 user_id:any;
 nextPageURL1:any='';
+nextPageURL2:any='';
 allConnectionScrollLists:any=[];
+receivedConnectionScrollLists:any=[];
    constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public connectionsService:ConnectionsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.connections="all";
     this.messages="inbox";
@@ -74,8 +76,9 @@ allConnectionScrollLists:any=[];
     loader.present();
     this.connectionsService.receivedRquest().subscribe(
      (receivedRquest) => {
-      this.receivedRquestInfo=receivedRquest.result.info.list;
-      this.orgReceivedRquestInfo=receivedRquest.result.info.list;     
+      this.receivedRquestInfo=receivedRquest.result.info.list.data;
+      this.orgReceivedRquestInfo=receivedRquest.result.info.list.data; 
+       this.nextPageURL2=receivedRquest.result.info.list.next_page_url;     
     },
     (err) => { 
         if(err.status===401)
@@ -115,42 +118,48 @@ allConnectionScrollLists:any=[];
   }
   public search(searchEvent) {
     let term = searchEvent.target.value;
-    /*if (term.trim() === '' || term.trim().length < 3) {
-      this.allConnectionsInfo=this.orgAllConnectionsInfo;
-    } else {*/
-      // Get the searched users from github
       this.connectionsService.searchConnection(term).subscribe(searchConnection => {
         this.allConnectionsInfo= searchConnection.result.info.list.data;
       });
-   // }
   }
 
   public doInfinite2(infiniteScroll) {
-    console.log('Begin async operation');
-    if(this.nextURL==null)
-    {
-     this.nextURL="http://192.168.1.120:8000/api/receiveConnectionRequest?page=1";
-    }
-    this.connectionsService.infiniteRquest(this.nextURL).subscribe(
-     (infinitereceivedRquest) => {
-       
-      this.infiniteReceivedRquestInfo=infinitereceivedRquest.result.info.list.data; 
-      this.nextURL=infinitereceivedRquest.result.info.list.next_page_url; 
-      console.log(this.infiniteReceivedRquestInfo);    
-    },
-    (err) => { 
-        this.infiniteReceivedRquestInfo=[];
+    setTimeout(() => {      
+      if(this.nextPageURL2!=null && this.nextPageURL2!='')
+      {
+        this.receivedConnectionScroll();
       }
-    );
-    setTimeout(() => {
-      for (let i = 0; i < Object.keys(this.infiniteReceivedRquestInfo).length; i++) {
-        this.receivedRquestInfo.data.push(this.infiniteReceivedRquestInfo[i]);
-        console.log(this.infiniteReceivedRquestInfo[i]);
+      else{
+         infiniteScroll.enable(false);
       }
       infiniteScroll.complete();
     }, 500);
   }
-
+  receivedConnectionScroll()
+  {
+     this.connectionsService.receivedConnectionScroll(this.nextPageURL2).subscribe(
+     (receivedConnectionScroll) => {
+      this.receivedConnectionScrollLists=receivedConnectionScroll.result.info.list.data;  
+      // console.log(this.allConnectionScrollLists);
+      for (let i = 0; i < Object.keys(this.receivedConnectionScrollLists).length; i++) {        
+        this.receivedRquestInfo.push(this.receivedConnectionScrollLists[i]);
+        // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
+        }
+      
+       this.nextPageURL2=receivedConnectionScroll.result.info.list.next_page_url;   
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
+  }
   public showToaster(message)
   {
    let toast = this.toastCtrl.create({
@@ -166,7 +175,6 @@ allConnectionScrollLists:any=[];
     this.navCtrl.setRoot(DashboardPage);
   }
    doInfinite1(infiniteScroll) {
-     console.log("scroll call");
       console.log(this.allConnectionsInfo);
     setTimeout(() => {      
       if(this.nextPageURL1!=null && this.nextPageURL1!='')
@@ -174,8 +182,6 @@ allConnectionScrollLists:any=[];
        this.allConnectionScroll();
       }
       else{
-          console.log("end scroll");
-          console.log(this.allConnectionsInfo);
         infiniteScroll.enable(false);
       }
       infiniteScroll.complete();
@@ -189,7 +195,6 @@ allConnectionScrollLists:any=[];
       this.allConnectionScrollLists=allConnectionScroll.result.info.list.data;  
       // console.log(this.allConnectionScrollLists);
       for (let i = 0; i < Object.keys(this.allConnectionScrollLists).length; i++) {
-        console.log("loop"+i);
         this.allConnectionsInfo.push(this.allConnectionScrollLists[i]);
         // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
         }
