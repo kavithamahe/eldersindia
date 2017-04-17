@@ -211,15 +211,12 @@
 	          		</ion-col>
 	      		</ion-row>
 	      			<div *ngIf="i==showblock">
-	      				
-							<ion-row *ngFor="let comment of user.comments" class="comm-posted">
-							
-		      					 		<img class="pro-imgs" [src]="imageUrl+comment?.profile_image"  [hidden]="!comment?.profile_image" >
-			      				
-	      						
-									<p class="cmmpost">{{comment.comments}}</p>
-									
-		      						<button ion-button class="trash-icon" (click)="showConfirm(comment.comments_id)" 
+	      					<ion-row *ngFor="let comment of user.comments" class="comm-posted">
+    					 		<img class="pro-imgs" [src]="imageUrl+comment?.profile_image"  [hidden]="!comment?.profile_image" >
+			      				<p class="cmmpost">{{comment.comments}}</p>
+															
+	      							<button ion-button clear>reply</button>
+	      						<button ion-button class="trash-icon" (click)="showConfirm(comment.comments_id)" 
 		      						color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
 							</ion-row>
 						

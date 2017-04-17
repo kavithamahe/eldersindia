@@ -40,7 +40,7 @@
 
 <div [ngSwitch]="connections">
   <ion-list *ngSwitchCase="'received'">  
-  <div *ngFor="let request of receivedRquestInfo?.data">
+  <div *ngFor="let request of receivedRquestInfo">
     <ion-grid>
     <ion-row>
     <ion-col width-20>
@@ -67,11 +67,8 @@
     </ion-grid>    
     </div>
     <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>   
   </ion-list>
 
   <ion-list *ngSwitchCase="'all'">
