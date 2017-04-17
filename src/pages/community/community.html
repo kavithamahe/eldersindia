@@ -213,6 +213,7 @@
 		      							[hidden]="!comment?.profile_image" >
 			      					</ion-avatar>
 	      							<ion-item text-wrap style="padding-top:0px;"><p class="cmmpost">{{comment.comments}}</p></ion-item>
+	      							<button ion-button clear>reply</button>
 		      						<button ion-button class="trash-icon" (click)="showConfirm(comment.comments_id)" 
 		      						color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
 							</ion-row>
