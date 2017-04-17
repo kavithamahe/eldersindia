@@ -39,13 +39,6 @@ export class ServiceprovidersPage {
     // alert('Device UUID is: ' + Device.uuid);
   }
 
-   onChange(event: any, input: any) {
-    let files = [].slice.call(event.target.files);
-    console.log("file lists: ",files);
-    input.value = files.map(f => f.name).join(', ');
-    console.log("files selected: ",input.value);
-  }
-
   loadServiceProvider(){
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
