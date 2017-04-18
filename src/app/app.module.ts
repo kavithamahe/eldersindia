@@ -58,6 +58,7 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
+import { SettingsPage } from '../pages/settings/settings';
 import { SubCategoryServicePage } from '../pages/sub-category-service/sub-category-service';
 
 import { Ionic2RatingModule } from 'ionic2-rating';
@@ -105,7 +106,8 @@ import { ServiceProvider } from '../providers/service-provider';
     ForgotPasswordPage,
     MyProfilePage,
     EditProfilePage,
-    ChangePasswordPage
+    ChangePasswordPage,
+    SettingsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp,AppConfig),
@@ -155,7 +157,8 @@ import { ServiceProvider } from '../providers/service-provider';
     ForgotPasswordPage,
     MyProfilePage,
     EditProfilePage,
-    ChangePasswordPage
+    ChangePasswordPage,
+    SettingsPage
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider

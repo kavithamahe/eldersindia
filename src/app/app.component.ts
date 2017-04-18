@@ -24,9 +24,12 @@ import { ManagePage } from '../pages/manage/manage';
 
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
+import { SettingsPage } from '../pages/settings/settings';
 
 import { LoginUser } from '../providers/login-user';
 import { Subscription }   from 'rxjs/Subscription';
+
+import { Storage } from '@ionic/storage';
 
 @Component({//selector:'my-theme',
   templateUrl: 'app.html'
@@ -34,6 +37,8 @@ import { Subscription }   from 'rxjs/Subscription';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
+
+  user_id:any;
 
   // make HelloIonicPage the root (or first) page
 
@@ -51,19 +56,30 @@ export class MyApp {
     public platform: Platform,
     public menu: MenuController,
     private userLogin: LoginUser,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public storage:Storage
   ) {
+    this.storage.ready().then(() => {
+    storage.get('id').then((id) => { this.user_id=id; })
+    
+   }); 
+
 // set our app's pages on user based
 
+      this.pages = [];
+      this.pages.push({ title: 'Dashboard', component: DashboardPage});
+      
       this.subscription = userLogin.userEntered$.subscribe(
       userData => {
         this.user_logged = userData;
-        console.log("from login page:",this.user_logged)
+
         if(this.user_logged == 'sponsor'){
-          this.pages = [];
-          this.pages.push(
-                          { title: 'Dashboard', component: DashboardPage},    
-                          { title: 'Manage Dependents', component: ManagePage },
+              this.pages.splice(1, 0, { title: 'Manage Dependents', component: ManagePage });
+              // this.pages.push({ title: 'Manage Dependents', component: ManagePage });
+         }
+    });
+     
+        this.pages.push(
                           { title: 'Community', component: CommunitylistPage },
                           { title: 'Connections', component: ConnectionsPage },
                           { title: 'Job Board', component: JobboardPage },
@@ -76,30 +92,10 @@ export class MyApp {
                           { title: 'Events', component: EventsPage },
                           { title: 'Profile', component: MyProfilePage },
                           { title: 'Change Password', component: ChangePasswordPage },
-                          { title: 'Logout', component: LogoutPage },
-                        );
-      }else{
-          this.pages = [];
-          this.pages.push(
-                          { title: 'Dashboard', component: DashboardPage },    
-                          // { title: 'Manage Dependents', component: ManagePage },
-                          { title: 'Community', component: CommunitylistPage },
-                          { title: 'Connections', component: ConnectionsPage },
-                          { title: 'Job Board', component: JobboardPage },
-                          { title: 'Applied Jobs', component: AppliedJobsPage },
-                          { title: 'Messages', component: MessagesPage },
-                          { title: 'Service Providers', component: ServiceprovidersPage },
-                          { title: 'Service Requests', component: ServicerequestPage },
-                          { title: 'Blogs', component: BlogsPage },
-                          { title: 'News', component: NewsPage },
-                          { title: 'Events', component: EventsPage },
-                          { title: 'Profile', component: MyProfilePage },
-                          { title: 'Change Password', component: ChangePasswordPage },
+                          { title: 'Settings', component: SettingsPage },
                           { title: 'Logout', component: LogoutPage },
                           );  
-        }
-    });
-
+    
     this.initializeApp();
     
   }
@@ -107,8 +103,6 @@ export class MyApp {
   initializeApp() {
 
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
       this.platform.registerBackButtonAction(() => {
@@ -117,56 +111,31 @@ export class MyApp {
           console.log(this.nav.getActive().name);
           this.nav.pop();
         }else{
-// <<<<<<< HEAD
-                
                 let confirmAlert = this.alertCtrl.create({
-               // title: 'Log Out',
+                title: 'Log Out',
                 subTitle: "Are you sure to Logout",
                 buttons: [{
                   text: 'NO',
                   handler: () => {
-                    //TODO: Your logic here
-                    // self.nav.push(PushMessagePage, {message: data.message});
-                    // this.platform.exitApp(); //Exit from app
-                    this.nav.setRoot(DashboardPage);
+                    if (this.user_id != '' || this.user_id != null) {
+                      // code...
+                      this.nav.setRoot(DashboardPage);
+                    }else{
+                      this.nav.setRoot(LoginPage);
+                    }
+                    
                   }
                 }, {
                   text: 'Yes',
                   handler: () => {
-                    //TODO: Your logic here
-                    // self.nav.push(PushMessagePage, {message: data.message});
                     this.platform.exitApp(); //Exit from app
-                    // this.nav.setRoot(LogoutPage);
-                  }
-                }]
-              });
-              confirmAlert.present();
+                   }
+                  }]
+                });
+                confirmAlert.present();
               }
-// =======
-          
-//           let confirmAlert = this.alertCtrl.create({
-//           title: 'Log Out',
-//           subTitle: "Confirm Logout",
-//           buttons: [{
-//             text: 'NO',
-//             handler: () => {
-//               //TODO: Your logic here
-//               // self.nav.push(PushMessagePage, {message: data.message});
-//               // this.platform.exitApp(); //Exit from app
-//               this.nav.setRoot(DashboardPage);
-//             }
-//           }, {
-//             text: 'OK',
-//             handler: () => {
-//               //TODO: Your logic here
-//               // self.nav.push(PushMessagePage, {message: data.message});
-//               this.platform.exitApp(); //Exit from app
-//             }
-//           }]
-//         });
-//         confirmAlert.present();
-//         }
-// >>>>>>> 502922fa8ee9ee56e515f88cce71b8393f2e3803
+
+
       });
     });
   }
