@@ -1,5 +1,5 @@
-import {Component, NgModule} from '@angular/core'
-import {BrowserModule} from '@angular/platform-browser'
+import {Component} from '@angular/core'
+// {BrowserModule} from '@angular/platform-browser'
 // import { Device, LocalNotifications } from 'ionic-native';
 import { Platform, NavController,LoadingController,ModalController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
