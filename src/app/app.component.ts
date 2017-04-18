@@ -24,6 +24,7 @@ import { ManagePage } from '../pages/manage/manage';
 
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
+import { SettingsPage } from '../pages/settings/settings';
 
 import { LoginUser } from '../providers/login-user';
 import { Subscription }   from 'rxjs/Subscription';
@@ -47,7 +48,7 @@ export class MyApp {
   subscription: Subscription;
 //----------------------------------//
 
-  rootPage: any =  DashboardPage;
+  rootPage: any =  MyProfilePage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -73,7 +74,8 @@ export class MyApp {
         this.user_logged = userData;
 
         if(this.user_logged == 'sponsor'){
-              this.pages.push({ title: 'Manage Dependents', component: ManagePage });
+              this.pages.splice(1, 0, { title: 'Manage Dependents', component: ManagePage });
+              // this.pages.push({ title: 'Manage Dependents', component: ManagePage });
          }
     });
      
@@ -90,6 +92,7 @@ export class MyApp {
                           { title: 'Events', component: EventsPage },
                           { title: 'Profile', component: MyProfilePage },
                           { title: 'Change Password', component: ChangePasswordPage },
+                          { title: 'Settings', component: SettingsPage },
                           { title: 'Logout', component: LogoutPage },
                           );  
     
