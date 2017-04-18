@@ -17,7 +17,7 @@ import { ServiceProvider } from '../../providers/service-provider';
 })
 export class EditProfilePage {
 
-profileData:any;
+profileData:any = "";
 user_type:any ;
 edit_profile_Form:FormGroup;
 name:any;
@@ -33,26 +33,20 @@ file: File;
 imageURL:any;
 user_dob:any;
 updateData:any;
-
+token:any;
 
   constructor(public storage:Storage,public loadingCtrl: LoadingController,public formBuilder:FormBuilder,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
 
       this.profileData = navParams.get("profileData");
       
-      this.storage.ready().then(() => {
-      storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;
       this.avatar = this.profileData.avatar;
       this.base64Image = this.imageURL+this.profileData.avatar;
-      console.log(this.base64Image);
-    });
-
-    });
       
-      this.user_dob = this.profileData.dob;//this.getDate(this.profileData.dob);
+      this.user_dob = this.getDate(this.profileData.dob);
 
       this.user_type = this.profileData.user_type;
       // this.gender = this.profileData.gender;
-     this.edit_profile_Form = formBuilder.group({
+      this.edit_profile_Form = formBuilder.group({
         name: [this.profileData.name,Validators.compose([Validators.required])],
         designation: [{value:this.profileData.designation,disabled: true},Validators.compose([Validators.minLength(3), Validators.required])],
         gender: [this.profileData.gender,Validators.compose([Validators.required])],
@@ -64,6 +58,17 @@ updateData:any;
     });
      
    
+  }
+
+  loadMyProfile(){
+    this.providerService.webServiceCall(`myaccount`,"")
+  .subscribe(data =>{
+    this.profileData = data.result.info;
+    this.user_type = data.result.info.user_type;
+  },
+  err=>{
+    this.providerService.showErrorToast(err);
+  })
   }
 
   getDate(datepar){
@@ -107,6 +112,22 @@ this.updateData = {name: data.name,gender:data.gender,mobile:data.mobile_number,
     err=>{
       console.log(err);
     })
+  }
+
+  ionViewWillEnter(){
+    this.storage.ready().then(() => {
+      this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;});
+      this.storage.get('token').then((token) => { this.token=token;})
+    });
+      this.providerService.webServiceCall(`myaccount`,"")
+      .subscribe(
+        data =>{
+              this.profileData = data.result.info;
+              this.user_type = data.result.info.user_type;
+              },
+        err=>{
+              this.providerService.showErrorToast(err);
+            })
   }
 
 }

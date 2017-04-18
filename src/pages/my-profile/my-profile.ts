@@ -22,6 +22,8 @@ profileData:any;
 user_type:any ;
 imageURL:any;
 token:any;
+gender:any ="";
+user_dob:any;
 
   constructor(public storage:Storage,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {  }
 
@@ -30,7 +32,9 @@ token:any;
     this.providerService.webServiceCall(`myaccount`,"")
   .subscribe(data =>{
     this.profileData = data.result.info;
+    this.gender = this.profileData.gender;
     this.user_type = data.result.info.user_type;
+    this.user_dob= this.profileData.dob;//this.getDate(this.profileData.dob);
   },
   err=>{
     this.providerService.showErrorToast(err);

@@ -120,7 +120,7 @@
 
  	 		<ion-list *ngFor="let community of communityProfile; let i=index">
  			<div>
- 				<ion-card>
+ 				
 					<ion-item>
 	      				<ion-row>
 	      					<ion-col>
@@ -131,8 +131,10 @@
 		        				</ion-avatar>
 	        				</ion-col><br>
 	        				<ion-col width-20>
+	        				<ion-card-content>
 		          				<h2 (click)="goBackToCommunity()" >{{community.community_name}}</h2>
 		          				<p class="time-datem"><i class="fa fa-calendar-o"></i> &nbsp; {{community.created_at}}</p>
+		          			</ion-card-content>
 							</ion-col>
 							<ion-col offset-50>
 			        		<!-- <button ion-button color="dark" clear (click)="itemDetails()">
@@ -145,14 +147,14 @@
 	          				</ion-col>
 	       				</ion-row>
 	    			</ion-item>
-		      		<ion-card-content>
+		      		<ion-card-content [hidden]="!community?.post_message">
 			          	<p>{{community.post_message}}</p><br>
-			          	<img  [src]="imageUrl+community?.post_image" 
-			          	[hidden]="!community?.post_image">
+			        </ion-card-content>
+			        <ion-card-content [hidden]="!community?.post_image">
+			          	<img  [src]="imageUrl+community?.post_image">
 			       	</ion-card-content>
-		       		<ion-card-content>
-						<iframe [src]="cleanURL(community?.post_video)" frameborder="0" 
-		         		[hidden]="!community?.post_video">
+		       		<ion-card-content [hidden]="!community?.post_video">
+						<iframe [src]="cleanURL(community?.post_video)" frameborder="0">
 		         		</iframe>
 		       		</ion-card-content>
 	       	 		<ion-card-content>
@@ -169,7 +171,8 @@
 		          			</button>
 		        		</ion-col> -->
 		        			<ion-col width-80>
-			          			<button ion-button class="comment but-colo" color="dark" clear (click)="addDetails(i)">
+			          			<button ion-button class="comment but-colo" color="dark" clear 
+			          			(click)="addDetails(i)">
 			          				<span style="color:red; font-size:13px;">{{community.comment_count}}</span>&nbsp;<p class="comm-cl">Comments...</p>
 			          			</button>
 		          			</ion-col>
@@ -201,7 +204,7 @@
 
 	      				</div>
 	      			</ion-card-content>
-	    		</ion-card>
+	    	
 			</div>
 		</ion-list>
 	</ion-list>
@@ -242,7 +245,7 @@
 	    			</ion-avatar>
 	    		</ion-col>
     			<ion-col width-67>
-    				<h1 class="primary-color" (click)="loadThisPage(all?.id)">{{all?.connections?.name}} </h1>
+    				<h1 class="primary-color" (click)="loadThisPage(all?.id)">{{all?.connections?.name}}</h1>
 	    				<p>{{all?.connections?.company_name}}</p>
 	    				<p><ion-icon ios="ios-briefcase" md="md-briefcase" [hidden]="!all?.connections?.designation"></ion-icon> {{all?.connections?.designation}}</p>
 	 					<p><ion-icon ios="ios-call" md="md-call" [hidden]="!all?.connections?.mobile"></ion-icon>  {{all?.connections?.mobile}}</p>

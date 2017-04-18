@@ -1,10 +1,12 @@
 import { Component , ViewChild } from '@angular/core';
-import { LoadingController,NavController, NavParams, Slides } from 'ionic-angular';
+import { LoadingController,NavController, NavParams, Slides, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ServiceProvider } from '../../providers/service-provider';
+
+import { InAppBrowser } from 'ionic-native';
 /*
   Generated class for the ServiceInfo page.
 
@@ -40,11 +42,12 @@ token:any;
 elderId:any;
 url:any;
 userType:any;
+website:any;
 
 @ViewChild('ghbslides') slider: Slides;
 // @ViewChild('ghbslides') ghbslides: any;
 
-  constructor(public formBuilder: FormBuilder,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public navCtrl: NavController, public navParams: NavParams, public storage:Storage) {
+  constructor(public platform: Platform, public formBuilder: FormBuilder,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public navCtrl: NavController, public navParams: NavParams, public storage:Storage) {
        
      // this.url = this.providerService.getUrl();
       this.subCategoryId = navParams.get("subCategoryId");
@@ -80,6 +83,14 @@ userType:any;
     });
   }
 
+  openUrl() {
+console.log("URL is ",this.website);
+        this.platform.ready().then(() => {
+            let browser = new InAppBrowser(this.website,'_blank');
+
+        });
+  }
+
   loadServiceInformation(subcategoryData){
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
@@ -89,6 +100,7 @@ userType:any;
           data =>{
                    this.vendorList = data.result.info;
                    this.serviceData = data.result.info.requestServices;
+                   this.website = this.vendorList.vendorDetails.website;
                   },
           err =>{
                    this.providerService.showErrorToast(err);
