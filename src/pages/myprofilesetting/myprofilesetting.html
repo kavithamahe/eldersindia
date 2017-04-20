@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Myprofile
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button  color="dark" clear (click)="dismiss()">
+       <i class="fa fa-times-circle"  name="close"></i>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+		<div>
+			<div *ngIf="avatar=='true'">
+				<img class="pro-imgs"[src]="imageUrl+myProfile.avatar"  
+	    		[hidden]="!myProfile.avatar" >
+			</div>
+			<div *ngIf = "name=='true'">
+				<ion-label>Name</ion-label>
+				<ion-input value={{myProfile.name}}></ion-input>
+			</div> 
+			<div *ngIf="birthday=='true'">
+				<ion-label>Birthday</ion-label>
+				<ion-input value={{myProfile.birthday}}></ion-input>
+			</div>
+			<div  *ngIf="email=='true'">
+				<ion-label>Email</ion-label>
+				<ion-input value={{myProfile.email}}></ion-input>
+			</div>
+			<div *ngIf = "location=='true'">
+				<ion-label>Location</ion-label>
+				<ion-input value={{myProfile.location}}></ion-input>
+			</div>
+			<div *ngIf = "mobile=='true'">
+				<ion-label>Mobile</ion-label>
+				<ion-input value={{myProfile.mobile}}></ion-input>
+			</div>
+			
+		</div>
+</ion-content>

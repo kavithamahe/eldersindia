@@ -43,6 +43,9 @@ import { CommunitylistPage } from '../pages/communitylist/communitylist';
 import { CommunityPage } from '../pages/community/community';
 import { CommunityprofilePage } from '../pages/communityprofile/communityprofile';
 import { CommunitymessagePage } from '../pages/communitymessage/communitymessage';
+import { CommunitycommentsPage } from '../pages/communitycomments/communitycomments';
+import { MyprofilesettingPage } from '../pages/myprofilesetting/myprofilesetting';
+
 
 import { ManagePage } from '../pages/manage/manage';
 import { EldersPage } from '../pages/elders/elders';
@@ -75,6 +78,8 @@ import { ServiceProvider } from '../providers/service-provider';
     CommunityPage,
     CommunityprofilePage,
     CommunitymessagePage,
+    CommunitycommentsPage,
+    MyprofilesettingPage,
   
     ManagePage,
     EldersPage,
@@ -124,6 +129,8 @@ import { ServiceProvider } from '../providers/service-provider';
     CommunitylistPage,
     CommunityprofilePage,
     CommunitymessagePage,
+    CommunitycommentsPage,
+    MyprofilesettingPage,
       
     CommunityPage,
     ManagePage,

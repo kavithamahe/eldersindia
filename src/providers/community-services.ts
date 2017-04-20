@@ -123,7 +123,23 @@ getCommunityMembers(){
     return this.http.post(`${this.getCommunityPostsUrl }getCommunityMembers`,"",this.options)
       .map(res =>res.json());
 }
-sendMessage(id,attachment,subject,message){
+myprofile(id){
+    this.send = {"user_id":id}
+
+
+   return this.http.post(`${this.getCommunityPostsUrl }myprofile`,this.send,this.options)
+      .map(res =>res.json());
+}
+ 
+ getPrivacy(id){
+    this.send = {"user_id":id}
+
+
+   return this.http.post(`${this.getCommunityPostsUrl }getPrivacy`,this.send,this.options)
+      .map(res =>res.json());
+}
+ 
+ sendMessage(id,attachment,subject,message){
     this.send = {"message":{"attachments":[],"to":{"title":"","description":"","image":"","originalObject":{"id":id,"avatar":"","email":"","user_type":"","friend_name":""}},"subject":subject,"message":message}}
 
    return this.http.post(`${this.getCommunityPostsUrl }sendMessage`,this.send,this.options)
@@ -181,6 +197,12 @@ sendMessage(id,attachment,subject,message){
     this.post = {"info": {"postId": id1, "comments": comments}}
 
      return this.http.post(`${this.getCommunityPostsUrl }sendComments`,this.post,this.options)
+      .map(res =>res.json());
+  }
+  sendReply(id1,profile_id,comments){
+    this.post = {"info":{"comments":comments,"uid_from":this.user_id,"uid_to":profile_id,"comment_id":id1}}
+
+     return this.http.post(`${this.getCommunityPostsUrl }sendReply`,this.post,this.options)
       .map(res =>res.json());
   }
 

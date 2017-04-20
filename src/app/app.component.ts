@@ -43,7 +43,7 @@ export class MyApp {
   subscription: Subscription;
 //----------------------------------//
 
-  rootPage: any =  CommunitylistPage;
+  rootPage: any =  LoginPage;
 
   pages: Array<{title: string, component: any}>;
 

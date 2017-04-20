@@ -15,163 +15,120 @@
 </ion-header>
   
 <ion-content style="background:#fff;">
-  	<!--<div padding>
-	    <ion-toolbar no-border-top>
-	      <ion-segment>
-	        <ion-segment-button  class="demo" >
-	        	Community
-	        </ion-segment-button>
-	        <ion-segment-button  class="one">
-	        	Connections
-	        </ion-segment-button>
-	      </ion-segment>
-	    </ion-toolbar>
-  	</div>-->
+
+
+
 	   <div class="one-half-responsive">
 	   <p class="image-column-left">
 
-				<img [src]="imageUrl+communityDetailData?.logo"  [hidden]="!communityDetailData?.logo">
-                        <strong class="wel-comemem">Welcome to {{communityDetailData?.community_name}}</strong>
-                        <em style="">{{communityDetailData?.description}}</em>
+				<img [src]="imageUrl+communityDetailData?.logo"  
+				[hidden]="!communityDetailData?.logo">
+                        <strong class="wel-comemem">Welcome to {{communityDetailData?.community_name}}
+                        </strong>
+                        <em  style="">{{communityDetailData?.description | words : 20 : '...'}}</em>
                     </p>
 					
 					<div class="decoration hide-if-responsive"></div></div>
-  	<div  *ngIf="userType == 'sponsor'">
+  		<div  *ngIf="userType == 'sponsor'">
 	  	
 	  
 			<ion-item>
-			<!--<ion-row>
-			<ion-col>
-				<img [src]="imageUrl+communityDetailData?.logo" style="width:100px; height:100px; border-radius:50%;margin-left: -34px; float:left;" [hidden]="!communityDetailData?.logo">
-		  	</ion-col>
-			<ion-col>
-					<ion-card-content>
-					<h2 class="wel-comemem">Welcome to {{communityDetailData?.community_name}}</h2>
-					<p class="members wrap" style="word-wrap: break-word; word-break: break-all;width:200px;">{{communityDetailData?.description}}</p>
-					</ion-card-content>
-			</ion-col>
-			</ion-row>-->
-	
-		
-					<ion-row>
-		    			<ion-col *ngIf="!communityDetailData?.isJoined">
-		    				<div>
-								<button ion-button  style=" float:right;"(click)="joinCommunity(communityDetailData.id)" class="post">Join</button>
-							</div>
-						</ion-col>
-					</ion-row>
-				
-						<h2 class="wel-comemem" style="padding-left:0px;">Members</h2>
-				
-						<!--<ion-row>
-		    			<ion-col *ngFor="let member of members" text-wrap>
-		    				
-								<ion-item text-wrap>
-									<ion-avatar>
-										<img (click)="membersProfile(member.uid)" 
-										[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar">
-										<p style="font-size:10px; color:#1d6ab2; text-align: left;" 
-										(click)="membersProfile(member.uid)">{{member?.name}}</p>
-									</ion-avatar>
-								</ion-item>
-								<ion-item  *ngIf="!show_member">
-										<p>No Members Joined Yet</p>
-							    </ion-item>
-							
-							
-						</ion-col>
-					</ion-row>-->
-                    
-		    		
-                        <div *ngFor="let member of members" text-wrap>
+				<ion-row *ngIf="!communityDetailData?.isJoined">
+		    		<ion-col>
+		    			<div>
+							<button ion-button  style=" float:right;"(click)="joinCommunity(communityDetailData.id)" class="post">Join</button>
+						</div>
+					</ion-col>
+				</ion-row>
+					<h2 class="wel-comemem" style="padding-left:0px;">Members</h2>
+						<div *ngFor="let member of members" text-wrap>
 		    				<ion-item text-wrap class="memb-list">
 								<ion-avatar>
-									<img (click)="membersProfile(member.uid)" style="border:5px solid #e6e6e6;" [src]="imageUrl+member?.avatar" [hidden]="!member?.avatar">
+									<img (click)="membersProfile(member.uid)" style="border:5px solid #e6e6e6;" [src]="imageUrl+member?.avatar" 
+									[hidden]="!member?.avatar">
 								</ion-avatar>
 							</ion-item>
+						</div>
 							<ion-item  *ngIf="!show_member">
-								<p>No Members Joined Yet</p>
+									<p>No Members Joined Yet</p>
+							</ion-item>
+			</ion-item>
+
+		</div>
+
+ 	<hr>
+
+	<div>
+		<h2 class="wel-comemem">Update Status</h2>
+			<div style="padding:0px !important;">
+				<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
+				</ion-textarea>
+			</div>
+		    <div style="padding:0px !important;">
+		    	<ion-row>
+					<ion-col>
+						<button ion-button (click)="accessGallery()" icon-only class="video">
+							<i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;
+						</button>
+						<img [src]="base64Image" *ngIf="base64Image" />
+					</ion-col>
+				</ion-row> 
+				<div>
+				    <!--   <h2>Hello {{name}}</h2> -->
+				    <input type="file" multiple (change)="onChange($event, showFileNames)" />
+				    <input #showFileNames />
+				</div>		    		
+				<ion-row>
+					<ion-col>
+						<button ion-button (click)="addVideos()" icon-only medium class="video">
+							<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp;
+						</button>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div *ngIf(addVideo)>
+							<ion-item  class="video" >
+								<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
+								</ion-input>
 							</ion-item>
 						</div>
-				
-		</ion-item>
-	</div>
- 	<hr>
-	<div>
-			 	<h2 class="wel-comemem">Update Status</h2>
-			
-			  	<div style="padding:0px !important;">
-					<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
-					</ion-textarea>
-				</div>
-		    	
-		    	<div style="padding:0px !important;">
-		    		<ion-row>
-						<ion-col>
-							<button ion-button (click)="accessGallery()" icon-only class="video">
-								<i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;
-							</button>
-							 	<img [src]="base64Image" *ngIf="base64Image" />
-						</ion-col>
-					</ion-row> 
-					<div>
-				    <!--   <h2>Hello {{name}}</h2> -->
-				      <input type="file" multiple (change)="onChange($event, showFileNames)" />
-				      <input #showFileNames />
-				    </div>		    		
-					<ion-row>
-						<ion-col>
-							<button ion-button (click)="addVideos()" icon-only medium class="video">
-								<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp;
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row>
-						<ion-col>
-							<div *ngIf(addVideo)>
-								<ion-item  class="video" >
-									<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
-									</ion-input>
-								</ion-item>
-							</div>
-						</ion-col>
-					</ion-row>
-		   		</div>
+					</ion-col>
+				</ion-row>
+		   	</div>
 					
-		        <div style="padding:0px !important;">
-					<ion-row>
-		    			<ion-col text-right>
-		    				<div>
-								<button ion-button icon-only medium style=" width:100%" 
+		    <div style="padding:0px !important;">
+				<ion-row>
+		    		<ion-col text-right>
+		    			<div>
+							<button ion-button icon-only medium style=" width:100%" 
 								(click)="postCommunity(communityDetailData?.id)" class="post">
-									<i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp; 
-								</button>
-							</div>
-						</ion-col>
-					</ion-row>
-				</div>
+								<i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp; 
+							</button>
+						</div>
+					</ion-col>
+				</ion-row>
+			</div>
 	</div>
 	
 	<ion-list *ngFor="let user of users; let i=index">	
 	
 	<hr>
-	
- 		<div>
- 			
-				<ion-item>
-	      			<ion-row>
-	      				<ion-col>
-	        				<ion-avatar item-left>
-	          					<img [src]="imageUrl+user?.avatar" [hidden]="!user?.avatar" 
+		<div>
+ 			<ion-item>
+	      		<ion-row>
+	      			<ion-col>
+	        			<ion-avatar item-left class="image-profile">
+	          				<img [src]="imageUrl+user?.avatar" [hidden]="!user?.avatar" 
 	          					(click)="communityProfiles(user.uid)">
-	        				</ion-avatar>
-	        			</ion-col>
-	        			<ion-col width-20>
-			          		<h2 (click)="communityProfile(user.uid)">{{user.name}}</h2>
-			          		<p class="time-datem"><i class="fa fa-calendar-o"></i> {{user.created_at}}</p>
-			          		
-						</ion-col>
-						<ion-col offset-50>
+	        			</ion-avatar>
+	        		</ion-col>
+	        		<ion-col width-20>
+			          	<h2 (click)="communityProfile(user.uid)">{{user.name}}</h2>
+			          	<p class="time-datem"><i class="fa fa-calendar-o"></i> {{user.created_at}}
+			          		</p>
+			        </ion-col>
+					<ion-col offset-50>
 		        		<!-- <button ion-button color="dark" clear (click)="itemDetails()">
 		          			<ion-icon  item-left name="arrow-dropdown"></ion-icon>
 		          		</button>
@@ -179,70 +136,54 @@
 	          			<button  ion-button full color="light" >Block</button>
 	          			<button  ion-button full color="light" >Report</button>
 	          		</div> -->
-	          			</ion-col>
-	       			</ion-row>
-	    		</ion-item>
-	      		
-		          	<p class="feed-post" [hidden]="!user?.post_message">{{user.post_message}}</p><br>
-		          	<img  [src]="imageUrl+user?.post_image" [hidden]="!user?.post_image">
-	       		
-				<ion-card-content *ngIf="user?.post_video" class="video-updates">
-					<iframe [src]="cleanURL(user?.post_video)" frameborder="0" 
-	         		[hidden]="!user?.post_video">
+	          		</ion-col>
+	       		</ion-row>
+	    	</ion-item>
+	      		<ion-card-content [hidden]="!user?.post_message">
+		          	<p class="feed-post">{{user.post_message}}</p>
+		        </ion-card-content><br>
+		        <ion-card-content [hidden]="!user?.post_image">
+		          	<img  [src]="imageUrl+user?.post_image">
+	       		</ion-card-content>
+				<ion-card-content class="video-updates" [hidden]="!user?.post_video">
+					<iframe [src]="cleanURL(user?.post_video)" frameborder="0">
 	         		</iframe>
 	         	</ion-card-content>
 	       	 
 	       	<div>
 	      		<ion-row>
 	        		<ion-col width-15>
-	          			<button class="hover but-colo" ion-button outline (click)="addLikes(user.id)"><i class="fa fa-heart-o likecolor"></i> &nbsp; <p class="num-of">{{user.likes}}</p>
+	          			<button class="hover but-colo" ion-button outline (click)="addLikes(user.id)">{{user.likes.emoji}} &nbsp; <p class="num-of">{{user.likes.emoji_name}}</p>
 	          			</button>
 	        		</ion-col>
-	        		<!-- <ion-col>
-	          			<button class="hover" ion-button outline color="light">
-	            			<ion-icon name="share"></ion-icon>
-	          			</button>
-	        		</ion-col> -->
-	        		<ion-col width-80>
+	        		
+	        		<ion-col>
 	          			<button ion-button class="comment but-colo" color="dark" clear 
-	          			(click)="addDetails(i)">
-	          				<span style="color:red; font-size:13px;">{{user.comment_count}}</span> &nbsp;<p class="comm-cl"> Comments...</p>
+	          			(click)="showComment(user)">
+	          				<span style="color:red; font-size:13px;">{{user.comment_count}}</span> 
+	          				&nbsp;<i class="fa fa-comments" aria-hidden="true"></i>
 	          			</button>
+	          		</ion-col>
+	          		<ion-col>
+		          		<button ion-button class="comment but-colo" color="dark" icon-only clear>
+		          		<i class="fa fa-pencil-square-o" aria-hidden="true" (click)="addDetails(i)">&nbsp;</i>
+		          		</button>
 	          		</ion-col>
 	      		</ion-row>
 	      			<div *ngIf="i==showblock">
-	      					<ion-row *ngFor="let comment of user.comments" class="comm-posted">
-    					 		<img class="pro-imgs" [src]="imageUrl+comment?.profile_image"  [hidden]="!comment?.profile_image" >
-			      				<p class="cmmpost">{{comment.comments}}</p>
-															
-	      							<button ion-button clear>reply</button>
-	      						<button ion-button class="trash-icon" (click)="showConfirm(comment.comments_id)" 
-		      						color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
-							</ion-row>
-						
-					
-							<ion-label class="liste-edit" style="text-align:left !important; padding-left:5px !important;">Enter Comments...</ion-label>
+	      				<ion-label class="liste-edit" style="text-align:left !important; padding-left:5px !important;">Enter Comments...</ion-label>
 	      				<ion-item>
 				   			<ion-textarea [(ngModel)]="comment" style=" margin:0px !important;">
 				   		    </ion-textarea>
-								
 						</ion-item>
-		<div class="send-req">
-		<button ion-button (click)="sendPost(user.id)" class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> </button>
+						<div class="send-req">
+							<button ion-button (click)="sendPost(user.id)" class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
+							</button>
+						</div>
+  					</div><br>
+	    	</div>
 		</div>
-  							<!--<button  ion-button (click)="addDetails(i)" color="light" full>Cancel
-  							</button>-->
-						
-	      			</div>
-					<br>
-	    </div>
-		
-	</div>
-	
-	<!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll> -->
-  </ion-list>
+	</ion-list>
 </ion-content>
 <style>
 .text-input-ios{}
