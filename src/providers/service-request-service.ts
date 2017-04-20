@@ -41,4 +41,18 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'serviceRequestListById',_request,this.options)
       .map(res => res.json()); 
   }
+  
+  submitRemark(serviceId,rating,remarks) 
+  {
+  
+   let _request= {info: {starvalue: rating, remarks: remarks, srid: serviceId, statusFlag: 2}};
+    return this.http.post(this.rootUrl+'serviceRating',_request,this.options)
+      .map(res => res.json()); 
+  }
+  serviceRequestScroll(nextPageURL)
+   {
+     let _request= {"info":{"list":true,"searchValue":"","status":""}};
+    return this.http.post(nextPageURL,_request,this.options)
+      .map(res => res.json()); 
+   }
 }

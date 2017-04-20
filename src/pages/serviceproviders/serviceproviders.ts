@@ -1,5 +1,5 @@
-import {Component, NgModule} from '@angular/core'
-import {BrowserModule} from '@angular/platform-browser'
+import {Component} from '@angular/core'
+// {BrowserModule} from '@angular/platform-browser'
 // import { Device, LocalNotifications } from 'ionic-native';
 import { Platform, NavController,LoadingController,ModalController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -43,9 +43,9 @@ export class ServiceprovidersPage {
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
     // this.providerService.loadServiceOffered()
-    this.providerService.webServiceCall(`getServiceOffered`,{"location":""})
+    this.providerService.webServiceCall(`getCategory`,{"location":""})
       .subscribe(data =>{
-      this.services = data.result.info;
+      this.services = data.result.info.category;
       
       console.log("Recieved filtered data :"+this.services);
     },

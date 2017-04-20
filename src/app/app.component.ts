@@ -49,7 +49,7 @@ export class MyApp {
   subscription: Subscription;
 //----------------------------------//
 
-  rootPage: any =  MyProfilePage;
+  rootPage: any =  ServiceprovidersPage;
 
   pages: Array<{title: string, component: any}>;
 
