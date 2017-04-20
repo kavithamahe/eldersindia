@@ -21,37 +21,41 @@
 </ion-header>
 
 <ion-content padding>
+
+<form (ngSubmit)="createBlog()" [formGroup]="blogForm">
 <ion-list>
 
   <ion-item>
     <ion-label stacked class="liste-names" style=" padding-top:10px;">Blog Title: *</ion-label>
-    <ion-input type="text" [(ngModel)]="title"></ion-input>
+    <ion-input type="text" formControlName="title" ></ion-input>
   </ion-item>
-
+  <p *ngIf="!blogForm.controls.title.valid && (blogForm.controls.title.dirty || submitAttempt)" class="err-reds">Please enter blog title</p>
 <ion-item>
     <ion-label stacked class="liste-names" style="text-align:left; padding-bottom:10px;">Category: *</ion-label>
-    <ion-select class="select-brd" [(ngModel)]="category">
+    <ion-select class="select-brd" formControlName="category">
       <ion-option *ngFor="let categories of categoriesList" [value]="categories.name">{{categories.name}}</ion-option>     
     </ion-select>
   </ion-item>
-
+  <p *ngIf="!blogForm.controls.category.valid && (blogForm.controls.category.dirty || submitAttempt)" class="err-reds">Please enter category</p>
 	<ion-item>
 	    <ion-label stacked class="liste-names">Highlights:</ion-label>
-	    <ion-textarea [(ngModel)]="highlights"></ion-textarea>
+	    <ion-textarea [(ngModel)]="highlights" [ngModelOptions]="{standalone: true}"></ion-textarea>
 	</ion-item>
 
 	<ion-item>
 	    <ion-label stacked class="liste-names">Description: *</ion-label>
-	    <ion-textarea [(ngModel)]="description"></ion-textarea>
+	    <ion-textarea  formControlName="description"></ion-textarea>      
 	</ion-item>
+  <p *ngIf="!blogForm.controls.description.valid && (blogForm.controls.description.dirty || submitAttempt)" class="err-reds">Please enter description</p>
   <ion-label stacked class="liste-names">Featured Image:</ion-label>
    <button ion-button >Browse</button>
    
     <ion-label stacked class="liste-names">Banner Image:</ion-label>
     <button ion-button >Browse</button>
     <ion-label stacked class="liste-names">Tags:</ion-label>
-    <rl-tag-input [(ngModel)]="tagsModel" [addOnBlur]="true" [addOnEnter]="true" [autocomplete]="true"  [autocompleteItems]="tags" placeholder="Tags"></rl-tag-input>
-  <div radio-group [(ngModel)]="allowComments">
+    <!--<rl-tag-input [(ngModel)]="tagsModel" [addOnBlur]="true" [addOnEnter]="true" [autocomplete]="true"  [autocompleteItems]="tags" placeholder="Tags"></rl-tag-input>-->
+        <rl-tag-input [(ngModel)]="tagsModel" [addOnBlur]="false" [addOnEnter]="true"  [autocompleteItems]="tags" [autocomplete]="true" placeholder="Tags" (keyup)="getTagsList($event)" [ngModelOptions]="{standalone: true}"></rl-tag-input>
+  <div radio-group [(ngModel)]="allowComments" [ngModelOptions]="{standalone: true}">
   <ion-list-header style=" background:#fff; margin-bottom:0px;">
    <p class="liste-names"> Allow Comments:</p>
   </ion-list-header>
@@ -64,9 +68,9 @@
     <ion-radio value="No"></ion-radio>
   </ion-item> 
 </div>
-<button ion-button icon-left full (click)="createBlog()">
+<button ion-button icon-left full>
   Send
 </button>
 </ion-list>
-
+</form>
 </ion-content>
