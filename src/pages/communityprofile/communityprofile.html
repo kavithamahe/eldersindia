@@ -14,11 +14,11 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="segments-info" style="background:#fff;">
   
-	  <ion-card>
+	  
 		  <ion-row>
-			  <ion-col width-20>
+			  <ion-col width-30>
 				  	<ion-item>
 					  <ion-avatar item-left class="image-profile">
 					  	<img [src]="imageUrl+communityProfileData?.avatar" 
@@ -28,7 +28,7 @@
 			  </ion-col>
 			 
 			  	 <ion-col *ngIf="status === 3">
-				  <button ion-button (click)="connectMember(communityProfileData)">CONNECT
+				  <button ion-button (click)="connectMember(communityProfileData)">Connect
 				  </button>
 				  </ion-col >
 				  <ion-col *ngIf ="status === 0">
@@ -50,7 +50,7 @@
 			</ion-row>
 		  <ion-row>
 			  <ion-col>
-				  <p style="text-align:left;">{{communityProfileData?.name}}</p>
+				  <p style="text-align:left;" class="mem-name">{{communityProfileData?.name}}</p>
 			  </ion-col>
 			  <ion-col>
 				  <button ion-button icon-only clear (click)="profileSetting(communityProfileData.id)">
@@ -58,8 +58,7 @@
 				  </button>
 			  </ion-col>
 		  </ion-row>
-		  			
-		  </ion-card>
+
 
 		    <hr/>
 		  
@@ -76,16 +75,15 @@
         </ion-segment>
        	<div [ngSwitch]="community">
 		    <ion-list *ngSwitchCase="'activity'">
-		    	<div>
-		  			<ion-card>
+		    	<div class="updated-staus-btn">
+		  		
 						<ion-item class="edit">
-					  		<h2 class="wel-comemem"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;Update Status</h2>
+					  		<h2 class="wel-comemem">Update Status</h2>
 					  	</ion-item>
-					  	   <hr>
-			  	  		<ion-card-content style="padding:3px !important;">
+					  
+			  	  		<ion-card-content style="padding:3px !important; margin:0px;">
 					  		<div class="three">
-					      		<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
-					      		</ion-textarea>
+					      		<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?" style="margin:0px;"></ion-textarea>
 				    		</div>
 		    			</ion-card-content>
 		    			<ion-card-content style="padding:0px !important;">
@@ -102,9 +100,9 @@
 									<i class="fa fa-video-camera"></i>&nbsp;</button>
 								</ion-col>
 							</ion-row>
-							<ion-row>
+							<ion-row  *ngIf(addVideo)>
 								<ion-col>
-									<div *ngIf(addVideo)>
+									<div>
 										<ion-item  class="video" >
 											<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
 											</ion-input>
@@ -121,10 +119,11 @@
 								</ion-col>
 							</ion-row>
 		   				</ion-card-content>
-		    		</ion-card>
+		 
 				</div>
-
+<hr/>
  	 		<ion-list *ngFor="let community of communityProfile; let i=index">
+
  			<div>
  				<ion-item>
 	      			<ion-row>
@@ -142,27 +141,25 @@
 			          		</ion-card-content>
 						</ion-col>
 						<ion-col offset-50>
-			        		<!-- <button ion-button color="dark" clear (click)="itemDetails()">
-			          			<ion-icon  item-left name="arrow-dropdown"></ion-icon>
-			          		</button>
-	          		<div *ngIf(itemComments)>
-	          			<button  ion-button full color="light" >Block</button>
-	          			<button  ion-button full color="light" >Report</button>
-	          		</div> -->
+			  
 	          			</ion-col>
 	       			</ion-row>
 	    		</ion-item>
-		      		<ion-card-content [hidden]="!community?.post_message">
-			          	<p>{{community.post_message}}</p><br>
-			        </ion-card-content>
-			        <ion-card-content [hidden]="!community?.post_image">
+
+	       	 		<div>
+				<ion-row>
+				<ion-col>
+			          	<p class="feed-post">{{community.post_message}}</p>
+					
+			       
 			          	<img  [src]="imageUrl+community?.post_image" [hidden]="!community?.post_image">
-			       	</ion-card-content>
-		       		<ion-card-content [hidden]="!community?.post_video">
-						<iframe [src]="cleanURL(community?.post_video)" frameborder="0" [hidden]="!community?.post_video">
+						</ion-col>
+			       	</ion-row>
+		       		<ion-card-content [hidden]="!community?.post_video" class="video-updates">
+						<iframe [src]="cleanURL(community?.post_video)" frameborder="0">
 		         		</iframe>
 		       		</ion-card-content>
-	       	 		<div>
+	       	 		
 	      				<ion-row>
 		        			<ion-col width-15>
 			          			<button class="hover but-colo" ion-button outline 
@@ -184,6 +181,7 @@
 				          		</button>
 			          		</ion-col>
 	      				</ion-row>
+						<hr/>
 	      				<div *ngIf="i==showblock">
 	      					
 							<ion-label class="liste-edit" style="text-align:left !important; padding-left:5px !important;">Enter Comments...</ion-label>
@@ -202,25 +200,28 @@
 	      	</div>
 	      </ion-list>
 					
-	</ion-list>
+
+		</ion-list>
+
     	
 	<ion-list *ngSwitchCase="'communities'">
-		<ion-card *ngFor="let community of getCommunityMembers">
+		<ion-item style="position:relative;" *ngFor="let community of getCommunityMembers">
 			<div class="community-img">
-		 		 <img (click)="detailCommunity()" [src]="imageUrl+community?.banner" 
+		 		 <img (click)="detailCommunity()" style="width:100%; height:200px;" 
+		 		 [src]="imageUrl+community?.banner" 	 		 
 		 		 [hidden]="!community?.banner" />
-		    </div>
-          	<ion-card-content>
-            	<ion-card-title>
-              		<ion-row>
+				 <div class="label-opc">
+			   <ion-item text-wrap style="text-align:left !important;"  (click)="goBackToCommunity()" 
+		                  [hidden]="!community.community_name">{{community.community_name}}</ion-item>
+			   </div>
+		        <!--<ion-row>
                 		<ion-col style="padding-left:0px !important;">
 		                  <p class="tid-cd"(click)="detailCommunity()" 
 		                  [hidden]="!community.community_name">{{community.community_name}}</p>
 		                </ion-col>
-              		</ion-row> 
-             	</ion-card-title>
-            </ion-card-content>
-		</ion-card>
+              		</ion-row> -->
+             	</div>
+		</ion-item>
 	</ion-list>
 	<ion-list *ngSwitchCase="'connections'">
 		<ion-row>

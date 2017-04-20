@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { SubcategoryListPage } from '../subcategory-list/subcategory-list';
-import { ServiceProvider } from '../../providers/service-provider';
+//import { ServiceProvider } from '../../providers/service-provider';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 
 /*

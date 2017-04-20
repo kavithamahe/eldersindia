@@ -192,10 +192,7 @@ border :2px solid green;
 
 }
 
-ion-content{
-    background-image: url('../../assets/img/bg.jpg');
-}
-
+ion-content													{background-image: url('../../assets/img/bg.jpg');   font-size:16px;  color:#777 !important;}
 
 .my-side-menu,{
  background: #333 !important;
@@ -206,14 +203,17 @@ ion-content{
     border-bottom: none !important;
 }
 /*-------------------------------------Common  css -------------------------------------*/
-.service-bg0												{height:auto !important;    min-height: 100px; background-color:#77b003; height: auto !important; margin-left:8px;margin-top:5px;width:95%;position: relative;}
-.service-bg1												{height:auto !important;     min-height: 100px;background-color:#0AA699; height: auto !important; margin-left:8px;width: 95%;position: relative;}
-.service-bg2												{height:auto !important;     min-height: 100px;background-color:#FE5722; height: auto !important; margin-left:8px;width: 95%;position: relative;}
-.service-bg3												{height:auto !important;     min-height: 100px;background-color:#3498DB; height: auto !important; margin-left:8px;width: 95%;position: relative;}
-.service-bg4												{height:auto !important;    min-height: 100px; background-color:#FFB6C1; height: auto !important; margin-left:8px;width: 95%;position: relative;}
-.service-bg5												{height:auto !important;     min-height: 100px;background-color:#9370DB; height: auto !important; margin-left:8px;width: 95%;position: relative;}
-.service-bg6												{height:auto !important;     min-height: 100px;background-color:#808000; height: auto !important; margin-left:8px;width: 95%;position: relative;}
-.ftbtb p                                                    {color:#fff; font-size:18px; font-weight:400;text-transform:capitalize;}
+.service-bg0												{height:auto !important;min-height:80px; background:#03b4a2;width:50%; border-bottom:1px solid #eed6e3; margin-top:1px; }
+.service-bg1												{height:auto !important;min-height:80px; background:#a8e118;width:50%; border-bottom:1px solid #eed6e3;margin-top:1px;}
+.service-bg2												{height:auto !important;min-height:80px; background:#fa7f3b;width:50%; border-bottom:1px solid #eed6e3; }
+.service-bg3												{height:auto !important;min-height:80px; background:#434248;width:50%;  border-bottom:1px solid #eed6e3;}
+.service-bg4												{height:auto !important;min-height:80px; background:#dd2f38;width:50%; border-bottom:1px solid #eed6e3;}
+.service-bg5												{height:auto !important;min-height:80px; background:#2670eb;width:50%; border-bottom:1px solid #eed6e3;}
+.service-bg6												{height:auto !important;min-height:80px; background:#fff;width:50%; border-bottom:1px solid #eed6e3;}
+.left-icons													{float:left; width:100%;}
+.left-icons i                                               {font-size:40px; font-weight:400; color:#fff;}
+.right-fnticon												{float:right; line-height:50px; color:#333;}
+.ftbtb p                                                    {color:#fff; font-size:17px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:45px;}
 .btn-warnings											    {background-color:#f0ad4e;border-color:#eea236;color:#fff;font-size:13px !important;text-transform:capitalize;}
 .btn-infos												    {background-color:#5bc0de;border-color:#46b8da;color:#fff;font-size:13px !important;text-transform:capitalize;}
 .info													    {font-size:13px !important;text-transform:capitalize !important;}
@@ -231,30 +231,22 @@ page-service-info ion-input									{border:none !important;}
 .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{ boder:none !important; box-shadow:none;}
 .label-lb													{font-size:15px !important;font-weight:400;padding-bottom:0px;text-align:center; margin-top:0px !important;}
 .toolbar-title-md											{color:#fff !important; text-align:left; }
-.service-bg0:before 										{content:"\f015";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#fff;
-															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
-.service-bg1:before 										{content:"\f0f8";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#fff;
-															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
-.service-bg2:before 										{content:"\f155";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#fff;
-															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
-.service-bg3:before 										{content:"\f02d";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#fff;
-															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
-.service-bg4:before 										{content:"\f1e4";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#fff;
-															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
-.service-bg5:before 										{content:"\f0d1";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#fff;
-															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
-.service-bg6:before 										{content:"\f0f7";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#fff;
-															 font-size:20px;padding-right:0.5em;position:absolute;top:10px;left:47%;}
+
 .brder-cor .button-ios										{background:#F97500; color:#fff !important; font-size:15px !important;text-transform:capitalize;}
 .brder-cor .button-ios										{color:#fff;font-size:15px;}
 ion-card img												{border:1px solid #F0FFFF;}
-.brder-cor .button-md										{background:#F97500; color:#fff !important; font-size:15px !important; text-transform:capitalize; border-radius:3px;}
+.brder-cor .button-md										{background:#F97500; color:#fff !important; font-size:18px !important; text-transform:capitalize !important; border-radius:3px;}
 span.mails-cont												{float:left;}
+.left-lefts													{padding:0px; margin:0px;}
+.right-rights												{padding:0px; margin:0px;}
+.community-layout{}
+.item-md ion-avatar ion-img, .item-md ion-avatar img		{ border-radius:0px  !important;}
+.button-md													{text-transform:capitalize !important; font-size:16px !important;}
 span.mails-cont i 											{float:left; color:#858D9B; font-size:15px;padding-top: 5px; padding-right:5px;}
 span.mails-cont p 											{float:left; color:#858D9B; font-size:15px;}
 page-service-info .service_request							{border:none !important;}
 ion-segment													{margin:7px; width:96%; border-radius:5px; }
-.segment-md .segment-button									{background:none; color:#888; border:none;font-size:16px;text-transform:capitalize; height:35px; line-height:35px; }
+.segment-md .segment-button									{background:none; color:#888; border-bottom:none;font-size:16px;text-transform:capitalize; border-left:1px solid #ffa200 !important; height:35px; line-height:35px; }
 .connection-page											{margin:0px !important; font-size:13px !important; font-weight:400 !important; color:#777; }
 .connection-pages											{color:#fe5722 !important; margin:0px !important;}
 .name-conne													{font-size:18px !important; color:#1976d2 !important; margin-bottom:2px; }
@@ -262,14 +254,26 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .thamb-lins													{bottom:-18px;left:12px;position:absolute;z-index: 999 !important; }
 .thamb-lins img												{border:3px solid #fff; height:80px;width:90px; border-radius:3px;box-shadow: 0 0 5px #888}
 .tid-cd 											        {color:#025fa9 !important;font-size:17px !important;font-weight:400 !important;text-align:left !important; float:left;}
-.labels-bds													{background:rgba(19, 19, 20, 0.58) !important;border-right:3px solid #1d6ab2 !important;color:#fff !important; font-weight:600;float:left;font-size:12px !important;padding:9px;position:absolute;
+.labels-bds													{background:rgba(19, 19, 20, 0.58) !important;border-right:4px solid red !important;color:#fff !important; font-weight:600;float:left;font-size:12px !important;padding:9px;position:absolute;
 															 right:-1px;top:15px;width:auto;}
 .video-updates                                              {padding:0px 4px !important;}
+.user-profile												{width:80px;height:80px; border:1px solid #ccc;}
 .wel-comemem											    {color:#025fa9 !important;font-family: "Open Sans",sans-serif;font-size:18px !important;margin: 0; padding:0 0 10px 10px;}
-.likecolor													{color:#1e90ff !important;}
+.likecolor													{color:#1e90ff !important; font-size:17px;}
 .time-datem													{color:#666 !important; font-size:12px !important;}
-.label-opc													{background:rgba(255, 255, 255, 0.73);bottom:0px;color:#1d6ab2!important;float:left;font-size:20px !important;margin-left:5px !important;padding:6px;position:absolute;width:100%;}
+.label-opc .item-md .item-inner .label-md					{ margin:0px !important; padding-top:0px;text-indent:0px; padding-left:8px; color:#1d6ab2; font-size:20px; line-height:25px; font-weight:400;}
+.label-opc .item-md{ background:none;}
+.label-opc {background:rgba(255, 255, 255, 0.73);bottom:0px;color:#1d6ab2!important;float:left;font-size:20px !important;position:absolute;width:100%;}
 .edit-ld													{}
+.text-commands											    { margin:0px !important; width:95% !important;}
+.post-icons													{position:absolute;background:#fff !important;border-radius: 50%; border:1px solid #ccc; color:red;
+    height: 40px;
+    position: absolute;
+   right: 4px;
+    top: 25px;
+    width: 40px; }
+.ios page-community .post, .md page-community .post			{width:100% !important;}
+.post-icons i 												{color:#46a049;}
 .personal-d p												{box-shadow:none !important; font-size:17px !important; color:#025fa9 !important; text-align:center;margin:0px !important;}
 .alert-md .alert-sub-title									{color:#fff !important;}
 .add-btn													{background:#1D6AB2; font-size:13px; color:#fff; border-radius:25px; width:90%;}
@@ -279,25 +283,44 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .list-mess .button-inner									{text-align:left;}
 .comm-listpag												{border-radius:35px;height:40px;width:100%;margin:0px !important;}
 .comm-postlist												{background:#ff4000 !important;border-radius:35px !important; height:40px !important; width:100% !important; margin:0px !important;}
-.image-profile img										    {border-radius:50%;height:90px;width:90px; border:3px solid #ccc;}
+.image-profile img										    {border-radius:50%;height:90px;width:90px; border:2px solid #ccc;}
+.mem-name													{font-size:17px !important; margin:0px;}
+.post-comm													{font-size:17px !important; margin:0px;}
 .memb-list .label-md										{padding-top:0px !important;}
 .memb-list .label-ios										{padding-top:0px !important;}
 .memb-list 													{float:left;margin-bottom:5px;margin-left:5px;margin-right:6px; width:20%;}
-.comm-posted												{position:relative; width:95%; margin-left:8px; border:1px solid #DCDCDC !important;margin-bottom:11px; padding:2px;-webkit-box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.17);
--moz-box-shadow:    0px 0px 3px 0px rgba(50, 50, 50, 0.17);
-box-shadow:         0px 0px 3px 0px rgba(50, 50, 50, 0.17);}
+.comm-posted												{position:relative; width:100%;border-top:1px solid #DCDCDC !important; border-bottom:1px solid #DCDCDC !important;margin-bottom:11px; padding:5px;}
 .secon-sdms													{}
-.send-req													{ float:left; width:50%; margin-left:10px; margin-bottom:10px;}
+.location-catlist											{border-bottom:1px solid #ff6666;  background: linear-gradient(to top right, #ffcccc 0%, #ffffff 100%);}
+.location-catlist .item-inner .input-wrapper .label-md		{font-size:18px !important; text-align:left; color:#434248;}
+.location-catlist .item-inner .input-wrapper .sub-cate-slec .select-text{font-size:18px !important; text-align:left; color:#434248;}
+.location-catlist .item-inner .input-wrapper .sub-cate-slec	{width:100%; padding:10px;}
+.location-catlist .item-inner .input-wrapper .sub-cate-slec .select-icon .select-icon-inner{border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid;
+															 color:#999;height:0;left:0px;margin-top:0px;pointer-events:none;position:absolute;top:50%;width:0;}
+.sub-cat-listed .item-inner .input-wrapper .label-md		{margin:0px !important;}
+.sub-cat-listed .item-inner .input-wrapper .label-md p		{font-size:17px !important; color:#000080; float:left; width:90%;  }
+.sub-cat-listed .item-inner .input-wrapper                  {border-top:1px solid #fff; border-bottom:none;}
+
+.left-right-side										    {color:#999;float:right;font-size:13px !important;font-weight:normal !important;line-height:25px;margin-right:13px;}
+.sub-cat-listed												{  background: linear-gradient(to right, #00ccff 0%, #ccffff 100%);margin:0px 0px 0px 10px; width:94%; padding-left:0px !important;}
+.error-clr													{font-size:15px !important; font-weight:400 !important; color:red !important;text-align:center !important;}
+.error-clr i.unlink 												{ font-size:17px; color:#1D6AB2;}
+.send-req													{ width:50%; margin-left:10px; margin-bottom:10px;}
 .cmmpost													{font-size:16px !important; color:#777 !important; text-align:left;  margin-top:5px; margin-left:8px;}
-.pro-imgs													{width:65px; height:65px; border-radius:50%; padding:5px; border:2px solid #ccc; margin-top:5px;}
+.pro-imgs													{width:50px; height:50px; border-radius:0px; padding:5px; margin-top:5px;}
+.updated-staus-btn .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
+.updated-staus-btn .item-md .item-inner .input-wrapper .label-md h2.wel-comemem{ padding-bottom:0px; padding-left:0px;}
+.three .input-md .text-input-md 								{margin:0px 0px 6px 7px;}
 .comm-posted .item-inner .input-wrapper .label-md{padding-top:0px !important;}
 .trash-icon													{height:20px;padding:0 !important;position:absolute;right:-7px;top:-13px;}
 .trash-icon	i												{color:red; font-size:19px !important;}
 .secon-sdms													{background:#ff4000 !important; color:#fff !important; font-size:15px; text-transform:capitalize; border-radius:25px;}
-.liste-edit													{font-size:15px !important;line-height:35px !important;padding:0 !important;text-align:center !important;}
+.liste-edit													{font-size:17px !important;line-height:35px !important;padding:0 !important;text-align:center !important;}
 .but-colo													{padding:8px !important;height:32px !important; width:auto!important; border:1px solid #ccc !important;}
 .num-of														{color:red !important; font-size:13px !important;}
-.comm-cl													{color:#1E90FF !important; font-size:14px !important;}
+.comm-cl													{color:#1E90FF !important; font-size:17px !important; text-transform: capitalize;}
+.points-count												{color:red; font-size:17px !important; }
+.label-md													{padding-top:0px !important;}
 .services > i 												{color:#5dade2 !important;}
 .jobs > i													{color:#e74c3c !important;}
 .community > i 												{color:#1976d2 !important;}
@@ -313,8 +336,7 @@ box-shadow:         0px 0px 3px 0px rgba(50, 50, 50, 0.17);}
 .dashboard > ion-row ion-col:hover							{background:#2c3e50;}
 .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{}
 .button-md-secondary										{background:none; color:#333;box-shadow:none;}
-.label-md													{margin:0px !important;}
-.label-ios													{margin:0px !important;}
+
 .item-md [item-left], .item-md [item-right]					{margin:0px !important;}
 .edit-pro													{color:#1976d2 !important;font-size:16px !important;font-weight:700 !important; line-height:25px !important;
 															 margin-bottom: 8px !important;text-align: left !important;}
@@ -340,7 +362,7 @@ ul.rating li												{padding:5px 0px !important;}
 
 
 /*-------------------------------------Android platform css -------------------------------------*/
-ion-content													{background-image: url('../../assets/img/bg.jpg');   font-size:15px;  color:#777 !important;}
+
 .primary-color 												{color:#1976d2 !important; font-size:15px !important;}
 .card-md p 													{color:#777;font-size:14px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
 														     margin: 0 0 2px;}
@@ -407,18 +429,21 @@ page-service-info .service_request							{border:none !important;}
     margin-bottom:10px;
     width: 100%;
 }
+.label-md {
+    margin: 13px 6px 13px 0;
+}
+.item-md.item-block .item-inner{padding-right:0px;}
 /*-------------------------------------ios platform css -------------------------------------*/
-.button-ios													{height:35px !important; font-size:14px !important;}
-ion-content													{background-image: url('../../assets/img/bg.jpg');   font-size:15px;  color:#777 !important;}
-.card-ios p													{color: #777;font-size:14px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
+.button-ios													{height:35px !important; font-size:16px !important;}
+.card-ios p													{color: #777;font-size:16px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
 															 margin: 0 0 2px;}
 ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !important}
 .login-pages .item-wp										{background:none;}
 .forgot-pass												{background:none !important;  color:#337ab7 !important;font-family: 'Open Sans', sans-serif !important; font-size:15px; }
 .bg-bac												        {background:none !important; border-bottom:none !important;}
-.text-input-md  											{border: 1px solid #ccc !important;border-radius:0px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15);   margin-left:8px !important; padding:5px 5px 5px 7px;font-size: 18px;
+.text-input-md  											{border: 1px solid #ccc !important;border-radius:0px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15);  padding:8px;font-size: 18px;
 .service-bg													{ height:auto !important;}															 font-weight:400; color:#555;}
-.text-input-ios   											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size: 18px;
+.text-input-ios   											{border:1px solid #ccc !important; width:95%;border-radius:0px !important;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size:18px; margin:7px;
 															 font-weight:400; color:#555;}
 .call-us												    {color:#00897b!important; font-size:18px;}
 .text-input-ios   											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size: 18px;
@@ -429,17 +454,22 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .service-req												{color:#1d6ab2 !important;display:inline;font-size:16px !important;margin: 0;padding:0;}
 .req-viewlist												{font-size:14px !important; font-weight:600 !important; color:#008B8B;}
 .err-reds													{font-size:12px !important; font-weight:400 !important; color:red !important; text-align:right !important; padding-right:25px !important; margin:0px; }
-.mails-left													{margin-left:10px !important; }
+
 .change-pass												{border-radius:20px; width:95%; height:35px; margin-left:5px;}
 .segment-ios .segment-button:hover:not(.segment-activated)	{background:#fff !important;}
 .segment-ios .segment-button.segment-activated				{margin-top:10px;}
 .segment-ios .segment-button								{margin-top:10px;background:#fff; border:1px solid #ffa200; color:#888 !important; padding-left:10px; height:38px; line-height:35px; font-size:15px;}
 .uploadimg													{height:35px !important; width:95%; border-radius:25px !important;}
 .segment-ios												{ margin-top:10px;}
+.label-ios 													{margin: 11px 0 15px;}
+.label-opc .item-ios										{background:none !important;}
+.sub-cat-listed .item-inner .input-wrapper .label-ios		{margin:0px !important;}
+.sub-cat-listed .item-inner .input-wrapper .label-ios p		{font-size:17px !important; color:#fff; float:left;  }
+.label-opc .item-ios .item-inner .input-wrapper .label-ios  {color:#1d6ab2;font-size:19px;font-weight:400;line-height:25px;margin:0 !important;padding-left:8px;padding-top:0;text-indent:0px !important;} 
 /*-------------------------------------ios platform css end-------------------------------------*/
 
 /*-------------------------------------Windows platform css -------------------------------------*/
-ion-content													{background-image: url('../../assets/img/bg.jpg');   font-size:15px;  color:#777 !important;}
+
 .card-wp p													{color: #777;font-size:15px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
 															 margin: 0 0 2px;}
 ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !important;}
@@ -462,6 +492,7 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 
 
 /*-------------------------------------Android platform css -------------------------------------*/
+.list-md{ margin:0px !important;}
 
 .my-list-item												{background:#333!important;color:#999 !important;text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);     -moz-border-bottom-colors: none;
 															-moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: #444 currentcolor #111 !important;
@@ -477,7 +508,7 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .list-cates													{ border:1px solid red !important;}
 .subcategory-list											{padding:5px;}
 .ios page-community .video, .md page-community .video		{width:100%; border:none; height:40px;}
-.community-img												{position:relative;}
+.community-img												{position:relative !important; }
 
 
 .ios ion-nav > .ion-page > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-nav > .ion-page > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-tab > .ion-page > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-tabs > .ion-page.tab-subpage > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-menu > .menu-inner > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-menu > .menu-inner > ion-header > ion-content.statusbar-padding:first-child .scroll-content{padding-top:0px !important;}
@@ -504,7 +535,7 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .item-block										            {/*border-bottom:1px solid rgba(212, 209, 209, 0.13) !important;*/}
 .item-select												{font-size:14px !important;}
 .marg-info													{padding:50px; float:left; margin-top:10px;}
-.item-ios.item-block .item-inner							{ border-bottom:none; margin-left:5px; }
+.item-ios.item-block .item-inner							{ border-bottom:none; margin-left:5px; padding-right:3px !important; }
 .label-ios													{font-size:15px;}
 .alert-ios .alert-wrapper									{background:#f8ffff;}
 .alert-message												{display:none;}
@@ -562,8 +593,8 @@ white-space: normal;}
 .headbg													    {background:#4169E1; font-size:15px;}
 .body-clr												    {background:#fff;}
 .popup-mds > .ion-label									    {font-size:15px; text-align:center;}
-.item-inner > .input-wrapper > .label-md h2				    {font-size:18px !important;color:#1d6ab2;text-transform:capitalize;}
-.item-inner > .input-wrapper > .label-md				    {color:#777;font-size:14px; }
+.item-inner > .input-wrapper > .label-md h2				    {font-size:19px !important;color:#1d6ab2;text-transform:capitalize; margin-top:0px !important;}
+.item-inner > .input-wrapper > .label-md				    {color:#777;font-size:16px; padding-right:0px !important; }
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ bottom:4px;}
 .marg-info img											    {border:3px solid #FFE4E1; box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);}
 .item-md .item-button									    {height:30px;}

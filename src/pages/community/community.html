@@ -44,8 +44,9 @@
 						<div *ngFor="let member of members" text-wrap>
 		    				<ion-item text-wrap class="memb-list">
 								<ion-avatar>
-									<img (click)="membersProfile(member.uid)" style="border:5px solid #e6e6e6;" [src]="imageUrl+member?.avatar" 
-									[hidden]="!member?.avatar">
+									
+									<img (click)="membersProfile(member.uid)" style="border:2px solid #e6e6e6;" [src]="imageUrl+member?.avatar" [hidden]="!member?.avatar">
+
 								</ion-avatar>
 							</ion-item>
 						</div>
@@ -74,28 +75,28 @@
 					</ion-col>
 				</ion-row> 
 				<div>
-				    <!--   <h2>Hello {{name}}</h2> -->
-				    <input type="file" multiple (change)="onChange($event, showFileNames)" />
-				    <input #showFileNames />
-				</div>		    		
-				<ion-row>
-					<ion-col>
-						<button ion-button (click)="addVideos()" icon-only medium class="video">
-							<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp;
-						</button>
-					</ion-col>
-				</ion-row>
-				<ion-row>
-					<ion-col>
-						<div *ngIf(addVideo)>
-							<ion-item  class="video" >
-								<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
-								</ion-input>
-							</ion-item>
-						</div>
-					</ion-col>
-				</ion-row>
-		   	</div>
+		
+				      <input type="file" multiple (change)="onChange($event, showFileNames)" />
+				      <input #showFileNames />
+				    </div>		    		
+					<ion-row>
+						<ion-col>
+							<button ion-button (click)="addVideos()" icon-only medium class="video">
+								<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp;
+							</button>
+						</ion-col>
+					</ion-row>
+					<ion-row *ngIf(addVideo)>
+						<ion-col>
+							<div>
+								<ion-item  class="video" >
+									<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
+									</ion-input>
+								</ion-item>
+							</div>
+						</ion-col>
+					</ion-row>
+		   		</div>
 					
 		    <div style="padding:0px !important;">
 				<ion-row>
@@ -153,7 +154,9 @@
 	       	<div>
 	      		<ion-row>
 	        		<ion-col width-15>
+
 	          			<button class="hover but-colo" ion-button outline (click)="addLikes(user.id)">{{user.likes.emoji}} &nbsp; <p class="num-of">{{user.likes.emoji_name}}</p>
+
 	          			</button>
 	        		</ion-col>
 	        		
@@ -165,9 +168,10 @@
 	          			</button>
 	          		</ion-col>
 	          		<ion-col>
-		          		<button ion-button class="comment but-colo" color="dark" icon-only clear>
-		          		<i class="fa fa-pencil-square-o" aria-hidden="true" (click)="addDetails(i)">&nbsp;</i>
-		          		</button>
+	          		<button ion-button class="comment but-colo" color="dark" icon-only clear>
+	          		<i class="fa fa-pencil-square-o" aria-hidden="true" (click)="addDetails(i)">&nbsp;
+	          		</i>
+	          		</button>
 	          		</ion-col>
 	      		</ion-row>
 	      			<div *ngIf="i==showblock">
@@ -184,6 +188,8 @@
 	    	</div>
 		</div>
 	</ion-list>
+
+	      					
 </ion-content>
 <style>
 .text-input-ios{}
