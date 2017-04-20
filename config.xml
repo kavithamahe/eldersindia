@@ -57,5 +57,8 @@
   <plugin name="cordova-plugin-device" spec="1.1.4"/>
   <plugin name="cordova-plugin-splashscreen" spec="~4.0.1"/>
   <plugin name="cordova-sqlite-storage" spec="~2.0.2"/>
+  <plugin name="phonegap-plugin-push" spec="1.10.2">    
+  <variable name="SENDER_ID" value="604025131571"/>   
+</plugin>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
 </widget>

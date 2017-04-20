@@ -22,6 +22,7 @@ rootUrl:any;
 
 // Observable string streams
   userEntered$ = this.userSource.asObservable();
+  device_id:any;
 
 
   constructor(public http: Http, public storage:Storage, public appConfig:AppConfig) {
@@ -36,7 +37,8 @@ rootUrl:any;
   
   loginload(credentials) {
    let _request= {"email": credentials.email,
-  "password": credentials.password,"app":""}
+  "password": credentials.password,
+  "device_id": this.device_id,"app":""}
     return this.http.post(this.rootUrl+'login',_request,this.headers)
       .map(res => res.json());
  
@@ -46,4 +48,9 @@ rootUrl:any;
     console.log("user logged:",user);
     this.userSource.next(user);
   }
+
+  setDeviceID(deviceID:string){
+    console.log("deviceID logged:",deviceID);
+    this.device_id = deviceID;
+      }
 }
