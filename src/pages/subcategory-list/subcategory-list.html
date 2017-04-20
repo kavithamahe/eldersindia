@@ -20,32 +20,29 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-	<ion-card style = "background:#FE6263" class="subcategory-list" *ngFor="let service_list of sublists.lists">
-		<ion-card (click)="serviceInfo(service_list)">
-		<ion-row>
-		<ion-col>
-		    <ion-thumbnail style="width: 100px; height: 100px;" item-left>
+<ion-content padding style="background:#fff;">
+	<ion-item class="subcategory-list" *ngFor="let service_list of sublists.lists">
+	
+		<ion-row (click)="serviceInfo(service_list)">
+		<ion-col width-40>
+		    <ion-thumbnail item-left>
 		      <img [src]= "logoUrl+service_list?.logo">
 		    </ion-thumbnail>
-</ion-col><ion-col>			
-		    <h2>{{service_list.name}}</h2>
+</ion-col>
+<ion-col width-60>			
+<h2>{{service_list.name}}</h2>
 			 <p>
 			  <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" 
 					(ngModelChange)="onModelChange($event)">        
 			  </rating>
 		 	 </p>
 		    <p><i class="fa fa-inr" aria-hidden="true"></i> {{service_list.service_cost - service_list.percentage_cost}}</p>
+			<button ion-button small (click)="openModal('scheduleModal',service_list.id)" class="btn-warnings"> Schedule</button>
+			<button ion-button small (click)="instantRequest(service_list.id)" class="btn-infos"> Instant</button>
 			</ion-col>
-			<ion-col>
-				<ion-row>
-				<button ion-button small (click)="openModal('scheduleModal',service_list.id)" class="btn-warnings"> Schedule</button>
-				</ion-row>
-				<ion-row>
-				<button ion-button small (click)="instantRequest(service_list.id)" class="btn-infos"> Instant</button>
-				</ion-row>
-			</ion-col>
+			
 		 </ion-row>
-		 </ion-card>
-	</ion-card>
+		
+	</ion-item>
+	<hr/>
 </ion-content>
