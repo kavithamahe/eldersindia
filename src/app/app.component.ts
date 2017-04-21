@@ -48,7 +48,7 @@ export class MyApp {
   user_logged = '<no user announced>';
   subscription: Subscription;
 //--------------------------------//
-  rootPage: any =  LoginPage;
+  rootPage: any;
 
   pages: Array<{title: string, component: any}>;
 
