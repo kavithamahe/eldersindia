@@ -26,7 +26,7 @@ export class LoginPage {
   passwordCode:any;
   mailID:any;
   newPassword:any;
-  id:any;
+  id:any='';
   loginForm: FormGroup;
   submitAttempt: boolean = false;
   registerCredentials = {email: '', password: ''};
@@ -35,7 +35,9 @@ export class LoginPage {
   police:any=0;
   constructor(public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
   this.storage.ready().then(() => { 
-    
+     storage.get('id').then((id) => { this.id=id; 
+     });
+
     });
     this.loginForm = formBuilder.group({
         email: ['', Validators.compose([Validators.required])],

@@ -8,6 +8,11 @@ import { Platform } from 'ionic-angular';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CommunitymessagePage } from '../communitymessage/communitymessage';
+import { CommunitycommentsPage } from '../communitycomments/communitycomments';
+
+import { MyprofilesettingPage } from '../myprofilesetting/myprofilesetting';
+import { CommunityPage } from '../community/community';
+
 import { CommunityServices } from '../../providers/community-services';
 
 
@@ -21,8 +26,10 @@ export class CommunityprofilePage {
     itemComments:boolean;
     imageUrl:any;
     showblock:any;
+    showReply:any;
     detail:any;
     comment:any;
+    comments:any;
     addVideo:any;
     connectLists:any;
     activityLists:any;
@@ -73,9 +80,20 @@ export class CommunityprofilePage {
       this.itemComments=false;
       loader.dismiss();
   }
+
+
+  showComment(post){
+    let commentModal = this.modalCtrl.create(CommunitycommentsPage, { posts: post });
+   commentModal.present();
+  }
   messageModel(member) {
 
     let modal = this.modalCtrl.create(CommunitymessagePage,{member_data:member});
+    modal.present();
+  }
+    profileSetting(member) {
+
+    let modal = this.modalCtrl.create(MyprofilesettingPage,{member_data:member});
     modal.present();
   }
   
@@ -113,6 +131,15 @@ export class CommunityprofilePage {
       this.showblock=event;
     }
   }
+   replyComments(event){
+    this.comments="";
+    if(this.showReply==event){
+        this.showReply=null;
+    }
+    else{
+      this.showReply=event;
+    }
+ }
 
   itemDetails(){
   if (this.itemComments) {
@@ -134,6 +161,7 @@ export class CommunityprofilePage {
   }
   
  profileCommunity(id){
+      this.communityProfile=[];
       this.communityServices.userProfile(id).subscribe(users => {
       this.communityProfile = users.result.info.lists.data;
 
@@ -146,6 +174,7 @@ export class CommunityprofilePage {
   }
  
   memberProfile(member_id){
+     this.communityProfileData=[];
     this.communityServices.memberProfileData(member_id).subscribe(users => {
       this.communityProfileData = users.result.info.profile_details;
       this.status = users.result.info.approve_status.status;
@@ -166,15 +195,7 @@ export class CommunityprofilePage {
     
     this.communityServices.showErrorToast(err);
   })
-    // this.activityLists = false;
-    // this.connectLists = false;
-    //  if (this.communityMembers) {
-    //     this.communityMembers = false;
-       
-    // } else {
-    //    this.communityMembers = true;
-    //  }
-    
+  
  }
   
   connectMember(user){
@@ -190,17 +211,7 @@ export class CommunityprofilePage {
     this.communityServices.showErrorToast(err);
   })
  }
- // activityMember(){
- //   this.connectLists = false;
- //   this.communityMembers = false;
 
- //   if (this.activityLists) {
- //        this.activityLists = false;
-       
- //    } else {
- //       this.activityLists = true;
- //     }
- // }
 
   Connections(id,val){
     this.communityServices.getConnectLists(id,val).subscribe(users => {
@@ -223,7 +234,7 @@ export class CommunityprofilePage {
   addLikes(id){
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
-   this.communityServices.addLike(id).subscribe(data =>{
+     this.communityServices.addLike(id).subscribe(data =>{
      this.showToast(data.result);
      this.profileCommunity(this.profile_uid);
    },
@@ -249,7 +260,7 @@ export class CommunityprofilePage {
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
      this.communityServices.sendPosts(id1,this.comment).subscribe(datas =>{
-     this.showToast(datas.result);
+     this.showToast(datas.result.info.message);
      this.comment="";
      // this.showblock= null;
      this.profileCommunity(this.profile_uid);
@@ -264,6 +275,7 @@ export class CommunityprofilePage {
    }
      
   }
+ 
   
 
    addUserPosts(id){
@@ -306,7 +318,6 @@ export class CommunityprofilePage {
           text: 'Ok',
           handler: () => {
            this.deleteComment(DeleteId);
-          
           }
         }
       ]
@@ -314,7 +325,14 @@ export class CommunityprofilePage {
     confirm.present();
   }
 
-  goBackToCommunity(){
+  goBackToCommunity(id){
+   this.nav.push(CommunityPage,{community_id:id});
+  }
+  profileMember(id){
+    this.profileCommunity(id);
+    this. memberProfile(id);
+  }
+  detailCommunity(){
     this.nav.pop();
   }
   public dashboardPage()

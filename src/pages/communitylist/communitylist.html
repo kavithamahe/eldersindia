@@ -48,16 +48,16 @@
         <ion-item style="position:relative;" *ngFor="let community of communitylists; let i= index" 
         (click)="getPost(community.id)">
           <div class="community-img">
-              <img  [src]="imageUrl+community?.banner" style="width:100%; height:200px;" [hidden]="!community?.banner" />
-			  <div class="label-opc">
-			   <ion-item text-wrap style="text-align:left !important;"  (click)="getPost(community.id)">{{community.community_name}}</ion-item>
-			   </div>
+               <img  [src]="imageUrl+community?.banner" style="width:100%; height:200px;" [hidden]="!community?.banner" />
+        			   <div class="label-opc">
+            			   <ion-item text-wrap style="text-align:left !important;"  
+                     (click)="getPost(community.id)">{{community.community_name}}</ion-item>
+        			   </div>
+
                 <span [hidden]="!community.category_name"> 
                   <label class="labels-bds"> {{community.category_name}}</label>
                 </span>
-				
 				  </div>
-        
         </ion-item>
       </ion-list>
 

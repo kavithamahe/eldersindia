@@ -41,7 +41,7 @@ import { Storage } from '@ionic/storage';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  user_id:any;
+  user_id:any='';
   reg_id:any;
 
   // make HelloIonicPage the root (or first) page
@@ -50,9 +50,8 @@ export class MyApp {
 
   user_logged = '<no user announced>';
   subscription: Subscription;
-//----------------------------------//
-
-  rootPage: any =  ServiceprovidersPage;
+//--------------------------------//
+  rootPage: any;
 
   pages: Array<{title: string, component: any}>;
 
@@ -64,8 +63,17 @@ export class MyApp {
     public storage:Storage
   ) {
     this.storage.ready().then(() => {
-    storage.get('id').then((id) => { this.user_id=id; })
-    
+    storage.get('id').then((id) => { this.user_id=id;
+   
+    if(this.user_id!='' && this.user_id != null)
+     {
+        this.rootPage=DashboardPage;
+     }
+     else
+     {
+      this.rootPage = LoginPage;
+     }
+     })
    }); 
 
 // set our app's pages on user based
@@ -121,7 +129,7 @@ export class MyApp {
         }else{
                 let confirmAlert = this.alertCtrl.create({
                 title: 'Log Out',
-                subTitle: "Are you sure to Logout",
+                subTitle: "Are you sure to close app",
                 buttons: [{
                   text: 'NO',
                   handler: () => {
