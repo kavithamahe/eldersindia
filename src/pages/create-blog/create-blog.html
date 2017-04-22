@@ -20,40 +20,40 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-<ion-list>
+<ion-content padding class="contect-bg-moblie">
+<ion-list class="bloge">
 
   <ion-item>
-    <ion-label stacked class="liste-names" style=" padding-top:10px;">Blog Title: *</ion-label>
+    <ion-label stacked class="bloag-label">Blog Title<small style="color:red;">*</small></ion-label><span style="color:red">*</span>
     <ion-input type="text" [(ngModel)]="title"></ion-input>
   </ion-item>
 
 <ion-item>
-    <ion-label stacked class="liste-names" style="text-align:left; padding-bottom:10px;">Category: *</ion-label>
+    <ion-label stacked class="bloag-label" style="text-align:left; padding-bottom:10px;">Category<small style="color:red;">*</small></ion-label>
     <ion-select class="select-brd" [(ngModel)]="category">
       <ion-option *ngFor="let categories of categoriesList" [value]="categories.name">{{categories.name}}</ion-option>     
     </ion-select>
   </ion-item>
 
 	<ion-item>
-	    <ion-label stacked class="liste-names">Highlights:</ion-label>
+	    <ion-label stacked class="liste-names">Highlights</ion-label>
 	    <ion-textarea [(ngModel)]="highlights"></ion-textarea>
 	</ion-item>
 
 	<ion-item>
-	    <ion-label stacked class="liste-names">Description: *</ion-label>
+	    <ion-label stacked class="liste-names">Description<small style="color:red;">*</small></ion-label>
 	    <ion-textarea [(ngModel)]="description"></ion-textarea>
 	</ion-item>
-  <ion-label stacked class="liste-names">Featured Image:</ion-label>
+  <ion-label stacked class="liste-names">Featured Image</ion-label>
    <button ion-button >Browse</button>
    
-    <ion-label stacked class="liste-names">Banner Image:</ion-label>
+    <ion-label stacked class="liste-names">Banner Image</ion-label>
     <button ion-button >Browse</button>
     <ion-label stacked class="liste-names">Tags:</ion-label>
     <rl-tag-input [(ngModel)]="tagsModel" [addOnBlur]="true" [addOnEnter]="true" [autocomplete]="true"  [autocompleteItems]="tags" placeholder="Tags"></rl-tag-input>
   <div radio-group [(ngModel)]="allowComments">
   <ion-list-header style=" background:#fff; margin-bottom:0px;">
-   <p class="liste-names"> Allow Comments:</p>
+   <p class="liste-names"> Allow Comments</p>
   </ion-list-header>
   <ion-item>
     <ion-label class="liste-names">Yes</ion-label>

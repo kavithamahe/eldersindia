@@ -20,35 +20,40 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="marg-info">
+<ion-content padding class="marg-info" style="background:#fff;">
   <div *ngIf="vendorList?.banners">
   <ion-slides class="slide_height" initialSlide="0" loop="true" pager="true" autoplay="3000">
-      <ion-slide *ngFor="let slide of vendorList.banners">
+      <ion-slide *ngFor="let slide of vendorList.banners" style="height:200px;">
         <img [src]="url+slide?.banner" class="slide-image"/>
       </ion-slide>  
   </ion-slides>  
   </div>
-	
-	<div class="view-storedet">
-      <h2> Welcome to {{vendorList?.vendorDetails?.name}}</h2>
-      <p> {{vendorList?.vendorDetails?.description}} </p>
 
-  <ion-row>
-  <span class="mails-cont"><i class="fa fa-envelope-o" aria-hidden="true"></i><p> {{vendorList?.vendorDetails?.email}}</p></span>
-  </ion-row>
-  <ion-row>
-															
- <span class="mails-cont"><i class="fa fa-globe" aria-hidden="true"></i><button (click)="openUrl()"> {{vendorList?.vendorDetails?.website}}</button></span>
-  </ion-row>    
+<div class="slider-detalis-list">
+<ion-card>
+  <ion-card-header>
+         <h2> Welcome to {{vendorList?.vendorDetails?.name}}</h2>
+  </ion-card-header>
+  <ion-card-content>
+   <p> {{vendorList?.vendorDetails?.description}} </p>
+  </ion-card-content>
+</ion-card>
+
+
+
+
+</div>
+
+  	<div class="view-storedet">
   <ion-row>
     <ion-col class="brder-cor">
       <button ion-button full (click)="toggleRequestService()">
-        <div>Request Services</div>
+        <b>Request Services </b><i class="fa fa-angle-down detalisview-arr"></i>
       </button>
       
 	  <form [formGroup]="requestForm" *ngIf(showRequestService)>
-      	<div padding style="background:#fff;">
-           
+      	<div class="select-detalis-in" padding style="background:#fff; border:1px solid #159deb; border-top:none;">
+           <br>
 			<ion-label stacked class="label-lb">Describe The Problem</ion-label>
       		<ion-input formControlName = "problem" type="text" ></ion-input>
 			 <small *ngIf="!requestForm.controls.problem.valid  && (requestForm.controls.problem.dirty || submitAttempt)">
@@ -91,8 +96,8 @@
             </small>
           <ion-row>
           <ion-col>
-		  <button class="btn-defaults" ion-button item-right small (click)="toggleRequestService()">Cancel</button></ion-col>
-      		<ion-col offset-33>
+		  <!--<button class="btn-defaults" ion-button item-right small (click)="toggleRequestService()">Cancel</button>--></ion-col>
+      		<ion-col>
 			<button class="btn-primarys" ion-button item-right small (click)="sendRequestService()">Submit</button></ion-col>
           </ion-row>
       	</div>
@@ -102,7 +107,7 @@
   <ion-row>
     <ion-col class="brder-cor">
       <button ion-button item-left full (click)="toggleServiceOffered()">        
-        <div>Services Offered</div>
+        <b>Services Offered</b><i class="fa fa-angle-down detalisview-arr"></i>
       </button>
       	<div *ngIf(showServiceOffered)>
           <ion-card *ngFor = "let service of vendorList.serviceOffered">
@@ -145,16 +150,16 @@
 
       <button ion-button item-left full (click)="toggleContact()">
         
-        <div>Contact Details</div>
+        <b>Contact Details</b><i class="fa fa-angle-down detalisview-arr"></i>
       </button>
-      <div *ngIf(showDetails)>
+      <div *ngIf(showDetails) class="add-detalis">
 		<p>{{vendorList?.vendorDetails?.address}}</p>
     <p>{{vendorList?.vendorDetails?.email}}</p>
     <p>{{vendorList?.vendorDetails?.contact_name}}</p>
     <p>{{vendorList?.vendorDetails?.contact_number}}</p>
       </div>
 	   <div *ngIf(!vendorList?.vendorDetails?.address)>
-			<p>"No Address Deatails To Display"</p>		  
+			<p style="color:red; font-size:15px;">"No Address Deatails To Display"</p>		  
       </div>
 	   </ion-col>
   </ion-row>

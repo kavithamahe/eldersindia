@@ -48,7 +48,7 @@ export class MyApp {
   subscription: Subscription;
 //----------------------------------//
 
-  rootPage: any =  ServiceprovidersPage;
+  rootPage: any =  JobboardPage;
 
   pages: Array<{title: string, component: any}>;
 
