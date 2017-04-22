@@ -30,7 +30,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding style="background:#fff;">
+<ion-content padding style="background:#fff;" class="ios-cont-s">
+
 <button class ="myblock" *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full (click)="subCategory(service)" class="ftbtb service-bg{{i}}">
 <ion-col>
 <div class="left-icons">

@@ -55,7 +55,7 @@
         </ion-card> 
         </div>
 
-        <div *ngIf(showContactDetails)>
+        <div *ngIf(showContactDetails) class="add-detalis">
 	        <ion-card>
 				<ion-item>
 				<i class="fa fa-map-marker" aria-hidden="true"></i> 
@@ -80,7 +80,7 @@
 	      	</ion-card>
 
 		   	<ion-card *ngIf(!vendorList?.vendorDetails?.address)>
-				<ion-item>"No Address Deatails To Display"</ion-item>		  
+				<ion-item style="color:red; font-size:15px;">"No Address Deatails To Display"</ion-item>		  
 	      	</ion-card>
       	</div>
 
