@@ -13,6 +13,7 @@ import { ServiceProvider } from '../../providers/service-provider';
   Ionic pages and navigation.
 */
 @Component({
+  selector:'page-subcategory-list',
   templateUrl: 'subcategory-list.html',
   providers :[ModalContentPage]
 })
@@ -54,7 +55,7 @@ export class SubcategoryListPage {
     }
     
 loadSubcategoryList(subCategory_id,location_id){
-  
+      console.log("loading vendor list for the service");
       this.subCategorydata = {subCategoryId : subCategory_id, flag:"1", locationId : location_id};
       // this.providerService.loadServiceProviderList(this.subCategorydata)
       this.providerService.webServiceCall(`getServiceProviderlist`,this.subCategorydata)
@@ -121,7 +122,8 @@ loadSubcategoryList(subCategory_id,location_id){
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
        .subscribe(
         data =>{
-                 console.log(data.result);
+          console.log("service request web service");
+                 console.log(".......",data.result);
                  this.providerService.showToast(data.result);
                 },
         err =>{
@@ -177,6 +179,7 @@ export class InstantRequestModalPage {
     public params: NavParams,
     public viewCtrl: ViewController
   ) {
+    console.log("modal page called");
     this.dependentLists = this.params.get('dependentList');
     this.service = this.params.get('service')
   }

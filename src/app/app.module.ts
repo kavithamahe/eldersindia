@@ -56,6 +56,7 @@ import { SubCategoryPage } from '../pages/sub-category/sub-category';
 import { SubcategoryListPage } from '../pages/subcategory-list/subcategory-list';
 import { InstantRequestModalPage } from '../pages/subcategory-list/subcategory-list';
 import { ServiceInfoPage } from '../pages/service-info/service-info';
+import { ServiceModalPage } from '../pages/service-modal/service-modal';
 import { ModalContentPage } from '../pages/modal-page/modal-page';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
@@ -63,6 +64,7 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { SettingsPage } from '../pages/settings/settings';
 import { SubCategoryServicePage } from '../pages/sub-category-service/sub-category-service';
+import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service-provider';
@@ -112,7 +114,9 @@ import { ServiceProvider } from '../providers/service-provider';
     MyProfilePage,
     EditProfilePage,
     ChangePasswordPage,
-    SettingsPage
+    SettingsPage,
+    ServiceModalPage,
+    TermsModalPage
   ],
   imports: [
     IonicModule.forRoot(MyApp,AppConfig),
@@ -165,7 +169,9 @@ import { ServiceProvider } from '../providers/service-provider';
     MyProfilePage,
     EditProfilePage,
     ChangePasswordPage,
-    SettingsPage
+    SettingsPage,
+    ServiceModalPage,
+    TermsModalPage
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
