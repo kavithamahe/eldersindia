@@ -33,13 +33,13 @@
       <h2> Welcome to {{vendorList?.vendorDetails?.name}}</h2>
       <p> {{vendorList?.vendorDetails?.description}} </p>
 
-  <ion-row>
-  <span class="mails-cont"><i class="fa fa-envelope-o" aria-hidden="true"></i><p> {{vendorList?.vendorDetails?.email}}</p></span>
-  </ion-row>
-  <ion-row>
-															
- <span class="mails-cont"><i class="fa fa-globe" aria-hidden="true"></i><button (click)="openUrl()"> {{vendorList?.vendorDetails?.website}}</button></span>
-  </ion-row>    
+                                  <!-- <ion-row>
+                                  <span class="mails-cont"><i class="fa fa-envelope-o" aria-hidden="true"></i><p> {{vendorList?.vendorDetails?.email}}</p></span>
+                                  </ion-row>
+                                  <ion-row>
+
+                                  <span class="mails-cont"><i class="fa fa-globe" aria-hidden="true"></i><button (click)="openUrl()"> {{vendorList?.vendorDetails?.website}}</button></span>
+                                  </ion-row> -->    
   <ion-row>
     <ion-col class="brder-cor">
       <button ion-button full (click)="toggleRequestService()">
@@ -89,8 +89,13 @@
 		      <small *ngIf="!requestForm.controls.dependents.valid  && (requestForm.controls.dependents.dirty || submitAttempt)">
                 <p class="err-reds">Please select the dependent</p>
             </small>
+            <!-- <ion-item>
+              <ion-label>I Agree With Terms and Conditions</ion-label>
+              <ion-checkbox [(ngModel)]="terms"></ion-checkbox>
+            </ion-item> -->
           <ion-row>
           <ion-col>
+
 		  <button class="btn-defaults" ion-button item-right small (click)="toggleRequestService()">Cancel</button></ion-col>
       		<ion-col offset-33>
 			<button class="btn-primarys" ion-button item-right small (click)="sendRequestService()">Submit</button></ion-col>
@@ -100,44 +105,44 @@
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col class="brder-cor">
-      <button ion-button item-left full (click)="toggleServiceOffered()">        
+    <ion-col class="brder-cor"> <!-- (click)="toggleServiceOffered()" -->
+      <button ion-button item-left full (click)="modal()">        
         <div>Services Offered</div>
       </button>
-      	<div *ngIf(showServiceOffered)>
-          <ion-card *ngFor = "let service of vendorList.serviceOffered">
-            <ion-list *ngFor = "let category_list of service.category_lists">
-              <button class="sub" ion-item (click)="show_sub_category()">
-                <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
-                {{category_list.category}}  
-              </button >
-              <ion-item *ngIf(sub_category)>
-                <ion-card *ngFor="let subcategory_list of category_list.service_sub_category_lists; let i=index " >
-                <ion-list (click)="showService(i)">
-                  <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
-                    {{subcategory_list.subcategory}}
-                </ion-list>
-                    <ion-item *ngIf= "i === show_service">
-                      <ion-card *ngFor="let services of subcategory_list.services" >
-                      <ion-list>
-                        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
-                          {{services.service}}
-                      </ion-list>
-                      </ion-card> 
-                    </ion-item>
-              </ion-card> 
-              </ion-item>
-              
-            </ion-list>
-          </ion-card>
+                                        <!-- <div *ngIf(showServiceOffered)>
+                                        <ion-card *ngFor = "let service of vendorList.serviceOffered">
+                                        <ion-list *ngFor = "let category_list of service.category_lists">
+                                        <button class="sub" ion-item (click)="show_sub_category()">
+                                        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
+                                        {{category_list.category}}  
+                                        </button >
+                                        <ion-item *ngIf(sub_category)>
+                                        <ion-card *ngFor="let subcategory_list of category_list.service_sub_category_lists; let i=index " >
+                                        <ion-list (click)="showService(i)">
+                                        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
+                                        {{subcategory_list.subcategory}}
+                                        </ion-list>
+                                        <ion-item *ngIf= "i === show_service">
+                                        <ion-card *ngFor="let services of subcategory_list.services" >
+                                        <ion-list>
+                                        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
+                                        {{services.service}}
+                                        </ion-list>
+                                        </ion-card> 
+                                        </ion-item>
+                                        </ion-card> 
+                                        </ion-item>
 
-        <ion-card *ngIf="!vendorList.serviceOffered">
-          <ion-card-content>
-            No Records Found..!
-          </ion-card-content>
-        </ion-card>    
-        
-        </div>  	
+                                        </ion-list>
+                                        </ion-card>
+
+                                        <ion-card *ngIf="!vendorList.serviceOffered">
+                                        <ion-card-content>
+                                        No Records Found..!
+                                        </ion-card-content>
+                                        </ion-card>    
+
+                                        </div>  	 -->
     </ion-col>
   </ion-row>
   <ion-row>
@@ -147,15 +152,15 @@
         
         <div>Contact Details</div>
       </button>
-      <div *ngIf(showDetails)>
-		<p>{{vendorList?.vendorDetails?.address}}</p>
-    <p>{{vendorList?.vendorDetails?.email}}</p>
-    <p>{{vendorList?.vendorDetails?.contact_name}}</p>
-    <p>{{vendorList?.vendorDetails?.contact_number}}</p>
-      </div>
-	   <div *ngIf(!vendorList?.vendorDetails?.address)>
-			<p>"No Address Deatails To Display"</p>		  
-      </div>
+                                          <!-- <div *ngIf(showDetails)>
+                                    		<p>{{vendorList?.vendorDetails?.address}}</p>
+                                        <p>{{vendorList?.vendorDetails?.email}}</p>
+                                        <p>{{vendorList?.vendorDetails?.contact_name}}</p>
+                                        <p>{{vendorList?.vendorDetails?.contact_number}}</p>
+                                          </div>
+                                    	   <div *ngIf(!vendorList?.vendorDetails?.address)>
+                                    			<p>"No Address Deatails To Display"</p>		  
+                                          </div> -->
 	   </ion-col>
   </ion-row>
 </div>

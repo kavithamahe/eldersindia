@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http,Headers,RequestOptions } from '@angular/http';
-//import {Observable} from 'rxjs/Observable';
 import {ToastController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import 'rxjs/Rx';
@@ -20,21 +19,26 @@ head:any;
 body: any;
 token:any; 
 rootUrl:any;
+
   constructor(public http: Http, public storage:Storage,public toastCtrl:ToastController) {
-this.storage.ready().then(() => {
-    storage.get('token').then((token) => { this.token=token;
-    this.headers = new Headers();
-    this.headers.append('Content-Type', 'application/json');
-    this.headers.append('Authorization', 'Bearer ' + this.token);
-    this.head = new RequestOptions({ headers: this.headers });
-       })    
-    storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; });
-    //console.log("constructor call");
+    this.storage.ready().then(() => {
+      storage.get('token').then((token) => { this.token=token;
+      this.headers = new Headers();
+      this.headers.append('Content-Type', 'application/json');
+      this.headers.append('Authorization', 'Bearer ' + this.token);
+      this.head = new RequestOptions({ headers: this.headers });
+         })    
+      storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; });
+      
    });  
 }
 
+serviceInit(token){
+    console.log("token intialized",token);
+    this.token = token;
+}
+
 webServiceCall(serviceName,bodyData){
-  //console.log("URL"+this.rootUrl);
   return this.http.post(this.rootUrl+serviceName, bodyData, this.head)
     .map(res => res.json());
 }

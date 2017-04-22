@@ -116,8 +116,8 @@
 					</ion-row> 
 					<div>
 				    <!--   <h2>Hello {{name}}</h2> -->
-				      <input type="file" multiple (change)="onChange($event, showFileNames)" />
-				      <input #showFileNames />
+				      <input type="file" multiple (change)="onChange($event, showFileNames,communityDetailData?.id)" />
+      					<input #showFileNames />
 				    </div>		    		
 					<ion-row>
 						<ion-col>

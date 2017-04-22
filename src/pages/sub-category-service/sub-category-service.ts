@@ -19,7 +19,6 @@ export class SubCategoryServicePage {
 	subcategory:any;
 	locationId:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-
   	this.subcategory = navParams.get("sub_service");
   	this.locationId = navParams.get("location_id");
 
@@ -28,8 +27,7 @@ export class SubCategoryServicePage {
   itemSelected(serviceData) {
     let service = serviceData;
     let location_id = this.locationId;
-    this.navCtrl.push(SubcategoryListPage,{location_id,service});  
-      
+    this.navCtrl.push(SubcategoryListPage,{location_id,service});
   }
 
    public dashboardPage()

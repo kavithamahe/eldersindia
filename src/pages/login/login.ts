@@ -9,6 +9,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 
 import { LoginUser } from '../../providers/login-user';
 import { AppConfig } from '../../providers/app-config';
+import { ServiceProvider } from '../../providers/service-provider'
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 /*
   Generated class for the Login page.
@@ -32,7 +33,7 @@ export class LoginPage {
   callSponsor:any=0;
   ambulance:any=0;
   police:any=0;
-  constructor(public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
+  constructor(public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
   this.storage.ready().then(() => { 
     
     });
@@ -56,6 +57,9 @@ export class LoginPage {
 
    	this.loginUser.loginload(this.registerCredentials).subscribe(     
       (loginuser) => {
+
+          this.service.serviceInit(loginuser['token']);
+
          if(loginuser['details']['user_type'] == 'elder'){
            this.loginUser.currentUser("elder");
          }else{

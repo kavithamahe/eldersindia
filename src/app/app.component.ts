@@ -31,6 +31,9 @@ import { Subscription }   from 'rxjs/Subscription';
 
 import { Storage } from '@ionic/storage';
 
+// import {ModalContentPage} from '../pages/modal-page/modal-page';
+
+
 @Component({//selector:'my-theme',
   templateUrl: 'app.html'
 
