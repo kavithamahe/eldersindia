@@ -23,11 +23,12 @@
 <ion-content padding style="background:#fff;">
 	<ion-item class="subcategory-list" *ngFor="let service_list of sublists.lists">
 	
-		<ion-row (click)="serviceInfo(service_list)">
-		<ion-col width-40>
+		<ion-row>
+		<ion-col width-40  (click)="serviceInfo(service_list)">
 		    <ion-thumbnail item-left>
 		      <img [src]= "logoUrl+service_list?.logo">
 		    </ion-thumbnail>
+<!--<<<<<<< HEAD
 </ion-col>
 <ion-col width-60>			
 <h2>{{service_list.name}}</h2>
@@ -37,6 +38,23 @@
 			  </rating>
 		 	 </p>
 		    <p class="price-clr"><i class="fa fa-inr" aria-hidden="true"></i> {{service_list.service_cost - service_list.percentage_cost}}</p>
+======= -->
+		</ion-col>
+		<ion-col width-60>			
+		<h2 (click)="serviceInfo(service_list)">{{service_list.name}}</h2>
+			 <p  class="rating-clr">
+			  <rating readOnly="true" [(ngModel)]="rate" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"> 
+			  <!-- (ngModelChange)="onModelChange($event)"         -->
+			  </rating>
+		 	 </p>
+		    <p class="price-clr">
+		    <i class="fa fa-inr" aria-hidden="true" style="text-decoration: line-through;"> {{service_list.service_cost}}</i> (
+		    <i class="fa fa-inr" aria-hidden="true">{{service_list.service_cost - service_list.percentage_cost}} ) / {{service_list.service_type}}</i>
+		    <span>
+		    <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+		    <span>{{service_list.discount_rate}} %</span>
+		    </span>
+		    </p>
 			<button ion-button small (click)="openModal('scheduleModal',service_list.id)" class="btn-warnings"> Schedule</button>
 			<button ion-button small (click)="instantRequest(service_list.id)" class="btn-infos"> Instant</button>
 			</ion-col>

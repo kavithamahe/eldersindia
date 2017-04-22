@@ -66,5 +66,10 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'getBlogCategories',_request,this.options)
       .map(res => res.json());
   }
-
+  getTagsList(tagsInput)
+  {
+   // let _request= {};
+    return this.http.get(this.rootUrl+'getBlogTags/'+tagsInput,this.options)
+      .map(res => res.json());
+  }
 }

@@ -15,8 +15,6 @@
 
 <ion-content class="popup-mds" style=" background:#fff;">
   <form [formGroup]="modalForm">
-          
-          
 			<ion-label stacked class="label-lb">Describe The Problem</ion-label>
           <ion-input type="text" formControlName="problem" ></ion-input>
 		  <ion-item *ngIf="!modalForm.controls.problem.valid  && (modalForm.controls.problem.dirty || submitAttempt)">
@@ -62,15 +60,30 @@
 		  <ion-item *ngIf="!modalForm.controls.dependents.valid  && (modalForm.controls.dependents.dirty || submitAttempt)">
                 <p class="err-reds">Please select the dependents</p>
             </ion-item>
-          <ion-row>
-          <ion-col><!--<button ion-button item-left small (click)="dismiss()" class="btn-defaults">close</button>--></ion-col>
-          <ion-col offset-33><button ion-button item-right small (click)="submit()" class="btn-primarys">Submit</button></ion-col>
-          </ion-row>
-        <!-- </form> -->
-      <!-- </div> -->
       </form>
-
+            <ion-item>
+              <!-- <ion-label (click)="openTerms()">I Agree With Terms and Conditions</ion-label> -->
+              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>
+            </ion-item>
+            <span (click)="openTerms()">I Agree With Terms and Conditions</span>
+            <small *ngIf="checkTerms">
+                <p class="err-reds">check agree to proceed</p>
+            </small>
 </ion-content>
+<ion-footer>
+  <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
+    <ion-buttons end>
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="submit()">
+        Update
+        <ion-icon name="send"></ion-icon>
+      </button>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="submit()">
+        Update
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
 </div>
 <style>
 .item-md													{background:none !important;}

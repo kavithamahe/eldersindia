@@ -15,6 +15,9 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
   templateUrl: 'settings.html'
 })
 export class SettingsPage {
+  settings:string="paginate";
+  records:number = 5;
+
 	privacy_name:any;
 	privacy_email:any;
 	privacy_mobile:any;
@@ -28,24 +31,80 @@ export class SettingsPage {
 
   constructor(public storage:Storage, public serviceProvider:ServiceProvider, public navCtrl: NavController, public navParams: NavParams) {}
 
+  update(){
+    if(this.settings=="paginate"){
+      this.setPageCount();
+    }else{
+      this.privacy_submit();
+    }
+  }
+  change(){
+    console.log("record count updated");
+  }
+  getPageCount(){
+    this.serviceProvider.webServiceCall('getPageCount',"")
+    .subscribe(data=>{
+      this.records = data.result;
+      console.log("get page count: ",data);
+    },
+    error=>{
+        if(error.status===401)
+        {
+        this.serviceProvider.showToast(JSON.parse(error._body).error);
+        }
+        else
+        {
+          this.serviceProvider.showToast("Error while fetching results");
+        }
+    });
+  }
+
+  setPageCount(){
+    let pageCount= {pageCount:this.records};
+
+    this.serviceProvider.webServiceCall('setPageCount',pageCount)
+    .subscribe(data=>{
+      this.records = data.paginate_value;
+      this.serviceProvider.showToast(data.result);
+    },
+    error=>{
+            if(error.status===401)
+        {
+        this.serviceProvider.showToast(JSON.parse(error._body).error);
+        }
+        else
+        {
+          this.serviceProvider.showToast("Error while fetching results");
+        }
+    });
+  }
+
+
   getPrivacy(){
   	let requestId = {"user_id":this.user_uid};
   	this.serviceProvider.webServiceCall('getPrivacy',requestId)
   	.subscribe(data=>{
+      console.log("JSON.parse('true')",JSON.parse("true"));
   		let [info] = data.result;
   		this.user_id = info.id;
   		this.user_uid = info.uid;
-  		this.privacy_name = info.privacy_name;
-  		console.log("this.privacy_name",!!this.privacy_name);
-  		this.privacy_email = info.privacy_email;
-  		this.privacy_mobile = info.privacy_mobile;
-  		this.privacy_location = info.privacy_location;
-  		this.privacy_birthday = info.privacy_birthday;
-  		this.privacy_avatar = info.privacy_avatar;
+  		this.privacy_name = JSON.parse(info.privacy_name);
+  		this.privacy_email = JSON.parse(info.privacy_email);
+  		this.privacy_mobile = JSON.parse(info.privacy_mobile);
+  		this.privacy_location = JSON.parse(info.privacy_location);
+  		this.privacy_birthday = JSON.parse(info.privacy_birthday);
+  		this.privacy_avatar = JSON.parse(info.privacy_avatar);
   		this.status = info.status;
   	},
   	error=>{
-  		console.log(error);
+      if(error.status===401)
+        {
+        this.serviceProvider.showToast(JSON.parse(error._body).error);
+        }
+        else
+        {
+          this.serviceProvider.showToast("Error while fetching results");
+        }
   	});
   }
 
@@ -85,6 +144,7 @@ export class SettingsPage {
      this.storage.ready().then(() => {
       this.storage.get('id').then((id) => { this.user_uid=id;
       this.getPrivacy();
+      this.getPageCount(); 
   		});
       })  
   }

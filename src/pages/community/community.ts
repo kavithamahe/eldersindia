@@ -1,13 +1,16 @@
 import { Component} from '@angular/core';
-import { NavController, NavParams,AlertController,LoadingController,ToastController } from 'ionic-angular';
+import { ModalController, NavController, NavParams,AlertController,LoadingController,Platform,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
 
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { CommunitycommentsPage } from '../communitycomments/communitycomments';
 import { CommunityprofilePage } from '../communityprofile/communityprofile';
 import { CommunityServices } from '../../providers/community-services';
 import { DomSanitizer } from '@angular/platform-browser/';
+import { InAppBrowser } from 'ionic-native';
+
 
 
 @Component({
@@ -22,10 +25,13 @@ export class CommunityPage {
     itemComments:boolean;
     imageUrl:any;
     showblock:any;
+    showReply:any;
     detail:any;
     comment:any;
+    comments:any;
     addVideo:any;
     post:any;
+    link:any;
     videoUrl:any;
     users=[];
     user:any;
@@ -39,7 +45,8 @@ export class CommunityPage {
     nextPageURL:any='';
     eventScrollLists:any;
     
-  constructor(public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+    
+  constructor(public platform: Platform,public modal: ModalController, public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
     this.nav=nav;
 
     this.storage.ready().then(() => {
@@ -60,6 +67,19 @@ export class CommunityPage {
 
 }
 
+files:any;
+
+onChange(event: any, input: any ,id) {
+    this.files = [].slice.call(event.target.files);
+
+    input.value = this.files.map(f => f.name).join(', ');
+
+    this.communityServices.fileUpload(id,this.files[0]).subscribe(data=>{
+      console.log(data);
+    })
+  }
+
+
 showConfirm(DeleteId) {
     let confirm = this.alertCtrl.create({
      subTitle: 'Confirm Deletion?',
@@ -77,6 +97,13 @@ showConfirm(DeleteId) {
       ]
     });
     confirm.present();
+  }
+   openUrl(metalink_url) {
+console.log("URL is ",metalink_url);
+        this.platform.ready().then(() => {
+            let browser = new InAppBrowser(metalink_url,'_blank');
+
+        });
   }
 
   accessGallery(){
@@ -104,6 +131,11 @@ showConfirm(DeleteId) {
     }
   }
 
+  showComment(post){
+    let commentModal = this.modal.create(CommunitycommentsPage, { posts: post });
+   commentModal.present();
+  }
+
 
   addDetails(event){
     this.comment="";
@@ -112,6 +144,15 @@ showConfirm(DeleteId) {
     }
     else{
       this.showblock=event;
+    }
+ }
+ replyComments(event){
+    this.comments="";
+    if(this.showReply==event){
+        this.showReply=null;
+    }
+    else{
+      this.showReply=event;
     }
  }
 
@@ -137,6 +178,7 @@ showConfirm(DeleteId) {
       this.communityDetailData = users.result.info;
       this.members =  users.result.info.members;
       this.show_member = this.members.length;
+      console.log(this.show_member);
       console.log(this.members.length);   
       
   },
@@ -164,6 +206,12 @@ showConfirm(DeleteId) {
   membersProfile(id){
     this.communityProfile(id);
   }
+  profileImage(id){
+    this.communityProfile(id);
+  }
+  myImage(id){
+    this.communityProfile(id);
+  }
  communityList(id){
      this.communityServices.getCommunityPost(id).subscribe (users => {
       this.users = users.result.info.lists.data;
@@ -175,34 +223,6 @@ showConfirm(DeleteId) {
     this.communityServices.showErrorToast(err);
   })
    }
-  //    doInfinite(infiniteScroll) {
-  //   setTimeout(() => {      
-  //     if(this.nextPageURL!=null && this.nextPageURL!='')
-  //     {
-  //      this.newsscroll();
-  //     }
-  //     else{
-  //       infiniteScroll.enable(false);
-  //     }
-  //     infiniteScroll.complete();
-  //   }, 500);
-  // }
-  // newsscroll()
-  // {
-  //    this.communityServices.eventsscrolls(this.nextPageURL).subscribe(
-  //    (eventsscroll) => {
-  //     this.eventScrollLists=eventsscroll.result.info.data;
-  //     for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
-  //       this.users.push(this.eventScrollLists[i]);
-  //       }
-      
-  //      this.nextPageURL=eventsscroll.result.info.lists.next_page_url;     
-  //   },
-  //   err =>{
-   
-  //   this.communityServices.showErrorToast(err);
-  // });
-  // }
  
   addLikes(id){
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
@@ -241,9 +261,10 @@ showConfirm(DeleteId) {
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
      this.communityServices.sendPosts(id1,this.comment).subscribe(datas =>{
-     this.showToast(datas.result);
+     this.showToast(datas.result.info.message);
      this.comment="";
      this.communityList(this.community_id);
+     this.showblock=null;
      },
      err =>{
     
@@ -255,11 +276,32 @@ showConfirm(DeleteId) {
    }
      
   }
+  //  sendReply(comments_id,profile_id){
+  //    console.log("comment" + comments_id + profile_id);
+  //   if(this.comments != ""){
+
+  //   let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+  //   loader.present();
+  //    this.communityServices.sendReply(comments_id,profile_id,this.comments).subscribe(datas =>{
+  //    this.showToast(datas.result.info.message);
+  //    this.comments="";
+  //    this.communityList(this.community_id);
+  //    },
+  //    err =>{
+    
+  //   this.communityServices.showErrorToast(err);
+  // })
+  //    loader.dismiss();
+  //  }else{
+  //    this.showToast("Enter Comments and Post");
+  //  }
+     
+  // }
 
   postCommunity(id){
      let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
      loader.present();
-     this.communityServices.postCommunity(id,this.base64Image,this.videoUrl,this.post).subscribe(datas =>{
+     this.communityServices.postCommunity(id,this.base64Image,this.videoUrl,this.post,this.link).subscribe(datas =>{
      this.showToast(datas.result);
      this.communityList(id);
      this.post="";

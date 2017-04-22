@@ -35,26 +35,41 @@ user_dob:any;
 updateData:any;
 token:any;
 
+  my_location:any;
+
   constructor(public storage:Storage,public loadingCtrl: LoadingController,public formBuilder:FormBuilder,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
 
       this.profileData = navParams.get("profileData");
       
       this.avatar = this.profileData.avatar;
+
+      this.storage.ready().then(() => {
+      this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;
       this.base64Image = this.imageURL+this.profileData.avatar;
+        });
+      });
       
-      this.user_dob = this.getDate(this.profileData.dob);
+      
+      this.user_dob = this.profileData.dob;
 
       this.user_type = this.profileData.user_type;
+      if(this.user_type == 'sponsor'){
+      this.my_location = this.profileData.locationName;  
+    }else{
+      this.user_type = "Elder";
+      this.my_location = this.profileData.address;
+    }
+      
       // this.gender = this.profileData.gender;
       this.edit_profile_Form = formBuilder.group({
         name: [this.profileData.name,Validators.compose([Validators.required])],
         designation: [{value:this.profileData.designation,disabled: true},Validators.compose([Validators.minLength(3), Validators.required])],
         gender: [this.profileData.gender,Validators.compose([Validators.required])],
         mobile_number: [this.profileData.mobile,Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.required])],
-        location: [{value:this.profileData.locationName,disabled:false},Validators.compose([Validators.required])],
+        location: [{value:this.my_location,disabled:false},Validators.compose([Validators.required])],
         // dob: ['',Validators.compose([Validators.required])],
         email: [{value:this.profileData.email,disabled:true},Validators.compose([Validators.minLength(6), Validators.required])],
-        user_type: [{value:this.profileData.user_type,disabled:true},Validators.compose([Validators.required])]        
+        user_type: [{value:this.user_type,disabled:true},Validators.compose([Validators.required])]        
     });
      
    

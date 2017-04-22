@@ -2,7 +2,7 @@ import { Component, ViewChild} from '@angular/core';
 
 import { Platform, MenuController, Nav, AlertController } from 'ionic-angular';
 
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { StatusBar, Splashscreen, Push} from 'ionic-native';
 
 // import the Menu's pages
 import { LoginPage } from '../pages/login/login';
@@ -31,6 +31,9 @@ import { Subscription }   from 'rxjs/Subscription';
 
 import { Storage } from '@ionic/storage';
 
+// import {ModalContentPage} from '../pages/modal-page/modal-page';
+
+
 @Component({//selector:'my-theme',
   templateUrl: 'app.html'
 
@@ -38,7 +41,8 @@ import { Storage } from '@ionic/storage';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  user_id:any;
+  user_id:any='';
+  reg_id:any;
 
   // make HelloIonicPage the root (or first) page
 
@@ -46,9 +50,14 @@ export class MyApp {
 
   user_logged = '<no user announced>';
   subscription: Subscription;
+<<<<<<< HEAD
 //----------------------------------//
 
   rootPage: any =  JobboardPage;
+=======
+//--------------------------------//
+  rootPage: any;
+>>>>>>> 49563afdec4d4a96c4b4b7d8e6495c06a2a1012f
 
   pages: Array<{title: string, component: any}>;
 
@@ -60,8 +69,17 @@ export class MyApp {
     public storage:Storage
   ) {
     this.storage.ready().then(() => {
-    storage.get('id').then((id) => { this.user_id=id; })
-    
+    storage.get('id').then((id) => { this.user_id=id;
+   
+    if(this.user_id!='' && this.user_id != null)
+     {
+        this.rootPage=DashboardPage;
+     }
+     else
+     {
+      this.rootPage = LoginPage;
+     }
+     })
    }); 
 
 // set our app's pages on user based
@@ -97,6 +115,10 @@ export class MyApp {
                           );  
     
     this.initializeApp();
+
+    platform.ready().then(() => {
+      this.initPushNotification();
+    });
     
   }
 
@@ -113,7 +135,7 @@ export class MyApp {
         }else{
                 let confirmAlert = this.alertCtrl.create({
                 title: 'Log Out',
-                subTitle: "Are you sure to Logout",
+                subTitle: "Are you sure to close app",
                 buttons: [{
                   text: 'NO',
                   handler: () => {
@@ -137,6 +159,65 @@ export class MyApp {
 
 
       });
+    });
+  }
+
+  initPushNotification()
+  {
+    if (!this.platform.is('cordova')) {
+      console.warn("Push notifications not initialized. Cordova is not available - Run in physical device");
+      return;
+    }
+    
+    let push = Push.init({
+      android: {
+        senderID: "604025131571"
+      },
+      ios: {
+        alert: "true",
+        badge: false,
+        sound: "true"
+      },
+      windows: {}
+    });
+
+    push.on('registration', (data) => {
+      console.log("device Reg ID ->", data.registrationId);
+      this.reg_id = data.registrationId ;
+      this.userLogin.setDeviceID(this.reg_id);
+      //TODO - send device token to server
+    });
+    push.on('notification', (data) => {
+      console.log('message', data.message);
+      console.log('sound',data.sound);
+      let self = this;
+      //if user using app and push notification comes
+      if (data.additionalData.foreground) {
+        // if application open, show popup
+        let confirmAlert = this.alertCtrl.create({
+          title: 'New Notification',
+          message: data.message,
+          buttons: [{
+            text: 'Ignore',
+            role: 'cancel'
+          }, {
+            text: 'View',
+            handler: () => {
+              //TODO: Your logic here
+              self.nav.push(MessagesPage, {message: data.message});
+            }
+          }]
+        });
+        confirmAlert.present();
+      } else {
+        //if user NOT using app and push notification comes
+        //TODO: Your logic on click of push notification directly
+        self.nav.push(MessagesPage, {message: data.message});
+        console.log("Push notification clicked");
+      }
+    });
+    push.on('error', (e) => {
+      console.log(e.message);
     });
   }
 

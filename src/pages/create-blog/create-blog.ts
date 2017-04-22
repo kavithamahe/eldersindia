@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { BlogListService } from '../../providers/blog-list-service';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
-
+import { BlogsPage } from '../../pages/blogs/blogs';
 /*
   Generated class for the CreateBlog page.
 
@@ -22,17 +23,14 @@ token:string;
 imageUrl:string;
 blogObject:any;
 categoriesList:any;
-
-category:any;
-title:any;
 highlights:any;
-description:any;
 tags:any=[];
 allowComments:any;
 items:any;
 tagsModel:any=[];
-  constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
-      this.tags = ['Pizza', 'Pasta', 'Parmesan'];
+blogForm: FormGroup;
+submitAttempt: boolean = false;
+  constructor(public formBuilder: FormBuilder,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
@@ -40,6 +38,11 @@ tagsModel:any=[];
       this.getBlogCategories();
       })
     });
+    this.blogForm = formBuilder.group({
+        title: ['', Validators.compose([Validators.required])],
+        category:['', Validators.compose([Validators.required])],
+        description: ['', Validators.compose([Validators.required])]
+         });
   }
 
   public dashboardPage()
@@ -64,17 +67,59 @@ tagsModel:any=[];
       }
     );
   }
-  public createBlog()
+  getTagsList($event)
   {
+
+    let tagsInput=$event.target.value;
+    if(tagsInput!='')
+    {
+    this.blogListService.getTagsList(tagsInput).subscribe(
+     (getTagsList) => {
+       this.tags=[];
+       for (let i = 0; i < Object.keys(getTagsList).length; i++) {
+        this.tags.push(getTagsList[i].name);
+       
+        }         
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+       // this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
+    }
+  }
+  public createBlog()
+  { 
+    if(!this.blogForm.valid){
+      this.submitAttempt = true;
+    }else{
+      this.submitAttempt = false;
+
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    console.log(this.tagsModel);
-    this.blogObject={ "category":this.category,"allow_comment":this.allowComments,"title":this.title,"highlights":this.highlights,
-        "description":this.description,"featured_image":"","banner_image":"","tags[0][id]":"2",
-        "tags[0][name]":"Healthcare","tags[1][name]":"hai"};
+
+    let tagsObj=[];
+    if(this.tagsModel.length>0)
+    {     
+      for(let j=0;j<this.tagsModel.length;j++)
+      {
+        tagsObj.push({"name":this.tagsModel[j]})
+      }
+    }
+    
+    this.blogObject={ "category":this.blogForm.value.category,"allow_comment":this.allowComments,"title":this.blogForm.value.title,"highlights":this.highlights,
+        "description":this.blogForm.value.description,"featured_image":"","banner_image":"","tags":tagsObj,
+        };
         
     this.blogListService.createBlog(this.blogObject).subscribe(
      (createBlog) => {
+      this.navCtrl.setRoot(BlogsPage);
       this.showToaster(createBlog.result);
       //console.log(createBlog.result);
     },
@@ -90,6 +135,7 @@ tagsModel:any=[];
       }
     );
     loader.dismiss();
+   }
   }
   public showToaster(message)
   {

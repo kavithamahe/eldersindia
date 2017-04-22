@@ -52,8 +52,13 @@
 			  <ion-col>
 				  <p style="text-align:left;" class="mem-name">{{communityProfileData?.name}}</p>
 			  </ion-col>
+			  <ion-col>
+				  <button ion-button icon-only clear (click)="profileSetting(communityProfileData.id)">
+		          			<i class="fa fa-user" aria-hidden="true"></i>
+				  </button>
+			  </ion-col>
 		  </ion-row>
-		 
+
 
 		    <hr/>
 		  
@@ -118,32 +123,30 @@
 				</div>
 <hr/>
  	 		<ion-list *ngFor="let community of communityProfile; let i=index">
-				<div>
-				<ion-item>
+
+ 			<div>
+ 				<ion-item>
 	      			<ion-row>
 	      				<ion-col>
 	        				<ion-avatar item-left>
-	          					<img [src]="imageUrl+community?.community_logo" 
+		          				<img [src]="imageUrl+community?.community_logo" 
 		          					[hidden]="!community?.community_logo"
-		          					(click)="goBackToCommunity()">
-	        				</ion-avatar>
-	        			</ion-col>
+		          					(click)="goBackToCommunity(community.com_id)">
+		        			</ion-avatar>
+	        			</ion-col><br>
 	        			<ion-col width-20>
-			          		<h2 (click)="goBackToCommunity()" >{{community.community_name}}</h2>
-		          				<p class="time-datem"><i class="fa fa-calendar-o"></i> &nbsp; {{community.created_at}}</p>
-			          		
+		        			<ion-card-content>
+			          			<h2 (click)="goBackToCommunity(community.com_id)">{{community.community_name}}</h2>
+			          			<p class="time-datem"><i class="fa fa-calendar-o"></i> &nbsp; {{community.created_at}}</p>
+			          		</ion-card-content>
 						</ion-col>
 						<ion-col offset-50>
-		        		<!-- <button ion-button color="dark" clear (click)="itemDetails()">
-		          			<ion-icon  item-left name="arrow-dropdown"></ion-icon>
-		          		</button>
-	          		<div *ngIf(itemComments)>
-	          			<button  ion-button full color="light" >Block</button>
-	          			<button  ion-button full color="light" >Report</button>
-	          		</div> -->
+			  
 	          			</ion-col>
 	       			</ion-row>
 	    		</ion-item>
+
+	       	 		<div>
 				<ion-row>
 				<ion-col>
 			          	<p class="feed-post">{{community.post_message}}</p>
@@ -161,62 +164,51 @@
 		        			<ion-col width-15>
 			          			<button class="hover but-colo" ion-button outline 
 			          			(click)="addLikes(community.id)" color="light">
-			            			<i class="fa fa-heart-o likecolor"></i> &nbsp; <p class="num-of">{{community.likes}}</p>
+			            			{{community.likes.emoji}} &nbsp; <p class="num-of">{{community.likes.emoji_name}}</p>
 			          			</button>
 		        			</ion-col>
-		        		<!-- <ion-col>
-		          			<button class="hover" ion-button outline color="light">
-		            			<ion-icon name="share"></ion-icon>
-		          			</button>
-		        		</ion-col> -->
-		        			<ion-col width-80>
+		        	
+		        			<ion-col>
 			          			<button ion-button class="comment but-colo" color="dark" clear 
-			          			(click)="addDetails(i)">
-			          				<span class="points-count">{{community.comment_count}}</span>&nbsp;<p class="comm-cl">Comments</p>
+			          			(click)="showComment(community)">
+			          				<span style="color:red; font-size:13px;">{{community.comment_count}}</span>&nbsp;<i class="fa fa-comments" aria-hidden="true"></i>
 			          			</button>
 		          			</ion-col>
+		          			<ion-col>
+				          		<button ion-button class="comment but-colo" color="dark" icon-only clear>&nbsp;
+				          		<i class="fa fa-pencil-square-o" aria-hidden="true" 
+				          		(click)="addDetails(i)"></i>
+				          		</button>
+			          		</ion-col>
 	      				</ion-row>
 						<hr/>
 	      				<div *ngIf="i==showblock">
-	      					<ion-item>
-								<ion-row class="send" *ngFor="let comment of community.comments" class="comm-posted">
-	      							<ion-avatar>
-	      								<img [src]="imageUrl+comment.profile_image" 
-	      								[hidden]="!comment.profile_image">
-	      							</ion-avatar>
-									<ion-row>
-									<button ion-button clear>reply</button>
-								</ion-row>
-	      							<ion-row text-wrap style="padding-top:0px;"><p class="cmmpost">{{comment.comments}}</p></ion-row>
-										<ion-row>
-		      							<button  ion-button (click)="showConfirm(comment.comments_id)" color="dark" clear>
-		      								<i class="fa fa-times-circle" aria-hidden="true"></i>
-		      							</button>
-											</ion-row>
-	      						</ion-row>
-							</ion-item>
-								<br>
-	      						<hr/>
-	      
-	  						<!--<button  ion-button (click)="addDetails(i)" color="light" full>Cancel</button>-->
+	      					
+							
+	      				<ion-item>
+				   			<ion-textarea [(ngModel)]="comment" placeholder="Enter Comments" style=" margin:0px !important;">
+				   		    </ion-textarea>
+						</ion-item>
+							<div class="send-req">
+							<button ion-button (click)="sendPost(community.id)" class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
+							</button>
 
-	      				<ion-row>
-					<ion-col style="position:relative;">
-	      				
-						   			<ion-textarea class="text-commands"  [(ngModel)]="comment" style=" margin:0px !important;"></ion-textarea>
-						 	<button class="post-icons" ion-button (click)="sendPost(community.id)" color="secondary"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
-	  								</button>
-								</ion-col>
-	  			</ion-row>					
-				</div>
-			</div>
+							</div>
+  							
+	      			</div>
+	      		</div>
+	      	</div>
+	      </ion-list>
+					
+
 		</ion-list>
-	</ion-list>
+
     	
 	<ion-list *ngSwitchCase="'communities'">
 		<ion-item style="position:relative;" *ngFor="let community of getCommunityMembers">
 			<div class="community-img">
-		 		 <img (click)="goBackToCommunity()" style="width:100%; height:200px;" [src]="imageUrl+community?.banner" 
+		 		 <img (click)="detailCommunity()" style="width:100%; height:200px;" 
+		 		 [src]="imageUrl+community?.banner" 	 		 
 		 		 [hidden]="!community?.banner" />
 				 <div class="label-opc">
 			   <ion-item text-wrap style="text-align:left !important;"  (click)="goBackToCommunity()" 
@@ -224,7 +216,7 @@
 			   </div>
 		        <!--<ion-row>
                 		<ion-col style="padding-left:0px !important;">
-		                  <p class="tid-cd"(click)="goBackToCommunity()" 
+		                  <p class="tid-cd"(click)="detailCommunity()" 
 		                  [hidden]="!community.community_name">{{community.community_name}}</p>
 		                </ion-col>
               		</ion-row> -->

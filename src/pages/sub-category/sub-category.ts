@@ -72,7 +72,6 @@ loadLocations(){
   this.providerService.webServiceCall(`getLocations`,"")
           .subscribe(data =>{
                             this.locations = data.result.info;
-                            
                             console.log("Location data : "+this.locations);
                             },
                       err =>{                       
