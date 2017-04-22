@@ -26,7 +26,8 @@
    <ion-label class="liste-edit">Relationship</ion-label>
         <ion-item>
          
-            <ion-select class="select-brd"  [(ngModel)]="elder_relation"   [ngModelOptions]="{standalone: true}">
+            <ion-select class="select-brd"  [(ngModel)]="elder_relation"   
+            [ngModelOptions]="{standalone: true}">
                 <ion-option  *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
             </ion-select>
         </ion-item>
@@ -36,7 +37,7 @@
             <ion-input  type="text" formControlName="elder_name"
             [class.invalid]="!authForm.controls.elder_name.valid && (authForm.controls.elder_name.dirty)" value={{elder_name}}>
             </ion-input>
-           </ion-item>
+      </ion-item>
           <small *ngIf="!authForm.controls.elder_name.valid  && (authForm.controls.elder_name.dirty)">
                   <p class="valid err-reds">Please enter name</p>
           </small> 
@@ -111,7 +112,7 @@
                  Add More
               </button>
             </ion-col>
-            <ion-col width-50>
+            <ion-col *ngIf="i != 0" width-50>
               <button class="rem-btn" (click)="removeEmergency()" ion-button icon-left clear>
                 <ion-icon name="ios-close"></ion-icon>Remove
               </button>
@@ -120,8 +121,8 @@
         </ion-col>
     
     <ion-item>
-	 <ion-label class="liste-edit" style="text-align:left !important;"></ion-label>
-    <ion-checkbox [(ngModel)]="job_interest" [ngModelOptions]="{standalone: true}"> Interested in Elder job opportunities?</ion-checkbox>
+	 <ion-label class="liste-edit" style="text-align:left !important;">Interested in Elder job opportunities?</ion-label>
+    <ion-checkbox [(ngModel)]="job_interest" [ngModelOptions]="{standalone: true}"> </ion-checkbox>
     </ion-item>
 
  
@@ -188,7 +189,7 @@
             <ion-icon name="ios-add"></ion-icon>Add More
           </button>
         </ion-col>
-        <ion-col width-50>
+        <ion-col *ngIf="i != 0" width-50>
           <button class="rem-btn" (click)="removeExperience()" ion-button icon-left clear>
             <ion-icon name="ios-close"></ion-icon>Remove
           </button>
@@ -209,7 +210,7 @@
 		  <hr/>
           <ion-card  *ngFor="let item of education_list; let i=index" >
           
-              <button style="background:none;" (click)="removeEducation(i)" ion-button icon-only align-right>
+              <button style="background:none;" *ngIf="i != 0" (click)="removeEducation(i)" ion-button icon-only align-right>
                 <ion-icon name="ios-close" style="color:#333;"></ion-icon>
               </button>
               <ion-label class="liste-edit">Graduation</ion-label>
