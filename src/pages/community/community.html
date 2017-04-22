@@ -65,6 +65,10 @@
 				<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
 				</ion-textarea>
 			</div>
+			<div style="padding:0px !important;">
+				<ion-textarea [(ngModel)]="link" type="text" placeholder="What's on link">
+				</ion-textarea>
+			</div>
 		    <div style="padding:0px !important;">
 		    	<ion-row>
 					<ion-col>
@@ -74,11 +78,11 @@
 						<img [src]="base64Image" *ngIf="base64Image" />
 					</ion-col>
 				</ion-row> 
-				<div>
+					<!-- <div>
 		
 				      <input type="file" multiple (change)="onChange($event, showFileNames)" />
 				      <input #showFileNames />
-				    </div>		    		
+				    </div> -->		    		
 					<ion-row>
 						<ion-col>
 							<button ion-button (click)="addVideos()" icon-only medium class="video">
@@ -86,16 +90,26 @@
 							</button>
 						</ion-col>
 					</ion-row>
-					<ion-row *ngIf(addVideo)>
-						<ion-col>
+					<div *ngIf(addVideo)>
+						<ion-row>
+							<ion-col>
+								<div>
+									<ion-item  class="video" >
+										<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
+										</ion-input>
+									</ion-item>
+								</div>
+							</ion-col>
+
+						</ion-row>
+						<ion-row>
 							<div>
-								<ion-item  class="video" >
-									<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
-									</ion-input>
+								<ion-item>
+									<p>( Youtube,Dailymotion,Vimeo,Wine)</p>
 								</ion-item>
 							</div>
-						</ion-col>
-					</ion-row>
+						</ion-row>
+					</div>
 		   		</div>
 					
 		    <div style="padding:0px !important;">
@@ -150,6 +164,18 @@
 					<iframe [src]="cleanURL(user?.post_video)" frameborder="0">
 	         		</iframe>
 	         	</ion-card-content>
+	         	
+	         	<ion-card-content>
+		          	<img  [src]="user.metalink_image" (click)="openUrl(user.metalink_url)" 
+		          	[hidden]="!user?.metalink_image">
+	       		</ion-card-content>
+	       		
+	         	<ion-card-content class="video-updates" [hidden]="!user?.metalink_title">
+					<p (click)="openUrl(user.metalink_url)">{{user.metalink_title}}</p>
+	         	</ion-card-content>
+	         	<ion-card-content class="video-updates" [hidden]="!user?.metalink_description">
+					<p (click)="openUrl(user.metalink_url)">{{user.metalink_description}}</p>
+	         	</ion-card-content>
 	       	 
 	       	<div>
 	      		<ion-row>
@@ -168,17 +194,15 @@
 	          			</button>
 	          		</ion-col>
 	          		<ion-col>
-	          		<button ion-button class="comment but-colo" color="dark" icon-only clear>
-	          		<i class="fa fa-pencil-square-o" aria-hidden="true" (click)="addDetails(i)">&nbsp;
-	          		</i>
-	          		</button>
+		          		<button ion-button class="comment but-colo" color="dark" icon-only clear>
+		          		<i class="fa fa-pencil-square-o" aria-hidden="true" (click)="addDetails(i)">&nbsp;
+		          		</i>
+		          		</button>
 	          		</ion-col>
 	      		</ion-row>
 	      			<div *ngIf="i==showblock">
-	      				<ion-label class="liste-edit" style="text-align:left !important; 
-	      				padding-left:5px !important;">Enter Comments...</ion-label>
 	      				<ion-item>
-				   			<ion-textarea [(ngModel)]="comment" style=" margin:0px !important;">
+				   			<ion-textarea [(ngModel)]="comment" placeholder="Enter Comments" style=" margin:0px !important;">
 				   		    </ion-textarea>
 						</ion-item>
 						<div class="send-req">

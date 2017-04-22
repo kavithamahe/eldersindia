@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ModalController, NavController, NavParams,AlertController,LoadingController,ToastController } from 'ionic-angular';
+import { ModalController, NavController, NavParams,AlertController,LoadingController,Platform,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
 
@@ -9,6 +9,8 @@ import { CommunitycommentsPage } from '../communitycomments/communitycomments';
 import { CommunityprofilePage } from '../communityprofile/communityprofile';
 import { CommunityServices } from '../../providers/community-services';
 import { DomSanitizer } from '@angular/platform-browser/';
+import { InAppBrowser } from 'ionic-native';
+
 
 
 @Component({
@@ -29,6 +31,7 @@ export class CommunityPage {
     comments:any;
     addVideo:any;
     post:any;
+    link:any;
     videoUrl:any;
     users=[];
     user:any;
@@ -43,7 +46,7 @@ export class CommunityPage {
     eventScrollLists:any;
     
     
-  constructor(public modal: ModalController, public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+  constructor(public platform: Platform,public modal: ModalController, public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
     this.nav=nav;
 
     this.storage.ready().then(() => {
@@ -81,6 +84,13 @@ showConfirm(DeleteId) {
       ]
     });
     confirm.present();
+  }
+   openUrl(metalink_url) {
+console.log("URL is ",metalink_url);
+        this.platform.ready().then(() => {
+            let browser = new InAppBrowser(metalink_url,'_blank');
+
+        });
   }
 
   accessGallery(){
@@ -278,7 +288,7 @@ showConfirm(DeleteId) {
   postCommunity(id){
      let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
      loader.present();
-     this.communityServices.postCommunity(id,this.base64Image,this.videoUrl,this.post).subscribe(datas =>{
+     this.communityServices.postCommunity(id,this.base64Image,this.videoUrl,this.post,this.link).subscribe(datas =>{
      this.showToast(datas.result);
      this.communityList(id);
      this.post="";
