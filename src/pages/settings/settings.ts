@@ -84,15 +84,16 @@ export class SettingsPage {
   	let requestId = {"user_id":this.user_uid};
   	this.serviceProvider.webServiceCall('getPrivacy',requestId)
   	.subscribe(data=>{
+      console.log("JSON.parse('true')",JSON.parse("true"));
   		let [info] = data.result;
   		this.user_id = info.id;
   		this.user_uid = info.uid;
-  		this.privacy_name = info.privacy_name;
-  		this.privacy_email = info.privacy_email;
-  		this.privacy_mobile = info.privacy_mobile;
-  		this.privacy_location = info.privacy_location;
-  		this.privacy_birthday = info.privacy_birthday;
-  		this.privacy_avatar = info.privacy_avatar;
+  		this.privacy_name = JSON.parse(info.privacy_name);
+  		this.privacy_email = JSON.parse(info.privacy_email);
+  		this.privacy_mobile = JSON.parse(info.privacy_mobile);
+  		this.privacy_location = JSON.parse(info.privacy_location);
+  		this.privacy_birthday = JSON.parse(info.privacy_birthday);
+  		this.privacy_avatar = JSON.parse(info.privacy_avatar);
   		this.status = info.status;
   	},
   	error=>{
@@ -112,12 +113,12 @@ export class SettingsPage {
   	let data = {"info":{
   		"id":this.user_id,
   		"uid":this.user_uid,
-  		"privacy_name":String(this.privacy_name),
-  		"privacy_email":String(this.privacy_email),
-  		"privacy_mobile":String(this.privacy_mobile),
-  		"privacy_location":String(this.privacy_location),
-  		"privacy_birthday":String(this.privacy_birthday),
-  		"privacy_avatar":String(this.privacy_avatar),
+  		"privacy_name":this.privacy_name,
+  		"privacy_email":this.privacy_email,
+  		"privacy_mobile":this.privacy_mobile,
+  		"privacy_location":this.privacy_location,
+  		"privacy_birthday":this.privacy_birthday,
+  		"privacy_avatar":this.privacy_avatar,
   		"status":this.status}}
   	this.serviceProvider.webServiceCall('setPrivacy',data)
   	.subscribe(data=>{

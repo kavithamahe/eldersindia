@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavParams, ViewController,LoadingController} from 'ionic-angular';
+import { NavParams, ViewController,LoadingController,ModalController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ServiceProvider } from '../../providers/service-provider';
+import { TermsModalPage } from '../../pages/terms-modal/terms-modal';
 
 import { Storage } from '@ionic/storage';
 
@@ -14,7 +15,8 @@ import { Storage } from '@ionic/storage';
 */
 @Component({
   selector: 'page-modal-page',
-  templateUrl: 'modal-page.html'
+  templateUrl: 'modal-page.html',
+  providers:[TermsModalPage]
 })
 export class ModalContentPage {
 
@@ -26,10 +28,12 @@ export class ModalContentPage {
   dependent:string = "";
   elderId:any;
 
+  terms:boolean = false;
+  checkTerms:any= false;
 
-  constructor(public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
+  constructor(public modalCtrl: ModalController, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
-     console.log(params.get("dependentList"));
+     console.log("modal content page",params.get("dependentList"));
      let loading = this.loadingCtrl.create({content: 'Please wait...!'});
      loading.present();
      this.dependentLists = params.get("dependentList");
@@ -39,7 +43,6 @@ export class ModalContentPage {
         time: ['',Validators.compose([Validators.required])],
         contact: ['',Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.pattern('[0-9]*'), Validators.required])],
         dependents: ['',Validators.compose([Validators.required])]
-        
     });
      loading.dismiss();
      // this.userType = "elder";
@@ -50,10 +53,27 @@ export class ModalContentPage {
       }
    }
 
-  submit() {
+   termsChanged(){
+     console.log(this.terms);
+     if(this.terms == true){
+       this.checkTerms = false;
+     }else{
+       this.checkTerms = true;
+     }
+   }
 
-    if(!this.modalForm.valid){
+   openTerms(){
+     let termsModal = this.modalCtrl.create(TermsModalPage);
+     termsModal.present();
+   }
+
+  submit() {
+    
+    if(!this.modalForm.valid || (this.terms == false)){
       this.submitAttempt = true;
+          if(this.terms == false){
+            this.checkTerms = true;
+          }
     }else{
       this.submitAttempt = false;
       
@@ -70,6 +90,6 @@ export class ModalContentPage {
   }
 
   dismiss(){
-    this.viewCtrl.dismiss("dismiss");
+      this.viewCtrl.dismiss("dismiss");
   }
 }

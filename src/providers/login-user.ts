@@ -38,7 +38,8 @@ rootUrl:any;
   loginload(credentials) {
    let _request= {"email": credentials.email,
   "password": credentials.password,
-  "device_id": this.device_id,"app":""}
+  "device_token": this.device_id,"app":""}
+  console.log("request data sent to login.",_request);
     return this.http.post(this.rootUrl+'login',_request,this.headers)
       .map(res => res.json());
  

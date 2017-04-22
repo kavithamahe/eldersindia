@@ -42,6 +42,13 @@ export class CommunityServices {
    }); 
   }
 
+  fileUpload(id,file){
+ let formdata = new FormData()
+ let posts:{community_id:string,image:File,videourl:string,message:string} = { community_id:id, image:file,videourl:"",message:"" }
+     return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,posts,this.options)
+      .map(res =>res.json());
+  }
+
   showToast(messageData){
     let toast = this.toastCtrl.create({
         message: messageData,

@@ -23,6 +23,8 @@ submitAttempt:any;
 password_submit:any;
 nav:any;
 change_password_Form: FormGroup;
+mytype:string ="password";
+show_password:boolean = false;
 
   constructor(public formBuilder:FormBuilder,public service:ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
   	this.password_submit = false;
@@ -39,6 +41,17 @@ change_password_Form: FormGroup;
      console.log("re enter password is focused..!");
      this.password_submit = false;
    }
+
+   showPassword(){
+     console.log("show password is clicked..",this.show_password);
+     if(this.show_password == false){
+       this.mytype = "password";
+     }else{
+       this.mytype = "text";
+     }
+     console.log("my type is: ",this.mytype);
+   }
+
 
   submit() {
     if(this.change_password_Form.valid){
@@ -73,7 +86,6 @@ change_password_Form: FormGroup;
   dismiss(){
   	this.password_submit = false;
   	this.submitAttempt = false;
-    // this.nav.popToRoot();
     this.dashboardPage();
     console.log("change password is attempting to close");
   }

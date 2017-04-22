@@ -67,6 +67,19 @@ export class CommunityPage {
 
 }
 
+files:any;
+
+onChange(event: any, input: any ,id) {
+    this.files = [].slice.call(event.target.files);
+
+    input.value = this.files.map(f => f.name).join(', ');
+
+    this.communityServices.fileUpload(id,this.files[0]).subscribe(data=>{
+      console.log(data);
+    })
+  }
+
+
 showConfirm(DeleteId) {
     let confirm = this.alertCtrl.create({
      subTitle: 'Confirm Deletion?',

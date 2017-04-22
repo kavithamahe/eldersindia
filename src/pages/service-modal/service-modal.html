@@ -1,0 +1,88 @@
+<!--
+  Generated template for the ServiceModal page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div class="ion-modal modal-popups">
+<ion-header>
+<ion-toolbar class="hei-head">
+    <ion-title color="primary" class="tittles-md">
+      {{title}}
+    </ion-title>
+    <ion-buttons start item-right class="close-iconss">
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon ios="ios-close-circle-outline" md="md-close-circle" ></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+			<div *ngIf(showServiceOffered)>
+          <ion-card *ngFor = "let service of vendorList.serviceOffered">
+            <ion-list *ngFor = "let category_list of service.category_lists">
+              <button class="sub" ion-item (click)="show_sub_category()">
+                <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
+                {{category_list.category}}  
+              </button >
+              <ion-item *ngIf(sub_category)>
+                <ion-card *ngFor="let subcategory_list of category_list.service_sub_category_lists; let i=index " >
+                <ion-list (click)="showService(i)">
+                  <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
+                    {{subcategory_list.subcategory}}
+                </ion-list>
+                    <ion-item *ngIf= "i === show_service">
+                      <ion-card *ngFor="let services of subcategory_list.services" >
+                      <ion-list>
+                        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
+                          {{services.service}}
+                      </ion-list>
+                      </ion-card> 
+                    </ion-item>
+              </ion-card> 
+              </ion-item>
+              
+            </ion-list>
+          </ion-card>
+
+        <ion-card *ngIf="!vendorList.serviceOffered">
+          <ion-card-content>
+            No Records Found..!
+          </ion-card-content>
+        </ion-card> 
+        </div>
+
+        <div *ngIf(showContactDetails)>
+	        <ion-card>
+				<ion-item>
+				<i class="fa fa-map-marker" aria-hidden="true"></i> 
+				{{vendorList?.vendorDetails?.address}}
+				</ion-item>
+			    
+			    <ion-item>
+			    <i class="fa fa-envelope" aria-hidden="true"></i> 
+			    {{vendorList?.vendorDetails?.email}}
+			    </ion-item>
+
+			    <ion-item>
+			    <i class="fa fa-user" aria-hidden="true"></i> 
+			    {{vendorList?.vendorDetails?.contact_name}}
+			    </ion-item>
+
+			    <ion-item>
+			    <i class="fa fa-phone" aria-hidden="true"></i> 
+			    {{vendorList?.vendorDetails?.contact_number}}
+			    </ion-item>
+			    
+	      	</ion-card>
+
+		   	<ion-card *ngIf(!vendorList?.vendorDetails?.address)>
+				<ion-item>"No Address Deatails To Display"</ion-item>		  
+	      	</ion-card>
+      	</div>
+
+</ion-content>
+</div>

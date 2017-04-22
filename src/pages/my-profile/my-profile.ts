@@ -28,12 +28,16 @@ user_dob:any;
   constructor(public storage:Storage,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {  }
 
 
-  loadMyProfile(){
+  loadMyProfile(token){
+    this.user_type = "";
     this.providerService.webServiceCall(`myaccount`,"")
   .subscribe(data =>{
     this.profileData = data.result.info;
     this.gender = this.profileData.gender;
     this.user_type = data.result.info.user_type;
+    if(this.user_type != "sponsor"){
+      this.user_type = "Elder";
+    }
     this.user_dob= this.profileData.dob;//this.getDate(this.profileData.dob);
   },
   err=>{
@@ -60,7 +64,7 @@ user_dob:any;
     this.storage.ready().then(() => {
       this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;});
       this.storage.get('token').then((token) => { this.token=token; 
-      this.loadMyProfile();
+      this.loadMyProfile( this.token);
       })
     });
   }
