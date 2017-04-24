@@ -31,8 +31,7 @@
 					<div class="decoration hide-if-responsive"></div></div>
   		<div  *ngIf="userType == 'sponsor'">
 	  	
-	  
-			<ion-item>
+	  		<ion-item>
 				<ion-row *ngIf="!communityDetailData?.isJoined">
 		    		<ion-col>
 		    			<div>
@@ -194,12 +193,12 @@
 	          				&nbsp;<i class="fa fa-comments" aria-hidden="true"></i>
 	          			</button>
 	          		</ion-col>
-	          		<ion-col>
+	          		<!-- <ion-col>
 		          		<button ion-button class="comment but-colo" color="dark" icon-only clear>
 		          		<i class="fa fa-pencil-square-o" aria-hidden="true" (click)="addDetails(i)">&nbsp;
 		          		</i>
 		          		</button>
-	          		</ion-col>
+	          		</ion-col> -->
 	      		</ion-row>
 	      			<div *ngIf="i==showblock">
 	      				<ion-item>

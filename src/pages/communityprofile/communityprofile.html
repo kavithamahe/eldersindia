@@ -121,7 +121,7 @@
 		   				</ion-card-content>
 		 
 				</div>
-<hr/>
+	<hr/>
  	 		<ion-list *ngFor="let community of communityProfile; let i=index">
 
  			<div>
@@ -174,12 +174,12 @@
 			          				<span style="color:red; font-size:13px;">{{community.comment_count}}</span>&nbsp;<i class="fa fa-comments" aria-hidden="true"></i>
 			          			</button>
 		          			</ion-col>
-		          			<ion-col>
+		          			<!-- <ion-col>
 				          		<button ion-button class="comment but-colo" color="dark" icon-only clear>&nbsp;
 				          		<i class="fa fa-pencil-square-o" aria-hidden="true" 
 				          		(click)="addDetails(i)"></i>
 				          		</button>
-			          		</ion-col>
+			          		</ion-col> -->
 	      				</ion-row>
 						<hr/>
 	      				<div *ngIf="i==showblock">
@@ -190,9 +190,8 @@
 				   		    </ion-textarea>
 						</ion-item>
 							<div class="send-req">
-							<button ion-button (click)="sendPost(community.id)" class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
-							</button>
-
+								<button ion-button (click)="sendPost(community.id)" class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
+								</button>
 							</div>
   							
 	      			</div>

@@ -6,7 +6,7 @@
     </ion-title>
     <ion-buttons start item-right class="close-iconss">
       <button ion-button (click)="dismiss()">
-        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <span ion-text color="primary" showWhen="ios"></span>
         <ion-icon ios="ios-close-circle-outline" md="md-close-circle" ></ion-icon>
       </button>
     </ion-buttons>
@@ -23,7 +23,7 @@
      
           
           
-           <ion-label stacked class="label-lb" style="padding-bottom:10px;">Date</ion-label>
+           <ion-label stacked class="label-lb">Date</ion-label>
 		   <ion-item>
            <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" formControlName ="date"></ion-datetime>
           </ion-item>
@@ -33,7 +33,7 @@
 		
 
           
-            <ion-label stacked class="label-lb" style="padding-bottom:10px;">Time</ion-label>
+            <ion-label stacked class="label-lb">Time</ion-label>
 			<ion-item>
             <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" formControlName ="time" class="select-brd"></ion-datetime>
           </ion-item>
@@ -50,9 +50,9 @@
             </ion-item>
 		
           
-		     <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb" style=" margin-bottom:10px; padding-bottom:10px;">Select Dependent</ion-label>
+		     <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb">Select Dependent</ion-label>
 			 <ion-item *ngIf = "userType =='sponsor'">
-              <ion-select formControlName="dependents" class="select-brd">
+              <ion-select formControlName="dependents" class="select-brds">
               <ion-option *ngFor = "let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}}
               </ion-option>
             </ion-select>
@@ -60,10 +60,6 @@
 		  <ion-item *ngIf="!modalForm.controls.dependents.valid  && (modalForm.controls.dependents.dirty || submitAttempt)">
                 <p class="err-reds">Please select the dependents</p>
             </ion-item>
-          <!-- <ion-row>
-          <ion-col><button ion-button item-left small (click)="dismiss()" class="btn-defaults">close</button></ion-col>
-          <ion-col offset-33><button ion-button item-right small (click)="submit()" class="btn-primarys">Submit</button></ion-col>
-          </ion-row> -->
       </form>
             <ion-item>
               <!-- <ion-label (click)="openTerms()">I Agree With Terms and Conditions</ion-label> -->

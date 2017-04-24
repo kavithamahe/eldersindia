@@ -20,27 +20,12 @@
 	    	<ion-item>
 			<!--	<p class="cmmpost">{{comment.comments}}</p>-->
 				 <div class="message-container" [innerHTML]="comment.comments | emojis">
- </div>
+                 </div>
 				    <button ion-button clear (click)="reply(j)">reply</button>
 						<button ion-button item-right clear (click)="showComments(j)">show replies
 						</button>
-		    </ion-item>							
-		      	<button ion-button class="trash-icon" (click)="showConfirm(comment.comments_id)" 
-			      	color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
-		</ion-row>
-		<ion-row>
-			<div>
-			    <div *ngIf="j==Reply">
-					<ion-item>
-						<ion-textarea [(ngModel)]="reply_comment" style=" margin:0px !important;" placeholder="write a reply..">
-						</ion-textarea>
 					</ion-item>
-					<div class="send-req">
-						<button (click)="sendReply(comment.comments_id,post_profile_id)" ion-button class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
-						</button>
-					</div>
-			    </div>
-			    <div *ngIf="j==showReply">
+						 <div *ngIf="j==showReply">
 				    <ion-list *ngFor="let reply of comment.comment_reply; let i=index">
 				      	<ion-row>
 				      		<ion-avatar>
@@ -72,6 +57,23 @@
 			      		</div><hr>
 					</ion-list>
 				</div>
+		    </ion-item>							
+		      	<button ion-button class="trash-icon" (click)="showConfirm(comment.comments_id)" 
+			      	color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+		</ion-row>
+		<ion-row>
+			<div>
+			    <div *ngIf="j==Reply">
+					<ion-item>
+						<ion-textarea [(ngModel)]="reply_comment" style=" margin:0px !important;" placeholder="write a reply..">
+						</ion-textarea>
+					</ion-item>
+					<div class="send-req">
+						<button (click)="sendReply(comment.comments_id,post_profile_id)" ion-button class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
+						</button>
+					</div>
+			    </div>
+			   
 			</div>
 		</ion-row>
 	</ion-list>
