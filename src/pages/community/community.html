@@ -176,9 +176,9 @@
 	      		<ion-row>
 	        		<ion-col width-15>
 
-	          			<button class="hover but-colo" ion-button outline (click)="addLikes(user.id)">{{user.likes.emoji}} &nbsp; <p class="num-of">{{user.likes.emoji_name}}</p>
-
-	          			</button>
+	          			<!--<button class="hover but-colo" ion-button outline (click)="addLikes(user.id)">{{user.likes.emoji}} &nbsp; <p class="num-of">{{user.likes.emoji_name}}</p>
+	          			</button>-->
+	          			<p class="message-container" [innerHTML]="user.likes.emoji | emojis" (click)="emojiPicker(user.id)"></p>
 	        		</ion-col>
 	        		
 	        		<ion-col>

@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ModalController, NavController, NavParams,AlertController,LoadingController,Platform,ToastController } from 'ionic-angular';
+import { ModalController, NavController, NavParams,AlertController,LoadingController,Platform,ToastController,PopoverController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
 
@@ -8,6 +8,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CommunitycommentsPage } from '../communitycomments/communitycomments';
 import { CommunityprofilePage } from '../communityprofile/communityprofile';
 import { CommunityServices } from '../../providers/community-services';
+import { EmojiPickerPage } from '../../pages/emoji-picker/emoji-picker';
 import { DomSanitizer } from '@angular/platform-browser/';
 import { InAppBrowser } from 'ionic-native';
 
@@ -44,9 +45,9 @@ export class CommunityPage {
     community_id:any;
     nextPageURL:any='';
     eventScrollLists:any;
+    emojiId:number=0;
     
-    
-  constructor(public platform: Platform,public modal: ModalController, public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+  constructor(public platform: Platform,public modal: ModalController, public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices,public popoverCtrl: PopoverController ) {
     this.nav=nav;
 
     this.storage.ready().then(() => {
@@ -224,10 +225,11 @@ console.log("URL is ",metalink_url);
   })
    }
  
-  addLikes(id){
+  addLikes(likeObj){
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
-   this.communityServices.addLike(id).subscribe(data =>{
+
+   this.communityServices.addLike(likeObj).subscribe(data =>{
      this.showToast(data.result);
       this.communityList(this.community_id);
    },
@@ -305,6 +307,7 @@ console.log("URL is ",metalink_url);
      this.showToast(datas.result);
      this.communityList(id);
      this.post="";
+     this.link="";
      this.videoUrl="";
      this.base64Image="";
      this.showblock= null;
@@ -331,7 +334,45 @@ console.log("URL is ",metalink_url);
   {
     this.nav.setRoot(DashboardPage);
   }
-
+  emojiPicker(userId)
+   {
+    let  likeEmoji={type:'likeEmoji'};
+   let modal = this.popoverCtrl.create(EmojiPickerPage,likeEmoji);
+    modal.present();
+     modal.onDidDismiss(data => {
+      if(data!=null)
+      {
+        let emojiSymbol=data.emojiImage;
+        let name=emojiSymbol.replace(/[^a-z\d]+/gi, "");
+        if(emojiSymbol==':thumbsup:')
+        {
+          this.emojiId=1;
+        }
+        else if(emojiSymbol==':heart:')
+        {
+          this.emojiId=2;
+        }
+        else if(emojiSymbol==':laughing:')
+        {
+          this.emojiId=3;
+        }
+        else if(emojiSymbol==':wow:')
+        {
+          this.emojiId=4;
+        }
+        else if(emojiSymbol==':disappointed_relieved:')
+        {
+          this.emojiId=5;
+        }
+        else if(emojiSymbol==':rage:')
+        {
+          this.emojiId=6;
+        }
+        let likeObj={"id":userId,"emoji":emojiSymbol,"name":name,"emojiId":this.emojiId};
+        this.addLikes(likeObj);
+      }
+     })
+   }
   
   }
 

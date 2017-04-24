@@ -15,15 +15,14 @@
 	<ion-list *ngFor="let comment of post_comments; let j=index" class="comm-posted">
 		
 		
-			 <ion-item>
+			<ion-item>
    				 <ion-avatar item-left>
       				<img class="pro-imgs" (click)="profileImage(comment.uid)" 
 	    		[src]="imageUrl+comment?.profile_image"  
 	    		[hidden]="!comment?.profile_image" >
     			</ion-avatar>
     			
-    			 <div class="message-container" [innerHTML]="comment.comments | emojis">
-                 </div>
+    			 <div text-wrap [innerHTML]="comment.comments | emojis"></div>
   			</ion-item>    
 			<button ion-button clear (click)="reply(j)">reply</button>
 
@@ -43,7 +42,8 @@
 						      		<p class="cmmpost">{{reply.name_from}} --> {{reply.name_to}}</p>
 						      	</ion-row>
 					      		<ion-row>
-						      		<p class="cmmpost">{{reply.comments_replay}}</p>
+					      			<div text-wrap [innerHTML]="reply.comments_replay | emojis"></div>
+						   
 						      			<button ion-button clear (click)="replyComments(i)">reply
 		      							</button>
 		      					</ion-row>
@@ -51,10 +51,12 @@
 		      			</ion-row>
 						      					
 						<div *ngIf="i==replyBlock">
-					      	<ion-item>
+					      	<ion-row>
 								<ion-textarea [(ngModel)]="reply_comment" style=" margin:0px !important;" placeholder="write a reply..">
 								</ion-textarea>
-							</ion-item>
+							
+							<p class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker2(comment.comments_id,post_profile_id)"></p>
+							</ion-row>
 							<div class="send-req">
 								<button (click)="sendReply(comment.comments_id,post_profile_id)" ion-button class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
 								</button>
@@ -66,29 +68,31 @@
 		      	<button ion-button class="trash-icon" (click)="showConfirm(comment.comments_id)" 
 			      	color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
 		
-		<ion-row>
-			<div>
+		
+			
 			    <div *ngIf="j==Reply">
-					<ion-item>
+					<ion-row>
 						<ion-textarea [(ngModel)]="reply_comment" style=" margin:0px !important;" placeholder="write a reply..">
 						</ion-textarea>
-					</ion-item>
+
+					<p class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker2(comment.comments_id,post_profile_id)"></p>
+				</ion-row>
 					<div class="send-req">
 						<button (click)="sendReply(comment.comments_id,post_profile_id)" ion-button class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
 						</button>
 					</div>
 			    </div>
 			   
-			</div>
-		</ion-row>
+		
 	</ion-list>
-			<ion-label class="liste-edit" style="text-align:left !important; padding-left:5px !important;">Enter Comments...</ion-label>
-	      	<ion-item>
-				<ion-textarea [(ngModel)]="post_comment" style=" margin:0px !important;">
-				</ion-textarea>
-			</ion-item>
+			<ion-row>
+				<ion-textarea [(ngModel)]="post_comment" style=" margin:0px !important;" placeholder="Enter Comments">
+				</ion-textarea>             
+						
+           		<p class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker1(post_id)"></p>
+           </ion-row>
 			<div class="send-req">
-				<button ion-button (click)="sendComment(post_id)" class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
+				<button ion-button (click)="sendComment(post_id,'post')" class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
 				</button>
 			</div>
 </ion-content>

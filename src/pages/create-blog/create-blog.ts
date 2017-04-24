@@ -29,8 +29,9 @@ highlights:any;
 tags:any=[];
 allowComments:any;
 items:any;
-base64Image:any;
+featuredImage:any;
 tagsModel:any=[];
+bannerImage:any;
 blogForm: FormGroup;
 submitAttempt: boolean = false;
   constructor(public formBuilder: FormBuilder,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
@@ -98,12 +99,17 @@ submitAttempt: boolean = false;
     }
   }
 
-   accessGallery(){
+   accessGallery(type){
    Camera.getPicture({
      sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
      destinationType: Camera.DestinationType.DATA_URL
     }).then((imageData) => {
-      this.base64Image = 'data:image/jpeg;base64,'+imageData;
+      if(type == 'banner'){
+      this.bannerImage = 'data:image/jpeg;base64,'+imageData;  
+    }else{
+      this.featuredImage = 'data:image/jpeg;base64,'+imageData;
+    }
+      
      }, (err) => {
       console.log(err);
     });
@@ -130,7 +136,7 @@ submitAttempt: boolean = false;
     }
     
     this.blogObject={ "category":this.blogForm.value.category,"allow_comment":this.allowComments,"title":this.blogForm.value.title,"highlights":this.highlights,
-        "description":this.blogForm.value.description,"featured_image":"","banner_image":"","tags":tagsObj,
+        "description":this.blogForm.value.description,"featured_image":this.featuredImage,"banner_image":this.bannerImage,"tags":tagsObj,"app":''
         };
         
     this.blogListService.createBlog(this.blogObject).subscribe(

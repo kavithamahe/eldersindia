@@ -176,7 +176,7 @@ myprofile(id){
 
 
   addUserPosts(id,image,videoUrl,posts,links){
-     this.posts = { "user_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links }
+     this.posts = { "user_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links,"app":'' }
 
 
      return this.http.post(`${this.getCommunityPostsUrl }addUserPost`,this.posts,this.options)
@@ -193,9 +193,10 @@ myprofile(id){
 
   
 
-  addLike(id){
-    this.body = {"info": {"postId":id}};
-     return this.http.post(`${this.getCommunityPostsUrl }sendLikes`,this.body,this.options)
+  addLike(likeObj){
+   // this.body = {"info": {"postId":id}};
+    this.body = {info: {postId: likeObj.id, emojiArr: {id: likeObj.emojiId, emoji: likeObj.emoji, name:likeObj.name}}};
+    return this.http.post(`${this.getCommunityPostsUrl }sendLikes`,this.body,this.options)
       .map(res =>res.json());
   }
 
@@ -214,7 +215,7 @@ myprofile(id){
   }
 
   postCommunity(id,image,videoUrl,posts,links){
-     this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links }
+     this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links,"app":'' }
 
 
      return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,this.posts,this.options)
