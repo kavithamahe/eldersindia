@@ -22,9 +22,11 @@
 	    		[hidden]="!comment?.profile_image" >
     			</ion-avatar>
     			
-    			<p ion-item text-wrap class="cmmpost">{{comment.comments}}</p>
+    			 <div class="message-container" [innerHTML]="comment.comments | emojis">
+                 </div>
   			</ion-item>    
 			<button ion-button clear (click)="reply(j)">reply</button>
+
 						<button ion-button item-right clear (click)="showComments(j)">show replies
 						</button>
 					
