@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Camera } from 'ionic-native';
+
 
 import { BlogListService } from '../../providers/blog-list-service';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -27,6 +29,7 @@ highlights:any;
 tags:any=[];
 allowComments:any;
 items:any;
+base64Image:any;
 tagsModel:any=[];
 blogForm: FormGroup;
 submitAttempt: boolean = false;
@@ -94,6 +97,19 @@ submitAttempt: boolean = false;
     );
     }
   }
+
+   accessGallery(){
+   Camera.getPicture({
+     sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+     destinationType: Camera.DestinationType.DATA_URL
+    }).then((imageData) => {
+      this.base64Image = 'data:image/jpeg;base64,'+imageData;
+     }, (err) => {
+      console.log(err);
+    });
+  }
+
+
   public createBlog()
   { 
     if(!this.blogForm.valid){

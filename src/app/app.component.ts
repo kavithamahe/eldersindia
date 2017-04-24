@@ -51,6 +51,7 @@ export class MyApp {
 
   user_logged = '<no user announced>';
   subscription: Subscription;
+
 //--------------------------------//
   rootPage: any;
 

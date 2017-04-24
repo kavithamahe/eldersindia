@@ -175,8 +175,8 @@ myprofile(id){
 
 
 
-  addUserPosts(id,image,videoUrl,posts){
-     this.posts = { "user_id":id, "image":image,"videourl":videoUrl,"message":posts }
+  addUserPosts(id,image,videoUrl,posts,links){
+     this.posts = { "user_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links }
 
 
      return this.http.post(`${this.getCommunityPostsUrl }addUserPost`,this.posts,this.options)
@@ -213,9 +213,9 @@ myprofile(id){
       .map(res =>res.json());
   }
 
-  postCommunity(id,image,videoUrl,posts){
-     this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts, "app":''}
 
+  postCommunity(id,image,videoUrl,posts,links){
+     this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links, "app":'' }
 
      return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,this.posts,this.options)
       .map(res =>res.json());

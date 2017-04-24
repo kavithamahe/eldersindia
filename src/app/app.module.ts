@@ -6,6 +6,7 @@ import { TruncateModule } from 'ng2-truncate';
 import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
 import {BrowserModule} from '@angular/platform-browser';
+import { Ng2EmojiModule } from 'ng2-emoji';
 //Venkatesh
 import { LoginPage } from '../pages/login/login';
 import { AppConfig } from '../providers/app-config';
@@ -37,6 +38,7 @@ import { EventsPage } from '../pages/events/events';
 import { ViewEventsPage } from '../pages/view-events/view-events';
 import { LogoutPage } from '../pages/logout/logout';
 import { JobDependentPage } from '../pages/job-dependent/job-dependent';
+import { EmojiPickerPage } from '../pages/emoji-picker/emoji-picker';
 
 // Kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
@@ -83,7 +85,7 @@ import { ServiceProvider } from '../providers/service-provider';
     CommunitymessagePage,
     CommunitycommentsPage,
     MyprofilesettingPage,
-  
+    EmojiPickerPage,
     ManagePage,
     EldersPage,
     JobboardPage,
@@ -124,7 +126,8 @@ import { ServiceProvider } from '../providers/service-provider';
     RlTagInputModule,
     Ionic2RatingModule,
     Ng2CompleterModule,
-    BrowserModule
+    BrowserModule,
+    Ng2EmojiModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -137,7 +140,7 @@ import { ServiceProvider } from '../providers/service-provider';
     CommunitymessagePage,
     CommunitycommentsPage,
     MyprofilesettingPage,
-      
+    EmojiPickerPage, 
     CommunityPage,
     ManagePage,
     EldersPage,

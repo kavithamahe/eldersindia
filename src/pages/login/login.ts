@@ -11,6 +11,8 @@ import { LoginUser } from '../../providers/login-user';
 import { AppConfig } from '../../providers/app-config';
 import { ServiceProvider } from '../../providers/service-provider'
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
+
+
 /*
   Generated class for the Login page.
 
@@ -43,6 +45,7 @@ export class LoginPage {
         email: ['', Validators.compose([Validators.required])],
         password: ['', Validators.compose([Validators.required])]
          });
+
   }
    public login() {  
     if(!this.loginForm.valid){
