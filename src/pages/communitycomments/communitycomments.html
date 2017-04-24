@@ -55,7 +55,7 @@
 								<ion-textarea [(ngModel)]="reply_comment" style=" margin:0px !important;" placeholder="write a reply..">
 								</ion-textarea>
 							
-							<p class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker2(comment.comments_id,post_profile_id)"></p>
+							<p class="message-container" [innerHTML]="':smile:  ' | emojis"  (click)="emojiPicker2(comment.comments_id,post_profile_id)"></p>
 							</ion-row>
 							<div class="send-req">
 								<button (click)="sendReply(comment.comments_id,post_profile_id)" ion-button class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 

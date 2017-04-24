@@ -356,7 +356,7 @@ console.log("URL is ",metalink_url);
         {
           this.emojiId=3;
         }
-        else if(emojiSymbol==':wow:')
+        else if(emojiSymbol==':open_mouth:')
         {
           this.emojiId=4;
         }
