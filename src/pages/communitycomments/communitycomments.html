@@ -18,7 +18,9 @@
 	    		[src]="imageUrl+comment?.profile_image"  
 	    		[hidden]="!comment?.profile_image" >
 	    	<ion-item>
-				<p class="cmmpost">{{comment.comments}}</p>
+			<!--	<p class="cmmpost">{{comment.comments}}</p>-->
+				 <div class="message-container" [innerHTML]="comment.comments | emojis">
+ </div>
 				    <button ion-button clear (click)="reply(j)">reply</button>
 						<button ion-button item-right clear (click)="showComments(j)">show replies
 						</button>
