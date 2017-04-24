@@ -71,8 +71,8 @@ var MessagesPage = (function () {
         });
         loader.dismiss();
     };
-    MessagesPage.prototype.viewMessages = function (messageId) {
-        this.navCtrl.push(ViewMessagesPage, { messageId: messageId });
+    MessagesPage.prototype.viewMessages = function (messageId, viewType) {
+        this.navCtrl.push(ViewMessagesPage, { messageId: messageId, viewType: viewType });
     };
     MessagesPage.prototype.showToaster = function (message) {
         var toast = this.toastCtrl.create({
@@ -93,7 +93,8 @@ var MessagesPage = (function () {
 MessagesPage = __decorate([
     Component({
         selector: 'page-messages',
-        templateUrl: 'messages.html'
+        templateUrl: 'messages.html',
+        providers: [MessagesService]
     }),
     __metadata("design:paramtypes", [NavController, NavParams, Storage, MessagesService, LoadingController, ToastController])
 ], MessagesPage);

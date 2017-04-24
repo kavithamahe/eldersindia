@@ -214,9 +214,9 @@ myprofile(id){
       .map(res =>res.json());
   }
 
-  postCommunity(id,image,videoUrl,posts,links){
-     this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links,"app":'' }
 
+  postCommunity(id,image,videoUrl,posts,links){
+     this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links, "app":'' }
 
      return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,this.posts,this.options)
       .map(res =>res.json());

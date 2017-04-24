@@ -19,8 +19,8 @@ import 'rxjs/add/operator/map';
 var AppConfig = (function () {
     function AppConfig(http) {
         this.http = http;
-        /*imageUrl="http://183.82.33.232:8097/";
-        rooturl="http://183.82.33.232:8097/api/"; */
+        // imageUrl="http://183.82.33.232:8097/"; 
+        // rooturl="http://183.82.33.232:8097/api/"; 
         this.imageUrl = "http://192.168.1.20:8000/";
         this.rooturl = "http://192.168.1.20:8000/api/";
     }
@@ -28,6 +28,7 @@ var AppConfig = (function () {
         return this.imageUrl;
     };
     AppConfig.prototype.setrooturl = function () {
+        console.log("app" + this.rooturl);
         return this.rooturl;
     };
     return AppConfig;

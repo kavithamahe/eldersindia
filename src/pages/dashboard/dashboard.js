@@ -8,12 +8,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CallNumber, Vibration } from 'ionic-native';
 import { ServiceprovidersPage } from '../../pages/serviceproviders/serviceproviders';
 import { JobboardPage } from '../../pages/jobboard/jobboard';
-import { CommunityPage } from '../../pages/community/community';
+import { CommunitylistPage } from '../../pages/communitylist/communitylist';
 import { BlogsPage } from '../../pages/blogs/blogs';
 import { ConnectionsPage } from '../../pages/connections/connections';
 import { MessagesPage } from '../../pages/messages/messages';
@@ -24,11 +24,13 @@ import { MessagesPage } from '../../pages/messages/messages';
   Ionic pages and navigation.
 */
 var DashboardPage = (function () {
-    function DashboardPage(navCtrl, navParams, storage) {
+    function DashboardPage(navCtrl, toastCtrl, navParams, storage) {
         var _this = this;
         this.navCtrl = navCtrl;
+        this.toastCtrl = toastCtrl;
         this.navParams = navParams;
         this.storage = storage;
+        this.hooterOn = false;
         this.storage.ready().then(function () {
             storage.get('token').then(function (token) { _this.token = token; });
             storage.get('user_type').then(function (user_type) { _this.user_type = user_type; });
@@ -48,7 +50,7 @@ var DashboardPage = (function () {
         this.navCtrl.setRoot(JobboardPage);
     };
     DashboardPage.prototype.communityPage = function () {
-        this.navCtrl.setRoot(CommunityPage);
+        this.navCtrl.setRoot(CommunitylistPage);
     };
     DashboardPage.prototype.blogsPage = function () {
         //alert("token"+this.token);
@@ -61,12 +63,32 @@ var DashboardPage = (function () {
         this.navCtrl.setRoot(MessagesPage);
     };
     DashboardPage.prototype.makeCall = function (number) {
-        CallNumber.callNumber(number, true)
-            .then(function () { return console.log('Launched dialer!'); })
-            .catch(function () { return console.log('Error launching dialer'); });
+        if (number) {
+            CallNumber.callNumber(number, true)
+                .then(function () { return console.log('Launched dialer!'); })
+                .catch(function () { return console.log('Error launching dialer'); });
+        }
+        else {
+            this.showToaster("There is no contact nuber");
+        }
     };
-    DashboardPage.prototype.hooter = function () {
-        Vibration.vibrate(5000);
+    DashboardPage.prototype.hooter = function (hooterOn) {
+        if (!hooterOn) {
+            this.hooterOn = !hooterOn;
+            Vibration.vibrate(60000);
+        }
+        else {
+            Vibration.vibrate(0);
+            this.hooterOn = !hooterOn;
+        }
+    };
+    DashboardPage.prototype.showToaster = function (message) {
+        var toast = this.toastCtrl.create({
+            message: message,
+            duration: 3000,
+            position: 'top'
+        });
+        toast.present();
     };
     return DashboardPage;
 }());
@@ -75,7 +97,7 @@ DashboardPage = __decorate([
         selector: 'page-dashboard',
         templateUrl: 'dashboard.html'
     }),
-    __metadata("design:paramtypes", [NavController, NavParams, Storage])
+    __metadata("design:paramtypes", [NavController, ToastController, NavParams, Storage])
 ], DashboardPage);
 export { DashboardPage };
 //# sourceMappingURL=dashboard.js.map

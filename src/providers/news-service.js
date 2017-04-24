@@ -43,6 +43,11 @@ var NewsService = (function () {
         return this.http.post(this.rootUrl + 'getNewsEventsDetails/' + newsId, _request, this.options)
             .map(function (res) { return res.json(); });
     };
+    NewsService.prototype.newsscroll = function (nextPageURL) {
+        var _request = { "search": { "title": "" }, "postType": "news" };
+        return this.http.post(nextPageURL, _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
     return NewsService;
 }());
 NewsService = __decorate([

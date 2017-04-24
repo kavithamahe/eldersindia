@@ -36,7 +36,7 @@ var JobBoardService = (function () {
     }
     JobBoardService.prototype.jobsList = function () {
         var _request = { "search": { "location": [], "functional_area": [] }, "get": ["FunctionalArea", "Location", "SkillSet"], "info": { "uid": this.user_id } };
-        return this.http.post('http://192.168.1.21:8000/api/' + 'getJobList', _request, this.options)
+        return this.http.post(this.rootUrl + 'getJobList', _request, this.options)
             .map(function (res) { return res.json(); });
     };
     JobBoardService.prototype.singleJob = function (jobId) {
@@ -44,8 +44,8 @@ var JobBoardService = (function () {
         return this.http.post(this.rootUrl + 'getJobById/' + jobId, _request, this.options)
             .map(function (res) { return res.json(); });
     };
-    JobBoardService.prototype.applyJob = function (jobId) {
-        var _request = { "info": { "job_id": jobId, "uid": this.user_id } };
+    JobBoardService.prototype.applyJob = function (jobId, dependantId) {
+        var _request = { "info": { "job_id": jobId, "uid": this.user_id, "dependantId": dependantId } };
         return this.http.post(this.rootUrl + 'applyJob', _request, this.options)
             .map(function (res) { return res.json(); });
     };
@@ -57,6 +57,16 @@ var JobBoardService = (function () {
     JobBoardService.prototype.getDependent = function () {
         var _request = {};
         return this.http.post(this.rootUrl + 'getDependants', _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    JobBoardService.prototype.JobBoardscroll = function (nextPageURL) {
+        var _request = { "search": { "location": [], "functional_area": [] }, "get": ["FunctionalArea", "Location", "SkillSet"], "info": { "uid": this.user_id } };
+        return this.http.post(nextPageURL, _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    JobBoardService.prototype.appliedJobscroll = function (nextPageURL) {
+        var _request = { "search": "", "info": { "uid": this.user_id } };
+        return this.http.post(nextPageURL, _request, this.options)
             .map(function (res) { return res.json(); });
     };
     return JobBoardService;

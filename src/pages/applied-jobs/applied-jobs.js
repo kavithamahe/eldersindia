@@ -28,6 +28,7 @@ var AppliedJobsPage = (function () {
         this.storage = storage;
         this.loadingCtrl = loadingCtrl;
         this.toastCtrl = toastCtrl;
+        this.nextPageURL = '';
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
             storage.get('token').then(function (token) {
@@ -66,12 +67,42 @@ var AppliedJobsPage = (function () {
     AppliedJobsPage.prototype.viewJob = function (jobId) {
         this.navCtrl.push(SinglejobPage, { jobId: jobId });
     };
+    AppliedJobsPage.prototype.doInfinite = function (infiniteScroll) {
+        var _this = this;
+        setTimeout(function () {
+            if (_this.nextPageURL != null && _this.nextPageURL != '') {
+                _this.appliedJobscroll();
+            }
+            else {
+                infiniteScroll.enable(false);
+            }
+            infiniteScroll.complete();
+        }, 500);
+    };
+    AppliedJobsPage.prototype.appliedJobscroll = function () {
+        var _this = this;
+        this.jobBoardService.appliedJobscroll(this.nextPageURL).subscribe(function (appliedJobscroll) {
+            _this.appliedJobScrollLists = appliedJobscroll.result.info.data;
+            for (var i = 0; i < Object.keys(_this.appliedJobScrollLists).length; i++) {
+                _this.appliedJobsList.push(_this.appliedJobScrollLists[i]);
+            }
+            _this.nextPageURL = appliedJobscroll.result.info.next_page_url;
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+            else {
+                _this.showToaster("Try again later");
+            }
+        });
+    };
     return AppliedJobsPage;
 }());
 AppliedJobsPage = __decorate([
     Component({
         selector: 'page-applied-jobs',
-        templateUrl: 'applied-jobs.html'
+        templateUrl: 'applied-jobs.html',
+        providers: [JobBoardService]
     }),
     __metadata("design:paramtypes", [NavController, NavParams, JobBoardService, Storage, LoadingController, ToastController])
 ], AppliedJobsPage);

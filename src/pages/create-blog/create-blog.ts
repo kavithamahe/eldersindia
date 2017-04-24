@@ -134,10 +134,10 @@ submitAttempt: boolean = false;
         tagsObj.push({"name":this.tagsModel[j]})
       }
     }
-    
+   
     this.blogObject={ "category":this.blogForm.value.category,"allow_comment":this.allowComments,"title":this.blogForm.value.title,"highlights":this.highlights,
         "description":this.blogForm.value.description,"featured_image":this.featuredImage,"banner_image":this.bannerImage,"tags":tagsObj,"app":''
-        };
+    };
         
     this.blogListService.createBlog(this.blogObject).subscribe(
      (createBlog) => {

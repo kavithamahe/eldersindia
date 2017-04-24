@@ -33,15 +33,16 @@ var ViewMessagesPage = (function () {
             storage.get('token').then(function (token) {
                 _this.token = token;
                 _this.messageId = navParams.get("messageId");
-                _this.onInit(_this.messageId);
+                _this.viewType = navParams.get("viewType");
+                _this.onInit(_this.messageId, _this.viewType);
             });
         });
     }
-    ViewMessagesPage.prototype.onInit = function (messageId) {
+    ViewMessagesPage.prototype.onInit = function (messageId, viewType) {
         var _this = this;
         var loader = this.loadingCtrl.create({ content: "Please wait..." });
         loader.present();
-        this.messagesService.viewMessages(messageId).subscribe(function (viewMessages) {
+        this.messagesService.viewMessages(messageId, viewType).subscribe(function (viewMessages) {
             _this.veiwMessagesInfo = viewMessages.result.details;
             console.log(_this.veiwMessagesInfo);
         }, function (err) {
@@ -70,7 +71,8 @@ var ViewMessagesPage = (function () {
 ViewMessagesPage = __decorate([
     Component({
         selector: 'page-view-messages',
-        templateUrl: 'view-messages.html'
+        templateUrl: 'view-messages.html',
+        providers: [MessagesService]
     }),
     __metadata("design:paramtypes", [NavController, NavParams, Storage, MessagesService, LoadingController, ToastController])
 ], ViewMessagesPage);

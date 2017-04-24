@@ -8,11 +8,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, ViewChild } from '@angular/core';
-import { LoadingController, NavController, NavParams, Slides } from 'ionic-angular';
+import { ModalController, LoadingController, NavController, NavParams, Slides, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { ServiceModalPage } from '../../pages/service-modal/service-modal';
+import { ModalContentPage } from '../modal-page/modal-page';
 import { ServiceProvider } from '../../providers/service-provider';
+import { InAppBrowser } from 'ionic-native';
 /*
   Generated class for the ServiceInfo page.
 
@@ -21,8 +24,10 @@ import { ServiceProvider } from '../../providers/service-provider';
 */
 var ServiceInfoPage = (function () {
     // @ViewChild('ghbslides') ghbslides: any;
-    function ServiceInfoPage(formBuilder, loadingCtrl, providerService, navCtrl, navParams, storage) {
+    function ServiceInfoPage(modalCtrl, platform, formBuilder, loadingCtrl, providerService, navCtrl, navParams, storage) {
         var _this = this;
+        this.modalCtrl = modalCtrl;
+        this.platform = platform;
         this.formBuilder = formBuilder;
         this.loadingCtrl = loadingCtrl;
         this.providerService = providerService;
@@ -62,6 +67,13 @@ var ServiceInfoPage = (function () {
             });
         });
     }
+    ServiceInfoPage.prototype.openUrl = function () {
+        var _this = this;
+        console.log("URL is ", this.website);
+        this.platform.ready().then(function () {
+            var browser = new InAppBrowser(_this.website, '_blank');
+        });
+    };
     ServiceInfoPage.prototype.loadServiceInformation = function (subcategoryData) {
         var _this = this;
         var loading = this.loadingCtrl.create({ content: 'Please wait...!' });
@@ -71,102 +83,97 @@ var ServiceInfoPage = (function () {
             .subscribe(function (data) {
             _this.vendorList = data.result.info;
             _this.serviceData = data.result.info.requestServices;
+            _this.website = _this.vendorList.vendorDetails.website;
         }, function (err) {
             _this.providerService.showErrorToast(err);
             console.log("Response for getVendorDetails: " + err);
         });
         loading.dismiss();
     };
-    //   ngOnInit() {
+    ServiceInfoPage.prototype.modal = function () {
+        var modal = this.modalCtrl.create(ServiceModalPage, { service: "service_offered", vendorList: this.vendorList });
+        modal.present();
+    };
+    // ngViewInit() {
     //     this.sliderOptions = {
     //       initialSlide: 0,
-    //       loop: true,
-    //       direction: 'horizontal',
-    //       pager: true,
-    //       speed: 300,
-    //       autoplay: 300,
-    //         effect: 'fade',
-    //         fade: {
-    //             crossFade: true
-    //         }
+    //     loop: true,
+    //     autoplay:2000,
+    //     autoplayDisableOnInteraction: false
     //     }
     //     this.slider.startAutoplay();
     // };
-    ServiceInfoPage.prototype.ngViewInit = function () {
-        this.sliderOptions = {
-            initialSlide: 0,
-            loop: true,
-            direction: 'horizontal',
-            pager: true,
-            speed: 300,
-            autoplay: 300,
-            effect: 'fade',
-            fade: {
-                crossFade: true
-            }
-        };
-        this.slider.startAutoplay();
-    };
-    ;
     ServiceInfoPage.prototype.dashboardPage = function () {
         this.navCtrl.setRoot(DashboardPage);
     };
-    ServiceInfoPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ServiceInfoPage');
-        this.slider.startAutoplay();
-    };
-    ServiceInfoPage.prototype.sendRequestService = function () {
+    // ionViewDidLoad() {
+    //   console.log('ionViewDidLoad ServiceInfoPage');
+    //   this.slider.startAutoplay();
+    // }
+    ServiceInfoPage.prototype.sendRequestService = function (data) {
+        // if(!this.requestForm.valid){
+        //   this.submitAttempt = true;
+        // }else{
+        //   this.submitAttempt = false;
+        //   this.dependentID = this.requestForm.value.dependents; 
+        //   if(this.userType != 'sponsor'){
+        //   this.dependentID = this.elderId;
+        //   }
         var _this = this;
-        if (!this.requestForm.valid) {
-            this.submitAttempt = true;
-        }
-        else {
-            this.submitAttempt = false;
-            this.dependentID = this.requestForm.value.dependents;
-            if (this.userType != 'sponsor') {
-                this.dependentID = this.elderId;
-            }
-            var requestServiceData = { "vendor_id": this.vendor_id, "category_id": this.serviceData.category_id, "sub_category_id": this.serviceData.sub_category_id, "service_id": this.serviceData.service_id, "problem": this.requestForm.value.problem, "datetime": this.requestForm.value.date + " " + this.requestForm.value.time, "dependentid": this.dependentID, "mobile": this.requestForm.value.contact };
-            // this.providerService.sendRequestServiceData(serviceData)
-            this.providerService.webServiceCall("serviceRequest", requestServiceData)
-                .subscribe(function (data) {
-                console.log(data);
-                _this.providerService.showToast(data.result);
-                _this.toggleRequestService();
-                _this.requestForm.reset();
-            }, function (err) {
-                _this.providerService.showErrorToast(err);
-                console.log("Response for serviceRequest: " + err);
-            });
-        }
+        // let requestServiceData = {"location_id":this.locationId,"vendor_id":this.vendor_id, "category_id":this.serviceData.category_id, "sub_category_id":this.serviceData.sub_category_id, "service_id":this.serviceData.service_id, "problem":this.requestForm.value.problem, "datetime":this.requestForm.value.date+" "+this.requestForm.value.time, "dependentid":this.dependentID, "mobile":this.requestForm.value.contact}
+        var requestServiceData = { "location_id": this.locationId, "vendor_id": this.vendor_id, "category_id": this.serviceData.category_id, "sub_category_id": this.serviceData.sub_category_id, "service_id": this.serviceData.service_id, "problem": data.problem, "datetime": data.datetime, "dependentid": data.dependentId, "mobile": data.mobile_no };
+        this.providerService.webServiceCall("serviceRequest", requestServiceData)
+            .subscribe(function (data) {
+            console.log(data);
+            _this.providerService.showToast(data.result);
+            // this.toggleRequestService();
+            // this.requestForm.reset();
+        }, function (err) {
+            _this.providerService.showErrorToast(err);
+            console.log("Response for serviceRequest: " + err);
+        });
     };
     ServiceInfoPage.prototype.toggleContact = function () {
-        this.showServiceOffered = false;
-        this.showRequestService = false;
-        this.show_service = false;
-        if (this.showDetails) {
-            this.showDetails = false;
-        }
-        else {
-            this.showDetails = true;
-        }
+        var modal = this.modalCtrl.create(ServiceModalPage, { service: "contact", vendorList: this.vendorList });
+        modal.present();
+        // this.showServiceOffered = false;
+        // this.showRequestService = false;
+        // this.show_service = false;
+        // if (this.showDetails){
+        //   this.showDetails = false;
+        // }else
+        // {
+        //   this.showDetails = true;
+        // }
     };
     ServiceInfoPage.prototype.toggleRequestService = function () {
-        this.submitAttempt = false;
-        this.showServiceOffered = false;
-        this.showDetails = false;
-        this.show_service = false;
-        if (this.showRequestService) {
-            this.showRequestService = false;
-        }
-        else {
-            this.showRequestService = true;
-        }
+        var _this = this;
+        var service_modal = this.modalCtrl.create(ModalContentPage, { dependentList: this.vendorList.dependentLists });
+        service_modal.present();
+        service_modal.onDidDismiss(function (data) {
+            if (data == "dismiss") {
+                console.log(" schedule request modal dismissed..!");
+            }
+            else {
+                _this.sendRequestService(data);
+            }
+        });
+        // this.submitAttempt = false;
+        // this.showServiceOffered = false;
+        // this.showDetails = false;
+        // this.show_service = false;
+        // if (this.showRequestService){
+        //   this.showRequestService = false;
+        // }else
+        // {
+        //   this.showRequestService = true;
+        // }
     };
     ServiceInfoPage.prototype.toggleServiceOffered = function () {
         this.showDetails = false;
         this.showRequestService = false;
         this.show_service = false;
+        this.sub_category = false;
         if (this.showServiceOffered) {
             this.showServiceOffered = false;
         }
@@ -202,9 +209,10 @@ __decorate([
 ServiceInfoPage = __decorate([
     Component({
         selector: 'page-service-info',
-        templateUrl: 'service-info.html'
+        templateUrl: 'service-info.html',
+        providers: [ServiceModalPage]
     }),
-    __metadata("design:paramtypes", [FormBuilder, LoadingController, ServiceProvider, NavController, NavParams, Storage])
+    __metadata("design:paramtypes", [ModalController, Platform, FormBuilder, LoadingController, ServiceProvider, NavController, NavParams, Storage])
 ], ServiceInfoPage);
 export { ServiceInfoPage };
 //# sourceMappingURL=service-info.js.map

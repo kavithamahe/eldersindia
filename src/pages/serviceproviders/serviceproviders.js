@@ -8,6 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
+// {BrowserModule} from '@angular/platform-browser'
 // import { Device, LocalNotifications } from 'ionic-native';
 import { Platform, NavController, LoadingController, ModalController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -46,9 +47,9 @@ var ServiceprovidersPage = (function () {
         var loading = this.loadingCtrl.create({ content: 'Please wait...!' });
         loading.present();
         // this.providerService.loadServiceOffered()
-        this.providerService.webServiceCall("getServiceOffered", { "location": "" })
+        this.providerService.webServiceCall("getCategory", { "location": "" })
             .subscribe(function (data) {
-            _this.services = data.result.info;
+            _this.services = data.result.info.category;
             console.log("Recieved filtered data :" + _this.services);
         }, function (err) {
             _this.providerService.showErrorToast(err);

@@ -27,30 +27,41 @@ var ForgotPasswordPage = (function () {
         this.passwordCode = navParams.get("passCode");
     }
     ForgotPasswordPage.prototype.submit = function () {
+        var _this = this;
         if (this.modalType == 'forgotPassword') {
-            if (this.mailId != 'test@gmail.com') {
-                this.service.showToast("Enter a valid Gmail..!");
+            if (this.mailId == '') {
+                this.service.showToast("Enter a valid E-Mail..!");
             }
             else {
-                this.modalData = { "emailId": this.mailId };
-                var submitData = { "modalType": this.modalType, modalData: this.modalData };
-                this.viewCtrl.dismiss(submitData);
+                this.service.webServiceCall("forgetPassword", { "email": this.mailId })
+                    .subscribe(function (data) {
+                    console.log(data);
+                    // this.dismiss();
+                    _this.viewCtrl.dismiss("dismiss");
+                }, function (err) {
+                    if (err.status === 401) {
+                        _this.service.showToast(JSON.parse(err._body).error);
+                    }
+                    else {
+                        _this.service.showToast("Try again later");
+                    }
+                });
+                // this.modalData = {"emailId": this.mailId};	
+                // let submitData = {"modalType":this.modalType , modalData:this.modalData};
+                // this.viewCtrl.dismiss(submitData);	
             }
         }
-        else if (this.resetCode != this.passwordCode) {
-            this.service.showToast("Invaild code.!");
-        }
-        else if (this.newPassword == '' || this.newPassword == null) {
-            this.service.showToast("Enter the Pass word to proceed.!");
-        }
-        else if (this.newPassword != this.reEnterPassword) {
-            this.service.showToast("Entered Password does not match.");
-        }
-        else {
-            this.modalData = { "resetCode": this.resetCode, "newPassword": this.newPassword };
-            var submitData = { "modalType": this.modalType, modalData: this.modalData };
-            this.viewCtrl.dismiss(submitData);
-        }
+        // else if(this.resetCode != this.passwordCode){
+        // 	this.service.showToast("Invaild code.!")
+        // 	}else if(this.newPassword == '' || this.newPassword == null){
+        // 		this.service.showToast("Enter the Pass word to proceed.!")
+        // 		}else if(this.newPassword != this.reEnterPassword){
+        // 			this.service.showToast("Entered Password does not match.")
+        // 			}else{
+        // 				this.modalData ={"resetCode": this.resetCode, "newPassword":this.newPassword};	
+        // 				let submitData = {"modalType":this.modalType , modalData:this.modalData};
+        // 				this.viewCtrl.dismiss(submitData);
+        // 		}
     };
     ForgotPasswordPage.prototype.dismiss = function () {
         this.viewCtrl.dismiss("dismiss");
@@ -63,7 +74,8 @@ var ForgotPasswordPage = (function () {
 ForgotPasswordPage = __decorate([
     Component({
         selector: 'page-forgot-password',
-        templateUrl: 'forgot-password.html'
+        templateUrl: 'forgot-password.html',
+        providers: [ServiceProvider]
     }),
     __metadata("design:paramtypes", [ServiceProvider, ViewController, NavController, NavParams])
 ], ForgotPasswordPage);

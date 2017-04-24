@@ -68,6 +68,11 @@ var BlogListService = (function () {
         return this.http.post(this.rootUrl + 'getBlogCategories', _request, this.options)
             .map(function (res) { return res.json(); });
     };
+    BlogListService.prototype.getTagsList = function (tagsInput) {
+        // let _request= {};
+        return this.http.get(this.rootUrl + 'getBlogTags/' + tagsInput, this.options)
+            .map(function (res) { return res.json(); });
+    };
     return BlogListService;
 }());
 BlogListService = __decorate([
