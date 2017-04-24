@@ -13,16 +13,21 @@
 <ion-content>
 			
 	<ion-list *ngFor="let comment of post_comments; let j=index" class="comm-posted">
-		<ion-row>
-	    	<img class="pro-imgs" (click)="profileImage(comment.uid)" 
+		
+		
+			 <ion-item>
+   				 <ion-avatar item-left>
+      				<img class="pro-imgs" (click)="profileImage(comment.uid)" 
 	    		[src]="imageUrl+comment?.profile_image"  
 	    		[hidden]="!comment?.profile_image" >
-	    	<ion-item><ion-item>
-				<p text-wrap class="cmmpost">{{comment.comments}}</p>
-				    <button ion-button clear (click)="reply(j)">reply</button>
+    			</ion-avatar>
+    			
+    			<p ion-item text-wrap class="cmmpost">{{comment.comments}}</p>
+  			</ion-item>    
+			<button ion-button clear (click)="reply(j)">reply</button>
 						<button ion-button item-right clear (click)="showComments(j)">show replies
 						</button>
-					</ion-item>
+					
 						 <div *ngIf="j==showReply">
 				    <ion-list *ngFor="let reply of comment.comment_reply; let i=index">
 				      	<ion-row>
@@ -55,10 +60,10 @@
 			      		</div><hr>
 					</ion-list>
 				</div>
-		    </ion-item>							
+		   						
 		      	<button ion-button class="trash-icon" (click)="showConfirm(comment.comments_id)" 
 			      	color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
-		</ion-row>
+		
 		<ion-row>
 			<div>
 			    <div *ngIf="j==Reply">

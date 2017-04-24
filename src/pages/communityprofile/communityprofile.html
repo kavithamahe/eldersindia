@@ -22,6 +22,7 @@
 				  	<ion-item>
 					  <ion-avatar item-left class="image-profile">
 					  	<img [src]="imageUrl+communityProfileData?.avatar" 
+					  	(click)="profileSetting(communityProfileData.id)"
 					  	[hidden]="!communityProfileData?.avatar">
 					  </ion-avatar>
 					</ion-item>
@@ -50,13 +51,9 @@
 			</ion-row>
 		  <ion-row>
 			  <ion-col>
-				  <p style="text-align:left;" class="mem-name">{{communityProfileData?.name}}</p>
+				  <p style="text-align:left;" class="mem-name" (click)="profileSetting(communityProfileData.id)">{{communityProfileData?.name}}</p>
 			  </ion-col>
-			  <ion-col>
-				  <button ion-button icon-only clear (click)="profileSetting(communityProfileData.id)">
-		          			<i class="fa fa-user" aria-hidden="true"></i>
-				  </button>
-			  </ion-col>
+			 
 		  </ion-row>
 
 
@@ -86,6 +83,10 @@
 					      		<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?" style="margin:0px;"></ion-textarea>
 				    		</div>
 		    			</ion-card-content>
+		    			<ion-card-content style="padding:3px !important; margin:0px;">
+							<ion-textarea [(ngModel)]="link" type="text" placeholder="What's on link">
+							</ion-textarea>
+						</ion-card-content>
 		    			<ion-card-content style="padding:0px !important;">
 		    				<ion-row>
 								<ion-col>
@@ -100,16 +101,25 @@
 									<i class="fa fa-video-camera"></i>&nbsp;</button>
 								</ion-col>
 							</ion-row>
-							<ion-row  *ngIf(addVideo)>
-								<ion-col>
+							<div  *ngIf(addVideo)>
+								<ion-row>
+									<ion-col>
+										<div>
+											<ion-item  class="video" >
+												<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
+												</ion-input>
+											</ion-item>
+										</div>
+									</ion-col>
+								</ion-row>
+								<ion-row>
 									<div>
-										<ion-item  class="video" >
-											<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
-											</ion-input>
+										<ion-item>
+											<p>( Youtube,Dailymotion,Vimeo,Wine)</p>
 										</ion-item>
 									</div>
-								</ion-col>
-							</ion-row>
+								</ion-row>
+							<</div>
 							<ion-row>
 			    				<ion-col>
 			    					<div>
@@ -159,6 +169,17 @@
 						<iframe [src]="cleanURL(community?.post_video)" frameborder="0">
 		         		</iframe>
 		       		</ion-card-content>
+		       		<ion-card-content>
+		          		<img  [src]="community.metalink_image" (click)="openUrl(community.metalink_url)" 
+		          		[hidden]="!community?.metalink_image">
+	       			</ion-card-content>
+	       		
+	         		<ion-card-content class="video-updates" [hidden]="!community?.metalink_title">
+						<p (click)="openUrl(community.metalink_url)">{{community.metalink_title}}</p>
+	         		</ion-card-content>
+	         		<ion-card-content class="video-updates" [hidden]="!community?.metalink_description">
+						<p (click)="openUrl(community.metalink_url)">{{community.metalink_description}}</p>
+	         		</ion-card-content>
 	       	 		
 	      				<ion-row>
 		        			<ion-col width-15>

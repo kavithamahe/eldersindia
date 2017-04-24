@@ -4,6 +4,8 @@ import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Platform } from 'ionic-angular';
+import { InAppBrowser } from 'ionic-native';
+
 
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -35,6 +37,7 @@ export class CommunityprofilePage {
     activityLists:any;
     communityMembers:any;
     post:any;
+    link:any;
     videoUrl:any;
     communityProfile:any;
     communityProfileData:any;
@@ -51,7 +54,7 @@ export class CommunityprofilePage {
     community: String = "activity";
   isAndroid: boolean = false;
 
-  constructor(public nav: NavController,platform: Platform, public storage:Storage, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+  constructor(public nav: NavController,public platform: Platform, public storage:Storage, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
         this.isAndroid = platform.is('android');
       this.nav=nav;
       this.storage.ready().then(() => {
@@ -158,6 +161,13 @@ export class CommunityprofilePage {
     } else {
        this.addVideo = true;
      }
+  }
+   openUrl(metalink_url) {
+console.log("URL is ",metalink_url);
+        this.platform.ready().then(() => {
+            let browser = new InAppBrowser(metalink_url,'_blank');
+
+        });
   }
   
  profileCommunity(id){
@@ -281,10 +291,11 @@ export class CommunityprofilePage {
    addUserPosts(id){
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
-     this.communityServices.addUserPosts(id,this.base64Image,this.videoUrl,this.post).subscribe(datas =>{
+     this.communityServices.addUserPosts(id,this.base64Image,this.videoUrl,this.post,this.link).subscribe(datas =>{
      this.showToast(datas.result);
      this.profileCommunity(id);
      this.post="";
+     this.link="";
      this.base64Image="";
      this.videoUrl="";
      this.showblock= null;

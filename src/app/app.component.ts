@@ -50,14 +50,9 @@ export class MyApp {
 
   user_logged = '<no user announced>';
   subscription: Subscription;
-<<<<<<< HEAD
-//----------------------------------//
 
-  rootPage: any =  JobboardPage;
-=======
 //--------------------------------//
   rootPage: any;
->>>>>>> 49563afdec4d4a96c4b4b7d8e6495c06a2a1012f
 
   pages: Array<{title: string, component: any}>;
 
