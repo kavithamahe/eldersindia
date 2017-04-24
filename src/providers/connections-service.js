@@ -23,6 +23,9 @@ var ConnectionsService = (function () {
         this.http = http;
         this.storage = storage;
         this.storage.ready().then(function () {
+            storage.get('id').then(function (id) {
+                _this.user_id = id;
+            });
             storage.get('token').then(function (token) {
                 _this.token = token;
                 _this.headers = new Headers();
@@ -31,7 +34,6 @@ var ConnectionsService = (function () {
                 _this.options = new RequestOptions({ headers: _this.headers });
             });
             storage.get('rooturl').then(function (rooturl) { _this.rootUrl = rooturl; });
-            storage.get('id').then(function (id) { _this.user_id = id; });
         });
     }
     ConnectionsService.prototype.allConnections = function () {
@@ -57,6 +59,16 @@ var ConnectionsService = (function () {
     ConnectionsService.prototype.infiniteRquest = function (nextURL) {
         var _request = { "searchValue": "" };
         return this.http.post(nextURL, _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    ConnectionsService.prototype.allConnectionScroll = function (nextPageURL) {
+        var _request = { "user_id": this.user_id, "searchValue": "" };
+        return this.http.post(nextPageURL, _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    ConnectionsService.prototype.receivedConnectionScroll = function (nextPageURL) {
+        var _request = { "searchValue": "" };
+        return this.http.post(nextPageURL, _request, this.options)
             .map(function (res) { return res.json(); });
     };
     return ConnectionsService;

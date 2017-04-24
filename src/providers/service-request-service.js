@@ -34,13 +34,23 @@ var ServiceRequestService = (function () {
         });
     }
     ServiceRequestService.prototype.serviceRequestList = function () {
-        var _request = { "searchValue": "", "status": "" };
+        var _request = { "info": { "list": true, "searchValue": "", "status": "" } };
         return this.http.post(this.rootUrl + 'serviceRequestList', _request, this.options)
             .map(function (res) { return res.json(); });
     };
     ServiceRequestService.prototype.viewServiceRequest = function (serviceRequestId) {
         var _request = { "id": serviceRequestId };
         return this.http.post(this.rootUrl + 'serviceRequestListById', _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    ServiceRequestService.prototype.submitRemark = function (serviceId, rating, remarks) {
+        var _request = { info: { starvalue: rating, remarks: remarks, srid: serviceId, statusFlag: 2 } };
+        return this.http.post(this.rootUrl + 'serviceRating', _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    ServiceRequestService.prototype.serviceRequestScroll = function (nextPageURL) {
+        var _request = { "info": { "list": true, "searchValue": "", "status": "" } };
+        return this.http.post(nextPageURL, _request, this.options)
             .map(function (res) { return res.json(); });
     };
     return ServiceRequestService;

@@ -69,7 +69,8 @@ var ViewServiceRequestPage = (function () {
 ViewServiceRequestPage = __decorate([
     Component({
         selector: 'page-view-service-request',
-        templateUrl: 'view-service-request.html'
+        templateUrl: 'view-service-request.html',
+        providers: [ServiceRequestService]
     }),
     __metadata("design:paramtypes", [NavController, NavParams, Storage, LoadingController, ToastController, ServiceRequestService])
 ], ViewServiceRequestPage);

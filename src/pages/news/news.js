@@ -28,6 +28,8 @@ var NewsPage = (function () {
         this.newsService = newsService;
         this.loadingCtrl = loadingCtrl;
         this.toastCtrl = toastCtrl;
+        this.newsLists = [];
+        this.nextPageURL = '';
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
             storage.get('token').then(function (token) {
@@ -42,6 +44,7 @@ var NewsPage = (function () {
         loader.present();
         this.newsService.newsList().subscribe(function (newsList) {
             _this.newsLists = newsList.result.data;
+            _this.nextPageURL = newsList.result.next_page_url;
         }, function (err) {
             if (err.status === 401) {
                 _this.showToaster(JSON.parse(err._body).error);
@@ -66,12 +69,42 @@ var NewsPage = (function () {
         });
         toast.present();
     };
+    NewsPage.prototype.doInfinite = function (infiniteScroll) {
+        var _this = this;
+        setTimeout(function () {
+            if (_this.nextPageURL != null && _this.nextPageURL != '') {
+                _this.newsscroll();
+            }
+            else {
+                infiniteScroll.enable(false);
+            }
+            infiniteScroll.complete();
+        }, 500);
+    };
+    NewsPage.prototype.newsscroll = function () {
+        var _this = this;
+        this.newsService.newsscroll(this.nextPageURL).subscribe(function (newsscroll) {
+            _this.newsScrollLists = newsscroll.result.data;
+            for (var i = 0; i < Object.keys(_this.newsScrollLists).length; i++) {
+                _this.newsLists.push(_this.newsScrollLists[i]);
+            }
+            _this.nextPageURL = newsscroll.result.next_page_url;
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+            else {
+                _this.showToaster("Try again later");
+            }
+        });
+    };
     return NewsPage;
 }());
 NewsPage = __decorate([
     Component({
         selector: 'page-news',
-        templateUrl: 'news.html'
+        templateUrl: 'news.html',
+        providers: [NewsService]
     }),
     __metadata("design:paramtypes", [NavController, NavParams, Storage, NewsService, LoadingController, ToastController])
 ], NewsPage);

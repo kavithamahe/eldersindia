@@ -10,17 +10,19 @@ import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { TruncateModule } from 'ng2-truncate';
 import { RlTagInputModule } from 'angular2-tag-input';
+import { Ng2CompleterModule } from "ng2-completer";
+import { BrowserModule } from '@angular/platform-browser';
 //Venkatesh
 import { LoginPage } from '../pages/login/login';
 import { AppConfig } from '../providers/app-config';
 import { LoginUser } from '../providers/login-user';
-import { ConnectionsService } from '../providers/connections-service';
-import { MessagesService } from '../providers/messages-service';
-import { JobBoardService } from '../providers/job-board-service';
-import { ServiceRequestService } from '../providers/service-request-service';
-import { BlogListService } from '../providers/blog-list-service';
-import { NewsService } from '../providers/news-service';
-import { EventsService } from '../providers/events-service';
+// { ConnectionsService } from '../providers/connections-service';
+//import { MessagesService } from '../providers/messages-service';
+//import { JobBoardService } from '../providers/job-board-service';
+//import { ServiceRequestService } from '../providers/service-request-service';
+//import { BlogListService } from '../providers/blog-list-service';
+//import { NewsService } from '../providers/news-service';
+//import { EventsService } from '../providers/events-service';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { ConnectionsPage } from '../pages/connections/connections';
 import { JobboardPage } from '../pages/jobboard/jobboard';
@@ -29,7 +31,6 @@ import { AppliedJobsPage } from '../pages/applied-jobs/applied-jobs';
 import { MessagesPage } from '../pages/messages/messages';
 import { CreateMessagePage } from '../pages/create-message/create-message';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
-import { MyservicesPage } from '../pages/myservices/myservices';
 import { ServiceprovidersPage } from '../pages/serviceproviders/serviceproviders';
 import { ServicerequestPage } from '../pages/servicerequest/servicerequest';
 import { ViewServiceRequestPage } from '../pages/view-service-request/view-service-request';
@@ -47,6 +48,8 @@ import { CommunitylistPage } from '../pages/communitylist/communitylist';
 import { CommunityPage } from '../pages/community/community';
 import { CommunityprofilePage } from '../pages/communityprofile/communityprofile';
 import { CommunitymessagePage } from '../pages/communitymessage/communitymessage';
+import { CommunitycommentsPage } from '../pages/communitycomments/communitycomments';
+import { MyprofilesettingPage } from '../pages/myprofilesetting/myprofilesetting';
 import { ManagePage } from '../pages/manage/manage';
 import { EldersPage } from '../pages/elders/elders';
 import { CommunityServices } from '../providers/community-services';
@@ -55,11 +58,15 @@ import { SubCategoryPage } from '../pages/sub-category/sub-category';
 import { SubcategoryListPage } from '../pages/subcategory-list/subcategory-list';
 import { InstantRequestModalPage } from '../pages/subcategory-list/subcategory-list';
 import { ServiceInfoPage } from '../pages/service-info/service-info';
+import { ServiceModalPage } from '../pages/service-modal/service-modal';
 import { ModalContentPage } from '../pages/modal-page/modal-page';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
+import { SettingsPage } from '../pages/settings/settings';
+import { SubCategoryServicePage } from '../pages/sub-category-service/sub-category-service';
+import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service-provider';
 var AppModule = (function () {
@@ -78,6 +85,8 @@ AppModule = __decorate([
             CommunityPage,
             CommunityprofilePage,
             CommunitymessagePage,
+            CommunitycommentsPage,
+            MyprofilesettingPage,
             ManagePage,
             EldersPage,
             JobboardPage,
@@ -86,7 +95,6 @@ AppModule = __decorate([
             MessagesPage,
             CreateMessagePage,
             ViewMessagesPage,
-            MyservicesPage,
             ServiceprovidersPage,
             ServicerequestPage,
             ViewServiceRequestPage,
@@ -96,6 +104,7 @@ AppModule = __decorate([
             LogoutPage,
             JobDependentPage,
             SubCategoryPage,
+            SubCategoryServicePage,
             SubcategoryListPage,
             ServiceInfoPage,
             ModalContentPage,
@@ -107,13 +116,18 @@ AppModule = __decorate([
             ForgotPasswordPage,
             MyProfilePage,
             EditProfilePage,
-            ChangePasswordPage
+            ChangePasswordPage,
+            SettingsPage,
+            ServiceModalPage,
+            TermsModalPage
         ],
         imports: [
             IonicModule.forRoot(MyApp, AppConfig),
             TruncateModule,
             RlTagInputModule,
-            Ionic2RatingModule
+            Ionic2RatingModule,
+            Ng2CompleterModule,
+            BrowserModule
         ],
         bootstrap: [IonicApp],
         entryComponents: [
@@ -124,6 +138,8 @@ AppModule = __decorate([
             CommunitylistPage,
             CommunityprofilePage,
             CommunitymessagePage,
+            CommunitycommentsPage,
+            MyprofilesettingPage,
             CommunityPage,
             ManagePage,
             EldersPage,
@@ -133,7 +149,6 @@ AppModule = __decorate([
             MessagesPage,
             CreateMessagePage,
             ViewMessagesPage,
-            MyservicesPage,
             ServiceprovidersPage,
             ServicerequestPage,
             ViewServiceRequestPage,
@@ -143,6 +158,7 @@ AppModule = __decorate([
             LogoutPage,
             JobDependentPage,
             SubCategoryPage,
+            SubCategoryServicePage,
             SubcategoryListPage,
             ServiceInfoPage,
             ModalContentPage,
@@ -154,9 +170,13 @@ AppModule = __decorate([
             ForgotPasswordPage,
             MyProfilePage,
             EditProfilePage,
-            ChangePasswordPage
+            ChangePasswordPage,
+            SettingsPage,
+            ServiceModalPage,
+            TermsModalPage
         ],
-        providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, LoginUser, CommunityServices, ConnectionsService, MessagesService, JobBoardService, BlogListService, NewsService, EventsService, AppConfig, ServiceProvider, ServiceRequestService, Storage] // Add GithubUsers provider
+        //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
+        providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, LoginUser, CommunityServices, ServiceProvider, AppConfig, Storage] // Add GithubUsers provider
     })
 ], AppModule);
 export { AppModule };

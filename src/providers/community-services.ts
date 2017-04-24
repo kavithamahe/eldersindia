@@ -214,7 +214,7 @@ myprofile(id){
   }
 
   postCommunity(id,image,videoUrl,posts){
-     this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts }
+     this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts, "app":''}
 
 
      return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,this.posts,this.options)

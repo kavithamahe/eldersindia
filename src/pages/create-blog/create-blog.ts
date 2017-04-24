@@ -113,7 +113,7 @@ submitAttempt: boolean = false;
       }
     }
     
-    this.blogObject={ "category":this.blogForm.value.category,"allow_comment":this.allowComments,"title":this.blogForm.value.title,"highlights":this.highlights,
+    this.blogObject={"app":'', "category":this.blogForm.value.category,"allow_comment":this.allowComments,"title":this.blogForm.value.title,"highlights":this.highlights,
         "description":this.blogForm.value.description,"featured_image":"","banner_image":"","tags":tagsObj,
         };
         

@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 //import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
+import { Validators, FormBuilder } from '@angular/forms';
 import { BlogListService } from '../../providers/blog-list-service';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 /*
@@ -20,22 +21,28 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
   Ionic pages and navigation.
 */
 var SingleblogPage = (function () {
-    function SingleblogPage(navCtrl, navParams, blogListService, storage, loadingCtrl, toastCtrl) {
+    function SingleblogPage(formBuilder, navCtrl, navParams, blogListService, storage, loadingCtrl, toastCtrl) {
         var _this = this;
+        this.formBuilder = formBuilder;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.blogListService = blogListService;
         this.storage = storage;
         this.loadingCtrl = loadingCtrl;
         this.toastCtrl = toastCtrl;
+        this.submitAttempt = false;
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
+            storage.get('id').then(function (id) { _this.user_id = id; });
             storage.get('token').then(function (token) {
                 _this.token = token;
                 _this.blogId = navParams.get("blogId");
                 _this.onInit(_this.blogId);
                 _this.viewComments(_this.blogId);
             });
+        });
+        this.commentForm = formBuilder.group({
+            comment: ['', Validators.compose([Validators.required])]
         });
         this.showComment = true;
     }
@@ -60,22 +67,29 @@ var SingleblogPage = (function () {
     };
     SingleblogPage.prototype.blogComment = function (blogId) {
         var _this = this;
-        var loader = this.loadingCtrl.create({ content: "Please wait..." });
-        loader.present();
-        this.commandObj = { "comment": this.comment };
-        this.blogListService.blogComment(blogId, this.commandObj).subscribe(function (blogComment) {
-            _this.viewComments(_this.blogId);
-            _this.showToaster(blogComment.result);
-        }, function (err) {
-            if (err.status === 401) {
-                _this.showToaster(JSON.parse(err._body).error);
-            }
-            else {
-                _this.showToaster("Try again later");
-            }
-        });
-        this.comment = '';
-        loader.dismiss();
+        if (!this.commentForm.valid) {
+            this.submitAttempt = true;
+        }
+        else {
+            this.submitAttempt = false;
+            this.comment = this.commentForm.value.comment;
+            var loader = this.loadingCtrl.create({ content: "Please wait..." });
+            loader.present();
+            this.commandObj = { "comment": this.comment };
+            this.blogListService.blogComment(blogId, this.commandObj).subscribe(function (blogComment) {
+                _this.viewComments(_this.blogId);
+                _this.commentForm.reset();
+                _this.showToaster(blogComment.result);
+            }, function (err) {
+                if (err.status === 401) {
+                    _this.showToaster(JSON.parse(err._body).error);
+                }
+                else {
+                    _this.showToaster("Try again later");
+                }
+            });
+            loader.dismiss();
+        }
     };
     SingleblogPage.prototype.viewComments = function (blogId) {
         var _this = this;
@@ -123,9 +137,10 @@ var SingleblogPage = (function () {
 SingleblogPage = __decorate([
     Component({
         selector: 'page-singleblog',
-        templateUrl: 'singleblog.html'
+        templateUrl: 'singleblog.html',
+        providers: [BlogListService]
     }),
-    __metadata("design:paramtypes", [NavController, NavParams, BlogListService, Storage, LoadingController, ToastController])
+    __metadata("design:paramtypes", [FormBuilder, NavController, NavParams, BlogListService, Storage, LoadingController, ToastController])
 ], SingleblogPage);
 export { SingleblogPage };
 //# sourceMappingURL=singleblog.js.map

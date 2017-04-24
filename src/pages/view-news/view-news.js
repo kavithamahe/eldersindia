@@ -68,7 +68,8 @@ var ViewNewsPage = (function () {
 ViewNewsPage = __decorate([
     Component({
         selector: 'page-view-news',
-        templateUrl: 'view-news.html'
+        templateUrl: 'view-news.html',
+        providers: [NewsService]
     }),
     __metadata("design:paramtypes", [NavController, NavParams, Storage, NewsService, LoadingController, ToastController])
 ], ViewNewsPage);

@@ -30,7 +30,11 @@ var MessagesService = (function () {
                 _this.headers.append('Authorization', 'Bearer ' + _this.token);
                 _this.options = new RequestOptions({ headers: _this.headers });
             });
-            storage.get('rooturl').then(function (rooturl) { _this.rootUrl = rooturl; });
+            storage.get('rooturl').then(function (rooturl) {
+                _this.rootUrl = rooturl;
+                console.log("consroot" + _this.rootUrl);
+            });
+            console.log("storage call");
         });
     }
     MessagesService.prototype.inbox = function () {
@@ -43,14 +47,19 @@ var MessagesService = (function () {
         return this.http.post(this.rootUrl + 'listSent', _request, this.options)
             .map(function (res) { return res.json(); });
     };
-    MessagesService.prototype.viewMessages = function (messageId) {
-        var _request = {};
+    MessagesService.prototype.viewMessages = function (messageId, viewType) {
+        var _request = { "viewType": viewType };
         return this.http.post(this.rootUrl + 'getInboxMessageDetails/' + messageId, _request, this.options)
             .map(function (res) { return res.json(); });
     };
     MessagesService.prototype.sendMessage = function (messageObject) {
         var _request = messageObject;
         return this.http.post(this.rootUrl + 'sendMessage', _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    MessagesService.prototype.getFriendsList = function () {
+        var _request = {};
+        return this.http.post(this.rootUrl + 'getConnections', _request, this.options)
             .map(function (res) { return res.json(); });
     };
     return MessagesService;
