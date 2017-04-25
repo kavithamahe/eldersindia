@@ -22,8 +22,12 @@ export class MessagesPage {
 messages:any;
 token:string;
 imageUrl:string;
-inboxInfo:any;
-sentInfo:any;
+inboxInfo:any=[];
+sentInfo:any=[];
+nextPageURL1:any='';
+nextPageURL2:any='';
+inboxScrollLists:any=[];
+sentScrolllLists:any=[];
    constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   	this.messages="inbox";
   	this.storage.ready().then(() => {
@@ -40,7 +44,8 @@ sentInfo:any;
     loader.present();
     this.messagesService.inbox().subscribe(
      (inbox) => {
-      this.inboxInfo=inbox.result;     
+      this.inboxInfo=inbox.result.data; 
+      this.nextPageURL1=inbox.result.next_page_url;      
     },
     (err) => { 
         if(err.status===401)
@@ -61,7 +66,8 @@ sentInfo:any;
     loader.present();
     this.messagesService.sent().subscribe(
      (sent) => {
-      this.sentInfo=sent.result;     
+      this.sentInfo=sent.result.data;  
+      this.nextPageURL2=sent.result.next_page_url;         
     },
     (err) => { 
         if(err.status===401)
@@ -96,5 +102,75 @@ sentInfo:any;
   public createMessage()
   {
   this.navCtrl.push(CreateMessagePage);
+  }
+
+  doInfinite1(infiniteScroll) {
+    setTimeout(() => {      
+      if(this.nextPageURL1!=null && this.nextPageURL1!='')
+      {
+       this.inboxscroll();
+      }
+      else{
+        infiniteScroll.enable(false);
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
+  inboxscroll()
+  {
+     this.messagesService.inboxScroll(this.nextPageURL1).subscribe(
+     (inboxScroll) => {
+      this.inboxScrollLists=inboxScroll.result.data;
+      for (let i = 0; i < Object.keys(this.inboxScrollLists).length; i++) {
+        this.inboxInfo.push(this.inboxScrollLists[i]);
+        }      
+       this.nextPageURL1=inboxScroll.result.next_page_url;     
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
+  }
+
+  doInfinite2(infiniteScroll) {
+    setTimeout(() => {      
+      if(this.nextPageURL2!=null && this.nextPageURL2!='')
+      {
+       this.sentScroll();
+      }
+      else{
+        infiniteScroll.enable(false);
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
+  sentScroll()
+  {
+     this.messagesService.sentScroll(this.nextPageURL2).subscribe(
+     (sentScroll) => {
+      this.sentScrolllLists=sentScroll.result.data;
+      for (let i = 0; i < Object.keys(this.sentScrolllLists).length; i++) {
+        this.sentInfo.push(this.sentScrolllLists[i]);
+        }      
+       this.nextPageURL2=sentScroll.result.next_page_url;     
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
   }
 }
