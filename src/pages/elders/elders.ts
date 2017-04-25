@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController,LoadingController, NavParams} from 'ionic-angular';
+import { Camera } from 'ionic-native';
 import { Storage } from '@ionic/storage';
+import { ServiceProvider } from '../../providers/service-provider';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 
 import { CommunityServices } from '../../providers/community-services';
@@ -13,7 +15,9 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 })
 export class EldersPage {
 authForm : FormGroup;
-
+base64Image:any;
+avatar:any;
+title:any;
   //---------------add functionality start-----------------------//
 
 functionalArea:any;
@@ -88,7 +92,7 @@ skill_data:any;
 
 //-----------------------END-------------------//
 
-  constructor(public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
+  constructor(public providerService:ServiceProvider, public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
 
       // this.getElderMasterDetails();
       
@@ -100,14 +104,22 @@ skill_data:any;
       storage.get('token').then((token) => { this.token=token; 
         
         this.functionality=navParams.get("fuctionality");
-      
-      if(this.functionality == 'edit'){
 
+      console.log(this.functionality);
+      if(this.functionality == 'edit'){
+          this.title = "Edit Elder Details"
           if(navParams.get("editData")!= null){
             // let dependent = navParams.get("editData");
             this.loadManageDependentData(navParams.get("editData").id);
          }
+        }else if(this.functionality == 'profileEdit'){
+          this.title = "Profile Edit"
+          console.log("....edit profile..",navParams.get('profileData'));
+          this.loadForm(navParams.get('profileData'));
+        }else{
+          this.title = "Elder Onboarding";
         }
+
       })
     }); 
     // this.today = "";
@@ -140,15 +152,23 @@ skill_data:any;
 
    this.communityServices.getElder(elderId).subscribe(
        elder=>{
-          
-          this.manageDependentData = elder.result.info[0];
+          this.loadForm(elder.result.info[0]);
+        },
+         err =>{
+            this.communityServices.showErrorToast(err);
+            })
+ }
+
+ loadForm(data){
               // this.manageDependentData = data[0] ;
+              this.manageDependentData = data;
               
           this.elder_id = this.manageDependentData.id;
+          this.sponsor_id = this.manageDependentData.sponsor_id;
           this.elder_name= this.manageDependentData.name;
           this.elder_service = this.manageDependentData.in_service;
           this.elder_number= this.manageDependentData.mobile;
-          this.elder_dob= this.getDate(this.manageDependentData.dob);
+          this.elder_dob= this.manageDependentData.dob;//this.getDate(this.manageDependentData.dob);
           this.elder_email= this.manageDependentData.email;
           this.elder_password= this.manageDependentData.password;
           this.elder_location = this.manageDependentData.location;        
@@ -206,10 +226,6 @@ skill_data:any;
               }  
             }
           }
-        },
-         err =>{
-            this.communityServices.showErrorToast(err);
-            })
  }
 
  getDate(datepar){
@@ -250,16 +266,21 @@ skill_data:any;
   addEmergency(){
     this.emergency_list.push({emergency:""});
   }
-  removeEmergency(){
-    this.emergency_list.pop({emergency:""});
+  removeEmergency(index){
+    this.emergency_list.splice(index,1);
+    this.emergency_name.splice(index,1);
+    this.emergency_no.splice(index,1);
   }
 
   addExperience(count){
     // this.getElderMasterDetails();
     this.experience_list.push({experience:""});
   }
-  removeExperience(){
-    this.experience_list.pop();
+  removeExperience(index){
+    this.experience_list.splice(index,1);
+    this.experience_industry.splice(index,1);
+    this.experience_years.splice(index,1);
+    this.experience_duration.splice(index,1);
   }
 
   addEducation(){
@@ -275,7 +296,7 @@ skill_data:any;
   }
 
   getElderSkills(){
-     if(this.functionality !="edit"){
+     if(this.functionality !="edit" && this.functionality !="profileEdit"){
       for(let i=0;i<this.skill_set.length;i++){
         this.elder_skills.push({"skill":this.skill_set[i]})  
       }
@@ -288,7 +309,7 @@ skill_data:any;
   }
 
   getEmergencyNumber(){
-    if(this.functionality != "edit"){
+    if(this.functionality != "edit" && this.functionality !="profileEdit"){
       for(let i=0;i<this.emergency_no.length;i++){
             this.elder_emergency.push({"id":(i+1),"person":this.emergency_name[i],"mobile":this.emergency_no[i]})  
           }
@@ -301,7 +322,7 @@ skill_data:any;
   }
 
   getElderExperience(){
-    if(this.functionality != "edit"){
+    if(this.functionality != "edit" && this.functionality !="profileEdit"){
       for(let i=0;i<this.experience_industry.length;i++){
             this.elder_experience.push({"industry":this.experience_industry[i],"year":this.experience_years[i],"duration":this.experience_duration[i]})  
             }
@@ -313,7 +334,7 @@ skill_data:any;
   }
 
   getElderEducation(){
-    if(this.functionality != "edit"){
+    if(this.functionality != "edit" && this.functionality !="profileEdit"){
     for(let i=0;i<this.education_graduation.length;i++){
             this.elder_education.push({"graduation":this.education_graduation[i],"specialization":this.education_specialization[i],"university":this.education_college[i]})  
           }
@@ -364,7 +385,7 @@ skill_data:any;
     
                         //-------------------modified----------------------------//
 
-      if(this.functionality=="edit")
+      if(this.functionality=="edit" || this.functionality =="profileEdit")
       {
         if(this.authForm.value.elder_name != ""){
             this.elder_name = this.authForm.value.elder_name;
@@ -376,8 +397,8 @@ skill_data:any;
             this.elder_address = this.authForm.value.elder_address;
         }
 
-        let editedData ={"info":
-        [{"id":this.elder_id,
+        let profileEditData = {
+        "id":this.elder_id,
         "area_interest":this.area_of_interest,
         "location":this.elder_location,
         "job_type":this.job_type,        
@@ -401,16 +422,34 @@ skill_data:any;
         "skills":this.skill_data,
         "emergency":this.emergency_data,
         "experience":this.experience_data,
-        "education":this.education_data
-      }]};
+        "education":this.education_data,
+        "app":"",
+        "avatar1":this.avatar
+      }
+
+        let editedData ={"info": [profileEditData]};
+
+          if(this.functionality == "edit"){
+
+            this.communityServices.editSubmit(editedData).subscribe(elders =>{
+                    console.log(elders);    
+             },
+             err =>{
+                    this.communityServices.showErrorToast(err);
+              })
+       
+          }else{
+
+              this.providerService.webServiceCall(`myaccountEdit`,profileEditData)
+                  .subscribe(data=>{
+                    console.log(data);
+                  },
+                  err=>{
+                    console.log(err);
+                  })
+       
+          }
         
-        this.communityServices.editSubmit(editedData).subscribe(elders =>{
-                console.log(elders);    
-         },
-         err =>{
-                this.communityServices.showErrorToast(err);
-          })
-   
       }
       else
         {
@@ -434,6 +473,18 @@ skill_data:any;
     {
       this.nav.setRoot(DashboardPage);
     }
+
+    accessGallery(){
+   Camera.getPicture({
+     sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+     destinationType: Camera.DestinationType.DATA_URL
+    }).then((imageData) => {
+      this.base64Image = 'data:image/jpeg;base64,'+imageData;
+      this.avatar = this.base64Image;
+     }, (err) => {
+      console.log(err);
+    });
+  }
 }
 
 
@@ -441,3 +492,34 @@ skill_data:any;
 
 
 
+[{
+"id":"1",
+"sponsor_id":"1",
+"name":"neduncheliyan",
+"avatar":"uploads\/avatar\/1492778687usr3.jpg",
+"relation":"father",
+"gender":"",
+"dob":"13-06-1950",
+"mobile":"9874563211",
+"mobile_verified":"1",
+"email":"neduncheliyan@elderindia.com",
+"email_verified":"1",
+"in_service":"0",
+"location":"3",
+"job_interested":"1",
+"area_interest":"Animation",
+"job_type":"full time",
+"address":"4\/22 Rutland Gate 4th Street, Chennai, Tamil Nadu 600034",
+"city":"",
+"state":"",
+"status":"1",
+"created_at":"2017-04-07 22:59:14",
+"updated_at":"2017-04-21 18:14:47",
+"city_name":"",
+"state_name":"",
+"experience":[{"id":"23","elder_id":"1","functional_id":"5","functional_other":"","year":"5","duration":"APRIL 2001-2017","status":"1","created_at":"2017-04-21 18:14:46","updated_at":"2017-04-21 18:14:46","$hashKey":"object:3907"}],
+"education":[{"id":"23","elder_id":"1","graduation":"BCA","graduation_other":"","specialization":"Maths","specialization_other":"","university":"anna university","status":"1","created_at":"2017-04-21 18:14:46","updated_at":"2017-04-21 18:14:46","$hashKey":"object:3910"}],
+"emergency":[{"id":"27","elder_id":"1","person":"police","mobile":"100","status":"1","created_at":"2017-04-21 18:14:46","updated_at":"2017-04-21 18:14:46","$hashKey":"object:3904"}],
+"skills":[{"id":"68","elder_id":"1","skill":"java","status":"1","created_at":"2017-04-21 18:14:46","updated_at":"2017-04-21 18:14:46"},{"id":"69","elder_id":"1","skill":"php","status":"1","created_at":"2017-04-21 18:14:46","updated_at":"2017-04-21 18:14:46"},{"id":"70","elder_id":"1","skill":"yii","status":"1","created_at":"2017-04-21 18:14:47","updated_at":"2017-04-21 18:14:47"}],
+"avatar1":"uploads\/avatar\/1492778687usr3.jpg"
+}]

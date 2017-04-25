@@ -32,7 +32,7 @@
   <ion-list>
     <ion-card>
       <ion-card-header ion-item text-left color="primary" (click)="show('show_description')">
-      1. Description of Services
+      1. Description of Services <i class="fa fa-angle-down detalisview-arr"></i>
       </ion-card-header>
       <ion-card-content *ngIf="show_details =='show_description'">
 
@@ -52,8 +52,10 @@
       </ion-card-content>
     </ion-card>
     <ion-card>
-      <ion-card-header ion-item text-left color="primary" (click)="show('show_application_use')">
-      2. Application Use
+      <ion-card-header ion-item text-left icon-right color="primary" (click)="show('show_application_use')">
+      2. Application Use 
+      <ion-icon *ngIf="show_details !='show_application_use'" ios="ios-arrow-down" md="md-arrow-dropdown"></ion-icon>
+      <ion-icon *ngIf="show_details =='show_application_use'" ios="ios-arrow-up" md="md-arrow-dropup"></ion-icon>
       </ion-card-header>
       <ion-card-content *ngIf="show_details =='show_application_use'">
         <p>
@@ -68,7 +70,7 @@
 
     <ion-card>
       <ion-card-header ion-item text-left color="primary" (click)="show('show_eligibility')">
-      3. Eligibility Criteria
+      3. Eligibility Criteria <i class="fa fa-angle-down detalisview-arr"></i>
       </ion-card-header>
       <ion-card-content *ngIf="show_details =='show_eligibility'">
         <ion-list>
@@ -90,7 +92,7 @@
 
     <ion-card>
       <ion-card-header ion-item text-left color="primary" (click)="show('show_user_accounts')">
-      4. User Accounts and Passwords
+      4. User Accounts and Passwords <i class="fa fa-angle-down detalisview-arr"></i>
       </ion-card-header>
       <ion-card-content *ngIf="show_details =='show_user_accounts'">
       <p>
@@ -124,7 +126,7 @@
 
     <ion-card>
       <ion-card-header ion-button full (click)="show('show_renewal')">
-      5. User Account Fees, Term and Renewal
+      5. User Fees, Term and Renewal <i class="fa fa-angle-down detalisview-arr"></i>
       </ion-card-header>
       <ion-card-content *ngIf="show_details =='show_renewal'">
       <p>
@@ -138,7 +140,7 @@
 
     <ion-card>
     <ion-card-header ion-item text-left color="primary" (click)="show('show_personal_info')">
-    6. Personal Information
+    6. Personal Information <i class="fa fa-angle-down detalisview-arr"></i>
     </ion-card-header>
     <ion-card-content *ngIf="show_details =='show_personal_info'">
     <p>
@@ -152,7 +154,7 @@
 
     <ion-card>
     <ion-card-header ion-item text-left color="primary" (click)="show('show_content')">
-    7. Content and Use of Services
+    7. Content and Use of Services <i class="fa fa-angle-down detalisview-arr"></i>
     </ion-card-header>
     <ion-card-content *ngIf="show_details =='show_content'">
       <ion-list>
@@ -180,7 +182,7 @@
 
     <ion-card>
     <ion-card-header ion-item text-left color="primary" (click)="show('show_license')">
-    8. Use License
+    8. Use License <i class="fa fa-angle-down detalisview-arr"></i>
     </ion-card-header>
     <ion-card-content *ngIf="show_details =='show_license'">
       <ion-list>
@@ -212,7 +214,7 @@
 
     <ion-card>
     <ion-card-header ion-item text-left color="primary" (click)="show('show_Intellectual')">
-    9. Intellectual Property
+    9. Intellectual Property <i class="fa fa-angle-down detalisview-arr"></i>
     </ion-card-header>
     <ion-card-content *ngIf="show_details =='show_Intellectual'">
        <p>The Platform and all intellectual property rights in the Platform are owned by CareGuide.</p><br>
@@ -222,7 +224,7 @@
 
     <ion-card>
     <ion-card-header ion-item text-left color="primary" (click)="show('show_trade_marks')">
-    10. Trade-marks
+    10. Trade-marks <i class="fa fa-angle-down detalisview-arr"></i>
     </ion-card-header>
     <ion-card-content *ngIf="show_details =='show_trade_marks'">
       <p>
@@ -239,7 +241,7 @@
 
     <ion-card>
     <ion-card-header ion-item text-left color="primary" (click)="show('show_restrictions')">
-    11. Use Restrictions
+    11. Use Restrictions <i class="fa fa-angle-down detalisview-arr"></i>
     </ion-card-header>
     <ion-card-content *ngIf="show_details =='show_restrictions'">
       <p>
@@ -259,7 +261,7 @@
 
     <ion-card>
     <ion-card-header ion-item text-left color="primary" (click)="show('show_termination')">
-    12. Termination of Registration 
+    12. Termination of Registration <i class="fa fa-angle-down detalisview-arr"></i>
     </ion-card-header>
     <ion-card-content *ngIf="show_details =='show_termination'">
       <p>
@@ -270,7 +272,7 @@
 
     <ion-card>
     <ion-card-header ion-item text-left color="primary" (click)="show('show_limitation')">
-    13. Limitation of Liability
+    13. Limitation of Liability <i class="fa fa-angle-down detalisview-arr"></i>
     </ion-card-header>
     <ion-card-content *ngIf="show_details =='show_limitation'">
       <p>
@@ -294,7 +296,7 @@
 
     <ion-card>
     <ion-card-header ion-item text-left color="primary" (click)="show('show_indemnification')">
-    14. Indemnification
+    14. Indemnification <i class="fa fa-angle-down detalisview-arr"></i>
     </ion-card-header>
     <ion-card-content *ngIf="show_details =='show_indemnification'">
       <p>
@@ -305,7 +307,7 @@
 
     <ion-card>
     <ion-card-header ion-item text-left color="primary" (click)="show('show_miscellaneous')">
-    15. Miscellaneous
+    15. Miscellaneous <i class="fa fa-angle-down detalisview-arr"></i>
     </ion-card-header>
     <ion-card-content *ngIf="show_details =='show_miscellaneous'">
       <ion-list>
@@ -379,7 +381,7 @@
 
     <ion-card>
     <ion-card-header ion-item text-left color="primary" (click)="show('show_contact_us')">
-    16. Contact Us
+    16. Contact Us <i class="fa fa-angle-down detalisview-arr"></i>
     </ion-card-header>
     <ion-card-content *ngIf="show_details =='show_contact_us'">
       <p>

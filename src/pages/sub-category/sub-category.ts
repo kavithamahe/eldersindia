@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LoadingController, NavController, NavParams } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 
 import { SubCategoryServicePage } from '../sub-category-service/sub-category-service';
 import { ServiceProvider } from '../../providers/service-provider';
@@ -17,7 +17,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 })
 export class SubCategoryPage {
 
-elderLocation : string ="";
+serviceLocation : string ="";
 subcategories:any =[];
 locations:any;
 emptyRecord:any;
@@ -27,20 +27,22 @@ subCategoryTitle:any;
 
 		// subcategories: Array<{title: string, lists: any, color: string}>;
 
-  constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navPara: NavParams,public providerService: ServiceProvider) {
+  constructor(public storage:Storage, public loadingCtrl: LoadingController, public navCtrl: NavController, public navPara: NavParams,public providerService: ServiceProvider) {
 
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
-
-      this.elderLocation ="";
-      this.subCategoryId = navPara.get("subcategory").id;
-      this.subCategoryTitle = navPara.get("subcategory").service;
-    
-      let serviceOfferedId = {"serviceOfferedId":this.subCategoryId,"locationId":""};
-      this.loadSubCategory(serviceOfferedId);
-      this.loadLocations();
-
-	   loading.present();
-     loading.dismiss();
+    this.storage.ready().then(() => {
+      this.storage.get('service_location').then((location) => {
+          this.serviceLocation = location;
+          this.subCategoryId = navPara.get("subcategory").id;
+          this.subCategoryTitle = navPara.get("subcategory").service;
+        
+          let serviceOfferedId = {"serviceOfferedId":this.subCategoryId,"locationId": this.serviceLocation};
+          this.loadSubCategory(serviceOfferedId);
+          this.loadLocations();
+      });
+    });
+    loading.present();
+    loading.dismiss();
 
   }	
   
@@ -81,15 +83,22 @@ loadLocations(){
 }
 
 locationChanged(){
-    let locationBasedData = {"serviceOfferedId":this.subCategoryId,"locationId":this.elderLocation};
-    this.subcategories="";
-    this.loadSubCategory(locationBasedData);
+
+  let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    this.storage.ready().then(() => {
+      this.storage.set('service_location',this.serviceLocation);
+      let locationBasedData = {"serviceOfferedId":this.subCategoryId,"locationId":this.serviceLocation};
+      this.subcategories="";
+      this.loadSubCategory(locationBasedData);
+    });
+    loading.present();
+    loading.dismiss();
   }
 
 openSelected(sub_category_Data){
-let location_id = this.elderLocation;
+let location_id = this.serviceLocation;
     let sub_service = sub_category_Data;
-    if(this.elderLocation==""){
+    if(this.serviceLocation==""){
       this.providerService.showToast("Please Select the Location!");
     }else{
     this.navCtrl.push(SubCategoryServicePage,{location_id,sub_service});  
