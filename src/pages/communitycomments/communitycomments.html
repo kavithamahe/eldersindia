@@ -20,11 +20,12 @@
 	    	<ion-item>
 			<!--	<p class="cmmpost">{{comment.comments}}</p>-->
 				 <div class="message-container" [innerHTML]="comment.comments | emojis">
-                 </div>
+             </div>
+
 				    <button ion-button clear (click)="reply(j)">reply</button>
 						<button ion-button item-right clear (click)="showComments(j)">show replies
 						</button>
-					</ion-item>
+					
 						 <div *ngIf="j==showReply">
 				    <ion-list *ngFor="let reply of comment.comment_reply; let i=index">
 				      	<ion-row>
