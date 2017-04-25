@@ -69,6 +69,7 @@
 	        <ion-segment-button (click)="Connections(communityProfileData?.id,'')" value="connections">
 	          Connections
 	        </ion-segment-button>
+	        
         </ion-segment>
        	<div [ngSwitch]="community">
 		    <ion-list *ngSwitchCase="'activity'">
@@ -119,7 +120,7 @@
 										</ion-item>
 									</div>
 								</ion-row>
-							<</div>
+							</div>
 							<ion-row>
 			    				<ion-col>
 			    					<div>
@@ -183,10 +184,8 @@
 	       	 		
 	      				<ion-row>
 		        			<ion-col width-15>
-			          			<button class="hover but-colo" ion-button outline 
-			          			(click)="addLikes(community.id)" color="light">
-			            			{{community.likes.emoji}} &nbsp; <p class="num-of">{{community.likes.emoji_name}}</p>
-			          			</button>
+			          			<button ion-button clear 
+			          			[innerHTML]="community.likes.emoji | emojis" (click)="emojiPicker(community.id)"></button>
 		        			</ion-col>
 		        	
 		        			<ion-col>
@@ -195,27 +194,10 @@
 			          				<span style="color:red; font-size:13px;">{{community.comment_count}}</span>&nbsp;<i class="fa fa-comments" aria-hidden="true"></i>
 			          			</button>
 		          			</ion-col>
-		          			<!-- <ion-col>
-				          		<button ion-button class="comment but-colo" color="dark" icon-only clear>&nbsp;
-				          		<i class="fa fa-pencil-square-o" aria-hidden="true" 
-				          		(click)="addDetails(i)"></i>
-				          		</button>
-			          		</ion-col> -->
+		          		
 	      				</ion-row>
 						<hr/>
-	      				<div *ngIf="i==showblock">
-	      					
-							
-	      				<ion-item>
-				   			<ion-textarea [(ngModel)]="comment" placeholder="Enter Comments" style=" margin:0px !important;">
-				   		    </ion-textarea>
-						</ion-item>
-							<div class="send-req">
-								<button ion-button (click)="sendPost(community.id)" class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
-								</button>
-							</div>
-  							
-	      			</div>
+	      			
 	      		</div>
 	      	</div>
 	      </ion-list>
@@ -270,5 +252,9 @@
   		</ion-card>
   	</ion-list>
 	</div>
+
+	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 	

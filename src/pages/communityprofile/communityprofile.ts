@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, ViewController,AlertController,LoadingController,ToastController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ViewController,AlertController,LoadingController,PopoverController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Platform } from 'ionic-angular';
 import { InAppBrowser } from 'ionic-native';
+import { EmojiPickerPage } from '../../pages/emoji-picker/emoji-picker';
+
 
 
 
@@ -50,11 +52,14 @@ export class CommunityprofilePage {
     profile_uid:any;
     connectionList:any;
     allConnections:any;
+    eventScrollLists:any;
+    nextPageURL:any;
     user_id:any;
+    emojiId:number=0;
     community: String = "activity";
   isAndroid: boolean = false;
 
-  constructor(public nav: NavController,public platform: Platform, public storage:Storage, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+  constructor(public nav: NavController,public platform: Platform, public storage:Storage,public popoverCtrl: PopoverController, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
         this.isAndroid = platform.is('android');
       this.nav=nav;
       this.storage.ready().then(() => {
@@ -64,21 +69,20 @@ export class CommunityprofilePage {
       
       this.profile_uid=navParams.get("profile_uid");
       this.loadThisPage(this.profile_uid);
+ 
   }
 
   loadThisPage(id){
     this.communityProfile=[];
     this.communityProfileData=[];
     this.status=[];
-     // this.connectLists = false;
-     //  this.activityLists = true;
+     
       this.status = false;
       this.request_sent = false;
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
       loader.present();
       this.profileCommunity(id);
       this.memberProfile(id);
-      
       this.addComments=false;
       this.itemComments=false;
       loader.dismiss();
@@ -96,7 +100,7 @@ export class CommunityprofilePage {
   }
     profileSetting(member) {
 
-    let modal = this.modalCtrl.create(MyprofilesettingPage,{member_data:member});
+    let modal = this.popoverCtrl.create(MyprofilesettingPage,{member_data:member});
     modal.present();
   }
   
@@ -163,7 +167,7 @@ export class CommunityprofilePage {
      }
   }
    openUrl(metalink_url) {
-console.log("URL is ",metalink_url);
+    console.log("URL is ",metalink_url);
         this.platform.ready().then(() => {
             let browser = new InAppBrowser(metalink_url,'_blank');
 
@@ -174,6 +178,7 @@ console.log("URL is ",metalink_url);
       this.communityProfile=[];
       this.communityServices.userProfile(id).subscribe(users => {
       this.communityProfile = users.result.info.lists.data;
+      this.nextPageURL=users.result.info.lists.next_page_url;
 
   },
    err =>{
@@ -241,20 +246,29 @@ console.log("URL is ",metalink_url);
   }
   
 
-  addLikes(id){
+  addLikes(likeObj){
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
-     this.communityServices.addLike(id).subscribe(data =>{
+
+   this.communityServices.addLike(likeObj).subscribe(data =>{
      this.showToast(data.result);
-     this.profileCommunity(this.profile_uid);
+      this.profileCommunity(this.profile_uid);
    },
      err =>{
+        if(err.status===401){
+      this.showToast(JSON.parse(err._body).error);
+    }
+    else if(err.status===500){
+      this.profileCommunity(this.profile_uid);
+    }
+    else{
+      this.communityServices.showErrorToast(err);  
+    }
     
-    this.communityServices.showErrorToast(err);
   })
     loader.dismiss();
   }
-
+ 
   showToast(messageData){
     let toast = this.toastCtrl.create({
         message: messageData,
@@ -350,6 +364,74 @@ console.log("URL is ",metalink_url);
   {
     this.nav.setRoot(DashboardPage);
   }
+ emojiPicker(userId)
+   {
+    let  likeEmoji={type:'likeEmoji'};
+   let modal = this.popoverCtrl.create(EmojiPickerPage,likeEmoji);
+    modal.present();
+     modal.onDidDismiss(data => {
+      if(data!=null)
+      {
+        let emojiSymbol=data.emojiImage;
+        let name=emojiSymbol.replace(/[^a-z\d]+/gi, "");
+        if(emojiSymbol==':thumbsup:')
+        {
+          this.emojiId=1;
+        }
+        else if(emojiSymbol==':heart:')
+        {
+          this.emojiId=2;
+        }
+        else if(emojiSymbol==':laughing:')
+        {
+          this.emojiId=3;
+        }
+        else if(emojiSymbol==':wow:')
+        {
+          this.emojiId=4;
+        }
+        else if(emojiSymbol==':disappointed_relieved:')
+        {
+          this.emojiId=5;
+        }
+        else if(emojiSymbol==':rage:')
+        {
+          this.emojiId=6;
+        }
+        let likeObj={"id":userId,"emoji":emojiSymbol,"name":name,"emojiId":this.emojiId};
+        this.addLikes(likeObj);
+      }
+     })
+   }
+doInfinite(infiniteScroll) {
+    setTimeout(() => {      
+      if(this.nextPageURL!=null && this.nextPageURL!='')
+      {
+       this.userpostsscroll(this.profile_uid);
+      }
+      else{
+        infiniteScroll.enable(false);
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
+   userpostsscroll(id)
+  {
+     this.communityServices.userpostsscroll(this.nextPageURL,id).subscribe(
+     (eventsscroll) => {
+      this.eventScrollLists=eventsscroll.result.info.lists.data;
+      for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
+        this.communityProfile.push(this.eventScrollLists[i]);
+        }
+      
+       this.nextPageURL=eventsscroll.result.info.lists.next_page_url;     
+    },
+    err =>{
+   
+    this.communityServices.showErrorToast(err);
+  });
+  }
+
  }
 
 
