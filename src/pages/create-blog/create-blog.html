@@ -46,6 +46,7 @@
 	    <ion-textarea [(ngModel)]="description" formControlName="description"></ion-textarea>
 	</ion-item>
 	<p *ngIf="!blogForm.controls.description.valid && (blogForm.controls.description.dirty || submitAttempt)" class="err-reds">Please enter description</p>
+  </form>
   <ion-label stacked class="liste-names">Featured Image</ion-label>
    <button ion-button (click)="accessGallery('featured')">Browse</button>
     <img [src]="base64Image" *ngIf="base64Image" />
@@ -72,5 +73,4 @@
   Send
 </button>
 </ion-list>
-</form>
 </ion-content>
