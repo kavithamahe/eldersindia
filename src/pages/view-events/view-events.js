@@ -68,7 +68,8 @@ var ViewEventsPage = (function () {
 ViewEventsPage = __decorate([
     Component({
         selector: 'page-view-events',
-        templateUrl: 'view-events.html'
+        templateUrl: 'view-events.html',
+        providers: [EventsService]
     }),
     __metadata("design:paramtypes", [NavController, NavParams, Storage, EventsService, LoadingController, ToastController])
 ], ViewEventsPage);

@@ -10,10 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { Platform, NavController, NavParams, AlertController, LoadingController, ModalController, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { Device, LocalNotifications } from 'ionic-native';
+import { LocalNotifications } from 'ionic-native';
+import { Validators, FormBuilder } from '@angular/forms';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { LoginUser } from '../../providers/login-user';
 import { AppConfig } from '../../providers/app-config';
+import { ServiceProvider } from '../../providers/service-provider';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 /*
   Generated class for the Login page.
@@ -22,7 +24,10 @@ import { ForgotPasswordPage } from '../forgot-password/forgot-password';
   Ionic pages and navigation.
 */
 var LoginPage = (function () {
-    function LoginPage(alertCtrl, modalCtrl, platform, navCtrl, navParams, loginUser, loadingCtrl, toastCtrl, storage, appConfig) {
+    function LoginPage(service, formBuilder, alertCtrl, modalCtrl, platform, navCtrl, navParams, loginUser, loadingCtrl, toastCtrl, storage, appConfig) {
+        var _this = this;
+        this.service = service;
+        this.formBuilder = formBuilder;
         this.alertCtrl = alertCtrl;
         this.modalCtrl = modalCtrl;
         this.platform = platform;
@@ -33,44 +38,83 @@ var LoginPage = (function () {
         this.toastCtrl = toastCtrl;
         this.storage = storage;
         this.appConfig = appConfig;
+        this.id = '';
+        this.submitAttempt = false;
         this.registerCredentials = { email: '', password: '' };
+        this.callSponsor = 0;
+        this.ambulance = 0;
+        this.police = 0;
+        this.storage.ready().then(function () {
+            storage.get('id').then(function (id) {
+                _this.id = id;
+            });
+        });
+        this.loginForm = formBuilder.group({
+            email: ['', Validators.compose([Validators.required])],
+            password: ['', Validators.compose([Validators.required])]
+        });
     }
     LoginPage.prototype.login = function () {
         var _this = this;
-        console.log('Device UUID is: ' + Device.uuid);
-        var loader = this.loadingCtrl.create({
-            content: "Please wait..."
-        });
-        loader.present();
-        this.loginUser.loginload(this.registerCredentials).subscribe(function (loginuser) {
-            _this.storage.ready().then(function () {
-                _this.storage.clear();
-                _this.storage.set('id', loginuser['details']['id']);
-                _this.storage.set('name', loginuser['details']['name']);
-                _this.storage.set('email', loginuser['details']['email']);
-                _this.storage.set('user_type', loginuser['details']['user_type']);
-                _this.storage.set('user_type_id', loginuser['details']['user_type_id']);
-                _this.storage.set('avatar', loginuser['details']['avatar']);
-                if (loginuser['details']['user_type'] == 'elder') {
-                    _this.storage.set('call_sponsor', loginuser.details.emergency_contacts[0].call_sponsor);
-                    _this.storage.set('ambulance', loginuser.details.emergency_contacts[0].ambulance);
-                    _this.storage.set('police', loginuser.details.emergency_contacts[0].police);
-                }
-                _this.storage.set('token', loginuser['token']);
-                _this.storage.set('imageurl', _this.appConfig.setImageurl());
-                _this.storage.set('rooturl', _this.appConfig.setrooturl());
+        if (!this.loginForm.valid) {
+            this.submitAttempt = true;
+        }
+        else {
+            this.submitAttempt = false;
+            this.registerCredentials.email = this.loginForm.value.email;
+            this.registerCredentials.password = this.loginForm.value.password;
+            var loader = this.loadingCtrl.create({
+                content: "Please wait..."
             });
-            // alert(loginuser['token']);
-            _this.navCtrl.setRoot(DashboardPage);
-        }, function (err) {
-            if (err.status === 401) {
-                _this.showToaster(JSON.parse(err._body).error);
-            }
-            else {
-                _this.showToaster("Try again later");
-            }
-        });
-        loader.dismiss();
+            loader.present();
+            this.loginUser.loginload(this.registerCredentials).subscribe(function (loginuser) {
+                _this.service.serviceInit(loginuser['token']);
+                if (loginuser['details']['user_type'] == 'elder') {
+                    _this.loginUser.currentUser("elder");
+                }
+                else {
+                    _this.loginUser.currentUser("sponsor");
+                }
+                _this.storage.ready().then(function () {
+                    _this.storage.clear();
+                    _this.storage.set('id', loginuser['details']['id']);
+                    _this.storage.set('name', loginuser['details']['name']);
+                    _this.storage.set('email', loginuser['details']['email']);
+                    _this.storage.set('user_type', loginuser['details']['user_type']);
+                    _this.storage.set('user_type_id', loginuser['details']['user_type_id']);
+                    _this.storage.set('avatar', loginuser['details']['avatar']);
+                    if (loginuser['details']['user_type'] == 'elder' && (loginuser.details.emergency_contacts.length > 0)) {
+                        if (loginuser.details.emergency_contacts[0].call_sponsor != 'undefined') {
+                            _this.callSponsor = loginuser.details.emergency_contacts[0].call_sponsor;
+                            console.log("callSponsor" + _this.callSponsor);
+                        }
+                        if (loginuser.details.emergency_contacts[0].ambulance != 'undefined') {
+                            _this.ambulance = loginuser.details.emergency_contacts[0].ambulance;
+                        }
+                        if (loginuser.details.emergency_contacts[0].police != 'undefined') {
+                            _this.police = loginuser.details.emergency_contacts[0].police;
+                        }
+                        _this.storage.set('call_sponsor', _this.callSponsor);
+                        _this.storage.set('ambulance', _this.ambulance);
+                        _this.storage.set('police', _this.police);
+                    }
+                    _this.storage.set('token', loginuser['token']);
+                    _this.storage.set('imageurl', _this.appConfig.setImageurl());
+                    _this.storage.set('rooturl', _this.appConfig.setrooturl());
+                    _this.storage.set('islogin', 1);
+                    _this.navCtrl.setRoot(DashboardPage);
+                });
+                // alert(loginuser['token']);
+            }, function (err) {
+                if (err.status === 401) {
+                    _this.showToaster(JSON.parse(err._body).error);
+                }
+                else {
+                    _this.showToaster("Try again later");
+                }
+            });
+            loader.dismiss();
+        }
     };
     LoginPage.prototype.showToaster = function (message) {
         var toast = this.toastCtrl.create({
@@ -136,7 +180,7 @@ LoginPage = __decorate([
     Component({
         templateUrl: 'login.html'
     }),
-    __metadata("design:paramtypes", [AlertController, ModalController, Platform, NavController, NavParams, LoginUser, LoadingController, ToastController, Storage, AppConfig])
+    __metadata("design:paramtypes", [ServiceProvider, FormBuilder, AlertController, ModalController, Platform, NavController, NavParams, LoginUser, LoadingController, ToastController, Storage, AppConfig])
 ], LoginPage);
 export { LoginPage };
 //# sourceMappingURL=login.js.map

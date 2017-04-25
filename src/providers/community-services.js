@@ -31,6 +31,12 @@ var CommunityServices = (function () {
             storage.get('id').then(function (id) { _this.user_id = id; });
         });
     }
+    CommunityServices.prototype.fileUpload = function (id, file) {
+        var formdata = new FormData();
+        var posts = { community_id: id, image: file, videourl: "", message: "" };
+        return this.http.post(this.getCommunityPostsUrl + "addCommunityPost", posts, this.options)
+            .map(function (res) { return res.json(); });
+    };
     CommunityServices.prototype.showToast = function (messageData) {
         var toast = this.toastCtrl.create({
             message: messageData,
@@ -50,6 +56,11 @@ var CommunityServices = (function () {
     CommunityServices.prototype.myCommunity = function (data) {
         this.body = { "uid": this.user_id, "search": data, "view": "grid", "get": ["communityCategory"] };
         return this.http.post(this.getCommunityPostsUrl + "myCommunity", this.body, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    CommunityServices.prototype.eventsscroll = function (nextPageURL) {
+        this.body = { "uid": this.user_id, "search": "", "view": "grid", "get": ["communityCategory"] };
+        return this.http.post(nextPageURL, this.body, this.options)
             .map(function (res) { return res.json(); });
     };
     CommunityServices.prototype.getCommunity = function (category) {
@@ -83,9 +94,23 @@ var CommunityServices = (function () {
             .map(function (res) { return res.json(); });
     };
     //------------//
-    CommunityServices.prototype.getConnectList = function () {
-        this.connectlist = { "searchValue": "" };
+    CommunityServices.prototype.getConnectLists = function (id, data) {
+        this.connectlist = { "id": id, "searchValue": data };
         return this.http.post(this.getCommunityPostsUrl + "getConnectionList", this.connectlist, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    CommunityServices.prototype.getCommunityMembers = function () {
+        return this.http.post(this.getCommunityPostsUrl + "getCommunityMembers", "", this.options)
+            .map(function (res) { return res.json(); });
+    };
+    CommunityServices.prototype.myprofile = function (id) {
+        this.send = { "user_id": id };
+        return this.http.post(this.getCommunityPostsUrl + "myprofile", this.send, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    CommunityServices.prototype.getPrivacy = function (id) {
+        this.send = { "user_id": id };
+        return this.http.post(this.getCommunityPostsUrl + "getPrivacy", this.send, this.options)
             .map(function (res) { return res.json(); });
     };
     CommunityServices.prototype.sendMessage = function (id, attachment, subject, message) {
@@ -124,8 +149,13 @@ var CommunityServices = (function () {
         return this.http.post(this.getCommunityPostsUrl + "sendComments", this.post, this.options)
             .map(function (res) { return res.json(); });
     };
+    CommunityServices.prototype.sendReply = function (id1, profile_id, comments) {
+        this.post = { "info": { "comments": comments, "uid_from": this.user_id, "uid_to": profile_id, "comment_id": id1 } };
+        return this.http.post(this.getCommunityPostsUrl + "sendReply", this.post, this.options)
+            .map(function (res) { return res.json(); });
+    };
     CommunityServices.prototype.postCommunity = function (id, image, videoUrl, posts) {
-        this.posts = { "community_id": id, "image": image, "videourl": videoUrl, "message": posts };
+        this.posts = { "community_id": id, "image": image, "videourl": videoUrl, "message": posts, "app": '' };
         return this.http.post(this.getCommunityPostsUrl + "addCommunityPost", this.posts, this.options)
             .map(function (res) { return res.json(); });
     };
@@ -139,8 +169,18 @@ var CommunityServices = (function () {
         return this.http.post(this.getCommunityPostsUrl + "getElderListBySponser", this.lists, this.options)
             .map(function (res) { return res.json(); });
     };
+    CommunityServices.prototype.searchManageLists = function (data) {
+        this.lists = { "searchValue": data };
+        return this.http.post(this.getCommunityPostsUrl + "getElderListBySponser", this.lists, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    CommunityServices.prototype.getElder = function (elder_id) {
+        var elderData = { "elderId": elder_id };
+        return this.http.post(this.getCommunityPostsUrl + "getElderListById", elderData, this.options)
+            .map(function (res) { return res.json(); });
+    };
     CommunityServices.prototype.getElderMasterDetails = function () {
-        this.body = { "get": ["FunctionalArea", "Educational", "Specialization", "Locations", "AreaofInterest", "Skills"] };
+        this.body = { "get": ["Relations", "InService", "FunctionalArea", "Educational", "Specialization", "Locations", "AreaofInterest", "Skills"] };
         return this.http.post(this.getCommunityPostsUrl + "getElderMasterDetails", this.body, this.options)
             .map(function (res) { return res.json(); });
     };
@@ -149,15 +189,12 @@ var CommunityServices = (function () {
         return this.http.post(this.getCommunityPostsUrl + "elderDelete", this.manage, this.options)
             .map(function (res) { return res.json(); });
     };
-    //-----------------------------------------------------//
-    CommunityServices.prototype.editSubmit = function () {
-        this.edit = { "info": [{ "id": 17, "sponsor_id": "7", "name": "asdf", "avatar": null, "relation": "father", "gender": "", "dob": "2017-03-02", "mobile": "09597009544", "mobile_verified": 1, "email": "sponsssssor@ec.dev", "email_verified": 1, "in_service": 0, "job_interested": 1, "address": "velachery chennai", "city": "chennai", "state": "Tamilnadu", "status": 1, "created_at": "2017-03-06 13:06:59", "updated_at": "2017-03-06 18:36:59", "city_name": "chennai", "state_name": "Tamilnadu", "service": "Retired", "experience": [{ "id": 13, "elder_id": 17, "functional_id": 8, "functional_other": "", "year": "3", "duration": "", "status": 1, "created_at": "2017-03-06 13:06:59", "updated_at": "2017-03-06 13:06:59" }], "education": [{ "id": 12, "elder_id": 17, "graduation": "B.Arch", "graduation_other": "", "specialization": "Chemistry", "specialization_other": "", "university": "anna university", "status": 1, "created_at": "2017-03-06 13:06:59", "updated_at": "2017-03-06 13:06:59" }], "emergency": [{ "id": 16, "elder_id": 17, "person": "police", "mobile": "9597009544", "status": 1, "created_at": "2017-03-06 13:06:59", "updated_at": "2017-03-06 13:06:59" }] }] };
-        return this.http.post(this.getCommunityPostsUrl + "elderEdit", this.edit, this.options)
+    CommunityServices.prototype.editSubmit = function (editedDependentData) {
+        return this.http.post(this.getCommunityPostsUrl + "elderEdit", editedDependentData, this.options)
             .map(function (res) { return res.json(); });
     };
-    CommunityServices.prototype.addSubmit = function () {
-        this.add = { "info": [{ "email": "mom@g.com", "relation": "mother", "password": "123456", "name": "mom", "dob": "2016-11-08", "mobile": "3216548754", "in_service": "0", "address": "maduari", "location": 2, "area_interest": "Accounting/Finance", "job_type": "full time", "skills": [{ "skill": "account" }, { "skill": "maths" }], "emergency": [{ "id": 1, "person": "police", "mobile": "100" }], "experience": [{ "industry": 1, "year": "5", "duration": "2010-2015" }], "education": [{ "graduation": "B.A", "specialization": "Maths", "university": "KLU" }], "sponsor_id": "0", "job_interested": 1 }] };
-        return this.http.post(this.getCommunityPostsUrl + "elderOnBoarding", this.add, this.options)
+    CommunityServices.prototype.addSubmit = function (dependentData) {
+        return this.http.post(this.getCommunityPostsUrl + "elderOnBoarding", dependentData, this.options)
             .map(function (res) { return res.json(); });
     };
     return CommunityServices;

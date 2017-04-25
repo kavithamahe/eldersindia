@@ -28,6 +28,8 @@ var EventsPage = (function () {
         this.eventsService = eventsService;
         this.loadingCtrl = loadingCtrl;
         this.toastCtrl = toastCtrl;
+        this.eventsLists = [];
+        this.nextPageURL = '';
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
             storage.get('token').then(function (token) {
@@ -42,7 +44,7 @@ var EventsPage = (function () {
         loader.present();
         this.eventsService.eventsList().subscribe(function (eventsList) {
             _this.eventsLists = eventsList.result.data;
-            console.log(_this.eventsLists);
+            _this.nextPageURL = eventsList.result.next_page_url;
         }, function (err) {
             if (err.status === 401) {
                 _this.showToaster(JSON.parse(err._body).error);
@@ -67,12 +69,42 @@ var EventsPage = (function () {
     EventsPage.prototype.viewEvents = function (eventsId) {
         this.navCtrl.push(ViewEventsPage, { eventsId: eventsId });
     };
+    EventsPage.prototype.doInfinite = function (infiniteScroll) {
+        var _this = this;
+        setTimeout(function () {
+            if (_this.nextPageURL != null && _this.nextPageURL != '') {
+                _this.newsscroll();
+            }
+            else {
+                infiniteScroll.enable(false);
+            }
+            infiniteScroll.complete();
+        }, 500);
+    };
+    EventsPage.prototype.newsscroll = function () {
+        var _this = this;
+        this.eventsService.eventsscroll(this.nextPageURL).subscribe(function (eventsscroll) {
+            _this.eventScrollLists = eventsscroll.result.data;
+            for (var i = 0; i < Object.keys(_this.eventScrollLists).length; i++) {
+                _this.eventsLists.push(_this.eventScrollLists[i]);
+            }
+            _this.nextPageURL = eventsscroll.result.next_page_url;
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+            else {
+                _this.showToaster("Try again later");
+            }
+        });
+    };
     return EventsPage;
 }());
 EventsPage = __decorate([
     Component({
         selector: 'page-events',
-        templateUrl: 'events.html'
+        templateUrl: 'events.html',
+        providers: [EventsService]
     }),
     __metadata("design:paramtypes", [NavController, NavParams, Storage, EventsService, LoadingController, ToastController])
 ], EventsPage);

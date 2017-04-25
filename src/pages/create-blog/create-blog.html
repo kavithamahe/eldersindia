@@ -47,10 +47,11 @@
 	</ion-item>
 	<p *ngIf="!blogForm.controls.description.valid && (blogForm.controls.description.dirty || submitAttempt)" class="err-reds">Please enter description</p>
   <ion-label stacked class="liste-names">Featured Image</ion-label>
-   <button ion-button >Browse</button>
-   
+   <button ion-button (click)="accessGallery('featured')">Browse</button>
+    <img [src]="base64Image" *ngIf="base64Image" />
     <ion-label stacked class="liste-names">Banner Image</ion-label>
-    <button ion-button >Browse</button>
+    <button ion-button (click)="accessGallery('banner')">Browse</button>
+    <img [src]="bannerImage" *ngIf="bannerImage" />
     <ion-label stacked class="liste-names">Tags:</ion-label>
     <!--<rl-tag-input [(ngModel)]="tagsModel" [addOnBlur]="true" [addOnEnter]="true" [autocomplete]="true"  [autocompleteItems]="tags" placeholder="Tags"></rl-tag-input>-->
         <rl-tag-input [(ngModel)]="tagsModel" [addOnBlur]="false" [addOnEnter]="true"  [autocompleteItems]="tags" [autocomplete]="true" placeholder="Tags" (keyup)="getTagsList($event)" [ngModelOptions]="{standalone: true}"></rl-tag-input>

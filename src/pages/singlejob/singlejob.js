@@ -32,6 +32,8 @@ var SinglejobPage = (function () {
         this.jobId = navParams.get("jobId");
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
+            storage.get('user_type').then(function (user_type) { _this.user_type = user_type; });
+            storage.get('user_type_id').then(function (user_type_id) { _this.user_type_id = user_type_id; });
             storage.get('token').then(function (token) {
                 _this.token = token;
                 _this.onInit();
@@ -56,8 +58,17 @@ var SinglejobPage = (function () {
         loader.dismiss();
     };
     SinglejobPage.prototype.applyJob = function (jobId) {
+        if (this.user_type == 'elder') {
+            this.jobDependentId = this.user_type_id;
+            this.callApplyJob(jobId, this.jobDependentId);
+        }
+        else {
+            this.jobDependent(jobId);
+        }
+    };
+    SinglejobPage.prototype.callApplyJob = function (jobId, jobDependentId) {
         var _this = this;
-        this.jobBoardService.applyJob(jobId).subscribe(function (applyJob) {
+        this.jobBoardService.applyJob(jobId, jobDependentId).subscribe(function (applyJob) {
             // this.applyJobInfo=applyJob.result;  
             _this.showToaster(applyJob.result);
             //console.log(singleJob);
@@ -81,8 +92,13 @@ var SinglejobPage = (function () {
     SinglejobPage.prototype.dashboardPage = function () {
         this.navCtrl.setRoot(DashboardPage);
     };
-    SinglejobPage.prototype.jobDependent = function () {
+    SinglejobPage.prototype.jobDependent = function (jobId) {
+        var _this = this;
         var modal = this.modalCtrl.create(JobDependentPage);
+        modal.onDidDismiss(function (data) {
+            _this.jobDependentId = data.dependent;
+            _this.callApplyJob(jobId, _this.jobDependentId);
+        });
         modal.present();
     };
     return SinglejobPage;
@@ -90,7 +106,8 @@ var SinglejobPage = (function () {
 SinglejobPage = __decorate([
     Component({
         selector: 'page-singlejob',
-        templateUrl: 'singlejob.html'
+        templateUrl: 'singlejob.html',
+        providers: [JobBoardService]
     }),
     __metadata("design:paramtypes", [NavController, NavParams, Storage, LoadingController, ToastController, JobBoardService, ModalController])
 ], SinglejobPage);

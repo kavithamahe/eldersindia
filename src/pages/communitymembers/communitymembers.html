@@ -1,0 +1,16 @@
+
+
+
+
+<ion-content padding>
+	<ion-list *ngFor="let member of members">
+		<ion-item text-wrap class="memb-list">
+			<ion-avatar>
+				<img (click)="membersProfile(member.uid)" style="border:2px solid #e6e6e6;" 
+				[src]="imageUrl+member?.avatar" 
+				[hidden]="!member?.avatar">
+			</ion-avatar>
+		</ion-item>
+	</ion-list>
+	
+</ion-content>

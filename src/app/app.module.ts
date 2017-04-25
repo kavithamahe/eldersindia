@@ -47,6 +47,8 @@ import { CommunityprofilePage } from '../pages/communityprofile/communityprofile
 import { CommunitymessagePage } from '../pages/communitymessage/communitymessage';
 import { CommunitycommentsPage } from '../pages/communitycomments/communitycomments';
 import { MyprofilesettingPage } from '../pages/myprofilesetting/myprofilesetting';
+import { CommunitymembersPage } from '../pages/communitymembers/communitymembers';
+
 
 
 import { ManagePage } from '../pages/manage/manage';
@@ -86,6 +88,7 @@ import { ServiceProvider } from '../providers/service-provider';
     CommunitycommentsPage,
     MyprofilesettingPage,
     EmojiPickerPage,
+    CommunitymembersPage,
     ManagePage,
     EldersPage,
     JobboardPage,
@@ -140,7 +143,8 @@ import { ServiceProvider } from '../providers/service-provider';
     CommunitymessagePage,
     CommunitycommentsPage,
     MyprofilesettingPage,
-    EmojiPickerPage, 
+    EmojiPickerPage,
+    CommunitymembersPage, 
     CommunityPage,
     ManagePage,
     EldersPage,

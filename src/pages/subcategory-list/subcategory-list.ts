@@ -153,6 +153,9 @@ loadSubcategoryList(subCategory_id,location_id){
 </ion-header>
 
 <ion-content class="popup-mds">
+  <ion-item *ngIf(selected)>
+  <p class="err-reds"> Dependent not selected</p>
+  </ion-item>
   <ion-row>
       <ion-item >
             <ion-label>Select Dependent</ion-label>
@@ -172,8 +175,9 @@ loadSubcategoryList(subCategory_id,location_id){
 })
 export class InstantRequestModalPage {
   dependentLists:any;
-  dependentData:any;
+  dependentData:any = "";
   service:any;
+  selected:boolean=false;
 
   constructor(
     public params: NavParams,
@@ -188,6 +192,8 @@ export class InstantRequestModalPage {
     this.viewCtrl.dismiss("dismiss");
   }
   submit(){
+    if(this.dependentData != ""){
+      this.selected = false;
     let dependent_model = this.dependentData;
     // let date = new Date();
     let d = new Date();
@@ -198,5 +204,8 @@ export class InstantRequestModalPage {
 
     let serviceRequestData = {"problem": this.service, "datetime": datestring, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile};
     this.viewCtrl.dismiss(serviceRequestData);
+  }else{
+    this.selected = true;
+    }
   }
 }

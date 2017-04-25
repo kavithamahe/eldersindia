@@ -15,21 +15,11 @@
 </ion-header>
 <ion-content padding>
   
- 
-   <!--  <ion-fab center edge>
-  <button ion-fab mini color="primary" (click)="addElder()"> <ion-icon name="md-person-add">
-    
-  </ion-icon>
-</button>
-</ion-fab> -->
-
-<br/>
- <ion-searchbar (ionInput)="getItems($event)">
-   
- </ion-searchbar>
- <div right edge>
-    <button ion-fab mini (click)="addElder()"><ion-icon name="md-person-add"></ion-icon></button>
-    </div>
+ <div>
+  <ion-fab  right bottom center>
+    <button ion-fab mini (click)="addElder()" end><ion-icon name="md-person-add"></ion-icon></button>
+    </ion-fab>
+  </div>
    <!--  <div>
      <button style="color:red;" ion-button icon-only round end (click)="addElder()">
       <ion-icon name="ios-person-add"></ion-icon> 
