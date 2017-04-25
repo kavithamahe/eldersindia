@@ -10,7 +10,7 @@
 	        <ion-icon name="home"></ion-icon>
 	    </button>
     </ion-buttons>
-    <ion-title text-center>Community</ion-title>
+    <ion-title text-center>Communities</ion-title>
   </ion-navbar>
 </ion-header>
   
@@ -40,18 +40,28 @@
 					</ion-col>
 				</ion-row>
 					<h2 class="wel-comemem" style="padding-left:0px;">Members</h2>
-						<div *ngFor="let member of members" text-wrap>
+						<div  *ngFor="let member of members; let i=index" text-wrap>
+						<div *ngIf="i<= 3">
+
 		    				<ion-item text-wrap class="memb-list">
 								<ion-avatar>
-									
-									<img (click)="membersProfile(member.uid)" style="border:2px solid #e6e6e6;" [src]="imageUrl+member?.avatar" [hidden]="!member?.avatar">
+									<img (click)="membersProfile(member.uid)" style="border:2px solid #e6e6e6;" [src]="imageUrl+member?.avatar" 
+									[hidden]="!member?.avatar">
 
 								</ion-avatar>
 							</ion-item>
 						</div>
+
+						</div>
+						<ion-item  *ngIf(viewMore)>
+								<button ion-button (click)="showModel(members)">View All</button>
+						</ion-item>
+							
 							<ion-item  *ngIf="!show_member">
-									<p>No Members Joined Yet</p>
+								<p>No Members Joined Yet</p>
 							</ion-item>
+							
+							
 			</ion-item>
 
 		</div>
@@ -174,11 +184,10 @@
 	       	 
 	       	<div>
 	      		<ion-row>
-	        		<ion-col width-15>
-
-	          			<!--<button class="hover but-colo" ion-button outline (click)="addLikes(user.id)">{{user.likes.emoji}} &nbsp; <p class="num-of">{{user.likes.emoji_name}}</p>
-	          			</button>-->
-	          			<p class="message-container" [innerHTML]="user.likes.emoji | emojis" (click)="emojiPicker(user.id)"></p>
+	        		<ion-col>
+						<button ion-button clear 
+						[innerHTML]="user.likes.emoji | emojis" 
+						(click)="emojiPicker(user.id)"></button>
 	        		</ion-col>
 	        		
 	        		<ion-col>
@@ -188,28 +197,17 @@
 	          				&nbsp;<i class="fa fa-comments" aria-hidden="true"></i>
 	          			</button>
 	          		</ion-col>
-	          		<!-- <ion-col>
-		          		<button ion-button class="comment but-colo" color="dark" icon-only clear>
-		          		<i class="fa fa-pencil-square-o" aria-hidden="true" (click)="addDetails(i)">&nbsp;
-		          		</i>
-		          		</button>
-	          		</ion-col> -->
+	          		
+	          		
 	      		</ion-row>
-	      			<div *ngIf="i==showblock">
-	      				<ion-item>
-				   			<ion-textarea [(ngModel)]="comment" placeholder="Enter Comments" style=" margin:0px !important;">
-				   		    </ion-textarea>
-						</ion-item>
-						<div class="send-req">
-							<button ion-button (click)="sendPost(user.id)" class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
-							</button>
-						</div>
-  					</div><br>
+
 	    	</div>
 		</div>
 	</ion-list>
 
-	      					
+ <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>	      					
 </ion-content>
 <style>
 .text-input-ios{}

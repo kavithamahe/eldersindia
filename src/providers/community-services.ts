@@ -162,12 +162,22 @@ myprofile(id){
     return this.http.post(`${this.getCommunityPostsUrl }getCommunityPosts`,{"info": {"community": id, "post": 0, "comPostId": ""}},this.options)
      .map(res => res.json());
      }
+  communityscroll(nextPageURL,id){
+        return this.http.post(nextPageURL,{"info": {"community": id, "post": 0, "comPostId": ""}},this.options)
+     .map(res => res.json());
+     }
      
 
   userProfile(id){
     this.body = {"user_id":id,"post":0}
 
      return this.http.post(`${this.getCommunityPostsUrl }getUserPosts`,this.body,this.options)
+      .map(res =>res.json());
+  }
+  userpostsscroll(nextPageURL,id){
+     this.body = {"user_id":id,"post":0}
+
+     return this.http.post(nextPageURL,this.body,this.options)
       .map(res =>res.json());
   }
 

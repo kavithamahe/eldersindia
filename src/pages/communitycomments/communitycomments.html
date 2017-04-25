@@ -14,48 +14,57 @@
 			
 	<ion-list *ngFor="let comment of post_comments; let j=index" class="comm-posted">
 		
-		
-			<ion-item>
-   				 <ion-avatar item-left>
-      				<img class="pro-imgs" (click)="profileImage(comment.uid)" 
-	    		[src]="imageUrl+comment?.profile_image"  
-	    		[hidden]="!comment?.profile_image" >
-    			</ion-avatar>
-    			
-    			 <div text-wrap [innerHTML]="comment.comments | emojis"></div>
-  			</ion-item>    
-			<button ion-button clear (click)="reply(j)">reply</button>
+			
+				<ion-row>
+					<ion-col width-20>
+	   				 <ion-avatar>
+	      				<img class="pro-imgs" (click)="profileImage(comment.uid)" 
+		    		[src]="imageUrl+comment?.profile_image"  
+		    		[hidden]="!comment?.profile_image" >
+	    			</ion-avatar>
+	    			</ion-col>
+	    			<ion-col>
+	    			 <p item-text-wrap [innerHTML]="comment.comments | emojis"></p>
+	    			</ion-col>
+	  			</ion-row>
+  			
+						<button ion-button clear (click)="reply(j)">
+						<i class="fa fa-reply" aria-hidden="true"></i>
+						</button>
 
-						<button ion-button item-right clear (click)="showComments(j)">show replies
+						<button ion-button item-right clear (click)="showComments(j)">view replies
 						</button>
 					
 						 <div *ngIf="j==showReply">
-				    <ion-list *ngFor="let reply of comment.comment_reply; let i=index">
-				      	<ion-row>
-				      		<ion-avatar>
-						      	<img class="pro-imgs" (click)="myImage(reply.uid)"
-						      	[src]="imageUrl+reply?.profile_image"  
-						      	[hidden]="!reply?.profile_image">
-						    </ion-avatar>
-						    <ion-col>
-							    <ion-row>
-						      		<p class="cmmpost">{{reply.name_from}} --> {{reply.name_to}}</p>
-						      	</ion-row>
-					      		<ion-row>
-					      			<div text-wrap [innerHTML]="reply.comments_replay | emojis"></div>
-						   
-						      			<button ion-button clear (click)="replyComments(i)">reply
-		      							</button>
-		      					</ion-row>
-		      				</ion-col>
-		      			</ion-row>
-						      					
+				    	<ion-list *ngFor="let reply of comment.comment_reply; let i=index">
+				      		<ion-row>
+				      		<ion-col width-20>
+					      		<ion-avatar>
+							      	<img class="pro-imgs" (click)="myImage(reply.uid)"
+							      	[src]="imageUrl+reply?.profile_image"  
+							      	[hidden]="!reply?.profile_image">
+							    </ion-avatar>
+							   </ion-col>
+							    <ion-col>
+								    
+							      		<p class="cmmpost">{{reply.name_from}} --> {{reply.name_to}}</p>
+							      	
+						      			 <p item-text-wrap [innerHTML]="reply.comments_replay | emojis"></p>	
+						      			
+			      					
+			      				</ion-col>
+			      				
+		      				</ion-row>
+		      				<button ion-button clear (click)="replyComments(i)">
+								<i class="fa fa-reply" aria-hidden="true"></i>
+							</button>
+		      						
 						<div *ngIf="i==replyBlock">
 					      	<ion-row>
 								<ion-textarea [(ngModel)]="reply_comment" style=" margin:0px !important;" placeholder="write a reply..">
 								</ion-textarea>
 							
-							<p class="message-container" [innerHTML]="':smile:  ' | emojis"  (click)="emojiPicker2(comment.comments_id,post_profile_id)"></p>
+								<p class="message-container" [innerHTML]="':smile:  ' | emojis"  (click)="emojiPicker2(comment.comments_id,post_profile_id)"></p>
 							</ion-row>
 							<div class="send-req">
 								<button (click)="sendReply(comment.comments_id,post_profile_id)" ion-button class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 

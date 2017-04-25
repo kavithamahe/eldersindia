@@ -52,6 +52,8 @@ export class CommunityprofilePage {
     profile_uid:any;
     connectionList:any;
     allConnections:any;
+    eventScrollLists:any;
+    nextPageURL:any;
     user_id:any;
     emojiId:number=0;
     community: String = "activity";
@@ -67,21 +69,20 @@ export class CommunityprofilePage {
       
       this.profile_uid=navParams.get("profile_uid");
       this.loadThisPage(this.profile_uid);
+ 
   }
 
   loadThisPage(id){
     this.communityProfile=[];
     this.communityProfileData=[];
     this.status=[];
-     // this.connectLists = false;
-     //  this.activityLists = true;
+     
       this.status = false;
       this.request_sent = false;
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
       loader.present();
       this.profileCommunity(id);
       this.memberProfile(id);
-      
       this.addComments=false;
       this.itemComments=false;
       loader.dismiss();
@@ -99,7 +100,7 @@ export class CommunityprofilePage {
   }
     profileSetting(member) {
 
-    let modal = this.modalCtrl.create(MyprofilesettingPage,{member_data:member});
+    let modal = this.popoverCtrl.create(MyprofilesettingPage,{member_data:member});
     modal.present();
   }
   
@@ -166,7 +167,7 @@ export class CommunityprofilePage {
      }
   }
    openUrl(metalink_url) {
-console.log("URL is ",metalink_url);
+    console.log("URL is ",metalink_url);
         this.platform.ready().then(() => {
             let browser = new InAppBrowser(metalink_url,'_blank');
 
@@ -177,6 +178,7 @@ console.log("URL is ",metalink_url);
       this.communityProfile=[];
       this.communityServices.userProfile(id).subscribe(users => {
       this.communityProfile = users.result.info.lists.data;
+      this.nextPageURL=users.result.info.lists.next_page_url;
 
   },
    err =>{
@@ -401,6 +403,34 @@ console.log("URL is ",metalink_url);
       }
      })
    }
+doInfinite(infiniteScroll) {
+    setTimeout(() => {      
+      if(this.nextPageURL!=null && this.nextPageURL!='')
+      {
+       this.userpostsscroll(this.profile_uid);
+      }
+      else{
+        infiniteScroll.enable(false);
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
+   userpostsscroll(id)
+  {
+     this.communityServices.userpostsscroll(this.nextPageURL,id).subscribe(
+     (eventsscroll) => {
+      this.eventScrollLists=eventsscroll.result.info.lists.data;
+      for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
+        this.communityProfile.push(this.eventScrollLists[i]);
+        }
+      
+       this.nextPageURL=eventsscroll.result.info.lists.next_page_url;     
+    },
+    err =>{
+   
+    this.communityServices.showErrorToast(err);
+  });
+  }
 
  }
 

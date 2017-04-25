@@ -9,6 +9,8 @@ import { CommunitycommentsPage } from '../communitycomments/communitycomments';
 import { CommunityprofilePage } from '../communityprofile/communityprofile';
 import { CommunityServices } from '../../providers/community-services';
 import { EmojiPickerPage } from '../../pages/emoji-picker/emoji-picker';
+import { CommunitymembersPage } from '../../pages/communitymembers/communitymembers';
+
 import { DomSanitizer } from '@angular/platform-browser/';
 import { InAppBrowser } from 'ionic-native';
 
@@ -46,6 +48,7 @@ export class CommunityPage {
     nextPageURL:any='';
     eventScrollLists:any;
     emojiId:number=0;
+    viewMore:boolean=false;
     
   constructor(public platform: Platform,public modal: ModalController, public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices,public popoverCtrl: PopoverController ) {
     this.nav=nav;
@@ -179,8 +182,9 @@ console.log("URL is ",metalink_url);
       this.communityDetailData = users.result.info;
       this.members =  users.result.info.members;
       this.show_member = this.members.length;
-      console.log(this.show_member);
-      console.log(this.members.length);   
+      if(this.show_member>4){
+        this.viewMore=true;
+      }
       
   },
    err =>{
@@ -216,7 +220,7 @@ console.log("URL is ",metalink_url);
  communityList(id){
      this.communityServices.getCommunityPost(id).subscribe (users => {
       this.users = users.result.info.lists.data;
-      // this.nextPageURL=users.result.info.lists.next_page_url;
+       this.nextPageURL=users.result.info.lists.next_page_url;
 
       },
    err =>{
@@ -257,48 +261,8 @@ console.log("URL is ",metalink_url);
       toast.present();
    }
 
-  sendPost(id1){
-    if(this.comment != ""){
 
-    let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
-    loader.present();
-     this.communityServices.sendPosts(id1,this.comment).subscribe(datas =>{
-     this.showToast(datas.result.info.message);
-     this.comment="";
-     this.communityList(this.community_id);
-     this.showblock=null;
-     },
-     err =>{
-    
-    this.communityServices.showErrorToast(err);
-  })
-     loader.dismiss();
-   }else{
-     this.showToast("Enter Comments and Post");
-   }
-     
-  }
-  //  sendReply(comments_id,profile_id){
-  //    console.log("comment" + comments_id + profile_id);
-  //   if(this.comments != ""){
-
-  //   let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
-  //   loader.present();
-  //    this.communityServices.sendReply(comments_id,profile_id,this.comments).subscribe(datas =>{
-  //    this.showToast(datas.result.info.message);
-  //    this.comments="";
-  //    this.communityList(this.community_id);
-  //    },
-  //    err =>{
-    
-  //   this.communityServices.showErrorToast(err);
-  // })
-  //    loader.dismiss();
-  //  }else{
-  //    this.showToast("Enter Comments and Post");
-  //  }
-     
-  // }
+  
 
   postCommunity(id){
      let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
@@ -374,6 +338,42 @@ console.log("URL is ",metalink_url);
      })
    }
   
+ showModel(member)
+   {
+    
+   let modal = this.popoverCtrl.create(CommunitymembersPage,{members:member});
+    modal.present();
+     
+   }  
+doInfinite(infiniteScroll) {
+    setTimeout(() => {      
+      if(this.nextPageURL!=null && this.nextPageURL!='')
+      {
+       this.communityscroll(this.community_id);
+      }
+      else{
+        infiniteScroll.enable(false);
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
+   communityscroll(id)
+  {
+     this.communityServices.communityscroll(this.nextPageURL,id).subscribe(
+     (eventsscroll) => {
+      this.eventScrollLists=eventsscroll.result.info.lists.data;
+      for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
+        this.users.push(this.eventScrollLists[i]);
+        }
+      
+       this.nextPageURL=eventsscroll.result.info.lists.next_page_url;     
+    },
+    err =>{
+   
+    this.communityServices.showErrorToast(err);
+  });
+  }
+
   }
 
 
