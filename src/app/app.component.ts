@@ -30,6 +30,7 @@ import { LoginUser } from '../providers/login-user';
 import { Subscription }   from 'rxjs/Subscription';
 
 import { Storage } from '@ionic/storage';
+import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 
 // import {ModalContentPage} from '../pages/modal-page/modal-page';
 
@@ -68,7 +69,7 @@ export class MyApp {
    
     if(this.user_id!='' && this.user_id != null)
      {
-        this.rootPage=DashboardPage;
+        this.rootPage= DashboardPage;
      }
      else
      {

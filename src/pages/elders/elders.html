@@ -10,23 +10,24 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Elder Onboarding</ion-title>
+    <ion-title text-center>{{title}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content style=" background:#fff;">
  <form [formGroup]="authForm">
-    <ion-row>
+    <ion-row *ngIf="functionality != 'profileEdit'">
       <ion-col>
         <div class="personal-d"><p>Personal Details</p></div>
       </ion-col>
     </ion-row>
 
-  <hr/>
+  <hr *ngIf="functionality != 'profileEdit'" />
    <ion-label class="liste-edit">Relationship</ion-label>
         <ion-item>
          
-            <ion-select class="select-brd"  [(ngModel)]="elder_relation"   [ngModelOptions]="{standalone: true}">
+            <ion-select class="select-brd"  [(ngModel)]="elder_relation"   
+            [ngModelOptions]="{standalone: true}">
                 <ion-option  *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
             </ion-select>
         </ion-item>
@@ -36,7 +37,7 @@
             <ion-input  type="text" formControlName="elder_name"
             [class.invalid]="!authForm.controls.elder_name.valid && (authForm.controls.elder_name.dirty)" value={{elder_name}}>
             </ion-input>
-           </ion-item>
+      </ion-item>
           <small *ngIf="!authForm.controls.elder_name.valid  && (authForm.controls.elder_name.dirty)">
                   <p class="valid err-reds">Please enter name</p>
           </small> 
@@ -107,21 +108,21 @@
           <ion-row>
             <ion-col width-50>
               <button class="add-btn" (click)="addEmergency()" ion-button icon-left clear>
-                <ion-icon name="ios-add"></ion-icon>
+                <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
                  Add More
               </button>
             </ion-col>
-            <ion-col width-50>
-              <button class="rem-btn" (click)="removeEmergency()" ion-button icon-left clear>
-                <ion-icon name="ios-close"></ion-icon>Remove
+            <ion-col *ngIf="i != 0" width-50>
+              <button class="rem-btn" (click)="removeEmergency(i)" ion-button icon-left clear>
+                <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
               </button>
             </ion-col>
           </ion-row>
         </ion-col>
     
     <ion-item>
-	 <ion-label class="liste-edit" style="text-align:left !important;"></ion-label>
-    <ion-checkbox [(ngModel)]="job_interest" [ngModelOptions]="{standalone: true}"> Interested in Elder job opportunities?</ion-checkbox>
+	 <ion-label class="liste-edit" style="text-align:left !important;">Interested in Elder job opportunities?</ion-label>
+    <ion-checkbox [(ngModel)]="job_interest" [ngModelOptions]="{standalone: true}"> </ion-checkbox>
     </ion-item>
 
  
@@ -185,12 +186,12 @@
        <ion-row>
         <ion-col width-50>
           <button class="add-btn" (click)="addExperience(i)" ion-button icon-left clear>
-            <ion-icon name="ios-add"></ion-icon>Add More
+            <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>Add More
           </button>
         </ion-col>
-        <ion-col width-50>
-          <button class="rem-btn" (click)="removeExperience()" ion-button icon-left clear>
-            <ion-icon name="ios-close"></ion-icon>Remove
+        <ion-col *ngIf="i != 0" width-50>
+          <button class="rem-btn" (click)="removeExperience(i)" ion-button icon-left clear>
+            <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
           </button>
         </ion-col>
       </ion-row>
@@ -209,9 +210,9 @@
 		  <hr/>
           <ion-card  *ngFor="let item of education_list; let i=index" >
           
-              <button style="background:none;" (click)="removeEducation(i)" ion-button icon-only align-right>
-                <ion-icon name="ios-close" style="color:#333;"></ion-icon>
-              </button>
+              <div icon-only align-right style="background:none;" *ngIf="i != 0" (click)="removeEducation(i)">
+                <ion-icon ios="ios-close-circle" md="md-close-circle" style="color:#333;"></ion-icon>
+              </div>
               <ion-label class="liste-edit">Graduation</ion-label>
             <ion-item>
             
@@ -239,7 +240,7 @@
           </ion-card>
           <ion-col>
               <button style="width:100%;" class="add-btn" (click)="addEducation()" ion-button full >
-                <ion-icon name="ios-add"></ion-icon>Add More
+                <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>Add More
               </button>
             </ion-col>
       </div>
@@ -248,7 +249,7 @@
   <!--END-->
   
 
-    <div  *ngIf="this.functionality != 'edit' ">
+    <div  *ngIf="functionality == 'add'">
      
           <ion-row>
             <ion-col>
@@ -274,7 +275,7 @@
                 <p class="valid err-reds">Please enter password</p>
               </small>
           </div>  
-          <div>
+          <!-- <div>
             <ion-row>
               <ion-col>
                 <button class="rem-btn" (click)="cancel()"  ion-button icon-left >
@@ -282,14 +283,49 @@
                 </button>
               </ion-col>
               <ion-col>
-                <!--  <button [disabled]="!authForm.valid" (click)="Submit()" class="back" ion-button icon-left round> -->
+                 <button [disabled]="!authForm.valid" (click)="Submit()" class="back" ion-button icon-left round>
                 <button class="add-btn" (click)="addDependent()" ion-button icon-left >
                   <ion-icon name="ios-arrow-round-forward"></ion-icon>Submit
                 </button>
               </ion-col>
             </ion-row>
-          </div>
-      </form> 
+          </div> -->
+      </form> <hr/>
+      <ion-item *ngIf="this.functionality == 'profileEdit' ">
+      <img [src]="base64Image" *ngIf="base64Image" width="90" height="90" />
+      <ion-row>
+      <button ion-button class="uploadimg" color="primary" (click)="accessGallery()"><i class="fa fa-upload"></i>&nbsp; Browse...</button>
+    </ion-row>
+    </ion-item>
+
 
 
 </ion-content>
+<ion-footer>
+  <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
+    
+    <ion-buttons>
+      <button ion-button color="royal" large icon-left showWhen="ios" (click)="cancel()">
+        <i class="fa fa-reply" aria-hidden="true"></i>
+        <!-- <ion-icon name="undo"></ion-icon> -->
+         Back
+      </button>
+      <button ion-button color="light" large icon-left hideWhen="ios" (click)="cancel()">
+        <i class="fa fa-reply" aria-hidden="true"></i>
+        <!-- <ion-icon name="undo"></ion-icon> -->
+         Back
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="addDependent()">
+        Update
+        <ion-icon name="send"></ion-icon>
+      </button>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="addDependent()">
+        Update
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

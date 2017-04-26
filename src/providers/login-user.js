@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Subject } from 'rxjs/Subject';
 import { Storage } from '@ionic/storage';
 import { AppConfig } from '../providers/app-config';
 //import { Login } from '../models/login';
@@ -25,19 +26,34 @@ var LoginUser = (function () {
         this.http = http;
         this.storage = storage;
         this.appConfig = appConfig;
+        // Observable string sources
+        this.userSource = new Subject();
+        // Observable string streams
+        this.userEntered$ = this.userSource.asObservable();
         this.storage.ready().then(function () {
-            _this.storage.set('imageurl', _this.appConfig.setImageurl());
             _this.storage.set('rooturl', _this.appConfig.setrooturl());
-            storage.get('rooturl').then(function (rooturl) { _this.rootUrl = rooturl; });
+            _this.storage.set('imageurl', _this.appConfig.setImageurl());
         });
+        this.rootUrl = this.appConfig.setrooturl();
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
     }
     LoginUser.prototype.loginload = function (credentials) {
         var _request = { "email": credentials.email,
-            "password": credentials.password };
+            "password": credentials.password,
+            "device_token": this.device_id, "app": "" };
+        console.log("request data sent to login.", _request);
         return this.http.post(this.rootUrl + 'login', _request, this.headers)
             .map(function (res) { return res.json(); });
+    };
+    // setting user on login 
+    LoginUser.prototype.currentUser = function (user) {
+        console.log("user logged:", user);
+        this.userSource.next(user);
+    };
+    LoginUser.prototype.setDeviceID = function (deviceID) {
+        console.log("deviceID logged:", deviceID);
+        this.device_id = deviceID;
     };
     return LoginUser;
 }());

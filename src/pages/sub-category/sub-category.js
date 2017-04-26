@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { LoadingController, NavController, NavParams } from 'ionic-angular';
-import { SubcategoryListPage } from '../subcategory-list/subcategory-list';
+import { SubCategoryServicePage } from '../sub-category-service/sub-category-service';
 import { ServiceProvider } from '../../providers/service-provider';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 /*
@@ -28,6 +28,7 @@ var SubCategoryPage = (function () {
         this.elderLocation = "";
         this.subcategories = [];
         var loading = this.loadingCtrl.create({ content: 'Please wait...!' });
+        this.elderLocation = "";
         this.subCategoryId = navPara.get("subcategory").id;
         this.subCategoryTitle = navPara.get("subcategory").service;
         var serviceOfferedId = { "serviceOfferedId": this.subCategoryId, "locationId": "" };
@@ -70,14 +71,14 @@ var SubCategoryPage = (function () {
         this.subcategories = "";
         this.loadSubCategory(locationBasedData);
     };
-    SubCategoryPage.prototype.openSelected = function (serviceData) {
+    SubCategoryPage.prototype.openSelected = function (sub_category_Data) {
         var location_id = this.elderLocation;
-        var service = serviceData;
+        var sub_service = sub_category_Data;
         if (this.elderLocation == "") {
             this.providerService.showToast("Please Select the Location!");
         }
         else {
-            this.navCtrl.push(SubcategoryListPage, { location_id: location_id, service: service });
+            this.navCtrl.push(SubCategoryServicePage, { location_id: location_id, sub_service: sub_service });
         }
     };
     SubCategoryPage.prototype.dashboardPage = function () {

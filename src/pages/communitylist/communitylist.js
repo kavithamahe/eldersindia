@@ -16,7 +16,6 @@ import { CommunityPage } from '../community/community';
 import { CommunityServices } from '../../providers/community-services';
 var CommunitylistPage = (function () {
     function CommunitylistPage(nav, storage, navParams, platform, toastCtrl, communityServices) {
-        var _this = this;
         this.nav = nav;
         this.storage = storage;
         this.navParams = navParams;
@@ -26,37 +25,41 @@ var CommunitylistPage = (function () {
         this.community = "mycommunity";
         this.isAndroid = false;
         this.searchTerm = '';
+        this.nextPageURL = '';
+        this.searchButton = false;
+        this.searchTextBox = '';
         this.isAndroid = platform.is('android');
-        this.searchData = "";
-        this.storage.ready().then(function () {
-            storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
-            storage.get('id').then(function (id) { _this.id = id; });
-            storage.get('token').then(function (token) {
-                _this.token = token;
-                _this.myCommunity(_this.searchData);
-            });
-        });
+        // this.searchData = "";
     }
+    CommunitylistPage.prototype.searchCall = function (searchValue) {
+        this.searchButton = !searchValue;
+    };
     CommunitylistPage.prototype.getPost = function (id) {
         this.nav.push(CommunityPage, { community_id: id });
     };
     CommunitylistPage.prototype.myCommunity = function (searchData) {
         var _this = this;
+        this.communitylists = [];
+        this.categoryLists = [];
         this.communityServices.myCommunity(searchData).
             subscribe(function (mycommunity) {
             _this.communitylists = mycommunity.result.info.data;
             _this.categoryLists = mycommunity.result.get.communityCategory;
+            _this.nextPageURL = mycommunity.result.info.next_page_url;
         }, function (err) {
             _this.communitylists = [];
             _this.communityServices.showErrorToast(err);
         });
     };
-    CommunitylistPage.prototype.otherCommunity = function (searchData) {
+    CommunitylistPage.prototype.otherCommunity = function (data) {
         var _this = this;
-        this.communityServices.recommendedCommunity(searchData).
+        this.communitylists = [];
+        this.categoryLists = [];
+        this.communityServices.recommendedCommunity(data).
             subscribe(function (mycommunity) {
             _this.communitylists = mycommunity.result.info.data;
             _this.categoryLists = mycommunity.result.get.communityCategory;
+            _this.nextPageURL = mycommunity.result.info.next_page_url;
         }, function (err) {
             _this.communitylists = [];
             _this.communityServices.showErrorToast(err);
@@ -91,15 +94,43 @@ var CommunitylistPage = (function () {
             _this.communityServices.showErrorToast(err);
         });
     };
-    //  doInfinite(infiniteScroll:any) {
-    //    console.log('doInfinite, start is currently '+this.start);
-    //    this.start+=50;
-    //   this.myCommunity().then(()=>{
-    //      infiniteScroll.complete();
-    //    });
-    // }
+    CommunitylistPage.prototype.doInfinite = function (infiniteScroll) {
+        var _this = this;
+        setTimeout(function () {
+            if (_this.nextPageURL != null && _this.nextPageURL != '') {
+                _this.communityscroll();
+            }
+            else {
+                infiniteScroll.enable(false);
+            }
+            infiniteScroll.complete();
+        }, 500);
+    };
+    CommunitylistPage.prototype.communityscroll = function () {
+        var _this = this;
+        this.communityServices.eventsscroll(this.nextPageURL).subscribe(function (eventsscroll) {
+            _this.eventScrollLists = eventsscroll.result.info.data;
+            for (var i = 0; i < Object.keys(_this.eventScrollLists).length; i++) {
+                _this.communitylists.push(_this.eventScrollLists[i]);
+            }
+            _this.nextPageURL = eventsscroll.result.info.next_page_url;
+        }, function (err) {
+            _this.communityServices.showErrorToast(err);
+        });
+    };
     CommunitylistPage.prototype.dashboardPage = function () {
         this.nav.setRoot(DashboardPage);
+    };
+    CommunitylistPage.prototype.ionViewWillEnter = function () {
+        var _this = this;
+        this.storage.ready().then(function () {
+            _this.storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
+            _this.storage.get('id').then(function (id) { _this.id = id; });
+            _this.storage.get('token').then(function (token) {
+                _this.token = token;
+                _this.myCommunity("");
+            });
+        });
     };
     return CommunitylistPage;
 }());

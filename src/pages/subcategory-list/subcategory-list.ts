@@ -78,7 +78,15 @@ loadSubcategoryList(subCategory_id,location_id){
 
   instantRequest(vendor_id) {
     if(this.userType != "sponsor"){
-            this.serviceRequestCall("",vendor_id);
+      let d = new Date();
+
+    let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
+    d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+    console.log(d,datestring);
+
+    let serviceRequestData = {"problem": this.serviceTitle, "datetime": datestring, "dependentId": this.elderId, "mobile_no": ""};
+    
+            this.serviceRequestCall(serviceRequestData,vendor_id);
     }else{
       this.openModal("instant",vendor_id);
     // let instantRequestmodal = this.modalCtrl.create(InstantRequestModalPage, {dependentList:this.dependentLists});
@@ -153,6 +161,9 @@ loadSubcategoryList(subCategory_id,location_id){
 </ion-header>
 
 <ion-content class="popup-mds">
+  <ion-item *ngIf(selected)>
+  <p class="err-reds"> Dependent not selected</p>
+  </ion-item>
   <ion-row>
       <ion-item >
             <ion-label>Select Dependent</ion-label>
@@ -172,8 +183,9 @@ loadSubcategoryList(subCategory_id,location_id){
 })
 export class InstantRequestModalPage {
   dependentLists:any;
-  dependentData:any;
+  dependentData:any = "";
   service:any;
+  selected:boolean=false;
 
   constructor(
     public params: NavParams,
@@ -188,6 +200,8 @@ export class InstantRequestModalPage {
     this.viewCtrl.dismiss("dismiss");
   }
   submit(){
+    if(this.dependentData != ""){
+      this.selected = false;
     let dependent_model = this.dependentData;
     // let date = new Date();
     let d = new Date();
@@ -198,5 +212,8 @@ export class InstantRequestModalPage {
 
     let serviceRequestData = {"problem": this.service, "datetime": datestring, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile};
     this.viewCtrl.dismiss(serviceRequestData);
+  }else{
+    this.selected = true;
+    }
   }
 }

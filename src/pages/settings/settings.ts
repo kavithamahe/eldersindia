@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Slides, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { ServiceProvider } from '../../providers/service-provider';
@@ -15,6 +15,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
   templateUrl: 'settings.html'
 })
 export class SettingsPage {
+  @ViewChild(Slides) slides: Slides;
   settings:string="paginate";
   records:number = 5;
 
@@ -28,6 +29,8 @@ export class SettingsPage {
 	user_uid:any;
 	user_id:any;
 
+  prev_index:any = 0;
+
 
   constructor(public storage:Storage, public serviceProvider:ServiceProvider, public navCtrl: NavController, public navParams: NavParams) {}
 
@@ -38,6 +41,26 @@ export class SettingsPage {
       this.privacy_submit();
     }
   }
+  slideChanged() {
+    let currentIndex = this.prev_index;
+    if(currentIndex == 1){
+      this.settings = "paginate";
+    }else{
+      this.settings = "privacy";
+    }
+    this.prev_index = this.slides.getActiveIndex();
+    console.log("Current index is", currentIndex);
+  }
+  changeSlide(){
+    this.slides.freeMode = true;
+    if(this.settings == 'privacy'){
+    this.slides.slideTo(1);  
+    }else{
+      this.slides.slideTo(0);  
+    }
+    
+  }
+
   change(){
     console.log("record count updated");
   }
@@ -58,6 +81,7 @@ export class SettingsPage {
         }
     });
   }
+
 
   setPageCount(){
     let pageCount= {pageCount:this.records};

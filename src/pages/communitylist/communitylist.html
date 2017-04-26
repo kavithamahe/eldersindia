@@ -1,22 +1,22 @@
 <ion-header>
   <ion-navbar color="primary">
-   
-    <ion-buttons left>
-    <button ion-button icon-only (click)="dashboardPage()">
-        <ion-icon name="home"></ion-icon>
-    </button>
+   <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
     </ion-buttons>
-    <ion-title text-center>Community</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dashboardPage()">
+          <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Communities</ion-title>
     <ion-buttons right>
     <button ion-button icon-only (click)="searchCall(searchButton)">
         <i class="fa fa-search" aria-hidden="true"></i>
     </button>
     </ion-buttons>
-	 <ion-buttons left>
-      <button ion-button icon-only menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
+	
   </ion-navbar>
 </ion-header>
 <ion-content class="segments-info" style="background:#fff;">

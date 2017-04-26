@@ -58,4 +58,16 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'getConnections',_request,this.options)
       .map(res => res.json()); 
   }
+  inboxScroll(nextPageURL)
+  {
+    let _request= {search: {title: "", status: "", category: ""}};
+    return this.http.post(nextPageURL,_request,this.options)
+      .map(res => res.json()); 
+  }
+  sentScroll(nextPageURL)
+  {
+    let _request= {searchValue: ""};
+    return this.http.post(nextPageURL,_request,this.options)
+      .map(res => res.json()); 
+  }
 }

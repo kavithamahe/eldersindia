@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ServiceRequestService } from '../../providers/service-request-service';
 import { ViewServiceRequestPage } from '../../pages/view-service-request/view-service-request';
@@ -20,14 +20,20 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
   Ionic pages and navigation.
 */
 var ServicerequestPage = (function () {
-    function ServicerequestPage(navCtrl, navParams, storage, loadingCtrl, toastCtrl, serviceRequest) {
+    function ServicerequestPage(alertCtrl, navCtrl, navParams, storage, loadingCtrl, toastCtrl, serviceRequest) {
         var _this = this;
+        this.alertCtrl = alertCtrl;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.storage = storage;
         this.loadingCtrl = loadingCtrl;
         this.toastCtrl = toastCtrl;
         this.serviceRequest = serviceRequest;
+        this.showRemark = null;
+        this.rating = 0;
+        this.remarks = '';
+        this.nextPageURL = '';
+        this.serviceRequestScrollLists = [];
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
             storage.get('token').then(function (token) {
@@ -42,7 +48,8 @@ var ServicerequestPage = (function () {
         var loader = this.loadingCtrl.create({ content: "Please wait..." });
         loader.present();
         this.serviceRequest.serviceRequestList().subscribe(function (serviceRequest) {
-            _this.serviceRequestInfo = serviceRequest.result.info;
+            _this.serviceRequestInfo = serviceRequest.result.info.data;
+            _this.nextPageURL = serviceRequest.result.info.next_page_url;
         }, function (err) {
             if (err.status === 401) {
                 _this.showToaster(JSON.parse(err._body).error);
@@ -67,14 +74,93 @@ var ServicerequestPage = (function () {
     ServicerequestPage.prototype.dashboardPage = function () {
         this.navCtrl.setRoot(DashboardPage);
     };
+    ServicerequestPage.prototype.enableRemark = function (eventId) {
+        this.remarks = '';
+        this.rating = 0;
+        if (this.showRemark == eventId) {
+            this.showRemark = null;
+        }
+        else {
+            this.showRemark = eventId;
+        }
+    };
+    ServicerequestPage.prototype.submitRemark = function (serviceId) {
+        var _this = this;
+        if (this.rating == 0 && this.remarks == '') {
+            this.showAlert('Please enter rating and remarks');
+        }
+        else if (this.rating == 0) {
+            this.showAlert('Please enter rating');
+        }
+        else if (this.remarks == '') {
+            this.showAlert('Please enter remarks');
+        }
+        else {
+            var loader = this.loadingCtrl.create({ content: "Please wait..." });
+            loader.present();
+            this.serviceRequest.submitRemark(serviceId, this.rating, this.remarks).subscribe(function (submitRemark) {
+                _this.showToaster(submitRemark.result);
+                _this.remarks = '';
+                _this.rating = 0;
+                _this.showRemark = null;
+                _this.onInit();
+            }, function (err) {
+                if (err.status === 401) {
+                    _this.showToaster(JSON.parse(err._body).error);
+                }
+                else {
+                    _this.showToaster("Try again later");
+                }
+            });
+            loader.dismiss();
+        }
+    };
+    ServicerequestPage.prototype.showAlert = function (errorMsg) {
+        var alert = this.alertCtrl.create({
+            title: 'Error Message',
+            subTitle: errorMsg,
+            buttons: ['OK']
+        });
+        alert.present();
+    };
+    ServicerequestPage.prototype.doInfinite = function (infiniteScroll) {
+        var _this = this;
+        setTimeout(function () {
+            if (_this.nextPageURL != null && _this.nextPageURL != '') {
+                _this.serviceRequestScroll();
+            }
+            else {
+                infiniteScroll.enable(false);
+            }
+            infiniteScroll.complete();
+        }, 500);
+    };
+    ServicerequestPage.prototype.serviceRequestScroll = function () {
+        var _this = this;
+        this.serviceRequest.serviceRequestScroll(this.nextPageURL).subscribe(function (serviceRequestScroll) {
+            _this.serviceRequestScrollLists = serviceRequestScroll.result.info.data;
+            for (var i = 0; i < Object.keys(_this.serviceRequestScrollLists).length; i++) {
+                _this.serviceRequestInfo.push(_this.serviceRequestScrollLists[i]);
+            }
+            _this.nextPageURL = serviceRequestScroll.result.info.next_page_url;
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+            else {
+                _this.showToaster("Try again later");
+            }
+        });
+    };
     return ServicerequestPage;
 }());
 ServicerequestPage = __decorate([
     Component({
         selector: 'page-servicerequest',
-        templateUrl: 'servicerequest.html'
+        templateUrl: 'servicerequest.html',
+        providers: [ServiceRequestService]
     }),
-    __metadata("design:paramtypes", [NavController, NavParams, Storage, LoadingController, ToastController, ServiceRequestService])
+    __metadata("design:paramtypes", [AlertController, NavController, NavParams, Storage, LoadingController, ToastController, ServiceRequestService])
 ], ServicerequestPage);
 export { ServicerequestPage };
 //# sourceMappingURL=servicerequest.js.map

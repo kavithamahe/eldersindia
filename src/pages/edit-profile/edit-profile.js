@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
 import { LoadingController, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Camera } from 'ionic-native';
+import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service-provider';
 /*
   Generated class for the EditProfile page.
@@ -19,28 +20,60 @@ import { ServiceProvider } from '../../providers/service-provider';
   Ionic pages and navigation.
 */
 var EditProfilePage = (function () {
-    function EditProfilePage(loadingCtrl, formBuilder, providerService, navCtrl, navParams) {
+    function EditProfilePage(storage, loadingCtrl, formBuilder, providerService, navCtrl, navParams) {
+        var _this = this;
+        this.storage = storage;
         this.loadingCtrl = loadingCtrl;
         this.formBuilder = formBuilder;
         this.providerService = providerService;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        // et
+        this.profileData = "";
+        this.avatar = "";
         this.profileData = navParams.get("profileData");
-        this.logoUrl = "http://183.82.33.232:8097/";
+        this.avatar = this.profileData.avatar;
+        this.storage.ready().then(function () {
+            _this.storage.get('imageurl').then(function (imageurl) {
+                _this.imageURL = imageurl;
+                _this.base64Image = _this.imageURL + _this.profileData.avatar;
+            });
+        });
+        this.user_dob = this.profileData.dob;
         this.user_type = this.profileData.user_type;
-        console.log(this.logoUrl + this.profileData.logo);
+        if (this.user_type == 'sponsor') {
+            this.my_location = this.profileData.locationName;
+        }
+        else {
+            this.user_type = "Elder";
+            this.my_location = this.profileData.address;
+        }
+        // this.gender = this.profileData.gender;
         this.edit_profile_Form = formBuilder.group({
-            name: [this.profileData.name, Validators.compose([Validators.minLength(6), Validators.required])],
-            designation: [this.profileData.designation, Validators.compose([Validators.minLength(3), Validators.required])],
-            gender: ["male", Validators.compose([Validators.required])],
-            mobile_number: [this.profileData.mobile, Validators.compose([Validators.minLength(10), Validators.required])],
-            location: [this.profileData.locationName, Validators.compose([Validators.minLength(6), Validators.required])],
-            dob: [this.profileData.dob, Validators.compose([Validators.minLength(6), Validators.required])],
-            email: [this.profileData.email, Validators.compose([Validators.minLength(6), Validators.required])],
-            user_type: [this.profileData.user_type, Validators.compose([Validators.minLength(6), Validators.required])]
+            name: [this.profileData.name, Validators.compose([Validators.required])],
+            designation: [{ value: this.profileData.designation, disabled: true }, Validators.compose([Validators.minLength(3), Validators.required])],
+            gender: [this.profileData.gender, Validators.compose([Validators.required])],
+            mobile_number: [this.profileData.mobile, Validators.compose([Validators.minLength(10), Validators.maxLength(10), Validators.required])],
+            location: [{ value: this.my_location, disabled: false }, Validators.compose([Validators.required])],
+            // dob: ['',Validators.compose([Validators.required])],
+            email: [{ value: this.profileData.email, disabled: true }, Validators.compose([Validators.minLength(6), Validators.required])],
+            user_type: [{ value: this.user_type, disabled: true }, Validators.compose([Validators.required])]
         });
     }
+    EditProfilePage.prototype.loadMyProfile = function () {
+        var _this = this;
+        this.providerService.webServiceCall("myaccount", "")
+            .subscribe(function (data) {
+            _this.profileData = data.result.info;
+            _this.user_type = data.result.info.user_type;
+        }, function (err) {
+            _this.providerService.showErrorToast(err);
+        });
+    };
+    EditProfilePage.prototype.getDate = function (datepar) {
+        var dateParts = datepar.split("-").reverse().join("-");
+        // let date = dateParts[2]+"-"+dateParts[1]+"-"+dateParts[0];
+        return dateParts;
+    };
     EditProfilePage.prototype.dismiss = function () {
         this.navCtrl.pop();
     };
@@ -51,48 +84,51 @@ var EditProfilePage = (function () {
             destinationType: Camera.DestinationType.DATA_URL
         }).then(function (imageData) {
             _this.base64Image = 'data:image/jpeg;base64,' + imageData;
-            _this.avatar = imageData;
-        }, function (err) {
-            console.log(err);
-        });
-    };
-    EditProfilePage.prototype.onChange1 = function (event) {
-        var eventObj = event;
-        var target = eventObj.target;
-        var files = target.files;
-        this.file = files[0];
-        console.log(target);
-        console.log(this.file);
-        var data = this.edit_profile_Form.value;
-        var updateData = { name: data.name, mobile: data.mobile_number, dob: data.dob, avatar: this.file };
-        this.providerService.webServiceCall("myaccountEdit", updateData)
-            .subscribe(function (data) {
-            console.log(data);
+            _this.avatar = _this.base64Image;
         }, function (err) {
             console.log(err);
         });
     };
     EditProfilePage.prototype.updateProfile = function () {
+        var _this = this;
         var data = this.edit_profile_Form.value;
-        var updateData = { name: data.name, mobile: data.mobile_number, dob: data.dob, avatar: this.file };
-        this.providerService.webServiceCall("myaccountEdit", updateData)
+        //     if(this.user_type == 'elder'){
+        this.updateData = { name: data.name, gender: data.gender, mobile: data.mobile_number, dob: this.user_dob, app: "", avatar1: this.avatar };
+        //     }else{
+        // this.updateData = {name: data.name,mobile:data.mobile_number,dob:this.user_dob ,app:"",avatar1:this.avatar};
+        // }
+        // 
+        this.providerService.webServiceCall("myaccountEdit", this.updateData)
             .subscribe(function (data) {
             console.log(data);
+            _this.dismiss();
         }, function (err) {
             console.log(err);
         });
     };
-    EditProfilePage.prototype.viewDidLoad = function () {
-        console.log('ionViewDidLoad EditProfilePage');
+    EditProfilePage.prototype.ionViewWillEnter = function () {
+        var _this = this;
+        this.storage.ready().then(function () {
+            _this.storage.get('imageurl').then(function (imageurl) { _this.imageURL = imageurl; });
+            _this.storage.get('token').then(function (token) { _this.token = token; });
+        });
+        this.providerService.webServiceCall("myaccount", "")
+            .subscribe(function (data) {
+            _this.profileData = data.result.info;
+            _this.user_type = data.result.info.user_type;
+        }, function (err) {
+            _this.providerService.showErrorToast(err);
+        });
     };
     return EditProfilePage;
 }());
 EditProfilePage = __decorate([
     Component({
         selector: 'page-edit-profile',
-        templateUrl: 'edit-profile.html'
+        templateUrl: 'edit-profile.html',
+        providers: [ServiceProvider]
     }),
-    __metadata("design:paramtypes", [LoadingController, FormBuilder, ServiceProvider, NavController, NavParams])
+    __metadata("design:paramtypes", [Storage, LoadingController, FormBuilder, ServiceProvider, NavController, NavParams])
 ], EditProfilePage);
 export { EditProfilePage };
 //# sourceMappingURL=edit-profile.js.map

@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { JobBoardService } from '../../providers/job-board-service';
 /*
@@ -18,10 +18,11 @@ import { JobBoardService } from '../../providers/job-board-service';
   Ionic pages and navigation.
 */
 var JobDependentPage = (function () {
-    function JobDependentPage(navCtrl, navParams, jobBoardService, storage, loadingCtrl, toastCtrl) {
+    function JobDependentPage(navCtrl, navParams, viewCtrl, jobBoardService, storage, loadingCtrl, toastCtrl) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.viewCtrl = viewCtrl;
         this.jobBoardService = jobBoardService;
         this.storage = storage;
         this.loadingCtrl = loadingCtrl;
@@ -60,14 +61,23 @@ var JobDependentPage = (function () {
         });
         toast.present();
     };
+    JobDependentPage.prototype.dismiss = function () {
+        var data = { 'dependent': '' };
+        this.viewCtrl.dismiss(data);
+    };
+    JobDependentPage.prototype.submitDependent = function () {
+        var data = { 'dependent': this.dependent };
+        this.viewCtrl.dismiss(data);
+    };
     return JobDependentPage;
 }());
 JobDependentPage = __decorate([
     Component({
         selector: 'page-job-dependent',
-        templateUrl: 'job-dependent.html'
+        templateUrl: 'job-dependent.html',
+        providers: [JobBoardService]
     }),
-    __metadata("design:paramtypes", [NavController, NavParams, JobBoardService, Storage, LoadingController, ToastController])
+    __metadata("design:paramtypes", [NavController, NavParams, ViewController, JobBoardService, Storage, LoadingController, ToastController])
 ], JobDependentPage);
 export { JobDependentPage };
 //# sourceMappingURL=job-dependent.js.map

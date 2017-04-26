@@ -13,11 +13,38 @@ import { ViewController,NavController, NavParams } from 'ionic-angular';
 })
 export class TermsModalPage {
 
+show_description:any;
+show_application_use:any;
+show_eligibility:any;
+show_user_accounts:any;
+show_renewal:any;
+show_personal_info:any;
+show_content:any;
+show_license:any;
+show_Intellectual:any;
+show_trade_marks:any;
+show_restrictions:any;
+show_termination:any;
+show_limitation:any;
+show_indemnification:any;
+show_miscellaneous:any;
+show_contact_us:any;
+show_details:any=null;
+
   constructor(public viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TermsModalPage');
   }
+  
+  show(event){
+    if(this.show_details == event){
+      this.show_details = null;
+    }else{
+      this.show_details = event;
+    }
+  }
+
   dismiss(){
 this.viewCtrl.dismiss();
   }

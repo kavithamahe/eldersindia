@@ -12,11 +12,15 @@ import { NavController, NavParams, ModalController, ViewController, AlertControl
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Platform } from 'ionic-angular';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CommunitymessagePage } from '../communitymessage/communitymessage';
+import { CommunitycommentsPage } from '../communitycomments/communitycomments';
+import { MyprofilesettingPage } from '../myprofilesetting/myprofilesetting';
+import { CommunityPage } from '../community/community';
 import { CommunityServices } from '../../providers/community-services';
 var CommunityprofilePage = (function () {
-    function CommunityprofilePage(nav, storage, viewCtrl, sanitizer, modalCtrl, alertCtrl, navParams, loadingCtrl, toastCtrl, communityServices) {
+    function CommunityprofilePage(nav, platform, storage, viewCtrl, sanitizer, modalCtrl, alertCtrl, navParams, loadingCtrl, toastCtrl, communityServices) {
         var _this = this;
         this.nav = nav;
         this.storage = storage;
@@ -28,28 +32,55 @@ var CommunityprofilePage = (function () {
         this.loadingCtrl = loadingCtrl;
         this.toastCtrl = toastCtrl;
         this.communityServices = communityServices;
-        this.activityLists = true;
+        this.community = "activity";
+        this.isAndroid = false;
+        this.isAndroid = platform.is('android');
         this.nav = nav;
-        this.status = false;
-        this.request_sent = false;
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
-            storage.get('token').then(function (token) {
-                _this.token = token;
-            });
+            storage.get('token').then(function (token) { _this.token = token; });
         });
+        this.profile_uid = navParams.get("profile_uid");
+        this.loadThisPage(this.profile_uid);
+    }
+    CommunityprofilePage.prototype.loadThisPage = function (id) {
+        this.communityProfile = [];
+        this.communityProfileData = [];
+        this.status = [];
+        // this.connectLists = false;
+        //  this.activityLists = true;
+        this.status = false;
+        this.request_sent = false;
         var loader = this.loadingCtrl.create({ content: "Please wait..." });
         loader.present();
-        this.profile_uid = navParams.get("profile_uid");
-        this.profileCommunity(this.profile_uid);
-        this.memberProfile(this.profile_uid);
+        this.profileCommunity(id);
+        this.memberProfile(id);
         this.addComments = false;
         this.itemComments = false;
         loader.dismiss();
-    }
+    };
+    CommunityprofilePage.prototype.showComment = function (post) {
+        var commentModal = this.modalCtrl.create(CommunitycommentsPage, { posts: post });
+        commentModal.present();
+    };
     CommunityprofilePage.prototype.messageModel = function (member) {
         var modal = this.modalCtrl.create(CommunitymessagePage, { member_data: member });
         modal.present();
+    };
+    CommunityprofilePage.prototype.profileSetting = function (member) {
+        var modal = this.modalCtrl.create(MyprofilesettingPage, { member_data: member });
+        modal.present();
+    };
+    CommunityprofilePage.prototype.cleanURL = function (oldURL) {
+        if (oldURL != null) {
+            var url1 = oldURL.replace('https://www.youtube.com/watch?v=', 'https://www.youtube.com/embed/');
+            var url2 = url1.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
+            var url = url2.replace("https://vimeo.com/", "https:\/\/player.vimeo.com\/video\/");
+            return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+        }
+        else {
+            return null;
+        }
     };
     CommunityprofilePage.prototype.accessGallery = function () {
         var _this = this;
@@ -71,6 +102,15 @@ var CommunityprofilePage = (function () {
             this.showblock = event;
         }
     };
+    CommunityprofilePage.prototype.replyComments = function (event) {
+        this.comments = "";
+        if (this.showReply == event) {
+            this.showReply = null;
+        }
+        else {
+            this.showReply = event;
+        }
+    };
     CommunityprofilePage.prototype.itemDetails = function () {
         if (this.itemComments) {
             this.itemComments = false;
@@ -89,6 +129,7 @@ var CommunityprofilePage = (function () {
     };
     CommunityprofilePage.prototype.profileCommunity = function (id) {
         var _this = this;
+        this.communityProfile = [];
         this.communityServices.userProfile(id).subscribe(function (users) {
             _this.communityProfile = users.result.info.lists.data;
         }, function (err) {
@@ -97,9 +138,19 @@ var CommunityprofilePage = (function () {
     };
     CommunityprofilePage.prototype.memberProfile = function (member_id) {
         var _this = this;
+        this.communityProfileData = [];
         this.communityServices.memberProfileData(member_id).subscribe(function (users) {
             _this.communityProfileData = users.result.info.profile_details;
             _this.status = users.result.info.approve_status.status;
+            _this.user_id = _this.communityProfileData.id;
+        }, function (err) {
+            _this.communityServices.showErrorToast(err);
+        });
+    };
+    CommunityprofilePage.prototype.Communities = function () {
+        var _this = this;
+        this.communityServices.getCommunityMembers().subscribe(function (users) {
+            _this.getCommunityMembers = users.result.data;
         }, function (err) {
             _this.communityServices.showErrorToast(err);
         });
@@ -108,34 +159,24 @@ var CommunityprofilePage = (function () {
         var _this = this;
         this.communityServices.connectMember(user.id, user.name).subscribe(function (users) {
             _this.showToast(users.result.info);
+            _this.memberProfile(user.id);
             _this.request_sent = true;
         }, function (err) {
             _this.communityServices.showErrorToast(err);
         });
     };
-    CommunityprofilePage.prototype.activityMember = function () {
-        this.connectLists = false;
-        if (this.activityLists) {
-            this.activityLists = false;
-        }
-        else {
-            this.activityLists = true;
-        }
-    };
-    CommunityprofilePage.prototype.connectList = function () {
+    CommunityprofilePage.prototype.Connections = function (id, val) {
         var _this = this;
-        this.communityServices.getConnectList().subscribe(function (users) {
-            console.log(users);
+        this.communityServices.getConnectLists(id, val).subscribe(function (users) {
+            _this.allConnections = users.result.info.list;
         }, function (err) {
             _this.communityServices.showErrorToast(err);
         });
-        this.activityLists = false;
-        if (this.connectLists) {
-            this.connectLists = false;
-        }
-        else {
-            this.connectLists = true;
-        }
+    };
+    CommunityprofilePage.prototype.setItems = function (ev) {
+        var val = ev.target.value;
+        var id = this.user_id;
+        this.Connections(id, val);
     };
     CommunityprofilePage.prototype.addLikes = function (id) {
         var _this = this;
@@ -143,6 +184,7 @@ var CommunityprofilePage = (function () {
         loader.present();
         this.communityServices.addLike(id).subscribe(function (data) {
             _this.showToast(data.result);
+            _this.profileCommunity(_this.profile_uid);
         }, function (err) {
             _this.communityServices.showErrorToast(err);
         });
@@ -158,17 +200,22 @@ var CommunityprofilePage = (function () {
     };
     CommunityprofilePage.prototype.sendPost = function (id1) {
         var _this = this;
-        var loader = this.loadingCtrl.create({ content: "Please wait initializing..." });
-        loader.present();
-        this.communityServices.sendPosts(id1, this.comment).subscribe(function (datas) {
-            _this.showToast(datas.result);
-            _this.comment = "";
-            // this.showblock= null;
-            _this.profileCommunity(_this.profile_uid);
-        }, function (err) {
-            _this.communityServices.showErrorToast(err);
-        });
-        loader.dismiss();
+        if (this.comment != "") {
+            var loader = this.loadingCtrl.create({ content: "Please wait initializing..." });
+            loader.present();
+            this.communityServices.sendPosts(id1, this.comment).subscribe(function (datas) {
+                _this.showToast(datas.result.info.message);
+                _this.comment = "";
+                // this.showblock= null;
+                _this.profileCommunity(_this.profile_uid);
+            }, function (err) {
+                _this.communityServices.showErrorToast(err);
+            });
+            loader.dismiss();
+        }
+        else {
+            this.showToast("Enter Comments and Post");
+        }
     };
     CommunityprofilePage.prototype.addUserPosts = function (id) {
         var _this = this;
@@ -195,7 +242,32 @@ var CommunityprofilePage = (function () {
             _this.communityServices.showErrorToast(err);
         });
     };
-    CommunityprofilePage.prototype.userProfile = function () {
+    CommunityprofilePage.prototype.showConfirm = function (DeleteId) {
+        var _this = this;
+        var confirm = this.alertCtrl.create({
+            subTitle: 'Confirm Deletion?',
+            buttons: [
+                {
+                    text: 'Cancel',
+                },
+                {
+                    text: 'Ok',
+                    handler: function () {
+                        _this.deleteComment(DeleteId);
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    };
+    CommunityprofilePage.prototype.goBackToCommunity = function (id) {
+        this.nav.push(CommunityPage, { community_id: id });
+    };
+    CommunityprofilePage.prototype.profileMember = function (id) {
+        this.profileCommunity(id);
+        this.memberProfile(id);
+    };
+    CommunityprofilePage.prototype.detailCommunity = function () {
         this.nav.pop();
     };
     CommunityprofilePage.prototype.dashboardPage = function () {
@@ -206,9 +278,9 @@ var CommunityprofilePage = (function () {
 CommunityprofilePage = __decorate([
     Component({
         selector: 'page-communityprofile',
-        templateUrl: 'communityprofile.html',
+        templateUrl: 'communityprofile.html'
     }),
-    __metadata("design:paramtypes", [NavController, Storage, ViewController, DomSanitizer, ModalController, AlertController, NavParams, LoadingController, ToastController, CommunityServices])
+    __metadata("design:paramtypes", [NavController, Platform, Storage, ViewController, DomSanitizer, ModalController, AlertController, NavParams, LoadingController, ToastController, CommunityServices])
 ], CommunityprofilePage);
 export { CommunityprofilePage };
 //# sourceMappingURL=communityprofile.js.map

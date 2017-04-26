@@ -101,6 +101,7 @@ export class LoginPage {
          this.storage.set('token', loginuser['token']);
          this.storage.set('imageurl',this.appConfig.setImageurl());
          this.storage.set('rooturl',this.appConfig.setrooturl());
+         this.storage.set('service_location','');
          this.storage.set('islogin',1);
           this.navCtrl.setRoot(DashboardPage);
        })

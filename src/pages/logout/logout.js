@@ -23,8 +23,10 @@ var LogoutPage = (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.storage = storage;
+        this.storage.clear();
         this.storage.ready().then(function () {
             _this.storage.clear();
+            _this.storage.set('id', '');
             _this.navCtrl.setRoot(LoginPage);
         });
     }

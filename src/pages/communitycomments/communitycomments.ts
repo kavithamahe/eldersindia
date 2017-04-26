@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ViewController ,LoadingController, AlertController,ToastController, NavController, NavParams } from 'ionic-angular';
+import { ViewController ,LoadingController, AlertController,ToastController, NavController, NavParams, PopoverController  } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { CommunityprofilePage } from '../communityprofile/communityprofile';
 import { CommunityServices } from '../../providers/community-services';
-
+import { EmojiPickerPage } from '../../pages/emoji-picker/emoji-picker';
 /*
   Generated class for the Communitycomments page.
 
@@ -24,12 +24,12 @@ reply_comment:any;
 Reply:any;
 showReply:any;
 replyBlock:any;
-post_comment:any;
+post_comment:any='';
 imageUrl:any;
 token:any;
 
 
-  constructor(public loadingCtrl: LoadingController, public viewCtrl: ViewController, public storage: Storage, public toastCtrl: ToastController, public alertCtrl:AlertController, public communityServices: CommunityServices, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public loadingCtrl: LoadingController, public viewCtrl: ViewController, public storage: Storage, public toastCtrl: ToastController, public alertCtrl:AlertController, public communityServices: CommunityServices, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
   	this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;
       	this.posts = navParams.get("posts");
@@ -106,12 +106,12 @@ token:any;
      this.post_comment="";
      for(let i=0; i<this.post_comments.length;i++){
      	if(this.post_comments[i].comments_id == id){
-     		console.log("index of comment: ",i);
+     		
      		this.post_comments.splice(i,1);
      	}
      }
      
-     // this.communityList(this.community_id);
+     
      },
      err =>{
     
@@ -138,8 +138,7 @@ sendComment(postID){
      this.post_comments.push(datas.result.info.list[0])
      this.showToast(datas.result.info.message);
      this.post_comment="";
-     // this.communityList(this.community_id);
-     // this.showblock=null;
+ 
      },
      err =>{
     
@@ -202,5 +201,31 @@ sendComment(postID){
   dismiss(){
   	this.viewCtrl.dismiss();
   }
+  emojiPicker1(post_id)
+   {
+    let  likeEmoji={type:'commentEmoji'};
+   let modal = this.popoverCtrl.create(EmojiPickerPage,likeEmoji);
+    modal.present();
+     modal.onDidDismiss(data => {
+      if(data!=null)
+      {
+      this.post_comment=this.post_comment+' '+data.emojiImage;
+      this.sendComment(post_id);
+      }
+     })
+   }
+   emojiPicker2(commendId,postProfileId)
+   {
+     let  likeEmoji={type:'commentEmoji'};
+   let modal = this.popoverCtrl.create(EmojiPickerPage,likeEmoji);
+    modal.present();
+     modal.onDidDismiss(data => {
+      if(data!=null)
+      {
+      this.reply_comment=this.reply_comment+' '+data.emojiImage;
+      this.sendReply(commendId,postProfileId);
+      }
+     })
+   }  
 
 }

@@ -126,10 +126,12 @@ getConnectLists(id,data){
 }
 
 
-getCommunityMembers(){
-    return this.http.post(`${this.getCommunityPostsUrl }getCommunityMembers`,"",this.options)
+getCommunityMembers(id){
+  this.post={"user_id": id}
+    return this.http.post(`${this.getCommunityPostsUrl }getCommunityMembers`,this.post,this.options)
       .map(res =>res.json());
 }
+
 myprofile(id){
     this.send = {"user_id":id}
 
@@ -162,6 +164,10 @@ myprofile(id){
     return this.http.post(`${this.getCommunityPostsUrl }getCommunityPosts`,{"info": {"community": id, "post": 0, "comPostId": ""}},this.options)
      .map(res => res.json());
      }
+  communityscroll(nextPageURL,id){
+        return this.http.post(nextPageURL,{"info": {"community": id, "post": 0, "comPostId": ""}},this.options)
+     .map(res => res.json());
+     }
      
 
   userProfile(id){
@@ -170,13 +176,19 @@ myprofile(id){
      return this.http.post(`${this.getCommunityPostsUrl }getUserPosts`,this.body,this.options)
       .map(res =>res.json());
   }
+  userpostsscroll(nextPageURL,id){
+     this.body = {"user_id":id,"post":0}
+
+     return this.http.post(nextPageURL,this.body,this.options)
+      .map(res =>res.json());
+  }
 
   //---------------------------------//
 
 
 
-  addUserPosts(id,image,videoUrl,posts){
-     this.posts = { "user_id":id, "image":image,"videourl":videoUrl,"message":posts }
+  addUserPosts(id,image,videoUrl,posts,links){
+     this.posts = { "user_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links,"app":'' }
 
 
      return this.http.post(`${this.getCommunityPostsUrl }addUserPost`,this.posts,this.options)
@@ -193,9 +205,10 @@ myprofile(id){
 
   
 
-  addLike(id){
-    this.body = {"info": {"postId":id}};
-     return this.http.post(`${this.getCommunityPostsUrl }sendLikes`,this.body,this.options)
+  addLike(likeObj){
+   // this.body = {"info": {"postId":id}};
+    this.body = {info: {postId: likeObj.id, emojiArr: {id: likeObj.emojiId, emoji: likeObj.emoji, name:likeObj.name}}};
+    return this.http.post(`${this.getCommunityPostsUrl }sendLikes`,this.body,this.options)
       .map(res =>res.json());
   }
 
@@ -213,9 +226,9 @@ myprofile(id){
       .map(res =>res.json());
   }
 
-  postCommunity(id,image,videoUrl,posts,links){
-     this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links }
 
+  postCommunity(id,image,videoUrl,posts,links){
+     this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links, "app":'' }
 
      return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,this.posts,this.options)
       .map(res =>res.json());

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Camera } from 'ionic-native';
+
 
 import { BlogListService } from '../../providers/blog-list-service';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -27,7 +29,9 @@ highlights:any;
 tags:any=[];
 allowComments:any;
 items:any;
+featuredImage:any;
 tagsModel:any=[];
+bannerImage:any;
 blogForm: FormGroup;
 submitAttempt: boolean = false;
   constructor(public formBuilder: FormBuilder,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
@@ -94,6 +98,24 @@ submitAttempt: boolean = false;
     );
     }
   }
+
+   accessGallery(type){
+   Camera.getPicture({
+     sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+     destinationType: Camera.DestinationType.DATA_URL
+    }).then((imageData) => {
+      if(type == 'banner'){
+      this.bannerImage = 'data:image/jpeg;base64,'+imageData;  
+    }else{
+      this.featuredImage = 'data:image/jpeg;base64,'+imageData;
+    }
+      
+     }, (err) => {
+      console.log(err);
+    });
+  }
+
+
   public createBlog()
   { 
     if(!this.blogForm.valid){
@@ -112,10 +134,10 @@ submitAttempt: boolean = false;
         tagsObj.push({"name":this.tagsModel[j]})
       }
     }
-    
+   
     this.blogObject={ "category":this.blogForm.value.category,"allow_comment":this.allowComments,"title":this.blogForm.value.title,"highlights":this.highlights,
-        "description":this.blogForm.value.description,"featured_image":"","banner_image":"","tags":tagsObj,
-        };
+        "description":this.blogForm.value.description,"featured_image":this.featuredImage,"banner_image":this.bannerImage,"tags":tagsObj,"app":''
+    };
         
     this.blogListService.createBlog(this.blogObject).subscribe(
      (createBlog) => {

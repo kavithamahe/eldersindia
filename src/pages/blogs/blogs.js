@@ -75,7 +75,8 @@ var BlogsPage = (function () {
 BlogsPage = __decorate([
     Component({
         selector: 'page-blogs',
-        templateUrl: 'blogs.html'
+        templateUrl: 'blogs.html',
+        providers: [BlogListService]
     }),
     __metadata("design:paramtypes", [NavController, NavParams, Storage, BlogListService, LoadingController, ToastController])
 ], BlogsPage);

@@ -39,7 +39,7 @@
 
 <div [ngSwitch]="messages">
   <ion-list *ngSwitchCase="'sent'">
-  <ion-card *ngFor="let sent of sentInfo?.data" (click)="viewMessages(sent?.id,'sent')" style="padding:3px;">
+  <ion-card *ngFor="let sent of sentInfo" (click)="viewMessages(sent?.id,'sent')" style="padding:3px;">
     <ion-row>
 	<ion-col width-20 height-20>
     <ion-avatar item-left>
@@ -53,10 +53,13 @@
   </ion-col>
   </ion-row>
   </ion-card>
+  <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
   </ion-list>
 
   <ion-list *ngSwitchCase="'inbox'">
-  <ion-card *ngFor="let inbox of inboxInfo?.data" (click)="viewMessages(inbox?.id,'inbox')">
+  <ion-card *ngFor="let inbox of inboxInfo" (click)="viewMessages(inbox?.id,'inbox')">
      <ion-row>
 	 <ion-col width-20 height-20>
     <ion-avatar item-left height-20>
@@ -70,6 +73,9 @@
     <p>{{inbox?.message | words : 10 : '...'}}</p>
    </ion-col></ion-row>
   </ion-card>
+  <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
   </ion-list>
 
 </div>

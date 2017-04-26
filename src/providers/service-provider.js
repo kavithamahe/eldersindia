@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-//import {Observable} from 'rxjs/Observable';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import 'rxjs/Rx';
@@ -37,8 +36,15 @@ var ServiceProvider = (function () {
             storage.get('rooturl').then(function (rooturl) { _this.rootUrl = rooturl; });
         });
     }
+    ServiceProvider.prototype.serviceInit = function (token) {
+        console.log("token intialized", token);
+        this.token = token;
+    };
     ServiceProvider.prototype.webServiceCall = function (serviceName, bodyData) {
-        console.log("serviceName" + this.rootUrl);
+        this.headers = new Headers();
+        this.headers.append('Content-Type', 'application/json');
+        this.headers.append('Authorization', 'Bearer ' + this.token);
+        this.head = new RequestOptions({ headers: this.headers });
         return this.http.post(this.rootUrl + serviceName, bodyData, this.head)
             .map(function (res) { return res.json(); });
     };
