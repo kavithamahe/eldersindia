@@ -73,8 +73,10 @@ export class CommunityprofilePage {
   }
 
   loadThisPage(id){
+    this.allConnections=[];
     this.communityProfile=[];
     this.communityProfileData=[];
+
     this.status=[];
      
       this.status = false;
@@ -83,6 +85,7 @@ export class CommunityprofilePage {
       loader.present();
       this.profileCommunity(id);
       this.memberProfile(id);
+      this.Connections(id,"");
       this.addComments=false;
       this.itemComments=false;
       loader.dismiss();
@@ -189,8 +192,8 @@ export class CommunityprofilePage {
   }
  
   memberProfile(member_id){
-     this.communityProfileData=[];
-    this.communityServices.memberProfileData(member_id).subscribe(users => {
+      this.communityProfileData=[];
+      this.communityServices.memberProfileData(member_id).subscribe(users => {
       this.communityProfileData = users.result.info.profile_details;
       this.status = users.result.info.approve_status.status;
       this.user_id = this.communityProfileData.id;
@@ -215,7 +218,7 @@ export class CommunityprofilePage {
   
   connectMember(user){
    
-    this.communityServices.connectMember(user.id,user.name).subscribe(users => {
+        this.communityServices.connectMember(user.id,user.name).subscribe(users => {
        this.showToast(users.result.info);
         this.memberProfile(user.id);
        this.request_sent = true;
@@ -403,7 +406,7 @@ export class CommunityprofilePage {
       }
      })
    }
-doInfinite(infiniteScroll) {
+  doInfinite(infiniteScroll) {
     setTimeout(() => {      
       if(this.nextPageURL!=null && this.nextPageURL!='')
       {
@@ -431,6 +434,7 @@ doInfinite(infiniteScroll) {
     this.communityServices.showErrorToast(err);
   });
   }
+  
 
  }
 

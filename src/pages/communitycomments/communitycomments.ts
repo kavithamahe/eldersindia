@@ -106,12 +106,12 @@ token:any;
      this.post_comment="";
      for(let i=0; i<this.post_comments.length;i++){
      	if(this.post_comments[i].comments_id == id){
-     		console.log("index of comment: ",i);
+     		
      		this.post_comments.splice(i,1);
      	}
      }
      
-     // this.communityList(this.community_id);
+     
      },
      err =>{
     
@@ -138,8 +138,7 @@ sendComment(postID){
      this.post_comments.push(datas.result.info.list[0])
      this.showToast(datas.result.info.message);
      this.post_comment="";
-     // this.communityList(this.community_id);
-     // this.showblock=null;
+ 
      },
      err =>{
     
