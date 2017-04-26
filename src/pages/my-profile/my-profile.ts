@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { EditProfilePage } from '../edit-profile/edit-profile';
+import { EldersPage } from '../../pages/elders/elders'
 import { ServiceProvider } from '../../providers/service-provider';
 import { Storage } from '@ionic/storage';
 
@@ -19,7 +20,7 @@ import { Storage } from '@ionic/storage';
 export class MyProfilePage {
 
 profileData:any;
-user_type:any ;
+user_type:any="";
 imageURL:any;
 token:any;
 gender:any ="";
@@ -28,21 +29,19 @@ user_dob:any;
   constructor(public storage:Storage,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {  }
 
 
-  loadMyProfile(token){
+  loadMyProfile(){
     this.user_type = "";
     this.providerService.webServiceCall(`myaccount`,"")
-  .subscribe(data =>{
-    this.profileData = data.result.info;
-    this.gender = this.profileData.gender;
-    this.user_type = data.result.info.user_type;
-    if(this.user_type != "sponsor"){
-      this.user_type = "Elder";
-    }
-    this.user_dob= this.profileData.dob;//this.getDate(this.profileData.dob);
-  },
-  err=>{
-    this.providerService.showErrorToast(err);
-  })
+                        .subscribe(
+                          data =>{
+                                    this.profileData = data.result.info;
+                                    this.gender = this.profileData.gender;
+                                    this.user_type = (data.result.info.user_type == 'sponosr') ? 'Sponsor' : "Elder"; 
+                                    this.user_dob= this.profileData.dob;//this.getDate(this.profileData.dob);
+                                    },
+                          err=>{
+                                      this.providerService.showErrorToast(err);
+                                    })
   }
 
   getDate(datepar){
@@ -52,7 +51,11 @@ user_dob:any;
   }
 
   editProfile(){
-  	this.navCtrl.push(EditProfilePage,{profileData:this.profileData});
+    if(this.user_type == "sponsor"){
+      this.navCtrl.push(EditProfilePage,{profileData:this.profileData});
+    }else{
+      this.navCtrl.push(EldersPage,{fuctionality:"profileEdit",profileData:this.profileData});
+    }
   }
 
   public dashboardPage()
@@ -64,7 +67,7 @@ user_dob:any;
     this.storage.ready().then(() => {
       this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;});
       this.storage.get('token').then((token) => { this.token=token; 
-      this.loadMyProfile( this.token);
+      this.loadMyProfile();
       })
     });
   }

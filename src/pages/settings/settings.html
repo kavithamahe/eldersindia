@@ -22,8 +22,8 @@
 
 
 <ion-content padding>
-<div padding>
-  <ion-segment [(ngModel)]="settings">
+<!-- <div padding> -->
+  <ion-segment [(ngModel)]="settings" (ionChange)="changeSlide()">
     <ion-segment-button value="paginate">
       Paginate
     </ion-segment-button>
@@ -31,52 +31,10 @@
       Privacy
     </ion-segment-button>
   </ion-segment>
-</div>
+<!-- </div> -->
 
-    <div [ngSwitch]="settings">
-
-    <div *ngSwitchCase="'privacy'">
-      <ion-list>
-
-        <ion-item>
-          <ion-label>Name</ion-label>
-          <ion-toggle [(ngModel)]="privacy_name"></ion-toggle>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Email</ion-label>
-          <ion-toggle [(ngModel)]="privacy_email"></ion-toggle>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Mobile</ion-label>
-          <ion-toggle [(ngModel)]="privacy_mobile"></ion-toggle>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Location</ion-label>
-          <ion-toggle [(ngModel)]="privacy_location"></ion-toggle>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Birthday</ion-label>
-          <ion-toggle [(ngModel)]="privacy_birthday"></ion-toggle>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Avatar</ion-label>
-          <ion-toggle [(ngModel)]="privacy_avatar"></ion-toggle>
-        </ion-item>
-
-      </ion-list>
-      <!-- <ion-row>
-      	         <ion-col><button ion-button item-left small (click)="dismiss()">Cancel</button></ion-col>
-           <ion-col><button  class="change-pass" ion-button round (click)="privacy_submit()">Submit</button></ion-col>
-       
-      </ion-row> -->
-      </div>
-
-      <div *ngSwitchCase="'paginate'">
+    <ion-slides (ionSlideDidChange)="slideChanged()">
+      <ion-slide>
         <ion-list>
           <ion-list-header>
           
@@ -91,9 +49,44 @@
             </ion-select>
           </ion-item>
         </ion-list>  
-      </div>
+      </ion-slide>
 
-    </div>
+    <ion-slide>
+      <ion-list>
+
+        <ion-item>
+          <ion-label>Name</ion-label>
+          <ion-toggle [(ngModel)]="privacy_name"></ion-toggle>
+        </ion-item>
+        <hr/>
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-toggle [(ngModel)]="privacy_email"></ion-toggle>
+        </ion-item>
+        <hr/>
+        <ion-item>
+          <ion-label>Mobile</ion-label>
+          <ion-toggle [(ngModel)]="privacy_mobile"></ion-toggle>
+        </ion-item>
+        <hr/>
+        <ion-item>
+          <ion-label>Location</ion-label>
+          <ion-toggle [(ngModel)]="privacy_location"></ion-toggle>
+        </ion-item>
+        <hr/>
+        <ion-item>
+          <ion-label>Birthday</ion-label>
+          <ion-toggle [(ngModel)]="privacy_birthday"></ion-toggle>
+        </ion-item>
+        <hr/>
+        <ion-item>
+          <ion-label>Avatar</ion-label>
+          <ion-toggle [(ngModel)]="privacy_avatar"></ion-toggle>
+        </ion-item>
+
+      </ion-list>
+      </ion-slide>
+    </ion-slides>
 </ion-content>
 
 <ion-footer>

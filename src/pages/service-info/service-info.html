@@ -1,0 +1,172 @@
+<!--
+  Generated template for the ServiceInfo page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{vendor_name}}</ion-title>    
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="marg-info" style="background:#fff;">
+  <div *ngIf="vendorList?.banners">
+  <ion-slides class="slide_height" initialSlide="0" loop="true" pager="true" autoplay="3000">
+      <ion-slide *ngFor="let slide of vendorList.banners" style="height:200px;">
+        <img [src]="url+slide?.banner" class="slide-image"/>
+      </ion-slide>  
+  </ion-slides>  
+  </div>
+
+<div class="slider-detalis-list">
+<ion-card>
+  <ion-card-header>
+         <h2> Welcome to {{vendorList?.vendorDetails?.name}}</h2>
+  </ion-card-header>
+  <ion-card-content>
+   <p> {{vendorList?.vendorDetails?.description}} </p>
+  </ion-card-content>
+</ion-card>
+
+</div>
+
+    <div class="view-storedet">
+
+  <ion-row>
+    <ion-col class="brder-cor">
+      <button ion-button full (click)="toggleRequestService()">
+        <b>Request Services </b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
+      </button>
+      
+   <form [formGroup]="requestForm" *ngIf(showRequestService)>
+        <div class="select-detalis-in" padding style="background:#fff; border:1px solid #159deb; border-top:none;">
+           <br>
+      <ion-label stacked class="label-lb">Describe The Problem</ion-label>
+          <ion-input formControlName = "problem" type="text" ></ion-input>
+      <small *ngIf="!requestForm.controls.problem.valid  && (requestForm.controls.problem.dirty || submitAttempt)">
+                <p class="err-reds">Please enter the describe problem</p>
+            </small>
+       
+    <ion-label stacked class="label-lb" style="padding-bottom:10px;">Date</ion-label>
+          <ion-item>
+           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" formControlName ="date"></ion-datetime>
+          </ion-item>
+   <small *ngIf="!requestForm.controls.date.valid  && (requestForm.controls.date.touched || submitAttempt)">
+                <p class="err-reds">Please enter the date</p>
+            </small>
+      
+    <ion-label stacked class="label-lb" style="padding-bottom:10px;">Time</ion-label>
+          <ion-item>
+            <ion-datetime class="select-brd" displayFormat="hh:mm A" pickerFormat="hh:mm:A" formControlName ="time"></ion-datetime>
+          </ion-item>
+    <ion-item *ngIf="!requestForm.controls.time.valid  && (requestForm.controls.time.dirty || submitAttempt)">
+                <p class="err-reds">Please enter the time</p>
+            </ion-item>
+        
+      
+      <ion-label stacked class="label-lb">Alternate Contact Number</ion-label>
+          <ion-input formControlName ="contact" type="text" ></ion-input>
+  <small *ngIf="!requestForm.controls.contact.valid  && (requestForm.controls.contact.dirty || submitAttempt)">
+                <p class="err-reds">Please enter the alternate contact number</p>
+            </small>
+        
+           <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb" style=" margin-bottom:10px; padding-bottom:10px;">Select Dependent</ion-label>
+     <ion-item *ngIf = "userType =='sponsor'">
+              <ion-select formControlName ="dependents" class="select-brd">
+                <ion-option  *ngFor = "let dependent of vendorList.dependentLists" value={{dependent.id}}>{{dependent.name}}
+                </ion-option>
+              </ion-select>
+      
+          </ion-item>
+         <small *ngIf="!requestForm.controls.dependents.valid  && (requestForm.controls.dependents.dirty || submitAttempt)">
+                <p class="err-reds">Please select the dependent</p>
+            </small>
+            <!-- <ion-item>
+              <ion-label>I Agree With Terms and Conditions</ion-label>
+              <ion-checkbox [(ngModel)]="terms"></ion-checkbox>
+            </ion-item> -->
+          <ion-row>
+          <ion-col>
+     <!--<button class="btn-defaults" ion-button item-right small (click)="toggleRequestService()">Cancel</button>--></ion-col>
+          <ion-col>
+      <button class="btn-primarys" ion-button item-right small (click)="sendRequestService()">Submit</button></ion-col>
+          </ion-row>
+        </div>
+      </form>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="brder-cor">
+      <button ion-button item-left full (click)="modal()">        
+        <b>Services Offered</b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
+      </button>
+                                        <!-- <div *ngIf(showServiceOffered)>
+                                        <ion-card *ngFor = "let service of vendorList.serviceOffered">
+                                        <ion-list *ngFor = "let category_list of service.category_lists">
+                                        <button class="sub" ion-item (click)="show_sub_category()">
+                                        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
+                                        {{category_list.category}}  
+                                        </button >
+                                        <ion-item *ngIf(sub_category)>
+                                        <ion-card *ngFor="let subcategory_list of category_list.service_sub_category_lists; let i=index " >
+                                        <ion-list (click)="showService(i)">
+                                        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
+                                        {{subcategory_list.subcategory}}
+                                        </ion-list>
+                                        <ion-item *ngIf= "i === show_service">
+                                        <ion-card *ngFor="let services of subcategory_list.services" >
+                                        <ion-list>
+                                        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
+                                        {{services.service}}
+                                        </ion-list>
+                                        </ion-card> 
+                                        </ion-item>
+                                        </ion-card> 
+                                        </ion-item>
+
+                                        </ion-list>
+                                        </ion-card>
+
+                                        <ion-card *ngIf="!vendorList.serviceOffered">
+                                        <ion-card-content>
+                                        No Records Found..!
+                                        </ion-card-content>
+                                        </ion-card>    
+
+                                        </div>    -->
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="brder-cor">
+
+      <button ion-button item-left full (click)="toggleContact()">
+        
+        <b>Contact Details</b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
+      </button>
+      <div *ngIf(showDetails) class="add-detalis">
+    <p>{{vendorList?.vendorDetails?.address}}</p>
+    <p>{{vendorList?.vendorDetails?.email}}</p>
+    <p>{{vendorList?.vendorDetails?.contact_name}}</p>
+    <p>{{vendorList?.vendorDetails?.contact_number}}</p>
+      </div>
+    <div *ngIf(!vendorList?.vendorDetails?.address)>
+      <p style="color:red; font-size:15px;">"No Address Deatails To Display"</p>     
+      </div>
+    </ion-col>
+  </ion-row>
+</div>
+  <!-- </ion-card> -->
+</ion-content>
+
+
