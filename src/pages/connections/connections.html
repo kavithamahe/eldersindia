@@ -26,7 +26,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="contect-bg-moblie">
 <div padding>
   <ion-segment [(ngModel)]="connections">
     <ion-segment-button value="all" color="orange" (click)="onInit()">
@@ -56,15 +56,18 @@
 	
     </ion-col>
       <ion-col width-20> 
-      <button ion-button icon-only small color="secondary" (click)="connectionStatus(request?.connection_id,1)">
-         <ion-icon ios="ios-checkmark" md="md-checkmark"></ion-icon>
+      <button ion-button icon-only class="active-btn"(click)="connectionStatus(request?.connection_id,1)">
+        <i class="fa fa-check"></i>
     </button>
-    <button ion-button icon-only small color="danger" (click)="connectionStatus(request?.connection_id,2)">
-        <ion-icon ios="ios-close" md="md-close"></ion-icon>
+    <button ion-button icon-only class="inactive-btn" (click)="connectionStatus(request?.connection_id,2)">
+        <i class="fa fa-times" aria-hidden="true"></i>
     </button>
     </ion-col>
     </ion-row>
-    </ion-grid>    
+
+    </ion-grid>  
+		<hr/>
+
     </div>
     <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
@@ -80,21 +83,16 @@
     <ion-avatar item-left>
     <img src="{{imageUrl+all?.avatar}}" [hidden]="!all?.avatar">
     </ion-avatar></ion-col>
-    <ion-col width-67>
+    <ion-col width-80>
     <h6 class="name-conne">{{all?.connections?.name}} </h6>
     <p class="connection-pages"><i class="fa fa-inbox"> </i> {{all?.connections?.email}}</p>
     <p class="connection-page" [hidden]="!all?.connections?.location">
     <i class="fa fa-map-marker"></i> {{all?.connections?.location}}    
     </p>
-	
     </ion-col>
-      <ion-col width-20> 
-      <button ion-button icon-only small color="secondary">
-         <ion-icon ios="ios-contact" md="md-contact"></ion-icon>
-    </button>
-    </ion-col>
-    </ion-row>    
+    </ion-row> 
     </ion-grid>
+	<hr/>
     </div>
     <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

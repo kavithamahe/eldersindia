@@ -20,7 +20,7 @@
 		  <ion-row>
 			  <ion-col width-30>
 				  	<ion-item>
-					  <ion-avatar item-left class="image-profile">
+					  <ion-avatar item-left class="image-profile" (click)="profileSetting(communityProfileData.id)">
 					  	<img [src]="imageUrl+communityProfileData?.avatar" 
 					  	[hidden]="!communityProfileData?.avatar">
 					  </ion-avatar>
@@ -50,13 +50,9 @@
 			</ion-row>
 		  <ion-row>
 			  <ion-col>
-				  <p style="text-align:left;" class="mem-name">{{communityProfileData?.name}}</p>
+				  <p style="text-align:left;" class="mem-name" (click)="profileSetting(communityProfileData.id)">{{communityProfileData?.name}}</p>
 			  </ion-col>
-			  <ion-col>
-				  <button ion-button icon-only clear (click)="profileSetting(communityProfileData.id)">
-		          			<i class="fa fa-user" aria-hidden="true"></i>
-				  </button>
-			  </ion-col>
+			 
 		  </ion-row>
 
 

@@ -25,19 +25,22 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding style="background:#fff;">
+<ion-content padding class="contect-bg-moblie">
 <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)">
-
-  <ion-item text-wrap>
-    <ion-avatar item-left>
+<ion-row>
+<ion-col width-20>
+	<ion-avatar item-left>
       <img src="{{imageUrl+blogs?.avatar}}" [hidden]="!blogs?.avatar">
     </ion-avatar>
-    <h2 class="primary-color pro-info">{{blogs.title}}</h2>
+	</ion-col>
+	<ion-col width-80 class="blogs-tittle">
+  <ion-item text-wrap>
+    <h2 class="pro-info">{{blogs.title}}</h2>
     <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{blogs.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{blogs.created_at | date :"MMM dd y"}}</p>
-    
   </ion-item>
+  </ion-col>
+  </ion-row>
 
-  <hr>
 
   <ion-card-content>
 {{imageUrl.blogs?.featured_image}}
