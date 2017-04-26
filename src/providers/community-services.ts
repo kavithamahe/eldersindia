@@ -126,10 +126,12 @@ getConnectLists(id,data){
 }
 
 
-getCommunityMembers(){
-    return this.http.post(`${this.getCommunityPostsUrl }getCommunityMembers`,"",this.options)
+getCommunityMembers(id){
+  this.post={"user_id": id}
+    return this.http.post(`${this.getCommunityPostsUrl }getCommunityMembers`,this.post,this.options)
       .map(res =>res.json());
 }
+
 myprofile(id){
     this.send = {"user_id":id}
 
