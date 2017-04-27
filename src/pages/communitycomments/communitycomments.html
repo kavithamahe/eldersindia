@@ -68,7 +68,7 @@
 					</ion-list>
 				</div>
 		   						
-		      	<button ion-button (click)="showConfirm(comment.comments_id)" 
+		      	<button *ngIf="comment.uid == user_id" ion-button (click)="showConfirm(comment.comments_id)" 
 			      	color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
 		
 		

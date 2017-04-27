@@ -54,7 +54,7 @@
 		</ion-item>
 	</div><hr>
 
-	<div>
+	<div *ngIf="communityDetailData?.isJoined">
 		<h2 class="wel-comemem">Update Status</h2>
 			<div style="padding:0px !important;">
 				<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?">

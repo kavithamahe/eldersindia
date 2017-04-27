@@ -85,7 +85,7 @@ export class CommunityprofilePage {
       loader.present();
       this.profileCommunity(id);
       this.memberProfile(id);
-      this.Connections(id,"");
+      // this.Connections(id,"");
       this.addComments=false;
       this.itemComments=false;
       loader.dismiss();

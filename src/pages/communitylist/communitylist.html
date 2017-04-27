@@ -21,15 +21,15 @@
 </ion-header>
 <ion-content class="segments-info" style="background:#fff;">
      <ion-segment [(ngModel)]="community" class="segment-top">
-        <ion-segment-button (click)="myCommunity()" value="mycommunity">
-          My Community
+        <ion-segment-button (click)="myCommunity()" value="my_community">
+          My Communities
         </ion-segment-button>
-        <ion-segment-button (click)="otherCommunity('')" value="othercommunity">
+        <ion-segment-button (click)="otherCommunity('')" value="other_community">
           Recommended Community
         </ion-segment-button>
       </ion-segment>
     <div [ngSwitch]="community">
-      <ion-list *ngSwitchCase="'mycommunity'">
+      <ion-list *ngSwitchCase="'my_community'">
         <ion-card *ngIf(searchButton)>
           <ion-list>
             <ion-item>
@@ -61,7 +61,7 @@
         </ion-item>
       </ion-list>
 
-      <ion-list *ngSwitchCase="'othercommunity'">
+      <ion-list *ngSwitchCase="'other_community'">
         <ion-card *ngIf(searchButton)>
           <ion-list>
             <ion-item>
