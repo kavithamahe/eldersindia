@@ -69,8 +69,8 @@ export class MyApp {
     this.storage.ready().then(() => {
     storage.get('user_type').then((userType)=>{
       this.user_type = userType;
-      this.user_logged = this.user_type;
-        if((this.user_logged == 'sponsor') && (this.user_type != '') && (this.user_logged != null)){
+      console.log("user_type : ", this.user_type);
+        if((this.user_type != '') && (this.user_type != null) && (this.user_type == 'sponsor')){
             this.pages.splice(1, 0, { title: 'Manage Dependents', component: ManagePage });
            }
     });
@@ -92,6 +92,11 @@ export class MyApp {
 // set our app's pages on user based
 
       this.pages = [];
+      console.log(this.pages);
+      while (this.pages.length > 0) {
+        this.pages.pop();
+      }
+      console.log(this.pages);
       this.pages.push(
                           { title: 'Dashboard', component: DashboardPage},
                           { title: 'Community', component: CommunitylistPage },
@@ -112,9 +117,16 @@ export class MyApp {
 
         this.subscription = userLogin.userEntered$.subscribe(
             userData => {
+                          console.log(userData);
                           this.user_logged = userData;
-                          if((this.user_logged == 'sponsor') && (this.user_type == '') && (this.user_type == null)){
+                          if((this.user_logged == 'sponsor')){
             this.pages.splice(1, 0, { title: 'Manage Dependents', component: ManagePage });
+           }else{
+             for(let i=0; i < this.pages.length;i++){
+               if(this.pages[i].title == 'Manage Dependents'){
+                 this.pages.splice(i, 1);
+               }
+             }             
            }
                         });                   
     
