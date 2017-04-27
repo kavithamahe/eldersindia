@@ -21,8 +21,9 @@
 </ion-header>
 
 <ion-content padding class="contect-bg-moblie">
-<form (ngSubmit)="createBlog()" [formGroup]="blogForm">
 <ion-list class="createblog-form">
+<form (ngSubmit)="createBlog()" [formGroup]="blogForm">
+
   <ion-item>
     <ion-label stacked class="bloag-label">Blog Title<small style="color:red;">*</small></ion-label><span style="color:red">*</span>
     <ion-input type="text" formControlName="title"></ion-input>

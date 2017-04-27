@@ -257,17 +257,9 @@ export class CommunityprofilePage {
      this.showToast(data.result);
       this.profileCommunity(this.profile_uid);
    },
-     err =>{
-        if(err.status===401){
-      this.showToast(JSON.parse(err._body).error);
-    }
-    else if(err.status===500){
-      this.profileCommunity(this.profile_uid);
-    }
-    else{
-      this.communityServices.showErrorToast(err);  
-    }
+      err =>{
     
+    this.communityServices.showErrorToast(err);
   })
     loader.dismiss();
   }
