@@ -20,18 +20,21 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="contect-bg-moblie">
 <ion-card>
-  <ion-item>
+  <ion-row>
+  <ion-col width-20>
+    <ion-avatar item-left>
+    <img src="{{imageUrl+veiwMessagesInfo?.avatar}}">
+    </ion-avatar>
+  </ion-col>
+  <ion-col width-80>
    <ion-card-content>
+   
    <h2>{{veiwMessagesInfo?.sender_name}}</h2>
    <p>{{veiwMessagesInfo?.subject}}</p>
    <p>{{veiwMessagesInfo?.message}}</p>
   <p class="timedate">{{veiwMessagesInfo?.created_at | date :'MMM dd y'}}</p>
-    </ion-card-content>
-    <ion-avatar item-left>
-    <img src="{{imageUrl+veiwMessagesInfo?.avatar}}">
-    </ion-avatar>
-  </ion-item>
+    </ion-card-content></ion-col></ion-row>
 </ion-card>
 </ion-content>

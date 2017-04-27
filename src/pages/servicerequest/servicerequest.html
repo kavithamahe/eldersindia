@@ -26,20 +26,29 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="contect-bg-moblie">
 <ion-card *ngFor="let service of serviceRequestInfo; let i=index;">
   <ion-card-content style=" padding:0px;">
   <ion-grid (click)="viewRequest(service?.id)">
    <ion-row>
-    <ion-col width-><img src="{{imageUrl}}{{service?.logo}}"></ion-col>
+    <ion-col width-25><img src="{{imageUrl}}{{service?.logo}}"/>
+	<a class="token-primarys"><i class="fa fa-phone"></i></a>
+	</ion-col>
 
-    <ion-col width-50 >
+    <ion-col width-75>
     <h2 class="service-req">{{service?.vendor_name}}</h2>
-    <p *ngIf="(service?.enquiry_date!='0000-00-00 00:00:00')">{{service?.enquiry_date | date :'MMM dd y'}}</p></ion-col>
-    <ion-col width-10><a class="call-us"><i class="fa fa-phone-square" aria-hidden="true"></i></a></ion-col>
+	<p *ngIf="(service?.enquiry_date!='0000-00-00 00:00:00')" class="token-date"><i class="fa fa-calendar"></i> {{service?.enquiry_date | date :'MMM dd y'}}</p>
+	 <p><i class="fa fa-id-card-o"></i> {{service?.sr_token}}</p>
+   <p class="des-detalis">{{service?.enquiry_about}}</p>
+  
+	
+	  
+
+	</ion-col>
+
   </ion-row>
-  <p>Token:{{service?.sr_token}}</p>
-  <p>{{service?.enquiry_about}}</p>
+
+
   </ion-grid>
   <button ion-button icon-left clear small *ngIf="(service?.vendor_status==2 &&(!service?.vendor_remarks))"(click)="enableRemark(i)">
         <i class="fa fa-star"></i>

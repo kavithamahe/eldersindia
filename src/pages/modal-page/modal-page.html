@@ -61,11 +61,15 @@
                 <p class="err-reds">Please select the dependents</p>
             </ion-item>
       </form>
+	  <ion-row>
+	  <ion-col col-33>
             <ion-item>
-              <!-- <ion-label (click)="openTerms()">I Agree With Terms and Conditions</ion-label> -->
-              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>
+             <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>	
+             <ion-label (click)="openTerms()">I Agree </ion-label>			  
             </ion-item>
-            <span (click)="openTerms()">I Agree With Terms and Conditions</span>
+			</ion-col>
+			<ion-col (click)="openTerms()"> Terms and Conditions </ion-col>
+			</ion-row>
             <small *ngIf="checkTerms">
                 <p class="err-reds">check agree to proceed</p>
             </small>

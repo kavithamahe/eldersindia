@@ -25,7 +25,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="contect-bg-moblie">
 <div padding>
   <ion-segment [(ngModel)]="messages">
     <ion-segment-button value="inbox" color="orange" (click)="onInit()">
@@ -39,15 +39,19 @@
 
 <div [ngSwitch]="messages">
   <ion-list *ngSwitchCase="'sent'">
-  <ion-card *ngFor="let sent of sentInfo" (click)="viewMessages(sent?.id,'sent')">
-    <ion-item>
+  <ion-card *ngFor="let sent of sentInfo" (click)="viewMessages(sent?.id,'sent')" style="padding:3px;">
+    <ion-row>
+	<ion-col width-20 height-20>
     <ion-avatar item-left>
-      <img src="{{imageUrl+sent?.avatar}}">
+      <img src="{{imageUrl+sent?.avatar}}" height="50" />
     </ion-avatar>
+	</ion-col>
+	<ion-col width-80>
     <h2>{{sent?.name}}</h2>
     <p>{{sent?.subject | words : 10 : '...'}}</p>
     <p>{{sent?.message | words : 10 : '...'}}</p>
-  </ion-item>
+  </ion-col>
+  </ion-row>
   </ion-card>
   <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
@@ -56,15 +60,18 @@
 
   <ion-list *ngSwitchCase="'inbox'">
   <ion-card *ngFor="let inbox of inboxInfo" (click)="viewMessages(inbox?.id,'inbox')">
-     <ion-item>
-    <ion-avatar item-left>
-      <img src="{{imageUrl+inbox?.avatar}}">
+     <ion-row>
+	 <ion-col width-20 height-20>
+    <ion-avatar item-left height-20>
+      <img src="{{imageUrl+inbox?.avatar}}" height="50" />
     </ion-avatar>
+	</ion-col>
+	<ion-col width-80>
     <h2>{{inbox?.author_name}}</h2>
+	<p>{{inbox?.created_at | date :'MMM dd y'}}</p>
     <p>{{inbox?.subject | words : 10 : '...'}}</p>
     <p>{{inbox?.message | words : 10 : '...'}}</p>
-    <p>{{inbox?.created_at | date :'MMM dd y'}}</p>
-  </ion-item>
+   </ion-col></ion-row>
   </ion-card>
   <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>

@@ -18,16 +18,19 @@
 
 
 <ion-content padding class="contect-bg-moblie">
-<ion-list>
-  <ion-item>
-    <ion-label>Select Dependent</ion-label>
-    <ion-select [(ngModel)]="dependent">
+<ion-row style="margin:px;">
+   
+  <ion-col>
+
+ <ion-label class="liste-edit">Select Dependent</ion-label>
+	
+    <ion-select [(ngModel)]="dependent" class="select-brddd">
       <ion-option *ngFor="let dependent of getDependentList" [value]="dependent?.id">{{dependent?.name}}</ion-option>    
 	  </ion-select>
-  </ion-item>
-  <ion-item>
-  <button ion-button full color="primary" (click)="submitDependent()">Submit</button>
-  </ion-item>
-</ion-list>
+	  <br/>
+	   <button ion-button  color="primary" class="submit-btns" (click)="submitDependent()">Submit</button>
+  </ion-col>
+
+</ion-row>
 
 </ion-content>

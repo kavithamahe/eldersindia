@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams ,ToastController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import {CallNumber, Vibration} from 'ionic-native';
+import {CallNumber, Vibration, NativeAudio} from 'ionic-native';
 
 import { ServiceprovidersPage } from '../../pages/serviceproviders/serviceproviders';
 import { JobboardPage } from '../../pages/jobboard/jobboard';
@@ -85,11 +85,14 @@ export class DashboardPage {
     {
        this.hooterOn=!hooterOn;
     Vibration.vibrate(60000);
-    
+    NativeAudio.preloadSimple('uniqueId1', 'assets/sound/siren_msg_tone.mp3').then(this.onSuccess, this.onError);
+    NativeAudio.play('uniqueId1').then(this.onSuccess, this.onError);
+    NativeAudio.loop('uniqueId1').then(this.onSuccess1, this.onError);
     }
     else
     {
       Vibration.vibrate(0);
+       NativeAudio.stop('uniqueId1').then(this.onSuccess, this.onError);
       this.hooterOn=!hooterOn;
     }   
   }
@@ -102,4 +105,13 @@ export class DashboardPage {
         });
    toast.present();
   }
+  onSuccess=function()
+   {
+     console.log("onSuccess");
+   }
+   onError=function()
+   {
+     console.log("onError");
+   }
+   onSuccess1=function(){ console.log('loop')};
 }

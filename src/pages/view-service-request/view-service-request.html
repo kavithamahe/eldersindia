@@ -21,29 +21,40 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="contect-bg-moblie">
 <ion-card>
   <ion-card-content style="padding:0px !important;">
-  <ion-grid *ngFor="let viewService of viewServiceRequestInfo">
+  <ion-grid *ngFor="let viewService of viewServiceRequestInfo" class="req-viewlist">
   <ion-row>
-    <ion-col width-50><b class="req-viewlist">Contact person</b></ion-col>
-    <ion-col width-50>{{viewService?.contact_name}}</ion-col>
+    <ion-col>
+	<span>Contact person</span>
+   <p>{{viewService?.contact_name}}</p>
+   </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col width-50><b class="req-viewlist">Contact No</b></ion-col>
-    <ion-col width-50>{{viewService?.contact_number}}</ion-col>
+    <ion-col>
+	<span>Contact No</span>
+    <p>{{viewService?.contact_number}}</p>
+	</ion-col>
   </ion-row>
   <ion-row>
-    <ion-col width-50><b class="req-viewlist">Service provider name</b></ion-col>
-    <ion-col width-50>{{viewService?.service_provider}}</ion-col>
+    <ion-col>
+	<span>Service provider name</span>
+   <p>{{viewService?.service_provider}}</p>
+   </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col width-50><b class="req-viewlist">Request date and time</b></ion-col>
-    <ion-col width-50>{{viewService?.Request_dateAndTime | date:'dd/M/yyyy h:m a'}}</ion-col>
+    <ion-col>
+	<span>Request date and time</span>
+    <p>{{viewService?.Request_dateAndTime | date:'dd/M/yyyy h:m a'}}</p>
+	</ion-col>
   </ion-row>
   <ion-row>
-    <ion-col width-50><b class="req-viewlist">Type of problem</b></ion-col>
-    <ion-col width-50>{{viewService?.problem}}</ion-col>
+    <ion-col>
+	<span>Type of problem</span>
+    <p>{{viewService?.problem}}</p>
+	
+	</ion-col>
   </ion-row>
   </ion-grid>
   </ion-card-content>
