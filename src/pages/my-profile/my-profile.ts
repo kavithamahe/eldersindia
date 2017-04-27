@@ -30,13 +30,13 @@ user_dob:any;
 
 
   loadMyProfile(){
-    this.user_type = "";
+    // this.user_type = "";
     this.providerService.webServiceCall(`myaccount`,"")
                         .subscribe(
                           data =>{
                                     this.profileData = data.result.info;
                                     this.gender = this.profileData.gender;
-                                    this.user_type = (data.result.info.user_type == 'sponosr') ? 'Sponsor' : "Elder"; 
+                                    // this.user_type = (data.result.info.user_type == 'sponosr') ? 'Sponsor' : "Elder"; 
                                     this.user_dob= this.profileData.dob;//this.getDate(this.profileData.dob);
                                     },
                           err=>{
@@ -66,6 +66,8 @@ user_dob:any;
   ionViewWillEnter(){
     this.storage.ready().then(() => {
       this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;});
+      this.storage.get('user_type').then((user) => { this.user_type=user;
+        console.log("usertype: ",this.user_type)});
       this.storage.get('token').then((token) => { this.token=token; 
       this.loadMyProfile();
       })

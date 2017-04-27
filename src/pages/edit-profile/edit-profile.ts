@@ -128,21 +128,5 @@ this.updateData = {name: data.name,gender:data.gender,mobile:data.mobile_number,
       console.log(err);
     })
   }
-
-  ionViewWillEnter(){
-    this.storage.ready().then(() => {
-      this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;});
-      this.storage.get('token').then((token) => { this.token=token;})
-    });
-      this.providerService.webServiceCall(`myaccount`,"")
-      .subscribe(
-        data =>{
-              this.profileData = data.result.info;
-              this.user_type = data.result.info.user_type;
-              },
-        err=>{
-              this.providerService.showErrorToast(err);
-            })
-  }
-
+    
 }

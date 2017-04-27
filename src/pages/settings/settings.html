@@ -21,8 +21,8 @@
 </ion-header>
 
 
-<ion-content padding class="contect-bg-moblie">
-<div padding>
+<ion-content padding class="contect-bg-moblie"><!-- 
+<div padding> -->
   <ion-segment [(ngModel)]="settings" (ionChange)="changeSlide()">
 
     <ion-segment-button value="paginate">
@@ -37,9 +37,6 @@
     <ion-slides (ionSlideDidChange)="slideChanged()">
       <ion-slide>
         <ion-list>
-          <ion-list-header>
-          
-          </ion-list-header>
           <ion-item>
             <ion-label> Records Per Page </ion-label>
             <ion-select [(ngModel)]="records" (ionChange)="change()">
@@ -80,9 +77,19 @@
           <ion-toggle [(ngModel)]="privacy_birthday"></ion-toggle>
         </ion-item>
         <hr/>
-        <ion-item>
+        <!-- <ion-item>
           <ion-label>Avatar</ion-label>
           <ion-toggle [(ngModel)]="privacy_avatar"></ion-toggle>
+        </ion-item>
+        <hr/> -->
+        <ion-item>
+          <ion-label>Connections</ion-label>
+          <ion-toggle [(ngModel)]="privacy_connection"></ion-toggle>
+        </ion-item>
+        <hr/>
+        <ion-item>
+          <ion-label>Profile</ion-label>
+          <ion-toggle [(ngModel)]="privacy_profile"></ion-toggle>
         </ion-item>
 
       </ion-list>
