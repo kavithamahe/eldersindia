@@ -37,7 +37,7 @@ export class LoginPage {
   callSponsor:any=0;
   ambulance:any=0;
   police:any=0;
-  constructor(public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
+  constructor(public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
   this.storage.ready().then(() => { 
      storage.get('id').then((id) => { this.id=id; 
      });
@@ -66,6 +66,7 @@ export class LoginPage {
       (loginuser) => {
 
           this.service.serviceInit(loginuser['token']);
+          this.community_service.initialize();
 
          if(loginuser['details']['user_type'] == 'elder'){
            this.loginUser.currentUser("elder");

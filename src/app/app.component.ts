@@ -30,7 +30,7 @@ import { LoginUser } from '../providers/login-user';
 import { Subscription }   from 'rxjs/Subscription';
 
 import { Storage } from '@ionic/storage';
-import { TermsModalPage } from '../pages/terms-modal/terms-modal';
+// import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 
 // import {ModalContentPage} from '../pages/modal-page/modal-page';
 
@@ -44,7 +44,7 @@ export class MyApp {
 
   user_id:any='';
   reg_id:any;
-
+  token:any='';
   // make HelloIonicPage the root (or first) page
 
 //-------userbased login-------------//
@@ -54,6 +54,8 @@ export class MyApp {
 
 //--------------------------------//
   rootPage: any;
+
+  user_type:any='';
 
   pages: Array<{title: string, component: any}>;
 
@@ -65,15 +67,24 @@ export class MyApp {
     public storage:Storage
   ) {
     this.storage.ready().then(() => {
+    storage.get('user_type').then((userType)=>{
+      this.user_type = userType;
+      this.user_logged = this.user_type;
+        if((this.user_logged == 'sponsor') && (this.user_type != '') && (this.user_logged != null)){
+            this.pages.splice(1, 0, { title: 'Manage Dependents', component: ManagePage });
+           }
+    });
+     storage.get('token').then((token) => { this.token=token;})
+
     storage.get('id').then((id) => { this.user_id=id;
    
-    if(this.user_id!='' && this.user_id != null)
+    if((this.user_id!='' && this.user_id != null) && (this.token!='' && this.token != null))
      {
         this.rootPage= DashboardPage;
      }
      else
      {
-      this.rootPage = ServicerequestPage;
+      this.rootPage = LoginPage;
      }
      })
    }); 
@@ -81,19 +92,8 @@ export class MyApp {
 // set our app's pages on user based
 
       this.pages = [];
-      this.pages.push({ title: 'Dashboard', component: DashboardPage});
-      
-      this.subscription = userLogin.userEntered$.subscribe(
-      userData => {
-        this.user_logged = userData;
-
-        if(this.user_logged == 'sponsor'){
-              this.pages.splice(1, 0, { title: 'Manage Dependents', component: ManagePage });
-              // this.pages.push({ title: 'Manage Dependents', component: ManagePage });
-         }
-    });
-     
-        this.pages.push(
+      this.pages.push(
+                          { title: 'Dashboard', component: DashboardPage},
                           { title: 'Community', component: CommunitylistPage },
                           { title: 'Connections', component: ConnectionsPage },
                           { title: 'Job Board', component: JobboardPage },
@@ -108,7 +108,15 @@ export class MyApp {
                           { title: 'Change Password', component: ChangePasswordPage },
                           { title: 'Settings', component: SettingsPage },
                           { title: 'Logout', component: LogoutPage },
-                          );  
+                      );
+
+        this.subscription = userLogin.userEntered$.subscribe(
+            userData => {
+                          this.user_logged = userData;
+                          if((this.user_logged == 'sponsor') && (this.user_type == '') && (this.user_type == null)){
+            this.pages.splice(1, 0, { title: 'Manage Dependents', component: ManagePage });
+           }
+                        });                   
     
     this.initializeApp();
 
@@ -119,7 +127,6 @@ export class MyApp {
   }
 
   initializeApp() {
-
     this.platform.ready().then(() => {
       StatusBar.styleDefault();
       Splashscreen.hide();
