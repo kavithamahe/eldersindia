@@ -66,9 +66,15 @@ export class CommunityprofilePage {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token;})
     });
+       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
       
       this.profile_uid=navParams.get("profile_uid");
-      this.loadThisPage(this.profile_uid);
+      this.profileCommunity(this.profile_uid);
+      this.memberProfile(this.profile_uid);
+        loader.dismiss();
+        this.addComments=false;
+        this.itemComments=false;
  
   }
 
@@ -76,7 +82,7 @@ export class CommunityprofilePage {
     this.allConnections=[];
     this.communityProfile=[];
     this.communityProfileData=[];
-
+    this.community="activity";
     this.status=[];
      
       this.status = false;
@@ -85,7 +91,6 @@ export class CommunityprofilePage {
       loader.present();
       this.profileCommunity(id);
       this.memberProfile(id);
-      // this.Connections(id,"");
       this.addComments=false;
       this.itemComments=false;
       loader.dismiss();
@@ -214,6 +219,10 @@ export class CommunityprofilePage {
     this.communityServices.showErrorToast(err);
   })
   
+ }
+ Activity(id){
+   this.profileCommunity(id);
+
  }
   
   connectMember(user){
