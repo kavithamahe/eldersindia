@@ -36,7 +36,7 @@ token:any;
       	this.post_comments = this.posts.comments;
       	this.post_id = this.posts.id;
       	this.post_profile_id = this.posts.profile_id;
-  		console.log("comments: ",this.posts);
+  	
   		});
       storage.get('token').then((token) => { this.token=token; });
     });
@@ -44,7 +44,7 @@ token:any;
   }
 
   profileImage(id){
-    // this.communityProfile(id);
+
     this.navCtrl.push(CommunityprofilePage,{profile_uid:id});
   }
   
