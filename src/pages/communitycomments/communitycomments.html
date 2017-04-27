@@ -30,7 +30,7 @@
 						<i class="fa fa-reply" aria-hidden="true"></i>
 						</button>
 
-						<button ion-button item-right clear (click)="showComments(j)">view replies
+						<button *ngIf="comment.comment_reply" ion-button item-right clear (click)="showComments(j)">view replies
 						</button>
 					
 						 <div *ngIf="j==showReply">
