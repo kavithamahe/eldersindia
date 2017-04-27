@@ -84,24 +84,6 @@ onChange(event: any, input: any ,id) {
   }
 
 
-showConfirm(DeleteId) {
-    let confirm = this.alertCtrl.create({
-     subTitle: 'Confirm Deletion?',
-       buttons: [
-        {
-          text: 'Cancel',
-         },
-        {
-          text: 'Ok',
-          handler: () => {
-           this.deleteComment(DeleteId);
-          
-          }
-        }
-      ]
-    });
-    confirm.present();
-  }
    openUrl(metalink_url) {
 console.log("URL is ",metalink_url);
         this.platform.ready().then(() => {

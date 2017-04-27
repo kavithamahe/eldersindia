@@ -50,7 +50,8 @@ token:any;
   
   showConfirm(DeleteId) {
     let confirm = this.alertCtrl.create({
-     subTitle: 'Confirm Deletion?',
+     title:'Confirm',
+     subTitle: 'comment will be deleted',
        buttons: [
         {
           text: 'Cancel',
