@@ -57,7 +57,7 @@ export class CommunityprofilePage {
     user_id:any;
     emojiId:number=0;
     community: String = "activity";
-  isAndroid: boolean = false;
+    isAndroid: boolean = false;
 
   constructor(public nav: NavController,public platform: Platform, public storage:Storage,public popoverCtrl: PopoverController, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
         this.isAndroid = platform.is('android');
@@ -73,8 +73,10 @@ export class CommunityprofilePage {
   }
 
   loadThisPage(id){
+    this.allConnections=[];
     this.communityProfile=[];
     this.communityProfileData=[];
+
     this.status=[];
      
       this.status = false;
@@ -83,6 +85,7 @@ export class CommunityprofilePage {
       loader.present();
       this.profileCommunity(id);
       this.memberProfile(id);
+      this.Connections(id,"");
       this.addComments=false;
       this.itemComments=false;
       loader.dismiss();
@@ -189,8 +192,8 @@ export class CommunityprofilePage {
   }
  
   memberProfile(member_id){
-     this.communityProfileData=[];
-    this.communityServices.memberProfileData(member_id).subscribe(users => {
+      this.communityProfileData=[];
+      this.communityServices.memberProfileData(member_id).subscribe(users => {
       this.communityProfileData = users.result.info.profile_details;
       this.status = users.result.info.approve_status.status;
       this.user_id = this.communityProfileData.id;
@@ -201,10 +204,10 @@ export class CommunityprofilePage {
   })
 
   }
-  Communities(){
-    this.communityServices.getCommunityMembers().subscribe(users => {
+  Communities(id){
+    this.communityServices.getCommunityMembers(id).subscribe(users => {
       this.getCommunityMembers=users.result.data;
-     
+      
   },
    err =>{
     
@@ -215,7 +218,7 @@ export class CommunityprofilePage {
   
   connectMember(user){
    
-    this.communityServices.connectMember(user.id,user.name).subscribe(users => {
+        this.communityServices.connectMember(user.id,user.name).subscribe(users => {
        this.showToast(users.result.info);
         this.memberProfile(user.id);
        this.request_sent = true;
@@ -403,12 +406,12 @@ export class CommunityprofilePage {
       }
      })
    }
-doInfinite(infiniteScroll) {
+  doInfinite(infiniteScroll) {
     setTimeout(() => {      
       if(this.nextPageURL!=null && this.nextPageURL!='')
       {
        this.userpostsscroll(this.profile_uid);
-      }
+            }
       else{
         infiniteScroll.enable(false);
       }
@@ -431,6 +434,25 @@ doInfinite(infiniteScroll) {
     this.communityServices.showErrorToast(err);
   });
   }
+  //  communitydetailscroll(id)
+  // {
+  //    this.communityServices.communitydetailscroll(this.nextPageURL,id).subscribe(
+  //    (eventsscroll) => {
+  //     this.eventScrollLists=eventsscroll.result.data;
+  //     for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
+  //       this.getCommunityMembers.push(this.eventScrollLists[i]);
+  //       }
+      
+  //      this.nextPageURL=eventsscroll.result.next_page_url;
+            
+     
+  //   },
+  //   err =>{
+   
+  //   this.communityServices.showErrorToast(err);
+  // });
+  // }
+  
 
  }
 
