@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import {ToastController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { AppConfig } from '../providers/app-config';
 import 'rxjs/Rx';
 
 // let webServiceURL="http://192.168.1.120:8000/api/";
@@ -20,7 +21,7 @@ body: any;
 token:any; 
 rootUrl:any;
 
-  constructor(public http: Http, public storage:Storage,public toastCtrl:ToastController) {
+  constructor(public app:AppConfig, public http: Http, public storage:Storage,public toastCtrl:ToastController) {
     this.storage.ready().then(() => {
       storage.get('token').then((token) => { this.token=token;
       this.headers = new Headers();
@@ -34,8 +35,10 @@ rootUrl:any;
 }
 
 serviceInit(token){
+      this.rootUrl= this.app.setrooturl();
+      this.token = token; 
     console.log("token intialized",token);
-    this.token = token;
+    console.log("root url: ",this.rootUrl);   
 }
 
 webServiceCall(serviceName,bodyData){

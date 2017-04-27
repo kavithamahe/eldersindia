@@ -10,8 +10,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 
 @Component({
   selector: 'page-elders',
-  templateUrl: 'elders.html',
-  providers:[CommunityServices]
+  templateUrl: 'elders.html'
 })
 export class EldersPage {
 authForm : FormGroup;
@@ -158,11 +157,18 @@ skill_data:any;
             this.communityServices.showErrorToast(err);
             })
  }
+ 
+imageURL:any;
 
  loadForm(data){
               // this.manageDependentData = data[0] ;
               this.manageDependentData = data;
-              
+          this.storage.ready().then(() => {
+            this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;
+            this.base64Image = this.imageURL+this.manageDependentData.avatar;
+              });
+            });
+                    
           this.elder_id = this.manageDependentData.id;
           this.sponsor_id = this.manageDependentData.sponsor_id;
           this.elder_name= this.manageDependentData.name;
@@ -442,9 +448,11 @@ skill_data:any;
 
               this.providerService.webServiceCall(`myaccountEdit`,profileEditData)
                   .subscribe(data=>{
+                    this.providerService.showToast(data.result);
                     console.log(data);
                   },
                   err=>{
+                    this.providerService.showErrorToast(err);
                     console.log(err);
                   })
        
