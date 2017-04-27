@@ -20,7 +20,7 @@
 		  <ion-row>
 			  <ion-col width-30>
 				  	<ion-item>
-					  <ion-avatar item-left class="image-profile" (click)="profileSetting(communityProfileData.id)">
+					  <ion-avatar item-left class="image-profile" >
 					  	<img [src]="imageUrl+communityProfileData?.avatar" 
 					  	(click)="profileSetting(communityProfileData.id)"
 					  	[hidden]="!communityProfileData?.avatar">
@@ -29,8 +29,8 @@
 			  </ion-col>
 			 
 			  	 <ion-col *ngIf="status === 3">
-				  <button ion-button (click)="connectMember(communityProfileData)">Connect
-				  </button>
+					  <button ion-button (click)="connectMember(communityProfileData)">Connect
+					  </button>
 				  </ion-col >
 				  <ion-col *ngIf ="status === 0">
 					  <button ion-button disabled="true">Request Sent
@@ -74,7 +74,7 @@
        	<div [ngSwitch]="community">
        		
 		    <ion-list *ngSwitchCase="'activity'">
-		    	<div class="updated-staus-btn">
+		    	<div  *ngIf="status === 1" class="updated-staus-btn">
 		  		
 						<ion-item class="edit">
 					  		<h2 class="wel-comemem">Update Status</h2>

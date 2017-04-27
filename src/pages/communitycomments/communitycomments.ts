@@ -27,6 +27,7 @@ replyBlock:any;
 post_comment:any='';
 imageUrl:any;
 token:any;
+user_id:any;
 
 
   constructor(public loadingCtrl: LoadingController, public viewCtrl: ViewController, public storage: Storage, public toastCtrl: ToastController, public alertCtrl:AlertController, public communityServices: CommunityServices, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
@@ -39,6 +40,7 @@ token:any;
   	
   		});
       storage.get('token').then((token) => { this.token=token; });
+      storage.get('id').then((id) => { this.user_id=id; })
     });
   	
   }

@@ -54,7 +54,7 @@
 		</ion-item>
 	</div><hr>
 
-	<div>
+	<div *ngIf="communityDetailData?.isJoined">
 		<h2 class="wel-comemem">Update Status</h2>
 			<div style="padding:0px !important;">
 				<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
@@ -167,19 +167,19 @@
 	       	<div>
 
 	      		<ion-row>
-	        		<ion-col width-15>
+	        		<ion-col>
 
-						<button class="hover but-colo" ion-button icon-left clear small 
+						<button  ion-button  clear small 
 						[innerHTML]="user.likes.emoji | emojis" 
 						(click)="emojiPicker(user.id)">
-						
-						  </button>
+						</button>
 	        		</ion-col>
 	        		<ion-col>
 	          	
 						<button class="comment but-colo" color="dark" ion-button icon-left clear small (click)="showComment(user)">
 							<ion-icon name="text"></ion-icon>
-							<div style="color:red; font-size:13px;">{{user.comment_count}} Comments</div>
+							<div style="color:red; font-size:13px;">{{user.comment_count}} Comments
+							</div>
 						  </button>
 	          		</ion-col>
 
