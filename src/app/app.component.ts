@@ -130,7 +130,7 @@ export class MyApp {
           this.nav.pop();
         }else{
                 let confirmAlert = this.alertCtrl.create({
-                title: 'Log Out',
+                title: 'App Exit',
                 subTitle: "Are you sure to close app",
                 buttons: [{
                   text: 'NO',
