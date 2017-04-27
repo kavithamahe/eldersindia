@@ -11,6 +11,7 @@ import { LoginUser } from '../../providers/login-user';
 import { AppConfig } from '../../providers/app-config';
 import { ServiceProvider } from '../../providers/service-provider'
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
+import { CommunityServices } from '../../providers/community-services';
 
 
 /*
@@ -20,7 +21,8 @@ import { ForgotPasswordPage } from '../forgot-password/forgot-password';
   Ionic pages and navigation.
 */
 @Component({
-   templateUrl: 'login.html'
+   templateUrl: 'login.html',
+   providers:[CommunityServices]
 })
 export class LoginPage {
   loginuser: Login[];

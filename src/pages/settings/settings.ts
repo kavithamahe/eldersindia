@@ -25,6 +25,8 @@ export class SettingsPage {
 	privacy_location:any;
 	privacy_birthday:any;
 	privacy_avatar:any;
+  privacy_connection:any;
+  privacy_profile:any;
 	status:any;
 	user_uid:any;
 	user_id:any;
@@ -117,7 +119,9 @@ export class SettingsPage {
   		this.privacy_mobile = JSON.parse(info.privacy_mobile);
   		this.privacy_location = JSON.parse(info.privacy_location);
   		this.privacy_birthday = JSON.parse(info.privacy_birthday);
-  		this.privacy_avatar = JSON.parse(info.privacy_avatar);
+  		// this.privacy_avatar = JSON.parse(info.privacy_avatar);
+      this.privacy_connection = JSON.parse(info.privacy_connection);
+      this.privacy_profile = JSON.parse(info.privacy_profile);
   		this.status = info.status;
   	},
   	error=>{
@@ -142,7 +146,9 @@ export class SettingsPage {
   		"privacy_mobile":this.privacy_mobile,
   		"privacy_location":this.privacy_location,
   		"privacy_birthday":this.privacy_birthday,
-  		"privacy_avatar":this.privacy_avatar,
+  		// "privacy_avatar":this.privacy_avatar,
+      "privacy_connection":this.privacy_connection,
+      "privacy_profile":this.privacy_profile,
   		"status":this.status}}
   	this.serviceProvider.webServiceCall('setPrivacy',data)
   	.subscribe(data=>{

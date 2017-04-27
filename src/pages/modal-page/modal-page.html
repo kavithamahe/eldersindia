@@ -62,13 +62,14 @@
             </ion-item>
       </form>
 	  <ion-row>
-	  <ion-col col-33>
+	  <ion-col width-50>
             <ion-item>
              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>	
              <ion-label (click)="openTerms()">I Agree </ion-label>			  
             </ion-item>
 			</ion-col>
-			<ion-col (click)="openTerms()"> Terms and Conditions </ion-col>
+			<ion-col width-50 style="text-align: center;
+padding-top: 15px; font-size: 14px !important; color: blue;" (click)="openTerms()"> Terms and Conditions </ion-col>
 			</ion-row>
             <small *ngIf="checkTerms">
                 <p class="err-reds">check agree to proceed</p>
