@@ -44,7 +44,7 @@ export class MyApp {
 
   user_id:any='';
   reg_id:any;
-
+  token:any='';
   // make HelloIonicPage the root (or first) page
 
 //-------userbased login-------------//
@@ -65,15 +65,17 @@ export class MyApp {
     public storage:Storage
   ) {
     this.storage.ready().then(() => {
+     storage.get('token').then((token) => { this.token=token;})
+   
     storage.get('id').then((id) => { this.user_id=id;
    
-    if(this.user_id!='' && this.user_id != null)
+    if((this.user_id!='' && this.user_id != null) && (this.token!='' && this.token != null))
      {
         this.rootPage= DashboardPage;
      }
      else
      {
-      this.rootPage = ServicerequestPage;
+      this.rootPage = LoginPage;
      }
      })
    }); 

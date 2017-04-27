@@ -38,9 +38,9 @@ export class DashboardPage {
      //alert(this.call_sponsor);
   }
 
-  /*ionViewDidLoad() {
-    console.log('ionViewDidLoad DashboardPage');
-  }*/
+  ionViewDidLoad() {
+    NativeAudio.preloadSimple('uniqueId1', 'assets/sound/siren_msg_tone.mp3').then(this.onSuccess, this.onError);
+  }
   public servicesPage()
   {
   	this.navCtrl.setRoot(ServiceprovidersPage);
@@ -84,8 +84,7 @@ export class DashboardPage {
     if(!hooterOn)
     {
        this.hooterOn=!hooterOn;
-    Vibration.vibrate(60000);
-    NativeAudio.preloadSimple('uniqueId1', 'assets/sound/siren_msg_tone.mp3').then(this.onSuccess, this.onError);
+    Vibration.vibrate(60000);    
     NativeAudio.play('uniqueId1').then(this.onSuccess, this.onError);
     NativeAudio.loop('uniqueId1').then(this.onSuccess1, this.onError);
     }

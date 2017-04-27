@@ -36,6 +36,9 @@ rootUrl:any;
 
 serviceInit(token){
       this.rootUrl= this.app.setrooturl();
+      this.storage.ready().then(() => {
+        this.storage.set('rooturl',this.rootUrl);
+      });
       this.token = token; 
     console.log("token intialized",token);
     console.log("root url: ",this.rootUrl);   
