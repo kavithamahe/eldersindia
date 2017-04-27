@@ -32,14 +32,11 @@
       Privacy
     </ion-segment-button>
   </ion-segment>
-<!-- </div> -->
+</div>
 
     <ion-slides (ionSlideDidChange)="slideChanged()">
       <ion-slide>
         <ion-list>
-          <ion-list-header>
-          
-          </ion-list-header>
           <ion-item>
             <ion-label> Records Per Page </ion-label>
             <ion-select [(ngModel)]="records" (ionChange)="change()">
