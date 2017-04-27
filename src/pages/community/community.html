@@ -116,8 +116,9 @@
 	</div>
 	
 	<ion-list *ngFor="let user of users; let i=index">	
+
 		<hr>
-		<div>
+	
  			<ion-item>
 	      		<ion-row>
 	      			<ion-col>
@@ -162,23 +163,30 @@
 	         	<ion-card-content class="video-updates" [hidden]="!user?.metalink_description">
 					<p (click)="openUrl(user.metalink_url)">{{user.metalink_description}}</p>
 	         	</ion-card-content>
+
 	       	<div>
+
 	      		<ion-row>
-	        		<ion-col>
-						<button ion-button clear 
+	        		<ion-col width-15>
+
+						<button class="hover but-colo" ion-button icon-left clear small 
 						[innerHTML]="user.likes.emoji | emojis" 
-						(click)="emojiPicker(user.id)"></button>
+						(click)="emojiPicker(user.id)">
+						
+						  </button>
 	        		</ion-col>
 	        		<ion-col>
-	          			<button ion-button class="comment but-colo" color="dark" clear 
-	          			(click)="showComment(user)">
-	          				<span style="color:red; font-size:13px;">{{user.comment_count}}</span> 
-	          				&nbsp;<i class="fa fa-comments" aria-hidden="true"></i>
-	          			</button>
+	          	
+						<button class="comment but-colo" color="dark" ion-button icon-left clear small (click)="showComment(user)">
+							<ion-icon name="text"></ion-icon>
+							<div style="color:red; font-size:13px;">{{user.comment_count}} Comments</div>
+						  </button>
 	          		</ion-col>
+
 	          	</ion-row>
 			</div>
-		</div>
+
+	      		
 	</ion-list>
 
  	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">

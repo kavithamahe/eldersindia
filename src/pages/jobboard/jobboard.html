@@ -29,16 +29,17 @@
 
 
 
-<ion-row *ngFor="let jobBoard of jobBoardInfo">
-  <ion-col class="job-borad">
+<ion-row *ngFor="let jobBoard of jobBoardInfo" >
+  <ion-col class="job-borad" (click)="viewJob(jobBoard?.id)">
     <h2>{{jobBoard?.title}}</h2>
-    <p *ngIf="jobBoard?.job_type">Job Type: {{jobBoard?.job_type}}</p>
+	<br>
+    <small *ngIf="jobBoard?.job_type"><ion-badge color="primary">{{jobBoard?.job_type}}</ion-badge></small>
      <ion-badge color="green" *ngIf="jobBoard?.skills">{{jobBoard?.skills}}</ion-badge> 
    
-  <div class="footer-btn">
+ <!-- <div class="footer-btn">
   <button ion-button class="btn-clr" color="primary" full (click)="applyJob(jobBoard?.id)">Apply</button>
   <button ion-button class="btn-clrs" color="orange" full (click)="viewJob(jobBoard?.id)">More Info</button>
-  </div>
+  </div>-->
   </ion-col>
 </ion-row>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

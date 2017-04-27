@@ -20,7 +20,7 @@
 		  <ion-row>
 			  <ion-col width-30>
 				  	<ion-item>
-					  <ion-avatar item-left class="image-profile">
+					  <ion-avatar item-left class="image-profile" (click)="profileSetting(communityProfileData.id)">
 					  	<img [src]="imageUrl+communityProfileData?.avatar" 
 					  	(click)="profileSetting(communityProfileData.id)"
 					  	[hidden]="!communityProfileData?.avatar">
