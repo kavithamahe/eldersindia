@@ -206,6 +206,12 @@ overflow: hidden;}
  background: #333 !important;
 }
 
+.selectable {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
 
 .list-md .item-block .item-inner {
     border-bottom: none !important;
