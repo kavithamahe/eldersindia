@@ -42,6 +42,16 @@ export class CommunityServices {
    }); 
   }
 
+  initialize(){
+    this.storage.ready().then(() => {
+    this.storage.get('token').then((token) => { this.token=token;
+      })    
+    this.storage.get('rooturl').then((rooturl) => { this.getCommunityPostsUrl=rooturl; });
+    this.storage.get('id').then((id) => { this.user_id=id; })
+    
+   }); 
+  }
+
   fileUpload(id,file){
  let formdata = new FormData()
  let posts:{community_id:string,image:File,videourl:string,message:string} = { community_id:id, image:file,videourl:"",message:"" }
