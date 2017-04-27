@@ -15,7 +15,7 @@ import { CommunityServices } from '../../providers/community-services';
 export class CommunitylistPage {
 
    // private start:number=0;
-	community: String = "mycommunity";
+	community: String = "my_community";
   isAndroid: boolean = false;
   communitylists:any;
   imageUrl:any;
@@ -153,7 +153,12 @@ ionViewWillEnter (){
       this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       this.storage.get('id').then((id) => { this.id=id; })
       this.storage.get('token').then((token) => { this.token=token;
-      this.myCommunity("");
+      if(this.community == "my_community"){
+      this.myCommunity("");  
+      }
+      else{
+        this.otherCommunity("");
+      }
       })
     });
 }
