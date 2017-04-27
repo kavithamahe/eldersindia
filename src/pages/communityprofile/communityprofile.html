@@ -60,7 +60,7 @@
 		    <hr/>
 		  
 		<ion-segment [(ngModel)]="community" class="segment-top">
-	        <ion-segment-button value="activity">
+	        <ion-segment-button (click)="Activity(communityProfileData?.id)" value="activity">
 	          Activity
 	        </ion-segment-button>
 	        <ion-segment-button (click)="Communities(communityProfileData?.id)" value="communities">
@@ -69,8 +69,7 @@
 	        <ion-segment-button (click)="Connections(communityProfileData?.id,'')" value="connections">
 	          Connections
 	        </ion-segment-button>
-	        
-        </ion-segment>
+	    </ion-segment>
        	<div [ngSwitch]="community">
        		
 		    <ion-list *ngSwitchCase="'activity'">
