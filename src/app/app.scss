@@ -192,7 +192,15 @@ border :2px solid green;
 
 }
 
-ion-content													{background-image: url('../../assets/img/bg.jpg');   font-size:16px;  color:#777 !important;}
+
+
+ion-content													{background-image: url('../../assets/img/Elder_4a.jpg');   font-size:16px;  color:#777 !important; background-position: center center;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+height: 100%; 
+overflow: hidden;}
 
 .my-side-menu,{
  background: #333 !important;
@@ -203,12 +211,13 @@ ion-content													{background-image: url('../../assets/img/bg.jpg');   fon
     border-bottom: none !important;
 }
 /*-------------------------------------Common  css -------------------------------------*/
-.service-bg0												{height:auto !important;min-height:80px;border-bottom:1px solid #fff;border-right:1px solid #fff;   background: linear-gradient(to top left, #ffffff 0%, #cc6699 8%);width:50%;  margin-top:1px; }
-.service-bg1												{height:auto !important;min-height:80px;border-bottom:1px solid #fff;border-right:1px solid #fff;  background: linear-gradient(to top right, #ffffff 0%, #ff9900 8%);width:50%; margin-top:1px;}
-.service-bg2												{height:auto !important;min-height:80px; border-bottom:1px solid #fff;border-right:1px solid #fff;            background: linear-gradient(to bottom left, #ffffff 0%, #669900 8%);width:50%;  }
-.service-bg3												{height:auto !important;min-height:80px; border-bottom:1px solid #fff;border-right:1px solid #fff;     background: linear-gradient(to bottom right, #ffffff 0%, #669999 8%);width:50%; }
-.service-bg4												{height:auto !important;min-height:80px;  border-bottom:1px solid #fff;border-right:1px solid #fff;  background: linear-gradient(to top left, #ffffff 0%, #33ccff 8%);width:50%;  }
-.service-bg5												{height:auto !important;min-height:80px; border-bottom:1px solid #fff;border-right:1px solid #fff;background: linear-gradient(to top right, #ffffff 0%, #cc6600 8%);width:50%; }
+ion-header{background:#404996 !important;}
+.service-bg0												{height:auto !important;min-height:80px;border-bottom:1px solid #fff;border-right:1px solid #fff;background:#ff7fe6;width:50%;  margin-top:1px; }
+.service-bg1												{height:auto !important;min-height:80px;border-bottom:1px solid #fff;border-right:1px solid #fff;background:#8c8cec;width:50%; margin-top:1px;}
+.service-bg2												{height:auto !important;min-height:80px; border-bottom:1px solid #fff;border-right:1px solid #fff;background:#4ec2ff;width:50%;  }
+.service-bg3												{height:auto !important;min-height:80px; border-bottom:1px solid #fff;border-right:1px solid #fff;background:#6cddc9;width:50%; }
+.service-bg4												{height:auto !important;min-height:80px;  border-bottom:1px solid #fff;border-right:1px solid #fff;background:#feac48;width:50%;  }
+.service-bg5												{height:auto !important;min-height:80px; border-bottom:1px solid #fff;border-right:1px solid #fff;background:#eb8b8c;width:50%; }
 .service-bg6												{height:auto !important;min-height:80px; background:#fff;width:50%; }
 .left-icons													{float:left; width:100%;}
 .left-icons i                                               {font-size:40px; font-weight:400; color:#FFF;}
@@ -225,7 +234,7 @@ page-modal-page ion-input									{border:none !important;}
 page-service-info ion-input									{border:none !important;}
 .view-storedet												{float:left; width:100%;}
 .job-borad													{ border-bottom:1px solid #ccc; padding:8px !important;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);    margin:8px;}
-.job-borad h2												{font-size:17px; color:#1d6ab2; font-weight:400; margin-top:0px !important;margin-bottom:0px !important;}
+.job-borad h2												{font-size:18px !important; color:#424a95; font-weight:400; margin-top:0px !important;margin-bottom:0px !important;}
 .job-borad p												{font-size:15px; color:#777; font-weight:400; margin:0px; padding-top:8px; padding-bottom:10px;}
 .view-storedet h2											{color:#1d6ab2;font-size:18px;padding:0; margin-bottom:0px !important;}
 .view-storedet p											{color:#708090;font-size:15px;line-height:24px; padding:0; margin-bottom:0px !important;margin-top:0px !important;}
@@ -246,7 +255,7 @@ page-service-info ion-input									{border:none !important;}
 .select-detalis-in .item-ios .select-brd					{width:97%; margin-bottom:10px;}
 .brder-cor b												{font-size:18px; font-weight:400; text-align:left; width:100%;}
 .brder-cor .button-ios										{background:#159deb; color:#fff !important; font-size:15px !important;text-transform:capitalize; margin-bottom:0px;}
-ion-card img												{border:1px solid #F0FFFF;}
+ion-card img												{border:1px solid #ccc;}
 .select-detalis-in .text-input-md							{width:calc(100% - 8px - 8px);}
 .select-detalis-in .text-input-ios							{width:calc(100% - 8px - 8px);}
 .add-detalis p  											{font-size:16px !important; padding-left:10px !important;}
@@ -262,11 +271,15 @@ span.mails-cont i 											{float:left; color:#858D9B; font-size:15px;padding-
 span.mails-cont p 											{float:left; color:#858D9B; font-size:15px;}
 page-service-info .service_request							{border:none !important;}
 ion-segment													{margin:7px; width:96%; border-radius:5px; }
-.segment-md .segment-button									{background:none; color:#888; border-bottom:none;font-size:16px;text-transform:capitalize; border-left:1px solid #ffa200 !important; height:35px; line-height:35px; }
-.connection-page											{margin:0px !important; font-size:13px !important; font-weight:400 !important; color:#777; }
-.connection-pages											{color:#fe5722 !important; margin:0px !important;}
-.name-conne													{font-size:18px !important; color:#1976d2 !important; margin-bottom:2px; }
-.segment-md .segment-button.activated, .segment-md .segment-button.segment-activated{ background:#ffa200; color:#fff; border:none; }
+.segment-md .segment-button									{background:none; color:#000; border-bottom:none;font-size:16px;text-transform:capitalize; border-left:1px solid #888aef !important; height:35px; line-height:35px; }
+.connection-page											{margin:0px !important; font-size:15px !important; font-weight:400 !important; color:#777; }
+.connection-pages											{color:#666 !important; margin:0px !important; font-size:15px;}
+.active-btn i                                               {background:#006400 !important; font-size:12px !important; color:#fff; padding:6px; border-radius:3px;}
+.active-btn 									            {background:none; box-shadow:none;}
+.inactive-btn 									            {background:none; box-shadow:none;}
+.inactive-btn i                                             {background:#FF0000!important; font-size:12px !important; color:#fff; padding:6px;border-radius:3px;}
+.name-conne													{font-size:18px !important; color:#404996 !important; margin-bottom:2px; }
+.segment-md .segment-button.activated, .segment-md .segment-button.segment-activated{ background:#888aef; color:#fff; border:none; }
 .thamb-lins													{bottom:-18px;left:12px;position:absolute;z-index: 999 !important; }
 .thamb-lins img												{border:3px solid #fff; height:80px;width:90px; border-radius:3px;box-shadow: 0 0 5px #888}
 .tid-cd 											        {color:#025fa9 !important;font-size:17px !important;font-weight:400 !important;text-align:left !important; float:left;}
@@ -288,6 +301,17 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
    right: 4px;
     top: 25px;
     width: 40px; }
+.createblog-form .item-md									{padding-left:10px;}
+.createblog-form .item-md .item-inner .input-wrapper .select-brd { width:97%; height:38px;}
+.rd-tags{  border: 1px solid #ccc !important;
+    border-radius: 0;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15) !important;
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 7px; width:94%; margin-left:10px; max-height:300px; min-height:80px;}
+.createblog-form .item-md .item-inner .input-wrapper .text-input-md{width: calc(100% - 9px) !important;}
+.createblog-form .item-md .item-inner .input-wrapper .label-md{ float:left; line-height:25px; margin-top:5px;}
 .contect-bg-moblie											{background:#fff;}
 .ios page-community .post, .md page-community .post			{width:100% !important;}
 .post-icons i 												{color:#46a049;}
@@ -315,12 +339,12 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .job-view .item-md .item-inner .input-wrapper .label-md	h2	{font-size:18px !important; padding-bottom:0px;}
 .job-view .item-md .item-inner .input-wrapper .label-md	p	{font-size:17px !important; padding-bottom:0px; width:100%;}
 .job-view .item-md .item-inner .input-wrapper .label-md span{font-size:12px !important; color:#979A9A;  float:right; padding-top:5px;}
-.location-catlist											{border-bottom:1px solid #999;  background:#ecebf0;}
+.location-catlist											{  background:#4ec2ff;}
 .location-catlist .item-inner .input-wrapper .label-md		{font-size:18px !important; text-align:left; color:#434248;}
-.location-catlist .item-inner .input-wrapper .sub-cate-slec .select-text{font-size:18px !important; text-align:left; color:#434248;}
+.location-catlist .item-inner .input-wrapper .sub-cate-slec .select-text{font-size:18px !important; text-align:left; color:#525252;}
 .location-catlist .item-inner .input-wrapper .sub-cate-slec	{width:100%; padding:10px;}
 .location-catlist .item-inner .input-wrapper .sub-cate-slec .select-icon .select-icon-inner{border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid;
-															 color:#999;height:0;left:0px;margin-top:0px;pointer-events:none;position:absolute;top:50%;width:0;}
+															 color:#525252;height:0;left:0px;margin-top:0px;pointer-events:none;position:absolute;top:50%;width:0;}
 .sub-cat-listed .item-inner .input-wrapper .label-md		{margin:0px !important;}
 .sub-cat-listed .item-inner .input-wrapper .label-md p		{font-size:16px !important; color:#fff; float:left; width:90%;  }
 .sub-cat-listed .item-inner .input-wrapper                  {border-top:1px solid #fff; border-bottom:none;}
@@ -378,9 +402,10 @@ page-my-profile ion-col										{ border-left:1px solid #F0F8FF !important;}
 ul.rating li												{padding:5px 0px !important;}
 .select-text												{font-size:15px !important;}
 .members													{font-size:15px !important;}
+
+ion-app.ios													{font-family: 'Open Sans', sans-serif !important;}
 .detalis-elder												{text-align:center;box-shadow:none; font-size:16px !important; font-weight:600 !important; color:#1976d2 !important; background:#fff; border-radius:3px; padding:4px;}
 /*-------------------------------------Common  css end -------------------------------------*/
-
 
 
 
@@ -404,7 +429,7 @@ ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !import
 page-service-info .service_request							{border:none !important;}
 .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{ border-bottom:none;}
 .liste-name													{font-size:17px !important; font-weight:400; height:25px; padding-left:10px; padding-top:5px;}
-.segment-md 												{border:1px solid #ffa200;}
+.segment-md 												{border:1px solid #888aef;}
 
 /*-------------------------------------Android platform css end-------------------------------------*/
 
@@ -476,20 +501,34 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .service-bg													{ height:auto !important;}															 font-weight:400; color:#555;}
 .text-input-ios   											{border:1px solid #ccc !important; width:95%;border-radius:0px !important;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size:18px; margin:7px;
 															 font-weight:400; color:#555;}
-.call-us												    {color:#00897b!important; font-size:18px;}
+.call-us												    {color:#9370DB!important; font-size:16px; width:100%; float:left; padding-top:5px;}
+.token-date													{font-size:12px !important; color:#777;}
 .text-input-ios   											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size: 18px;
 															 font-weight:400; color:#555;}
+.des-detalis												{ font-size:17px !important;}
 .toolbar-ios ion-title										{padding: 0 50px 1px;}
 .label-ios[stacked]											{margin-bottom:0px;}
 .label-ios													{line-height:14px;}
-.service-req												{color:#1d6ab2 !important;display:inline;font-size:16px !important;margin: 0;padding:0;}
-.req-viewlist												{font-size:14px !important; font-weight:600 !important; color:#008B8B;}
+.blogs-tittle .item-md										{ padding-left:0px !important;}
+.blogs-tittle .item-md .item-inner .input-wrapper .label-md	{ margin:0px ;}
+.blogs-tittle .item-md .item-inner .input-wrapper .label-md h2{ padding-top:0px !important;text-indent:0px !important;}
+.service-req												{color:#404998 !important;display:inline;font-size:18px !important;margin: 0;padding:0;}
+.req-viewlist												{font-size:17px !important; font-weight:400 !important; color:#008B8B;}
+.req-viewlist span											{font-size:18px !important; font-weight:400 !important; color:#414994;}
+.req-viewlist p											    {font-size:17px !important; font-weight:400 !important; color:#666;}
 .err-reds													{font-size:12px !important; font-weight:400 !important; color:red !important; text-align:right !important; padding-right:25px !important; margin:0px; }
-
+.token-primary												{ width:auto; margin-top:7px; border-radius:3px;}
+.token-primarys												{  width:40px; height:40px;margin-left:8px;margin-top:5px; display:block; border:1px solid #ccc; border-radius:50%;}
+.token-primarys	 i											{ line-height:42px; color:#00a651; text-align:center; width:100%; font-size:20px;}
+.call-contact												{background:#E6E6FA; display:block; text-align:center; width:100%;}
+.token-primary	small										{font-size:18px; font-weight:400;color:#FE2725; float:left;}
+.token-primary i											{font-size:14px; color:#666; line-height:25px;  float:left; padding-left:5px; line-height:30px;}
+.token-primary p											{font-size:17px; color:#888aef; float:left;  margin:0px; line-height:30px;padding-left:5px; }
 .change-pass												{border-radius:20px; width:95%; height:35px; margin-left:5px;}
+.item-ios ion-avatar ion-img, .item-ios ion-avatar img		{ border-radius:0px !important;}
 .segment-ios .segment-button:hover:not(.segment-activated)	{background:#fff !important;}
 .segment-ios .segment-button.segment-activated				{margin-top:10px;}
-.segment-ios .segment-button								{margin-top:10px;background:#fff; border:1px solid #ffa200; color:#888 !important; padding-left:10px; height:38px; line-height:35px; font-size:15px;}
+.segment-ios .segment-button								{margin-top:10px;background:#fff; border:1px solid #888aef; color:#888 !important; padding-left:10px; height:38px; line-height:35px; font-size:15px;}
 .uploadimg													{height:35px !important; width:95%; border-radius:25px !important;}
 .segment-ios												{ margin-top:10px;}
 .label-ios 													{margin: 11px 0 15px;}
@@ -509,6 +548,7 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
     font-size:17px !important;
     padding-bottom: 10px;
 }
+.btn-right													{float:right;margin-right:10px;}
 .job-view .item-ios .item-inner .input-wrapper .label-ios span{font-size:12px !important; color:#777;  float:right; padding-top:5px;}
 .label-opc .item-ios .item-inner .input-wrapper .label-ios  {color:#1d6ab2;font-size:19px;font-weight:400;line-height:25px;margin:0 !important;padding-left:8px;padding-top:0;text-indent:0px !important;} 
 /*-------------------------------------ios platform css end-------------------------------------*/
@@ -590,7 +630,7 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .alert-ios .alert-radio-label								{padding:5px 5px 5px 10px;}
 .alert-ios .alert-tappable									{height:35px;border-bottom:1px dashed #ccc;}
 .alert-ios .alert-radio-group, .alert-ios .alert-checkbox-group{max-height:250px !important; overflow-y:scroll !important;}
-.alert-ios .alert-button									{font-weight:normal !important; font-size:15px;}
+.alert-ios .alert-button									{font-weight:normal !important; font-size:16px;}
 .item-inner > .input-wrapper > .label-ios h2				{font-size:16px;color:#1d6ab2;text-transform:capitalize;}
 .rupee 														{color:#777 ; position:relative;}
 .item-inner > .input-wrapper > .label-ios					{color:#777;font-size:14px; }
@@ -607,14 +647,14 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .item-ios [item-left]										{margin:0px !important;}
 .button-ios-secondary										{background:none; color:#333;}
 .mar-top													{margin-top:10px;}
-.timedate													{font-size:13px !important; color:#A9A9A9 !important;}
+.timedate													{font-size:13px !important; color:#A9A9A9 !important; text-indent:0px !important;}
 .pro-info													{padding-top:10px;}
 .userioc													{border-right:1px dashed #D8BFD8; color:#FA8072;font-size:15px;height:25px;line-height:25px; text-align:center;width:25px;}
 .listed-det p												{font-size:15px !important; color:#1E90FF; font-weight:400 !important;border: 1px dashed #D8BFD8; margin-bottom:10px;}
 .title														{ font-size:15px !important; color:#FA8072 !important;}
 ion-select													{max-width:100% !important;}
 .liste-names 												{font-size:16px !important;font-weight: 400;height:30px;padding-left: 10px;padding-top: 5px;}
-.segment-ios .segment-button.segment-activated				{background:#ffa200; padding-left:5px !important; height:38px; color:#fff !important;}
+.segment-ios .segment-button.segment-activated				{background:#888aef; padding-left:5px !important; height:38px; color:#fff !important;}
 .fant-size > .item-inner > .input-wrapper > .label-ios      {font-size:16px !important; padding-top:0px !important;line-height:25px !important; text-indent:10px !important;}
 .segments-info .segment-top .segment-ios .segment-button.segment-activated{margin-top:10px;}
 .page-down													{white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
@@ -637,6 +677,14 @@ white-space: normal;}
 .job-descriptions p{ width:100%; font-size:15px; color:#777;}
 .job-summary{ font-size:17px !important;}
 .listing { padding-left:0px; font-size:16px !important; color:#777;}
+.select-brddd{   border: 1px solid #ccc !important;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+    color: #555;
+    font-size: 18px;
+    font-weight: 400; margin-left:8px;
+    padding: 7px 10px 6px 20px !important;
+    width:95%;}
+	.submit-btns{width:95%; border-radius:4px; margin-left: 8px;}
 /*-------------------------------------ios platform css end-------------------------------------*/
 /*-------------------------------------Android platform css -------------------------------------*/
 
@@ -649,8 +697,8 @@ white-space: normal;}
 .price-clr													{color:red !important; color:18px !important; font-weight:400; font-size:16px !important;}
 .rating-clr	ul.rating .ion-icon								{font-weight:400; font-size:20px !important;}
 .rating-clr	ul.rating .ion-md-star							{color:#FF8C00; }
-.fant-size > .item-inner > .input-wrapper > .label-md       {font-size:18px !important;padding-top:0px !important; line-height:19px !important; text-indent:10px !important;}
-.fant-size > .item-inner > .input-wrapper > .label-ios       {font-size:18px !important;padding-top:0px !important; line-height:19px !important; text-indent:10px !important;}
+.fant-size > .item-inner > .input-wrapper > .label-md       {font-size:18px !important;padding-top:0px !important; line-height:22px !important; text-indent:10px !important;}
+.fant-size > .item-inner > .input-wrapper > .label-ios       {font-size:18px !important;padding-top:0px !important; line-height:22px !important; text-indent:10px !important;}
 .sub-cate .item-inner .input-wrapper .label-md			    {margin:0px !important; background:none !important;}
 .sub-cate .item-inner .input-wrapper .label-md h2 .title-md {background: rgba(51, 51, 51, 0.12); font-size:20px; font-weight:400; 
 															 color:#fff;display:block;height:45px;line-height:45px;width:100%; text-align:left; padding-left:5px}
@@ -662,7 +710,7 @@ white-space: normal;}
 .headbg													    {background:#4169E1; font-size:15px;}
 .body-clr												    {background:#fff;}
 .popup-mds > .ion-label									    {font-size:15px; text-align:center;}
-.item-inner > .input-wrapper > .label-md h2				    {font-size:19px !important;color:#1d6ab2;text-transform:capitalize; margin-top:0px !important;}
+.item-inner > .input-wrapper > .label-md h2				    {font-size:19px !important;color:#424a95;text-transform:capitalize; margin-top:0px !important;}
 .item-inner > .input-wrapper > .label-md				    {color:#777;font-size:16px; padding-right:0px !important; }
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ bottom:4px;}
 .marg-info img											    {}
@@ -673,10 +721,14 @@ page-dashboard .dashboard								    {padding:25px 0px !important;}
 .des-card												    {background:#fff	!important;}
 .name-person											    {font-size:15px !important;  font-weight:600;color:#6A5ACD; float:left;}
 .name-elder												    {color:#777!important;float:left;font-size:16px!important;font-weight:400 !important;padding-left:10px !important;text-transform:capitalize;}
-.edit-eld												   { color:#1E90FF; padding:3px; font-size:17px !important; border-radius:3px; width:20px; height:20px;}
-.trash-del												   {color:red; padding:3px;font-size:17px !important; border-radius:3px; width:20px; height:20px;}
-
-
+.edit-eld												    {color:#1E90FF; padding:3px; font-size:17px !important; border-radius:3px; width:20px; height:20px;}
+.trash-del												    {color:red; padding:3px;font-size:17px !important; border-radius:3px; width:20px; height:20px;}
+.create-message .item-md									{padding-left:0px !important;}
+.alert-button											    {font-size:15px !important;}
+.create-message .item-md .text-input-md						{width: calc(100% - 8px - 7px);}
+.create-message .item-ios .text-input-ios					{width: calc(100% - 8px - 5px);}
+.create-message .completer-holder .completer-input 			{border:1px solid #ccc !important;border-radius:0;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);color:#555;font-size:15px;
+                                                             font-weight:400;padding:7px; margin-left:10px !important; width:94%;}
 /*-------------------------------------Android platform css end-------------------------------------*/
 
 

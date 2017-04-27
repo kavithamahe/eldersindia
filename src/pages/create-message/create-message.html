@@ -21,9 +21,10 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="contect-bg-moblie">
 <form (ngSubmit)="sendMessage()" [formGroup]="messageForm">
-<ion-list>
+<br>
+<ion-list class="create-message">
 
             <ng2-completer [(ngModel)]="toAddress" formControlName="toAddress" [datasource]="friendsList" placeholder="To" [minSearchLength]="0"></ng2-completer>
 
@@ -37,8 +38,8 @@
      <ion-textarea placeholder="Message" formControlName="message"></ion-textarea>
   </ion-item>
   <p *ngIf="!messageForm.controls.message.valid && (messageForm.controls.message.dirty || submitAttempt)" class="err-reds">Please enter message</p>
-  <button ion-button icon-left full>
-  <ion-icon ios="ios-send" md="md-send"></ion-icon>
+  <button ion-button class="btn-right">
+  <ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;
   Send
 </button>
 </ion-list>

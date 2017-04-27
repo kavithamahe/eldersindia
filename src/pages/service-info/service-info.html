@@ -38,11 +38,9 @@
    <p> {{vendorList?.vendorDetails?.description}} </p>
   </ion-card-content>
 </ion-card>
-
 </div>
 
-    <div class="view-storedet">
-
+  	<div class="view-storedet">
   <ion-row>
     <ion-col class="brder-cor">
       <button ion-button full (click)="toggleRequestService()">
@@ -98,9 +96,9 @@
             </ion-item> -->
           <ion-row>
           <ion-col>
-     <!--<button class="btn-defaults" ion-button item-right small (click)="toggleRequestService()">Cancel</button>--></ion-col>
-          <ion-col>
-      <button class="btn-primarys" ion-button item-right small (click)="sendRequestService()">Submit</button></ion-col>
+		  <button class="btn-defaults" ion-button item-right small (click)="toggleRequestService()">Cancel</button></ion-col>
+      		<ion-col offset-33>
+			<button class="btn-primarys" ion-button item-right small (click)="sendRequestService()">Submit</button></ion-col>
           </ion-row>
         </div>
       </form>
@@ -154,16 +152,7 @@
         
         <b>Contact Details</b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
       </button>
-      <div *ngIf(showDetails) class="add-detalis">
-    <p>{{vendorList?.vendorDetails?.address}}</p>
-    <p>{{vendorList?.vendorDetails?.email}}</p>
-    <p>{{vendorList?.vendorDetails?.contact_name}}</p>
-    <p>{{vendorList?.vendorDetails?.contact_number}}</p>
-      </div>
-    <div *ngIf(!vendorList?.vendorDetails?.address)>
-      <p style="color:red; font-size:15px;">"No Address Deatails To Display"</p>     
-      </div>
-    </ion-col>
+	   </ion-col>
   </ion-row>
 </div>
   <!-- </ion-card> -->

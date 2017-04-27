@@ -134,7 +134,7 @@
 	<ion-list *ngFor="let user of users; let i=index">	
 	
 	<hr>
-		<div>
+		<ion-card>
  			<ion-item>
 	      		<ion-row>
 	      			<ion-col>
@@ -182,27 +182,44 @@
 					<p (click)="openUrl(user.metalink_url)">{{user.metalink_description}}</p>
 	         	</ion-card-content>
 	       	 
-	       	<div>
+	       	
 	      		<ion-row>
-	        		<ion-col>
-						<button ion-button clear 
-						[innerHTML]="user.likes.emoji | emojis" 
-						(click)="emojiPicker(user.id)"></button>
+	        		<ion-col width-15>
+
+	          			<!--<button class="hover but-colo" ion-button outline (click)="addLikes(user.id)">{{user.likes.emoji}} &nbsp; <p class="num-of">{{user.likes.emoji_name}}</p>
+
+	          			</button> -->
+						<button class="hover but-colo" ion-button icon-left clear small [innerHTML]="user.likes.emoji | emojis" 
+						(click)="emojiPicker(user.id)">
+							<!--<ion-icon name="thumbs-up"></ion-icon>
+							<div class="num-of">12 Likes</div> -->
+						  </button>
 	        		</ion-col>
 	        		
 	        		<ion-col>
-	          			<button ion-button class="comment but-colo" color="dark" clear 
+	          			<!--<button ion-button class="comment but-colo" color="dark" clear 
 	          			(click)="showComment(user)">
 	          				<span style="color:red; font-size:13px;">{{user.comment_count}}</span> 
 	          				&nbsp;<i class="fa fa-comments" aria-hidden="true"></i>
-	          			</button>
+	          			</button> -->
+						<button class="comment but-colo" color="dark" ion-button icon-left clear small (click)="showComment(user)">
+							<ion-icon name="text"></ion-icon>
+							<div style="color:red; font-size:13px;">{{user.comment_count}} Comments</div>
+						  </button>
 	          		</ion-col>
-	          		
-	          		
 	      		</ion-row>
-
-	    	</div>
-		</div>
+	      		<!--	<div *ngIf="i==showblock">
+	      				<ion-item>
+				   			<ion-textarea [(ngModel)]="comment" placeholder="Enter Comments" style=" margin:0px !important;">
+				   		    </ion-textarea>
+						</ion-item>
+						<div class="send-req">
+							<button ion-button (click)="sendPost(user.id)" class="secon-sdms" color="secondary" full><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
+							</button>
+						</div>
+  					</div><br>-->
+	    	
+		</ion-card>
 	</ion-list>
 
  	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
