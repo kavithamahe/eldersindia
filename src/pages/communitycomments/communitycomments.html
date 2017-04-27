@@ -13,16 +13,16 @@
 <ion-content>
 			
 	<ion-list *ngFor="let comment of post_comments; let j=index" class="comm-posted">
-     <ion-row>
+     			<ion-row>
 					<ion-col width-20>
-	   				 <ion-avatar>
-	      				<img class="pro-imgs" (click)="profileImage(comment.uid)" 
-		    		[src]="imageUrl+comment?.profile_image"  
-		    		[hidden]="!comment?.profile_image" >
-	    			</ion-avatar>
+		   				<ion-avatar>
+		      				<img class="pro-imgs" (click)="profileImage(comment.uid)" 
+			    		[src]="imageUrl+comment?.profile_image"  
+			    		[hidden]="!comment?.profile_image" >
+		    			</ion-avatar>
 	    			</ion-col>
 	    			<ion-col>
-	    			 <p item-text-wrap [innerHTML]="comment.comments | emojis"></p>
+	    			 	<p item-text-wrap [innerHTML]="comment.comments | emojis"></p>
 	    			</ion-col>
 	  			</ion-row>
   			
@@ -68,7 +68,7 @@
 					</ion-list>
 				</div>
 		   						
-		      	<button ion-button class="trash-icon" (click)="showConfirm(comment.comments_id)" 
+		      	<button ion-button (click)="showConfirm(comment.comments_id)" 
 			      	color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
 		
 		

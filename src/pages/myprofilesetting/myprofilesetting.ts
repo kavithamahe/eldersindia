@@ -42,8 +42,9 @@ export class MyprofilesettingPage {
   }
   getPrivacy(member_data){
   	 this.communityServices.getPrivacy(this.member_data).subscribe(users => {
+      
        let Privacy = users.result[0];
-       this.avatar = Privacy.privacy_avatar;
+       // this.avatar = Privacy.privacy_avatar;
        this.birthday = Privacy.privacy_birthday;
        this.email = Privacy.privacy_email;
        this.location = Privacy.privacy_location;
