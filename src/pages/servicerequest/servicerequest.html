@@ -29,13 +29,13 @@
 <ion-content padding class="contect-bg-moblie">
 <ion-card *ngFor="let service of serviceRequestInfo; let i=index;">
   <ion-card-content style=" padding:0px;">
-  <ion-grid (click)="viewRequest(service?.id)">
+  <ion-grid>
    <ion-row>
-    <ion-col width-25><img src="{{imageUrl}}{{service?.logo}}"/>
-	<a class="token-primarys"><i class="fa fa-phone"></i></a>
+    <ion-col width-25 (click)="viewRequest(service?.id)"><img src="{{imageUrl}}{{service?.logo}}"/>
+	<a class="token-primarys" (click)="makeCall(service?.contact_number)"><i class="fa fa-phone"></i></a>
 	</ion-col>
 
-    <ion-col width-75>
+    <ion-col width-75 (click)="viewRequest(service?.id)">
     <h2 class="service-req">{{service?.vendor_name}}</h2>
 	<p *ngIf="(service?.enquiry_date!='0000-00-00 00:00:00')" class="token-date"><i class="fa fa-calendar"></i> {{service?.enquiry_date | date :'MMM dd y'}}</p>
 	 <p><i class="fa fa-id-card-o"></i> {{service?.sr_token}}</p>

@@ -101,7 +101,7 @@ export class MyApp {
                           { title: 'Dashboard', component: DashboardPage},
                           { title: 'Community', component: CommunitylistPage },
                           { title: 'Connections', component: ConnectionsPage },
-                          { title: 'Job Board', component: JobboardPage },
+                          { title: 'Jobs', component: JobboardPage },
                           { title: 'Applied Jobs', component: AppliedJobsPage },
                           { title: 'Messages', component: MessagesPage },
                           { title: 'Service Providers', component: ServiceprovidersPage },

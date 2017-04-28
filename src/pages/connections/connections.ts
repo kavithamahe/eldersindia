@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
 import { ConnectionsService } from '../../providers/connections-service';
 /*
   Generated class for the Connections page.
@@ -53,9 +54,7 @@ receivedConnectionScrollLists:any=[];
      (allConnections) => {
       this.allConnectionsInfo=allConnections.result.info.list.data;  
       this.orgAllConnectionsInfo=allConnections.result.info.list.data;
-      this.nextPageURL1=allConnections.result.info.list.next_page_url; 
-      console.log("onload");
-      console.log(this.allConnectionsInfo);      
+      this.nextPageURL1=allConnections.result.info.list.next_page_url;        
     },
     (err) => { 
         if(err.status===401)
@@ -169,7 +168,11 @@ receivedConnectionScrollLists:any=[];
         });
    toast.present();
   }
-  
+  public CommunityUserWall(profile_uid)
+  {
+    console.log(profile_uid);
+    this.navCtrl.setRoot(CommunityprofilePage,{profile_uid});
+  }
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);
