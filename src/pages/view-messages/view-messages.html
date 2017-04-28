@@ -21,8 +21,7 @@
 </ion-header>
 
 <ion-content padding class="contect-bg-moblie">
-<ion-card>
-  <ion-row>
+  <!-- <ion-row>
   <ion-col width-20>
     <ion-avatar item-left>
     <img src="{{imageUrl+veiwMessagesInfo?.avatar}}">
@@ -35,6 +34,34 @@
    <p>{{veiwMessagesInfo?.subject}}</p>
    <p>{{veiwMessagesInfo?.message}}</p>
   <p class="timedate">{{veiwMessagesInfo?.created_at | date :'MMM dd y'}}</p>
-    </ion-card-content></ion-col></ion-row>
-</ion-card>
+    </ion-card-content></ion-col></ion-row> -->
+  <ion-card>
+  <ion-item text-wrap>
+    <ion-row>
+            <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
+            <ion-avatar item-left>
+              <img src="{{imageUrl+veiwMessagesInfo?.avatar}}">
+            </ion-avatar>
+            </ion-col>
+          
+            <ion-col width-80  style="padding: 0px !important">
+              <ion-row>
+                <ion-col width-70 style="padding: 0px !important">
+                <h2><strong>{{veiwMessagesInfo?.sender_name}}</strong></h2>
+                </ion-col>
+              </ion-row>
+              <ion-row style="padding-left: 5px !important;">
+              <p class="timedate">Received : {{veiwMessagesInfo?.created_at | date :'MMM dd y'}}</p>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+  </ion-item>
+  <hr>
+  <ion-card-content item-text-wrap>
+    <p style="padding-left: 10px">
+      Subject : <strong>{{veiwMessagesInfo?.subject}}</strong>
+    </p>
+    <p style="padding-top: 15px;padding-left: 20px">{{veiwMessagesInfo?.message}}</p>
+  </ion-card-content>
+  </ion-card>
 </ion-content>
