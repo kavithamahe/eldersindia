@@ -22,7 +22,7 @@
 
 <ion-content padding class="contect-bg-moblie">
 <ion-list class="createblog-form">
-<form (ngSubmit)="createBlog()" [formGroup]="blogForm">
+<form  [formGroup]="blogForm">
 
   <ion-item>
     <ion-label stacked class="bloag-label">Blog Title<small style="color:red;">*</small></ion-label><span style="color:red">*</span>
@@ -69,7 +69,7 @@
     <ion-radio value="No"></ion-radio>
   </ion-item> 
 </div>
-<button ion-button icon-left full>
+<button ion-button icon-left full (click)="createBlog()">
   Send
 </button>
 </ion-list>

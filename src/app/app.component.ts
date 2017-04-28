@@ -113,6 +113,7 @@ export class MyApp {
                   { myIcon:'fa fa-unlock-alt', title: 'Change Password', component: ChangePasswordPage },
                   { myIcon:'fa fa-cog', title: 'Settings', component: SettingsPage },
                   { myIcon:'fa fa-sign-out', title: 'Logout', component: LogoutPage },
+
                       );
 
         this.subscription = userLogin.userEntered$.subscribe(

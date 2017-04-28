@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController,ToastController,AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
+import { CallNumber } from 'ionic-native';
 import { ServiceRequestService } from '../../providers/service-request-service';
 import { ViewServiceRequestPage } from '../../pages/view-service-request/view-service-request';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -171,5 +171,18 @@ serviceRequestScrollLists:any=[];
       }
     );
      
+  }
+  public makeCall(number)
+  {
+    if(number)
+    {
+    CallNumber.callNumber(number, true)
+  .then(() => console.log('Launched dialer!'))
+  .catch(() => console.log('Error launching dialer'));
+   }
+   else
+   {
+    this.showToaster("There is no contact nuber");
+   }
   }
 }
