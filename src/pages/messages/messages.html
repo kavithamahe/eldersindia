@@ -39,7 +39,7 @@
 
 <div [ngSwitch]="messages">
   <ion-list *ngSwitchCase="'sent'">
-  <ion-card *ngFor="let sent of sentInfo" (click)="viewMessages(sent?.id,'sent')" style="padding:3px;">
+  <!-- <ion-card *ngFor="let sent of sentInfo" (click)="viewMessages(sent?.id,'sent')" style="padding:3px;">
     <ion-row>
 	<ion-col width-20 height-20>
     <ion-avatar item-left>
@@ -52,14 +52,51 @@
     <p>{{sent?.message | words : 10 : '...'}}</p>
   </ion-col>
   </ion-row>
-  </ion-card>
+  </ion-card> -->
+  <ion-card *ngFor="let sent of sentInfo" (click)="viewMessages(sent?.id,'sent')">
+      <ion-item-sliding>
+        <ion-item>
+          <ion-row>
+            <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
+            <ion-avatar item-left>
+              <img src="{{imageUrl+sent?.avatar}}">
+            </ion-avatar>
+            </ion-col>
+          
+            <ion-col width-80  style="padding: 0px !important">
+              <ion-row>
+                <ion-col width-70 style="padding: 0px !important">
+                <h2><strong>{{sent?.name}}</strong></h2>
+                </ion-col>
+                <ion-col width-30 style="text-align-last: end; padding: 0px !important">
+                <p>{{sent?.created_at | date :'MM/dd/yy'}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="sent.subject">
+              subject :  <h3>{{sent?.subject | words : 10 : '...'}}</h3>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="primary">
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </button>
+          <button ion-button color= red>
+            <ion-icon name="call"></ion-icon>
+            Call
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-card>
   <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
   </ion-list>
 
   <ion-list *ngSwitchCase="'inbox'">
-  <ion-card *ngFor="let inbox of inboxInfo" (click)="viewMessages(inbox?.id,'inbox')">
+  <!-- <ion-card *ngFor="let inbox of inboxInfo" (click)="viewMessages(inbox?.id,'inbox')">
      <ion-row>
 	 <ion-col width-20 height-20>
     <ion-avatar item-left height-20>
@@ -72,7 +109,44 @@
     <p>{{inbox?.subject | words : 10 : '...'}}</p>
     <p>{{inbox?.message | words : 10 : '...'}}</p>
    </ion-col></ion-row>
-  </ion-card>
+  </ion-card> -->
+      <ion-card *ngFor="let inbox of inboxInfo" (click)="viewMessages(inbox?.id,'inbox')">
+      <ion-item-sliding>
+        <ion-item>
+          <ion-row>
+            <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
+            <ion-avatar item-left>
+              <img src="{{imageUrl+inbox?.avatar}}">
+            </ion-avatar>
+            </ion-col>
+          
+            <ion-col width-80  style="padding: 0px !important">
+              <ion-row>
+                <ion-col width-70 style="padding: 0px !important">
+                <h2><strong>{{inbox?.author_name}}</strong></h2>
+                </ion-col>
+                <ion-col width-30 style="text-align-last: end; padding: 0px !important">
+                <p>{{inbox?.created_at | date :'MM/dd/yy'}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="inbox.subject">
+              subject :  <h3>{{inbox?.subject | words : 10 : '...'}}</h3>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="primary">
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </button>
+          <button ion-button color= red>
+            <ion-icon name="call"></ion-icon>
+            Call
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-card>
   <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>

@@ -35,7 +35,6 @@
 
     <ion-slides (ionSlideDidChange)="slideChanged()">
       <ion-slide>
-        <ion-list>
           <ion-item>
             <ion-label> Records Per Page </ion-label>
             <ion-select [(ngModel)]="records" (ionChange)="change()">
@@ -45,7 +44,6 @@
               <ion-option value="20">20</ion-option>
             </ion-select>
           </ion-item>
-        </ion-list>  
       </ion-slide>
 
     <ion-slide>
@@ -98,6 +96,22 @@
 
 <ion-footer>
   <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
+    <ion-buttons>
+      <button ion-button color="royal" large icon-left showWhen="ios" (click)="dashboardPage()">
+        <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
+        <ion-icon class="gly-rotate-180" name="send"></ion-icon>
+        <div style="padding-left: 10px !important;">
+          Back
+        </div>
+      </button>
+      <button ion-button color="light" large icon-left hideWhen="ios" (click)="dashboardPage()">
+        <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
+        <ion-icon class="gly-rotate-180" name="send"></ion-icon>
+        <div style="padding-left: 10px !important;">
+          Back
+        </div>
+      </button>
+    </ion-buttons>
     <ion-buttons end>
       <button ion-button color="royal" large icon-right showWhen="ios" (click)="update()">
         Update
@@ -110,3 +124,14 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
+<style>
+   .gly-rotate-180 {
+  filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.5);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  display: inline-block;
+}
+</style>

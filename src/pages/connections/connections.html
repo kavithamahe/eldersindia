@@ -44,8 +44,8 @@
     <ion-grid>
     <ion-row>
     <ion-col width-20>
-    <ion-avatar item-left>
-    <img src="{{imageUrl+request?.avatar}}" [hidden]="!request?.avatar">
+    <ion-avatar item-left (click)="CommunityUserWall(request?.id)">
+    <img src="{{imageUrl+request?.avatar}}" [hidden]="!request?.avatar" (click)="CommunityUserWall(request?.id)">
     </ion-avatar></ion-col>
     <ion-col width-67>
     <h6 class="name-conne">{{request?.connections?.name}} </h6>
@@ -81,10 +81,10 @@
     <ion-row>
     <ion-col width-20>
     <ion-avatar item-left>
-    <img src="{{imageUrl+all?.avatar}}" [hidden]="!all?.avatar">
+    <img src="{{imageUrl+all?.avatar}}" [hidden]="!all?.avatar" (click)="CommunityUserWall(all?.id)">
     </ion-avatar></ion-col>
     <ion-col width-80>
-    <h6 class="name-conne">{{all?.connections?.name}} </h6>
+    <h6 class="name-conne" (click)="CommunityUserWall(all?.id)">{{all?.connections?.name}} </h6>
     <p class="connection-pages"><i class="fa fa-inbox"> </i> {{all?.connections?.email}}</p>
     <p class="connection-page" [hidden]="!all?.connections?.location">
     <i class="fa fa-map-marker"></i> {{all?.connections?.location}}    
