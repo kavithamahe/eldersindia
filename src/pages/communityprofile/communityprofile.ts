@@ -212,7 +212,8 @@ export class CommunityprofilePage {
   Communities(id){
     this.communityServices.getCommunityMembers(id).subscribe(users => {
       this.getCommunityMembers=users.result.data;
-      
+      this.nextPageURL=users.result.next_page_url;
+
   },
    err =>{
     
@@ -242,8 +243,9 @@ export class CommunityprofilePage {
 
   Connections(id,val){
     this.communityServices.getConnectLists(id,val).subscribe(users => {
-       this.allConnections=users.result.info.list;
- 
+       this.allConnections=users.result.info.list.data;
+       this.nextPageURL=users.result.info.list.next_page_url;
+
   },
    err =>{
     
@@ -435,24 +437,65 @@ export class CommunityprofilePage {
     this.communityServices.showErrorToast(err);
   });
   }
-  //  communitydetailscroll(id)
-  // {
-  //    this.communityServices.communitydetailscroll(this.nextPageURL,id).subscribe(
-  //    (eventsscroll) => {
-  //     this.eventScrollLists=eventsscroll.result.data;
-  //     for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
-  //       this.getCommunityMembers.push(this.eventScrollLists[i]);
-  //       }
+
+   doInfinite1(infiniteScroll) {
+    setTimeout(() => {      
+      if(this.nextPageURL!=null && this.nextPageURL!='')
+      {
+       this.connectionscroll(this.profile_uid);
+            }
+      else{
+        infiniteScroll.enable(false);
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
+  connectionscroll(id)
+  {
+     this.communityServices.connectionscroll(this.nextPageURL,id).subscribe(
+     (eventsscroll) => {
+      this.eventScrollLists=eventsscroll.result.info.list.data;
+      for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
+        this.allConnections.push(this.eventScrollLists[i]);
+        }
       
-  //      this.nextPageURL=eventsscroll.result.next_page_url;
+       this.nextPageURL=eventsscroll.result.info.list.next_page_url;     
+    },
+    err =>{
+   
+    this.communityServices.showErrorToast(err);
+  });
+  }
+   doInfinite2(infiniteScroll) {
+    setTimeout(() => {      
+      if(this.nextPageURL!=null && this.nextPageURL!='')
+      {
+       this.communitydetailscroll(this.profile_uid);
+            }
+      else{
+        infiniteScroll.enable(false);
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
+   communitydetailscroll(id)
+  {
+     this.communityServices.communitydetailscroll(this.nextPageURL,id).subscribe(
+     (eventsscroll) => {
+      this.eventScrollLists=eventsscroll.result.data;
+      for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
+        this.getCommunityMembers.push(this.eventScrollLists[i]);
+        }
+      
+       this.nextPageURL=eventsscroll.result.next_page_url;
             
      
-  //   },
-  //   err =>{
+    },
+    err =>{
    
-  //   this.communityServices.showErrorToast(err);
-  // });
-  // }
+    this.communityServices.showErrorToast(err);
+  });
+  }
   
 
  }

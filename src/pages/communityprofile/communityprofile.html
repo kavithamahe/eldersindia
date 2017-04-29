@@ -20,9 +20,8 @@
 		  <ion-row>
 			  <ion-col width-30>
 				  	<ion-item>
-					  <ion-avatar item-left class="image-profile" >
+					  <ion-avatar (click)="profileSetting(communityProfileData.id)" item-left class="image-profile" >
 					  	<img [src]="imageUrl+communityProfileData?.avatar" 
-					  	(click)="profileSetting(communityProfileData.id)"
 					  	[hidden]="!communityProfileData?.avatar">
 					  </ion-avatar>
 					</ion-item>
@@ -51,8 +50,13 @@
 			</ion-row>
 		  <ion-row>
 			  <ion-col>
-				  <p style="text-align:left;" class="mem-name" (click)="profileSetting(communityProfileData.id)">{{communityProfileData?.name}}</p>
+				  <p style="text-align:left;" class="mem-name">{{communityProfileData?.name}}</p>
 			  </ion-col>
+			  <!-- <ion-col>
+					<button ion-button (click)="profileSetting(communityProfileData.id)">My Profile
+					</button>
+			  </ion-col> -->
+
 			 
 		  </ion-row>
 
@@ -135,7 +139,7 @@
 	<hr/>
  	 		<ion-list *ngFor="let community of communityProfile; let i=index">
 
- 			<div>
+ 			<ion-card>
  				<ion-item>
 	      			<ion-row>
 	      				<ion-col>
@@ -158,34 +162,37 @@
 	    		</ion-item>
 
 	       	 		<div>
-				<ion-row>
-				<ion-col>
-			          	<p class="feed-post">{{community.post_message}}</p>
-					
-			       
-			          	<img  [src]="imageUrl+community?.post_image" [hidden]="!community?.post_image">
-						</ion-col>
-			       	</ion-row>
-		       		<ion-card-content [hidden]="!community?.post_video" class="video-updates">
-						<iframe [src]="cleanURL(community?.post_video)" frameborder="0">
-		         		</iframe>
-		       		</ion-card-content>
-		       		<ion-card-content>
-		          		<img  [src]="community.metalink_image" (click)="openUrl(community.metalink_url)" 
-		          		[hidden]="!community?.metalink_image">
-	       			</ion-card-content>
-	       		
-	         		<ion-card-content class="video-updates" [hidden]="!community?.metalink_title">
-						<p (click)="openUrl(community.metalink_url)">{{community.metalink_title}}</p>
-	         		</ion-card-content>
-	         		<ion-card-content class="video-updates" [hidden]="!community?.metalink_description">
-						<p (click)="openUrl(community.metalink_url)">{{community.metalink_description}}</p>
-	         		</ion-card-content>
+						<ion-row>
+							<ion-col>
+			          			<p item-text-wrap class="feed-post">{{community.post_message}}</p>
+								<img  [src]="imageUrl+community?.post_image" [hidden]="!community?.post_image">
+							</ion-col>
+			       		</ion-row>
+		       			<ion-card-content [hidden]="!community?.post_video" class="video-updates">
+							<iframe [src]="cleanURL(community?.post_video)" frameborder="0">
+			         		</iframe>
+		       			</ion-card-content>
+		       			<ion-card-content>
+		          			<img  [src]="community.metalink_image" (click)="openUrl(community.metalink_url)" 
+		          			[hidden]="!community?.metalink_image">
+	       				</ion-card-content>
+	       				<ion-card-content class="video-updates" [hidden]="!community?.metalink_title">
+							<p (click)="openUrl(community.metalink_url)">{{community.metalink_title}}
+							</p>
+	         			</ion-card-content>
+	         			<ion-card-content class="video-updates" 
+	         				[hidden]="!community?.metalink_description">
+							<p (click)="openUrl(community.metalink_url)">{{community.metalink_description}}</p>
+	         			</ion-card-content>
 	       	 		
 	      				<ion-row>
 		        			<ion-col width-15>
-			          			<button ion-button clear 
+			          			<button ion-button clear *ngIf=(community.likes.emoji)
 			          			[innerHTML]="community.likes.emoji | emojis" (click)="emojiPicker(community.id)"></button>
+			          			<button *ngIf=(!(community.likes.emoji)) ion-button  clear small 
+								[innerHTML]="':thumbsup:' | emojis" 
+								(click)="emojiPicker(community.id)">
+						</button>
 		        			</ion-col>
 		        	
 		        			<ion-col>
@@ -196,37 +203,31 @@
 		          			</ion-col>
 		          		
 	      				</ion-row>
-						<hr/>
-	      			
-	      		</div>
-	      	</div>
-	      </ion-list>
-					
-
+					</div>
+	      		</ion-card>
+	      	</ion-list>
+				<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   					<ion-infinite-scroll-content></ion-infinite-scroll-content>
+  				</ion-infinite-scroll>
 		</ion-list>
 		
-
-    	
-	<ion-list *ngSwitchCase="'communities'">
-		<ion-item style="position:relative;" *ngFor="let community of getCommunityMembers">
-			<div class="community-img">
-		 		 <img (click)="goBackToCommunity(community.id)" style="width:100%; height:200px;" 
-		 		 [src]="imageUrl+community?.banner" 	 		 
-		 		 [hidden]="!community?.banner" />
-				 <div class="label-opc">
-			   <ion-item text-wrap style="text-align:left !important;"  (click)="goBackToCommunity(community.id)" [hidden]="!community.community_name">{{community.community_name}}
-			   </ion-item>
-			   </div>
-		        <!--<ion-row>
-                		<ion-col style="padding-left:0px !important;">
-		                  <p class="tid-cd"(click)="detailCommunity()" 
-		                  [hidden]="!community.community_name">{{community.community_name}}</p>
-		                </ion-col>
-              		</ion-row> -->
-             	</div>
-		</ion-item>
-	</ion-list>
-	<div>
+		<ion-list *ngSwitchCase="'communities'">
+			<ion-item style="position:relative;" *ngFor="let community of getCommunityMembers">
+				<div class="community-img">
+			 		 <img (click)="goBackToCommunity(community.id)" style="width:100%; height:200px;" 
+			 		 [src]="imageUrl+community?.banner" 	 		 
+			 		 [hidden]="!community?.banner" />
+					<div class="label-opc">
+					   <ion-item text-wrap style="text-align:left !important;"  (click)="goBackToCommunity(community.id)" [hidden]="!community.community_name">{{community.community_name}}
+					   </ion-item>
+				   	</div>
+		   		</div>
+			</ion-item>
+				<ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
+	   				<ion-infinite-scroll-content></ion-infinite-scroll-content>
+	  			</ion-infinite-scroll>
+		</ion-list>
+	
 		<ion-list *ngSwitchCase="'connections'">
 			<ion-row>
 			  	<ion-col>
@@ -236,31 +237,27 @@
 					</div>
 				</ion-col>
 			</ion-row>
-			<ion-card *ngFor="let all of allConnections?.data; let islast=last;">
+			<ion-card *ngFor="let connection of allConnections">
 	   			<ion-row>
 		    		<ion-col width-20>
 		    			<ion-avatar item-left>
-		    				<img src="{{imageUrl+all?.avatar}}" [hidden]="!all?.avatar" 
-		    				(click)="loadThisPage(all?.id)">
+		    				<img src="{{imageUrl+connection?.avatar}}" [hidden]="!connection?.avatar" 
+		    				(click)="loadThisPage(connection?.id)">
 		    			</ion-avatar>
 		    		</ion-col>
 	    			<ion-col width-67>
-	    				<h1 class="primary-color" (click)="loadThisPage(all?.id)">{{all?.connections?.name}}</h1>
-		    				<p>{{all?.connections?.company_name}}</p>
+	    				<h1 class="primary-color" (click)="loadThisPage(connection?.id)">{{connection?.connections?.name}}</h1>
+		    				<p>{{connection?.connections?.company_name}}</p>
 		    				<p><ion-icon ios="ios-briefcase" md="md-briefcase" 
-		    				[hidden]="!all?.connections?.designation"></ion-icon> {{all?.connections?.designation}}</p>
-		 					<p><ion-icon ios="ios-call" md="md-call" [hidden]="!all?.connections?.mobile"></ion-icon>  {{all?.connections?.mobile}}</p>
+		    				[hidden]="!connection?.connections?.designation"></ion-icon> {{connection?.connections?.designation}}</p>
+		 					<p><ion-icon ios="ios-call" md="md-call" [hidden]="!connection?.connections?.mobile"></ion-icon>  {{connection?.connections?.mobile}}</p>
 	    			</ion-col>
 	      		</ion-row>    
 	  		</ion-card>
-	  	</ion-list>
-
-  	</div>
+		  		<ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
+	   				<ion-infinite-scroll-content></ion-infinite-scroll-content>
+	  			</ion-infinite-scroll>
+		</ion-list>
 	</div>
-	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-   		<ion-infinite-scroll-content></ion-infinite-scroll-content>
-  	</ion-infinite-scroll>
-	
-
 </ion-content>
 	

@@ -3,14 +3,13 @@
 
 
 <ion-content padding>
-	<ion-list *ngFor="let member of members">
-		<ion-item text-wrap class="memb-list">
-			<ion-avatar>
+	<div *ngFor="let member of members">
+		<ion-card class="memb-list">
 				<img (click)="membersProfile(member.uid)" style="border:2px solid #e6e6e6;" 
 				[src]="imageUrl+member?.avatar" 
 				[hidden]="!member?.avatar">
-			</ion-avatar>
-		</ion-item>
-	</ion-list>
+			{{member.name}}
+		</ion-card>
+	</div>
 	
 </ion-content>

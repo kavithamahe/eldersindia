@@ -134,11 +134,20 @@ getConnectLists(id,data){
    return this.http.post(`${this.getCommunityPostsUrl }getConnectionList`,this.connectlist,this.options)
       .map(res =>res.json());
 }
-
+connectionscroll(nextPageURL,id){
+  this.connectlist = {"id":id,"searchValue":""}
+   return this.http.post(nextPageURL,this.connectlist,this.options)
+      .map(res =>res.json());
+}
 
 getCommunityMembers(id){
   this.post={"user_id": id}
     return this.http.post(`${this.getCommunityPostsUrl }getCommunityMembers`,this.post,this.options)
+      .map(res =>res.json());
+}
+communitydetailscroll(nextPageURL,id){
+   this.post={"user_id": id}
+    return this.http.post(nextPageURL,this.post,this.options)
       .map(res =>res.json());
 }
 
