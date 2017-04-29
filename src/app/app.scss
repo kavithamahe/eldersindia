@@ -194,7 +194,7 @@ border :2px solid green;
 
 
 
-ion-content													{background-image: url('../../assets/img/Elder_4a.jpg');   font-size:16px;  color:#777 !important; background-position: center center;
+ion-content													{background-image: url('../../assets/img/bgss.png');   font-size:16px;  color:#777 !important; background-position: center center;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
@@ -348,7 +348,8 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .sub-cat-listed .item-inner .input-wrapper .label-md		{margin:0px !important;}
 .sub-cat-listed .item-inner .input-wrapper .label-md p		{font-size:16px !important; color:#fff; float:left; width:90%;  }
 .sub-cat-listed .item-inner .input-wrapper                  {border-top:1px solid #fff; border-bottom:none;}
-
+.forgot-pa p												{padding-left:10px; margin-bottom:0px;}
+.forgot-pa .input-md .text-input-md							{width: calc(100% - 8px - 7px);}
 .left-right-side										    {color:#999;float:right;font-size:13px !important;font-weight:normal !important;line-height:25px;margin-right:13px;}
 .sub-cat-listed												{background: linear-gradient(to right, #1f96db 40%, #70c4f1 100%);margin:0px 0px 0px 5px; width:97%; padding-left:0px !important;}
 .error-clr													{font-size:15px !important; font-weight:400 !important; color:red !important;text-align:center !important;}
@@ -411,7 +412,8 @@ ion-app.ios													{font-family: 'Open Sans', sans-serif !important;}
 
 
 /*-------------------------------------Android platform css -------------------------------------*/
-
+.login-btn .fab-md											{ background:#888aef !important; margin-top:10px;}
+.login-btn .fab-ios											{ background:#888aef !important;margin-top:10px;}
 .primary-color 												{color:#1976d2 !important; font-size:15px !important;}
 .card-md p 													{color:#777;font-size:14px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
 														     margin: 0 0 2px;}
@@ -421,8 +423,12 @@ ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !import
 															 font-weight:700;line-height:20px;text-align:left;}
 .my-list-item												{background:#333!important;color:#999 !important;border-bottom:1px solid #444 !important; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);}
 .login-pages .item-ios									    {background:none;}
+.login-pages .item-ios .text-input-ios						{padding:9px 10px 9px 20px !important;}
 .forgot-pass												{background:none !important;  color:#337ab7 !important;font-family: 'Open Sans', sans-serif !important; font-size:15px; }
 .bg-back													{background:none !important; border-bottom:none !important;}
+.bg-back .item-inner .input-wrapper .label-md .forgot-pass	{ font-size:17px !important; margin-top:40px; color:#404996 !important;}
+.bg-back .item-inner .input-wrapper .label-ios .forgot-pass	{ font-size:17px !important; margin-top:10px; color:#404996 !important;}
+.bg-back .item-inner .input-wrapper .label-ios .forgot-pass	{}
 .text-input-wp  											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size: 18px;
 															 font-weight:400; color:#555;}
 .list-ios .item-block .item-inner							{border-bottom:none;}
@@ -430,7 +436,7 @@ page-service-info .service_request							{border:none !important;}
 .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{ border-bottom:none;}
 .liste-name													{font-size:17px !important; font-weight:400; height:25px; padding-left:10px; padding-top:5px;}
 .segment-md 												{border:1px solid #888aef;}
-
+.arrow-bg{ font-size:17px !important;}
 /*-------------------------------------Android platform css end-------------------------------------*/
 
 
@@ -558,9 +564,10 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .card-wp p													{color: #777;font-size:15px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
 															 margin: 0 0 2px;}
 ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !important;}
-.login-pages img.logo										{margin-top:70px;}	
-.login-pages .item-md										{background:none;}										
-.login-pages .item-md										{background:none;}
+.login-pages img.logo										{margin-top:70px; width:90%; margin-left:15px;}	
+.login-pages .item-md										{background:none; padding-left:5px;}	
+.login-pages .item-md .text-input-md						{width: calc(100% - 8px - 11px); color:#333; padding:8px;}									
+
 .forgot-pass 												{background:none !important;box-shadow:none; color:#337ab7 !important;font-family: 'Open Sans', sans-serif !important; margin-top:10px; font-size:15px !important; text-transform:capitalize; }
 .bg-back .item-inner										{background:none !important; border-bottom:none !important;}
 .text-input-wp  											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size: 18px;
