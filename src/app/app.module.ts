@@ -12,7 +12,7 @@ import { NativeAudio } from 'ionic-native';
 import { LoginPage } from '../pages/login/login';
 import { AppConfig } from '../providers/app-config';
 import { LoginUser } from '../providers/login-user';
-// { ConnectionsService } from '../providers/connections-service';
+//import { ConnectionsService } from '../providers/connections-service';
 //import { MessagesService } from '../providers/messages-service';
 //import { JobBoardService } from '../providers/job-board-service';
 //import { ServiceRequestService } from '../providers/service-request-service';

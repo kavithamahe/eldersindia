@@ -69,7 +69,7 @@
     <h2>{{viewComments?.user_name}}</h2>
 
 	 
-    <p class="timedate">{{viewComments?.created_at | date :"MMM dd y"}}</p>
+    <p class="timedate">{{viewComments?.created_at | date :"MMM dd y h:mm a"}}</p>
     <p class="page-down">{{viewComments?.comment}}</p>
 
     	<button ion-button icon-right clear end small item-right *ngIf="user_id==viewComments?.user_id" (click)="deleteComment(viewComments?.id)">

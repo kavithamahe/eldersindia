@@ -57,7 +57,7 @@ export class MyApp {
 
   user_type:any='';
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{myIcon:string, title: string, component: any}>;
 
   constructor(
     public platform: Platform,
@@ -71,7 +71,7 @@ export class MyApp {
       this.user_type = userType;
       console.log("user_type : ", this.user_type);
         if((this.user_type != '') && (this.user_type != null) && (this.user_type == 'sponsor')){
-            this.pages.splice(1, 0, { title: 'Manage Dependents', component: ManagePage });
+            this.pages.splice(1, 0, { myIcon:'fa fa-users', title: 'Manage Dependents', component: ManagePage });
            }
     });
      storage.get('token').then((token) => { this.token=token;})
@@ -98,21 +98,22 @@ export class MyApp {
       }
       console.log(this.pages);
       this.pages.push(
-                          { title: 'Dashboard', component: DashboardPage},
-                          { title: 'Community', component: CommunitylistPage },
-                          { title: 'Connections', component: ConnectionsPage },
-                          { title: 'Job Board', component: JobboardPage },
-                          { title: 'Applied Jobs', component: AppliedJobsPage },
-                          { title: 'Messages', component: MessagesPage },
-                          { title: 'Service Providers', component: ServiceprovidersPage },
-                          { title: 'Service Requests', component: ServicerequestPage },
-                          { title: 'Blogs', component: BlogsPage },
-                          { title: 'News', component: NewsPage },
-                          { title: 'Events', component: EventsPage },
-                          { title: 'Profile', component: MyProfilePage },
-                          { title: 'Change Password', component: ChangePasswordPage },
-                          { title: 'Settings', component: SettingsPage },
-                          { title: 'Logout', component: LogoutPage },
+                  { myIcon:'fa fa-th-large', title: 'Dashboard', component: DashboardPage },
+                  { myIcon:'fa fa-snowflake-o', title: 'Services', component: ServiceprovidersPage },
+                  { myIcon:'fa fa-cogs', title: 'My Service Requests', component: ServicerequestPage },
+                  { myIcon:'fa fa-cubes', title: 'Jobs', component: JobboardPage },
+                  { myIcon:'fa fa-th-list', title: 'Applied Jobs', component: AppliedJobsPage },
+                  { myIcon:'fa fa-recycle', title: 'Communities', component: CommunitylistPage },
+                  { myIcon:'fa fa-sitemap', title: 'Connections', component: ConnectionsPage },
+                  { myIcon:'fa fa-envelope', title: 'Messages', component: MessagesPage },
+                  { myIcon:'fa fa-rss', title: 'Blogs', component: BlogsPage },
+                  { myIcon:'fa fa-newspaper-o', title: 'News', component: NewsPage },
+                  { myIcon:'fa fa-random', title: 'Events', component: EventsPage },
+                  { myIcon:'fa fa-address-book-o', title: 'Profile', component: MyProfilePage },
+                  { myIcon:'fa fa-unlock-alt', title: 'Change Password', component: ChangePasswordPage },
+                  { myIcon:'fa fa-cog', title: 'Settings', component: SettingsPage },
+                  { myIcon:'fa fa-sign-out', title: 'Logout', component: LogoutPage },
+
                       );
 
         this.subscription = userLogin.userEntered$.subscribe(
@@ -120,7 +121,7 @@ export class MyApp {
                           console.log(userData);
                           this.user_logged = userData;
                           if((this.user_logged == 'sponsor')){
-            this.pages.splice(1, 0, { title: 'Manage Dependents', component: ManagePage });
+            this.pages.splice(1, 0, { myIcon:'fa fa-users', title: 'Manage Dependents', component: ManagePage });
            }else{
              for(let i=0; i < this.pages.length;i++){
                if(this.pages[i].title == 'Manage Dependents'){

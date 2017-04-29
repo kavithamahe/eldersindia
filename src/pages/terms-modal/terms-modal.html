@@ -23,8 +23,13 @@
 <ion-card>
   Last updated: February 27, 2017
   <ion-item text-wrap>
-     <p>These Terms of Use set out the terms and conditions under which individuals may use the website or mobile application and access the services offered by CareGuide Inc. ("CareGuide"). These Terms of Use comprise a legal agreement between CareGuide and you, the person accessing and using the website or mobile application ("You" or "User"). CareGuide owns, operates and maintains the CareGuide.com website at careguide.com, other subsidiary websites, including sitter.com (collectively referred to as "Website"), and the Sitter.com mobile application ("App"), Website and App collectively referred to as the "Platform". By downloading, accessing and/or using the Platform, you are deemed to have read Terms of Use and you agree to be bound by the Terms of Use which shall govern your access and use of the Platform and all applicable laws and regulations.
-    </p><br>
+     <p *ngIf(!show_description)>{{description | words : 29 : '...'}} 
+     <button (click)="toggleContent()">view more</button>
+     </p>
+     <p *ngIf(show_description)>{{description}}
+     <button (click)="toggleContent()">view less</button>
+     </p>
+    <br/>
     <p>
     IF YOU DO NOT AGREE TO ALL OF THE TERMS OF USE SET OUT BELOW, YOU MAY NOT ACCESS OR USE THE WEBSITE OR APP, SHOULD NOT CLICK TO ACCEPT THESE TERMS AND SHOULD NOT PROCEED ANY FURTHER.</p>
   </ion-item>
@@ -401,3 +406,46 @@
   </ion-list>
 </ion-card>
 </ion-content>
+<ion-footer>
+  <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
+    
+    <ion-buttons>
+      <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
+        <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
+        <ion-icon class="gly-rotate-180" name="send"></ion-icon>
+        <div style="padding-left: 10px !important;">
+          Back
+        </div>
+      </button>
+      <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()">
+        <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
+        <ion-icon class="gly-rotate-180" name="send"></ion-icon>
+        <div style="padding-left: 10px !important;">
+          Back
+        </div>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="dismiss()">
+        OK
+        <ion-icon name="send"></ion-icon>
+      </button>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="dismiss()">
+        OK
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+<style>
+   .gly-rotate-180 {
+  filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.5);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  display: inline-block;
+}
+</style>

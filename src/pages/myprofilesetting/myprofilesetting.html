@@ -7,24 +7,19 @@
 	    		[hidden]="!myProfile.avatar" >
 			</div> -->
 			<div *ngIf = "name=='true'">
-				<ion-label>Name</ion-label>
-				<ion-input value={{myProfile.name}}></ion-input>
+				<i class="fa fa-user" aria-hidden="true"></i>{{myProfile.name}}
 			</div> 
 			<div *ngIf="birthday=='true'">
-				<ion-label>Birthday</ion-label>
-				<ion-input value={{myProfile.birthday}}></ion-input>
+				<i class="fa fa-birthday-cake" aria-hidden="true"></i>{{myProfile.birthday}}
 			</div>
 			<div  *ngIf="email=='true'">
-				<ion-label>Email</ion-label>
-				<ion-input value={{myProfile.email}}></ion-input>
+				<i class="fa fa-envelope" aria-hidden="true"></i>{{myProfile.email}}
 			</div>
 			<div *ngIf = "location=='true'">
-				<ion-label>Location</ion-label>
-				<ion-input value={{myProfile.location}}></ion-input>
+				<i class="fa fa-map-marker" aria-hidden="true"></i>{{myProfile.location}}
 			</div>
 			<div *ngIf = "mobile=='true'">
-				<ion-label>Mobile</ion-label>
-				<ion-input value={{myProfile.mobile}}></ion-input>
+				<i class="fa fa-map-marker" aria-hidden="true"></i>{{myProfile.mobile}}
 			</div>
 			
 		</div>
