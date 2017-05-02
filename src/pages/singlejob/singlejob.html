@@ -20,10 +20,10 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding class="contect-bg-moblie">
-<ion-card *ngFor="let singleJob of singleJobInfo" style="padding:2px;">
+<div *ngFor="let singleJob of singleJobInfo" style="padding:2px;">
   <ion-list class="job-view">
   <ion-item text-wrap>
- <h2 class="primary-color">{{singleJob?.title}} <span *ngIf="singleJob?.created_at"><i class="fa fa-calendar-o"></i> {{singleJob?.created_at | date :'MMM dd y'}}</span></h2>
+ <h2>{{singleJob?.title}} <span *ngIf="singleJob?.created_at"><i class="fa fa-calendar-o"></i> {{singleJob?.created_at | date :'MMM dd y'}}</span></h2>
 
  <p>{{singleJob?.company_name}}</p>
   </ion-item>
@@ -40,15 +40,31 @@
       <small>Job Description</small>
      <p [innerHtml]="singleJob?.description"></p>
 </ion-grid>
-<hr/>
-<ion-grid>
-  <ion-item style="padding-left:0px !important;"><h2 class="job-summary">Job summary</h2></ion-item>
-  <ion-row>
-    <ion-col width-33><span class="primary-color">Company</span> <br> {{singleJob?.company_name}}</ion-col>
-     <ion-col width-33><span class="primary-color">Location</span> <br>  <span *ngFor="let locations of singleJob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></ion-col>
-      <ion-col width-33><span class="primary-color">Job Type </span> <br> <span *ngFor="let jobType of singleJob?.job_type; let isLast2=last">{{jobType?.name}}{{isLast2 ? '' : ', '}}</span></ion-col>
-  </ion-row>
-</ion-grid>
-</ion-card>
-</ion-content>
 
+<ion-card>
+ <h2 class="job-summary">Job summary</h2>
+
+  <ion-row class="job-listed">
+    <ion-col width-100>
+	<span>Company</span> 
+	<p>{{singleJob?.company_name}}</p>
+	
+	
+	</ion-col>
+	  </ion-row>
+	   <ion-row>
+     <ion-col width-100 class="job-listed">
+	 <span>Location</span>   
+	 <p *ngFor="let locations of singleJob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</p>
+	 </ion-col>
+	  </ion-row>
+	   <ion-row>
+      <ion-col width-100 class="job-listed">
+	  <span>Job Type </span> 
+	  <p *ngFor="let jobType of singleJob?.job_type; let isLast2=last">{{jobType?.name}}{{isLast2 ? '' : ', '}}</p>
+	  </ion-col>
+	   </ion-row>
+</ion-card>
+</div>
+</ion-content>
+<style> p{margin:0px;}</style>

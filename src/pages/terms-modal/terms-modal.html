@@ -19,8 +19,8 @@
 </ion-header>
 
 
-<ion-content padding>
-<ion-card>
+<ion-content padding style="background:#fff;">
+
   Last updated: February 27, 2017
   <ion-item text-wrap>
      <p *ngIf(!show_description)>{{description | words : 29 : '...'}} 
@@ -404,7 +404,7 @@
     </ion-card-content>
     </ion-card>
   </ion-list>
-</ion-card>
+
 </ion-content>
 <ion-footer>
   <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
