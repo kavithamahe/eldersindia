@@ -48,13 +48,13 @@
   </ion-row>
 <ion-list [hidden]="showComment">  
    <form [formGroup]="commentForm">
-  <ion-item>
+  <ion-item style="padding-left:0px;">
     <ion-textarea placeholder="Comment" formControlName="comment"></ion-textarea>
   </ion-item>
   <p *ngIf="!commentForm.controls.comment.valid && (commentForm.controls.comment.dirty || submitAttempt)" class="err-reds">Please enter comment.</p>
   </form>
   <ion-item text-right>
-  <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)" >Submit</button>
+  <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)" class="commend-btn">Submit</button>
   </ion-item>
   <hr/>
   <ion-item *ngFor="let viewComments of viewCommentsList">
