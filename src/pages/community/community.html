@@ -20,7 +20,9 @@
 			<img [src]="imageUrl+communityDetailData?.logo"  
 				[hidden]="!communityDetailData?.logo">
             <strong class="wel-comemem">Welcome to {{communityDetailData?.community_name}}</strong>
-            <em  style="">{{communityDetailData?.description | words : 20 : '...'}}</em>
+            <em  style="" *ngIf(!show_description)>{{communityDetailData?.description | words : 10 : '...'}}<button (click)="toggleContent()">view more</button></em>
+            <em  style="" *ngIf(show_description)>{{communityDetailData?.description}}
+             <button (click)="toggleContent()">view less</button></em>
         </p>
 					
 		<div class="decoration hide-if-responsive"></div>

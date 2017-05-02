@@ -23,6 +23,7 @@ token:string='';
 imageUrl:string;
 allConnectionsInfo:any=[];
 receivedRquestInfo:any=[];
+sentRquestInfo:any=[];
 orgReceivedRquestInfo:any=[];
 connectionStatusInfo:any=[];
 orgAllConnectionsInfo:any=[];
@@ -78,6 +79,28 @@ receivedConnectionScrollLists:any=[];
       this.receivedRquestInfo=receivedRquest.result.info.list.data;
       this.orgReceivedRquestInfo=receivedRquest.result.info.list.data; 
        this.nextPageURL2=receivedRquest.result.info.list.next_page_url;     
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
+    loader.dismiss();
+  }
+   public sentRquest()
+  {    
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.connectionsService.sentRquest().subscribe(
+     (sentRquest) => {
+      this.sentRquestInfo=sentRquest.result.info.list.data;
+         
     },
     (err) => { 
         if(err.status===401)

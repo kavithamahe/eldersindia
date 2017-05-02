@@ -42,6 +42,11 @@ user_id:any;
     return this.http.post(this.rootUrl+'receiveConnectionRequest',_request,this.options)
       .map(res => res.json()); 
   }
+  sentRquest(){
+     let _request= {"searchValue":""};
+    return this.http.post(this.rootUrl+'getSentRequestLists',_request,this.options)
+      .map(res => res.json()); 
+  }
   connectionStatus(connectionId,status) {  
    let _request= {"conn_req__id":connectionId,"approve_status":status};
     return this.http.post(this.rootUrl+'sendResponse',_request,this.options)
