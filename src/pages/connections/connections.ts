@@ -17,6 +17,7 @@ import { ConnectionsService } from '../../providers/connections-service';
   providers:[ConnectionsService]
 })
 export class ConnectionsPage {
+getconnections:string;
 connections:string;  
 messages:any;
 token:string='';
@@ -24,6 +25,7 @@ imageUrl:string;
 allConnectionsInfo:any=[];
 receivedRquestInfo:any=[];
 sentRquestInfo:any=[];
+addConnectionInfo:any=[];
 orgReceivedRquestInfo:any=[];
 connectionStatusInfo:any=[];
 orgAllConnectionsInfo:any=[];
@@ -32,9 +34,14 @@ nextURL;any;
 user_id:any;
 nextPageURL1:any='';
 nextPageURL2:any='';
+nextPageURL3:any='';
+nextPageURL4:any='';
+connect_name:any;
+
 allConnectionScrollLists:any=[];
 receivedConnectionScrollLists:any=[];
    constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public connectionsService:ConnectionsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
+    this.getconnections="myConnections";
     this.connections="all";
     this.messages="inbox";
     this.storage.ready().then(() => {
@@ -100,8 +107,31 @@ receivedConnectionScrollLists:any=[];
     this.connectionsService.sentRquest().subscribe(
      (sentRquest) => {
       this.sentRquestInfo=sentRquest.result.info.list.data;
-         
+      this.nextPageURL4=sentRquest.result.info.list.next_page_url;     
+  
     },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
+    loader.dismiss();
+  }
+    public addConnectionsList()
+  {    
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.connectionsService.getAllConnectionList().subscribe(
+     (addConnectionsList) => {
+      this.addConnectionInfo=addConnectionsList.result.info.data;
+      this.nextPageURL3=addConnectionsList.result.info.next_page_url;
+        },
     (err) => { 
         if(err.status===401)
         {
@@ -144,7 +174,35 @@ receivedConnectionScrollLists:any=[];
         this.allConnectionsInfo= searchConnection.result.info.list.data;
       });
   }
-
+  public search1(Event) {
+    let term = Event.target.value;
+      this.connectionsService.addsearchConnection(term).subscribe(searchConnections => {
+        this.addConnectionInfo= searchConnections.result.info.data;
+      });
+  }
+ public connectMember(connect_id,connect_name){
+   let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.connectionsService.sendConnectionRequest(connect_id,connect_name).subscribe(
+     (connectionMember) => {
+       this.showToaster(connectionMember);
+       this.addConnectionsList();
+       
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+       
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
+    loader.dismiss();
+ }
   public doInfinite2(infiniteScroll) {
     setTimeout(() => {      
       if(this.nextPageURL2!=null && this.nextPageURL2!='')
@@ -226,6 +284,84 @@ receivedConnectionScrollLists:any=[];
         }
       
        this.nextPageURL1=allConnectionScroll.result.info.list.next_page_url;   
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
+  }
+   doInfinite3(infiniteScroll) {
+      console.log(this.allConnectionsInfo);
+    setTimeout(() => {      
+      if(this.nextPageURL3!=null && this.nextPageURL3!='')
+      {
+       this.addConnectionScroll();
+      }
+      else{
+        infiniteScroll.enable(false);
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
+  addConnectionScroll()
+  {
+   
+     this.connectionsService.addConnectionScroll(this.nextPageURL3).subscribe(
+     (addConnectionScroll) => {
+      this.allConnectionScrollLists=addConnectionScroll.result.info.data;  
+      // console.log(this.allConnectionScrollLists);
+      for (let i = 0; i < Object.keys(this.allConnectionScrollLists).length; i++) {
+        this.addConnectionInfo.push(this.allConnectionScrollLists[i]);
+        // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
+        }
+      
+       this.nextPageURL3=addConnectionScroll.result.info.next_page_url;   
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
+  }
+   doInfinite4(infiniteScroll) {
+      console.log(this.allConnectionsInfo);
+    setTimeout(() => {      
+      if(this.nextPageURL4!=null && this.nextPageURL4!='')
+      {
+       this.sentRequestScroll();
+      }
+      else{
+        infiniteScroll.enable(false);
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
+  sentRequestScroll()
+  {
+   
+     this.connectionsService.sentRequestScroll(this.nextPageURL4).subscribe(
+     (sentRequestScroll) => {
+      this.allConnectionScrollLists=sentRequestScroll.result.info.list.data;  
+      // console.log(this.allConnectionScrollLists);
+      for (let i = 0; i < Object.keys(this.allConnectionScrollLists).length; i++) {
+        this.sentRquestInfo.push(this.allConnectionScrollLists[i]);
+        // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
+        }
+      
+       this.nextPageURL4=sentRequestScroll.result.info.list.next_page_url;   
     },
     (err) => { 
         if(err.status===401)

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
+    <ion-title text-center>
       Comments
     </ion-title>
     <ion-buttons start>
@@ -28,14 +28,14 @@
 	  			</ion-item>
 	  			<ion-item>
 	    		 	<p item-text-wrap [innerHTML]="comment.comments | emojis"></p>
-	    		 </ion-item>
+	    		</ion-item>
 	  				<button *ngIf="comment.uid == user_id" ion-button (click)="showConfirm(comment.comments_id)" 
 			      	color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
   			
 						<button ion-button clear (click)="reply(j)">
 							<i class="fa fa-reply" aria-hidden="true"></i>
 						</button>
-						<button ion-button item-right clear 
+						<button *ngIf="comment.comment_reply[0] != null" ion-button item-right clear 
 						(click)="showComments(j)">view replies
 						</button>
 					
@@ -56,6 +56,8 @@
 				      			 	<p class="tim e-datem">{{reply.created_at}}</p>
 				      				<p item-text-wrap [innerHTML]="reply.comments_replay | emojis"></p>	
 							    </ion-item>
+							   <!--  <button *ngIf="reply.uid == user_id" ion-button (click)="showConfirm(reply.comments_id)" 
+			      	color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button> -->
 						    
 		      				<button ion-button clear (click)="replyComments(i)">
 								<i class="fa fa-reply" aria-hidden="true"></i>

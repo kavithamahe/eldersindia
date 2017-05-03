@@ -1,26 +1,38 @@
 
-<ion-content>
 
-		<div>
-			<!-- <div *ngIf="avatar=='true'">
-				<img class="pro-imgs"[src]="imageUrl+myProfile.avatar"  
-	    		[hidden]="!myProfile.avatar" >
-			</div> -->
-			<div *ngIf = "name=='true'">
-				<i class="fa fa-user" aria-hidden="true"></i>{{myProfile.name}}
-			</div> 
-			<div *ngIf="birthday=='true'">
+<ion-content padding>
+<ion-card>
+<ion-card-header text-center>
+{{myProfile.name}}
+</ion-card-header><hr>
+<ion-card-content *ngIf="profile == 'true'">
+			<ion-item *ngIf="birthday=='true'">
 				<i class="fa fa-birthday-cake" aria-hidden="true"></i>{{myProfile.birthday}}
-			</div>
-			<div  *ngIf="email=='true'">
+			</ion-item>
+			<ion-item  *ngIf="email=='true'">
 				<i class="fa fa-envelope" aria-hidden="true"></i>{{myProfile.email}}
-			</div>
-			<div *ngIf = "location=='true'">
+			</ion-item>
+			<ion-item *ngIf = "location=='true'">
 				<i class="fa fa-map-marker" aria-hidden="true"></i>{{myProfile.location}}
-			</div>
-			<div *ngIf = "mobile=='true'">
+			</ion-item>
+			<ion-item *ngIf = "mobile=='true'">
 				<i class="fa fa-map-marker" aria-hidden="true"></i>{{myProfile.mobile}}
-			</div>
-			
-		</div>
+			</ion-item>
+
+</ion-card-content>
+<ion-card-content *ngIf="profile == 'false'">
+	<ion-item>
+		<h2>User Profile is Restricted</h2>
+	</ion-item>
+</ion-card-content>
+
+</ion-card>
+
+	
 </ion-content>
+
+<style>
+	.item-md{
+		    padding-left: 0 !important;
+	}
+</style>
