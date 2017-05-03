@@ -4,7 +4,6 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<div class="ion-modal modal-popups">
 <ion-header>
 <ion-toolbar class="hei-head">
     <ion-title color="primary" class="tittles-md">
@@ -20,7 +19,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="popup-mds" style=" background:#fff !important;">
 
         <div *ngIf(showServiceOffered)>
           <ion-item *ngFor = "let service of vendorList.serviceOffered">
@@ -102,7 +101,7 @@
 <ion-footer>
   <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
     
-    <ion-buttons>
+    <ion-buttons end>
       <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
         <ion-icon class="gly-rotate-180" name="send"></ion-icon>
@@ -118,21 +117,13 @@
         </div>
       </button>
     </ion-buttons>
-
-    <ion-buttons end>
-      <button ion-button color="royal" large icon-right showWhen="ios" (click)="dismiss()">
-        OK
-        <ion-icon name="send"></ion-icon>
-      </button>
-      <button ion-button color="light" large icon-right hideWhen="ios" (click)="dismiss()">
-        OK
-        <ion-icon name="send"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-footer>
-</div>
 <style>
+.item-md													{background:none !important;}
+ion-content{ background:none !important;}
+.scroll-content{overflow-y:hidden !important;}
+
   .gly-rotate-180 {
   filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.5);
   -webkit-transform: rotate(180deg);
