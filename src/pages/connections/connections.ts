@@ -185,7 +185,7 @@ receivedConnectionScrollLists:any=[];
     loader.present();
     this.connectionsService.sendConnectionRequest(connect_id,connect_name).subscribe(
      (connectionMember) => {
-       this.showToaster(connectionMember);
+       this.showToaster(connectionMember.result.info);
        this.addConnectionsList();
        
     },
