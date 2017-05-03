@@ -75,7 +75,7 @@ export class CommunityprofilePage {
       this.profile_uid=navParams.get("profile_uid");
       this.profileCommunity(this.profile_uid);
       this.memberProfile(this.profile_uid);
-      this.getPrivacy(this.profile_uid)
+      this.getPrivacy(this.profile_uid);
         loader.dismiss();
         this.addComments=false;
         this.itemComments=false;
@@ -95,6 +95,7 @@ export class CommunityprofilePage {
       loader.present();
       this.profileCommunity(id);
       this.memberProfile(id);
+      this.getPrivacy(id);
       this.addComments=false;
       this.itemComments=false;
       loader.dismiss();
