@@ -47,7 +47,8 @@
             <ion-col width-80  style="padding: 0px !important">
               <ion-row>
                 <ion-col width-70 style="padding: 0px !important">
-                <h2><strong>{{veiwMessagesInfo?.sender_name}}</strong></h2>
+                <h2 *ngIf="viewType=='inbox'"><strong>{{veiwMessagesInfo?.sender_name}}</strong></h2>
+                <h2 *ngIf="viewType=='sent'"><strong>{{veiwMessagesInfo?.receiver_name}}</strong></h2>
                 </ion-col>
               </ion-row>
               <ion-row style="padding-left: 5px !important;">
