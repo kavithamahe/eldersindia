@@ -241,7 +241,7 @@ overflow: hidden;}
 .btn-infos												    {background-color:#fe7fe6;border-color:#46b8da;color:#fff;font-size:13px !important;text-transform:capitalize;}
 .info													    {font-size:13px !important;text-transform:capitalize !important;}
 .btn-defaults												{background-color:#ccc !important;border-color:#333;color:#666;font-size:13px !important;text-transform:capitalize; margin-top:10px; margin-right:10px; float:right;}
-.btn-primarys												{background-color:#337AB7 !important;border-color:#333;color:#fff;font-size:13px !important;text-transform:capitalize;margin-top:10px; float:right;margin-right:10px;}
+.btn-primarys												{background-color:#888aef !important; border-color:#333;color:#fff;font-size:14px !important;text-transform:capitalize;margin-top:10px; float:right;margin-right:10px;}
 .toolbar-background-md										{background:#337ab7; }
 .ion-modal													{left:0px !important; background:#F8F8FF; margin-top:0px;}
 page-modal-page ion-input									{border:none !important;}
@@ -353,7 +353,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .job-view .item-md											{padding-left:0px !important;}
 .job-view .item-md .item-inner .input-wrapper .label-md		{margin:0px;text-indent:0px;}
 .job-view .item-md .item-inner .input-wrapper .label-md	h2	{font-size:18px !important; padding-bottom:0px;}
-.job-view .item-md .item-inner .input-wrapper .label-md	p	{font-size:17px !important; padding-bottom:0px; width:100%;}
+.job-view .item-md .item-inner .input-wrapper .label-md	p	{font-size:16px !important; padding-bottom:0px; width:100%;}
 .job-view .item-md .item-inner .input-wrapper .label-md span{font-size:12px !important; color:#979A9A;  float:right; padding-top:5px;}
 .location-catlist											{  background:#4ec2ff;}
 .location-catlist .item-inner .input-wrapper .label-md		{font-size:18px !important; text-align:left; color:#434248;}
@@ -368,7 +368,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .forgot-pa p												{padding-left:10px; margin-bottom:0px;}
 .forgot-pa .input-md .text-input-md							{width: calc(100% - 8px - 7px);}
 .left-right-side										    {color:#404998;float:right;font-size:13px !important;font-weight:normal !important;line-height:25px;margin-right:13px;}
-.sub-cat-listed												{background:rgba(136, 138, 239, 0.85);margin:0px 0px 0px 5px; width:97%; padding-left:0px !important;}
+.sub-cat-listed												{background:#888aef;margin:0px 0px 0px 5px; width:97%; padding-left:0px !important;}
 .error-clr													{font-size:15px !important; font-weight:400 !important; color:red !important;text-align:center !important;}
 .error-clr i.unlink 												{ font-size:17px; color:#1D6AB2;}
 .send-req													{ width:50%; margin-left:10px; margin-bottom:10px;}
@@ -432,7 +432,7 @@ ion-app.ios													{font-family: 'Open Sans', sans-serif !important;}
 .login-btn .fab-md											{ background:#888aef !important; margin-top:10px;}
 .login-btn .fab-ios											{ background:#888aef !important;margin-top:10px;}
 .primary-color 												{color:#1976d2 !important; font-size:15px !important;}
-.card-md p 													{color:#777;font-size:14px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
+.card-md p 													{color:#777;font-size:16px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
 														     margin: 0 0 2px;}
 ion-app.md													{font-family: 'Open Sans', sans-serif !important; }
 ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !important;}
@@ -577,7 +577,7 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
     font-size:17px !important;
     padding-bottom: 10px;
 }
-.btn-right													{float:right;margin-right:10px;}
+.btn-right													{float:right;margin-right:10px; background:#888aef;}
 .job-view .item-ios .item-inner .input-wrapper .label-ios span{font-size:12px !important; color:#777;  float:right; padding-top:5px;}
 .label-opc .item-ios .item-inner .input-wrapper .label-ios  {color:#1d6ab2;font-size:19px;font-weight:400;line-height:25px;margin:0 !important;padding-left:8px;padding-top:0;text-indent:0px !important;} 
 /*-------------------------------------ios platform css end-------------------------------------*/
@@ -687,8 +687,8 @@ padding-left:0px !important;
 .mar-top													{margin-top:10px;}
 .timedate													{font-size:13px !important; color:#A9A9A9 !important; text-indent:0px !important;}
 .pro-info													{padding-top:10px;}
-.userioc													{border-right:1px dashed #D8BFD8; color:#FA8072;font-size:15px;height:25px;line-height:25px; text-align:center;width:25px;}
-.listed-det p												{font-size:15px !important; color:#1E90FF; font-weight:400 !important;border: 1px dashed #D8BFD8; margin-bottom:10px;}
+.userioc													{border-right:1px dashed #D8BFD8; color:#fe7fe6;font-size:17px;height:25px;line-height:25px; text-align:center;width:25px;}
+.listed-det p												{font-size:17px !important; color:#3d4993; font-weight:400 !important;border: 1px dashed #cecece; margin-bottom:10px;}
 .title														{ font-size:15px !important; color:#FA8072 !important;}
 ion-select													{max-width:100% !important;}
 .liste-names 												{font-size:16px !important;font-weight: 400;height:30px;padding-left: 10px;padding-top: 5px;}
@@ -710,10 +710,32 @@ white-space: normal;}
 .job-view .item-ios .item-inner .input-wrapper .label-ios	p	{font-size:17px !important; padding-bottom:0px; width:100%;}
 .job-view .item-ios .item-inner .input-wrapper .label-ios span{font-size:13px !important; color:#979A9A;  float:right; padding-top:5px;}
 .applyJob-btn			{float:right; margin-right:5px; width:97%;}
-.job-descriptions small{ width:100%; font-size:18px;color:#424999;}
+.inbox-sends .item-md	{ padding-left:5px;}
+.inbox-sends .item-md .item-inner .input-wrapper .label-md{ margin-top:8px; margin-bottom:8px; line-height:10px !important;}
+.send-box-content ion-row > ion-col > small{ font-size:18px !important; color:#404994 !important; font-weight:400; line-height:5px important;}
+.send-box-content ion-row > ion-col > b{ font-size:15px !important; color:#555 !important; font-weight:400; line-height:5px important;}
+.send-box-content ion-row > ion-col > span{ font-size:14px !important; color:#666 !important; font-weight:400; line-height:5px important;}
+.send-box-content ion-row > ion-col > p{ font-size:11px;}
+.job-descriptions small{ width:100%; font-size:18px;color:#555;}
 .job-descriptions span{ width:100%; font-size:16px; color:#777;}
-.job-descriptions p{ width:100%; font-size:15px; color:#777;}
-.job-summary{ font-size:18px !important; color:#483D8B !important; border-bottom:1px solid rgba(0, 0, 0, 0.08); width:100%; text-align:center; padding:10px;}
+.job-descriptions p{ width:100%; font-size:14px; color:#777; padding-bottom:5px; padding-top:3px;}
+
+.inbox-sends .item-ios	{ padding-left:5px !important;}
+.inbox-sends .item-ios .item-inner .input-wrapper .label-ios{ margin-top:8px; margin-bottom:8px; line-height:10px !important;}
+.send-box-content ion-row > ion-col > small{ font-size:18px !important; color:#404994 !important; font-weight:400; line-height:5px important;}
+.send-box-content ion-row > ion-col > b{ font-size:15px !important; color:#555 !important; font-weight:400; line-height:5px important;}
+.send-box-content ion-row > ion-col > span{ font-size:14px !important; color:#666 !important; font-weight:400; line-height:5px important;}
+.send-box-content ion-row > ion-col > p{ font-size:11px;}
+
+
+
+
+.job-summary{ font-size:18px !important; color:#424999 !important; background:#fff; width:100%; text-align:left;  margin:0px; padding-left:10px; padding-bottom:8px;}
+
+
+
+
+
 .listing { padding-left:0px; font-size:16px !important; color:#777;}
 .select-brddd{   border: 1px solid #ccc !important;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
@@ -727,7 +749,8 @@ white-space: normal;}
 	.button-ios-orange{ background:#888aef !important}
 /*-------------------------------------ios platform css end-------------------------------------*/
 /*-------------------------------------Android platform css -------------------------------------*/
-.job-listed span{ color:#888aef;font-size:17px; }
+.job-listed span{ color:#333;font-size:17px; float:left; width:130px; }
+.job-listed i{ font-size:17px; color:#444; width:20px; line-height:22px;}
 .badge-md-primary{ background:#BDB76B; color:#fff; font-weight:600;}
 .badge-md-green{ background:#6495ED; font-weight:600;}
 
