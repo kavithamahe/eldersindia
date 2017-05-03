@@ -43,6 +43,7 @@ export class CommunityprofilePage {
     videoUrl:any;
     communityProfile:any;
     communityProfileData:any;
+    getPrivacyLists:any;
     getCommunityMembers:any;
     base64Image:any;
     status:any;
@@ -58,6 +59,8 @@ export class CommunityprofilePage {
     emojiId:number=0;
     community: String = "activity";
     isAndroid: boolean = false;
+    connection:any="true";
+    profile:any="true";
 
   constructor(public nav: NavController,public platform: Platform, public storage:Storage,public popoverCtrl: PopoverController, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
         this.isAndroid = platform.is('android');
@@ -72,6 +75,7 @@ export class CommunityprofilePage {
       this.profile_uid=navParams.get("profile_uid");
       this.profileCommunity(this.profile_uid);
       this.memberProfile(this.profile_uid);
+      this.getPrivacy(this.profile_uid)
         loader.dismiss();
         this.addComments=false;
         this.itemComments=false;
@@ -208,6 +212,26 @@ export class CommunityprofilePage {
     this.communityServices.showErrorToast(err);
   })
 
+  }
+  getPrivacy(user_id){
+      this.communityServices.getPrivacy(user_id).subscribe(users => {
+      let Privacy = users.result[0];
+       if(Privacy != null){
+     
+       
+       this.connection = Privacy.privacy_connection;
+       console.log("connection"+ this.connection);
+    
+       this.profile = Privacy.privacy_profile;
+       
+       }
+       console.log("Privacy" + Privacy);
+
+  },
+   err =>{
+    
+    this.communityServices.showErrorToast(err);
+  })
   }
   Communities(id){
     this.communityServices.getCommunityMembers(id).subscribe(users => {
