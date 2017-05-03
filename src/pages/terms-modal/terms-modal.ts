@@ -59,7 +59,7 @@ show_details:any=null;
   }
 
   dismiss(){
-this.viewCtrl.dismiss("");
+this.viewCtrl.dismiss("dismiss");
   }
 
 }

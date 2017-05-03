@@ -13,6 +13,8 @@ import { CommunityServices } from '../../providers/community-services';
   providers:[CommunityServices]
 })
 export class ManagePage {
+show_option:boolean =false;
+
   manageLists:boolean;
   managesLists:boolean;
   manages:any;
@@ -27,7 +29,8 @@ export class ManagePage {
    this.nav=nav;  
            
     }
-   showConfirm(DeleteId) {
+   showConfirm() {
+     let DeleteId = this.manage_elder.id;
     let confirm = this.alertCtrl.create({
      subTitle: 'Confirm Deletion',
       buttons: [
@@ -54,6 +57,20 @@ export class ManagePage {
      })
       loader.dismiss();
    }
+manage_elder:any;
+
+   showOptions(user){
+     this.manage_elder = user;
+     console.log("options are pressed");
+     if(this.show_option == false){
+       this.show_option = true;
+     }
+   }
+   closeOption(){
+     if(this.show_option == true){
+       this.show_option = false;
+     }
+   }
 
   toggleDetails(event) {
      
@@ -71,7 +88,8 @@ export class ManagePage {
   }
  
 
-  editElder(elder){
+  editElder(){
+    let elder = this.manage_elder;
     let data={"fuctionality":"edit","editData":elder};
     this.nav.push(EldersPage,data);
   }
