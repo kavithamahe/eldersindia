@@ -13,14 +13,16 @@ import { CommunityServices } from '../../providers/community-services';
 })
 export class MyprofilesettingPage {
 	member_data:any;
-	avatar:any;
-	birthday:any;
-	email:any;
-	location:any;
-	mobile:any;
-	name:any;
+	avatar:any="true";
+	birthday:any="true";
+	email:any="true";
+	location:any="true";
+	mobile:any="true";
+	name:any="true";
 	imageUrl:any;
 	token:any;
+  connection:any="true";
+  profile:any="true";
 
   constructor(public navCtrl: NavController, public storage:Storage, public communityServices: CommunityServices, public navParams: NavParams, public viewCtrl: ViewController) {
  	 this.storage.ready().then(() => {
@@ -44,13 +46,22 @@ export class MyprofilesettingPage {
   	 this.communityServices.getPrivacy(this.member_data).subscribe(users => {
       
        let Privacy = users.result[0];
-       // this.avatar = Privacy.privacy_avatar;
+       if(Privacy != null){
+          // this.avatar = Privacy.privacy_avatar;
        this.birthday = Privacy.privacy_birthday;
+       this.connection = Privacy.privacy_connection;
        this.email = Privacy.privacy_email;
        this.location = Privacy.privacy_location;
        this.mobile = Privacy.privacy_mobile;
        this.name = Privacy.privacy_name;
+       this.profile = Privacy.privacy_profile;
+
        console.log(this.location);
+       }
+      // else{
+     //       this.communityServices.showToast("No Data");
+
+     // } 
       
       },
    err =>{

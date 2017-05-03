@@ -49,6 +49,7 @@ export class CommunityPage {
     eventScrollLists:any;
     emojiId:number=0;
     viewMore:boolean=false;
+    show_description:any;
     
   constructor(public platform: Platform,public modal: ModalController, public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices,public popoverCtrl: PopoverController ) {
     this.nav=nav;
@@ -58,16 +59,16 @@ export class CommunityPage {
       storage.get('token').then((token) => { this.token=token; });
     });
 
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
+    // let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    // loader.present();
     
-    this.community_id=navParams.get("community_id");
-        this.communityList(this.community_id);
-        this.communityDetail(this.community_id);
-        this.addComments=false;
-        this.itemComments=false;
-        loader.dismiss();
-        this.userType="sponsor";
+    // this.community_id=navParams.get("community_id");
+    //     this.communityList(this.community_id);
+    //     this.communityDetail(this.community_id);
+    //     this.addComments=false;
+    //     this.itemComments=false;
+    //     loader.dismiss();
+    //     this.userType="sponsor";
 
 }
 
@@ -91,7 +92,13 @@ console.log("URL is ",metalink_url);
 
         });
   }
-
+toggleContent(){
+    if(this.show_description == false){
+      this.show_description = true;
+    }else{
+      this.show_description = false;
+    }
+  }
   accessGallery(){
    Camera.getPicture({
      sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
@@ -355,6 +362,19 @@ doInfinite(infiniteScroll) {
    
     this.communityServices.showErrorToast(err);
   });
+  }
+
+  ionViewWillEnter(){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    
+    this.community_id=this.navParams.get("community_id");
+        this.communityList(this.community_id);
+        this.communityDetail(this.community_id);
+        this.addComments=false;
+        this.itemComments=false;
+        loader.dismiss();
+        this.userType="sponsor";
   }
 
   }
