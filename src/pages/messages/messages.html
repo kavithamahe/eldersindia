@@ -25,7 +25,7 @@
 </ion-header>
 
 
-<ion-content padding class="contect-bg-moblie">
+<ion-content padding style="background:#fff;">
 <div padding>
   <ion-segment [(ngModel)]="messages">
     <ion-segment-button value="inbox" color="orange" (click)="onInit()">
@@ -54,7 +54,7 @@
   </ion-row>
   </ion-card> -->
   <ion-card *ngFor="let sent of sentInfo" (click)="viewMessages(sent?.id,'sent')">
-      <ion-item-sliding>
+      <ion-item-sliding class="inbox-sends">
         <ion-item>
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
@@ -63,17 +63,19 @@
             </ion-avatar>
             </ion-col>
           
-            <ion-col width-80  style="padding: 0px !important">
+            <ion-col width-80  class="send-box-content" style="padding: 0px !important">
               <ion-row>
                 <ion-col width-70 style="padding: 0px !important">
-                <h2><strong>{{sent?.name}}</strong></h2>
+                <small>{{sent?.name}}</small>
                 </ion-col>
                 <ion-col width-30 style="text-align-last: end; padding: 0px !important">
-                <p>{{sent?.created_at | date :'MM/dd/yy'}}</p>
+                <p><i class="fa fa-calendar-o"></i>  {{sent?.created_at | date :'MM/dd/yy'}}</p>
                 </ion-col>
               </ion-row>
               <ion-row *ngIf="sent.subject">
-              subject :  <h3>{{sent?.subject | words : 10 : '...'}}</h3>
+			  <ion-col style="padding: 0px !important"><b>Subject :</b>
+              <span>{{sent?.subject | words : 10 : '...'}}</span>
+			    </ion-col>
               </ion-row>
             </ion-col>
           </ion-row>
@@ -111,7 +113,7 @@
    </ion-col></ion-row>
   </ion-card> -->
       <ion-card *ngFor="let inbox of inboxInfo" (click)="viewMessages(inbox?.id,'inbox')">
-      <ion-item-sliding>
+      <ion-item-sliding class="inbox-sends">
         <ion-item>
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
@@ -120,17 +122,18 @@
             </ion-avatar>
             </ion-col>
           
-            <ion-col width-80  style="padding: 0px !important">
+            <ion-col width-80  style="padding: 0px !important" class="send-box-content">
               <ion-row>
                 <ion-col width-70 style="padding: 0px !important">
-                <h2><strong>{{inbox?.author_name}}</strong></h2>
+                <small>{{inbox?.author_name}}</small>
                 </ion-col>
                 <ion-col width-30 style="text-align-last: end; padding: 0px !important">
-                <p>{{inbox?.created_at | date :'MM/dd/yy'}}</p>
+                <p><i class="fa fa-calendar-o"></i> {{inbox?.created_at | date :'MM/dd/yy'}}</p>
                 </ion-col>
               </ion-row>
               <ion-row *ngIf="inbox.subject">
-              subject :  <h3>{{inbox?.subject | words : 10 : '...'}}</h3>
+			    <ion-col style="padding: 0px !important"><b>Subject :</b>  <span>{{inbox?.subject | words : 10 : '...'}}</span>
+			    </ion-col>
               </ion-row>
             </ion-col>
           </ion-row>
@@ -138,11 +141,11 @@
         <ion-item-options side="right">
           <button ion-button color="primary">
             <ion-icon name="trash"></ion-icon>
-            Delete
+          
           </button>
           <button ion-button color= red>
             <ion-icon name="call"></ion-icon>
-            Call
+         
           </button>
         </ion-item-options>
       </ion-item-sliding>
