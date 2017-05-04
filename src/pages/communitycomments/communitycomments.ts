@@ -20,7 +20,7 @@ posts:any;
 post_comments = [];
 post_id:any;
 post_profile_id:any;
-reply_comment:any;
+reply_comment:any="";
 Reply:any;
 showReply:any;
 replyBlock:any;
