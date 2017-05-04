@@ -13,7 +13,7 @@
     <ion-title text-center>Manage Dependents</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding style="background:#F3F7FF;">
+<ion-content padding style="background:#F3F7FF;" (tap)="closeOption()">
   
  <div>
   <ion-fab  right top>
@@ -31,14 +31,14 @@
         <ion-card class="des-card">
         <ion-row>
         <ion-col width-75>
-         <button ion-button color="dark" clear (click)="toggleDetails(i)" style="margin:0px!important;">
+         <button ion-button color="dark" clear (press)="showOptions(manage)" (tap)="toggleDetails(i)" style="margin:0px!important;">
          <i class="fa fa-user name-person"></i><p name="person" class="name-elder">{{manage.relation}}<p>
           </button>
           </ion-col>
-          <ion-col width-25>
+          <!-- <ion-col width-25>
           <button ion-button (click)="editElder(manage)" color="dark" clear style="padding:2px;"><i class="fa fa-pencil-square-o edit-eld" name="create"></i></button>
 		  <button ion-button (click)="showConfirm(manage.id)" color="dark" clear style="padding:2px;"><i class="fa fa-trash-o trash-del" name="trash"></i></button>
-          </ion-col>
+          </ion-col> -->
           </ion-row>
         </ion-card>
       
@@ -63,6 +63,15 @@
   
      
   </ion-content>
+  <ion-footer *ngIf(show_option)>
+  <ion-item>
+          <button ion-fab mini item-right (click)="editElder()" color="dark" clear style="padding:2px;"><i class="fa fa-pencil-square-o edit-eld" name="create"></i></button>
+          <!-- </ion-fab>
+          <ion-fab>
+ -->      <button ion-fab mini item-left (click)="showConfirm()" color="dark" clear style="padding:2px;"><i class="fa fa-trash-o trash-del" name="trash"></i></button>
+      </ion-item>
+          
+  </ion-footer>
   <style>
 .button-ios{margin:0px !important;}
   
