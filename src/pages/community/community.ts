@@ -40,7 +40,7 @@ export class CommunityPage {
     user:any;
     communityDetailData:any;
     members:any;
-    base64Image:any;
+    base64Image:any="";
     isJoined:any;
     show_member:any;
     token:any;
