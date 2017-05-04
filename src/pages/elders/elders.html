@@ -15,15 +15,16 @@
 </ion-header>
 
 <ion-content style=" background:#fff;">
+<div class="add-depentsform">
  <form [formGroup]="authForm">
     <ion-row *ngIf="functionality != 'profileEdit'">
-      <ion-col>
+      <ion-col class="title-depen">
         <div class="personal-d"><p>Personal Details</p></div>
       </ion-col>
     </ion-row>
 
   <hr *ngIf="functionality != 'profileEdit'" />
-   <ion-label class="liste-edit">Relationship</ion-label>
+   <ion-label>Relationship</ion-label>
         <ion-item>
          
             <ion-select class="select-brd"  [(ngModel)]="elder_relation"   
@@ -31,7 +32,7 @@
                 <ion-option  *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
             </ion-select>
         </ion-item>
-		  <ion-label class="liste-edit">Elder Name</ion-label>
+		  <ion-label>Elder Name</ion-label>
       <ion-item>
       
             <ion-input  type="text" formControlName="elder_name"
@@ -41,14 +42,14 @@
           <small *ngIf="!authForm.controls.elder_name.valid  && (authForm.controls.elder_name.dirty)">
                   <p class="valid err-reds">Please enter name</p>
           </small> 
-		  <ion-label class="liste-edit">Services</ion-label>
+		  <ion-label>Services</ion-label>
           <ion-item>
               
                 <ion-select class="select-brd" [(ngModel)]="elder_service"  [ngModelOptions]="{standalone: true}">
                     <ion-option *ngFor="let service of in_service" value={{service.value}}>{{service.label}}</ion-option>
                 </ion-select>
           </ion-item>
-		   <ion-label class="liste-edit">Number</ion-label>
+		   <ion-label>Number</ion-label>
             <ion-item>
               <ion-input type="text" formControlName="elder_number"
                   [class.invalid]="!authForm.controls.elder_number.valid && (authForm.controls.elder_number.dirty)"  value={{elder_number}}>
@@ -57,12 +58,12 @@
               <small  *ngIf="!authForm.controls.elder_number.valid  && (authForm.controls.elder_number.dirty)">
                 <p class="valid err-reds">Please enter number</p>
               </small>
-			    <ion-label class="liste-edit">Date Of Birth</ion-label>
+			    <ion-label>Date Of Birth</ion-label>
          <ion-item>
           
               <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" [(ngModel)]="elder_dob" [ngModelOptions]="{standalone: true}"></ion-datetime>
           </ion-item>  
-          <ion-label class="liste-edit">Address</ion-label>
+          <ion-label>Address</ion-label>
 		    <ion-item>  
               <ion-input type="text" formControlName="elder_address"
                 [class.invalid]="!authForm.controls.elder_address.valid && (authForm.controls.elder_address.dirty)" value={{elder_address}}>
@@ -71,7 +72,7 @@
           <small *ngIf="!authForm.controls.elder_address.valid  && (authForm.controls.elder_address.dirty)">
                 <p class="valid err-reds">Please enter address</p>
           </small>
-		   <ion-label class="liste-edit">Loaction</ion-label>
+		   <ion-label>Loaction</ion-label>
           <ion-item>
            
               <ion-select  class="select-brd" [(ngModel)]="elder_location"  [ngModelOptions]="{standalone: true}">
@@ -85,8 +86,9 @@
             </ion-col>
           </ion-row>
 		  	<hr/>
-             <ion-col  *ngFor="let item of emergency_list; let i=index">
-			  <ion-label class="liste-edit">{{emergency_name[i]}}</ion-label>
+             <div  *ngFor="let item of emergency_list; let i=index">
+			  <!--<ion-label>{{emergency_name[i]}}</ion-label>-->
+			    <ion-label>Select here </ion-label>
             <ion-item>
               <ion-select class="select-brd" placeholder="select" [(ngModel)]="emergency_name[i]"  
                 [ngModelOptions]="{standalone: true}">
@@ -96,7 +98,7 @@
                     <ion-option value="son">Son</ion-option>
               </ion-select>
             </ion-item>
-            <ion-label class="liste-edit">Number</ion-label>
+            <ion-label>Number</ion-label>
 			   <ion-item>
               <ion-input type="text" [(ngModel)]="emergency_no[i]"  [ngModelOptions]="{standalone: true}"></ion-input>
 			     </ion-item>
@@ -118,23 +120,23 @@
               </button>
             </ion-col>
           </ion-row>
-        </ion-col>
+        </div>
     
     <ion-item>
-	 <ion-label class="liste-edit" style="text-align:left !important;">Interested in Elder job opportunities?</ion-label>
+	 <ion-label style="text-align:left !important;">Interested in Elder job opportunities?</ion-label>
     <ion-checkbox [(ngModel)]="job_interest" [ngModelOptions]="{standalone: true}"> </ion-checkbox>
     </ion-item>
 
  
   <div *ngIf="job_interest">
-     <ion-label class="liste-edit">Interest</ion-label>
+     <ion-label>Interest</ion-label>
         <ion-item>
        
             <ion-select class="select-brd" [(ngModel)]="area_of_interest"   [ngModelOptions]="{standalone: true}">
                 <ion-option  *ngFor="let interest of areaOfInterest" >{{interest.label}}</ion-option>
             </ion-select>
         </ion-item>
-    <ion-label class="liste-edit">Job Type</ion-label>
+    <ion-label>Job type</ion-label>
         <ion-item>
           <ion-select class="select-brd" [(ngModel)]="job_type"   [ngModelOptions]="{standalone: true}">
               <ion-option  value="full time">Full TIme</ion-option>
@@ -142,7 +144,7 @@
             </ion-select>
         </ion-item>
 
-        <div class="tag">
+        <div class="tag-skill_set">
         <!-- <ion-card> -->
             <rl-tag-input
              [ngModelOptions]="{standalone: true}"
@@ -161,9 +163,9 @@
     </ion-row>
 	<div class="clearfix"></div>
 	<hr/>
-	<br/>
-    <ion-col  *ngFor="let item of experience_list; let i=index" >
-	  <ion-label class="liste-edit">Industry</ion-label>
+
+    <div  *ngFor="let item of experience_list; let i=index" >
+	  <ion-label>Industry</ion-label>
       <ion-item>
         
             <ion-select class="select-brd" [(ngModel)]="experience_industry[i]" [ngModelOptions]="{standalone: true}">
@@ -172,13 +174,13 @@
             </ion-select>
 			 
         </ion-item>
-         <ion-label class="liste-edit">Total Years</ion-label>
+         <ion-label>Total Years</ion-label>
 		  <ion-item>
               <ion-input [(ngModel)]="experience_years[i]" 
                 [ngModelOptions]="{standalone: true   }"type="text" value={{experience_years}}>
               </ion-input>
         </ion-item>
-          <ion-label class="liste-edit">Duration</ion-label>
+          <ion-label>Duration</ion-label>
 		        <ion-item>
               <ion-input [(ngModel)]="experience_duration[i]" [ngModelOptions]="{standalone: true}" type="text" placeholder="Eg:April 2007-2011">
               </ion-input>
@@ -195,7 +197,7 @@
           </button>
         </ion-col>
       </ion-row>
-      </ion-col>
+      </div>
  
 
   <!-- Educational Details-->
@@ -208,12 +210,12 @@
             </ion-col>
           </ion-row>
 		  <hr/>
-          <ion-card  *ngFor="let item of education_list; let i=index" >
+          <div  *ngFor="let item of education_list; let i=index" >
           
               <div icon-only align-right style="background:none;" *ngIf="i != 0" (click)="removeEducation(i)">
                 <ion-icon ios="ios-close-circle" md="md-close-circle" style="color:#333;"></ion-icon>
               </div>
-              <ion-label class="liste-edit">Graduation</ion-label>
+              <ion-label>Graduation</ion-label>
             <ion-item>
             
                 <ion-select class="select-brd" [(ngModel)]="education_graduation[i]" [ngModelOptions]="{standalone: true}">
@@ -221,7 +223,7 @@
                   </ion-option>
                 </ion-select>
             </ion-item>
-			   <ion-label class="liste-edit">Specialization</ion-label>
+			   <ion-label>Specialization</ion-label>
             <ion-item>
            
               <ion-select class="select-brd" [(ngModel)]="education_specialization[i]" [ngModelOptions]="{standalone: true}">
@@ -230,19 +232,22 @@
               </ion-select>
             </ion-item>
         
-            <ion-label class="liste-edit">College/University</ion-label>
+            <ion-label>College/University</ion-label>
             <ion-item>
                 <ion-input [(ngModel)]="education_college[i]" [ngModelOptions]="{standalone: true}" type="text">
                 </ion-input>
 </ion-item>
            
             
-          </ion-card>
-          <ion-col>
-              <button style="width:100%;" class="add-btn" (click)="addEducation()" ion-button full >
-                <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>Add More
+          </div>
+		       <ion-row>
+          <ion-col width-50>
+              <button class="add-btn" (click)="addEducation()" ion-button full >
+                <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon> &nbsp;Add More
               </button>
             </ion-col>
+			<ion-col width-50> </ion-col>
+			</ion-row>
       </div>
     </div>
 
@@ -258,7 +263,7 @@
           </ion-row>
 		  <hr/>
    
-            <ion-label class="liste-edit">Email Address</ion-label>
+            <ion-label>Email Address</ion-label>
 			<ion-item>
                 <ion-input formControlName="elder_email"
                 [class.invalid]="!authForm.controls.elder_email.valid && (authForm.controls.elder_email.dirty)" placeholder="Email" value={{elder_email}}>
@@ -267,8 +272,8 @@
                 <small *ngIf="!authForm.controls.elder_email.valid  && (authForm.controls.elder_email.dirty)">
                     <p class="valid err-reds">Please enter Email</p>
                 </small>
-            <ion-label class="liste-edit">Password</ion-label>
-              <ion-input formControlName="elder_password"
+            <ion-label>Password</ion-label>
+              <ion-input formControlName="elder_password" style="margin:0px;"
                 [class.invalid]="!authForm.controls.elder_password.valid && (authForm.controls.elder_password.dirty)" type="text" placeholder="Password" value={{elder_password}}>
               </ion-input>
               <small *ngIf="!authForm.controls.elder_password.valid  && (authForm.controls.elder_password.dirty)">
@@ -297,7 +302,7 @@
       <button ion-button class="uploadimg" color="primary" (click)="accessGallery()"><i class="fa fa-upload"></i>&nbsp; Browse...</button>
     </ion-row>
     </ion-item>
-
+</div>
 
 
 </ion-content>
@@ -329,3 +334,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
+<style>
+[_nghost-ung-41]{box-shadow:0 0;}
+
+</style>

@@ -42,15 +42,41 @@ user_id:any;
     return this.http.post(this.rootUrl+'receiveConnectionRequest',_request,this.options)
       .map(res => res.json()); 
   }
+  sentRquest(){
+     let _request= {"searchValue":""};
+    return this.http.post(this.rootUrl+'getSentRequestLists',_request,this.options)
+      .map(res => res.json()); 
+  }
+  sentRequestScroll(nextPageURL){
+     let _request= {"searchValue":""};
+    return this.http.post(nextPageURL,_request,this.options)
+      .map(res => res.json()); 
+  }
+  getAllConnectionList(){
+     let _request= {"search_value":""};
+
+    return this.http.post(this.rootUrl+'getAllConnectionList',_request,this.options)
+      .map(res => res.json()); 
+  }
   connectionStatus(connectionId,status) {  
    let _request= {"conn_req__id":connectionId,"approve_status":status};
     return this.http.post(this.rootUrl+'sendResponse',_request,this.options)
+      .map(res => res.json()); 
+  }
+  sendConnectionRequest(connect_id,name){
+     let _request= {"connect_id":connect_id,"connect_name":name};
+    return this.http.post(this.rootUrl+'sendConnectionRequest',_request,this.options)
       .map(res => res.json()); 
   }
   searchConnection(term) {  
    let _request= {"user_id":this.user_id,"searchValue":term};
     return this.http.post(this.rootUrl+'getConnectionList',_request,this.options)
       .map(res => res.json()); 
+  }
+  addsearchConnection(term){
+     let _request= {"search_value":term};
+    return this.http.post(this.rootUrl+'getAllConnectionList',_request,this.options)
+      .map(res => res.json());
   }
   infiniteRquest(nextURL) {  
    let _request= {"searchValue":""};
@@ -60,6 +86,11 @@ user_id:any;
   allConnectionScroll(nextPageURL)
    {
     let _request= {"user_id":this.user_id,"searchValue":""};
+    return this.http.post(nextPageURL,_request,this.options)
+      .map(res => res.json()); 
+   }
+   addConnectionScroll(nextPageURL){
+      let _request= {"search_value":""};
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }

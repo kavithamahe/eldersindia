@@ -26,15 +26,15 @@
     <ion-input name="password" class="mails-left" type="password" formControlName="password" placeholder="Password"></ion-input>
   </ion-item>
   <p *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)" class="err-reds">Please enter password.</p>
-   <br>
-  <ion-fab center edge>
-  <button ion-fab color="primary">  <ion-icon name="md-arrow-forward"></ion-icon>
+
+  <ion-fab center edge class="login-btn">
+  <button ion-fab> <i class="fa fa-chevron-right arrow-bg"></i>
 </button>
 </ion-fab>
 </ion-list>
 </form>
 <br>
-<br/>
+
 <ion-item  class="bg-back">
 <button ion-button full (click)="forgotPassword()" class="forgot-pass">Forgot Password?</button>  
 </ion-item>

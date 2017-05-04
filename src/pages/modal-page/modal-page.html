@@ -1,4 +1,4 @@
-<div class="ion-modal modal-popups">
+
 <ion-header>
   <ion-toolbar class="hei-head">
     <ion-title color="primary" class="tittles-md">
@@ -13,7 +13,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="popup-mds" style=" background:#fff;">
+<ion-content class="popup-mds" style=" background:#fff !important;">
   <form [formGroup]="modalForm">
 			<ion-label stacked class="label-lb">Describe The Problem</ion-label>
           <ion-input type="text" formControlName="problem" ></ion-input>
@@ -61,16 +61,15 @@
                 <p class="err-reds">Please select the dependents</p>
             </ion-item>
       </form>
-	  <ion-row>
-	  <ion-col width-50>
-            <ion-item>
+	
+
+            <ion-item class="check-bx">
              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>	
              <ion-label (click)="openTerms()">I Agree </ion-label>			  
             </ion-item>
-			</ion-col>
-			<ion-col width-50 style="text-align: center;
-padding-top: 15px; font-size: 14px !important; color: blue;" (click)="openTerms()"> Terms and Conditions </ion-col>
-			</ion-row>
+			 <ion-item class="terms-con">
+			<ion-col ><i class="fa fa-file-text terms-text" aria-hidden="true"></i> <small style="text-decoration:underline; font-size:16px;" (click)="openTerms()"s>Terms and Conditions </small></ion-col>
+		 </ion-item>
             <small *ngIf="checkTerms">
                 <p class="err-reds">check agree to proceed</p>
             </small>
@@ -106,7 +105,7 @@ padding-top: 15px; font-size: 14px !important; color: blue;" (click)="openTerms(
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
-</div>
+
 <style>
 .item-md													{background:none !important;}
 ion-content{ background:none !important;}
@@ -121,4 +120,7 @@ ion-select{ width:100% !important;}
   transform: rotate(180deg);
   display: inline-block;
 }
+
+.label-ios + ion-input .text-input, .label-ios + ion-textarea .text-input, .label-ios + .input + .cloned-input{ margin-left:8px !important;}
+.text-input-ios{ width:95% !important;}
 </style>

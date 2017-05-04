@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController,ViewController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
+import { SubcategoryListPage } from '../subcategory-list/subcategory-list';
 /*
   Generated class for the ServiceModal page.
 
@@ -13,12 +15,12 @@ import { NavController,ViewController, NavParams } from 'ionic-angular';
 })
 export class ServiceModalPage {
 vendorList:any;
-show_service:any;
+show_service:any = null;
 sub_category:any;
 showContactDetails = false;
 showServiceOffered = false;
 title:any;
-  constructor(public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public storage:Storage, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams) {
 
   	this.vendorList = navParams.get("vendorList");
   	if(navParams.get("service") == "contact"){
@@ -44,6 +46,13 @@ title:any;
     else{
       this.show_service=event;
     }
+
+ }
+
+ goToService(sub_service){
+   let service = {id:sub_service.service_id, name:sub_service.service};
+    let location_id = this.locationId;
+    this.navCtrl.push(SubcategoryListPage,{location_id,service});
  }
 
  show_sub_category(){
@@ -54,8 +63,11 @@ title:any;
       this.sub_category = true;
     }
   }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ServiceModalPage');
+  ionViewWillEnter() {
+    this.storage.ready().then(() => {
+      this.storage.get('service_location').then((location) => { this.locationId=location;});
+    });
+    
   }
-
+locationId:any;
 }

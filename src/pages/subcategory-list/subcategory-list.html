@@ -20,7 +20,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding style="background:#fff;">
+<ion-content padding style="background:#F3F7FF;">
 	<ion-item class="subcategory-list" *ngFor="let service_list of sublists.lists">
 	
 		<ion-row>
@@ -52,8 +52,8 @@
 			<p class="price-clr">
 		    <i class="fa fa-inr" aria-hidden="true">{{service_list.service_cost - service_list.percentage_cost}} </i><span style="color:#777; font-size:15px;"> 
 		   
-		   Off
-		    ( <span style="color:red">{{service_list.discount_rate}} % </span>)
+		   
+		    (Off <span style="color:red">{{service_list.discount_rate}} % </span>)
 		    </span>
 		    </p>
 			<button ion-button small (click)="openModal('scheduleModal',service_list.id)" class="btn-warnings"> Schedule</button>
@@ -63,5 +63,5 @@
 		 </ion-row>
 		
 	</ion-item>
-	<hr style="margin:0px;">
+
 </ion-content>

@@ -54,8 +54,12 @@ show_details:any=null;
     }
   }
 
+  accept(){
+    this.viewCtrl.dismiss("true");
+  }
+
   dismiss(){
-this.viewCtrl.dismiss();
+this.viewCtrl.dismiss("dismiss");
   }
 
 }

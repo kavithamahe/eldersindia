@@ -65,6 +65,13 @@ export class ModalContentPage {
    openTerms(){
      let termsModal = this.modalCtrl.create(TermsModalPage);
      termsModal.present();
+     termsModal.onDidDismiss(data=>{
+       if(data == "dismiss"){
+        console.log(" Terms modal dismissed..!");
+      }else{
+       this.terms = JSON.parse(data);
+      }
+     })
    }
 
   submit() {
