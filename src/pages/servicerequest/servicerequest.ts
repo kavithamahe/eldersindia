@@ -24,6 +24,7 @@ showRemark:any=null;
 rating:number=0;
 remarks:string='';
 nextPageURL:any='';
+getRemarksList:any=[];
 serviceRequestScrollLists:any=[];
   constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
@@ -31,6 +32,7 @@ serviceRequestScrollLists:any=[];
       storage.get('token').then((token) => { this.token=token; 
       // this.blogId=navParams.get("blogId");
   		this.onInit();
+      this.getRemarks();
       })
   	});
   }
@@ -41,8 +43,8 @@ serviceRequestScrollLists:any=[];
     loader.present();
     this.serviceRequest.serviceRequestList().subscribe(
      (serviceRequest) => {
-      this.serviceRequestInfo=serviceRequest.result.info.data; 
-      this.nextPageURL=serviceRequest.result.info.next_page_url;      
+      this.serviceRequestInfo=serviceRequest.result.info.list.data; 
+      this.nextPageURL=serviceRequest.result.info.list.next_page_url;      
     },
     (err) => { 
         if(err.status===401)
@@ -56,6 +58,21 @@ serviceRequestScrollLists:any=[];
       }
     );
     loader.dismiss();
+  }
+   public getRemarks()
+  {
+    this.serviceRequest.getRemarks().subscribe(
+     (getRemarks) => {
+      this.getRemarksList=getRemarks.result.info.remark;       
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        
+      }
+    );
   }
   public viewRequest(serviceRequestId)
   {
@@ -152,12 +169,12 @@ serviceRequestScrollLists:any=[];
   {
     this.serviceRequest.serviceRequestScroll(this.nextPageURL).subscribe(
      (serviceRequestScroll) => {
-      this.serviceRequestScrollLists=serviceRequestScroll.result.info.data; 
+      this.serviceRequestScrollLists=serviceRequestScroll.result.info.list.data; 
        for (let i = 0; i < Object.keys(this.serviceRequestScrollLists).length; i++) {
         this.serviceRequestInfo.push(this.serviceRequestScrollLists[i]);
         }
       
-       this.nextPageURL=serviceRequestScroll.result.info.next_page_url;     
+       this.nextPageURL=serviceRequestScroll.result.info.list.next_page_url;     
     },
     (err) => { 
         if(err.status===401)

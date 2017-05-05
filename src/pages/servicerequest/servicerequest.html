@@ -65,8 +65,14 @@
  </ion-item>
 <rating [(ngModel)]="rating" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
 
-  <ion-item>
+ <!-- <ion-item>
     <ion-input [(ngModel)]="remarks" type="text" placeholder="Remarks"></ion-input>
+  </ion-item>-->
+  <ion-item text-wrap>
+    <ion-label>Remarks</ion-label>
+    <ion-select [(ngModel)]="remarks">
+      <ion-option *ngFor="let remarkList of getRemarksList" value="{{remarkList.id}}">{{remarkList.remarks}}</ion-option>
+    </ion-select>
   </ion-item>
   <ion-item>
   <button ion-button full (click)="submitRemark(service?.id)">Submit</button>
