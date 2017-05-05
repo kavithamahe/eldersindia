@@ -31,6 +31,7 @@ export class ServiceprovidersPage {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
       this.loadServiceProvider();
+      this.loadLocations();
       })
     });
     
@@ -61,8 +62,23 @@ export class ServiceprovidersPage {
     this.navCtrl.setRoot(DashboardPage);
   }
 
+locations:any;
+
+  loadLocations(){
+  
+  this.providerService.webServiceCall(`getLocations`,"")
+          .subscribe(data =>{
+                            this.locations = data.result.info;
+                            console.log("Location data : "+this.locations);
+                            },
+                      err =>{                       
+                            this.providerService.showErrorToast(err);
+                            console.log("Response for Location data: "+err);
+                            });
+}
+
   subCategory(subcategory){
-    this.navCtrl.push(SubCategoryPage,{subcategory});
+    this.navCtrl.push(SubCategoryPage,{"subcategory":subcategory,'locations':this.locations});
   }
 
   // forgotPassword(){

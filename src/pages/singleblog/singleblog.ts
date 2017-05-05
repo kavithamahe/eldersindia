@@ -5,6 +5,8 @@ import { Storage } from '@ionic/storage';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { BlogListService } from '../../providers/blog-list-service';
+import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
+
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 /*
   Generated class for the Singleblog page.
@@ -28,6 +30,10 @@ comment:any;
 showComment:any;
 viewCommentsList:any;
 user_id:any;
+Reply:any;
+reply_comment:any="";
+showReply:any;
+replyPost:any;
 commentForm: FormGroup;
 submitAttempt: boolean = false;
   constructor(public formBuilder: FormBuilder,public navCtrl: NavController, public navParams: NavParams,public blogListService:BlogListService,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
@@ -46,7 +52,10 @@ submitAttempt: boolean = false;
     this.showComment=true;
   }
   public leaveComment()
-  {
+  { if(this.showComment)
+    {
+     document.getElementById('commentsView').scrollIntoView();
+     }
     this.showComment=!this.showComment;
   }
   public onInit(blogId)
@@ -70,6 +79,8 @@ submitAttempt: boolean = false;
     );
     loader.dismiss();
   }
+  
+ 
   public blogComment(blogId)
   {
     if(!this.commentForm.valid){
@@ -152,6 +163,59 @@ submitAttempt: boolean = false;
         });
    toast.present();
   }
+   viewReply(event){
+      this.replyPost=null;
+    if(this.showReply==event){
+        this.showReply=null;
+    }
+    else{
+      this.showReply=event;
+    }
+ }
+ replyblogPost(event){
+   this.showReply=null;
+    if(this.replyPost==event){
+        this.replyPost=null;
+    }
+    else{
+      this.replyPost=event;
+    }
+ }
+ postReply(commentId,user_id){
+    if(this.reply_comment != ""){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.blogListService.postReply(commentId,user_id,this.reply_comment).subscribe(
+     (postComment) => {
+      
+     this.showToaster(postComment.result.info.message);
+     this.reply_comment="";   
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
+    loader.dismiss();
+ }
+ else{
+     this.showToaster("Enter Comments and Post");
+   }
+}
+
+  public CommunityUserWall(profile_uid)
+  {
+    console.log(profile_uid);
+    this.navCtrl.setRoot(CommunityprofilePage,{profile_uid});
+  }
+
+
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);

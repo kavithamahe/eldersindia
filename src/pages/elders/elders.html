@@ -212,9 +212,7 @@
 		  <hr/>
           <div  *ngFor="let item of education_list; let i=index" >
           
-              <div icon-only align-right style="background:none;" *ngIf="i != 0" (click)="removeEducation(i)">
-                <ion-icon ios="ios-close-circle" md="md-close-circle" style="color:#333;"></ion-icon>
-              </div>
+            
               <ion-label>Graduation</ion-label>
             <ion-item>
             
@@ -239,18 +237,27 @@
 </ion-item>
            
             
-          </div>
+          
 		       <ion-row>
           <ion-col width-50>
-              <button class="add-btn" (click)="addEducation()" ion-button full >
+              <button class="add-btn" (click)="addEducation()" ion-button icon-left clear >
                 <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon> &nbsp;Add More
               </button>
-            </ion-col>
-			<ion-col width-50> </ion-col>
+          </ion-col>
+			    <ion-col *ngIf="i != 0" width-50>
+          <button class="rem-btn" (click)="removeEducation(i)" ion-button icon-left clear>
+            <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
+          </button>
+        </ion-col>
 			</ion-row>
+      </div>
       </div>
     </div>
 
+      <!-- <div icon-only align-right style="background:none;" *ngIf="i != 0" (click)="removeEducation(i)">
+                <ion-icon ios="ios-close-circle" md="md-close-circle" style="color:#333;"></ion-icon>
+              </div>
+ -->
   <!--END-->
   
 

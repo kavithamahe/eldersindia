@@ -45,7 +45,7 @@ export class CommunityprofilePage {
     communityProfileData:any;
     getPrivacyLists:any;
     getCommunityMembers:any;
-    base64Image:any;
+    base64Image:any="";
     status:any;
     request_sent:any;
     name:any;

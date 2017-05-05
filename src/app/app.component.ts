@@ -2,7 +2,9 @@ import { Component, ViewChild} from '@angular/core';
 
 import { Platform, MenuController, Nav, AlertController } from 'ionic-angular';
 
-import { StatusBar, Splashscreen, Push} from 'ionic-native';
+import { StatusBar, Splashscreen, Push,Geolocation } from 'ionic-native';
+// import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 
 // import the Menu's pages
 import { LoginPage } from '../pages/login/login';
@@ -60,6 +62,8 @@ export class MyApp {
   pages: Array<{myIcon:string, title: string, component: any}>;
 
   constructor(
+    private geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder,
     public platform: Platform,
     public menu: MenuController,
     private userLogin: LoginUser,
@@ -67,6 +71,7 @@ export class MyApp {
     public storage:Storage
   ) {
     this.storage.ready().then(() => {
+    storage.set('service_location','');
     storage.get('user_type').then((userType)=>{
       this.user_type = userType;
       console.log("user_type : ", this.user_type);
@@ -118,11 +123,11 @@ export class MyApp {
 
         this.subscription = userLogin.userEntered$.subscribe(
             userData => {
-                          console.log(userData);
+                          console.log(userData,this.pages.length);
                           this.user_logged = userData;
-                          if((this.user_logged == 'sponsor')){
+                          if((this.user_logged == 'sponsor')&&(this.pages.length == 15)){
             this.pages.splice(1, 0, { myIcon:'fa fa-users', title: 'Manage Dependents', component: ManagePage });
-           }else{
+           }else if((this.user_logged == 'elder')&&(this.pages.length == 16)){
              for(let i=0; i < this.pages.length;i++){
                if(this.pages[i].title == 'Manage Dependents'){
                  this.pages.splice(i, 1);
@@ -132,7 +137,15 @@ export class MyApp {
                         });                   
     
     this.initializeApp();
-
+    let confirmAlert = this.alertCtrl.create({
+          subTitle: 'switch-ON GPS to get current Location.',
+          buttons: [{
+            text: 'OK',
+            role: 'cancel',
+          }]
+        });
+        confirmAlert.present();
+    // alert("switch-ON GPS to get current Location.");
     platform.ready().then(() => {
       this.initPushNotification();
     });
@@ -140,7 +153,18 @@ export class MyApp {
   }
 
   initializeApp() {
+
     this.platform.ready().then(() => {
+      Geolocation.getCurrentPosition().then(
+      (data) => {
+            console.log('My latitude : ', data.coords.latitude);
+            console.log('My longitude: ', data.coords.longitude);
+            this.getLocation(data.coords.latitude,data.coords.longitude);
+        },
+        (err) =>{
+            console.log("error in fetching Geo Location: ",err);
+        });
+
       StatusBar.styleDefault();
       Splashscreen.hide();
       this.platform.registerBackButtonAction(() => {
@@ -151,7 +175,7 @@ export class MyApp {
         }else{
                 let confirmAlert = this.alertCtrl.create({
                 title: 'App Exit',
-                subTitle: "Are you sure to close app",
+                subTitle: "Are you sure to Exit app",
                 buttons: [{
                   text: 'NO',
                   handler: () => {
@@ -243,4 +267,20 @@ export class MyApp {
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
   }
+
+  getLocation(d1,d2){
+
+    this.nativeGeocoder.reverseGeocode(d1, d2)
+  .then(
+    (result: NativeGeocoderReverseResult) => {
+      this.storage.ready().then(() => {this.storage.set('service_location',result.city);});
+      // alert("current Location is: "+result.city);
+    console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
+    })
+    
+  .catch((error: any) => console.log(error));
+  }
 }
+
+
+// 13.0827° N, 80.2707° E

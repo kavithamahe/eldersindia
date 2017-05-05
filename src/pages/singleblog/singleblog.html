@@ -46,7 +46,9 @@
       </button>
     </ion-col>
   </ion-row>
+
 <ion-list [hidden]="showComment">  
+<div id="commentsView">
    <form [formGroup]="commentForm">
   <ion-item style="padding-left:0px;">
     <ion-textarea placeholder="Comment" formControlName="comment"></ion-textarea>
@@ -56,29 +58,73 @@
   <ion-item text-right>
   <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)" class="commend-btn">Submit</button>
   </ion-item>
+  </div>
   <hr/>
-  <ion-item *ngFor="let viewComments of viewCommentsList">
+  <ion-item *ngFor="let viewComments of viewCommentsList; let i=index">
   <ion-row>
 <ion-col width-20>
     <ion-avatar item-left>
-      <img src="{{imageUrl+viewComments?.avatar}}" [hidden]="!viewComments?.avatar">
+      <img (click)="CommunityUserWall(viewComments?.user_id)" src="{{imageUrl+viewComments?.avatar}}"  
+      [hidden]="!viewComments?.avatar">
     </ion-avatar>
 	</ion-col>
 	<ion-col width-80 class="blogs-tittle">
  <ion-item text-wrap style="padding-left:0px;">
-    <h2>{{viewComments?.user_name}}</h2>
+    <h2 (click)="CommunityUserWall(viewComments?.user_id)">{{viewComments?.user_name}}</h2>
 
 	 
     <p class="timedate">{{viewComments?.created_at | date :"MMM dd y h:mm a"}}</p>
-    <p class="page-down">{{viewComments?.comment}}</p>
-
-    	<button ion-button icon-right clear end small item-right *ngIf="user_id==viewComments?.user_id" (click)="deleteComment(viewComments?.id)">
-<ion-icon ios="ios-trash" md="md-trash"></ion-icon>      
+    <p item-text-wrap class="page-down">{{viewComments?.comment}}</p>
+   
+    	<button ion-button icon-right clear end small item-right *ngIf="user_id==viewComments?.user_id" 
+      (click)="deleteComment(viewComments?.id)">
+        <ion-icon ios="ios-trash" md="md-trash"></ion-icon>      
       </button>
+     
 	  	 </ion-item>
+
 	  </ion-col>
 	  </ion-row>
-  </ion-item>
+     <button ion-button *ngIf="user_id != viewComments?.user_id" (click)="viewReply(i)" clear>
+     <i class="fa fa-reply" aria-hidden="true"></i>
+     </button>
+     <div *ngIf="i==showReply">
+     <ion-row>
+        <ion-item>
+        <ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important;" placeholder="write a reply.."></ion-textarea>
+        </ion-item>
+        <button ion-button icon-only (click)="postReply(viewComments.id,user_id)" round><i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+        </button>
+      </ion-row>
+      </div>
+       <ion-list *ngFor="let reply of viewComments.comment_reply; let j=index">
+        <ion-row>
+          <ion-col offset-10>
+            <ion-item>
+              <ion-avatar item-left>
+                <img (click)="CommunityUserWall(reply?.uid_from)" src="{{imageUrl+reply?.profile_image}}" [hidden]="!reply?.profile_image">
+              </ion-avatar>
+              <h2 (click)="CommunityUserWall(reply?.uid_from)">{{reply.name_from}}-{{reply.name_to}}</h2>
+              <p item-text-wrap>{{reply.comments_replay}}</p>
+            </ion-item>
+            <button ion-button *ngIf="user_id != reply?.uid_from" (click)="replyblogPost(j)" clear><i class="fa fa-reply" aria-hidden="true"></i></button>
+              <div *ngIf="j==replyPost">
+                <ion-row>
+                  <ion-item>
+                      <ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important;" placeholder="write a reply.."></ion-textarea>
+                  </ion-item>
+                  <button ion-button icon-only (click)="postReply(viewComments.id,user_id)" round>
+                  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                  </button>
+                </ion-row>
+              </div>
+            </ion-col>
+          </ion-row>
+      </ion-list>
+     
+     
+      </ion-item>
+  
 </ion-list>
 </ion-card>
 
