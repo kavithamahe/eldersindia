@@ -7,7 +7,9 @@ import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
 import {BrowserModule} from '@angular/platform-browser';
 import { Ng2EmojiModule } from 'ng2-emoji';
-import { NativeAudio } from 'ionic-native';
+import { NativeAudio,Geolocation } from 'ionic-native';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
+// import { Geolocation } from '@ionic-native';
 //Venkatesh
 import { LoginPage } from '../pages/login/login';
 import { AppConfig } from '../providers/app-config';
@@ -131,7 +133,7 @@ import { ServiceProvider } from '../providers/service-provider';
     Ionic2RatingModule,
     Ng2CompleterModule,
     BrowserModule,
-    Ng2EmojiModule
+    Ng2EmojiModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -183,6 +185,6 @@ import { ServiceProvider } from '../providers/service-provider';
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},NativeAudio,LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
 })
 export class AppModule {}

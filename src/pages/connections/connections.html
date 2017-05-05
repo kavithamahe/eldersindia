@@ -46,43 +46,56 @@
         Connections
       </ion-segment-button>
       <ion-segment-button value="received" color="primary" (click)="receivedRquest()">
-        Received Requests
+        <i class="fa fa-download" aria-hidden="true"></i> Requests
       </ion-segment-button>
       <ion-segment-button value="sent" color="primary" (click)="sentRquest()">
-        Sent Requests
+        <i class="fa fa-upload" aria-hidden="true"></i> Requests
       </ion-segment-button>
     </ion-segment>
   </div>
 
 <div [ngSwitch]="connections">
-  <ion-list *ngSwitchCase="'received'">  
+  <ion-list *ngSwitchCase="'received'">
+     
   <div *ngFor="let request of receivedRquestInfo">
-    <ion-grid>
+  <ion-item-sliding class="inbox-sends">
+    <ion-item>
     <ion-row>
     <ion-col width-20>
     <ion-avatar item-left (click)="CommunityUserWall(request?.id)">
     <img src="{{imageUrl+request?.avatar}}" [hidden]="!request?.avatar">
     </ion-avatar></ion-col>
     <ion-col width-67>
-    <h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} </h6>
-    <p class="connection-pages"><i class="fa fa-inbox"> </i> {{request?.connections?.email}}</p>
-    <p class="connection-page" [hidden]="!request?.connections?.location">
-    <i class="fa fa-map-marker"></i> {{request?.connections?.location}}    
-    </p>
+      <h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} 
+      </h6>
+      <p class="connection-pages"><i class="fa fa-inbox"> </i> {{request?.connections?.email}}</p>
+      <p class="connection-page" [hidden]="!request?.connections?.location">
+      <i class="fa fa-map-marker"></i> {{request?.connections?.location}}    
+      </p>
 	
     </ion-col>
-      <ion-col width-20> 
+   
+     <!--  <ion-col width-20> 
       <button ion-button icon-only class="active-btn"(click)="connectionStatus(request?.connection_id,1)">
         <i class="fa fa-check"></i>
     </button>
     <button ion-button icon-only class="inactive-btn" (click)="connectionStatus(request?.connection_id,2)">
         <i class="fa fa-times" aria-hidden="true"></i>
     </button>
-    </ion-col>
+    </ion-col> -->
     </ion-row>
-
-    </ion-grid>  
-		<hr/>
+    </ion-item>
+    <ion-item-options side="right">
+   <button ion-button icon-only class="active-btn"(click)="connectionStatus(request?.connection_id,1)">
+        <i class="fa fa-check"></i>
+    </button>
+     <button ion-button icon-only class="inactive-btn" (click)="connectionStatus(request?.connection_id,2)">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+    </ion-item-options>
+     
+	
+    </ion-item-sliding>
 
     </div>
     <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
@@ -154,21 +167,19 @@
     <ion-avatar item-left (click)="CommunityUserWall(request?.id)">
     <img src="{{imageUrl+request?.avatar}}" [hidden]="!request?.avatar">
     </ion-avatar></ion-col>
-    <ion-col width-67>
+    <ion-col width-60>
     <h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} </h6>
     <p class="connection-page" [hidden]="!request?.connections?.location">
     <i class="fa fa-map-marker"></i> {{request?.connections?.location}}    
     </p>
   
     </ion-col>
-  
-    </ion-row>
-    <ion-row>
-    <ion-col width-10>
-      <button ion-button (click)="connectMember(request.id,request.connections.name)"  small>connect
+      <ion-col width-20 class="connection-btn">
+      <button ion-button (click)="connectMember(request.id,request.connections.name)"  small><i class="fa fa-share-alt"></i>
       </button>
     </ion-col>
     </ion-row>
+
     </ion-grid>  
     <hr/>
 
