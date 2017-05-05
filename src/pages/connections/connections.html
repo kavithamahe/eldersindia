@@ -55,9 +55,11 @@
   </div>
 
 <div [ngSwitch]="connections">
-  <ion-list *ngSwitchCase="'received'">  
+  <ion-list *ngSwitchCase="'received'">
+     
   <div *ngFor="let request of receivedRquestInfo">
-    <ion-grid>
+  <ion-item-sliding class="inbox-sends">
+    <ion-item>
     <ion-row>
     <ion-col width-20>
     <ion-avatar item-left (click)="CommunityUserWall(request?.id)">
@@ -71,18 +73,28 @@
     </p>
 	
     </ion-col>
-      <ion-col width-20> 
+   
+     <!--  <ion-col width-20> 
       <button ion-button icon-only class="active-btn"(click)="connectionStatus(request?.connection_id,1)">
         <i class="fa fa-check"></i>
     </button>
     <button ion-button icon-only class="inactive-btn" (click)="connectionStatus(request?.connection_id,2)">
         <i class="fa fa-times" aria-hidden="true"></i>
     </button>
-    </ion-col>
+    </ion-col> -->
     </ion-row>
-
-    </ion-grid>  
-		<hr/>
+    </ion-item>
+     <ion-item-options side="right">
+     <button ion-button icon-only class="active-btn"(click)="connectionStatus(request?.connection_id,1)">
+        <i class="fa fa-check"></i>
+    </button>
+     <button ion-button icon-only class="inactive-btn" (click)="connectionStatus(request?.connection_id,2)">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+    </ion-item-options>
+     
+	
+    </ion-item-sliding>
 
     </div>
     <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
