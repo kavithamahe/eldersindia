@@ -16,82 +16,56 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Settings</ion-title>
+    <ion-title text-center>Privacy Settings</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="contect-bg-moblie">
-<div padding>
-  <ion-segment [(ngModel)]="settings" (ionChange)="changeSlide()">
-
-    <ion-segment-button value="paginate">
-      Paginate
-    </ion-segment-button>
-    <ion-segment-button value="privacy">
-      Privacy
-    </ion-segment-button>
-  </ion-segment>
-</div>
-
-    <ion-slides (ionSlideDidChange)="slideChanged()">
-      <ion-slide>
-          <ion-item>
-            <ion-label> Records Per Page </ion-label>
-            <ion-select [(ngModel)]="records" (ionChange)="change()">
-              <ion-option value="5">5</ion-option>
-              <ion-option value="10">10</ion-option>
-              <ion-option value="15">15</ion-option>
-              <ion-option value="20">20</ion-option>
-            </ion-select>
-          </ion-item>
-      </ion-slide>
-
-    <ion-slide>
+<ion-content style="background:#fff;">
+  <ion-card>
       <ion-list>
 
-        <ion-item>
+        <ion-item color="mistyrose">
           <ion-label>Name</ion-label>
           <ion-toggle [(ngModel)]="privacy_name"></ion-toggle>
         </ion-item>
-        <hr/>
-        <ion-item>
+
+        <ion-item color="seashell">
           <ion-label>Email</ion-label>
           <ion-toggle [(ngModel)]="privacy_email"></ion-toggle>
         </ion-item>
-        <hr/>
-        <ion-item>
+ 
+        <ion-item color="mistyrose">
           <ion-label>Mobile</ion-label>
           <ion-toggle [(ngModel)]="privacy_mobile"></ion-toggle>
         </ion-item>
-        <hr/>
-        <ion-item>
+
+        <ion-item color="seashell">
           <ion-label>Location</ion-label>
           <ion-toggle [(ngModel)]="privacy_location"></ion-toggle>
         </ion-item>
-        <hr/>
-        <ion-item>
+
+        <ion-item color="mistyrose">
           <ion-label>Birthday</ion-label>
           <ion-toggle [(ngModel)]="privacy_birthday"></ion-toggle>
         </ion-item>
-        <hr/>
+
         <!-- <ion-item>
           <ion-label>Avatar</ion-label>
           <ion-toggle [(ngModel)]="privacy_avatar"></ion-toggle>
         </ion-item>
         <hr/> -->
-        <ion-item>
+        <ion-item color="seashell">
           <ion-label>Connections</ion-label>
           <ion-toggle [(ngModel)]="privacy_connection"></ion-toggle>
         </ion-item>
-        <hr/>
-        <ion-item>
+
+        <ion-item color="mistyrose">
           <ion-label>Profile</ion-label>
           <ion-toggle [(ngModel)]="privacy_profile"></ion-toggle>
         </ion-item>
 
       </ion-list>
-      </ion-slide>
-    </ion-slides>
+	  </ion-card>
 </ion-content>
 
 <ion-footer>
@@ -125,6 +99,7 @@
   </ion-toolbar>
 </ion-footer>
 <style>
+.toggle-md .toggle-checked .toggle-inner{ background-color:#fe7fe6 !important;}
    .gly-rotate-180 {
   filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.5);
   -webkit-transform: rotate(180deg);

@@ -13,18 +13,12 @@
 </ion-header>
 
 <ion-content padding style="background:#fff;">
-	<ion-row style=" border-bottom:1px solid #ccc;" *ngIf="user_type =='sponsor' ">
-		<ion-col>
-			<ion-title>
-				<img alt="logo" height="50" width="50" class="mar-top" style=" border:1px solid #ccc;"  [src]="imageURL+profileData?.logo" > 
-			</ion-title>
-		</ion-col>
-		<ion-col><p class="edit-pro">{{profileData?.company_name}}</p></ion-col>
-	</ion-row>
+<div class="profile-edit"><span  *ngIf="user_type =='sponsor' " class="profile-img"><img [src]="imageURL+profileData?.logo" > </span>
+			<p>{{profileData?.company_name}}</p></div>
 
 	<form [formGroup]="edit_profile_Form">
+<div class="edit-profile-view">
 
-		
 		
 		<ion-label class="liste-edit" *ngIf="user_type =='elder' ">Name</ion-label>
 		<ion-label class="liste-edit" *ngIf="user_type =='sponsor' ">Sponsor Name</ion-label>
@@ -68,7 +62,7 @@
 	    </ion-item>
 	    
 
-		<ion-label class="liste-edit">DOB</ion-label>
+		<ion-label class="liste-edit">Date of birth</ion-label>
 		<ion-item>
 	    <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" [(ngModel)]="user_dob" [ngModelOptions]="{standalone: true}">
 	    </ion-datetime>
@@ -86,19 +80,25 @@
 	    </ion-item>
 	  
 
-	    <ion-item>
-	    <img [src]="base64Image" *ngIf="base64Image" width="90" height="90" />
+	
+	   
 	    <ion-row>
+		<ion-col>
 	    <button ion-button class="uploadimg" color="primary" (click)="accessGallery()"><i class="fa fa-upload"></i>&nbsp; Browse...</button>
+				</ion-col>
+				<ion-col>
+				 <img [src]="base64Image" *ngIf="base64Image" width="90" height="90" />
+						</ion-col>
 		</ion-row>
- 		</ion-item>
+ 	
 <hr/>
 	  	<ion-row>
 	         <ion-col><button class="btn-defaults" ion-button item-left small (click)="dismiss()">Cancel</button></ion-col>
 	         <ion-col offset-33><button class="btn-primarys"ion-button item-right small (click)="updateProfile()">Update</button></ion-col>
 	    </ion-row>
+</div>
 </form>
-
+	
 </ion-content>
 
 <style>

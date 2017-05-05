@@ -24,82 +24,39 @@
 
 
 <ion-content padding style="background:#fff;">
-    <ion-row style=" border-bottom:1px solid #ccc;" *ngIf="user_type =='sponsor' ">
-        <ion-col style="-webkit-flex: null!important; padding-left:0px;">
-            <ion-title>
-                <img alt="logo" height="50" width="50" class="mar-top" style=" border:1px solid #ccc;"  [src]="imageURL+profileData?.logo" > 
-            </ion-title>
-        </ion-col>
-        <ion-col><p class="edit-pro">{{profileData?.company_name}}</p></ion-col>
 
-    </ion-row>
+<div class="profile-edit">
+    <span *ngIf="user_type =='sponsor' " class="profile-img"><img alt="logo" class="mar-top" [src]="imageURL+profileData?.avatar"/> </span>
+		<p>{{profileData?.name}}</p>
+	</div>
+	<div class="edit-profile">
+       
+    
+  
+  </div>
+	
 
-        <ion-label class="liste-edit">Name</ion-label>
+<div class="edit-profile-view">
+<div class="listed-profiles" color="mistyrose">
+	
+            <p><i class="fa fa-building-o"></i>&nbsp;{{profileData?.company_name}}</p>
+            <p *ngIf="user_type =='sponsor' "><i class="fa fa-user-secret"></i>&nbsp;{{profileData?.designation}}</p>
+            <p *ngIf="profileData?.employee_id"><i class="fa fa-suitcase"></i>&nbsp;{{profileData?.employee_id}}</p>
+            <p><i class="fa fa-phone"></i>&nbsp;{{profileData?.mobile}}</p>			
+           <p><i class="fa fa-envelope-o"></i>&nbsp;{{profileData?.personal_email}}</p>
+		   <p><i class="fa fa-map-marker"></i>&nbsp;{{profileData?.locationName}}</p>
+            <p><i class="fa fa-calendar"></i>&nbsp;{{user_dob}}</p>
+			<p *ngIf="user_type =='elder' "><i class="fa fa-user userioc"></i>&nbsp;{{gender}}</p>
+           <p><i class="fa fa-phone"></i>&nbsp;{{profileData?.email}}</p>
+            <p *ngIf="user_type !='sponsor' "><i class="fa fa-map-marker userioc"></i>&nbsp;{{profileData?.address}}</p>
+			<p><i class="fa fa-calendar"></i>&nbsp;Updated : {{profileData?.updated_at}}</p>
+		
+          </div>
+
         
-        <ion-item>
-        <ion-input type="text" disabled="true" value={{profileData?.name}}></ion-input>
-        </ion-item>
-        
 
-    <ion-label *ngIf="user_type =='elder' " class="liste-edit">Gender</ion-label>
-        <ion-item *ngIf="user_type =='elder' ">
-        <ion-select [(ngModel)]="gender">
-        <ion-option value="">Select Gender</ion-option>
-        <ion-option value="male">Male</ion-option>
-        <ion-option value="female">Female</ion-option>
-        </ion-select>
-        </ion-item>
-
-        <ion-label *ngIf="user_type =='sponsor' " class="liste-edit">Designation</ion-label>
-        <ion-item *ngIf="user_type =='sponsor' ">
-        <ion-input type="text" disabled="true" value={{profileData?.designation}}></ion-input>
-        </ion-item>
-
-        <ion-label *ngIf="profileData?.employee_id" class="liste-edit">Employee ID</ion-label>
-        <ion-item *ngIf="profileData?.employee_id">
-         <ion-input type="text" disabled="true" value={{profileData?.employee_id}}></ion-input>
-        </ion-item>
-        
-        <ion-label class="liste-edit">Mobile Number</ion-label>
-        <ion-item>
-         <ion-input type="text" disabled="true" value={{profileData?.mobile}}></ion-input>
-        </ion-item>
-        
-        <ion-label *ngIf="user_type =='sponsor' " class="liste-edit">Personal Email</ion-label>
-        <ion-item *ngIf="user_type =='sponsor' ">
-         <ion-input type="text" disabled="true" value={{profileData?.personal_email}}></ion-input>
-        </ion-item>
-        
-     
-        <ion-label *ngIf="user_type =='sponsor' " class="liste-edit">Location</ion-label>
-        <ion-item *ngIf="user_type =='sponsor' ">
-        <ion-input  type="text" disabled="true" value={{profileData?.locationName}}></ion-input>
-        </ion-item>
-
-        <ion-label class="liste-edit">DOB</ion-label>
-        <ion-item>
-        <ion-input type="text" disabled="true" value={{user_dob}}></ion-input>
-        </ion-item>
-
-        <ion-label *ngIf="user_type !='sponsor' " class="liste-edit">Address</ion-label>
-        <ion-item *ngIf="user_type !='sponsor' ">
-        <ion-input  text-wrap  type="text" disabled="true" value={{profileData?.address}}></ion-input>
-        </ion-item> 
-
-        <ion-label class="liste-edit">Email</ion-label>
-        <ion-item>
-        <ion-input type="text" disabled="true" value={{profileData?.email}}></ion-input>
-        </ion-item>
-     
-        <ion-label class="liste-edit">User Type</ion-label>
-        <ion-item>
-        <ion-input type="text" disabled="true" value={{user_type}}></ion-input>
-        </ion-item>
-
-        <ion-label class="liste-edit">Last Modified</ion-label>
-        <ion-item>
-         <ion-input type="text" disabled="true" value={{profileData?.updated_at}}></ion-input>
-        </ion-item>
+   
+		</div>
    <!--      
       
 
