@@ -46,7 +46,9 @@
       </button>
     </ion-col>
   </ion-row>
+
 <ion-list [hidden]="showComment">  
+<div id="commentsView">
    <form [formGroup]="commentForm">
   <ion-item style="padding-left:0px;">
     <ion-textarea placeholder="Comment" formControlName="comment"></ion-textarea>
@@ -56,6 +58,7 @@
   <ion-item text-right>
   <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)" class="commend-btn">Submit</button>
   </ion-item>
+  </div>
   <hr/>
   <ion-item *ngFor="let viewComments of viewCommentsList; let i=index">
   <ion-row>
