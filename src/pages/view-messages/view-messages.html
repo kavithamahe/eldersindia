@@ -40,7 +40,8 @@
     <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
             <ion-avatar item-left>
-              <img src="{{imageUrl+veiwMessagesInfo?.avatar}}">
+              <img (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" 
+              src="{{imageUrl+veiwMessagesInfo?.avatar}}">
             </ion-avatar>
             </ion-col>
           

@@ -4,6 +4,8 @@ import { Storage } from '@ionic/storage';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { MessagesService } from '../../providers/messages-service';
+import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
+
 
 /*
   Generated class for the ViewMessages page.
@@ -49,7 +51,7 @@ viewType:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -71,5 +73,10 @@ viewType:any;
         position: 'top'
         });
    toast.present();
+  }
+   public CommunityUserWall(profile_uid)
+  {
+    console.log(profile_uid);
+    this.navCtrl.setRoot(CommunityprofilePage,{profile_uid});
   }
 }
