@@ -28,17 +28,21 @@ subCategoryTitle:any;
 		// subcategories: Array<{title: string, lists: any, color: string}>;
 
   constructor(public storage:Storage, public loadingCtrl: LoadingController, public navCtrl: NavController, public navPara: NavParams,public providerService: ServiceProvider) {
-
+    // this.loadLocations();
+    this.subCategoryTitle = navPara.get("subcategory").service;
+    this.locations = navPara.get("locations");
+    
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     this.storage.ready().then(() => {
-      this.storage.get('service_location').then((location) => {
-          this.serviceLocation = location;
-          this.subCategoryId = navPara.get("subcategory").id;
-          this.subCategoryTitle = navPara.get("subcategory").service;
-        
-          let serviceOfferedId = {"serviceOfferedId":this.subCategoryId,"locationId": this.serviceLocation};
-          this.loadSubCategory(serviceOfferedId);
-          this.loadLocations();
+      this.storage.get('service_location').then((my_location) => {
+          for(let i=0; i<this.locations.length;i++){
+            if(this.locations[i].location == my_location){
+              this.serviceLocation = my_location;
+            }else{
+              this.serviceLocation = "";
+            }
+          }          
+          this.loadSubCategory(this.serviceLocation);          
       });
     });
     loading.present();
@@ -46,10 +50,12 @@ subCategoryTitle:any;
 
   }	
   
-loadSubCategory(serviceListId){
-
-	// getVendorServiceSubCategory
-	this.providerService.webServiceCall(`getVendorServiceSubCategory`,serviceListId)
+loadSubCategory(location){
+  
+  this.subCategoryId = this.navPara.get("subcategory").id;
+  let serviceOfferedData = {"serviceOfferedId":this.subCategoryId,"locationId": location};
+          
+	this.providerService.webServiceCall(`getVendorServiceSubCategory`,serviceOfferedData)
 	// this.providerService.loadVendorServiceSubCategory(serviceListId)
     .subscribe(data =>{
       this.subcategories = data.result;
@@ -69,27 +75,14 @@ loadSubCategory(serviceListId){
     })
 }
 
-loadLocations(){
-  
-  this.providerService.webServiceCall(`getLocations`,"")
-          .subscribe(data =>{
-                            this.locations = data.result.info;
-                            console.log("Location data : "+this.locations);
-                            },
-                      err =>{                       
-                            this.providerService.showErrorToast(err);
-                            console.log("Response for Location data: "+err);
-                            });
-}
-
 locationChanged(){
 
   let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     this.storage.ready().then(() => {
       this.storage.set('service_location',this.serviceLocation);
-      let locationBasedData = {"serviceOfferedId":this.subCategoryId,"locationId":this.serviceLocation};
+      // let locationBasedData = {"serviceOfferedId":this.subCategoryId,"locationId":this.serviceLocation};
       this.subcategories="";
-      this.loadSubCategory(locationBasedData);
+      this.loadSubCategory(this.serviceLocation);
     });
     loading.present();
     loading.dismiss();
