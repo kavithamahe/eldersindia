@@ -85,7 +85,8 @@
 
 	  </ion-col>
 	  </ion-row>
-     <button ion-button (click)="viewReply(i)" clear><i class="fa fa-reply" aria-hidden="true"></i>
+     <button ion-button *ngIf="user_id != viewComments?.user_id" (click)="viewReply(i)" clear>
+     <i class="fa fa-reply" aria-hidden="true"></i>
      </button>
      <div *ngIf="i==showReply">
      <ion-row>
@@ -106,7 +107,7 @@
               <h2 (click)="CommunityUserWall(reply?.uid_from)">{{reply.name_from}}-{{reply.name_to}}</h2>
               <p item-text-wrap>{{reply.comments_replay}}</p>
             </ion-item>
-            <button ion-button (click)="replyblogPost(j)" clear><i class="fa fa-reply" aria-hidden="true"></i></button>
+            <button ion-button *ngIf="user_id != reply?.uid_from" (click)="replyblogPost(j)" clear><i class="fa fa-reply" aria-hidden="true"></i></button>
               <div *ngIf="j==replyPost">
                 <ion-row>
                   <ion-item>
