@@ -53,7 +53,7 @@ user_id:any;
   }
   deleteComment(commentId) {  
    let _request= {"id":commentId};
-    return this.http.post(this.rootUrl+'deleteComment/',_request,this.options)
+    return this.http.post(this.rootUrl+'deleteComment',_request,this.options)
       .map(res => res.json()); 
   }
    postReply(commentId,user_id,comments) {  

@@ -52,7 +52,10 @@ submitAttempt: boolean = false;
     this.showComment=true;
   }
   public leaveComment()
-  {
+  { if(this.showComment)
+    {
+     document.getElementById('commentsView').scrollIntoView();
+     }
     this.showComment=!this.showComment;
   }
   public onInit(blogId)
