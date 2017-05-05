@@ -14,6 +14,7 @@ headers;
 token:string;
 options:any;
 rootUrl:any;
+user_id:any;
   constructor(public http: Http, public storage:Storage) {
     this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
@@ -23,6 +24,7 @@ rootUrl:any;
     this.options = new RequestOptions({ headers: this.headers });
        })    
     storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; });
+     storage.get('id').then((id) => { this.user_id=id; })
    });
   }
   
@@ -51,7 +53,12 @@ rootUrl:any;
   }
   deleteComment(commentId) {  
    let _request= {"id":commentId};
-    return this.http.post(this.rootUrl+'deleteComment/',_request,this.options)
+    return this.http.post(this.rootUrl+'deleteComment',_request,this.options)
+      .map(res => res.json()); 
+  }
+   postReply(commentId,user_id,comments) {  
+   let _request= {info: {"comments": comments, "uid_from": this.user_id, "uid_to": user_id, "comment_id": commentId}}
+    return this.http.post(this.rootUrl+'postReply/',_request,this.options)
       .map(res => res.json()); 
   }
   createBlog(blogObject)

@@ -28,10 +28,10 @@
 <br/><br/><br/>
   <div *ngFor="let manage of manages; let i=index">
    
-        <ion-card class="des-card">
+        <ion-card (tap)="toggleDetails(i)" class="des-card">
         <ion-row>
         <ion-col width-75>
-         <button ion-button color="dark" clear (press)="showOptions(manage)" (tap)="toggleDetails(i)" style="margin:0px!important;">
+         <button ion-button color="dark" clear (press)="showOptions(manage)"  style="margin:0px!important;">
          <i class="fa fa-user name-person"></i><p name="person" class="name-elder">{{manage.relation}}<p>
           </button>
           </ion-col>
