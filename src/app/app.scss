@@ -243,6 +243,13 @@ overflow: hidden;}
 .btn-defaults												{background-color:#ccc !important;border-color:#333;color:#666;font-size:13px !important;text-transform:capitalize; margin-top:10px; margin-right:10px; float:right;}
 .btn-primarys												{background-color:#888aef !important; border-color:#333;color:#fff;font-size:14px !important;text-transform:capitalize;margin-top:10px; float:right;margin-right:10px;}
 .toolbar-background-md										{background:#337ab7; }
+.profile-edit												{ height:175px; background-image: url('../../assets/img/profile.png');  position:relative; }
+
+.profile-edit span.profile-img img							{width:100px; height:100px; position:absolute; left:50%; top:23px; border-radius:50%; border:2px solid #fff; margin-left:-50px;
+-moz-box-shadow: 0 0 5px #333;
+-webkit-box-shadow: 0 0 5px #333;
+box-shadow: 0 0 5px #333;}
+.profile-edit p												{ width:100%; text-align:center; float:left; padding-top:110px; color:#333; font-weight:600; font-size:19px;}
 .ion-modal													{left:0px !important; background:#F8F8FF; margin-top:0px;}
 page-modal-page ion-input									{border:none !important;}
 page-service-info ion-input									{border:none !important;}
@@ -260,6 +267,9 @@ page-service-info ion-input									{border:none !important;}
 .toolbar-title-md											{color:#fff !important; text-align:left; }
 .btn-clr													{width:45%; float:left; border-radius:4px; margin-top:10px; }
 .btn-clrs													{width:45%; float:right; border-radius:4px;margin-top:10px; }
+.bar-button-light-md, .bar-button-clear-md-light, .bar-button-md-light{font-size:15px;}
+.connection-btn .button-md 									{background:#58e2c9;box-shadow:none;}
+
 .footer-btn													{float:left; width:100%;}
 .brder-cor .button-md span.button-inner						{justify-content:left;}
 .detalisview-arr											{float:right;}
@@ -381,7 +391,20 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .trash-icon													{height:20px;padding:0 !important;position:absolute;right:-7px;top:-13px;}
 .trash-icon	i												{color:red; font-size:19px !important;}
 .secon-sdms													{background:#ff4000 !important; color:#fff !important; font-size:15px; text-transform:capitalize; border-radius:25px;}
-.liste-edit													{font-size:17px !important;line-height:35px !important;padding:0 !important;text-align:center !important;}
+.edit-profile-view .label-ios								{font-size:17px; padding-left:6px;  margin:5px 0 px; }
+.edit-profile-view .item-ios									{padding-left:8px;}
+.edit-profile-view .item-ios .item-inner .input-wrapper .input-ios .text-input-ios{font-size:16px;  width: calc(100% - 8px - 5px) !important;}
+
+.edit-profile-view .label-md								{font-size:17px; padding-left:6px;   margin:7px 0 7px; }
+.edit-profile-view .item-md									{padding-left:8px;}
+.edit-profile-view .item-md .item-inner .input-wrapper .input-md .text-input-md{ font-size:15px;  width: calc(100% - 8px - 0px) !important;}
+.edit-profile-view .item-md .item-inner .input-wrapper .select-brd{width:97% !important; font-size:15px; padding-left:6px !important; height:38px;}
+
+.listed-profiles{  margin:10px !important; float:left;width:94%;background:#fef3f3; border-left:4px solid rgba(255, 193, 7, 0.22);}
+.listed-profiles p{ font-size:16px; padding-left:10px;}
+.listed-profiles p i{ width:22px; font-size:15px;}
+
+
 .but-colo													{padding:8px !important;height:32px !important; width:auto!important; border:1px solid #ccc !important;}
 .num-of														{color:red !important; font-size:13px !important;}
 .comm-cl													{color:#1E90FF !important; font-size:17px !important; text-transform: capitalize;}
@@ -511,9 +534,11 @@ page-service-info .service_request							{border:none !important;}
 .label-md {
     margin: 13px 6px 13px 0;
 }
+
+
 .item-md.item-block .item-inner{padding-right:0px;}
 /*-------------------------------------ios platform css -------------------------------------*/
-.ios-cont-s{margin-top:0px;}
+
 .slider-detalis-list .card-md 							{ margin:5px; width: calc(100% - 10px) !important; padding:5px;}
 .slider-detalis-list .card-md .card-header-md ,.card-content-md					{ padding:0px;}
 .slider-detalis-list										{float:left;  width:100%; margin-top:10px; }
@@ -533,7 +558,13 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 															 font-weight:400; color:#555;}
 .call-us												    {color:#9370DB!important; font-size:16px; width:100%; float:left; padding-top:5px;}
 .token-date													{font-size:12px !important; color:#777;}
-
+.show-pass													{padding-left:0px;}
+.show-pass .checkbox-md 									{margin: 0 0 9px 10px !important;}
+.show-pass .item-inner .input-wrapper .label-md 			{margin:-6px 0px 0px 0px; line-height:0px; }
+.btn-can													{background:#fe7fe6;}
+.btn-sbt													{background:#888aef; float:right;}
+.show-pass .checkbox-ios 									{margin: 0 0 9px 10px !important;}
+.show-pass .item-inner .input-wrapper .label-ios 			{margin:-6px 0px 0px 0px; line-height:0px; }
 .des-detalis												{font-size:15px !important;}
 .toolbar-ios ion-title										{padding: 0 50px 1px;}
 .label-ios[stacked]											{margin-bottom:0px;}
@@ -553,12 +584,12 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .token-primary	small										{font-size:18px; font-weight:400;color:#FE2725; float:left;}
 .token-primary i											{font-size:14px; color:#666; line-height:25px;  float:left; padding-left:5px; line-height:30px;}
 .token-primary p											{font-size:17px; color:#888aef; float:left;  margin:0px; line-height:30px;padding-left:5px; }
-.change-pass												{border-radius:20px; width:95%; height:35px; margin-left:5px; border:1px solid red;}
+.change-pass												{border-radius:20px; width:95%; height:35px; margin-left:5px;}
 .item-ios ion-avatar ion-img, .item-ios ion-avatar img		{ border-radius:0px !important;}
 .segment-ios .segment-button:hover:not(.segment-activated)	{background:#fff !important;}
 .segment-ios .segment-button.segment-activated				{margin-top:10px;}
 .segment-ios .segment-button								{margin-top:10px;background:#fff; border:1px solid #888aef; color:#888 !important; padding-left:10px; height:38px; line-height:35px; font-size:15px;}
-.uploadimg													{height:35px !important; width:95%; border-radius:25px !important;}
+.uploadimg													{height:35px !important; width:95%; border-radius:25px !important; background:#fe7fe6;}
 .segment-ios												{ margin-top:10px;}
 .label-ios 													{margin: 11px 0 15px;}
 .label-opc .item-ios										{background:none !important;}

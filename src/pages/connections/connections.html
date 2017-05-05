@@ -154,21 +154,19 @@
     <ion-avatar item-left (click)="CommunityUserWall(request?.id)">
     <img src="{{imageUrl+request?.avatar}}" [hidden]="!request?.avatar" (click)="CommunityUserWall(request?.id)">
     </ion-avatar></ion-col>
-    <ion-col width-67>
+    <ion-col width-60>
     <h6 class="name-conne">{{request?.connections?.name}} </h6>
     <p class="connection-page" [hidden]="!request?.connections?.location">
     <i class="fa fa-map-marker"></i> {{request?.connections?.location}}    
     </p>
   
     </ion-col>
-  
-    </ion-row>
-    <ion-row>
-    <ion-col width-10>
-      <button ion-button (click)="connectMember(request.id,request.connections.name)"  small>connect
+      <ion-col width-20 class="connection-btn">
+      <button ion-button (click)="connectMember(request.id,request.connections.name)"  small><i class="fa fa-share-alt"></i>
       </button>
     </ion-col>
     </ion-row>
+
     </ion-grid>  
     <hr/>
 
