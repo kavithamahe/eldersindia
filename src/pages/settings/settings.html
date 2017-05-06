@@ -24,27 +24,27 @@
   <ion-card>
       <ion-list>
 
-        <ion-item color="mistyrose">
+        <ion-item color="mistyrose" (tap)="toggle('privacy_name')">
           <ion-label>Name</ion-label>
           <ion-toggle [(ngModel)]="privacy_name"></ion-toggle>
         </ion-item>
 
-        <ion-item color="seashell">
+        <ion-item color="seashell" (tap)="toggle('privacy_email')">
           <ion-label>Email</ion-label>
           <ion-toggle [(ngModel)]="privacy_email"></ion-toggle>
         </ion-item>
  
-        <ion-item color="mistyrose">
+        <ion-item color="mistyrose" (tap)="toggle('privacy_mobile')">
           <ion-label>Mobile</ion-label>
           <ion-toggle [(ngModel)]="privacy_mobile"></ion-toggle>
         </ion-item>
 
-        <ion-item color="seashell">
+        <ion-item color="seashell" (tap)="toggle('privacy_location')">
           <ion-label>Location</ion-label>
           <ion-toggle [(ngModel)]="privacy_location"></ion-toggle>
         </ion-item>
 
-        <ion-item color="mistyrose">
+        <ion-item color="mistyrose" (tap)="toggle('privacy_birthday')">
           <ion-label>Birthday</ion-label>
           <ion-toggle [(ngModel)]="privacy_birthday"></ion-toggle>
         </ion-item>
@@ -54,12 +54,12 @@
           <ion-toggle [(ngModel)]="privacy_avatar"></ion-toggle>
         </ion-item>
         <hr/> -->
-        <ion-item color="seashell">
+        <ion-item color="seashell" (tap)="toggle('privacy_connection')">
           <ion-label>Connections</ion-label>
           <ion-toggle [(ngModel)]="privacy_connection"></ion-toggle>
         </ion-item>
 
-        <ion-item color="mistyrose">
+        <ion-item color="mistyrose" (tap)="toggle('privacy_profile')">
           <ion-label>Profile</ion-label>
           <ion-toggle [(ngModel)]="privacy_profile"></ion-toggle>
         </ion-item>
