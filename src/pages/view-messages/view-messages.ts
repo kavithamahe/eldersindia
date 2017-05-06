@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { MessagesService } from '../../providers/messages-service';
 import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
-
+import { CreateMessagePage } from '../../pages/create-message/create-message';
 
 /*
   Generated class for the ViewMessages page.
@@ -74,9 +74,13 @@ viewType:any;
         });
    toast.present();
   }
-   public CommunityUserWall(profile_uid)
+  public CommunityUserWall(profile_uid)
   {
-    console.log(profile_uid);
     this.navCtrl.setRoot(CommunityprofilePage,{profile_uid});
+  }
+  public messageReply(to,subject)
+  {
+    let msgObject={"to":to,"subject":subject};
+    this.navCtrl.setRoot(CreateMessagePage,msgObject);
   }
 }

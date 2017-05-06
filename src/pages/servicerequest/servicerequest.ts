@@ -26,6 +26,7 @@ remarks:string='';
 nextPageURL:any='';
 getRemarksList:any=[];
 serviceRequestScrollLists:any=[];
+vendorStatus:any=[];
   constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -44,6 +45,7 @@ serviceRequestScrollLists:any=[];
     this.serviceRequest.serviceRequestList().subscribe(
      (serviceRequest) => {
       this.serviceRequestInfo=serviceRequest.result.info.list.data; 
+      this.vendorStatus=serviceRequest.result.info.status;
       this.nextPageURL=serviceRequest.result.info.list.next_page_url;      
     },
     (err) => { 

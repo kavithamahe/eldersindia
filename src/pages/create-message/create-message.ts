@@ -44,6 +44,8 @@ submitAttempt: boolean = false;
     })
 
   });
+//  this.messageForm.value.to=navParams.get("to");
+//      this.messageForm.value.subject=navParams.get("subject");
    this.messageForm = formBuilder.group({
         toAddress: ['', Validators.compose([Validators.required])],
         subject: ['', Validators.compose([Validators.required])],
