@@ -63,6 +63,7 @@ token:any;
       // this.gender = this.profileData.gender;
       this.edit_profile_Form = formBuilder.group({
         name: [this.profileData.name,Validators.compose([Validators.required])],
+        company: [{value:this.profileData.company_name,disabled: true}],
         designation: [{value:this.profileData.designation,disabled: true},Validators.compose([Validators.minLength(3), Validators.required])],
         gender: [this.profileData.gender,Validators.compose([Validators.required])],
         mobile_number: [this.profileData.mobile,Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.required])],
