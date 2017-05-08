@@ -81,7 +81,7 @@
         <i class="fa fa-reply"> Reply</i>
       </button>
     </ion-col>
-    <ion-col *ngIf ="viewType == 'sent'" (click)="messageReply(veiwMessagesInfo?.receiver_name)">
+    <ion-col *ngIf ="viewType == 'sent'" (click)="messageReply(veiwMessagesInfo?.receiver_name,veiwMessagesInfo?.subject)">
       <button ion-button icon-left clear small>
         <i class="fa fa-reply"> Reply</i>
       </button>

@@ -46,7 +46,6 @@ viewType:any;
     this.messagesService.viewMessages(messageId,viewType).subscribe(
      (viewMessages) => {
       this.veiwMessagesInfo=viewMessages.result.details;  
-      console.log(this.veiwMessagesInfo);
     },
     (err) => { 
         if(err.status===401)

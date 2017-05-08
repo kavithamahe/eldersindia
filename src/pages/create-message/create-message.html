@@ -16,7 +16,7 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Create Message</ion-title>
+    <ion-title text-center>Compose</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -31,7 +31,7 @@
   <p *ngIf="!messageForm.controls.toAddress.valid && (messageForm.controls.toAddress.dirty || submitAttempt)" class="err-reds">Please select to</p>
 
   <ion-item>
-    <ion-input type="text" placeholder="Subject" formControlName="subject"></ion-input>
+    <ion-input type="text" placeholder="Subject" formControlName="subject" [(ngModel)]="subject1"></ion-input>
   </ion-item>
   <p *ngIf="!messageForm.controls.subject.valid && (messageForm.controls.subject.dirty || submitAttempt)" class="err-reds">Please enter subject</p>
   <ion-item>
