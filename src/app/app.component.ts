@@ -138,14 +138,6 @@ export class MyApp {
                         });                   
     
     this.initializeApp();
-    let confirmAlert = this.alertCtrl.create({
-          subTitle: 'switch-ON GPS to get current Location.',
-          buttons: [{
-            text: 'OK',
-            role: 'cancel',
-          }]
-        });
-        confirmAlert.present();
     // alert("switch-ON GPS to get current Location.");
     platform.ready().then(() => {
       this.initPushNotification();
@@ -163,6 +155,14 @@ export class MyApp {
             this.getLocation(data.coords.latitude,data.coords.longitude);
         },
         (err) =>{
+          let confirmAlert = this.alertCtrl.create({
+          subTitle: 'switch-ON GPS to get current Location.',
+          buttons: [{
+            text: 'OK',
+            role: 'cancel',
+          }]
+        });
+        confirmAlert.present();
             console.log("error in fetching Geo Location: ",err);
         });
 

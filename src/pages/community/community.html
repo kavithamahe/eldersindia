@@ -66,7 +66,7 @@
 	<div *ngIf="communityDetailData?.isJoined">
 		<h2 class="wel-comemem">Update Status</h2>
 			<div style="padding:0px !important;">
-				<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
+				<ion-textarea style="-webkit-user-select:all !important;" [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
 				</ion-textarea>
 			</div>
 			<!-- <div style="padding:0px !important;">
@@ -94,7 +94,7 @@
 						<ion-col>
 							<div>
 								<ion-item  class="video" >
-									<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
+									<ion-input [(ngModel)]="videoUrl" type="url" placeholder="Enter Video Url...">
 									</ion-input>
 								</ion-item>
 							</div>
@@ -190,7 +190,7 @@
 						<button class="comment but-colo" color="dark" ion-button icon-left clear small 
 						(click)="showComment(user)">
 							<span style="color:red; font-size:13px;">{{user.comment_count}}</span>&nbsp;<i class="fa fa-comments" aria-hidden="true"></i>
-						  </button>
+						</button>
 	          		</ion-col>
 
 	          	</ion-row>

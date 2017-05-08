@@ -355,9 +355,7 @@ imageURL:any;
 
   addDependent(){
     //---------------------------------edited-------------------------------//
-    if(!this.authForm.valid){
-      this.communityServices.showToast("Enter The Above Details..!");
-    }else{
+   
     this.getElderSkills();
     this.skill_data= this.elder_skills;
 
@@ -472,7 +470,7 @@ imageURL:any;
               })
         }
     this.nav.pop();
-}
+
 }
 
  cancel(){

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController,ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController,ToastController,ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { MessagesService } from '../../providers/messages-service';
+
 import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
 import { CreateMessagePage } from '../../pages/create-message/create-message';
 
@@ -28,7 +29,7 @@ toAddress:any;
 subject:any;
 message:any;
 viewType:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public modalCtrl: ModalController,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   	this.messages="inbox";
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -60,6 +61,7 @@ viewType:any;
     );
     loader.dismiss();
   }
+  
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);

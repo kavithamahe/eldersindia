@@ -12,9 +12,10 @@
 
 </ion-header>
 
-<ion-content padding style="background:#fff;">
-<div class="profile-edit"><span  *ngIf="user_type =='sponsor' " class="profile-img"><img [src]="imageURL+profileData?.logo" > </span>
-			<p>{{profileData?.company_name}}</p></div>
+<ion-content padding style="background:#fff;"> <!-- imageURL+profileData?.logo -->
+<div class="profile-edit"><span  *ngIf="user_type =='sponsor' " class="profile-img"><img [src]="base64Image" > </span>
+<p><i class="fa fa-camera" aria-hidden="true" (click)="accessGallery()"></i></p>
+</div>
 
 	<form [formGroup]="edit_profile_Form">
 <div class="edit-profile-view">
@@ -38,6 +39,11 @@
 	    </ion-item>
 
            		<p class="err-reds" *ngIf="!edit_profile_Form.controls.gender.valid  && (edit_profile_Form.controls.gender.touched || submitAttempt)">Please select your Gender</p>
+
+        <ion-label class="liste-edit" *ngIf="user_type =='sponsor' ">Company</ion-label>
+		<ion-item *ngIf="user_type =='sponsor' ">
+	    <ion-input type="text" formControlName="company"></ion-input>
+	    </ion-item>
       
 		<ion-label *ngIf="user_type =='sponsor' " class="liste-edit">Designation</ion-label>
         <ion-item *ngIf="user_type =='sponsor' ">
@@ -79,27 +85,57 @@
 	    <ion-input type="text" formControlName="user_type"></ion-input>
 	    </ion-item>
 	  
-
+<br/>
 	
 	   
-	    <ion-row>
+	    <!-- <ion-row>
 		<ion-col>
 	    <button ion-button class="uploadimg" color="primary" (click)="accessGallery()"><i class="fa fa-upload"></i>&nbsp; Browse...</button>
 				</ion-col>
 				<ion-col>
 				 <img [src]="base64Image" *ngIf="base64Image" width="90" height="90" />
 						</ion-col>
-		</ion-row>
+		</ion-row> 
  	
 <hr/>
 	  	<ion-row>
 	         <ion-col><button class="btn-defaults" ion-button item-left small (click)="dismiss()">Cancel</button></ion-col>
 	         <ion-col offset-33><button class="btn-primarys"ion-button item-right small (click)="updateProfile()">Update</button></ion-col>
-	    </ion-row>
+	    </ion-row>-->
 </div>
 </form>
 	
 </ion-content>
+<ion-footer>
+  <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
+    <ion-buttons>
+      <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
+        <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
+        <ion-icon class="gly-rotate-180" name="send"></ion-icon>
+        <div style="padding-left: 10px !important;">
+          Back
+        </div>
+      </button>
+      <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()">
+        <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
+        <ion-icon class="gly-rotate-180" name="send"></ion-icon>
+        <div style="padding-left: 10px !important;">
+          Back
+        </div>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="updateProfile()">
+        Update
+        <ion-icon name="send"></ion-icon>
+      </button>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="updateProfile()">
+        Update
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
 
 <style>
 .text-input-md{ margin:0px;}
@@ -109,4 +145,13 @@ border-bottom-color: transparent !important;
 box-shadow: none !important;}
 .item-ios.item-block .item-inner{ border-bottom:none !important;}
 .item-ios.item-label-stacked .text-input, .item-ios.item-label-floating .text-input{ font-size:14px !important;margin-left:8px !important;}
+.gly-rotate-180 {
+  filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.5);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  display: inline-block;
+}
 </style>
