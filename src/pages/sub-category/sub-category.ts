@@ -31,16 +31,19 @@ subCategoryTitle:any;
     // this.loadLocations();
     this.subCategoryTitle = navPara.get("subcategory").service;
     this.locations = navPara.get("locations");
-    
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     this.storage.ready().then(() => {
       this.storage.get('service_location').then((my_location) => {
+        console.log("this.serviceLocation1",my_location);
           for(let i=0; i<this.locations.length;i++){
-            if(this.locations[i].location == my_location){
+            if(this.locations[i].location == my_location || this.locations[i].id == my_location){
               this.serviceLocation = my_location;
-            }else{
-              this.serviceLocation = "";
+              console.log("this.serviceLocation2",this.serviceLocation);
             }
+            // else{
+            //   this.serviceLocation = "";
+            //   console.log("this.serviceLocation3",this.serviceLocation);
+            // }
           }          
           this.loadSubCategory(this.serviceLocation);          
       });
@@ -76,7 +79,7 @@ loadSubCategory(location){
 }
 
 locationChanged(){
-
+console.log("this.serviceLocation4",this.serviceLocation);
   let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     this.storage.ready().then(() => {
       this.storage.set('service_location',this.serviceLocation);

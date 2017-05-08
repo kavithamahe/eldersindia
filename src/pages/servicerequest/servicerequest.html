@@ -40,8 +40,9 @@
 	<p *ngIf="(service?.enquiry_date!='0000-00-00 00:00:00')" class="token-date"><i class="fa fa-calendar"></i> {{service?.enquiry_date | date :'MMM dd y'}}</p>
 	 <p><i class="fa fa-id-card-o"></i> {{service?.sr_token}}</p>
    <p class="des-detalis">{{service?.enquiry_about}}</p>
-  
-	
+   <span *ngFor="let venStatus of vendorStatus" >
+   <p *ngIf="venStatus.id==service?.vendor_status"> <ion-badge> {{venStatus.label}}</ion-badge></p>
+	</span>
 	  
 
 	</ion-col>
