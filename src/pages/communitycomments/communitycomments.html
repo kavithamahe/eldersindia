@@ -48,7 +48,7 @@
 				</ion-col>
 		      	<div *ngIf="i==replyBlock">
 					<ion-row>
-						<ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important;" placeholder="write a reply.."></ion-textarea>
+						<ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important; -webkit-user-select:all !important;" placeholder="write a reply.."></ion-textarea>
 						<p class="message-container" [innerHTML]="':smile:  ' | emojis"  
 						(click)="emojiPicker2(comment.comments_id,post_profile_id)"></p>
 					</ion-row>
@@ -60,7 +60,7 @@
 		</div>
 		<div *ngIf="j==Reply">
 			<ion-row>
-				<ion-textarea [(ngModel)]="reply_comment" style=" margin:0px !important;" placeholder="write a reply.."></ion-textarea>
+				<ion-textarea [(ngModel)]="reply_comment" style=" margin:0px !important;-webkit-user-select:all !important;" placeholder="write a reply.."></ion-textarea>
 				<p class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker2(comment.comments_id,post_profile_id)"></p>
 			</ion-row>
 			<div class="send-req">
@@ -70,7 +70,7 @@
 		</div>
 	</ion-list>
 		<ion-row>
-			<ion-textarea [(ngModel)]="post_comment" style=" margin:0px !important;" placeholder="Enter Comments"></ion-textarea>             
+			<ion-textarea [(ngModel)]="post_comment" style=" margin:0px !important;-webkit-user-select:all !important;" placeholder="Enter Comments"></ion-textarea>             
 			<p class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker1(post_id)"></p>		
         </ion-row>
 		<div class="send-req">

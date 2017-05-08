@@ -20,6 +20,7 @@ token:any;
     this.storage.ready().then(() => {
      this.storage.clear();
      this.storage.set('id','');
+     this.storage.set('token','');
      this.navCtrl.setRoot(LoginPage);
  });
    }

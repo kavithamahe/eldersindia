@@ -39,13 +39,14 @@
             [class.invalid]="!authForm.controls.elder_name.valid && (authForm.controls.elder_name.dirty)" value={{elder_name}}>
             </ion-input>
       </ion-item>
-          <small *ngIf="!authForm.controls.elder_name.valid  && (authForm.controls.elder_name.dirty)">
+          <small *ngIf="!authForm.controls.elder_name.valid  && (authForm.controls.elder_name.dirty || submitAttempt)">
                   <p class="valid err-reds">Please enter name</p>
           </small> 
 		  <ion-label>Services</ion-label>
           <ion-item>
               
-                <ion-select class="select-brd" [(ngModel)]="elder_service"  [ngModelOptions]="{standalone: true}">
+                <ion-select class="select-brd" [(ngModel)]="elder_service"  
+                [ngModelOptions]="{standalone: true}">
                     <ion-option *ngFor="let service of in_service" value={{service.value}}>{{service.label}}</ion-option>
                 </ion-select>
           </ion-item>
@@ -55,7 +56,7 @@
                   [class.invalid]="!authForm.controls.elder_number.valid && (authForm.controls.elder_number.dirty)"  value={{elder_number}}>
               </ion-input>
 			     </ion-item>
-              <small  *ngIf="!authForm.controls.elder_number.valid  && (authForm.controls.elder_number.dirty)">
+              <small  *ngIf="!authForm.controls.elder_number.valid  && (authForm.controls.elder_number.dirty || submitAttempt)">
                 <p class="valid err-reds">Please enter number</p>
               </small>
 			    <ion-label>Date Of Birth</ion-label>
@@ -69,10 +70,10 @@
                 [class.invalid]="!authForm.controls.elder_address.valid && (authForm.controls.elder_address.dirty)" value={{elder_address}}>
               </ion-input>
 			    </ion-item>  
-          <small *ngIf="!authForm.controls.elder_address.valid  && (authForm.controls.elder_address.dirty)">
+          <small *ngIf="!authForm.controls.elder_address.valid  && (authForm.controls.elder_address.dirty || submitAttempt)">
                 <p class="valid err-reds">Please enter address</p>
           </small>
-		   <ion-label>Loaction</ion-label>
+		   <ion-label>Location</ion-label>
           <ion-item>
            
               <ion-select  class="select-brd" [(ngModel)]="elder_location"  [ngModelOptions]="{standalone: true}">
@@ -175,11 +176,12 @@
 			 
         </ion-item>
          <ion-label>Total Years</ion-label>
-		  <ion-item>
+		    <ion-item>
               <ion-input [(ngModel)]="experience_years[i]" 
-                [ngModelOptions]="{standalone: true   }"type="text" value={{experience_years}}>
+                [ngModelOptions]="{standalone: true}" type="text" value={{experience_years}}>
               </ion-input>
         </ion-item>
+       
           <ion-label>Duration</ion-label>
 		        <ion-item>
               <ion-input [(ngModel)]="experience_duration[i]" [ngModelOptions]="{standalone: true}" type="text" placeholder="Eg:April 2007-2011">
@@ -276,14 +278,14 @@
                 [class.invalid]="!authForm.controls.elder_email.valid && (authForm.controls.elder_email.dirty)" placeholder="Email" value={{elder_email}}>
                 </ion-input>
 				</ion-item>
-                <small *ngIf="!authForm.controls.elder_email.valid  && (authForm.controls.elder_email.dirty)">
+                <small *ngIf="!authForm.controls.elder_email.valid  && (authForm.controls.elder_email.dirty || submitAttempt)">
                     <p class="valid err-reds">Please enter Email</p>
                 </small>
             <ion-label>Password</ion-label>
               <ion-input formControlName="elder_password" style="margin:0px;"
                 [class.invalid]="!authForm.controls.elder_password.valid && (authForm.controls.elder_password.dirty)" type="text" placeholder="Password" value={{elder_password}}>
               </ion-input>
-              <small *ngIf="!authForm.controls.elder_password.valid  && (authForm.controls.elder_password.dirty)">
+              <small *ngIf="!authForm.controls.elder_password.valid  && (authForm.controls.elder_password.dirty || submitAttempt)">
                 <p class="valid err-reds">Please enter password</p>
               </small>
           </div>  
@@ -318,14 +320,16 @@
     
     <ion-buttons>
       <button ion-button color="royal" large icon-left showWhen="ios" (click)="cancel()">
-        <i class="fa fa-reply" aria-hidden="true"></i>
-        <!-- <ion-icon name="undo"></ion-icon> -->
-         Back
+        <ion-icon class="gly-rotate-180" name="send"></ion-icon>
+         <div style="padding-left: 10px !important;">
+          Back
+        </div>
       </button>
       <button ion-button color="light" large icon-left hideWhen="ios" (click)="cancel()">
-        <i class="fa fa-reply" aria-hidden="true"></i>
-        <!-- <ion-icon name="undo"></ion-icon> -->
-         Back
+         <ion-icon class="gly-rotate-180" name="send"></ion-icon>
+        <div style="padding-left: 10px !important;">
+          Back
+        </div>
       </button>
     </ion-buttons>
 
@@ -343,5 +347,13 @@
 </ion-footer>
 <style>
 [_nghost-ung-41]{box-shadow:0 0;}
-
+.gly-rotate-180 {
+  filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.5);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  display: inline-block;
+}
 </style>

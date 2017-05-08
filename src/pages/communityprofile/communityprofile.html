@@ -27,30 +27,31 @@
 					</ion-item>
 			  </ion-col>
 			 
-			  	 <ion-col *ngIf="status === 3">
+			  	 <ion-col *ngIf="(status === 3 && (communityProfileData.id != my_id))">
 					  <button ion-button (click)="connectMember(communityProfileData)">Connect
 					  </button>
-				  </ion-col >
-				  <ion-col *ngIf ="status === 0">
+				  </ion-col > 
+				  <ion-col *ngIf ="status === 0 && (communityProfileData.id != my_id)">
 					  <button ion-button disabled="true">Request Sent
 					  </button>
 				  </ion-col>
-				  <ion-col  *ngIf="status === 2">
+				  <ion-col  *ngIf="status === 2 && (communityProfileData.id != my_id)">
 					  <button ion-button disabled="true">Rejected
 					  </button>
 				  </ion-col>
-				  <ion-col  *ngIf="status === 1">
+				  <ion-col  *ngIf="status === 1 && (communityProfileData.id != my_id)">
 					  <button ion-button disabled="true">Connected
 					  </button>
 				  </ion-col>
-				  <ion-col *ngIf="status === 1">
+				  <ion-col *ngIf="status === 1 && (communityProfileData.id != my_id)">
 					  <button ion-button (click)="messageModel(communityProfileData)">Message
 					  </button>
 				  </ion-col>
 			</ion-row>
 		  <ion-row>
-			  <ion-col>
-				  <p style="text-align:left;" class="mem-name">{{communityProfileData?.name}}</p>
+			  <ion-col text-capitalize>
+				  <p *ngIf="communityProfileData.id != my_id" style="text-align:left;" class="mem-name">{{communityProfileData?.name}}</p>
+				  <p *ngIf="communityProfileData.id == my_id" style="text-align:left;" class="mem-name">You</p>
 			  </ion-col>
 			  <!-- <ion-col>
 					<button ion-button (click)="profileSetting(communityProfileData.id)">My Profile
@@ -85,7 +86,7 @@
 					  
 			  	  		<ion-card-content style="padding:3px !important; margin:0px;">
 					  		<div class="three">
-					      		<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?" style="margin:0px;"></ion-textarea>
+					      		<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?" style="margin:0px; -webkit-user-select:all !important;"></ion-textarea>
 				    		</div>
 		    			</ion-card-content>
 		    			<!-- <ion-card-content style="padding:3px !important; margin:0px;">

@@ -82,14 +82,15 @@ export class MyApp {
      storage.get('token').then((token) => { this.token=token;})
 
     storage.get('id').then((id) => { this.user_id=id;
-   
+     console.log("userid"+this.user_id);
+     console.log("token"+this.token);
     if((this.user_id!='' && this.user_id != null) && (this.token!='' && this.token != null))
      {
         this.rootPage= DashboardPage;
      }
      else
      {
-      this.rootPage = ChangePasswordPage;
+      this.rootPage = LoginPage;
      }
      })
    }); 
@@ -179,7 +180,7 @@ export class MyApp {
                 buttons: [{
                   text: 'NO',
                   handler: () => {
-                    if (this.user_id != '' || this.user_id != null) {
+                    if (this.user_id != '' && this.user_id != null) {
                       // code...
                       this.nav.setRoot(DashboardPage);
                     }else{

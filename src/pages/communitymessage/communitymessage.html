@@ -1,11 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Compose
+      Compose Message
     </ion-title>
-    <ion-buttons start>
-      <button ion-button  color="dark" clear (click)="dismiss()">
-       <i class="fa fa-times-circle"  name="close"></i>
+     <ion-buttons start item-right class="close-iconss">
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon ios="ios-close-circle-outline" md="md-close-circle" ></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
@@ -18,8 +19,9 @@
 		        	<ion-label>To</ion-label>
 		    	</ion-row>
 		    	<ion-row>
-			       	<button ion-button outline color="dark" light full class="message">{{member_name}}
-			       	</button>
+			       	<ion-input disabled type="text" class="message" value={{member_name}}>
+			       	</ion-input>
+			       
 	       		</ion-row>
 	       		<ion-row>
 		        	<ion-label>Subject</ion-label>
@@ -44,8 +46,9 @@
 	       			 <br>
      			<!-- <button ion-button (click)="accessGallery()" color="dark" outline>
      			<ion-icon name="add"></ion-icon>Attachment</button> -->
-      			<button ion-button (click)="sendMessage()"><ion-icon name="send"></ion-icon>Send
-      			</button>
+      			
+      			<button (click)="sendMessage()" ion-button class="btn-right">
+  				<ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;Send</button>
 			</ion-list>
   		</ion-card>
   	</form>
