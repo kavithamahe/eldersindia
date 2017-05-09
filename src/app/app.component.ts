@@ -85,7 +85,7 @@ export class MyApp {
    
     if((this.user_id!='' && this.user_id != null) && (this.token!='' && this.token != null))
      {
-        this.rootPage= DashboardPage;
+        this.rootPage= ServiceprovidersPage;
      }
      else
      {
