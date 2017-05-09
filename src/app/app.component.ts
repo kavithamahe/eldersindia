@@ -22,6 +22,7 @@ import { LogoutPage } from '../pages/logout/logout';
 
 // kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
+import { CommunityPage } from '../pages/community/community';
 import { ManagePage } from '../pages/manage/manage';
 
 import { ChangePasswordPage } from '../pages/change-password/change-password';
@@ -212,7 +213,10 @@ export class MyApp {
     
     let push = Push.init({
       android: {
-        senderID: "604025131571"
+        senderID: "604025131571",
+        icon:"icon",
+        iconColor:"blue"
+
       },
       ios: {
         alert: "true",
@@ -230,8 +234,8 @@ export class MyApp {
     });
     push.on('notification', (data) => {
       console.log('message', data.message);
-      console.log('sound',data.sound);
-      let self = this;
+      console.log('data',data);
+      // let self = this;
       //if user using app and push notification comes
       if (data.additionalData.foreground) {
         // if application open, show popup
@@ -244,8 +248,7 @@ export class MyApp {
           }, {
             text: 'View',
             handler: () => {
-              //TODO: Your logic here
-              self.nav.push(MessagesPage, {message: data.message});
+                this.getPage(data);
             }
           }]
         });
@@ -253,13 +256,25 @@ export class MyApp {
       } else {
         //if user NOT using app and push notification comes
         //TODO: Your logic on click of push notification directly
-        self.nav.push(MessagesPage, {message: data.message});
+        this.getPage(data);
         console.log("Push notification clicked");
       }
     });
     push.on('error', (e) => {
       console.log(e.message);
     });
+  }
+
+  getPage(data){
+    let type = data.additionalData.additionalData.page_type;
+    let com_id = data.additionalData.additionalData.page_details.com_id;
+    switch (type) {
+       case "comments": this.nav.push(CommunityPage,{community_id:com_id});
+       case "likes" : this.nav.push(CommunityPage,{community_id:com_id});
+       case "connection_request": this.nav.push(CommunityPage,{community_id:com_id});
+       case "service_request": this.nav.push(CommunityPage,{community_id:com_id});
+       case "message" : this.nav.push(MessagesPage);
+     }
   }
 
   openPage(page) {
@@ -274,8 +289,9 @@ export class MyApp {
     this.nativeGeocoder.reverseGeocode(d1, d2)
   .then(
     (result: NativeGeocoderReverseResult) => {
-      this.storage.ready().then(() => {this.storage.set('service_location',result.city);});
-      // alert("current Location is: "+result.city);
+      this.storage.ready().then(() => {
+      this.storage.set('service_location',result.city);
+    });
     console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
     })
     
