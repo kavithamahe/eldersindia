@@ -21,8 +21,10 @@
 
 <ion-content padding style="background:#fff;">
 
-  Last updated: February 27, 2017
+ 
   <ion-item text-wrap>
+  <div class="lastupdate">
+   <small>Last updated: February 27, 2017</small>
      <p *ngIf(!show_description)>{{description | words : 29 : '...'}} 
      <button (click)="toggleContent()">view more</button>
      </p>
@@ -32,6 +34,7 @@
     <br/>
     <p>
     IF YOU DO NOT AGREE TO ALL OF THE TERMS OF USE SET OUT BELOW, YOU MAY NOT ACCESS OR USE THE WEBSITE OR APP, SHOULD NOT CLICK TO ACCEPT THESE TERMS AND SHOULD NOT PROCEED ANY FURTHER.</p>
+  </div>
   </ion-item>
 
   <ion-list>

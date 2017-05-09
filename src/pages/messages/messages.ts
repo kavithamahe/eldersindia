@@ -173,4 +173,34 @@ sentScrolllLists:any=[];
       }
     );
   }
+  deleteMessage(messageId,viewType)
+  {
+     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.messagesService.deleteMessage(messageId,viewType).subscribe(
+     (deleteMessage) => {
+       console.log(deleteMessage);
+      this.inboxInfo=deleteMessage.result.data;   
+      if(viewType=='sent')
+      {
+        this.sent();
+      } 
+      else
+      {
+        this.onInit();
+      }  
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
+    loader.dismiss();
+  }
 }

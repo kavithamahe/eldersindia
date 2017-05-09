@@ -18,6 +18,7 @@ export class AppConfig {
   // imageUrl="http://192.168.1.121:8000/"; 
   // rooturl=this.imageUrl+"api/";
 
+
   constructor(public http: Http) {
   }
   setImageurl()

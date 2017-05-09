@@ -27,9 +27,7 @@ rootUrl:any;
     this.options = new RequestOptions({ headers: this.headers });
        })    
     storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
-      console.log("consroot"+this.rootUrl);
     });
-    console.log("storage call");
    });
   }
  showToaster(message)
@@ -81,5 +79,11 @@ rootUrl:any;
     let _request= {searchValue: ""};
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
+  }
+  deleteMessage(messageId,viewType)
+  {
+    let _request= {"viewType":viewType};
+    return this.http.post(this.rootUrl+'deleteMessage/'+messageId,_request,this.options)
+      .map(res => res.json());
   }
 }

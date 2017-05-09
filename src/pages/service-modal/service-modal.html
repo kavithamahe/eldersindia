@@ -21,23 +21,33 @@
 
 <ion-content class="popup-mds" style=" background:#fff !important;">
 
-        <div *ngIf(showServiceOffered)>
+        <div *ngIf(showServiceOffered) class="offered-servicelist">
           <ion-item *ngFor = "let service of vendorList.serviceOffered">
             <ion-card *ngFor = "let category_list of service.category_lists">
               <ion-card-header class="sub" ion-item (click)="show_sub_category()">
-                <ion-icon *ngIf(!sub_category) ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
-                <ion-icon *ngIf(sub_category) ios="ios-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>
-                {{category_list.category}}  
+               
+                <p>{{category_list.category}}</p>  
+				 <small>
+		<i *ngIf(sub_category) class="fa fa-angle-up" aria-hidden="true"></i>
+		<i *ngIf(!sub_category) class="fa fa-angle-down" aria-hidden="true"></i>
+			
+				
+				</small>
               </ion-card-header>
-              <hr *ngIf(sub_category)>
-                  <ion-card-content *ngIf(sub_category)>
+              <!-- <hr *ngIf(sub_category)> -->
+                  <ion-card-content *ngIf(sub_category) class="offered-servicelist-two">
                     <ion-item *ngFor="let subcategory_list of category_list.service_sub_category_lists; let i=index " >
                     <ion-list (click)="showService(i)">
-                      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                        {{subcategory_list.subcategory}}
-                        <i *ngIf= "i !== show_service" class="fa fa-angle-double-down"></i>
-                        <i *ngIf= "i === show_service" class="fa fa-angle-double-up"></i>
-                    </ion-list><hr>
+                   
+                       <p> {{subcategory_list.subcategory}}</p>
+                        <small>
+							<i *ngIf= "i !== show_service" class="fa fa-angle-up" aria-hidden="true"></i>
+		                    <i *ngIf= "i === show_service" class="fa fa-angle-down" aria-hidden="true"></i>
+						
+						
+						
+						</small>
+                    </ion-list>
                         <div *ngIf= "i === show_service">
                           <ion-card *ngFor="let services of subcategory_list.services" >
                           <!-- <ion-list>
@@ -61,39 +71,51 @@
           </ion-item>
 
         <ion-card *ngIf="!vendorList.serviceOffered">
-          <ion-card-content>
-            No Records Found..!
+          <ion-card-content><p style=" font-size:15px; color:red;">
+            No Records Found..!</p>
           </ion-card-content>
         </ion-card> 
         </div>
 			
 
         <div *ngIf(showContactDetails) class="add-detalis">
-	        <ion-card>
-				<ion-item>
+	        <ion-card class="contact-list">
+				<ion-item text-wrap>
+				
 				<i class="fa fa-map-marker" aria-hidden="true"></i> 
+				<p>
 				{{vendorList?.vendorDetails?.address}}
+				</p>
 				</ion-item>
 			    
 			    <ion-item>
+			
 			    <i class="fa fa-envelope" aria-hidden="true"></i> 
+						<p>
 			    {{vendorList?.vendorDetails?.email}}
+				</p>
 			    </ion-item>
 
 			    <ion-item>
+					
 			    <i class="fa fa-user" aria-hidden="true"></i> 
+				<p>
 			    {{vendorList?.vendorDetails?.contact_name}}
+				</p>
 			    </ion-item>
 
 			    <ion-item>
+				
 			    <i class="fa fa-phone" aria-hidden="true"></i> 
+					<p>
 			    {{vendorList?.vendorDetails?.contact_number}}
+				</p>
 			    </ion-item>
 			    
 	      	</ion-card>
 
 		   	<ion-card *ngIf(!vendorList?.vendorDetails?.address)>
-				<ion-item style="color:red; font-size:15px;">"No Address Deatails To Display"</ion-item>		  
+				<ion-item style="color:red; font-size:15px;color:red;">"No Address Deatails To Display"</ion-item>		  
 	      	</ion-card>
       	</div>
 
@@ -101,11 +123,11 @@
 <ion-footer>
   <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
     
-    <ion-buttons end>
+    <ion-buttons>
       <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
         <ion-icon class="gly-rotate-180" name="send"></ion-icon>
-        <div style="padding-left: 10px !important;">
+        <div style="padding-left: 10px !important; float:left;">
           Back
         </div>
       </button>
@@ -135,36 +157,3 @@ ion-content{ background:none !important;}
 }
 </style>
 
-<div *ngIf(showServiceOffered)>
-          <ion-card *ngFor = "let service of vendorList.serviceOffered">
-            <ion-list *ngFor = "let category_list of service.category_lists">
-              <button class="sub" ion-item (click)="show_sub_category()">
-                <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
-                {{category_list.category}}  
-              </button >
-              <!-- <ion-item *ngIf(sub_category)>
-                <ion-card *ngFor="let subcategory_list of category_list.service_sub_category_lists; let i=index " >
-                <ion-list (click)="showService(i)">
-                  <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
-                    {{subcategory_list.subcategory}}
-                </ion-list>
-                    <ion-item *ngIf= "i === show_service">
-                      <ion-card *ngFor="let services of subcategory_list.services" >
-                      <ion-list>
-                        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
-                          {{services.service}}
-                      </ion-list>
-                      </ion-card> 
-                    </ion-item>
-              </ion-card> 
-              </ion-item> -->
-              
-            </ion-list>
-          </ion-card>
-
-        <ion-card *ngIf="!vendorList.serviceOffered">
-          <ion-card-content>
-            No Records Found..!
-          </ion-card-content>
-        </ion-card> 
-        </div>
