@@ -1,15 +1,14 @@
 
 
 <ion-content padding>
-<ion-card>
-<ion-card-header text-center>
+<p text-center>
 {{myProfile.name}}
-</ion-card-header><hr>
-<ion-card-content *ngIf="profile == 'true'">
+</p><hr>
+<ion-item *ngIf="profile == 'true'">
 			<ion-item *ngIf="birthday=='true'">
 				<i class="fa fa-birthday-cake" aria-hidden="true"></i>{{myProfile.birthday}}
 			</ion-item>
-			<ion-item  *ngIf="email=='true'">
+			<ion-item text-wrap *ngIf="email=='true'">
 				<i class="fa fa-envelope" aria-hidden="true"></i>{{myProfile.email}}
 			</ion-item>
 			<ion-item *ngIf = "location=='true'">
@@ -18,17 +17,13 @@
 			<ion-item *ngIf = "mobile=='true'">
 				<i class="fa fa-map-marker" aria-hidden="true"></i>{{myProfile.mobile}}
 			</ion-item>
+</ion-item>
 
-</ion-card-content>
-<ion-card-content *ngIf="profile == 'false'">
-	<ion-item>
+	<ion-item *ngIf="profile == 'false'">
 		<h2>User Profile is Restricted</h2>
 	</ion-item>
-</ion-card-content>
 
-</ion-card>
 
-	
 </ion-content>
 
 <style>

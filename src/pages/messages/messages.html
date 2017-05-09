@@ -54,9 +54,9 @@
   </ion-row>
   </ion-card> -->
   <ion-card *ngIf="sentInfo.length<=0"><ion-item>No Record Found</ion-item></ion-card>
-  <ion-card *ngFor="let sent of sentInfo" (click)="viewMessages(sent?.id,'sent')">
+  <ion-card *ngFor="let sent of sentInfo">
       <ion-item-sliding class="inbox-sends">
-        <ion-item>
+        <ion-item (click)="viewMessages(sent?.id,'sent')">
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
             <ion-avatar item-left>
@@ -81,14 +81,9 @@
             </ion-col>
           </ion-row>
         </ion-item>
-        <ion-item-options side="right">
+        <ion-item-options side="right" (click)="deleteMessage(sent?.id,'sent')">
           <button ion-button color="primary">
-            <ion-icon name="trash"></ion-icon>
-            Delete
-          </button>
-          <button ion-button color= red>
-            <ion-icon name="call"></ion-icon>
-            Call
+            <i class="fa fa-trash-o fa-2x"></i>            
           </button>
         </ion-item-options>
       </ion-item-sliding>
@@ -114,9 +109,9 @@
    </ion-col></ion-row>
   </ion-card> -->
       <ion-card *ngIf="inboxInfo.length<=0"><ion-item>No Record Found</ion-item></ion-card>
-      <ion-card *ngFor="let inbox of inboxInfo" (click)="viewMessages(inbox?.id,'inbox')">
+      <ion-card *ngFor="let inbox of inboxInfo">
       <ion-item-sliding class="inbox-sends">
-        <ion-item>
+        <ion-item (click)="viewMessages(inbox?.id,'inbox')">
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
             <ion-avatar item-left>
@@ -140,15 +135,10 @@
             </ion-col>
           </ion-row>
         </ion-item>
-        <ion-item-options side="right">
+        <ion-item-options side="right" (click)="deleteMessage(inbox?.id,'inbox')">
           <button ion-button color="primary">
-            <ion-icon name="trash"></ion-icon>
-          
-          </button>
-          <button ion-button color= red>
-            <ion-icon name="call"></ion-icon>
-         
-          </button>
+          <i class="fa fa-trash-o fa-2x"></i>          
+          </button>        
         </ion-item-options>
       </ion-item-sliding>
     </ion-card>

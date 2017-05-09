@@ -55,4 +55,11 @@ rootUrl:any;
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }
+  getRemarks() 
+  {
+  
+   let _request= {"info":{"list":true,"searchValue":"","status":""}};
+    return this.http.post(this.rootUrl+'getRemarks',_request,this.options)
+      .map(res => res.json()); 
+  }
 }

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController,ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController,ToastController,ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { MessagesService } from '../../providers/messages-service';
-import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
 
+import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
+import { CreateMessagePage } from '../../pages/create-message/create-message';
 
 /*
   Generated class for the ViewMessages page.
@@ -28,7 +29,7 @@ toAddress:any;
 subject:any;
 message:any;
 viewType:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public modalCtrl: ModalController,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   	this.messages="inbox";
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -46,7 +47,6 @@ viewType:any;
     this.messagesService.viewMessages(messageId,viewType).subscribe(
      (viewMessages) => {
       this.veiwMessagesInfo=viewMessages.result.details;  
-      console.log(this.veiwMessagesInfo);
     },
     (err) => { 
         if(err.status===401)
@@ -61,6 +61,7 @@ viewType:any;
     );
     loader.dismiss();
   }
+  
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);
@@ -74,9 +75,13 @@ viewType:any;
         });
    toast.present();
   }
-   public CommunityUserWall(profile_uid)
+  public CommunityUserWall(profile_uid)
   {
-    console.log(profile_uid);
     this.navCtrl.setRoot(CommunityprofilePage,{profile_uid});
+  }
+  public messageReply(to,subject)
+  {
+    let msgObject={"to":to,"subject":subject};
+    this.navCtrl.setRoot(CreateMessagePage,msgObject);
   }
 }

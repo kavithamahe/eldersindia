@@ -34,6 +34,7 @@ toEmail:any;
 user_type:any;
 messageForm: FormGroup;
 submitAttempt: boolean = false;
+subject1:any='';
 //protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
  constructor(public formBuilder: FormBuilder,private completerService: CompleterService,public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public messagesService:MessagesService) {
   this.storage.ready().then(() => {
@@ -44,6 +45,8 @@ submitAttempt: boolean = false;
     })
 
   });
+  this.toAddress=navParams.get("to");
+  this.subject1=navParams.get("subject");
    this.messageForm = formBuilder.group({
         toAddress: ['', Validators.compose([Validators.required])],
         subject: ['', Validators.compose([Validators.required])],

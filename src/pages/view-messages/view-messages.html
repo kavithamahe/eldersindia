@@ -54,6 +54,7 @@
                 <ion-col width-30 style="text-align-last: end; padding: 0px !important">
                 <p><i class="fa fa-calendar-o"></i> {{veiwMessagesInfo?.created_at | date :'MM/dd/yy'}}</p>
                 </ion-col>
+                
               </ion-row><!--
               <ion-row>
                 <ion-col width-70 style="padding: 0px !important">
@@ -73,6 +74,30 @@
      <b>Subject :</b>  <span>{{veiwMessagesInfo?.subject}}</span>
     </div>
     <p style="padding-top: 15px;padding-left: 20px">{{veiwMessagesInfo?.message}}</p>
+    <br>
+  <hr>
+   <ion-row>
+    <ion-col *ngIf ="viewType == 'inbox'" (click)="messageReply(veiwMessagesInfo?.sender_name,veiwMessagesInfo?.subject)">
+      <button ion-button icon-left clear small>
+        <i class="fa fa-reply"> Reply</i>
+      </button>
+    </ion-col>
+    <ion-col *ngIf ="viewType == 'sent'" (click)="messageReply(veiwMessagesInfo?.receiver_name,veiwMessagesInfo?.subject)">
+      <button ion-button icon-left clear small>
+        <i class="fa fa-reply"> Reply</i>
+      </button>
+    </ion-col>
+    <ion-col *ngIf ="viewType == 'inbox'" (click)="messageReply(veiwMessagesInfo?.sender_name,veiwMessagesInfo?.subject)">
+      <button ion-button icon-left clear small>
+      <div>Forward  <i class="fa fa-share"></i></div>       
+      </button>
+    </ion-col>
+    <ion-col end *ngIf ="viewType == 'sent'" (click)="messageReply(veiwMessagesInfo?.receiver_name)">
+      <button ion-button icon-left clear small>
+      <div>Forward <i class="fa fa-share"> </i></div>      
+      </button>
+    </ion-col>
+  </ion-row>
   </ion-card-content>
   </ion-card>
 </ion-content>

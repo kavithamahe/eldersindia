@@ -82,14 +82,15 @@ export class MyApp {
      storage.get('token').then((token) => { this.token=token;})
 
     storage.get('id').then((id) => { this.user_id=id;
-   
+     console.log("userid"+this.user_id);
+     console.log("token"+this.token);
     if((this.user_id!='' && this.user_id != null) && (this.token!='' && this.token != null))
      {
-        this.rootPage= ServiceprovidersPage;
+        this.rootPage= DashboardPage;
      }
      else
      {
-      this.rootPage = ChangePasswordPage;
+      this.rootPage = LoginPage;
      }
      })
    }); 
@@ -137,14 +138,6 @@ export class MyApp {
                         });                   
     
     this.initializeApp();
-    let confirmAlert = this.alertCtrl.create({
-          subTitle: 'switch-ON GPS to get current Location.',
-          buttons: [{
-            text: 'OK',
-            role: 'cancel',
-          }]
-        });
-        confirmAlert.present();
     // alert("switch-ON GPS to get current Location.");
     platform.ready().then(() => {
       this.initPushNotification();
@@ -162,6 +155,14 @@ export class MyApp {
             this.getLocation(data.coords.latitude,data.coords.longitude);
         },
         (err) =>{
+          let confirmAlert = this.alertCtrl.create({
+          subTitle: 'switch-ON GPS to get current Location.',
+          buttons: [{
+            text: 'OK',
+            role: 'cancel',
+          }]
+        });
+        confirmAlert.present();
             console.log("error in fetching Geo Location: ",err);
         });
 
@@ -179,7 +180,7 @@ export class MyApp {
                 buttons: [{
                   text: 'NO',
                   handler: () => {
-                    if (this.user_id != '' || this.user_id != null) {
+                    if (this.user_id != '' && this.user_id != null) {
                       // code...
                       this.nav.setRoot(DashboardPage);
                     }else{

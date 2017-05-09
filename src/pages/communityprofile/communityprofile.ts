@@ -61,13 +61,14 @@ export class CommunityprofilePage {
     isAndroid: boolean = false;
     connection:any="true";
     profile:any="true";
-
+    my_id:any;
   constructor(public nav: NavController,public platform: Platform, public storage:Storage,public popoverCtrl: PopoverController, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
         this.isAndroid = platform.is('android');
       this.nav=nav;
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      storage.get('token').then((token) => { this.token=token;})
+      storage.get('token').then((token) => { this.token=token;});
+      storage.get('id').then((id) => { this.my_id=id; })
     });
        let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();

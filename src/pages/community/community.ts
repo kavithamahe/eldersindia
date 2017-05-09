@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { ModalController, NavController, NavParams,AlertController,LoadingController,Platform,ToastController,PopoverController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
+import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
