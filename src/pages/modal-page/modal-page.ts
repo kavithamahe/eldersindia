@@ -24,7 +24,7 @@ export class ModalContentPage {
   userType:any;
   submitAttempt:any;
   modalForm: FormGroup;
-
+  vendor:any="";
   dependent:string = "";
   elderId:any;
 
@@ -33,10 +33,13 @@ export class ModalContentPage {
 
   constructor(public modalCtrl: ModalController, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
-     console.log("modal content page",params.get("dependentList"));
+     console.log("modal content page",params.get("vendor"));
      let loading = this.loadingCtrl.create({content: 'Please wait...!'});
      loading.present();
      this.dependentLists = params.get("dependentList");
+     if(params.get("vendor") != undefined){
+      this.vendor = this.params.get("vendor").name;
+    }
      this.modalForm = formBuilder.group({
         problem: ['',Validators.compose([Validators.minLength(5), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
         date: ['',Validators.compose([Validators.required])],
