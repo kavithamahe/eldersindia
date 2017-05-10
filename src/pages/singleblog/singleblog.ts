@@ -181,15 +181,17 @@ submitAttempt: boolean = false;
       this.replyPost=event;
     }
  }
- postReply(commentId,user_id){
+ postReply(commentId,to_id){
     if(this.reply_comment != ""){
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.blogListService.postReply(commentId,user_id,this.reply_comment).subscribe(
+    this.blogListService.postReply(commentId,to_id,this.reply_comment).subscribe(
      (postComment) => {
-      
+      this.viewComments(this.blogId);
      this.showToaster(postComment.result.info.message);
-     this.reply_comment="";   
+     this.reply_comment='';
+    this.replyPost=null;  
+    this.showReply=null;
     },
     (err) => { 
         if(err.status===401)
