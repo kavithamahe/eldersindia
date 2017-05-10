@@ -254,15 +254,22 @@ toggleContent(){
 
 
   
+metaLink:any = "";
 
   postCommunity(id){
      let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
      loader.present();
-     this.communityServices.postCommunity(id,this.base64Image,this.videoUrl,this.post,this.link).subscribe(datas =>{
+     let message=this.urlifyMessage(this.post);
+    this.urlifyLink(this.post);
+     // if(this.urlArr.length > 0){
+     //                 this.metalink = this.urlArr[0];
+     //            }
+
+     this.communityServices.postCommunity(id,this.base64Image,this.videoUrl,message,this.metaLink).subscribe(datas =>{
      this.showToast(datas.result);
      this.communityList(id);
-     this.post="";
-     this.link="";
+     message="";
+     this.metaLink="";
      this.videoUrl="";
      this.base64Image="";
      this.showblock= null;
@@ -272,6 +279,34 @@ toggleContent(){
     this.communityServices.showErrorToast(err);
   })
      loader.dismiss();
+  }
+    urlifyMessage(text) {
+            var urlRegex = /(https?:\/\/[^\s]+)/g;
+
+            return text.replace(urlRegex, (url)=> {
+              // return "";
+                return '<a href="' + url + '" target="_blank">' + url + '</a>';
+            })
+          }
+
+         // urlArr = [];
+         urlifyLink(text) {
+            var urlRegex = /(https?:\/\/[^\s]+)/g;
+            var i=0;
+            return text.replace(urlRegex, (data)=>{
+                this.metaLink= data;
+                i++;
+            })
+        }
+  deletePost(id){
+    this.communityServices.deletePost(id).subscribe(datas =>{
+     this.showToast(datas.result);
+     this.communityList(this.community_id);
+     },
+     err =>{
+    
+    this.communityServices.showErrorToast(err);
+  })
   }
   
   deleteComment(id){

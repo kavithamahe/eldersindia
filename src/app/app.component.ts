@@ -1,6 +1,6 @@
 import { Component, ViewChild} from '@angular/core';
 
-import { Platform, MenuController, Nav, AlertController } from 'ionic-angular';
+import { Platform, MenuController, Nav, AlertController,ToastController,LoadingController } from 'ionic-angular';
 
 import { StatusBar, Splashscreen, Push } from 'ionic-native';
 // import { Geolocation } from '@ionic-native/geolocation';
@@ -32,7 +32,9 @@ import { SettingsPage } from '../pages/settings/settings';
 
 import { LoginUser } from '../providers/login-user';
 import { Subscription }   from 'rxjs/Subscription';
-
+import { AppConfig } from '../providers/app-config';
+import { ServiceProvider } from '../providers/service-provider';
+import { CommunityServices } from '../providers/community-services';
 import { Storage } from '@ionic/storage';
 // import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 
@@ -49,6 +51,12 @@ export class MyApp {
   user_id:any='';
   reg_id:any;
   token:any='';
+  registerCredentials = {email: '', password: ''};
+  callSponsor:any=0;
+  ambulance:any=0;
+  police:any=0;
+  emailId:any='';
+  password:any='';
   // make HelloIonicPage the root (or first) page
 
 //-------userbased login-------------//
@@ -68,24 +76,102 @@ export class MyApp {
     public menu: MenuController,
     private userLogin: LoginUser,
     public alertCtrl: AlertController,
+    public toastCtrl: ToastController,
+    public appConfig:AppConfig,
+    public service:ServiceProvider,
+    public loadingCtrl: LoadingController,
+    public community_service:CommunityServices,
     public storage:Storage
   ) {
     this.storage.ready().then(() => {
     storage.get('user_type').then((userType)=>{
-      this.user_type = userType;
+    this.user_type = userType;
       console.log("user_type : ", this.user_type);
         if((this.user_type != '') && (this.user_type != null) && (this.user_type == 'sponsor')){
             this.pages.splice(1, 0, { myIcon:'fa fa-users', title: 'Manage Dependents', component: ManagePage });
            }
     });
      storage.get('token').then((token) => { this.token=token;})
-
+     storage.get('email').then((email) => { this.emailId=email;})
+     storage.get('password').then((password) => { this.password=password;})
     storage.get('id').then((id) => { this.user_id=id;
-     console.log("userid"+this.user_id);
-     console.log("token"+this.token);
     if((this.user_id!='' && this.user_id != null) && (this.token!='' && this.token != null))
      {
+              //Login Start
+      this.registerCredentials.email = this.emailId; 
+      this.registerCredentials.password = this.password; 
+    
+     let loader = this.loadingCtrl.create({
+      content: "Please wait..."
+    });     
+    loader.present();
+
+     this.userLogin.loginload(this.registerCredentials).subscribe(     
+      (loginuser) => {
+
+          this.service.serviceInit(loginuser['token']);
+          this.community_service.initialize();
+
+         if(loginuser['details']['user_type'] == 'elder'){
+           this.userLogin.currentUser("elder");
+         }else{
+           this.userLogin.currentUser("sponsor");
+         }
+         this.storage.ready().then(() => {
+           this.storage.clear();
+         this.storage.set('id', loginuser['details']['id']);
+         this.storage.set('name', loginuser['details']['name']);
+         this.storage.set('email',loginuser['details']['email']);
+          this.storage.set('password',this.registerCredentials.password);
+         this.storage.set('user_type', loginuser['details']['user_type']);
+         this.storage.set('user_type_id', loginuser['details']['user_type_id']);
+         this.storage.set('avatar', loginuser['details']['avatar']);
+         if(loginuser['details']['user_type']=='elder' && (loginuser.details.emergency_contacts.length>0))
+         {
+         if(loginuser.details.emergency_contacts[0].call_sponsor!='undefined')
+         {
+          this.callSponsor= loginuser.details.emergency_contacts[0].call_sponsor;
+          console.log("callSponsor"+this.callSponsor);
+         }
+         
+         if(loginuser.details.emergency_contacts[0].ambulance!='undefined')
+         {
+           this.ambulance=loginuser.details.emergency_contacts[0].ambulance;
+         }
+         if(loginuser.details.emergency_contacts[0].police!='undefined')
+         {
+           this.police=loginuser.details.emergency_contacts[0].police;
+         }
+         this.storage.set('call_sponsor', this.callSponsor);
+         this.storage.set('ambulance', this.ambulance);
+         this.storage.set('police', this.police);
+         }
+         this.storage.set('token', loginuser['token']);
+         this.storage.set('imageurl',this.appConfig.setImageurl());
+         this.storage.set('rooturl',this.appConfig.setrooturl());
+         // this.storage.set('service_location','');
+         this.storage.set('islogin',1);
+        //  this.nav.setRoot(DashboardPage);
         this.rootPage= DashboardPage;
+       })
+        // alert(loginuser['token']);
+       
+    },
+
+    (err) => { 
+        if(err.status===401)
+        {
+        this.rootPage = LoginPage;
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+         
+       },
+    )
+    loader.dismiss();
+       // Login End         
      }
      else
      {
@@ -143,7 +229,15 @@ export class MyApp {
     });
     
   }
-
+  showToaster(message)
+  {
+   let toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000,
+        position: 'top'
+        });
+   toast.present();
+  }
   initializeApp() {
 
     this.platform.ready().then(() => {

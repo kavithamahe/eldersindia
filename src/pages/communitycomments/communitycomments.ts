@@ -81,6 +81,21 @@ user_id:any;
       this.showReply=event;
     }
  }
+ sendInlineLikes(comments_id){
+     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+    loader.present();
+
+   this.communityServices.sendInlineLikes(comments_id).subscribe(data =>{
+     this.showToast(data.result.info.message);
+     
+   },
+    err =>{
+    
+    this.communityServices.showErrorToast(err);
+  })
+    
+    loader.dismiss();
+ }
 
  replyComments(event){
     this.reply_comment="";
@@ -121,7 +136,7 @@ user_id:any;
     this.communityServices.showErrorToast(err);
   })
   }
-
+ 
   showToast(messageData){
     let toast = this.toastCtrl.create({
         message: messageData,
@@ -154,15 +169,15 @@ sendComment(postID){
      
   }
 
-  sendReply(comments_id,profile_id){
-     console.log("comment" + comments_id + profile_id);
+  sendReply(uid_from,comments_id){
+     console.log("comment" + uid_from + comments_id);
       this.Reply=null;
       this.replyBlock=null;
     if(this.reply_comment != ""){
 
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
-     this.communityServices.sendReply(comments_id,profile_id,this.reply_comment).subscribe(datas =>{
+     this.communityServices.sendReply(uid_from,comments_id,this.reply_comment).subscribe(datas =>{
      this.showToast(datas.result.info.message);
      this.reply_comment="";
      // this.communityList(this.community_id);
