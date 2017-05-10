@@ -104,7 +104,8 @@
               <ion-avatar item-left>
                 <img (click)="CommunityUserWall(reply?.uid_from)" src="{{imageUrl+reply?.profile_image}}" [hidden]="!reply?.profile_image">
               </ion-avatar>
-              <h2 (click)="CommunityUserWall(reply?.uid_from)">{{reply.name_from}}-{{reply.name_to}}</h2>
+              <h2 (click)="CommunityUserWall(reply?.uid_from)">{{reply.name_from}}-{{reply.name_to}}
+              </h2>
               <p item-text-wrap>{{reply.comments_replay}}</p>
             </ion-item>
             <button ion-button *ngIf="user_id != reply?.uid_from" (click)="replyblogPost(j)" clear><i class="fa fa-reply" aria-hidden="true"></i></button>
