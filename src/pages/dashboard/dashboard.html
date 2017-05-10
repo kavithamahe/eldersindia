@@ -29,63 +29,86 @@
 
 <ion-content padding class="dashboard">
 <!--*ngIf="user_type=='elder'" -->
+<span style="margin-top:18px;float:left;width:100%;"></span>
 <div *ngIf="user_type=='elder'" >
 <ion-grid class="dashboard">
   <ion-row>
 
-    <ion-col width-50 class="ambulance" text-center  (click)="makeCall(ambulance)">
-    <i class="fa fa-ambulance fa-5x"></i><br>
-    AMBULANCE
+    <ion-col width-50 class="ambulance" text-center  (click)="makeCall(ambulance)" style="border:1px solid #ccc;"> 
+    <i class="fa fa-ambulance fa-5x"></i>
+    <p>AMBULANCE</p>
     </ion-col>
     <ion-col width-50 class="police" text-center (click)="makeCall(police)">
-    <i class="fa fa-users fa-5x"></i><br>
-    POLICE</ion-col>
+    <i class="fa fa-users fa-5x"></i>
+    <p>POLICE</p></ion-col>
   </ion-row>
 </ion-grid>
 <ion-grid class="dashboard">
   <ion-row>
 
     <ion-col width-50 class="hooter" text-center (click)="hooter(hooterOn)">
-    <i class="fa fa-bell-o fa-5x"></i><br>
-    HOOTER
+    <i class="fa fa-bell-o fa-5x"></i><p>
+    HOOTER</p>
     </ion-col>
     <ion-col width-50 class="call-sponsor" text-center (click)="makeCall(call_sponsor)">
-	<i class="fa fa-phone-square fa-5x"></i><br/>
+	<i class="fa fa-phone-square fa-5x"></i>
     <!--<img src="assets/img/headshot.jpg" class="img-circle">-->
-    CALL SPONSOR</ion-col>
+    <p>CALL SPONSOR</p></ion-col>
   </ion-row>
 </ion-grid>
 </div>
+
  <ion-grid class="dashboard">
   <ion-row>
 
     <ion-col width-50 class="services" text-center (click)="servicesPage()">
-    <i class="fa fa-cog fa-5x"></i><br>
-    SERVICES
+	<span class="dashboard-listed">
+    <i class="fa fa-cog fa-5x"></i>
+	
+    <p>SERVICES</p>
+	</span>
     </ion-col>
     <ion-col width-50 class="jobs" text-center (click)="jobsPage()">
-    <i class="fa fa-cubes fa-5x"></i><br>
-    JOBS</ion-col>
+		<span class="dashboard-listed">
+    <i class="fa fa-cubes fa-5x"></i>
+	<p>JOBS</p>
+	</span>
+	</ion-col>
   </ion-row>
 </ion-grid>
+
 <ion-grid class="dashboard">
   <ion-row>
     <ion-col width-50 class="community" text-center (click)="communityPage()">
-    <i class="fa fa-universal-access fa-5x"></i><br>
-    COMMUNITY</ion-col>
+		<span class="dashboard-listed">
+    <i class="fa fa-universal-access fa-5x"></i>
+    <p>COMMUNITY</p>
+	</span>
+	</ion-col>
     <ion-col width-50 class="blogs" text-center (click)="blogsPage()">
-    <i class="fa fa-rss fa-5x"></i><br>
-    BLOGS</ion-col>
+		<span class="dashboard-listed">
+    <i class="fa fa-rss fa-5x"></i>
+    <p>BLOGS</p>
+	</span>
+	</ion-col>
   </ion-row>
 </ion-grid>
 <ion-grid class="dashboard">
   <ion-row>
     <ion-col width-50 class="connection" text-center (click)="connectionsPage()">
-     <i class="fa fa-sitemap fa-5x"></i><br>
-     CONNECTIONS</ion-col>
+	
+	<span class="dashboard-listed">
+     <i class="fa fa-sitemap fa-5x"></i><p>CONNECTIONS</p>
+	 
+	 </span>
+	 </ion-col>
     <ion-col width-50 class="messagess" text-center (click)="messagesPage()">
-   <i class="fa fa-envelope-o fa-5x"></i><br>
-    MESSAGES</ion-col>
+	<span class="dashboard-listed">
+   <i class="fa fa-envelope-o fa-5x"></i><p>MESSAGES</p>
+   
+      </span>
+   </ion-col>
+
   </ion-row>
 </ion-grid>
 </ion-content>

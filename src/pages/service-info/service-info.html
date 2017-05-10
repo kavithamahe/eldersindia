@@ -24,7 +24,7 @@
   <div *ngIf="vendorList?.banners">
   <ion-slides class="slide_height" initialSlide="0" loop="true" pager="true" autoplay="3000">
       <ion-slide *ngFor="let slide of vendorList.banners" style="height:200px;">
-        <img [src]="url+slide?.banner" class="slide-image"/>
+        <img [src]="url+slide?.banner" class="slide-image" width="100" height="150"/>
       </ion-slide>  
   </ion-slides>  
   </div>
@@ -152,10 +152,18 @@
         
         <b>Contact Details</b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
       </button>
+	  <br/>
 	   </ion-col>
   </ion-row>
 </div>
   <!-- </ion-card> -->
 </ion-content>
+<style>
+
+.scroll-content{margin-top:0px !important;}
+
+
+
+</style>
 
 
