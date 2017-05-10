@@ -30,9 +30,9 @@
    
         <ion-card (tap)="toggleDetails(i)" class="des-card">
         <ion-row>
-        <ion-col width-75>
-         <button ion-button color="dark" clear (press)="showOptions(manage)"  style="margin:0px!important;">
-         <i class="fa fa-user name-person"></i><p name="person" class="name-elder">{{manage.relation}}<p>
+        <ion-col width-100 class="depende-elder">
+         <button ion-button color="dark" clear (press)="showOptions(manage)"  style="margin:0px!important; padding:4px; width:100%;">
+         <i class="fa fa-user name-person"></i><p name="person" class="name-elder">{{manage.relation}}</p>&nbsp;<i class="fa fa-angle-down"></i>
           </button>
           </ion-col>
           <!-- <ion-col width-25>
@@ -42,17 +42,17 @@
           </ion-row>
         </ion-card>
       
-        <ion-card *ngIf="i==showblock" style="padding:10px;">
+        <ion-card *ngIf="i==showblock" style="padding:7px;">
 			
           <div class="listed-det">
 	
-            <p><i class="fa fa-user userioc"></i>&nbsp;{{manage.name}}</p>
-            <p><i class="fa fa-phone userioc"></i>&nbsp;{{manage.mobile}}</p>
-            <p><i class="fa fa-calendar userioc"></i>&nbsp;{{manage.dob}}</p>
+            <span><i class="fa fa-user"></i><p>{{manage.name}}</p></span>
+            <span> <i class="fa fa-phone"></i><p>{{manage.mobile}}</p></span>
+           <span> <i class="fa fa-calendar"></i><p>{{manage.dob}}</p></span>
            <!--  <p><ion-icon class="depend" item-left 
             name="pin"></ion-icon>{{manage.city}}</p> -->
-            <p><i class="fa fa-map-marker userioc"></i>&nbsp;{{manage.address}}</p>
-            <p><i class="fa fa-suitcase userioc"></i>&nbsp;{{manage.service}}</p>
+           <span><i class="fa fa-map-marker"></i> <p>{{manage.address}}</p></span>
+            <span><i class="fa fa-suitcase"></i><p>{{manage.service}}</p></span>
 		
           </div>
 		
@@ -63,12 +63,12 @@
   
      
   </ion-content>
-  <ion-footer *ngIf(show_option)>
+  <ion-footer *ngIf(show_option) class="footer-defent">
   <ion-item>
-          <button ion-fab mini item-right (click)="editElder()" color="dark" clear style="padding:2px;"><i class="fa fa-pencil-square-o edit-eld" name="create"></i></button>
+          <button ion-fab mini item-right (click)="editElder()" clear style="padding:2px;"><i class="fa fa-pencil-square-o edit-eld" name="create"></i></button>
           <!-- </ion-fab>
           <ion-fab>
- -->      <button ion-fab mini item-left (click)="showConfirm()" color="dark" clear style="padding:2px;"><i class="fa fa-trash-o trash-del" name="trash"></i></button>
+ -->      <button ion-fab mini item-left (click)="showConfirm()" clear style="padding:2px;"><i class="fa fa-trash-o trash-del" name="trash"></i></button>
       </ion-item>
           
   </ion-footer>

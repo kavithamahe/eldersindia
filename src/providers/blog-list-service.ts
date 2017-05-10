@@ -56,9 +56,9 @@ user_id:any;
     return this.http.post(this.rootUrl+'deleteComment',_request,this.options)
       .map(res => res.json()); 
   }
-   postReply(commentId,user_id,comments) {  
-   let _request= {info: {"comments": comments, "uid_from": this.user_id, "uid_to": user_id, "comment_id": commentId}}
-    return this.http.post(this.rootUrl+'postReply/',_request,this.options)
+   postReply(commentId,to_id,comments) {  
+   let _request= {info: {"comments": comments, "uid_from": this.user_id, "uid_to": to_id, "comment_id": commentId}}
+    return this.http.post(this.rootUrl+'postReply',_request,this.options)
       .map(res => res.json()); 
   }
   createBlog(blogObject)

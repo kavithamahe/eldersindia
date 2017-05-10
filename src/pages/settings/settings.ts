@@ -240,7 +240,7 @@ export class SettingsPage {
      this.storage.ready().then(() => {
       this.storage.get('id').then((id) => { this.user_uid=id;
       this.getPrivacy();
-      this.getPageCount(); 
+      // this.getPageCount(); 
   		});
       })  
   }

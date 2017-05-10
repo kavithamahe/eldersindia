@@ -16,45 +16,80 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>View Service Request</ion-title>    
+    <ion-title text-center>{{viewServiceRequestInfo?.sr_token}}</ion-title>    
   </ion-navbar>
 </ion-header>
 
 
-<ion-content padding class="contect-bg-moblie">
+<ion-content padding style="background:#fff;">
 <ion-card>
   <ion-card-content style="padding:0px !important;">
-  <ion-grid *ngFor="let viewService of viewServiceRequestInfo" class="req-viewlist">
+  <ion-grid class="req-viewlist">
   <ion-row>
     <ion-col>
-	<span>Contact person</span>
-   <p>{{viewService?.contact_name}}</p>
+	<span>Service Provider Name</span>
+   <p>{{viewServiceRequestInfo?.vendor_name}}</p>
    </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
-	<span>Contact No</span>
-    <p>{{viewService?.contact_number}}</p>
+	<span>Contact Number</span>
+    <p>{{viewServiceRequestInfo?.contact_number}}</p>
 	</ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
-	<span>Service provider name</span>
-   <p>{{viewService?.service_provider}}</p>
+	<span>Enquiry About</span>
+   <p>{{viewServiceRequestInfo?.problem}}</p>
    </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
-	<span>Request date and time</span>
-    <p>{{viewService?.Request_dateAndTime | date:'dd/M/yyyy h:m a'}}</p>
-	</ion-col>
+  <span>Category</span>
+   <p>{{viewServiceRequestInfo?.category_name}}</p>
+   </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
-	<span>Type of problem</span>
-    <p>{{viewService?.problem}}</p>
-	
+  <span>Sub Category</span>
+   <p>{{viewServiceRequestInfo?.sub_category_name}}</p>
+   </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+  <span>Type Of Request</span>
+   <p>{{viewServiceRequestInfo?.service_type}}</p>
+   </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+  <span>Location</span>
+   <p>{{viewServiceRequestInfo?.location_name}}</p>
+   </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+	<span>Enquiry Date</span>
+    <p>{{viewServiceRequestInfo?.enquiry_date | date:'dd/M/yyyy h:m a'}}</p>
 	</ion-col>
+  </ion-row>
+  <ion-row>
+  <ion-col>
+  <span>Sheduled At</span>
+    <p>{{viewServiceRequestInfo?.scheduled_at | date:'dd/M/yyyy h:m a'}}</p>
+  </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+	<span>Remarks</span>
+    <p>{{viewServiceRequestInfo?.remarks}}</p>	
+	</ion-col>
+  </ion-row>
+    <ion-row>
+    <ion-col>
+  <span>Service Provider Comments</span>
+    <p>{{viewServiceRequestInfo?.comments}}</p>  
+  </ion-col>
   </ion-row>
   </ion-grid>
   </ion-card-content>

@@ -93,7 +93,7 @@
         <ion-item>
         <ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important;" placeholder="write a reply.."></ion-textarea>
         </ion-item>
-        <button ion-button icon-only (click)="postReply(viewComments.id,user_id)" round><i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+        <button ion-button icon-only (click)="postReply(viewComments.id,viewComments?.user_id)" round><i class="fa fa-paper-plane-o" aria-hidden="true"></i>
         </button>
       </ion-row>
       </div>
@@ -107,6 +107,10 @@
               <h2 (click)="CommunityUserWall(reply?.uid_from)">{{reply.name_from}}-{{reply.name_to}}
               </h2>
               <p item-text-wrap>{{reply.comments_replay}}</p>
+              <button ion-button icon-right clear end small item-right *ngIf="user_id==reply?.uid_to" 
+              (click)="deleteComment(reply?.comments_replay_id)">
+                <ion-icon ios="ios-trash" md="md-trash"></ion-icon>      
+              </button>
             </ion-item>
             <button ion-button *ngIf="user_id != reply?.uid_from" (click)="replyblogPost(j)" clear><i class="fa fa-reply" aria-hidden="true"></i></button>
               <div *ngIf="j==replyPost">

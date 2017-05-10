@@ -34,6 +34,8 @@ toEmail:any;
 user_type:any;
 messageForm: FormGroup;
 submitAttempt: boolean = false;
+subject1:any='';
+customErr:any=false;
 //protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
  constructor(public formBuilder: FormBuilder,private completerService: CompleterService,public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public messagesService:MessagesService) {
   this.storage.ready().then(() => {
@@ -44,14 +46,16 @@ submitAttempt: boolean = false;
     })
 
   });
-//  this.messageForm.value.to=navParams.get("to");
-//      this.messageForm.value.subject=navParams.get("subject");
+  this.toAddress=navParams.get("to");
+  this.subject=navParams.get("subject");
+  this.message=navParams.get("message");
    this.messageForm = formBuilder.group({
         toAddress: ['', Validators.compose([Validators.required])],
         subject: ['', Validators.compose([Validators.required])],
         message: ['', Validators.compose([Validators.required])]
          });
   }
+  
   public getFriendsList()
   { 
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -86,6 +90,7 @@ submitAttempt: boolean = false;
   public sendMessage()
   {
     if(!this.messageForm.valid){
+      console.log(this.messageForm.valid);
       this.submitAttempt = true;
     }else{
      let subject= this.messageForm.value.subject;
@@ -101,6 +106,16 @@ submitAttempt: boolean = false;
       this.toEmail=this.getFriendsListobj[i].email; 
       }
       }
+      console.log("toId"+this.toId);
+      if(this.toId=='' || this.toId===null || this.toId==undefined)
+      {
+        //this.showToaster("Please select valid to address");
+        loader.dismiss();
+        this.customErr=true;
+       // return false;
+      }
+      else
+       {
     this.messageObj= {"message":{"attachments":[],"to":{"title":this.toAddress,"description":this.toEmail,"image":"","originalObject":{"id":this.toId,"avatar":"","email":this.toEmail,"user_type":this.user_type,"friend_name":""}},"subject":subject,"message":message}};
     this.messagesService.sendMessage(this.messageObj).subscribe(
      (sendMessage) => { 
@@ -124,9 +139,13 @@ submitAttempt: boolean = false;
       }
     );
     loader.dismiss();
+   }
   }
   }
-  
+  hiddeEorr()
+  {
+    this.customErr=false;
+  }
   public showToaster(message)
   {
    let toast = this.toastCtrl.create({

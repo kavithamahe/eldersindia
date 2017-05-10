@@ -19,7 +19,7 @@ import { CreateMessagePage } from '../../pages/create-message/create-message';
   providers:[MessagesService]
 })
 export class MessagesPage {
-messages:any;
+messages:any="inbox";
 token:string;
 imageUrl:string;
 inboxInfo:any=[];
@@ -29,12 +29,22 @@ nextPageURL2:any='';
 inboxScrollLists:any=[];
 sentScrolllLists:any=[];
    constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
-  	this.messages="inbox";
+  	if(navParams.get("viewType")!='' && navParams.get("viewType")!=null)
+    {
+    this.messages=navParams.get("viewType");
+    }
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
       // this.blogId=navParams.get("blogId");
-  		this.onInit();
+      if(this.messages=='inbox')
+      {
+      this.onInit();
+      }
+      else
+      {
+       this.sent(); 
+      }
       })
   	});
   }
@@ -172,5 +182,34 @@ sentScrolllLists:any=[];
         }
       }
     );
+  }
+  deleteMessage(messageId,viewType)
+  {
+     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.messagesService.deleteMessage(messageId,viewType).subscribe(
+     (deleteMessage) => {
+       this.showToaster(deleteMessage.result);
+      if(viewType =='sent')
+      {
+        this.sent();
+      } 
+      else
+      {
+        this.onInit();
+      }  
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
+    loader.dismiss();
   }
 }

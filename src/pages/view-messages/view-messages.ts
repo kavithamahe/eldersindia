@@ -7,7 +7,7 @@ import { MessagesService } from '../../providers/messages-service';
 
 import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
 import { CreateMessagePage } from '../../pages/create-message/create-message';
-
+import { MessagesPage } from '../../pages/messages/messages';
 /*
   Generated class for the ViewMessages page.
 
@@ -30,7 +30,7 @@ subject:any;
 message:any;
 viewType:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public modalCtrl: ModalController,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
-  	this.messages="inbox";
+  //	this.messages="inbox";
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
@@ -47,7 +47,6 @@ viewType:any;
     this.messagesService.viewMessages(messageId,viewType).subscribe(
      (viewMessages) => {
       this.veiwMessagesInfo=viewMessages.result.details;  
-      console.log(this.veiwMessagesInfo);
     },
     (err) => { 
         if(err.status===401)
@@ -84,5 +83,33 @@ viewType:any;
   {
     let msgObject={"to":to,"subject":subject};
     this.navCtrl.setRoot(CreateMessagePage,msgObject);
+  }
+  public messageForward(subject,message)
+  {
+    let msgObject={"subject":subject,"message":message};
+    this.navCtrl.setRoot(CreateMessagePage,msgObject);
+  }
+  deleteMessage(messageId,viewType)
+  {
+     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.messagesService.deleteMessage(messageId,viewType).subscribe(
+     (deleteMessage) => {
+       this.showToaster(deleteMessage.result);
+      let viewObj={"viewType":viewType}; 
+      this.navCtrl.setRoot(MessagesPage,viewObj);
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
+    loader.dismiss();
   }
 }
