@@ -34,7 +34,7 @@ jobBoardScrollLists:any;
       storage.get('user_type_id').then((user_type_id) => { this.user_type_id=user_type_id;});
       storage.get('token').then((token) => { this.token=token; 
   		this.onInit();
-      })
+      });
   	});
   }
 
