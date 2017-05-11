@@ -5,10 +5,8 @@ import { Camera } from 'ionic-native';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Platform } from 'ionic-angular';
 import { InAppBrowser } from 'ionic-native';
+import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 import { EmojiPickerPage } from '../../pages/emoji-picker/emoji-picker';
-
-
-
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CommunitymessagePage } from '../communitymessage/communitymessage';
@@ -62,13 +60,20 @@ export class CommunityprofilePage {
     connection:any="true";
     profile:any="true";
     my_id:any;
-  constructor(public nav: NavController,public platform: Platform, public storage:Storage,public popoverCtrl: PopoverController, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+    authForm:FormGroup;
+    submitAttempt:any;
+    message:any;
+  constructor(public nav: NavController,public platform: Platform, public storage:Storage,public formBuilder: FormBuilder,public popoverCtrl: PopoverController, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
         this.isAndroid = platform.is('android');
       this.nav=nav;
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token;});
       storage.get('id').then((id) => { this.my_id=id; })
+    });
+      this.authForm = formBuilder.group({
+        videoUrl : ['', Validators.compose([Validators.pattern('^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be|vimeo\.com|dailymotion\.com|metacafe\.com|wines\.com)\/.+$')])],
+      
     });
        let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
@@ -132,6 +137,16 @@ export class CommunityprofilePage {
    }
   
 }
+deletePost(id){
+    this.communityServices.deletePost(id).subscribe(datas =>{
+     this.showToast(datas.result);
+      this.profileCommunity(this.profile_uid);
+     },
+     err =>{
+    
+    this.communityServices.showErrorToast(err);
+  })
+  }
   accessGallery(){
    Camera.getPicture({
      sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
@@ -333,15 +348,25 @@ export class CommunityprofilePage {
   }
  
   
+metaLink:any = "";
 
    addUserPosts(id){
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
-     this.communityServices.addUserPosts(id,this.base64Image,this.videoUrl,this.post,this.link).subscribe(datas =>{
+     if(!this.authForm.valid){
+      this.submitAttempt = true;
+    }else{
+      this.submitAttempt = false;
+       if(this.post!='' && this.post!=undefined && this.post!=null)
+       {
+    this.message=this.urlifyMessage(this.post);
+    this.urlifyLink(this.post);
+  }
+     this.communityServices.addUserPosts(id,this.base64Image,this.authForm.value.videoUrl,this.message,this.metaLink).subscribe(datas =>{
      this.showToast(datas.result);
      this.profileCommunity(id);
-     this.post="";
-     this.link="";
+     this.message="";
+     this.metaLink="";
      this.base64Image="";
      this.videoUrl="";
      this.showblock= null;
@@ -350,8 +375,29 @@ export class CommunityprofilePage {
     
     this.communityServices.showErrorToast(err);
   })
+   }
      loader.dismiss();
   }
+  
+
+   urlifyMessage(text) {
+            var urlRegex = /(https?:\/\/[^\s]+)/g;
+
+            return text.replace(urlRegex, (url)=> {
+              // return "";
+                 return '<a href="' + url + '" target="_blank">' + url + '</a>';
+            })
+          }
+
+         // urlArr = [];
+         urlifyLink(text) {
+            var urlRegex = /(https?:\/\/[^\s]+)/g;
+            var i=0;
+            return text.replace(urlRegex, (data)=>{
+                this.metaLink= data;
+                i++;
+            })
+        }
 
   deleteComment(id){
     this.communityServices.deleteComment(id).subscribe(datas =>{

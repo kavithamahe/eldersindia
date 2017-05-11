@@ -10,7 +10,7 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Member Profile</ion-title>
+    <ion-title text-capitalize>{{communityProfileData?.name}} Wall</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -108,15 +108,18 @@
 								</ion-col>
 							</ion-row>
 							<div *ngIf(addVideo)>
+							<form [formGroup]="authForm">
 								<ion-row>
 									<ion-col>
 										<div>
-											<ion-item  class="video" >
-												<ion-input [(ngModel)]="videoUrl" type="text" placeholder="Enter Video Url...">
-												</ion-input>
-											</ion-item>
+											<ion-input type="url" placeholder="Enter Video Url..."  formControlName="videoUrl"
+		            						[class.invalid]="!authForm.controls.videoUrl.valid && (authForm.controls.videoUrl.dirty )">
+											</ion-input>	
 										</div>
 									</ion-col>
+									<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
+	                				<p style="color:red" class="valid">Please enter valid video url</p>
+           							</div>
 								</ion-row>
 								<ion-row>
 									<div>
@@ -125,6 +128,7 @@
 										</ion-item>
 									</div>
 								</ion-row>
+							</form>
 							</div>
 							<ion-row>
 			    				<ion-col>
@@ -157,7 +161,8 @@
 			          		</ion-card-content>
 						</ion-col>
 						<ion-col offset-50>
-			  
+			  				<button ion-button *ngIf="community.uid == my_id" (click)="deletePost(community.id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i>
+						</button>
 	          			</ion-col>
 	       			</ion-row>
 	    		</ion-item>
@@ -165,7 +170,7 @@
 	       	 		<div>
 						<ion-row>
 							<ion-col>
-			          			<p item-text-wrap class="feed-post">{{community.post_message}}</p>
+			          			<p item-text-wrap class="feed-post" [innerHTML]="community.post_message"><a href=""></a>{{community.post_message}}</p>
 								<img  [src]="imageUrl+community?.post_image" [hidden]="!community?.post_image">
 							</ion-col>
 			       		</ion-row>

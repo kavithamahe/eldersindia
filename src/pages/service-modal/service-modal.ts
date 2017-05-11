@@ -25,10 +25,10 @@ title:any;
   	this.vendorList = navParams.get("vendorList");
   	if(navParams.get("service") == "contact"){
   		this.showContactDetails = true;	
-  		this.title = "Contact Details";
+  		this.title = this.vendorList.vendorDetails.name+" - Contact Details";
   	}else{
   		this.showServiceOffered = true;
-  		this.title = "Service Offered";
+  		this.title = this.vendorList.vendorDetails.name+" - Service Offered";
   	}
   	
   }

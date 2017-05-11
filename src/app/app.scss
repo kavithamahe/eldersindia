@@ -195,13 +195,18 @@ border :2px solid green;
 
 
 
-ion-content													{background-image: url('../../assets/img/bgss.png');   font-size:16px;  color:#777 !important; background-position: center center;
+ion-content													{
+background-image: url('../assets/img/bgss.png');
+  -webkit-background-image: url('../assets/img/bgss.png');
+     font-size:16px;  color:#777 !important; background-position: center center;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
 height: 100%; 
-overflow: hidden;}
+overflow: hidden;
+
+}
 
 .my-side-menu,{
  background:#F5FBEF !important;
@@ -213,7 +218,14 @@ overflow: hidden;}
   -ms-user-select: text;
   user-select: text;
 }
-
+input, textarea {
+        -webkit-user-select: auto !important;
+        -khtml-user-select: auto !important;
+        -moz-user-select: auto !important;
+        -ms-user-select: auto !important;
+        -o-user-select: auto !important;
+        user-select: auto !important;  
+  }
 .list-md .item-block .item-inner {
     border-bottom: none !important;
 }

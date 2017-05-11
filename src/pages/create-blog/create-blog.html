@@ -32,7 +32,7 @@
 <ion-item>
     <ion-label stacked class="bloag-label" style="text-align:left; padding-bottom:10px;">Category<small style="color:red;">*</small></ion-label>
     <ion-select class="select-brd" formControlName="category">
-      <ion-option *ngFor="let categories of categoriesList" [value]="categories.name">{{categories.name}}</ion-option>     
+      <ion-option *ngFor="let categories of categoriesList" [value]="categories.id">{{categories.name}}</ion-option>     
     </ion-select>
   </ion-item>
   <p *ngIf="!blogForm.controls.category.valid && (blogForm.controls.category.dirty || submitAttempt)" class="err-reds">Please enter category</p>
@@ -49,7 +49,7 @@
   </form>
   <ion-label stacked class="liste-names">Featured Image</ion-label>
    <button ion-button (click)="accessGallery('featured')">Browse</button>
-    <img [src]="base64Image" *ngIf="base64Image" />
+    <img [src]="featuredImage" *ngIf="featuredImage" />
     <ion-label stacked class="liste-names">Banner Image</ion-label>
     <button ion-button (click)="accessGallery('banner')">Browse</button>
     <img [src]="bannerImage" *ngIf="bannerImage" />

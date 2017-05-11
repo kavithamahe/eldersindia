@@ -21,14 +21,15 @@
 <ion-row style="margin:px;">
    
   <ion-col>
-
+<ion-item>
  <ion-label class="liste-edit">Select Dependent</ion-label>
-	
     <ion-select [(ngModel)]="dependent" class="select-brddd">
       <ion-option *ngFor="let dependent of getDependentList" [value]="dependent?.id">{{dependent?.name}}</ion-option>    
 	  </ion-select>
-	  <br/>
-	   <button ion-button class="submit-btns" (click)="submitDependent()">Submit</button>
+
+     </ion-item>
+        <br/>
+         <button ion-button class="submit-btns" (click)="submitDependent()">Submit</button>
   </ion-col>
 
 </ion-row>
