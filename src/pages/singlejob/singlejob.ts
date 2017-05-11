@@ -109,7 +109,10 @@ user_type_id:any;
     let modal = this.modalCtrl.create(JobDependentPage);
      modal.onDidDismiss(data => {
      this.jobDependentId=data.dependent;
+     if(this.jobDependentId!='')
+     {
      this.callApplyJob(jobId,this.jobDependentId);
+     }
      });
     modal.present();
   }
