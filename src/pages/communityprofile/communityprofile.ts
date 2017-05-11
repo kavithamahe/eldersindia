@@ -132,6 +132,16 @@ export class CommunityprofilePage {
    }
   
 }
+deletePost(id){
+    this.communityServices.deletePost(id).subscribe(datas =>{
+     this.showToast(datas.result);
+      this.profileCommunity(this.profile_uid);
+     },
+     err =>{
+    
+    this.communityServices.showErrorToast(err);
+  })
+  }
   accessGallery(){
    Camera.getPicture({
      sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
@@ -333,15 +343,18 @@ export class CommunityprofilePage {
   }
  
   
+metaLink:any = "";
 
    addUserPosts(id){
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
-     this.communityServices.addUserPosts(id,this.base64Image,this.videoUrl,this.post,this.link).subscribe(datas =>{
+    let message=this.urlifyMessage(this.post);
+    this.urlifyLink(this.post);
+     this.communityServices.addUserPosts(id,this.base64Image,this.videoUrl,message,this.metaLink).subscribe(datas =>{
      this.showToast(datas.result);
      this.profileCommunity(id);
-     this.post="";
-     this.link="";
+     message="";
+     this.metaLink="";
      this.base64Image="";
      this.videoUrl="";
      this.showblock= null;
@@ -352,6 +365,24 @@ export class CommunityprofilePage {
   })
      loader.dismiss();
   }
+   urlifyMessage(text) {
+            var urlRegex = /(https?:\/\/[^\s]+)/g;
+
+            return text.replace(urlRegex, (url)=> {
+              // return "";
+                 return '<a href="' + url + '" target="_blank">' + url + '</a>';
+            })
+          }
+
+         // urlArr = [];
+         urlifyLink(text) {
+            var urlRegex = /(https?:\/\/[^\s]+)/g;
+            var i=0;
+            return text.replace(urlRegex, (data)=>{
+                this.metaLink= data;
+                i++;
+            })
+        }
 
   deleteComment(id){
     this.communityServices.deleteComment(id).subscribe(datas =>{

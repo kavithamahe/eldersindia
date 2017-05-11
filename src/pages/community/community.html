@@ -10,7 +10,7 @@
 	        <ion-icon name="home"></ion-icon>
 	    </button>
     </ion-buttons>
-    <ion-title text-center>Communities</ion-title>
+    <ion-title text-center>{{communityDetailData?.community_name}}</ion-title>
   </ion-navbar>
 </ion-header>
   
@@ -45,11 +45,12 @@
 					<div *ngFor="let member of members; let i=index" text-wrap>
 						<div *ngIf="i<= 3">
 							<ion-item class="memb-list">
-								<ion-avatar>
+								<ion-col>
 									<img (click)="membersProfile(member.uid)" style="border:2px solid #e6e6e6;" [src]="imageUrl+member?.avatar" 
 											[hidden]="!member?.avatar">
-								</ion-avatar>
-								{{member.name}}
+											{{member.name}}
+								</ion-col>
+								
 							</ion-item>
 						</div>
 					</div>
@@ -69,10 +70,7 @@
 				<ion-textarea style="-webkit-user-select:all !important;" [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
 				</ion-textarea>
 			</div>
-			<!-- <div style="padding:0px !important;">
-				<ion-textarea [(ngModel)]="link" type="text" placeholder="What's on link">
-				</ion-textarea>
-			</div> -->
+			
 		    <div style="padding:0px !important;">
 		    	<ion-row>
 					<ion-col>
@@ -90,13 +88,18 @@
 					</ion-col>
 				</ion-row>
 				<div *ngIf(addVideo)>
+				<form [formGroup]="authForm">
 					<ion-row>
 						<ion-col>
 							<div>
 								<ion-item  class="video" >
-									<ion-input [(ngModel)]="videoUrl" type="url" placeholder="Enter Video Url...">
-									</ion-input>
+									<ion-input type="url" placeholder="Enter Video Url..."  formControlName="videoUrl"
+		            					[class.invalid]="!authForm.controls.videoUrl.valid && (authForm.controls.videoUrl.dirty )">
+									</ion-input>									
 								</ion-item>
+								<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
+	                				<p style="color:red" class="valid">Please enter valid video url</p>
+           							</div>
 							</div>
 						</ion-col>
 					</ion-row>
@@ -107,6 +110,7 @@
 							</ion-item>
 						</div>
 					</ion-row>
+					</form>
 				</div>
 		   	</div>
 					
@@ -141,6 +145,8 @@
 			          		</p>
 			        </ion-col>
 					<ion-col offset-50>
+						<button ion-button *ngIf="user.uid == user_id" (click)="deletePost(user.id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i>
+						</button>
 		        		<!-- <button ion-button color="dark" clear (click)="itemDetails()">
 		          			<ion-icon  item-left name="arrow-dropdown"></ion-icon>
 		          		</button>
@@ -152,7 +158,8 @@
 	       		</ion-row>
 	    	</ion-item>
 	      		<ion-card-content [hidden]="!user?.post_message">
-		          	<p item-text-wrap class="feed-post">{{user.post_message}}</p>
+		          	<p item-text-wrap class="feed-post" [innerHTML]="user.post_message">
+		          	<a href=""></a>{{user.post_message}}</p>
 		        </ion-card-content><br>
 		        <ion-card-content [hidden]="!user?.post_image">
 		          	<img  [src]="imageUrl+user?.post_image">

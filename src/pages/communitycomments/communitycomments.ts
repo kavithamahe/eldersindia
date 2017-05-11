@@ -81,6 +81,21 @@ user_id:any;
       this.showReply=event;
     }
  }
+ sendInlineLikes(comments_id){
+     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+    loader.present();
+
+   this.communityServices.sendInlineLikes(comments_id).subscribe(data =>{
+     this.showToast(data.result.info.message);
+     
+   },
+    err =>{
+    
+    this.communityServices.showErrorToast(err);
+  })
+    
+    loader.dismiss();
+ }
 
  replyComments(event){
     this.reply_comment="";
@@ -103,15 +118,47 @@ user_id:any;
     }
  }
 
+  // deleteComment(id){
+  //    this.communityServices.deleteComment(id).subscribe(datas =>{
+  //    this.showToast(datas.result);
+  //    this.post_comment="";
+  //    for(let i=0; i<this.post_comments.length;i++){
+  //    	if(this.post_comments[i].comments_id == id){
+     		
+  //    		this.post_comments.splice(i,1);
+  //         console.log("index of comment: ",i);
+  //    	}
+  //    }
+     
+     
+  //    },
+  //    err =>{
+    
+  //   this.communityServices.showErrorToast(err);
+  // })
+  // }
   deleteComment(id){
      this.communityServices.deleteComment(id).subscribe(datas =>{
      this.showToast(datas.result);
      this.post_comment="";
-     for(let i=0; i<this.post_comments.length;i++){
-     	if(this.post_comments[i].comments_id == id){
-     		
-     		this.post_comments.splice(i,1);
-     	}
+       for(let i=0; i<this.post_comments.length;i++){
+       if(this.post_comments[i].comments_id == id){
+         console.log("index of comment: ",i);
+         // this.post_comments[i].comments=[];
+         let list = datas.result.info.list;
+         console.log(list);
+         this.post_comments[i].comment_reply.splice(i,{
+           com_post_cmt_id:list.com_post_cmt_id,
+           comments_replay:list.comments_replay,
+           comments_replay_id:list.comments_replay_id,
+           created_at:null,
+           name_from:list.name_from,
+           name_to:list.name_to,
+           profile_image:list.profile_image,
+           uid_from:list.uid_from,
+           uid_to:list.uid_to
+         });
+       }
      }
      
      
@@ -121,7 +168,7 @@ user_id:any;
     this.communityServices.showErrorToast(err);
   })
   }
-
+ 
   showToast(messageData){
     let toast = this.toastCtrl.create({
         message: messageData,
@@ -154,15 +201,15 @@ sendComment(postID){
      
   }
 
-  sendReply(comments_id,profile_id){
-     console.log("comment" + comments_id + profile_id);
+  sendReply(uid_from,comments_id){
+     console.log("comment" + uid_from + comments_id);
       this.Reply=null;
       this.replyBlock=null;
     if(this.reply_comment != ""){
 
     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
-     this.communityServices.sendReply(comments_id,profile_id,this.reply_comment).subscribe(datas =>{
+     this.communityServices.sendReply(uid_from,comments_id,this.reply_comment).subscribe(datas =>{
      this.showToast(datas.result.info.message);
      this.reply_comment="";
      // this.communityList(this.community_id);

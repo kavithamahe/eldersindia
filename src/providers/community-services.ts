@@ -230,6 +230,11 @@ myprofile(id){
     return this.http.post(`${this.getCommunityPostsUrl }sendLikes`,this.body,this.options)
       .map(res =>res.json());
   }
+  sendInlineLikes(comments_id){
+     this.body = {comPostCmtsId: comments_id}
+    return this.http.post(`${this.getCommunityPostsUrl }sendInlineLikes`,this.body,this.options)
+      .map(res =>res.json());
+  }
 
    sendPosts(id1,comments){
      
@@ -238,8 +243,8 @@ myprofile(id){
      return this.http.post(`${this.getCommunityPostsUrl }sendComments`,this.post,this.options)
       .map(res =>res.json());
   }
-  sendReply(id1,profile_id,comments){
-    this.post = {"info":{"comments":comments,"uid_from":this.user_id,"uid_to":profile_id,"comment_id":id1}}
+  sendReply(uid_from,comments_id,comments){
+    this.post = {"info":{"comments":comments,"uid_from":this.user_id,"uid_to":uid_from,"comment_id":comments_id}}
 
      return this.http.post(`${this.getCommunityPostsUrl }sendReply`,this.post,this.options)
       .map(res =>res.json());
@@ -258,7 +263,11 @@ myprofile(id){
    return this.http.post(`${this.getCommunityPostsUrl }removeFeedComment`,this.delete,this.options)
    .map(res =>res.json());
  }
- 
+ deletePost(id){
+   this.delete={info: {post_id: id}}
+   return this.http.post(`${this.getCommunityPostsUrl }removeFeedpost`,this.delete,this.options)
+   .map(res =>res.json());
+ }
  manageLists(){
     this.lists={"searchValue":""}
       

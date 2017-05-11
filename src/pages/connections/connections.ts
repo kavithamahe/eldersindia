@@ -42,7 +42,12 @@ allConnectionScrollLists:any=[];
 receivedConnectionScrollLists:any=[];
    constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public connectionsService:ConnectionsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.getconnections="myConnections";
-    this.connections="all";
+    if(navParams.get("notification")== 'connection_request'){
+      this.connections = "received";
+    }else{
+      this.connections="all";  
+    }
+    
     this.messages="inbox";
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});

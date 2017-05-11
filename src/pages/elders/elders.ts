@@ -17,6 +17,7 @@ authForm : FormGroup;
 base64Image:any;
 avatar:any;
 title:any;
+submitAttempt:any;
   //---------------add functionality start-----------------------//
 
 functionalArea:any;
@@ -469,6 +470,7 @@ imageURL:any;
               this.communityServices.showErrorToast(err);
               })
         }
+        
     this.nav.pop();
 
 }
