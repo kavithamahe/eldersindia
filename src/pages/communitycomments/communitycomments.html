@@ -26,8 +26,8 @@
 	  	<ion-item>
 	    	<p item-text-wrap [innerHTML]="comment.comments | emojis"></p>
 	   	</ion-item>
-	 		<button *ngIf="comment.comment_reply.length == 0 && comment.uid != user_id" ion-button (click)="showConfirm(comment.comments_id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
-  			<button *ngIf="comment.uid != user_id" ion-button clear (click)="reply(j)">	<i class="fa fa-reply" aria-hidden="true"></i></button>
+	 		<button *ngIf="comment.comment_reply.length == 0" ion-button (click)="showConfirm(comment.comments_id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+  			<button  ion-button clear (click)="reply(j)">	<i class="fa fa-reply" aria-hidden="true"></i></button>
 			<button *ngIf="comment.comment_reply[0] != null" ion-button item-right clear 
 			(click)="showComments(j)">view replies</button>
 		<div *ngIf="j==showReply">

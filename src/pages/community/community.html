@@ -88,15 +88,18 @@
 					</ion-col>
 				</ion-row>
 				<div *ngIf(addVideo)>
-				 <form [formGroup]="form">
+				<form [formGroup]="authForm">
 					<ion-row>
 						<ion-col>
 							<div>
 								<ion-item  class="video" >
-									<ion-input [(ngModel)]="videoUrl" type="url" placeholder="Enter Video Url...">
-									</ion-input>
-
+									<ion-input type="url" placeholder="Enter Video Url..."  formControlName="videoUrl"
+		            					[class.invalid]="!authForm.controls.videoUrl.valid && (authForm.controls.videoUrl.dirty )">
+									</ion-input>									
 								</ion-item>
+								<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
+	                				<p style="color:red" class="valid">Please enter valid video url</p>
+           							</div>
 							</div>
 						</ion-col>
 					</ion-row>
@@ -142,7 +145,8 @@
 			          		</p>
 			        </ion-col>
 					<ion-col offset-50>
-						<button ion-button (click)="deletePost(user.id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+						<button ion-button *ngIf="user.uid == user_id" (click)="deletePost(user.id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i>
+						</button>
 		        		<!-- <button ion-button color="dark" clear (click)="itemDetails()">
 		          			<ion-icon  item-left name="arrow-dropdown"></ion-icon>
 		          		</button>

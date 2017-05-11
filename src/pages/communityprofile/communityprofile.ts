@@ -132,6 +132,16 @@ export class CommunityprofilePage {
    }
   
 }
+deletePost(id){
+    this.communityServices.deletePost(id).subscribe(datas =>{
+     this.showToast(datas.result);
+      this.profileCommunity(this.profile_uid);
+     },
+     err =>{
+    
+    this.communityServices.showErrorToast(err);
+  })
+  }
   accessGallery(){
    Camera.getPicture({
      sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
