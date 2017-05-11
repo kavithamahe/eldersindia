@@ -76,7 +76,7 @@ loadSubcategoryList(subCategory_id,location_id){
     this.navCtrl.push(ServiceInfoPage,servieListData);
   }
 
-  instantRequest(vendor_id) {
+  instantRequest(vendorData) {
     if(this.userType != "sponsor"){
       let d = new Date();
 
@@ -86,9 +86,9 @@ loadSubcategoryList(subCategory_id,location_id){
 
     let serviceRequestData = {"problem": this.serviceTitle, "datetime": datestring, "dependentId": this.elderId, "mobile_no": ""};
     
-            this.serviceRequestCall(serviceRequestData,vendor_id);
+            this.serviceRequestCall(serviceRequestData,vendorData.id);
     }else{
-      this.openModal("instant",vendor_id);
+      this.openModal("instant",vendorData);
     // let instantRequestmodal = this.modalCtrl.create(InstantRequestModalPage, {dependentList:this.dependentLists});
         
     // instantRequestmodal.onDidDismiss(data =>{
@@ -102,18 +102,18 @@ loadSubcategoryList(subCategory_id,location_id){
     }
   }
 
-  openModal(modalPage,vendor_id){
+  openModal(modalPage,vendorData){
     if(modalPage == "instant"){
-      this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,service:this.serviceTitle});
+      this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,service:this.serviceTitle,vendor:vendorData});
     }else{
-      this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists});
+      this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists,vendor:vendorData});
     }
     
     this.modal.onDidDismiss(data =>{
       if(data == "dismiss"){
         console.log(" schedule request modal dismissed..!");
       }else{
-       this.serviceRequestCall(data,vendor_id);
+       this.serviceRequestCall(data,vendorData.id);
       }
     })
     
@@ -145,11 +145,11 @@ loadSubcategoryList(subCategory_id,location_id){
 
 @Component({
   template: `
-<div class="ion-modal modal-popups">
+<div class="ion-modal-popup">
 <ion-header>
 <ion-toolbar class="hei-head">
     <ion-title color="primary" class="tittles-md">
-      Dependent List
+      {{vendor}} - Instant Request
     </ion-title>
     <ion-buttons start item-right class="close-iconss">
       <button ion-button (click)="dismiss()">
@@ -182,21 +182,40 @@ loadSubcategoryList(subCategory_id,location_id){
  
 </ion-content>
 </div>
+<style>
+.ion-modal-popup {
+    position: absolute;
+    top: 150px;
+    left: 0;
+    /* display: block; */
+    width: 100%;
+    height: 40%;
+    /* contain: strict; */
+    /* padding-top: 0%; */
+    /* align-content: center; */
+    /* -webkit-box-align: center; */
+    /* align-self: center; */
+}
+</style>
 `
 })
 export class InstantRequestModalPage {
   dependentLists:any;
   dependentData:any = "";
-  service:any;
+  service:any="";
   selected:boolean=false;
-
+  vendor:any="";
   constructor(
     public params: NavParams,
     public viewCtrl: ViewController
   ) {
     console.log("modal page called");
     this.dependentLists = this.params.get('dependentList');
-    this.service = this.params.get('service')
+    this.service = this.params.get('service');
+    if(params.get("vendor") != undefined){
+      this.vendor = this.params.get("vendor").name;
+    }
+    
   }
 
   dismiss() {

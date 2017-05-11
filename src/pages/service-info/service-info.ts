@@ -184,7 +184,7 @@ let requestServiceData = {"location_id":this.locationId,"vendor_id":this.vendor_
     }
 
   toggleRequestService(){
-     let service_modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.vendorList.dependentLists});    
+     let service_modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.vendorList.dependentLists,vendor:this.vendorList.vendorDetails});    
     service_modal.present();
     service_modal.onDidDismiss(data =>{
       if(data == "dismiss"){

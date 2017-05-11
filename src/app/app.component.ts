@@ -2,9 +2,9 @@ import { Component, ViewChild} from '@angular/core';
 
 import { Platform, MenuController, Nav, AlertController,ToastController,LoadingController } from 'ionic-angular';
 
-import { StatusBar, Splashscreen, Push,Geolocation } from 'ionic-native';
+import { StatusBar, Splashscreen, Push } from 'ionic-native';
 // import { Geolocation } from '@ionic-native/geolocation';
-import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
+
 
 // import the Menu's pages
 import { LoginPage } from '../pages/login/login';
@@ -19,6 +19,7 @@ import { BlogsPage } from '../pages/blogs/blogs';
 import { NewsPage } from '../pages/news/news';
 import { EventsPage } from '../pages/events/events';
 import { LogoutPage } from '../pages/logout/logout';
+import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 
 // kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
@@ -71,8 +72,6 @@ export class MyApp {
   pages: Array<{myIcon:string, title: string, component: any}>;
 
   constructor(
-    private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder,
     public platform: Platform,
     public menu: MenuController,
     private userLogin: LoginUser,
@@ -85,7 +84,6 @@ export class MyApp {
     public storage:Storage
   ) {
     this.storage.ready().then(() => {
-    storage.set('service_location','');
     storage.get('user_type').then((userType)=>{
     this.user_type = userType;
       console.log("user_type : ", this.user_type);
@@ -243,23 +241,6 @@ export class MyApp {
   initializeApp() {
 
     this.platform.ready().then(() => {
-      Geolocation.getCurrentPosition().then(
-      (data) => {
-            console.log('My latitude : ', data.coords.latitude);
-            console.log('My longitude: ', data.coords.longitude);
-            this.getLocation(data.coords.latitude,data.coords.longitude);
-        },
-        (err) =>{
-          let confirmAlert = this.alertCtrl.create({
-          subTitle: 'switch-ON GPS to get current Location.',
-          buttons: [{
-            text: 'OK',
-            role: 'cancel',
-          }]
-        });
-        confirmAlert.present();
-            console.log("error in fetching Geo Location: ",err);
-        });
 
       StatusBar.styleDefault();
       Splashscreen.hide();
@@ -332,21 +313,27 @@ export class MyApp {
       // let self = this;
       //if user using app and push notification comes
       if (data.additionalData.foreground) {
-        // if application open, show popup
-        let confirmAlert = this.alertCtrl.create({
-          title: 'New Notification',
-          message: data.message,
-          buttons: [{
-            text: 'Ignore',
-            role: 'cancel'
-          }, {
-            text: 'View',
-            handler: () => {
-                this.getPage(data);
-            }
-          }]
-        });
-        confirmAlert.present();
+
+            let confirm = this.alertCtrl.create({
+            title: 'Use this lightsaber?',
+            message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+            buttons: [
+              {
+                text: 'Disagree',          
+                role: 'cancel'
+                
+              },
+              {
+                text: 'View',
+                handler: () => {
+                  this.getPage(data);
+                  console.log('Alert View clicked');
+                }
+              }
+            ]
+          });
+          confirm.present()
+
       } else {
         //if user NOT using app and push notification comes
         //TODO: Your logic on click of push notification directly
@@ -360,14 +347,14 @@ export class MyApp {
   }
 
   getPage(data){
-    let type = data.additionalData.additionalData.page_type;
-    let com_id = data.additionalData.additionalData.page_details.com_id;
+    let type = data.additionalData.page_type;
     switch (type) {
-       case "comments": this.nav.push(CommunityPage,{community_id:com_id});
-       case "likes" : this.nav.push(CommunityPage,{community_id:com_id});
-       case "connection_request": this.nav.push(CommunityPage,{community_id:com_id});
-       case "service_request": this.nav.push(CommunityPage,{community_id:com_id});
-       case "message" : this.nav.push(MessagesPage);
+       case "comments": this.nav.push(CommunityPage,{community_id:data.additionalData.page_details.com_id});
+       case "reply": this.nav.push(CommunityPage,{community_id:data.additionalData.page_details.com_id});
+       case "likes" : this.nav.push(CommunityPage,{community_id:data.additionalData.page_details.com_id});
+       case "connection_request": this.nav.push(ConnectionsPage,{notification:'connection_request'});
+       case "service_request": this.nav.push(ServicerequestPage);
+       case "message" : this.nav.push(ViewMessagesPage, {messageId:data.additionalData.page_details.id,viewType:"inbox"});
      }
   }
 
@@ -376,20 +363,6 @@ export class MyApp {
     this.menu.close();
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
-  }
-
-  getLocation(d1,d2){
-
-    this.nativeGeocoder.reverseGeocode(d1, d2)
-  .then(
-    (result: NativeGeocoderReverseResult) => {
-      this.storage.ready().then(() => {
-      this.storage.set('service_location',result.city);
-    });
-    console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
-    })
-    
-  .catch((error: any) => console.log(error));
   }
 }
 
