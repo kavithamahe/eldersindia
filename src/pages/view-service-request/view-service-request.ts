@@ -35,7 +35,7 @@ serviceRequestId:number;
     loader.present();
     this.serviceRequest.viewServiceRequest(this.serviceRequestId).subscribe(
      (viewServiceRequest) => {
-      this.viewServiceRequestInfo=[viewServiceRequest]; 
+      this.viewServiceRequestInfo=viewServiceRequest; 
       console.log(this.viewServiceRequestInfo);    
     },
     (err) => { 
