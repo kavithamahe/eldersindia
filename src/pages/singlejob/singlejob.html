@@ -21,7 +21,7 @@
 </ion-header>
 <ion-content padding style="background:#fff;">
 <div *ngFor="let singleJob of singleJobInfo" style="padding:2px;">
-<ion-card>
+
   <ion-list class="job-view">
   <ion-item text-wrap>
  <h2>{{singleJob?.title}}   <span *ngIf="singleJob?.created_at"><i class="fa fa-calendar-o"></i> {{singleJob?.created_at | date :'MMM dd y'}}</span></h2>
@@ -30,11 +30,11 @@
  <p>{{singleJob?.company_name}}</p>
   </ion-item>
 </ion-list>
-</ion-card>
+<hr/>
   <!--applyJob(singleJob?.id)-->
 
   
-<hr>
+
    <ion-grid class="job-descriptions"> 
     <small>Functional Area</small><p *ngIf="singleJob?.functional_area"><span *ngFor="let funArea of singleJob?.functional_area">{{funArea?.name}}</span> </p>
      <small>Skills</small><p *ngIf="singleJob?.skills"><span *ngFor="let skills of singleJob?.skills">{{skills?.skills}}</span> </p>
@@ -42,6 +42,9 @@
       <small>Job Description</small>
      <p [innerHtml]="singleJob?.description"></p>
 </ion-grid>
+<hr/>
+
+
  <h2 class="job-summary">Job summary</h2>
   <ion-row class="job-listed">
     <ion-col width-100>
@@ -65,10 +68,10 @@
 	   </ion-row>
 <ion-row>
 <ion-col>
-  <button ion-button class="applyJob-btn" color="orange" (click)="applyJob(singleJob?.id)">Apply</button>
+  <button ion-button  color="orange" full (click)="applyJob(singleJob?.id)"><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button>
   </ion-col>
 </ion-row>
-<hr/>
+
 </div>
 </ion-content>
 <style> p{margin:0px;}</style>
