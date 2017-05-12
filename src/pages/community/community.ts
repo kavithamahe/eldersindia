@@ -24,6 +24,7 @@ import { InAppBrowser } from 'ionic-native';
 })
 
 export class CommunityPage {
+   submitAttempt:any;
     userType:any;
     addComments: boolean;
     itemComments:boolean;
@@ -51,13 +52,20 @@ export class CommunityPage {
     emojiId:number=0;
     viewMore:boolean=false;
     show_description:any;
-    
-  constructor(public platform: Platform,public modal: ModalController, public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices,public popoverCtrl: PopoverController ) {
+    user_id:any;
+    authForm:FormGroup;
+    message:any='';
+  constructor(public platform: Platform,public modal: ModalController, public formBuilder: FormBuilder,public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices,public popoverCtrl: PopoverController ) {
     this.nav=nav;
 
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; });
+      storage.get('id').then((id) => { this.user_id=id; })
+    });
+    this.authForm = formBuilder.group({
+        videoUrl : ['', Validators.compose([Validators.pattern('^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be|vimeo\.com|dailymotion\.com|metacafe\.com|wines\.com)\/.+$')])],
+      
     });
 
     // let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -259,27 +267,37 @@ metaLink:any = "";
   postCommunity(id){
      let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
      loader.present();
-     let message=this.urlifyMessage(this.post);
-    this.urlifyLink(this.post);
-     // if(this.urlArr.length > 0){
-     //                 this.metalink = this.urlArr[0];
-     //            }
-
-     this.communityServices.postCommunity(id,this.base64Image,this.videoUrl,message,this.metaLink).subscribe(datas =>{
-     this.showToast(datas.result);
-     this.communityList(id);
-     message="";
-     this.metaLink="";
-     this.videoUrl="";
-     this.base64Image="";
-     this.showblock= null;
-   },
-     err =>{
-    
-    this.communityServices.showErrorToast(err);
-  })
+     if(!this.authForm.valid){
+      this.submitAttempt = true;
+    }else{
+      this.submitAttempt = false;
+       if(this.post!='' && this.post!=undefined && this.post!=null)
+       {
+       this.message=this.urlifyMessage(this.post);
+       this.urlifyLink(this.post);
+       }
+       // if(this.urlArr.length > 0){
+       //                 this.metalink = this.urlArr[0];
+       //            }
+       
+       this.communityServices.postCommunity(id,this.base64Image,this.authForm.value.videoUrl,this.message,this.metaLink).subscribe(datas =>{
+       this.showToast(datas.result);
+       this.communityList(id);
+       this.message="";
+       this.metaLink="";
+       this.videoUrl="";
+       this.base64Image="";
+       this.showblock= null;
+     },
+       err =>{
+      
+      this.communityServices.showErrorToast(err);
+    })
+     }
      loader.dismiss();
   }
+
+
     urlifyMessage(text) {
             var urlRegex = /(https?:\/\/[^\s]+)/g;
 
@@ -298,6 +316,7 @@ metaLink:any = "";
                 i++;
             })
         }
+
   deletePost(id){
     this.communityServices.deletePost(id).subscribe(datas =>{
      this.showToast(datas.result);

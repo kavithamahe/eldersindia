@@ -267,9 +267,9 @@ page-modal-page ion-input									{border:none !important;}
 page-service-info ion-input									{border:none !important;}
 .view-storedet												{float:left; width:100%;}
 .commend-btn													{background:#888aef !important;}
-.job-borad													{ border-bottom:1px solid #ccc; padding:8px !important;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);  background:#fff;   margin:8px;}
-.job-borad h2												{font-size:18px !important; color:#424a95; font-weight:400; margin-top:0px !important;margin-bottom:0px !important;}
-.job-borad p												{font-size:15px; color:#777; font-weight:400; margin:0px; padding-top:8px; padding-bottom:10px;}
+.job-borad													{ padding:8px !important;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);  background:#fff;   margin:8px;}
+.job-borad h2												{font-size:17px !important; color:#424a95; font-weight:400; margin-top:0px !important;margin-bottom:0px !important;}
+.job-borad p												{font-size:14px; color:#555; font-weight:400; margin:0px; padding-top:8px; padding-bottom:10px; line-height:25px;}
 .view-storedet h2											{color:#1d6ab2;font-size:18px;padding:0; margin-bottom:0px !important;}
 .view-storedet p											{color:#708090;font-size:15px;line-height:24px; padding:0; margin-bottom:0px !important;margin-top:0px !important;}
 .close-iconss > .bar-button-default .ion-md-close-circle    {color:#fff!important; font-size:22px;margin-top:-11px;}
@@ -278,7 +278,7 @@ page-service-info ion-input									{border:none !important;}
 .label-lb													{font-size:16px !important;font-weight:400;padding-bottom:0px; margin-top:0px !important;padding-left:4px;}
 .toolbar-title-md											{color:#fff !important; text-align:left; }
 .btn-clr													{width:45%; float:left; border-radius:4px; margin-top:10px; }
-.btn-clrs													{width:45%; float:right; border-radius:4px;margin-top:10px; }
+.btn-clrs													{ float:right; border-radius:4px;margin-top:10px;  width:50%;}
 .bar-button-light-md, .bar-button-clear-md-light, .bar-button-md-light{font-size:15px;}
 .connection-btn .button-md 									{background:#58e2c9;box-shadow:none;}
 
@@ -292,7 +292,15 @@ page-service-info ion-input									{border:none !important;}
 .select-detalis-in .item-ios .select-brd					{width:97%; margin-bottom:10px;}
 .brder-cor b												{font-size:18px; font-weight:400; text-align:left; width:100%;}
 .brder-cor .button-ios										{background:#fe7fe6; color:#fff !important; font-size:15px !important;text-transform:capitalize; margin-bottom:0px;}
-ion-card img												{border:1px solid #ccc;}
+ion-card img												{     display: inline-block;
+    height: auto;
+    max-width: 100%;
+    padding: 4px;
+
+
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out; }
 .select-detalis-in .text-input-md							{width:calc(100% - 8px - 8px);}
 .select-detalis-in .text-input-ios							{width:calc(100% - 8px - 8px);}
 .dashboard-listed{border:1px solid #243346; float:left; width:99%; border-radius:3px; padding:5px;}
@@ -570,8 +578,40 @@ page-service-info .service_request							{border:none !important;}
 .offered-servicelist-two .item-md .item-inner .input-wrapper .label-md .list-md{ background:#a9abfc; height:38px;  border-left:3px solid #8d8ff6;}
 .offered-servicelist-two .item-md .item-inner .input-wrapper .label-md .list-md p{color:#fff; line-height:38px; font-size:17px; font-weight:400; width:90%; float:left; 
  border-right:1px solid #bebffe;}
- .offered-servicelist-two .item-md .item-inner .input-wrapper .label-md .list-md small{font-size:15px; color:#fff; line-height:40px;}
+.offered-servicelist-two .item-md .item-inner .input-wrapper .label-md .list-md small{font-size:15px; color:#fff; line-height:40px;}
 
+.offered-servicelist-tree{ /*border:1px solid #A9ABFC;*/}
+.offered-servicelist-tree .card-md{ margin:0px; width:100%; border-bottom:1px solid #fff; border-radius:0px;}
+.offered-servicelist-tree .card-md ion-row .item-md .item-inner .input-wrapper .label-md{}
+.offered-servicelist-tree .card-md ion-row .service-lefttext{ background:#ededed !important;}
+.offered-servicelist-tree .card-md ion-row .service-lefttext .item-inner .input-wrapper .label-md p{text-indent:0px; padding:5px; color:#333;}
+.offered-servicelist-tree .card-md ion-row .service-rightprice{background:#ededed; padding:0px;}
+.offered-servicelist-tree .card-md ion-row .service-rightprice small{font-size:16px; color:red; line-height:45px; background:#fbfbfb; padding:2px; border:1px solid #d3d3d3; text-indent:0px;}
+
+
+
+.offered-servicelist{ padding-left:0px;}
+.offered-servicelist .item-ios{padding-left:0px;}
+.offered-servicelist .item-ios .item-inner .input-wrapper .label-ios{ margin:0px;}
+.offered-servicelist .item-ios .item-inner .input-wrapper .label-ios .card-ios{box-shadow:none;}
+.offered-servicelist .item-ios .item-inner .input-wrapper .label-ios .card-ios .sub .item-inner .input-wrapper .label-ios{ background:#2ebaef; height:38px;  border-left:3px solid #0a9dd4;}
+.offered-servicelist .item-ios .item-inner .input-wrapper .label-ios .card-ios .sub .item-inner .input-wrapper .label-ios p{color:#fff; line-height:38px; font-size:18px; font-weight:400; width:90%; float:left; 
+ border-right:1px solid #56d1ff;}
+.offered-servicelist .item-ios .item-inner .input-wrapper .label-ios .card-ios .sub .item-inner .input-wrapper .label-ios small{ font-size:15px; color:#fff; line-height:40px;}
+
+.offered-servicelist-two{padding-left:0px; }
+.offered-servicelist-two .item-ios .item-inner .input-wrapper .label-ios .list-ios{ background:#a9abfc; height:38px;  border-left:3px solid #8d8ff6;}
+.offered-servicelist-two .item-ios .item-inner .input-wrapper .label-ios .list-ios p{color:#fff; line-height:38px; font-size:17px; font-weight:400; width:90%; float:left; 
+ border-right:1px solid #bebffe;}
+.offered-servicelist-two .item-ios .item-inner .input-wrapper .label-ios .list-ios small{font-size:15px; color:#fff; line-height:40px;}
+
+.offered-servicelist-tree{ /*border:1px solid #A9ABFC;*/}
+.offered-servicelist-tree .card-ios{ margin:0px; width:100%; border-bottom:1px solid #fff; border-radius:0px;}
+.offered-servicelist-tree .card-ios ion-row .item-ios .item-inner .input-wrapper .label-ios{}
+.offered-servicelist-tree .card-ios ion-row .service-lefttext{ background:#ededed !important;}
+.offered-servicelist-tree .card-ios ion-row .service-lefttext .item-inner .input-wrapper .label-ios p{text-indent:0px; padding:5px; color:#333;}
+.offered-servicelist-tree .card-ios ion-row .service-rightprice{background:#ededed; padding:0px;}
+.offered-servicelist-tree .card-ios ion-row .service-rightprice small{font-size:16px; color:red; line-height:45px; background:#fbfbfb; padding:2px; border:1px solid #d3d3d3; text-indent:0px;}
 
 
 
@@ -598,7 +638,7 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .text-input-ios   											{border:1px solid #ccc !important; width:95%;border-radius:0px !important;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:7px;font-size:18px; margin:7px;
 															 font-weight:400; color:#555;}
 .call-us												    {color:#9370DB!important; font-size:16px; width:100%; float:left; padding-top:5px;}
-.token-date													{font-size:12px !important; color:#777;}
+.token-date													{font-size:11px !important; color:#777; float:left; width:100%;}
 .show-pass													{padding-left:0px;}
 .show-pass .checkbox-md 									{margin: 0 0 9px 10px !important;}
 .show-pass .item-inner .input-wrapper .label-md 			{margin:-6px 0px 0px 0px; line-height:0px; }
@@ -620,16 +660,18 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .req-viewlist p											    {font-size:15px !important; font-weight:400 !important; color:#777; padding-left:10px; }
 .req-viewlist i                                             {font-size:25px !important; color:#777; line-height:50px;}
 .err-reds													{font-size:12px !important; font-weight:400 !important; color:red !important; text-align:right !important; padding-right:25px !important; margin:0px; }
-.token-primary												{ width:auto; margin-top:7px; border-radius:3px;}
-.token-primarys												{  width:40px; height:40px;margin-left:8px;margin-top:5px; display:block; border:1px solid #ccc; border-radius:50%;}
-.token-primarys	 i											{ line-height:42px; color:#00a651; text-align:center; width:100%; font-size:20px;}
+.token-primary												{width:auto; margin-top:7px; border-radius:3px;}
+.tocken-no													{color:#888aef !important; font-size:14px !important;}
+.token-primarys												{width:35px; height:35px;margin-left:4px;margin-top:5px; display:block; border:1px solid #ccc; border-radius:50%;}
+.token-primarys	 i											{ line-height:35px; color:#00a651; text-align:center; width:100%; font-size:20px;}
 .call-contact												{background:#E6E6FA; display:block; text-align:center; width:100%;}
 .token-primary	small										{font-size:18px; font-weight:400;color:#FE2725; float:left;}
 .token-primary i											{font-size:14px; color:#666; line-height:25px;  float:left; padding-left:5px; line-height:30px;}
-.token-primary p											{font-size:17px; color:#888aef; float:left;  margin:0px; line-height:30px;padding-left:5px; }
+.token-primary p											{font-size:17px; color:#888aef; float:left;  margin:0px; line-height:30px;padding-left:5px; width:100%; }
 .change-pass												{border-radius:20px; width:95%; height:35px; margin-left:5px;}
-.item-ios ion-avatar ion-img, .item-ios ion-avatar img		{ border-radius:0px !important;}
+.item-ios ion-avatar ion-img, .item-ios ion-avatar img		{border-radius:0px !important;}
 .segment-ios .segment-button:hover:not(.segment-activated)	{background:#fff !important;}
+.service-cont												{font-size:15px !important; font-weight:400; width:100%;}
 .segment-ios .segment-button.segment-activated				{margin-top:10px;}
 .segment-ios .segment-button								{margin-top:10px;background:#fff; border:1px solid #888aef; color:#888 !important; padding-left:10px; height:38px; line-height:35px; font-size:15px;}
 .uploadimg													{height:35px !important; width:95%; border-radius:25px !important; background:#fe7fe6;}
@@ -788,16 +830,17 @@ white-space: normal;}
 .slider-detalis-list .card-ios .card-header-ios ,.card-content-ios					{ padding:0px;}
 .job-view .item-ios .item-inner .input-wrapper .label-ios	p	{font-size:17px !important; padding-bottom:0px; width:100%;}
 .job-view .item-ios .item-inner .input-wrapper .label-ios span{font-size:13px !important; color:#979A9A;  float:right; padding-top:5px;}
-.applyJob-btn			{float:right; margin-right:5px; width:97%;}
+.applyJob-btn			{float:left; margin-right:5px; width:100%;}
 .inbox-sends .item-md	{ padding-left:5px;}
 .inbox-sends .item-md .item-inner .input-wrapper .label-md{ margin-top:8px; margin-bottom:8px; line-height:10px !important;}
 .send-box-content ion-row > ion-col > small{ font-size:18px !important; color:#404994 !important; font-weight:400; line-height:5px important;}
 .send-box-content ion-row > ion-col > b{ font-size:15px !important; color:#555 !important; font-weight:400; line-height:5px important;}
 .send-box-content ion-row > ion-col > span{ font-size:14px !important; color:#666 !important; font-weight:400; line-height:5px important;}
 .send-box-content ion-row > ion-col > p{ font-size:11px;}
-.job-descriptions small{ width:100%; font-size:18px;color:#555;}
-.job-descriptions span{ width:100%; font-size:16px; color:#777;}
-.job-descriptions p{ width:100%; font-size:14px; color:#777; padding-bottom:5px; padding-top:3px;}
+.job-descriptions small{ width:100%; font-size:17px;color:#404994;}
+.job-descriptions span{ width:100%; font-size:15px; color:#777;}
+.job-descriptions p{ width:100%; font-size:15px; color:#777; padding-bottom:5px; padding-top:3px; line-height:25px;}
+.job-descriptions p h4{ width:100%; font-size:15px; color:#777; padding-bottom:5px; padding-top:3px; line-height:25px;}
 
 .inbox-sends .item-ios	{ padding-left:5px !important;}
 .inbox-sends .item-ios .item-inner .input-wrapper .label-ios{ margin-top:8px; margin-bottom:8px; line-height:10px !important;}
@@ -815,7 +858,7 @@ white-space: normal;}
 
 
 
-.listing { padding-left:0px; font-size:16px !important; color:#777;}
+.listing { padding-left:0px; font-size:15px !important; color:#777;}
 .select-brddd{   border: 1px solid #ccc !important;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
     color: #555;
@@ -828,11 +871,13 @@ white-space: normal;}
 	.button-ios-orange{ background:#888aef !important}
 /*-------------------------------------ios platform css end-------------------------------------*/
 /*-------------------------------------Android platform css -------------------------------------*/
-.job-listed span{ color:#333;font-size:17px; float:left; width:130px; }
-.job-listed i{ font-size:17px; color:#444; width:20px; line-height:22px;}
+.job-listed span{ color:#555;font-size:16px; float:left; width:130px; width:100%; }
+.job-listed i{ font-size:15px; color:#555; width:20px; line-height:22px; padding-left:5px;}
+.job-listed p{ padding-left:10px; font-size:15px; padding-left:24px;line-height:25px;}
 .badge-md-primary{ background:#BDB76B; color:#fff; font-weight:600;}
-.badge-md-green{ background:#6495ED; font-weight:600;}
-
+.badge-md-green{ background:#58e2c9; font-weight:600;}
+.badge-md{ font-size:14px; font-weight:400;}
+.badge-ios{ font-size:14px; font-weight:400;}
 .badge-ios-primary{ background:#BDB76B; color:#fff; font-weight:600;}
 .badge-ios-green{ background:#6495ED; font-weight:600;}
 .tag-skill_set												{ margin-left:8px; width:95%; border:1px solid #ccc; margin-top:10px; padding:5px;
@@ -883,7 +928,8 @@ white-space: normal;}
 .headbg													    {background:#4169E1; font-size:15px;}
 .body-clr												    {background:#fff;}
 .popup-mds > .ion-label									    {font-size:15px; text-align:center;}
-.item-inner > .input-wrapper > .label-md h2				    {font-size:18px !important;color:#424a95;text-transform:capitalize; margin-top:0px !important; font-weight:400;}
+.job-view .item-md .item-inner .input-wrapper .label-md h2{ font-size:17px !important;}
+.item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#424a95;text-transform:capitalize; margin-top:0px !important; font-weight:400;}
 .item-inner > .input-wrapper > .label-md				    {color:#777;font-size:16px; padding-right:0px !important; }
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ bottom:4px;}
 .marg-info img											    {}
