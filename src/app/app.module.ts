@@ -42,6 +42,7 @@ import { EventsPage } from '../pages/events/events';
 import { ViewEventsPage } from '../pages/view-events/view-events';
 import { LogoutPage } from '../pages/logout/logout';
 import { JobDependentPage } from '../pages/job-dependent/job-dependent';
+import { ManageBlogsPage } from '../pages/manage-blogs/manage-blogs';
 import { EmojiPickerPage } from '../pages/emoji-picker/emoji-picker';
 
 // Kavitha
@@ -109,6 +110,7 @@ import { ServiceProvider } from '../providers/service-provider';
     CreateBlogPage,
     LogoutPage,
     JobDependentPage,
+    ManageBlogsPage,
     SubCategoryPage,
     SubCategoryServicePage,
     SubcategoryListPage,
@@ -166,6 +168,7 @@ import { ServiceProvider } from '../providers/service-provider';
     CreateBlogPage,
     LogoutPage,
     JobDependentPage,
+    ManageBlogsPage,
     SubCategoryPage,
     SubCategoryServicePage,
     SubcategoryListPage,

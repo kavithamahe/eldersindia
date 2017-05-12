@@ -79,4 +79,9 @@ user_id:any;
     return this.http.get(this.rootUrl+'getBlogTags/'+tagsInput,this.options)
       .map(res => res.json());
   }
+  manageblogs() {  
+   let _request= {"search":{"title":"","status":"","category":"","posted_by":"others","author":"10"}};
+    return this.http.post(this.rootUrl+'listBlog',_request,this.options)
+      .map(res => res.json()); 
+  }
 }
