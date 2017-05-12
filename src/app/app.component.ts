@@ -242,40 +242,71 @@ export class MyApp {
 
     this.platform.ready().then(() => {
 
+      var countTimerForCloseApp = false;
+this.platform.registerBackButtonAction(function(e) {
+ e.preventDefault();
+ function showConfirm() {
+  if (countTimerForCloseApp) {
+   this.Platform.exitApp();
+  } else {
+   countTimerForCloseApp = true;
+   this.service.confirmationToast('Press again to exit.');
+   this.timeout(function() {
+    countTimerForCloseApp = false;
+   }, 2000);
+  }
+
+ };
+
+ // Is there a page to go back to?
+ if (this.nav.canGoBack()) {
+  // Go back in history
+  console.log(this.nav.getActive().name);
+          this.nav.pop();
+ } else {
+  // This is the last page: Show confirmation popup
+  showConfirm();
+ }
+
+ return false;
+}, 101);
+
+
+
       StatusBar.styleDefault();
       Splashscreen.hide();
-      this.platform.registerBackButtonAction(() => {
-        // let nav = this.app.getActiveNav();
-        if (this.nav.canGoBack()){ //Can we go back?
-          console.log(this.nav.getActive().name);
-          this.nav.pop();
-        }else{
-                let confirmAlert = this.alertCtrl.create({
-                title: 'App Exit',
-                subTitle: "Are you sure to Exit app",
-                buttons: [{
-                  text: 'NO',
-                  handler: () => {
-                    if (this.user_id != '' && this.user_id != null) {
-                      // code...
-                      this.nav.setRoot(DashboardPage);
-                    }else{
-                      this.nav.setRoot(LoginPage);
-                    }
+      // this.platform.registerBackButtonAction(() => {
+      //   // let nav = this.app.getActiveNav();
+      //   if (this.nav.canGoBack()){ //Can we go back?
+      //     console.log(this.nav.getActive().name);
+      //     this.nav.pop();
+      //   }else{
+      //           let confirmAlert = this.alertCtrl.create({
+      //           title: 'App Exit',
+      //           subTitle: "Are you sure to Exit app",
+      //           buttons: [{
+      //             text: 'NO',
+      //             handler: () => {
+      //               if (this.user_id != '' && this.user_id != null) {
+      //                 // code...
+      //                 this.nav.setRoot(DashboardPage);
+      //               }else{
+      //                 this.nav.setRoot(LoginPage);
+      //               }
                     
-                  }
-                }, {
-                  text: 'Yes',
-                  handler: () => {
-                    this.platform.exitApp(); //Exit from app
-                   }
-                  }]
-                });
-                confirmAlert.present();
-              }
+      //             }
+      //           }, {
+      //             text: 'Yes',
+      //             handler: () => {
+      //               this.platform.exitApp(); //Exit from app
+      //              }
+      //             }]
+      //           });
+      //           confirmAlert.present();
+      //         }
 
 
-      });
+      // });
     });
   }
 
@@ -310,13 +341,24 @@ export class MyApp {
     push.on('notification', (data) => {
       console.log('message', data.message);
       console.log('data',data);
+      push.getApplicationIconBadgeNumber(function(n) {
+          console.log('success', n);
+        }, function() {
+          console.log('error');
+        });
+
+      push.setApplicationIconBadgeNumber(function() {
+        console.log('success');
+      }, function() {
+        console.log('error');
+      }, +data.count);
       // let self = this;
       //if user using app and push notification comes
       if (data.additionalData.foreground) {
 
             let confirm = this.alertCtrl.create({
-            title: 'Use this lightsaber?',
-            message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+            title: 'Elder India Notification',
+            subTitle: data.message,
             buttons: [
               {
                 text: 'Disagree',          
@@ -327,7 +369,7 @@ export class MyApp {
                 text: 'View',
                 handler: () => {
                   this.getPage(data);
-                  console.log('Alert View clicked');
+                  console.log('Notification View clicked');
                 }
               }
             ]
@@ -339,22 +381,35 @@ export class MyApp {
         //TODO: Your logic on click of push notification directly
         this.getPage(data);
         console.log("Push notification clicked");
+        push.clearAllNotifications(function() {
+              console.log('success');
+            }, function() {
+              console.log('error');
+            });
       }
     });
     push.on('error', (e) => {
       console.log(e.message);
     });
+
+
   }
 
   getPage(data){
     let type = data.additionalData.page_type;
     switch (type) {
        case "comments": this.nav.push(CommunityPage,{community_id:data.additionalData.page_details.com_id});
+                       break;
        case "reply": this.nav.push(CommunityPage,{community_id:data.additionalData.page_details.com_id});
+                       break;
        case "likes" : this.nav.push(CommunityPage,{community_id:data.additionalData.page_details.com_id});
+                       break;
        case "connection_request": this.nav.push(ConnectionsPage,{notification:'connection_request'});
+                       break;
        case "service_request": this.nav.push(ServicerequestPage);
+                       break;
        case "message" : this.nav.push(ViewMessagesPage, {messageId:data.additionalData.page_details.id,viewType:"inbox"});
+                       break;
      }
   }
 
