@@ -32,7 +32,7 @@
 			<ion-row *ngIf="!communityDetailData?.isJoined">
 		    	<ion-col>
 		    		<div>
-						<button ion-button  style=" float:right;"(click)="joinCommunity(communityDetailData.id)" class="post">Join</button>
+						<button ion-button  style=" float:right;"(click)="joinCommunity(communityDetailData?.id)" class="post">Join</button>
 					</div>
 				</ion-col>
 			</ion-row>
@@ -99,7 +99,7 @@
 								</ion-item>
 								<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
 	                				<p style="color:red" class="valid">Please enter valid video url</p>
-           							</div>
+           						</div>
 							</div>
 						</ion-col>
 					</ion-row>

@@ -27,11 +27,14 @@
    <ion-label>Relationship</ion-label>
         <ion-item>
          
-            <ion-select class="select-brd"  [(ngModel)]="elder_relation"   
-            [ngModelOptions]="{standalone: true}">
+            <ion-select class="select-brd"  [(ngModel)]="elder_relation" 
+            formControlName="elder_relation" [class.invalid]="!authForm.controls.elder_relation.valid && (authForm.controls.elder_relation.dirty)">
                 <ion-option  *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
             </ion-select>
         </ion-item>
+         <small *ngIf="!authForm.controls.elder_relation.valid  && (authForm.controls.elder_relation.dirty || submitAttempt)">
+                  <p class="valid err-reds">Please select relation</p>
+          </small> 
 		  <ion-label>Elder Name</ion-label>
       <ion-item>
       
@@ -46,10 +49,14 @@
           <ion-item>
               
                 <ion-select class="select-brd" [(ngModel)]="elder_service"  
-                [ngModelOptions]="{standalone: true}">
+                formControlName="elder_service"  
+                [class.invalid]="!authForm.controls.elder_service.valid && (authForm.controls.elder_service.dirty)">
                     <ion-option *ngFor="let service of in_service" value={{service.value}}>{{service.label}}</ion-option>
                 </ion-select>
           </ion-item>
+           <small *ngIf="!authForm.controls.elder_service.valid  && (authForm.controls.elder_service.dirty || submitAttempt)">
+                  <p class="valid err-reds">Please select services</p>
+          </small> 
 		   <ion-label>Number</ion-label>
             <ion-item>
               <ion-input type="text" formControlName="elder_number"
@@ -62,8 +69,12 @@
 			    <ion-label>Date Of Birth</ion-label>
          <ion-item>
           
-              <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" [(ngModel)]="elder_dob" [ngModelOptions]="{standalone: true}"></ion-datetime>
-          </ion-item>  
+              <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" [(ngModel)]="elder_dob" formControlName="elder_dob"
+                [class.invalid]="!authForm.controls.elder_dob.valid && (authForm.controls.elder_dob.dirty)"></ion-datetime>
+          </ion-item>
+          <small  *ngIf="!authForm.controls.elder_dob.valid  && (authForm.controls.elder_dob.dirty || submitAttempt)">
+                <p class="valid err-reds">Please select dob</p>
+              </small>  
           <ion-label>Address</ion-label>
 		    <ion-item>  
               <ion-input type="text" formControlName="elder_address"
@@ -76,10 +87,15 @@
 		   <ion-label>Location</ion-label>
           <ion-item>
            
-              <ion-select  class="select-brd" [(ngModel)]="elder_location"  [ngModelOptions]="{standalone: true}">
+              <ion-select  class="select-brd" [(ngModel)]="elder_location"  
+              formControlName="elder_location"  
+                [class.invalid]="!authForm.controls.elder_location.valid && (authForm.controls.elder_location.dirty)">
                 <ion-option  *ngFor="let location of locations"  value={{location.id}} >{{location.location}}</ion-option>
             </ion-select>
           </ion-item>
+          <small *ngIf="!authForm.controls.elder_location.valid  && (authForm.controls.elder_location.dirty || submitAttempt)">
+                <p class="valid err-reds">Please select location</p>
+          </small>
 		  	<hr/>
           <ion-row>
             <ion-col>
@@ -91,17 +107,18 @@
 			  <!--<ion-label>{{emergency_name[i]}}</ion-label>-->
 			    <ion-label>Select here </ion-label>
             <ion-item>
-              <ion-select class="select-brd" placeholder="select" [(ngModel)]="emergency_name[i]"  
-                [ngModelOptions]="{standalone: true}">
+              <ion-select class="select-brd" placeholder="select" [(ngModel)]="emergency_name[i]" 
+              [ngModelOptions]="{standalone:true}">
                     <ion-option value="police">Police</ion-option>
                     <ion-option value="hospital">Hospital</ion-option>
                     <ion-option value="ambulance">Ambulance</ion-option>
                     <ion-option value="son">Son</ion-option>
               </ion-select>
             </ion-item>
+            
             <ion-label>Number</ion-label>
 			   <ion-item>
-              <ion-input type="text" [(ngModel)]="emergency_no[i]"  [ngModelOptions]="{standalone: true}"></ion-input>
+              <ion-input type="text" [(ngModel)]="emergency_no[i]" formControlName="emergency_numbers"></ion-input>
 			     </ion-item>
               <small *ngIf="!authForm.controls.emergency_numbers.valid  && 
                   (authForm.controls.emergency_numbers.dirty || submitAttempt)">

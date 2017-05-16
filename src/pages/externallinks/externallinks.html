@@ -1,0 +1,57 @@
+<!--
+  Generated template for the Externallinks page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Useful External Links</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+	<ion-list *ngFor="let useful of externalLinks">
+		<ion-card>
+			<ion-card-title>
+				<h1 (click)="openUrl(useful.metalink_url)">{{useful.metalink_title}}</h1>
+			</ion-card-title>
+			<ion-card-content>
+				<p (click)="openUrl(useful.metalink_url)">{{useful.metalink_description}}</p>
+			</ion-card-content>
+			<ion-card-content>
+				<ion-item>
+					<ion-row>
+						<ion-col>
+							<ion-avatar item-left>
+					          	<img  [src]="useful.metalink_image" (click)="openUrl(useful.metalink_url)" 
+					          	[hidden]="!useful?.metalink_image">
+					      	</ion-avatar>
+					    </ion-col>
+					    <ion-col>
+						    <h1 item-text-wrap (click)="openUrl(useful.metalink_url)">{{useful.title}}
+						    </h1>					      	
+						    <p class="time-datem"><i class="fa fa-calendar-o"></i> {{useful.created_at}}
+						          		</p>
+					    </ion-col>
+					</ion-row>
+			     </ion-item>
+	       	</ion-card-content>
+		</ion-card>
+
+	</ion-list>
+	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ 	</ion-infinite-scroll>
+</ion-content>

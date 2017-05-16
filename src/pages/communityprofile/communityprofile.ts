@@ -66,10 +66,16 @@ export class CommunityprofilePage {
   constructor(public nav: NavController,public platform: Platform, public storage:Storage,public formBuilder: FormBuilder,public popoverCtrl: PopoverController, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
         this.isAndroid = platform.is('android');
       this.nav=nav;
+      this.profile_uid=navParams.get("profile_uid");
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      storage.get('token').then((token) => { this.token=token;});
-      storage.get('id').then((id) => { this.my_id=id; })
+      storage.get('id').then((id) => { this.my_id=id; });
+      storage.get('token').then((token) => { this.token=token;
+       this.profileCommunity(this.profile_uid);
+      this.memberProfile(this.profile_uid);
+      this.getPrivacy(this.profile_uid);
+    })
+      
     });
       this.authForm = formBuilder.group({
         videoUrl : ['', Validators.compose([Validators.pattern('^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be|vimeo\.com|dailymotion\.com|metacafe\.com|wines\.com)\/.+$')])],
@@ -78,10 +84,8 @@ export class CommunityprofilePage {
        let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
       
-      this.profile_uid=navParams.get("profile_uid");
-      this.profileCommunity(this.profile_uid);
-      this.memberProfile(this.profile_uid);
-      this.getPrivacy(this.profile_uid);
+      
+     
         loader.dismiss();
         this.addComments=false;
         this.itemComments=false;

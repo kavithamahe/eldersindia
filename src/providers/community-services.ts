@@ -4,6 +4,7 @@ import { Http,Headers,RequestOptions } from '@angular/http';
 //import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
+import { AppConfig } from '../providers/app-config';
 
 
 @Injectable()
@@ -26,9 +27,10 @@ export class CommunityServices {
   send:any;
   token:any;
   //id:number;
-  user_id:number;
+  user_id:number = 0;
   getCommunityPostsUrl:any;
-   constructor(public http: Http, public storage:Storage,public toastCtrl: ToastController) {
+   constructor(public appConfig:AppConfig,public http: Http, public storage:Storage,public toastCtrl: ToastController) {
+     this.getCommunityPostsUrl = appConfig.setrooturl();
     this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();

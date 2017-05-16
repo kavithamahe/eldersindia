@@ -20,7 +20,7 @@ import { InAppBrowser } from 'ionic-native';
 @Component({
   selector: 'page-community',
   templateUrl: 'community.html',
-  // providers : [CommunityServices]
+  providers : [CommunityServices]
 })
 
 export class CommunityPage {
@@ -52,7 +52,7 @@ export class CommunityPage {
     emojiId:number=0;
     viewMore:boolean=false;
     show_description:any;
-    user_id:any;
+    user_id:any= 0;
     authForm:FormGroup;
     message:any='';
   constructor(public platform: Platform,public modal: ModalController, public formBuilder: FormBuilder,public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices,public popoverCtrl: PopoverController ) {
@@ -60,7 +60,18 @@ export class CommunityPage {
 
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      storage.get('token').then((token) => { this.token=token; });
+      storage.get('token').then((token) => { this.token=token; 
+       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+      loader.present();
+    
+        this.community_id=this.navParams.get("community_id");
+        this.communityList(this.community_id);
+        this.communityDetail(this.community_id);
+        this.addComments=false;
+        this.itemComments=false;
+        loader.dismiss();
+        this.userType="sponsor";
+      });
       storage.get('id').then((id) => { this.user_id=id; })
     });
     this.authForm = formBuilder.group({
@@ -419,7 +430,7 @@ doInfinite(infiniteScroll) {
   });
   }
 
-  ionViewWillEnter(){
+ /* ionViewWillEnter(){
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     
@@ -430,7 +441,7 @@ doInfinite(infiniteScroll) {
         this.itemComments=false;
         loader.dismiss();
         this.userType="sponsor";
-  }
+  }*/
 
   }
 

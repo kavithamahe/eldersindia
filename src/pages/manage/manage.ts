@@ -98,6 +98,7 @@ manage_elder:any;
   deleteElder(id){
     this.communityServices.deleteDetail(id).subscribe(datas =>{
      this.showToast(datas.result);
+     this.manageDetail()
      },
      err =>{
           this.communityServices.showErrorToast(err);
