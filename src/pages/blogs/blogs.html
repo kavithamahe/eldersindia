@@ -21,12 +21,19 @@
       <button ion-button icon-only>
         <ion-icon name="create"></ion-icon>
       </button>
-    </ion-buttons>-->
+    </ion-buttons>
     <ion-buttons right (click)="createBlog()">    
       <button ion-button icon-only>
         <ion-icon name="create"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons>-->
+     <ion-fab right bottom style="top: 5px;">
+    <button ion-fab ><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="createBlog()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      <button ion-fab (click)="manageBlog()"><i class="fa fa-list" aria-hidden="true"></i></button>
+    </ion-fab-list>
+  </ion-fab>
   </ion-navbar>
 </ion-header>
 

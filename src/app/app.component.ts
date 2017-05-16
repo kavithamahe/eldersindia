@@ -242,71 +242,46 @@ export class MyApp {
 
     this.platform.ready().then(() => {
 
-      var countTimerForCloseApp = false;
-this.platform.registerBackButtonAction(function(e) {
- e.preventDefault();
- function showConfirm() {
-  if (countTimerForCloseApp) {
-   this.Platform.exitApp();
-  } else {
-   countTimerForCloseApp = true;
-   this.service.confirmationToast('Press again to exit.');
-   this.timeout(function() {
-    countTimerForCloseApp = false;
-   }, 2000);
-  }
-
- };
-
- // Is there a page to go back to?
- if (this.nav.canGoBack()) {
-  // Go back in history
-  console.log(this.nav.getActive().name);
-          this.nav.pop();
- } else {
-  // This is the last page: Show confirmation popup
-  showConfirm();
- }
-
- return false;
-}, 101);
-
-
-
       StatusBar.styleDefault();
       Splashscreen.hide();
-      // this.platform.registerBackButtonAction(() => {
-      //   // let nav = this.app.getActiveNav();
-      //   if (this.nav.canGoBack()){ //Can we go back?
-      //     console.log(this.nav.getActive().name);
-      //     this.nav.pop();
-      //   }else{
-      //           let confirmAlert = this.alertCtrl.create({
-      //           title: 'App Exit',
-      //           subTitle: "Are you sure to Exit app",
-      //           buttons: [{
-      //             text: 'NO',
-      //             handler: () => {
-      //               if (this.user_id != '' && this.user_id != null) {
-      //                 // code...
-      //                 this.nav.setRoot(DashboardPage);
-      //               }else{
-      //                 this.nav.setRoot(LoginPage);
-      //               }
-                    
-      //             }
-      //           }, {
-      //             text: 'Yes',
-      //             handler: () => {
-      //               this.platform.exitApp(); //Exit from app
-      //              }
-      //             }]
-      //           });
-      //           confirmAlert.present();
-      //         }
+      this.platform.registerBackButtonAction(() => {
+        // let nav = this.app.getActiveNav();
+        if (this.nav.canGoBack()){ //Can we go back?
+          console.log(this.nav.getActive().name);
+          this.nav.pop();
+        }else{
+                let confirmAlert = this.alertCtrl.create({
+                title: 'App Exit',
+                subTitle: "Are you sure to Exit app",
+                buttons: [{
+                  text: 'NO',
+                  handler: () => {
+                    this.storage.ready().then(() => {
+                      this.storage.get('token').then((token) => { this.token=token;});
+                      this.storage.get('id').then((id) => { this.user_id=id;
+                    if((this.user_id!='' && this.user_id != null) && (this.token!='' && this.token != null))
+                     {
+    
+                      // code...
+                      this.nav.setRoot(DashboardPage);
+                    }else{
+                      this.nav.setRoot(LoginPage);
+                    }
+                  });
+                });
+                  }
+                }, {
+                  text: 'Yes',
+                  handler: () => {
+                    this.platform.exitApp(); //Exit from app
+                   }
+                  }]
+                });
+                confirmAlert.present();
+              }
 
 
-      // });
+      });
     });
   }
 

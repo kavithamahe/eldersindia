@@ -38,9 +38,12 @@ dependent:any;
     loader.present();
    this.jobBoardService.getDependent().subscribe(
      (getDependent) => {
-      
-      this.getDependentList=getDependent;   
-      console.log(this.getDependentList);  
+      if(getDependent.length<=0)
+      {
+        this.showToaster("There is no dependent. You can not apply job!.");
+        this.dismiss();
+      }
+      this.getDependentList=getDependent;  
     },
     (err) => { 
         if(err.status===401)
