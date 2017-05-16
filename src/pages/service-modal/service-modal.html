@@ -41,25 +41,20 @@
                    
                        <p> {{subcategory_list.subcategory}}</p>
                         <small>
-							<i *ngIf= "i !== show_service" class="fa fa-angle-up" aria-hidden="true"></i>
-		                    <i *ngIf= "i === show_service" class="fa fa-angle-down" aria-hidden="true"></i>
-						
-						
-						
+							<i *ngIf= "i === show_service" class="fa fa-angle-up" aria-hidden="true"></i>
+		                    <i *ngIf= "i !== show_service" class="fa fa-angle-down" aria-hidden="true"></i>
 						</small>
                     </ion-list>
-                        <div *ngIf= "i === show_service">
+                        <div *ngIf= "i === show_service" class="offered-servicelist-tree">
                           <ion-card *ngFor="let services of subcategory_list.services" >
-                          <!-- <ion-list>
-                              {{services.service}}
-                          </ion-list> -->
-                          <ion-item (click)= "goToService(services)">
-                              <!-- <i class="fa fa-thumb-tack" aria-hidden="true"></i> -->
-                              {{services.service}}
-                              <ion-badge item-right>
-                              <i class="fa fa-inr" aria-hidden="true">{{services.service_cost}}</i>
-                              </ion-badge>
-                            </ion-item>
+							<ion-row>
+								<ion-col width-80 ion-item (click)= "goToService(services)" text-wrap class="service-lefttext">
+								 <p> {{services.service}}</p> 
+								</ion-col>
+								<ion-col width-20 class="service-rightprice">
+								<small><i class="fa fa-inr" aria-hidden="true">{{services.service_cost}}</i></small>
+								</ion-col>
+							</ion-row>
                           </ion-card>
                         </div>
                     </ion-item>
