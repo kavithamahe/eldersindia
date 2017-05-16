@@ -127,11 +127,14 @@ skill_data:any;
      this.job_interest=false;
 
         this.authForm = formBuilder.group({
-        elder_name : ['', Validators.compose([Validators.required])],
+        elder_relation : ['', Validators.compose([Validators.required])],
+        elder_name : ['', Validators.compose([ Validators.maxLength(30), 
+              Validators.pattern('[a-zA-Z ]*'),Validators.required])],
+        elder_service : ['', Validators.compose([Validators.required])],
         elder_number : ['', Validators.compose([Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
-        elder_email: ['', Validators.compose([Validators.required])],
+        elder_email: ['', Validators.compose([Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]*'),Validators.required])],
         elder_password:['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
         emergency_numbers: ['', Validators.compose([Validators.required])],
@@ -356,7 +359,7 @@ imageURL:any;
 
   addDependent(){
     //---------------------------------edited-------------------------------//
-   
+
     this.getElderSkills();
     this.skill_data= this.elder_skills;
 
@@ -470,8 +473,20 @@ imageURL:any;
               this.communityServices.showErrorToast(err);
               })
         }
-        
-    this.nav.pop();
+        if(this.functionality != "edit" && this.functionality !="profileEdit"){      
+    if(!this.authForm.valid){
+      this.submitAttempt = true;
+    }
+    else{
+      this.submitAttempt = false;
+      this.nav.pop();
+    }
+  }
+   if(this.functionality=="edit" || this.functionality =="profileEdit")
+      {
+        this.nav.pop();
+      }
+    
 
 }
 

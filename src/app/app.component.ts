@@ -18,6 +18,7 @@ import { ServicerequestPage } from '../pages/servicerequest/servicerequest';
 import { BlogsPage } from '../pages/blogs/blogs';
 import { NewsPage } from '../pages/news/news';
 import { EventsPage } from '../pages/events/events';
+import { ExternallinksPage } from '../pages/externallinks/externallinks';
 import { LogoutPage } from '../pages/logout/logout';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 
@@ -35,6 +36,8 @@ import { Subscription }   from 'rxjs/Subscription';
 import { AppConfig } from '../providers/app-config';
 import { ServiceProvider } from '../providers/service-provider';
 import { CommunityServices } from '../providers/community-services';
+// import { Externallinks } from '../providers/externallinks';
+
 import { Storage } from '@ionic/storage';
 // import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 
@@ -43,7 +46,7 @@ import { Storage } from '@ionic/storage';
 
 @Component({//selector:'my-theme',
   templateUrl: 'app.html'
-
+  
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -200,6 +203,7 @@ export class MyApp {
                   { myIcon:'fa fa-rss', title: 'Blogs', component: BlogsPage },
                   { myIcon:'fa fa-newspaper-o', title: 'News', component: NewsPage },
                   { myIcon:'fa fa-random', title: 'Events', component: EventsPage },
+                  { myIcon:'fa fa-random', title: 'Useful External Links', component: ExternallinksPage },
                   { myIcon:'fa fa-address-book-o', title: 'Profile', component: MyProfilePage },
                   { myIcon:'fa fa-unlock-alt', title: 'Change Password', component: ChangePasswordPage },
                   { myIcon:'fa fa-cog', title: 'Settings', component: SettingsPage },

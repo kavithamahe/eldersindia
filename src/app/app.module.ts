@@ -40,6 +40,7 @@ import { NewsPage } from '../pages/news/news';
 import { ViewNewsPage } from '../pages/view-news/view-news';
 import { EventsPage } from '../pages/events/events';
 import { ViewEventsPage } from '../pages/view-events/view-events';
+import { ExternallinksPage } from '../pages/externallinks/externallinks';
 import { LogoutPage } from '../pages/logout/logout';
 import { JobDependentPage } from '../pages/job-dependent/job-dependent';
 import { ManageBlogsPage } from '../pages/manage-blogs/manage-blogs';
@@ -77,6 +78,7 @@ import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service-provider';
+import { Externallinks } from '../providers/externallinks';
 
 
 
@@ -120,6 +122,7 @@ import { ServiceProvider } from '../providers/service-provider';
     NewsPage,
     ViewNewsPage,
     EventsPage,
+    ExternallinksPage,
     ViewEventsPage,
     ForgotPasswordPage,
     MyProfilePage,
@@ -178,6 +181,7 @@ import { ServiceProvider } from '../providers/service-provider';
     NewsPage,
     ViewNewsPage,
     EventsPage,
+    ExternallinksPage,
     ViewEventsPage,
     ForgotPasswordPage,
     MyProfilePage,
@@ -189,6 +193,6 @@ import { ServiceProvider } from '../providers/service-provider';
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider, AppConfig,Storage] // Add GithubUsers provider
 })
 export class AppModule {}
