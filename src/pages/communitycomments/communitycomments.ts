@@ -30,9 +30,8 @@ token:any;
 user_id:any;
 
 
-  constructor(public loadingCtrl: LoadingController, public nav: NavController, public viewCtrl: ViewController, public storage: Storage, public toastCtrl: ToastController, public alertCtrl:AlertController, public communityServices: CommunityServices, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
-  	 this.nav=nav;  
-    this.storage.ready().then(() => {
+  constructor(public loadingCtrl: LoadingController, public viewCtrl: ViewController, public storage: Storage, public toastCtrl: ToastController, public alertCtrl:AlertController, public communityServices: CommunityServices, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
+  	this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;
       	this.posts = navParams.get("posts");
       	this.post_comments = this.posts.comments;
@@ -220,7 +219,7 @@ sendComment(postID){
   }
 
   dismiss(){
-  	this.nav.pop();
+  	this.viewCtrl.dismiss();
   }
   emojiPicker1(post_id)
    {

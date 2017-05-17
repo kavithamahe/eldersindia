@@ -470,8 +470,8 @@ imageURL:any;
         {
          this.communityServices.addSubmit(dependentData).subscribe(
            elders=>{
-              // console.log(elders);
-              this.communityServices.showToast("Successfully Added" + elders.result.updated);
+              console.log(elders);
+              // this.communityServices.showToast("Successfully Added" + elders.result.updated);
               },
            err =>{
               this.communityServices.showErrorToast(err);
@@ -483,11 +483,12 @@ imageURL:any;
 
     }
     else{
-      // this.submitAttempt = false;
-     this.nav.pop();
+      this.submitAttempt = false;
+     // this.nav.pop();
      
     }
   }
+    
     if(this.functionality=="edit" || this.functionality =="profileEdit")
       {
         this.nav.pop();

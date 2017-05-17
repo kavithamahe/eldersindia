@@ -24,7 +24,7 @@
     </ion-row>
 
   <hr *ngIf="functionality != 'profileEdit'" />
-   <ion-label>Relationship</ion-label>
+   <ion-label>Relationship *</ion-label>
         <ion-item>
          
             <ion-select class="select-brd"  [(ngModel)]="elder_relation" 
@@ -35,7 +35,7 @@
          <small *ngIf="!authForm.controls.elder_relation.valid  && (authForm.controls.elder_relation.dirty || submitAttempt)">
                   <p class="valid err-reds">Please select relation</p>
           </small> 
-		  <ion-label>Elder Name</ion-label>
+		  <ion-label>Elder Name *</ion-label>
       <ion-item>
       
             <ion-input  type="text" formControlName="elder_name"
@@ -45,7 +45,7 @@
           <small *ngIf="!authForm.controls.elder_name.valid  && (authForm.controls.elder_name.dirty || submitAttempt)">
                   <p class="valid err-reds">Please enter name</p>
           </small> 
-		  <ion-label>Services</ion-label>
+		  <ion-label>Services *</ion-label>
           <ion-item>
               
                 <ion-select class="select-brd" [(ngModel)]="elder_service"  
@@ -57,7 +57,7 @@
            <small *ngIf="!authForm.controls.elder_service.valid  && (authForm.controls.elder_service.dirty || submitAttempt)">
                   <p class="valid err-reds">Please select services</p>
           </small> 
-		   <ion-label>Number</ion-label>
+		   <ion-label>Number *</ion-label>
             <ion-item>
               <ion-input type="text" formControlName="elder_number"
                   [class.invalid]="!authForm.controls.elder_number.valid && (authForm.controls.elder_number.dirty)"  value={{elder_number}}>
@@ -66,7 +66,7 @@
               <small  *ngIf="!authForm.controls.elder_number.valid  && (authForm.controls.elder_number.dirty || submitAttempt)">
                 <p class="valid err-reds">Please enter number</p>
               </small>
-			    <ion-label>Date Of Birth</ion-label>
+			    <ion-label>Date Of Birth *</ion-label>
          <ion-item>
           
               <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" 
@@ -76,7 +76,7 @@
           <small  *ngIf="!authForm.controls.elder_dob.valid  && (authForm.controls.elder_dob.dirty || submitAttempt)">
                 <p class="valid err-reds">Please select dob</p>
               </small>  
-          <ion-label>Address</ion-label>
+          <ion-label>Address *</ion-label>
 		    <ion-item>  
               <ion-input type="text" formControlName="elder_address"
                 [class.invalid]="!authForm.controls.elder_address.valid && (authForm.controls.elder_address.dirty)" value={{elder_address}}>
@@ -85,7 +85,7 @@
           <small *ngIf="!authForm.controls.elder_address.valid  && (authForm.controls.elder_address.dirty || submitAttempt)">
                 <p class="valid err-reds">Please enter address</p>
           </small>
-		   <ion-label>Location</ion-label>
+		   <ion-label>Location *</ion-label>
           <ion-item>
            
               <ion-select  class="select-brd" [(ngModel)]="elder_location"  
@@ -285,7 +285,7 @@
           </ion-row>
 		  <hr/>
    
-            <ion-label>Email Address</ion-label>
+            <ion-label>Email Address *</ion-label>
 			  <ion-item>
                 <ion-input formControlName="elder_email"
                 [class.invalid]="!authForm.controls.elder_email.valid && (authForm.controls.elder_email.dirty)" placeholder="Email" value={{elder_email}}>
@@ -294,7 +294,7 @@
                 <small *ngIf="!authForm.controls.elder_email.valid  && (authForm.controls.elder_email.dirty || submitAttempt)">
                     <p class="valid err-reds">Please enter Email</p>
                 </small>
-            <ion-label>Password</ion-label>
+            <ion-label>Password *</ion-label>
               <ion-input formControlName="elder_password" style="margin:0px;"
                 [class.invalid]="!authForm.controls.elder_password.valid && (authForm.controls.elder_password.dirty)" type="text" placeholder="Password" value={{elder_password}}>
               </ion-input>
