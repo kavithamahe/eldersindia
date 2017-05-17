@@ -15,7 +15,7 @@
 </ion-header>
 <ion-content padding style="background:#F3F7FF;" (tap)="closeOption()">
   
- <div>
+ <div *ngIf="allowedElderFlag">
   <ion-fab  right top>
     <button class="add-depends" ion-fab mini (click)="addElder()" end><ion-icon name="md-person-add"></ion-icon></button>
     </ion-fab>

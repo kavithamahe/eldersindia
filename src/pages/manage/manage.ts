@@ -25,6 +25,7 @@ show_option:boolean =false;
   imageUrl:any;
   user_id:any;
   token:any;
+  allowedElderFlag:any=true;
   constructor(public alertCtrl: AlertController, public nav: NavController,public storage:Storage, public navParams: NavParams,public toastCtrl: ToastController,public loadingCtrl: LoadingController,public communityServices: CommunityServices) {
    this.nav=nav;  
            
@@ -54,6 +55,7 @@ show_option:boolean =false;
       this.communityServices.manageLists().subscribe(manages =>{
      
       this.manages=manages.result.info.data;
+      this.allowedElderFlag=manages.result.allowedElderFlag;
      })
       loader.dismiss();
    }
