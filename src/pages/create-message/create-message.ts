@@ -123,7 +123,7 @@ customErr:any=false;
        this.subject='';
        this.message='';
        this.navCtrl.setRoot(MessagesPage);
-      this.showToaster(sendMessage.result); 
+      this.showToaster(sendMessage.result.info); 
       //console.log(singleJob);
     },
     (err) => { 
