@@ -39,7 +39,7 @@
       <ion-item>
       
             <ion-input  type="text" formControlName="elder_name"
-            [class.invalid]="!authForm.controls.elder_name.valid && (authForm.controls.elder_name.dirty)" value={{elder_name}}>
+            [class.invalid]="!authForm.controls.elder_name.valid && (authForm.controls.elder_name.dirty)" [(ngModel)]="elder_name" value={{elder_name}}>
             </ion-input>
       </ion-item>
           <small *ngIf="!authForm.controls.elder_name.valid  && (authForm.controls.elder_name.dirty || submitAttempt)">
@@ -60,7 +60,7 @@
 		   <ion-label>Number *</ion-label>
             <ion-item>
               <ion-input type="text" formControlName="elder_number"
-                  [class.invalid]="!authForm.controls.elder_number.valid && (authForm.controls.elder_number.dirty)"  value={{elder_number}}>
+                  [class.invalid]="!authForm.controls.elder_number.valid && (authForm.controls.elder_number.dirty)" [(ngModel)]="elder_number" value={{elder_number}}>
               </ion-input>
 			     </ion-item>
               <small  *ngIf="!authForm.controls.elder_number.valid  && (authForm.controls.elder_number.dirty || submitAttempt)">
@@ -79,7 +79,7 @@
           <ion-label>Address *</ion-label>
 		    <ion-item>  
               <ion-input type="text" formControlName="elder_address"
-                [class.invalid]="!authForm.controls.elder_address.valid && (authForm.controls.elder_address.dirty)" value={{elder_address}}>
+                [class.invalid]="!authForm.controls.elder_address.valid && (authForm.controls.elder_address.dirty)" [(ngModel)]= "elder_address" value={{elder_address}}>
               </ion-input>
 			    </ion-item>  
           <small *ngIf="!authForm.controls.elder_address.valid  && (authForm.controls.elder_address.dirty || submitAttempt)">

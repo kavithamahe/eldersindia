@@ -20,51 +20,28 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="contect-bg-moblie">
-  <!-- <ion-row>
-  <ion-col width-20>
-    <ion-avatar item-left>
-    <img src="{{imageUrl+veiwMessagesInfo?.avatar}}">
-    </ion-avatar>
-  </ion-col>
-  <ion-col width-80>
-   <ion-card-content>
-   
-   <h2>{{veiwMessagesInfo?.sender_name}}</h2>
-   <p>{{veiwMessagesInfo?.subject}}</p>
-   <p>{{veiwMessagesInfo?.message}}</p>
-  <p class="timedate">{{veiwMessagesInfo?.created_at | date :'MMM dd y'}}</p>
-    </ion-card-content></ion-col></ion-row> -->
-  <ion-card class="inbox-sends">
+<ion-content padding style="background:#fff;">
+
+  <ion-list>
   <ion-item text-wrap>
     <ion-row>
-            <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
+            <ion-col width-20 class="left-img">
             <ion-avatar item-left>
               <img (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" 
               src="{{imageUrl+veiwMessagesInfo?.avatar}}">
             </ion-avatar>
             </ion-col>
-          
             <ion-col width-80  style="padding: 0px !important" class="send-box-content">
 			<ion-row>
-                <ion-col width-70 style="padding: 0px !important">
+                <ion-item width-70 style="padding: 0px !important" class="view-messname">
 				<small *ngIf ="viewType == 'inbox'">{{veiwMessagesInfo?.sender_name}}</small>
 				<small *ngIf ="viewType == 'sent'">{{veiwMessagesInfo?.receiver_name}}</small>
-                </ion-col>
+				
+                </ion-item>
                 <ion-col width-30 style="text-align-last: end; padding: 0px !important">
                 <p><i class="fa fa-calendar-o"></i> {{veiwMessagesInfo?.created_at | date :'MM/dd/yy'}}</p>
                 </ion-col>
-                
-              </ion-row><!--
-              <ion-row>
-                <ion-col width-70 style="padding: 0px !important">
-                <h2 *ngIf ="viewType == 'inbox'"><strong>{{veiwMessagesInfo?.sender_name}}</strong></h2>
-				<h2 *ngIf ="viewType == 'sent'"><strong>{{veiwMessagesInfo?.receiver_name}}</strong></h2>
-                </ion-col>
               </ion-row>
-              <ion-row style="padding-left: 5px !important;">
-              <p class="timedate">{{veiwMessagesInfo?.created_at | date :'MMM dd y'}}</p>
-   -->
             </ion-col>
           </ion-row>
   </ion-item>
@@ -73,10 +50,17 @@
     <div style="padding-left: 10px">
      <b>Subject :</b>  <span>{{veiwMessagesInfo?.subject}}</span>
     </div>
-    <p style="padding-top: 15px;padding-left: 20px">{{veiwMessagesInfo?.message}}</p>
+    <p>{{veiwMessagesInfo?.message}}</p>
     <br>
   <hr>
-   <ion-row>
+
+  </ion-card-content>
+   
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+  <ion-row>
     <ion-col *ngIf ="viewType == 'inbox'" (click)="messageReply(veiwMessagesInfo?.sender_name,veiwMessagesInfo?.subject)">
       <button ion-button icon-left clear small>
         <i class="fa fa-reply"> Reply</i>
@@ -98,6 +82,5 @@
       </button>
     </ion-col>   
   </ion-row>
-  </ion-card-content>
-  </ion-card>
-</ion-content>
+  </ion-toolbar>
+</ion-footer>

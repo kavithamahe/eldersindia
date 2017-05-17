@@ -25,72 +25,84 @@
 <ion-card>
   <ion-card-content style="padding:0px !important;">
   <ion-grid class="req-viewlist">
-  <ion-row>
-    <ion-col>
+  <ion-row style="border-bottom:1px solid #e3e3e3;">
+   <ion-col width-10><i class="fa fa-user-circle" aria-hidden="true"></i></ion-col>
+    <ion-col width-90>
 	<span>Service Provider Name</span>
    <p>{{viewServiceRequestInfo?.vendor_name}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>
-    <ion-col>
+  <ion-row style="border-bottom:1px solid #e3e3e3;">
+   <ion-col width-10><i class="fa fa-phone-square" aria-hidden="true"></i></ion-col>
+    <ion-col width-90>
 	<span>Contact Number</span>
-    <p>{{viewServiceRequestInfo?.contact_number}}</p>
-	</ion-col>
+   <p>{{viewServiceRequestInfo?.contact_number}}</p>
+   </ion-col>
   </ion-row>
-  <ion-row>
-    <ion-col>
+  <ion-row style="border-bottom:1px solid #e3e3e3;">
+   <ion-col width-10><i class="fa fa-user-circle" aria-hidden="true"></i></ion-col>
+    <ion-col width-90>
 	<span>Enquiry About</span>
    <p>{{viewServiceRequestInfo?.problem}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>
-    <ion-col>
-  <span>Category</span>
+  <ion-row style="border-bottom:1px solid #e3e3e3;">
+   <ion-col width-10><i class="fa fa-user-circle" aria-hidden="true"></i></ion-col>
+    <ion-col width-90>
+	<span>Category</span>
    <p>{{viewServiceRequestInfo?.category_name}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>
-    <ion-col>
-  <span>Sub Category</span>
+  <ion-row style="border-bottom:1px solid #e3e3e3;">
+   <ion-col width-10><i class="fa fa-user-circle" aria-hidden="true"></i></ion-col>
+    <ion-col width-90>
+	<span>Sub Category</span>
    <p>{{viewServiceRequestInfo?.sub_category_name}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>
-    <ion-col>
-  <span>Type Of Request</span>
+   <ion-row style="border-bottom:1px solid #e3e3e3;">
+   <ion-col width-10><i class="fa fa-list-alt" aria-hidden="true"></i></ion-col>
+    <ion-col width-90>
+	<span>Type Of Request</span>
    <p>{{viewServiceRequestInfo?.service_type}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>
-    <ion-col>
-  <span>Location</span>
+  <ion-row style="border-bottom:1px solid #e3e3e3;">
+   <ion-col width-10><i class="fa fa-user-circle" aria-hidden="true"></i></ion-col>
+    <ion-col width-90>
+	<span>Location</span>
    <p>{{viewServiceRequestInfo?.location_name}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>
-    <ion-col>
+  <ion-row style="border-bottom:1px solid #e3e3e3;">
+   <ion-col width-10><i class="fa fa-calendar" aria-hidden="true"></i></ion-col>
+    <ion-col width-90>
 	<span>Enquiry Date</span>
-    <p>{{viewServiceRequestInfo?.enquiry_date | date:'dd/M/yyyy h:m a'}}</p>
-	</ion-col>
+   <p>{{viewServiceRequestInfo?.enquiry_date | date:'dd/M/yyyy h:m a'}}</p>
+   </ion-col>
   </ion-row>
-  <ion-row>
-  <ion-col>
-  <span>Sheduled At</span>
-    <p>{{viewServiceRequestInfo?.scheduled_at | date:'dd/M/yyyy h:m a'}}</p>
-  </ion-col>
+  <ion-row style="border-bottom:1px solid #e3e3e3;">
+   <ion-col width-10><i class="fa fa-calendar" aria-hidden="true"></i></ion-col>
+    <ion-col width-90>
+	<span>Sheduled At</span>
+   <p>{{viewServiceRequestInfo?.scheduled_at | date:'dd/M/yyyy h:m a'}}</p>
+   </ion-col>
   </ion-row>
-  <ion-row>
-    <ion-col>
+  <ion-row style="border-bottom:1px solid #e3e3e3;">
+   <ion-col width-10><i class="fa fa-user-circle" aria-hidden="true"></i></ion-col>
+    <ion-col width-90>
 	<span>Remarks</span>
-    <p>{{viewServiceRequestInfo?.remarks}}</p>	
-	</ion-col>
+   <p>{{viewServiceRequestInfo?.remarks}}</p>
+   </ion-col>
   </ion-row>
-    <ion-row>
-    <ion-col>
-  <span>Service Provider Comments</span>
-    <p>{{viewServiceRequestInfo?.comments}}</p>  
-  </ion-col>
+  <ion-row style="border-bottom:1px solid #e3e3e3;">
+   <ion-col width-10><i class="fa fa-user-circle" aria-hidden="true"></i></ion-col>
+    <ion-col width-90>
+	<span>Service Provider Comments</span>
+   <p>{{viewServiceRequestInfo?.comments}}</p>
+   </ion-col>
   </ion-row>
+  
   </ion-grid>
   </ion-card-content>
 </ion-card>
