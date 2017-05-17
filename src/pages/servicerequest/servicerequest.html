@@ -26,7 +26,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding style="background:#F3F7FF;">
 <ion-card *ngFor="let service of serviceRequestInfo; let i=index;">
   <ion-card-content style=" padding:0px;">
   <ion-grid>
@@ -40,13 +40,13 @@
 		<h2 item-text-wrap class="service-req">{{service?.vendor_name}}</h2>
 	</ion-row>
 	<ion-row>
-	<p *ngIf="(service?.enquiry_date!='0000-00-00 00:00:00')" class="token-date"><i class="fa fa-calendar"></i> {{service?.enquiry_date | date :'MMM dd y h:mm a'}}</p>
+	<p *ngIf="(service?.enquiry_date!='0000-00-00 00:00:00')" class="token-date"><i class="fa fa-calendar"></i>&nbsp; {{service?.enquiry_date | date :'MMM dd y h:mm a'}}</p>
 	
 			
 	</ion-row>
-	<ion-row>
-			<p item-text-wrap  class="service-cont">{{service?.sr_token}}</p>
-	</ion-row>
+	<!-- <ion-row> -->
+			<!-- <p item-text-wrap  class="service-cont">{{service?.sr_token}}</p> -->
+	<!-- </ion-row> -->
 	<ion-row>
 			<p item-text-wrap  class="service-cont">{{service?.enquiry_about}}</p>
 	</ion-row>

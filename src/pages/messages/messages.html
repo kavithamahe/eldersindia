@@ -39,22 +39,8 @@
 
 <div [ngSwitch]="messages">
   <ion-list *ngSwitchCase="'sent'">
-  <!-- <ion-card *ngFor="let sent of sentInfo" (click)="viewMessages(sent?.id,'sent')" style="padding:3px;">
-    <ion-row>
-	<ion-col width-20 height-20>
-    <ion-avatar item-left>
-      <img src="{{imageUrl+sent?.avatar}}" height="50" />
-    </ion-avatar>
-	</ion-col>
-	<ion-col width-80>
-    <h2>{{sent?.name}}</h2>
-    <p>{{sent?.subject | words : 10 : '...'}}</p>
-    <p>{{sent?.message | words : 10 : '...'}}</p>
-  </ion-col>
-  </ion-row>
-  </ion-card> -->
-  <ion-card *ngIf="sentInfo.length<=0"><ion-item>No Record Found</ion-item></ion-card>
-  <ion-card *ngFor="let sent of sentInfo">
+  <p *ngIf="sentInfo.length<=0" class="recordnotfound">No Record Found</p>
+  <ion-list *ngFor="let sent of sentInfo">
       <ion-item-sliding class="inbox-sends">
         <ion-item (click)="viewMessages(sent?.id,'sent')">
           <ion-row>
@@ -64,18 +50,18 @@
             </ion-avatar>
             </ion-col>
           
-            <ion-col width-80  class="send-box-content" style="padding: 0px !important">
+            <ion-col width-80 class="send-box-content" style="padding: 0px !important">
               <ion-row>
-                <ion-col width-70 style="padding: 0px !important">
+                <ion-item width-70 style="padding: 0px !important" text-wrap>
                 <small>{{sent?.name}}</small>
-                </ion-col>
+                </ion-item>
                 <ion-col width-30 style="text-align-last: end; padding: 0px !important">
                 <p><i class="fa fa-calendar-o"></i>  {{sent?.created_at | date :'MM/dd/yy'}}</p>
                 </ion-col>
               </ion-row>
               <ion-row *ngIf="sent.subject">
 			  <ion-col style="padding: 0px !important">
-              <ion-item><b>Subject :</b>{{sent?.subject}}</ion-item>
+              <ion-item class="subject-details"><b>Subject :</b>{{sent?.subject}}</ion-item>
 			    </ion-col>
               </ion-row>
             </ion-col>
@@ -87,30 +73,16 @@
           </button>
         </ion-item-options>
       </ion-item-sliding>
-    </ion-card>
+    </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
   </ion-list>
 
   <ion-list *ngSwitchCase="'inbox'">
-  <!-- <ion-card *ngFor="let inbox of inboxInfo" (click)="viewMessages(inbox?.id,'inbox')">
-     <ion-row>
-	 <ion-col width-20 height-20>
-    <ion-avatar item-left height-20>
-      <img src="{{imageUrl+inbox?.avatar}}" height="50" />
-    </ion-avatar>
-	</ion-col>
-	<ion-col width-80>
-    <h2>{{inbox?.author_name}}</h2>
-	<p>{{inbox?.created_at | date :'MMM dd y'}}</p>
-    <p>{{inbox?.subject | words : 10 : '...'}}</p>
-    <p>{{inbox?.message | words : 10 : '...'}}</p>
-   </ion-col></ion-row>
-  </ion-card> -->
-      <ion-card *ngIf="inboxInfo.length<=0"><ion-item>No Record Found</ion-item></ion-card>
-      <ion-card *ngFor="let inbox of inboxInfo">
-      <ion-item-sliding class="inbox-sends">
+     <p *ngIf="inboxInfo.length<=0" class="recordnotfound">No Record Found</p>
+      <ion-list *ngFor="let inbox of inboxInfo">
+      <ion-item-sliding  class="inbox-sends">
         <ion-item (click)="viewMessages(inbox?.id,'inbox')">
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
@@ -121,27 +93,31 @@
           
             <ion-col width-80  style="padding: 0px !important" class="send-box-content">
               <ion-row>
-                <ion-col width-70 style="padding: 0px !important">
+                <ion-item width-70 style="padding: 0px !important" text-wrap>
                 <small>{{inbox?.author_name}}</small>
-                </ion-col>
+           </ion-item>
                 <ion-col width-30 style="text-align-last: end; padding: 0px !important">
                 <p><i class="fa fa-calendar-o"></i> {{inbox?.created_at | date :'MM/dd/yy'}}</p>
                 </ion-col>
               </ion-row>
               <ion-row *ngIf="inbox.subject">
-			    <ion-col style="padding: 0px !important"><b>Subject :</b>  <span>{{inbox?.subject}}</span>
+			    <ion-col style="padding: 0px !important">
+				<ion-item class="subject-details">
+				
+				<b>Subject :</b><span>{{inbox?.subject}}</span>
+				</ion-item>
 			    </ion-col>
               </ion-row>
             </ion-col>
           </ion-row>
         </ion-item>
         <ion-item-options side="right" (click)="deleteMessage(inbox?.id,'inbox')">
-          <button ion-button color="primary">
+          <button ion-button class="trash-del">
           <i class="fa fa-trash-o fa-2x"></i>          
           </button>        
         </ion-item-options>
       </ion-item-sliding>
-    </ion-card>
+    </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
@@ -153,6 +129,8 @@
 
 </ion-content>
 <style type="text/css">
+.list-md{margin:3px;}
+.inbox-sends .item-md .item-inner .input-wrapper .label-md{line-height:0px !important;}
  .ellipse-text
  {
 overflow: hidden;
