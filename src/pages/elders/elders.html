@@ -110,24 +110,17 @@
             <ion-item>
               <ion-select class="select-brd"  [(ngModel)]="emergency_name[i]" 
               [ngModelOptions]="{standalone:true}">
-                    
-                    <ion-option>Select</ion-option>
-                    <ion-option value={{emergency_name}}>Police </ion-option>
-                    <ion-option value={{emergency_name}}>Ambulance  </ion-option>
-                    <ion-option value= {{emergency_name}}>Hospital</ion-option>
-                    <ion-option value= {{emergency_name}}>Son</ion-option>
+                      <ion-option value="police">Police</ion-option>
+                    <ion-option value="hospital">Hospital</ion-option>
+                    <ion-option value="ambulance">Ambulance</ion-option>
+                    <ion-option value="son">Son</ion-option>
               </ion-select>
             </ion-item>
-            
             <ion-label>Number</ion-label>
-			   <ion-item>
-              <ion-input type="text" [(ngModel)]="emergency_no[i]" value={{emergency_no}} formControlName="emergency_numbers"></ion-input>
-			     </ion-item>
-              <small *ngIf="!authForm.controls.emergency_numbers.valid  && 
-                  (authForm.controls.emergency_numbers.dirty || submitAttempt)">
-                  <p class="valid err-reds">Please enter number</p>
-              </small>
-         
+         <ion-item>
+              <ion-input type="text" [(ngModel)]="emergency_no[i]"  [ngModelOptions]="{standalone: true}"></ion-input>
+           </ion-item>
+             
           <ion-row>
             <ion-col width-50>
               <button class="add-btn" (click)="addEmergency()" ion-button icon-left clear>

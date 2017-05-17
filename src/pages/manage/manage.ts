@@ -72,6 +72,7 @@ manage_elder:any;
      if(this.show_option == true){
        this.show_option = false;
      }
+     
    }
 
   toggleDetails(event) {
@@ -100,7 +101,7 @@ manage_elder:any;
   deleteElder(id){
     this.communityServices.deleteDetail(id).subscribe(datas =>{
      this.showToast(datas.result);
-     this.manageDetail()
+     this.manageDetail();
      },
      err =>{
           this.communityServices.showErrorToast(err);
