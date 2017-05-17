@@ -18,6 +18,7 @@ import { ServicerequestPage } from '../pages/servicerequest/servicerequest';
 import { BlogsPage } from '../pages/blogs/blogs';
 import { NewsPage } from '../pages/news/news';
 import { EventsPage } from '../pages/events/events';
+import { ExternallinksPage } from '../pages/externallinks/externallinks';
 import { LogoutPage } from '../pages/logout/logout';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 
@@ -35,6 +36,8 @@ import { Subscription }   from 'rxjs/Subscription';
 import { AppConfig } from '../providers/app-config';
 import { ServiceProvider } from '../providers/service-provider';
 import { CommunityServices } from '../providers/community-services';
+// import { Externallinks } from '../providers/externallinks';
+
 import { Storage } from '@ionic/storage';
 // import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 
@@ -43,7 +46,7 @@ import { Storage } from '@ionic/storage';
 
 @Component({//selector:'my-theme',
   templateUrl: 'app.html'
-
+  
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -200,6 +203,7 @@ export class MyApp {
                   { myIcon:'fa fa-rss', title: 'Blogs', component: BlogsPage },
                   { myIcon:'fa fa-newspaper-o', title: 'News', component: NewsPage },
                   { myIcon:'fa fa-random', title: 'Events', component: EventsPage },
+                  { myIcon:'fa fa-random', title: 'Useful External Links', component: ExternallinksPage },
                   { myIcon:'fa fa-address-book-o', title: 'Profile', component: MyProfilePage },
                   { myIcon:'fa fa-unlock-alt', title: 'Change Password', component: ChangePasswordPage },
                   { myIcon:'fa fa-cog', title: 'Settings', component: SettingsPage },
@@ -256,13 +260,19 @@ export class MyApp {
                 buttons: [{
                   text: 'NO',
                   handler: () => {
-                    if (this.user_id != '' && this.user_id != null) {
+                    this.storage.ready().then(() => {
+                      this.storage.get('token').then((token) => { this.token=token;});
+                      this.storage.get('id').then((id) => { this.user_id=id;
+                    if((this.user_id!='' && this.user_id != null) && (this.token!='' && this.token != null))
+                     {
+    
                       // code...
                       this.nav.setRoot(DashboardPage);
                     }else{
                       this.nav.setRoot(LoginPage);
                     }
-                    
+                  });
+                });
                   }
                 }, {
                   text: 'Yes',
@@ -310,13 +320,24 @@ export class MyApp {
     push.on('notification', (data) => {
       console.log('message', data.message);
       console.log('data',data);
+      push.getApplicationIconBadgeNumber(function(n) {
+          console.log('success', n);
+        }, function() {
+          console.log('error');
+        });
+
+      push.setApplicationIconBadgeNumber(function() {
+        console.log('success');
+      }, function() {
+        console.log('error');
+      }, +data.count);
       // let self = this;
       //if user using app and push notification comes
       if (data.additionalData.foreground) {
 
             let confirm = this.alertCtrl.create({
-            title: 'Use this lightsaber?',
-            message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+            title: 'Elder India Notification',
+            subTitle: data.message,
             buttons: [
               {
                 text: 'Disagree',          
@@ -327,7 +348,7 @@ export class MyApp {
                 text: 'View',
                 handler: () => {
                   this.getPage(data);
-                  console.log('Alert View clicked');
+                  console.log('Notification View clicked');
                 }
               }
             ]
@@ -339,22 +360,35 @@ export class MyApp {
         //TODO: Your logic on click of push notification directly
         this.getPage(data);
         console.log("Push notification clicked");
+        push.clearAllNotifications(function() {
+              console.log('success');
+            }, function() {
+              console.log('error');
+            });
       }
     });
     push.on('error', (e) => {
       console.log(e.message);
     });
+
+
   }
 
   getPage(data){
     let type = data.additionalData.page_type;
     switch (type) {
        case "comments": this.nav.push(CommunityPage,{community_id:data.additionalData.page_details.com_id});
+                       break;
        case "reply": this.nav.push(CommunityPage,{community_id:data.additionalData.page_details.com_id});
+                       break;
        case "likes" : this.nav.push(CommunityPage,{community_id:data.additionalData.page_details.com_id});
+                       break;
        case "connection_request": this.nav.push(ConnectionsPage,{notification:'connection_request'});
+                       break;
        case "service_request": this.nav.push(ServicerequestPage);
+                       break;
        case "message" : this.nav.push(ViewMessagesPage, {messageId:data.additionalData.page_details.id,viewType:"inbox"});
+                       break;
      }
   }
 

@@ -33,7 +33,7 @@ export class SubcategoryListPage {
   serviceTitle:any;
   rate:any;
 	token:any;
-
+  dependentLen:any=true;
   constructor( public loadingCtrl: LoadingController, public providerService: ServiceProvider, public navCtrl: NavController, public altCtrl:AlertController, public navParams: NavParams,public toastCtrl: ToastController,public modalCtrl: ModalController, public mp:ModalContentPage, public storage:Storage) {
       this.location_id = navParams.get("location_id");
       this.service_id = navParams.get("service").id;
@@ -63,6 +63,11 @@ loadSubcategoryList(subCategory_id,location_id){
                             this.sublists = data.result.info;
                             this.dependentLists = data.result.info.dependentLists;
                             this.serviceData = data.result.info.requestServices;
+                            if((Object.keys(this.dependentLists).length<=0) && this.userType == 'sponsor')
+                            {
+                             this.showToaster("There is no dependent. You can not apply job!.");
+                            this.dependentLen=false;
+                            }
                             console.log("dependentList data : "+this.dependentLists);
                             },
                       (err) =>{               
@@ -138,6 +143,15 @@ loadSubcategoryList(subCategory_id,location_id){
                 this.providerService.showErrorToast(err);
                 console.log("Response for serviceRequest: "+err);
               });
+  }
+  public showToaster(message)
+  {
+   let toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000,
+        position: 'top'
+        });
+   toast.present();
   }
 
 }

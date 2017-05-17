@@ -20,38 +20,38 @@
 		  <ion-row>
 			  <ion-col width-30>
 				  	<ion-item>
-					  <ion-avatar (click)="profileSetting(communityProfileData.id)" item-left class="image-profile" >
+					  <ion-avatar (click)="profileSetting(communityProfileData?.id)" item-left class="image-profile" >
 					  	<img [src]="imageUrl+communityProfileData?.avatar" 
 					  	[hidden]="!communityProfileData?.avatar">
 					  </ion-avatar>
 					</ion-item>
 			  </ion-col>
 			 
-			  	 <ion-col *ngIf="(status === 3 && (communityProfileData.id != my_id))">
+			  	 <ion-col *ngIf="(status === 3 && (communityProfileData?.id != my_id))">
 					  <button ion-button (click)="connectMember(communityProfileData)">Connect
 					  </button>
 				  </ion-col > 
-				  <ion-col *ngIf ="status === 0 && (communityProfileData.id != my_id)">
+				  <ion-col *ngIf ="status === 0 && (communityProfileData?.id != my_id)">
 					  <button ion-button disabled="true">Request Sent
 					  </button>
 				  </ion-col>
-				  <ion-col  *ngIf="status === 2 && (communityProfileData.id != my_id)">
+				  <ion-col  *ngIf="status === 2 && (communityProfileData?.id != my_id)">
 					  <button ion-button disabled="true">Rejected
 					  </button>
 				  </ion-col>
-				  <ion-col  *ngIf="status === 1 && (communityProfileData.id != my_id)">
+				  <ion-col  *ngIf="status === 1 && (communityProfileData?.id != my_id)">
 					  <button ion-button disabled="true">Connected
 					  </button>
 				  </ion-col>
-				  <ion-col *ngIf="status === 1 && (communityProfileData.id != my_id)">
+				  <ion-col *ngIf="status === 1 && (communityProfileData?.id != my_id)">
 					  <button ion-button (click)="messageModel(communityProfileData)">Message
 					  </button>
 				  </ion-col>
 			</ion-row>
 		  <ion-row>
 			  <ion-col text-capitalize>
-				  <p *ngIf="communityProfileData.id != my_id" style="text-align:left;" class="mem-name">{{communityProfileData?.name}}</p>
-				  <p *ngIf="communityProfileData.id == my_id" style="text-align:left;" class="mem-name">You</p>
+				  <p *ngIf="communityProfileData?.id != my_id" style="text-align:left;" class="mem-name">{{communityProfileData?.name}}</p>
+				  <p *ngIf="communityProfileData?.id == my_id" style="text-align:left;" class="mem-name">You</p>
 			  </ion-col>
 			  <!-- <ion-col>
 					<button ion-button (click)="profileSetting(communityProfileData.id)">My Profile
@@ -134,7 +134,7 @@
 			    				<ion-col>
 			    					<div>
 										<button ion-button medium icon-only (click)="addUserPosts
-										(communityProfileData.id)" class="post comm-postlist"><i class="fa fa-paper-plane"></i>&nbsp;</button>
+										(communityProfileData?.id)" class="post comm-postlist"><i class="fa fa-paper-plane"></i>&nbsp;</button>
 									</div>
 								</ion-col>
 							</ion-row>
@@ -171,7 +171,8 @@
 						<ion-row>
 							<ion-col>
 			          			<p item-text-wrap class="feed-post" [innerHTML]="community.post_message"><a href=""></a>{{community.post_message}}</p>
-								<img  [src]="imageUrl+community?.post_image" [hidden]="!community?.post_image">
+								<img  [src]="imageUrl+community?.post_image" 
+								[hidden]="!community?.post_image">
 							</ion-col>
 			       		</ion-row>
 		       			<ion-card-content [hidden]="!community?.post_video" class="video-updates">

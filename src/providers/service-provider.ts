@@ -63,6 +63,15 @@ showToast(message) {
     toast.present();
   }
 
+confirmationToast(message) {
+    const toast = this.toastCtrl.create({
+      message: message,
+      position: "bottom",
+      duration: 1000,
+    });
+    toast.present();
+  }  
+
   showErrorToast(error) {
 
     if(error.status===401){

@@ -16,7 +16,7 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Create Blog</ion-title>    
+    <ion-title text-center>{{blogTitle}}</ion-title>    
   </ion-navbar>
 </ion-header>
 
@@ -26,12 +26,12 @@
 
   <ion-item>
     <ion-label stacked class="bloag-label">Blog Title<small style="color:red;">*</small></ion-label><span style="color:red">*</span>
-    <ion-input type="text" formControlName="title"></ion-input>
+    <ion-input type="text" formControlName="title" [(ngModel)]="title"></ion-input>
   </ion-item>
   <p *ngIf="!blogForm.controls.title.valid && (blogForm.controls.title.dirty || submitAttempt)" class="err-reds">Please enter blog title</p>
 <ion-item>
     <ion-label stacked class="bloag-label" style="text-align:left; padding-bottom:10px;">Category<small style="color:red;">*</small></ion-label>
-    <ion-select class="select-brd" formControlName="category">
+    <ion-select class="select-brd" formControlName="category" [(ngModel)]="category">
       <ion-option *ngFor="let categories of categoriesList" [value]="categories.id">{{categories.name}}</ion-option>     
     </ion-select>
   </ion-item>
@@ -43,7 +43,7 @@
 
 	<ion-item>
 	    <ion-label stacked>Description<small style="color:red;">*</small></ion-label>
-	    <ion-textarea [(ngModel)]="description" formControlName="description"></ion-textarea>
+	    <ion-textarea  formControlName="description" [(ngModel)]="description"></ion-textarea>
 	</ion-item>
 	<p *ngIf="!blogForm.controls.description.valid && (blogForm.controls.description.dirty || submitAttempt)" class="err-reds">Please enter description</p>
   </form>
@@ -62,11 +62,11 @@
   </ion-list-header>
   <ion-item>
     <ion-label class="liste-names">Yes</ion-label>
-    <ion-radio value="Yes"></ion-radio>
+    <ion-radio value="1"></ion-radio>
   </ion-item>
   <ion-item>
     <ion-label class="liste-names">No</ion-label>
-    <ion-radio value="No"></ion-radio>
+    <ion-radio value="0"></ion-radio>
   </ion-item> 
 </div>
 <button ion-button icon-left full (click)="createBlog()">

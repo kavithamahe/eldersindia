@@ -61,10 +61,10 @@ user_id:any;
     return this.http.post(this.rootUrl+'postReply',_request,this.options)
       .map(res => res.json()); 
   }
-  createBlog(blogObject)
+  createBlog(blogObject,actionUrl)
   {
     let _request= blogObject;
-    return this.http.post(this.rootUrl+'addBlog',_request,this.options)
+    return this.http.post(this.rootUrl+actionUrl,_request,this.options)
       .map(res => res.json());
   }
   getBlogCategory()
@@ -79,4 +79,26 @@ user_id:any;
     return this.http.get(this.rootUrl+'getBlogTags/'+tagsInput,this.options)
       .map(res => res.json());
   }
+  manageblogs() {  
+   let _request= {"search":{"title":"","status":"","category":"","posted_by":"others","author":this.user_id}};
+    return this.http.post(this.rootUrl+'listBlog',_request,this.options)
+      .map(res => res.json()); 
+  }
+  deleteBlog(blogId) {  
+   let _request= {"info":{"id":blogId}};
+    return this.http.post(this.rootUrl+'deleteBlog',_request,this.options)
+      .map(res => res.json()); 
+  }
+  manageBlogscroll(nextPageURL)
+   {
+   let _request= {"search":{"title":"","status":"","category":"","posted_by":"others","author":this.user_id}};
+    return this.http.post(nextPageURL,_request,this.options)
+      .map(res => res.json()); 
+   }
+   getEditBlog(blogId)
+   {   
+      let _request= {};
+    return this.http.post(this.rootUrl+'getBlog/'+blogId,_request,this.options)
+      .map(res => res.json());      
+   }
 }

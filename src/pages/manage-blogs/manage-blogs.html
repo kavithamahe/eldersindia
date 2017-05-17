@@ -1,0 +1,69 @@
+<!--
+  Generated template for the ManageBlogs page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Manage Blogs</ion-title>
+    <!--<ion-buttons right>    
+      <button ion-button icon-only>
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>-->
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<ion-card *ngFor="let manageBlog of manageblogsLists; let i=index;">
+  <ion-card-content style=" padding:0px;">
+  <ion-grid>
+   <ion-row>   
+    <ion-col width-80>
+	<ion-row>
+		<h2 item-text-wrap class="service-req">{{manageBlog?.category_name}}</h2>
+	</ion-row>
+	<ion-row>
+	<p *ngIf="(manageBlog?.created_at!='0000-00-00 00:00:00')" class="token-date"><i class="fa fa-calendar"></i> {{manageBlog?.created_at | date :'MMM dd y h:mm a'}}</p>
+	</ion-row>
+	<ion-row *ngFor="let status of blogStatus" >
+	<p item-text-wrap  class="service-cont" *ngIf="manageBlog?.status==status?.id">
+	<ion-badge color="secondary">{{status?.label}}</ion-badge></p>
+	</ion-row>
+	<ion-row>
+			<p item-text-wrap  class="service-cont" innerHTML="{{manageBlog?.description | words:40}}"></p>
+	</ion-row>	
+	</ion-col>	
+  </ion-row>
+  </ion-grid> 
+    <hr>
+   <ion-row>
+    <ion-col (click)="editBlog(manageBlog?.id,'edit')">
+      <button ion-button icon-left clear small>
+        <i class="fa fa-pencil-square-o"> Edit</i>
+      </button>
+    </ion-col>
+    <ion-col (click)="deleteBlog(manageBlog?.id)">
+      <button ion-button icon-left clear small>
+        <i class="fa fa-trash-o"> Delete</i>
+      </button>
+    </ion-col>   
+  </ion-row>
+  </ion-card-content>
+</ion-card>
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+</ion-content>

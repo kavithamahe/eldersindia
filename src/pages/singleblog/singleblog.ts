@@ -47,8 +47,7 @@ submitAttempt: boolean = false;
       })
   	});
     this.commentForm = formBuilder.group({
-        comment: ['', Validators.compose([Validators.required,Validators.pattern('^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be|vimeo\.com|dailymotion\.com|metacafe\.com|wine\.com)\/.+$')
-])]//(^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$)
+        comment: ['', Validators.compose([Validators.required])]
          });
     this.showComment=true;
   }

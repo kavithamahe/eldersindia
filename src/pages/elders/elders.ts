@@ -7,6 +7,8 @@ import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 
 import { CommunityServices } from '../../providers/community-services';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { ManagePage } from '../../pages/manage/manage';
+
 
 @Component({
   selector: 'page-elders',
@@ -39,7 +41,7 @@ sponser_id:any;
   industry_experience:any = [{year:""}];
   functional_duration:any ="";
   sponsor_id:any;
-
+  mobile:any="";
   elder_email:any="";
   elder_password:any="";
   elder_id:any="";
@@ -105,7 +107,7 @@ skill_data:any;
         
         this.functionality=navParams.get("fuctionality");
 
-      console.log(this.functionality);
+      console.log(this.functionality+'fffffffffff');
       if(this.functionality == 'edit'){
           this.title = "Edit Elder Details"
           if(navParams.get("editData")!= null){
@@ -125,26 +127,64 @@ skill_data:any;
     // this.today = "";
      
      this.job_interest=false;
-
+         
+  // }
+  if(navParams.get("fuctionality")!= "edit" && navParams.get("fuctionality") !="profileEdit"){
+    
         this.authForm = formBuilder.group({
-        elder_name : ['', Validators.compose([Validators.required])],
-        elder_number : ['', Validators.compose([Validators.required])],
+        elder_relation : ['', Validators.compose([Validators.required])],
+        elder_name : ['', Validators.compose([ Validators.maxLength(30), 
+              Validators.pattern('[a-zA-Z ]*'),Validators.required])],
+        elder_service : ['', Validators.compose([Validators.required])],
+        elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
-        elder_email: ['', Validators.compose([Validators.required])],
+        elder_email: ['', Validators.compose([Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]*'),Validators.required])],
         elder_password:['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
-        emergency_numbers: ['', Validators.compose([Validators.required])],
+       /* emergency_numbers: ['', Validators.compose([Validators.required])],
         experienceYears: ['', Validators.compose([Validators.required])],
         college: ['', Validators.compose([Validators.required])],
         elderGraduation: ['', Validators.compose([Validators.required])],
         elderSpecialization: ['', Validators.compose([Validators.required])],
         functional_area: ['', Validators.compose([Validators.required])],
-        functional_duration: ['', Validators.compose([Validators.required])]
+        functional_duration: ['', Validators.compose([Validators.required])]*/
+        emergency_numbers: ['', Validators.compose([])],
+        experienceYears: ['', Validators.compose([])],
+        college: ['', Validators.compose([])],
+        elderGraduation: ['', Validators.compose([])],
+        elderSpecialization: ['', Validators.compose([])],
+        functional_area: ['', Validators.compose([])],
+        functional_duration: ['', Validators.compose([])]
               });
-
-  // }
-
+  }
+  else
+  {
+        this.authForm = formBuilder.group({
+        elder_relation : ['', Validators.compose([Validators.required])],
+        elder_name : ['', Validators.compose([ Validators.maxLength(30), 
+              Validators.pattern('[a-zA-Z ]*'),Validators.required])],
+        elder_service : ['', Validators.compose([Validators.required])],
+        elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.required])],
+        elder_address: ['', Validators.compose([Validators.required])],
+        elder_dob : ['', Validators.compose([Validators.required])],
+        elder_location: ['', Validators.compose([Validators.required])],
+       /* emergency_numbers: ['', Validators.compose([Validators.required])],
+        experienceYears: ['', Validators.compose([Validators.required])],
+        college: ['', Validators.compose([Validators.required])],
+        elderGraduation: ['', Validators.compose([Validators.required])],
+        elderSpecialization: ['', Validators.compose([Validators.required])],
+        functional_area: ['', Validators.compose([Validators.required])],
+        functional_duration: ['', Validators.compose([Validators.required])]*/
+        emergency_numbers: ['', Validators.compose([])],
+        experienceYears: ['', Validators.compose([])],
+        college: ['', Validators.compose([])],
+        elderGraduation: ['', Validators.compose([])],
+        elderSpecialization: ['', Validators.compose([])],
+        functional_area: ['', Validators.compose([])],
+        functional_duration: ['', Validators.compose([])]
+              });
+  }
   this.nav=nav;
 }
 
@@ -356,7 +396,7 @@ imageURL:any;
 
   addDependent(){
     //---------------------------------edited-------------------------------//
-   
+
     this.getElderSkills();
     this.skill_data= this.elder_skills;
 
@@ -383,6 +423,7 @@ imageURL:any;
                           "job_type":this.job_type,
                           "skills":this.skill_data,
                           "emergency":this.emergency_data,
+                          "emergency_numbers":this.mobile,
                           "experience":this.experience_data,
                           "education":this.education_data,
                           "sponsor_id":this.sponsor_id,
@@ -437,14 +478,32 @@ imageURL:any;
         let editedData ={"info": [profileEditData]};
 
           if(this.functionality == "edit"){
-
+          if(!this.authForm.valid){
+            this.submitAttempt = true;
+           }
+          else
+          {
+           this.submitAttempt = false;
             this.communityServices.editSubmit(editedData).subscribe(elders =>{
-                    console.log(elders);    
+                    // console.log(elders); 
+                    let msg='';
+              if(elders.result.updated!='')
+              {
+                this.nav.setRoot(ManagePage);
+                msg="Elder Information updated successfully";
+                this.communityServices.showToast(msg); 
+              } 
+              else 
+              {
+               msg="Can not edit elder information";
+               this.communityServices.showToast(msg); 
+              } 
+                      
              },
              err =>{
                     this.communityServices.showErrorToast(err);
               })
-       
+            }
           }else{
 
               this.providerService.webServiceCall(`myaccountEdit`,profileEditData)
@@ -462,16 +521,45 @@ imageURL:any;
       }
       else
         {
-         this.communityServices.addSubmit(dependentData).subscribe(
+        
+       // }
+        if(this.functionality != "edit" && this.functionality !="profileEdit"){      
+    if(!this.authForm.valid){
+      this.submitAttempt = true;
+    }
+    else{
+      this.submitAttempt = false;
+       this.communityServices.addSubmit(dependentData).subscribe(
            elders=>{
-              console.log(elders);
+              let msg='';
+              if(elders.result.added!='')
+              {
+                 this.nav.setRoot(ManagePage);
+                msg="Elder Information added Successfully";
+              }
+              else if(elders.result.exist!='')
+              {
+                msg="Elder email id already exits";
+              } 
+              else
+              {
+               msg="Can not added elder information";
+              } 
+               this.communityServices.showToast(msg);
               },
            err =>{
               this.communityServices.showErrorToast(err);
               })
-        }
-        
-    this.nav.pop();
+     // this.nav.pop();
+     }
+    }
+  }
+    
+    if(this.functionality =="profileEdit")
+      {
+        this.nav.pop();
+      }
+    
 
 }
 

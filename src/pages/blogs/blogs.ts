@@ -7,6 +7,7 @@ import { BlogListService } from '../../providers/blog-list-service';
 import { SingleblogPage } from '../../pages/singleblog/singleblog';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CreateBlogPage } from '../../pages/create-blog/create-blog';
+import { ManageBlogsPage } from '../../pages/manage-blogs/manage-blogs';
 /*
   Generated class for the Blogs page.
 
@@ -77,5 +78,9 @@ imageUrl:string;
   public createBlog()
   {
    this.navCtrl.push(CreateBlogPage);
+  }
+  public manageBlog()
+  {
+   this.navCtrl.push(ManageBlogsPage);
   }
 }
