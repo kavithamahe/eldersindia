@@ -487,6 +487,7 @@ imageURL:any;
      // this.nav.pop();
      
     }
+    this.communityServices.showToast("Successfully Added" );
   }
     
     if(this.functionality=="edit" || this.functionality =="profileEdit")

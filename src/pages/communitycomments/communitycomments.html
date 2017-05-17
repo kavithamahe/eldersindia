@@ -43,7 +43,7 @@
 					</ion-item>
 				   	<button (click)="toggleContent()" ion-button clear (click)="sendInlineLikes(comment.comments_id)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
 				      	<p item-text-wrap [innerHTML]="reply.comments_replay | emojis"></p>	
-						<button *ngIf="reply.uid_from == user_id" ion-button (click)="showConfirm(reply.comments_replay_id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+						<button ion-button (click)="showConfirm(reply.comments_replay_id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
 						<button  ion-button clear (click)="replyComments(i)">
 						<i class="fa fa-reply" aria-hidden="true"></i></button>
 				</ion-col>
