@@ -8,6 +8,7 @@ import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 import { CommunityServices } from '../../providers/community-services';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 
+
 @Component({
   selector: 'page-elders',
   templateUrl: 'elders.html'
@@ -39,7 +40,7 @@ sponser_id:any;
   industry_experience:any = [{year:""}];
   functional_duration:any ="";
   sponsor_id:any;
-
+  mobile:any="";
   elder_email:any="";
   elder_password:any="";
   elder_id:any="";
@@ -131,7 +132,7 @@ skill_data:any;
         elder_name : ['', Validators.compose([ Validators.maxLength(30), 
               Validators.pattern('[a-zA-Z ]*'),Validators.required])],
         elder_service : ['', Validators.compose([Validators.required])],
-        elder_number : ['', Validators.compose([Validators.required])],
+        elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
         elder_email: ['', Validators.compose([Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]*'),Validators.required])],
@@ -386,6 +387,7 @@ imageURL:any;
                           "job_type":this.job_type,
                           "skills":this.skill_data,
                           "emergency":this.emergency_data,
+                          "emergency_numbers":this.mobile,
                           "experience":this.experience_data,
                           "education":this.education_data,
                           "sponsor_id":this.sponsor_id,
@@ -442,7 +444,8 @@ imageURL:any;
           if(this.functionality == "edit"){
 
             this.communityServices.editSubmit(editedData).subscribe(elders =>{
-                    console.log(elders);    
+                    // console.log(elders); 
+                    this.communityServices.showToast("Successfully Edited"  +  elders.result.updated);   
              },
              err =>{
                     this.communityServices.showErrorToast(err);
@@ -467,7 +470,8 @@ imageURL:any;
         {
          this.communityServices.addSubmit(dependentData).subscribe(
            elders=>{
-              console.log(elders);
+              // console.log(elders);
+              this.communityServices.showToast("Successfully Added" + elders.result.updated);
               },
            err =>{
               this.communityServices.showErrorToast(err);
@@ -476,13 +480,15 @@ imageURL:any;
         if(this.functionality != "edit" && this.functionality !="profileEdit"){      
     if(!this.authForm.valid){
       this.submitAttempt = true;
+
     }
     else{
-      this.submitAttempt = false;
-      this.nav.pop();
+      // this.submitAttempt = false;
+     this.nav.pop();
+     
     }
   }
-   if(this.functionality=="edit" || this.functionality =="profileEdit")
+    if(this.functionality=="edit" || this.functionality =="profileEdit")
       {
         this.nav.pop();
       }

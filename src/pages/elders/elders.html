@@ -69,7 +69,8 @@
 			    <ion-label>Date Of Birth</ion-label>
          <ion-item>
           
-              <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" [(ngModel)]="elder_dob" formControlName="elder_dob"
+              <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" 
+              [(ngModel)]="elder_dob" formControlName="elder_dob"
                 [class.invalid]="!authForm.controls.elder_dob.valid && (authForm.controls.elder_dob.dirty)"></ion-datetime>
           </ion-item>
           <small  *ngIf="!authForm.controls.elder_dob.valid  && (authForm.controls.elder_dob.dirty || submitAttempt)">
@@ -107,24 +108,19 @@
 			  <!--<ion-label>{{emergency_name[i]}}</ion-label>-->
 			    <ion-label>Select here </ion-label>
             <ion-item>
-              <ion-select class="select-brd" placeholder="select" [(ngModel)]="emergency_name[i]" 
+              <ion-select class="select-brd"  [(ngModel)]="emergency_name[i]" 
               [ngModelOptions]="{standalone:true}">
-                    <ion-option value="police">Police</ion-option>
+                      <ion-option value="police">Police</ion-option>
                     <ion-option value="hospital">Hospital</ion-option>
                     <ion-option value="ambulance">Ambulance</ion-option>
                     <ion-option value="son">Son</ion-option>
               </ion-select>
             </ion-item>
-            
             <ion-label>Number</ion-label>
-			   <ion-item>
-              <ion-input type="text" [(ngModel)]="emergency_no[i]" formControlName="emergency_numbers"></ion-input>
-			     </ion-item>
-              <small *ngIf="!authForm.controls.emergency_numbers.valid  && 
-                  (authForm.controls.emergency_numbers.dirty || submitAttempt)">
-                  <p class="valid err-reds">Please enter number</p>
-              </small>
-         
+         <ion-item>
+              <ion-input type="text" [(ngModel)]="emergency_no[i]"  [ngModelOptions]="{standalone: true}"></ion-input>
+           </ion-item>
+             
           <ion-row>
             <ion-col width-50>
               <button class="add-btn" (click)="addEmergency()" ion-button icon-left clear>

@@ -25,6 +25,7 @@ show_option:boolean =false;
   imageUrl:any;
   user_id:any;
   token:any;
+  allowedElderFlag:any=true;
   constructor(public alertCtrl: AlertController, public nav: NavController,public storage:Storage, public navParams: NavParams,public toastCtrl: ToastController,public loadingCtrl: LoadingController,public communityServices: CommunityServices) {
    this.nav=nav;  
            
@@ -54,6 +55,7 @@ show_option:boolean =false;
       this.communityServices.manageLists().subscribe(manages =>{
      
       this.manages=manages.result.info.data;
+      this.allowedElderFlag=manages.result.allowedElderFlag;
      })
       loader.dismiss();
    }
@@ -70,6 +72,7 @@ manage_elder:any;
      if(this.show_option == true){
        this.show_option = false;
      }
+     
    }
 
   toggleDetails(event) {
@@ -98,7 +101,7 @@ manage_elder:any;
   deleteElder(id){
     this.communityServices.deleteDetail(id).subscribe(datas =>{
      this.showToast(datas.result);
-     this.manageDetail()
+     this.manageDetail();
      },
      err =>{
           this.communityServices.showErrorToast(err);
