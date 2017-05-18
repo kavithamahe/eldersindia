@@ -28,18 +28,17 @@ post_comment:any='';
 imageUrl:any;
 token:any;
 user_id:any;
-
+senddata:any;
 
   constructor(public loadingCtrl: LoadingController, public viewCtrl: ViewController, public storage: Storage, public toastCtrl: ToastController, public alertCtrl:AlertController, public communityServices: CommunityServices, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
   	this.storage.ready().then(() => {
-      storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;
-      	this.posts = navParams.get("posts");
-      	this.post_comments = this.posts.comments;
-      	this.post_id = this.posts.id;
-      	this.post_profile_id = this.posts.profile_id;
-  	
-  		});
-      storage.get('token').then((token) => { this.token=token; });
+      storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      storage.get('token').then((token) => { this.token=token; 
+      this.posts = navParams.get("posts");
+        this.post_comments = this.posts.comments;
+        this.post_id = this.posts.id;
+        this.post_profile_id = this.posts.profile_id;
+    });
       storage.get('id').then((id) => { this.user_id=id; })
     });
   	
@@ -86,9 +85,10 @@ user_id:any;
     loader.present();
 
    this.communityServices.sendInlineLikes(comments_id).subscribe(data =>{
-     this.showToast(data.result.info.message);
-     
-   },
+    
+           this.showToast(data.result.info.message);
+          // this.post_comments.push(data.result.info[0])
+        },
     err =>{
     
     this.communityServices.showErrorToast(err);

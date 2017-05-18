@@ -34,26 +34,39 @@
 <ion-grid class="dashboard">
   <ion-row>
 
-    <ion-col width-50 class="ambulance" text-center  (click)="makeCall(ambulance)" style="border:1px solid #ccc;"> 
+    <ion-col width-50 class="ambulance" text-center  (click)="makeCall(ambulance)"> 
+	<span class="dashboard-listed">
     <i class="fa fa-ambulance fa-5x"></i>
     <p>AMBULANCE</p>
+	</span>
     </ion-col>
     <ion-col width-50 class="police" text-center (click)="makeCall(police)">
+	<span class="dashboard-listed">
     <i class="fa fa-users fa-5x"></i>
-    <p>POLICE</p></ion-col>
+    <p>POLICE</p>
+	</span>
+	
+	</ion-col>
   </ion-row>
 </ion-grid>
 <ion-grid class="dashboard">
   <ion-row>
 
     <ion-col width-50 class="hooter" text-center (click)="hooter(hooterOn)">
+	<span class="dashboard-listed">
     <i class="fa fa-bell-o fa-5x"></i><p>
     HOOTER</p>
+	</span>
     </ion-col>
     <ion-col width-50 class="call-sponsor" text-center (click)="makeCall(call_sponsor)">
+	<span class="dashboard-listed">
 	<i class="fa fa-phone-square fa-5x"></i>
     <!--<img src="assets/img/headshot.jpg" class="img-circle">-->
-    <p>CALL SPONSOR</p></ion-col>
+    <p>CALL SPONSOR</p>
+	</span>
+	
+	
+	</ion-col>
   </ion-row>
 </ion-grid>
 </div>
