@@ -553,6 +553,7 @@ imageURL:any;
      // this.nav.pop();
      }
     }
+    this.communityServices.showToast("Successfully Added" );
   }
     
     if(this.functionality =="profileEdit")
