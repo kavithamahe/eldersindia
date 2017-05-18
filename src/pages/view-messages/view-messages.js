@@ -8,10 +8,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { MessagesService } from '../../providers/messages-service';
+import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
+import { CreateMessagePage } from '../../pages/create-message/create-message';
+import { MessagesPage } from '../../pages/messages/messages';
 /*
   Generated class for the ViewMessages page.
 
@@ -19,15 +22,16 @@ import { MessagesService } from '../../providers/messages-service';
   Ionic pages and navigation.
 */
 var ViewMessagesPage = (function () {
-    function ViewMessagesPage(navCtrl, navParams, storage, messagesService, loadingCtrl, toastCtrl) {
+    function ViewMessagesPage(navCtrl, navParams, storage, modalCtrl, messagesService, loadingCtrl, toastCtrl) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.storage = storage;
+        this.modalCtrl = modalCtrl;
         this.messagesService = messagesService;
         this.loadingCtrl = loadingCtrl;
         this.toastCtrl = toastCtrl;
-        this.messages = "inbox";
+        //	this.messages="inbox";
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
             storage.get('token').then(function (token) {
@@ -44,7 +48,6 @@ var ViewMessagesPage = (function () {
         loader.present();
         this.messagesService.viewMessages(messageId, viewType).subscribe(function (viewMessages) {
             _this.veiwMessagesInfo = viewMessages.result.details;
-            console.log(_this.veiwMessagesInfo);
         }, function (err) {
             if (err.status === 401) {
                 _this.showToaster(JSON.parse(err._body).error);
@@ -66,6 +69,35 @@ var ViewMessagesPage = (function () {
         });
         toast.present();
     };
+    ViewMessagesPage.prototype.CommunityUserWall = function (profile_uid) {
+        this.navCtrl.setRoot(CommunityprofilePage, { profile_uid: profile_uid });
+    };
+    ViewMessagesPage.prototype.messageReply = function (to, subject) {
+        var msgObject = { "to": to, "subject": subject };
+        this.navCtrl.setRoot(CreateMessagePage, msgObject);
+    };
+    ViewMessagesPage.prototype.messageForward = function (subject, message) {
+        var msgObject = { "subject": subject, "message": message };
+        this.navCtrl.setRoot(CreateMessagePage, msgObject);
+    };
+    ViewMessagesPage.prototype.deleteMessage = function (messageId, viewType) {
+        var _this = this;
+        var loader = this.loadingCtrl.create({ content: "Please wait..." });
+        loader.present();
+        this.messagesService.deleteMessage(messageId, viewType).subscribe(function (deleteMessage) {
+            _this.showToaster(deleteMessage.result);
+            var viewObj = { "viewType": viewType };
+            _this.navCtrl.setRoot(MessagesPage, viewObj);
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+            else {
+                _this.showToaster("Try again later");
+            }
+        });
+        loader.dismiss();
+    };
     return ViewMessagesPage;
 }());
 ViewMessagesPage = __decorate([
@@ -74,7 +106,7 @@ ViewMessagesPage = __decorate([
         templateUrl: 'view-messages.html',
         providers: [MessagesService]
     }),
-    __metadata("design:paramtypes", [NavController, NavParams, Storage, MessagesService, LoadingController, ToastController])
+    __metadata("design:paramtypes", [NavController, NavParams, Storage, ModalController, MessagesService, LoadingController, ToastController])
 ], ViewMessagesPage);
 export { ViewMessagesPage };
 //# sourceMappingURL=view-messages.js.map

@@ -13,12 +13,17 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 //import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
+import { AppConfig } from '../providers/app-config';
 var CommunityServices = (function () {
-    function CommunityServices(http, storage, toastCtrl) {
+    function CommunityServices(appConfig, http, storage, toastCtrl) {
         var _this = this;
+        this.appConfig = appConfig;
         this.http = http;
         this.storage = storage;
         this.toastCtrl = toastCtrl;
+        //id:number;
+        this.user_id = 0;
+        this.getCommunityPostsUrl = appConfig.setrooturl();
         this.storage.ready().then(function () {
             storage.get('token').then(function (token) {
                 _this.token = token;
@@ -31,6 +36,16 @@ var CommunityServices = (function () {
             storage.get('id').then(function (id) { _this.user_id = id; });
         });
     }
+    CommunityServices.prototype.initialize = function () {
+        var _this = this;
+        this.storage.ready().then(function () {
+            _this.storage.get('token').then(function (token) {
+                _this.token = token;
+            });
+            _this.storage.get('rooturl').then(function (rooturl) { _this.getCommunityPostsUrl = rooturl; });
+            _this.storage.get('id').then(function (id) { _this.user_id = id; });
+        });
+    };
     CommunityServices.prototype.fileUpload = function (id, file) {
         var formdata = new FormData();
         var posts = { community_id: id, image: file, videourl: "", message: "" };
@@ -99,8 +114,19 @@ var CommunityServices = (function () {
         return this.http.post(this.getCommunityPostsUrl + "getConnectionList", this.connectlist, this.options)
             .map(function (res) { return res.json(); });
     };
-    CommunityServices.prototype.getCommunityMembers = function () {
-        return this.http.post(this.getCommunityPostsUrl + "getCommunityMembers", "", this.options)
+    CommunityServices.prototype.connectionscroll = function (nextPageURL, id) {
+        this.connectlist = { "id": id, "searchValue": "" };
+        return this.http.post(nextPageURL, this.connectlist, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    CommunityServices.prototype.getCommunityMembers = function (id) {
+        this.post = { "user_id": id };
+        return this.http.post(this.getCommunityPostsUrl + "getCommunityMembers", this.post, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    CommunityServices.prototype.communitydetailscroll = function (nextPageURL, id) {
+        this.post = { "user_id": id };
+        return this.http.post(nextPageURL, this.post, this.options)
             .map(function (res) { return res.json(); });
     };
     CommunityServices.prototype.myprofile = function (id) {
@@ -123,14 +149,23 @@ var CommunityServices = (function () {
         return this.http.post(this.getCommunityPostsUrl + "getCommunityPosts", { "info": { "community": id, "post": 0, "comPostId": "" } }, this.options)
             .map(function (res) { return res.json(); });
     };
+    CommunityServices.prototype.communityscroll = function (nextPageURL, id) {
+        return this.http.post(nextPageURL, { "info": { "community": id, "post": 0, "comPostId": "" } }, this.options)
+            .map(function (res) { return res.json(); });
+    };
     CommunityServices.prototype.userProfile = function (id) {
         this.body = { "user_id": id, "post": 0 };
         return this.http.post(this.getCommunityPostsUrl + "getUserPosts", this.body, this.options)
             .map(function (res) { return res.json(); });
     };
+    CommunityServices.prototype.userpostsscroll = function (nextPageURL, id) {
+        this.body = { "user_id": id, "post": 0 };
+        return this.http.post(nextPageURL, this.body, this.options)
+            .map(function (res) { return res.json(); });
+    };
     //---------------------------------//
-    CommunityServices.prototype.addUserPosts = function (id, image, videoUrl, posts) {
-        this.posts = { "user_id": id, "image": image, "videourl": videoUrl, "message": posts };
+    CommunityServices.prototype.addUserPosts = function (id, image, videoUrl, posts, links) {
+        this.posts = { "user_id": id, "image": image, "videourl": videoUrl, "message": posts, "metalink": links, "app": '' };
         return this.http.post(this.getCommunityPostsUrl + "addUserPost", this.posts, this.options)
             .map(function (res) { return res.json(); });
     };
@@ -139,9 +174,15 @@ var CommunityServices = (function () {
         return this.http.post(this.getCommunityPostsUrl + "getProfileDetail", this.body, this.options)
             .map(function (res) { return res.json(); });
     };
-    CommunityServices.prototype.addLike = function (id) {
-        this.body = { "info": { "postId": id } };
+    CommunityServices.prototype.addLike = function (likeObj) {
+        // this.body = {"info": {"postId":id}};
+        this.body = { info: { postId: likeObj.id, emojiArr: { id: likeObj.emojiId, emoji: likeObj.emoji, name: likeObj.name } } };
         return this.http.post(this.getCommunityPostsUrl + "sendLikes", this.body, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    CommunityServices.prototype.sendInlineLikes = function (comments_id) {
+        this.body = { comPostCmtsId: comments_id };
+        return this.http.post(this.getCommunityPostsUrl + "sendInlineLikes", this.body, this.options)
             .map(function (res) { return res.json(); });
     };
     CommunityServices.prototype.sendPosts = function (id1, comments) {
@@ -149,19 +190,24 @@ var CommunityServices = (function () {
         return this.http.post(this.getCommunityPostsUrl + "sendComments", this.post, this.options)
             .map(function (res) { return res.json(); });
     };
-    CommunityServices.prototype.sendReply = function (id1, profile_id, comments) {
-        this.post = { "info": { "comments": comments, "uid_from": this.user_id, "uid_to": profile_id, "comment_id": id1 } };
+    CommunityServices.prototype.sendReply = function (uid_from, comments_id, comments) {
+        this.post = { "info": { "comments": comments, "uid_from": this.user_id, "uid_to": uid_from, "comment_id": comments_id } };
         return this.http.post(this.getCommunityPostsUrl + "sendReply", this.post, this.options)
             .map(function (res) { return res.json(); });
     };
-    CommunityServices.prototype.postCommunity = function (id, image, videoUrl, posts) {
-        this.posts = { "community_id": id, "image": image, "videourl": videoUrl, "message": posts, "app": '' };
+    CommunityServices.prototype.postCommunity = function (id, image, videoUrl, posts, links) {
+        this.posts = { "community_id": id, "image": image, "videourl": videoUrl, "message": posts, "metalink": links, "app": '' };
         return this.http.post(this.getCommunityPostsUrl + "addCommunityPost", this.posts, this.options)
             .map(function (res) { return res.json(); });
     };
     CommunityServices.prototype.deleteComment = function (id) {
         this.delete = { "info": { "comment_id": id } };
         return this.http.post(this.getCommunityPostsUrl + "removeFeedComment", this.delete, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    CommunityServices.prototype.deletePost = function (id) {
+        this.delete = { info: { post_id: id } };
+        return this.http.post(this.getCommunityPostsUrl + "removeFeedpost", this.delete, this.options)
             .map(function (res) { return res.json(); });
     };
     CommunityServices.prototype.manageLists = function () {
@@ -201,7 +247,7 @@ var CommunityServices = (function () {
 }());
 CommunityServices = __decorate([
     Injectable(),
-    __metadata("design:paramtypes", [Http, Storage, ToastController])
+    __metadata("design:paramtypes", [AppConfig, Http, Storage, ToastController])
 ], CommunityServices);
 export { CommunityServices };
 //# sourceMappingURL=community-services.js.map

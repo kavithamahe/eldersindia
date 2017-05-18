@@ -63,6 +63,7 @@ loadSubcategoryList(subCategory_id,location_id){
                             this.sublists = data.result.info;
                             this.dependentLists = data.result.info.dependentLists;
                             this.serviceData = data.result.info.requestServices;
+                            console.log(this.dependentLists);
                             if((Object.keys(this.dependentLists).length<=0) && this.userType == 'sponsor')
                             {
                              this.showToaster("There is no dependent. You can not apply job!.");

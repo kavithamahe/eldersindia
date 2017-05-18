@@ -46,14 +46,39 @@ var ConnectionsService = (function () {
         return this.http.post(this.rootUrl + 'receiveConnectionRequest', _request, this.options)
             .map(function (res) { return res.json(); });
     };
+    ConnectionsService.prototype.sentRquest = function () {
+        var _request = { "searchValue": "" };
+        return this.http.post(this.rootUrl + 'getSentRequestLists', _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    ConnectionsService.prototype.sentRequestScroll = function (nextPageURL) {
+        var _request = { "searchValue": "" };
+        return this.http.post(nextPageURL, _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    ConnectionsService.prototype.getAllConnectionList = function () {
+        var _request = { "search_value": "" };
+        return this.http.post(this.rootUrl + 'getAllConnectionList', _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
     ConnectionsService.prototype.connectionStatus = function (connectionId, status) {
         var _request = { "conn_req__id": connectionId, "approve_status": status };
         return this.http.post(this.rootUrl + 'sendResponse', _request, this.options)
             .map(function (res) { return res.json(); });
     };
+    ConnectionsService.prototype.sendConnectionRequest = function (connect_id, name) {
+        var _request = { "connect_id": connect_id, "connect_name": name };
+        return this.http.post(this.rootUrl + 'sendConnectionRequest', _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
     ConnectionsService.prototype.searchConnection = function (term) {
         var _request = { "user_id": this.user_id, "searchValue": term };
         return this.http.post(this.rootUrl + 'getConnectionList', _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    ConnectionsService.prototype.addsearchConnection = function (term) {
+        var _request = { "search_value": term };
+        return this.http.post(this.rootUrl + 'getAllConnectionList', _request, this.options)
             .map(function (res) { return res.json(); });
     };
     ConnectionsService.prototype.infiniteRquest = function (nextURL) {
@@ -63,6 +88,11 @@ var ConnectionsService = (function () {
     };
     ConnectionsService.prototype.allConnectionScroll = function (nextPageURL) {
         var _request = { "user_id": this.user_id, "searchValue": "" };
+        return this.http.post(nextPageURL, _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    ConnectionsService.prototype.addConnectionScroll = function (nextPageURL) {
+        var _request = { "search_value": "" };
         return this.http.post(nextPageURL, _request, this.options)
             .map(function (res) { return res.json(); });
     };

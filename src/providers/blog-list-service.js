@@ -31,6 +31,7 @@ var BlogListService = (function () {
                 _this.options = new RequestOptions({ headers: _this.headers });
             });
             storage.get('rooturl').then(function (rooturl) { _this.rootUrl = rooturl; });
+            storage.get('id').then(function (id) { _this.user_id = id; });
         });
     }
     BlogListService.prototype.blogList = function () {
@@ -55,12 +56,17 @@ var BlogListService = (function () {
     };
     BlogListService.prototype.deleteComment = function (commentId) {
         var _request = { "id": commentId };
-        return this.http.post(this.rootUrl + 'deleteComment/', _request, this.options)
+        return this.http.post(this.rootUrl + 'deleteComment', _request, this.options)
             .map(function (res) { return res.json(); });
     };
-    BlogListService.prototype.createBlog = function (blogObject) {
+    BlogListService.prototype.postReply = function (commentId, to_id, comments) {
+        var _request = { info: { "comments": comments, "uid_from": this.user_id, "uid_to": to_id, "comment_id": commentId } };
+        return this.http.post(this.rootUrl + 'postReply', _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    BlogListService.prototype.createBlog = function (blogObject, actionUrl) {
         var _request = blogObject;
-        return this.http.post(this.rootUrl + 'addBlog', _request, this.options)
+        return this.http.post(this.rootUrl + actionUrl, _request, this.options)
             .map(function (res) { return res.json(); });
     };
     BlogListService.prototype.getBlogCategory = function () {
@@ -71,6 +77,26 @@ var BlogListService = (function () {
     BlogListService.prototype.getTagsList = function (tagsInput) {
         // let _request= {};
         return this.http.get(this.rootUrl + 'getBlogTags/' + tagsInput, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    BlogListService.prototype.manageblogs = function () {
+        var _request = { "search": { "title": "", "status": "", "category": "", "posted_by": "others", "author": this.user_id } };
+        return this.http.post(this.rootUrl + 'listBlog', _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    BlogListService.prototype.deleteBlog = function (blogId) {
+        var _request = { "info": { "id": blogId } };
+        return this.http.post(this.rootUrl + 'deleteBlog', _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    BlogListService.prototype.manageBlogscroll = function (nextPageURL) {
+        var _request = { "search": { "title": "", "status": "", "category": "", "posted_by": "others", "author": this.user_id } };
+        return this.http.post(nextPageURL, _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    BlogListService.prototype.getEditBlog = function (blogId) {
+        var _request = {};
+        return this.http.post(this.rootUrl + 'getBlog/' + blogId, _request, this.options)
             .map(function (res) { return res.json(); });
     };
     return BlogListService;

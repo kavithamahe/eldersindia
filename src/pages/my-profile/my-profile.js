@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { EditProfilePage } from '../edit-profile/edit-profile';
+import { EldersPage } from '../../pages/elders/elders';
 import { ServiceProvider } from '../../providers/service-provider';
 import { Storage } from '@ionic/storage';
 /*
@@ -25,20 +26,20 @@ var MyProfilePage = (function () {
         this.providerService = providerService;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.user_type = "";
         this.gender = "";
     }
-    MyProfilePage.prototype.loadMyProfile = function (token) {
+    MyProfilePage.prototype.loadMyProfile = function () {
         var _this = this;
-        this.user_type = "";
+        // this.user_type = "";
         this.providerService.webServiceCall("myaccount", "")
             .subscribe(function (data) {
             _this.profileData = data.result.info;
             _this.gender = _this.profileData.gender;
-            _this.user_type = data.result.info.user_type;
-            if (_this.user_type != "sponsor") {
-                _this.user_type = "Elder";
-            }
+            // this.user_type = (data.result.info.user_type == 'sponosr') ? 'Sponsor' : "Elder"; 
             _this.user_dob = _this.profileData.dob; //this.getDate(this.profileData.dob);
+            console.log('ddddddddddddddddd');
+            console.log(_this.profileData);
         }, function (err) {
             _this.providerService.showErrorToast(err);
         });
@@ -49,7 +50,12 @@ var MyProfilePage = (function () {
         return dateParts;
     };
     MyProfilePage.prototype.editProfile = function () {
-        this.navCtrl.push(EditProfilePage, { profileData: this.profileData });
+        if (this.user_type == "sponsor") {
+            this.navCtrl.push(EditProfilePage, { profileData: this.profileData });
+        }
+        else {
+            this.navCtrl.push(EldersPage, { fuctionality: "profileEdit", profileData: this.profileData });
+        }
     };
     MyProfilePage.prototype.dashboardPage = function () {
         this.navCtrl.setRoot(DashboardPage);
@@ -58,9 +64,13 @@ var MyProfilePage = (function () {
         var _this = this;
         this.storage.ready().then(function () {
             _this.storage.get('imageurl').then(function (imageurl) { _this.imageURL = imageurl; });
+            _this.storage.get('user_type').then(function (user) {
+                _this.user_type = user;
+                console.log("usertype: ", _this.user_type);
+            });
             _this.storage.get('token').then(function (token) {
                 _this.token = token;
-                _this.loadMyProfile(_this.token);
+                _this.loadMyProfile();
             });
         });
     };

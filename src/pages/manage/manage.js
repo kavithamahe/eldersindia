@@ -22,11 +22,14 @@ var ManagePage = (function () {
         this.toastCtrl = toastCtrl;
         this.loadingCtrl = loadingCtrl;
         this.communityServices = communityServices;
+        this.show_option = false;
         this.showblock = null;
+        this.allowedElderFlag = true;
         this.nav = nav;
     }
-    ManagePage.prototype.showConfirm = function (DeleteId) {
+    ManagePage.prototype.showConfirm = function () {
         var _this = this;
+        var DeleteId = this.manage_elder.id;
         var confirm = this.alertCtrl.create({
             subTitle: 'Confirm Deletion',
             buttons: [
@@ -50,8 +53,21 @@ var ManagePage = (function () {
         loader.present();
         this.communityServices.manageLists().subscribe(function (manages) {
             _this.manages = manages.result.info.data;
+            _this.allowedElderFlag = manages.result.allowedElderFlag;
         });
         loader.dismiss();
+    };
+    ManagePage.prototype.showOptions = function (user) {
+        this.manage_elder = user;
+        console.log("options are pressed");
+        if (this.show_option == false) {
+            this.show_option = true;
+        }
+    };
+    ManagePage.prototype.closeOption = function () {
+        if (this.show_option == true) {
+            this.show_option = false;
+        }
     };
     ManagePage.prototype.toggleDetails = function (event) {
         if (this.showblock == null) {
@@ -61,21 +77,12 @@ var ManagePage = (function () {
             this.showblock = null;
         }
     };
-    ManagePage.prototype.getItems = function (ev) {
-        var _this = this;
-        var val = ev.target.value;
-        this.communityServices.searchManageLists(val).subscribe(function (manages) {
-            _this.manages = manages.result.info.data;
-        }, function (err) {
-            _this.manages = [];
-            _this.communityServices.showErrorToast(err);
-        });
-    };
     ManagePage.prototype.addElder = function () {
         var data = { fuctionality: "add" };
         this.nav.push(EldersPage, data);
     };
-    ManagePage.prototype.editElder = function (elder) {
+    ManagePage.prototype.editElder = function () {
+        var elder = this.manage_elder;
         var data = { "fuctionality": "edit", "editData": elder };
         this.nav.push(EldersPage, data);
     };
@@ -83,6 +90,7 @@ var ManagePage = (function () {
         var _this = this;
         this.communityServices.deleteDetail(id).subscribe(function (datas) {
             _this.showToast(datas.result);
+            _this.manageDetail();
         }, function (err) {
             _this.communityServices.showErrorToast(err);
         });

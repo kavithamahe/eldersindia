@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
 import { ConnectionsService } from '../../providers/connections-service';
 /*
   Generated class for the Connections page.
@@ -30,15 +31,25 @@ var ConnectionsPage = (function () {
         this.token = '';
         this.allConnectionsInfo = [];
         this.receivedRquestInfo = [];
+        this.sentRquestInfo = [];
+        this.addConnectionInfo = [];
         this.orgReceivedRquestInfo = [];
         this.connectionStatusInfo = [];
         this.orgAllConnectionsInfo = [];
         this.infiniteReceivedRquestInfo = [];
         this.nextPageURL1 = '';
         this.nextPageURL2 = '';
+        this.nextPageURL3 = '';
+        this.nextPageURL4 = '';
         this.allConnectionScrollLists = [];
         this.receivedConnectionScrollLists = [];
-        this.connections = "all";
+        this.getconnections = "myConnections";
+        if (navParams.get("notification") == 'connection_request') {
+            this.connections = "received";
+        }
+        else {
+            this.connections = "all";
+        }
         this.messages = "inbox";
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
@@ -59,8 +70,6 @@ var ConnectionsPage = (function () {
             _this.allConnectionsInfo = allConnections.result.info.list.data;
             _this.orgAllConnectionsInfo = allConnections.result.info.list.data;
             _this.nextPageURL1 = allConnections.result.info.list.next_page_url;
-            console.log("onload");
-            console.log(_this.allConnectionsInfo);
         }, function (err) {
             if (err.status === 401) {
                 _this.showToaster(JSON.parse(err._body).error);
@@ -79,6 +88,40 @@ var ConnectionsPage = (function () {
             _this.receivedRquestInfo = receivedRquest.result.info.list.data;
             _this.orgReceivedRquestInfo = receivedRquest.result.info.list.data;
             _this.nextPageURL2 = receivedRquest.result.info.list.next_page_url;
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+            else {
+                _this.showToaster("Try again later");
+            }
+        });
+        loader.dismiss();
+    };
+    ConnectionsPage.prototype.sentRquest = function () {
+        var _this = this;
+        var loader = this.loadingCtrl.create({ content: "Please wait..." });
+        loader.present();
+        this.connectionsService.sentRquest().subscribe(function (sentRquest) {
+            _this.sentRquestInfo = sentRquest.result.info.list.data;
+            _this.nextPageURL4 = sentRquest.result.info.list.next_page_url;
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+            else {
+                _this.showToaster("Try again later");
+            }
+        });
+        loader.dismiss();
+    };
+    ConnectionsPage.prototype.addConnectionsList = function () {
+        var _this = this;
+        var loader = this.loadingCtrl.create({ content: "Please wait..." });
+        loader.present();
+        this.connectionsService.getAllConnectionList().subscribe(function (addConnectionsList) {
+            _this.addConnectionInfo = addConnectionsList.result.info.data;
+            _this.nextPageURL3 = addConnectionsList.result.info.next_page_url;
         }, function (err) {
             if (err.status === 401) {
                 _this.showToaster(JSON.parse(err._body).error);
@@ -113,6 +156,30 @@ var ConnectionsPage = (function () {
         this.connectionsService.searchConnection(term).subscribe(function (searchConnection) {
             _this.allConnectionsInfo = searchConnection.result.info.list.data;
         });
+    };
+    ConnectionsPage.prototype.search1 = function (Event) {
+        var _this = this;
+        var term = Event.target.value;
+        this.connectionsService.addsearchConnection(term).subscribe(function (searchConnections) {
+            _this.addConnectionInfo = searchConnections.result.info.data;
+        });
+    };
+    ConnectionsPage.prototype.connectMember = function (connect_id, connect_name) {
+        var _this = this;
+        var loader = this.loadingCtrl.create({ content: "Please wait..." });
+        loader.present();
+        this.connectionsService.sendConnectionRequest(connect_id, connect_name).subscribe(function (connectionMember) {
+            _this.showToaster(connectionMember.result.info);
+            _this.addConnectionsList();
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+            else {
+                _this.showToaster("Try again later");
+            }
+        });
+        loader.dismiss();
     };
     ConnectionsPage.prototype.doInfinite2 = function (infiniteScroll) {
         var _this = this;
@@ -153,6 +220,10 @@ var ConnectionsPage = (function () {
         });
         toast.present();
     };
+    ConnectionsPage.prototype.CommunityUserWall = function (profile_uid) {
+        console.log(profile_uid);
+        this.navCtrl.setRoot(CommunityprofilePage, { profile_uid: profile_uid });
+    };
     ConnectionsPage.prototype.dashboardPage = function () {
         this.navCtrl.setRoot(DashboardPage);
     };
@@ -179,6 +250,70 @@ var ConnectionsPage = (function () {
                 // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
             }
             _this.nextPageURL1 = allConnectionScroll.result.info.list.next_page_url;
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+            else {
+                _this.showToaster("Try again later");
+            }
+        });
+    };
+    ConnectionsPage.prototype.doInfinite3 = function (infiniteScroll) {
+        var _this = this;
+        console.log(this.allConnectionsInfo);
+        setTimeout(function () {
+            if (_this.nextPageURL3 != null && _this.nextPageURL3 != '') {
+                _this.addConnectionScroll();
+            }
+            else {
+                infiniteScroll.enable(false);
+            }
+            infiniteScroll.complete();
+        }, 500);
+    };
+    ConnectionsPage.prototype.addConnectionScroll = function () {
+        var _this = this;
+        this.connectionsService.addConnectionScroll(this.nextPageURL3).subscribe(function (addConnectionScroll) {
+            _this.allConnectionScrollLists = addConnectionScroll.result.info.data;
+            // console.log(this.allConnectionScrollLists);
+            for (var i = 0; i < Object.keys(_this.allConnectionScrollLists).length; i++) {
+                _this.addConnectionInfo.push(_this.allConnectionScrollLists[i]);
+                // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
+            }
+            _this.nextPageURL3 = addConnectionScroll.result.info.next_page_url;
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+            else {
+                _this.showToaster("Try again later");
+            }
+        });
+    };
+    ConnectionsPage.prototype.doInfinite4 = function (infiniteScroll) {
+        var _this = this;
+        console.log(this.allConnectionsInfo);
+        setTimeout(function () {
+            if (_this.nextPageURL4 != null && _this.nextPageURL4 != '') {
+                _this.sentRequestScroll();
+            }
+            else {
+                infiniteScroll.enable(false);
+            }
+            infiniteScroll.complete();
+        }, 500);
+    };
+    ConnectionsPage.prototype.sentRequestScroll = function () {
+        var _this = this;
+        this.connectionsService.sentRequestScroll(this.nextPageURL4).subscribe(function (sentRequestScroll) {
+            _this.allConnectionScrollLists = sentRequestScroll.result.info.list.data;
+            // console.log(this.allConnectionScrollLists);
+            for (var i = 0; i < Object.keys(_this.allConnectionScrollLists).length; i++) {
+                _this.sentRquestInfo.push(_this.allConnectionScrollLists[i]);
+                // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
+            }
+            _this.nextPageURL4 = sentRequestScroll.result.info.list.next_page_url;
         }, function (err) {
             if (err.status === 401) {
                 _this.showToaster(JSON.parse(err._body).error);

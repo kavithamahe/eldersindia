@@ -30,12 +30,26 @@ var MessagesPage = (function () {
         this.loadingCtrl = loadingCtrl;
         this.toastCtrl = toastCtrl;
         this.messages = "inbox";
+        this.inboxInfo = [];
+        this.sentInfo = [];
+        this.nextPageURL1 = '';
+        this.nextPageURL2 = '';
+        this.inboxScrollLists = [];
+        this.sentScrolllLists = [];
+        if (navParams.get("viewType") != '' && navParams.get("viewType") != null) {
+            this.messages = navParams.get("viewType");
+        }
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
             storage.get('token').then(function (token) {
                 _this.token = token;
                 // this.blogId=navParams.get("blogId");
-                _this.onInit();
+                if (_this.messages == 'inbox') {
+                    _this.onInit();
+                }
+                else {
+                    _this.sent();
+                }
             });
         });
     }
@@ -44,7 +58,8 @@ var MessagesPage = (function () {
         var loader = this.loadingCtrl.create({ content: "Please wait..." });
         loader.present();
         this.messagesService.inbox().subscribe(function (inbox) {
-            _this.inboxInfo = inbox.result;
+            _this.inboxInfo = inbox.result.data;
+            _this.nextPageURL1 = inbox.result.next_page_url;
         }, function (err) {
             if (err.status === 401) {
                 _this.showToaster(JSON.parse(err._body).error);
@@ -60,7 +75,8 @@ var MessagesPage = (function () {
         var loader = this.loadingCtrl.create({ content: "Please wait..." });
         loader.present();
         this.messagesService.sent().subscribe(function (sent) {
-            _this.sentInfo = sent.result;
+            _this.sentInfo = sent.result.data;
+            _this.nextPageURL2 = sent.result.next_page_url;
         }, function (err) {
             if (err.status === 401) {
                 _this.showToaster(JSON.parse(err._body).error);
@@ -87,6 +103,86 @@ var MessagesPage = (function () {
     };
     MessagesPage.prototype.createMessage = function () {
         this.navCtrl.push(CreateMessagePage);
+    };
+    MessagesPage.prototype.doInfinite1 = function (infiniteScroll) {
+        var _this = this;
+        setTimeout(function () {
+            if (_this.nextPageURL1 != null && _this.nextPageURL1 != '') {
+                _this.inboxscroll();
+            }
+            else {
+                infiniteScroll.enable(false);
+            }
+            infiniteScroll.complete();
+        }, 500);
+    };
+    MessagesPage.prototype.inboxscroll = function () {
+        var _this = this;
+        this.messagesService.inboxScroll(this.nextPageURL1).subscribe(function (inboxScroll) {
+            _this.inboxScrollLists = inboxScroll.result.data;
+            for (var i = 0; i < Object.keys(_this.inboxScrollLists).length; i++) {
+                _this.inboxInfo.push(_this.inboxScrollLists[i]);
+            }
+            _this.nextPageURL1 = inboxScroll.result.next_page_url;
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+            else {
+                _this.showToaster("Try again later");
+            }
+        });
+    };
+    MessagesPage.prototype.doInfinite2 = function (infiniteScroll) {
+        var _this = this;
+        setTimeout(function () {
+            if (_this.nextPageURL2 != null && _this.nextPageURL2 != '') {
+                _this.sentScroll();
+            }
+            else {
+                infiniteScroll.enable(false);
+            }
+            infiniteScroll.complete();
+        }, 500);
+    };
+    MessagesPage.prototype.sentScroll = function () {
+        var _this = this;
+        this.messagesService.sentScroll(this.nextPageURL2).subscribe(function (sentScroll) {
+            _this.sentScrolllLists = sentScroll.result.data;
+            for (var i = 0; i < Object.keys(_this.sentScrolllLists).length; i++) {
+                _this.sentInfo.push(_this.sentScrolllLists[i]);
+            }
+            _this.nextPageURL2 = sentScroll.result.next_page_url;
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+            else {
+                _this.showToaster("Try again later");
+            }
+        });
+    };
+    MessagesPage.prototype.deleteMessage = function (messageId, viewType) {
+        var _this = this;
+        var loader = this.loadingCtrl.create({ content: "Please wait..." });
+        loader.present();
+        this.messagesService.deleteMessage(messageId, viewType).subscribe(function (deleteMessage) {
+            _this.showToaster(deleteMessage.result);
+            if (viewType == 'sent') {
+                _this.sent();
+            }
+            else {
+                _this.onInit();
+            }
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+            else {
+                _this.showToaster("Try again later");
+            }
+        });
+        loader.dismiss();
     };
     return MessagesPage;
 }());

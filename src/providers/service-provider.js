@@ -11,6 +11,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { AppConfig } from '../providers/app-config';
 import 'rxjs/Rx';
 // let webServiceURL="http://192.168.1.120:8000/api/";
 /*
@@ -20,8 +21,9 @@ import 'rxjs/Rx';
   for more info on providers and Angular 2 DI.
 */
 var ServiceProvider = (function () {
-    function ServiceProvider(http, storage, toastCtrl) {
+    function ServiceProvider(app, http, storage, toastCtrl) {
         var _this = this;
+        this.app = app;
         this.http = http;
         this.storage = storage;
         this.toastCtrl = toastCtrl;
@@ -37,8 +39,14 @@ var ServiceProvider = (function () {
         });
     }
     ServiceProvider.prototype.serviceInit = function (token) {
-        console.log("token intialized", token);
+        var _this = this;
+        this.rootUrl = this.app.setrooturl();
+        this.storage.ready().then(function () {
+            _this.storage.set('rooturl', _this.rootUrl);
+        });
         this.token = token;
+        console.log("token intialized", token);
+        console.log("root url: ", this.rootUrl);
     };
     ServiceProvider.prototype.webServiceCall = function (serviceName, bodyData) {
         this.headers = new Headers();
@@ -56,6 +64,14 @@ var ServiceProvider = (function () {
         });
         toast.present();
     };
+    ServiceProvider.prototype.confirmationToast = function (message) {
+        var toast = this.toastCtrl.create({
+            message: message,
+            position: "bottom",
+            duration: 1000,
+        });
+        toast.present();
+    };
     ServiceProvider.prototype.showErrorToast = function (error) {
         if (error.status === 401) {
             this.showToast(JSON.parse(error._body).result);
@@ -68,7 +84,7 @@ var ServiceProvider = (function () {
 }());
 ServiceProvider = __decorate([
     Injectable(),
-    __metadata("design:paramtypes", [Http, Storage, ToastController])
+    __metadata("design:paramtypes", [AppConfig, Http, Storage, ToastController])
 ], ServiceProvider);
 export { ServiceProvider };
 //# sourceMappingURL=service-provider.js.map

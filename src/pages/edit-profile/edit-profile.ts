@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { LoadingController,NavController, NavParams } from 'ionic-angular';
+import { LoadingController,NavController, NavParams,ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from 'ionic-native';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service-provider';
+import { MyProfilePage } from '../../pages/my-profile/my-profile';
 /*
   Generated class for the EditProfile page.
 
@@ -34,13 +35,17 @@ imageURL:any;
 user_dob:any;
 updateData:any;
 token:any;
-
+pemail:any='';
   my_location:any;
+submitAttempt:any;
 
-  constructor(public storage:Storage,public loadingCtrl: LoadingController,public formBuilder:FormBuilder,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public storage:Storage,public loadingCtrl: LoadingController,public formBuilder:FormBuilder,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController) {
 
       this.profileData = navParams.get("profileData");
-      
+      console.log("xxxxxxxxxxx");
+      console.log(this.profileData);
+      console.log("person"+this.profileData.personal_email);
+      this.pemail=this.profileData.personal_email;
       this.avatar = this.profileData.avatar;
 
       this.storage.ready().then(() => {
@@ -65,11 +70,12 @@ token:any;
         name: [this.profileData.name,Validators.compose([Validators.required])],
         company: [{value:this.profileData.company_name,disabled: true}],
         designation: [{value:this.profileData.designation,disabled: true},Validators.compose([Validators.minLength(3), Validators.required])],
-        gender: [this.profileData.gender,Validators.compose([Validators.required])],
+       // gender: [this.profileData.gender,Validators.compose([Validators.required])],
         mobile_number: [this.profileData.mobile,Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.required])],
-        location: [{value:this.my_location,disabled:false},Validators.compose([Validators.required])],
+        location: [{value:this.my_location,disabled:true},Validators.compose([Validators.required])],
          dob: [{value:this.my_location,disabled:false},Validators.compose([])],
-        email: [{value:this.profileData.email,disabled:true},Validators.compose([Validators.minLength(6), Validators.required])],
+        email: [{value:this.profileData.email,disabled:true},Validators.compose([Validators.required])],
+        personal_email: ['',Validators.compose([])],
         user_type: [{value:this.user_type,disabled:true},Validators.compose([Validators.required])]        
     });
      
@@ -82,6 +88,7 @@ token:any;
     this.profileData = data.result.info;
     this.user_dob=data.result.info.dob;
     this.user_type = data.result.info.user_type;
+
   },
   err=>{
     this.providerService.showErrorToast(err);
@@ -113,9 +120,16 @@ token:any;
 
 
  updateProfile(){
+   if(!this.edit_profile_Form.valid){
+            this.submitAttempt = true;
+            console.log("error");
+           }
+          else
+          {
+           this.submitAttempt = false;
     let data = this.edit_profile_Form.value;
 //     if(this.user_type == 'elder'){
-this.updateData = {name: data.name,gender:data.gender,mobile:data.mobile_number,dob:this.user_dob ,app:"",avatar1:this.avatar};
+this.updateData = {name: data.name,mobile:data.mobile_number,personal_email:data.personal_email,dob:this.user_dob ,app:"",avatar1:this.avatar};
 //     }else{
 // this.updateData = {name: data.name,mobile:data.mobile_number,dob:this.user_dob ,app:"",avatar1:this.avatar};
     // }
@@ -123,12 +137,22 @@ this.updateData = {name: data.name,gender:data.gender,mobile:data.mobile_number,
     
     this.providerService.webServiceCall(`myaccountEdit`,this.updateData)
     .subscribe(data=>{
-      console.log(data);
-      this.dismiss();
-    },
+      this.showToaster(data.result);
+      this.navCtrl.setRoot(MyProfilePage);
+          },
     err=>{
       console.log(err);
     })
   }
-    
+   } 
+
+   public showToaster(message)
+  {
+   let toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000,
+        position: 'top'
+        });
+   toast.present();
+  }
 }

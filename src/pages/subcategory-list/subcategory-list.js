@@ -34,6 +34,7 @@ var SubcategoryListPage = (function () {
         this.storage = storage;
         this.sublists = [];
         this.dependentLists = [];
+        this.dependentLen = true;
         this.location_id = navParams.get("location_id");
         this.service_id = navParams.get("service").id;
         this.serviceTitle = navParams.get("service").name;
@@ -61,6 +62,10 @@ var SubcategoryListPage = (function () {
             _this.sublists = data.result.info;
             _this.dependentLists = data.result.info.dependentLists;
             _this.serviceData = data.result.info.requestServices;
+            if ((Object.keys(_this.dependentLists).length <= 0) && _this.userType == 'sponsor') {
+                _this.showToaster("There is no dependent. You can not apply job!.");
+                _this.dependentLen = false;
+            }
             console.log("dependentList data : " + _this.dependentLists);
         }, function (err) {
             _this.providerService.showErrorToast(err);
@@ -70,12 +75,17 @@ var SubcategoryListPage = (function () {
         var servieListData = { "vendor": vendor, "subCategoryId": this.service_id, "flag": "1", "location_id": this.location_id };
         this.navCtrl.push(ServiceInfoPage, servieListData);
     };
-    SubcategoryListPage.prototype.instantRequest = function (vendor_id) {
+    SubcategoryListPage.prototype.instantRequest = function (vendorData) {
         if (this.userType != "sponsor") {
-            this.serviceRequestCall("", vendor_id);
+            var d = new Date();
+            var datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" +
+                d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+            console.log(d, datestring);
+            var serviceRequestData = { "problem": this.serviceTitle, "datetime": datestring, "dependentId": this.elderId, "mobile_no": "" };
+            this.serviceRequestCall(serviceRequestData, vendorData.id);
         }
         else {
-            this.openModal("instant", vendor_id);
+            this.openModal("instant", vendorData);
             // let instantRequestmodal = this.modalCtrl.create(InstantRequestModalPage, {dependentList:this.dependentLists});
             // instantRequestmodal.onDidDismiss(data =>{
             //   if(data == "dismiss"){
@@ -87,20 +97,20 @@ var SubcategoryListPage = (function () {
             // instantRequestmodal.present();   
         }
     };
-    SubcategoryListPage.prototype.openModal = function (modalPage, vendor_id) {
+    SubcategoryListPage.prototype.openModal = function (modalPage, vendorData) {
         var _this = this;
         if (modalPage == "instant") {
-            this.modal = this.modalCtrl.create(InstantRequestModalPage, { dependentList: this.dependentLists, service: this.serviceTitle });
+            this.modal = this.modalCtrl.create(InstantRequestModalPage, { dependentList: this.dependentLists, service: this.serviceTitle, vendor: vendorData });
         }
         else {
-            this.modal = this.modalCtrl.create(ModalContentPage, { dependentList: this.dependentLists });
+            this.modal = this.modalCtrl.create(ModalContentPage, { dependentList: this.dependentLists, vendor: vendorData });
         }
         this.modal.onDidDismiss(function (data) {
             if (data == "dismiss") {
                 console.log(" schedule request modal dismissed..!");
             }
             else {
-                _this.serviceRequestCall(data, vendor_id);
+                _this.serviceRequestCall(data, vendorData.id);
             }
         });
         this.modal.present();
@@ -121,6 +131,14 @@ var SubcategoryListPage = (function () {
             console.log("Response for serviceRequest: " + err);
         });
     };
+    SubcategoryListPage.prototype.showToaster = function (message) {
+        var toast = this.toastCtrl.create({
+            message: message,
+            duration: 3000,
+            position: 'top'
+        });
+        toast.present();
+    };
     return SubcategoryListPage;
 }());
 SubcategoryListPage = __decorate([
@@ -137,10 +155,15 @@ var InstantRequestModalPage = (function () {
         this.params = params;
         this.viewCtrl = viewCtrl;
         this.dependentData = "";
+        this.service = "";
         this.selected = false;
+        this.vendor = "";
         console.log("modal page called");
         this.dependentLists = this.params.get('dependentList');
         this.service = this.params.get('service');
+        if (params.get("vendor") != undefined) {
+            this.vendor = this.params.get("vendor").name;
+        }
     }
     InstantRequestModalPage.prototype.dismiss = function () {
         this.viewCtrl.dismiss("dismiss");
@@ -165,7 +188,7 @@ var InstantRequestModalPage = (function () {
 }());
 InstantRequestModalPage = __decorate([
     Component({
-        template: "\n<div class=\"ion-modal modal-popups\">\n<ion-header>\n<ion-toolbar class=\"hei-head\">\n    <ion-title color=\"primary\" class=\"tittles-md\">\n      Dependent List\n    </ion-title>\n    <ion-buttons start item-right class=\"close-iconss\">\n      <button ion-button (click)=\"dismiss()\">\n        <span ion-text color=\"primary\" showWhen=\"ios\">Cancel</span>\n        <ion-icon ios=\"ios-close-circle-outline\" md=\"md-close-circle\" ></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"popup-mds\">\n  <ion-item *ngIf(selected)>\n  <p class=\"err-reds\"> Dependent not selected</p>\n  </ion-item>\n  <ion-row>\n      <ion-item >\n            <ion-label>Select Dependent</ion-label>\n              <ion-select [(ngModel)]=\"dependentData\">\n                <ion-option *ngFor = \"let dependent of dependentLists\" [value]=\"dependent\">{{dependent.name}}\n                </ion-option>\n              </ion-select>\n          </ion-item>\n  </ion-row>\n  <ion-row>\n  <ion-col><button ion-button class=\"btn-defaults\" item-left small (click)=\"dismiss()\">Cancel</button></ion-col>\n  <ion-col offset-33><button class=\"btn-primarys\" ion-button item-right small (click)=\"submit()\">Submit</button></ion-col>\n  </ion-row>\n</ion-content>\n</div>\n"
+        template: "\n<div class=\"ion-modal-popup\">\n<ion-header>\n<ion-toolbar class=\"hei-head\">\n    <ion-title color=\"primary\" class=\"tittles-md\">\n      {{vendor}} - Instant Request\n    </ion-title>\n    <ion-buttons start item-right class=\"close-iconss\">\n      <button ion-button (click)=\"dismiss()\">\n        <span ion-text color=\"primary\" showWhen=\"ios\">Cancel</span>\n        <ion-icon ios=\"ios-close-circle-outline\" md=\"md-close-circle\" ></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"popup-mds\">\n  <ion-item *ngIf(selected)>\n  <p class=\"err-reds\"> Dependent not selected</p>\n  </ion-item>\n\n   <ion-label style=\" font-size:17px;\">Select Dependent</ion-label>\n      <ion-item >\n           \n              <ion-select class=\"select-brd\" style=\" margin-left:5px; width:97% !important; text-align:left; font-size:15px;\" [(ngModel)]=\"dependentData\">\n                <ion-option *ngFor = \"let dependent of dependentLists\" [value]=\"dependent\">{{dependent.name}}\n                </ion-option>\n              </ion-select>\n          </ion-item>\n \n\n\n\n  <button class=\"btn-primarys\" ion-button item-right small (click)=\"submit()\">Submit</button>\n\n \n</ion-content>\n</div>\n<style>\n.ion-modal-popup {\n    position: absolute;\n    top: 150px;\n    left: 0;\n    /* display: block; */\n    width: 100%;\n    height: 40%;\n    /* contain: strict; */\n    /* padding-top: 0%; */\n    /* align-content: center; */\n    /* -webkit-box-align: center; */\n    /* align-self: center; */\n}\n</style>\n"
     }),
     __metadata("design:paramtypes", [NavParams,
         ViewController])
