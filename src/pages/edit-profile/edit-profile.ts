@@ -68,7 +68,7 @@ token:any;
         gender: [this.profileData.gender,Validators.compose([Validators.required])],
         mobile_number: [this.profileData.mobile,Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.required])],
         location: [{value:this.my_location,disabled:false},Validators.compose([Validators.required])],
-        // dob: ['',Validators.compose([Validators.required])],
+         dob: [{value:this.my_location,disabled:false},Validators.compose([])],
         email: [{value:this.profileData.email,disabled:true},Validators.compose([Validators.minLength(6), Validators.required])],
         user_type: [{value:this.user_type,disabled:true},Validators.compose([Validators.required])]        
     });
@@ -80,6 +80,7 @@ token:any;
     this.providerService.webServiceCall(`myaccount`,"")
   .subscribe(data =>{
     this.profileData = data.result.info;
+    this.user_dob=data.result.info.dob;
     this.user_type = data.result.info.user_type;
   },
   err=>{
