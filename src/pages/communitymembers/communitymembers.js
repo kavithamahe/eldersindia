@@ -10,35 +10,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { LoginPage } from '../../pages/login/login';
+import { CommunityprofilePage } from '../communityprofile/communityprofile';
 /*
-  Generated class for the Logout page.
+  Generated class for the Communitymembers page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-var LogoutPage = (function () {
-    function LogoutPage(navCtrl, navParams, storage) {
+var CommunitymembersPage = (function () {
+    function CommunitymembersPage(nav, navParams, storage) {
         var _this = this;
-        this.navCtrl = navCtrl;
+        this.nav = nav;
         this.navParams = navParams;
         this.storage = storage;
-        this.storage.clear();
+        this.member_profiles = [];
+        this.nav = nav;
         this.storage.ready().then(function () {
-            _this.storage.clear();
-            _this.storage.set('id', '');
-            _this.storage.set('token', '');
-            _this.navCtrl.setRoot(LoginPage);
+            storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
+            storage.get('token').then(function (token) { _this.token = token; });
         });
+        this.members = navParams.get("members");
+        this.member_profiles = this.members.members;
     }
-    return LogoutPage;
+    CommunitymembersPage.prototype.membersProfile = function (id) {
+        this.nav.push(CommunityprofilePage, { profile_uid: id });
+    };
+    CommunitymembersPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad CommunitymembersPage');
+    };
+    return CommunitymembersPage;
 }());
-LogoutPage = __decorate([
+CommunitymembersPage = __decorate([
     Component({
-        selector: 'page-logout',
-        templateUrl: 'logout.html'
+        selector: 'page-communitymembers',
+        templateUrl: 'communitymembers.html'
     }),
     __metadata("design:paramtypes", [NavController, NavParams, Storage])
-], LogoutPage);
-export { LogoutPage };
-//# sourceMappingURL=logout.js.map
+], CommunitymembersPage);
+export { CommunitymembersPage };
+//# sourceMappingURL=communitymembers.js.map

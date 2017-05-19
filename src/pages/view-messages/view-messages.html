@@ -23,9 +23,9 @@
 <ion-content padding style="background:#fff;">
 
   <ion-list>
-  <ion-item text-wrap>
+  <ion-item text-wrap class="left-img">
     <ion-row>
-            <ion-col width-20 class="left-img">
+            <ion-col width-20>
             <ion-avatar item-left>
               <img (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" 
               src="{{imageUrl+veiwMessagesInfo?.avatar}}">
@@ -33,54 +33,48 @@
             </ion-col>
             <ion-col width-80  style="padding: 0px !important" class="send-box-content">
 			<ion-row>
-                <ion-item width-70 style="padding: 0px !important" class="view-messname">
+                <ion-item style="padding: 0px !important" class="view-messname">
 				<small *ngIf ="viewType == 'inbox'">{{veiwMessagesInfo?.sender_name}}</small>
 				<small *ngIf ="viewType == 'sent'">{{veiwMessagesInfo?.receiver_name}}</small>
-				
+				<b><i class="fa fa-calendar-o"></i> {{veiwMessagesInfo?.created_at | date :'MM/dd/yy'}}</b>
+				    <span>{{veiwMessagesInfo?.subject}}</span>
+					
                 </ion-item>
-                <ion-col width-30 style="text-align-last: end; padding: 0px !important">
-                <p><i class="fa fa-calendar-o"></i> {{veiwMessagesInfo?.created_at | date :'MM/dd/yy'}}</p>
-                </ion-col>
+            
               </ion-row>
             </ion-col>
           </ion-row>
   </ion-item>
   <hr>
-  <ion-card-content item-text-wrap>
-    <div style="padding-left: 10px">
-     <b>Subject :</b>  <span>{{veiwMessagesInfo?.subject}}</span>
-    </div>
+  <ion-card-content item-text-wrap class="text-view-mess">
+ 
     <p>{{veiwMessagesInfo?.message}}</p>
-    <br>
-  <hr>
+
+
 
   </ion-card-content>
-   
-  </ion-list>
-</ion-content>
-<ion-footer>
-  <ion-toolbar>
-  <ion-row>
+     <ion-row class="replay-forward">
     <ion-col *ngIf ="viewType == 'inbox'" (click)="messageReply(veiwMessagesInfo?.sender_name,veiwMessagesInfo?.subject)">
       <button ion-button icon-left clear small>
-        <i class="fa fa-reply"> Reply</i>
+         <i class="fa fa-reply"></i>&nbsp;<p>Reply</p>
       </button>
     </ion-col>
     <ion-col *ngIf ="viewType == 'sent'" (click)="messageReply(veiwMessagesInfo?.receiver_name,veiwMessagesInfo?.subject)">
       <button ion-button icon-left clear small>
-        <i class="fa fa-reply"> Reply</i>
+        <i class="fa fa-reply"></i>&nbsp;<p>Reply</p>
       </button>
     </ion-col>
+	     <ion-col (click)="deleteMessage(veiwMessagesInfo?.id,viewType)">
+      <button ion-button icon-left clear small>
+       <i class="fa fa-trash-o"></i>&nbsp;<p>Delete</p>
+      </button>
+    </ion-col> 
     <ion-col (click)="messageForward(veiwMessagesInfo?.subject,veiwMessagesInfo?.message)">
       <button ion-button icon-left clear small>
-      <div>Forward  <i class="fa fa-share"></i></div>       
+ <i class="fa fa-share"></i>&nbsp;<p>Forward</p> 
       </button>
     </ion-col>
-        <ion-col (click)="deleteMessage(veiwMessagesInfo?.id,viewType)">
-      <button ion-button icon-left clear small>
-        <i class="fa fa-trash-o"> Delete</i>
-      </button>
-    </ion-col>   
+     
   </ion-row>
-  </ion-toolbar>
-</ion-footer>
+  </ion-list>
+</ion-content>

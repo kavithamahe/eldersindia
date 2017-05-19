@@ -268,7 +268,7 @@ page-service-info ion-input									{border:none !important;}
 .view-storedet												{float:left; width:100%;}
 .commend-btn													{background:#888aef !important;}
 .job-borad													{ padding:8px !important;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);  background:#fff;   margin:8px;}
-.job-borad h2												{font-size:17px !important; color:#424a95; font-weight:400; margin-top:0px !important;margin-bottom:0px !important;}
+.job-borad h2												{font-size:18px !important; color:#424a95; font-weight:400; margin-top:0px !important;margin-bottom:0px !important;}
 .job-borad p												{font-size:15px; color:#555; font-weight:400; margin:0px; padding-top:8px; padding-bottom:10px; line-height:25px;}
 .view-storedet h2											{color:#1d6ab2;font-size:18px;padding:0; margin-bottom:0px !important;}
 .view-storedet p											{color:#708090;font-size:15px;line-height:24px; padding:0; margin-bottom:0px !important;margin-top:0px !important;}
@@ -304,7 +304,7 @@ ion-card img												{     display: inline-block;
     transition: all .2s ease-in-out; }
 .select-detalis-in .text-input-md							{width:calc(100% - 8px - 8px);}
 .select-detalis-in .text-input-ios							{width:calc(100% - 8px - 8px);}
-.job-borad p h4{ font-size:16px; line-height:25px;}
+.job-borad p h4{ font-size:15px; line-height:25px;}
 .dashboard-listed{border:1px solid #243346; float:left; width:99%; border-radius:3px; padding:5px;}
 .contact-list .item-md{ padding:5px;}
 .contact-list .item-md .item-inner .input-wrapper			{}
@@ -845,7 +845,7 @@ white-space: normal;}
 .mess-detalisview b{ font-size:16px; color:#777; font-weight:400;}
 .mess-detalisview span{ font-size:16px; color:#777; font-weight:400;}
 .mess-detalisview p{ font-size:16px; color:#777; font-weight:400; margin:0px;}
-.left-img{ border:1px solid red;}
+.left-img{padding-left:0px;}
 .send-box-content ion-row > ion-col > p{ font-size:11px;}
 .recordnotfound{ color:red; font-size:15px; text-align:center;}
 
@@ -854,7 +854,17 @@ white-space: normal;}
 .view-messname .item-inner .label-md small{ font-size:17px; color:#404996; width:100%; float:left; margin-left:5px;}
 .view-messname .item-inner .label-ios small{ font-size:17px; color:#404996; width:100%; float:left;margin-left:5px;}
 
-.view-messname .item-inner .label-md span{ font-size:14px; color:#777; margin-left:5px; float:left; font-weight:400; padding-top:10px;}
+.view-messname .item-inner .label-md span{ font-size:15px; color:#777; margin-left:5px; float:left; font-weight:400;  width:100%;}
+.view-messname .item-inner .label-md b{ font-size:11px; color:#777; margin-left:5px; float:left; font-weight:400;width:100%;}
+.view-messname .item-inner .label-ios span{ font-size:15px; color:#777; margin-left:5px; float:left; font-weight:400;  width:100%;}
+.view-messname .item-inner .label-ios b{ font-size:11px; color:#777; margin-left:5px; float:left; font-weight:400;width:100%;}
+
+.text-view-mess p{padding-left:10px; margin:0px;}
+.replay-forward{ margin-top:20px; border-top:1px solid rgba(0, 0, 0, 0.08); border-bottom:1px solid rgba(0, 0, 0, 0.08);background:#f1f1f1;}
+.replay-forward ion-col button{ padding:0px;}
+.replay-forward ion-col button span.button-inner p{ width:100%; color:#555; font-size:14px; font-weight:400;}
+.replay-forward ion-col button span.button-inner i{ float:left; color:#c1c0c0;}
+
 
 .view-messname .item-inner .label-ios span{ font-size:14px; color:#777; margin-left:5px; float:left;font-weight:400; padding-top:10px;}
 .listeviews .item-md{ padding-left:8px !important;}

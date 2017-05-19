@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 /*
@@ -18,10 +19,11 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 var MessagesService = (function () {
-    function MessagesService(http, storage) {
+    function MessagesService(http, storage, toastCtrl) {
         var _this = this;
         this.http = http;
         this.storage = storage;
+        this.toastCtrl = toastCtrl;
         this.storage.ready().then(function () {
             storage.get('token').then(function (token) {
                 _this.token = token;
@@ -32,11 +34,17 @@ var MessagesService = (function () {
             });
             storage.get('rooturl').then(function (rooturl) {
                 _this.rootUrl = rooturl;
-                console.log("consroot" + _this.rootUrl);
             });
-            console.log("storage call");
         });
     }
+    MessagesService.prototype.showToaster = function (message) {
+        var toast = this.toastCtrl.create({
+            message: message,
+            duration: 3000,
+            position: 'top'
+        });
+        toast.present();
+    };
     MessagesService.prototype.inbox = function () {
         var _request = { search: { title: "", status: "", category: "" } };
         return this.http.post(this.rootUrl + 'listInbox', _request, this.options)
@@ -62,11 +70,26 @@ var MessagesService = (function () {
         return this.http.post(this.rootUrl + 'getConnections', _request, this.options)
             .map(function (res) { return res.json(); });
     };
+    MessagesService.prototype.inboxScroll = function (nextPageURL) {
+        var _request = { search: { title: "", status: "", category: "" } };
+        return this.http.post(nextPageURL, _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    MessagesService.prototype.sentScroll = function (nextPageURL) {
+        var _request = { searchValue: "" };
+        return this.http.post(nextPageURL, _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
+    MessagesService.prototype.deleteMessage = function (messageId, viewType) {
+        var _request = { "viewType": viewType };
+        return this.http.post(this.rootUrl + 'deleteMessage/' + messageId, _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
     return MessagesService;
 }());
 MessagesService = __decorate([
     Injectable(),
-    __metadata("design:paramtypes", [Http, Storage])
+    __metadata("design:paramtypes", [Http, Storage, ToastController])
 ], MessagesService);
 export { MessagesService };
 //# sourceMappingURL=messages-service.js.map

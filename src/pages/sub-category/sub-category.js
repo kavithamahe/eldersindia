@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { LoadingController, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { SubCategoryServicePage } from '../sub-category-service/sub-category-service';
 import { ServiceProvider } from '../../providers/service-provider';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -20,27 +21,43 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 */
 var SubCategoryPage = (function () {
     // subcategories: Array<{title: string, lists: any, color: string}>;
-    function SubCategoryPage(loadingCtrl, navCtrl, navPara, providerService) {
+    function SubCategoryPage(storage, loadingCtrl, navCtrl, navPara, providerService) {
+        var _this = this;
+        this.storage = storage;
         this.loadingCtrl = loadingCtrl;
         this.navCtrl = navCtrl;
         this.navPara = navPara;
         this.providerService = providerService;
-        this.elderLocation = "";
+        this.serviceLocation = "";
         this.subcategories = [];
-        var loading = this.loadingCtrl.create({ content: 'Please wait...!' });
-        this.elderLocation = "";
-        this.subCategoryId = navPara.get("subcategory").id;
+        // this.loadLocations();
         this.subCategoryTitle = navPara.get("subcategory").service;
-        var serviceOfferedId = { "serviceOfferedId": this.subCategoryId, "locationId": "" };
-        this.loadSubCategory(serviceOfferedId);
-        this.loadLocations();
+        this.locations = navPara.get("locations");
+        var loading = this.loadingCtrl.create({ content: 'Please wait...!' });
+        this.storage.ready().then(function () {
+            _this.storage.get('service_location').then(function (my_location) {
+                console.log("this.serviceLocation1", my_location);
+                for (var i = 0; i < _this.locations.length; i++) {
+                    if (_this.locations[i].location == my_location || _this.locations[i].id == my_location) {
+                        _this.serviceLocation = my_location;
+                        console.log("this.serviceLocation2", _this.serviceLocation);
+                    }
+                    // else{
+                    //   this.serviceLocation = "";
+                    //   console.log("this.serviceLocation3",this.serviceLocation);
+                    // }
+                }
+                _this.loadSubCategory(_this.serviceLocation);
+            });
+        });
         loading.present();
         loading.dismiss();
     }
-    SubCategoryPage.prototype.loadSubCategory = function (serviceListId) {
+    SubCategoryPage.prototype.loadSubCategory = function (location) {
         var _this = this;
-        // getVendorServiceSubCategory
-        this.providerService.webServiceCall("getVendorServiceSubCategory", serviceListId)
+        this.subCategoryId = this.navPara.get("subcategory").id;
+        var serviceOfferedData = { "serviceOfferedId": this.subCategoryId, "locationId": location };
+        this.providerService.webServiceCall("getVendorServiceSubCategory", serviceOfferedData)
             .subscribe(function (data) {
             _this.subcategories = data.result;
         }, function (err) {
@@ -55,26 +72,23 @@ var SubCategoryPage = (function () {
             }
         });
     };
-    SubCategoryPage.prototype.loadLocations = function () {
-        var _this = this;
-        this.providerService.webServiceCall("getLocations", "")
-            .subscribe(function (data) {
-            _this.locations = data.result.info;
-            console.log("Location data : " + _this.locations);
-        }, function (err) {
-            _this.providerService.showErrorToast(err);
-            console.log("Response for Location data: " + err);
-        });
-    };
     SubCategoryPage.prototype.locationChanged = function () {
-        var locationBasedData = { "serviceOfferedId": this.subCategoryId, "locationId": this.elderLocation };
-        this.subcategories = "";
-        this.loadSubCategory(locationBasedData);
+        var _this = this;
+        console.log("this.serviceLocation4", this.serviceLocation);
+        var loading = this.loadingCtrl.create({ content: 'Please wait...!' });
+        this.storage.ready().then(function () {
+            _this.storage.set('service_location', _this.serviceLocation);
+            // let locationBasedData = {"serviceOfferedId":this.subCategoryId,"locationId":this.serviceLocation};
+            _this.subcategories = "";
+            _this.loadSubCategory(_this.serviceLocation);
+        });
+        loading.present();
+        loading.dismiss();
     };
     SubCategoryPage.prototype.openSelected = function (sub_category_Data) {
-        var location_id = this.elderLocation;
+        var location_id = this.serviceLocation;
         var sub_service = sub_category_Data;
-        if (this.elderLocation == "") {
+        if (this.serviceLocation == "") {
             this.providerService.showToast("Please Select the Location!");
         }
         else {
@@ -91,7 +105,7 @@ SubCategoryPage = __decorate([
         selector: 'page-sub-category',
         templateUrl: 'sub-category.html'
     }),
-    __metadata("design:paramtypes", [LoadingController, NavController, NavParams, ServiceProvider])
+    __metadata("design:paramtypes", [Storage, LoadingController, NavController, NavParams, ServiceProvider])
 ], SubCategoryPage);
 export { SubCategoryPage };
 //# sourceMappingURL=sub-category.js.map

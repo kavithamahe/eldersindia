@@ -12,11 +12,15 @@ import { TruncateModule } from 'ng2-truncate';
 import { RlTagInputModule } from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
 import { BrowserModule } from '@angular/platform-browser';
+import { Ng2EmojiModule } from 'ng2-emoji';
+import { NativeAudio, Geolocation } from 'ionic-native';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
+// import { Geolocation } from '@ionic-native';
 //Venkatesh
 import { LoginPage } from '../pages/login/login';
 import { AppConfig } from '../providers/app-config';
 import { LoginUser } from '../providers/login-user';
-// { ConnectionsService } from '../providers/connections-service';
+//import { ConnectionsService } from '../providers/connections-service';
 //import { MessagesService } from '../providers/messages-service';
 //import { JobBoardService } from '../providers/job-board-service';
 //import { ServiceRequestService } from '../providers/service-request-service';
@@ -41,8 +45,11 @@ import { NewsPage } from '../pages/news/news';
 import { ViewNewsPage } from '../pages/view-news/view-news';
 import { EventsPage } from '../pages/events/events';
 import { ViewEventsPage } from '../pages/view-events/view-events';
+import { ExternallinksPage } from '../pages/externallinks/externallinks';
 import { LogoutPage } from '../pages/logout/logout';
 import { JobDependentPage } from '../pages/job-dependent/job-dependent';
+import { ManageBlogsPage } from '../pages/manage-blogs/manage-blogs';
+import { EmojiPickerPage } from '../pages/emoji-picker/emoji-picker';
 // Kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
 import { CommunityPage } from '../pages/community/community';
@@ -50,6 +57,7 @@ import { CommunityprofilePage } from '../pages/communityprofile/communityprofile
 import { CommunitymessagePage } from '../pages/communitymessage/communitymessage';
 import { CommunitycommentsPage } from '../pages/communitycomments/communitycomments';
 import { MyprofilesettingPage } from '../pages/myprofilesetting/myprofilesetting';
+import { CommunitymembersPage } from '../pages/communitymembers/communitymembers';
 import { ManagePage } from '../pages/manage/manage';
 import { EldersPage } from '../pages/elders/elders';
 import { CommunityServices } from '../providers/community-services';
@@ -87,6 +95,8 @@ AppModule = __decorate([
             CommunitymessagePage,
             CommunitycommentsPage,
             MyprofilesettingPage,
+            EmojiPickerPage,
+            CommunitymembersPage,
             ManagePage,
             EldersPage,
             JobboardPage,
@@ -103,6 +113,7 @@ AppModule = __decorate([
             CreateBlogPage,
             LogoutPage,
             JobDependentPage,
+            ManageBlogsPage,
             SubCategoryPage,
             SubCategoryServicePage,
             SubcategoryListPage,
@@ -112,6 +123,7 @@ AppModule = __decorate([
             NewsPage,
             ViewNewsPage,
             EventsPage,
+            ExternallinksPage,
             ViewEventsPage,
             ForgotPasswordPage,
             MyProfilePage,
@@ -127,7 +139,8 @@ AppModule = __decorate([
             RlTagInputModule,
             Ionic2RatingModule,
             Ng2CompleterModule,
-            BrowserModule
+            BrowserModule,
+            Ng2EmojiModule,
         ],
         bootstrap: [IonicApp],
         entryComponents: [
@@ -140,6 +153,8 @@ AppModule = __decorate([
             CommunitymessagePage,
             CommunitycommentsPage,
             MyprofilesettingPage,
+            EmojiPickerPage,
+            CommunitymembersPage,
             CommunityPage,
             ManagePage,
             EldersPage,
@@ -157,6 +172,7 @@ AppModule = __decorate([
             CreateBlogPage,
             LogoutPage,
             JobDependentPage,
+            ManageBlogsPage,
             SubCategoryPage,
             SubCategoryServicePage,
             SubcategoryListPage,
@@ -166,6 +182,7 @@ AppModule = __decorate([
             NewsPage,
             ViewNewsPage,
             EventsPage,
+            ExternallinksPage,
             ViewEventsPage,
             ForgotPasswordPage,
             MyProfilePage,
@@ -176,7 +193,7 @@ AppModule = __decorate([
             TermsModalPage
         ],
         //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-        providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, LoginUser, CommunityServices, ServiceProvider, AppConfig, Storage] // Add GithubUsers provider
+        providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Geolocation, NativeGeocoder, NativeAudio, LoginUser, CommunityServices, ServiceProvider, AppConfig, Storage] // Add GithubUsers provider
     })
 ], AppModule);
 export { AppModule };

@@ -17,7 +17,7 @@ import { ManagePage } from '../../pages/manage/manage';
 export class EldersPage {
 authForm : FormGroup;
 base64Image:any;
-avatar:any;
+avatar:any='';
 title:any;
 submitAttempt:any;
   //---------------add functionality start-----------------------//

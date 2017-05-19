@@ -13,6 +13,7 @@ import { NavController, NavParams, LoadingController, ToastController } from 'io
 import { Storage } from '@ionic/storage';
 import { Validators, FormBuilder } from '@angular/forms';
 import { BlogListService } from '../../providers/blog-list-service';
+import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 /*
   Generated class for the Singleblog page.
@@ -30,6 +31,7 @@ var SingleblogPage = (function () {
         this.storage = storage;
         this.loadingCtrl = loadingCtrl;
         this.toastCtrl = toastCtrl;
+        this.reply_comment = "";
         this.submitAttempt = false;
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
@@ -47,6 +49,9 @@ var SingleblogPage = (function () {
         this.showComment = true;
     }
     SingleblogPage.prototype.leaveComment = function () {
+        if (this.showComment) {
+            document.getElementById('commentsView').scrollIntoView();
+        }
         this.showComment = !this.showComment;
     };
     SingleblogPage.prototype.onInit = function (blogId) {
@@ -128,6 +133,53 @@ var SingleblogPage = (function () {
             position: 'top'
         });
         toast.present();
+    };
+    SingleblogPage.prototype.viewReply = function (event) {
+        this.replyPost = null;
+        if (this.showReply == event) {
+            this.showReply = null;
+        }
+        else {
+            this.showReply = event;
+        }
+    };
+    SingleblogPage.prototype.replyblogPost = function (event) {
+        this.showReply = null;
+        if (this.replyPost == event) {
+            this.replyPost = null;
+        }
+        else {
+            this.replyPost = event;
+        }
+    };
+    SingleblogPage.prototype.postReply = function (commentId, to_id) {
+        var _this = this;
+        if (this.reply_comment != "") {
+            var loader = this.loadingCtrl.create({ content: "Please wait..." });
+            loader.present();
+            this.blogListService.postReply(commentId, to_id, this.reply_comment).subscribe(function (postComment) {
+                _this.viewComments(_this.blogId);
+                _this.showToaster(postComment.result.info.message);
+                _this.reply_comment = '';
+                _this.replyPost = null;
+                _this.showReply = null;
+            }, function (err) {
+                if (err.status === 401) {
+                    _this.showToaster(JSON.parse(err._body).error);
+                }
+                else {
+                    _this.showToaster("Try again later");
+                }
+            });
+            loader.dismiss();
+        }
+        else {
+            this.showToaster("Enter Comments and Post");
+        }
+    };
+    SingleblogPage.prototype.CommunityUserWall = function (profile_uid) {
+        console.log(profile_uid);
+        this.navCtrl.setRoot(CommunityprofilePage, { profile_uid: profile_uid });
     };
     SingleblogPage.prototype.dashboardPage = function () {
         this.navCtrl.setRoot(DashboardPage);

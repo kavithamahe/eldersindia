@@ -11,14 +11,8 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
-/*
-  Generated class for the ServiceRequestService provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
-var ServiceRequestService = (function () {
-    function ServiceRequestService(http, storage) {
+var Externallinks = (function () {
+    function Externallinks(http, storage) {
         var _this = this;
         this.http = http;
         this.storage = storage;
@@ -33,36 +27,21 @@ var ServiceRequestService = (function () {
             storage.get('rooturl').then(function (rooturl) { _this.rootUrl = rooturl; });
         });
     }
-    ServiceRequestService.prototype.serviceRequestList = function () {
-        var _request = { "info": { "list": true, "searchValue": "", "status": "" } };
-        return this.http.post(this.rootUrl + 'serviceRequestList', _request, this.options)
+    Externallinks.prototype.externalLinksList = function () {
+        var _request = { "search": { "title": "" }, "postType": "usefullLinks" };
+        return this.http.post(this.rootUrl + "normaListNewsEvents", _request, this.options)
             .map(function (res) { return res.json(); });
     };
-    ServiceRequestService.prototype.viewServiceRequest = function (serviceRequestId) {
-        var _request = { "id": serviceRequestId };
-        return this.http.post(this.rootUrl + 'serviceRequestListById', _request, this.options)
-            .map(function (res) { return res.json(); });
-    };
-    ServiceRequestService.prototype.submitRemark = function (serviceId, rating, remarks) {
-        var _request = { info: { starvalue: rating, remarks: remarks, srid: serviceId, statusFlag: 2 } };
-        return this.http.post(this.rootUrl + 'serviceRating', _request, this.options)
-            .map(function (res) { return res.json(); });
-    };
-    ServiceRequestService.prototype.serviceRequestScroll = function (nextPageURL) {
-        var _request = { "info": { "list": true, "searchValue": "", "status": "" } };
+    Externallinks.prototype.linksscroll = function (nextPageURL) {
+        var _request = { "search": { "title": "" }, "postType": "usefullLinks" };
         return this.http.post(nextPageURL, _request, this.options)
             .map(function (res) { return res.json(); });
     };
-    ServiceRequestService.prototype.getRemarks = function () {
-        var _request = { "info": { "list": true, "searchValue": "", "status": "" } };
-        return this.http.post(this.rootUrl + 'getRemarks', _request, this.options)
-            .map(function (res) { return res.json(); });
-    };
-    return ServiceRequestService;
+    return Externallinks;
 }());
-ServiceRequestService = __decorate([
+Externallinks = __decorate([
     Injectable(),
     __metadata("design:paramtypes", [Http, Storage])
-], ServiceRequestService);
-export { ServiceRequestService };
-//# sourceMappingURL=service-request-service.js.map
+], Externallinks);
+export { Externallinks };
+//# sourceMappingURL=externallinks.js.map

@@ -41,8 +41,11 @@ var JobDependentPage = (function () {
         var loader = this.loadingCtrl.create({ content: "Please wait..." });
         loader.present();
         this.jobBoardService.getDependent().subscribe(function (getDependent) {
+            if (getDependent.length <= 0) {
+                _this.showToaster("There is no dependent. You can not apply job!.");
+                _this.dismiss();
+            }
             _this.getDependentList = getDependent;
-            console.log(_this.getDependentList);
         }, function (err) {
             if (err.status === 401) {
                 _this.showToaster(JSON.parse(err._body).error);

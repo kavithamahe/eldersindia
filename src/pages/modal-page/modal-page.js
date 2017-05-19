@@ -30,13 +30,17 @@ var ModalContentPage = (function () {
         this.params = params;
         this.viewCtrl = viewCtrl;
         this.dependentLists = [];
+        this.vendor = "";
         this.dependent = "";
         this.terms = false;
         this.checkTerms = false;
-        console.log("modal content page", params.get("dependentList"));
+        console.log("modal content page", params.get("vendor"));
         var loading = this.loadingCtrl.create({ content: 'Please wait...!' });
         loading.present();
         this.dependentLists = params.get("dependentList");
+        if (params.get("vendor") != undefined) {
+            this.vendor = this.params.get("vendor").name;
+        }
         this.modalForm = formBuilder.group({
             problem: ['', Validators.compose([Validators.minLength(5), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
             date: ['', Validators.compose([Validators.required])],
@@ -61,8 +65,17 @@ var ModalContentPage = (function () {
         }
     };
     ModalContentPage.prototype.openTerms = function () {
+        var _this = this;
         var termsModal = this.modalCtrl.create(TermsModalPage);
         termsModal.present();
+        termsModal.onDidDismiss(function (data) {
+            if (data == "dismiss") {
+                console.log(" Terms modal dismissed..!");
+            }
+            else {
+                _this.terms = JSON.parse(data);
+            }
+        });
     };
     ModalContentPage.prototype.submit = function () {
         if (!this.modalForm.valid || (this.terms == false)) {

@@ -9,6 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { NavController, ViewController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { SubcategoryListPage } from '../subcategory-list/subcategory-list';
 /*
   Generated class for the ServiceModal page.
 
@@ -16,20 +18,22 @@ import { NavController, ViewController, NavParams } from 'ionic-angular';
   Ionic pages and navigation.
 */
 var ServiceModalPage = (function () {
-    function ServiceModalPage(viewCtrl, navCtrl, navParams) {
+    function ServiceModalPage(storage, viewCtrl, navCtrl, navParams) {
+        this.storage = storage;
         this.viewCtrl = viewCtrl;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.show_service = null;
         this.showContactDetails = false;
         this.showServiceOffered = false;
         this.vendorList = navParams.get("vendorList");
         if (navParams.get("service") == "contact") {
             this.showContactDetails = true;
-            this.title = "Contact Details";
+            this.title = this.vendorList.vendorDetails.name + " - Contact Details";
         }
         else {
             this.showServiceOffered = true;
-            this.title = "Service Offered";
+            this.title = this.vendorList.vendorDetails.name + " - Service Offered";
         }
     }
     ServiceModalPage.prototype.dismiss = function () {
@@ -44,6 +48,11 @@ var ServiceModalPage = (function () {
             this.show_service = event;
         }
     };
+    ServiceModalPage.prototype.goToService = function (sub_service) {
+        var service = { id: sub_service.service_id, name: sub_service.service };
+        var location_id = this.locationId;
+        this.navCtrl.push(SubcategoryListPage, { location_id: location_id, service: service });
+    };
     ServiceModalPage.prototype.show_sub_category = function () {
         this.show_service = false;
         if (this.sub_category) {
@@ -53,8 +62,11 @@ var ServiceModalPage = (function () {
             this.sub_category = true;
         }
     };
-    ServiceModalPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ServiceModalPage');
+    ServiceModalPage.prototype.ionViewWillEnter = function () {
+        var _this = this;
+        this.storage.ready().then(function () {
+            _this.storage.get('service_location').then(function (location) { _this.locationId = location; });
+        });
     };
     return ServiceModalPage;
 }());
@@ -63,7 +75,7 @@ ServiceModalPage = __decorate([
         selector: 'page-service-modal',
         templateUrl: 'service-modal.html'
     }),
-    __metadata("design:paramtypes", [ViewController, NavController, NavParams])
+    __metadata("design:paramtypes", [Storage, ViewController, NavController, NavParams])
 ], ServiceModalPage);
 export { ServiceModalPage };
 //# sourceMappingURL=service-modal.js.map

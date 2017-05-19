@@ -38,7 +38,7 @@ user_dob:any;
                                     this.gender = this.profileData.gender;
                                     // this.user_type = (data.result.info.user_type == 'sponosr') ? 'Sponsor' : "Elder"; 
                                     this.user_dob= this.profileData.dob;//this.getDate(this.profileData.dob);
-                                    },
+                                  },
                           err=>{
                                       this.providerService.showErrorToast(err);
                                     })
