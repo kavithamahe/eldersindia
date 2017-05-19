@@ -369,10 +369,11 @@ metaLink:any = "";
      this.communityServices.addUserPosts(id,this.base64Image,this.authForm.value.videoUrl,this.message,this.metaLink).subscribe(datas =>{
      this.showToast(datas.result);
      this.profileCommunity(id);
-     this.message="";
+     this.post="";
      this.metaLink="";
      this.base64Image="";
      this.videoUrl="";
+     this.addVideo = false;
      this.showblock= null;
    },
      err =>{
