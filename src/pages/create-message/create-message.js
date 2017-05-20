@@ -23,7 +23,7 @@ import { MessagesService } from '../../providers/messages-service';
 */
 var CreateMessagePage = (function () {
     //protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
-    function CreateMessagePage(formBuilder, completerService, navCtrl, navParams, storage, loadingCtrl, toastCtrl, messagesService) {
+    function CreateMessagePage(formBuilder, completerService, navCtrl, navParams, storage, loadingCtrl, toastCtrl, messagesService, public) {
         var _this = this;
         this.formBuilder = formBuilder;
         this.completerService = completerService;
@@ -36,6 +36,8 @@ var CreateMessagePage = (function () {
         this.friendsList = [];
         this.getFriendsListobj = [];
         this.submitAttempt = false;
+        this.subject1 = '';
+        this.customErr = false;
         this.storage.ready().then(function () {
             storage.get('user_type').then(function (user_type) { _this.user_type = user_type; });
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
@@ -44,6 +46,9 @@ var CreateMessagePage = (function () {
                 _this.getFriendsList();
             });
         });
+        this.toAddress = navParams.get("to");
+        this.subject = navParams.get("subject");
+        this.message = navParams.get("message");
         this.messageForm = formBuilder.group({
             toAddress: ['', Validators.compose([Validators.required])],
             subject: ['', Validators.compose([Validators.required])],
@@ -75,6 +80,7 @@ var CreateMessagePage = (function () {
     CreateMessagePage.prototype.sendMessage = function () {
         var _this = this;
         if (!this.messageForm.valid) {
+            console.log(this.messageForm.valid);
             this.submitAttempt = true;
         }
         else {
@@ -88,24 +94,36 @@ var CreateMessagePage = (function () {
                     this.toEmail = this.getFriendsListobj[i].email;
                 }
             }
-            this.messageObj = { "message": { "attachments": [], "to": { "title": this.toAddress, "description": this.toEmail, "image": "", "originalObject": { "id": this.toId, "avatar": "", "email": this.toEmail, "user_type": this.user_type, "friend_name": "" } }, "subject": subject, "message": message } };
-            this.messagesService.sendMessage(this.messageObj).subscribe(function (sendMessage) {
-                _this.toAddress = '';
-                _this.subject = '';
-                _this.message = '';
-                _this.navCtrl.setRoot(MessagesPage);
-                _this.showToaster(sendMessage.result);
-                //console.log(singleJob);
-            }, function (err) {
-                if (err.status === 401) {
-                    _this.showToaster(JSON.parse(err._body).error);
-                }
-                else {
-                    _this.showToaster("Try again later");
-                }
-            });
-            loader.dismiss();
+            console.log("toId" + this.toId);
+            if (this.toId == '' || this.toId === null || this.toId == undefined) {
+                //this.showToaster("Please select valid to address");
+                loader.dismiss();
+                this.customErr = true;
+                // return false;
+            }
+            else {
+                this.messageObj = { "message": { "attachments": [], "to": { "title": this.toAddress, "description": this.toEmail, "image": "", "originalObject": { "id": this.toId, "avatar": "", "email": this.toEmail, "user_type": this.user_type, "friend_name": "" } }, "subject": subject, "message": message } };
+                this.messagesService.sendMessage(this.messageObj).subscribe(function (sendMessage) {
+                    _this.toAddress = '';
+                    _this.subject = '';
+                    _this.message = '';
+                    _this.navCtrl.setRoot(MessagesPage);
+                    _this.showToaster(sendMessage.result.info);
+                    //console.log(singleJob);
+                }, function (err) {
+                    if (err.status === 401) {
+                        _this.showToaster(JSON.parse(err._body).error);
+                    }
+                    else {
+                        _this.showToaster("Try again later");
+                    }
+                });
+                loader.dismiss();
+            }
         }
+    };
+    CreateMessagePage.prototype.hiddeEorr = function () {
+        this.customErr = false;
     };
     CreateMessagePage.prototype.showToaster = function (message) {
         var toast = this.toastCtrl.create({
@@ -123,7 +141,7 @@ CreateMessagePage = __decorate([
         templateUrl: 'create-message.html',
         providers: [MessagesService]
     }),
-    __metadata("design:paramtypes", [FormBuilder, CompleterService, NavController, NavParams, Storage, LoadingController, ToastController, MessagesService])
+    __metadata("design:paramtypes", [FormBuilder, CompleterService, NavController, NavParams, Storage, LoadingController, ToastController, MessagesService, Object])
 ], CreateMessagePage);
 export { CreateMessagePage };
 //# sourceMappingURL=create-message.js.map

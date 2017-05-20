@@ -27,6 +27,7 @@ var LogoutPage = (function () {
         this.storage.ready().then(function () {
             _this.storage.clear();
             _this.storage.set('id', '');
+            _this.storage.set('token', '');
             _this.navCtrl.setRoot(LoginPage);
         });
     }

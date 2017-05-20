@@ -53,6 +53,11 @@ var ServiceRequestService = (function () {
         return this.http.post(nextPageURL, _request, this.options)
             .map(function (res) { return res.json(); });
     };
+    ServiceRequestService.prototype.getRemarks = function () {
+        var _request = { "info": { "list": true, "searchValue": "", "status": "" } };
+        return this.http.post(this.rootUrl + 'getRemarks', _request, this.options)
+            .map(function (res) { return res.json(); });
+    };
     return ServiceRequestService;
 }());
 ServiceRequestService = __decorate([

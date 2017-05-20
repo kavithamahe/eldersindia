@@ -8,18 +8,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { ModalController, NavController, NavParams, AlertController, LoadingController, ToastController } from 'ionic-angular';
+import { ModalController, NavController, NavParams, AlertController, LoadingController, Platform, ToastController, PopoverController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CommunitycommentsPage } from '../communitycomments/communitycomments';
 import { CommunityprofilePage } from '../communityprofile/communityprofile';
 import { CommunityServices } from '../../providers/community-services';
+import { EmojiPickerPage } from '../../pages/emoji-picker/emoji-picker';
+import { CommunitymembersPage } from '../../pages/communitymembers/communitymembers';
 import { DomSanitizer } from '@angular/platform-browser/';
+import { InAppBrowser } from 'ionic-native';
 var CommunityPage = (function () {
-    function CommunityPage(modal, sanitizer, storage, nav, alertCtrl, navParams, loadingCtrl, toastCtrl, communityServices) {
+    function CommunityPage(platform, modal, formBuilder, sanitizer, storage, nav, alertCtrl, navParams, loadingCtrl, toastCtrl, communityServices, popoverCtrl) {
         var _this = this;
+        this.platform = platform;
         this.modal = modal;
+        this.formBuilder = formBuilder;
         this.sanitizer = sanitizer;
         this.storage = storage;
         this.nav = nav;
@@ -28,22 +34,44 @@ var CommunityPage = (function () {
         this.loadingCtrl = loadingCtrl;
         this.toastCtrl = toastCtrl;
         this.communityServices = communityServices;
+        this.popoverCtrl = popoverCtrl;
         this.users = [];
+        this.base64Image = "";
         this.nextPageURL = '';
+        this.emojiId = 0;
+        this.viewMore = false;
+        this.user_id = 0;
+        this.message = '';
+        this.metaLink = "";
         this.nav = nav;
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
-            storage.get('token').then(function (token) { _this.token = token; });
+            storage.get('token').then(function (token) {
+                _this.token = token;
+                var loader = _this.loadingCtrl.create({ content: "Please wait..." });
+                loader.present();
+                _this.community_id = _this.navParams.get("community_id");
+                _this.communityList(_this.community_id);
+                _this.communityDetail(_this.community_id);
+                _this.addComments = false;
+                _this.itemComments = false;
+                loader.dismiss();
+                _this.userType = "sponsor";
+            });
+            storage.get('id').then(function (id) { _this.user_id = id; });
         });
-        var loader = this.loadingCtrl.create({ content: "Please wait..." });
-        loader.present();
-        this.community_id = navParams.get("community_id");
-        this.communityList(this.community_id);
-        this.communityDetail(this.community_id);
-        this.addComments = false;
-        this.itemComments = false;
-        loader.dismiss();
-        this.userType = "sponsor";
+        this.authForm = formBuilder.group({
+            videoUrl: ['', Validators.compose([Validators.pattern('^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be|vimeo\.com|dailymotion\.com|metacafe\.com|wines\.com)\/.+$')])],
+        });
+        // let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+        // loader.present();
+        // this.community_id=navParams.get("community_id");
+        //     this.communityList(this.community_id);
+        //     this.communityDetail(this.community_id);
+        //     this.addComments=false;
+        //     this.itemComments=false;
+        //     loader.dismiss();
+        //     this.userType="sponsor";
     }
     CommunityPage.prototype.onChange = function (event, input, id) {
         this.files = [].slice.call(event.target.files);
@@ -52,23 +80,19 @@ var CommunityPage = (function () {
             console.log(data);
         });
     };
-    CommunityPage.prototype.showConfirm = function (DeleteId) {
-        var _this = this;
-        var confirm = this.alertCtrl.create({
-            subTitle: 'Confirm Deletion?',
-            buttons: [
-                {
-                    text: 'Cancel',
-                },
-                {
-                    text: 'Ok',
-                    handler: function () {
-                        _this.deleteComment(DeleteId);
-                    }
-                }
-            ]
+    CommunityPage.prototype.openUrl = function (metalink_url) {
+        console.log("URL is ", metalink_url);
+        this.platform.ready().then(function () {
+            var browser = new InAppBrowser(metalink_url, '_blank');
         });
-        confirm.present();
+    };
+    CommunityPage.prototype.toggleContent = function () {
+        if (this.show_description == false) {
+            this.show_description = true;
+        }
+        else {
+            this.show_description = false;
+        }
     };
     CommunityPage.prototype.accessGallery = function () {
         var _this = this;
@@ -137,7 +161,9 @@ var CommunityPage = (function () {
             _this.members = users.result.info.members;
             _this.show_member = _this.members.length;
             console.log(_this.show_member);
-            console.log(_this.members.length);
+            if (_this.show_member > 4) {
+                _this.viewMore = true;
+            }
         }, function (err) {
             _this.communityServices.showErrorToast(err);
         });
@@ -171,16 +197,16 @@ var CommunityPage = (function () {
         var _this = this;
         this.communityServices.getCommunityPost(id).subscribe(function (users) {
             _this.users = users.result.info.lists.data;
-            // this.nextPageURL=users.result.info.lists.next_page_url;
+            _this.nextPageURL = users.result.info.lists.next_page_url;
         }, function (err) {
             _this.communityServices.showErrorToast(err);
         });
     };
-    CommunityPage.prototype.addLikes = function (id) {
+    CommunityPage.prototype.addLikes = function (likeObj) {
         var _this = this;
         var loader = this.loadingCtrl.create({ content: "Please wait initializing..." });
         loader.present();
-        this.communityServices.addLike(id).subscribe(function (data) {
+        this.communityServices.addLike(likeObj).subscribe(function (data) {
             _this.showToast(data.result);
             _this.communityList(_this.community_id);
         }, function (err) {
@@ -204,58 +230,61 @@ var CommunityPage = (function () {
         });
         toast.present();
     };
-    CommunityPage.prototype.sendPost = function (id1) {
-        var _this = this;
-        if (this.comment != "") {
-            var loader = this.loadingCtrl.create({ content: "Please wait initializing..." });
-            loader.present();
-            this.communityServices.sendPosts(id1, this.comment).subscribe(function (datas) {
-                _this.showToast(datas.result.info.message);
-                _this.comment = "";
-                _this.communityList(_this.community_id);
-                _this.showblock = null;
-            }, function (err) {
-                _this.communityServices.showErrorToast(err);
-            });
-            loader.dismiss();
-        }
-        else {
-            this.showToast("Enter Comments and Post");
-        }
-    };
-    //  sendReply(comments_id,profile_id){
-    //    console.log("comment" + comments_id + profile_id);
-    //   if(this.comments != ""){
-    //   let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
-    //   loader.present();
-    //    this.communityServices.sendReply(comments_id,profile_id,this.comments).subscribe(datas =>{
-    //    this.showToast(datas.result.info.message);
-    //    this.comments="";
-    //    this.communityList(this.community_id);
-    //    },
-    //    err =>{
-    //   this.communityServices.showErrorToast(err);
-    // })
-    //    loader.dismiss();
-    //  }else{
-    //    this.showToast("Enter Comments and Post");
-    //  }
-    // }
     CommunityPage.prototype.postCommunity = function (id) {
         var _this = this;
         var loader = this.loadingCtrl.create({ content: "Please wait initializing..." });
         loader.present();
-        this.communityServices.postCommunity(id, this.base64Image, this.videoUrl, this.post).subscribe(function (datas) {
+        if (!this.authForm.valid) {
+            this.submitAttempt = true;
+        }
+        else {
+            this.submitAttempt = false;
+            if (this.post != '' && this.post != undefined && this.post != null) {
+                this.message = this.urlifyMessage(this.post);
+                this.urlifyLink(this.post);
+            }
+            // if(this.urlArr.length > 0){
+            //                 this.metalink = this.urlArr[0];
+            //            }
+            this.communityServices.postCommunity(id, this.base64Image, this.authForm.value.videoUrl, this.message, this.metaLink).subscribe(function (datas) {
+                _this.showToast(datas.result);
+                _this.communityList(id);
+                _this.message = "";
+                _this.metaLink = "";
+                _this.videoUrl = "";
+                _this.base64Image = "";
+                _this.showblock = null;
+            }, function (err) {
+                _this.communityServices.showErrorToast(err);
+            });
+        }
+        loader.dismiss();
+    };
+    CommunityPage.prototype.urlifyMessage = function (text) {
+        var urlRegex = /(https?:\/\/[^\s]+)/g;
+        return text.replace(urlRegex, function (url) {
+            // return "";
+            return '<a href="' + url + '" target="_blank">' + url + '</a>';
+        });
+    };
+    // urlArr = [];
+    CommunityPage.prototype.urlifyLink = function (text) {
+        var _this = this;
+        var urlRegex = /(https?:\/\/[^\s]+)/g;
+        var i = 0;
+        return text.replace(urlRegex, function (data) {
+            _this.metaLink = data;
+            i++;
+        });
+    };
+    CommunityPage.prototype.deletePost = function (id) {
+        var _this = this;
+        this.communityServices.deletePost(id).subscribe(function (datas) {
             _this.showToast(datas.result);
-            _this.communityList(id);
-            _this.post = "";
-            _this.videoUrl = "";
-            _this.base64Image = "";
-            _this.showblock = null;
+            _this.communityList(_this.community_id);
         }, function (err) {
             _this.communityServices.showErrorToast(err);
         });
-        loader.dismiss();
     };
     CommunityPage.prototype.deleteComment = function (id) {
         var _this = this;
@@ -270,14 +299,75 @@ var CommunityPage = (function () {
     CommunityPage.prototype.dashboardPage = function () {
         this.nav.setRoot(DashboardPage);
     };
+    CommunityPage.prototype.emojiPicker = function (userId) {
+        var _this = this;
+        var likeEmoji = { type: 'likeEmoji' };
+        var modal = this.popoverCtrl.create(EmojiPickerPage, likeEmoji);
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            if (data != null) {
+                var emojiSymbol = data.emojiImage;
+                var name_1 = emojiSymbol.replace(/[^a-z\d]+/gi, "");
+                if (emojiSymbol == ':thumbsup:') {
+                    _this.emojiId = 1;
+                }
+                else if (emojiSymbol == ':heart:') {
+                    _this.emojiId = 2;
+                }
+                else if (emojiSymbol == ':laughing:') {
+                    _this.emojiId = 3;
+                }
+                else if (emojiSymbol == ':open_mouth:') {
+                    _this.emojiId = 4;
+                }
+                else if (emojiSymbol == ':disappointed_relieved:') {
+                    _this.emojiId = 5;
+                }
+                else if (emojiSymbol == ':rage:') {
+                    _this.emojiId = 6;
+                }
+                var likeObj = { "id": userId, "emoji": emojiSymbol, "name": name_1, "emojiId": _this.emojiId };
+                _this.addLikes(likeObj);
+            }
+        });
+    };
+    CommunityPage.prototype.showModel = function (member) {
+        var modal = this.popoverCtrl.create(CommunitymembersPage, { members: member });
+        modal.present();
+    };
+    CommunityPage.prototype.doInfinite = function (infiniteScroll) {
+        var _this = this;
+        setTimeout(function () {
+            if (_this.nextPageURL != null && _this.nextPageURL != '') {
+                _this.communityscroll(_this.community_id);
+            }
+            else {
+                infiniteScroll.enable(false);
+            }
+            infiniteScroll.complete();
+        }, 500);
+    };
+    CommunityPage.prototype.communityscroll = function (id) {
+        var _this = this;
+        this.communityServices.communityscroll(this.nextPageURL, id).subscribe(function (eventsscroll) {
+            _this.eventScrollLists = eventsscroll.result.info.lists.data;
+            for (var i = 0; i < Object.keys(_this.eventScrollLists).length; i++) {
+                _this.users.push(_this.eventScrollLists[i]);
+            }
+            _this.nextPageURL = eventsscroll.result.info.lists.next_page_url;
+        }, function (err) {
+            _this.communityServices.showErrorToast(err);
+        });
+    };
     return CommunityPage;
 }());
 CommunityPage = __decorate([
     Component({
         selector: 'page-community',
         templateUrl: 'community.html',
+        providers: [CommunityServices]
     }),
-    __metadata("design:paramtypes", [ModalController, DomSanitizer, Storage, NavController, AlertController, NavParams, LoadingController, ToastController, CommunityServices])
+    __metadata("design:paramtypes", [Platform, ModalController, FormBuilder, DomSanitizer, Storage, NavController, AlertController, NavParams, LoadingController, ToastController, CommunityServices, PopoverController])
 ], CommunityPage);
 export { CommunityPage };
 //# sourceMappingURL=community.js.map

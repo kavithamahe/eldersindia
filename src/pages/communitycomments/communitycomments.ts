@@ -18,6 +18,7 @@ import { EmojiPickerPage } from '../../pages/emoji-picker/emoji-picker';
 export class CommunitycommentsPage {
 posts:any;
 post_comments = [];
+comment_reply = [];
 post_id:any;
 post_profile_id:any;
 reply_comment:any="";
@@ -29,6 +30,7 @@ imageUrl:any;
 token:any;
 user_id:any;
 senddata:any;
+post_likes:any;
 
   constructor(public loadingCtrl: LoadingController, public viewCtrl: ViewController, public storage: Storage, public toastCtrl: ToastController, public alertCtrl:AlertController, public communityServices: CommunityServices, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
   	this.storage.ready().then(() => {
@@ -36,6 +38,7 @@ senddata:any;
       storage.get('token').then((token) => { this.token=token; 
       this.posts = navParams.get("posts");
         this.post_comments = this.posts.comments;
+        this.post_likes = this.posts.comments.likes;
         this.post_id = this.posts.id;
         this.post_profile_id = this.posts.profile_id;
     });
@@ -85,9 +88,9 @@ senddata:any;
     loader.present();
 
    this.communityServices.sendInlineLikes(comments_id).subscribe(data =>{
-    
+           // this.senddata=data.result.info.data;
            this.showToast(data.result.info.message);
-          // this.post_comments.push(data.result.info[0])
+          
         },
     err =>{
     
@@ -129,7 +132,7 @@ senddata:any;
           console.log("index of comment: ",i);
      	}
      }
-     
+      
      
      },
      err =>{
@@ -137,7 +140,25 @@ senddata:any;
     this.communityServices.showErrorToast(err);
   })
   }
- 
+ removeComment(id){
+   this.communityServices.deleteComment(id).subscribe(datas =>{
+     this.showToast(datas.result);
+     this.reply_comment="";
+     for(let i=0; i<this.post_comments.length;i++){
+       if(this.post_comments[i].comments_id == id){
+         
+        this.post_comments[i].comment_reply.splice(i,1);
+          console.log("index of commentttttt: ",i);
+       }
+     }
+      
+     
+     },
+     err =>{
+    
+    this.communityServices.showErrorToast(err);
+  })
+ }
  
   showToast(messageData){
     let toast = this.toastCtrl.create({

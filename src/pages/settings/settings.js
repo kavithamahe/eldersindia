@@ -7,8 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Slides, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service-provider';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -24,8 +24,9 @@ var SettingsPage = (function () {
         this.serviceProvider = serviceProvider;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.settings = "paginate";
+        this.settings = "privacy";
         this.records = 5;
+        this.prev_index = 0;
     }
     SettingsPage.prototype.update = function () {
         if (this.settings == "paginate") {
@@ -33,6 +34,26 @@ var SettingsPage = (function () {
         }
         else {
             this.privacy_submit();
+        }
+    };
+    SettingsPage.prototype.slideChanged = function () {
+        var currentIndex = this.prev_index;
+        if (currentIndex == 1) {
+            this.settings = "paginate";
+        }
+        else {
+            this.settings = "privacy";
+        }
+        this.prev_index = this.slides.getActiveIndex();
+        console.log("Current index is", currentIndex);
+    };
+    SettingsPage.prototype.changeSlide = function () {
+        this.slides.freeMode = true;
+        if (this.settings == 'privacy') {
+            this.slides.slideTo(1);
+        }
+        else {
+            this.slides.slideTo(0);
         }
     };
     SettingsPage.prototype.change = function () {
@@ -69,6 +90,73 @@ var SettingsPage = (function () {
             }
         });
     };
+    SettingsPage.prototype.toggle = function (privacy) {
+        switch (privacy) {
+            case "privacy_name": {
+                if (this.privacy_name == true) {
+                    this.privacy_name = false;
+                }
+                else {
+                    this.privacy_name = true;
+                }
+                break;
+            }
+            case "privacy_email": {
+                if (this.privacy_email == true) {
+                    this.privacy_email = false;
+                }
+                else {
+                    this.privacy_email = true;
+                }
+                break;
+            }
+            case "privacy_mobile": {
+                if (this.privacy_mobile == true) {
+                    this.privacy_mobile = false;
+                }
+                else {
+                    this.privacy_mobile = true;
+                }
+                break;
+            }
+            case "privacy_location": {
+                if (this.privacy_location == true) {
+                    this.privacy_location = false;
+                }
+                else {
+                    this.privacy_location = true;
+                }
+                break;
+            }
+            case "privacy_birthday": {
+                if (this.privacy_birthday == true) {
+                    this.privacy_birthday = false;
+                }
+                else {
+                    this.privacy_birthday = true;
+                }
+                break;
+            }
+            case "privacy_connection": {
+                if (this.privacy_connection == true) {
+                    this.privacy_connection = false;
+                }
+                else {
+                    this.privacy_connection = true;
+                }
+                break;
+            }
+            case "privacy_profile": {
+                if (this.privacy_profile == true) {
+                    this.privacy_profile = false;
+                }
+                else {
+                    this.privacy_profile = true;
+                }
+                break;
+            }
+        }
+    };
     SettingsPage.prototype.getPrivacy = function () {
         var _this = this;
         var requestId = { "user_id": this.user_uid };
@@ -83,7 +171,9 @@ var SettingsPage = (function () {
             _this.privacy_mobile = JSON.parse(info.privacy_mobile);
             _this.privacy_location = JSON.parse(info.privacy_location);
             _this.privacy_birthday = JSON.parse(info.privacy_birthday);
-            _this.privacy_avatar = JSON.parse(info.privacy_avatar);
+            // this.privacy_avatar = JSON.parse(info.privacy_avatar);
+            _this.privacy_connection = JSON.parse(info.privacy_connection);
+            _this.privacy_profile = JSON.parse(info.privacy_profile);
             _this.status = info.status;
         }, function (error) {
             if (error.status === 401) {
@@ -104,7 +194,9 @@ var SettingsPage = (function () {
                 "privacy_mobile": this.privacy_mobile,
                 "privacy_location": this.privacy_location,
                 "privacy_birthday": this.privacy_birthday,
-                "privacy_avatar": this.privacy_avatar,
+                // "privacy_avatar":this.privacy_avatar,
+                "privacy_connection": this.privacy_connection,
+                "privacy_profile": this.privacy_profile,
                 "status": this.status
             } };
         this.serviceProvider.webServiceCall('setPrivacy', data)
@@ -130,7 +222,7 @@ var SettingsPage = (function () {
             _this.storage.get('id').then(function (id) {
                 _this.user_uid = id;
                 _this.getPrivacy();
-                _this.getPageCount();
+                // this.getPageCount(); 
             });
         });
     };
@@ -139,6 +231,10 @@ var SettingsPage = (function () {
     };
     return SettingsPage;
 }());
+__decorate([
+    ViewChild(Slides),
+    __metadata("design:type", Slides)
+], SettingsPage.prototype, "slides", void 0);
 SettingsPage = __decorate([
     Component({
         selector: 'page-settings',

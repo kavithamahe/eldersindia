@@ -8,10 +8,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { ViewController, LoadingController, AlertController, ToastController, NavController, NavParams } from 'ionic-angular';
+import { ViewController, LoadingController, AlertController, ToastController, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CommunityprofilePage } from '../communityprofile/communityprofile';
 import { CommunityServices } from '../../providers/community-services';
+import { EmojiPickerPage } from '../../pages/emoji-picker/emoji-picker';
 /*
   Generated class for the Communitycomments page.
 
@@ -19,7 +20,7 @@ import { CommunityServices } from '../../providers/community-services';
   Ionic pages and navigation.
 */
 var CommunitycommentsPage = (function () {
-    function CommunitycommentsPage(loadingCtrl, viewCtrl, storage, toastCtrl, alertCtrl, communityServices, navCtrl, navParams) {
+    function CommunitycommentsPage(loadingCtrl, viewCtrl, storage, toastCtrl, alertCtrl, communityServices, navCtrl, navParams, popoverCtrl) {
         var _this = this;
         this.loadingCtrl = loadingCtrl;
         this.viewCtrl = viewCtrl;
@@ -29,7 +30,10 @@ var CommunitycommentsPage = (function () {
         this.communityServices = communityServices;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.popoverCtrl = popoverCtrl;
         this.post_comments = [];
+        this.reply_comment = "";
+        this.post_comment = '';
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) {
                 _this.imageUrl = imageurl;
@@ -37,19 +41,19 @@ var CommunitycommentsPage = (function () {
                 _this.post_comments = _this.posts.comments;
                 _this.post_id = _this.posts.id;
                 _this.post_profile_id = _this.posts.profile_id;
-                console.log("comments: ", _this.posts);
             });
             storage.get('token').then(function (token) { _this.token = token; });
+            storage.get('id').then(function (id) { _this.user_id = id; });
         });
     }
     CommunitycommentsPage.prototype.profileImage = function (id) {
-        // this.communityProfile(id);
         this.navCtrl.push(CommunityprofilePage, { profile_uid: id });
     };
     CommunitycommentsPage.prototype.showConfirm = function (DeleteId) {
         var _this = this;
         var confirm = this.alertCtrl.create({
-            subTitle: 'Confirm Deletion?',
+            title: 'Confirm',
+            subTitle: 'comment will be deleted',
             buttons: [
                 {
                     text: 'Cancel',
@@ -74,6 +78,17 @@ var CommunitycommentsPage = (function () {
         else {
             this.showReply = event;
         }
+    };
+    CommunitycommentsPage.prototype.sendInlineLikes = function (comments_id) {
+        var _this = this;
+        var loader = this.loadingCtrl.create({ content: "Please wait initializing..." });
+        loader.present();
+        this.communityServices.sendInlineLikes(comments_id).subscribe(function (data) {
+            _this.showToast(data.result.info.message);
+        }, function (err) {
+            _this.communityServices.showErrorToast(err);
+        });
+        loader.dismiss();
     };
     CommunitycommentsPage.prototype.replyComments = function (event) {
         this.reply_comment = "";
@@ -102,11 +117,10 @@ var CommunitycommentsPage = (function () {
             _this.post_comment = "";
             for (var i = 0; i < _this.post_comments.length; i++) {
                 if (_this.post_comments[i].comments_id == id) {
-                    console.log("index of comment: ", i);
                     _this.post_comments.splice(i, 1);
+                    console.log("index of comment: ", i);
                 }
             }
-            // this.communityList(this.community_id);
         }, function (err) {
             _this.communityServices.showErrorToast(err);
         });
@@ -128,8 +142,6 @@ var CommunitycommentsPage = (function () {
                 _this.post_comments.push(datas.result.info.list[0]);
                 _this.showToast(datas.result.info.message);
                 _this.post_comment = "";
-                // this.communityList(this.community_id);
-                // this.showblock=null;
             }, function (err) {
                 _this.communityServices.showErrorToast(err);
             });
@@ -139,15 +151,15 @@ var CommunitycommentsPage = (function () {
             this.showToast("Enter Comments and Post");
         }
     };
-    CommunitycommentsPage.prototype.sendReply = function (comments_id, profile_id) {
+    CommunitycommentsPage.prototype.sendReply = function (uid_from, comments_id) {
         var _this = this;
-        console.log("comment" + comments_id + profile_id);
+        console.log("comment" + uid_from + comments_id);
         this.Reply = null;
         this.replyBlock = null;
         if (this.reply_comment != "") {
             var loader = this.loadingCtrl.create({ content: "Please wait initializing..." });
             loader.present();
-            this.communityServices.sendReply(comments_id, profile_id, this.reply_comment).subscribe(function (datas) {
+            this.communityServices.sendReply(uid_from, comments_id, this.reply_comment).subscribe(function (datas) {
                 _this.showToast(datas.result.info.message);
                 _this.reply_comment = "";
                 // this.communityList(this.community_id);
@@ -185,6 +197,30 @@ var CommunitycommentsPage = (function () {
     CommunitycommentsPage.prototype.dismiss = function () {
         this.viewCtrl.dismiss();
     };
+    CommunitycommentsPage.prototype.emojiPicker1 = function (post_id) {
+        var _this = this;
+        var likeEmoji = { type: 'commentEmoji' };
+        var modal = this.popoverCtrl.create(EmojiPickerPage, likeEmoji);
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            if (data != null) {
+                _this.post_comment = _this.post_comment + ' ' + data.emojiImage;
+                _this.sendComment(post_id);
+            }
+        });
+    };
+    CommunitycommentsPage.prototype.emojiPicker2 = function (commendId, postProfileId) {
+        var _this = this;
+        var likeEmoji = { type: 'commentEmoji' };
+        var modal = this.popoverCtrl.create(EmojiPickerPage, likeEmoji);
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            if (data != null) {
+                _this.reply_comment = _this.reply_comment + ' ' + data.emojiImage;
+                _this.sendReply(commendId, postProfileId);
+            }
+        });
+    };
     return CommunitycommentsPage;
 }());
 CommunitycommentsPage = __decorate([
@@ -192,7 +228,7 @@ CommunitycommentsPage = __decorate([
         selector: 'page-communitycomments',
         templateUrl: 'communitycomments.html'
     }),
-    __metadata("design:paramtypes", [LoadingController, ViewController, Storage, ToastController, AlertController, CommunityServices, NavController, NavParams])
+    __metadata("design:paramtypes", [LoadingController, ViewController, Storage, ToastController, AlertController, CommunityServices, NavController, NavParams, PopoverController])
 ], CommunitycommentsPage);
 export { CommunitycommentsPage };
 //# sourceMappingURL=communitycomments.js.map

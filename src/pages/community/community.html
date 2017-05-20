@@ -22,7 +22,8 @@
             <strong class="wel-comemem">Welcome to {{communityDetailData?.community_name}}</strong>
             <em  style="" *ngIf(!show_description)>{{communityDetailData?.description | words : 10 : '...'}}<button (click)="toggleContent()">view more</button></em>
             <em  style="" *ngIf(show_description)>{{communityDetailData?.description}}
-             <button (click)="toggleContent()">view less</button></em>
+            <!--  <button (click)="toggleContent()">view less</button> -->
+             </em>
         </p>
 					
 		<div class="decoration hide-if-responsive"></div>
@@ -182,7 +183,7 @@
 	       	<div>
 
 	      		<ion-row>
-	        		<ion-col>
+	        		<!-- <ion-col>
 						<button  ion-button  clear small *ngIf=(user.likes.emoji)
 						[innerHTML]="user.likes.emoji | emojis" 
 						(click)="emojiPicker(user.id)">
@@ -191,6 +192,7 @@
 						[innerHTML]="':thumbsup:' | emojis" 
 						(click)="emojiPicker(user.id)">
 						</button>
+						
 	        		</ion-col>
 	        		<ion-col>
 	          	
@@ -198,7 +200,24 @@
 						(click)="showComment(user)">
 							<span style="color:red; font-size:13px;">{{user.comment_count}}</span>&nbsp;<i class="fa fa-comments" aria-hidden="true"></i>
 						</button>
-	          		</ion-col>
+	          		</ion-col> -->
+
+				    <ion-col>
+				    <button  ion-button  clear small *ngIf=(user.likes.emoji)
+						[innerHTML]="user.likes.emoji | emojis" 
+						(click)="emojiPicker(user.id)">
+					</button>
+				      <button *ngIf=(!(user.likes.emoji)) ion-button  clear small (click)="emojiPicker(user.id)">
+						<ion-icon name="thumbs-up"></ion-icon>
+				        <div>Likes</div>
+						</button>
+				    </ion-col>
+				    <ion-col>
+				      <button ion-button icon-left clear small (click)="showComment(user)">
+				        <ion-icon name="text"></ion-icon>
+				        <div>Comments</div>
+				      </button>
+				    </ion-col>
 
 	          	</ion-row>
 			</div>
@@ -210,6 +229,7 @@
     	<ion-infinite-scroll-content></ion-infinite-scroll-content>
   	</ion-infinite-scroll>	      					
 </ion-content>
+
 <style>
 .text-input-ios{}
 

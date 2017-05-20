@@ -22,7 +22,7 @@ var CommunitylistPage = (function () {
         this.toastCtrl = toastCtrl;
         this.communityServices = communityServices;
         // private start:number=0;
-        this.community = "mycommunity";
+        this.community = "my_community";
         this.isAndroid = false;
         this.searchTerm = '';
         this.nextPageURL = '';
@@ -128,7 +128,12 @@ var CommunitylistPage = (function () {
             _this.storage.get('id').then(function (id) { _this.id = id; });
             _this.storage.get('token').then(function (token) {
                 _this.token = token;
-                _this.myCommunity("");
+                if (_this.community == "my_community") {
+                    _this.myCommunity("");
+                }
+                else {
+                    _this.otherCommunity("");
+                }
             });
         });
     };
@@ -137,7 +142,8 @@ var CommunitylistPage = (function () {
 CommunitylistPage = __decorate([
     Component({
         selector: 'page-communitylist',
-        templateUrl: 'communitylist.html'
+        templateUrl: 'communitylist.html',
+        providers: [CommunityServices]
     }),
     __metadata("design:paramtypes", [NavController, Storage, NavParams, Platform, ToastController, CommunityServices])
 ], CommunitylistPage);

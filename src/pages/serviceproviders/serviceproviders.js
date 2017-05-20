@@ -38,6 +38,7 @@ var ServiceprovidersPage = (function () {
             storage.get('token').then(function (token) {
                 _this.token = token;
                 _this.loadServiceProvider();
+                _this.loadLocations();
             });
         });
         // alert('Device UUID is: ' + Device.uuid);
@@ -60,8 +61,19 @@ var ServiceprovidersPage = (function () {
     ServiceprovidersPage.prototype.dashboardPage = function () {
         this.navCtrl.setRoot(DashboardPage);
     };
+    ServiceprovidersPage.prototype.loadLocations = function () {
+        var _this = this;
+        this.providerService.webServiceCall("getLocations", "")
+            .subscribe(function (data) {
+            _this.locations = data.result.info;
+            console.log("Location data : " + _this.locations);
+        }, function (err) {
+            _this.providerService.showErrorToast(err);
+            console.log("Response for Location data: " + err);
+        });
+    };
     ServiceprovidersPage.prototype.subCategory = function (subcategory) {
-        this.navCtrl.push(SubCategoryPage, { subcategory: subcategory });
+        this.navCtrl.push(SubCategoryPage, { "subcategory": subcategory, 'locations': this.locations });
     };
     // forgotPassword(){
     //   this.passwordCode ="";

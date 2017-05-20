@@ -40,7 +40,7 @@ export class CommunitymessagePage {
   
   sendMessage(){
      this.communityServices.sendMessage(this.member_id,this.attachment,this.authForm.value.subject,this.authForm.value.message).subscribe(users => {
-       this.communityServices.showToast(users.result);
+       this.communityServices.showToast(users.result.info);
        this.authForm.reset();
       },
    err =>{

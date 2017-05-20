@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { CallNumber, Vibration } from 'ionic-native';
+import { CallNumber, Vibration, NativeAudio } from 'ionic-native';
 import { ServiceprovidersPage } from '../../pages/serviceproviders/serviceproviders';
 import { JobboardPage } from '../../pages/jobboard/jobboard';
 import { CommunitylistPage } from '../../pages/communitylist/communitylist';
@@ -31,6 +31,13 @@ var DashboardPage = (function () {
         this.navParams = navParams;
         this.storage = storage;
         this.hooterOn = false;
+        this.onSuccess = function () {
+            console.log("onSuccess");
+        };
+        this.onError = function () {
+            console.log("onError");
+        };
+        this.onSuccess1 = function () { console.log('loop'); };
         this.storage.ready().then(function () {
             storage.get('token').then(function (token) { _this.token = token; });
             storage.get('user_type').then(function (user_type) { _this.user_type = user_type; });
@@ -40,9 +47,9 @@ var DashboardPage = (function () {
         });
         //alert(this.call_sponsor);
     }
-    /*ionViewDidLoad() {
-      console.log('ionViewDidLoad DashboardPage');
-    }*/
+    DashboardPage.prototype.ionViewDidLoad = function () {
+        NativeAudio.preloadSimple('uniqueId1', 'assets/sound/siren_msg_tone.mp3').then(this.onSuccess, this.onError);
+    };
     DashboardPage.prototype.servicesPage = function () {
         this.navCtrl.setRoot(ServiceprovidersPage);
     };
@@ -76,9 +83,12 @@ var DashboardPage = (function () {
         if (!hooterOn) {
             this.hooterOn = !hooterOn;
             Vibration.vibrate(60000);
+            NativeAudio.play('uniqueId1').then(this.onSuccess, this.onError);
+            NativeAudio.loop('uniqueId1').then(this.onSuccess1, this.onError);
         }
         else {
             Vibration.vibrate(0);
+            NativeAudio.stop('uniqueId1').then(this.onSuccess, this.onError);
             this.hooterOn = !hooterOn;
         }
     };

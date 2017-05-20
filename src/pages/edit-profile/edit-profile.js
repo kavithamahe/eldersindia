@@ -13,6 +13,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Camera } from 'ionic-native';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service-provider';
+import { MyProfilePage } from '../../pages/my-profile/my-profile';
 /*
   Generated class for the EditProfile page.
 
@@ -30,7 +31,12 @@ var EditProfilePage = (function () {
         this.navParams = navParams;
         this.profileData = "";
         this.avatar = "";
+        this.pemail = '';
         this.profileData = navParams.get("profileData");
+        console.log("xxxxxxxxxxx");
+        console.log(this.profileData);
+        console.log("person" + this.profileData.personal_email);
+        this.pemail = this.profileData.personal_email;
         this.avatar = this.profileData.avatar;
         this.storage.ready().then(function () {
             _this.storage.get('imageurl').then(function (imageurl) {
@@ -50,12 +56,14 @@ var EditProfilePage = (function () {
         // this.gender = this.profileData.gender;
         this.edit_profile_Form = formBuilder.group({
             name: [this.profileData.name, Validators.compose([Validators.required])],
+            company: [{ value: this.profileData.company_name, disabled: true }],
             designation: [{ value: this.profileData.designation, disabled: true }, Validators.compose([Validators.minLength(3), Validators.required])],
             gender: [this.profileData.gender, Validators.compose([Validators.required])],
             mobile_number: [this.profileData.mobile, Validators.compose([Validators.minLength(10), Validators.maxLength(10), Validators.required])],
             location: [{ value: this.my_location, disabled: false }, Validators.compose([Validators.required])],
-            // dob: ['',Validators.compose([Validators.required])],
-            email: [{ value: this.profileData.email, disabled: true }, Validators.compose([Validators.minLength(6), Validators.required])],
+            dob: [{ value: this.my_location, disabled: false }, Validators.compose([])],
+            email: [{ value: this.profileData.email, disabled: true }, Validators.compose([Validators.required])],
+            personal_email: ['', Validators.compose([])],
             user_type: [{ value: this.user_type, disabled: true }, Validators.compose([Validators.required])]
         });
     }
@@ -64,6 +72,7 @@ var EditProfilePage = (function () {
         this.providerService.webServiceCall("myaccount", "")
             .subscribe(function (data) {
             _this.profileData = data.result.info;
+            _this.user_dob = data.result.info.dob;
             _this.user_type = data.result.info.user_type;
         }, function (err) {
             _this.providerService.showErrorToast(err);
@@ -91,34 +100,34 @@ var EditProfilePage = (function () {
     };
     EditProfilePage.prototype.updateProfile = function () {
         var _this = this;
-        var data = this.edit_profile_Form.value;
-        //     if(this.user_type == 'elder'){
-        this.updateData = { name: data.name, gender: data.gender, mobile: data.mobile_number, dob: this.user_dob, app: "", avatar1: this.avatar };
-        //     }else{
-        // this.updateData = {name: data.name,mobile:data.mobile_number,dob:this.user_dob ,app:"",avatar1:this.avatar};
-        // }
-        // 
-        this.providerService.webServiceCall("myaccountEdit", this.updateData)
-            .subscribe(function (data) {
-            console.log(data);
-            _this.dismiss();
-        }, function (err) {
-            console.log(err);
-        });
+        if (!this.edit_profile_Form.valid) {
+            this.submitAttempt = true;
+        }
+        else {
+            this.submitAttempt = false;
+            var data = this.edit_profile_Form.value;
+            //     if(this.user_type == 'elder'){
+            this.updateData = { name: data.name, gender: data.gender, mobile: data.mobile_number, personal_email: data.personal_email, dob: this.user_dob, app: "", avatar1: this.avatar };
+            //     }else{
+            // this.updateData = {name: data.name,mobile:data.mobile_number,dob:this.user_dob ,app:"",avatar1:this.avatar};
+            // }
+            // 
+            this.providerService.webServiceCall("myaccountEdit", this.updateData)
+                .subscribe(function (data) {
+                console.log(data);
+                _this.navCtrl.setRoot(MyProfilePage);
+            }, function (err) {
+                console.log(err);
+            });
+        }
     };
-    EditProfilePage.prototype.ionViewWillEnter = function () {
-        var _this = this;
-        this.storage.ready().then(function () {
-            _this.storage.get('imageurl').then(function (imageurl) { _this.imageURL = imageurl; });
-            _this.storage.get('token').then(function (token) { _this.token = token; });
+    EditProfilePage.prototype.showToaster = function (message) {
+        var toast = this.toastCtrl.create({
+            message: message,
+            duration: 3000,
+            position: 'top'
         });
-        this.providerService.webServiceCall("myaccount", "")
-            .subscribe(function (data) {
-            _this.profileData = data.result.info;
-            _this.user_type = data.result.info.user_type;
-        }, function (err) {
-            _this.providerService.showErrorToast(err);
-        });
+        toast.present();
     };
     return EditProfilePage;
 }());

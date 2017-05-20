@@ -97,7 +97,9 @@ var SinglejobPage = (function () {
         var modal = this.modalCtrl.create(JobDependentPage);
         modal.onDidDismiss(function (data) {
             _this.jobDependentId = data.dependent;
-            _this.callApplyJob(jobId, _this.jobDependentId);
+            if (_this.jobDependentId != '') {
+                _this.callApplyJob(jobId, _this.jobDependentId);
+            }
         });
         modal.present();
     };

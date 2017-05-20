@@ -79,16 +79,6 @@ export class CommunityPage {
       
     });
 
-    // let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    // loader.present();
-    
-    // this.community_id=navParams.get("community_id");
-    //     this.communityList(this.community_id);
-    //     this.communityDetail(this.community_id);
-    //     this.addComments=false;
-    //     this.itemComments=false;
-    //     loader.dismiss();
-    //     this.userType="sponsor";
 
 }
 
@@ -294,10 +284,11 @@ metaLink:any = "";
        this.communityServices.postCommunity(id,this.base64Image,this.authForm.value.videoUrl,this.message,this.metaLink).subscribe(datas =>{
        this.showToast(datas.result);
        this.communityList(id);
-       this.message="";
+       this.post="";
        this.metaLink="";
-       this.videoUrl="";
+       this.authForm.value.videoUrl="";
        this.base64Image="";
+       this.addVideo = false;
        this.showblock= null;
      },
        err =>{

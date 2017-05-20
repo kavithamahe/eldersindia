@@ -148,7 +148,7 @@ var ServiceInfoPage = (function () {
     };
     ServiceInfoPage.prototype.toggleRequestService = function () {
         var _this = this;
-        var service_modal = this.modalCtrl.create(ModalContentPage, { dependentList: this.vendorList.dependentLists });
+        var service_modal = this.modalCtrl.create(ModalContentPage, { dependentList: this.vendorList.dependentLists, vendor: this.vendorList.vendorDetails });
         service_modal.present();
         service_modal.onDidDismiss(function (data) {
             if (data == "dismiss") {

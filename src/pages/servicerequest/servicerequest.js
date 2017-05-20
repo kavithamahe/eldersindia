@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { CallNumber } from 'ionic-native';
 import { ServiceRequestService } from '../../providers/service-request-service';
 import { ViewServiceRequestPage } from '../../pages/view-service-request/view-service-request';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -33,13 +34,16 @@ var ServicerequestPage = (function () {
         this.rating = 0;
         this.remarks = '';
         this.nextPageURL = '';
+        this.getRemarksList = [];
         this.serviceRequestScrollLists = [];
+        this.vendorStatus = [];
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
             storage.get('token').then(function (token) {
                 _this.token = token;
                 // this.blogId=navParams.get("blogId");
                 _this.onInit();
+                _this.getRemarks();
             });
         });
     }
@@ -48,8 +52,9 @@ var ServicerequestPage = (function () {
         var loader = this.loadingCtrl.create({ content: "Please wait..." });
         loader.present();
         this.serviceRequest.serviceRequestList().subscribe(function (serviceRequest) {
-            _this.serviceRequestInfo = serviceRequest.result.info.data;
-            _this.nextPageURL = serviceRequest.result.info.next_page_url;
+            _this.serviceRequestInfo = serviceRequest.result.info.list.data;
+            _this.vendorStatus = serviceRequest.result.info.status;
+            _this.nextPageURL = serviceRequest.result.info.list.next_page_url;
         }, function (err) {
             if (err.status === 401) {
                 _this.showToaster(JSON.parse(err._body).error);
@@ -59,6 +64,16 @@ var ServicerequestPage = (function () {
             }
         });
         loader.dismiss();
+    };
+    ServicerequestPage.prototype.getRemarks = function () {
+        var _this = this;
+        this.serviceRequest.getRemarks().subscribe(function (getRemarks) {
+            _this.getRemarksList = getRemarks.result.info.remark;
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+        });
     };
     ServicerequestPage.prototype.viewRequest = function (serviceRequestId) {
         this.navCtrl.push(ViewServiceRequestPage, { serviceRequestId: serviceRequestId });
@@ -138,11 +153,11 @@ var ServicerequestPage = (function () {
     ServicerequestPage.prototype.serviceRequestScroll = function () {
         var _this = this;
         this.serviceRequest.serviceRequestScroll(this.nextPageURL).subscribe(function (serviceRequestScroll) {
-            _this.serviceRequestScrollLists = serviceRequestScroll.result.info.data;
+            _this.serviceRequestScrollLists = serviceRequestScroll.result.info.list.data;
             for (var i = 0; i < Object.keys(_this.serviceRequestScrollLists).length; i++) {
                 _this.serviceRequestInfo.push(_this.serviceRequestScrollLists[i]);
             }
-            _this.nextPageURL = serviceRequestScroll.result.info.next_page_url;
+            _this.nextPageURL = serviceRequestScroll.result.info.list.next_page_url;
         }, function (err) {
             if (err.status === 401) {
                 _this.showToaster(JSON.parse(err._body).error);
@@ -151,6 +166,16 @@ var ServicerequestPage = (function () {
                 _this.showToaster("Try again later");
             }
         });
+    };
+    ServicerequestPage.prototype.makeCall = function (number) {
+        if (number) {
+            CallNumber.callNumber(number, true)
+                .then(function () { return console.log('Launched dialer!'); })
+                .catch(function () { return console.log('Error launching dialer'); });
+        }
+        else {
+            this.showToaster("There is no contact nuber");
+        }
     };
     return ServicerequestPage;
 }());

@@ -19,6 +19,14 @@ var MyprofilesettingPage = (function () {
         this.communityServices = communityServices;
         this.navParams = navParams;
         this.viewCtrl = viewCtrl;
+        this.avatar = "true";
+        this.birthday = "true";
+        this.email = "true";
+        this.location = "true";
+        this.mobile = "true";
+        this.name = "true";
+        this.connection = "true";
+        this.profile = "true";
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
             storage.get('token').then(function (token) { _this.token = token; });
@@ -39,13 +47,20 @@ var MyprofilesettingPage = (function () {
         var _this = this;
         this.communityServices.getPrivacy(this.member_data).subscribe(function (users) {
             var Privacy = users.result[0];
-            _this.avatar = Privacy.privacy_avatar;
-            _this.birthday = Privacy.privacy_birthday;
-            _this.email = Privacy.privacy_email;
-            _this.location = Privacy.privacy_location;
-            _this.mobile = Privacy.privacy_mobile;
-            _this.name = Privacy.privacy_name;
-            console.log(_this.location);
+            if (Privacy != null) {
+                // this.avatar = Privacy.privacy_avatar;
+                _this.birthday = Privacy.privacy_birthday;
+                _this.connection = Privacy.privacy_connection;
+                _this.email = Privacy.privacy_email;
+                _this.location = Privacy.privacy_location;
+                _this.mobile = Privacy.privacy_mobile;
+                _this.name = Privacy.privacy_name;
+                _this.profile = Privacy.privacy_profile;
+                console.log(_this.location);
+            }
+            // else{
+            //       this.communityServices.showToast("No Data");
+            // } 
         }, function (err) {
             _this.communityServices.showErrorToast(err);
         });

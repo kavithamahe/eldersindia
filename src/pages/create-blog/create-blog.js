@@ -11,9 +11,10 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Validators, FormBuilder } from '@angular/forms';
+import { Camera } from 'ionic-native';
 import { BlogListService } from '../../providers/blog-list-service';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
-import { BlogsPage } from '../../pages/blogs/blogs';
+import { ManageBlogsPage } from '../../pages/manage-blogs/manage-blogs';
 /*
   Generated class for the CreateBlog page.
 
@@ -30,15 +31,37 @@ var CreateBlogPage = (function () {
         this.blogListService = blogListService;
         this.loadingCtrl = loadingCtrl;
         this.toastCtrl = toastCtrl;
+        this.highlights = '';
         this.tags = [];
+        this.featuredImage = '';
         this.tagsModel = [];
+        this.bannerImage = '';
         this.submitAttempt = false;
+        this.blogTitle = "Create Blog";
+        this.blogId = 0;
+        this.action = "add";
+        this.title = '';
+        this.category = '';
+        this.description = '';
+        this.user_id = 0;
+        this.user_type = '';
+        this.actionUrl = 'addBlog';
         this.storage.ready().then(function () {
             storage.get('imageurl').then(function (imageurl) { _this.imageUrl = imageurl; });
+            storage.get('id').then(function (id) { _this.user_id = id; });
+            storage.get('user_type').then(function (user_type) { _this.user_type = user_type; });
             storage.get('token').then(function (token) {
                 _this.token = token;
-                // this.blogId=navParams.get("blogId");
+                _this.blogId = navParams.get("blogId");
+                _this.action = navParams.get("action");
+                var loader = _this.loadingCtrl.create({ content: "Please wait..." });
+                loader.present();
+                if (_this.blogId > 0 && _this.action == 'edit') {
+                    _this.blogTitle = "Edit Blog";
+                    _this.getEditBlog(_this.blogId);
+                }
                 _this.getBlogCategories();
+                loader.dismiss();
             });
         });
         this.blogForm = formBuilder.group({
@@ -49,6 +72,33 @@ var CreateBlogPage = (function () {
     }
     CreateBlogPage.prototype.dashboardPage = function () {
         this.navCtrl.setRoot(DashboardPage);
+    };
+    CreateBlogPage.prototype.getEditBlog = function (blogId) {
+        var _this = this;
+        this.blogListService.getEditBlog(blogId).subscribe(function (getEditBlog) {
+            _this.title = getEditBlog.result.title;
+            _this.category = getEditBlog.result.category;
+            _this.highlights = getEditBlog.result.highlights;
+            _this.description = getEditBlog.result.description;
+            if (getEditBlog.result.featured_image != '') {
+                _this.featuredImage = _this.imageUrl + getEditBlog.result.featured_image;
+            }
+            if (getEditBlog.result.banner_image != '') {
+                _this.bannerImage = _this.imageUrl + getEditBlog.result.banner_image;
+            }
+            var tagsObject = getEditBlog.result.tags;
+            for (var i = 0; Object.keys(tagsObject).length > i; i++) {
+                _this.tagsModel[i] = tagsObject[i].name;
+            }
+            _this.allowComments = getEditBlog.result.allow_comment;
+        }, function (err) {
+            if (err.status === 401) {
+                _this.showToaster(JSON.parse(err._body).error);
+            }
+            else {
+                _this.showToaster("Try again later");
+            }
+        });
     };
     CreateBlogPage.prototype.getBlogCategories = function () {
         var _this = this;
@@ -82,6 +132,22 @@ var CreateBlogPage = (function () {
             });
         }
     };
+    CreateBlogPage.prototype.accessGallery = function (type) {
+        var _this = this;
+        Camera.getPicture({
+            sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+            destinationType: Camera.DestinationType.DATA_URL
+        }).then(function (imageData) {
+            if (type == 'banner') {
+                _this.bannerImage = 'data:image/jpeg;base64,' + imageData;
+            }
+            else {
+                _this.featuredImage = 'data:image/jpeg;base64,' + imageData;
+            }
+        }, function (err) {
+            console.log(err);
+        });
+    };
     CreateBlogPage.prototype.createBlog = function () {
         var _this = this;
         if (!this.blogForm.valid) {
@@ -97,11 +163,18 @@ var CreateBlogPage = (function () {
                     tagsObj.push({ "name": this.tagsModel[j] });
                 }
             }
-            this.blogObject = { "app": '', "category": this.blogForm.value.category, "allow_comment": this.allowComments, "title": this.blogForm.value.title, "highlights": this.highlights,
-                "description": this.blogForm.value.description, "featured_image": "", "banner_image": "", "tags": tagsObj,
+            this.blogObject = { "category": this.blogForm.value.category, "allow_comment": this.allowComments, "title": this.blogForm.value.title, "highlights": this.highlights,
+                "description": this.blogForm.value.description, "featured_image": this.featuredImage, "banner_image": this.bannerImage, "tags": tagsObj, "app": ''
             };
-            this.blogListService.createBlog(this.blogObject).subscribe(function (createBlog) {
-                _this.navCtrl.setRoot(BlogsPage);
+            if (this.action == 'edit') {
+                this.actionUrl = 'editBlog/' + this.blogId;
+                this.blogObject.id = this.blogId;
+                this.blogObject.author = this.user_id;
+                this.blogObject.author_type = this.user_type;
+                console.log(this.blogObject);
+            }
+            this.blogListService.createBlog(this.blogObject, this.actionUrl).subscribe(function (createBlog) {
+                _this.navCtrl.push(ManageBlogsPage);
                 _this.showToaster(createBlog.result);
                 //console.log(createBlog.result);
             }, function (err) {

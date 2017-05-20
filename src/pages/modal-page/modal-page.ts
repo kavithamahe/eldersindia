@@ -45,7 +45,7 @@ export class ModalContentPage {
         date: ['',Validators.compose([Validators.required])],
         time: ['',Validators.compose([Validators.required])],
         contact: ['',Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.pattern('[0-9]*'), Validators.required])],
-        dependents: ['',Validators.compose([Validators.required])]
+        dependents: ['',Validators.compose([])]
     });
      loading.dismiss();
      // this.userType = "elder";
