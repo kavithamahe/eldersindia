@@ -18,6 +18,7 @@ import { EmojiPickerPage } from '../../pages/emoji-picker/emoji-picker';
 export class CommunitycommentsPage {
 posts:any;
 post_comments = [];
+comment_reply = [];
 post_id:any;
 post_profile_id:any;
 reply_comment:any="";
@@ -87,7 +88,7 @@ post_likes:any;
     loader.present();
 
    this.communityServices.sendInlineLikes(comments_id).subscribe(data =>{
-           this.senddata=data.result.info.data;
+           // this.senddata=data.result.info.data;
            this.showToast(data.result.info.message);
           
         },
@@ -131,7 +132,7 @@ post_likes:any;
           console.log("index of comment: ",i);
      	}
      }
-     
+      
      
      },
      err =>{
@@ -139,7 +140,25 @@ post_likes:any;
     this.communityServices.showErrorToast(err);
   })
   }
- 
+ removeComment(id){
+   this.communityServices.deleteComment(id).subscribe(datas =>{
+     this.showToast(datas.result);
+     this.reply_comment="";
+     for(let i=0; i<this.post_comments.length;i++){
+       if(this.post_comments[i].comments_id == id){
+         
+        this.post_comments[i].comment_reply.splice(i,1);
+          console.log("index of commentttttt: ",i);
+       }
+     }
+      
+     
+     },
+     err =>{
+    
+    this.communityServices.showErrorToast(err);
+  })
+ }
  
   showToast(messageData){
     let toast = this.toastCtrl.create({
