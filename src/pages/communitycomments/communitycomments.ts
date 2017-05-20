@@ -29,6 +29,7 @@ imageUrl:any;
 token:any;
 user_id:any;
 senddata:any;
+post_likes:any;
 
   constructor(public loadingCtrl: LoadingController, public viewCtrl: ViewController, public storage: Storage, public toastCtrl: ToastController, public alertCtrl:AlertController, public communityServices: CommunityServices, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
   	this.storage.ready().then(() => {
@@ -36,6 +37,7 @@ senddata:any;
       storage.get('token').then((token) => { this.token=token; 
       this.posts = navParams.get("posts");
         this.post_comments = this.posts.comments;
+        this.post_likes = this.posts.comments.likes;
         this.post_id = this.posts.id;
         this.post_profile_id = this.posts.profile_id;
     });
@@ -85,9 +87,9 @@ senddata:any;
     loader.present();
 
    this.communityServices.sendInlineLikes(comments_id).subscribe(data =>{
-    
+           this.senddata=data.result.info.data;
            this.showToast(data.result.info.message);
-          // this.post_comments.push(data.result.info[0])
+          
         },
     err =>{
     
