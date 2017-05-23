@@ -311,9 +311,13 @@ ion-card img												{     display: inline-block;
 .contact-list .item-md .item-inner .input-wrapper .label-md {margin:0px; text-indent: 0; border:1px solid #e9e9e9; float:left; }
 .contact-list .item-md .item-inner .input-wrapper .label-md p{ font-size:15px;  margin-left:5px; line-height:27px;}
 .contact-list .item-md .item-inner .input-wrapper .label-md i{font-size:18px; color:#777; width:30px; float:left; line-height:30px; text-align:center;}
-
-.community-div .item-md{ padding-left:0px;}
+.view-more{ font-size:14px; color:red !important; background:none !important;}
+.view-more i{ color:#a5a0a4;}
+.community-div .item-md{ padding-left:0px;} 
 .community-div .card-md{margin:5px important;}
+.memberareas{ border-bottom:1px solid #f1f1f1 !important; }
+.memberareas .item-md{ padding-left:0px; margin-top:0px !important;}
+.memberareas .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
  
 .brder-cor .button-md										{background:#fe7fe6; color:#fff !important; font-size:16px !important; text-transform:capitalize !important; margin-bottom:0px;}
 span.mails-cont												{float:left;}
@@ -338,16 +342,16 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .thamb-lins													{bottom:-18px;left:12px;position:absolute;z-index: 999 !important; }
 .thamb-lins img												{border:3px solid #fff; height:80px;width:90px; border-radius:3px;box-shadow: 0 0 5px #888}
 .tid-cd 											        {color:#025fa9 !important;font-size:17px !important;font-weight:400 !important;text-align:left !important; float:left;}
-.labels-bds													{background:rgba(19, 19, 20, 0.58) !important;border-right:4px solid red !important;color:#fff !important; font-weight:600;float:left;font-size:12px !important;padding:9px;position:absolute;
+.labels-bds													{background:rgba(19, 19, 20, 0.58) !important;border-right:4px solid #1d6ab2 !important;color:#fff !important; font-weight:600;float:left;font-size:12px !important;padding:9px;position:absolute;
 															 right:-1px;top:15px;width:auto;}
 .video-updates                                              {padding:0px 4px !important;}
 .user-profile												{width:80px;height:80px; border:1px solid #ccc;}
-.wel-comemem											    {color:#025fa9 !important;font-family: "Open Sans",sans-serif;font-size:18px !important;margin: 0; padding:0 0 10px 10px;}
+.wel-comemem											    {color:#424a95 !important;font-family: "Open Sans",sans-serif;font-size:18px !important;margin: 0; padding:10px 0px 0px 10px;}
 .likecolor													{color:#1e90ff !important; font-size:17px;}
 .time-datem													{color:#666 !important; font-size:12px !important;}
 .label-opc .item-md .item-inner .label-md					{ margin:0px !important; padding-top:0px;text-indent:0px; padding-left:8px; color:#1d6ab2; font-size:20px; line-height:25px; font-weight:400;}
 .label-opc .item-md{ background:none;}
-.label-opc {background:rgba(255, 255, 255, 0.73);bottom:0px;color:#1d6ab2!important;float:left;font-size:20px !important;position:absolute;width:100%;}
+.label-opc {background:rgba(255, 255, 255, 0.73);bottom:0px;color:#1d6ab2!important;float:left;font-size:20px !important; height:50px;position:absolute;width:100%;}
 .edit-ld													{}
 .text-commands											    { margin:0px !important; width:95% !important;}
 .post-icons													{position:absolute;background:#fff !important;border-radius: 50%; border:1px solid #ccc; color:red;
@@ -368,7 +372,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .createblog-form .item-md .item-inner .input-wrapper .text-input-md{width: calc(100% - 9px) !important;}
 .createblog-form .item-md .item-inner .input-wrapper .label-md{ float:left; line-height:25px; margin-top:5px;}
 .contect-bg-moblie											{background:#F3F7FF;}
-.ios page-community .post, .md page-community .post			{width:100% !important;}
+.postedimgvideos{  float:right !important; width:50% !important; background:#888aef;}
 .post-icons i 												{color:#46a049;}
 
 .personal-d p												{box-shadow:none !important; font-size:18px !important; color:#404996 !important; text-align:center;margin:0px !important; line-height:15px;padding-top: 10px;}
@@ -380,16 +384,25 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .list-mess .button-inner									{text-align:left;}
 .comm-listpag												{border-radius:35px;height:40px;width:100%;margin:0px !important;}
 .comm-postlist												{background:#ff4000 !important;border-radius:35px !important; height:40px !important; width:100% !important; margin:0px !important;}
-.image-profile img										    {border-radius:50%;height:90px;width:90px; border:2px solid #ccc;}
+.post-urls													{border-top:1px solid #f1f1f1; margin-top:5px; padding-bottom:5px;}
+.listed-comments .item-md								    {padding-left:0px;}
+.post-urls small											{font-size:15px; padding-left:10px;color:#999;}
+.post-urls ion-row ion-col .item-md							{padding-left:0px;}
 .mem-name													{font-size:17px !important; margin:0px;}
 .post-comm													{font-size:17px !important; margin:0px;}
 .memb-list .label-md										{padding-top:0px !important;}
 .memb-list .label-ios										{padding-top:0px !important;}
-.memb-list 													{float:left;margin-bottom:5px;margin-left:5px;margin-right:6px; width:20%;}
+.memb-list 													{float:left;margin-bottom:5px; width:20%;margin:5px 5px 0px 7px;} 
 .comm-posted												{position:relative; width:100%;border-top:1px solid #DCDCDC !important; border-bottom:1px solid #DCDCDC !important;margin-bottom:11px; padding:5px;}
 .secon-sdms													{}
 .job-view													{margin-top:10px;}
+.mem-name													{width:45px; font-size:12px !important; height: 42px; overflow: hidden; text-overflow: ellipsis;float:left; white-space: nowrap; }
 .job-view													{padding:5px !important;}
+.mem-name-update											{background:#fff; border-bottom:1px solid #e9ecef;}
+.mem-title													{border-bottom:1px solid #f1f1f1; margin-bottom:10px;}
+.mem-title p												{font-size:18px !important; font-weight:400 !important; color:#424a95;}
+.mem-title i												{color:#a5a0a4;}
+.show-members											    {border-radius:50%; background:#888aef !important;height:35px;width:35px; text-align:center; line-height:35px; padding:0px;text-indent:0px !important; margin-left:15px;margin-top: 10px;}
 .job-view .item-md											{padding-left:0px !important;}
 .job-view .item-md .item-inner .input-wrapper .label-md		{margin:0px;text-indent:0px;}
 .job-view .item-md .item-inner .input-wrapper .label-md	h2	{font-size:18px !important; padding-bottom:0px;}
@@ -534,7 +547,7 @@ page-service-info .service_request							{border:none !important;}
 }
 .image-column-left {
     margin-bottom: 30px !important;
-    padding-right: 30px !important;
+    padding-right: 30px !important; margin-top:0px !important; padding-top:5px;
 }
 .image-column-left img {
     border-radius: 0 100px 100px 0;
@@ -544,7 +557,7 @@ page-service-info .service_request							{border:none !important;}
     margin-right:10px;
     width: 115px;
 }
-.image-column-left strong {
+.image-column-left strong { padding-bottom:5px;
     display: block;
     font-size:18px !important; font-weight:400;
     width: 100%;
@@ -736,7 +749,8 @@ padding-left:0px !important;
 .list-cates													{border:1px solid red !important;}
 .subcategory-list											{padding:5px; margin-bottom:10px; border-bottom:1px solid rgba(0, 0, 0, 0.08); }
 .subcategory-list .item-inner .input-wrapper .label-md		{margin:0px !important;}
-.ios page-community .video, .md page-community .video		{width:100%; border:none; height:40px;}
+.ios page-community .video, .md page-community .video		{width:40px; border:none; height:40px; background:#fe7fe6; float:left; margin:0px 5px 0px 0px;}
+.ios page-community .video, .md page-community .video i     { color:#fff;}
 .community-img												{position:relative !important; }
 
 
@@ -951,6 +965,7 @@ white-space: normal;}
 .body-clr												    {background:#fff;}
 .popup-mds > .ion-label									    {font-size:15px; text-align:center;}
 .job-view .item-md .item-inner .input-wrapper .label-md h2{ font-size:17px !important;}
+.liks-comments{ border:1px solid #ccc;}
 .item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#424a95;text-transform:capitalize; margin-top:0px !important; font-weight:400;}
 .item-inner > .input-wrapper > .label-md				    {color:#777;font-size:16px; padding-right:0px !important; }
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ bottom:4px;}
