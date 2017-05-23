@@ -10,7 +10,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content on-swipe-up="onSwipeUp()">
 			
 	<ion-list *ngFor="let comment of post_comments; let j=index" class="comm-posted">
      	<ion-item>
