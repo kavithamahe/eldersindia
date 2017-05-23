@@ -20,10 +20,11 @@
 			<img [src]="imageUrl+communityDetailData?.logo"  
 				[hidden]="!communityDetailData?.logo">
             <strong class="wel-comemem">Welcome to {{communityDetailData?.community_name}}</strong>
-            <em  style="" *ngIf(!show_description)>{{communityDetailData?.description | words : 10 : '...'}}<button (click)="toggleContent()">view more</button></em>
+            <em  style="" *ngIf(!show_description)>{{communityDetailData?.description | words : 50 : '...'}}</em>
+            <!-- <button (click)="toggleContent()">view more</button></em>
             <em  style="" *ngIf(show_description)>{{communityDetailData?.description}}
-            <!--  <button (click)="toggleContent()">view less</button> -->
-             </em>
+              <button (click)="toggleContent()">view less</button> 
+             </em> -->
         </p>
 					
 		<div class="decoration hide-if-responsive"></div>
@@ -41,10 +42,10 @@
     				<ion-item>
       					<ion-icon name="contact" item-left style="color: #d03e84"></ion-icon>
       					Members
-      					<ion-badge item-right>{{show_member}}</ion-badge>
+      					
     				</ion-item>
 					<div *ngFor="let member of members; let i=index" text-wrap>
-						<div *ngIf="i<= 3">
+						<div *ngIf="i<= 6">
 							<ion-item class="memb-list">
 								<ion-col>
 									<img (click)="membersProfile(member.uid)" style="border:2px solid #e6e6e6;" [src]="imageUrl+member?.avatar" 
@@ -56,8 +57,9 @@
 						</div>
 					</div>
 					<ion-item  *ngIf(viewMore)>
-						<button ion-button item-right (click)="showModel(members)">View All</button>
-					</ion-item>
+						<ion-badge (click)="showModel(members)" item-right>{{show_member}}</ion-badge>
+					<!-- <button ion-button item-right >View All</button> --> 
+ 					</ion-item>
 					<ion-item  *ngIf="!show_member">
 						<p>No Members Joined Yet</p>
 					</ion-item>
