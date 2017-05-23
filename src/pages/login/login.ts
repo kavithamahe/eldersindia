@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform,NavController, NavParams,AlertController, LoadingController, ModalController, ToastController } from 'ionic-angular';
+import { Component,NgModule } from '@angular/core';
+import { Platform,NavController, NavParams,AlertController, LoadingController, ModalController, ToastController,MenuController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { LocalNotifications, Geolocation } from 'ionic-native';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
@@ -14,16 +14,16 @@ import { ServiceProvider } from '../../providers/service-provider'
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 import { CommunityServices } from '../../providers/community-services';
 
-
 /*
   Generated class for the Login page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+
 @Component({
    templateUrl: 'login.html',
-   providers:[CommunityServices]
+   providers:[CommunityServices],
 })
 export class LoginPage {
   loginuser: Login[];
@@ -39,7 +39,7 @@ export class LoginPage {
   ambulance:any=0;
   police:any=0;
   constructor(
-    private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder, public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
+    private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public menuCtrl: MenuController, public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
   this.storage.ready().then(() => { 
      storage.get('id').then((id) => { this.id=id; 
      });
@@ -110,7 +110,9 @@ export class LoginPage {
          this.storage.set('rooturl',this.appConfig.setrooturl());
          // this.storage.set('service_location','');
          this.storage.set('islogin',1);
+         this.enableUserTypeMenu(loginuser['details']['user_type'])
           this.navCtrl.setRoot(DashboardPage);
+          
        })
         // alert(loginuser['token']);
        
@@ -139,6 +141,17 @@ export class LoginPage {
         position: 'top'
         });
    toast.present();
+  }
+  enableUserTypeMenu(userType) {
+  if(userType=='sponsor'){
+  this.menuCtrl.enable(true, 'sponsor');
+  this.menuCtrl.enable(false, 'elder');
+  }
+  else
+  {
+  this.menuCtrl.enable(true, 'elder');
+  this.menuCtrl.enable(false, 'sponsor');
+  }
   }
 
   forgotPassword(){
