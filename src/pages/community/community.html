@@ -211,13 +211,13 @@
 					</button>
 				      <button *ngIf=(!(user.likes.emoji)) ion-button  clear small (click)="emojiPicker(user.id)">
 						<ion-icon name="thumbs-up"></ion-icon>
-				        <div>Likes</div>
+				        <div>{{user.likecount}}Likes</div>
 						</button>
 				    </ion-col>
 				    <ion-col>
 				      <button ion-button icon-left clear small (click)="showComment(user)">
 				        <ion-icon name="text"></ion-icon>
-				        <div>Comments</div>
+				        <div> {{user.comment_count}}Comments</div>
 				      </button>
 				    </ion-col>
 
