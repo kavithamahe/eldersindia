@@ -182,7 +182,7 @@ toggleContent(){
       this.members =  users.result.info.members;
       this.show_member = this.members.length;
       console.log(this.show_member);
-      if(this.show_member>4){
+      if(this.show_member>7){
         this.viewMore=true;
       }
       

@@ -13,11 +13,13 @@ import { EmojiPickerPage } from '../../pages/emoji-picker/emoji-picker';
 */
 @Component({
   selector: 'page-communitycomments',
-  templateUrl: 'communitycomments.html'
+  templateUrl: 'communitycomments.html',
+   providers : [CommunityServices]
 })
 export class CommunitycommentsPage {
 posts:any;
 post_comments = [];
+comment_reply: any =[];
 post_id:any;
 post_profile_id:any;
 reply_comment:any="";
@@ -29,6 +31,7 @@ imageUrl:any;
 token:any;
 user_id:any;
 senddata:any;
+post_likes:any;
 
   constructor(public loadingCtrl: LoadingController, public viewCtrl: ViewController, public storage: Storage, public toastCtrl: ToastController, public alertCtrl:AlertController, public communityServices: CommunityServices, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
   	this.storage.ready().then(() => {
@@ -36,6 +39,8 @@ senddata:any;
       storage.get('token').then((token) => { this.token=token; 
       this.posts = navParams.get("posts");
         this.post_comments = this.posts.comments;
+        //this.comment_reply =  this.posts.comments.comment_reply;
+        this.post_likes = this.posts.comments.likes;
         this.post_id = this.posts.id;
         this.post_profile_id = this.posts.profile_id;
     });
@@ -85,9 +90,10 @@ senddata:any;
     loader.present();
 
    this.communityServices.sendInlineLikes(comments_id).subscribe(data =>{
-    
+           // this.senddata=data.result.info.data;
+           //this.post_comments.push(data.result.info.data);
            this.showToast(data.result.info.message);
-          // this.post_comments.push(data.result.info[0])
+          
         },
     err =>{
     
@@ -129,7 +135,7 @@ senddata:any;
           console.log("index of comment: ",i);
      	}
      }
-     
+      
      
      },
      err =>{
@@ -138,6 +144,36 @@ senddata:any;
   })
   }
  
+
+deleteReply(comment_id,reply_id,post_id)
+{
+ this.communityServices.deleteComment(reply_id).subscribe(
+    datas =>{
+             this.showToast(datas.result);
+                 for(let i=0; i<this.post_comments.length;i++)
+                {
+                    if(this.post_comments[i].comments_id == comment_id)
+                    {
+                        for(let j=0; j<this.post_comments[i].comment_reply.length;j++)
+                        {
+                            if(this.post_comments[i].comment_reply[j].comments_replay_id == reply_id)
+                            {
+                                this.post_comments[i].comment_reply.splice(j,1);
+                                console.log("index of reply: ",j);
+                            }
+                        }
+                        
+                      console.log("index of comment: ",i);
+                    }
+                 }
+            },
+     err =>{
+    
+            this.communityServices.showErrorToast(err);
+            })     
+} 
+
+
  
   showToast(messageData){
     let toast = this.toastCtrl.create({
