@@ -348,7 +348,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .user-profile												{width:80px;height:80px; border:1px solid #ccc;}
 .wel-comemem											    {color:#424a95 !important;font-family: "Open Sans",sans-serif;font-size:18px !important;margin: 0; padding:10px 0px 0px 10px;}
 .likecolor													{color:#1e90ff !important; font-size:17px;}
-.time-datem													{color:#666 !important; font-size:12px !important;}
+.time-datem													{color:#949494 !important; font-size:11px !important;}
 .label-opc .item-md .item-inner .label-md					{ margin:0px !important; padding-top:0px;text-indent:0px; padding-left:8px; color:#1d6ab2; font-size:20px; line-height:25px; font-weight:400;}
 .label-opc .item-md{ background:none;}
 .label-opc {background:rgba(255, 255, 255, 0.73);bottom:0px;color:#1d6ab2!important;float:left;font-size:20px !important; height:50px;position:absolute;width:100%;}
@@ -374,6 +374,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .contect-bg-moblie											{background:#F3F7FF;}
 .postedimgvideos{  float:right !important; width:50% !important; background:#888aef;}
 .post-icons i 												{color:#46a049;}
+.closed i{ color:#fff; font-size:20px; font-weight:400;}
 
 .personal-d p												{box-shadow:none !important; font-size:18px !important; color:#404996 !important; text-align:center;margin:0px !important; line-height:15px;padding-top: 10px;}
 .alert-md .alert-sub-title									{color:#fff !important; color:#fff !important; font-size:17px !important;}
@@ -393,7 +394,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .memb-list .label-md										{padding-top:0px !important;}
 .memb-list .label-ios										{padding-top:0px !important;}
 .memb-list 													{float:left;margin-bottom:5px; width:20%;margin:5px 5px 0px 7px;} 
-.comm-posted												{position:relative; width:100%;border-top:1px solid #DCDCDC !important; border-bottom:1px solid #DCDCDC !important;margin-bottom:11px; padding:5px;}
+.comm-posted												{position:relative; width:100%;}
 .secon-sdms													{}
 .job-view													{margin-top:10px;}
 .mem-name													{width:45px; font-size:12px !important; height: 42px; overflow: hidden; text-overflow: ellipsis;float:left; white-space: nowrap; }
@@ -451,6 +452,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .footer-defent .item-md{ background:#404996 !important;}
 .footer-defent .item-md button{ background:none !important; color:#fff;  box-shadow: none;}
 .footer-defent .item-md button span i{ color:#fff !important;}
+.ios page-community .post, .md page-community .post{ background:#888aef; margin-top:5px; border-radius:0px !important;}
 
 .but-colo													{padding:8px !important;height:32px !important; width:auto!important; border:1px solid #ccc !important;}
 .num-of														{color:red !important; font-size:13px !important;}
@@ -480,7 +482,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .label-ios .head-mar h2.edit-pro							{margin-top:20px !important;}
 .editicoan													{font-size:18px !important;}
 .labels-lb													{color:#00CED1; font-weight:400; font-size:16px;}
-.feed-post													{color:#777 !important;font-size:17px !important;font-weight:400 !important; margin:0px !important;line-height:25px !important;padding:0px 0px 0px 10px !important;}
+.feed-post													{color:#777 !important;font-size:15px !important;font-weight:400 !important; margin:0px !important;line-height:25px !important;padding:0px 0px 0px 10px !important;}
 page-my-profile ion-col										{ border-left:1px solid #F0F8FF !important;}
 .video-updates												{}
 .item-md.item-input.ng-valid.input-has-value:not(.input-has-active) .item-inner{ border-bottom:none;}
@@ -851,7 +853,7 @@ white-space: normal;}
 .inbox-sends .item-md .item-inner .input-wrapper .label-md ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-md small{ font-size:17px; color:#404996;}
 .inbox-sends .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-ios small{ font-size:17px; color:#404996;}
 
-.trash-del{ background:#eeeeee;}
+
 .trash-del i{ font-size:15px; color:#fb0e1f;}
 .subject-details .item-inner .input-wrapper .label-md b{ font-size:15px; font-weight:400; padding-right:5px; }
 .subject-details .item-inner .input-wrapper .label-md span{font-size:14px; font-weight:400; padding-right:5px; }
@@ -965,7 +967,9 @@ white-space: normal;}
 .body-clr												    {background:#fff;}
 .popup-mds > .ion-label									    {font-size:15px; text-align:center;}
 .job-view .item-md .item-inner .input-wrapper .label-md h2{ font-size:17px !important;}
-.liks-comments{ border:1px solid #ccc;}
+.liks-comments{font-size:14px !important; color:#83858b !important;}
+.liks-comments i{color:#9c9ea4 !important;}
+.comment-liks{ background:#f7f7f7; border-top:1px solid #efefef;}
 .item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#424a95;text-transform:capitalize; margin-top:0px !important; font-weight:400;}
 .item-inner > .input-wrapper > .label-md				    {color:#777;font-size:16px; padding-right:0px !important; }
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ bottom:4px;}

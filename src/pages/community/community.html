@@ -127,8 +127,7 @@
 	      		<ion-row>
 	      			<ion-col width-20>
 	        			<ion-avatar item-left class="image-profile">
-	          				<img [src]="imageUrl+user?.avatar" [hidden]="!user?.avatar" 
-	          					(click)="communityProfiles(user.uid)">
+	          				<img [src]="imageUrl+user?.avatar" [hidden]="!user?.avatar" (click)="communityProfiles(user.uid)"/>
 	        			</ion-avatar>
 	        		</ion-col>
 	        		<ion-col width-80>
@@ -136,9 +135,10 @@
 			          	<p class="time-datem"><i class="fa fa-calendar-o"></i> {{user.created_at}}
 			          		</p>
 			        </ion-col>
-					
+	
 	       		</ion-row>
 	    	</ion-item>
+			<div>
 	      		<ion-card-content [hidden]="!user?.post_message">
 		          	<p item-text-wrap class="feed-post" [innerHTML]="user.post_message">
 		          	<a href=""></a>{{user.post_message}}</p>
@@ -160,8 +160,8 @@
 	         	<ion-card-content class="video-updates" [hidden]="!user?.metalink_description">
 					<p (click)="openUrl(user.metalink_url)">{{user.metalink_description}}</p>
 	         	</ion-card-content>
-
-	       	<div>
+</div>
+	       	<div class="comment-liks">
 
 	      		<ion-row>
 	        	    <ion-col>
@@ -170,19 +170,19 @@
 						(click)="emojiPicker(user.id)">
 					</button>
 				      <button *ngIf=(!(user.likes.emoji)) ion-button  clear small (click)="emojiPicker(user.id)">
-						<p class="liks-comments"><i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp; {{user.likecount}}Likes</p>
+						<p class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp; {{user.likecount}}Likes</p>
 
 
 						</button>
 				    </ion-col>
 				    <ion-col>
 				      <button ion-button icon-left clear small (click)="showComment(user)">
-				        <ion-icon name="text"></ion-icon>
-				        <div>{{user.comment_count}}Comments</div>
+				        
+				       <p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{user.comment_count}}+Comments</p>
 				      </button>
 				    </ion-col>
 					<ion-col>
-						<button ion-button *ngIf="user.uid == user_id" (click)="deletePost(user.id)" color="dark" clear><i class="fa fa-trash"></i>
+						<button ion-button *ngIf="user.uid == user_id" (click)="deletePost(user.id)" color="dark" clear><p class="liks-comments"><i class="fa fa-trash"></i></p>
 						</button>
 		      		</ion-col>
 

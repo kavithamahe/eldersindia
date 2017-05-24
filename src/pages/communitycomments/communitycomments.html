@@ -4,15 +4,16 @@
       Comments
     </ion-title>
     <ion-buttons start>
-      <button ion-button  color="dark" clear (click)="dismiss()">
+      <button ion-button class="closed" clear (click)="dismiss()">
        <i class="fa fa-times-circle"  name="close"></i>
       </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content style="background:#F3F7FF;">
 			
 	<ion-list *ngFor="let comment of post_comments; let j=index" class="comm-posted">
+	<ion-card>
      	<ion-item>
 		   	<ion-avatar item-left>
   				<img (click)="profileImage(comment.uid)" 
@@ -27,14 +28,16 @@
 	  	<ion-item>
 	    	<p item-text-wrap [innerHTML]="comment.comments | emojis"></p>
 	   	</ion-item>
+		<div class="comment-liks">
 	   		<button ion-button clear *ngIf="comment.likes == 1" (click)="sendInlineLikes(comment.comments_id)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
 			<button ion-button clear *ngIf="comment.likes == 0 || comment.likes == null" 
-			(click)="sendInlineLikes(comment.comments_id)">Like</button>
+			(click)="sendInlineLikes(comment.comments_id)"><p class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;Like</p></button>
 	 		<button *ngIf="comment.comment_reply.length == 0 && comment.uid_from == user_id" ion-button (click)="showConfirm(comment.comments_id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true">
 	 		</i></button>
   			<button  ion-button clear (click)="reply(j)"><i class="fa fa-reply" aria-hidden="true"></i></button>
 			<button *ngIf="comment.comment_reply[0] != null" ion-button item-right clear 
 			(click)="showComments(j)">view replies</button>
+			</div>
 		<div *ngIf="j==showReply">
 			<ion-list *ngFor="let reply of comment.comment_reply; let i=index">
 				<ion-col offset-10>
@@ -61,7 +64,7 @@
 					<div class="send-req">
 						<button (click)="sendReply(reply.uid_to,reply.com_post_cmt_id)" ion-button class="secon-sdms" color="secondary" round><i class="fa fa-paper-plane-o" aria-hidden="true"></i> </button>
 					</div>
-			   	</div><hr>
+			   	</div>
 			</ion-list>
 		</div>
 		<div *ngIf="j==Reply">
@@ -74,6 +77,7 @@
 				</i></button>
 			</div>
 		</div>
+		</ion-card>
 	</ion-list>
 		<ion-row>
 			<ion-textarea [(ngModel)]="post_comment" style=" margin:0px !important;-webkit-user-select:all !important;" placeholder="Enter Comments"></ion-textarea>             
