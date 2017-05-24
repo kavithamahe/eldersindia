@@ -67,10 +67,6 @@
 						
 					</div>
 
-					<ion-item  *ngIf(viewMore)>
-						<ion-badge (click)="showModel(members)" item-right>{{show_member}}</ion-badge>
-					<!-- <button ion-button item-right >View All</button> --> 
- 					</ion-item>
 
 					<ion-item  *ngIf="!show_member">
 						<p style=" color:red; font-size:15px; font-weight:400;">No Members Joined Yet</p>
@@ -134,12 +130,12 @@
 	<ion-card class="listed-comments">
  			<ion-item>
 	      		<ion-row>
-	      			<ion-col width-20>
+	      			<ion-col>
 	        			<ion-avatar item-left class="image-profile">
 	          				<img [src]="imageUrl+user?.avatar" [hidden]="!user?.avatar" (click)="communityProfiles(user.uid)"/>
 	        			</ion-avatar>
 	        		</ion-col>
-	        		<ion-col width-80>
+	        		<ion-col width-20>
 			          	<h2 (click)="communityProfile(user.uid)">{{user.name}}</h2>
 			          	<p class="time-datem"><i class="fa fa-calendar-o"></i> {{user.created_at}}
 			          		</p>
@@ -199,10 +195,7 @@
 				       <p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{user.comment_count}}+Comments</p>
 				      </button>
 				    </ion-col>
-					<ion-col>
-						<button ion-button *ngIf="user.uid == user_id" (click)="deletePost(user.id)" color="dark" clear><p class="liks-comments"><i class="fa fa-trash"></i></p>
-						</button>
-		      		</ion-col>
+					
 
 	          	</ion-row>
 			</div>
