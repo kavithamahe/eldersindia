@@ -20,10 +20,13 @@
 			<img [src]="imageUrl+communityDetailData?.logo"  
 				[hidden]="!communityDetailData?.logo">
             <strong class="wel-comemem">Welcome to {{communityDetailData?.community_name}}</strong>
-            <em  style="" *ngIf(!show_description)>{{communityDetailData?.description | words :8 : '...'}}<button (click)="toggleContent()" class="view-more"><i class="fa fa-eye" aria-hidden="true"></i> View more</button></em>
+
+            <em  style="" *ngIf(!show_description)>{{communityDetailData?.description | words : 50 : '...'}}</em>
+            <!-- <button (click)="toggleContent()">view more</button></em>
+
             <em  style="" *ngIf(show_description)>{{communityDetailData?.description}}
-            <!--  <button (click)="toggleContent()">view less</button> -->
-             </em>
+              <button (click)="toggleContent()">view less</button> 
+             </em> -->
         </p>
 					
 		<div class="decoration hide-if-responsive"></div>
@@ -37,11 +40,11 @@
 					</div>
 				</ion-col>
 			</ion-row>
-				
+	
     				<ion-item class="mem-title">
       			
       					<p><i class="fa fa-user-circle-o"></i> Members</p>
-      					
+
     				</ion-item>
 					<div *ngFor="let member of members; let i=index" text-wrap>
 						<div *ngIf="i<= 6">
@@ -63,6 +66,12 @@
 					<ion-badge (click)="showModel(members)" class="show-members">+{{show_member}} </ion-badge>
 						
 					</div>
+
+					<ion-item  *ngIf(viewMore)>
+						<ion-badge (click)="showModel(members)" item-right>{{show_member}}</ion-badge>
+					<!-- <button ion-button item-right >View All</button> --> 
+ 					</ion-item>
+
 					<ion-item  *ngIf="!show_member">
 						<p style=" color:red; font-size:15px; font-weight:400;">No Members Joined Yet</p>
 					</ion-item>
@@ -135,7 +144,16 @@
 			          	<p class="time-datem"><i class="fa fa-calendar-o"></i> {{user.created_at}}
 			          		</p>
 			        </ion-col>
-	
+
+					<ion-col offset-50>
+						<!-- <button ion-button *ngIf="user.uid == user_id" (click)="deletePost(user.id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i>
+						</button> -->
+						<button ion-button color="dark" clear (click)="openMenu(user.id)">
+		          			<ion-icon  item-left name="arrow-dropdown"></ion-icon>
+		          		</button>
+
+	          		</ion-col>
+
 	       		</ion-row>
 	    	</ion-item>
 			<div>
@@ -170,14 +188,14 @@
 						(click)="emojiPicker(user.id)">
 					</button>
 				      <button *ngIf=(!(user.likes.emoji)) ion-button  clear small (click)="emojiPicker(user.id)">
-						<p class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp; {{user.likecount}}Likes</p>
 
+						<p class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp; {{user.likecount}}Likes</p>
 
 						</button>
 				    </ion-col>
 				    <ion-col>
 				      <button ion-button icon-left clear small (click)="showComment(user)">
-				        
+  
 				       <p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{user.comment_count}}+Comments</p>
 				      </button>
 				    </ion-col>

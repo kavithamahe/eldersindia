@@ -73,6 +73,7 @@ export class MyApp {
   user_type:any='';
 
   pages: Array<{myIcon:string, title: string, component: any}>;
+  pages2: Array<{myIcon:string, title: string, component: any}>;
 
   constructor(
     public platform: Platform,
@@ -88,11 +89,7 @@ export class MyApp {
   ) {
     this.storage.ready().then(() => {
     storage.get('user_type').then((userType)=>{
-    this.user_type = userType;
-      console.log("user_type : ", this.user_type);
-        if((this.user_type != '') && (this.user_type != null) && (this.user_type == 'sponsor')){
-            this.pages.splice(1, 0, { myIcon:'fa fa-users', title: 'Manage Dependents', component: ManagePage });
-           }
+    this.user_type = userType;  
     });
      storage.get('token').then((token) => { this.token=token;})
      storage.get('email').then((email) => { this.emailId=email;})
@@ -154,7 +151,8 @@ export class MyApp {
          this.storage.set('rooturl',this.appConfig.setrooturl());
          // this.storage.set('service_location','');
          this.storage.set('islogin',1);
-        //  this.nav.setRoot(DashboardPage);
+        //  this.nav.setRoot(DashboardPage)
+        this.enableUserTypeMenu(loginuser['details']['user_type']);
         this.rootPage= DashboardPage;
        })
         // alert(loginuser['token']);
@@ -186,11 +184,8 @@ export class MyApp {
 // set our app's pages on user based
 
       this.pages = [];
-      console.log(this.pages);
-      while (this.pages.length > 0) {
-        this.pages.pop();
-      }
-      console.log(this.pages);
+      this.pages2 = [];
+      
       this.pages.push(
                   { myIcon:'fa fa-th-large', title: 'Dashboard', component: DashboardPage },
                   { myIcon:'fa fa-snowflake-o', title: 'Services', component: ServiceprovidersPage },
@@ -203,28 +198,33 @@ export class MyApp {
                   { myIcon:'fa fa-rss', title: 'Blogs', component: BlogsPage },
                   { myIcon:'fa fa-newspaper-o', title: 'News', component: NewsPage },
                   { myIcon:'fa fa-random', title: 'Events', component: EventsPage },
-                  { myIcon:'fa fa-random', title: 'Useful External Links', component: ExternallinksPage },
+                  { myIcon:'fa fa-external-link', title: 'Useful External Links', component: ExternallinksPage },
                   { myIcon:'fa fa-address-book-o', title: 'Profile', component: MyProfilePage },
                   { myIcon:'fa fa-unlock-alt', title: 'Change Password', component: ChangePasswordPage },
                   { myIcon:'fa fa-cog', title: 'Settings', component: SettingsPage },
                   { myIcon:'fa fa-sign-out', title: 'Logout', component: LogoutPage },
 
                       );
+      this.pages2.push(
+                  { myIcon:'fa fa-th-large', title: 'Dashboard', component: DashboardPage },
+                  { myIcon:'fa fa-users', title: 'Manage Dependents', component: ManagePage },
+                  { myIcon:'fa fa-snowflake-o', title: 'Services', component: ServiceprovidersPage },
+                  { myIcon:'fa fa-cogs', title: 'My Service Requests', component: ServicerequestPage },
+                  { myIcon:'fa fa-cubes', title: 'Jobs', component: JobboardPage },
+                  { myIcon:'fa fa-th-list', title: 'Applied Jobs', component: AppliedJobsPage },
+                  { myIcon:'fa fa-recycle', title: 'Communities', component: CommunitylistPage },
+                  { myIcon:'fa fa-sitemap', title: 'Connections', component: ConnectionsPage },
+                  { myIcon:'fa fa-envelope', title: 'Messages', component: MessagesPage },
+                  { myIcon:'fa fa-rss', title: 'Blogs', component: BlogsPage },
+                  { myIcon:'fa fa-newspaper-o', title: 'News', component: NewsPage },
+                  { myIcon:'fa fa-random', title: 'Events', component: EventsPage },
+                  { myIcon:'fa fa-external-link', title: 'Useful External Links', component: ExternallinksPage },
+                  { myIcon:'fa fa-address-book-o', title: 'Profile', component: MyProfilePage },
+                  { myIcon:'fa fa-unlock-alt', title: 'Change Password', component: ChangePasswordPage },
+                  { myIcon:'fa fa-cog', title: 'Settings', component: SettingsPage },
+                  { myIcon:'fa fa-sign-out', title: 'Logout', component: LogoutPage },
 
-        this.subscription = userLogin.userEntered$.subscribe(
-            userData => {
-                          console.log(userData,this.pages.length);
-                          this.user_logged = userData;
-                          if((this.user_logged == 'sponsor')&&(this.pages.length == 15)){
-            this.pages.splice(1, 0, { myIcon:'fa fa-users', title: 'Manage Dependents', component: ManagePage });
-           }else if((this.user_logged == 'elder')&&(this.pages.length == 16)){
-             for(let i=0; i < this.pages.length;i++){
-               if(this.pages[i].title == 'Manage Dependents'){
-                 this.pages.splice(i, 1);
-               }
-             }             
-           }
-                        });                   
+                      );
     
     this.initializeApp();
     // alert("switch-ON GPS to get current Location.");
@@ -241,6 +241,17 @@ export class MyApp {
         position: 'top'
         });
    toast.present();
+  }
+  enableUserTypeMenu(userType) {
+  if(userType=='sponsor'){
+  this.menu.enable(true, 'sponsor');
+  this.menu.enable(false, 'elder');
+  }
+  else
+  {
+  this.menu.enable(true, 'elder');
+  this.menu.enable(false, 'sponsor');
+  }
   }
   initializeApp() {
 
@@ -400,5 +411,3 @@ export class MyApp {
   }
 }
 
-
-// 13.0827° N, 80.2707° E

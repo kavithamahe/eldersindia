@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ModalController, NavController, NavParams,AlertController,LoadingController,Platform,ToastController,PopoverController } from 'ionic-angular';
+import { ModalController,ActionSheetController , NavController, NavParams,AlertController,LoadingController,Platform,ToastController,PopoverController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
@@ -55,7 +55,7 @@ export class CommunityPage {
     user_id:any= 0;
     authForm:FormGroup;
     message:any='';
-  constructor(public platform: Platform,public modal: ModalController, public formBuilder: FormBuilder,public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices,public popoverCtrl: PopoverController ) {
+  constructor(public platform: Platform, public actionsheetCtrl: ActionSheetController,public modal: ModalController, public formBuilder: FormBuilder,public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices,public popoverCtrl: PopoverController ) {
     this.nav=nav;
 
     this.storage.ready().then(() => {
@@ -93,7 +93,24 @@ onChange(event: any, input: any ,id) {
       console.log(data);
     })
   }
-
+ openMenu(id) {
+    let actionSheet = this.actionsheetCtrl.create({
+      title: '',
+      cssClass: 'action-sheets-basic-page',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'trash' : null,
+          handler: () => {
+            this.deletePost(id);
+          }
+        },
+      
+      ]
+    });
+    actionSheet.present();
+  }
 
    openUrl(metalink_url) {
 console.log("URL is ",metalink_url);
@@ -182,7 +199,7 @@ toggleContent(){
       this.members =  users.result.info.members;
       this.show_member = this.members.length;
       console.log(this.show_member);
-      if(this.show_member>4){
+      if(this.show_member>7){
         this.viewMore=true;
       }
       
@@ -280,11 +297,13 @@ metaLink:any = "";
        // if(this.urlArr.length > 0){
        //                 this.metalink = this.urlArr[0];
        //            }
+        if(this.message != ""){
        
        this.communityServices.postCommunity(id,this.base64Image,this.authForm.value.videoUrl,this.message,this.metaLink).subscribe(datas =>{
        this.showToast(datas.result);
        this.communityList(id);
        this.post="";
+       this.message="";
        this.metaLink="";
        this.authForm.value.videoUrl="";
        this.base64Image="";
@@ -296,6 +315,10 @@ metaLink:any = "";
       this.communityServices.showErrorToast(err);
     })
      }
+     else{
+     this.showToast("Enter message and Post");
+   }
+   }
      loader.dismiss();
   }
 

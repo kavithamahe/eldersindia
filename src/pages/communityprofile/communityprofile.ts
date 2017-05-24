@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, ViewController,AlertController,LoadingController,PopoverController,ToastController } from 'ionic-angular';
+import { NavController, NavParams,ActionSheetController, ModalController, ViewController,AlertController,LoadingController,PopoverController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -63,7 +63,7 @@ export class CommunityprofilePage {
     authForm:FormGroup;
     submitAttempt:any;
     message:any;
-  constructor(public nav: NavController,public platform: Platform, public storage:Storage,public formBuilder: FormBuilder,public popoverCtrl: PopoverController, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+  constructor(public nav: NavController, public actionsheetCtrl: ActionSheetController,public platform: Platform, public storage:Storage,public formBuilder: FormBuilder,public popoverCtrl: PopoverController, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
         this.isAndroid = platform.is('android');
       this.nav=nav;
       this.profile_uid=navParams.get("profile_uid");
@@ -111,7 +111,24 @@ export class CommunityprofilePage {
       loader.dismiss();
   }
 
-
+ openMenu(id) {
+    let actionSheet = this.actionsheetCtrl.create({
+      title: '',
+      cssClass: 'action-sheets-basic-page',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'trash' : null,
+          handler: () => {
+            this.deletePost(id);
+          }
+        },
+      
+      ]
+    });
+    actionSheet.present();
+  }
   showComment(post){
     let commentModal = this.modalCtrl.create(CommunitycommentsPage, { posts: post });
    commentModal.present();
@@ -366,10 +383,12 @@ metaLink:any = "";
     this.message=this.urlifyMessage(this.post);
     this.urlifyLink(this.post);
   }
+   if(this.message != ""){
      this.communityServices.addUserPosts(id,this.base64Image,this.authForm.value.videoUrl,this.message,this.metaLink).subscribe(datas =>{
      this.showToast(datas.result);
      this.profileCommunity(id);
      this.post="";
+     this.message="";
      this.metaLink="";
      this.base64Image="";
      this.videoUrl="";
@@ -381,6 +400,10 @@ metaLink:any = "";
     this.communityServices.showErrorToast(err);
   })
    }
+    else{
+     this.showToast("Enter message and Post");
+   }
+ }
      loader.dismiss();
   }
   
