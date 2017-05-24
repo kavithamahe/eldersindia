@@ -91,7 +91,7 @@ post_likes:any;
 
    this.communityServices.sendInlineLikes(comments_id).subscribe(data =>{
            // this.senddata=data.result.info.data;
-           //this.post_comments.push(data.result.info.data);
+           this.post_comments.push(data.result.info.data);
            this.showToast(data.result.info.message);
           
         },

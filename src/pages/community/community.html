@@ -148,12 +148,15 @@
 			          		</p>
 			        </ion-col>
 					<ion-col offset-50>
-						<button ion-button *ngIf="user.uid == user_id" (click)="deletePost(user.id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i>
-						</button>
-		        		<!-- <button ion-button color="dark" clear (click)="itemDetails()">
+						<!-- <button ion-button *ngIf="user.uid == user_id" (click)="deletePost(user.id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i>
+						</button> -->
+						<button ion-button color="dark" clear (click)="openMenu(user.id)">
 		          			<ion-icon  item-left name="arrow-dropdown"></ion-icon>
 		          		</button>
-	          		<div *ngIf(itemComments)>
+		        		<!-- <button ion-button color="dark" clear (click)="itemDetails()">
+		          			<ion-icon  item-left name="arrow-dropdown"></ion-icon>
+		          		</button> -->
+	          		<!-- <div *ngIf(itemComments)>
 	          			<button  ion-button full color="light" >Block</button>
 	          			<button  ion-button full color="light" >Report</button>
 	          		</div> -->

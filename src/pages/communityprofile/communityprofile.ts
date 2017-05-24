@@ -366,10 +366,12 @@ metaLink:any = "";
     this.message=this.urlifyMessage(this.post);
     this.urlifyLink(this.post);
   }
+   if(this.message != ""){
      this.communityServices.addUserPosts(id,this.base64Image,this.authForm.value.videoUrl,this.message,this.metaLink).subscribe(datas =>{
      this.showToast(datas.result);
      this.profileCommunity(id);
      this.post="";
+     this.message="";
      this.metaLink="";
      this.base64Image="";
      this.videoUrl="";
@@ -381,6 +383,10 @@ metaLink:any = "";
     this.communityServices.showErrorToast(err);
   })
    }
+    else{
+     this.showToast("Enter message and Post");
+   }
+ }
      loader.dismiss();
   }
   
