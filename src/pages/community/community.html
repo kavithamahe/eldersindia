@@ -47,7 +47,7 @@
 
     				</ion-item>
 					<div *ngFor="let member of members; let i=index" text-wrap>
-						<div *ngIf="i<= 6">
+						<div *ngIf="i<= 2">
 							<ion-item class="memb-list">
 								<ion-col>
 									<img (click)="membersProfile(member.uid)" [src]="imageUrl+member?.avatar" 
@@ -63,7 +63,8 @@
 					</div>
 				
 					<div  *ngIf(viewMore) style="float:left;">
-					<ion-badge (click)="showModel(members)" class="show-members">+{{show_member}} </ion-badge>
+					<ion-badge (click)="showModel(members)" class="show-members">+{{show_member}} 
+					</ion-badge>
 						
 					</div>
 
@@ -174,7 +175,7 @@
 	         	<ion-card-content class="video-updates" [hidden]="!user?.metalink_description">
 					<p (click)="openUrl(user.metalink_url)">{{user.metalink_description}}</p>
 	         	</ion-card-content>
-</div>
+			</div>
 	       	<div class="comment-liks">
 
 	      		<ion-row>
@@ -195,7 +196,14 @@
 				       <p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{user.comment_count}}+Comments</p>
 				      </button>
 				    </ion-col>
+<<<<<<< HEAD
 					
+=======
+					<ion-col>
+						<!-- <button ion-button *ngIf="user.uid == user_id" (click)="deletePost(user.id)" color="dark" clear><p class="liks-comments"><i class="fa fa-trash"></i></p>
+						</button> -->
+		      		</ion-col>
+>>>>>>> 713273065f0380f98c21334b15030403b390b4ed
 
 	          	</ion-row>
 			</div>
