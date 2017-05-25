@@ -21,7 +21,7 @@ showContactDetails = false;
 showServiceOffered = false;
 title:any;
   constructor(public storage:Storage, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams) {
-
+   console.log("this is service modal page");
   	this.vendorList = navParams.get("vendorList");
   	if(navParams.get("service") == "contact"){
   		this.showContactDetails = true;	

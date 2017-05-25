@@ -118,7 +118,7 @@ export class MyApp {
            this.userLogin.currentUser("sponsor");
          }
          this.storage.ready().then(() => {
-           this.storage.clear();
+         //  this.storage.clear();
          this.storage.set('id', loginuser['details']['id']);
          this.storage.set('name', loginuser['details']['name']);
          this.storage.set('email',loginuser['details']['email']);
@@ -266,8 +266,8 @@ export class MyApp {
           this.nav.pop();
         }else{
                 let confirmAlert = this.alertCtrl.create({
-                title: 'App Exit',
-                subTitle: "Are you sure to Exit app",
+              //  title: 'App Exit',
+                subTitle: "Are you sure you want to exit?",
                 buttons: [{
                   text: 'NO',
                   handler: () => {

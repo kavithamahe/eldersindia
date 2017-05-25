@@ -33,6 +33,7 @@ export class ModalContentPage {
 
   constructor(public modalCtrl: ModalController, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
+     console.log("this is modal page");
      console.log("modal content page",params.get("vendor"));
      let loading = this.loadingCtrl.create({content: 'Please wait...!'});
      loading.present();
@@ -41,7 +42,7 @@ export class ModalContentPage {
       this.vendor = this.params.get("vendor").name;
     }
      this.modalForm = formBuilder.group({
-        problem: ['',Validators.compose([Validators.minLength(5), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+        problem: ['',Validators.compose([Validators.minLength(5), Validators.required])],
         date: ['',Validators.compose([Validators.required])],
         time: ['',Validators.compose([Validators.required])],
         contact: ['',Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.pattern('[0-9]*'), Validators.required])],

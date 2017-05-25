@@ -78,5 +78,5 @@ submit() {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ForgotPasswordPage');
   }
-	
+  
 }

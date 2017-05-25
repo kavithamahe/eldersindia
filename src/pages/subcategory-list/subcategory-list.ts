@@ -6,6 +6,7 @@ import { ServiceInfoPage } from '../service-info/service-info';
 import { ModalContentPage } from '../modal-page/modal-page';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ServiceProvider } from '../../providers/service-provider';
+import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
 /*
   Generated class for the SubcategoryList page.
 
@@ -34,7 +35,9 @@ export class SubcategoryListPage {
   rate:any;
 	token:any;
   dependentLen:any=true;
+  scheduleModal:any='';
   constructor( public loadingCtrl: LoadingController, public providerService: ServiceProvider, public navCtrl: NavController, public altCtrl:AlertController, public navParams: NavParams,public toastCtrl: ToastController,public modalCtrl: ModalController, public mp:ModalContentPage, public storage:Storage) {
+    console.log("this is sub category list page");
       this.location_id = navParams.get("location_id");
       this.service_id = navParams.get("service").id;
       this.serviceTitle = navParams.get("service").name;   
@@ -114,7 +117,7 @@ loadSubcategoryList(subCategory_id,location_id){
     }else{
       this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists,vendor:vendorData});
     }
-    
+    this.scheduleModal=modalPage;
     this.modal.onDidDismiss(data =>{
       if(data == "dismiss"){
         console.log(" schedule request modal dismissed..!");
@@ -124,6 +127,10 @@ loadSubcategoryList(subCategory_id,location_id){
     })
     
     this.modal.present();
+    if(modalPage != "instant"){
+      console.log("test venkatesh");
+     // this.navCtrl.setRoot(ServicerequestPage);
+    }
   }
   public dashboardPage()
   {
@@ -139,6 +146,9 @@ loadSubcategoryList(subCategory_id,location_id){
           console.log("service request web service");
                  console.log(".......",data.result);
                  this.providerService.showToast(data.result);
+                  if(this.scheduleModal != "instant"){
+                 this.navCtrl.setRoot(ServicerequestPage);
+               }
                 },
         err =>{
                 this.providerService.showErrorToast(err);
