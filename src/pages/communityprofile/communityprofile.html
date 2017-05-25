@@ -161,7 +161,10 @@
 			          		</ion-card-content>
 						</ion-col>
 						<ion-col offset-50>
-			  				<button ion-button *ngIf="community.uid == my_id" (click)="deletePost(community.id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+			  			
+			  				<button ion-button color="dark" clear (click)="openMenu(community.id)">
+		          			<ion-icon  item-left name="arrow-dropdown"></ion-icon>
+		          		</button>
 	          			</ion-col>
 	       			</ion-row>
 	    		</ion-item>
@@ -235,6 +238,7 @@
 		</ion-list>
 	
 		<ion-list *ngSwitchCase="'connections'">
+		<ion-card *ngFor="let connection of allConnections">
 			<ion-row>
 			  	<ion-col>
 				  	<div>
@@ -243,7 +247,7 @@
 					</div>
 				</ion-col>
 			</ion-row>
-			<ion-card *ngFor="let connection of allConnections">
+			
 	   			<ion-row>
 		    		<ion-col width-20>
 		    			<ion-avatar item-left>

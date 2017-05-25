@@ -56,7 +56,7 @@ post_likes:any;
   
   showConfirm(DeleteId) {
     let confirm = this.alertCtrl.create({
-     title:'Confirm',
+     title:'',
      subTitle: 'comment will be deleted',
        buttons: [
         {
@@ -72,6 +72,26 @@ post_likes:any;
       ]
     });
     confirm.present();
+  }
+  showconfirmReply(comment_id,reply_id,post_id){
+    let confirm = this.alertCtrl.create({
+     title:'',
+     subTitle: 'comment will be deleted',
+       buttons: [
+        {
+          text: 'Cancel',
+         },
+        {
+          text: 'Ok',
+          handler: () => {
+          this.deleteReply(comment_id,reply_id,post_id);
+          
+          }
+        }
+      ]
+    });
+    confirm.present();
+    
   }
 
   showComments(event){
@@ -93,6 +113,14 @@ post_likes:any;
            // this.senddata=data.result.info.data;
            //this.post_comments.push(data.result.info.data);
            this.showToast(data.result.info.message);
+            for(let i=0; i<this.post_comments.length;i++){
+       if(this.post_comments[i].likes == comments_id){
+         
+         this.post_comments[i].likes.push(i,1);
+          console.log("index of comment: ",i);
+       }
+     }
+      
           
         },
     err =>{

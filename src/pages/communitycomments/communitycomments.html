@@ -4,37 +4,48 @@
       Comments
     </ion-title>
     <ion-buttons start>
-      <button ion-button  color="dark" clear (click)="dismiss()">
+      <button ion-button class="closed" clear (click)="dismiss()">
        <i class="fa fa-times-circle"  name="close"></i>
       </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content on-swipe-up="onSwipeUp()">
+<ion-content style="background:#F3F7FF;">
+
 			
 	<ion-list *ngFor="let comment of post_comments; let j=index" class="comm-posted">
+	<ion-card class="listed-comments">
      	<ion-item>
+		<ion-row>
+		<ion-col width-20>
 		   	<ion-avatar item-left>
   				<img (click)="profileImage(comment.uid)" 
 			    		[src]="imageUrl+comment?.profile_image"  
 			    		[hidden]="!comment?.profile_image" >
 		    </ion-avatar>
+			</ion-col>
+			<ion-col width-80>
 	    	<h2 class="cmmpost" (click)="profileImage(comment.uid)">{{comment.name_from}}</h2>
 			<p class="time-datem">{{comment.created_at}}</p>
+			</ion-col>
+			</ion-row>
 		</ion-item>
-		
-		
-	  	<ion-item>
-	    	<p item-text-wrap [innerHTML]="comment.comments | emojis"></p>
-	   	</ion-item>
+		<ion-card-content>
+			<p item-text-wrap class="feed-post" [innerHTML]="comment.comments | emojis"></p>
+	  	
+		</ion-card-content>
+		<br>
+		<div class="comment-liks">
 	   		<button ion-button clear *ngIf="comment.likes == 1" (click)="sendInlineLikes(comment.comments_id)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
-			<button ion-button clear *ngIf="comment.likes == 0 || comment.likes == null" 
-			(click)="sendInlineLikes(comment.comments_id)">Like</button>
-	 		<button *ngIf="comment.comment_reply.length == 0 && comment.uid_from == user_id" ion-button (click)="showConfirm(comment.comments_id,post_id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true">
+
+			<button ion-button clear *ngIf="comment.likes == 0 || comment.likes == null" (click)="sendInlineLikes(comment.comments_id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
+	 		<button *ngIf="comment.comment_reply.length == 0 && comment.uid_from == user_id" ion-button (click)="deleteComment(comment.comments_id,post_id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true">
+
 	 		</i></button>
   			<button  ion-button clear (click)="reply(j)"><i class="fa fa-reply" aria-hidden="true"></i></button>
 			<button *ngIf="comment.comment_reply[0] != null" ion-button item-right clear 
 			(click)="showComments(j)">view replies</button>
+			</div>
 		<div *ngIf="j==showReply">
 			<ion-list *ngFor="let reply of comment.comment_reply; let i=index">
 				<ion-col offset-10>
@@ -47,7 +58,8 @@
 					  	<p class="tim e-datem">{{reply.created_at}}</p>
 					</ion-item>
 				   	<button ion-button clear (click)="sendInlineLikes(comment.comments_id)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
-				      	<p item-text-wrap [innerHTML]="reply.comments_replay | emojis"></p>	
+				      	<ion-item item-text-wrap [innerHTML]="reply.comments_replay | emojis">
+				      	</ion-item>	
 						<button ion-button *ngIf="reply.uid_from == user_id" (click)="deleteReply(reply.com_post_cmt_id,reply.comments_replay_id,post_id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
 						<button  ion-button clear (click)="replyComments(i)">
 						<i class="fa fa-reply" aria-hidden="true"></i></button>
@@ -61,7 +73,7 @@
 					<div class="send-req">
 						<button (click)="sendReply(reply.uid_to,reply.com_post_cmt_id)" ion-button class="secon-sdms" color="secondary" round><i class="fa fa-paper-plane-o" aria-hidden="true"></i> </button>
 					</div>
-			   	</div><hr>
+			   	</div>
 			</ion-list>
 		</div>
 		<div *ngIf="j==Reply">
@@ -74,12 +86,13 @@
 				</i></button>
 			</div>
 		</div>
+		</ion-card>
 	</ion-list>
 		<ion-row>
 			<ion-textarea [(ngModel)]="post_comment" style=" margin:0px !important;-webkit-user-select:all !important;" placeholder="Enter Comments"></ion-textarea>             
 			<p class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker1(post_id)"></p>		
         </ion-row>
 		<div class="send-req">
-			<button ion-button (click)="sendComment(post_id,'post')" class="secon-sdms" color="secondary" round><i class="fa fa-paper-plane-o" aria-hidden="true"></i> </button>
+			<button ion-button (click)="sendComment(post_id,'post')" class="secon-sdms" color="secondary" round>  <ion-icon ios="ios-send" md="md-send"></ion-icon></button>
 		</div>
 </ion-content>
