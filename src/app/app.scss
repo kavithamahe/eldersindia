@@ -349,7 +349,8 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .wel-comemem											    {color:#424a95 !important;font-family: "Open Sans",sans-serif;font-size:18px !important;margin: 0; padding:10px 0px 0px 10px;}
 .likecolor													{color:#1e90ff !important; font-size:17px;}
 .time-datem													{color:#949494 !important; font-size:11px !important;}
-.label-opc .item-md .item-inner .label-md					{ margin:0px !important; padding-top:0px;text-indent:0px; padding-left:8px; color:#1d6ab2; font-size:20px; line-height:25px; font-weight:400;}
+.label-opc .item-md .item-inner .label-md p					{ margin:0px !important; padding-top:0px;text-indent:0px; padding-left:8px; color:#1d6ab2; font-size:20px; line-height:25px; font-weight:400;}
+.label-opc .item-md .item-inner .label-md					{ margin:0px !important;}
 .label-opc .item-md{ background:none;}
 .label-opc {background:rgba(255, 255, 255, 0.73);bottom:0px;color:#1d6ab2!important;float:left;font-size:20px !important; height:50px;position:absolute;width:100%;}
 .edit-ld													{}
@@ -967,8 +968,8 @@ white-space: normal;}
 .body-clr												    {background:#fff;}
 .popup-mds > .ion-label									    {font-size:15px; text-align:center;}
 .job-view .item-md .item-inner .input-wrapper .label-md h2{ font-size:17px !important;}
-.liks-comments{font-size:14px !important; color:#83858b !important;}
-.liks-comments i{color:#9c9ea4 !important;}
+.liks-comments{font-size:15px !important; color:#404996 !important;}
+.liks-comments i{color:#666 !important;}
 .comment-liks{ background:#f7f7f7; border-top:1px solid #efefef;}
 .item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#424a95;text-transform:capitalize; margin-top:0px !important; font-weight:400;}
 .item-inner > .input-wrapper > .label-md				    {color:#777;font-size:16px; padding-right:0px !important; }
