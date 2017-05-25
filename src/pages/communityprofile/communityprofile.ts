@@ -20,7 +20,8 @@ import { CommunityServices } from '../../providers/community-services';
 
 @Component({
   selector: 'page-communityprofile',
-  templateUrl: 'communityprofile.html'
+  templateUrl: 'communityprofile.html',
+  providers : [CommunityServices]
 })
 export class CommunityprofilePage {
     userType:any;

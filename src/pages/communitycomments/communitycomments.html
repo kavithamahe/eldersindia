@@ -37,8 +37,10 @@
 		<br>
 		<div class="comment-liks">
 	   		<button ion-button clear *ngIf="comment.likes == 1" (click)="sendInlineLikes(comment.comments_id)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
-			<button ion-button clear *ngIf="comment.likes == 0 || comment.likes == null" (click)="sendInlineLikes(comment.comments_id)"><i class="fa fa-thumbs-o-up"></i> Like</button>
-	 		<button *ngIf="comment.comment_reply.length == 0 && comment.uid_from == user_id" ion-button (click)="showConfirm(comment.comments_id,post_id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true">
+
+			<button ion-button clear *ngIf="comment.likes == 0 || comment.likes == null" (click)="sendInlineLikes(comment.comments_id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
+	 		<button *ngIf="comment.comment_reply.length == 0 && comment.uid_from == user_id" ion-button (click)="deleteComment(comment.comments_id,post_id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true">
+
 	 		</i></button>
   			<button  ion-button clear (click)="reply(j)"><i class="fa fa-reply" aria-hidden="true"></i></button>
 			<button *ngIf="comment.comment_reply[0] != null" ion-button item-right clear 
