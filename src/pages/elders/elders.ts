@@ -483,6 +483,8 @@ imageURL:any;
           else
           {
            this.submitAttempt = false;
+           let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+            loader.present();
             this.communityServices.editSubmit(editedData).subscribe(elders =>{
                     // console.log(elders); 
                     let msg='';
@@ -502,9 +504,11 @@ imageURL:any;
              err =>{
                     this.communityServices.showErrorToast(err);
               })
+             loader.dismiss();
             }
           }else{
-
+            let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+            loader.present();
               this.providerService.webServiceCall(`myaccountEdit`,profileEditData)
                   .subscribe(data=>{
                     this.providerService.showToast(data.result);
@@ -514,6 +518,7 @@ imageURL:any;
                     this.providerService.showErrorToast(err);
                     console.log(err);
                   })
+                   loader.dismiss();
        
           }
         
@@ -528,6 +533,8 @@ imageURL:any;
     }
     else{
       this.submitAttempt = false;
+      let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+    loader.present();
        this.communityServices.addSubmit(dependentData).subscribe(
            elders=>{
               let msg='';
@@ -549,7 +556,7 @@ imageURL:any;
            err =>{
               this.communityServices.showErrorToast(err);
               })
-     // this.nav.pop();
+    loader.dismiss();
      }
     }
 
