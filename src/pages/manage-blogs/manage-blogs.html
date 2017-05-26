@@ -63,6 +63,9 @@
   </ion-row>
   </ion-card-content>
 </ion-card>
+<ion-item *ngIf="manageblogsLists.length<=0">
+<p>No Record Found</p>
+</ion-item>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
