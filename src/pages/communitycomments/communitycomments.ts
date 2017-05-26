@@ -105,14 +105,51 @@ post_likes:any;
       this.showReply=event;
     }
  }
- sendInlineLikes(comments_id){
+ sendInlineLikescmt(id){
+     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+    loader.present();
+
+   this.communityServices.sendInlineLikes(id).subscribe(data =>{
+           
+           this.showToast(data.result.info.message);
+            for(let i=0; i<this.post_comments.length;i++){
+       if(this.post_comments[i].comments_id == id){
+         
+         this.post_comments[i].likes = data.result.info.data;
+          console.log("index of comment: ",i);
+       }
+     }
+      
+       },
+    err =>{
+    
+    this.communityServices.showErrorToast(err);
+  })
+    
+    loader.dismiss();
+ }
+ sendInlineLikes(comments_id,reply_id,post_id){
      let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
 
    this.communityServices.sendInlineLikes(comments_id).subscribe(data =>{
-           // this.senddata=data.result.info.data;
-           //this.post_comments.push(data.result.info.data);
+           
            this.showToast(data.result.info.message);
+            for(let i=0; i<this.post_comments.length;i++)
+                {
+                    if(this.post_comments[i].comments_id == comments_id)
+                    {
+                        for(let j=0; j<this.post_comments[i].comment_reply.length;j++)
+                        {
+                            if(this.post_comments[i].comment_reply[j].comments_replay_id == reply_id)
+                            {
+                               this.post_comments[i].comment_reply[j].likes = data.result.info.data
+                            }
+                        }
+                        
+                      console.log("index of comment: ",i);
+                    }
+                 }
        },
     err =>{
     
