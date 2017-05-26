@@ -180,7 +180,7 @@
 	       	<div class="comment-liks">
 
 	      		<ion-row>
-	        	    <ion-col>
+	        	    <ion-col style="padding:0px !important;">
 				    <button ion-button clear small *ngIf=(user.likes.emoji)
 						[innerHTML]="user.likes.emoji | emojis" 
 						(click)="emojiPicker(user.id)">
@@ -191,7 +191,7 @@
 
 						</button>
 				    </ion-col>
-				    <ion-col>
+				    <ion-col style="padding:0px !important;">
 				      <button ion-button icon-left clear small (click)="showComment(user)">
   
 				       <p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{user.comment_count}}+Comments</p>
