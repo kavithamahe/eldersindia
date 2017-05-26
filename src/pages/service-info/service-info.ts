@@ -52,7 +52,7 @@ website:any;
 // @ViewChild('ghbslides') ghbslides: any;
 
   constructor(public modalCtrl: ModalController, public platform: Platform, public formBuilder: FormBuilder,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public navCtrl: NavController, public navParams: NavParams, public storage:Storage) {
-       
+       console.log("this is service info page");
      // this.url = this.providerService.getUrl();
       this.subCategoryId = navParams.get("subCategoryId");
       this.locationId = navParams.get("location_id");

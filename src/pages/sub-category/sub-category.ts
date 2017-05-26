@@ -17,38 +17,44 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 })
 export class SubCategoryPage {
 
-serviceLocation : string ="";
+serviceLocation : any ="";
 subcategories:any =[];
 locations:any;
 emptyRecord:any;
 subCategoryId:any;
 subCategoryTitle:any;
 
-
 		// subcategories: Array<{title: string, lists: any, color: string}>;
 
   constructor(public storage:Storage, public loadingCtrl: LoadingController, public navCtrl: NavController, public navPara: NavParams,public providerService: ServiceProvider) {
     // this.loadLocations();
+    console.log("this is sub category page");
     this.subCategoryTitle = navPara.get("subcategory").service;
     this.locations = navPara.get("locations");
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
-    this.storage.ready().then(() => {
+    loading.present();
+    this.storage.ready().then(() => { 
+     storage.get('service_location').then((service_location) => { 
+       this.serviceLocation=service_location; 
+       console.log("current location"+this.serviceLocation);        
+          //this.serviceLocation = my_location;
+          this.loadSubCategory(this.serviceLocation);  
+     });
+
+    });
+    /*this.storage.ready().then(() => {
       this.storage.get('service_location').then((my_location) => {
         console.log("this.serviceLocation1",my_location);
           for(let i=0; i<this.locations.length;i++){
             if(this.locations[i].location == my_location || this.locations[i].id == my_location){
               this.serviceLocation = my_location;
               console.log("this.serviceLocation2",this.serviceLocation);
-            }
-            // else{
-            //   this.serviceLocation = "";
-            //   console.log("this.serviceLocation3",this.serviceLocation);
-            // }
-          }          
-          this.loadSubCategory(this.serviceLocation);          
+            }            
+          } 
+                  
       });
-    });
-    loading.present();
+    });*/
+    
     loading.dismiss();
 
   }	
@@ -81,13 +87,15 @@ loadSubCategory(location){
 locationChanged(){
 console.log("this.serviceLocation4",this.serviceLocation);
   let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+  loading.present();
     this.storage.ready().then(() => {
       this.storage.set('service_location',this.serviceLocation);
+      console.log("change location"+this.serviceLocation);
       // let locationBasedData = {"serviceOfferedId":this.subCategoryId,"locationId":this.serviceLocation};
       this.subcategories="";
       this.loadSubCategory(this.serviceLocation);
     });
-    loading.present();
+    
     loading.dismiss();
   }
 

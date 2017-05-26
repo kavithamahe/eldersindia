@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController ,LoadingController, AlertController,ToastController, NavController, NavParams, PopoverController  } from 'ionic-angular';
+import { ViewController,ActionSheetController,Platform,LoadingController, AlertController,ToastController, NavController, NavParams, PopoverController  } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { CommunityprofilePage } from '../communityprofile/communityprofile';
@@ -33,7 +33,7 @@ user_id:any;
 senddata:any;
 post_likes:any;
 
-  constructor(public loadingCtrl: LoadingController, public viewCtrl: ViewController, public storage: Storage, public toastCtrl: ToastController, public alertCtrl:AlertController, public communityServices: CommunityServices, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
+  constructor(public platform: Platform,public loadingCtrl: LoadingController,public actionsheetCtrl: ActionSheetController, public viewCtrl: ViewController, public storage: Storage, public toastCtrl: ToastController, public alertCtrl:AlertController, public communityServices: CommunityServices, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
   	this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
@@ -53,46 +53,46 @@ post_likes:any;
 
     this.navCtrl.push(CommunityprofilePage,{profile_uid:id});
   }
+  myImage(id){
+    this.profileImage(id);
+  }
+   openMenu(id) {
+    let actionSheet = this.actionsheetCtrl.create({
+      title: '',
+      cssClass: 'action-sheets-basic-page',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'trash' : null,
+          handler: () => {
+           this.deleteComment(id);
+          }
+        },
+      
+      ]
+    });
+    actionSheet.present();
+  }
+  openReplyMenu(comment_id,reply_id,post_id){
+    let actionSheet = this.actionsheetCtrl.create({
+      title: '',
+      cssClass: 'action-sheets-basic-page',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'trash' : null,
+          handler: () => {
+           this.deleteReply(comment_id,reply_id,post_id);
+          }
+        },
+      
+      ]
+    });
+    actionSheet.present();
+  }
   
-  showConfirm(DeleteId) {
-    let confirm = this.alertCtrl.create({
-     title:'',
-     subTitle: 'comment will be deleted',
-       buttons: [
-        {
-          text: 'Cancel',
-         },
-        {
-          text: 'Ok',
-          handler: () => {
-           this.deleteComment(DeleteId);
-          
-          }
-        }
-      ]
-    });
-    confirm.present();
-  }
-  showconfirmReply(comment_id,reply_id,post_id){
-    let confirm = this.alertCtrl.create({
-     title:'',
-     subTitle: 'comment will be deleted',
-       buttons: [
-        {
-          text: 'Cancel',
-         },
-        {
-          text: 'Ok',
-          handler: () => {
-          this.deleteReply(comment_id,reply_id,post_id);
-          
-          }
-        }
-      ]
-    });
-    confirm.present();
-    
-  }
 
   showComments(event){
     this.reply_comment="";
@@ -105,24 +105,52 @@ post_likes:any;
       this.showReply=event;
     }
  }
- sendInlineLikes(comments_id){
+ sendInlineLikescmt(id){
      let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
     loader.present();
 
-   this.communityServices.sendInlineLikes(comments_id).subscribe(data =>{
-           // this.senddata=data.result.info.data;
-           //this.post_comments.push(data.result.info.data);
+   this.communityServices.sendInlineLikes(id).subscribe(data =>{
+           
            this.showToast(data.result.info.message);
             for(let i=0; i<this.post_comments.length;i++){
-       if(this.post_comments[i].likes == comments_id){
+       if(this.post_comments[i].comments_id == id){
          
-         this.post_comments[i].likes.push(i,1);
+         this.post_comments[i].likes = data.result.info.data;
           console.log("index of comment: ",i);
        }
      }
       
-          
-        },
+       },
+    err =>{
+    
+    this.communityServices.showErrorToast(err);
+  })
+    
+    loader.dismiss();
+ }
+ sendInlineLikes(comments_id,reply_id,post_id){
+     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+    loader.present();
+
+   this.communityServices.sendInlineLikes(comments_id).subscribe(data =>{
+           
+           this.showToast(data.result.info.message);
+            for(let i=0; i<this.post_comments.length;i++)
+                {
+                    if(this.post_comments[i].comments_id == comments_id)
+                    {
+                        for(let j=0; j<this.post_comments[i].comment_reply.length;j++)
+                        {
+                            if(this.post_comments[i].comment_reply[j].comments_replay_id == reply_id)
+                            {
+                               this.post_comments[i].comment_reply[j].likes = data.result.info.data
+                            }
+                        }
+                        
+                      console.log("index of comment: ",i);
+                    }
+                 }
+       },
     err =>{
     
     this.communityServices.showErrorToast(err);

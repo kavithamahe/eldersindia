@@ -49,7 +49,8 @@ sponser_id:any;
   elder_name:any="";
   elder_service:any="";
   elder_number:any="";
-  elder_dob:any="";
+
+  elder_dob:any="1977-01-01";
   elder_address:any="";
   elder_location:any="";
   emergency_numbers:any;
@@ -106,8 +107,6 @@ skill_data:any;
       storage.get('token').then((token) => { this.token=token; 
         
         this.functionality=navParams.get("fuctionality");
-
-      console.log(this.functionality+'fffffffffff');
       if(this.functionality == 'edit'){
           this.title = "Edit Elder Details"
           if(navParams.get("editData")!= null){
@@ -484,18 +483,20 @@ imageURL:any;
           else
           {
            this.submitAttempt = false;
+           let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+            loader.present();
             this.communityServices.editSubmit(editedData).subscribe(elders =>{
                     // console.log(elders); 
                     let msg='';
               if(elders.result.updated!='')
               {
                 this.nav.setRoot(ManagePage);
-                msg="Elder Information updated successfully";
+                msg="Elder details updated successfully.";
                 this.communityServices.showToast(msg); 
               } 
               else 
               {
-               msg="Can not edit elder information";
+               msg="Elder details can not updated.";
                this.communityServices.showToast(msg); 
               } 
                       
@@ -503,9 +504,11 @@ imageURL:any;
              err =>{
                     this.communityServices.showErrorToast(err);
               })
+             loader.dismiss();
             }
           }else{
-
+            let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+            loader.present();
               this.providerService.webServiceCall(`myaccountEdit`,profileEditData)
                   .subscribe(data=>{
                     this.providerService.showToast(data.result);
@@ -515,6 +518,7 @@ imageURL:any;
                     this.providerService.showErrorToast(err);
                     console.log(err);
                   })
+                   loader.dismiss();
        
           }
         
@@ -529,31 +533,33 @@ imageURL:any;
     }
     else{
       this.submitAttempt = false;
+      let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+    loader.present();
        this.communityServices.addSubmit(dependentData).subscribe(
            elders=>{
               let msg='';
               if(elders.result.added!='')
               {
                  this.nav.setRoot(ManagePage);
-                msg="Elder Information added Successfully";
+                msg="Elder details added Successfully";
               }
               else if(elders.result.exist!='')
               {
-                msg="Elder email id already exits";
+                msg="Elder email id already exits.";
               } 
               else
               {
-               msg="Can not added elder information";
+               msg="Elder details can not added.";
               } 
                this.communityServices.showToast(msg);
               },
            err =>{
               this.communityServices.showErrorToast(err);
               })
-     // this.nav.pop();
+    loader.dismiss();
      }
     }
-    //this.communityServices.showToast("Successfully Added" );
+
   }
     
     if(this.functionality =="profileEdit")
