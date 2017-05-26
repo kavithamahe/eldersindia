@@ -19,6 +19,7 @@ export class SubCategoryServicePage {
 	subcategory:any;
 	locationId:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    console.log("this is sub category service page");
   	this.subcategory = navParams.get("sub_service");
   	this.locationId = navParams.get("location_id");
 
