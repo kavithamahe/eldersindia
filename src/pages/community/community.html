@@ -20,15 +20,8 @@
 			<img [src]="imageUrl+communityDetailData?.logo"  
 				[hidden]="!communityDetailData?.logo">
             <strong class="wel-comemem">Welcome to {{communityDetailData?.community_name}}</strong>
-
-            <em  style="" *ngIf(!show_description)>{{communityDetailData?.description | words : 50 : '...'}}</em>
-            <!-- <button (click)="toggleContent()">view more</button></em>
-
-            <em  style="" *ngIf(show_description)>{{communityDetailData?.description}}
-              <button (click)="toggleContent()">view less</button> 
-             </em> -->
+			<em  style="" *ngIf(!show_description)>{{communityDetailData?.description | words : 50 : '...'}}</em>
         </p>
-					
 		<div class="decoration hide-if-responsive"></div>
 	</div>
   	<div  *ngIf="userType == 'sponsor'" class="memberareas">
@@ -40,39 +33,27 @@
 					</div>
 				</ion-col>
 			</ion-row>
-	
-    				<ion-item class="mem-title">
-      			
-      					<p><i class="fa fa-user-circle-o"></i> Members</p>
-
-    				</ion-item>
-					<div *ngFor="let member of members; let i=index" text-wrap>
-						<div *ngIf="i<= 2">
-							<ion-item class="memb-list">
-								<ion-col>
-									<img (click)="membersProfile(member.uid)" [src]="imageUrl+member?.avatar" 
-											[hidden]="!member?.avatar" width="100" height="52" />
-											<small class="mem-name">{{member.name | words :1 : '....'}}</small>
-								</ion-col>
-							
-								
-							</ion-item>
-							
-						</div>
-						
+			<ion-item class="mem-title">
+      			<p><i class="fa fa-user-circle-o"></i>Members</p>
+			</ion-item>
+				<div *ngFor="let member of members; let i=index" text-wrap>
+					<div *ngIf="i<= 2">
+						<ion-item class="memb-list">
+							<ion-col>
+								<img (click)="membersProfile(member.uid)" 
+								[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar" width="100" height="52" />
+								<small class="mem-name">{{member.name | words :1 : '....'}}</small>
+							</ion-col>
+						</ion-item>
 					</div>
-				
-					<div  *ngIf(viewMore) style="float:left;">
+				</div>
+				<div  *ngIf(viewMore) style="float:left;">
 					<ion-badge (click)="showModel(members)" class="show-members">+{{show_member}} 
 					</ion-badge>
-						
-					</div>
-
-
-					<ion-item  *ngIf="!show_member">
-						<p style=" color:red; font-size:15px; font-weight:400;">No Members Joined Yet</p>
-					</ion-item>
-			
+				</div>
+				<ion-item  *ngIf="!show_member">
+					<p style=" color:red; font-size:15px; font-weight:400;">No Members Joined Yet</p>
+				</ion-item>
 		</ion-item>
 	</div>
 
@@ -81,10 +62,8 @@
 			<div style="padding:0px !important;">
 				<ion-textarea style="-webkit-user-select:all !important;" [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
 				</ion-textarea>
-				
 			</div>
-			
-		    <div style="padding:0px !important;">
+			<div style="padding:0px !important;">
 		    	<ion-row>
 					<ion-col>
 						<button ion-button (click)="accessGallery()" icon-only class="video">
@@ -99,36 +78,29 @@
 							</button>
 					</ion-col>
 				</ion-row> 
-	
 				<div *ngIf(addVideo) class="post-urls">
-				<form [formGroup]="authForm">
-					<ion-row>
-						<ion-col>
-						
+					<form [formGroup]="authForm">
+						<ion-row>
+							<ion-col>
 								<ion-item>
 									<ion-input type="url" placeholder="Enter Video Url..."  formControlName="videoUrl"
 		            					[class.invalid]="!authForm.controls.videoUrl.valid && (authForm.controls.videoUrl.dirty )">
 									</ion-input>
-							
-                                </ion-item>
-									<small style=" float:left;">( Youtube,Dailymotion,Vimeo,Wine)</small>
+								</ion-item>
+									<small style=" float:left;">( Youtube,Dailymotion,Vimeo,Wine)
+									</small>
 								<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
 	                				<p style="color:red" class="valid">Please enter valid video url</p>
            						</div>
-						
-						</ion-col>
-					</ion-row>
-			
+							</ion-col>
+						</ion-row>
 					</form>
 				</div>
 		   	</div>
-					
-		 
 	</div>
 	
 	<ion-list *ngFor="let user of users; let i=index">	
-
-	<ion-card class="listed-comments">
+		<ion-card class="listed-comments">
  			<ion-item>
 	      		<ion-row>
 	      			<ion-col width-20>
@@ -141,24 +113,18 @@
 			          	<p class="time-datem"><i class="fa fa-calendar-o"></i> {{user.created_at}}
 			          		</p>
 			        </ion-col>
-
 					<ion-col width-20>
-					
 						<button ion-button color="dark" clear (click)="openMenu(user.id)">
 		          			<i class="fa fa-angle-down"></i>
 		          		</button>
-
 	          		</ion-col>
-
-	       		</ion-row>
+				</ion-row>
 	    	</ion-item>
 			<div>
 	      		<ion-card-content [hidden]="!user?.post_message">
 		          	<p item-text-wrap class="feed-post" [innerHTML]="user.post_message">
 		          	<a href=""></a>{{user.post_message}}</p>
-		        </ion-card-content>
-				
-				<br>
+		        </ion-card-content><br>
 		        <ion-card-content [hidden]="!user?.post_image">
 		          	<img  [src]="imageUrl+user?.post_image">
 	       		</ion-card-content>
@@ -178,31 +144,24 @@
 	         	</ion-card-content>
 			</div>
 	       	<div class="comment-liks">
-
-	      		<ion-row>
+				<ion-row>
 	        	    <ion-col>
-				    <button ion-button clear small *ngIf=(user.likes.emoji)
-						[innerHTML]="user.likes.emoji | emojis" 
-						(click)="emojiPicker(user.id)">
-					</button>
-				      <button *ngIf=(!(user.likes.emoji)) ion-button  clear small (click)="emojiPicker(user.id)">
-
-						<p class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp; {{user.likecount}}Likes</p>
-
+					    <button ion-button clear small *ngIf=(user.likes.emoji)
+							[innerHTML]="user.likes.emoji | emojis" 
+							(click)="emojiPicker(user.id)">
+						</button>
+				      	<button *ngIf=(!(user.likes.emoji)) ion-button  clear small (click)="emojiPicker(user.id)">
+					  	<p class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp; {{user.likecount}}Likes</p>
 						</button>
 				    </ion-col>
 				    <ion-col>
 				      <button ion-button icon-left clear small (click)="showComment(user)">
-  
-				       <p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{user.comment_count}}+Comments</p>
+  						<p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{user.comment_count}}+Comments</p>
 				      </button>
 				    </ion-col>
-
-
-	          	</ion-row>
+				</ion-row>
 			</div>
-
-	  </ion-card>    		
+		</ion-card>    		
 	</ion-list>
 
  	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">

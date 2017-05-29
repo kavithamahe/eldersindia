@@ -39,7 +39,6 @@ post_likes:any;
       storage.get('token').then((token) => { this.token=token; 
       this.posts = navParams.get("posts");
         this.post_comments = this.posts.comments;
-        //this.comment_reply =  this.posts.comments.comment_reply;
         this.post_likes = this.posts.comments.likes;
         this.post_id = this.posts.id;
         this.post_profile_id = this.posts.profile_id;
@@ -116,7 +115,6 @@ post_likes:any;
        if(this.post_comments[i].comments_id == id){
          
          this.post_comments[i].likes = data.result.info.data;
-          console.log("index of comment: ",i);
        }
      }
       
@@ -274,11 +272,9 @@ sendComment(postID){
      this.communityServices.sendReply(uid_from,comments_id,this.reply_comment).subscribe(datas =>{
      this.showToast(datas.result.info.message);
      this.reply_comment="";
-     // this.communityList(this.community_id);
      for(let i=0; i<this.post_comments.length;i++){
      	if(this.post_comments[i].comments_id == comments_id){
      		console.log("index of comment: ",i);
-     		// this.post_comments[i].comments=[];
      		let list = datas.result.info.list;
      		console.log(list);
      		this.post_comments[i].comment_reply.push({

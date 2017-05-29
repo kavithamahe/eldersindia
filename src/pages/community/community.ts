@@ -294,9 +294,6 @@ metaLink:any = "";
        this.message=this.urlifyMessage(this.post);
        this.urlifyLink(this.post);
        }
-       // if(this.urlArr.length > 0){
-       //                 this.metalink = this.urlArr[0];
-       //            }
         if(this.message != ""){
        
        this.communityServices.postCommunity(id,this.base64Image,this.authForm.value.videoUrl,this.message,this.metaLink).subscribe(datas =>{
@@ -327,12 +324,9 @@ metaLink:any = "";
             var urlRegex = /(https?:\/\/[^\s]+)/g;
 
             return text.replace(urlRegex, (url)=> {
-              // return "";
                 return '<a href="' + url + '" target="_blank">' + url + '</a>';
             })
           }
-
-         // urlArr = [];
          urlifyLink(text) {
             var urlRegex = /(https?:\/\/[^\s]+)/g;
             var i=0;
