@@ -331,13 +331,13 @@ span.mails-cont p 											{float:left; color:#858D9B; font-size:15px;}
 page-service-info .service_request							{border:none !important;}
 ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .segment-md .segment-button									{background:none; color:#000; border-bottom:none;font-size:16px;text-transform:capitalize; border-left:1px solid #888aef !important; height:35px; line-height:35px; }
-.connection-page											{margin:0px !important; font-size:15px !important; font-weight:400 !important; color:#777; }
-.connection-pages											{color:#666 !important; margin:0px !important; font-size:15px;}
+.connection-page											{margin:0px !important; font-size:13px !important; font-weight:400 !important; color:#777; }
+.connection-pages											{color:#666 !important; margin:0px !important; font-size:13px;}
 .active-btn i                                               {background:#006400 !important; font-size:12px !important; color:#fff; padding:6px; border-radius:3px;}
 .active-btn 									            {background:none; box-shadow:none;}
 .inactive-btn 									            {background:none; box-shadow:none;}
 .inactive-btn i                                             {background:#FF0000!important; font-size:12px !important; color:#fff; padding:6px;border-radius:3px;}
-.name-conne													{font-size:18px !important; color:#404996 !important; margin-bottom:2px; }
+.name-conne													{font-size:17px !important; color:#404996 !important; margin-bottom:2px; }
 .segment-md .segment-button.activated, .segment-md .segment-button.segment-activated{ background:#888aef; color:#fff; border:none; }
 .thamb-lins													{bottom:-18px;left:12px;position:absolute;z-index: 999 !important; }
 .thamb-lins img												{border:3px solid #fff; height:80px;width:90px; border-radius:3px;box-shadow: 0 0 5px #888}
@@ -370,6 +370,9 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
     font-size: 18px;
     font-weight: 400;
     padding: 7px; width:94%; margin-left:10px; max-height:300px; min-height:80px;}
+	
+
+.sendreqarea .send-req button.secon-sdms span.button-inner .ion-md-send{ color:#c2c2c2; font-size:25px !important; z-index:999;}
 .createblog-form .item-md .item-inner .input-wrapper .text-input-md{width: calc(100% - 9px) !important;}
 .createblog-form .item-md .item-inner .input-wrapper .label-md{ float:left; line-height:25px; margin-top:5px;}
 .contect-bg-moblie											{background:#F3F7FF;}
@@ -396,7 +399,6 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .memb-list .label-ios										{padding-top:0px !important;}
 .memb-list 													{float:left;margin-bottom:5px; width:20%;margin:5px 5px 0px 7px;} 
 .comm-posted												{position:relative; width:100%;}
-.secon-sdms													{}
 .job-view													{margin-top:10px;}
 .mem-name													{width:45px; font-size:12px !important; height: 42px; overflow: hidden; text-overflow: ellipsis;float:left; white-space: nowrap; }
 .job-view													{padding:5px !important;}
@@ -435,7 +437,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .comm-posted .item-inner .input-wrapper .label-md{padding-top:0px !important;}
 .trash-icon													{height:20px;padding:0 !important;position:absolute;right:-7px;top:-13px;}
 .trash-icon	i												{color:red; font-size:19px !important;}
-.secon-sdms													{background:#ff4000 !important; color:#fff !important; font-size:15px; text-transform:capitalize; border-radius:25px;}
+.secon-sdms													{font-size:15px; text-transform:capitalize; border-radius:25px;}
 .edit-profile-view .label-ios								{font-size:17px; padding-left:6px;  margin:5px 0 px; }
 .edit-profile-view .item-ios									{padding-left:8px;}
 .edit-profile-view .item-ios .item-inner .input-wrapper .input-ios .text-input-ios{font-size:16px;  width: calc(100% - 8px - 5px) !important;}
@@ -970,14 +972,16 @@ white-space: normal;}
 .job-view .item-md .item-inner .input-wrapper .label-md h2{ font-size:17px !important;}
 .liks-comments{font-size:14px !important; color:#0a399a !important;}
 .liks-comments i{color:#6e6e6f !important;}
-.reply-shows{ border-left:1px solid #f7f7f7;margin-bottom:15px;margin-left:10px; margin-top:10px;} 
-.reply-shows .list-md ion-col .item-md .item-inner .input-wrapper .label-md h2{ font-size:15px; color:#424a95;}
-.reply-shows .list-ios ion-col .item-ios .item-inner .input-wrapper .label-ios h2{ font-size:15px; color:#424a95;}
+.reply-shows{ border-left:1px solid #dddfe2;margin-bottom:15px;margin-left:8px; margin-top:10px;} 
+.reply-shows .list-md ion-col .item-md .item-inner .input-wrapper .label-md h2{ font-size:15px; color:#424a95;text-indent:0px !important;}
+.reply-shows .list-ios ion-col .item-ios .item-inner .input-wrapper .label-ios h2{ font-size:15px; color:#424a95;text-indent:0 !important;}
 .reply-shows .list-md ion-col .item-md .item-inner .input-wrapper .label-md p{ font-size:11px; color:#777;}
 .reply-shows .list-ios ion-col .item-ios .item-inner .input-wrapper .label-ios p{ font-size:11px; color:#777;}
-
+.texts-lefts h2{ text-indent:0px !important; font-size:15px !important;}
+.texts-lefts p.comm-datetime{ font-size:11px !important;}
+.texts-lefts p{ text-indent:0px !important; font-size:14px !important;}
 .comment-liks{ background:#f7f7f7; border-top:1px solid #efefef;}
-.item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#424a95;text-transform:capitalize; margin-top:0px !important; font-weight:400;}
+.item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#424a95; margin-top:0px !important; font-weight:400;}
 .item-inner > .input-wrapper > .label-md				    {color:#777;font-size:16px; padding-right:0px !important; }
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ bottom:4px;}
 .marg-info img											    {}
