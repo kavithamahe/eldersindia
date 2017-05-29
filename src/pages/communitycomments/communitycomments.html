@@ -28,7 +28,7 @@
 			    	<h2 class="cmmpost" (click)="profileImage(comment.uid_from)">{{comment.name_from}}</h2>
 					<p class="time-datem">{{comment.created_at}}</p>
 				</ion-col>
-				<ion-col offset-50>
+				<ion-col offset-50 >
 					<button  *ngIf="comment.comment_reply.length == 0 && comment.uid_from == user_id" ion-button color="dark" clear (click)="openMenu(comment.comments_id,post_id)">
 				        <ion-icon  item-left name="arrow-dropdown"></ion-icon>
 				    </button>
@@ -41,13 +41,10 @@
 		<div class="comment-liks">
 		<ion-row>
 				 <ion-col *ngIf="comment.likes == 1" style="padding:0px;">
-	   		<button ion-button clear  (click)="sendInlineLikes(comment.comments_id,post_id)"> <p class="liks-comments"><i class="fa fa-thumbs-up"></i>&nbsp;Like</p></button>
+	   		<button ion-button clear  (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p class="liks-comments"><i class="fa fa-thumbs-up"></i>&nbsp;Like</p></button>
 			 </ion-col>
 			<ion-col *ngIf="comment.likes == 0 || comment.likes == null" style="padding:0px;">
-			<button ion-button clear (click)="sendInlineLikes(comment.comments_id,post_id)"> <p class="liks-comments"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</p></button>
-			 </ion-col>
-			  <ion-col *ngIf="comment.comment_reply.length == 0 && comment.uid_from == user_id" style="padding:0px;">
-	 		<button  ion-button (click)="deleteComment(comment.comments_id,post_id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+			<button ion-button clear (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p class="liks-comments">&nbsp;Like</p></button>
 			 </ion-col>
 			  <ion-col style="padding:0px;">
   			<button  ion-button clear (click)="reply(j)"><p class="liks-comments"> <i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply</p></button>
@@ -77,8 +74,8 @@
 						<ion-col>
 						<h2>{{reply.name_from}}-{{reply.name_to}}</h2>
 					  	<p>{{reply.created_at}}</p>
-						<ion-col offset-50>
-					  		<button  *ngIf="reply.uid_from == user_id" ion-button color="dark" clear 
+						<ion-col offset-50 *ngIf="reply.uid_from == user_id">
+					  		<button ion-button color="dark" clear 
 						(click)="openReplyMenu(reply.com_post_cmt_id,reply.comments_replay_id,post_id)">
 				        <ion-icon  item-left name="arrow-dropdown"></ion-icon>
 				    	</button>
@@ -91,9 +88,6 @@
 								</ion-col>
 								<ion-col *ngIf="reply.likes == 0 || reply.likes == null">
 								<button ion-button clear  (click)="sendInlineLikes(reply.com_post_cmt_id,reply.comments_replay_id,post_id)">Like</button>
-								</ion-col>
-								<ion-col *ngIf="reply.uid_from == user_id">
-								<button ion-button (click)="deleteReply(reply.com_post_cmt_id,reply.comments_replay_id,post_id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
 								</ion-col>
 								<ion-col>
 								<button  ion-button clear (click)="replyComments(i)">
@@ -127,7 +121,8 @@
 				<button (click)="sendReply(comment.uid_from,comment.comments_id)" ion-button class="secon-sdms" color="secondary" round><i class="fa fa-paper-plane-o" aria-hidden="true">
 				</i></button>
 			</div>
-		</ion-card>
+			</div>
+	</ion-card>
 	</ion-list>
 		<ion-row>
 			<ion-textarea [(ngModel)]="post_comment" style=" margin:0px !important;-webkit-user-select:all !important;" placeholder="Enter Comments"></ion-textarea>             
