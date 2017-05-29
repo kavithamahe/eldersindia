@@ -12,8 +12,8 @@
 </ion-header>
 <ion-content style="background:#F3F7FF;">
 
-			
 	<ion-list *ngFor="let comment of post_comments; let j=index" class="comm-posted">
+
 	<ion-card class="listed-comments">
      	<ion-item>
 		<ion-row>
@@ -102,7 +102,8 @@
 					
 		      	<div *ngIf="i==replyBlock" class="sendreqarea">
 					<ion-row>
-						<ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important; -webkit-user-select:all !important;" placeholder="write a reply.."></ion-textarea>
+						<ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important; -webkit-user-select:all !important;" placeholder="write a reply..">
+						</ion-textarea>
 						<p class="message-container" [innerHTML]="':smile:  ' | emojis"  
 						(click)="emojiPicker2(reply.uid_to,reply.com_post_cmt_id)"></p>
 					</ion-row>
@@ -121,7 +122,6 @@
 				<button (click)="sendReply(comment.uid_from,comment.comments_id)" ion-button class="secon-sdms" color="secondary" round><i class="fa fa-paper-plane-o" aria-hidden="true">
 				</i></button>
 			</div>
-		</div>
 		</ion-card>
 	</ion-list>
 	<div class="sendreqarea">
