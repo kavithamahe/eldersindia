@@ -483,7 +483,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .label-ios .head-mar h2.edit-pro							{margin-top:20px !important;}
 .editicoan													{font-size:18px !important;}
 .labels-lb													{color:#00CED1; font-weight:400; font-size:16px;}
-.feed-post													{color:#777 !important;font-size:15px !important;font-weight:400 !important; margin:0px !important;line-height:25px !important;padding:0px 0px 0px 10px !important;}
+.feed-post													{color:#777 !important;font-size:15px !important;font-weight:400 !important; margin:0px !important;line-height:25px !important;padding:0px 10px 0px 10px !important;}
 page-my-profile ion-col										{ border-left:1px solid #F0F8FF !important;}
 .video-updates												{}
 .item-md.item-input.ng-valid.input-has-value:not(.input-has-active) .item-inner{ border-bottom:none;}
@@ -968,8 +968,14 @@ white-space: normal;}
 .body-clr												    {background:#fff;}
 .popup-mds > .ion-label									    {font-size:15px; text-align:center;}
 .job-view .item-md .item-inner .input-wrapper .label-md h2{ font-size:17px !important;}
-.liks-comments{font-size:15px !important; color:#404996 !important;}
-.liks-comments i{color:#666 !important;}
+.liks-comments{font-size:14px !important; color:#0a399a !important;}
+.liks-comments i{color:#6e6e6f !important;}
+.reply-shows{ border-left:1px solid #f7f7f7;margin-bottom:15px;margin-left:10px; margin-top:10px;} 
+.reply-shows .list-md ion-col .item-md .item-inner .input-wrapper .label-md h2{ font-size:15px; color:#424a95;}
+.reply-shows .list-ios ion-col .item-ios .item-inner .input-wrapper .label-ios h2{ font-size:15px; color:#424a95;}
+.reply-shows .list-md ion-col .item-md .item-inner .input-wrapper .label-md p{ font-size:11px; color:#777;}
+.reply-shows .list-ios ion-col .item-ios .item-inner .input-wrapper .label-ios p{ font-size:11px; color:#777;}
+
 .comment-liks{ background:#f7f7f7; border-top:1px solid #efefef;}
 .item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#424a95;text-transform:capitalize; margin-top:0px !important; font-weight:400;}
 .item-inner > .input-wrapper > .label-md				    {color:#777;font-size:16px; padding-right:0px !important; }

@@ -13,87 +13,119 @@
 <ion-content style="background:#F3F7FF;">
 
 	<ion-list *ngFor="let comment of post_comments; let j=index" class="comm-posted">
-		<ion-card class="listed-comments">
-     		<ion-item>
-	     		<ion-row>
-		     		<ion-col>
-				   		<ion-avatar item-left>
-		  					<img (click)="profileImage(comment.uid_from)" 
+
+	<ion-card class="listed-comments">
+     	<ion-item>
+			<ion-row>
+		     	<ion-col>
+				   	<ion-avatar item-left>
+		  				<img (click)="profileImage(comment.uid_from)" 
 					    		[src]="imageUrl+comment?.profile_image"  
 					    		[hidden]="!comment?.profile_image" >
-				    	</ion-avatar>
-					</ion-col>
-					<ion-col width-20>
-			    		<h2 class="cmmpost" (click)="profileImage(comment.uid_from)">{{comment.name_from}}</h2>
-						<p class="time-datem">{{comment.created_at}}</p>
-					</ion-col>
-					<ion-col offset-50>
-						<button  *ngIf="comment.comment_reply.length == 0 && comment.uid_from == user_id" ion-button color="dark" clear (click)="openMenu(comment.comments_id,post_id)">
-					        <ion-icon  item-left name="arrow-dropdown"></ion-icon>
-					    </button>
-					</ion-col>
-				</ion-row>
-			</ion-item>
-				<p text-wrap [innerHTML]="comment.comments | emojis"></p>
-	  		<div class="comment-liks">
-		   		<button ion-button clear *ngIf="comment.likes == 1" (click)="sendInlineLikescmt(comment.comments_id,post_id)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
-				<button ion-button clear *ngIf="comment.likes == 0 || comment.likes == null" (click)="sendInlineLikescmt(comment.comments_id,post_id)">Like</button>
-		 		<button  ion-button clear (click)="reply(j)"><i class="fa fa-reply" aria-hidden="true"></i></button>
-				<button *ngIf="comment.comment_reply[0] != null" ion-button item-right clear 
-				(click)="showComments(j)">view replies</button>
+				    </ion-avatar>
+				</ion-col>
+				<ion-col width-20>
+			    	<h2 class="cmmpost" (click)="profileImage(comment.uid_from)">{{comment.name_from}}</h2>
+					<p class="time-datem">{{comment.created_at}}</p>
+				</ion-col>
+				<ion-col offset-50>
+					<button  *ngIf="comment.comment_reply.length == 0 && comment.uid_from == user_id" ion-button color="dark" clear (click)="openMenu(comment.comments_id,post_id)">
+				        <ion-icon  item-left name="arrow-dropdown"></ion-icon>
+				    </button>
+				</ion-col>
+			</ion-row>
+		</ion-item>
+		
+	  	<p text-wrap [innerHTML]="comment.comments | emojis"></p>
+	  
+		<div class="comment-liks">
+		<ion-row>
+				 <ion-col *ngIf="comment.likes == 1" style="padding:0px;">
+	   		<button ion-button clear  (click)="sendInlineLikes(comment.comments_id,post_id)"> <p class="liks-comments"><i class="fa fa-thumbs-up"></i>&nbsp;Like</p></button>
+			 </ion-col>
+			<ion-col *ngIf="comment.likes == 0 || comment.likes == null" style="padding:0px;">
+			<button ion-button clear (click)="sendInlineLikes(comment.comments_id,post_id)"> <p class="liks-comments"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</p></button>
+			 </ion-col>
+			  <ion-col *ngIf="comment.comment_reply.length == 0 && comment.uid_from == user_id" style="padding:0px;">
+	 		<button  ion-button (click)="deleteComment(comment.comments_id,post_id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+			 </ion-col>
+			  <ion-col style="padding:0px;">
+  			<button  ion-button clear (click)="reply(j)"><p class="liks-comments"> <i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply</p></button>
+			 </ion-col>
+			  <ion-col style="padding:0px;">
+			<button *ngIf="comment.comment_reply[0] != null" ion-button item-right clear 
+			(click)="showComments(j)"><p class="liks-comments"> <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;View </p></button>
+			 </ion-col>
+			
+			
+	      		</ion-row>
 			</div>
-			<div *ngIf="j==showReply">
-				<ion-list *ngFor="let reply of comment.comment_reply; let i=index">
-					<ion-col offset-10>
-						<ion-item>
+		<div *ngIf="j==showReply" class="reply-shows">
+
+			<ion-list *ngFor="let reply of comment.comment_reply; let i=index">
+				
+					<ion-item>
+					<ion-row>
+						<ion-col>
+						<ion-avatar item-left>
+							<img (click)="myImage(reply.uid_to)" 
+							[src]="imageUrl+reply?.profile_image"  
+							[hidden]="!reply?.profile_image">
+						</ion-avatar>
+						</ion-col>
+
+						<ion-col>
+						<h2>{{reply.name_from}}-{{reply.name_to}}</h2>
+					  	<p>{{reply.created_at}}</p>
+						<ion-col offset-50>
+					  		<button  *ngIf="reply.uid_from == user_id" ion-button color="dark" clear 
+						(click)="openReplyMenu(reply.com_post_cmt_id,reply.comments_replay_id,post_id)">
+				        <ion-icon  item-left name="arrow-dropdown"></ion-icon>
+				    	</button>
+						</ion-col>
+						<p text-wrap [innerHTML]="reply.comments_replay | emojis"></p>
+						<div>
 							<ion-row>
+								<ion-col *ngIf="reply.likes == 1">
+								<button ion-button clear (click)="sendInlineLikes(reply.com_post_cmt_id,reply.comments_replay_id,post_id)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
+								</ion-col>
+								<ion-col *ngIf="reply.likes == 0 || reply.likes == null">
+								<button ion-button clear  (click)="sendInlineLikes(reply.com_post_cmt_id,reply.comments_replay_id,post_id)">Like</button>
+								</ion-col>
+								<ion-col *ngIf="reply.uid_from == user_id">
+								<button ion-button (click)="deleteReply(reply.com_post_cmt_id,reply.comments_replay_id,post_id)" color="dark" clear><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+								</ion-col>
 								<ion-col>
-									<ion-avatar item-left>
-										<img (click)="myImage(reply.uid_to)" 
-										[src]="imageUrl+reply?.profile_image"  
-										[hidden]="!reply?.profile_image">
-									</ion-avatar>
+								<button  ion-button clear (click)="replyComments(i)">
+								<i class="fa fa-reply" aria-hidden="true"></i></button>
 								</ion-col>
-								<ion-col width-10>
-									<h2 class="cmmpost">{{reply.name_from}}-{{reply.name_to}}</h2>
-								  	<p class="tim e-datem">{{reply.created_at}}</p>
-					  			</ion-col>
-					  			<ion-col offset-50>
-					  				<button  *ngIf="reply.uid_from == user_id" ion-button color="dark" clear (click)="openReplyMenu(reply.com_post_cmt_id,reply.comments_replay_id,post_id)">
-				        			<ion-icon  item-left name="arrow-dropdown"></ion-icon>
-				    				</button>
-								</ion-col>
-					  		</ion-row>
-						</ion-item>
-				   		<p text-wrap [innerHTML]="reply.comments_replay | emojis"></p>
-				  		<div>
-							<button ion-button clear *ngIf="reply.likes == 1" (click)="sendInlineLikes(reply.com_post_cmt_id,reply.comments_replay_id,post_id)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
-							<button ion-button clear *ngIf="reply.likes == 0 || reply.likes == null" (click)="sendInlineLikes(reply.com_post_cmt_id,reply.comments_replay_id,post_id)">Like</button>
-							<button  ion-button clear (click)="replyComments(i)">
-							<i class="fa fa-reply" aria-hidden="true"></i></button>
+							</ion-row>
 						</div>
-					</ion-col>
-		      		<div *ngIf="i==replyBlock">
-						<ion-row>
-							<ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important; -webkit-user-select:all !important;" placeholder="write a reply..">
-							</ion-textarea>
-							<p class="message-container" [innerHTML]="':smile:  ' | emojis"  
-							(click)="emojiPicker2(reply.uid_to,reply.com_post_cmt_id)"></p>
-						</ion-row>
-						<div class="send-req">
-							<button (click)="sendReply(reply.uid_to,reply.com_post_cmt_id)" ion-button class="secon-sdms" color="secondary" round><i class="fa fa-paper-plane-o" aria-hidden="true"></i> </button>
-						</div>
-			   		</div>
-				</ion-list>
-			</div>
-			<div *ngIf="j==Reply">
-				<ion-row>
-					<ion-textarea [(ngModel)]="reply_comment" style=" margin:0px !important;-webkit-user-select:all !important;" placeholder="write a reply.."></ion-textarea>
-					<p class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker2(comment.uid_from,comment.comments_id)"></p>
-				</ion-row>
-				<div class="send-req">
-					<button (click)="sendReply(comment.uid_from,comment.comments_id)" ion-button class="secon-sdms" color="secondary" round><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-				</div>
+						</ion-col>
+					</ion-row>
+					</ion-item>
+	
+		      	<div *ngIf="i==replyBlock">
+					<ion-row>
+						<ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important; -webkit-user-select:all !important;" placeholder="write a reply..">
+						</ion-textarea>
+						<p class="message-container" [innerHTML]="':smile:  ' | emojis"  
+						(click)="emojiPicker2(reply.uid_to,reply.com_post_cmt_id)"></p>
+					</ion-row>
+					<div class="send-req">
+						<button (click)="sendReply(reply.uid_to,reply.com_post_cmt_id)" ion-button class="secon-sdms" color="secondary" round><i class="fa fa-paper-plane-o" aria-hidden="true"></i> </button>
+					</div>
+			   	</div>
+			</ion-list>
+		</div>
+		<div *ngIf="j==Reply">
+			<ion-row>
+				<ion-textarea [(ngModel)]="reply_comment" style=" margin:0px !important;-webkit-user-select:all !important;" placeholder="write a reply.."></ion-textarea>
+				<p class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker2(comment.uid_from,comment.comments_id)"></p>
+			</ion-row>
+			<div class="send-req">
+				<button (click)="sendReply(comment.uid_from,comment.comments_id)" ion-button class="secon-sdms" color="secondary" round><i class="fa fa-paper-plane-o" aria-hidden="true">
+				</i></button>
 			</div>
 		</ion-card>
 	</ion-list>
