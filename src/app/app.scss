@@ -370,9 +370,6 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
     font-size: 18px;
     font-weight: 400;
     padding: 7px; width:94%; margin-left:10px; max-height:300px; min-height:80px;}
-	
-
-.sendreqarea .send-req button.secon-sdms span.button-inner .ion-md-send{ color:#c2c2c2; font-size:25px !important; z-index:999;}
 .createblog-form .item-md .item-inner .input-wrapper .text-input-md{width: calc(100% - 9px) !important;}
 .createblog-form .item-md .item-inner .input-wrapper .label-md{ float:left; line-height:25px; margin-top:5px;}
 .contect-bg-moblie											{background:#F3F7FF;}
@@ -437,7 +434,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .comm-posted .item-inner .input-wrapper .label-md{padding-top:0px !important;}
 .trash-icon													{height:20px;padding:0 !important;position:absolute;right:-7px;top:-13px;}
 .trash-icon	i												{color:red; font-size:19px !important;}
-.secon-sdms													{font-size:15px; text-transform:capitalize; border-radius:25px;}
+.secon-sdms													{background:#888aef !important; color:#fff !important; font-size:15px; text-transform:capitalize; border-radius:25px;}
 .edit-profile-view .label-ios								{font-size:17px; padding-left:6px;  margin:5px 0 px; }
 .edit-profile-view .item-ios									{padding-left:8px;}
 .edit-profile-view .item-ios .item-inner .input-wrapper .input-ios .text-input-ios{font-size:16px;  width: calc(100% - 8px - 5px) !important;}
