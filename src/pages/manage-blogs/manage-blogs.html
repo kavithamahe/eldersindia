@@ -33,8 +33,9 @@
    <ion-row>   
     <ion-col width-80>
 	<ion-row>
-		<h2 item-text-wrap class="service-req">{{manageBlog?.category_name}}</h2>
+		<h2 item-text-wrap class="service-req">{{manageBlog?.title}}</h2>
 	</ion-row>
+  <h2 item-text-wrap >{{manageBlog?.category_name}}</h2>
 	<ion-row>
 	<p *ngIf="(manageBlog?.created_at!='0000-00-00 00:00:00')" class="token-date"><i class="fa fa-calendar"></i> {{manageBlog?.created_at | date :'MMM dd y h:mm a'}}</p>
 	</ion-row>
@@ -63,10 +64,12 @@
   </ion-row>
   </ion-card-content>
 </ion-card>
-<ion-item *ngIf="manageblogsLists.length<=0">
-<p>No Record Found</p>
-</ion-item>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
+ <ion-card *ngIf="manageblogsLists.length<=0">
+ <ion-item>
+ <p>No Record Found.</p>
+ </ion-item>
+ </ion-card>
 </ion-content>
