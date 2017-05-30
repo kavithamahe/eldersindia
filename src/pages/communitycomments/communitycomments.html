@@ -16,23 +16,23 @@
 
 	<ion-card class="listed-comments">
      	<ion-item>
-		<ion-row>
-		<ion-col width-20>
-		   	<ion-avatar item-left>
-  				<img (click)="profileImage(comment.uid)" 
-			    		[src]="imageUrl+comment?.profile_image"  
-			    		[hidden]="!comment?.profile_image" >
-		    </ion-avatar>
-			</ion-col>
-			<ion-col width-60>
-	    	<h2 (click)="profileImage(comment.uid)">{{comment.name_from}}</h2>
-			<p class="time-datem">{{comment.created_at}}</p>
-			</ion-col>
-			<ion-col width-20>
+			<ion-row>
+		     	<ion-col width-20>
+				   	<ion-avatar item-left>
+		  				<img (click)="profileImage(comment.uid_from)" 
+					    		[src]="imageUrl+comment?.profile_image"  
+					    		[hidden]="!comment?.profile_image" >
+				    </ion-avatar>
+				</ion-col>
+				<ion-col width-60>
+			    	<h2 class="cmmpost" (click)="profileImage(comment.uid_from)">{{comment.name_from}}</h2>
+					<p class="time-datem">{{comment.created_at}}</p>
+				</ion-col>
+				<ion-col offset-20>
 					<button  *ngIf="comment.comment_reply.length == 0 && comment.uid_from == user_id" ion-button color="dark" clear (click)="openMenu(comment.comments_id,post_id)">
-					        	<i class="fa fa-angle-down" aria-hidden="true"></i>
+					    <i class="fa fa-angle-down" aria-hidden="true"></i>
 					 </button>
-			</ion-col>
+				</ion-col>
 			</ion-row>
 		</ion-item>
 		<ion-card-content>
