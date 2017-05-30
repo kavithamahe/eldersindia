@@ -54,6 +54,17 @@ webServiceCall(serviceName,bodyData){
     .map(res => res.json());
 }
 
+forgotPassword(serviceName,bodyData){
+      this.rootUrl= this.app.setrooturl();
+      this.headers = new Headers();
+      this.headers.append('Content-Type', 'application/json');
+      this.head = new RequestOptions({ headers: this.headers });
+
+  return this.http.post(this.rootUrl+serviceName, bodyData, this.head)
+    .map(res => res.json());
+}
+
+
 showToast(message) {
     const toast = this.toastCtrl.create({
       message: message,

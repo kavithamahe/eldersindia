@@ -14,7 +14,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="segments-info" style="background:#fff;">
+<ion-content class="segments-info" style="background:#F3F7FF;">
   
 	  
 		  <ion-row>
@@ -144,25 +144,24 @@
 	<hr/>
  	 		<ion-list *ngFor="let community of communityProfile; let i=index">
 
- 			<ion-card>
- 				<ion-item>
+ 			<ion-card class="listed-comments">
+ 				<ion-item text-wrap>
 	      			<ion-row>
-	      				<ion-col>
-	        				<ion-avatar item-left>
+	      				<ion-col width-20>
+	        				<ion-avatar item-left class="image-profile">
 		          				<img [src]="imageUrl+community?.community_logo" 
 		          					[hidden]="!community?.community_logo"
 		          					(click)="goBackToCommunity(community.com_id)">
 		        			</ion-avatar>
 	        			</ion-col><br>
-	        			<ion-col width-20>
+	        			<ion-col width-60>
 		        			<ion-card-content>
 			          			<h2 text-wrap (click)="goBackToCommunity(community.com_id)">{{community.community_name}}</h2>
 			          			<p class="time-datem"><i class="fa fa-calendar-o"></i> &nbsp; {{community.created_at}}</p>
 			          		</ion-card-content>
 						</ion-col>
-						<ion-col offset-50>
-			  			
-			  				<button ion-button color="dark" clear (click)="openMenu(community.id)">
+						<ion-col width-20>
+			  				<button *ngIf="community?.uid == my_id" ion-button color="dark" clear (click)="openMenu(community.id)">
 		          			<ion-icon  item-left name="arrow-dropdown"></ion-icon>
 		          		</button>
 	          			</ion-col>
@@ -170,18 +169,19 @@
 	    		</ion-item>
 
 	       	 		<div>
-						<ion-row>
-							<ion-col>
-			          			<p item-text-wrap class="feed-post" [innerHTML]="community.post_message"><a href=""></a>{{community.post_message}}</p>
-								<img  [src]="imageUrl+community?.post_image" 
-								[hidden]="!community?.post_image">
-							</ion-col>
-			       		</ion-row>
+						<ion-card-content>
+			          			<p item-text-wrap class="feed-post" 
+			          			[innerHTML]="community.post_message">
+			          			<a href=""></a>{{community.post_message}}</p>
+						</ion-card-content>
+						<ion-card-content [hidden]="!community?.post_image">
+							<img  [src]="imageUrl+community?.post_image">
+						</ion-card-content>
 		       			<ion-card-content [hidden]="!community?.post_video" class="video-updates">
 							<iframe [src]="cleanURL(community?.post_video)" frameborder="0">
 			         		</iframe>
 		       			</ion-card-content>
-		       			<ion-card-content>
+		       			<ion-card-content [hidden]="!community?.metalink_image">
 		          			<img  [src]="community.metalink_image" (click)="openUrl(community.metalink_url)" 
 		          			[hidden]="!community?.metalink_image">
 	       				</ion-card-content>
@@ -193,21 +193,21 @@
 	         				[hidden]="!community?.metalink_description">
 							<p (click)="openUrl(community.metalink_url)">{{community.metalink_description}}</p>
 	         			</ion-card-content>
-	       	 		
+	       	 		</div>
+	       	 		<div class="comment-liks">
 	      				<ion-row>
-		        			<ion-col width-15>
+		        			<ion-col style="padding:0px !important;">
 			          			<button ion-button clear *ngIf=(community.likes.emoji)
 			          			[innerHTML]="community.likes.emoji | emojis" (click)="emojiPicker(community.id)"></button>
-			          			<button *ngIf=(!(community.likes.emoji)) ion-button  clear small 
-								[innerHTML]="':thumbsup:' | emojis" 
-								(click)="emojiPicker(community.id)">
-						</button>
+			          			<button *ngIf=(!(community.likes.emoji)) ion-button  clear small (click)="emojiPicker(community.id)">
+								<p class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp; {{community.likecount}}Likes</p>
+								</button>
 		        			</ion-col>
 		        	
-		        			<ion-col>
-			          			<button ion-button class="comment but-colo" color="dark" clear 
+		        			<ion-col style="padding:0px !important;">
+			          			<button ion-button color="dark" clear 
 			          			(click)="showComment(community)">
-			          				<span style="color:red; font-size:13px;"></span>&nbsp;<i class="fa fa-comments" aria-hidden="true"></i>
+			          				<p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{community.comment_count}}+Comments</p>
 			          			</button>
 		          			</ion-col>
 		          		
@@ -221,17 +221,21 @@
 		</ion-list>
 		
 		<ion-list *ngSwitchCase="'communities'">
-			<ion-item style="position:relative;" *ngFor="let community of getCommunityMembers">
+		<div class="community-div">
+			<ion-card *ngFor="let community of getCommunityMembers" class="community-layout">
 				<div class="community-img">
 			 		 <img (click)="goBackToCommunity(community.id)" style="width:100%; height:200px;" 
 			 		 [src]="imageUrl+community?.banner" 	 		 
 			 		 [hidden]="!community?.banner" />
 					<div class="label-opc">
-					   <ion-item text-wrap style="text-align:left !important;"  (click)="goBackToCommunity(community.id)" [hidden]="!community.community_name">{{community.community_name}}
+					   <ion-item text-wrap style="text-align:left !important;"  
+					   (click)="goBackToCommunity(community.id)" [hidden]="!community.community_name">
+					   <p>{{community.community_name}}</p>
 					   </ion-item>
 				   	</div>
 		   		</div>
-			</ion-item>
+			</ion-card>
+		</div>
 				<ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
 	   				<ion-infinite-scroll-content></ion-infinite-scroll-content>
 	  			</ion-infinite-scroll>

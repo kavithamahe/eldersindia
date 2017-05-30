@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,ToastController } from 'ionic-angular';
+import { NavController, NavParams,ToastController,LoadingController } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
@@ -32,7 +32,7 @@ export class CommunitylistPage {
   searchButton:boolean=false;
   searchValue:any;
   searchTextBox:any='';
-  constructor(public nav: NavController,public storage:Storage, public navParams: NavParams,platform: Platform,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+  constructor(public nav: NavController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams,platform: Platform,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
      this.isAndroid = platform.is('android');
      // this.searchData = "";
    }
@@ -45,6 +45,8 @@ export class CommunitylistPage {
   }
  
   myCommunity(searchData){
+     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+      loader.present();
     this.communitylists =[];
     this.categoryLists=[]
       this.communityServices.myCommunity(searchData).
@@ -57,10 +59,12 @@ export class CommunitylistPage {
     this.communitylists =[];
     this.communityServices.showErrorToast(err);
   })
-
+  loader.dismiss();
   }
 
   otherCommunity(data){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+      loader.present();
       this.communitylists=[];
       this.categoryLists=[];
       this.communityServices.recommendedCommunity(data).
@@ -74,7 +78,7 @@ export class CommunitylistPage {
     this.communitylists =[];
     this.communityServices.showErrorToast(err);
   })
-
+       loader.dismiss();
   }
   getItems(ev) {
     

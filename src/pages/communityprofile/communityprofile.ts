@@ -111,7 +111,25 @@ export class CommunityprofilePage {
       this.itemComments=false;
       loader.dismiss();
   }
-
+showConfirm(id){
+     let confirm = this.alertCtrl.create({
+     title:'Confirm',
+     subTitle: 'comment will be deleted',
+       buttons: [
+        {
+          text: 'Cancel',
+         },
+        {
+          text: 'Ok',
+          handler: () => {
+           this.deletePost(id);
+          
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
  openMenu(id) {
     let actionSheet = this.actionsheetCtrl.create({
       title: '',
@@ -122,13 +140,26 @@ export class CommunityprofilePage {
           role: 'destructive',
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
-            this.deletePost(id);
+            this.showConfirm(id);
           }
         },
       
       ]
     });
     actionSheet.present();
+  }
+  deletePost(id){
+     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.communityServices.deletePost(id).subscribe(datas =>{
+     this.showToast(datas.result);
+      this.profileCommunity(this.profile_uid);
+     },
+     err =>{
+    
+    this.communityServices.showErrorToast(err);
+  })
+    loader.dismiss();
   }
   showComment(post){
     let commentModal = this.modalCtrl.create(CommunitycommentsPage, { posts: post });
@@ -159,16 +190,7 @@ export class CommunityprofilePage {
    }
   
 }
-deletePost(id){
-    this.communityServices.deletePost(id).subscribe(datas =>{
-     this.showToast(datas.result);
-      this.profileCommunity(this.profile_uid);
-     },
-     err =>{
-    
-    this.communityServices.showErrorToast(err);
-  })
-  }
+
   accessGallery(){
    Camera.getPicture({
      sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
@@ -428,34 +450,7 @@ metaLink:any = "";
             })
         }
 
-  deleteComment(id){
-    this.communityServices.deleteComment(id).subscribe(datas =>{
-     this.showToast(datas.result);
-     this.profileCommunity(this.profile_uid);
-     },
-     err =>{
-    
-    this.communityServices.showErrorToast(err);
-  })
-  }
-  showConfirm(DeleteId) {
-    let confirm = this.alertCtrl.create({
-     
-     subTitle: 'Confirm Deletion?',
-      buttons: [
-        {
-          text: 'Cancel',
-         },
-        {
-          text: 'Ok',
-          handler: () => {
-           this.deleteComment(DeleteId);
-          }
-        }
-      ]
-    });
-    confirm.present();
-  }
+  
 
   goBackToCommunity(id){
    this.nav.push(CommunityPage,{community_id:id});

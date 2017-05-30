@@ -65,13 +65,51 @@ post_likes:any;
           role: 'destructive',
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
-           this.deleteComment(id);
+           this.showConfirm(id);
           }
         },
       
       ]
     });
     actionSheet.present();
+  }
+    showConfirm(replyId){
+     let confirm = this.alertCtrl.create({
+     title:'Confirm',
+     subTitle: 'comment will be deleted',
+       buttons: [
+        {
+          text: 'Cancel',
+         },
+        {
+          text: 'Ok',
+          handler: () => {
+           this.deleteComment(replyId);
+          
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+   showConfirmreply(comment_id,reply_id,post_id){
+     let confirm = this.alertCtrl.create({
+     title:'Confirm',
+     subTitle: 'comment will be deleted',
+       buttons: [
+        {
+          text: 'Cancel',
+         },
+        {
+          text: 'Ok',
+          handler: () => {
+           this.deleteReply(comment_id,reply_id,post_id);
+          
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
   openReplyMenu(comment_id,reply_id,post_id){
     let actionSheet = this.actionsheetCtrl.create({
@@ -83,7 +121,7 @@ post_likes:any;
           role: 'destructive',
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
-           this.deleteReply(comment_id,reply_id,post_id);
+           this.showConfirmreply(comment_id,reply_id,post_id);
           }
         },
       

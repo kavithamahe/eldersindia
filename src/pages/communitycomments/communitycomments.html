@@ -47,7 +47,7 @@
 					<button ion-button clear (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p class="liks-comments"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</p></button>
 		 		</ion-col>
 				<ion-col *ngIf="comment.likes == 0 || comment.likes == null" style="padding:0px;">
-					<button ion-button clear (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p class="liks-comments"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</p></button>
+					<button ion-button clear (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p class="liks-comments">&nbsp;Like</p></button>
 				</ion-col>
 			 
 			  <ion-col style="padding:0px;">
@@ -68,7 +68,7 @@
 					<ion-row>
 						<ion-col width-20>
 						<ion-avatar item-left>
-							<img (click)="myImage(reply.uid)" [src]="imageUrl+reply?.profile_image"  
+							<img (click)="myImage(reply.uid_from)" [src]="imageUrl+reply?.profile_image"  
 							[hidden]="!reply?.profile_image">
 						</ion-avatar>
 						</ion-col>
@@ -89,17 +89,15 @@
 						<button ion-button clear  (click)="sendInlineLikes(reply.com_post_cmt_id,reply.comments_replay_id,post_id)"><p class="liks-comments"><i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;Like</p></button>
 						</ion-col>
 						<ion-col  *ngIf="reply.likes == 0 || reply.likes == null" >
-						<button ion-button clear  (click)="sendInlineLikes(reply.com_post_cmt_id,reply.comments_replay_id,post_id)"><p class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;Like</p></button>
+						<button ion-button clear  (click)="sendInlineLikes(reply.com_post_cmt_id,reply.comments_replay_id,post_id)"><p class="liks-comments">&nbsp;Like</p></button>
 						</ion-col>
 						<ion-col>
-						<button  ion-button clear (click)="replyComments(i)"><p class="liks-comments"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply</p></button>
+						<button  ion-button clear (click)="replyComments(i)"><p class="liks-comments">
+						<i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply</p></button>
 						</ion-col>
 						</ion-row>
 					</ion-item>
-				  
-				      	
-					
-		      	<div *ngIf="i==replyBlock">
+				  <div *ngIf="i==replyBlock">
 					<ion-row>
 						<ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important; -webkit-user-select:all !important;" placeholder="write a reply..">
 						</ion-textarea>

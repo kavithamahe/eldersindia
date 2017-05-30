@@ -24,12 +24,14 @@ export class ExternallinksPage {
 	externalLinks:any;
   nextPageURL:any='';
   eventScrollLists:any;
+  externalLinksLists:any;
 
   constructor(public platform: Platform,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public externallinks:Externallinks,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
          this.externalLinksList();
+         this.externalListLinks();
     })
 
   });
@@ -40,8 +42,28 @@ export class ExternallinksPage {
  	 let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
      this.externallinks.externalLinksList().subscribe (users => {
-      this.externalLinks = users.result.data;
       this.nextPageURL=users.result.next_page_url;
+      
+      },
+      (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    );
+    
+    loader.dismiss();
+  }
+  externalListLinks(){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+     this.externallinks.externalListLinks().subscribe (users => {
+      this.externalLinksLists = users.result.info;
       
       },
       (err) => { 
