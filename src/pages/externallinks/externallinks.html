@@ -22,7 +22,7 @@
 
 
 <ion-content padding>
-	<ion-list *ngFor="let useful of externalLinks">
+	<ion-list *ngFor="let useful of externalLinksLists">
 		<ion-card>
 			<ion-card-title>
 				<h1 (click)="openUrl(useful.metalink_url)">{{useful.metalink_title}}</h1>
@@ -31,16 +31,16 @@
 				<p (click)="openUrl(useful.metalink_url)">{{useful.metalink_description}}</p>
 			</ion-card-content>
 			<ion-card-content>
-				<ion-item>
+				<ion-item text-wrap>
 					<ion-row>
-						<ion-col>
+						<ion-col width-20>
 							<ion-avatar item-left>
 					          	<img  [src]="useful.metalink_image" (click)="openUrl(useful.metalink_url)" 
 					          	[hidden]="!useful?.metalink_image">
 					      	</ion-avatar>
 					    </ion-col>
-					    <ion-col>
-						    <h1 item-text-wrap (click)="openUrl(useful.metalink_url)">{{useful.title}}
+					    <ion-col width-80>
+						    <h1 text-wrap (click)="openUrl(useful.metalink_url)">{{useful.title}}
 						    </h1>					      	
 						    <p class="time-datem"><i class="fa fa-calendar-o"></i> {{useful.created_at}}
 						          		</p>

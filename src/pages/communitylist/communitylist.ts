@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams,ToastController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController,Slides, NavParams,ToastController,LoadingController } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
@@ -14,7 +14,7 @@ import { CommunityServices } from '../../providers/community-services';
   providers : [CommunityServices]
 })
 export class CommunitylistPage {
-
+  @ViewChild(Slides) slides: Slides;
    // private start:number=0;
 	community: String = "my_community";
   isAndroid: boolean = false;
@@ -32,7 +32,8 @@ export class CommunitylistPage {
   searchButton:boolean=false;
   searchValue:any;
   searchTextBox:any='';
-  constructor(public nav: NavController,public storage:Storage, public navParams: NavParams,platform: Platform,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+  prev_index:any = 0;
+  constructor(public nav: NavController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams,platform: Platform,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
      this.isAndroid = platform.is('android');
      // this.searchData = "";
    }
@@ -43,8 +44,37 @@ export class CommunitylistPage {
   getPost(id){
     this.nav.push(CommunityPage,{community_id:id});
   }
- 
+  slideChanged() {
+    let currentIndex = this.prev_index;
+    if(currentIndex == 1){
+      this.community = "my_community";
+       this.myCommunity("");
+    }else{
+      this.community = "other_community";
+      this.otherCommunity("");
+    }
+    this.prev_index = this.slides.getActiveIndex();
+    console.log("Current index is", currentIndex);
+  }
+   changeSlide(){
+    this.slides.freeMode = true;
+    if(this.community == 'other_community'){
+    this.slides.slideTo(1);  
+    //this.slides.slideNext(300,true);
+    
+    
+    }else{
+      this.slides.slideTo(0);  
+      //this.slides.slidePrev(300,true);
+      
+    }
+    
+  }
+  
   myCommunity(searchData){
+    this.prev_index = this.slides.getActiveIndex();
+     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+      loader.present();
     this.communitylists =[];
     this.categoryLists=[]
       this.communityServices.myCommunity(searchData).
@@ -57,10 +87,13 @@ export class CommunitylistPage {
     this.communitylists =[];
     this.communityServices.showErrorToast(err);
   })
-
+  loader.dismiss();
   }
 
   otherCommunity(data){
+    this.prev_index = this.slides.getActiveIndex();
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+      loader.present();
       this.communitylists=[];
       this.categoryLists=[];
       this.communityServices.recommendedCommunity(data).
@@ -74,7 +107,7 @@ export class CommunitylistPage {
     this.communitylists =[];
     this.communityServices.showErrorToast(err);
   })
-
+       loader.dismiss();
   }
   getItems(ev) {
     

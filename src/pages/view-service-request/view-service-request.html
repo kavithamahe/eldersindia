@@ -21,59 +21,60 @@
 </ion-header>
 
 
-<ion-content padding style="background:#fff;">
-<ion-card>
-  <ion-card-content style="padding:0px !important;">
-  <ion-grid class="req-viewlist">
-  <ion-row style="border-bottom:1px solid #e3e3e3;">
-   <ion-col width-10><i class="fa fa-user-circle" aria-hidden="true"></i></ion-col>
-    <ion-col width-90>
+<ion-content padding class="content-intop">
+<ion-card class="req-viewlist" >
+ 
+
+  <ion-row>
+  
+    <ion-col width-100 class="child_menu">
 	<span>Service Provider Name</span>
    <p>{{viewServiceRequestInfo?.vendor_name}}</p>
    </ion-col>
   </ion-row>
-  <ion-row style="border-bottom:1px solid #e3e3e3;">
-   <ion-col width-10><i class="fa fa-phone-square" aria-hidden="true"></i></ion-col>
-    <ion-col width-90>
+  <ion-row>
+   
+    <ion-col width-100 class="child_menu">
 	<span>Contact Number</span>
    <p>{{viewServiceRequestInfo?.contact_number}}</p>
    </ion-col>
   </ion-row>
-  <ion-row style="border-bottom:1px solid #e3e3e3;">
-   <ion-col width-10><i class="fa fa-user-circle" aria-hidden="true"></i></ion-col>
-    <ion-col width-90>
+  <ion-row>
+   
+    <ion-col width-100 class="child_menu">
 	<span>Enquiry About</span>
    <p>{{viewServiceRequestInfo?.problem}}</p>
    </ion-col>
   </ion-row>
-  <ion-row style="border-bottom:1px solid #e3e3e3;">
-   <ion-col width-10><i class="fa fa-user-circle" aria-hidden="true"></i></ion-col>
-    <ion-col width-90>
+  <ion-row>
+   
+    <ion-col width-100 class="child_menu">
 	<span>Category</span>
    <p>{{viewServiceRequestInfo?.category_name}}</p>
    </ion-col>
   </ion-row>
-  <ion-row style="border-bottom:1px solid #e3e3e3;">
-   <ion-col width-10><i class="fa fa-user-circle" aria-hidden="true"></i></ion-col>
-    <ion-col width-90>
+  <ion-row>
+   
+    <ion-col width-100 class="child_menu">
 	<span>Sub Category</span>
    <p>{{viewServiceRequestInfo?.sub_category_name}}</p>
    </ion-col>
   </ion-row>
-   <ion-row style="border-bottom:1px solid #e3e3e3;">
-   <ion-col width-10><i class="fa fa-list-alt" aria-hidden="true"></i></ion-col>
-    <ion-col width-90>
+   <ion-row>
+   
+    <ion-col width-100 class="child_menu">
 	<span>Type Of Request</span>
    <p>{{viewServiceRequestInfo?.service_type}}</p>
    </ion-col>
   </ion-row>
-  <ion-row style="border-bottom:1px solid #e3e3e3;">
-   <ion-col width-10><i class="fa fa-user-circle" aria-hidden="true"></i></ion-col>
-    <ion-col width-90>
+  <ion-row>
+  
+    <ion-col width-100 class="child_menu">
 	<span>Location</span>
    <p>{{viewServiceRequestInfo?.location_name}}</p>
    </ion-col>
   </ion-row>
+
   <ion-row style="border-bottom:1px solid #e3e3e3;" *ngIf="(viewServiceRequestInfo?.enquiry_date!='0000-00-00 00:00:00')">
    <ion-col width-10><i class="fa fa-calendar" aria-hidden="true"></i></ion-col>
     <ion-col width-90>
@@ -81,6 +82,7 @@
    <p>{{viewServiceRequestInfo?.enquiry_date | date:'dd/M/yyyy h:m a'}}</p>
    </ion-col>
   </ion-row>
+
   <ion-row style="border-bottom:1px solid #e3e3e3;" *ngIf="(viewServiceRequestInfo?.scheduled_at!='0000-00-00 00:00:00')">
    <ion-col width-10><i class="fa fa-calendar" aria-hidden="true"></i></ion-col>
     <ion-col width-90>
@@ -88,22 +90,19 @@
    <p>{{viewServiceRequestInfo?.scheduled_at | date:'dd/M/yyyy h:m a'}}</p>
    </ion-col>
   </ion-row>
-  <ion-row style="border-bottom:1px solid #e3e3e3;">
-   <ion-col width-10><i class="fa fa-user-circle" aria-hidden="true"></i></ion-col>
-    <ion-col width-90>
+  <ion-row>
+ 
+    <ion-col width-100 class="child_menu">
 	<span>Remarks</span>
    <p>{{viewServiceRequestInfo?.remarks}}</p>
    </ion-col>
   </ion-row>
-  <ion-row style="border-bottom:1px solid #e3e3e3;">
-   <ion-col width-10><i class="fa fa-user-circle" aria-hidden="true"></i></ion-col>
-    <ion-col width-90>
+  <ion-row>
+   
+    <ion-col width-100 class="child_menu">
 	<span>Service Provider Comments</span>
    <p>{{viewServiceRequestInfo?.comments}}</p>
    </ion-col>
   </ion-row>
-  
-  </ion-grid>
-  </ion-card-content>
 </ion-card>
 </ion-content>

@@ -14,10 +14,9 @@
 </ion-header>
 
 <ion-content class="popup-mds" style=" background:#fff !important;">
-  <ion-item>
-  <ion-label class="mandatory">* All fields mandatory</ion-label>
-  </ion-item>
+
   <form [formGroup]="modalForm">
+  <br>
 			<ion-label stacked class="label-lb">Describe the problem</ion-label>
           <ion-input type="text" formControlName="problem" ></ion-input>
 		  <ion-item *ngIf="!modalForm.controls.problem.valid  && (modalForm.controls.problem.dirty || submitAttempt)">
@@ -68,10 +67,10 @@
 
             <ion-item class="check-bx">
              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>	
-             <ion-label (click)="openTerms()">I Agree to</ion-label>			  
+             <ion-label (click)="openTerms()" style="margin:0px;">I Agree to</ion-label>			  
             </ion-item>
 			 <ion-item class="terms-con">
-			<ion-col ><i class="fa fa-file-text terms-text" aria-hidden="true"></i> <small style="text-decoration:underline; font-size:16px;" (click)="openTerms()"s>Terms and Conditions </small></ion-col>
+			<ion-col ><i class="fa fa-file-text" aria-hidden="true"></i> &nbsp;<small style="text-decoration:underline; font-size:16px;" (click)="openTerms()"s>Terms and Conditions </small></ion-col>
 		 </ion-item>
             <small *ngIf="checkTerms">
                 <p class="err-reds">Kindly agree to the terms and conditions</p>

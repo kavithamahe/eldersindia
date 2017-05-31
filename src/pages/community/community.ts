@@ -84,15 +84,6 @@ export class CommunityPage {
 
 files:any;
 
-onChange(event: any, input: any ,id) {
-    this.files = [].slice.call(event.target.files);
-
-    input.value = this.files.map(f => f.name).join(', ');
-
-    this.communityServices.fileUpload(id,this.files[0]).subscribe(data=>{
-      console.log(data);
-    })
-  }
  openMenu(id) {
     let actionSheet = this.actionsheetCtrl.create({
       title: '',
@@ -103,7 +94,7 @@ onChange(event: any, input: any ,id) {
           role: 'destructive',
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
-            this.deletePost(id);
+            this.showConfirm(id);
           }
         },
       
@@ -111,9 +102,26 @@ onChange(event: any, input: any ,id) {
     });
     actionSheet.present();
   }
-
+showConfirm(id){
+     let confirm = this.alertCtrl.create({
+     title:'Confirm',
+     subTitle: 'comment will be deleted',
+       buttons: [
+        {
+          text: 'Cancel',
+         },
+        {
+          text: 'Ok',
+          handler: () => {
+           this.deletePost(id);
+          
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
    openUrl(metalink_url) {
-console.log("URL is ",metalink_url);
         this.platform.ready().then(() => {
             let browser = new InAppBrowser(metalink_url,'_blank');
 
@@ -150,7 +158,20 @@ toggleContent(){
       return null;
     }
   }
-
+// getDate(date){
+//   console.log("current time");
+//   // getDate
+//   let today = new Date().toISOString();
+//   console.log("current time ",today);
+//   let time:any = new Date("2017-03-05 11:26:16").getHours();
+// let date2:any = new Date("2017-03-06 12:26:16").getHours();
+// console.log(time -date2, time, date2, "sdfsd")
+// }
+  getDate(stringDate){
+      var dateOut = new Date(stringDate);
+      dateOut.setDate(dateOut.getDate());
+      return dateOut;
+    };
   showComment(post){
     let commentModal = this.modal.create(CommunitycommentsPage, { posts: post });
    commentModal.present();
@@ -198,7 +219,6 @@ toggleContent(){
       this.communityDetailData = users.result.info;
       this.members =  users.result.info.members;
       this.show_member = this.members.length;
-      console.log(this.show_member);
       if(this.show_member>3){
         this.viewMore=true;
       }

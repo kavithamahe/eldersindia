@@ -29,7 +29,10 @@ rootUrl:any;
       return this.http.post(this.rootUrl+`normaListNewsEvents`,_request,this.options)
       .map(res => res.json()); 
    }
-   
+   externalListLinks(){ 
+      return this.http.post(this.rootUrl+`getUsefullLinks`,"",this.options)
+      .map(res => res.json()); 
+   }
    linksscroll(nextPageURL){
    	 let _request= {"search": {"title": ""}, "postType": "usefullLinks"}
     return this.http.post(nextPageURL,_request,this.options)

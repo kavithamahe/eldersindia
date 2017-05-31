@@ -34,7 +34,7 @@
 				</ion-col>
 			</ion-row>
 			<ion-item class="mem-title">
-      			<p><i class="fa fa-user-circle-o"></i>Members</p>
+      			<p><i class="fa fa-user-circle-o"></i> &nbsp;Members</p>
 			</ion-item>
 				<div *ngFor="let member of members; let i=index" text-wrap>
 					<div *ngIf="i<= 2">
@@ -105,16 +105,17 @@
 	      		<ion-row>
 	      			<ion-col width-20>
 	        			<ion-avatar item-left class="image-profile">
-	          				<img [src]="imageUrl+user?.avatar" [hidden]="!user?.avatar" (click)="communityProfiles(user.uid)"/>
+	          				<img [src]="imageUrl+user?.avatar" [hidden]="!user?.avatar" 
+	          				(click)="communityProfiles(user.uid)"/>
 	        			</ion-avatar>
 	        		</ion-col>
 	        		<ion-col width-60>
 			          	<h2 (click)="communityProfile(user.uid)">{{user.name}}</h2>
-			          	<p class="time-datem"><i class="fa fa-calendar-o"></i> {{user.created_at}}
+			          		<p class="time-datem"><i class="fa fa-calendar-o"></i> {{user.created_at}}
 			          		</p>
 			        </ion-col>
 					<ion-col width-20>
-						<button ion-button color="dark" clear (click)="openMenu(user.id)">
+						<button *ngIf="user.uid == user_id" ion-button color="dark" clear (click)="openMenu(user.id)">
 		          			<i class="fa fa-angle-down"></i>
 		          		</button>
 	          		</ion-col>
@@ -132,7 +133,7 @@
 					<iframe [src]="cleanURL(user?.post_video)" frameborder="0">
 	         		</iframe>
 	         	</ion-card-content>
-	         	<ion-card-content>
+	         	<ion-card-content [hidden]="!user?.metalink_image">
 		          	<img  [src]="user.metalink_image" (click)="openUrl(user.metalink_url)" 
 		          	[hidden]="!user?.metalink_image">
 	       		</ion-card-content>

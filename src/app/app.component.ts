@@ -370,6 +370,11 @@ export class MyApp {
         //if user NOT using app and push notification comes
         //TODO: Your logic on click of push notification directly
         this.getPage(data);
+        push.finish(function() {
+        console.log('success');
+          }, function() {
+          console.log('error');
+          }, 'push-1');
         console.log("Push notification clicked");
         push.clearAllNotifications(function() {
               console.log('success');

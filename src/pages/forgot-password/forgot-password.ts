@@ -36,7 +36,7 @@ submit() {
 			if( this.mailId == ''){
 				this.service.showToast("Enter a valid E-Mail..!")	
 			}else{
-				this.service.webServiceCall(`forgetPassword`,{"email":this.mailId})
+				this.service.forgotPassword(`forgetPassword`,{"email":this.mailId})
 				.subscribe(
 					data=>{
 					      console.log(data);
