@@ -82,12 +82,14 @@ export class CommunitylistPage {
       this.communitylists = mycommunity.result.info.data;
       this.categoryLists = mycommunity.result.get.communityCategory;
       this.nextPageURL=mycommunity.result.info.next_page_url;
+      loader.dismiss();
   },
    err =>{
     this.communitylists =[];
+    loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
-  loader.dismiss();
+  
   }
 
   otherCommunity(data){
@@ -101,13 +103,14 @@ export class CommunitylistPage {
       this.communitylists = mycommunity.result.info.data;
       this.categoryLists = mycommunity.result.get.communityCategory;
       this.nextPageURL=mycommunity.result.info.next_page_url;
-
+      loader.dismiss();
   },
    err =>{
     this.communitylists =[];
+    loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
-       loader.dismiss();
+       
   }
   getItems(ev) {
     

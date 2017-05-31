@@ -65,7 +65,7 @@ export class ExternallinksPage {
     loader.present();
      this.externallinks.externalListLinks().subscribe (users => {
       this.externalLinksLists = users.result.info;
-      
+      loader.dismiss();
       },
       (err) => { 
         if(err.status===401)
@@ -76,10 +76,11 @@ export class ExternallinksPage {
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
     );
     
-    loader.dismiss();
+    
   }
    public showToaster(message)
   {

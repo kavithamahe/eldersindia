@@ -99,6 +99,7 @@ viewType:any;
        this.showToaster(deleteMessage.result);
       let viewObj={"viewType":viewType}; 
       this.navCtrl.setRoot(MessagesPage,viewObj);
+      loader.dismiss();
     },
     (err) => { 
         if(err.status===401)
@@ -109,8 +110,9 @@ viewType:any;
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
     );
-    loader.dismiss();
+    
   }
 }

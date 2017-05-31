@@ -82,12 +82,6 @@ export class CommunityprofilePage {
         videoUrl : ['', Validators.compose([Validators.pattern('^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be|vimeo\.com|dailymotion\.com|metacafe\.com|wines\.com)\/.+$')])],
       
     });
-       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-      
-      
-     
-        loader.dismiss();
         this.addComments=false;
         this.itemComments=false;
  
@@ -101,15 +95,13 @@ export class CommunityprofilePage {
     this.status=[];
      
       this.status = false;
-      this.request_sent = false;
-      let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-      loader.present();
+      this.request_sent = false;      
       this.profileCommunity(id);
       this.memberProfile(id);
       this.getPrivacy(id);
       this.addComments=false;
       this.itemComments=false;
-      loader.dismiss();
+      
   }
 showConfirm(id){
      let confirm = this.alertCtrl.create({
@@ -154,12 +146,13 @@ showConfirm(id){
     this.communityServices.deletePost(id).subscribe(datas =>{
      this.showToast(datas.result);
       this.profileCommunity(this.profile_uid);
+      loader.dismiss();
      },
      err =>{
-    
+    loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
-    loader.dismiss();
+    
   }
   showComment(post){
     let commentModal = this.modalCtrl.create(CommunitycommentsPage, { posts: post });
@@ -275,6 +268,8 @@ showConfirm(id){
 
   }
   getPrivacy(user_id){
+      let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+      loader.present();
       this.communityServices.getPrivacy(user_id).subscribe(users => {
       let Privacy = users.result[0];
        if(Privacy != null){
@@ -287,21 +282,24 @@ showConfirm(id){
        
        }
        console.log("Privacy" + Privacy);
-
+      loader.dismiss();
   },
    err =>{
     
     this.communityServices.showErrorToast(err);
+    loader.dismiss();
   })
   }
   Communities(id){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
     this.communityServices.getCommunityMembers(id).subscribe(users => {
       this.getCommunityMembers=users.result.data;
       this.nextPageURL=users.result.next_page_url;
-
+      loader.dismiss();
   },
    err =>{
-    
+    loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
   
@@ -312,28 +310,31 @@ showConfirm(id){
  }
   
   connectMember(user){
-   
+        let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+        loader.present();
         this.communityServices.connectMember(user.id,user.name).subscribe(users => {
-       this.showToast(users.result.info);
+        this.showToast(users.result.info);
         this.memberProfile(user.id);
        this.request_sent = true;
-
+       loader.dismiss();
       },
    err =>{
-    
+    loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
  }
 
 
   Connections(id,val){
-    this.communityServices.getConnectLists(id,val).subscribe(users => {
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+        loader.present();
+       this.communityServices.getConnectLists(id,val).subscribe(users => {
        this.allConnections=users.result.info.list.data;
        this.nextPageURL=users.result.info.list.next_page_url;
-
+      loader.dismiss();
   },
    err =>{
-    
+    loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
     }
@@ -354,8 +355,7 @@ showConfirm(id){
       this.profileCommunity(this.profile_uid);
       loader.dismiss();
    },
-      err =>{
-    
+      err =>{    
     this.communityServices.showErrorToast(err);
     loader.dismiss();
   })
@@ -400,19 +400,19 @@ showConfirm(id){
   
 metaLink:any = "";
 
-   addUserPosts(id){
-    let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
-    loader.present();
+   addUserPosts(id){   
      if(!this.authForm.valid){
       this.submitAttempt = true;
     }else{
       this.submitAttempt = false;
        if(this.post!='' && this.post!=undefined && this.post!=null)
        {
-    this.message=this.urlifyMessage(this.post);
-    this.urlifyLink(this.post);
-  }
+        this.message=this.urlifyMessage(this.post);
+        this.urlifyLink(this.post);
+       }
    if(this.message != ""){
+     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+     loader.present();
      this.communityServices.addUserPosts(id,this.base64Image,this.authForm.value.videoUrl,this.message,this.metaLink).subscribe(datas =>{
      this.showToast(datas.result);
      this.profileCommunity(id);
@@ -425,8 +425,7 @@ metaLink:any = "";
      this.showblock= null;
      loader.dismiss();
    },
-     err =>{
-    
+     err =>{    
     this.communityServices.showErrorToast(err);
     loader.dismiss();
   })

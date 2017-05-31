@@ -61,15 +61,11 @@ export class CommunityPage {
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
-       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-      loader.present();
-    
         this.community_id=this.navParams.get("community_id");
         this.communityList(this.community_id);
         this.communityDetail(this.community_id);
         this.addComments=false;
         this.itemComments=false;
-        loader.dismiss();
         this.userType="sponsor";
       });
       storage.get('id').then((id) => { this.user_id=id; })
@@ -215,6 +211,8 @@ toggleContent(){
   }
 
   communityDetail(id1){
+      let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+      loader.present();
       this.communityServices.communityDetail(id1).subscribe(users => {
       this.communityDetailData = users.result.info;
       this.members =  users.result.info.members;
@@ -222,19 +220,24 @@ toggleContent(){
       if(this.show_member>3){
         this.viewMore=true;
       }
-      
+      loader.dismiss();
   },
    err =>{
+     loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
   }
   joinCommunity(id){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+      loader.present();
     this.communityServices.joinCommunity(id).subscribe(users => {
       this.showToast(users.result);
       this.communityDetail(id);
       this.nav.pop();
+      loader.dismiss();
   },
    err =>{
+     loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
   }
@@ -267,12 +270,13 @@ toggleContent(){
    }
  
   addLikes(likeObj){
-    let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
 
    this.communityServices.addLike(likeObj).subscribe(data =>{
      this.showToast(data.result);
       this.communityList(this.community_id);
+      loader.dismiss();
    },
      err =>{
         if(err.status===401){
@@ -284,9 +288,9 @@ toggleContent(){
     else{
       this.communityServices.showErrorToast(err);  
     }
-    
-  })
     loader.dismiss();
+  })
+    
   }
   
   showToast(messageData){
@@ -303,7 +307,7 @@ toggleContent(){
 metaLink:any = "";
 
   postCommunity(id){
-     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
      loader.present();
      if(!this.authForm.valid){
       this.submitAttempt = true;
@@ -326,9 +330,10 @@ metaLink:any = "";
        this.base64Image="";
        this.addVideo = false;
        this.showblock= null;
+       loader.dismiss();
      },
        err =>{
-      
+      loader.dismiss();
       this.communityServices.showErrorToast(err);
     })
      }
@@ -336,7 +341,7 @@ metaLink:any = "";
      this.showToast("Enter message and Post");
    }
    }
-     loader.dismiss();
+     
   }
 
 
@@ -357,24 +362,30 @@ metaLink:any = "";
         }
 
   deletePost(id){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+     loader.present();
     this.communityServices.deletePost(id).subscribe(datas =>{
      this.showToast(datas.result);
      this.communityList(this.community_id);
+     loader.dismiss();
      },
      err =>{
-    
+    loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
   }
   
   deleteComment(id){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+     loader.present();
      this.communityServices.deleteComment(id).subscribe(datas =>{
      this.showToast(datas.result);
      this.comment="";
      this.communityList(this.community_id);
+     loader.dismiss();
      },
      err =>{
-    
+    loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
   }
