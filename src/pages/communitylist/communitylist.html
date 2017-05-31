@@ -19,16 +19,18 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="segments-info" style="background:#F3F7FF;">
-     <ion-segment [(ngModel)]="community" class="segment-top">
+     <ion-segment [(ngModel)]="community" class="segment-top" (ionChange)="changeSlide($event)">
         <ion-segment-button (click)="myCommunity()" value="my_community">
           My Communities
         </ion-segment-button>
-        <ion-segment-button (click)="otherCommunity('')" value="other_community">
+        <ion-segment-button (click)="otherCommunity()" value="other_community">
           Recommended Community
         </ion-segment-button>
       </ion-segment>
     <div [ngSwitch]="community">
-      <ion-list *ngSwitchCase="'my_community'">
+      <ion-slides (ionSlideWillChange)="slideChanged($event)">
+      <ion-slide>
+      <ion-list>
         <ion-card *ngIf(searchButton)>
           <ion-list>
             <ion-item>
@@ -64,8 +66,9 @@
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
       </ion-list>
-
-      <ion-list *ngSwitchCase="'other_community'">
+      </ion-slide>
+      <ion-slide>
+      <ion-list >
         <ion-card *ngIf(searchButton)>
           <ion-list>
             <ion-item>
@@ -98,6 +101,8 @@
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
       </ion-list>
+      </ion-slide>
+      </ion-slides>
     </div>
 	
 </ion-content>
