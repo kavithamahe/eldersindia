@@ -38,6 +38,7 @@ eventsId:number;
    this.eventsService.viewEvents(eventsId).subscribe(
      (viewEvents) => {
       this.eventsInfo=viewEvents.result;
+      loader.dismiss();
      },
     (err) => { 
         if(err.status===401)
@@ -48,10 +49,9 @@ eventsId:number;
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    
-    loader.dismiss();
+    );    
   }
   public showToaster(message)
   {

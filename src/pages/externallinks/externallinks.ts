@@ -42,7 +42,7 @@ export class ExternallinksPage {
      this.externallinks.externalLinksList().subscribe (users => {
       this.externalLinks = users.result.data;
       this.nextPageURL=users.result.next_page_url;
-      
+      loader.dismiss();
       },
       (err) => { 
         if(err.status===401)
@@ -53,10 +53,11 @@ export class ExternallinksPage {
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
     );
     
-    loader.dismiss();
+    
   }
    public showToaster(message)
   {

@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 import { JobBoardService } from '../../providers/job-board-service';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { JobDependentPage } from '../../pages/job-dependent/job-dependent';
-
+import { AppliedJobsPage } from '../../pages/applied-jobs/applied-jobs';
 /*
   Generated class for the Singlejob page.
 
@@ -44,7 +44,7 @@ user_type_id:any;
     this.jobBoardService.singleJob(this.jobId).subscribe(
      (singleJob) => {
       this.singleJobInfo=singleJob.result.info;  
-      //console.log(singleJob);
+      loader.dismiss();
     },
     (err) => { 
         if(err.status===401)
@@ -55,9 +55,9 @@ user_type_id:any;
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
   }
    public applyJob(jobId)
   {
@@ -78,6 +78,7 @@ user_type_id:any;
      (applyJob) => {
      // this.applyJobInfo=applyJob.result;  
        this.showToaster(applyJob.result);
+       this.navCtrl.setRoot(AppliedJobsPage);
       //console.log(singleJob);
     },
     (err) => { 

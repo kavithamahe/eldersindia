@@ -38,7 +38,8 @@ newsId:number;
     loader.present();
    this.newsService.viewNews(newsId).subscribe(
      (viewNews) => {
-      this.NewsInfo=viewNews.result;     
+      this.NewsInfo=viewNews.result; 
+      loader.dismiss();    
     },
     (err) => { 
         if(err.status===401)
@@ -49,10 +50,9 @@ newsId:number;
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    
-    loader.dismiss();
+    );   
   }
   public showToaster(message)
   {

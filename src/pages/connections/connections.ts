@@ -67,7 +67,8 @@ receivedConnectionScrollLists:any=[];
      (allConnections) => {
       this.allConnectionsInfo=allConnections.result.info.list.data;  
       this.orgAllConnectionsInfo=allConnections.result.info.list.data;
-      this.nextPageURL1=allConnections.result.info.list.next_page_url;        
+      this.nextPageURL1=allConnections.result.info.list.next_page_url; 
+      loader.dismiss();       
     },
     (err) => { 
         if(err.status===401)
@@ -78,9 +79,9 @@ receivedConnectionScrollLists:any=[];
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
   }
   public receivedRquest()
   {    
@@ -90,7 +91,8 @@ receivedConnectionScrollLists:any=[];
      (receivedRquest) => {
       this.receivedRquestInfo=receivedRquest.result.info.list.data;
       this.orgReceivedRquestInfo=receivedRquest.result.info.list.data; 
-       this.nextPageURL2=receivedRquest.result.info.list.next_page_url;     
+       this.nextPageURL2=receivedRquest.result.info.list.next_page_url;  
+       loader.dismiss();   
     },
     (err) => { 
         if(err.status===401)
@@ -101,9 +103,9 @@ receivedConnectionScrollLists:any=[];
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
   }
    public sentRquest()
   {    
@@ -113,7 +115,7 @@ receivedConnectionScrollLists:any=[];
      (sentRquest) => {
       this.sentRquestInfo=sentRquest.result.info.list.data;
       this.nextPageURL4=sentRquest.result.info.list.next_page_url;     
-  
+      loader.dismiss();
     },
     (err) => { 
         if(err.status===401)
@@ -124,9 +126,9 @@ receivedConnectionScrollLists:any=[];
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
   }
     public addConnectionsList()
   {    
@@ -136,6 +138,7 @@ receivedConnectionScrollLists:any=[];
      (addConnectionsList) => {
       this.addConnectionInfo=addConnectionsList.result.info.data;
       this.nextPageURL3=addConnectionsList.result.info.next_page_url;
+      loader.dismiss();
         },
     (err) => { 
         if(err.status===401)
@@ -146,9 +149,9 @@ receivedConnectionScrollLists:any=[];
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
   }
   public connectionStatus(connectionId,status)
   {    
@@ -157,7 +160,8 @@ receivedConnectionScrollLists:any=[];
     this.connectionsService.connectionStatus(connectionId,status).subscribe(
      (connectionStatus) => {
       this.showToaster(connectionStatus.result);
-      this.receivedRquest();   
+      this.receivedRquest();  
+      loader.dismiss(); 
     },
     (err) => { 
         if(err.status===401)
@@ -169,9 +173,9 @@ receivedConnectionScrollLists:any=[];
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
   }
   public search(searchEvent) {
     let term = searchEvent.target.value;
@@ -192,7 +196,7 @@ receivedConnectionScrollLists:any=[];
      (connectionMember) => {
        this.showToaster(connectionMember.result.info);
        this.addConnectionsList();
-       
+       loader.dismiss();
     },
     (err) => { 
         if(err.status===401)
@@ -204,9 +208,9 @@ receivedConnectionScrollLists:any=[];
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
  }
   public doInfinite2(infiniteScroll) {
     setTimeout(() => {      

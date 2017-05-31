@@ -55,7 +55,8 @@ sentScrolllLists:any=[];
     this.messagesService.inbox().subscribe(
      (inbox) => {
       this.inboxInfo=inbox.result.data; 
-      this.nextPageURL1=inbox.result.next_page_url;      
+      this.nextPageURL1=inbox.result.next_page_url;  
+      loader.dismiss();    
     },
     (err) => { 
         if(err.status===401)
@@ -66,9 +67,9 @@ sentScrolllLists:any=[];
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
     );
-    loader.dismiss();
   }
   public sent()
   {
@@ -77,7 +78,8 @@ sentScrolllLists:any=[];
     this.messagesService.sent().subscribe(
      (sent) => {
       this.sentInfo=sent.result.data;  
-      this.nextPageURL2=sent.result.next_page_url;         
+      this.nextPageURL2=sent.result.next_page_url; 
+      loader.dismiss();        
     },
     (err) => { 
         if(err.status===401)
@@ -88,9 +90,9 @@ sentScrolllLists:any=[];
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
   }
   public viewMessages(messageId,viewType)
   {
@@ -193,10 +195,12 @@ sentScrolllLists:any=[];
       if(viewType =='sent')
       {
         this.sent();
+        loader.dismiss();
       } 
       else
       {
         this.onInit();
+        loader.dismiss();
       }  
     },
     (err) => { 
@@ -208,8 +212,8 @@ sentScrolllLists:any=[];
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
   }
 }

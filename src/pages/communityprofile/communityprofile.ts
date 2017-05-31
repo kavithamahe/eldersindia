@@ -330,12 +330,14 @@ deletePost(id){
    this.communityServices.addLike(likeObj).subscribe(data =>{
      this.showToast(data.result);
       this.profileCommunity(this.profile_uid);
+      loader.dismiss();
    },
       err =>{
     
     this.communityServices.showErrorToast(err);
-  })
     loader.dismiss();
+  })
+    
   }
  
   showToast(messageData){
@@ -357,16 +359,20 @@ deletePost(id){
      this.comment="";
      // this.showblock= null;
      this.profileCommunity(this.profile_uid);
+      loader.dismiss(); 
    },
      err =>{
     
-    this.communityServices.showErrorToast(err);
-  })
-     loader.dismiss();
-  }else{
-     this.showToast("Enter Comments and Post");
-   }
-     
+       this.communityServices.showErrorToast(err);
+        loader.dismiss(); 
+         })
+    
+  }
+  else
+  {
+    this.showToast("Enter Comments and Post");
+  }
+   
   }
  
   
@@ -395,17 +401,19 @@ metaLink:any = "";
      this.videoUrl="";
      this.addVideo = false;
      this.showblock= null;
+     loader.dismiss();
    },
      err =>{
     
     this.communityServices.showErrorToast(err);
+    loader.dismiss();
   })
    }
     else{
      this.showToast("Enter message and Post");
    }
  }
-     loader.dismiss();
+     
   }
   
 

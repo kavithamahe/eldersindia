@@ -36,7 +36,7 @@ serviceRequestId:number;
     this.serviceRequest.viewServiceRequest(this.serviceRequestId).subscribe(
      (viewServiceRequest) => {
       this.viewServiceRequestInfo=viewServiceRequest; 
-      console.log(this.viewServiceRequestInfo);    
+      loader.dismiss();   
     },
     (err) => { 
         if(err.status===401)
@@ -47,9 +47,9 @@ serviceRequestId:number;
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
   }
   public dashboardPage()
   {

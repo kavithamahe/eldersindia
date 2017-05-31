@@ -56,8 +56,13 @@ show_option:boolean =false;
      
       this.manages=manages.result.info.data;
       this.allowedElderFlag=manages.result.allowedElderFlag;
-     })
       loader.dismiss();
+     },
+     (err) => {         
+        loader.dismiss();
+      }
+     );
+      
    }
 manage_elder:any;
 

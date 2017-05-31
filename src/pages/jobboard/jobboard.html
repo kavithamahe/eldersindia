@@ -27,7 +27,18 @@
 
 <ion-content padding class="contect-bg-moblie">
 
-
+ <ion-item>
+    <ion-label>Functional Area</ion-label>
+    <ion-select [(ngModel)]="functionalArea" (ionChange)="onInit()">
+      <ion-option *ngFor="let functional of functionalAreaList" value="{{functional?.id}}">{{functional?.name}}</ion-option>      
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Location</ion-label>
+    <ion-select [(ngModel)]="location" (ionChange)="onInit()">
+      <ion-option *ngFor="let locations of locationList" value="{{locations?.id}}">{{locations?.location}}</ion-option>
+    </ion-select>
+  </ion-item>
 
 <ion-row *ngFor="let jobBoard of jobBoardInfo" >
   <ion-col class="job-borad" (click)="viewJob(jobBoard?.id)">
@@ -47,7 +58,7 @@
  </ion-infinite-scroll>
 <ion-card *ngIf="emptyRecordSet">
 <ion-card-content>
-{{emptyRecordSet}}
+<p>{{emptyRecordSet}}</p>
 </ion-card-content>
 </ion-card>
 </ion-content>
