@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController,NavController, NavParams } from 'ionic-angular';
+import { ViewController,NavController, NavParams,LoadingController } from 'ionic-angular';
 
 import { ServiceProvider } from '../../providers/service-provider';
 /*
@@ -25,7 +25,7 @@ export class ForgotPasswordPage {
 	modalData:any;
 	passwordCode:any;
 
-  constructor(public service:ServiceProvider, public viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public service:ServiceProvider,public loadingCtrl: LoadingController, public viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams) {
   	this.mailId="";
   	this.modalType = navParams.get("modalType");
   	this.passwordCode = navParams.get("passCode");
@@ -36,12 +36,15 @@ submit() {
 			if( this.mailId == ''){
 				this.service.showToast("Enter a valid E-Mail..!")	
 			}else{
+				let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    			loader.present();
 				this.service.forgotPassword(`forgetPassword`,{"email":this.mailId})
 				.subscribe(
 					data=>{
 					      console.log(data);
 			            // this.dismiss();
 			            this.viewCtrl.dismiss("dismiss");
+			            loader.dismiss();
 			                },
 	                err=>{
 	                       if(err.status===401)
@@ -52,6 +55,7 @@ submit() {
 					        {
 					          	this.service.showToast("Try again later");
 					        }
+					        loader.dismiss();
 	                              })
 				// this.modalData = {"emailId": this.mailId};	
 				// let submitData = {"modalType":this.modalType , modalData:this.modalData};

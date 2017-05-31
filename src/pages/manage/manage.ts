@@ -104,12 +104,17 @@ manage_elder:any;
 
 
   deleteElder(id){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
     this.communityServices.deleteDetail(id).subscribe(datas =>{
      this.showToast(datas.result);
+     this.closeOption();
      this.manageDetail();
+     loader.dismiss();
      },
      err =>{
           this.communityServices.showErrorToast(err);
+          loader.dismiss();
       })
   }
 

@@ -95,8 +95,7 @@ customErr:any=false;
     }else{
      let subject= this.messageForm.value.subject;
      let message= this.messageForm.value.message;
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
+    
 
      for(let i=0;i<this.getFriendsListobj.length;i++)
       {
@@ -110,13 +109,14 @@ customErr:any=false;
       if(this.toId=='' || this.toId===null || this.toId==undefined)
       {
         //this.showToaster("Please select valid to address");
-        loader.dismiss();
-        this.customErr=true;
+          this.customErr=true;
        // return false;
       }
       else
        {
     this.messageObj= {"message":{"attachments":[],"to":{"title":this.toAddress,"description":this.toEmail,"image":"","originalObject":{"id":this.toId,"avatar":"","email":this.toEmail,"user_type":this.user_type,"friend_name":""}},"subject":subject,"message":message}};
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
     this.messagesService.sendMessage(this.messageObj).subscribe(
      (sendMessage) => { 
        this.toAddress='';

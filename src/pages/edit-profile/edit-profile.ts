@@ -83,15 +83,18 @@ submitAttempt:any;
   }
 
   loadMyProfile(){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
     this.providerService.webServiceCall(`myaccount`,"")
   .subscribe(data =>{
     this.profileData = data.result.info;
     this.user_dob=data.result.info.dob;
     this.user_type = data.result.info.user_type;
-
+    loader.dismiss();
   },
   err=>{
     this.providerService.showErrorToast(err);
+    loader.dismiss();
   })
   }
 
@@ -120,13 +123,17 @@ submitAttempt:any;
 
 
  updateProfile(){
+   
    if(!this.edit_profile_Form.valid){
             this.submitAttempt = true;
             console.log("error");
+            
            }
           else
           {
            this.submitAttempt = false;
+           let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
     let data = this.edit_profile_Form.value;
 //     if(this.user_type == 'elder'){
 this.updateData = {name: data.name,mobile:data.mobile_number,personal_email:data.personal_email,dob:this.user_dob ,app:"",avatar1:this.avatar};
@@ -139,9 +146,11 @@ this.updateData = {name: data.name,mobile:data.mobile_number,personal_email:data
     .subscribe(data=>{
       this.showToaster(data.result);
       this.navCtrl.setRoot(MyProfilePage);
+      loader.dismiss();
           },
     err=>{
       console.log(err);
+      loader.dismiss();
     })
   }
    } 

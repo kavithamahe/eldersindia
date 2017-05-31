@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController,LoadingController } from 'ionic-angular';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 import { Camera } from 'ionic-native';
 
@@ -20,7 +20,7 @@ export class CommunitymessagePage {
    message:any;
    member_id:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public communityServices: CommunityServices, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams,public communityServices: CommunityServices, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
   	 
      this.member_name = navParams.get("member_data").name;
      this.member_id = navParams.get("member_data").id;
@@ -39,18 +39,23 @@ export class CommunitymessagePage {
   }
   
   sendMessage(){
-     this.communityServices.sendMessage(this.member_id,this.attachment,this.authForm.value.subject,this.authForm.value.message).subscribe(users => {
-       this.communityServices.showToast(users.result.info);
-       this.authForm.reset();
-      },
-   err =>{
-    this.communityServices.showErrorToast(err);
-  })
+     
     if(!this.authForm.valid){
   		this.submitAttempt = true;
   	}
   	else{
   		this.submitAttempt = false;
+      let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+      loader.present();
+      this.communityServices.sendMessage(this.member_id,this.attachment,this.authForm.value.subject,this.authForm.value.message).subscribe(users => {
+       this.communityServices.showToast(users.result.info);
+       this.authForm.reset();
+       loader.dismiss(); 
+      },
+   err =>{
+     loader.dismiss(); 
+    this.communityServices.showErrorToast(err);
+  })
   	}
 
   }
