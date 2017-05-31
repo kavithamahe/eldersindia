@@ -75,23 +75,20 @@
    </ion-col>
   </ion-row>
 
-  <ion-row style="border-bottom:1px solid #e3e3e3;" *ngIf="(viewServiceRequestInfo?.enquiry_date!='0000-00-00 00:00:00')">
-   <ion-col width-10><i class="fa fa-calendar" aria-hidden="true"></i></ion-col>
-    <ion-col width-90>
+  <ion-row>  
+    <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.enquiry_date!='0000-00-00 00:00:00')">
 	<span>Enquiry Date</span>
    <p>{{viewServiceRequestInfo?.enquiry_date | date:'dd/M/yyyy h:m a'}}</p>
    </ion-col>
   </ion-row>
 
-  <ion-row style="border-bottom:1px solid #e3e3e3;" *ngIf="(viewServiceRequestInfo?.scheduled_at!='0000-00-00 00:00:00')">
-   <ion-col width-10><i class="fa fa-calendar" aria-hidden="true"></i></ion-col>
-    <ion-col width-90>
+  <ion-row>   
+    <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.scheduled_at!='0000-00-00 00:00:00')">
 	<span>Scheduled Date</span>
    <p>{{viewServiceRequestInfo?.scheduled_at | date:'dd/M/yyyy h:m a'}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>
- 
+  <ion-row> 
     <ion-col width-100 class="child_menu">
 	<span>Remarks</span>
    <p>{{viewServiceRequestInfo?.remarks}}</p>
