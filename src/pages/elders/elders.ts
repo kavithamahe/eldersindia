@@ -138,7 +138,7 @@ skill_data:any;
         elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
-        elder_email: ['', Validators.compose([Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]*'),Validators.required])],
+        elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
         elder_password:['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
        /* emergency_numbers: ['', Validators.compose([Validators.required])],
