@@ -35,8 +35,8 @@ export class ModalContentPage {
    {    
      console.log("this is modal page");
      console.log("modal content page",params.get("vendor"));
-     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
-     loading.present();
+     //let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+     //loading.present();
      this.dependentLists = params.get("dependentList");
      if(params.get("vendor") != undefined){
       this.vendor = this.params.get("vendor").name;
@@ -48,7 +48,7 @@ export class ModalContentPage {
         contact: ['',Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.pattern('[0-9]*'), Validators.required])],
         dependents: ['',Validators.compose([])]
     });
-     loading.dismiss();
+    // loading.dismiss();
      // this.userType = "elder";
      storage.get('user_type').then((user_type) => { this.userType=user_type;});
      if(this.userType != 'sponsor'){

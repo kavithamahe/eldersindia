@@ -52,16 +52,13 @@ actionUrl:any='addBlog';
       storage.get('user_type').then((user_type) => { this.user_type=user_type;});
       storage.get('token').then((token) => { this.token=token; 
        this.blogId=navParams.get("blogId");
-       this.action=navParams.get("action");
-       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-       loader.present();
+       this.action=navParams.get("action");     
        if(this.blogId>0 && this.action=='edit')
        {
          this.blogTitle="Edit Blog";
          this.getEditBlog(this.blogId);
        }
-      this.getBlogCategories();
-      loader.dismiss();
+      this.getBlogCategories();      
       })
     });
     this.blogForm = formBuilder.group({
@@ -77,6 +74,8 @@ actionUrl:any='addBlog';
   }
   getEditBlog(blogId)
   {
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
     this.blogListService.getEditBlog(blogId).subscribe(
      (getEditBlog) => {
       this.title=getEditBlog.result.title; 
@@ -96,7 +95,8 @@ actionUrl:any='addBlog';
       {
       this.tagsModel[i]=tagsObject[i].name;  
       }  
-      this.allowComments=getEditBlog.result.allow_comment;    
+      this.allowComments=getEditBlog.result.allow_comment;  
+      loader.dismiss();  
     },
     (err) => { 
         if(err.status===401)
@@ -107,14 +107,18 @@ actionUrl:any='addBlog';
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
     ); 
   }
   public getBlogCategories()
   {
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
     this.blogListService.getBlogCategory().subscribe(
      (getBlogCategories) => {
-      this.categoriesList=getBlogCategories.result;     
+      this.categoriesList=getBlogCategories.result;  
+      loader.dismiss();   
     },
     (err) => { 
         if(err.status===401)
@@ -125,6 +129,7 @@ actionUrl:any='addBlog';
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
     );
   }
@@ -208,6 +213,7 @@ actionUrl:any='addBlog';
      (createBlog) => {
       this.navCtrl.push(ManageBlogsPage);
       this.showToaster(createBlog.result);
+      loader.dismiss();
       //console.log(createBlog.result);
     },
     (err) => { 
@@ -219,9 +225,10 @@ actionUrl:any='addBlog';
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
     );
-    loader.dismiss();
+    
    }
   }
   public showToaster(message)

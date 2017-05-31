@@ -23,7 +23,7 @@ manageblogsLists:any=[];
 blogStatus:any=[];
 nextPageURL:any='';
 manageBlogscrollLists:any=[];
-  constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
+  constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
@@ -38,11 +38,11 @@ manageBlogscrollLists:any=[];
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
    this.blogListService.manageblogs().subscribe(
-     (manageblogs) => {
-      
+     (manageblogs) => {      
       this.manageblogsLists=manageblogs.result.list.data;  
        this.blogStatus=manageblogs.result.status; 
        this.nextPageURL=manageblogs.result.list.next_page_url;
+       loader.dismiss();
     },
     (err) => { 
         if(err.status===401)
@@ -53,10 +53,9 @@ manageBlogscrollLists:any=[];
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    
-    loader.dismiss();
+    );   
   }
   public showToaster(message)
   {
@@ -69,26 +68,45 @@ manageBlogscrollLists:any=[];
   }
   deleteBlog(blogId)
   {
-  	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-   this.blogListService.deleteBlog(blogId).subscribe(
-     (manageblogs) => {  
-      this.showToaster(manageblogs.result);
-      this.manageblogs();
-    },
-    (err) => { 
-        if(err.status===401)
+     let confirm = this.alertCtrl.create({
+      title: 'Are you delete the blog',
+      message: 'Are you sure to delete this blog',
+      cssClass:'alertbox',
+      buttons: [
         {
-        this.showToaster(JSON.parse(err._body).error);
-        }
-        else
+          text: 'Cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
         {
-          this.showToaster("Try again later");
+          text: 'Ok',
+          handler: () => {
+           let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+            loader.present();
+           this.blogListService.deleteBlog(blogId).subscribe(
+             (manageblogs) => {  
+              this.showToaster(manageblogs.result);
+              this.manageblogs();
+              loader.dismiss();
+            },
+            (err) => { 
+                if(err.status===401)
+                {
+                this.showToaster(JSON.parse(err._body).error);
+                }
+                else
+                {
+                  this.showToaster("Try again later");
+                }
+                loader.dismiss();
+              }
+            );
+          }
         }
-      }
-    );
-    
-    loader.dismiss();
+      ]
+    });
+  	confirm.present();
   }
   public dashboardPage()
   {

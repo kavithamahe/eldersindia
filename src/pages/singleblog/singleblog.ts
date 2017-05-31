@@ -64,7 +64,8 @@ submitAttempt: boolean = false;
     loader.present();
     this.blogListService.singleBlog(blogId).subscribe(
      (singleBlog) => {
-      this.singleBlogInfo=singleBlog.result;     
+      this.singleBlogInfo=singleBlog.result;  
+      loader.dismiss();   
     },
     (err) => { 
         if(err.status===401)
@@ -75,9 +76,9 @@ submitAttempt: boolean = false;
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
     );
-    loader.dismiss();
   }
   
  
@@ -96,7 +97,8 @@ submitAttempt: boolean = false;
      (blogComment) => {
        this.viewComments(this.blogId);
        this.commentForm.reset();
-     this.showToaster(blogComment.result);   
+     this.showToaster(blogComment.result);  
+     loader.dismiss(); 
     },
     (err) => { 
         if(err.status===401)
@@ -107,10 +109,9 @@ submitAttempt: boolean = false;
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    
-     loader.dismiss();
+    );   
    }
   }
   public viewComments(blogId)
@@ -139,7 +140,8 @@ submitAttempt: boolean = false;
     this.blogListService.deleteComment(commentId).subscribe(
      (deleteComment) => {
        this.viewComments(this.blogId);
-     this.showToaster(deleteComment.result);   
+     this.showToaster(deleteComment.result);  
+      loader.dismiss(); 
     },
     (err) => { 
         if(err.status===401)
@@ -150,9 +152,9 @@ submitAttempt: boolean = false;
         {
           this.showToaster("Try again later");
         }
+         loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );   
   }
   public showToaster(message)
   {
@@ -192,6 +194,7 @@ submitAttempt: boolean = false;
      this.reply_comment='';
     this.replyPost=null;  
     this.showReply=null;
+     loader.dismiss();
     },
     (err) => { 
         if(err.status===401)
@@ -202,9 +205,9 @@ submitAttempt: boolean = false;
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
     );
-    loader.dismiss();
  }
  else{
      this.showToaster("Enter Comments and Post");

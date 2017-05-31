@@ -67,7 +67,7 @@ customErr:any=false;
       {
       this.friendsList[i]=getFriendsList.result[i].friend_name; 
       }
-          
+      loader.dismiss();   
     },
     (err) => { 
         if(err.status===401)
@@ -78,9 +78,9 @@ customErr:any=false;
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
   }
 
   public dashboardPage()
@@ -124,6 +124,7 @@ customErr:any=false;
        this.message='';
        this.navCtrl.setRoot(MessagesPage);
       this.showToaster(sendMessage.result.info); 
+      loader.dismiss();
       //console.log(singleJob);
     },
     (err) => { 
@@ -136,9 +137,9 @@ customErr:any=false;
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
    }
   }
   }

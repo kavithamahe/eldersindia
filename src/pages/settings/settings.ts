@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Slides, NavController, NavParams } from 'ionic-angular';
+import { Slides, NavController, NavParams,LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { ServiceProvider } from '../../providers/service-provider';
@@ -34,7 +34,7 @@ export class SettingsPage {
   prev_index:any = 0;
 
 
-  constructor(public storage:Storage, public serviceProvider:ServiceProvider, public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public storage:Storage,public loadingCtrl: LoadingController, public serviceProvider:ServiceProvider, public navCtrl: NavController, public navParams: NavParams) {}
 
   update(){
     if(this.settings=="paginate"){
@@ -66,11 +66,10 @@ export class SettingsPage {
   change(){
     console.log("record count updated");
   }
-  getPageCount(){
+  getPageCount(){    
     this.serviceProvider.webServiceCall('getPageCount',"")
     .subscribe(data=>{
-      this.records = data.result;
-      console.log("get page count: ",data);
+      this.records = data.result;      
     },
     error=>{
         if(error.status===401)
@@ -173,6 +172,8 @@ export class SettingsPage {
 
 
   getPrivacy(){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
   	let requestId = {"user_id":this.user_uid};
   	this.serviceProvider.webServiceCall('getPrivacy',requestId)
   	.subscribe(data=>{
@@ -189,6 +190,7 @@ export class SettingsPage {
       this.privacy_connection = JSON.parse(info.privacy_connection);
       this.privacy_profile = JSON.parse(info.privacy_profile);
   		this.status = info.status;
+      loader.dismiss();
   	},
   	error=>{
       if(error.status===401)
@@ -199,11 +201,14 @@ export class SettingsPage {
         {
           this.serviceProvider.showToast("Error while fetching results");
         }
+        loader.dismiss();
   	});
   }
 
 
   privacy_submit(){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
   	let data = {"info":{
   		"id":this.user_id,
   		"uid":this.user_uid,
@@ -221,6 +226,7 @@ export class SettingsPage {
   		this.serviceProvider.showToast(data.result);
   		console.log(data);
   		this.getPrivacy();
+      loader.dismiss();
   	},
   	error=>{
   		if(error.status===401){
@@ -229,6 +235,7 @@ export class SettingsPage {
       else{
        this.serviceProvider.showToast("Server Error..!");   
       }
+      loader.dismiss();
   	});
   }
 

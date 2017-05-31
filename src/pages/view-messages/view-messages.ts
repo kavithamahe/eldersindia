@@ -46,7 +46,8 @@ viewType:any;
     loader.present();
     this.messagesService.viewMessages(messageId,viewType).subscribe(
      (viewMessages) => {
-      this.veiwMessagesInfo=viewMessages.result.details;  
+      this.veiwMessagesInfo=viewMessages.result.details; 
+      loader.dismiss(); 
     },
     (err) => { 
         if(err.status===401)
@@ -57,9 +58,9 @@ viewType:any;
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
   }
   
   public dashboardPage()

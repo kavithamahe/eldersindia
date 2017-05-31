@@ -48,14 +48,14 @@ export class ServiceprovidersPage {
     this.providerService.webServiceCall(`getCategory`,{"location":""})
       .subscribe(data =>{
       this.services = data.result.info.category;
-      
+      loading.dismiss();
       console.log("Recieved filtered data :"+this.services);
     },
     err =>{
       this.providerService.showErrorToast(err);
       console.log("Response for get service offered: "+err);
-    })
       loading.dismiss();
+    })      
   }
 
   public dashboardPage()

@@ -105,12 +105,14 @@ website:any;
                    this.vendorList = data.result.info;
                    this.serviceData = data.result.info.requestServices;
                    this.website = this.vendorList.vendorDetails.website;
+                   loading.dismiss();
                   },
           err =>{
                    this.providerService.showErrorToast(err);
+                   loading.dismiss();
                    console.log("Response for getVendorDetails: "+err);
                 })
-        loading.dismiss();
+        
   }
 
 
@@ -140,28 +142,20 @@ modal(){
   // }
 
   sendRequestService(data){
-    // if(!this.requestForm.valid){
-    //   this.submitAttempt = true;
-    // }else{
-    //   this.submitAttempt = false;
-    //   this.dependentID = this.requestForm.value.dependents; 
-    //   if(this.userType != 'sponsor'){
-    //   this.dependentID = this.elderId;
-    //   }
-    
-    // let requestServiceData = {"location_id":this.locationId,"vendor_id":this.vendor_id, "category_id":this.serviceData.category_id, "sub_category_id":this.serviceData.sub_category_id, "service_id":this.serviceData.service_id, "problem":this.requestForm.value.problem, "datetime":this.requestForm.value.date+" "+this.requestForm.value.time, "dependentid":this.dependentID, "mobile":this.requestForm.value.contact}
-let requestServiceData = {"location_id":this.locationId,"vendor_id":this.vendor_id, "category_id":this.serviceData.category_id, "sub_category_id":this.serviceData.sub_category_id, "service_id":this.serviceData.service_id, "problem":data.problem, "datetime":data.datetime, "dependentid":data.dependentId, "mobile":data.mobile_no}    
+    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    loading.present();
+    let requestServiceData = {"location_id":this.locationId,"vendor_id":this.vendor_id, "category_id":this.serviceData.category_id, "sub_category_id":this.serviceData.sub_category_id, "service_id":this.serviceData.service_id, "problem":data.problem, "datetime":data.datetime, "dependentid":data.dependentId, "mobile":data.mobile_no}    
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
     .subscribe(
         data =>{
                  console.log(data);
                  this.providerService.showToast(data.result);
-                 // this.toggleRequestService();
-                 // this.requestForm.reset();
+                 loading.dismiss();
                 },
         err =>{
                   this.providerService.showErrorToast(err);
                   console.log("Response for serviceRequest: "+err);
+                  loading.dismiss();
               })
 
   }

@@ -22,7 +22,9 @@ token:string;
 imageUrl:string;
 nextPageURL:any='';
 appliedJobScrollLists:any;
+loader:any;
    constructor(public navCtrl: NavController, public navParams: NavParams,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
+    
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
@@ -33,11 +35,12 @@ appliedJobScrollLists:any;
 }
  appliedJobs()
  {
- 	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
+   this.loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    this.loader.present();
    this.jobBoardService.appliedJobs().subscribe(
      (appliedJobs) => {      
       this.appliedJobsList=appliedJobs.result.info.data; 
+      this.loader.dismiss();
     },
     (err) => { 
         if(err.status===401)
@@ -48,10 +51,9 @@ appliedJobScrollLists:any;
         {
           this.showToaster("Try again later");
         }
+        this.loader.dismiss();
       }
-    );
-    
-    loader.dismiss();
+    );  
  }
  public dashboardPage()
   {
@@ -106,5 +108,9 @@ appliedJobScrollLists:any;
         }
       }
     );
+  }
+  ionViewDidLoad()
+  {
+    this.loader.dismiss();
   }
 }
