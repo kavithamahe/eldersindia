@@ -40,19 +40,21 @@
     </ion-select>
   </ion-item>
 
-<ion-row *ngFor="let jobBoard of jobBoardInfo" >
-  <ion-col class="job-borad" (click)="viewJob(jobBoard?.id)">
-    <h2>{{jobBoard?.title}}</h2>
-	<br>
+<ion-card *ngFor="let jobBoard of jobBoardInfo" >
+  <ion-item (click)="viewJob(jobBoard?.id)">
+    <h2 test-wrap>{{jobBoard?.title}}</h2>
+    <P><i class="fa fa-university" aria-hidden="true"> {{jobBoard?.company_name}} </i></P>
+    <P><i class="fa fa-briefcase" aria-hidden="true"> {{jobBoard?.min_experience}} - {{jobBoard?.max_experience}} years</i></P>
+    <P><i class="fa fa-map-marker" aria-hidden="true"> {{jobBoard?.location}}</i> </P>
+	<!--<br>
     <small *ngIf="jobBoard?.job_type"><ion-badge color="primary">{{jobBoard?.job_type}}</ion-badge></small>
      <ion-badge color="green" *ngIf="jobBoard?.skills">{{jobBoard?.skills}}</ion-badge> 
-   
- <!-- <div class="footer-btn">
-  <button ion-button class="btn-clr" color="primary" full (click)="applyJob(jobBoard?.id)">Apply</button>
-  <button ion-button class="btn-clrs" color="orange" full (click)="viewJob(jobBoard?.id)">More Info</button>
-  </div>-->
-  </ion-col>
-</ion-row>
+  -->
+  <ion-thumbnail item-right>
+  <img src="assets/img/logo-head.png">
+  </ion-thumbnail>
+  </ion-item>
+</ion-card>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>

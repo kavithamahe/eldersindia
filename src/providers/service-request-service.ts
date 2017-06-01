@@ -62,4 +62,11 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'getRemarks',_request,this.options)
       .map(res => res.json()); 
   }
+  cancelRequest(serviceId) 
+  {
+  
+   let _request= {"sr_id":serviceId};
+    return this.http.post(this.rootUrl+'cancelServiceRequest',_request,this.options)
+      .map(res => res.json()); 
+  }
 }

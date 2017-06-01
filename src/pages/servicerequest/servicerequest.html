@@ -48,7 +48,7 @@
 			<!-- <p item-text-wrap  class="service-cont">{{service?.sr_token}}</p> -->
 	<!-- </ion-row> -->
 	<ion-row>
-			<p item-text-wrap  class="service-cont">{{service?.enquiry_about}}</p>
+			<p item-text-wrap  class="service-cont">{{service?.enquiry_about | words : 10}}</p>
 	</ion-row>
 	<ion-row>
 	<ion-col width-50 style="padding-left:0px;">
@@ -61,19 +61,28 @@
 	
 	<p class="tocken-no"><i class="fa fa-id-card-o"></i> {{service?.sr_token}}</p>
 	</ion-col>
-	</ion-row>
-	
+	</ion-row>	
 	</ion-col>	
+
   </ion-row>
-  
+  <ion-row>
+  <button ion-button icon-left small *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="cancelRequest(service?.id)">
+       
+         Cancel Request
+  </button>
+  </ion-row>
 
 
   </ion-grid>
+  <ion-row>
+  <ion-col width-20></ion-col>
+  <ion-col width-80>
   <button ion-button icon-left clear small *ngIf="(service?.vendor_status==2 &&(!service?.vendor_remarks))"(click)="enableRemark(i)">
         <i class="fa fa-star"></i>
         <div> Remarks</div>
   </button>
-
+  </ion-col>
+  </ion-row>
 
 
   <ion-list *ngIf="(i==showRemark)">
