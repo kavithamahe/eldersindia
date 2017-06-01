@@ -40,7 +40,7 @@
      <small>Skills</small><p *ngIf="singleJob?.skills"><span *ngFor="let skills of singleJob?.skills">{{skills?.skills}}</span> </p>
 
       <small>Job Description</small>
-     <p [innerHtml]="singleJob?.description"></p>
+     <p [innerHtml]="singleJob?.description" style="margin:0px;"></p>
 </ion-grid>
 <hr/>
 
