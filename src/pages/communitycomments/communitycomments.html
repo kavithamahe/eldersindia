@@ -86,10 +86,10 @@
 					</ion-row>
 					<ion-row>
 						<ion-col *ngIf="reply.likes == 1">
-						<button ion-button clear  (click)="sendInlineLikes(reply.com_post_cmt_id,reply.comments_replay_id,post_id)"><p class="liks-comments"><i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;Like</p></button>
+						<button ion-button clear  (click)="sendInlineLikes(reply.comments_replay_id,reply.com_post_cmt_id,post_id)"><p class="liks-comments"><i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;Like</p></button>
 						</ion-col>
 						<ion-col  *ngIf="reply.likes == 0 || reply.likes == null" >
-						<button ion-button clear  (click)="sendInlineLikes(reply.com_post_cmt_id,reply.comments_replay_id,post_id)"><p class="liks-comments">&nbsp;Like</p></button>
+						<button ion-button clear  (click)="sendInlineLikes(reply.comments_replay_id,reply.com_post_cmt_id,post_id)"><p class="liks-comments">&nbsp;Like</p></button>
 						</ion-col>
 						<ion-col>
 						<button  ion-button clear (click)="replyComments(i)"><p class="liks-comments">
