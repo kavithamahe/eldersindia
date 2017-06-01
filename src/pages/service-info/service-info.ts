@@ -47,7 +47,7 @@ elderId:any;
 url:any;
 userType:any;
 website:any;
-
+lead_time:any='00:00';
 @ViewChild('ghbslides') slider: Slides;
 // @ViewChild('ghbslides') ghbslides: any;
 
@@ -105,6 +105,7 @@ website:any;
                    this.vendorList = data.result.info;
                    this.serviceData = data.result.info.requestServices;
                    this.website = this.vendorList.vendorDetails.website;
+                   this.lead_time=data.result.info.serviceOffered[0].category_lists[0].service_sub_category_lists[0].lead_time;
                    loading.dismiss();
                   },
           err =>{
@@ -144,7 +145,7 @@ modal(){
   sendRequestService(data){
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
-    let requestServiceData = {"location_id":this.locationId,"vendor_id":this.vendor_id, "category_id":this.serviceData.category_id, "sub_category_id":this.serviceData.sub_category_id, "service_id":this.serviceData.service_id, "problem":data.problem, "datetime":data.datetime, "dependentid":data.dependentId, "mobile":data.mobile_no}    
+    let requestServiceData = {"location_id":this.locationId,"vendor_id":this.vendor_id, "category_id":this.serviceData.category_id, "sub_category_id":this.serviceData.sub_category_id, "service_id":this.serviceData.service_id, "problem":data.problem, "datetime":data.datetime, "dependentid":data.dependentId, "mobile":data.mobile_no,"lead_time":this.lead_time}    
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
     .subscribe(
         data =>{

@@ -67,7 +67,7 @@ export class LoginPage {
 
    	this.loginUser.loginload(this.registerCredentials).subscribe(     
       (loginuser) => {
-
+          console.log("you can login");
           this.service.serviceInit(loginuser['token']);
           this.community_service.initialize();
 
@@ -119,6 +119,8 @@ export class LoginPage {
     },
 
     (err) => { 
+        console.log("you can not login");
+        console.log(err);
         if(err.status===401)
         {
         this.showToaster(JSON.parse(err._body).error);
