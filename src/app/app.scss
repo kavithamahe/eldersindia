@@ -248,7 +248,10 @@ input, textarea {
 .left-icons													{float:left; width:100%;}
 .left-icons i                                               {font-size:40px; font-weight:400; color:#FFF;}
 .right-fnticon												{float:right; line-height:50px; color:#333;}
-.ftbtb p                                                    {color:#333; font-size:17px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:45px;}
+.ftbtb p                                                    {color:#333; font-size:17px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:45px;  width:135px; display:block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;}
 .btn-warnings											    {background-color:#888aef;border-color:#eea236;color:#fff;font-size:13px !important;text-transform:capitalize;}
 .btn-infos												    {background-color:#fe7fe6;border-color:#46b8da;color:#fff;font-size:13px !important;text-transform:capitalize;}
 .info													    {font-size:13px !important;text-transform:capitalize !important;}
@@ -511,7 +514,7 @@ ion-app.md													{font-family: 'Open Sans', sans-serif !important; }
 ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !important;}
 .blogs-div h2												{color:#1976d2;white-space: nowrap;font-family: "Open Sans",sans-serif !important; overflow:hidden;font-size:16px;
 															 font-weight:700;line-height:20px;text-align:left;}
-.scroll-content{background:#fff;}
+
 
 .login-pages .item-ios									    {background:none;}
 .login-pages .item-ios .text-input-ios						{padding:9px 10px 9px 20px !important;}
@@ -667,12 +670,12 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
     border-radius: 50%;
     bottom: auto;
     content: "";
-    height: 8px;
-    left:10px;
-    margin-top:8px;
+    height:6px;
+    left:11px;
+    margin-top:9px;
     position: absolute;
     right: auto;
-    width: 8px;
+    width:6px;
     z-index: 1;}
 	.req-viewlist ion-row ion-col.child_menu::after{    border-left:1px dotted  #9dbdd6;
     bottom: 0;
@@ -892,7 +895,7 @@ white-space: normal;}
 .send-box-content ion-row > ion-col > p{ font-size:11px;}
 .job-descriptions small{ width:100%; font-size:17px;color:#404994;}
 .job-descriptions span{ width:100%; font-size:15px; color:#777;}
-.job-descriptions p{ width:100%; font-size:15px; color:#777; padding-bottom:5px; padding-top:3px; line-height:25px;}
+.job-descriptions p{ width:100%; font-size:15px; color:#777; padding-bottom:5px; padding-top:3px; line-height:25px; margin:0px !important;}
 .job-descriptions p h4{ width:100%; font-size:15px; color:#777; padding-bottom:5px; padding-top:3px; line-height:25px;}
 
 .inbox-sends .item-ios	{ padding-left:5px !important;}
