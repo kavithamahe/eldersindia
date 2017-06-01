@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -26,7 +26,7 @@ change_password_Form: FormGroup;
 mytype:string ="password";
 show_password:boolean = false;
 
-  constructor(public formBuilder:FormBuilder,public service:ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public formBuilder:FormBuilder,public loadingCtrl: LoadingController,public service:ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
   	this.password_submit = false;
   	this.nav = navCtrl;
   	this.change_password_Form = formBuilder.group({
@@ -54,6 +54,7 @@ show_password:boolean = false;
 
 
   submit() {
+    
     if(this.change_password_Form.valid){
 
     if(this.change_password_Form.value.newPassword != this.change_password_Form.value.re_enterPassword){
@@ -61,13 +62,16 @@ show_password:boolean = false;
       this.submitAttempt = false;
     }else{
     	this.submitAttempt = false;
-      this.password_submit = false;      
+      this.password_submit = false; 
+      let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+      loader.present();     
       let change_password_data = {"current_password": this.change_password_Form.value.currentPassword, "new_password": this.change_password_Form.value.newPassword, "confirm_password": this.change_password_Form.value.re_enterPassword};
       this.service.webServiceCall(`changePassword`,change_password_data)
       .subscribe(data =>{      	
       		this.service.showToast(data.result);
       		this.change_password_Form.reset();
           this.dismiss();
+          loader.dismiss(); 
 	    },
 		    error =>{
           if(error.status===401){
@@ -76,7 +80,7 @@ show_password:boolean = false;
       else{
        this.service.showToast("Please try again later..!");   
       }
-		      
+		   loader.dismiss();    
 	    })
     } 
   }else{

@@ -46,7 +46,8 @@ vendorStatus:any=[];
      (serviceRequest) => {
       this.serviceRequestInfo=serviceRequest.result.info.list.data; 
       this.vendorStatus=serviceRequest.result.info.status;
-      this.nextPageURL=serviceRequest.result.info.list.next_page_url;      
+      this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
+      loader.dismiss();    
     },
     (err) => { 
         if(err.status===401)
@@ -57,9 +58,9 @@ vendorStatus:any=[];
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
   }
    public getRemarks()
   {
@@ -127,11 +128,11 @@ vendorStatus:any=[];
     this.serviceRequest.submitRemark(serviceId,this.rating,this.remarks).subscribe(
      (submitRemark) => {      
       this.showToaster(submitRemark.result);  
-       this.remarks='';
-       this.rating=0;   
-      this.showRemark=null;
-  
-      this.onInit();  
+      this.remarks='';
+      this.rating=0;   
+      this.showRemark=null;  
+      this.onInit(); 
+      loader.dismiss(); 
     },
     (err) => { 
         if(err.status===401)
@@ -142,9 +143,9 @@ vendorStatus:any=[];
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    loader.dismiss();
+    );    
   }
   }
   showAlert(errorMsg) {

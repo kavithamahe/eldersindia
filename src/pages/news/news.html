@@ -38,4 +38,9 @@
  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
+ <ion-card *ngIf="newsLists.length<=0">
+ <ion-item>
+ <p>No Record Found.</p>
+ </ion-item>
+ </ion-card>
 </ion-content>

@@ -41,7 +41,8 @@ imageUrl:string;
    this.blogListService.blogList().subscribe(
      (blogsList) => {
       
-      this.bloglists=blogsList.result.data;     
+      this.bloglists=blogsList.result.data; 
+      loader.dismiss();    
     },
     (err) => { 
         if(err.status===401)
@@ -52,10 +53,9 @@ imageUrl:string;
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    
-    loader.dismiss();
+    );   
   }
 
   public showToaster(message)

@@ -39,7 +39,8 @@ eventScrollLists:any;
    this.eventsService.eventsList().subscribe(
      (eventsList) => {
       this.eventsLists=eventsList.result.data;        
-      this.nextPageURL=eventsList.result.next_page_url;   
+      this.nextPageURL=eventsList.result.next_page_url;  
+      loader.dismiss(); 
     },
     (err) => { 
         if(err.status===401)
@@ -50,10 +51,9 @@ eventScrollLists:any;
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
-    
-    loader.dismiss();
+    );  
   }
 
   public showToaster(message)

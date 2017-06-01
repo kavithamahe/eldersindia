@@ -135,10 +135,10 @@ skill_data:any;
         elder_name : ['', Validators.compose([ Validators.maxLength(30), 
               Validators.pattern('[a-zA-Z ]*'),Validators.required])],
         elder_service : ['', Validators.compose([Validators.required])],
-        elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.required])],
+        elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.minLength(10),Validators.maxLength(10),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
-        elder_email: ['', Validators.compose([Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]*'),Validators.required])],
+        elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
         elder_password:['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
        /* emergency_numbers: ['', Validators.compose([Validators.required])],
@@ -282,6 +282,8 @@ imageURL:any;
 
 
  getElderMasterDetails(){
+   let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
      this.communityServices.getElderMasterDetails()
        .subscribe(masterData =>{
                     this.functionalArea=masterData.result.FunctionalArea;
@@ -297,9 +299,11 @@ imageURL:any;
 
                     this.relations=masterData.result.Relations;
                     this.in_service=masterData.result.InService;
+                    loader.dismiss();
                      },
                      err =>{
                     this.communityServices.showErrorToast(err);
+                    loader.dismiss();
                   })
        
 
@@ -483,7 +487,7 @@ imageURL:any;
           else
           {
            this.submitAttempt = false;
-           let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+           let loader = this.loadingCtrl.create({ content: "Please wait..." });     
             loader.present();
             this.communityServices.editSubmit(editedData).subscribe(elders =>{
                     // console.log(elders); 
@@ -499,26 +503,29 @@ imageURL:any;
                msg="Elder details can not updated.";
                this.communityServices.showToast(msg); 
               } 
-                      
+               loader.dismiss();       
              },
              err =>{
                     this.communityServices.showErrorToast(err);
+                    loader.dismiss();
               })
-             loader.dismiss();
+             
             }
           }else{
-            let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+            let loader = this.loadingCtrl.create({ content: "Please wait..." });     
             loader.present();
               this.providerService.webServiceCall(`myaccountEdit`,profileEditData)
                   .subscribe(data=>{
                     this.providerService.showToast(data.result);
                     console.log(data);
+                    loader.dismiss();
                   },
                   err=>{
                     this.providerService.showErrorToast(err);
                     console.log(err);
+                    loader.dismiss();
                   })
-                   loader.dismiss();
+                   
        
           }
         
@@ -533,7 +540,7 @@ imageURL:any;
     }
     else{
       this.submitAttempt = false;
-      let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+      let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
        this.communityServices.addSubmit(dependentData).subscribe(
            elders=>{
@@ -552,11 +559,13 @@ imageURL:any;
                msg="Elder details can not added.";
               } 
                this.communityServices.showToast(msg);
+               loader.dismiss();
               },
            err =>{
               this.communityServices.showErrorToast(err);
+              loader.dismiss();
               })
-    loader.dismiss();
+    
      }
     }
 

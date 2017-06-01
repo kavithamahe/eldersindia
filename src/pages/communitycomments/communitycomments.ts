@@ -143,7 +143,7 @@ post_likes:any;
     }
  }
  sendInlineLikescmt(id){
-     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
 
    this.communityServices.sendInlineLikes(id).subscribe(data =>{
@@ -155,17 +155,16 @@ post_likes:any;
          this.post_comments[i].likes = data.result.info.data;
        }
      }
-      
+      loader.dismiss();
        },
     err =>{
-    
-    this.communityServices.showErrorToast(err);
-  })
-    
     loader.dismiss();
+    this.communityServices.showErrorToast(err);
+  })    
+    
  }
  sendInlineLikes(comments_id,reply_id,post_id){
-     let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
 
    this.communityServices.sendInlineLikes(comments_id).subscribe(data =>{
@@ -186,13 +185,14 @@ post_likes:any;
                       console.log("index of comment: ",i);
                     }
                  }
+                  loader.dismiss();
        },
     err =>{
-    
+     loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
     
-    loader.dismiss();
+   
  }
 
  replyComments(event){
@@ -217,6 +217,8 @@ post_likes:any;
  }
 
   deleteComment(id){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
      this.communityServices.deleteComment(id).subscribe(datas =>{
      this.showToast(datas.result);
      this.post_comment="";
@@ -228,10 +230,10 @@ post_likes:any;
      	}
      }
       
-     
+      loader.dismiss();
      },
      err =>{
-    
+     loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
   }
@@ -239,6 +241,8 @@ post_likes:any;
 
 deleteReply(comment_id,reply_id,post_id)
 {
+  let loader = this.loadingCtrl.create({ content: "Please wait..." });
+  loader.present();
  this.communityServices.deleteComment(reply_id).subscribe(
     datas =>{
              this.showToast(datas.result);
@@ -258,9 +262,10 @@ deleteReply(comment_id,reply_id,post_id)
                       console.log("index of comment: ",i);
                     }
                  }
+                  loader.dismiss();
             },
      err =>{
-    
+              loader.dismiss();
             this.communityServices.showErrorToast(err);
             })     
 } 
@@ -279,20 +284,20 @@ deleteReply(comment_id,reply_id,post_id)
 sendComment(postID){
     if(this.post_comment != ""){
 
-    let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
      this.communityServices.sendPosts(postID,this.post_comment).subscribe(datas =>{
 
      this.post_comments.push(datas.result.info.list[0])
      this.showToast(datas.result.info.message);
      this.post_comment="";
- 
+     loader.dismiss();
      },
      err =>{
-    
+    loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
-     loader.dismiss();
+     
    }else{
      this.showToast("Enter Comments and Post");
    }
@@ -305,7 +310,7 @@ sendComment(postID){
       this.replyBlock=null;
     if(this.reply_comment != ""){
 
-    let loader = this.loadingCtrl.create({ content: "Please wait initializing..." });     
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
      this.communityServices.sendReply(uid_from,comments_id,this.reply_comment).subscribe(datas =>{
      this.showToast(datas.result.info.message);
@@ -328,12 +333,13 @@ sendComment(postID){
      		});
      	}
      }
+     loader.dismiss();
      },
      err =>{
-    
+    loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
-     loader.dismiss();
+     
    }else{
      this.showToast("Enter Comments and Post");
    }

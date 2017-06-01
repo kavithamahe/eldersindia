@@ -27,8 +27,13 @@ jobDependentId:any;
 emptyRecordSet:any='';
 nextPageURL:any='';
 jobBoardScrollLists:any;
+loader:any;
+functionalAreaList:any=[];
+locationList:any=[];
+functionalArea:any='';
+location:any='';
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public jobBoardService:JobBoardService,public modalCtrl: ModalController) {
-  	this.storage.ready().then(() => {
+    this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('user_type').then((user_type) => { this.user_type=user_type;});
       storage.get('user_type_id').then((user_type_id) => { this.user_type_id=user_type_id;});
@@ -39,28 +44,36 @@ jobBoardScrollLists:any;
   }
 
   public onInit()
-  {
-  	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-    this.jobBoardService.jobsList().subscribe(
+  { 
+    console.log('this.functionalArea'+this.functionalArea);
+    console.log('this.location'+this.location); 	
+    this.loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    this.loader.present();
+    this.jobBoardService.jobsList(this.functionalArea,this.location).subscribe(
      (jobBoard) => {
       this.jobBoardInfo=jobBoard.result.info.data; 
       this.nextPageURL=jobBoard.result.info.next_page_url;
+      this.functionalAreaList=jobBoard.result.get.FunctionalArea; 
+      this.locationList=jobBoard.result.get.Location; 
       this.emptyRecordSet='';
+      this.loader.dismiss();
     },
     (err) => { 
         if(err.status===401)
         {
         this.showToaster(JSON.parse(err._body).error);
-        this.emptyRecordSet=JSON.parse(err._body).error;
+        this.jobBoardInfo=[];
+        this.nextPageURL='';
+        this.emptyRecordSet=JSON.parse(err._body).error;       
         }
         else
         {
           this.showToaster("Try again later");
         }
+         this.loader.dismiss();
       }
     );
-    loader.dismiss();
+    
   }
 
   public viewJob(jobId)
@@ -143,7 +156,7 @@ jobBoardScrollLists:any;
   jobBoardscroll()
   {
 
-     this.jobBoardService.JobBoardscroll(this.nextPageURL).subscribe(
+     this.jobBoardService.JobBoardscroll(this.nextPageURL,this.functionalArea,this.location).subscribe(
      (JobBoardscroll) => {
       this.jobBoardScrollLists=JobBoardscroll.result.info.data;
 
@@ -165,4 +178,5 @@ jobBoardScrollLists:any;
       }
     );
   }
+ 
 }

@@ -43,7 +43,8 @@ dependent:any;
         this.showToaster("There is no dependent. You can not apply job!.");
         this.dismiss();
       }
-      this.getDependentList=getDependent;  
+      this.getDependentList=getDependent; 
+       loader.dismiss(); 
     },
     (err) => { 
         if(err.status===401)
@@ -54,10 +55,9 @@ dependent:any;
         {
           this.showToaster("Try again later");
         }
+         loader.dismiss();
       }
-    );
-    
-    loader.dismiss();
+    );  
  }
  public showToaster(message)
   {

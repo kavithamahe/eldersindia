@@ -25,7 +25,8 @@
 				    </ion-avatar>
 				</ion-col>
 				<ion-col width-60>
-			    	<h2 class="cmmpost" (click)="profileImage(comment.uid_from)">{{comment.name_from}}</h2>
+			    	<h2 class="cmmpost" (click)="profileImage(comment.uid_from)">{{comment.name_from}}
+			    	</h2>
 					<p class="time-datem">{{comment.created_at}}</p>
 				</ion-col>
 				<ion-col offset-20>
@@ -76,7 +77,6 @@
 						<h2>{{reply.name_from}}-{{reply.name_to}}</h2>
 					  	<p class="comm-datetime">{{reply.created_at}}</p>
 						<p text-wrap [innerHTML]="reply.comments_replay | emojis"></p>
-				
 						</ion-col>
 						<ion-col width-20>
 							<button  *ngIf="reply.uid_from == user_id" ion-button color="dark" clear (click)="openReplyMenu(reply.com_post_cmt_id,reply.comments_replay_id,post_id)">

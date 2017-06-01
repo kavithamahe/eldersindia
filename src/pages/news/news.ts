@@ -40,7 +40,8 @@ newsScrollLists:any;
    this.newsService.newsList().subscribe(
      (newsList) => {
       this.newsLists=newsList.result.data;  
-      this.nextPageURL=newsList.result.next_page_url;   
+      this.nextPageURL=newsList.result.next_page_url;  
+      loader.dismiss(); 
     },
     (err) => { 
         if(err.status===401)
@@ -51,10 +52,10 @@ newsScrollLists:any;
         {
           this.showToaster("Try again later");
         }
+        loader.dismiss();
       }
-    );
+    );   
     
-    loader.dismiss();
   }
   public dashboardPage()
   {

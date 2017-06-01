@@ -16,6 +16,8 @@ token:string;
 options:any;
 rootUrl:any;
 user_id:number;
+functionalSearch:any=[];
+locationSearch:any=[];
   constructor(public http: Http,public storage:Storage) {
    this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
@@ -30,10 +32,17 @@ user_id:number;
    });
   }
 
- jobsList() 
+ jobsList(functionalArea,location) 
  {
-  
-   let _request= {"search":{"location":[],"functional_area":[]},"get":["FunctionalArea","Location","SkillSet"],"info":{"uid":this.user_id}};
+   if(functionalArea!='' && functionalArea!=null)
+   {
+     this.functionalSearch=[functionalArea];
+   } 
+   if(location!='' && location!=null)
+   {
+     this.locationSearch=[location];
+   }
+   let _request= {"search":{"location":this.locationSearch,"functional_area":this.functionalSearch},"get":["FunctionalArea","Location","SkillSet"],"info":{"uid":this.user_id}};
     return this.http.post(this.rootUrl+'getJobList',_request,this.options)
       .map(res => res.json()); 
   }
@@ -65,9 +74,18 @@ user_id:number;
     return this.http.post(this.rootUrl+'getDependants',_request,this.options)
       .map(res => res.json()); 
   }
-  JobBoardscroll(nextPageURL)
+  JobBoardscroll(nextPageURL,functionalArea,location)
+   {  
+   if(functionalArea!='' && functionalArea!=null)
    {
-    let _request= {"search":{"location":[],"functional_area":[]},"get":["FunctionalArea","Location","SkillSet"],"info":{"uid":this.user_id}};
+     this.functionalSearch=[functionalArea];
+   } 
+   if(location!='' && location!=null)
+   {
+     this.locationSearch=[location];
+   }
+   let _request= {"search":{"location":this.locationSearch,"functional_area":this.functionalSearch},"get":["FunctionalArea","Location","SkillSet"],"info":{"uid":this.user_id}};
+    
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }

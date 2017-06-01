@@ -36,6 +36,7 @@ export class SubcategoryListPage {
 	token:any;
   dependentLen:any=true;
   scheduleModal:any='';
+  lead_time:any='00:00';
   constructor( public loadingCtrl: LoadingController, public providerService: ServiceProvider, public navCtrl: NavController, public altCtrl:AlertController, public navParams: NavParams,public toastCtrl: ToastController,public modalCtrl: ModalController, public mp:ModalContentPage, public storage:Storage) {
     console.log("this is sub category list page");
       this.location_id = navParams.get("location_id");
@@ -59,6 +60,8 @@ export class SubcategoryListPage {
     
 loadSubcategoryList(subCategory_id,location_id){
       console.log("loading vendor list for the service");
+      let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
       this.subCategorydata = {subCategoryId : subCategory_id, flag:"1", locationId : location_id};
       // this.providerService.loadServiceProviderList(this.subCategorydata)
       this.providerService.webServiceCall(`getServiceProviderlist`,this.subCategorydata)
@@ -66,6 +69,7 @@ loadSubcategoryList(subCategory_id,location_id){
                             this.sublists = data.result.info;
                             this.dependentLists = data.result.info.dependentLists;
                             this.serviceData = data.result.info.requestServices;
+                            this.lead_time =data.result.info.lists[0].lead_time;
                             console.log(this.dependentLists);
                             if((Object.keys(this.dependentLists).length<=0) && this.userType == 'sponsor')
                             {
@@ -73,10 +77,11 @@ loadSubcategoryList(subCategory_id,location_id){
                             this.dependentLen=false;
                             }
                             console.log("dependentList data : "+this.dependentLists);
+                            loading.dismiss();
                             },
                       (err) =>{               
                             this.providerService.showErrorToast(err);
-                            
+                            loading.dismiss();
                             });
             }
 
@@ -137,8 +142,9 @@ loadSubcategoryList(subCategory_id,location_id){
     this.navCtrl.setRoot(DashboardPage);
   }
   serviceRequestCall(service_request_data,vendorId){
-   
-    let requestServiceData = {"location_id":this.location_id,"vendor_id":vendorId, "category_id":this.serviceData.category_id, "sub_category_id":this.serviceData.sub_category_id, "service_id":this.serviceData.service_id, "problem":service_request_data.problem, "datetime":service_request_data.datetime, "dependentid":service_request_data.dependentId, "mobile":service_request_data.mobile_no}
+    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    loading.present();
+    let requestServiceData = {"location_id":this.location_id,"vendor_id":vendorId, "category_id":this.serviceData.category_id, "sub_category_id":this.serviceData.sub_category_id, "service_id":this.serviceData.service_id, "problem":service_request_data.problem, "datetime":service_request_data.datetime, "dependentid":service_request_data.dependentId, "mobile":service_request_data.mobile_no,"lead_time":this.lead_time}
 
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
        .subscribe(
@@ -149,10 +155,12 @@ loadSubcategoryList(subCategory_id,location_id){
                   if(this.scheduleModal != "instant"){
                  this.navCtrl.setRoot(ServicerequestPage);
                }
+               loading.dismiss();
                 },
         err =>{
                 this.providerService.showErrorToast(err);
                 console.log("Response for serviceRequest: "+err);
+                loading.dismiss();
               });
   }
   public showToaster(message)

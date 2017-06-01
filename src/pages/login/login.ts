@@ -115,7 +115,7 @@ export class LoginPage {
           
        })
         // alert(loginuser['token']);
-       
+        loader.dismiss();
     },
 
     (err) => { 
@@ -127,10 +127,9 @@ export class LoginPage {
         {
           this.showToaster("Try again later");
         }
-         
+        loader.dismiss();  
     },
-  )
-    loader.dismiss();
+  )   
   }
   }
   showToaster(message)

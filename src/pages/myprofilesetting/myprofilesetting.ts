@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController,LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 
@@ -24,7 +24,7 @@ export class MyprofilesettingPage {
   connection:any="true";
   profile:any="true";
 
-  constructor(public navCtrl: NavController, public storage:Storage, public communityServices: CommunityServices, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController,public loadingCtrl: LoadingController, public storage:Storage, public communityServices: CommunityServices, public navParams: NavParams, public viewCtrl: ViewController) {
  	 this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token;})
@@ -43,6 +43,8 @@ export class MyprofilesettingPage {
 
   }
   getPrivacy(member_data){
+     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+     loader.present();
   	 this.communityServices.getPrivacy(this.member_data).subscribe(users => {
       
        let Privacy = users.result[0];
@@ -55,17 +57,18 @@ export class MyprofilesettingPage {
        this.mobile = Privacy.privacy_mobile;
        this.name = Privacy.privacy_name;
        this.profile = Privacy.privacy_profile;
-
+      
        console.log(this.location);
        }
       // else{
      //       this.communityServices.showToast("No Data");
 
      // } 
-      
+      loader.dismiss();
       },
    err =>{
     this.communityServices.showErrorToast(err);
+    loader.dismiss();
   })
 
   }

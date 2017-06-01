@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,LoadingController } from 'ionic-angular';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { EditProfilePage } from '../edit-profile/edit-profile';
@@ -26,11 +26,13 @@ token:any;
 gender:any ="";
 user_dob:any;
 
-  constructor(public storage:Storage,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {  }
+  constructor(public storage:Storage,public loadingCtrl: LoadingController,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {  }
 
 
   loadMyProfile(){
     // this.user_type = "";
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
     this.providerService.webServiceCall(`myaccount`,"")
                         .subscribe(
                           data =>{
@@ -38,9 +40,11 @@ user_dob:any;
                                     this.gender = this.profileData.gender;
                                     // this.user_type = (data.result.info.user_type == 'sponosr') ? 'Sponsor' : "Elder"; 
                                     this.user_dob= this.profileData.dob;//this.getDate(this.profileData.dob);
+                                    loader.dismiss();
                                   },
                           err=>{
                                       this.providerService.showErrorToast(err);
+                                      loader.dismiss();
                                     })
   }
 

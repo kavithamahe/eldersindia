@@ -74,22 +74,21 @@
    <p>{{viewServiceRequestInfo?.location_name}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>
-  
-    <ion-col width-100 class="child_menu">
+
+  <ion-row>  
+    <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.enquiry_date!='0000-00-00 00:00:00')">
 	<span>Enquiry Date</span>
    <p>{{viewServiceRequestInfo?.enquiry_date | date:'dd/M/yyyy h:m a'}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>
-   
-    <ion-col width-100 class="child_menu">
-	<span>Sheduled At</span>
+
+  <ion-row>   
+    <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.scheduled_at!='0000-00-00 00:00:00')">
+	<span>Scheduled Date</span>
    <p>{{viewServiceRequestInfo?.scheduled_at | date:'dd/M/yyyy h:m a'}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>
- 
+  <ion-row> 
     <ion-col width-100 class="child_menu">
 	<span>Remarks</span>
    <p>{{viewServiceRequestInfo?.remarks}}</p>

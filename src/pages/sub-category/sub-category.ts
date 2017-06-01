@@ -30,9 +30,7 @@ subCategoryTitle:any;
     // this.loadLocations();
     console.log("this is sub category page");
     this.subCategoryTitle = navPara.get("subcategory").service;
-    this.locations = navPara.get("locations");
-  	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
-    loading.present();
+    this.locations = navPara.get("locations");  	
     this.storage.ready().then(() => { 
      storage.get('service_location').then((service_location) => { 
        this.serviceLocation=service_location; 
@@ -55,12 +53,13 @@ subCategoryTitle:any;
       });
     });*/
     
-    loading.dismiss();
+    
 
   }	
   
 loadSubCategory(location){
-  
+  let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+  loading.present();
   this.subCategoryId = this.navPara.get("subcategory").id;
   let serviceOfferedData = {"serviceOfferedId":this.subCategoryId,"locationId": location};
           
@@ -68,9 +67,9 @@ loadSubCategory(location){
 	// this.providerService.loadVendorServiceSubCategory(serviceListId)
     .subscribe(data =>{
       this.subcategories = data.result;
+      loading.dismiss();
     },
     err =>{
-
       if(err.status===401){
       // this.providerService.showToast(JSON.parse(err._body).result);
       // this.providerService.showToast(JSON.parse(err._body).error);  
@@ -80,23 +79,20 @@ loadSubCategory(location){
        this.providerService.showToast("Please try again later..!");  
        this.emptyRecord = "No Records Found" 
       }
-
+      loading.dismiss();
     })
 }
 
 locationChanged(){
 console.log("this.serviceLocation4",this.serviceLocation);
-  let loading = this.loadingCtrl.create({content: 'Please wait...!'});
-  loading.present();
-    this.storage.ready().then(() => {
+     this.storage.ready().then(() => {
       this.storage.set('service_location',this.serviceLocation);
       console.log("change location"+this.serviceLocation);
       // let locationBasedData = {"serviceOfferedId":this.subCategoryId,"locationId":this.serviceLocation};
       this.subcategories="";
       this.loadSubCategory(this.serviceLocation);
     });
-    
-    loading.dismiss();
+   
   }
 
 openSelected(sub_category_Data){
