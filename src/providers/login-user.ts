@@ -3,8 +3,6 @@ import { Http,Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Subject }    from 'rxjs/Subject';
 import { Storage } from '@ionic/storage';
-import 'rxjs/add/operator/timeoutWith';
-import { Observable } from 'rxjs/Observable';
 
 import { AppConfig } from '../providers/app-config';
 //import { Login } from '../models/login';
@@ -42,7 +40,7 @@ rootUrl:any;
   "password": credentials.password,
   "device_token": this.device_id,"app":""}
   console.log("request data sent to login.",_request);
-    return this.http.post(this.rootUrl+'login',_request,this.headers).timeoutWith(5000, Observable.throw(new Error('Boom!')))
+    return this.http.post(this.rootUrl+'login',_request,this.headers)
       .map(res => res.json());
  
   }

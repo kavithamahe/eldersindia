@@ -42,7 +42,7 @@ eventScrollLists:any;
       this.nextPageURL=eventsList.result.next_page_url;  
       loader.dismiss(); 
     },
-    (err) => { 
+    (err) => {         
         if(err.status===401)
         {
         this.showToaster(JSON.parse(err._body).error);

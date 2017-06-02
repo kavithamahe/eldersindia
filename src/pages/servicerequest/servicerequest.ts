@@ -83,7 +83,6 @@ vendorStatus:any=[];
     loader.present();
     this.serviceRequest.cancelRequest(serviceId).subscribe(
      (cancelRequest) => {
-       console.log(cancelRequest);
       this.getRemarksList=cancelRequest.result;   
       this.showToaster(cancelRequest.result); 
       loader.dismiss(); 
