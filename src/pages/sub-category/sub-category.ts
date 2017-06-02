@@ -28,18 +28,27 @@ subCategoryTitle:any;
 
   constructor(public storage:Storage, public loadingCtrl: LoadingController, public navCtrl: NavController, public navPara: NavParams,public providerService: ServiceProvider) {
     // this.loadLocations();
-    console.log("this is sub category page");
-    this.subCategoryTitle = navPara.get("subcategory").service;
-    this.locations = navPara.get("locations");  	
-    this.storage.ready().then(() => { 
-     storage.get('service_location').then((service_location) => { 
-       this.serviceLocation=service_location; 
-       console.log("current location"+this.serviceLocation);        
-          //this.serviceLocation = my_location;
-          this.loadSubCategory(this.serviceLocation);  
-     });
-
+     this.subCategoryTitle = navPara.get("subcategory").service;
+    this.locations = navPara.get("locations");
+    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    this.storage.ready().then(() => {
+      this.storage.get('service_location').then((my_location) => {
+        console.log("this.serviceLocation1",my_location);
+          for(let i=0; i<this.locations.length;i++){
+            if(this.locations[i].location == my_location || this.locations[i].id == my_location){
+              this.serviceLocation = my_location;
+              console.log("this.serviceLocation2",this.serviceLocation);
+            }
+            // else{
+            //   this.serviceLocation = "";
+            //   console.log("this.serviceLocation3",this.serviceLocation);
+            // }
+          }          
+          this.loadSubCategory(this.serviceLocation);          
+      });
     });
+    loading.present();
+    loading.dismiss();
     /*this.storage.ready().then(() => {
       this.storage.get('service_location').then((my_location) => {
         console.log("this.serviceLocation1",my_location);

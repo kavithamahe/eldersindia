@@ -163,11 +163,11 @@ post_likes:any;
   })    
     
  }
- sendInlineLikes(comments_id,reply_id,post_id){
+ sendInlineLikes(reply_id,comments_id,post_id){
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
 
-   this.communityServices.sendInlineLikes(comments_id).subscribe(data =>{
+   this.communityServices.sendInlineLikes(reply_id).subscribe(data =>{
            
            this.showToast(data.result.info.message);
             for(let i=0; i<this.post_comments.length;i++)

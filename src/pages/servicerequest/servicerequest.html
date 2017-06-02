@@ -71,7 +71,19 @@
 	</ion-col>	
 
   </ion-row>
-
+  <ion-row>
+  <ion-col>
+  <button ion-button icon-left small *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="cancelRequest(service?.id)">
+       
+         Cancel Request
+  </button>
+  </ion-col>
+  <ion-col>
+  <button ion-button icon-left small *ngIf="(service?.vendor_status==5 &&(!service?.vendor_remarks))"(click)="enableRemark(i)">
+       Mark as Complete
+  </button>
+  </ion-col>
+  </ion-row>
 
 
   </ion-grid>
