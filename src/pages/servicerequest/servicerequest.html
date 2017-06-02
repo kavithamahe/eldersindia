@@ -31,8 +31,14 @@
   <ion-card-content style=" padding:0px;">
   <ion-grid>
    <ion-row>
-    <ion-col width-20><img src="{{imageUrl}}{{service?.logo}}"/>
+    <ion-col width-20>
+	<img src="{{imageUrl}}{{service?.logo}}" width="100" />
 	<a class="token-primarys" (click)="makeCall(service?.contact_number)"><i class="fa fa-phone"></i></a>
+	  
+  <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="cancelRequest(service?.id)">
+<i class="fa fa-times" aria-hidden="true"></i>
+  </a>
+ 
 	</ion-col>
 
     <ion-col width-80 (click)="viewRequest(service?.id)">
@@ -65,12 +71,7 @@
 	</ion-col>	
 
   </ion-row>
-  <ion-row>
-  <button ion-button icon-left small *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="cancelRequest(service?.id)">
-       
-         Cancel Request
-  </button>
-  </ion-row>
+
 
 
   </ion-grid>
