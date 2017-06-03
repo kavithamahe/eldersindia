@@ -284,7 +284,10 @@ page-service-info ion-input									{border:none !important;}
 .btn-clrs													{ float:right; border-radius:4px;margin-top:10px;  width:50%;}
 .bar-button-light-md, .bar-button-clear-md-light, .bar-button-md-light{font-size:15px;}
 .connection-btn .button-md 									{background:#58e2c9;box-shadow:none;}
-.Pending													{color:#f90202; padding:0px; font-size:14px; }
+.Pending													{color:#f8b106; padding:0px; font-size:14px; }
+
+
+
 .service-cont												{color:#888aef;}
 .footer-btn													{float:left; width:100%;}
 .brder-cor .button-md span.button-inner						{justify-content:left;}
@@ -514,7 +517,7 @@ ion-app.md													{font-family: 'Open Sans', sans-serif !important; }
 ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !important;}
 .blogs-div h2												{color:#1976d2;white-space: nowrap;font-family: "Open Sans",sans-serif !important; overflow:hidden;font-size:16px;
 															 font-weight:700;line-height:20px;text-align:left;}
-
+.Cancelled{ font-size:14px !important; color:#f90202 !important;padding:0px !important;}
 
 .login-pages .item-ios									    {background:none;}
 .login-pages .item-ios .text-input-ios						{padding:9px 10px 9px 20px !important;}
@@ -690,9 +693,11 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .req-viewlist i                                             {font-size:25px !important; color:#b0b2b6; line-height:50px;}
 .err-reds													{font-size:14px !important; font-weight:400 !important; color:red !important; text-align:right !important; padding-right:25px !important; margin:0px; }
 .token-primary												{width:auto; margin-top:7px; border-radius:3px;}
-.tocken-no													{color:#888aef !important; font-size:15px !important;}
+.tocken-no													{font-size:15px !important; border:1px solid #e0e1e2; text-align:center; color:#0493f8!important; }
 .token-primarys												{width:35px; height:35px;margin-left:4px;margin-top:5px; display:block; border:1px solid #ccc; border-radius:50%;}
-.token-primarys	 i											{ line-height:35px; color:#00a651; text-align:center; width:100%; font-size:20px;}
+.token-primarys i											{line-height:35px; color:#00a651; text-align:center; width:100%; font-size:20px;}
+.req-cancel												    {width:35px; height:35px;margin-left:4px;margin-top:5px; display:block; border:1px solid #ccc; border-radius:50%;}
+.req-cancel i											    {line-height:33px; color:#ff5722; text-align:center; width:100%; font-size:17px; font-weight:400;}
 .call-contact												{background:#E6E6FA; display:block; text-align:center; width:100%;}
 .token-primary	small										{font-size:18px; font-weight:400;color:#FE2725; float:left;}
 .token-primary i											{font-size:14px; color:#666; line-height:25px;  float:left; padding-left:5px; line-height:30px;}

@@ -152,7 +152,9 @@
 	        			<ion-col width-60>
 		        			<ion-card-content>
 			          			<h2 text-wrap (click)="goBackToCommunity(community.com_id)">{{community.community_name}}</h2>
-			          			<p class="time-datem"><i class="fa fa-calendar-o"></i> &nbsp; {{community.created_at}}</p>
+			          			<p class="time-datem"><i class="fa fa-clock-o"></i>
+			          		{{community.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
+			          		</p>
 			          		</ion-card-content>
 						</ion-col>
 						<ion-col width-20>

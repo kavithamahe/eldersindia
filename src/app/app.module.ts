@@ -9,6 +9,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import { Ng2EmojiModule } from 'ng2-emoji';
 import { NativeAudio,Geolocation } from 'ionic-native';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import {MomentModule} from 'angular2-moment';
+
 // import { Geolocation } from '@ionic-native';
 //Venkatesh
 import { LoginPage } from '../pages/login/login';
@@ -140,6 +142,7 @@ import { Externallinks } from '../providers/externallinks';
     Ng2CompleterModule,
     BrowserModule,
     Ng2EmojiModule,
+    MomentModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

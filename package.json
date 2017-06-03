@@ -31,6 +31,7 @@
     "@ionic-native/youtube-video-player": "^3.4.4",
     "@ionic/storage": "^1.1.9",
     "angular2-emoji": "^0.1.6",
+    "angular2-moment": "^1.3.3",
     "angular2-tag-input": "^1.2.3",
     "bootstrap": "^3.3.7",
     "codemirror": "^5.25.0",

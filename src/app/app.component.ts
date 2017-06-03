@@ -331,6 +331,7 @@ export class MyApp {
     push.on('notification', (data) => {
       console.log('message', data.message);
       console.log('data',data);
+      //console.log("count" + data.count);
       push.getApplicationIconBadgeNumber(function(n) {
           console.log('success', n);
         }, function() {

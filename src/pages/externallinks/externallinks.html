@@ -42,8 +42,9 @@
 					    <ion-col width-80>
 						    <h1 text-wrap (click)="openUrl(useful.metalink_url)">{{useful.title}}
 						    </h1>					      	
-						    <p class="time-datem"><i class="fa fa-calendar-o"></i> {{useful.created_at}}
-						          		</p>
+						    <p class="time-datem"><i class="fa fa-clock-o"></i>
+			          		{{useful.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
+			          		</p>
 					    </ion-col>
 					</ion-row>
 			     </ion-item>

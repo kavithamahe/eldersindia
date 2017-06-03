@@ -76,7 +76,7 @@ export class CommunitylistPage {
      let loader = this.loadingCtrl.create({ content: "Please wait..." });     
       loader.present();
     this.communitylists =[];
-    this.categoryLists=[]
+    this.categoryLists=[];
       this.communityServices.myCommunity(searchData).
       subscribe(mycommunity => {
       this.communitylists = mycommunity.result.info.data;
