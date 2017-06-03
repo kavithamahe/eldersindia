@@ -75,7 +75,6 @@ export class CommunityPage {
       
     });
 
-
 }
 
 files:any;

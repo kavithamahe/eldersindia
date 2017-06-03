@@ -42,6 +42,7 @@ export class ExternallinksPage {
  	 let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
      this.externallinks.externalLinksList().subscribe (users => {
+       this.externalLinks=users.result.data;
       this.nextPageURL=users.result.next_page_url;
       loader.dismiss();
       },

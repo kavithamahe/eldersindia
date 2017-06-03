@@ -26,7 +26,7 @@
   <hr *ngIf="functionality != 'profileEdit'" />
    <ion-label>Relationship *</ion-label>
         <ion-item>
-         
+         <ion-label>Relationship</ion-label>
             <ion-select class="select-brd"  [(ngModel)]="elder_relation" 
             formControlName="elder_relation" [class.invalid]="!authForm.controls.elder_relation.valid && (authForm.controls.elder_relation.dirty)">
                 <ion-option  *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
@@ -47,7 +47,7 @@
           </small> 
 		  <ion-label>Services *</ion-label>
           <ion-item>
-              
+              <ion-label>Services</ion-label>
                 <ion-select class="select-brd" [(ngModel)]="elder_service"  
                 formControlName="elder_service"  
                 [class.invalid]="!authForm.controls.elder_service.valid && (authForm.controls.elder_service.dirty)">
@@ -87,7 +87,7 @@
           </small>
 		   <ion-label>Location *</ion-label>
           <ion-item>
-           
+            <ion-label>Location</ion-label>
               <ion-select  class="select-brd" [(ngModel)]="elder_location"  
               formControlName="elder_location"  
                 [class.invalid]="!authForm.controls.elder_location.valid && (authForm.controls.elder_location.dirty)">
@@ -108,6 +108,7 @@
 			  <!--<ion-label>{{emergency_name[i]}}</ion-label>-->
 			    <ion-label>Select here </ion-label>
             <ion-item>
+            <ion-label>Emergency</ion-label>
               <ion-select class="select-brd"  [(ngModel)]="emergency_name[i]" 
               [ngModelOptions]="{standalone:true}">
                       <ion-option value="police">Police</ion-option>
@@ -146,13 +147,14 @@
   <div *ngIf="job_interest">
      <ion-label>Interest</ion-label>
         <ion-item>
-       
+          <ion-label>Interest</ion-label>
             <ion-select class="select-brd" [(ngModel)]="area_of_interest"   [ngModelOptions]="{standalone: true}">
                 <ion-option  *ngFor="let interest of areaOfInterest" >{{interest.label}}</ion-option>
             </ion-select>
         </ion-item>
     <ion-label>Job type</ion-label>
         <ion-item>
+        <ion-label>Job type</ion-label>
           <ion-select class="select-brd" [(ngModel)]="job_type"   [ngModelOptions]="{standalone: true}">
               <ion-option  value="full time">Full TIme</ion-option>
               <ion-option  value="part time">Part TIme</ion-option>
@@ -182,7 +184,7 @@
     <div  *ngFor="let item of experience_list; let i=index" >
 	  <ion-label>Industry</ion-label>
       <ion-item>
-        
+         <ion-label>Industry</ion-label>
             <ion-select class="select-brd" [(ngModel)]="experience_industry[i]" [ngModelOptions]="{standalone: true}">
               <ion-option *ngFor="let industry of functionalArea"  selected="item?.select" value={{industry.id}}>{{industry.name}}
               </ion-option>
@@ -231,7 +233,7 @@
             
               <ion-label>Graduation</ion-label>
             <ion-item>
-            
+                 <ion-label>Graduation</ion-label>
                 <ion-select class="select-brd" [(ngModel)]="education_graduation[i]" [ngModelOptions]="{standalone: true}">
                   <ion-option *ngFor="let education of educations" value={{education.value}}>{{education.label}}
                   </ion-option>
@@ -239,7 +241,7 @@
             </ion-item>
 			   <ion-label>Specialization</ion-label>
             <ion-item>
-           
+              <ion-label>Specialization</ion-label>
               <ion-select class="select-brd" [(ngModel)]="education_specialization[i]" [ngModelOptions]="{standalone: true}">
                 <ion-option *ngFor="let specialization of specializations" value={{specialization.value}}>{{specialization.label}}
                 </ion-option>
