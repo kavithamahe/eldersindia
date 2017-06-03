@@ -36,13 +36,16 @@ eventScrollLists:any;
   { 
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-   this.eventsService.eventsList().subscribe(
+    this.eventsService.eventsList().subscribe(
      (eventsList) => {
       this.eventsLists=eventsList.result.data;        
-      this.nextPageURL=eventsList.result.next_page_url;  
+      this.nextPageURL=eventsList.result.next_page_url;
       loader.dismiss(); 
     },
-    (err) => {         
+    (err) => {      
+        console.log(err.status);
+        console.log(err.error); // error message as string
+        console.log(err.headers);   
         if(err.status===401)
         {
         this.showToaster(JSON.parse(err._body).error);
