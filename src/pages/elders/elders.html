@@ -23,10 +23,10 @@
       </ion-col>
     </ion-row>
 
-  <hr *ngIf="functionality != 'profileEdit'" />
-   <ion-label>Relationship *</ion-label>
+  <small *ngIf="functionality != 'profileEdit'"></small>
+   <ion-label>Relationship <small class="req-field">*</small></ion-label>
         <ion-item>
-         <ion-label>Relationship</ion-label>
+         <ion-label style="margin:0px;">Relationship</ion-label>
             <ion-select class="select-brd"  [(ngModel)]="elder_relation" 
             formControlName="elder_relation" [class.invalid]="!authForm.controls.elder_relation.valid && (authForm.controls.elder_relation.dirty)">
                 <ion-option  *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
@@ -35,7 +35,7 @@
          <small *ngIf="!authForm.controls.elder_relation.valid  && (authForm.controls.elder_relation.dirty || submitAttempt)">
                   <p class="valid err-reds">Please select relation</p>
           </small> 
-		  <ion-label>Elder Name *</ion-label>
+		  <ion-label>Elder Name <small class="req-field">*</small></ion-label>
       <ion-item>
       
             <ion-input  type="text" formControlName="elder_name"
@@ -45,7 +45,7 @@
           <small *ngIf="!authForm.controls.elder_name.valid  && (authForm.controls.elder_name.dirty || submitAttempt)">
                   <p class="valid err-reds">Please enter name</p>
           </small> 
-		  <ion-label>Services *</ion-label>
+		  <ion-label>Services <small class="req-field">*</small></ion-label>
           <ion-item>
               <ion-label>Services</ion-label>
                 <ion-select class="select-brd" [(ngModel)]="elder_service"  
@@ -57,7 +57,7 @@
            <small *ngIf="!authForm.controls.elder_service.valid  && (authForm.controls.elder_service.dirty || submitAttempt)">
                   <p class="valid err-reds">Please select services</p>
           </small> 
-		   <ion-label>Number *</ion-label>
+		   <ion-label>Number <small class="req-field">*</small></ion-label>
             <ion-item>
               <ion-input type="text" formControlName="elder_number"
                   [class.invalid]="!authForm.controls.elder_number.valid && (authForm.controls.elder_number.dirty)" [(ngModel)]="elder_number" value={{elder_number}}>
@@ -66,7 +66,7 @@
               <small  *ngIf="!authForm.controls.elder_number.valid  && (authForm.controls.elder_number.dirty || submitAttempt)">
                 <p class="valid err-reds">Please enter number</p>
               </small>
-			    <ion-label>Date Of Birth *</ion-label>
+			    <ion-label>Date Of Birth <small class="req-field">*</small></ion-label>
          <ion-item>
           
               <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" 
@@ -76,7 +76,7 @@
           <small  *ngIf="!authForm.controls.elder_dob.valid  && (authForm.controls.elder_dob.dirty || submitAttempt)">
                 <p class="valid err-reds">Please select dob</p>
               </small>  
-          <ion-label>Address *</ion-label>
+          <ion-label>Address <small class="req-field">*</small></ion-label>
 		    <ion-item>  
               <ion-input type="text" formControlName="elder_address"
                 [class.invalid]="!authForm.controls.elder_address.valid && (authForm.controls.elder_address.dirty)" [(ngModel)]= "elder_address" value={{elder_address}}>
@@ -85,7 +85,7 @@
           <small *ngIf="!authForm.controls.elder_address.valid  && (authForm.controls.elder_address.dirty || submitAttempt)">
                 <p class="valid err-reds">Please enter address</p>
           </small>
-		   <ion-label>Location *</ion-label>
+		   <ion-label>Location <small class="req-field">*</small></ion-label>
           <ion-item>
             <ion-label>Location</ion-label>
               <ion-select  class="select-brd" [(ngModel)]="elder_location"  
@@ -99,11 +99,11 @@
           </small>
 		  	<hr/>
           <ion-row>
-            <ion-col>
+            <ion-col class="title-depen">
               <div class="personal-d"><p>Emergency Contacts</p></div>
             </ion-col>
           </ion-row>
-		  	<hr/>
+		  
              <div  *ngFor="let item of emergency_list; let i=index">
 			  <!--<ion-label>{{emergency_name[i]}}</ion-label>-->
 			    <ion-label>Select here </ion-label>
@@ -174,7 +174,7 @@
         </div>
 <hr/>
     <ion-row>
-      <ion-col>
+      <ion-col class="title-depen">
         <div class="personal-d"><p>Experience Details</div>
       </ion-col>
     </ion-row>
@@ -223,7 +223,7 @@
       <div>
 	  <hr/>
           <ion-row>
-            <ion-col>
+            <ion-col class="title-depen">
               <div class="personal-d"><p>Educational Details</p></div>
             </ion-col>
           </ion-row>
@@ -282,11 +282,11 @@
     <div  *ngIf="functionality == 'add'">
      
           <ion-row>
-            <ion-col>
+            <ion-col class="title-depen">
               <div class="personal-d"><p>Login Details</p></div>
             </ion-col>
           </ion-row>
-		  <hr/>
+		 
    
             <ion-label>Email Address *</ion-label>
 			  <ion-item>
@@ -320,7 +320,7 @@
               </ion-col>
             </ion-row>
           </div> -->
-      </form> <hr/>
+      </form>
       <ion-item *ngIf="this.functionality == 'profileEdit' ">
       <img [src]="base64Image" *ngIf="base64Image" width="90" height="90" />
       <ion-row>
@@ -372,4 +372,5 @@
   transform: rotate(180deg);
   display: inline-block;
 }
+[_nghost-dbn-41]{ box-shadow: 0 1px #fff;}
 </style>
