@@ -377,7 +377,7 @@ export class MyApp {
           console.log('error');
           }, 'push-1');
         console.log("Push notification clicked");
-       
+
       }
     });
     push.on('error', (e) => {
