@@ -111,7 +111,8 @@
 	        		</ion-col>
 	        		<ion-col width-60>
 			          	<h2 (click)="communityProfile(user.uid)">{{user.name}}</h2>
-			          		<p class="time-datem"><i class="fa fa-calendar-o"></i> {{user.created_at}}
+			          		<p class="time-datem"><i class="fa fa-clock-o"></i>
+			          		{{user.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
 			          		</p>
 			        </ion-col>
 					<ion-col width-20>
