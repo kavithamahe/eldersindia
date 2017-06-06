@@ -383,10 +383,10 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .post-icons i 												{color:#46a049;}
 .closed i{ color:#fff; font-size:20px; font-weight:400;}
 
-.personal-d p												{box-shadow:none !important; font-size:18px !important; color:#404996 !important; text-align:center;margin:0px !important; line-height:15px;padding-top: 10px;}
+.personal-d p												{box-shadow:none !important; font-size:18px !important; color:#000 !important; text-align:center;margin:0px !important; line-height:20px;padding-top: 10px;}
 .alert-md .alert-sub-title									{color:#fff !important; color:#fff !important; font-size:17px !important;}
-.add-btn													{background:#888aef; font-size:13px !important; font-size:600 !important; color:#fff; border-radius:25px; width:90%;}
-.rem-btn													{background:#fe7fe6;font-size:13px !important;  font-size:600 !important;color:#fff; border-radius:25px;width:90%;}
+.add-btn													{background:#888aef; font-size:14px !important; font-size:600 !important; color:#fff; border-radius:25px; width:90%;}
+.rem-btn													{background:#fe7fe6;font-size:14px !important;  font-size:600 !important;color:#fff; border-radius:25px;width:90%;}
 .alert-ios .alert-sub-title									{color:#fff !important; font-size:17px !important;}
 .list-mess													{background:#E6E6FA;border-bottom:1px solid #f8f8ff !important;font-size:15px;margin:0 !important;text-transform:capitalize;}
 .list-mess .button-inner									{text-align:left;}
@@ -979,26 +979,26 @@ white-space: normal;}
 .tag-skill_set												{ margin-left:8px; width:95%; border:1px solid #ccc; margin-top:10px; padding:5px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);}
 .tag-skill_set .ng2-tag-input-focus[_nghost-yta-41]			{box-shadow:0 2px #fff !important;}
-
-.add-depentsform .label-md									{font-size:16px; font-weight:400; color:#777; padding-left:5px;}
-.add-depentsform .item-md .item-inner .input-wrapper .select-brd{ width:95%; margin-left:8px; text-align:left;font-size:15px !important; padding-left:0px !important;}
+.title-depen{ background:#4ec2ff; height:40px !important; padding:0px !important; }
+.add-depentsform .label-md									{font-size:16px; font-weight:400; color:#777; padding-left:5px; margin:4px 0px 4px 0px !important;}
+.add-depentsform .item-md .item-inner .input-wrapper .select-brd{ width:95%; margin-left:8px; text-align:left;font-size:15px !important; padding-left:0px !important; height:37px !important;}
 .add-depentsform .item-md .item-inner .input-wrapper .select-brd .select-text{ padding-left:5px;font-size:15px !important;}
 .add-depentsform .item-md .checkbox-md { margin:9px 0px 9px 9px;}
 .add-depentsform .item-md .item-inner .input-wrapper .select-brd .datetime-text{ padding-left:8px;}
 .add-depentsform .item-md .item-inner .input-wrapper .input-md{ width:95%; margin-left:8px; text-align:left; margin:0px !important;}
 .add-depentsform .item-md									{padding-left:0px !important;}
-.add-depentsform .item-md .text-input-md { margin:0px 0px 0px 7px; font-size:15px;}
+.add-depentsform .item-md .text-input-md { margin:0px 0px 0px 8px; font-size:15px;}
 .add-depentsfor .item-md .item-inner .input-wrapper .select-brd { width:95% !important;}
 
-
+.req-field{ color:red !important;}
 .add-depentsform .label-ios									{font-size:16px; font-weight:400; color:#777; padding-left:5px;}
-.add-depentsform .item-ios .item-inner .input-wrapper .select-brd{ width:95%; margin-left:8px; text-align:left;font-size:15px !important; padding-left:0px !important;}
+.add-depentsform .item-ios .item-inner .input-wrapper .select-brd{ width:95%; margin-left:8px; text-align:left;font-size:15px !important; padding-left:0px !important;height:37px !important;}
 .add-depentsform .item-ios .item-inner .input-wrapper .select-brd .select-text{ padding-left:5px;font-size:15px !important;}
 .add-depentsform .item-ios .checkbox-ios { margin:9px 0px 9px 9px;}
 .add-depentsform .item-ios .item-inner .input-wrapper .select-brd .datetime-text{ padding-left:8px;}
 .add-depentsform .item-ios .item-inner .input-wrapper .input-md{ width:95%; margin-left:8px; text-align:left; margin:0px !important;}
 .add-depentsform .item-ios									{padding-left:0px !important;}
-.add-depentsform .item-ios .text-input-ios { margin:0px 0px 0px 7px; font-size:15px;}
+.add-depentsform .item-ios .text-input-ios { margin:0px 0px 0px 8px; font-size:15px;}
 .add-depentsfor .item-ios .item-inner .input-wrapper .select-brd { width:95% !important;}
 
 .popup-mds .text-input-md{ margin-bottom:10px !important; margin-top:0px !important;}
