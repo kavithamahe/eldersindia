@@ -43,9 +43,9 @@
   <ion-list>
      <p *ngIf="inboxInfo.length<=0" class="recordnotfound">No Record Found</p>
       <ion-list *ngFor="let inbox of inboxInfo">
-      <!-- <div *ngIf="inbox.read_status == 0" [style.color]="inbox.read_status == 0 ? 'red' : null"> -->
-      <ion-item-sliding  class="inbox-sends" [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
-        <ion-item (click)="viewMessages(inbox?.id,'inbox')" >
+      <ion-item-sliding  class="inbox-sends">
+        <ion-item (click)="viewMessages(inbox?.id,'inbox')" 
+        [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
             <ion-avatar item-left>
@@ -54,7 +54,8 @@
             </ion-col>
             <ion-col width-80  style="padding: 0px !important" class="send-box-content">
               <ion-row>
-                <ion-item width-70 style="padding: 0px !important" text-wrap>
+                <ion-item width-70 style="padding: 0px !important" text-wrap 
+                [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
                   <small>{{inbox?.author_name}}</small>
                 </ion-item>
                 <ion-col width-30 style="text-align-last: end; padding: 0px !important">
@@ -63,7 +64,7 @@
               </ion-row>
               <ion-row *ngIf="inbox.subject">
           <ion-col style="padding: 0px !important">
-        <ion-item class="subject-details">
+        <ion-item class="subject-details" [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
         
         <b>Subject :</b><span>{{inbox?.subject}}</span>
         </ion-item>
@@ -78,7 +79,6 @@
           </button>        
         </ion-item-options>
       </ion-item-sliding>
-      <!-- </div> -->
     </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
@@ -90,7 +90,8 @@
   <p *ngIf="sentInfo.length<=0" class="recordnotfound">No Record Found</p>
   <ion-list *ngFor="let sent of sentInfo">
       <ion-item-sliding class="inbox-sends">
-        <ion-item (click)="viewMessages(sent?.id,'sent')">
+        <ion-item (click)="viewMessages(sent?.id,'sent')" 
+        [ngClass]="sent.read_status?'readmsg':'unreadmsg'">
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
             <ion-avatar item-left>
@@ -100,7 +101,8 @@
           
             <ion-col width-80 class="send-box-content" style="padding: 0px !important">
               <ion-row>
-                <ion-item width-70 style="padding: 0px !important" text-wrap>
+                <ion-item width-70 style="padding: 0px !important" text-wrap 
+                [ngClass]="sent.read_status?'readmsg':'unreadmsg'">
                 <small>{{sent?.name}}</small>
                 </ion-item>
                 <ion-col width-30 style="text-align-last: end; padding: 0px !important">
@@ -109,7 +111,7 @@
               </ion-row>
               <ion-row *ngIf="sent.subject">
 			     <ion-col style="padding: 0px !important">
-              <ion-item class="subject-details"><b>Subject :</b>{{sent?.subject}}</ion-item>
+              <ion-item class="subject-details" [ngClass]="sent.read_status?'readmsg':'unreadmsg'"><b>Subject :</b>{{sent?.subject}}</ion-item>
 			    </ion-col>
               </ion-row>
             </ion-col>
@@ -143,7 +145,7 @@ overflow: hidden;
 text-overflow: ellipsis;
 white-space: nowrap;
  }
- .readmsg
+ .unreadmsg
  {
   background-color: #F0F0F0;
  }
