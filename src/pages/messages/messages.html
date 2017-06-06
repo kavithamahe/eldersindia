@@ -27,7 +27,7 @@
 
 <ion-content padding style="background:#fff;">
 <div padding>
-  <ion-segment [(ngModel)]="messages">
+  <ion-segment [(ngModel)]="messages" (ionChange)="changeSlide($event)">
     <ion-segment-button value="inbox" color="orange" (click)="onInit()">
       Inbox
     </ion-segment-button>
@@ -38,11 +38,60 @@
 </div>
 
 <div [ngSwitch]="messages">
-  <ion-list *ngSwitchCase="'sent'">
+ <ion-slides (ionSlideWillChange)="slideChanged($event)">
+ <ion-slide>
+  <ion-list>
+     <p *ngIf="inboxInfo.length<=0" class="recordnotfound">No Record Found</p>
+      <ion-list *ngFor="let inbox of inboxInfo">
+      <ion-item-sliding  class="inbox-sends">
+        <ion-item (click)="viewMessages(inbox?.id,'inbox')" 
+        [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
+          <ion-row>
+            <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
+            <ion-avatar item-left>
+              <img src="{{imageUrl+inbox?.avatar}}">
+            </ion-avatar>
+            </ion-col>
+            <ion-col width-80  style="padding: 0px !important" class="send-box-content">
+              <ion-row>
+                <ion-item width-70 style="padding: 0px !important" text-wrap 
+                [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
+                  <small>{{inbox?.author_name}}</small>
+                </ion-item>
+                <ion-col width-30 style="text-align-last: end; padding: 0px !important">
+                <p><i class="fa fa-clock-o"></i>{{inbox?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="inbox.subject">
+          <ion-col style="padding: 0px !important">
+        <ion-item class="subject-details" [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
+        
+        <b>Subject :</b><span>{{inbox?.subject}}</span>
+        </ion-item>
+          </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item-options side="right" (click)="deleteMessage(inbox?.id,'inbox')">
+          <button ion-button class="trash-del">
+          <i class="fa fa-trash-o fa-2x"></i>          
+          </button>        
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+  </ion-list>
+</ion-slide>
+      <ion-slide>
+  <ion-list>
   <p *ngIf="sentInfo.length<=0" class="recordnotfound">No Record Found</p>
   <ion-list *ngFor="let sent of sentInfo">
       <ion-item-sliding class="inbox-sends">
-        <ion-item (click)="viewMessages(sent?.id,'sent')">
+        <ion-item (click)="viewMessages(sent?.id,'sent')" 
+        [ngClass]="sent.read_status?'readmsg':'unreadmsg'">
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
             <ion-avatar item-left>
@@ -52,16 +101,17 @@
           
             <ion-col width-80 class="send-box-content" style="padding: 0px !important">
               <ion-row>
-                <ion-item width-70 style="padding: 0px !important" text-wrap>
+                <ion-item width-70 style="padding: 0px !important" text-wrap 
+                [ngClass]="sent.read_status?'readmsg':'unreadmsg'">
                 <small>{{sent?.name}}</small>
                 </ion-item>
                 <ion-col width-30 style="text-align-last: end; padding: 0px !important">
-                <p><i class="fa fa-calendar-o"></i>  {{sent?.created_at | date :'MM/dd/yy'}}</p>
+                <p><i class="fa fa-clock-o"></i>{{sent?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p>
                 </ion-col>
               </ion-row>
               <ion-row *ngIf="sent.subject">
-			  <ion-col style="padding: 0px !important">
-              <ion-item class="subject-details"><b>Subject :</b>{{sent?.subject}}</ion-item>
+			     <ion-col style="padding: 0px !important">
+              <ion-item class="subject-details" [ngClass]="sent.read_status?'readmsg':'unreadmsg'"><b>Subject :</b>{{sent?.subject}}</ion-item>
 			    </ion-col>
               </ion-row>
             </ion-col>
@@ -78,51 +128,9 @@
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
   </ion-list>
+</ion-slide>
 
-  <ion-list *ngSwitchCase="'inbox'">
-     <p *ngIf="inboxInfo.length<=0" class="recordnotfound">No Record Found</p>
-      <ion-list *ngFor="let inbox of inboxInfo">
-      <ion-item-sliding  class="inbox-sends">
-        <ion-item (click)="viewMessages(inbox?.id,'inbox')">
-          <ion-row>
-            <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
-            <ion-avatar item-left>
-              <img src="{{imageUrl+inbox?.avatar}}">
-            </ion-avatar>
-            </ion-col>
-          
-            <ion-col width-80  style="padding: 0px !important" class="send-box-content">
-              <ion-row>
-                <ion-item width-70 style="padding: 0px !important" text-wrap>
-                <small>{{inbox?.author_name}}</small>
-           </ion-item>
-                <ion-col width-30 style="text-align-last: end; padding: 0px !important">
-                <p><i class="fa fa-calendar-o"></i> {{inbox?.created_at | date :'MM/dd/yy'}}</p>
-                </ion-col>
-              </ion-row>
-              <ion-row *ngIf="inbox.subject">
-			    <ion-col style="padding: 0px !important">
-				<ion-item class="subject-details">
-				
-				<b>Subject :</b><span>{{inbox?.subject}}</span>
-				</ion-item>
-			    </ion-col>
-              </ion-row>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-        <ion-item-options side="right" (click)="deleteMessage(inbox?.id,'inbox')">
-          <button ion-button class="trash-del">
-          <i class="fa fa-trash-o fa-2x"></i>          
-          </button>        
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
-  </ion-list>
-
+</ion-slides>
 </div>
 
 
@@ -136,5 +144,9 @@
 overflow: hidden;
 text-overflow: ellipsis;
 white-space: nowrap;
+ }
+ .unreadmsg
+ {
+  background-color: #F0F0F0;
  }
 </style>

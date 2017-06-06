@@ -365,7 +365,7 @@ export class MyApp {
               }
             ]
           });
-          confirm.present()
+          confirm.present();
 
       } else {
         //if user NOT using app and push notification comes
@@ -377,11 +377,7 @@ export class MyApp {
           console.log('error');
           }, 'push-1');
         console.log("Push notification clicked");
-        // push.clearAllNotifications(function() {
-        //       console.log('success');
-        //     }, function() {
-        //       console.log('error');
-        //     });
+
       }
     });
     push.on('error', (e) => {

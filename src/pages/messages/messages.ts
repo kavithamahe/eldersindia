@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController,ToastController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController,Slides,NavParams, LoadingController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Platform } from 'ionic-angular';
 
 import { MessagesService } from '../../providers/messages-service';
 import { ViewMessagesPage } from '../../pages/view-messages/view-messages';
@@ -19,7 +20,10 @@ import { CreateMessagePage } from '../../pages/create-message/create-message';
   providers:[MessagesService]
 })
 export class MessagesPage {
-messages:any="inbox";
+@ViewChild(Slides) slides: Slides;
+prev_index:any = 0;
+messages: String ="inbox";
+isAndroid: boolean = false;
 token:string;
 imageUrl:string;
 inboxInfo:any=[];
@@ -28,8 +32,11 @@ nextPageURL1:any='';
 nextPageURL2:any='';
 inboxScrollLists:any=[];
 sentScrolllLists:any=[];
-   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
-  	if(navParams.get("viewType")!='' && navParams.get("viewType")!=null)
+status:any;
+
+   constructor(public navCtrl: NavController, public navParams: NavParams,platform: Platform,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
+  	this.isAndroid = platform.is('android');
+    if(navParams.get("viewType")!='' && navParams.get("viewType")!=null)
     {
     this.messages=navParams.get("viewType");
     }
@@ -48,13 +55,41 @@ sentScrolllLists:any=[];
       })
   	});
   }
+   slideChanged() {
+    let currentIndex = this.prev_index;
+    if(currentIndex == 1){
+      this.messages = "inbox";
+       this.onInit();
+    }else{
+      this.messages = "sent";
+      this.sent();
+    }
+    this.prev_index = this.slides.getActiveIndex();
+    console.log("Current index is", currentIndex);
+  }
+   changeSlide(){
+    this.slides.freeMode = true;
+    if(this.messages == 'sent'){
+    this.slides.slideTo(1);  
+    //this.slides.slideNext(300,true);
+    
+    
+    }else{
+      this.slides.slideTo(0);  
+      //this.slides.slidePrev(300,true);
+      
+    }
+    
+  }
   public onInit()
   {
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     this.messagesService.inbox().subscribe(
      (inbox) => {
-      this.inboxInfo=inbox.result.data; 
+      this.inboxInfo=inbox.result.data;
+      this.status=this.inboxInfo.read_status;
+      console.log("status" + this.status );
       this.nextPageURL1=inbox.result.next_page_url;  
       loader.dismiss();    
     },
@@ -216,4 +251,5 @@ sentScrolllLists:any=[];
       }
     );    
   }
+
 }
