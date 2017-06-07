@@ -283,10 +283,12 @@ page-service-info ion-input									{border:none !important;}
 .btn-clr													{width:45%; float:left; border-radius:4px; margin-top:10px; }
 .btn-clrs													{ float:right; border-radius:4px;margin-top:10px;  width:50%;}
 .bar-button-light-md, .bar-button-clear-md-light, .bar-button-md-light{font-size:15px;}
+.bar-button-light-ios, .bar-button-clear-ios-light, .bar-button-ios-light{ color:#fff !important;}
 .connection-btn .button-md 									{background:#58e2c9;box-shadow:none;}
 .Pending													{color:#f8b106; padding:0px; font-size:14px; }
 
-
+.add-btn .button-inner .ion-ios-add-circle{ color:#333 !important;}
+.rem-btn .button-inner .ion-ios-add-circle{ color:#333 !important;}
 
 .service-cont												{color:#888aef;}
 .footer-btn													{float:left; width:100%;}
@@ -385,8 +387,8 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 
 .personal-d p												{box-shadow:none !important; font-size:18px !important; color:#000 !important; text-align:center;margin:0px !important; line-height:20px;padding-top: 10px;}
 .alert-md .alert-sub-title									{color:#fff !important; color:#fff !important; font-size:17px !important;}
-.add-btn													{background:#888aef; font-size:14px !important; font-size:600 !important; color:#fff; border-radius:25px; width:90%;}
-.rem-btn													{background:#fe7fe6;font-size:14px !important;  font-size:600 !important;color:#fff; border-radius:25px;width:90%;}
+.add-btn													{background:#888aef; font-size:14px !important; font-size:600 !important; color:#fff; border-radius:25px; width:75%;margin-left:8px;}
+.rem-btn													{background:#fe7fe6;font-size:14px !important;  font-size:600 !important;color:#fff; border-radius:25px;width:75%;margin-right:8px; float:right;}
 .alert-ios .alert-sub-title									{color:#fff !important; font-size:17px !important;}
 .list-mess													{background:#E6E6FA;border-bottom:1px solid #f8f8ff !important;font-size:15px;margin:0 !important;text-transform:capitalize;}
 .list-mess .button-inner									{text-align:left;}
@@ -419,10 +421,10 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .location-catlist .item-inner .input-wrapper .label-md		{font-size:18px !important; text-align:left; color:#434248;}
 .location-catlist .item-inner .input-wrapper .sub-cate-slec .select-text{font-size:18px !important; text-align:left; color:#525252;}
 .location-catlist .item-inner .input-wrapper .sub-cate-slec	{width:100%; padding:10px; }
-.location-catlist .item-inner .input-wrapper .select-ios .select-text{ margin-top:10px !important; }
+
 .location-catlist .item-inner .input-wrapper .sub-cate-slec .select-icon .select-icon-inner{border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid;
 															 color:#525252;height:0;left:0px;margin-top:0px;pointer-events:none;position:absolute;top:50%;width:0;}
-.sub-cat-listed .item-inner .input-wrapper .label-md		{margin:0px !important;}
+.sub-cat-listed .item-inner .input-wrapper .label-md		{margin:0px !important; padding-left:12px;}
 .sub-cat-listed .item-inner .input-wrapper .label-md p		{font-size:17px !important; color:#fff; float:left; width:90%;  }
 .sub-cat-listed .item-inner .input-wrapper                  {border-top:1px solid #fff; border-bottom:none;}
 .forgot-pa p												{padding-left:10px; margin-bottom:0px;}
@@ -539,12 +541,12 @@ page-service-info .service_request							{border:none !important;}
 /*-------------------------------------Android platform css end-------------------------------------*/
 .terms-con{padding-left:0px;}
 .terms-con .item-inner .input-wrapper .label-md{ margin-top:0px;}
-.terms-con .item-inner .input-wrapper .label-md ion-col{ padding-top:0px; padding-left:1px;}
+.terms-con .item-inner .input-wrapper .label-md ion-col{ padding-top:0px; padding-left:8px !important;}
 .terms-con .item-inner .input-wrapper .label-ios{ margin-top:0px;}
-.terms-con .item-inner .input-wrapper .label-ios ion-col{ padding-top:0px; padding-left:1px;}
+.terms-con .item-inner .input-wrapper .label-ios ion-col{ padding-top:0px; padding-left:8px !important;}
 
-.check-bx .checkbox-md { margin: 9px 4px 9px -7px !important;}
-.check-bx .checkbox-ios { margin: 9px 4px 9px 6px !important;}
+.check-bx .checkbox-md { margin: 9px 4px 9px 0px !important;}
+.check-bx .checkbox-ios { margin: 9px 4px 9px 12px !important;}
 .one-half-responsive {
     width: 100%;
 }
@@ -714,9 +716,10 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .segment-ios												{margin-top:10px;}
 .label-ios 													{margin: 11px 0 15px;}
 .label-opc .item-ios										{background:none !important;}
-.sub-cat-listed .item-inner .input-wrapper .label-ios		{margin:0px !important;}
+.content-ios												{ margin-top:9px;}
+.sub-cat-listed .item-inner .input-wrapper .label-ios		{margin:0px !important; padding-left:7px;}
 .content-ios .scroll-content .subcategory-list 				{border-bottom:1px solid rgba(0, 0, 0, 0.08);}
-.sub-cat-listed .item-inner .input-wrapper .label-ios p		{font-size:17px !important; color:#fff; float:left;  }
+.sub-cat-listed .item-inner .input-wrapper .label-ios p		{font-size:17px !important; color:#fff; float:left; width:90%;  }
 .view-storedet ion-row .brder-cor							{padding-bottom:0px; padding-top:0px;}
 .job-view .item-ios .item-inner .input-wrapper .label-ios	{margin:0px;text-indent:0px;}
 .list-ios > .item-block:first-child 						{border-top:0px solid #c8c7cc;}
@@ -773,28 +776,25 @@ padding-left:0px !important;
 .header-md													{z-index:999;}
 .header														{height:55px;}
 .item-select												{padding-left:0px; text-align:center; }
-
 .sub-cate > .list-md > .item-md								{background:#c0392b !important; padding-left:0px; }
 .sub-cate > .list-md > .item-md	> .label-md				    {margin:0px !important;}
 .list-cates													{border:1px solid red !important;}
 .subcategory-list											{padding:5px; margin-bottom:10px; border-bottom:1px solid rgba(0, 0, 0, 0.08); }
 .subcategory-list .item-inner .input-wrapper .label-md		{margin:0px !important;}
 .ios page-community .video, .md page-community .video		{width:40px; border:none; height:40px; background:#fe7fe6; float:left; margin:0px 5px 0px 0px;}
-.ios page-community .video, .md page-community .video i     { color:#fff;}
+.ios page-community .video, .md page-community .video i     {color:#fff;}
 .community-img												{position:relative !important; }
-
-
 .ios ion-nav > .ion-page > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-nav > .ion-page > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-tab > .ion-page > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-tabs > .ion-page.tab-subpage > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-menu > .menu-inner > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-menu > .menu-inner > ion-header > ion-content.statusbar-padding:first-child .scroll-content{padding-top:0px !important;}
 /*-------------------------------------Android platform css end-------------------------------------*/
 
 
 /*-------------------------------------ios platform css -------------------------------------*/
-.thamb-texts												{ position:relative;}
+.thamb-texts												{position:relative;}
 .label-ios													{font-size:14px;line-height:15px;overflow:hidden;padding-right:1px;text-indent:5px;text-overflow:ellipsis;white-space:nowrap;}
 .item-inner													{background:none !important;}
 .toolbar-title-ios											{font-size:19px; font-weight:400;}
 .sub-cate													{background:none !important;box-shadow:none;border-radius:0px; width:94%; margin-left:11px; padding-left:0px;}
-.bar-button-ios												{font-size:15px;}
+.bar-button-ios												{font-size:15px; color:#fff;text-transform: uppercase;}
 .sub-cate .list-ios										    {padding-left:0px; margin-bottom:0px; background:repeat;}
 .bar-button-ios[icon-only] ion-icon							{font-size:25px;}
 .sub-cate > .input-wrapper									{background:#C0392B !important;}
@@ -814,9 +814,9 @@ padding-left:0px !important;
 .alert-message												{display:none;}
 .alert-wrapper > .alert-head > h2							{margin-top:0px; color:#fff; font-size:20px; font-weight:400; padding:3px; }
 .lastupdate												    {background:#fff;  padding-left:0px !important;}
-.lastupdate small											{float:right; color:#777; font-size:14px; }
+.lastupdate small											{float:left; color:#777; font-size:14px; }
 .lastupdate	h1{ float:left; width:100%; font-size:19px; text-align:center; color:#555;}
-.lastupdate p												{font-size:15px; width:100%; padding:8px;}
+.lastupdate p												{font-size:15px; width:100%; padding:5px; text-indent:0px !important;}
 .listed-terms .card-md{box-shadow:none; border:1px solid #888aef; }
 .listed-terms .card-md .item-md{ padding-left:5px; border-left:2px solid #5c5fea; box-shadow:none; background:#888aef; border-radius:0px;}
 .listed-terms .card-md .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
@@ -824,15 +824,9 @@ padding-left:0px !important;
 .listed-terms .card-md .item-md .item-inner .input-wrapper .label-md span{ width:20%; float:left;}
 .listed-terms .card-md .item-md .item-inner .input-wrapper .label-md span{text-align:center; color:#333;}
 .listed-terms .card-md .card-content-md p{ padding:8px; font-size:15px; line-height:25px;}
-
-.listed-terms .card-md .card-content-md b{font-size: 15px; float:left; width:100%;
-    line-height: 25px;
-    padding: 8px;}
-	
-	
-	
-	
-	.listed-terms .card-ios{box-shadow:none; border:1px solid #888aef; }
+.listed-terms .card-md .card-content-md b{font-size: 15px; float:left; width:100%;line-height: 25px;padding: 8px;}
+.listed-terms .card-ios{box-shadow:none; border:1px solid #888aef; }
+.listed-terms .card-ios{box-shadow:none; border:1px solid #888aef; }
 .listed-terms .card-ios .item-ios{ padding-left:5px; border-left:2px solid #5c5fea; box-shadow:none; background:#888aef; border-radius:0px;}
 .listed-terms .card-ios .item-ios .item-inner .input-wrapper .label-ios{ margin:0px;}
 .listed-terms .card-ios .item-ios .item-inner .input-wrapper .label-ios p{ width:80%; float:left; color:#fff; font-size:18px; font-weight:400;}
@@ -976,40 +970,40 @@ white-space: normal;}
 .badge-ios{ font-size:14px; font-weight:400;}
 .badge-ios-primary{ background:#BDB76B; color:#fff; font-weight:600;}
 .badge-ios-green{ background:#6495ED; font-weight:600;}
-.tag-skill_set												{ margin-left:8px; width:95%; border:1px solid #ccc; margin-top:10px; padding:5px;
+.tag-skill_set												{ margin-left:14px; width:92%; border:1px solid #ccc; margin-top:10px; padding:5px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);}
 .tag-skill_set .ng2-tag-input-focus[_nghost-yta-41]			{box-shadow:0 2px #fff !important;}
 .title-depen{ background:#4ec2ff; height:40px !important; padding:0px !important; }
 .add-depentsform .label-md									{font-size:16px; font-weight:400; color:#777; padding-left:5px; margin:4px 0px 4px 0px !important;}
 .add-depentsform .item-md .item-inner .input-wrapper .select-brd{ width:95%; margin-left:8px; text-align:left;font-size:15px !important; padding-left:0px !important; height:37px !important;}
 .add-depentsform .item-md .item-inner .input-wrapper .select-brd .select-text{ padding-left:5px;font-size:15px !important;}
-.add-depentsform .item-md .checkbox-md { margin:9px 0px 9px 9px;}
+.add-depentsform .item-md .checkbox-md { margin:9px 0px 9px 18px;}
 .add-depentsform .item-md .item-inner .input-wrapper .select-brd .datetime-text{ padding-left:8px;}
 .add-depentsform .item-md .item-inner .input-wrapper .input-md{ width:95%; margin-left:8px; text-align:left; margin:0px !important;}
 .add-depentsform .item-md									{padding-left:0px !important;}
-.add-depentsform .item-md .text-input-md { margin:0px 0px 0px 8px; font-size:15px;}
+.add-depentsform .item-md .text-input-md { margin:0px 0px 0px 13px; font-size:15px; width:92%;}
 .add-depentsfor .item-md .item-inner .input-wrapper .select-brd { width:95% !important;}
-
+.elder-pass{ width:97%; margin:0px 0px 0px 5px;}
 .req-field{ color:red !important;}
-.add-depentsform .label-ios									{font-size:16px; font-weight:400; color:#777; padding-left:5px;}
-.add-depentsform .item-ios .item-inner .input-wrapper .select-brd{ width:95%; margin-left:8px; text-align:left;font-size:15px !important; padding-left:0px !important;height:37px !important;}
+.add-depentsform .label-ios									{font-size:16px; font-weight:400; color:#777; padding-left:5px; margin:4px;}
+.add-depentsform .item-ios .item-inner .input-wrapper .select-brd{ width:95%;  text-align:left;font-size:15px !important; padding-left:0px !important;height:37px !important;}
 .add-depentsform .item-ios .item-inner .input-wrapper .select-brd .select-text{ padding-left:5px;font-size:15px !important;}
-.add-depentsform .item-ios .checkbox-ios { margin:9px 0px 9px 9px;}
+.add-depentsform .item-ios .checkbox-ios { margin:9px 0px 9px 18px;}
 .add-depentsform .item-ios .item-inner .input-wrapper .select-brd .datetime-text{ padding-left:8px;}
 .add-depentsform .item-ios .item-inner .input-wrapper .input-md{ width:95%; margin-left:8px; text-align:left; margin:0px !important;}
 .add-depentsform .item-ios									{padding-left:0px !important;}
-.add-depentsform .item-ios .text-input-ios { margin:0px 0px 0px 8px; font-size:15px;}
+.add-depentsform .item-ios .text-input-ios { margin:0px 0px 0px 14px; font-size:15px; width:92%;}
 .add-depentsfor .item-ios .item-inner .input-wrapper .select-brd { width:95% !important;}
-
-.popup-mds .text-input-md{ margin-bottom:10px !important; margin-top:0px !important;}
+.popup-mds .text-input-ios{ margin-bottom:10px !important; margin-top:0px !important; width:92% !important; margin-left:14px !important;}
+.popup-mds .text-input-md{ margin-bottom:10px !important; margin-top:0px !important; width:92% !important; margin-left:14px !important;}
 .popup-mds .label-md{ margin-top:0px !important;}
 .popup-mds .text-input-ios{ margin-bottom:10px !important; margin-top:0px !important;}
 .popup-mds .label-ios{ margin-top:0px !important;}
-.popup-mds .scroll-content form .label-lb				    {font-size:17px; font-weight:400; margin-top:0px; margin-bottom:8px;}
+.popup-mds .scroll-content form .label-lb				    {font-size:17px; font-weight:400; margin-top:0px; margin-bottom:8px; padding-left:10px;}
 .popup-mds .scroll-content form .item-datetime    			{padding-left:8px !important;}
-.popup-mds .scroll-content form .select-brd 				{width:98%; margin-bottom:10px;}
+.popup-mds .scroll-content form .select-brd 				{width:94%; margin-bottom:10px; margin-left: 7px;}
 .popup-mds .scroll-content form .select-brds				{border:1px solid #ccc !important;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15);color:#555;font-size:18px;font-weight:400;
-															 padding: 7px 10px 9px 20px !important;width:96% !important; margin-left:7px !important;}
+															 padding: 7px 10px 9px 20px !important;width:92% !important; margin-left:7px !important;}
 .alert-md .alert-radio-label								{font-size:16px !important; font-weight:400;}
 .price-clr													{color:red !important; color:18px !important; font-weight:400; font-size:16px !important;}
 .rating-clr	ul.rating .ion-icon								{font-weight:400; font-size:20px !important;}
@@ -1026,6 +1020,7 @@ white-space: normal;}
 .alert-md .alert-head									    {padding: 4px 10px 10px;}
 .headbg													    {background:#4169E1; font-size:15px;}
 .body-clr												    {background:#fff;}
+.label-tittle												{ padding-left:10px !important;}
 .popup-mds > .ion-label									    {font-size:15px; text-align:center;}
 .job-view .item-md .item-inner .input-wrapper .label-md h2{ font-size:17px !important;}
 .liks-comments{font-size:14px !important; color:#0a399a !important;}
@@ -1059,7 +1054,25 @@ page-dashboard .dashboard								    {padding:0px 0px !important;}
 .create-message .completer-holder .completer-input 			{border:1px solid #ccc !important;border-radius:0;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);color:#555;font-size:15px;
                                                              font-weight:400;padding:7px; margin-left:10px !important; width:94%;}
 /*-------------------------------------Android platform css end-------------------------------------*/
-
-
+.external-listed .card-title-md h1{ color: #424a95;
+    font-family: "Open Sans",sans-serif;
+    font-size: 18px;
+    margin: 0;
+    padding:0px 0 0 10px;}
+.external-listed .card-content-md p{  color: #777;
+    display: block;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    margin-left:11px;
+   }
+.lastupdate .item-inner .input-wrapper .label-md h2 {
+   
+    float: left;
+    font-size: 19px !important;
+    text-align:left;
+    width: 100%;
+}
+.lastupdate{ margin:10px;}
 //venkat
 .item-inner 											    {border-bottom-color: transparent !important;box-shadow: none !important;}

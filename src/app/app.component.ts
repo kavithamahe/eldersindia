@@ -27,6 +27,7 @@ import { CommunitylistPage } from '../pages/communitylist/communitylist';
 import { CommunityPage } from '../pages/community/community';
 import { ManagePage } from '../pages/manage/manage';
 
+
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { SettingsPage } from '../pages/settings/settings';

@@ -24,6 +24,7 @@
     "@ionic-native/camera": "^3.4.4",
     "@ionic-native/core": "^3.6.1",
     "@ionic-native/file-chooser": "^3.12.1",
+    "@ionic-native/file-path": "^3.12.1",
     "@ionic-native/geolocation": "^3.6.1",
     "@ionic-native/native-geocoder": "^3.6.1",
     "@ionic-native/transfer": "^3.4.4",
