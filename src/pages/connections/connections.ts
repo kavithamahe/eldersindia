@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController,ToastController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { PopoverController,ViewController,Slides,NavController, NavParams,ActionSheetController,LoadingController,ToastController,Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
 import { ConnectionsService } from '../../providers/connections-service';
+
 /*
   Generated class for the Connections page.
 
@@ -17,6 +18,7 @@ import { ConnectionsService } from '../../providers/connections-service';
   providers:[ConnectionsService]
 })
 export class ConnectionsPage {
+@ViewChild(Slides) slides: Slides;
 getconnections:string;
 connections:string;  
 messages:any;
@@ -37,11 +39,19 @@ nextPageURL2:any='';
 nextPageURL3:any='';
 nextPageURL4:any='';
 connect_name:any;
+receivedrequests:any;
+sentrequests:any;
+allrequests:any;
+connectionsaction:any;
 
 allConnectionScrollLists:any=[];
 receivedConnectionScrollLists:any=[];
-   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public connectionsService:ConnectionsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
+prev_index:any = 0;
+data:any;
+All:any;
+   constructor(private popoverCtrl: PopoverController,public platform: Platform,public navCtrl: NavController, public actionsheetCtrl: ActionSheetController,public navParams: NavParams,public storage:Storage,public connectionsService:ConnectionsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.getconnections="myConnections";
+    this.connectionsaction ="all";
     if(navParams.get("notification")== 'connection_request'){
       this.connections = "received";
     }else{
@@ -59,6 +69,7 @@ receivedConnectionScrollLists:any=[];
       })
     });
   }
+
   public onInit()
   {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -384,4 +395,61 @@ receivedConnectionScrollLists:any=[];
       }
     );
   }
+  presentPopover(ev) {
+    let popover = this.popoverCtrl.create(PopoverPage, {
+    });
+    popover.present({
+      ev: ev
+    });
+    popover.onDidDismiss((popoverData) => {
+      this.connectionsaction = popoverData;
+      console.log(this.connectionsaction);
+   if(this.connectionsaction == "all"){
+      this.connectionsaction = "all";
+            this.onInit();
+   }
+    if(this.connectionsaction == "received"){
+      this.connectionsaction = "received";
+            this.receivedRquest();
+   }
+    if(this.connectionsaction == "sent"){
+      this.connectionsaction = "sent";
+            this.sentRquest();
+   }
+   if(this.connectionsaction == "null" || this.connectionsaction === null  ){
+      this.connectionsaction = "all";
+            this.onInit();
+   }
+    })
+  }
+
+}
+
+
+
+@Component({
+  template: `<ion-list>
+<ion-item (click)="requests('all')">
+All
+</ion-item>
+<ion-item (click)="requests('received')">
+Received
+</ion-item>
+<ion-item (click)="requests('sent')">
+Sent
+</ion-item>
+</ion-list>
+  `
+})
+export class PopoverPage {
+  connectionsaction:any;
+ //selectedTitle: string;
+  constructor(private viewCtrl: ViewController) {
+   this.connectionsaction = "all";
+   }
+ requests(data){
+   this.connectionsaction=data;
+   this.viewCtrl.dismiss(this.connectionsaction);
+console.log(data);
+ }
 }

@@ -44,11 +44,8 @@
                 	<p style="color:red" class="valid">This field is required</p>
            		</div>
 	       			 <br>
-     			<button ion-button color="dark" outline>
+     			<button ion-button color="dark" outline (click)="openCamera()">
      			<ion-icon name="add"></ion-icon>Attachment</button>
-     			<!-- <button ion-button (click)="accessGallery()" color="dark" outline>
-     			<ion-icon name="add"></ion-icon>Attachment</button>
-      			 -->
       			<button (click)="sendMessage()" ion-button class="btn-right">
   				<ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;Send</button>
 			</ion-list>

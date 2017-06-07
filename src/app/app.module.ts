@@ -10,6 +10,9 @@ import { Ng2EmojiModule } from 'ng2-emoji';
 import { NativeAudio,Geolocation } from 'ionic-native';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import {MomentModule} from 'angular2-moment';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { FilePath } from '@ionic-native/file-path';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 
 // import { Geolocation } from '@ionic-native';
 //Venkatesh
@@ -56,8 +59,7 @@ import { CommunitymessagePage } from '../pages/communitymessage/communitymessage
 import { CommunitycommentsPage } from '../pages/communitycomments/communitycomments';
 import { MyprofilesettingPage } from '../pages/myprofilesetting/myprofilesetting';
 import { CommunitymembersPage } from '../pages/communitymembers/communitymembers';
-
-
+import { PopoverPage } from '../pages/connections/connections';
 
 import { ManagePage } from '../pages/manage/manage';
 import { EldersPage } from '../pages/elders/elders';
@@ -80,7 +82,7 @@ import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service-provider';
-import { Externallinks } from '../providers/externallinks';
+// import { Externallinks } from '../providers/externallinks';
 
 
 
@@ -98,6 +100,7 @@ import { Externallinks } from '../providers/externallinks';
     MyprofilesettingPage,
     EmojiPickerPage,
     CommunitymembersPage,
+    PopoverPage,
     ManagePage,
     EldersPage,
     JobboardPage,
@@ -156,7 +159,8 @@ import { Externallinks } from '../providers/externallinks';
     CommunitycommentsPage,
     MyprofilesettingPage,
     EmojiPickerPage,
-    CommunitymembersPage, 
+    CommunitymembersPage,
+    PopoverPage, 
     CommunityPage,
     ManagePage,
     EldersPage,
@@ -196,6 +200,6 @@ import { Externallinks } from '../providers/externallinks';
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider, AppConfig,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider, AppConfig,Storage] // Add GithubUsers provider
 })
 export class AppModule {}
