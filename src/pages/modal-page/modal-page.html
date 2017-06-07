@@ -54,7 +54,8 @@
           
 		     <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb">Select Dependent</ion-label>
 			 <ion-item *ngIf = "userType =='sponsor'">
-              <ion-select formControlName="dependents" class="select-brds">
+	<ion-label>Select Dependent</ion-label>
+              <ion-select formControlName="dependents" class="select-brds" >
               <ion-option *ngFor = "let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}}
               </ion-option>
             </ion-select>
@@ -112,7 +113,7 @@
 .item-md													{background:none !important;}
 ion-content{ background:none !important;}
 .scroll-content{overflow-y:hidden !important;}
-ion-select{ width:100% !important;}
+
  .gly-rotate-180 {
   filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.5);
   -webkit-transform: rotate(180deg);

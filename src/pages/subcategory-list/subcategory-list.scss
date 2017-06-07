@@ -3,4 +3,10 @@ page-subcategory-list {
 .subcategory-list{
 	background-color:"white";
 }
+
+.item-md ion-thumbnail ion-img, .item-md ion-thumbnail img{ width:auto; height:auto;}
+.item-ios ion-thumbnail ion-img, .item-ios ion-thumbnail img{ width:auto; height:auto;}
+
+.item-inner > .input-wrapper > .label-md h2{ font-size:18px !important;}
+.item-inner > .input-wrapper > .label-ios h2{ font-size:18px !important;}
 }

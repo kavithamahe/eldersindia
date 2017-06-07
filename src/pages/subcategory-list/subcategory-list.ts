@@ -178,7 +178,7 @@ loadSubcategoryList(subCategory_id,location_id){
 
 @Component({
   template: `
-<div class="ion-modal-popup">
+<div class="ion-modal-popup" style="">
 <ion-header>
 <ion-toolbar class="hei-head">
     <ion-title color="primary" class="tittles-md">
@@ -186,22 +186,21 @@ loadSubcategoryList(subCategory_id,location_id){
     </ion-title>
     <ion-buttons start item-right class="close-iconss">
       <button ion-button (click)="dismiss()">
-        <span ion-text color="primary" showWhen="ios">Cancel</span>
         <ion-icon ios="ios-close-circle-outline" md="md-close-circle" ></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="popup-mds">
+<ion-content class="popup-mds" style="background:#fff;">
   <ion-item *ngIf(selected)>
   <p class="err-reds"> Dependent not selected</p>
   </ion-item>
 
    <ion-label style=" font-size:17px;">Select Dependent</ion-label>
       <ion-item >
-           
-              <ion-select class="select-brd" style=" margin-left:5px; width:97% !important; text-align:left; font-size:15px;" [(ngModel)]="dependentData">
+           <ion-label>Select Dependent</ion-label>
+              <ion-select class="select-brd" style=" margin-left:10px; width:92% !important; text-align:left; font-size:15px;" [(ngModel)]="dependentData">
                 <ion-option *ngFor = "let dependent of dependentLists" [value]="dependent">{{dependent.name}}
                 </ion-option>
               </ion-select>

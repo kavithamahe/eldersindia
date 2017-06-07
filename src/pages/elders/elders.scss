@@ -1,12 +1,29 @@
 page-elders{
 .add-depentsform .item-md .item-inner .input-wrapper .select-brd {
     width: 100%;
-    margin-left: 0;
+   
     text-align: left;
-    margin-right: 10px !important;
+    margin-right:11px !important;
 }
 .datetime
 {
-	 margin-left: 9px !important;
+	 margin-left:14px !important;
 }
+.ng2-tag-input-focus[_nghost-qkx-41]{box-shadow:none !important;}
+[_nghost-qkx-41]{box-shadow:none !important;}
+}
+
+page-elders{
+.add-depentsform .item-ios .item-inner .input-wrapper .select-brd {
+    width:92%;
+   
+    text-align: left;
+    margin-right:11px !important;
+}
+.datetime
+{
+	 margin-left:14px !important;
+}
+.ng2-tag-input-focus[_nghost-qkx-41]{box-shadow:none !important;}
+[_nghost-qkx-41]{box-shadow:none !important;}
 }
