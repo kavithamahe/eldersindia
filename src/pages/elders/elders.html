@@ -288,7 +288,7 @@
           </ion-row>
 		 
    
-            <ion-label>Email Address *</ion-label>
+            <ion-label>Email Address <small class="req-field">*</small></ion-label>
 			  <ion-item>
                 <ion-input formControlName="elder_email"
                 [class.invalid]="!authForm.controls.elder_email.valid && (authForm.controls.elder_email.dirty)" placeholder="Email" value={{elder_email}}>
@@ -297,7 +297,7 @@
                 <small *ngIf="!authForm.controls.elder_email.valid  && (authForm.controls.elder_email.dirty || submitAttempt)">
                     <p class="valid err-reds">Please enter Email</p>
                 </small>
-            <ion-label>Password *</ion-label>
+            <ion-label>Password <small class="req-field">*</small></ion-label>
               <ion-input formControlName="elder_password" style="margin:0px;"
                 [class.invalid]="!authForm.controls.elder_password.valid && (authForm.controls.elder_password.dirty)" type="text" placeholder="Password" value={{elder_password}}>
               </ion-input>
@@ -372,6 +372,5 @@
   transform: rotate(180deg);
   display: inline-block;
 }
-[_nghost-dbn-41]{ box-shadow: 0 1px #fff;}
 
 </style>

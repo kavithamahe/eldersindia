@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController,Slides,NavParams, LoadingController,ToastController } from 'ionic-angular';
+import { NavController,Slides,NavParams, LoadingController,ToastController,AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Platform } from 'ionic-angular';
 
@@ -34,7 +34,7 @@ inboxScrollLists:any=[];
 sentScrolllLists:any=[];
 status:any;
 
-   constructor(public navCtrl: NavController, public navParams: NavParams,platform: Platform,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
+   constructor(public navCtrl: NavController,public alertCtrl: AlertController, public navParams: NavParams,platform: Platform,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   	this.isAndroid = platform.is('android');
     if(navParams.get("viewType")!='' && navParams.get("viewType")!=null)
     {
@@ -219,6 +219,25 @@ status:any;
         }
       }
     );
+  }
+  showConfirm(messageId,viewType){
+     let confirm = this.alertCtrl.create({
+     title:'Confirm',
+     subTitle: 'Message will be deleted',
+       buttons: [
+        {
+          text: 'Cancel',
+         },
+        {
+          text: 'Ok',
+          handler: () => {
+           this.deleteMessage(messageId,viewType);
+          
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
   deleteMessage(messageId,viewType)
   {
