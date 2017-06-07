@@ -73,7 +73,7 @@
             </ion-col>
           </ion-row>
         </ion-item>
-        <ion-item-options side="right" (click)="deleteMessage(inbox?.id,'inbox')">
+        <ion-item-options side="right" (click)="showConfirm(inbox?.id,'inbox')">
           <button ion-button class="trash-del">
           <i class="fa fa-trash-o fa-2x"></i>          
           </button>        
@@ -117,7 +117,7 @@
             </ion-col>
           </ion-row>
         </ion-item>
-        <ion-item-options side="right" (click)="deleteMessage(sent?.id,'sent')">
+        <ion-item-options side="right" (click)="showConfirm(sent?.id,'sent')">
           <button ion-button color="primary">
             <i class="fa fa-trash-o fa-2x"></i>            
           </button>
