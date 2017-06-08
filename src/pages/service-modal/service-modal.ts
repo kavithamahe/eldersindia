@@ -55,12 +55,12 @@ title:any;
     this.navCtrl.push(SubcategoryListPage,{location_id,service});
  }
 
- show_sub_category(){
+ show_sub_category(event){
       this.show_service = false;      
-    if(this.sub_category){
-      this.sub_category = false; 
+    if(this.sub_category== null){
+      this.sub_category = event; 
     }else{
-      this.sub_category = true;
+      this.sub_category = null;
     }
   }
   ionViewWillEnter() {

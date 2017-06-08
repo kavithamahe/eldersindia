@@ -5,6 +5,8 @@ import { Http,Headers,RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 import { AppConfig } from '../providers/app-config';
+import { FilePath } from '@ionic-native/file-path';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 
 
 @Injectable()
@@ -29,7 +31,7 @@ export class CommunityServices {
   //id:number;
   user_id:number = 0;
   getCommunityPostsUrl:any;
-   constructor(public appConfig:AppConfig,public http: Http,public storage:Storage,public toastCtrl: ToastController) {
+   constructor(private transfer: Transfer, private filePath: FilePath,public appConfig:AppConfig,public http: Http,public storage:Storage,public toastCtrl: ToastController) {
      this.getCommunityPostsUrl = appConfig.setrooturl();
     this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
@@ -44,7 +46,65 @@ export class CommunityServices {
    }); 
   }
 
-  
+  fileTransferIonic(uri){
+     const fileTransfer: TransferObject = this.transfer.create();
+
+
+    // regarding detailed description of this you cn just refere ionic 2 transfer plugin in official website
+      let options1: FileUploadOptions = {
+         fileKey: 'file',
+         fileName: 'avatar.png',
+         // headers: this.options,
+         params: {"app_key":"Testappkey","name":"saravanan","dob":"09-04-1995", "mobile":"9566631107"},
+         chunkedMode : false
+      
+      }
+
+      fileTransfer.upload(uri, encodeURI('http://192.168.1.200:8095/fileup/fileupload.php'), options1)
+       .then((data) => {
+       // success
+       console.log(data);
+       alert("success"+JSON.stringify(data));
+       }, (err) => {
+       // error
+       console.log(err);
+       alert("error"+JSON.stringify(err));
+           });
+  }
+  file_Path:any;
+    upload(imageData)
+    {
+      
+       // imageData is either a base64 encoded string or a file URI
+       // If it's base64:
+
+     const fileTransfer: TransferObject = this.transfer.create();
+
+    this.filePath.resolveNativePath(imageData)
+     .then(filePath => {
+                console.log(filePath);
+                this.file_Path = filePath;
+            });
+
+      let file_name = this.file_Path.split("/").pop();
+
+      let options1: FileUploadOptions = {
+         fileKey: 'file',
+         fileName: file_name,
+         headers: {}
+      
+      }
+
+  fileTransfer.upload(imageData, 'http://192.168.1.200:8095/fileup/fileupload.php', options1)
+   .then((data) => {
+     // success
+     alert("success");
+   }, (err) => {
+     // error
+     alert("error"+JSON.stringify(err));
+   });
+ 
+}
   initialize(){
     this.storage.ready().then(() => {
     this.storage.get('token').then((token) => { this.token=token;

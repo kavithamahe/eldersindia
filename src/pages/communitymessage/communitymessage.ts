@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController,LoadingController } from 'ionic-angular';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
-import { Camera } from 'ionic-native';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { FilePath } from '@ionic-native/file-path';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 
 import { CommunityServices } from '../../providers/community-services';
 
@@ -19,7 +21,7 @@ export class CommunitymessagePage {
    message:any;
    member_id:any;
 
-  constructor(public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams,public communityServices: CommunityServices, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
+  constructor(private transfer: Transfer, private fileChooser: FileChooser,private filePath: FilePath,public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams,public communityServices: CommunityServices, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
   	 
      this.member_name = navParams.get("member_data").name;
      this.member_id = navParams.get("member_data").id;
@@ -58,5 +60,27 @@ export class CommunitymessagePage {
   	}
 
   }
+   browseFile(){
+    this.fileChooser.open()
+  .then(uri => {
+    console.log(uri);
+  this.filePath.resolveNativePath(uri)
+  .then(filePath => {
+    console.log(filePath);
+    this.communityServices.fileTransferIonic(filePath);
+  })
+  .catch(err => console.log(err));
+  })
+  .catch(e => console.log(e));
+
+  }
+ openCamera(){
+
+    this.fileChooser.open()
+      .then((imageData) => {
+        this.communityServices.upload(imageData);
+      });
+  }
+
 
 }

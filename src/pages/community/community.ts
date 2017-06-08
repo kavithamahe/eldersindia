@@ -153,15 +153,6 @@ toggleContent(){
       return null;
     }
   }
-// getDate(date){
-//   console.log("current time");
-//   // getDate
-//   let today = new Date().toISOString();
-//   console.log("current time ",today);
-//   let time:any = new Date("2017-03-05 11:26:16").getHours();
-// let date2:any = new Date("2017-03-06 12:26:16").getHours();
-// console.log(time -date2, time, date2, "sdfsd")
-// }
   getDate(stringDate){
       var dateOut = new Date(stringDate);
       dateOut.setDate(dateOut.getDate());
