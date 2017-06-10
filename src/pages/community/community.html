@@ -163,6 +163,12 @@
   						<p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{user.comment_count}}+Comments</p>
 				      </button>
 				    </ion-col>
+				    <ion-col>
+				    	<button ion-button icon-left clear small  *ngIf="!user.likecount == 0" 
+				    	(click)="showComment(user)">
+  							<p class="liks-comments">&nbsp;{{user.likecount}}+like it</p>
+				      	</button>
+				    </ion-col>
 				</ion-row>
 			</div>
 		</ion-card>    		

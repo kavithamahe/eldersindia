@@ -75,8 +75,7 @@ post_likes:any;
   }
     showConfirm(replyId){
      let confirm = this.alertCtrl.create({
-     title:'Confirm',
-     subTitle: 'comment will be deleted',
+     subTitle: '1 comment will be deleted',
        buttons: [
         {
           text: 'Cancel',
@@ -94,8 +93,7 @@ post_likes:any;
   }
    showConfirmreply(comment_id,reply_id,post_id){
      let confirm = this.alertCtrl.create({
-     title:'Confirm',
-     subTitle: 'comment will be deleted',
+     subTitle: '1 comment will be deleted',
        buttons: [
         {
           text: 'Cancel',

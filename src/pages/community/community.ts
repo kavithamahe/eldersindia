@@ -99,8 +99,7 @@ files:any;
   }
 showConfirm(id){
      let confirm = this.alertCtrl.create({
-     title:'Confirm',
-     subTitle: 'comment will be deleted',
+     subTitle: '1 post will be deleted',
        buttons: [
         {
           text: 'Cancel',
@@ -328,6 +327,7 @@ metaLink:any = "";
     })
      }
      else{
+       loader.dismiss();
      this.showToast("Enter message and Post");
    }
    }

@@ -33,7 +33,7 @@ rootUrl:any;
       
    });  
 }
-
+ 
 serviceInit(token){
       this.rootUrl= this.app.setrooturl();
       this.storage.ready().then(() => {
