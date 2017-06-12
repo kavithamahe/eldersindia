@@ -62,6 +62,9 @@ user_dob:any;
     }
   }
 
+  dismiss(){
+    this.dashboardPage();
+  }
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);

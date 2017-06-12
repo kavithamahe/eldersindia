@@ -239,8 +239,7 @@
 		</ion-list>
 	
 		<ion-list *ngSwitchCase="'connections'">
-		<ion-card *ngFor="let connection of allConnections">
-			<ion-row>
+		<ion-row>
 			  	<ion-col>
 				  	<div>
 						<ion-searchbar (ionInput)="setItems($event)">
@@ -248,6 +247,8 @@
 					</div>
 				</ion-col>
 			</ion-row>
+		<ion-card *ngFor="let connection of allConnections">
+			
 			
 	   			<ion-row>
 		    		<ion-col width-20>

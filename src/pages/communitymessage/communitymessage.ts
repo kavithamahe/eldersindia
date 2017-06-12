@@ -4,6 +4,11 @@ import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 
 import { CommunityServices } from '../../providers/community-services';
 
+import { FileChooser } from '@ionic-native/file-chooser';
+import { FilePath } from '@ionic-native/file-path';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+
+
 @Component({
   selector: 'page-communitymessage',
   templateUrl: 'communitymessage.html'
@@ -18,7 +23,7 @@ export class CommunitymessagePage {
    message:any;
    member_id:any;
 
-  constructor(public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams,public communityServices: CommunityServices, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
+  constructor(private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams,public communityServices: CommunityServices, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
   	 
      this.member_name = navParams.get("member_data").name;
      this.member_id = navParams.get("member_data").id;
@@ -59,13 +64,13 @@ export class CommunitymessagePage {
 
   }
   
- // openCamera(){
-
- //    this.fileChooser.open()
- //      .then((imageData) => {
- //        this.communityServices.upload(imageData);
- //      });
- //  }
+ openCamera(){
+console.log("open success");
+    this.fileChooser.open()
+      .then((imageData) => {
+        this.communityServices.upload(imageData);
+      });
+  }
 
 
 }

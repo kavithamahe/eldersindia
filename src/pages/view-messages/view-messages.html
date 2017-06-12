@@ -34,8 +34,8 @@
             <ion-col width-80  style="padding: 0px !important" class="send-box-content">
 			<ion-row>
                 <ion-item style="padding: 0px !important" class="view-messname">
-				<small *ngIf ="viewType == 'inbox'">{{veiwMessagesInfo?.sender_name}}</small>
-				<small *ngIf ="viewType == 'sent'">{{veiwMessagesInfo?.receiver_name}}</small>
+				<small (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" *ngIf ="viewType == 'inbox'">{{veiwMessagesInfo?.sender_name}}</small>
+				<small (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" *ngIf ="viewType == 'sent'">{{veiwMessagesInfo?.receiver_name}}</small>
 				<b><i class="fa fa-calendar-o"></i> {{veiwMessagesInfo?.created_at | date :'MM/dd/yy'}}</b>
 				    <span>{{veiwMessagesInfo?.subject}}</span>
 					
