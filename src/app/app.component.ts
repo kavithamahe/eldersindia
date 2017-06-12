@@ -295,9 +295,7 @@ export class MyApp {
                 });
                 confirmAlert.present();
               }
-
-
-      });
+   });
     });
   }
 
@@ -339,11 +337,16 @@ export class MyApp {
           console.log('error');
         });
 
+      // push.setApplicationIconBadgeNumber(function() {
+      //   console.log('success');
+      // }, function() {
+      //   console.log('error');
+      // }, +data.count);
       push.setApplicationIconBadgeNumber(function() {
-        console.log('success');
-      }, function() {
-        console.log('error');
-      }, +data.count);
+  console.log('success');
+}, function() {
+  console.log('error');
+}, 2);
       // let self = this;
       //if user using app and push notification comes
       if (data.additionalData.foreground) {
