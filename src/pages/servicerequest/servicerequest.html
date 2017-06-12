@@ -17,7 +17,7 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Service Requests</ion-title>
+    <ion-title text-center text-capitalize>Service Requests</ion-title>
     <!--<ion-buttons right>    
       <button ion-button icon-only>
         <ion-icon name="search"></ion-icon>
@@ -55,7 +55,7 @@
 	<ion-col width-50 style="padding-left:0px;">
 	
 	<span *ngFor="let venStatus of vendorStatus" >
-   <p *ngIf="venStatus.id==service?.vendor_status"> <ion-badge class="{{venStatus.label}}"> {{venStatus.label}}</ion-badge></p>
+   <p *ngIf="venStatus.id==service?.vendor_status"><ion-badge class="{{venStatus.label}}"> {{venStatus.label}}</ion-badge></p>
 	</span>
 		 
 	</ion-col>

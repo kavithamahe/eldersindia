@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+	    <button ion-button icon-only (click)="dashboardPage()">
+	        <ion-icon name="home"></ion-icon>
+	    </button>
+    </ion-buttons>
+    <ion-title text-center text-capitalize>Blogs</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-tabs>
+  <ion-tab [root]="tab1Root" tabTitle="View Blogs"  tabsHideOnSubPages="false" tabIcon="logo-rss">
+  </ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Manage My Blogs"  tabsHideOnSubPages="false" tabIcon="logo-rss">
+  </ion-tab>
+   <ion-tab [root]="tab3Root" tabTitle="Create Blog"  tabsHideOnSubPages="false" tabIcon="add">
+  </ion-tab>
+</ion-tabs>

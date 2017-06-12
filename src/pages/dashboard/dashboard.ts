@@ -9,6 +9,8 @@ import { CommunitylistPage } from '../../pages/communitylist/communitylist';
 import { BlogsPage } from '../../pages/blogs/blogs';
 import { ConnectionsPage } from '../../pages/connections/connections';
 import { MessagesPage } from '../../pages/messages/messages';
+import { BlogtabsPage } from '../../pages/blogtabs/blogtabs';
+
 /*
   Generated class for the Dashboard page.
 
@@ -56,7 +58,7 @@ export class DashboardPage {
   public blogsPage()
   {
     //alert("token"+this.token);
-  	this.navCtrl.setRoot(BlogsPage);
+  	this.navCtrl.setRoot(BlogtabsPage);
   }
   public connectionsPage()
   {

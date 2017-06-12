@@ -2,18 +2,10 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-
 import { BlogListService } from '../../providers/blog-list-service';
 import { SingleblogPage } from '../../pages/singleblog/singleblog';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
-import { CreateBlogPage } from '../../pages/create-blog/create-blog';
-import { ManageBlogsPage } from '../../pages/manage-blogs/manage-blogs';
-/*
-  Generated class for the Blogs page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-blogs',
   templateUrl: 'blogs.html',
@@ -47,7 +39,7 @@ imageUrl:string;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -74,13 +66,5 @@ imageUrl:string;
   public viewBlog(blogId)
   {
    this.navCtrl.push(SingleblogPage, {blogId});
-  }
-  public createBlog()
-  {
-   this.navCtrl.push(CreateBlogPage);
-  }
-  public manageBlog()
-  {
-   this.navCtrl.push(ManageBlogsPage);
   }
 }

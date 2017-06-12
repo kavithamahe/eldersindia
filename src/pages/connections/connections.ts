@@ -212,8 +212,7 @@ All:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
-       
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -251,7 +250,7 @@ All:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -386,7 +385,7 @@ All:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -443,7 +442,6 @@ Sent
 })
 export class PopoverPage {
   connectionsaction:any;
- //selectedTitle: string;
   constructor(private viewCtrl: ViewController) {
    this.connectionsaction = "all";
    }

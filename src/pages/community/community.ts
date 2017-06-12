@@ -99,8 +99,7 @@ files:any;
   }
 showConfirm(id){
      let confirm = this.alertCtrl.create({
-     title:'Confirm',
-     subTitle: 'comment will be deleted',
+     subTitle: '1 post will be deleted',
        buttons: [
         {
           text: 'Cancel',
@@ -153,15 +152,6 @@ toggleContent(){
       return null;
     }
   }
-// getDate(date){
-//   console.log("current time");
-//   // getDate
-//   let today = new Date().toISOString();
-//   console.log("current time ",today);
-//   let time:any = new Date("2017-03-05 11:26:16").getHours();
-// let date2:any = new Date("2017-03-06 12:26:16").getHours();
-// console.log(time -date2, time, date2, "sdfsd")
-// }
   getDate(stringDate){
       var dateOut = new Date(stringDate);
       dateOut.setDate(dateOut.getDate());
@@ -337,6 +327,7 @@ metaLink:any = "";
     })
      }
      else{
+       loader.dismiss();
      this.showToast("Enter message and Post");
    }
    }

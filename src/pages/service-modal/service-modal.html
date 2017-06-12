@@ -6,7 +6,7 @@
 -->
 <ion-header>
 <ion-toolbar class="hei-head">
-    <ion-title color="primary" class="tittles-md">
+    <ion-title color="primary" class="tittles-md" text-capitalize>
       {{title}}
     </ion-title>
     <ion-buttons start item-right class="close-iconss">
@@ -23,8 +23,8 @@
 
         <div *ngIf(showServiceOffered) class="offered-servicelist">
           <ion-item *ngFor = "let service of vendorList.serviceOffered">
-            <ion-card *ngFor = "let category_list of service.category_lists">
-              <ion-card-header class="sub" ion-item (click)="show_sub_category()">
+            <ion-card *ngFor = "let category_list of service.category_lists; let i=index">
+              <ion-card-header class="sub" ion-item (click)="show_sub_category(i)">
                
                 <p>{{category_list.category}}</p>  
 				 <small>
@@ -35,7 +35,7 @@
 				</small>
               </ion-card-header>
               <!-- <hr *ngIf(sub_category)> -->
-                  <ion-card-content *ngIf(sub_category) class="offered-servicelist-two">
+                  <ion-card-content *ngIf="i==sub_category" class="offered-servicelist-two">
                     <ion-item *ngFor="let subcategory_list of category_list.service_sub_category_lists; let i=index " >
                     <ion-list (click)="showService(i)">
                    

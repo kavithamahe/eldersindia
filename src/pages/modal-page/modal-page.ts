@@ -82,6 +82,7 @@ export class ModalContentPage {
     
     if(!this.modalForm.valid || (this.terms == false)){
       this.submitAttempt = true;
+      this.providerService.showToast("Please Enter The Required Fields");
           if(this.terms == false){
             this.checkTerms = true;
           }
