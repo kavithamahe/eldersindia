@@ -27,32 +27,37 @@
 
 <ion-content padding class="content-intop">
 
- <ion-item>
+ <ion-item class="select-loca">
     <ion-label>Functional Area</ion-label>
-    <ion-select [(ngModel)]="functionalArea" (ionChange)="onInit()">
+    <ion-select [(ngModel)]="functionalArea" (ionChange)="onInit()"	>
       <ion-option *ngFor="let functional of functionalAreaList" value="{{functional?.id}}">{{functional?.name}}</ion-option>      
     </ion-select>
   </ion-item>
-  <ion-item>
+  <ion-item class="select-loca">
     <ion-label>Location</ion-label>
     <ion-select [(ngModel)]="location" (ionChange)="onInit()">
       <ion-option *ngFor="let locations of locationList" value="{{locations?.id}}">{{locations?.location}}</ion-option>
     </ion-select>
   </ion-item>
-
-<ion-card *ngFor="let jobBoard of jobBoardInfo" >
-  <ion-item (click)="viewJob(jobBoard?.id)">
+<ion-item class="select-locas">
+<p>Current job openings</p>
+</ion-item>
+<ion-card *ngFor="let jobBoard of jobBoardInfo" class="job-detailsview">
+  <ion-item (click)="viewJob(jobBoard?.id)" test-wrap>
+  <ion-row>
+  <ion-col width-75>
     <h2 test-wrap>{{jobBoard?.title}}</h2>
-    <P><i class="fa fa-university" aria-hidden="true"> {{jobBoard?.company_name}} </i></P>
-    <P><i class="fa fa-briefcase" aria-hidden="true"> {{jobBoard?.min_experience}} - {{jobBoard?.max_experience}} years</i></P>
-    <P><i class="fa fa-map-marker" aria-hidden="true"> {{jobBoard?.location}}</i> </P>
-	<!--<br>
-    <small *ngIf="jobBoard?.job_type"><ion-badge color="primary">{{jobBoard?.job_type}}</ion-badge></small>
-     <ion-badge color="green" *ngIf="jobBoard?.skills">{{jobBoard?.skills}}</ion-badge> 
-  -->
-  <ion-thumbnail item-right>
-  <img src="assets/img/logo-head.png">
-  </ion-thumbnail>
+    <P style=" color:#333 !important;"><i class="fa fa-university" aria-hidden="true" ></i>&nbsp;{{jobBoard?.company_name}}</P>
+    <P><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;{{jobBoard?.min_experience}} - {{jobBoard?.max_experience}} years</P>
+	
+    <P><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;{{jobBoard?.location}} </P>
+	</ion-col>
+  <ion-col width-25>
+
+  <img src="assets/img/moble.png">
+
+    </ion-col>
+  </ion-row>
   </ion-item>
 </ion-card>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
@@ -60,7 +65,7 @@
  </ion-infinite-scroll>
 <ion-card *ngIf="emptyRecordSet">
 <ion-card-content>
-<p>{{emptyRecordSet}}</p>
+<p style=" color:red;">{{emptyRecordSet}}</p>
 </ion-card-content>
 </ion-card>
 </ion-content>

@@ -46,7 +46,7 @@
                     </ion-col>
                     <ion-col width-67>
                       <h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} </h6>
-                      <p class="connection-pages"><i class="fa fa-inbox"> </i> {{request?.connections?.email}}</p>
+                      <p class="connection-page"><i class="fa fa-inbox"> </i> {{request?.connections?.email}}</p>
                       <p class="connection-page" [hidden]="!request?.connections?.location">
                       <i class="fa fa-map-marker"></i> {{request?.connections?.location}}    
                       </p>
@@ -75,7 +75,7 @@
                   </ion-col>
                   <ion-col width-67>
                     <h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}}</h6>
-                    <p class="connection-pages"><i class="fa fa-inbox"> </i> {{request?.connections?.email}}</p>
+                    <p class="connection-page"><i class="fa fa-inbox"> </i> {{request?.connections?.email}}</p>
                     <p class="connection-page" [hidden]="!request?.connections?.location">
                     <i class="fa fa-map-marker"></i> {{request?.connections?.location}}    
                     </p>
@@ -100,7 +100,7 @@
                   </ion-col>
                 <ion-col width-67>
                   <h6 class="name-conne" (click)="CommunityUserWall(all?.id)">{{all?.connections?.name}} </h6>
-                  <p class="connection-pages"><i class="fa fa-inbox"> </i> {{all?.connections?.email}}
+                  <p class="connection-page"><i class="fa fa-inbox"> </i> {{all?.connections?.email}}
                   </p>
                   <p class="connection-page" [hidden]="!all?.connections?.location">
                   <i class="fa fa-map-marker"></i> {{all?.connections?.location}}</p>

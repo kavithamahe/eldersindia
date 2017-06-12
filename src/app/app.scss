@@ -231,6 +231,40 @@ input, textarea {
 }
 .label-ios{line-height:22px !important;}
 .label-md{ line-height:22px !important;}
+.remarks-btns{ background:none; box-shadow:none; float:right; padding:0px !important;}
+.remarks-btns .button-inner i {float:right; background:#ec72d7; font-size:14px !important; width:35px; line-height:35px; height:35px; border-radius:50%;}
+.job-detailsview .item-md{ padding-left:5px !important;}
+.job-detailsview .item-md .item-inner .input-wrapper .label-md h2{color:#424a95;font-size:18px !important;font-weight:400;margin-top:0;}
+.job-detailsview .item-md .item-inner .input-wrapper .label-md p i{ font-size:12px; color:#a8a9a8 !important; width:20px; text-align:left !important;}
+.job-detailsview .item-md .item-inner .input-wrapper .label-md p{color:#777 !important;font-size:15px !important;font-weight:400;margin-top:0; text-indent:0px !important; padding-left:2px; overflow:hidden;text-overflow:ellipsis;}
+ .job-detailsview .item-md .item-inner .input-wrapper .label-md p i.fa-map-marker{padding-left:4px;}
+.job-detailsview .item-ios{ padding-left:5px !important;}
+.job-detailsview .item-ios .item-inner .input-wrapper .label-ios h2{color:#424a95;font-size:18px !important;font-weight:400;margin-top:0;}
+.job-detailsview .item-ios .item-inner .input-wrapper .label-ios p i{ font-size:12px; color:#a8a9a8 !important; width:20px; text-align:center !important;}
+.job-detailsview .item-ios .item-inner .input-wrapper .label-ios p{color:#777 !important;font-size:15px !important;font-weight:400;margin-top:0; text-indent:0px !important; padding-left:2px; overflow: hidden;text-overflow:ellipsis;}
+.job-imgs{ margin-right:10px; }
+.job-dates{ padding-left:0px !important;}
+.job-dates .item-inner .input-wrapper .label-md{ font-size:13px; padding-left:0px; margin:0px;}
+.job-dates .item-inner .input-wrapper .label-md p span i{ width:23px; color:#a8a9a8;}
+.job-dates .item-inner .input-wrapper .label-md p span{ font-size:14px; color:#777;}
+.job-dates .item-inner .input-wrapper .label-ios{ font-size:13px; padding-left:0px; margin:0px;}
+.job-dates .item-inner .input-wrapper .label-ios p span i{ width:23px; color:#a8a9a8;}
+.job-dates .item-inner .input-wrapper .label-ios p span{ font-size:14px; color:#777;}
+
+.select-loca{ border-bottom:1px solid #5ba9fc; background:#3396fe;}
+.select-loca .item-inner .input-wrapper .label-ios{ text-align:left; color:#fff; padding-left:8px; margin:0px; font-size:17px;}
+.select-loca .item-inner .input-wrapper .select-ios .select-icon .select-icon-inner{ color:#fff !important;}
+.select-locas p{  font-size:17px; color:#424b9a; font-weight:400; text-align:center; }
+.select-locas{padding-left:0px;}
+.select-locas .item-inner .input-wrapper .label-ios{ margin:0px;}
+
+.select-loca{ border-bottom:1px solid #5ba9fc; background:#3396fe;}
+.select-loca .item-inner .input-wrapper .label-md{ text-align:left; color:#fff; padding-left:8px; margin:0px;}
+.select-loca .item-inner .input-wrapper .select-md .select-icon .select-icon-inner{ color:#fff !important;}
+.select-locas p{  font-size:17px; color:#424b9a; font-weight:400; text-align:center; }
+.select-locas{padding-left:0px;}
+.select-locas .item-inner .input-wrapper .label-md{ margin:0px;}
+
 /*-------------------------------------Common  css -------------------------------------*/
 
 .service-bg0												{height:auto !important;min-height:80px;background:#ff7fe6;width:50%; margin-top:1px; border-right:1px solid #fff; border-bottom:1px solid #fff;}
@@ -284,7 +318,7 @@ page-service-info ion-input									{border:none !important;}
 .btn-clrs													{ float:right; border-radius:4px;margin-top:10px;  width:50%;}
 .bar-button-light-md, .bar-button-clear-md-light, .bar-button-md-light{font-size:15px;}
 .bar-button-light-ios, .bar-button-clear-ios-light, .bar-button-ios-light{ color:#fff !important;}
-.connection-btn .button-md 									{background:#58e2c9;box-shadow:none;}
+.connection-btn .button-md 									{ background:#58e2c9;border-radius:35px;box-shadow:none;height:40px;width:40px;}
 .Pending													{color:#f8b106; padding:0px; font-size:14px; }
 
 .add-btn .button-inner .ion-ios-add-circle{ color:#333 !important;}
@@ -339,8 +373,11 @@ span.mails-cont p 											{float:left; color:#858D9B; font-size:15px;}
 page-service-info .service_request							{border:none !important;}
 ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .segment-md .segment-button									{background:none; color:#000; border-bottom:none;font-size:16px;text-transform:capitalize; border-left:1px solid #888aef !important; height:35px; line-height:35px; }
-.connection-page											{margin:0px !important; font-size:13px !important; font-weight:400 !important; color:#777; }
-.connection-pages											{color:#666 !important; margin:0px !important; font-size:13px;}
+.connection-page											{margin:0px !important; font-size:14px !important; font-weight:400 !important; color:#777; }
+.connection-page											{color:#777 !important; margin:0px !important; font-size:13px;}
+.connection-page i											{width:15px; text-align:left; color:#a8a9a8;}
+.connection-page i.fa-map-marker							{ padding-left:3px;}
+
 .active-btn i                                               {background:#006400 !important; font-size:12px !important; color:#fff; padding:6px; border-radius:3px;}
 .active-btn 									            {background:none; box-shadow:none;}
 .inactive-btn 									            {background:none; box-shadow:none;}
@@ -358,6 +395,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .likecolor													{color:#1e90ff !important; font-size:17px;}
 .time-datem													{color:#949494 !important; font-size:11px !important;}
 .label-opc .item-md .item-inner .label-md p					{ margin:0px !important; padding-top:0px;text-indent:0px; padding-left:8px; color:#1d6ab2; font-size:20px; line-height:25px; font-weight:400;}
+.label-opc .item-ios .item-inner .label-ios p					{ margin:0px !important; padding-top:0px;text-indent:0px; padding-left:8px; color:#1d6ab2; font-size:20px; line-height:25px; font-weight:400;}
 .label-opc .item-md .item-inner .label-md					{ margin:0px !important;}
 .label-opc .item-md{ background:none;}
 .label-opc {background:rgba(255, 255, 255, 0.73);bottom:0px;color:#1d6ab2!important;float:left;font-size:20px !important; height:50px;position:absolute;width:100%;}
@@ -379,9 +417,19 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
     font-weight: 400;
     padding: 7px; width:94%; margin-left:10px; max-height:300px; min-height:80px;}
 .createblog-form .item-md .item-inner .input-wrapper .text-input-md{width: calc(100% - 9px) !important;}
-.createblog-form .item-md .item-inner .input-wrapper .label-md{ float:left; line-height:25px; margin-top:5px;}
+.createblog-form .item-md .item-inner .input-wrapper .label-md{ float:left; line-height:25px; margin-top:5px; text-indent:0px;}
+.createblog-form .item-ios .item-inner .input-wrapper .text-input-ios{width: calc(100% - 9px) !important;}
+.createblog-form .item-ios .item-inner .input-wrapper .label-ios{ float:left; line-height:25px; margin-top:5px; text-indent:0px;}
+.createblog-form .item-ios{ padding-left: 10px;}
+.newslisted .item-md{padding-left:7px !important;}
+.newslisted .item-ios{padding-left:7px !important;}
+.newslisted .item-inner .input-wrapper .label-md{ margin:0px;}
+.newslisted .item-inner .input-wrapper .label-md h2{padding-top:5px; color:#404996; font-size:16px;}
+.newslisted .item-inner .input-wrapper .label-ios{ margin:0px;}
+.newslisted .item-inner .input-wrapper .label-ios h2{padding-top:5px; color:#404996; font-size:16px;}
+
 .contect-bg-moblie											{background:#F3F7FF;}
-.postedimgvideos{  float:right !important; width:50% !important; background:#888aef;}
+.postedimgvideos{  float:right !important; width:50% !important; background:#888aef; height:35px;}
 .post-icons i 												{color:#46a049;}
 .closed i{ color:#fff; font-size:20px; font-weight:400;}
 
@@ -412,11 +460,16 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .mem-title p												{font-size:18px !important; font-weight:400 !important; color:#424a95;}
 .mem-title i												{color:#a5a0a4;}
 .show-members											    {border-radius:50%; background:#888aef !important;height:35px;width:35px; text-align:center; line-height:35px; padding:0px;text-indent:0px !important; margin-left:15px;margin-top: 10px;}
-.job-view .item-md											{padding-left:0px !important;}
+.job-view .item-md											{padding-left:5px !important;}
 .job-view .item-md .item-inner .input-wrapper .label-md		{margin:0px;text-indent:0px;}
-.job-view .item-md .item-inner .input-wrapper .label-md	h2	{font-size:18px !important; padding-bottom:0px;}
-.job-view .item-md .item-inner .input-wrapper .label-md	p	{font-size:16px !important; padding-bottom:0px; width:100%;}
+.job-view .item-md .item-inner .input-wrapper .label-md	h2	{font-size:18px !important; padding-bottom:3px;}
+.job-view .item-md .item-inner .input-wrapper .label-md	p	{font-size:16px !important; padding-bottom:0px; width:100%; color:#3396fe;}
 .job-view .item-md .item-inner .input-wrapper .label-md span{font-size:12px !important; color:#979A9A;  float:right; padding-top:5px;}
+.job-view .item-ios											{padding-left:5px !important;}
+.job-view .item-ios .item-inner .input-wrapper .label-ios		{margin:0px;text-indent:0px;}
+.job-view .item-ios .item-inner .input-wrapper .label-ios	h2	{font-size:18px !important; padding-bottom:0px;}
+.job-view .item-ios .item-inner .input-wrapper .label-ios	p	{font-size:16px !important; padding-bottom:0px; width:100%; color:#3396fe;}
+.job-view .item-ios .item-inner .input-wrapper .label-ios span{font-size:12px !important; color:#979A9A;  float:right; padding-top:5px;}
 .location-catlist											{  background:#4ec2ff;}
 .location-catlist .item-inner .input-wrapper .label-md		{font-size:18px !important; text-align:left; color:#434248;}
 .location-catlist .item-inner .input-wrapper .sub-cate-slec .select-text{font-size:18px !important; text-align:left; color:#525252;}
@@ -439,6 +492,8 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .updated-staus-btn .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
 .updated-staus-btn .item-md .item-inner .input-wrapper .label-md h2.wel-comemem{ padding-bottom:0px; padding-left:0px;}
 .three .input-md .text-input-md 								{margin:0px 0px 6px 7px;}
+.video-c{width:40px; border:none; height:40px !important; background:#fe7fe6; float:left;     margin: 0 7px 0 4px; border-radius:35px;}
+.video-c i{color:#fff; padding-left:4px;}
 .comm-posted .item-inner .input-wrapper .label-md{padding-top:0px !important;}
 .trash-icon													{height:20px;padding:0 !important;position:absolute;right:-7px;top:-13px;}
 .trash-icon	i												{color:red; font-size:19px !important;}
@@ -460,7 +515,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .footer-defent .item-md{ background:#404996 !important;}
 .footer-defent .item-md button{ background:none !important; color:#fff;  box-shadow: none;}
 .footer-defent .item-md button span i{ color:#fff !important;}
-.ios page-community .post, .md page-community .post{ background:#888aef; margin-top:5px; border-radius:0px !important;}
+.ios page-community .post, .md page-community .post{ background:#fe7fe6; margin-top:5px; border-radius:5px !important;}
 
 .but-colo													{padding:8px !important;height:32px !important; width:auto!important; border:1px solid #ccc !important;}
 .num-of														{color:red !important; font-size:13px !important;}
@@ -595,7 +650,14 @@ page-service-info .service_request							{border:none !important;}
 .label-md {
     margin: 13px 6px 13px 0;
 }
+.brw-btn{ margin-left:6px !important; width:96%; background:#888aef;}
+.upimag{ margin:0px 0px 5px 0px !important;font-size:16px !important;}
+.cont-conn{ background:#fff !important; padding-bottom:1px;}
+.updated-staus-btn{background:#fff !important;}
+.updated-staus-btn .item-md{padding-left:11px;}
+.updated-staus-btn .item-md h2{padding-top:0px;}
 .content-intop{ background:#F3F7FF !important;}
+.createblog-form{ background:#fff;}
 .offered-servicelist{ padding-left:0px;}
 .offered-servicelist .item-md{padding-left:0px;}
 .offered-servicelist .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
@@ -645,7 +707,7 @@ page-service-info .service_request							{border:none !important;}
 .slider-detalis-list h2										{text-align:left; font-size:18px; color:#1d6ab2; padding-top:5px; margin:0px;  padding-left:5px;  }
 .slider-detalis-list p									    {text-align:left; font-size:16px; color:#777 !important; margin:0px;padding-top:8px; padding-left:10px; line-height:25px;}
 .swiper-slide img											{max-height:190px; width:100%;}
-.button-ios													{height:35px !important; font-size:16px !important;}
+.button-ios													{font-size:16px !important;}
 .card-ios p													{color: #777;font-size:16px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
 															 margin: 0 0 2px;}
 ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !important}
@@ -673,17 +735,20 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .blogs-tittle .item-md .item-inner .input-wrapper .label-md	{ margin:0px ;}
 .blogs-tittle .item-md .item-inner .input-wrapper .label-md h2{ padding-top:0px !important;text-indent:0px !important;}
 .req-viewlist ion-row ion-col{ position: relative;}
-.req-viewlist ion-row ion-col.child_menu::before{background:#9dbdd6;
+.req-viewlist ion-row ion-col.child_menu:before{
     border-radius: 50%;
     bottom: auto;
-    content: "";
+     content: "\f260";
     height:6px;
-    left:11px;
-    margin-top:9px;
-    position: absolute;
+   left: 5px;
+    margin-top: 5px;
+    position: absolute; font-family: FontAwesome;
     right: auto;
     width:6px;
-    z-index: 1;}
+    z-index: 1; color:#158B91;
+	
+	
+	}
 	.req-viewlist ion-row ion-col.child_menu::after{    border-left:1px dotted  #9dbdd6;
     bottom: 0;
     content: "";
@@ -724,8 +789,8 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .job-view .item-ios .item-inner .input-wrapper .label-ios	{margin:0px;text-indent:0px;}
 .list-ios > .item-block:first-child 						{border-top:0px solid #c8c7cc;}
 .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {border-bottom:0px solid #c8c7cc;}
-.job-view .item-ios .item-inner .input-wrapper .label-ios h2{font-size:17px !important;padding-bottom:10px;}
-.job-view .item-md .item-inner .input-wrapper .label-md p   {font-size:15px !important; }
+
+.job-view .item-md .item-inner .input-wrapper .label-md p   {font-size:16px !important; }
 .btn-right													{float:right;margin-right:10px; background:#888aef;}
 .job-view .item-ios .item-inner .input-wrapper .label-ios span{font-size:12px !important; color:#777;  float:right; padding-top:5px;}
 .label-opc .item-ios .item-inner .input-wrapper .label-ios  {color:#1d6ab2;font-size:19px;font-weight:400;line-height:25px;margin:0 !important;padding-left:8px;padding-top:0;text-indent:0px !important;} 
@@ -836,14 +901,15 @@ padding-left:0px !important;
 .listed-terms .card-ios .card-content-ios b{font-size: 15px; float:left; width:100%;line-height:25px;padding:8px;}
 
 
-
-
+.name-conne p{ font-size:17px; font-weight:400; margin:0px;}
+.mess-accept p{ float:left; margin:8px 5px 0px 0px; }
+.mess-accept p .button-md{ border-radius:35px; width:40px; height:40px; background:#a377fe;}
 .alert-wrapper > .alert-head								{background:#888aef; }
 .alert-ios .alert-radio-label								{padding:5px 5px 5px 10px;}
 .alert-ios .alert-tappable									{height:35px;border-bottom:1px dashed #ccc;}
 .alert-ios .alert-radio-group, .alert-ios .alert-checkbox-group{max-height:250px !important; overflow-y:scroll !important;}
 .alert-ios .alert-button									{font-weight:normal !important; font-size:18px; font-weight:600;}
-.item-inner > .input-wrapper > .label-ios h2				{font-size:16px;color:#1d6ab2;text-transform:capitalize;}
+.item-inner > .input-wrapper > .label-ios h2				{font-size:16px;color:#424a95; text-indent:0px;}
 .rupee 														{color:#777 ; position:relative;}
 .item-inner > .input-wrapper > .label-ios					{color:#777;font-size:14px; }
 .rupee:before 										        {content:"\f156";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#777;
@@ -890,12 +956,7 @@ white-space: normal;}
 .send-box-content ion-row > ion-col > small{ font-size:17px !important; line-height:20px !important; color:#404994 !important; font-weight:400; }
 .send-box-content ion-row > ion-col > b{ font-size:15px !important; color:#555 !important; font-weight:400; line-height:5px important;}
 .send-box-content ion-row > ion-col > span{ font-size:14px !important; color:#666 !important; font-weight:400; line-height:5px important;}
-.send-box-content ion-row > ion-col > p{ font-size:11px;}
-.job-descriptions small{ width:100%; font-size:17px;color:#404994;}
-.job-descriptions span{ width:100%; font-size:15px; color:#777;}
-.job-descriptions p{ width:100%; font-size:15px; color:#777; padding-bottom:5px; padding-top:3px; line-height:25px; margin:0px !important;}
-.job-descriptions p h4{ width:100%; font-size:15px; color:#777; padding-bottom:5px; padding-top:3px; line-height:25px;}
-
+.send-box-content ion-row > ion-col > p{ font-size:10px; color:#a8a9a8;}
 .inbox-sends .item-ios	{ padding-left:5px !important;}
 
 .inbox-sends{ border-bottom:1px solid #f0f2f6; padding:5px;}
@@ -904,8 +965,12 @@ white-space: normal;}
 .inbox-sends .item-ios .item-inner .input-wrapper .label-ios{ margin:0px;}
 .inbox-sends .item-md .item-inner .input-wrapper .label-md ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-md small{ font-size:17px; color:#404996;}
 .inbox-sends .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-ios small{ font-size:17px; color:#404996;}
-
-
+.single-jobs{ border:1px solid #ebf0e9; width:95%; margin:5px; background:#fbfbfb;}
+.single-jobs small{color:#555;float:left;font-size:16px;font-weight:400;padding-bottom:3px;width:100%; padding-left:2px;}
+.single-jobs p{color:#777;float:left;font-size:15px;font-weight:400;padding-bottom:5px;width:100%; padding-left:2px;}
+.single-jobs p p{ margin:0px !important; }
+.single-jobs span{color:#777;padding-bottom:5px; font-size:15px;}
+.single-jobs h4{color:#777;padding-bottom:5px; font-size:15px;}
 .trash-del i{ font-size:15px; color:#fb0e1f;}
 .subject-details .item-inner .input-wrapper .label-md b{ font-size:15px; font-weight:400; padding-right:5px; }
 .subject-details .item-inner .input-wrapper .label-md span{font-size:14px; font-weight:400; padding-right:5px; }
@@ -934,7 +999,7 @@ white-space: normal;}
 .replay-forward{ margin-top:20px; border-top:1px solid rgba(0, 0, 0, 0.08); border-bottom:1px solid rgba(0, 0, 0, 0.08);background:#f1f1f1;}
 .replay-forward ion-col button{ padding:0px;}
 .replay-forward ion-col button span.button-inner p{ width:100%; color:#555; font-size:14px; font-weight:400;}
-.replay-forward ion-col button span.button-inner i{ float:left; color:#c1c0c0;}
+.replay-forward ion-col button span.button-inner i{ float:left; color:#666;}
 
 
 .view-messname .item-inner .label-ios span{ font-size:14px; color:#777; margin-left:5px; float:left;font-weight:400; padding-top:10px;}
@@ -944,8 +1009,15 @@ white-space: normal;}
 .inbox-sends .item-md .item-inner .input-wrapper .label-ios ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-ios {text-indent:0px; margin-left:5px;}
 .job-summary{ font-size:18px !important; color:#424999 !important; background:#fff; width:100%; text-align:left;  margin:0px; padding-left:10px; padding-bottom:8px;}
 
-
-
+.single-jobscotact{
+    background: #fbfbfb none repeat scroll 0 0;
+    border: 1px solid #ebf0e9;
+    margin: 5px;
+    width: 95%;
+}
+.single-jobscotact h2{ font-size:17px; font-weight:400; color:#555; text-align:center; line-height:30px;width:100%; border-bottom:1px solid #ebf0e9; padding-bottom:10px;}
+.single-jobscotact span{ font-size:16px; font-weight:400; color:#555; width:100%;  padding-bottom:6px; float:left;}
+.single-jobscotact span i{color:#a8a9a8;font-size:15px;text-align:center;width:20px;}
 
 
 .listing { padding-left:0px; font-size:15px !important; color:#777;}
@@ -957,8 +1029,8 @@ white-space: normal;}
     padding: 7px 10px 6px 20px !important;
     width:95%;}
 	.submit-btns{width:95%; border-radius:4px; margin-left: 8px; background:#888aef;}
-	.button-md-orange{ background:#888aef !important}
-	.button-ios-orange{ background:#888aef !important}
+	.button-md-orange{ background:#888aef !important;border-radius:5px;}
+	.button-ios-orange{ background:#888aef !important; border-radius:5px;}
 /*-------------------------------------ios platform css end-------------------------------------*/
 /*-------------------------------------Android platform css -------------------------------------*/
 .job-listed span{ color:#555;font-size:16px; float:left; width:130px; width:100%; }
@@ -1022,7 +1094,7 @@ white-space: normal;}
 .body-clr												    {background:#fff;}
 .label-tittle												{ padding-left:10px !important;}
 .popup-mds > .ion-label									    {font-size:15px; text-align:center;}
-.job-view .item-md .item-inner .input-wrapper .label-md h2{ font-size:17px !important;}
+
 .liks-comments{font-size:14px !important; color:#0a399a !important;}
 .liks-comments i{color:#6e6e6f !important;}
 .reply-shows{ border-left:1px solid #dddfe2;margin-bottom:15px;margin-left:8px; margin-top:10px;} 
@@ -1034,7 +1106,7 @@ white-space: normal;}
 .texts-lefts p.comm-datetime{ font-size:11px !important;}
 .texts-lefts p{ text-indent:0px !important; font-size:14px !important;}
 .comment-liks{ background:#f7f7f7; border-top:1px solid #efefef;}
-.item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#424a95; margin-top:0px !important; font-weight:400;}
+.item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#424a95; margin-top:0px !important; font-weight:400; text-indent:0px;}
 .item-inner > .input-wrapper > .label-md				    {color:#777;font-size:16px; padding-right:0px !important; }
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ bottom:4px;}
 .marg-info img											    {}
