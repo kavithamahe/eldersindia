@@ -1,0 +1,1 @@
+{"version":3,"file":"ng2-alt-summernote.js","sourceRoot":"","sources":["ng2-alt-summernote.ts"],"names":[],"mappings":";;AAAA,mEAA+D;AAAvD,qDAAA,mBAAmB,CAAA;AAC3B,6DAAyD;AAAjD,+CAAA,gBAAgB,CAAA","sourcesContent":["export {SummernoteComponent} from './src/summernote.component';\nexport {SummernoteModule} from './src/summernote.module';"]}

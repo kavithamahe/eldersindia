@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noEmitHelpers": false,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "declaration": true,
+    "removeComments": false,
+    "outDir": "./dist"
+  },
+  "files": [
+    "typings/index.d.ts",
+    "src/index.ts"
+  ],
+  "lib": [
+    "es6",
+    "dom"
+  ],
+  "types": [
+    "jasmine",
+    "node"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "aot"
+  ],
+  "angularCompilerOptions": {
+    "genDir": "aot",
+    "skipMetadataEmit" : false
+  }
+}
