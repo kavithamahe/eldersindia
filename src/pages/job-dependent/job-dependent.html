@@ -17,19 +17,20 @@
 </ion-header>
 
 
-<ion-content padding class="contect-bg-moblie">
+<ion-content padding style="background:#fff;">
 <ion-row style="margin:px;">
    
   <ion-col>
+   <ion-label style=" font-size:17px; padding-left:10px; padding-top:10px; line-height:20px;">Select Dependent</ion-label>
 <ion-item>
- <ion-label class="liste-edit">Select Dependent</ion-label>
+
     <ion-select [(ngModel)]="dependent" class="select-brddd">
       <ion-option *ngFor="let dependent of getDependentList" [value]="dependent?.id">{{dependent?.name}}</ion-option>    
 	  </ion-select>
 
      </ion-item>
         <br/>
-         <button ion-button class="submit-btns" (click)="submitDependent()">Submit</button>
+         <button ion-button class="submit-btns" ion-button item-right small (click)="submitDependent()">Submit</button>
   </ion-col>
 
 </ion-row>
