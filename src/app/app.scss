@@ -234,7 +234,13 @@ input, textarea {
 .remarks-btns{ background:none; box-shadow:none; float:right; padding:0px !important;}
 .remarks-btns .button-inner i {float:right; background:#ec72d7; font-size:14px !important; width:35px; line-height:35px; height:35px; border-radius:50%;}
 .job-detailsview .item-md{ padding-left:5px !important;}
-.job-detailsview .item-md .item-inner .input-wrapper .label-md h2{color:#424a95;font-size:18px !important;font-weight:400;margin-top:0;}
+.job-detailsview .item-md .item-inner .input-wrapper .label-md h2{color:#424a95;font-size:18px !important;font-weight:400;margin-top:0;  width:100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;}
+.conn-listed h1{ font-size:17px; color:#414896; padding-bottom:3px;}
+
+.conn-listed p i{ width:22px; color:#a8a9a8;}
 .job-detailsview .item-md .item-inner .input-wrapper .label-md p i{ font-size:12px; color:#a8a9a8 !important; width:20px; text-align:left !important;}
 .job-detailsview .item-md .item-inner .input-wrapper .label-md p{color:#777 !important;font-size:15px !important;font-weight:400;margin-top:0; text-indent:0px !important; padding-left:2px; overflow:hidden;text-overflow:ellipsis;}
  .job-detailsview .item-md .item-inner .input-wrapper .label-md p i.fa-map-marker{padding-left:4px;}
@@ -734,7 +740,8 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .label-ios													{line-height:14px;}
 .blogs-tittle .item-md										{ padding-left:0px !important;}
 .blogs-tittle .item-md .item-inner .input-wrapper .label-md	{ margin:0px ;}
-.blogs-tittle .item-md .item-inner .input-wrapper .label-md h2{ padding-top:0px !important;text-indent:0px !important;}
+.blogs-tittle .item-md .item-inner .input-wrapper .label-md h2{ padding-top:0px !important;text-indent:0px !important; font-size:18px !important;}
+.blogs-tittle .item-ios .item-inner .input-wrapper .label-ios h2{ padding-top:0px !important;text-indent:0px !important; font-size:18px !important;}
 .req-viewlist ion-row ion-col{ position: relative;}
 .req-viewlist ion-row ion-col.child_menu:before{
     border-radius: 50%;
@@ -792,7 +799,7 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {border-bottom:0px solid #c8c7cc;}
 
 .job-view .item-md .item-inner .input-wrapper .label-md p   {font-size:16px !important; }
-.btn-right													{float:right;margin-right:10px; background:#888aef;}
+.btn-right													{float:left;margin-left:13px; background:#888aef; width:92%;}
 .job-view .item-ios .item-inner .input-wrapper .label-ios span{font-size:12px !important; color:#777;  float:right; padding-top:5px;}
 .label-opc .item-ios .item-inner .input-wrapper .label-ios  {color:#1d6ab2;font-size:19px;font-weight:400;line-height:25px;margin:0 !important;padding-left:8px;padding-top:0;text-indent:0px !important;} 
 /*-------------------------------------ios platform css end-------------------------------------*/
@@ -927,7 +934,7 @@ padding-left:0px !important;
 .button-ios-secondary										{background:none; color:#333;}
 .mar-top													{margin-top:10px;}
 .timedate													{font-size:13px !important; color:#A9A9A9 !important; text-indent:0px !important;}
-.pro-info													{padding-top:10px;}
+.pro-info													{padding-top:10px; font-size:18px !important;}
 .userioc													{border-right:1px dashed #D8BFD8; color:#fe7fe6;font-size:17px;height:25px;line-height:25px; text-align:center;width:25px;}
 .listed-det span i											{float:left; width:35px;color:#a8a9a8;font-size:18px;height:35px;line-height:35px; text-align:center; background:#f6f4f6;}
 .listed-det span p											{font-size:16px !important; color:#777; font-weight:400 !important; padding:5px; margin-bottom:0px; float:left; }
@@ -1128,10 +1135,10 @@ page-dashboard .dashboard								    {padding:0px 0px !important;}
 .trash-del												    {color:#a4a5a7; padding:3px;font-size:20px !important; border-radius:3px; width:20px; height:20px;}
 .create-message .item-md									{padding-left:0px !important;}
 .alert-button											    {font-size:15px !important;}
-.create-message .item-md .text-input-md						{width: calc(100% - 8px - 7px);}
-.create-message .item-ios .text-input-ios					{width: calc(100% - 8px - 5px);}
+.create-message .item-md .item-inner .input-wrapper .input-md .text-input-md { width:92%; margin-left:13px;}
+.create-message .item-ios .item-inner .input-wrapper .input-ios .text-input-ios { width:92%; margin-left:13px;}
 .create-message .completer-holder .completer-input 			{border:1px solid #ccc !important;border-radius:0;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);color:#555;font-size:15px;
-                                                             font-weight:400;padding:7px; margin-left:10px !important; width:94%;}
+                                                             font-weight:400;padding:7px; margin-left:13px !important; width:92%;}
 .comment-liks .button-md							{ padding:0px !important; width:100%; }
 .comment-liks .button-ios							{ padding:0px !important; width:100%;}
 /*-------------------------------------Android platform css end-------------------------------------*/
