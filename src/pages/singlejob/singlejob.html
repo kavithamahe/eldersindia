@@ -28,69 +28,67 @@
  <h2>{{singleJob?.title}}   </h2>
 
 
- <p>{{singleJob?.company_name}}</p>
+ <p><i class="fa fa-building-o"></i>&nbsp; {{singleJob?.company_name}}</p>
  
 
   </ion-item>
   
 </ion-list>
-<ion-item>
-<p><span *ngIf="singleJob?.created_at"><i class="fa fa-calendar-o"> Posted on: </i> {{singleJob?.created_at |  date :'MMM dd y'}}</span></p>
-<p><span *ngIf="singleJob?.job_expiry"><i class="fa fa-calendar-o"> Valid upto: </i> {{singleJob?.job_expiry }}</span></p>
-<p><i class="fa fa-list-alt" aria-hidden="true"> Job Type : </i> 
-    <span *ngFor="let jobType of singleJob?.job_type; let isLast2=last">{{jobType?.name}}{{isLast2 ? '' : ', '}}</span></p>
+<ion-item class="job-dates">
+<p><span *ngIf="singleJob?.created_at"><i class="fa fa-calendar-o"> </i>&nbsp;{{singleJob?.created_at |  date :'MMM dd y'}}</span><span *ngIf="singleJob?.job_expiry">&nbsp;(To)&nbsp;{{singleJob?.job_expiry }}</span></p>
 
-   <p><i class="fa fa-map-marker" aria-hidden="true"> Location : </i> 
-   <span *ngFor="let locations of singleJob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
+
+
+   <p>
+   <span *ngFor="let locations of singleJob?.location; let isLast1=last" ><i class="fa fa-map-marker" aria-hidden="true" style="padding-left:3px;"></i>&nbsp;{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
   </ion-item>
+
 <hr/>
-  <!--applyJob(singleJob?.id)-->
-
   
-
-   <ion-grid class="job-descriptions"> 
-    <div *ngIf="singleJob?.salary"> <small>Salary</small><p><i class="fa fa-inr"> </i><span>{{singleJob?.salary}} </span> </p></div>
-    <small>Functional Area</small><p *ngIf="singleJob?.functional_area"><span *ngFor="let funArea of singleJob?.functional_area">{{funArea?.name}}</span> </p>
-    <div> <small>Experience</small><p><span>{{singleJob?.min_experience}} - {{singleJob?.max_experience}} years</span> </p></div>
+<ion-row>
+<ion-col class="single-jobs">
+<div>   <small>Job Type</small>
+    <span *ngFor="let jobType of singleJob?.job_type; let isLast2=last">{{jobType?.name}}{{isLast2 ? '' : ', '}}</span></div>
+<div *ngIf="singleJob?.salary"> <small>Salary</small><p><i class="fa fa-inr"> </i>&nbsp;<span>{{singleJob?.salary}} </span> </p></div>
+ <p *ngIf="singleJob?.functional_area"><span *ngFor="let funArea of singleJob?.functional_area">{{funArea?.name}}</span> </p>
+   
+   <div> <small>Experience</small><p><span>{{singleJob?.min_experience}} - {{singleJob?.max_experience}} years</span> </p></div>
     
      <small>Skills</small><p *ngIf="singleJob?.skills"><span *ngFor="let skills of singleJob?.skills">{{skills?.skills}}</span> </p>
 
       <small>Job Description</small>
-     <p [innerHtml]="singleJob?.description" style="margin:0px;"></p>
-</ion-grid>
-<hr/>
+     <p [innerHtml]="singleJob?.description" style="margin:0px !important;"></p>
+</ion-col>
 
-
- <h2 class="job-summary">Contact Details</h2>
-  <ion-row class="job-listed">
-    <ion-col width-100>
-	<span><i class="fa fa-user-o" aria-hidden="true"></i> {{singleJob?.contact_name}}</span> 
-	<p></p>	
-	</ion-col>
-	  </ion-row>	   
-	  <ion-row class="job-listed">
-    <ion-col width-100>
-  <span><i class="fa fa-phone" aria-hidden="true"></i> {{singleJob?.contact_mobile}}</span> 
-  <p></p> 
-  </ion-col>
-    </ion-row>  
-    <ion-row class="job-listed">
-    <ion-col width-100>
-  <span><i class="fa fa-envelope" aria-hidden="true"></i> {{singleJob?.contact_email}}</span> 
-  <p></p> 
-  </ion-col>
-    </ion-row>  
-    <ion-row class="job-listed">
-    <ion-col width-100>
-  <span><i class="fa fa-internet-explorer" aria-hidden="true"></i> <a href="{{singleJob?.user?.website}}">{{singleJob?.user?.website}}</a></span> 
-  <p></p> 
-  </ion-col>
-    </ion-row> 
+</ion-row>
 <ion-row>
 <ion-col>
   <button ion-button  color="orange" full (click)="applyJob(singleJob?.id)"><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button>
   </ion-col>
 </ion-row>
+<hr/>
+
+
+<ion-row>
+<ion-col class="single-jobscotact">
+<h2>Contact Details</h2>
+<span><i class="fa fa-user-o" aria-hidden="true"></i> {{singleJob?.contact_name}}</span> 
+<span><i class="fa fa-phone" aria-hidden="true"></i> {{singleJob?.contact_mobile}}</span> 
+<span><i class="fa fa-envelope" aria-hidden="true"></i> {{singleJob?.contact_email}}</span> 
+ <span><i class="fa fa-internet-explorer" aria-hidden="true"></i> <a href="{{singleJob?.user?.website}}">{{singleJob?.user?.website}}</a></span>
+</ion-col>
+
+</ion-row>
+
+<br/>
+
+
+
+ 
+ 	   
+ 
+ 
+  
 
 </div>
 </ion-content>
