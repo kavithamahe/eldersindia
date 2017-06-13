@@ -10,7 +10,10 @@
 	        <ion-icon name="home"></ion-icon>
 	    </button>
     </ion-buttons>
-    <ion-title text-center text-capitalize>{{communityDetailData?.community_name}}</ion-title>
+   
+    <ion-title text-center text-capitalize> <MARQUEE>{{communityDetailData?.community_name}}
+
+</MARQUEE></ion-title>
   </ion-navbar>
 </ion-header>
   
@@ -164,12 +167,10 @@
   						<p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{user.comment_count}}&nbsp;Comment</p>
 				      </button>
 				    </ion-col>
-				    <ion-col text-left width-34 style="padding:0px !important;">
-				    	<button ion-button icon-left clear small  *ngIf="!user.likecount == 0" 
-				    	(click)="showComment(user)">
-						
-  							<p class="liks-comments" style=" width:100%;"><i class="fa fa-thumbs-o-up"></i>&nbsp;+&nbsp;{{user.likecount}}</p>
-				      	</button>
+				    <ion-col>
+				    	<button ion-button icon-left clear small  *ngIf="!user.likecount == 0">
+  							<p class="liks-comments">&nbsp;{{user.likecount}}+like it</p>
+						</button>
 				    </ion-col>
 				</ion-row>
 	

@@ -77,8 +77,8 @@
     <p item-text-wrap class="page-down">{{viewComments?.comment}}</p>
    
     	<button ion-button icon-right clear end small item-right *ngIf="user_id==viewComments?.user_id" 
-      (click)="deleteComment(viewComments?.id)">
-        <ion-icon ios="ios-trash" md="md-trash"></ion-icon>      
+     (click)="openMenu(viewComments?.id)">
+        <i class="fa fa-angle-down"></i>      
       </button>
      
 	  	 </ion-item>
@@ -108,8 +108,8 @@
               </h2>
               <p item-text-wrap>{{reply.comments_replay}}</p>
               <button ion-button icon-right clear end small item-right *ngIf="user_id==reply?.uid_to" 
-              (click)="deleteComment(reply?.comments_replay_id)">
-                <ion-icon ios="ios-trash" md="md-trash"></ion-icon>      
+              (click)="openMenu(reply?.comments_replay_id)">
+                <i class="fa fa-angle-down"></i>    
               </button>
             </ion-item>
             <button ion-button *ngIf="user_id != reply?.uid_from" (click)="replyblogPost(j)" clear><i class="fa fa-reply" aria-hidden="true"></i></button>

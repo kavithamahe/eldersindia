@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ModalController,ActionSheetController , NavController, NavParams,AlertController,LoadingController,Platform,ToastController,PopoverController } from 'ionic-angular';
+import { ModalController,ActionSheetController, NavController, NavParams,AlertController,LoadingController,Platform,ToastController,PopoverController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
@@ -426,7 +426,7 @@ metaLink:any = "";
  showModel(member)
    {
     
-   let modal = this.popoverCtrl.create(CommunitymembersPage,{members:member});
+   let modal = this.modal.create(CommunitymembersPage,{members:member});
     modal.present();
      
    }  
