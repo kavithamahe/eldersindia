@@ -22,6 +22,9 @@ export class CommunitymessagePage {
    subject:any;
    message:any;
    member_id:any;
+   file_path:any;
+   nativepath: any;
+   name:any;
 
   constructor(private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams,public communityServices: CommunityServices, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
   	 
@@ -51,7 +54,7 @@ export class CommunitymessagePage {
   		this.submitAttempt = false;
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
       loader.present();
-      this.communityServices.sendMessage(this.member_id,this.authForm.value.subject,this.authForm.value.message,this.fileChooser).subscribe(users => {
+      this.communityServices.sendMessage(this.member_id,this.authForm.value.subject,this.authForm.value.message,this.name,this.nativepath).subscribe(users => {
        this.communityServices.showToast(users.result.info);
        this.authForm.reset();
        loader.dismiss(); 
@@ -63,16 +66,30 @@ export class CommunitymessagePage {
   	}
 
   }
-  file_Path:any;
  openCamera(){
 console.log("open success");
     this.fileChooser.open()
       .then((imageData) => {
-      
+
+      console.log("filedfsdf"+imageData );
+         (<any>window).FilePath.resolveNativePath(imageData, (result) => {
+    this.nativepath = result;
+    console.log("nativepath"+ this.nativepath);
+    
+  })
         this.communityServices.upload(imageData);
       });
-      
-  }
 
+  }
+//   openCamera(){
+//     this.fileChooser.open().then((url) => {
+//  console.log("file"+url);
+//   (<any>window).FilePath.resolveNativePath(url, (result) => {
+//     this.nativepath = result;
+//      this.communityServices.upload(nativepath);
+//   })
+// })
+//   }
+ 
 
 }

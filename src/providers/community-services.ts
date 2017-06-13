@@ -65,6 +65,7 @@ export class CommunityServices {
   }
 
   postCommunity(id,image,videoUrl,posts,links){
+    console.log("kavitha"+image);
      this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links, "app":'' }
 
      return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,this.posts,this.options)
@@ -112,17 +113,18 @@ file_Path:any;
 
 
      let fd = new FormData();
-        fd.append('file', file);
+        fd.append('file_path', file);
+        fd.append('file_name', name);
         fd.append('name',"avatar");
         let send:{message:{attachments:string,to:{title:string,description:string,image:string,originalObject:{id:string,avatar:string,email:string,user_type:string,friend_name:string}},subject:string,message:string,
     file_name:string,file_path:ImageData}} = {"message":{"attachments":"","to":{"title":"","description":"","image":"","originalObject":{"id":id,"avatar":"","email":"","user_type":"","friend_name":""}},"subject":"","message":"",
-    "file_name":"","file_path":file}}
+    "file_name":name,"file_path":file}}
        return this.http.post(`${this.getCommunityPostsUrl }sendMessage`, send,this.options).map(res => res.json());
 
   }
-sendMessage(id,subject,message,file){
+sendMessage(id,subject,message,name,file23){
     this.send = {"message":{"attachments":[],"to":{"title":"","description":"","image":"","originalObject":{"id":id,"avatar":"","email":"","user_type":"","friend_name":""}},"subject":subject,"message":message,
-    "file_name":"","file_path":file
+    "file_name":name,"file_path":file23
 }}
 
    return this.http.post(`${this.getCommunityPostsUrl }sendMessage`,this.send,this.options)

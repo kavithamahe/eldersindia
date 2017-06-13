@@ -1,14 +1,24 @@
-
-
-
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>
+      Members
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button class="closed" clear (click)="dismiss()">
+       <i class="fa fa-times-circle"  name="close"></i>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content padding>
 	<div *ngFor="let member of members">
-		<ion-card class="memb-list">
-				<img (click)="membersProfile(member.uid)" style="border:2px solid #e6e6e6;" 
-				[src]="imageUrl+member?.avatar" 
-				[hidden]="!member?.avatar">
-			{{member.name}}
-		</ion-card>
+		<ion-item class="memb-list" [hidden]="!member?.avatar">
+		<ion-col>
+				<img (click)="membersProfile(member.uid)" 
+								[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar" width="100" height="52" />
+			<small class="mem-name">{{member.name | words :1 : '....'}}</small>
+		</ion-col>
+		</ion-item>
 	</div>
 </ion-content>

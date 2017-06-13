@@ -16,16 +16,15 @@
       </button>
     </ion-buttons>
     <ion-title text-center>Messages</ion-title>
-    <ion-buttons right (click)="createMessage()">    
-      <button ion-button icon-only>
-        <ion-icon name="create"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding style="background:#fff;">
+ <ion-fab  right bottom>
+    <button class="add-depends" ion-fab mini (click)="createMessage()" end><ion-icon name="create">
+     </ion-icon></button>
+    </ion-fab>
 <div padding>
   <ion-segment [(ngModel)]="messages" (ionChange)="changeSlide($event)">
     <ion-segment-button value="inbox" color="orange" (click)="onInit()">
