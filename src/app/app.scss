@@ -351,8 +351,8 @@ ion-card img												{     display: inline-block;
 .contact-list .item-md{ padding:5px;}
 .contact-list .item-md .item-inner .input-wrapper			{}
 .contact-list .item-md .item-inner .input-wrapper .label-md {margin:0px; text-indent: 0; border:1px solid #e9e9e9; float:left; }
-.contact-list .item-md .item-inner .input-wrapper .label-md p{ font-size:15px;  margin-left:5px; line-height:27px;}
-.contact-list .item-md .item-inner .input-wrapper .label-md i{font-size:18px; color:#777; width:30px; float:left; line-height:30px; text-align:center;}
+.contact-list .item-md .item-inner .input-wrapper .label-md p{ font-size:17px;  margin-left:5px; line-height:27px; padding-left:10px;}
+.contact-list .item-md .item-inner .input-wrapper .label-md i{font-size:18px; color:#a8a9a8; width:30px; float:left; line-height:30px; text-align:center; background:#f6f4f6;}
 .view-more{ font-size:14px; color:red !important; background:none !important;}
 .view-more i{ color:#a5a0a4;}
 .community-div .item-md{ padding-left:0px;} 
@@ -393,7 +393,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .user-profile												{width:80px;height:80px; border:1px solid #ccc;}
 .wel-comemem											    {color:#424a95 !important;font-family: "Open Sans",sans-serif;font-size:18px !important;margin: 0; padding:10px 0px 0px 10px;}
 .likecolor													{color:#1e90ff !important; font-size:17px;}
-.time-datem													{color:#949494 !important; font-size:11px !important;}
+.time-datem													{color:#949494 !important; font-size:11px !important;font-style:italic; text-indent:0px;}
 .label-opc .item-md .item-inner .label-md p					{ margin:0px !important; padding-top:0px;text-indent:0px; padding-left:8px; color:#1d6ab2; font-size:20px; line-height:25px; font-weight:400;}
 .label-opc .item-ios .item-inner .label-ios p					{ margin:0px !important; padding-top:0px;text-indent:0px; padding-left:8px; color:#1d6ab2; font-size:20px; line-height:25px; font-weight:400;}
 .label-opc .item-md .item-inner .label-md					{ margin:0px !important;}
@@ -429,7 +429,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .newslisted .item-inner .input-wrapper .label-ios h2{padding-top:5px; color:#404996; font-size:16px;}
 
 .contect-bg-moblie											{background:#F3F7FF;}
-.postedimgvideos{  float:right !important; width:50% !important; background:#888aef; height:35px;}
+.postedimgvideos{  float:right !important; width:50% !important; background:#888aef; height:35px; margin-right:5px;}
 .post-icons i 												{color:#46a049;}
 .closed i{ color:#fff; font-size:20px; font-weight:400;}
 
@@ -443,7 +443,8 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .comm-listpag												{border-radius:35px;height:40px;width:100%;margin:0px !important;}
 .comm-postlist												{background:#ff4000 !important;border-radius:35px !important; height:40px !important; width:100% !important; margin:0px !important;}
 .post-urls													{border-top:1px solid #f1f1f1; margin-top:5px; padding-bottom:5px;}
-.listed-comments .item-md								    {padding-left:0px;}
+.listed-comments .item-md								    {padding-left:0px; background:none;}
+.listed-comments .item-ios								    {padding-left:0px; background:none;}
 .post-urls small											{font-size:15px; padding-left:10px;color:#999;}
 .post-urls ion-row ion-col .item-md							{padding-left:0px;}
 .mem-name													{font-size:17px !important; margin:0px;}
@@ -486,7 +487,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .sub-cat-listed												{background:#888aef;margin:0px 0px 0px 0px; width:100%; padding-left:0px !important;}
 .error-clr													{font-size:15px !important; font-weight:400 !important; color:red !important;text-align:center !important;}
 .error-clr i.unlink 												{ font-size:17px; color:#1D6AB2;}
-.send-req													{ width:50%; margin-left:10px; margin-bottom:10px;}
+.send-req													{  margin-left:10px; margin-bottom:10px; float:right;}
 .cmmpost													{font-size:16px !important; color:#777 !important; text-align:left;  margin-top:5px; margin-left:8px;}
 .pro-imgs													{width:50px; height:50px; border-radius:0px; padding:5px; margin-top:5px;}
 .updated-staus-btn .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
@@ -846,7 +847,7 @@ padding-left:0px !important;
 .list-cates													{border:1px solid red !important;}
 .subcategory-list											{padding:5px; margin-bottom:10px; border-bottom:1px solid rgba(0, 0, 0, 0.08); }
 .subcategory-list .item-inner .input-wrapper .label-md		{margin:0px !important;}
-.ios page-community .video, .md page-community .video		{width:40px; border:none; height:40px; background:#fe7fe6; float:left; margin:0px 5px 0px 0px;}
+.ios page-community .video, .md page-community .video		{width:40px; border:none; height:40px; background:#fe7fe6; float:left; margin:0px 5px 0px 5px;}
 .ios page-community .video, .md page-community .video i     {color:#fff;}
 .community-img												{position:relative !important; }
 .ios ion-nav > .ion-page > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-nav > .ion-page > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-tab > .ion-page > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-tabs > .ion-page.tab-subpage > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-menu > .menu-inner > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-menu > .menu-inner > ion-header > ion-content.statusbar-padding:first-child .scroll-content{padding-top:0px !important;}
@@ -928,8 +929,8 @@ padding-left:0px !important;
 .timedate													{font-size:13px !important; color:#A9A9A9 !important; text-indent:0px !important;}
 .pro-info													{padding-top:10px;}
 .userioc													{border-right:1px dashed #D8BFD8; color:#fe7fe6;font-size:17px;height:25px;line-height:25px; text-align:center;width:25px;}
-.listed-det span i											{float:left; width:30px;color:#777;font-size:17px;height:25px;line-height:35px; text-align:center;width:25px;}
-.listed-det span p											{font-size:15px !important; color:#777; font-weight:400 !important; padding:5px; margin-bottom:0px; float:left; width:90%;}
+.listed-det span i											{float:left; width:35px;color:#a8a9a8;font-size:18px;height:35px;line-height:35px; text-align:center; background:#f6f4f6;}
+.listed-det span p											{font-size:16px !important; color:#777; font-weight:400 !important; padding:5px; margin-bottom:0px; float:left; }
 .title														{font-size:15px !important; color:#FA8072 !important;}
 .listed-det span										   {padding:3px; width:100%; float:left;border: 1px solid #e9e9e9; margin-bottom:8px;}
 ion-select													{max-width:100% !important;}
@@ -958,7 +959,8 @@ white-space: normal;}
 .send-box-content ion-row > ion-col > span{ font-size:14px !important; color:#666 !important; font-weight:400; line-height:5px important;}
 .send-box-content ion-row > ion-col > p{ font-size:10px; color:#a8a9a8;}
 .inbox-sends .item-ios	{ padding-left:5px !important;}
-
+.subcategory-list .item-inner .input-wrapper .label-md{ text-indent:0px;}
+.subcategory-list .item-inner .input-wrapper .label-ios{ text-indent:0px;}
 .inbox-sends{ border-bottom:1px solid #f0f2f6; padding:5px;}
 .inbox-sends .item-block { min-height:0px;}
 .inbox-sends .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
@@ -1094,28 +1096,33 @@ white-space: normal;}
 .body-clr												    {background:#fff;}
 .label-tittle												{ padding-left:10px !important;}
 .popup-mds > .ion-label									    {font-size:15px; text-align:center;}
-
+.reply-comm{ font-size:12px !important; color:#404996 !important;}
 .liks-comments{font-size:14px !important; color:#0a399a !important;}
 .liks-comments i{color:#6e6e6f !important;}
-.reply-shows{ border-left:1px solid #dddfe2;margin-bottom:15px;margin-left:8px; margin-top:10px;} 
-.reply-shows .list-md ion-col .item-md .item-inner .input-wrapper .label-md h2{ font-size:15px; color:#424a95;text-indent:0px !important;}
-.reply-shows .list-ios ion-col .item-ios .item-inner .input-wrapper .label-ios h2{ font-size:15px; color:#424a95;text-indent:0 !important;}
-.reply-shows .list-md ion-col .item-md .item-inner .input-wrapper .label-md p{ font-size:11px; color:#777;}
-.reply-shows .list-ios ion-col .item-ios .item-inner .input-wrapper .label-ios p{ font-size:11px; color:#777;}
+.reply-shows{margin-bottom:15px;margin-left:30px; margin-top:0px;} 
+.reply-shows .list-md .item-md .item-inner .input-wrapper .label-md h5{ font-size:14px !important; color:#424a95;text-indent:0px !important;}
+.reply-shows .list-md .item-md .item-inner .input-wrapper .label-md em{float:left;font-size:9px !important;width:100%; text-indent:0px; }
+.reply-shows .list-ios .item-ios .item-inner .input-wrapper .label-ios em{float:left;font-size:9px !important;width:100%; text-indent:0px; }
+.reply-shows .list-ios .item-ios .item-inner .input-wrapper .label-ios h5{ font-size:15px; color:#424a95;text-indent:0 !important;}
+.reply-shows .list-md .item-md .item-inner .input-wrapper .label-md small{ font-size:12px !important; color:#777;}
+.reply-shows .list-md .item-md .item-inner .input-wrapper .label-md{line-height:15px !important;}
+.reply-shows .list-ios .item-ios .item-inner .input-wrapper .label-ios small{ font-size:12px; color:#777;}
 .texts-lefts h2{ text-indent:0px !important; font-size:15px !important;}
-.texts-lefts p.comm-datetime{ font-size:11px !important;}
-.texts-lefts p{ text-indent:0px !important; font-size:14px !important;}
-.comment-liks{ background:#f7f7f7; border-top:1px solid #efefef;}
-.item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#424a95; margin-top:0px !important; font-weight:400; text-indent:0px;}
+.reply-hei ion-col{padding:0px;}
+.reply-hei ion-col .button-md{margin:0px !important; padding:0px !important; height:20px !important; text-align:center; width:100%;}
+.reply-hei ion-col .button-ios{margin:0px !important; padding:0px !important; height:20px !important; text-align:center; width:100%;}
+.texts-lefts p.comm-datetime                                {font-size:11px !important;}
+.texts-lefts p                                              {text-indent:0px !important; font-size:14px !important;}
+.comment-liks                                               {background:#f7f7f7; border-top:1px solid #efefef;}
+.item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#424a95 !important; margin-top:0px !important; font-weight:400; text-indent:0px;}
 .item-inner > .input-wrapper > .label-md				    {color:#777;font-size:16px; padding-right:0px !important; }
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ bottom:4px;}
-.marg-info img											    {}
 .item-md .item-button									    {height:30px;}
 .text-input-md											    {font-size:15px;width: calc(100% - 8px - 8px);}
 .add-depends												{ background:#fe7fe6;}
 page-dashboard .dashboard								    {padding:0px 0px !important;}
 .des-card												    {background:#fff	!important;}
-.name-person											    {font-size:22px !important;  font-weight:600;color:#888aef; float:left;}
+.name-person											    {font-size:22px !important;  font-weight:600;color:#fe7fe6; float:left;}
 .name-elder												    {color:#404998!important;float:left;font-size:17px!important;font-weight:400 !important;padding-left:10px !important;text-transform:capitalize;}
 .edit-eld												    {color:#1E90FF; padding:3px; font-size:20px !important; border-radius:3px; width:20px; height:20px;}
 .trash-del												    {color:#a4a5a7; padding:3px;font-size:20px !important; border-radius:3px; width:20px; height:20px;}
@@ -1125,26 +1132,12 @@ page-dashboard .dashboard								    {padding:0px 0px !important;}
 .create-message .item-ios .text-input-ios					{width: calc(100% - 8px - 5px);}
 .create-message .completer-holder .completer-input 			{border:1px solid #ccc !important;border-radius:0;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);color:#555;font-size:15px;
                                                              font-weight:400;padding:7px; margin-left:10px !important; width:94%;}
+.comment-liks .button-md							{ padding:0px !important; width:100%; }
+.comment-liks .button-ios							{ padding:0px !important; width:100%;}
 /*-------------------------------------Android platform css end-------------------------------------*/
-.external-listed .card-title-md h1{ color: #424a95;
-    font-family: "Open Sans",sans-serif;
-    font-size: 18px;
-    margin: 0;
-    padding:0px 0 0 10px;}
-.external-listed .card-content-md p{  color: #777;
-    display: block;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
-    margin-left:11px;
-   }
-.lastupdate .item-inner .input-wrapper .label-md h2 {
-   
-    float: left;
-    font-size: 19px !important;
-    text-align:left;
-    width: 100%;
-}
-.lastupdate{ margin:10px;}
+.external-listed .card-title-md h1	                        {color:#424a95;font-family:"Open Sans",sans-serif;font-size:18px;margin: 0;padding:0px 0 0 10px;}
+.external-listed .card-content-md p                         {color:#777;display:block;font-size:15px;font-style:normal;font-weight:400;margin-left:11px;}
+.lastupdate .item-inner .input-wrapper .label-md h2         {float:left;font-size:19px !important;text-align:left;width:100%;}
+.lastupdate                                                 {margin:10px;}
 //venkat
 .item-inner 											    {border-bottom-color: transparent !important;box-shadow: none !important;}
