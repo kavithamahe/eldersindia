@@ -51,7 +51,7 @@ export class CommunitymessagePage {
   		this.submitAttempt = false;
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
       loader.present();
-      this.communityServices.sendMessage(this.member_id,this.attachment,this.authForm.value.subject,this.authForm.value.message).subscribe(users => {
+      this.communityServices.sendMessage(this.member_id,this.authForm.value.subject,this.authForm.value.message,this.fileChooser).subscribe(users => {
        this.communityServices.showToast(users.result.info);
        this.authForm.reset();
        loader.dismiss(); 
@@ -63,13 +63,15 @@ export class CommunitymessagePage {
   	}
 
   }
-  
+  file_Path:any;
  openCamera(){
 console.log("open success");
     this.fileChooser.open()
       .then((imageData) => {
+      
         this.communityServices.upload(imageData);
       });
+      
   }
 
 

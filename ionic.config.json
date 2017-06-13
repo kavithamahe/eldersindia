@@ -1,6 +1,6 @@
 {
-	"name":"ElderIndia",
-	"app_id":"",
-	"v2":true,
-	"typscript":true
+  "name": "ElderIndia",
+  "app_id": "",
+  "typscript": true,
+  "type": "ionic-angular"
 }

@@ -1,0 +1,117 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ngx-embed-video",
+        "scope": null,
+        "escapedName": "ngx-embed-video",
+        "name": "ngx-embed-video",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "D:\\kavi\\mob-elder"
+    ]
+  ],
+  "_from": "ngx-embed-video@latest",
+  "_id": "ngx-embed-video@0.1.6",
+  "_inCache": true,
+  "_location": "/ngx-embed-video",
+  "_nodeVersion": "6.9.2",
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/ngx-embed-video-0.1.6.tgz_1489792449850_0.836356618674472"
+  },
+  "_npmUser": {
+    "name": "samirh",
+    "email": "samir.sgd@gmail.com"
+  },
+  "_npmVersion": "3.10.9",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ngx-embed-video",
+    "scope": null,
+    "escapedName": "ngx-embed-video",
+    "name": "ngx-embed-video",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ngx-embed-video/-/ngx-embed-video-0.1.6.tgz",
+  "_shasum": "0b2f3a033f381144c39d418c20932826a3b2608a",
+  "_shrinkwrap": null,
+  "_spec": "ngx-embed-video",
+  "_where": "D:\\kavi\\mob-elder",
+  "author": {
+    "name": "SamirHodzic",
+    "email": "samir.sgd@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/SamirHodzic/ngx-embed-video/issues"
+  },
+  "dependencies": {},
+  "description": "> Get embed code for embedding youtube/vimeo/dailymotion/* video in websites from URL or ID in Angular 2. > Currently supports YouTube, Vimeo and Dailymotion. Feel free to make pull request to add others!",
+  "devDependencies": {
+    "@angular/common": "^2.4.10",
+    "@angular/compiler": "^2.4.10",
+    "@angular/compiler-cli": "^2.4.10",
+    "@angular/core": "^2.4.10",
+    "@angular/http": "^2.4.10",
+    "@angular/platform-browser": "^2.4.10",
+    "@angular/platform-server": "^2.4.10",
+    "@types/es6-shim": "^0.31.32",
+    "codelyzer": "~2.0.0-beta.4",
+    "rxjs": "^5.2.0",
+    "tslint": "^4.5.1",
+    "typescript": "^2.2.1",
+    "zone.js": "^0.7.2"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "0b2f3a033f381144c39d418c20932826a3b2608a",
+    "tarball": "https://registry.npmjs.org/ngx-embed-video/-/ngx-embed-video-0.1.6.tgz"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "gitHead": "d29e1b2b4f624b47171829c13f93023fe5dddcd5",
+  "homepage": "https://github.com/SamirHodzic/ngx-embed-video#readme",
+  "keywords": [
+    "angular",
+    "angular2",
+    "ng2",
+    "embed-video",
+    "embed",
+    "typescript"
+  ],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "maintainers": [
+    {
+      "name": "samirh",
+      "email": "samir.sgd@gmail.com"
+    }
+  ],
+  "name": "ngx-embed-video",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "@angular/core": "^2.0.0",
+    "@angular/http": "^2.0.0"
+  },
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamirHodzic/ngx-embed-video.git"
+  },
+  "scripts": {
+    "build": "ngc -p tsconfig.json",
+    "lint": "tslint --force --type-check --project tsconfig.json src/*.ts",
+    "prepublish": "tsc",
+    "tsc": "tsc"
+  },
+  "version": "0.1.6"
+}

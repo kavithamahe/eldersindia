@@ -63,6 +63,13 @@ export class CommunityServices {
      return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,posts,this.options)
       .map(res =>res.json());
   }
+
+  postCommunity(id,image,videoUrl,posts,links){
+     this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links, "app":'' }
+
+     return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,this.posts,this.options)
+      .map(res =>res.json());
+  }
 file_Path:any;
     upload(imageData)
     {
@@ -86,8 +93,8 @@ file_Path:any;
          headers: {}
       
       }
-
-  fileTransfer.upload(imageData, 'http://192.168.1.200:8095/fileup/fileupload.php', options1)
+      
+  fileTransfer.upload(imageData, `${this.getCommunityPostsUrl }sendMessage`,options1)
    .then((data) => {
      // success
      alert("success");
@@ -96,6 +103,30 @@ file_Path:any;
      alert("error"+JSON.stringify(err));
    });
  
+}
+  fileUploads(id,file){
+    this.headers = new Headers();
+    this.headers.append('Content-Type',undefined);
+    //this.headers.append('Authorization','Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEwMSwiaXNzIjoiaHR0cDpcL1wvMTgzLjgyLjMzLjIzMjo4MDk3XC9hcGlcL2xvZ2luIiwiaWF0IjoxNDk2MzE0ODMyLCJleHAiOjE0OTcxNzg4MzIsIm5iZiI6MTQ5NjMxNDgzMiwianRpIjoiREI3cVloa2Zva3k4OUk2SiJ9.ZGZUZaNUDMONtvL2kes4SqSsu-JvLYhJYX4EU3WL0aE');
+    this.options = new RequestOptions({headers: this.headers});
+
+
+     let fd = new FormData();
+        fd.append('file', file);
+        fd.append('name',"avatar");
+        let send:{message:{attachments:string,to:{title:string,description:string,image:string,originalObject:{id:string,avatar:string,email:string,user_type:string,friend_name:string}},subject:string,message:string,
+    file_name:string,file_path:ImageData}} = {"message":{"attachments":"","to":{"title":"","description":"","image":"","originalObject":{"id":id,"avatar":"","email":"","user_type":"","friend_name":""}},"subject":"","message":"",
+    "file_name":"","file_path":file}}
+       return this.http.post(`${this.getCommunityPostsUrl }sendMessage`, send,this.options).map(res => res.json());
+
+  }
+sendMessage(id,subject,message,file){
+    this.send = {"message":{"attachments":[],"to":{"title":"","description":"","image":"","originalObject":{"id":id,"avatar":"","email":"","user_type":"","friend_name":""}},"subject":subject,"message":message,
+    "file_name":"","file_path":file
+}}
+
+   return this.http.post(`${this.getCommunityPostsUrl }sendMessage`,this.send,this.options)
+      .map(res =>res.json());
 }
   showToast(messageData){
     let toast = this.toastCtrl.create({
@@ -205,12 +236,7 @@ myprofile(id){
       .map(res =>res.json());
 }
  
- sendMessage(id,attachment,subject,message){
-    this.send = {"message":{"attachments":[],"to":{"title":"","description":"","image":"","originalObject":{"id":id,"avatar":"","email":"","user_type":"","friend_name":""}},"subject":subject,"message":message}}
-
-   return this.http.post(`${this.getCommunityPostsUrl }sendMessage`,this.send,this.options)
-      .map(res =>res.json());
-}
+ 
  
  //-------------------------------//
 
@@ -289,12 +315,6 @@ myprofile(id){
   }
 
 
-  postCommunity(id,image,videoUrl,posts,links){
-     this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links, "app":'' }
-
-     return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,this.posts,this.options)
-      .map(res =>res.json());
-  }
 
  deleteComment(id){
    this.delete={"info": {"comment_id": id}}

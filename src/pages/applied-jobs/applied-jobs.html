@@ -27,18 +27,23 @@
 
 
 <ion-content padding class="contect-bg-moblie">
-<ion-row *ngFor="let appliedJobs of appliedJobsList">
-  <ion-col class="job-borad">
-    <h2>{{appliedJobs?.title}}</h2>
+<ion-card *ngFor="let appliedJobs of appliedJobsList">
+  <!-- <ion-col class="job-borad"> -->
+  <ion-item text-wrap>
+    <h2>{{appliedJobs?.title | words :5: '....'}} <span><i class="fa fa-briefcase" aria-hidden="true"> {{appliedJobs?.min_experience}} - {{appliedJobs?.max_experience}} years</i></span> </h2>
+    <P><i class="fa fa-university" aria-hidden="true"> {{appliedJobs?.company_name}} </i></P>
     <p *ngIf="(appliedJobs?.requested_date!='0000-00-00 00:00:00')">Job Applied on : {{appliedJobs?.requested_date | date:'dd/M/yyyy h:m a'}}</p>
-    <p [hidden]="!appliedJobs?.job_type">Job Type : {{appliedJobs?.job_type}}</p>    
-    <ion-badge color="green" [hidden]="!appliedJobs?.skills">{{appliedJobs?.skills}}</ion-badge> 
-    <p [innerHTML]="appliedJobs?.description | words : 60 : '...'"></p>
+    <!-- <p [hidden]="!appliedJobs?.job_type">Job Type : {{appliedJobs?.job_type}}</p> -->
+       
+    <!-- <ion-badge color="green" [hidden]="!appliedJobs?.skills">{{appliedJobs?.skills}}</ion-badge>  -->
+    <!-- <p text-wrap [innerHTML]="appliedJobs?.description | words : 30 : '...'"></p> -->
   	
   
-  <button ion-button class="btn-clrs"  color="orange" full (click)="viewJob(appliedJobs?.id)">More Info</button>
-  </ion-col>
-</ion-row>
+  <button ion-button class="btn-clrs"  color="orange" full (click)="viewJob(appliedJobs?.id)">More Info
+  </button>
+  </ion-item>
+  <!-- </ion-col> -->
+</ion-card>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
