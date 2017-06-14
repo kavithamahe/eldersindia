@@ -50,14 +50,14 @@
   <ion-row>
   <ion-col>
    <ion-label stacked class="upimag">Featured Image</ion-label>
-  	<button ion-button (click)="accessGallery('featured')" class="brw-btn">Browse</button>
+  	<button ion-button (click)="accessGallery('featured')" class="brw-btn"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Browse</button>
 	<img [src]="featuredImage" *ngIf="featuredImage" />
   </ion-col>
   </ion-row>
     <ion-row>
     <ion-col>
       <ion-label stacked class="upimag">Banner Image</ion-label>
-    <button ion-button (click)="accessGallery('banner')" class="brw-btn">Browse</button>
+    <button ion-button (click)="accessGallery('banner')" class="brw-btn"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Browse</button>
     <img [src]="bannerImage" *ngIf="bannerImage" />
   </ion-col>
     </ion-row>
@@ -88,9 +88,9 @@
   </ion-row>
 
 </div>
-<button ion-button icon-left full (click)="createBlog()">
-  Save
-</button>
+<br/>
+<button ion-button class="brw-btns" icon-left full (click)="createBlog()"> Save</button>
+<br/><br/>
 </ion-list>
 </ion-content>
 

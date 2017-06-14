@@ -85,7 +85,7 @@
 	   
 	    <ion-row>
 		<ion-col>
-	    <button ion-button class="uploadimg" color="primary" (click)="accessGallery()"><i class="fa fa-upload"></i>&nbsp; Browse...</button>
+	    <button ion-button class="uploadimg" color="primary" (click)="accessGallery()"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Browse...</button>
 				</ion-col>
 				<ion-col>
 				 <img [src]="base64Image" *ngIf="base64Image" width="90" height="90" />
@@ -102,14 +102,14 @@
     <ion-buttons>
       <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
-        <ion-icon class="gly-rotate-180" name="send"></ion-icon>
+     <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
         <div style="padding-left: 10px !important;">
           Back
         </div>
       </button>
       <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()">
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
-        <ion-icon class="gly-rotate-180" name="send"></ion-icon>
+  <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
         <div style="padding-left: 10px !important;">
           Back
         </div>

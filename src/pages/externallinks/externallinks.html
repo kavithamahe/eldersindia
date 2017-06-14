@@ -24,7 +24,7 @@
 <ion-content padding class="content-intop">
 	<ion-list *ngFor="let useful of externalLinksLists">
 		<ion-card class="external-listed">
-			<ion-card-title>
+	
 			<ion-item text-wrap>
 					<ion-row>
 						<ion-col width-20>
@@ -36,18 +36,20 @@
 						<ion-col width-80>		
 							<h1 (click)="openUrl(useful.metalink_url)">{{useful.metalink_title}}</h1>
 
-						    <p class="time-datem"><i class="fa fa-clock-o"></i>
+						    <em class="time-datem"><i class="fa fa-clock-o"></i>
 			          		{{useful.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
-			          		</p>
+			          		</em>
 					    </ion-col>
 					</ion-row>
 			     </ion-item>
 				
-			</ion-card-title>
+			
 			
 			<ion-card-content>
 				<p (click)="openUrl(useful.metalink_url)">{{useful.metalink_description}}</p>
 	       	</ion-card-content>
+			
+			<br/>
 		</ion-card>
 
 	</ion-list>

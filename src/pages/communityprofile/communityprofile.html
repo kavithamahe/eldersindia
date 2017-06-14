@@ -18,7 +18,7 @@
   
 	  <div class="cont-conn">
 		  <ion-row>
-			  <ion-col width-20 style="margin-top:5px;">
+			  <ion-col width-20 style="margin-top:5px; margin-left:5px;">
 			
 					  <ion-avatar (click)="profileSetting(communityProfileData?.id)" item-left class="image-profile" width-30>
 					  	<img [src]="imageUrl+communityProfileData?.avatar" [hidden]="!communityProfileData?.avatar" />
@@ -232,12 +232,11 @@
 		    				(click)="loadThisPage(connection?.id)">
 		    			</ion-avatar>
 		    		</ion-col>
-	    			<ion-col width-67>
-	    				<h1 class="primary-color" (click)="loadThisPage(connection?.id)">{{connection?.connections?.name}}</h1>
-		    				<p>{{connection?.connections?.company_name}}</p>
-		    				<p><ion-icon ios="ios-briefcase" md="md-briefcase" 
-		    				[hidden]="!connection?.connections?.designation"></ion-icon> {{connection?.connections?.designation}}</p>
-		 					<p><ion-icon ios="ios-call" md="md-call" [hidden]="!connection?.connections?.mobile"></ion-icon>  {{connection?.connections?.mobile}}</p>
+	    			<ion-col width-80 class="conn-listed">
+	    				<h1 (click)="loadThisPage(connection?.id)">{{connection?.connections?.name}}</h1>
+		    				<p class="comp-name"><i class="fa fa-building-o" aria-hidden="true"></i>{{connection?.connections?.company_name}}</p>
+		    				<p><i class="fa fa-briefcase" [hidden]="!connection?.connections?.designation"></i> {{connection?.connections?.designation}}</p>
+		 					<p><i class="fa fa-phone" [hidden]="!connection?.connections?.mobile"></i>{{connection?.connections?.mobile}}</p>
 	    			</ion-col>
 	      		</ion-row>    
 	  		</ion-card>

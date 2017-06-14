@@ -31,7 +31,7 @@
   <p *ngIf="!messageForm.controls.toAddress.valid && (messageForm.controls.toAddress.dirty || submitAttempt)" class="err-reds">Please select to</p>
   <p *ngIf="customErr" class="err-reds">Please select Valid To address</p>
   <ion-item>
-    <ion-input type="text" placeholder="Subject" formControlName="subject" [(ngModel)]="subject"></ion-input>
+    <ion-input type="text"  placeholder="Subject" formControlName="subject" [(ngModel)]="subject"></ion-input>
   </ion-item>
   <p *ngIf="!messageForm.controls.subject.valid && (messageForm.controls.subject.dirty || submitAttempt)" class="err-reds">Please enter subject</p>
   <ion-item>

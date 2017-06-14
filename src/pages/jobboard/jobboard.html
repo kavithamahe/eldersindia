@@ -46,7 +46,7 @@
 <ion-card *ngFor="let jobBoard of jobBoardInfo" class="job-detailsview">
   <ion-item (click)="viewJob(jobBoard?.id)" test-wrap>
   <ion-row>
-  <ion-col width-75>
+  <ion-col width-75 test-wrap>
     <h2 test-wrap>{{jobBoard?.title}}</h2>
     <P style=" color:#333 !important;"><i class="fa fa-university" aria-hidden="true" ></i>&nbsp;{{jobBoard?.company_name}}</P>
     <P><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;{{jobBoard?.min_experience}} - {{jobBoard?.max_experience}} years</P>

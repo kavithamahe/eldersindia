@@ -20,7 +20,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding style="background:#fff;">
+<ion-content padding class="content-intop">
 <ion-card>
 <ion-row>
 <ion-col width-20>
@@ -55,7 +55,7 @@
   </ion-item>
   <p *ngIf="!commentForm.controls.comment.valid && (commentForm.controls.comment.dirty || submitAttempt)" class="err-reds">Please enter comment.</p>
   </form>
-  <ion-item text-right>
+  <ion-item class="commend-btns">
   <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)" class="commend-btn">Submit</button>
   </ion-item>
   </div>
@@ -82,12 +82,12 @@
       </button>
      
 	  	 </ion-item>
-
+<button style="padding:0px;" class="replys" ion-button *ngIf="user_id != viewComments?.user_id" (click)="viewReply(i)" clear>
+     <i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply
+     </button>
 	  </ion-col>
 	  </ion-row>
-     <button ion-button *ngIf="user_id != viewComments?.user_id" (click)="viewReply(i)" clear>
-     <i class="fa fa-reply" aria-hidden="true"></i>
-     </button>
+     
      <div *ngIf="i==showReply">
      <ion-row>
         <ion-item>
@@ -100,12 +100,11 @@
        <ion-list *ngFor="let reply of viewComments.comment_reply; let j=index">
         <ion-row>
           <ion-col offset-10>
-            <ion-item>
+            <ion-item class="blog-reply">
               <ion-avatar item-left>
-                <img (click)="CommunityUserWall(reply?.uid_from)" src="{{imageUrl+reply?.profile_image}}" [hidden]="!reply?.profile_image">
+                <img (click)="CommunityUserWall(reply?.uid_from)" src="{{imageUrl+reply?.profile_image}}" [hidden]="!reply?.profile_image" width="30" height="30"/>
               </ion-avatar>
-              <h2 (click)="CommunityUserWall(reply?.uid_from)">{{reply.name_from}}-{{reply.name_to}}
-              </h2>
+              <h5 (click)="CommunityUserWall(reply?.uid_from)">{{reply.name_from}}-{{reply.name_to}}</h5>
               <p item-text-wrap>{{reply.comments_replay}}</p>
               <button ion-button icon-right clear end small item-right *ngIf="user_id==reply?.uid_to" 
               (click)="openMenu(reply?.comments_replay_id)">
