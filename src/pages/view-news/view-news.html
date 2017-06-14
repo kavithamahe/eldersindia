@@ -23,15 +23,15 @@
 
 <ion-content padding class="content-intop">
 <ion-card>
-<div>
-  <ion-item text-wrap>   
+
+  <ion-item text-wrap class="view-news">   
     <h2 class="primary-color pro-info">{{NewsInfo?.title}}</h2>
     <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{NewsInfo?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{NewsInfo?.post_date | date :"MMM dd y"}}</p>
   </ion-item>
 <img src="{{imageUrl+NewsInfo?.featured_image}}" [hidden]="!NewsInfo?.featured_image">
-  <ion-card-content>
+  <ion-card-content style=" margin:10px;">
      <p [innerHTML]="NewsInfo?.description"></p>
   </ion-card-content>
-  </div>
+
 </ion-card>
 </ion-content>
