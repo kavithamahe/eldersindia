@@ -160,7 +160,7 @@ status:any;
       else{
         infiniteScroll.enable(false);
       }
-      infiniteScroll.complete();
+      
     }, 500);
   }
   inboxscroll()
@@ -195,7 +195,6 @@ status:any;
       else{
         infiniteScroll.enable(false);
       }
-      infiniteScroll.complete();
     }, 500);
   }
   sentScroll()

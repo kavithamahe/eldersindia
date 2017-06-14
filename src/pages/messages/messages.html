@@ -79,9 +79,13 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
+      <button *ngIf="nextPageURL1!=null && nextPageURL1!=''" ion-button color="dark" clear 
+            (click)="doInfinite1($event)">
+        <i class="fa fa-angle-down"></i>
+                  </button>
+ <!--  <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
+ </ion-infinite-scroll> -->
   </ion-list>
 </ion-slide>
       <ion-slide>
@@ -123,9 +127,14 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
+<!-- 
   <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
+ </ion-infinite-scroll> -->
+     <button *ngIf="nextPageURL2!=null && nextPageURL2!=''" ion-button color="dark" clear 
+            (click)="doInfinite2($event)">
+        <i class="fa fa-angle-down"></i>
+      </button>
   </ion-list>
 </ion-slide>
 

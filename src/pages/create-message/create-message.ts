@@ -7,6 +7,9 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { MessagesPage } from '../../pages/messages/messages';
 import { MessagesService } from '../../providers/messages-service';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { FilePath } from '@ionic-native/file-path';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 
 /*
   Generated class for the CreateMessage page.
@@ -26,6 +29,7 @@ token:any;
 messageObj:any;
 subject:any;
 message:any;
+file23:any;
 friendsList:any=[];
 toAddress:any;
 getFriendsListobj:any=[];
@@ -36,8 +40,11 @@ messageForm: FormGroup;
 submitAttempt: boolean = false;
 subject1:any='';
 customErr:any=false;
+file_path:any;
+nativepath: any;
+file_name:any;
 //protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
- constructor(public formBuilder: FormBuilder,private completerService: CompleterService,public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public messagesService:MessagesService) {
+ constructor(private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public formBuilder: FormBuilder,private completerService: CompleterService,public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public messagesService:MessagesService) {
   this.storage.ready().then(() => {
     storage.get('user_type').then((user_type) => { this.user_type=user_type;});
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -114,7 +121,7 @@ customErr:any=false;
       }
       else
        {
-    this.messageObj= {"message":{"attachments":[],"to":{"title":this.toAddress,"description":this.toEmail,"image":"","originalObject":{"id":this.toId,"avatar":"","email":this.toEmail,"user_type":this.user_type,"friend_name":""}},"subject":subject,"message":message}};
+    this.messageObj= {"message":{"attachments":[],"to":{"title":this.toAddress,"description":this.toEmail,"image":"","originalObject":{"id":this.toId,"avatar":"","email":this.toEmail,"user_type":this.user_type,"friend_name":""}},"subject":subject,"message":message,"file_name":this.file_name,"file_path":this.nativepath}};
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     this.messagesService.sendMessage(this.messageObj).subscribe(
@@ -155,6 +162,23 @@ customErr:any=false;
         position: 'top'
         });
    toast.present();
+  }
+   openCamera(){
+console.log("open success");
+    this.fileChooser.open()
+      .then((imageData) => {
+
+      console.log("filedfsdf"+imageData );
+         (<any>window).FilePath.resolveNativePath(imageData, (result) => {
+    this.nativepath = result;
+     this.file_name = this.nativepath.split("/").pop();
+console.log("name"+this.file_name);
+    console.log("nativepath"+ this.nativepath);
+    
+  })
+        this.messagesService.upload(imageData);
+      });
+
   }
 
 }

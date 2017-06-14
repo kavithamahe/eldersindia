@@ -24,6 +24,7 @@ export class CommunitymessagePage {
    member_id:any;
    file_path:any;
    nativepath: any;
+   file_name:any;
    name:any;
 
   constructor(private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams,public communityServices: CommunityServices, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
@@ -54,7 +55,7 @@ export class CommunitymessagePage {
   		this.submitAttempt = false;
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
       loader.present();
-      this.communityServices.sendMessage(this.member_id,this.authForm.value.subject,this.authForm.value.message,this.name,this.nativepath).subscribe(users => {
+      this.communityServices.sendMessage(this.member_id,this.authForm.value.subject,this.authForm.value.message,this.file_name,this.nativepath).subscribe(users => {
        this.communityServices.showToast(users.result.info);
        this.authForm.reset();
        loader.dismiss(); 
@@ -74,6 +75,8 @@ console.log("open success");
       console.log("filedfsdf"+imageData );
          (<any>window).FilePath.resolveNativePath(imageData, (result) => {
     this.nativepath = result;
+     this.file_name = this.nativepath.split("/").pop();
+console.log("name"+this.file_name);
     console.log("nativepath"+ this.nativepath);
     
   })
