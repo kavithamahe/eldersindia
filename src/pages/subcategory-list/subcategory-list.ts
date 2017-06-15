@@ -196,7 +196,7 @@ loadSubcategoryList(subCategory_id,location_id){
   <ion-item *ngIf(selected)>
   <p class="err-reds"> Dependent not selected</p>
   </ion-item>
-
+<br/>
    <ion-label style=" font-size:17px; padding-left:10px; padding-top:10px; line-height:20px; float:left;">Select Dependent</ion-label>
       <ion-item >
            

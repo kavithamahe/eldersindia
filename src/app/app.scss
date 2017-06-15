@@ -265,7 +265,8 @@ input, textarea {
 .select-locas .item-inner .input-wrapper .label-ios{ margin:0px;}
 
 .select-loca{ border-bottom:1px solid #5ba9fc; background:#3396fe;}
-.select-loca .item-inner .input-wrapper .label-md{ text-align:left; color:#fff; padding-left:8px; margin:0px;}
+.select-loca .item-inner .input-wrapper .label-md{ text-align:left; color:#fff; padding-left:8px; margin:0px; font-size:18px;}
+.select-loca .item-inner .input-wrapper .label-ios{ text-align:left; color:#fff; padding-left:8px; margin:0px; font-size:18px;}
 .select-loca .item-inner .input-wrapper .select-md .select-icon .select-icon-inner{ color:#fff !important;}
 .select-locas p{  font-size:17px; color:#424b9a; font-weight:400; text-align:center; }
 .select-locas{padding-left:0px;}
@@ -296,7 +297,9 @@ input, textarea {
 .btn-infos												    {background-color:#fe7fe6;border-color:#46b8da;color:#fff;font-size:13px !important;text-transform:capitalize;}
 .info													    {font-size:13px !important;text-transform:capitalize !important;}
 .btn-defaults												{background-color:#ccc !important;border-color:#333;color:#666;font-size:13px !important;text-transform:capitalize; margin-top:10px; margin-right:10px; float:right;}
-.btn-primarys												{background-color:#888aef !important; border-color:#333;color:#fff;font-size:14px !important;text-transform:capitalize;margin-top:10px; float:right;margin-right:10px;}
+.btn-primarys												{background-color:#888aef;color: #fff;float: left; font-size: 14px; margin-left: 14px;margin-top: 10px;
+
+    width: 91%;}
 .toolbar-background-md										{background:#337ab7; }
 .profile-edit												{ height:175px; background-image: url('../../assets/img/llll.jpg');  position:relative; }
 
@@ -793,7 +796,7 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .req-viewlist span											{font-size:17px !important; font-weight:400 !important; color:#414994; padding-left:25px;}
 .req-viewlist p											    {font-size:15px !important; font-weight:400 !important; color:#777; padding-left:25px; padding-top:8px; }
 .req-viewlist i                                             {font-size:25px !important; color:#b0b2b6; line-height:50px;}
-.err-reds													{font-size:14px !important; font-weight:400 !important; color:red !important; text-align:right !important; padding-right:25px !important; margin:0px; }
+.err-reds													{color:red;font-size:12px;font-weight:400;margin:0 0 10px;padding-right:13px;text-align:right;}
 .token-primary												{width:auto; margin-top:7px; border-radius:3px;}
 .tocken-no													{font-size:15px !important; border:1px solid #e0e1e2; text-align:center; color:#0493f8!important; }
 .token-primarys												{width:35px; height:35px;margin-left:4px;margin-top:5px; display:block; border:1px solid #ccc; border-radius:50%;}
@@ -844,7 +847,8 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
         													 font-weight:400; color:#555;}
 .service-bg													{height:auto !important;}
 
-												 
+.appliedjob												 	{ padding-left:5px;}
+.appliedjob .item-inner .label-md{}
 /*-------------------------------------Windows platform css end-------------------------------------*/
 
 .change-pass-content form .item-md { padding-left:0px;}
@@ -915,8 +919,8 @@ padding-left:0px !important;
 .lastupdate small											{float:left; color:#777; font-size:14px; }
 .lastupdate	h1{ float:left; width:100%; font-size:19px; text-align:center; color:#555;}
 .lastupdate p												{font-size:15px; width:100%; padding:5px; text-indent:0px !important;}
-.listed-terms .card-md{box-shadow:none; border:1px solid #888aef; }
-.listed-terms .card-md .item-md{ padding-left:5px; border-left:2px solid #5c5fea; box-shadow:none; background:#888aef; border-radius:0px;}
+.listed-terms .card-md{box-shadow:none; border:1px solid #fe7fe6; }
+.listed-terms .card-md .item-md{ padding-left:5px; border-left:2px solid #fb06cd; box-shadow:none; background:#fe7fe6; border-radius:0px; height:35px;}
 .listed-terms .card-md .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
 .listed-terms .card-md .item-md .item-inner .input-wrapper .label-md p{ width:80%; float:left; color:#fff; font-size:18px; font-weight:400;}
 .listed-terms .card-md .item-md .item-inner .input-wrapper .label-md span{ width:20%; float:left;}
@@ -951,7 +955,7 @@ padding-left:0px !important;
 .toolbar-title-ios											{color:#fff;}
 .item-ios .item-button									    {height:30px !important;}
 .hei-head > .toolbar-background-md                          {height:55px!important;}
-.tittles-md .toolbar-title-md								{margin-top:-18px !important;font-size:18px !important; text-align:center;}
+.tittles-md .toolbar-title-md								{font-size:18px !important; text-align:center;}
 .tittles-md .toolbar-title-ios                              {font-size:17px !important;}
 .hei-head > .toolbar-background-md > .toolbar-md			{height:45px !important;}
 .header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before{ background:none;}
@@ -1007,7 +1011,7 @@ white-space: normal;}
 .single-jobs span{color:#777;padding-bottom:5px; font-size:15px;}
 .single-jobs h4{color:#777;padding-bottom:5px; font-size:15px;}
 .trash-del i{ font-size:15px; color:#fb0e1f;}
-.subject-details .item-inner .input-wrapper .label-md b{ font-size:15px; font-weight:400; padding-right:5px; }
+.subject-details .item-inner .input-wrapper .label-md b{ font-size:13px; font-weight:400; padding-right:5px; }
 .subject-details .item-inner .input-wrapper .label-md span{font-size:14px; font-weight:400; padding-right:5px; }
 .subject-details .item-inner .input-wrapper .label-ios b{ font-size:15px; font-weight:400; padding-right:5px; }
 .subject-details .item-inner .input-wrapper .label-ios span{font-size:14px; font-weight:400; padding-right:5px; }
@@ -1017,7 +1021,7 @@ white-space: normal;}
 .mess-detalisview span{ font-size:16px; color:#777; font-weight:400;}
 .mess-detalisview p{ font-size:16px; color:#777; font-weight:400; margin:0px;}
 .left-img{padding-left:0px;}
-.send-box-content ion-row > ion-col > p{ font-size:11px;}
+.send-box-content ion-row > ion-col > p{ font-size:10px;}
 .recordnotfound{ color:red; font-size:15px; text-align:center;}
 
 .view-messname .item-inner .label-md{ margin:0px;}
@@ -1040,7 +1044,7 @@ white-space: normal;}
 .view-messname .item-inner .label-ios span{ font-size:14px; color:#777; margin-left:5px; float:left;font-weight:400; padding-top:10px;}
 .listeviews .item-md{ padding-left:8px !important;}
 .listeviews .item-ios{ padding-left:8px !important;}
-.inbox-sends .item-md .item-inner .input-wrapper .label-md ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-md {text-indent:0px; margin-left:3px;}
+.inbox-sends .item-md .item-inner .input-wrapper .label-md ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-md {text-indent:0px; margin-left:3px; font-size:13px;}
 .inbox-sends .item-md .item-inner .input-wrapper .label-ios ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-ios {text-indent:0px; margin-left:5px;}
 .job-summary{ font-size:18px !important; color:#424999 !important; background:#fff; width:100%; text-align:left;  margin:0px; padding-left:10px; padding-bottom:8px;}
 
@@ -1050,7 +1054,7 @@ white-space: normal;}
     margin: 5px;
     width: 95%;
 }
-.single-jobscotact h2{ font-size:17px; font-weight:400; color:#555; text-align:center; line-height:30px;width:100%; border-bottom:1px solid #ebf0e9; padding-bottom:10px;}
+.single-jobscotact h2{ font-size:17px; font-weight:400; color:#555; text-align:center; line-height:30px;width:100%; border-bottom:1px solid #ebf0e9; padding-bottom:7px;}
 .single-jobscotact span{ font-size:16px; font-weight:400; color:#555; width:100%;  padding-bottom:6px; float:left;}
 .single-jobscotact span i{color:#a8a9a8;font-size:15px;text-align:center;width:20px;}
 
@@ -1104,8 +1108,7 @@ white-space: normal;}
 .popup-mds .text-input-ios{ margin-bottom:10px !important; margin-top:0px !important; width:92% !important; margin-left:14px !important;}
 .popup-mds .text-input-md{ margin-bottom:10px !important; margin-top:0px !important; width:92% !important; margin-left:14px !important;}
 .popup-mds .label-md{ margin-top:0px !important;}
-.popup-mds .text-input-ios{ margin-bottom:10px !important; margin-top:0px !important;}
-.popup-mds .label-ios{ margin-top:0px !important;}
+
 .popup-mds .scroll-content form .label-lb				    {font-size:17px; font-weight:400; margin-top:0px; margin-bottom:8px; padding-left:10px;}
 .popup-mds .scroll-content form .item-datetime    			{padding-left:8px !important;}
 .popup-mds .scroll-content form .select-brd 				{width:94%; margin-bottom:10px; margin-left: 7px;}
@@ -1132,7 +1135,8 @@ white-space: normal;}
 .reply-comm{ font-size:12px !important; color:#404996 !important;}
 .liks-comments{font-size:14px !important; color:#0a399a !important;}
 .liks-comments i{color:#6e6e6f !important;}
-.reply-shows{margin-bottom:15px;margin-left:30px; margin-top:0px;} 
+.reply-shows{margin-bottom:15px;margin-left:30px; margin-top:0px; background:#fff;} 
+.attached{ width:40px; height:40px; border-radius:50%; background:#ccc;}
 .reply-shows .list-md .item-md .item-inner .input-wrapper .label-md h5{ font-size:14px !important; color:#424a95;text-indent:0px !important;}
 .reply-shows .list-md .item-md .item-inner .input-wrapper .label-md em{float:left;font-size:9px !important;width:100%; text-indent:0px; }
 .reply-shows .list-ios .item-ios .item-inner .input-wrapper .label-ios em{float:left;font-size:9px !important;width:100%; text-indent:0px; }
@@ -1155,7 +1159,7 @@ white-space: normal;}
 .add-depends												{ background:#fe7fe6;}
 page-dashboard .dashboard								    {padding:0px 0px !important;}
 .des-card												    {background:#fff	!important;}
-.name-person											    {font-size:22px !important;  font-weight:600;color:#fe7fe6; float:left;}
+.name-person											    {font-size:22px !important;  font-weight:600;color:#a8a9a8; float:left;}
 .name-elder												    {color:#404998!important;float:left;font-size:17px!important;font-weight:400 !important;padding-left:10px !important;text-transform:capitalize;}
 .edit-eld												    {color:#1E90FF; padding:3px; font-size:20px !important; border-radius:3px; width:20px; height:20px;}
 .trash-del												    {color:#a4a5a7; padding:3px;font-size:20px !important; border-radius:3px; width:20px; height:20px;}

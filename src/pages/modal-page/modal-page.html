@@ -1,6 +1,6 @@
 
 <ion-header>
-  <ion-toolbar class="hei-head">
+  <ion-toolbar class="hei-head" color="primary">
     <ion-title color="primary" class="tittles-md" text-capitalize>
       {{vendor}} - Schedule Request
     </ion-title>
@@ -19,9 +19,9 @@
   <br>
 			<ion-label stacked class="label-lb">Describe the problem</ion-label>
           <ion-input type="text" formControlName="problem" ></ion-input>
-		  <ion-item *ngIf="!modalForm.controls.problem.valid  && (modalForm.controls.problem.dirty || submitAttempt)">
-                <p class="err-reds">Please enter the describe problem</p>
-            </ion-item>
+	
+                <p class="err-reds" *ngIf="!modalForm.controls.problem.valid  && (modalForm.controls.problem.dirty || submitAttempt)">Please enter the describe problem</p>
+       
      
              <ion-label stacked class="label-lb">Lead Time:{{lead_time}}</ion-label>
         
@@ -30,27 +30,26 @@
 		   <ion-item>
            <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" formControlName ="date"></ion-datetime>
           </ion-item>
-          <ion-item *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">
-                <p class="err-reds">Please enter the scheduled date</p>
-            </ion-item>
+   
+                <p class="err-reds" *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">Please enter the scheduled date</p>
+       
 		
 
           
             <ion-label stacked class="label-lb">Scheduled Time</ion-label>
 			<ion-item>
             <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" formControlName ="time" class="select-brd"></ion-datetime>
+			
           </ion-item>
-		  <ion-item *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">
-                <p class="err-reds">Please enter the scheduled time</p>
-          </ion-item>
+		   <p class="err-reds" *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">Please enter the scheduled time</p>
+	
 		
 
 		  <ion-label stacked class="label-lb">Alternate Contact Number</ion-label>
 
           <ion-input type="text" formControlName="contact"></ion-input>
-		    <ion-item *ngIf="!modalForm.controls.contact.valid  && (modalForm.controls.contact.dirty || submitAttempt)">
-                <p class="err-reds">Please enter the alternate contact number</p>
-            </ion-item>
+		   <p class="err-reds" *ngIf="!modalForm.controls.contact.valid  && (modalForm.controls.contact.dirty || submitAttempt)">Please enter the alternate contact number</p>
+	
 		
           
 		     <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb">Select Dependent</ion-label>
@@ -61,9 +60,9 @@
               </ion-option>
             </ion-select>
           </ion-item>
-		  <ion-item *ngIf="!modalForm.controls.dependents.valid  && (modalForm.controls.dependents.dirty || submitAttempt)">
-                <p class="err-reds">Please select the dependents</p>
-            </ion-item>
+		
+                <p class="err-reds" *ngIf="!modalForm.controls.dependents.valid  && (modalForm.controls.dependents.dirty || submitAttempt)">Please select the dependents</p>
+
       </form>
 	
 
@@ -78,33 +77,28 @@
                 <p class="err-reds">Kindly agree to the terms and conditions</p>
             </small>
 </ion-content>
+
+
+
+
+
 <ion-footer>
-  <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
+  <ion-toolbar color="primary"> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
     <ion-buttons>
       <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
-  <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
-        <div style="padding-left: 10px !important;">
-          Back
-        </div>
-      </button>
+   <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
       <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()">
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
-  <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
-        <div style="padding-left: 10px !important;">
-          Back
-        </div>
-      </button>
+     <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
     </ion-buttons>
     
     <ion-buttons end>
-      <button ion-button color="royal" large icon-right showWhen="ios" (click)="submit()">
-        Submit
-        <ion-icon name="send"></ion-icon>
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="submit()">&nbsp;Submit
+       <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button ion-button color="light" large icon-right hideWhen="ios" (click)="submit()">
-        Submit
-        <ion-icon name="send"></ion-icon>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="submit()">&nbsp;Submit
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
