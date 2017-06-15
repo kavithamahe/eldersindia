@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
       Compose Message
     </ion-title>
@@ -11,9 +11,10 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="content-intop">
+<div class="change-pass-content">
 	<form [formGroup]="authForm">
-		<ion-card padding>
+<br/>
   			<ion-list>
       			<ion-row>
 		        	<ion-label>To</ion-label>
@@ -43,12 +44,13 @@
             	<div *ngIf="!authForm.controls.message.valid  && (authForm.controls.message.dirty || submitAttempt)">
                 	<p style="color:red" class="valid">This field is required</p>
            		</div>
-	       			 <br>
-     			<button ion-button color="dark" outline (click)="openCamera()">
-     			<ion-icon name="add" ></ion-icon>Attachment</button>
+	       		
+     			<button ion-button class="attached" outline (click)="openCamera()">
+     			<i class="fa fa-paperclip" aria-hidden="true"></i></button>
       			<button (click)="sendMessage()" ion-button class="btn-right">
   				<ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;Send</button>
 			</ion-list>
-  		</ion-card>
+  
   	</form>
+	</div>
 </ion-content>
