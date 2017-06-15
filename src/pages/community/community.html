@@ -38,11 +38,11 @@
       			<p> &nbsp;Members</p>
 			</ion-item>
 				<div *ngFor="let member of members; let i=index" text-wrap>
-					<div *ngIf="i<= 2">
-						<ion-item class="memb-list">
+					<div *ngIf="i<= 6">
+						<ion-item class="memb-list" [hidden]="!member?.avatar">
 							<ion-col>
 								<img (click)="membersProfile(member.uid)" 
-								[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar" width="100" height="52" />
+								[src]="imageUrl+member?.avatar" width="100" height="52" />
 								<small class="mem-name">{{member.name | words :1 : '....'}}</small>
 							</ion-col>
 						</ion-item>

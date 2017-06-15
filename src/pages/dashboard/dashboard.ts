@@ -78,7 +78,7 @@ export class DashboardPage {
    }
    else
    {
-    this.showToaster("There is no contact nuber");
+    this.showToaster("There is no contact number");
    }
   }
   public hooter(hooterOn)

@@ -77,6 +77,24 @@ vendorStatus:any=[];
       }
     );
   }
+  showConfirm(serviceId){
+     let confirm = this.alertCtrl.create({
+     subTitle: '1 request will be deleted',
+       buttons: [
+        {
+          text: 'Cancel',
+         },
+        {
+          text: 'Ok',
+          handler: () => {
+           this.cancelRequest(serviceId);
+          
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
   public cancelRequest(serviceId)
   {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     

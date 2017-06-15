@@ -120,7 +120,7 @@ loadSubcategoryList(subCategory_id,location_id){
     if(modalPage == "instant"){
       this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,service:this.serviceTitle,vendor:vendorData});
     }else{
-      this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists,vendor:vendorData});
+      this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists,lead_time:this.lead_time,vendor:vendorData});
     }
     this.scheduleModal=modalPage;
     this.modal.onDidDismiss(data =>{

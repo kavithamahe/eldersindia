@@ -89,6 +89,16 @@ rootUrl:any;
    });
  
 }
+file:any;
+download() {
+  const fileTransfer: TransferObject = this.transfer.create();
+  const url = 'http://www.example.com/file.pdf';
+  fileTransfer.download(url, this.file.dataDirectory + 'file.pdf').then((entry) => {
+    console.log('download complete: ' + entry.toURL());
+  }, (error) => {
+    // handle error
+  });
+}
   fileUploads(id,file){
     this.headers = new Headers();
     this.headers.append('Content-Type',undefined);

@@ -206,7 +206,7 @@ toggleContent(){
       this.communityDetailData = users.result.info;
       this.members =  users.result.info.members;
       this.show_member = this.members.length;
-      if(this.show_member>3){
+      if(this.show_member>7){
         this.viewMore=true;
       }
       loader.dismiss();

@@ -8,6 +8,7 @@ import { MessagesService } from '../../providers/messages-service';
 import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
 import { CreateMessagePage } from '../../pages/create-message/create-message';
 import { MessagesPage } from '../../pages/messages/messages';
+
 /*
   Generated class for the ViewMessages page.
 
@@ -23,7 +24,8 @@ export class ViewMessagesPage {
 messages:any;
 token:string;
 imageUrl:string;
-veiwMessagesInfo:any;
+veiwMessagesInfo:any=[];
+attachmentInfo:any=[];
 messageId:any;
 toAddress:any;
 subject:any;
@@ -46,7 +48,8 @@ viewType:any;
     loader.present();
     this.messagesService.viewMessages(messageId,viewType).subscribe(
      (viewMessages) => {
-      this.veiwMessagesInfo=viewMessages.result.details; 
+      this.veiwMessagesInfo=viewMessages.result.details;
+      this.attachmentInfo=viewMessages.result.attachments;
       loader.dismiss(); 
     },
     (err) => { 
@@ -115,4 +118,5 @@ viewType:any;
     );
     
   }
+
 }

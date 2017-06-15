@@ -53,6 +53,10 @@
 
 
   </ion-card-content>
+  <div *ngFor="let attachment of attachmentInfo">
+  <p>{{attachment.file_name}}</p>
+
+  </div>
      <ion-row class="replay-forward">
     <ion-col *ngIf ="viewType == 'inbox'" (click)="messageReply(veiwMessagesInfo?.sender_name,veiwMessagesInfo?.subject)">
       <button ion-button icon-left clear small>

@@ -121,7 +121,7 @@ file_name:any;
       }
       else
        {
-    this.messageObj= {"message":{"attachments":[],"to":{"title":this.toAddress,"description":this.toEmail,"image":"","originalObject":{"id":this.toId,"avatar":"","email":this.toEmail,"user_type":this.user_type,"friend_name":""}},"subject":subject,"message":message,"file_name":this.file_name,"file_path":this.nativepath}};
+    this.messageObj= {"message":{"attachments":[{"file_name":this.file_name,"file_path":this.nativepath}],"to":{"title":this.toAddress,"description":this.toEmail,"image":"","originalObject":{"id":this.toId,"avatar":"","email":this.toEmail,"user_type":this.user_type,"friend_name":""}},"subject":subject,"message":message}};
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     this.messagesService.sendMessage(this.messageObj).subscribe(
@@ -138,8 +138,7 @@ file_name:any;
         if(err.status===401)
         {
         this.showToaster(JSON.parse(err._body).error);
-        
-        }
+         }
         else
         {
           this.showToaster("Try again later");
