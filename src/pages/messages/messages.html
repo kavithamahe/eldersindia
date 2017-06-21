@@ -135,14 +135,12 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
-<!-- 
-  <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll> -->
+<ion-item center>
      <button middle *ngIf="nextPageURL2!=null && nextPageURL2!=''" ion-button color="dark" clear 
             (click)="doInfinite2($event)">
         <i class="fa fa-angle-down"></i>
       </button>
+	  </ion-item>
   </ion-list>
 
 </div>
