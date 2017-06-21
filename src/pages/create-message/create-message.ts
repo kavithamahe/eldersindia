@@ -90,10 +90,10 @@ file_name:any;
     );    
   }
 
-  public dashboardPage()
-  {
-    this.navCtrl.setRoot(DashboardPage);
-  }
+  // public dashboardPage()
+  // {
+  //   this.navCtrl.setRoot(DashboardPage);
+  // }
   public sendMessage()
   {
     if(!this.messageForm.valid){
