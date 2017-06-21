@@ -17,7 +17,7 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center text-capitalize>Service Requests</ion-title>
+    <ion-title text-center text-capitalize>My Service Requests</ion-title>
     <!--<ion-buttons right>    
       <button ion-button icon-only>
         <ion-icon name="search"></ion-icon>
@@ -27,6 +27,9 @@
 </ion-header>
 
 <ion-content padding class="content-intop">
+<div>
+    <ion-searchbar [(ngModel)]="searchTextBox" (ionInput)="getItems($event)"></ion-searchbar>
+</div>
 <ion-card *ngFor="let service of serviceRequestInfo; let i=index;">
   <ion-card-content style=" padding:0px;">
   <ion-grid>
@@ -35,7 +38,7 @@
 	<img src="{{imageUrl}}{{service?.logo}}" width="100" />
 	<a class="token-primarys" (click)="makeCall(service?.contact_number)"><i class="fa fa-phone"></i></a>
 	  
-  <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="cancelRequest(service?.id)">
+  <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="showConfirm(service?.id)">
 <i class="fa fa-times" aria-hidden="true"></i>
   </a>
  
@@ -69,16 +72,16 @@
   </ion-row>
   <ion-row>
 
-  <ion-col>
+ <!--  <ion-col>
   <button ion-button icon-left small *ngIf="(service?.vendor_status==5 &&(!service?.vendor_remarks))"(click)="enableRemark(i)">
        Mark as Complete
   </button>
-  </ion-col>
+  </ion-col> -->
   </ion-row>
 
 
   </ion-grid>
-  <ion-row>
+  <!-- <ion-row>
   <ion-col width-20></ion-col>
   <ion-col width-80>
   
@@ -86,7 +89,7 @@
        <i class="fa fa-comments"></i>
   </button>
   </ion-col>
-  </ion-row>
+  </ion-row> -->
 
 
   <ion-list *ngIf="(i==showRemark)">

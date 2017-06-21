@@ -19,8 +19,7 @@
 	  <div class="cont-conn">
 		  <ion-row>
 			  <ion-col width-20 style="margin-top:5px; margin-left:5px;">
-			
-					  <ion-avatar (click)="profileSetting(communityProfileData?.id)" item-left class="image-profile" width-30>
+					<ion-avatar (click)="profileSetting(communityProfileData?.id)" item-left class="image-profile" width-30>
 					  	<img [src]="imageUrl+communityProfileData?.avatar" [hidden]="!communityProfileData?.avatar" />
 					  </ion-avatar>
 					
@@ -99,11 +98,10 @@
 											<small style=" float:left;">( Youtube,Dailymotion,Vimeo,Wine)
 									</small>
 									</ion-col>
-									<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
-	                				<p style="color:red" class="valid">Please enter valid video url</p>
+									</ion-row>
+							<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
+	                				<p style="color:red;font-size: 14px;" class="valid">Please enter valid video url</p>
            							</div>
-								</ion-row>
-						
 							</form>
 							</div>
 		   	</div>
@@ -179,7 +177,8 @@
 			          			</button>
 		          			</ion-col>
 		          		<ion-col>
-				    	<button ion-button icon-left clear small  *ngIf="!community.likecount == 0">
+				    	<button ion-button icon-left clear small  
+				    	*ngIf="!community.likecount == 0">
   							<p class="liks-comments">&nbsp;{{community.likecount}}+like it</p>
 				      	</button>
 				    </ion-col>

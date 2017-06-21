@@ -43,10 +43,9 @@
 			    </ion-row>
             	<div *ngIf="!authForm.controls.message.valid  && (authForm.controls.message.dirty || submitAttempt)">
                 	<p style="color:red" class="valid">This field is required</p>
-           		</div>
-	       		
+           		</div>	
      			<button ion-button class="attached" outline (click)="openCamera()">
-     			<i class="fa fa-paperclip" aria-hidden="true"></i></button>
+     			<i class="fa fa-paperclip" aria-hidden="true"></i></button><p>{{file_name}}</p>
       			<button (click)="sendMessage()" ion-button class="btn-right">
   				<ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;Send</button>
 			</ion-list>

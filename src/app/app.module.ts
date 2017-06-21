@@ -9,6 +9,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import { Ng2EmojiModule } from 'ng2-emoji';
 import { NativeAudio,Geolocation } from 'ionic-native';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { Diagnostic } from 'ionic-native';
+import { CameraPreview, CameraPreviewRect } from 'ionic-native';
+//import { Permissions } from '@ionic-native/android-permissions';
 import {MomentModule} from 'angular2-moment';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
@@ -206,8 +209,6 @@ import { ServiceProvider } from '../providers/service-provider';
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer, 
-    FileChooser,
-    FilePath,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider, AppConfig,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider, AppConfig,Storage] // Add GithubUsers provider
 })
 export class AppModule {}

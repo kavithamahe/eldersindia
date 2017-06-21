@@ -32,6 +32,7 @@ functionalAreaList:any=[];
 locationList:any=[];
 functionalArea:any='';
 location:any='';
+file_name:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public jobBoardService:JobBoardService,public modalCtrl: ModalController) {
     this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -86,7 +87,8 @@ location:any='';
     if(this.user_type=='elder')
     {
        this.jobDependentId=this.user_type_id;
-       this.callApplyJob(jobId,this.jobDependentId);
+       
+       this.callApplyJob(jobId,this.jobDependentId,this.file_name);
     }
     else
     {
@@ -94,9 +96,9 @@ location:any='';
     }
    
   }
-  callApplyJob(jobId,jobDependentId)
+  callApplyJob(jobId,jobDependentId,file_name)
   {
-    this.jobBoardService.applyJob(jobId,jobDependentId).subscribe(
+    this.jobBoardService.applyJob(jobId,jobDependentId,file_name).subscribe(
      (applyJob) => {
      // this.applyJobInfo=applyJob.result;  
        this.showToaster(applyJob.result);
@@ -133,9 +135,11 @@ location:any='';
     let modal = this.modalCtrl.create(JobDependentPage);
      modal.onDidDismiss(data => {
      this.jobDependentId=data.dependent;
+     this.file_name=data.file_name;
+
      if(this.jobDependentId!='')
      {
-     this.callApplyJob(jobId,this.jobDependentId);
+     this.callApplyJob(jobId,this.jobDependentId,this.file_name);
      }
      });
     modal.present();

@@ -21,6 +21,7 @@ import { Storage } from '@ionic/storage';
 export class ModalContentPage {
 
   dependentLists:any=[];
+  lead_time:any=[];
   userType:any;
   submitAttempt:any;
   modalForm: FormGroup;
@@ -38,6 +39,7 @@ export class ModalContentPage {
      //let loading = this.loadingCtrl.create({content: 'Please wait...!'});
      //loading.present();
      this.dependentLists = params.get("dependentList");
+     this.lead_time = params.get("lead_time");
      if(params.get("vendor") != undefined){
       this.vendor = this.params.get("vendor").name;
     }

@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams ,ToastController} from 'ionic-angular';
+import {  Platform,NavController, NavParams,AlertController,ToastController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {CallNumber, Vibration, NativeAudio} from 'ionic-native';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
+import { LocalNotifications, Geolocation } from 'ionic-native';
+
 
 import { ServiceprovidersPage } from '../../pages/serviceproviders/serviceproviders';
 import { JobboardPage } from '../../pages/jobboard/jobboard';
@@ -29,7 +32,7 @@ export class DashboardPage {
   ambulance:any;
   call_sponsor:any;
   hooterOn:boolean=false;
-  constructor(public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
+  constructor(public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
   	this.storage.ready().then(() => {
       storage.get('token').then((token) => { this.token=token;  })
       storage.get('user_type').then((user_type) => { this.user_type=user_type;  })
@@ -37,7 +40,48 @@ export class DashboardPage {
       storage.get('ambulance').then((ambulance) => { this.ambulance=ambulance;  })
       storage.get('police').then((police) => { this.police=police;  })
   });
+    this.fetchLocation();
      //alert(this.call_sponsor);
+  }
+   fetchLocation(){
+    if (!this.platform.is('cordova')) {
+      console.warn("Location not initialized. Cordova is not available - Run in physical device");
+      return;
+    }
+  this.platform.ready().then(() => {
+      Geolocation.getCurrentPosition().then(
+      (data) => {
+            console.log('My latitude : ', data.coords.latitude);
+            console.log('My longitude: ', data.coords.longitude);
+            this.getLocation(data.coords.latitude,data.coords.longitude);
+        },
+        (err) =>{
+          let confirmAlert = this.alertCtrl.create({
+          subTitle: 'switch-ON GPS to get current Location.',
+          buttons: [{
+            text: 'OK',
+            role: 'cancel',
+          }]
+        });
+        confirmAlert.present();
+            console.log("error in fetching Geo Location: ",err);
+        });
+  });
+
+}
+
+  getLocation(d1,d2){
+console.log("location ready");
+    this.nativeGeocoder.reverseGeocode(d1, d2)
+  .then(
+    (result: NativeGeocoderReverseResult) => {
+      this.storage.ready().then(() => {
+      this.storage.set('service_location',result.city);
+    });
+    console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
+    })
+    
+  .catch((error: any) => console.log(error));
   }
 
   ionViewDidLoad() {
@@ -78,7 +122,7 @@ export class DashboardPage {
    }
    else
    {
-    this.showToaster("There is no contact nuber");
+    this.showToaster("There is no contact number");
    }
   }
   public hooter(hooterOn)

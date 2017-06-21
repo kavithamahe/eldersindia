@@ -84,15 +84,6 @@ console.log("name"+this.file_name);
       });
 
   }
-//   openCamera(){
-//     this.fileChooser.open().then((url) => {
-//  console.log("file"+url);
-//   (<any>window).FilePath.resolveNativePath(url, (result) => {
-//     this.nativepath = result;
-//      this.communityServices.upload(nativepath);
-//   })
-// })
-//   }
  
 
 }

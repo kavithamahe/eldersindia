@@ -206,7 +206,7 @@ toggleContent(){
       this.communityDetailData = users.result.info;
       this.members =  users.result.info.members;
       this.show_member = this.members.length;
-      if(this.show_member>3){
+      if(this.show_member>7){
         this.viewMore=true;
       }
       loader.dismiss();
@@ -263,7 +263,7 @@ toggleContent(){
     loader.present();
 
    this.communityServices.addLike(likeObj).subscribe(data =>{
-     this.showToast(data.result);
+     this.showToast(data.result.info.message);
       this.communityList(this.community_id);
       loader.dismiss();
    },

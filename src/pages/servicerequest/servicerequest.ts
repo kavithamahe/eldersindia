@@ -27,6 +27,7 @@ nextPageURL:any='';
 getRemarksList:any=[];
 serviceRequestScrollLists:any=[];
 vendorStatus:any=[];
+searchTextBox:any='';
   constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -42,6 +43,7 @@ vendorStatus:any=[];
   {
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
+    this.serviceRequestInfo =[];
     this.serviceRequest.serviceRequestList().subscribe(
      (serviceRequest) => {
       this.serviceRequestInfo=serviceRequest.result.info.list.data; 
@@ -50,6 +52,7 @@ vendorStatus:any=[];
       loader.dismiss();    
     },
     (err) => { 
+      this.serviceRequestInfo =[];
         if(err.status===401)
         {
         this.showToaster(JSON.parse(err._body).error);
@@ -61,6 +64,18 @@ vendorStatus:any=[];
         loader.dismiss();
       }
     );    
+  }
+  // getItems(ev) {
+    
+  //   var val = ev.target.value;
+  //   this.onInit(val);
+   
+  // }
+  public getItems(searchEvent) {
+    let term = searchEvent.target.value;
+      this.serviceRequest.searchConnection(term).subscribe(searchConnection => {
+        this.serviceRequestInfo= searchConnection.result.info.list.data;
+      });
   }
   public getRemarks()
   {
@@ -76,6 +91,24 @@ vendorStatus:any=[];
         
       }
     );
+  }
+  showConfirm(serviceId){
+     let confirm = this.alertCtrl.create({
+     subTitle: '1 request will be deleted',
+       buttons: [
+        {
+          text: 'Cancel',
+         },
+        {
+          text: 'Ok',
+          handler: () => {
+           this.cancelRequest(serviceId);
+          
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
   public cancelRequest(serviceId)
   {
@@ -98,8 +131,7 @@ vendorStatus:any=[];
           this.showToaster("Try again later");
         }
         loader.dismiss();
-      }
-    );
+      });
   }
   
   public viewRequest(serviceRequestId)

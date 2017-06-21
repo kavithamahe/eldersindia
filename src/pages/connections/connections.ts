@@ -194,6 +194,19 @@ All:any;
         this.allConnectionsInfo= searchConnection.result.info.list.data;
       });
   }
+  public sendsearch(searchEvent){
+     let term = searchEvent.target.value;
+      this.connectionsService.sendsearchConnection(term).subscribe(searchConnection => {
+        this.sentRquestInfo= searchConnection.result.info.list.data;;
+      });
+  
+  }
+ public receivedsearch(searchEvent){
+     let term = searchEvent.target.value;
+      this.connectionsService.receivedsearchConnection(term).subscribe(searchConnection => {
+        this.receivedRquestInfo= searchConnection.result.info.list.data;;
+      });
+  }
   public search1(Event) {
     let term = Event.target.value;
       this.connectionsService.addsearchConnection(term).subscribe(searchConnections => {

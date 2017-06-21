@@ -19,7 +19,8 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="segments-info" style="background:#F3F7FF;">
-     <ion-segment [(ngModel)]="community" class="segment-top" (ionChange)="changeSlide($event)">
+     <ion-segment [(ngModel)]="community" class="segment-top" 
+     (ionChange)="changeSlide($event)">
         <ion-segment-button (click)="myCommunity()" value="my_community">
           My Communities
         </ion-segment-button>
@@ -44,7 +45,8 @@
           </ion-list>
         </ion-card>
         <div *ngIf(searchButton)>
-          <ion-searchbar [(ngModel)]="searchTextBox" (ionInput)="getItems($event)"></ion-searchbar>
+          <ion-searchbar [(ngModel)]="searchTextBox" (ionInput)="getItems($event)">
+          </ion-searchbar>
         </div>
 	<div class="community-div">
         <ion-card style="position:relative;" *ngFor="let community of communitylists; let i= index" 

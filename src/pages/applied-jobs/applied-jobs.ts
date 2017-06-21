@@ -23,6 +23,8 @@ imageUrl:string;
 nextPageURL:any='';
 appliedJobScrollLists:any;
 loader:any;
+searchTextBox:any='';
+
    constructor(public navCtrl: NavController, public navParams: NavParams,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     
   this.storage.ready().then(() => {
@@ -37,12 +39,14 @@ loader:any;
  {
    this.loader = this.loadingCtrl.create({ content: "Please wait..." });     
     this.loader.present();
+    this.appliedJobsList =[];
    this.jobBoardService.appliedJobs().subscribe(
      (appliedJobs) => {      
       this.appliedJobsList=appliedJobs.result.info.data; 
       this.loader.dismiss();
     },
     (err) => { 
+      this.appliedJobsList =[];
         if(err.status===401)
         {
         this.showToaster(JSON.parse(err._body).error);
@@ -55,6 +59,13 @@ loader:any;
       }
     );  
  }
+ 
+  public jobsearch(searchEvent) {
+    let term = searchEvent.target.value;
+      this.jobBoardService.searchConnection(term).subscribe(searchConnection => {
+        this.appliedJobsList= searchConnection.result.info.data;
+      });
+  }
  public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);

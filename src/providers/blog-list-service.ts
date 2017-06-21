@@ -33,7 +33,17 @@ user_id:any;
     return this.http.post(this.rootUrl+`normaListBlog`,_request,this.options)
       .map(res => res.json()); 
   }
-
+  searchConnection(term) {  
+   let _request= {"search":{"title":term}};
+    return this.http.post(this.rootUrl+'normaListBlog',_request,this.options)
+      .map(res => res.json()); 
+  }
+eventsscroll(nextPageURL) 
+   {  
+   let _request= {"search":{"title":""}};
+    return this.http.post(nextPageURL,_request,this.options)
+      .map(res => res.json()); 
+   }
   singleBlog(blogId) {  
    let _request= {};
     return this.http.post(this.rootUrl+'getBlogDetails/'+blogId,_request,this.options)

@@ -40,13 +40,13 @@ rootUrl:any;
         });
    toast.present();
   }
-  inbox() {  
+  inbox(data) {  
    let _request= {search: {title: "", status: "", category: ""}};
     return this.http.post(this.rootUrl+'listInbox',_request,this.options)
       .map(res => res.json()); 
   }
   sent() {  
-   let _request= {searchValue: ""};
+   let _request= {"searchValue":""};
     return this.http.post(this.rootUrl+'listSent',_request,this.options)
       .map(res => res.json()); 
   }
@@ -55,6 +55,7 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'getInboxMessageDetails/'+messageId,_request,this.options)
       .map(res => res.json()); 
   }
+  
   file_Path:any;
     upload(imageData)
     {
@@ -89,6 +90,7 @@ rootUrl:any;
    });
  
 }
+file:any;
   fileUploads(id,file){
     this.headers = new Headers();
     this.headers.append('Content-Type',undefined);
@@ -100,9 +102,9 @@ rootUrl:any;
         fd.append('file_name', name);
         fd.append('file_path', file);
         fd.append('name',"avatar");
-        let send:{message:{attachments:string,to:{title:string,description:string,image:string,originalObject:{id:string,avatar:string,email:string,user_type:string,friend_name:string}},subject:string,message:string,
-    file_name:FormData,file_path:ImageData}} = {"message":{"attachments":"","to":{"title":"","description":"","image":"","originalObject":{"id":id,"avatar":"","email":"","user_type":"","friend_name":""}},"subject":"","message":"",
-    "file_name":name,"file_path":file}}
+        let send:{message:{attachments:[{file_name:FormData,file_path:ImageData}],to:{title:string,description:string,image:string,originalObject:{id:string,avatar:string,email:string,user_type:string,friend_name:string}},subject:string,message:string
+    }} = {"message":{"attachments":[{"file_name":name,"file_path":file}],"to":{"title":"","description":"","image":"","originalObject":{"id":id,"avatar":"","email":"","user_type":"","friend_name":""}},"subject":"","message":"",
+ }}
        return this.http.post(this.rootUrl+'sendMessage', send,this.options).map(res => res.json());
 
   }

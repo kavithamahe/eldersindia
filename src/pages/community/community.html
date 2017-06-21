@@ -38,11 +38,11 @@
       			<p> &nbsp;Members</p>
 			</ion-item>
 				<div *ngFor="let member of members; let i=index" text-wrap>
-					<div *ngIf="i<= 2">
-						<ion-item class="memb-list">
+					<div *ngIf="i<= 6">
+						<ion-item class="memb-list" [hidden]="!member?.avatar">
 							<ion-col>
 								<img (click)="membersProfile(member.uid)" 
-								[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar" width="100" height="52" />
+								[src]="imageUrl+member?.avatar" width="100" height="52" />
 								<small class="mem-name">{{member.name | words :1 : '....'}}</small>
 							</ion-col>
 						</ion-item>
@@ -57,7 +57,6 @@
 				</ion-item>
 		</ion-item>
 	</div>
-
 	<div *ngIf="communityDetailData?.isJoined" class="mem-name-update">
 		<h2 class="wel-comemem">Update Status</h2>
 			<div style="padding:0px !important;">
@@ -90,11 +89,12 @@
 								</ion-item>
 									<small style=" float:left;">( Youtube,Dailymotion,Vimeo,Wine)
 									</small>
-								<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
-	                				<p style="color:red" class="valid">Please enter valid video url</p>
-           						</div>
+								
 							</ion-col>
 						</ion-row>
+						<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
+	                	<p style="color:red; font-size: 14px;" class="valid">Please enter valid video url</p>
+           				</div>
 					</form>
 				</div>
 		   	</div>
@@ -166,13 +166,12 @@
 				      </button>
 				    </ion-col>
 				    <ion-col>
-				    	<button ion-button icon-left clear small  *ngIf="!user.likecount == 0">
-  							<p class="liks-comments">&nbsp;{{user.likecount}}+like it</p>
-						</button>
+					    <button ion-button icon-left clear small  
+					    *ngIf="!user.likecount == 0">
+	  					<p class="liks-comments">&nbsp;{{user.likecount}}+like it</p></button>
 				    </ion-col>
 				</ion-row>
-	
-		     	</div>
+			</div>
 		</ion-card>    		
 	</ion-list>
 

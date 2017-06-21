@@ -3,7 +3,9 @@ import { Component, ViewChild} from '@angular/core';
 import { Platform, MenuController, Nav, AlertController,ToastController,LoadingController } from 'ionic-angular';
 
 import { StatusBar, Splashscreen, Push } from 'ionic-native';
-// import { Geolocation } from '@ionic-native/geolocation';
+import { Diagnostic } from 'ionic-native';
+import { CameraPreview, CameraPreviewRect } from 'ionic-native';
+//import { Geolocation } from '@ionic-native/geolocation';
 
 
 // import the Menu's pages
@@ -229,6 +231,8 @@ export class MyApp {
     
     this.initializeApp();
     // alert("switch-ON GPS to get current Location.");
+    this.checkPermissions();
+    this.initializePreview();
     platform.ready().then(() => {
       this.initPushNotification();
     });
@@ -298,7 +302,38 @@ export class MyApp {
    });
     });
   }
-
+    checkPermissions() {
+    Diagnostic.isCameraAuthorized().then((authorized) => {
+    if(authorized)
+        this.initializePreview();
+    else {
+        Diagnostic.requestCameraAuthorization().then((status) => {
+            if(status == Diagnostic.permissionStatus.GRANTED)
+                this.initializePreview();
+            else {
+                // Permissions not granted
+                // Therefore, create and present toast
+                this.toastCtrl.create(
+                    {
+                        message: "Cannot access camera", 
+                        position: "bottom",
+                        duration: 5000
+                    }
+                ).present();
+            }
+        });
+    }
+});
+}
+initializePreview() {
+    let previewRect: CameraPreviewRect = {
+      x: 0,
+      y: 0,
+      width: window.innerWidth,
+      height: window.innerHeight
+    };
+}
+  
   initPushNotification()
   {
     if (!this.platform.is('cordova')) {
