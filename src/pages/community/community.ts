@@ -263,7 +263,7 @@ toggleContent(){
     loader.present();
 
    this.communityServices.addLike(likeObj).subscribe(data =>{
-     this.showToast(data.result);
+     this.showToast(data.result.info.message);
       this.communityList(this.community_id);
       loader.dismiss();
    },

@@ -3,7 +3,9 @@ import { Platform,NavController, NavParams,AlertController, LoadingController, M
 import { Storage } from '@ionic/storage';
 import { LocalNotifications, Geolocation } from 'ionic-native';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
+//import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
+import { Diagnostic } from 'ionic-native';
+import { CameraPreview, CameraPreviewRect } from 'ionic-native';
 
 import { Login } from '../../models/login';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -38,8 +40,7 @@ export class LoginPage {
   callSponsor:any=0;
   ambulance:any=0;
   police:any=0;
-  constructor(
-    private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public menuCtrl: MenuController, public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
+  constructor(public menuCtrl: MenuController, public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
   this.storage.ready().then(() => { 
      storage.get('id').then((id) => { this.id=id; 
      });
@@ -49,7 +50,9 @@ export class LoginPage {
         email: ['', Validators.compose([Validators.required])],
         password: ['', Validators.compose([Validators.required])]
          });
-    this.fetchLocation();
+    //this.fetchLocation();
+    // this.checkPermissions();
+    // this.initializePreview();
 
   }
    public login() {  
@@ -213,44 +216,79 @@ export class LoginPage {
   /*ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }*/
-  fetchLocation(){
-    if (!this.platform.is('cordova')) {
-      console.warn("Location not initialized. Cordova is not available - Run in physical device");
-      return;
-    }
-  this.platform.ready().then(() => {
-      Geolocation.getCurrentPosition().then(
-      (data) => {
-            console.log('My latitude : ', data.coords.latitude);
-            console.log('My longitude: ', data.coords.longitude);
-            this.getLocation(data.coords.latitude,data.coords.longitude);
-        },
-        (err) =>{
-          let confirmAlert = this.alertCtrl.create({
-          subTitle: 'switch-ON GPS to get current Location.',
-          buttons: [{
-            text: 'OK',
-            role: 'cancel',
-          }]
-        });
-        confirmAlert.present();
-            console.log("error in fetching Geo Location: ",err);
-        });
-  });
+//   fetchLocation(){
+//     if (!this.platform.is('cordova')) {
+//       console.warn("Location not initialized. Cordova is not available - Run in physical device");
+//       return;
+//     }
+//   this.platform.ready().then(() => {
+//       Geolocation.getCurrentPosition().then(
+//       (data) => {
+//             console.log('My latitude : ', data.coords.latitude);
+//             console.log('My longitude: ', data.coords.longitude);
+//             this.getLocation(data.coords.latitude,data.coords.longitude);
+//         },
+//         (err) =>{
+//           let confirmAlert = this.alertCtrl.create({
+//           subTitle: 'switch-ON GPS to get current Location.',
+//           buttons: [{
+//             text: 'OK',
+//             role: 'cancel',
+//           }]
+//         });
+//         confirmAlert.present();
+//             console.log("error in fetching Geo Location: ",err);
+//         });
+//   });
 
-}
+// }
 
-  getLocation(d1,d2){
-
-    this.nativeGeocoder.reverseGeocode(d1, d2)
-  .then(
-    (result: NativeGeocoderReverseResult) => {
-      this.storage.ready().then(() => {
-      this.storage.set('service_location',result.city);
-    });
-    console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
-    })
+//   getLocation(d1,d2){
+// console.log("location ready");
+//     this.nativeGeocoder.reverseGeocode(d1, d2)
+//   .then(
+//     (result: NativeGeocoderReverseResult) => {
+//       this.storage.ready().then(() => {
+//       this.storage.set('service_location',result.city);
+//     });
+//     console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
+//     })
     
-  .catch((error: any) => console.log(error));
-  }
+//   .catch((error: any) => console.log(error));
+//   }
+//   checkPermissions() {
+//     Diagnostic.isCameraAuthorized().then((authorized) => {
+//     if(authorized)
+//         this.initializePreview();
+//     else {
+//         Diagnostic.requestCameraAuthorization().then((status) => {
+//             if(status == Diagnostic.permissionStatus.GRANTED)
+//                 this.initializePreview();
+//             else {
+//                 // Permissions not granted
+//                 // Therefore, create and present toast
+//                 this.toastCtrl.create(
+//                     {
+//                         message: "Cannot access camera", 
+//                         position: "bottom",
+//                         duration: 5000
+//                     }
+//                 ).present();
+//             }
+//         });
+//     }
+// });
+// }
+// initializePreview() {
+//     // Make the width and height of the preview equal 
+//     // to the width and height of the app's window
+//     let previewRect: CameraPreviewRect = {
+//       x: 0,
+//       y: 0,
+//       width: window.innerWidth,
+//       height: window.innerHeight
+//     };
+ 
+//     // More code goes here
+// }
 }

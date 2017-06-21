@@ -120,6 +120,11 @@ locationSearch:any=[];
     return this.http.post(this.rootUrl+'myJobRequests',_request,this.options)
       .map(res => res.json()); 
   }
+   searchConnection(term) {  
+   let _request= {"search":term,"info":{"uid":this.user_id}};
+    return this.http.post(this.rootUrl+'myJobRequests',_request,this.options)
+      .map(res => res.json()); 
+  }
   getDependent() 
   {
   

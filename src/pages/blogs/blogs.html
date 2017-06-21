@@ -16,6 +16,7 @@
 </ion-header>
 
 <ion-content padding style="background:#fff;">
+<ion-searchbar (input)="blogsearch($event)"></ion-searchbar>
 <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)">
 <ion-row>
 <ion-col width-20>
@@ -26,7 +27,8 @@
 	<ion-col width-80 class="blogs-tittle">
   <ion-item text-wrap>
     <h2 class="pro-info">{{blogs.title}}</h2>
-    <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{blogs.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{blogs.created_at | date :"MMM dd y"}}</p>
+    <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{blogs.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{blogs.created_at | date :"MMM dd y"}}
+    </p>
   </ion-item>
   </ion-col>
   </ion-row>
@@ -38,5 +40,9 @@
    <!-- <p [innerHTML]="blogs?.description | words : 60 : '...'"></p>-->
   </ion-card-content>
   <img src="{{imageUrl+blogs?.featured_image}}" [hidden]="!blogs?.featured_image">
+
  </ion-card> 
+ <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

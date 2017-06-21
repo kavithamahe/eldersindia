@@ -350,7 +350,7 @@ showConfirm(id){
     loader.present();
 
    this.communityServices.addLike(likeObj).subscribe(data =>{
-     this.showToast(data.result);
+     this.showToast(data.result.info.message);
       this.profileCommunity(this.profile_uid);
       loader.dismiss();
    },

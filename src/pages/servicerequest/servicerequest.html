@@ -27,6 +27,9 @@
 </ion-header>
 
 <ion-content padding class="content-intop">
+<div>
+    <ion-searchbar [(ngModel)]="searchTextBox" (ionInput)="getItems($event)"></ion-searchbar>
+</div>
 <ion-card *ngFor="let service of serviceRequestInfo; let i=index;">
   <ion-card-content style=" padding:0px;">
   <ion-grid>

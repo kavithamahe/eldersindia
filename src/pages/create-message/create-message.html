@@ -16,13 +16,13 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Compose</ion-title>
+    <ion-title text-center>Compose Message</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding style="background:#fff;">
-<form (ngSubmit)="sendMessage()" [formGroup]="messageForm">
+<form [formGroup]="messageForm">
 <br>
 <ion-list class="create-message">
 
@@ -38,8 +38,8 @@
      <ion-textarea placeholder="Message" formControlName="message" [(ngModel)]="message"></ion-textarea>
   </ion-item>
   <p *ngIf="!messageForm.controls.message.valid && (messageForm.controls.message.dirty || submitAttempt)" class="err-reds">Please enter message</p>
-            <button ion-button color="dark" outline (click)="openCamera()">
-          <ion-icon name="add" ></ion-icon>Attachment</button><p>{{file_name}}</p>
+          <button ion-button class="attached" outline (click)="openCamera()">
+          <i class="fa fa-paperclip" aria-hidden="true"></i></button><p>{{file_name}}</p>
   <button ion-button class="btn-right" (click)="sendMessage()">
   <ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;
   Send

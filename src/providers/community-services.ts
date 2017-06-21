@@ -116,8 +116,8 @@ file_Path:any;
         fd.append('file_name', name);
         fd.append('file_path', file);
         fd.append('name',"avatar");
-        let send:{message:{attachments:{file_name:FormData,file_path:ImageData},to:{title:string,description:string,image:string,originalObject:{id:string,avatar:string,email:string,user_type:string,friend_name:string}},subject:string,message:string
-    }} = {"message":{"attachments":{"file_name":name,"file_path":file},"to":{"title":"","description":"","image":"","originalObject":{"id":id,"avatar":"","email":"","user_type":"","friend_name":""}},"subject":"","message":""
+        let send:{message:{attachments:[{file_name:FormData,file_path:ImageData}],to:{title:string,description:string,image:string,originalObject:{id:string,avatar:string,email:string,user_type:string,friend_name:string}},subject:string,message:string
+    }} = {"message":{"attachments":[{"file_name":name,"file_path":file}],"to":{"title":"","description":"","image":"","originalObject":{"id":id,"avatar":"","email":"","user_type":"","friend_name":""}},"subject":"","message":""
     }}
        return this.http.post(`${this.getCommunityPostsUrl }sendMessage`, send,this.options).map(res => res.json());
 

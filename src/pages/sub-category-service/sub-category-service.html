@@ -24,12 +24,9 @@
 
 <ion-content padding style="background:#fff;">
 
-	<ion-item *ngFor="let service of subcategory.services" (click)="itemSelected(service)" [color]="subcategory.color" class="sub-cat-listed">
-	
-		   
-		  <p> {{ service.name }} </p><i class="fa fa-chevron-right left-right-side"></i>
-		  
-		
+	<ion-item *ngFor="let service of subcategory.services" (click)="itemSelected(service)" 
+  [color]="subcategory.color" class="sub-cat-listed">
+	 <p> {{ service.name }} </p><i class="fa fa-chevron-right left-right-side"></i>
 	</ion-item>
 
 <!--updated 3/22/2017-->

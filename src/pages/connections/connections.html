@@ -36,6 +36,7 @@
       <ion-list *ngSwitchCase="'myConnections'"> 
         <ion-list *ngIf="connectionsaction == 'received'">
         <ion-segment-button>Received Requests</ion-segment-button>
+        <ion-searchbar (input)="receivedsearch($event)"></ion-searchbar>
             <div *ngFor="let request of receivedRquestInfo">
               <ion-item-sliding class="inbox-sends">
                 <ion-item>
@@ -66,7 +67,8 @@
             </ion-infinite-scroll>   
           </ion-list>
           <ion-list *ngIf="connectionsaction == 'sent'">
-          <ion-segment-button>Sent Requests</ion-segment-button>  
+          <ion-segment-button>Sent Requests</ion-segment-button>
+           <ion-searchbar (input)="sendsearch($event)"></ion-searchbar>  
             <div *ngFor="let request of sentRquestInfo">
               <ion-grid>
                 <ion-row>

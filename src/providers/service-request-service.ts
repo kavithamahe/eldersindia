@@ -34,6 +34,11 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
   }
+  searchConnection(term){
+     let _request= {"info":{"list":true,"searchValue":term,"status":""}};
+    return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
+      .map(res => res.json()); 
+  }
   viewServiceRequest(serviceRequestId) 
   {
   

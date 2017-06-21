@@ -73,6 +73,16 @@ user_id:any;
     return this.http.post(this.rootUrl+'getConnectionList',_request,this.options)
       .map(res => res.json()); 
   }
+  sendsearchConnection(term){
+    let _request= {"searchValue":term};
+    return this.http.post(this.rootUrl+'getSentRequestLists',_request,this.options)
+      .map(res => res.json()); 
+  }
+  receivedsearchConnection(term){
+    let _request= {"searchValue":term};
+    return this.http.post(this.rootUrl+'receiveConnectionRequest',_request,this.options)
+      .map(res => res.json()); 
+  }
   addsearchConnection(term){
      let _request= {"search_value":term};
     return this.http.post(this.rootUrl+'getAllConnectionList',_request,this.options)
