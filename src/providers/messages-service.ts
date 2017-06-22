@@ -41,7 +41,7 @@ rootUrl:any;
    toast.present();
   }
   inbox(data) {  
-   let _request= {search: {title: "", status: "", category: ""}};
+   let _request= {search: ""}
     return this.http.post(this.rootUrl+'listInbox',_request,this.options)
       .map(res => res.json()); 
   }
@@ -124,7 +124,7 @@ file:any;
   }
   inboxScroll(nextPageURL)
   {
-    let _request= {search: {title: "", status: "", category: ""}};
+    let _request= {search: ""}
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
   }

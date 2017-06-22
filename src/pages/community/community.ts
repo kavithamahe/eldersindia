@@ -99,7 +99,7 @@ files:any;
   }
 showConfirm(id){
      let confirm = this.alertCtrl.create({
-     subTitle: '1 post will be deleted',
+     subTitle: 'This post will be deleted',
        buttons: [
         {
           text: 'Cancel',
@@ -152,11 +152,6 @@ toggleContent(){
       return null;
     }
   }
-  getDate(stringDate){
-      var dateOut = new Date(stringDate);
-      dateOut.setDate(dateOut.getDate());
-      return dateOut;
-    };
   showComment(post){
     let commentModal = this.modal.create(CommunitycommentsPage, { posts: post });
    commentModal.present();

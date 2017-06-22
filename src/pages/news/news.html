@@ -22,6 +22,7 @@
 
 
 <ion-content padding class="content-intop">
+<!-- <ion-searchbar (input)="newssearch($event)"></ion-searchbar> -->
 <ion-card *ngFor="let news of newsLists"  class="newslisted">
 <div (click)="viewNews(news?.id)">
  <img src="{{imageUrl+news?.featured_image}}" [hidden]="!news?.featured_image">

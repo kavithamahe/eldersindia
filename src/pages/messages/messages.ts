@@ -203,7 +203,7 @@ status:any;
   }
   showConfirm(messageId,viewType){
      let confirm = this.alertCtrl.create({
-     subTitle: '1 Message will be deleted',
+     subTitle: 'This Message will be deleted',
        buttons: [
         {
           text: 'Cancel',

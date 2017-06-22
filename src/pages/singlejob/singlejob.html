@@ -35,12 +35,13 @@
   
 </ion-list>
 <ion-item class="job-dates">
-<p><span *ngIf="singleJob?.created_at"><i class="fa fa-calendar-o"> </i>&nbsp;{{singleJob?.created_at |  date :'MMM dd y'}}</span><span *ngIf="singleJob?.job_expiry">&nbsp;(To)&nbsp;{{singleJob?.job_expiry }}</span></p>
+<p><span *ngIf="singleJob?.created_at"><i class="fa fa-calendar-o"> </i>&nbsp;{{singleJob?.created_at |  date :'MMM dd y'}}</span></p>
+<!-- <span *ngIf="singleJob?.job_expiry">&nbsp;(To)&nbsp;{{singleJob?.job_expiry }}</span>
+ -->
 
 
-
-   <p>
-   <span *ngFor="let locations of singleJob?.location; let isLast1=last" ><i class="fa fa-map-marker" aria-hidden="true" style="padding-left:3px;"></i>&nbsp;{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
+   <p><i class="fa fa-map-marker" aria-hidden="true" style="padding-left:3px;"></i>&nbsp;
+   <span *ngFor="let locations of singleJob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
   </ion-item>
 
 <hr/>

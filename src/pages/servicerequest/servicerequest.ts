@@ -27,7 +27,6 @@ nextPageURL:any='';
 getRemarksList:any=[];
 serviceRequestScrollLists:any=[];
 vendorStatus:any=[];
-searchTextBox:any='';
   constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});

@@ -5,6 +5,7 @@ import { CompleterService } from 'ng2-completer';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { ViewMessagesPage } from '../../pages/view-messages/view-messages';
 import { MessagesPage } from '../../pages/messages/messages';
 import { MessagesService } from '../../providers/messages-service';
 import { FileChooser } from '@ionic-native/file-chooser';
@@ -93,6 +94,9 @@ file_name:any;
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);
+  }
+  public back(){
+    this.navCtrl.setRoot(ViewMessagesPage);
   }
   public sendMessage()
   {

@@ -505,7 +505,18 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .sub-cat-listed .item-inner .input-wrapper .label-md p		{font-size:17px !important; color:#fff; float:left; width:90%;  }
 .sub-cat-listed .item-inner .input-wrapper                  {border-top:1px solid #fff; border-bottom:none;}
 .forgot-pa p												{padding-left:10px; margin-bottom:0px;}
-.forgot-pa .input-md .text-input-md							{width: calc(100% - 8px - 7px);}
+.forgot-pa .input-md .text-input-md							{    width: 92% !important;
+    margin-left: 13px !important;
+    color: #333;
+    height: 45px !important; margin-top:20px;
+}
+
+.forgot-pa .input-ios .text-input-ios							{    width: 92% !important;
+    margin-left: 13px !important;
+    color: #333;
+    height: 45px !important; margin-top:20px;
+}
+
 .left-right-side										    {color:#404998;float:right;font-size:13px !important;font-weight:normal !important;line-height:25px;margin-right:13px;}
 .sub-cat-listed												{background:#888aef;margin:0px 0px 0px 0px; width:100%; padding-left:0px !important;}
 .error-clr													{font-size:15px !important; font-weight:400 !important; color:red !important;text-align:center !important;}
@@ -610,7 +621,11 @@ ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !import
 .Delivered{ font-size:14px !important; color:#808000!important;padding:0px !important;font-weight:600 !important;}
 
 .login-pages .item-ios									    {background:none;}
-.login-pages .item-ios .text-input-ios						{padding:9px 10px 9px 20px !important;}
+.login-pages .item-ios .text-input-ios						{    width: 92% !important;
+    margin-left: 13px !important;
+    color: #333;
+    height: 45px !important;
+}
 .forgot-pass												{background:none !important;  color:#337ab7 !important;font-family: 'Open Sans', sans-serif !important; font-size:15px; }
 .bg-back													{background:none !important; border-bottom:none !important; }
 .bg-back .item-inner .input-wrapper .label-md .forgot-pass	{ font-size:17px !important; margin-top:40px; color:#404996 !important; margin-top:10px;}
@@ -757,7 +772,7 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 															 font-weight:400; color:#555;}
 .call-us												    {color:#9370DB!important; font-size:16px; width:100%; float:left; padding-top:5px;}
 .token-date													{font-size:11px !important; color:#90949c !important; float:left; width:100%;}
-.show-pass													{padding-left:0px;}
+.show-pass													{padding-left:5px;}
 .show-pass .checkbox-md 									{margin: 0 0 9px 10px !important;}
 .show-pass .item-inner .input-wrapper .label-md 			{margin:-6px 0px 0px 0px; line-height:0px; }
 .btn-can													{background:#fe7fe6;}
@@ -841,7 +856,8 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !important;}
 .login-pages img.logo										{margin-top:70px; width:90%; margin-left:15px;}	
 .login-pages .item-md										{background:none; padding-left:5px;}	
-.login-pages .item-md .text-input-md						{width: calc(100% - 8px - 11px); color:#333; padding:8px;}									
+.login-pages .item-md .text-input-md						{width: 92%!important;
+    margin-left: 13px !important; color:#333; height:45px !important;}									
 
 .forgot-pass 												{background:none !important;box-shadow:none; color:#337ab7 !important;font-family: 'Open Sans', sans-serif !important; margin-top:10px; font-size:15px !important; text-transform:capitalize; }
 .bg-back .item-inner										{background:none !important; border-bottom:none !important;}
@@ -860,14 +876,22 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 .appliedjob .item-inner .input-wrapper .label-ios span i     {color:#a8a9a8;font-size:12px;text-align:left;width:20px;}
 .appliedjob .item-inner .input-wrapper .label-ios p		    {font-size:15px;padding-left:7px;text-indent:0px;}
 .appliedjob .item-inner .input-wrapper .label-ios p i     {color:#a8a9a8;font-size:12px;text-align:left;width:20px;}
-.action-sheet-md .action-sheet-container{ background:#404996 !important;}
+
 /*-------------------------------------Windows platform css end-------------------------------------*/
 
 .change-pass-content form .item-md { padding-left:0px;}
-.change-pass-content form .label-md{ margin-bottom:0px; margin-top:0px; font-size:17px; padding-left:5px;}
+.change-pass-content form .label-md{ margin-bottom:0px; margin-top:0px; font-size:17px; padding-left:11px;}
+.change-pass-content form .item-md .item-inner .input-wrapper .text-input-md{     width: 92% !important;
+    margin-left: 13px !important;
+    color: #333;
+    height: 45px !important;}
+    .change-pass-content form .item-ios .item-inner .input-wrapper .text-input-ios{     width: 92% !important;
+    margin-left: 13px !important;
+    color: #333;
+    height: 45px !important;}
 
 .change-pass-content form .item-ios { padding-left:0px;}
-.change-pass-content form .label-ios{ margin-bottom:0px; margin-top:0px; font-size:17px; padding-left:5px;}
+.change-pass-content form .label-ios{ margin-bottom:0px; margin-top:0px; font-size:17px; padding-left:11px;}
 
 
 
@@ -1104,7 +1128,7 @@ white-space: normal;}
 .add-depentsform .item-md .item-inner .input-wrapper .select-brd .datetime-text{ padding-left:8px;}
 .add-depentsform .item-md .item-inner .input-wrapper .input-md{ width:95%; margin-left:8px; text-align:left; margin:0px !important;}
 .add-depentsform .item-md									{padding-left:0px !important;}
-.add-depentsform .item-md .text-input-md { margin:0px 0px 0px 13px; font-size:15px; width:92%;}
+.add-depentsform .item-md .text-input-md { margin:0px 0px 0px 13px; font-size:15px; width:93%;}
 .add-depentsfor .item-md .item-inner .input-wrapper .select-brd { width:95% !important;}
 .elder-pass{ width:97%; margin:0px 0px 0px 5px;}
 .req-field{ color:red !important;}
@@ -1118,14 +1142,14 @@ white-space: normal;}
 .add-depentsform .item-ios .text-input-ios { margin:0px 0px 0px 14px; font-size:15px; width:92%;}
 .add-depentsfor .item-ios .item-inner .input-wrapper .select-brd { width:95% !important;}
 .popup-mds .text-input-ios{ margin-bottom:10px !important; margin-top:0px !important; width:92% !important; margin-left:14px !important;}
-.popup-mds .text-input-md{ margin-bottom:10px !important; margin-top:0px !important; width:92% !important; margin-left:14px !important;}
+.popup-mds .text-input-md{ margin-bottom:10px !important; height:45px; margin-top:0px !important; width:92% !important; margin-left:14px !important;}
 .popup-mds .label-md{ margin-top:0px !important;}
 
 .popup-mds .scroll-content form .label-lb				    {font-size:17px; font-weight:400; margin-top:0px; margin-bottom:8px; padding-left:10px;}
 .popup-mds .scroll-content form .item-datetime    			{padding-left:8px !important;}
-.popup-mds .scroll-content form .select-brd 				{width:94%; margin-bottom:10px; margin-left: 7px;}
+.popup-mds .scroll-content form .select-brd 				{width:94%; height:45px;margin-bottom:10px; margin-left: 7px;}
 .popup-mds .scroll-content form .select-brds				{border:1px solid #ccc !important;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15);color:#555;font-size:18px;font-weight:400;
-															 padding: 7px 10px 9px 20px !important;width:92% !important; margin-left:7px !important;}
+															     padding: 13px 10px 10px 20px!important;width:91% !important; margin-left:15px !important;}
 .alert-md .alert-radio-label								{font-size:16px !important; font-weight:400;}
 .price-clr													{color:red !important; color:18px !important; font-weight:400; font-size:16px !important;}
 .rating-clr	ul.rating .ion-icon								{font-weight:400; font-size:20px !important;}

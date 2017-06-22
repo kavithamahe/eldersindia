@@ -5,8 +5,8 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
+<ion-navbar color="primary">
+  
     <ion-title>Edit Profile</ion-title>
   </ion-navbar>
 
@@ -98,6 +98,7 @@
 	
 </ion-content>
 <ion-footer>
+<ion-navbar color="primary">
   <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
     <ion-buttons>
       <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
@@ -126,6 +127,7 @@
       </button>
     </ion-buttons>
   </ion-toolbar>
+  </ion-navbar>
 </ion-footer>
 <style>
 .text-input-md{ margin:0px;}

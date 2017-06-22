@@ -105,7 +105,7 @@ export class CommunityprofilePage {
   }
 showConfirm(id){
      let confirm = this.alertCtrl.create({
-     subTitle: '1 post will be deleted',
+     subTitle: 'This post will be deleted',
        buttons: [
         {
           text: 'Cancel',
