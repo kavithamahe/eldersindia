@@ -85,7 +85,7 @@ files:any;
       cssClass: 'action-sheets-basic-page',
       buttons: [
         {
-          text: '',
+          text: 'Delete',
           role: 'destructive',
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
@@ -99,7 +99,7 @@ files:any;
   }
 showConfirm(id){
      let confirm = this.alertCtrl.create({
-     subTitle: '1 post will be deleted',
+     subTitle: 'This post will be deleted',
        buttons: [
         {
           text: 'Cancel',

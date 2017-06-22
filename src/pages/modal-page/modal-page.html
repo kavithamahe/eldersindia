@@ -17,15 +17,10 @@
 
   <form [formGroup]="modalForm">
   <br>
-			<ion-label stacked class="label-lb">Describe the problem</ion-label>
+			<ion-label stacked class="label-lb">Describe the need</ion-label>
           <ion-input type="text" formControlName="problem" ></ion-input>
 	
-                <p class="err-reds" *ngIf="!modalForm.controls.problem.valid  && (modalForm.controls.problem.dirty || submitAttempt)">Please enter the describe problem</p>
-       
-     
-             <ion-label stacked class="label-lb">Lead Time:{{lead_time}}</ion-label>
-        
-          
+                <p class="err-reds" *ngIf="!modalForm.controls.problem.valid  && (modalForm.controls.problem.dirty || submitAttempt)">Please enter the need</p>
            <ion-label stacked class="label-lb">Scheduled Date</ion-label>
 		   <ion-item>
            <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" formControlName ="date"></ion-datetime>
@@ -52,9 +47,10 @@
 	
 		
           
-		     <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb">Select Dependent</ion-label>
+		     <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb">Select Dependent
+         </ion-label>
 			 <ion-item *ngIf = "userType =='sponsor'">
-	<ion-label>Select Dependent</ion-label>
+	
               <ion-select formControlName="dependents" class="select-brds" >
               <ion-option *ngFor = "let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}}
               </ion-option>
