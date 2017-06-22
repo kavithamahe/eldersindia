@@ -85,7 +85,7 @@ files:any;
       cssClass: 'action-sheets-basic-page',
       buttons: [
         {
-          text: 'Delete',
+          text: '',
           role: 'destructive',
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
@@ -152,11 +152,6 @@ toggleContent(){
       return null;
     }
   }
-  getDate(stringDate){
-      var dateOut = new Date(stringDate);
-      dateOut.setDate(dateOut.getDate());
-      return dateOut;
-    };
   showComment(post){
     let commentModal = this.modal.create(CommunitycommentsPage, { posts: post });
    commentModal.present();

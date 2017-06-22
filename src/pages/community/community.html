@@ -43,7 +43,8 @@
 							<ion-col>
 								<img (click)="membersProfile(member.uid)" 
 								[src]="imageUrl+member?.avatar" width="100" height="52" />
-								<small class="mem-name">{{member.name | words :1 : '....'}}</small>
+								<small class="mem-name">{{member.name | words :1 : '....'}}
+								</small>
 							</ion-col>
 						</ion-item>
 					</div>

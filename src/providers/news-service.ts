@@ -33,6 +33,11 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'normaListNewsEvents',_request,this.options)
       .map(res => res.json()); 
    }
+     searchConnection(term) {  
+   let _request= {"search":{"title":term},"postType":""};
+    return this.http.post(this.rootUrl+'normaListNewsEvents',_request,this.options)
+      .map(res => res.json()); 
+  }
    viewNews(newsId) 
    {  
    let _request= {"postType":"news"};

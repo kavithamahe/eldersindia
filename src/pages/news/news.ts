@@ -57,6 +57,12 @@ newsScrollLists:any;
     );   
     
   }
+   public newssearch(searchEvent) {
+    let term = searchEvent.target.value;
+      this.newsService.searchConnection(term).subscribe(searchConnection => {
+        this.newsLists= searchConnection.result.data;
+      });
+  }
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);

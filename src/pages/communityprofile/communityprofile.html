@@ -20,9 +20,9 @@
 		  <ion-row>
 			  <ion-col width-20 style="margin-top:5px; margin-left:5px;">
 					<ion-avatar (click)="profileSetting(communityProfileData?.id)" item-left class="image-profile" width-30>
-					  	<img [src]="imageUrl+communityProfileData?.avatar" [hidden]="!communityProfileData?.avatar" />
-					  </ion-avatar>
-					
+					  	<img [src]="imageUrl+communityProfileData?.avatar" 
+					  	[hidden]="!communityProfileData?.avatar" />
+					  </ion-avatar>	
 			  </ion-col>
 			
 			  <ion-col text-capitalize class="name-conne">
@@ -33,7 +33,8 @@
 			  
 			    <ion-row>
 			 	  <ion-col class="mess-accept">
-					  <p *ngIf="(status === 3 && (communityProfileData?.id != my_id))"><button ion-button (click)="connectMember(communityProfileData)">Connect</button></p>
+					  <p *ngIf="(status === 3 && (communityProfileData?.id != my_id))"><button ion-button (click)="connectMember(communityProfileData)">Connect
+					  </button></p>
 					  <p *ngIf ="status === 0 && (communityProfileData?.id != my_id)"><button ion-button disabled="true"><i class="fa fa-paper-plane-o"></i></button></p>
 					  <p *ngIf="status === 2 && (communityProfileData?.id != my_id)"><button ion-button disabled="true"><i class="fa fa-paper-plane-o"></i></button></p>
 					  <p *ngIf="status === 1 && (communityProfileData?.id != my_id)"><button ion-button disabled="true"><i class="fa fa-share-alt"></i></button></p>
