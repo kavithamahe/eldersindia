@@ -108,7 +108,7 @@ All:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -194,6 +194,19 @@ All:any;
         this.allConnectionsInfo= searchConnection.result.info.list.data;
       });
   }
+  public sendsearch(searchEvent){
+     let term = searchEvent.target.value;
+      this.connectionsService.sendsearchConnection(term).subscribe(searchConnection => {
+        this.sentRquestInfo= searchConnection.result.info.list.data;;
+      });
+  
+  }
+ public receivedsearch(searchEvent){
+     let term = searchEvent.target.value;
+      this.connectionsService.receivedsearchConnection(term).subscribe(searchConnection => {
+        this.receivedRquestInfo= searchConnection.result.info.list.data;;
+      });
+  }
   public search1(Event) {
     let term = Event.target.value;
       this.connectionsService.addsearchConnection(term).subscribe(searchConnections => {
@@ -212,8 +225,7 @@ All:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
-       
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -251,7 +263,7 @@ All:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -386,7 +398,7 @@ All:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -443,7 +455,6 @@ Sent
 })
 export class PopoverPage {
   connectionsaction:any;
- //selectedTitle: string;
   constructor(private viewCtrl: ViewController) {
    this.connectionsaction = "all";
    }

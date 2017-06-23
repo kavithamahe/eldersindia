@@ -348,31 +348,19 @@
 
 </ion-content>
 <ion-footer>
-  <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
+  <ion-toolbar color="primary"> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
     
     <ion-buttons>
       <button ion-button color="royal" large icon-left showWhen="ios" (click)="cancel()">
-        <ion-icon class="gly-rotate-180" ios="md-send" md="md-send"></ion-icon>
-         <div style="padding-left: 10px !important;">
-          Back
-        </div>
-      </button>
+        <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
       <button ion-button color="light" large icon-left hideWhen="ios" (click)="cancel()">
-         <ion-icon class="gly-rotate-180" ios="md-send" md="md-send"></ion-icon>
-        <div style="padding-left: 10px !important;">
-          Back
-        </div>
-      </button>
+          <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
     </ion-buttons>
 
     <ion-buttons end>
-      <button ion-button color="royal" large icon-right showWhen="ios" (click)="addDependent()">
-        Update
-        <ion-icon ios="md-send" md="md-send"></ion-icon>
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="addDependent()">&nbsp;Update<ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button ion-button color="light" large icon-right hideWhen="ios" (click)="addDependent()">
-        Update
-        <ion-icon ios="md-send" md="md-send"></ion-icon>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="addDependent()">&nbsp;Update<ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>

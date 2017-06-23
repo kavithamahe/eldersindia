@@ -3,7 +3,9 @@ import { Component, ViewChild} from '@angular/core';
 import { Platform, MenuController, Nav, AlertController,ToastController,LoadingController } from 'ionic-angular';
 
 import { StatusBar, Splashscreen, Push } from 'ionic-native';
-// import { Geolocation } from '@ionic-native/geolocation';
+import { Diagnostic } from 'ionic-native';
+import { CameraPreview, CameraPreviewRect } from 'ionic-native';
+//import { Geolocation } from '@ionic-native/geolocation';
 
 
 // import the Menu's pages
@@ -15,7 +17,6 @@ import { AppliedJobsPage } from '../pages/applied-jobs/applied-jobs';
 import { MessagesPage } from '../pages/messages/messages';
 import { ServiceprovidersPage } from '../pages/serviceproviders/serviceproviders';
 import { ServicerequestPage } from '../pages/servicerequest/servicerequest';
-import { BlogsPage } from '../pages/blogs/blogs';
 import { NewsPage } from '../pages/news/news';
 import { EventsPage } from '../pages/events/events';
 import { ExternallinksPage } from '../pages/externallinks/externallinks';
@@ -26,6 +27,7 @@ import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
 import { CommunityPage } from '../pages/community/community';
 import { ManagePage } from '../pages/manage/manage';
+import { BlogtabsPage } from '../pages/blogtabs/blogtabs';
 
 
 import { ChangePasswordPage } from '../pages/change-password/change-password';
@@ -196,7 +198,7 @@ export class MyApp {
                   { myIcon:'fa fa-recycle', title: 'Communities', component: CommunitylistPage },
                   { myIcon:'fa fa-sitemap', title: 'Connections', component: ConnectionsPage },
                   { myIcon:'fa fa-envelope', title: 'Messages', component: MessagesPage },
-                  { myIcon:'fa fa-rss', title: 'Blogs', component: BlogsPage },
+                  { myIcon:'fa fa-rss', title: 'Blogs', component: BlogtabsPage },
                   { myIcon:'fa fa-newspaper-o', title: 'News', component: NewsPage },
                   { myIcon:'fa fa-random', title: 'Events', component: EventsPage },
                   { myIcon:'fa fa-external-link', title: 'Useful External Links', component: ExternallinksPage },
@@ -216,7 +218,7 @@ export class MyApp {
                   { myIcon:'fa fa-recycle', title: 'Communities', component: CommunitylistPage },
                   { myIcon:'fa fa-sitemap', title: 'Connections', component: ConnectionsPage },
                   { myIcon:'fa fa-envelope', title: 'Messages', component: MessagesPage },
-                  { myIcon:'fa fa-rss', title: 'Blogs', component: BlogsPage },
+                  { myIcon:'fa fa-rss', title: 'Blogs', component: BlogtabsPage },
                   { myIcon:'fa fa-newspaper-o', title: 'News', component: NewsPage },
                   { myIcon:'fa fa-random', title: 'Events', component: EventsPage },
                   { myIcon:'fa fa-external-link', title: 'Useful External Links', component: ExternallinksPage },
@@ -229,6 +231,8 @@ export class MyApp {
     
     this.initializeApp();
     // alert("switch-ON GPS to get current Location.");
+    this.checkPermissions();
+    this.initializePreview();
     platform.ready().then(() => {
       this.initPushNotification();
     });
@@ -295,12 +299,41 @@ export class MyApp {
                 });
                 confirmAlert.present();
               }
-
-
-      });
+   });
     });
   }
-
+    checkPermissions() {
+    Diagnostic.isCameraAuthorized().then((authorized) => {
+    if(authorized)
+        this.initializePreview();
+    else {
+        Diagnostic.requestCameraAuthorization().then((status) => {
+            if(status == Diagnostic.permissionStatus.GRANTED)
+                this.initializePreview();
+            else {
+                // Permissions not granted
+                // Therefore, create and present toast
+                this.toastCtrl.create(
+                    {
+                        message: "Cannot access camera", 
+                        position: "bottom",
+                        duration: 5000
+                    }
+                ).present();
+            }
+        });
+    }
+});
+}
+initializePreview() {
+    let previewRect: CameraPreviewRect = {
+      x: 0,
+      y: 0,
+      width: window.innerWidth,
+      height: window.innerHeight
+    };
+}
+  
   initPushNotification()
   {
     if (!this.platform.is('cordova')) {
@@ -339,11 +372,16 @@ export class MyApp {
           console.log('error');
         });
 
+      // push.setApplicationIconBadgeNumber(function() {
+      //   console.log('success');
+      // }, function() {
+      //   console.log('error');
+      // }, +data.count);
       push.setApplicationIconBadgeNumber(function() {
-        console.log('success');
-      }, function() {
-        console.log('error');
-      }, +data.count);
+  console.log('success');
+}, function() {
+  console.log('error');
+}, 2);
       // let self = this;
       //if user using app and push notification comes
       if (data.additionalData.foreground) {

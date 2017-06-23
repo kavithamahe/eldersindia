@@ -14,45 +14,36 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="segments-info" style="background:#F3F7FF;">
+<ion-content class="content-intop">
   
-	  
+	  <div class="cont-conn">
 		  <ion-row>
-			  <ion-col width-30>
-				  	<ion-item>
-					  <ion-avatar (click)="profileSetting(communityProfileData?.id)" item-left class="image-profile" >
+			  <ion-col width-20 style="margin-top:5px; margin-left:5px;">
+					<ion-avatar (click)="profileSetting(communityProfileData?.id)" item-left class="image-profile" width-30>
 					  	<img [src]="imageUrl+communityProfileData?.avatar" 
-					  	[hidden]="!communityProfileData?.avatar">
-					  </ion-avatar>
-					</ion-item>
+					  	[hidden]="!communityProfileData?.avatar" />
+					  </ion-avatar>	
 			  </ion-col>
-			 	  <ion-col *ngIf="(status === 3 && (communityProfileData?.id != my_id))">
-					  <button ion-button (click)="connectMember(communityProfileData)">Connect
-					  </button>
-				  </ion-col > 
-				  <ion-col *ngIf ="status === 0 && (communityProfileData?.id != my_id)">
-					  <button ion-button disabled="true">Request Sent
-					  </button>
-				  </ion-col>
-				  <ion-col  *ngIf="status === 2 && (communityProfileData?.id != my_id)">
-					  <button ion-button disabled="true">Rejected
-					  </button>
-				  </ion-col>
-				  <ion-col  *ngIf="status === 1 && (communityProfileData?.id != my_id)">
-					  <button ion-button disabled="true">Connected
-					  </button>
-				  </ion-col>
-				  <ion-col *ngIf="status === 1 && (communityProfileData?.id != my_id)">
-					  <button ion-button (click)="messageModel(communityProfileData)">Message
-					  </button>
-				  </ion-col>
-			</ion-row>
-		  <ion-row>
-			  <ion-col text-capitalize>
-				  <p *ngIf="communityProfileData?.id != my_id" style="text-align:left;" class="mem-name">{{communityProfileData?.name}}</p>
-				  <p *ngIf="communityProfileData?.id == my_id" style="text-align:left;" class="mem-name">You</p>
+			
+			  <ion-col text-capitalize class="name-conne">
+				  <p *ngIf="communityProfileData?.id != my_id" style="text-align:left;">{{communityProfileData?.name}}</p>
+				  <p *ngIf="communityProfileData?.id == my_id" style="text-align:left;">You</p>
 			  </ion-col>
 		  </ion-row>
+			  
+			    <ion-row>
+			 	  <ion-col class="mess-accept">
+					  <p *ngIf="(status === 3 && (communityProfileData?.id != my_id))"><button ion-button (click)="connectMember(communityProfileData)">Connect
+					  </button></p>
+					  <p *ngIf ="status === 0 && (communityProfileData?.id != my_id)"><button ion-button disabled="true"><i class="fa fa-paper-plane-o"></i></button></p>
+					  <p *ngIf="status === 2 && (communityProfileData?.id != my_id)"><button ion-button disabled="true"><i class="fa fa-paper-plane-o"></i></button></p>
+					  <p *ngIf="status === 1 && (communityProfileData?.id != my_id)"><button ion-button disabled="true"><i class="fa fa-share-alt"></i></button></p>
+					  <p *ngIf="status === 1 && (communityProfileData?.id != my_id)"><button ion-button (click)="messageModel(communityProfileData)"><i class="fa fa-commenting-o"></i>
+					  </button></p>
+				  </ion-col> 
+				
+			</ion-row>
+		
 
 
 		    <hr/>
@@ -68,76 +59,55 @@
 	          Connections
 	        </ion-segment-button>
 	    </ion-segment>
-       	<div [ngSwitch]="community">
+  
+		
+		</div>
+		
+		
+		<div [ngSwitch]="community">
        		
 		    <ion-list *ngSwitchCase="'activity'">
+			
 		    	<div  *ngIf="status === 1" class="updated-staus-btn">
-		  		
-						<ion-item class="edit">
-					  		<h2 class="wel-comemem">Update Status</h2>
-					  	</ion-item>
-					  
-			  	  		<ion-card-content style="padding:3px !important; margin:0px;">
-					  		<div class="three">
-					      		<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?" style="margin:0px; -webkit-user-select:all !important;">
-					      			
-					      		</ion-textarea>
+				  		<h2 class="wel-comemem">Update Status</h2>
+			  		<div style="padding:0px; margin-top:0px;">
+			<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?" style="margin:0px; -webkit-user-select:all !important;">
+           </ion-textarea>
 				    		</div>
-		    			</ion-card-content>
-		    			<!-- <ion-card-content style="padding:3px !important; margin:0px;">
-							<ion-textarea [(ngModel)]="link" type="text" placeholder="What's on link">
-							</ion-textarea>
-						</ion-card-content> -->
-		    			<ion-card-content style="padding:0px !important;">
-		    				<ion-row>
-								<ion-col>
-									<button ion-button style="width:100%;" icon-only 
-								(click)="accessGallery()" class="video comm-listpag"><i class="fa fa-picture-o"></i>&nbsp;</button>
-								 	<img [src]="base64Image" *ngIf="base64Image" />
-								</ion-col>
-							</ion-row>
-		    				<ion-row>
-								<ion-col>
-									<button ion-button (click)="addVideos()" icon-only medium class="video comm-listpag">
-									<i class="fa fa-video-camera"></i>&nbsp;</button>
-								</ion-col>
-							</ion-row>
-							<div *ngIf(addVideo)>
+		    		
+						
+						
+						
+						
+						<div style="padding:0px !important;" class="mem-name-update">
+		    	<ion-row>
+					<ion-col>
+<button ion-button icon-only class="video-c" (click)="accessGallery()"><i class="fa fa-picture-o"></i>&nbsp;</button><img [src]="base64Image" *ngIf="base64Image" />
+<button ion-button (click)="addVideos()" icon-only medium class="video-c"><i class="fa fa-video-camera"></i>&nbsp;</button>
+<button ion-button medium icon-only (click)="addUserPosts (communityProfileData?.id)" class="postedimgvideos"><i class="fa fa-paper-plane"></i>&nbsp;</button>
+					</ion-col>
+				</ion-row> 
+				<div *ngIf(addVideo) class="post-urls">
 							<form [formGroup]="authForm">
 								<ion-row>
 									<ion-col>
-										<div>
+										<ion-item>
 											<ion-input type="url" placeholder="Enter Video Url..."  formControlName="videoUrl"
 		            						[class.invalid]="!authForm.controls.videoUrl.valid && (authForm.controls.videoUrl.dirty )">
 											</ion-input>	
-										</div>
-									</ion-col>
-									<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
-	                				<p style="color:red" class="valid">Please enter valid video url</p>
-           							</div>
-								</ion-row>
-								<ion-row>
-									<div>
-										<ion-item>
-											<p>( Youtube,Dailymotion,Vimeo,Wine)</p>
 										</ion-item>
-									</div>
-								</ion-row>
+											<small style=" float:left;">( Youtube,Dailymotion,Vimeo,Wine)
+									</small>
+									</ion-col>
+									</ion-row>
+							<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
+	                				<p style="color:red;font-size: 14px;" class="valid">Please enter valid video url</p>
+           							</div>
 							</form>
 							</div>
-							<ion-row>
-			    				<ion-col>
-			    					<div>
-										<button ion-button medium icon-only (click)="addUserPosts
-										(communityProfileData?.id)" class="post comm-postlist"><i class="fa fa-paper-plane"></i>&nbsp;</button>
-									</div>
-								</ion-col>
-							</ion-row>
-		   				</ion-card-content>
-		 
+		   	</div>
 				</div>
-	<hr/>
- 	 		<ion-list *ngFor="let community of communityProfile; let i=index">
+	 		<ion-list *ngFor="let community of communityProfile; let i=index">
 
  			<ion-card class="listed-comments">
  				<ion-item text-wrap>
@@ -159,7 +129,7 @@
 						</ion-col>
 						<ion-col width-20>
 			  				<button *ngIf="community?.uid == my_id" ion-button color="dark" clear (click)="openMenu(community.id)">
-		          			<ion-icon  item-left name="arrow-dropdown"></ion-icon>
+		          			<i class="fa fa-angle-down"></i>
 		          		</button>
 	          			</ion-col>
 	       			</ion-row>
@@ -207,7 +177,12 @@
 			          				<p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{community.comment_count}}+Comments</p>
 			          			</button>
 		          			</ion-col>
-		          		
+		          		<ion-col>
+				    	<button ion-button icon-left clear small  
+				    	*ngIf="!community.likecount == 0">
+  							<p class="liks-comments">&nbsp;{{community.likecount}}+like it</p>
+				      	</button>
+				    </ion-col>
 	      				</ion-row>
 					</div>
 	      		</ion-card>
@@ -239,8 +214,7 @@
 		</ion-list>
 	
 		<ion-list *ngSwitchCase="'connections'">
-		<ion-card *ngFor="let connection of allConnections">
-			<ion-row>
+		<ion-row>
 			  	<ion-col>
 				  	<div>
 						<ion-searchbar (ionInput)="setItems($event)">
@@ -248,6 +222,8 @@
 					</div>
 				</ion-col>
 			</ion-row>
+		<ion-card *ngFor="let connection of allConnections">
+			
 			
 	   			<ion-row>
 		    		<ion-col width-20>
@@ -256,12 +232,11 @@
 		    				(click)="loadThisPage(connection?.id)">
 		    			</ion-avatar>
 		    		</ion-col>
-	    			<ion-col width-67>
-	    				<h1 class="primary-color" (click)="loadThisPage(connection?.id)">{{connection?.connections?.name}}</h1>
-		    				<p>{{connection?.connections?.company_name}}</p>
-		    				<p><ion-icon ios="ios-briefcase" md="md-briefcase" 
-		    				[hidden]="!connection?.connections?.designation"></ion-icon> {{connection?.connections?.designation}}</p>
-		 					<p><ion-icon ios="ios-call" md="md-call" [hidden]="!connection?.connections?.mobile"></ion-icon>  {{connection?.connections?.mobile}}</p>
+	    			<ion-col width-80 class="conn-listed">
+	    				<h1 (click)="loadThisPage(connection?.id)">{{connection?.connections?.name}}</h1>
+		    				<p class="comp-name"><i class="fa fa-building-o" aria-hidden="true"></i>{{connection?.connections?.company_name}}</p>
+		    				<p><i class="fa fa-briefcase" [hidden]="!connection?.connections?.designation"></i> {{connection?.connections?.designation}}</p>
+		 					<p><i class="fa fa-phone" [hidden]="!connection?.connections?.mobile"></i>{{connection?.connections?.mobile}}</p>
 	    			</ion-col>
 	      		</ion-row>    
 	  		</ion-card>

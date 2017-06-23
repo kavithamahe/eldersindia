@@ -231,6 +231,47 @@ input, textarea {
 }
 .label-ios{line-height:22px !important;}
 .label-md{ line-height:22px !important;}
+.remarks-btns{ background:none; box-shadow:none; float:right; padding:0px !important;}
+.remarks-btns .button-inner i {float:right; background:#ec72d7; font-size:14px !important; width:35px; line-height:35px; height:35px; border-radius:50%;}
+.job-detailsview .item-md{ padding-left:5px !important;}
+.job-detailsview .item-md .item-inner .input-wrapper .label-md h2{color:#424a95;font-size:18px !important;font-weight:400;margin-top:0;  width:100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;}
+.conn-listed h1{ font-size:17px; color:#414896; padding-bottom:3px;}
+
+.conn-listed p i{ width:22px; color:#a8a9a8;}
+.job-detailsview .item-md .item-inner .input-wrapper .label-md p i{ font-size:12px; color:#a8a9a8 !important; width:15px; text-align:left !important;}
+.job-detailsview .item-md .item-inner .input-wrapper .label-md p{color:#777 !important;font-size:15px !important;font-weight:400;margin-top:0; text-indent:0px !important; padding-left:3px; overflow:hidden;text-overflow:ellipsis;}
+ .job-detailsview .item-md .item-inner .input-wrapper .label-md p i.fa-map-marker{padding-left:4px;}
+.job-detailsview .item-ios{ padding-left:5px !important;}
+.job-detailsview .item-ios .item-inner .input-wrapper .label-ios h2{color:#424a95;font-size:18px !important;font-weight:400;margin-top:0;}
+.job-detailsview .item-ios .item-inner .input-wrapper .label-ios p i{ font-size:12px; color:#a8a9a8 !important; width:15px; text-align:center !important;}
+.job-detailsview .item-ios .item-inner .input-wrapper .label-ios p{color:#777 !important;font-size:15px !important;font-weight:400;margin-top:0; text-indent:0px !important; padding-left:3px; overflow: hidden;text-overflow:ellipsis;}
+.job-imgs{ margin-right:10px; }
+.job-dates{ padding-left:0px !important;}
+.job-dates .item-inner .input-wrapper .label-md{ font-size:13px; padding-left:0px; margin:0px;}
+.job-dates .item-inner .input-wrapper .label-md p span i{ width:23px; color:#a8a9a8;}
+.job-dates .item-inner .input-wrapper .label-md p span{ font-size:14px; color:#777;}
+.job-dates .item-inner .input-wrapper .label-ios{ font-size:13px; padding-left:0px; margin:0px;}
+.job-dates .item-inner .input-wrapper .label-ios p span i{ width:23px; color:#a8a9a8;}
+.job-dates .item-inner .input-wrapper .label-ios p span{ font-size:14px; color:#777;}
+
+.select-loca{ border-bottom:1px solid #5ba9fc; background:#3396fe;}
+.select-loca .item-inner .input-wrapper .label-ios{ text-align:left; color:#fff; padding-left:8px; margin:0px; font-size:17px;}
+.select-loca .item-inner .input-wrapper .select-ios .select-icon .select-icon-inner{ color:#fff !important;}
+.select-locas p{  font-size:17px; color:#424b9a; font-weight:400; text-align:center; }
+.select-locas{padding-left:0px;}
+.select-locas .item-inner .input-wrapper .label-ios{ margin:0px;}
+
+.select-loca{ border-bottom:1px solid #5ba9fc; background:#3396fe;}
+.select-loca .item-inner .input-wrapper .label-md{ text-align:left; color:#fff; padding-left:8px; margin:0px; font-size:18px;}
+.select-loca .item-inner .input-wrapper .label-ios{ text-align:left; color:#fff; padding-left:8px; margin:0px; font-size:18px;}
+.select-loca .item-inner .input-wrapper .select-md .select-icon .select-icon-inner{ color:#fff !important;}
+.select-locas p{  font-size:17px; color:#424b9a; font-weight:400; text-align:center; }
+.select-locas{padding-left:0px;}
+.select-locas .item-inner .input-wrapper .label-md{ margin:0px;}
+
 /*-------------------------------------Common  css -------------------------------------*/
 
 .service-bg0												{height:auto !important;min-height:80px;background:#ff7fe6;width:50%; margin-top:1px; border-right:1px solid #fff; border-bottom:1px solid #fff;}
@@ -256,7 +297,9 @@ input, textarea {
 .btn-infos												    {background-color:#fe7fe6;border-color:#46b8da;color:#fff;font-size:13px !important;text-transform:capitalize;}
 .info													    {font-size:13px !important;text-transform:capitalize !important;}
 .btn-defaults												{background-color:#ccc !important;border-color:#333;color:#666;font-size:13px !important;text-transform:capitalize; margin-top:10px; margin-right:10px; float:right;}
-.btn-primarys												{background-color:#888aef !important; border-color:#333;color:#fff;font-size:14px !important;text-transform:capitalize;margin-top:10px; float:right;margin-right:10px;}
+.btn-primarys												{background-color:#888aef;color: #fff;float: left; font-size: 14px; margin-left: 14px;margin-top: 10px;
+
+    width: 91%;}
 .toolbar-background-md										{background:#337ab7; }
 .profile-edit												{ height:175px; background-image: url('../../assets/img/llll.jpg');  position:relative; }
 
@@ -269,8 +312,17 @@ box-shadow: 0 0 5px #333;}
 page-modal-page ion-input									{border:none !important;}
 page-service-info ion-input									{border:none !important;}
 .view-storedet												{float:left; width:100%;}
-.commend-btn													{background:#888aef !important;}
-.job-borad													{ padding:8px !important;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);  background:#fff;   margin:8px;}
+.commend-btn												{background:#fe7fe6 !important;}
+.blog-reply													{padding-left:0px !important;}
+.blog-reply .item-inner .input-wrapper .label-md            {font-size:15px !important; color:#424a95; margin:0px;}
+.blog-reply .item-inner .input-wrapper .label-md h5			{font-size:15px !important; color:#424a95;}
+.blog-reply .item-inner .input-wrapper .label-md p 			{font-size:14px !important;}
+.blog-reply .item-inner .input-wrapper .label-ios            {font-size:15px !important; color:#424a95; margin:0px;}
+.blog-reply .item-inner .input-wrapper .label-ios h5			{font-size:15px !important; color:#424a95;}
+.blog-reply .item-inner .input-wrapper .label-ios p 			{font-size:14px !important;}
+.commend-btns												{padding-left:0px !important;}
+.commend-btns .item-inner .input-wrapper .label-md .button-md{ height:35px; margin-left:3px; width:96%; background:#fe7fe6;}
+.job-borad													{padding:8px !important;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);  background:#fff;   margin:8px;}
 .job-borad h2												{font-size:18px !important; color:#424a95; font-weight:400; margin-top:0px !important;margin-bottom:0px !important;}
 .job-borad p												{font-size:15px; color:#555; font-weight:400; margin:0px; padding-top:8px; padding-bottom:10px; line-height:25px;}
 .view-storedet h2											{color:#1d6ab2;font-size:18px;padding:0; margin-bottom:0px !important;}
@@ -284,8 +336,8 @@ page-service-info ion-input									{border:none !important;}
 .btn-clrs													{ float:right; border-radius:4px;margin-top:10px;  width:50%;}
 .bar-button-light-md, .bar-button-clear-md-light, .bar-button-md-light{font-size:15px;}
 .bar-button-light-ios, .bar-button-clear-ios-light, .bar-button-ios-light{ color:#fff !important;}
-.connection-btn .button-md 									{background:#58e2c9;box-shadow:none;}
-.Pending													{color:#f8b106; padding:0px; font-size:14px; }
+.connection-btn .button-md 									{ background:#58e2c9;border-radius:35px;box-shadow:none;height:40px;width:40px;}
+.Pending													{color:#f8b106; padding:0px; font-size:14px; font-weight:600 !important; }
 
 .add-btn .button-inner .ion-ios-add-circle{ color:#333 !important;}
 .rem-btn .button-inner .ion-ios-add-circle{ color:#333 !important;}
@@ -317,8 +369,8 @@ ion-card img												{     display: inline-block;
 .contact-list .item-md{ padding:5px;}
 .contact-list .item-md .item-inner .input-wrapper			{}
 .contact-list .item-md .item-inner .input-wrapper .label-md {margin:0px; text-indent: 0; border:1px solid #e9e9e9; float:left; }
-.contact-list .item-md .item-inner .input-wrapper .label-md p{ font-size:15px;  margin-left:5px; line-height:27px;}
-.contact-list .item-md .item-inner .input-wrapper .label-md i{font-size:18px; color:#777; width:30px; float:left; line-height:30px; text-align:center;}
+.contact-list .item-md .item-inner .input-wrapper .label-md p{ font-size:17px;  margin-left:5px; line-height:27px; padding-left:10px;}
+.contact-list .item-md .item-inner .input-wrapper .label-md i{font-size:18px; color:#a8a9a8; width:30px; float:left; line-height:30px; text-align:center; background:#f6f4f6;}
 .view-more{ font-size:14px; color:red !important; background:none !important;}
 .view-more i{ color:#a5a0a4;}
 .community-div .item-md{ padding-left:0px;} 
@@ -339,8 +391,11 @@ span.mails-cont p 											{float:left; color:#858D9B; font-size:15px;}
 page-service-info .service_request							{border:none !important;}
 ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .segment-md .segment-button									{background:none; color:#000; border-bottom:none;font-size:16px;text-transform:capitalize; border-left:1px solid #888aef !important; height:35px; line-height:35px; }
-.connection-page											{margin:0px !important; font-size:13px !important; font-weight:400 !important; color:#777; }
-.connection-pages											{color:#666 !important; margin:0px !important; font-size:13px;}
+.connection-page											{margin:0px !important; font-size:14px !important; font-weight:400 !important; color:#777; }
+.connection-page											{color:#777 !important; margin:0px !important; font-size:13px;}
+.connection-page i											{width:15px; text-align:left; color:#a8a9a8;}
+.connection-page i.fa-map-marker							{ padding-left:3px;}
+
 .active-btn i                                               {background:#006400 !important; font-size:12px !important; color:#fff; padding:6px; border-radius:3px;}
 .active-btn 									            {background:none; box-shadow:none;}
 .inactive-btn 									            {background:none; box-shadow:none;}
@@ -356,8 +411,9 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .user-profile												{width:80px;height:80px; border:1px solid #ccc;}
 .wel-comemem											    {color:#424a95 !important;font-family: "Open Sans",sans-serif;font-size:18px !important;margin: 0; padding:10px 0px 0px 10px;}
 .likecolor													{color:#1e90ff !important; font-size:17px;}
-.time-datem													{color:#949494 !important; font-size:11px !important;}
+.time-datem													{color:#949494 !important; font-size:11px !important;font-style:italic; text-indent:0px;}
 .label-opc .item-md .item-inner .label-md p					{ margin:0px !important; padding-top:0px;text-indent:0px; padding-left:8px; color:#1d6ab2; font-size:20px; line-height:25px; font-weight:400;}
+.label-opc .item-ios .item-inner .label-ios p					{ margin:0px !important; padding-top:0px;text-indent:0px; padding-left:8px; color:#1d6ab2; font-size:20px; line-height:25px; font-weight:400;}
 .label-opc .item-md .item-inner .label-md					{ margin:0px !important;}
 .label-opc .item-md{ background:none;}
 .label-opc {background:rgba(255, 255, 255, 0.73);bottom:0px;color:#1d6ab2!important;float:left;font-size:20px !important; height:50px;position:absolute;width:100%;}
@@ -379,9 +435,24 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
     font-weight: 400;
     padding: 7px; width:94%; margin-left:10px; max-height:300px; min-height:80px;}
 .createblog-form .item-md .item-inner .input-wrapper .text-input-md{width: calc(100% - 9px) !important;}
-.createblog-form .item-md .item-inner .input-wrapper .label-md{ float:left; line-height:25px; margin-top:5px;}
+.createblog-form .item-md .item-inner .input-wrapper .label-md{ float:left; line-height:25px; margin-top:5px; text-indent:0px;}
+.createblog-form .item-ios .item-inner .input-wrapper .text-input-ios{width: calc(100% - 9px) !important;}
+.createblog-form .item-ios .item-inner .input-wrapper .label-ios{ float:left; line-height:25px; margin-top:5px; text-indent:0px;}
+.createblog-form .item-ios{ padding-left: 10px;}
+.newslisted .item-md{padding-left:7px !important;}
+.newslisted .item-ios{padding-left:7px !important;}
+.newslisted .item-inner .input-wrapper .label-md{ margin:0px;}
+.newslisted .item-inner .input-wrapper .label-md h2{padding-top:5px; color:#404996; font-size:16px; text-indent:0px !important;}
+.newslisted .item-inner .input-wrapper .label-ios{ margin:0px;}
+.newslisted .item-inner .input-wrapper .label-ios h2{padding-top:5px; color:#404996; font-size:16px;text-indent:0px !important;}
+.view-news{ padding-left:10px !important;}
+.view-news .item-inner .input-wrapper .label-md h2{ text-indent:0px; font-size:17px;}
+.view-news .item-inner .input-wrapper .label-ios h2{ text-indent:0px; font-size:17px;}
+.view-news .item-inner .input-wrapper .label-ios p{ text-indent:0px; font-size:17px;}
+.show-newsdetalis{ margin:5px !important;}
+.events-shows{ padding-left:10px !important;}
 .contect-bg-moblie											{background:#F3F7FF;}
-.postedimgvideos{  float:right !important; width:50% !important; background:#888aef;}
+.postedimgvideos{  float:right !important; width:50% !important; background:#888aef; height:35px; margin-right:5px;}
 .post-icons i 												{color:#46a049;}
 .closed i{ color:#fff; font-size:20px; font-weight:400;}
 
@@ -395,7 +466,8 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .comm-listpag												{border-radius:35px;height:40px;width:100%;margin:0px !important;}
 .comm-postlist												{background:#ff4000 !important;border-radius:35px !important; height:40px !important; width:100% !important; margin:0px !important;}
 .post-urls													{border-top:1px solid #f1f1f1; margin-top:5px; padding-bottom:5px;}
-.listed-comments .item-md								    {padding-left:0px;}
+.listed-comments .item-md								    {padding-left:0px; background:none;}
+.listed-comments .item-ios								    {padding-left:0px; background:none;}
 .post-urls small											{font-size:15px; padding-left:10px;color:#999;}
 .post-urls ion-row ion-col .item-md							{padding-left:0px;}
 .mem-name													{font-size:17px !important; margin:0px;}
@@ -412,14 +484,19 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .mem-title p												{font-size:18px !important; font-weight:400 !important; color:#424a95;}
 .mem-title i												{color:#a5a0a4;}
 .show-members											    {border-radius:50%; background:#888aef !important;height:35px;width:35px; text-align:center; line-height:35px; padding:0px;text-indent:0px !important; margin-left:15px;margin-top: 10px;}
-.job-view .item-md											{padding-left:0px !important;}
+.job-view .item-md											{padding-left:5px !important;}
 .job-view .item-md .item-inner .input-wrapper .label-md		{margin:0px;text-indent:0px;}
-.job-view .item-md .item-inner .input-wrapper .label-md	h2	{font-size:18px !important; padding-bottom:0px;}
-.job-view .item-md .item-inner .input-wrapper .label-md	p	{font-size:16px !important; padding-bottom:0px; width:100%;}
+.job-view .item-md .item-inner .input-wrapper .label-md	h2	{font-size:18px !important; padding-bottom:3px;}
+.job-view .item-md .item-inner .input-wrapper .label-md	p	{font-size:16px !important; padding-bottom:0px; width:100%; color:#3396fe;}
 .job-view .item-md .item-inner .input-wrapper .label-md span{font-size:12px !important; color:#979A9A;  float:right; padding-top:5px;}
+.job-view .item-ios											{padding-left:5px !important;}
+.job-view .item-ios .item-inner .input-wrapper .label-ios		{margin:0px;text-indent:0px;}
+.job-view .item-ios .item-inner .input-wrapper .label-ios	h2	{font-size:18px !important; padding-bottom:0px;}
+.job-view .item-ios .item-inner .input-wrapper .label-ios	p	{font-size:16px !important; padding-bottom:0px; width:100%; color:#3396fe;}
+.job-view .item-ios .item-inner .input-wrapper .label-ios span{font-size:12px !important; color:#979A9A;  float:right; padding-top:5px;}
 .location-catlist											{  background:#4ec2ff;}
 .location-catlist .item-inner .input-wrapper .label-md		{font-size:18px !important; text-align:left; color:#434248;}
-.location-catlist .item-inner .input-wrapper .sub-cate-slec .select-text{font-size:18px !important; text-align:left; color:#525252;}
+.location-catlist .item-inner .input-wrapper .sub-cate-slec .select-text{font-size:18px !important; text-align:left; color:#333;}
 .location-catlist .item-inner .input-wrapper .sub-cate-slec	{width:100%; padding:10px; }
 
 .location-catlist .item-inner .input-wrapper .sub-cate-slec .select-icon .select-icon-inner{border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid;
@@ -428,29 +505,47 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .sub-cat-listed .item-inner .input-wrapper .label-md p		{font-size:17px !important; color:#fff; float:left; width:90%;  }
 .sub-cat-listed .item-inner .input-wrapper                  {border-top:1px solid #fff; border-bottom:none;}
 .forgot-pa p												{padding-left:10px; margin-bottom:0px;}
-.forgot-pa .input-md .text-input-md							{width: calc(100% - 8px - 7px);}
+.forgot-pa .input-md .text-input-md							{    width: 92% !important;
+    margin-left: 13px !important;
+    color: #333;
+    height: 45px !important; margin-top:20px;
+}
+
+.forgot-pa .input-ios .text-input-ios							{    width: 92% !important;
+    margin-left: 13px !important;
+    color: #333;
+    height: 45px !important; margin-top:20px;
+}
+
 .left-right-side										    {color:#404998;float:right;font-size:13px !important;font-weight:normal !important;line-height:25px;margin-right:13px;}
 .sub-cat-listed												{background:#888aef;margin:0px 0px 0px 0px; width:100%; padding-left:0px !important;}
 .error-clr													{font-size:15px !important; font-weight:400 !important; color:red !important;text-align:center !important;}
 .error-clr i.unlink 												{ font-size:17px; color:#1D6AB2;}
-.send-req													{ width:50%; margin-left:10px; margin-bottom:10px;}
+.send-req													{  margin-left:10px; margin-bottom:10px; float:right;}
 .cmmpost													{font-size:16px !important; color:#777 !important; text-align:left;  margin-top:5px; margin-left:8px;}
 .pro-imgs													{width:50px; height:50px; border-radius:0px; padding:5px; margin-top:5px;}
 .updated-staus-btn .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
 .updated-staus-btn .item-md .item-inner .input-wrapper .label-md h2.wel-comemem{ padding-bottom:0px; padding-left:0px;}
 .three .input-md .text-input-md 								{margin:0px 0px 6px 7px;}
+.video-c{width:40px; border:none; height:40px !important; background:#fe7fe6; float:left;     margin: 0 7px 0 4px; border-radius:35px;}
+.video-c i{color:#fff; padding-left:4px;}
 .comm-posted .item-inner .input-wrapper .label-md{padding-top:0px !important;}
 .trash-icon													{height:20px;padding:0 !important;position:absolute;right:-7px;top:-13px;}
 .trash-icon	i												{color:red; font-size:19px !important;}
-.secon-sdms													{background:#888aef !important; color:#fff !important; font-size:15px; text-transform:capitalize; border-radius:25px;}
-.edit-profile-view .label-ios								{font-size:17px; padding-left:6px;  margin:5px 0 px; }
-.edit-profile-view .item-ios									{padding-left:8px;}
-.edit-profile-view .item-ios .item-inner .input-wrapper .input-ios .text-input-ios{font-size:16px;  width: calc(100% - 8px - 5px) !important;}
+.secon-sdms													{background:#888aef !important; color:#fff !important; margin-right:40px; font-size:15px; text-transform:capitalize; border-radius:25px;}
+.edit-profile-view .label-ios								{font-size:17px; padding-left:8px;  margin:5px 0 px; }
+.seetingslist .list-md .item-md{ border-bottom:1px solid #ccc !important; background:none;}
+.seetingslist .list-ios .item-ios{ border-bottom:1px solid #ccc !important; background:none;}
+.seetingslist .list-md .item-md .item-inner .input-wrapper .label-md{ color:#404996; text-align:left;}
+.seetingslist .list-ios .item-ios .item-inner .input-wrapper .label-ios{ color:#404996;text-align:left;}
 
-.edit-profile-view .label-md								{font-size:17px; padding-left:6px;   margin:7px 0 7px; }
-.edit-profile-view .item-md									{padding-left:8px;}
-.edit-profile-view .item-md .item-inner .input-wrapper .input-md .text-input-md{ font-size:15px;  width: calc(100% - 8px - 0px) !important;}
-.edit-profile-view .item-md .item-inner .input-wrapper .select-brd{width:97% !important; font-size:15px; padding-left:6px !important; height:38px;}
+
+.edit-profile-view .item-ios .item-inner .input-wrapper .input-ios .text-input-ios{font-size:16px; width:95%;margin-left:2px;}
+.edit-profile-view .item-ios .item-inner .input-wrapper .select-brd{width:95% !important; font-size:15px; padding-left:6px !important; height:38px; margin-left:2px;}
+.edit-profile-view .label-md								{font-size:17px; padding-left:8px;   margin:7px 0 7px; }
+.edit-profile-view .item-md									{padding-left:11px;}
+.edit-profile-view .item-md .item-inner .input-wrapper .input-md .text-input-md{ font-size:15px; width:95%; margin-left:2px;}
+.edit-profile-view .item-md .item-inner .input-wrapper .select-brd{width:95% !important; font-size:15px; padding-left:6px !important; height:38px; margin-left:2px;}
 
 .listed-profiles{  margin:10px !important; float:left;width:94%;background:rgba(111, 134, 210, 0.18); border-left:4px solid #ff7fe6;}
 .listed-profiles p{ font-size:16px; padding-left:10px; border-bottom:1px solid #F0FFFF;  margin:0px;padding:6px;}
@@ -460,7 +555,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .footer-defent .item-md{ background:#404996 !important;}
 .footer-defent .item-md button{ background:none !important; color:#fff;  box-shadow: none;}
 .footer-defent .item-md button span i{ color:#fff !important;}
-.ios page-community .post, .md page-community .post{ background:#888aef; margin-top:5px; border-radius:0px !important;}
+.ios page-community .post, .md page-community .post{ background:#fe7fe6; margin-top:5px; border-radius:5px !important;}
 
 .but-colo													{padding:8px !important;height:32px !important; width:auto!important; border:1px solid #ccc !important;}
 .num-of														{color:red !important; font-size:13px !important;}
@@ -519,12 +614,18 @@ ion-app.md													{font-family: 'Open Sans', sans-serif !important; }
 ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !important;}
 .blogs-div h2												{color:#1976d2;white-space: nowrap;font-family: "Open Sans",sans-serif !important; overflow:hidden;font-size:16px;
 															 font-weight:700;line-height:20px;text-align:left;}
-.Cancelled{ font-size:14px !important; color:#f90202 !important;padding:0px !important;}
-.Contacted{ font-size:14px !important; color:#2196F3 !important;padding:0px !important;}
-.Completed{ font-size:14px !important; color:#4CAF50 !important;padding:0px !important;}
+.Cancelled{ font-size:14px !important; color:#f90202 !important;padding:0px !important;font-weight:600 !important;}
+.Contacted{ font-size:14px !important; color:#2196F3 !important;padding:0px !important; font-weight:600 !important;}
+.Completed{ font-size:14px !important; color:#4CAF50 !important;padding:0px !important;font-weight:600 !important;}
+.Shedule{ font-size:14px !important; color:#9370db !important;padding:0px !important;font-weight:600 !important;}
+.Delivered{ font-size:14px !important; color:#808000!important;padding:0px !important;font-weight:600 !important;}
 
 .login-pages .item-ios									    {background:none;}
-.login-pages .item-ios .text-input-ios						{padding:9px 10px 9px 20px !important;}
+.login-pages .item-ios .text-input-ios						{    width: 92% !important;
+    margin-left: 13px !important;
+    color: #333;
+    height: 45px !important;
+}
 .forgot-pass												{background:none !important;  color:#337ab7 !important;font-family: 'Open Sans', sans-serif !important; font-size:15px; }
 .bg-back													{background:none !important; border-bottom:none !important; }
 .bg-back .item-inner .input-wrapper .label-md .forgot-pass	{ font-size:17px !important; margin-top:40px; color:#404996 !important; margin-top:10px;}
@@ -595,7 +696,20 @@ page-service-info .service_request							{border:none !important;}
 .label-md {
     margin: 13px 6px 13px 0;
 }
+.brw-btn{ margin-left:6px !important; width:96%; background:#888aef; border-radius:5px;}
+.brw-btns{ margin-left:13px !important; width:92%; background:#fe7fe6; border-radius:5px;}
+.upimag{ margin:0px 0px 5px 0px !important;font-size:16px !important;}
+.cont-conn{ background:#fff !important; padding-bottom:1px;}
+.updated-staus-btn{background:#fff !important;}
+.updated-staus-btn .item-md{padding-left:11px;}
+.updated-staus-btn .item-md h2{padding-top:0px;}
 .content-intop{ background:#F3F7FF !important;}
+
+.seetingslist .item-md{ padding-left:0px;}
+.seetingslist .item-md i{width:25px; color:#a8a9a8;}
+.seetingslist .item-ios{ padding-left:0px;}
+.seetingslist .item-ios i{ width:25px; color:#a8a9a8;}
+.createblog-form{ background:#fff;}
 .offered-servicelist{ padding-left:0px;}
 .offered-servicelist .item-md{padding-left:0px;}
 .offered-servicelist .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
@@ -645,7 +759,7 @@ page-service-info .service_request							{border:none !important;}
 .slider-detalis-list h2										{text-align:left; font-size:18px; color:#1d6ab2; padding-top:5px; margin:0px;  padding-left:5px;  }
 .slider-detalis-list p									    {text-align:left; font-size:16px; color:#777 !important; margin:0px;padding-top:8px; padding-left:10px; line-height:25px;}
 .swiper-slide img											{max-height:190px; width:100%;}
-.button-ios													{height:35px !important; font-size:16px !important;}
+.button-ios													{font-size:16px !important;}
 .card-ios p													{color: #777;font-size:16px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
 															 margin: 0 0 2px;}
 ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !important}
@@ -658,7 +772,7 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 															 font-weight:400; color:#555;}
 .call-us												    {color:#9370DB!important; font-size:16px; width:100%; float:left; padding-top:5px;}
 .token-date													{font-size:11px !important; color:#90949c !important; float:left; width:100%;}
-.show-pass													{padding-left:0px;}
+.show-pass													{padding-left:5px;}
 .show-pass .checkbox-md 									{margin: 0 0 9px 10px !important;}
 .show-pass .item-inner .input-wrapper .label-md 			{margin:-6px 0px 0px 0px; line-height:0px; }
 .btn-can													{background:#fe7fe6;}
@@ -671,19 +785,23 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .label-ios													{line-height:14px;}
 .blogs-tittle .item-md										{ padding-left:0px !important;}
 .blogs-tittle .item-md .item-inner .input-wrapper .label-md	{ margin:0px ;}
-.blogs-tittle .item-md .item-inner .input-wrapper .label-md h2{ padding-top:0px !important;text-indent:0px !important;}
+.blogs-tittle .item-md .item-inner .input-wrapper .label-md h2{ padding-top:0px !important;text-indent:0px !important; font-size:17px !important;}
+.blogs-tittle .item-ios .item-inner .input-wrapper .label-ios h2{ padding-top:0px !important;text-indent:0px !important; font-size:17px !important;}
 .req-viewlist ion-row ion-col{ position: relative;}
-.req-viewlist ion-row ion-col.child_menu::before{background:#9dbdd6;
+.req-viewlist ion-row ion-col.child_menu:before{
     border-radius: 50%;
     bottom: auto;
-    content: "";
+     content: "\f260";
     height:6px;
-    left:11px;
-    margin-top:9px;
-    position: absolute;
+   left: 5px;
+    margin-top: 5px;
+    position: absolute; font-family: FontAwesome;
     right: auto;
     width:6px;
-    z-index: 1;}
+    z-index: 1; color:#158B91;
+	
+	
+	}
 	.req-viewlist ion-row ion-col.child_menu::after{    border-left:1px dotted  #9dbdd6;
     bottom: 0;
     content: "";
@@ -695,9 +813,9 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .req-viewlist span											{font-size:17px !important; font-weight:400 !important; color:#414994; padding-left:25px;}
 .req-viewlist p											    {font-size:15px !important; font-weight:400 !important; color:#777; padding-left:25px; padding-top:8px; }
 .req-viewlist i                                             {font-size:25px !important; color:#b0b2b6; line-height:50px;}
-.err-reds													{font-size:14px !important; font-weight:400 !important; color:red !important; text-align:right !important; padding-right:25px !important; margin:0px; }
+.err-reds													{color:red;font-size:12px;font-weight:400;margin:0 0 10px;padding-right:13px;text-align:right;}
 .token-primary												{width:auto; margin-top:7px; border-radius:3px;}
-.tocken-no													{font-size:15px !important; border:1px solid #e0e1e2; text-align:center; color:#0493f8!important; }
+.tocken-no													{font-size:15px !important; font-weight:600 !important; text-align:center; color:#0493f8!important; }
 .token-primarys												{width:35px; height:35px;margin-left:4px;margin-top:5px; display:block; border:1px solid #ccc; border-radius:50%;}
 .token-primarys i											{line-height:35px; color:#00a651; text-align:center; width:100%; font-size:20px;}
 .req-cancel												    {width:35px; height:35px;margin-left:4px;margin-top:5px; display:block; border:1px solid #ccc; border-radius:50%;}
@@ -724,9 +842,9 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 .job-view .item-ios .item-inner .input-wrapper .label-ios	{margin:0px;text-indent:0px;}
 .list-ios > .item-block:first-child 						{border-top:0px solid #c8c7cc;}
 .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {border-bottom:0px solid #c8c7cc;}
-.job-view .item-ios .item-inner .input-wrapper .label-ios h2{font-size:17px !important;padding-bottom:10px;}
-.job-view .item-md .item-inner .input-wrapper .label-md p   {font-size:15px !important; }
-.btn-right													{float:right;margin-right:10px; background:#888aef;}
+
+.job-view .item-md .item-inner .input-wrapper .label-md p   {font-size:16px !important; }
+.btn-right													{float:left;margin-left:13px; background:#888aef; width:92%;}
 .job-view .item-ios .item-inner .input-wrapper .label-ios span{font-size:12px !important; color:#777;  float:right; padding-top:5px;}
 .label-opc .item-ios .item-inner .input-wrapper .label-ios  {color:#1d6ab2;font-size:19px;font-weight:400;line-height:25px;margin:0 !important;padding-left:8px;padding-top:0;text-indent:0px !important;} 
 /*-------------------------------------ios platform css end-------------------------------------*/
@@ -738,7 +856,8 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !important;}
 .login-pages img.logo										{margin-top:70px; width:90%; margin-left:15px;}	
 .login-pages .item-md										{background:none; padding-left:5px;}	
-.login-pages .item-md .text-input-md						{width: calc(100% - 8px - 11px); color:#333; padding:8px;}									
+.login-pages .item-md .text-input-md						{width: 92%!important;
+    margin-left: 13px !important; color:#333; height:45px !important;}									
 
 .forgot-pass 												{background:none !important;box-shadow:none; color:#337ab7 !important;font-family: 'Open Sans', sans-serif !important; margin-top:10px; font-size:15px !important; text-transform:capitalize; }
 .bg-back .item-inner										{background:none !important; border-bottom:none !important;}
@@ -746,14 +865,33 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
         													 font-weight:400; color:#555;}
 .service-bg													{height:auto !important;}
 
-												 
+.appliedjob												 	{padding-left:10px;}
+.appliedjob .item-inner .input-wrapper .label-md h2         {font-size:17px !important; padding-bottom:5px;}
+.appliedjob .item-inner .input-wrapper .label-md span		{font-size:15px !important;}
+.appliedjob .item-inner .input-wrapper .label-md span i     {color:#a8a9a8;font-size:12px;text-align:left;width:20px;}
+.appliedjob .item-inner .input-wrapper .label-md p		    {font-size:15px;padding-left:7px;text-indent:0px;}
+.appliedjob .item-inner .input-wrapper .label-md p i     {color:#a8a9a8;font-size:12px;text-align:left;width:20px;}
+.appliedjob .item-inner .input-wrapper .label-ios h2         {font-size:17px !important; padding-bottom:5px;}
+.appliedjob .item-inner .input-wrapper .label-ios span		{font-size:15px !important;}
+.appliedjob .item-inner .input-wrapper .label-ios span i     {color:#a8a9a8;font-size:12px;text-align:left;width:20px;}
+.appliedjob .item-inner .input-wrapper .label-ios p		    {font-size:15px;padding-left:7px;text-indent:0px;}
+.appliedjob .item-inner .input-wrapper .label-ios p i     {color:#a8a9a8;font-size:12px;text-align:left;width:20px;}
+
 /*-------------------------------------Windows platform css end-------------------------------------*/
 
 .change-pass-content form .item-md { padding-left:0px;}
-.change-pass-content form .label-md{ margin-bottom:0px; margin-top:0px; font-size:17px; padding-left:5px;}
+.change-pass-content form .label-md{ margin-bottom:0px; margin-top:0px; font-size:17px; padding-left:11px;}
+.change-pass-content form .item-md .item-inner .input-wrapper .text-input-md{     width: 92% !important;
+    margin-left: 13px !important;
+    color: #333;
+    height: 45px !important;}
+    .change-pass-content form .item-ios .item-inner .input-wrapper .text-input-ios{     width: 92% !important;
+    margin-left: 13px !important;
+    color: #333;
+    height: 45px !important;}
 
 .change-pass-content form .item-ios { padding-left:0px;}
-.change-pass-content form .label-ios{ margin-bottom:0px; margin-top:0px; font-size:17px; padding-left:5px;}
+.change-pass-content form .label-ios{ margin-bottom:0px; margin-top:0px; font-size:17px; padding-left:11px;}
 
 
 
@@ -781,7 +919,7 @@ padding-left:0px !important;
 .list-cates													{border:1px solid red !important;}
 .subcategory-list											{padding:5px; margin-bottom:10px; border-bottom:1px solid rgba(0, 0, 0, 0.08); }
 .subcategory-list .item-inner .input-wrapper .label-md		{margin:0px !important;}
-.ios page-community .video, .md page-community .video		{width:40px; border:none; height:40px; background:#fe7fe6; float:left; margin:0px 5px 0px 0px;}
+.ios page-community .video, .md page-community .video		{width:40px; border:none; height:40px; background:#fe7fe6; float:left; margin:0px 5px 0px 5px;}
 .ios page-community .video, .md page-community .video i     {color:#fff;}
 .community-img												{position:relative !important; }
 .ios ion-nav > .ion-page > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-nav > .ion-page > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-tab > .ion-page > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-tabs > .ion-page.tab-subpage > ion-header > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-menu > .menu-inner > ion-content.statusbar-padding:first-child .scroll-content, .ios ion-menu > .menu-inner > ion-header > ion-content.statusbar-padding:first-child .scroll-content{padding-top:0px !important;}
@@ -817,8 +955,8 @@ padding-left:0px !important;
 .lastupdate small											{float:left; color:#777; font-size:14px; }
 .lastupdate	h1{ float:left; width:100%; font-size:19px; text-align:center; color:#555;}
 .lastupdate p												{font-size:15px; width:100%; padding:5px; text-indent:0px !important;}
-.listed-terms .card-md{box-shadow:none; border:1px solid #888aef; }
-.listed-terms .card-md .item-md{ padding-left:5px; border-left:2px solid #5c5fea; box-shadow:none; background:#888aef; border-radius:0px;}
+.listed-terms .card-md{box-shadow:none; border:1px solid #fe7fe6; }
+.listed-terms .card-md .item-md{ padding-left:5px; border-left:2px solid #fb06cd; box-shadow:none; background:#fe7fe6; border-radius:0px; height:35px;}
 .listed-terms .card-md .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
 .listed-terms .card-md .item-md .item-inner .input-wrapper .label-md p{ width:80%; float:left; color:#fff; font-size:18px; font-weight:400;}
 .listed-terms .card-md .item-md .item-inner .input-wrapper .label-md span{ width:20%; float:left;}
@@ -836,14 +974,15 @@ padding-left:0px !important;
 .listed-terms .card-ios .card-content-ios b{font-size: 15px; float:left; width:100%;line-height:25px;padding:8px;}
 
 
-
-
+.name-conne p{ font-size:17px; font-weight:400; margin:0px;}
+.mess-accept p{ float:left; margin:8px 5px 0px 0px; }
+.mess-accept p .button-md{ border-radius:35px; width:40px; height:40px; background:#a377fe;}
 .alert-wrapper > .alert-head								{background:#888aef; }
 .alert-ios .alert-radio-label								{padding:5px 5px 5px 10px;}
 .alert-ios .alert-tappable									{height:35px;border-bottom:1px dashed #ccc;}
 .alert-ios .alert-radio-group, .alert-ios .alert-checkbox-group{max-height:250px !important; overflow-y:scroll !important;}
 .alert-ios .alert-button									{font-weight:normal !important; font-size:18px; font-weight:600;}
-.item-inner > .input-wrapper > .label-ios h2				{font-size:16px;color:#1d6ab2;text-transform:capitalize;}
+.item-inner > .input-wrapper > .label-ios h2				{font-size:16px;color:#424a95; text-indent:0px;}
 .rupee 														{color:#777 ; position:relative;}
 .item-inner > .input-wrapper > .label-ios					{color:#777;font-size:14px; }
 .rupee:before 										        {content:"\f156";font-family:FontAwesome;font-style:normal;font-weight:normal;text-decoration:inherit;color:#777;
@@ -852,18 +991,19 @@ padding-left:0px !important;
 .toolbar-title-ios											{color:#fff;}
 .item-ios .item-button									    {height:30px !important;}
 .hei-head > .toolbar-background-md                          {height:55px!important;}
-.tittles-md .toolbar-title-md								{margin-top:-18px !important;font-size:18px !important; text-align:center;}
+.tittles-md .toolbar-title-md								{font-size:18px !important; text-align:center;}
 .tittles-md .toolbar-title-ios                              {font-size:17px !important;}
 .hei-head > .toolbar-background-md > .toolbar-md			{height:45px !important;}
 .header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before{ background:none;}
 .item-ios [item-left]										{margin:0px !important;}
 .button-ios-secondary										{background:none; color:#333;}
 .mar-top													{margin-top:10px;}
-.timedate													{font-size:13px !important; color:#A9A9A9 !important; text-indent:0px !important;}
-.pro-info													{padding-top:10px;}
+.replys														{ font-size:13px !important;}
+.timedate													{font-size:12px !important; color:#A9A9A9 !important; text-indent:0px !important; font-family:italic !important;}
+.pro-info													{padding-top:10px; font-size:18px !important;}
 .userioc													{border-right:1px dashed #D8BFD8; color:#fe7fe6;font-size:17px;height:25px;line-height:25px; text-align:center;width:25px;}
-.listed-det span i											{float:left; width:30px;color:#777;font-size:17px;height:25px;line-height:35px; text-align:center;width:25px;}
-.listed-det span p											{font-size:15px !important; color:#777; font-weight:400 !important; padding:5px; margin-bottom:0px; float:left; width:90%;}
+.listed-det span i											{float:left; width:35px;color:#a8a9a8;font-size:18px;height:35px;line-height:35px; text-align:center; background:#f6f4f6;}
+.listed-det span p											{font-size:16px !important; width:80%; color:#555; font-weight:400 !important; padding:0px 0px 0px 5px; margin-bottom:0px; float:left; }
 .title														{font-size:15px !important; color:#FA8072 !important;}
 .listed-det span										   {padding:3px; width:100%; float:left;border: 1px solid #e9e9e9; margin-bottom:8px;}
 ion-select													{max-width:100% !important;}
@@ -890,26 +1030,26 @@ white-space: normal;}
 .send-box-content ion-row > ion-col > small{ font-size:17px !important; line-height:20px !important; color:#404994 !important; font-weight:400; }
 .send-box-content ion-row > ion-col > b{ font-size:15px !important; color:#555 !important; font-weight:400; line-height:5px important;}
 .send-box-content ion-row > ion-col > span{ font-size:14px !important; color:#666 !important; font-weight:400; line-height:5px important;}
-.send-box-content ion-row > ion-col > p{ font-size:11px;}
-.job-descriptions small{ width:100%; font-size:17px;color:#404994;}
-.job-descriptions span{ width:100%; font-size:15px; color:#777;}
-.job-descriptions p{ width:100%; font-size:15px; color:#777; padding-bottom:5px; padding-top:3px; line-height:25px; margin:0px !important;}
-.job-descriptions p h4{ width:100%; font-size:15px; color:#777; padding-bottom:5px; padding-top:3px; line-height:25px;}
+.send-box-content ion-row > ion-col > p{ font-size:10px; color:#a8a9a8;}
 
-.inbox-sends .item-ios	{ padding-left:5px !important;}
-
+.subcategory-list .item-inner .input-wrapper .label-md{ text-indent:0px;}
+.subcategory-list .item-inner .input-wrapper .label-ios{ text-indent:0px;}
 .inbox-sends{ border-bottom:1px solid #f0f2f6; padding:5px;}
 .inbox-sends .item-block { min-height:0px;}
-.inbox-sends .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
-.inbox-sends .item-ios .item-inner .input-wrapper .label-ios{ margin:0px;}
+.inbox-sends .item-md .item-inner .input-wrapper .label-md{ margin:0px; padding-left:5px !important; }
+.inbox-sends .item-ios .item-inner .input-wrapper .label-ios{ margin:0px;padding-left:5px !important;}
 .inbox-sends .item-md .item-inner .input-wrapper .label-md ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-md small{ font-size:17px; color:#404996;}
 .inbox-sends .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-ios small{ font-size:17px; color:#404996;}
-
-
+.single-jobs{ border:1px solid #ebf0e9; width:95%; margin:5px; background:#fbfbfb;}
+.single-jobs small{color:#333;float:left;font-size:16px;font-weight:400;padding-bottom:5px;width:100%; padding-left:2px;}
+.single-jobs p{color:#777;float:left;font-size:15px;font-weight:400;padding-bottom:5px;width:100%; padding-left:2px;}
+.single-jobs p p{ margin:0px !important; }
+.single-jobs span{color:#777;padding-bottom:5px; font-size:15px;}
+.single-jobs h4{color:#777;padding-bottom:5px; font-size:15px;}
 .trash-del i{ font-size:15px; color:#fb0e1f;}
-.subject-details .item-inner .input-wrapper .label-md b{ font-size:15px; font-weight:400; padding-right:5px; }
+.subject-details .item-inner .input-wrapper .label-md b{ font-size:13px; font-weight:400; padding-right:5px; float:left;  }
 .subject-details .item-inner .input-wrapper .label-md span{font-size:14px; font-weight:400; padding-right:5px; }
-.subject-details .item-inner .input-wrapper .label-ios b{ font-size:15px; font-weight:400; padding-right:5px; }
+.subject-details .item-inner .input-wrapper .label-ios b{ font-size:15px; font-weight:400; padding-right:5px; float:left; }
 .subject-details .item-inner .input-wrapper .label-ios span{font-size:14px; font-weight:400; padding-right:5px; }
 .mess-detalisview{padding:8px;}
 .view-messname .item-inner .label-md p{ font-size:11px; color:#777;}
@@ -917,7 +1057,7 @@ white-space: normal;}
 .mess-detalisview span{ font-size:16px; color:#777; font-weight:400;}
 .mess-detalisview p{ font-size:16px; color:#777; font-weight:400; margin:0px;}
 .left-img{padding-left:0px;}
-.send-box-content ion-row > ion-col > p{ font-size:11px;}
+.send-box-content ion-row > ion-col > p{ font-size:10px;}
 .recordnotfound{ color:red; font-size:15px; text-align:center;}
 
 .view-messname .item-inner .label-md{ margin:0px;}
@@ -930,22 +1070,29 @@ white-space: normal;}
 .view-messname .item-inner .label-ios span{ font-size:15px; color:#777; margin-left:5px; float:left; font-weight:400;  width:100%;}
 .view-messname .item-inner .label-ios b{ font-size:11px; color:#777; margin-left:5px; float:left; font-weight:400;width:100%;}
 
-.text-view-mess p{padding-left:10px; margin:0px;}
+.text-view-mess p{padding-left:10px; margin:0px; font-size:16px;}
 .replay-forward{ margin-top:20px; border-top:1px solid rgba(0, 0, 0, 0.08); border-bottom:1px solid rgba(0, 0, 0, 0.08);background:#f1f1f1;}
 .replay-forward ion-col button{ padding:0px;}
 .replay-forward ion-col button span.button-inner p{ width:100%; color:#555; font-size:14px; font-weight:400;}
-.replay-forward ion-col button span.button-inner i{ float:left; color:#c1c0c0;}
+.replay-forward ion-col button span.button-inner i{ float:left; color:#666;}
 
 
 .view-messname .item-inner .label-ios span{ font-size:14px; color:#777; margin-left:5px; float:left;font-weight:400; padding-top:10px;}
 .listeviews .item-md{ padding-left:8px !important;}
 .listeviews .item-ios{ padding-left:8px !important;}
-.inbox-sends .item-md .item-inner .input-wrapper .label-md ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-md {text-indent:0px; margin-left:3px;}
+.inbox-sends .item-md .item-inner .input-wrapper .label-md ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-md {text-indent:0px; margin-left:3px; font-size:13px;}
 .inbox-sends .item-md .item-inner .input-wrapper .label-ios ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-ios {text-indent:0px; margin-left:5px;}
 .job-summary{ font-size:18px !important; color:#424999 !important; background:#fff; width:100%; text-align:left;  margin:0px; padding-left:10px; padding-bottom:8px;}
 
-
-
+.single-jobscotact{
+    background: #fbfbfb none repeat scroll 0 0;
+    border: 1px solid #ebf0e9;
+    margin: 5px;
+    width: 95%;
+}
+.single-jobscotact h2{ font-size:17px; font-weight:400; color:#555; text-align:center; line-height:30px;width:100%; border-bottom:1px solid #ebf0e9; padding-bottom:7px;}
+.single-jobscotact span{ font-size:16px; font-weight:400; color:#555; width:100%;  padding-bottom:6px; float:left;}
+.single-jobscotact span i{color:#a8a9a8;font-size:15px;text-align:center;width:20px;}
 
 
 .listing { padding-left:0px; font-size:15px !important; color:#777;}
@@ -957,8 +1104,8 @@ white-space: normal;}
     padding: 7px 10px 6px 20px !important;
     width:95%;}
 	.submit-btns{width:95%; border-radius:4px; margin-left: 8px; background:#888aef;}
-	.button-md-orange{ background:#888aef !important}
-	.button-ios-orange{ background:#888aef !important}
+	.button-md-orange{ background:#888aef !important;border-radius:5px;}
+	.button-ios-orange{ background:#888aef !important; border-radius:5px;}
 /*-------------------------------------ios platform css end-------------------------------------*/
 /*-------------------------------------Android platform css -------------------------------------*/
 .job-listed span{ color:#555;font-size:16px; float:left; width:130px; width:100%; }
@@ -981,7 +1128,7 @@ white-space: normal;}
 .add-depentsform .item-md .item-inner .input-wrapper .select-brd .datetime-text{ padding-left:8px;}
 .add-depentsform .item-md .item-inner .input-wrapper .input-md{ width:95%; margin-left:8px; text-align:left; margin:0px !important;}
 .add-depentsform .item-md									{padding-left:0px !important;}
-.add-depentsform .item-md .text-input-md { margin:0px 0px 0px 13px; font-size:15px; width:92%;}
+.add-depentsform .item-md .text-input-md { margin:0px 0px 0px 13px; font-size:15px; width:93%;}
 .add-depentsfor .item-md .item-inner .input-wrapper .select-brd { width:95% !important;}
 .elder-pass{ width:97%; margin:0px 0px 0px 5px;}
 .req-field{ color:red !important;}
@@ -995,15 +1142,14 @@ white-space: normal;}
 .add-depentsform .item-ios .text-input-ios { margin:0px 0px 0px 14px; font-size:15px; width:92%;}
 .add-depentsfor .item-ios .item-inner .input-wrapper .select-brd { width:95% !important;}
 .popup-mds .text-input-ios{ margin-bottom:10px !important; margin-top:0px !important; width:92% !important; margin-left:14px !important;}
-.popup-mds .text-input-md{ margin-bottom:10px !important; margin-top:0px !important; width:92% !important; margin-left:14px !important;}
+.popup-mds .text-input-md{ margin-bottom:10px !important; height:45px; margin-top:0px !important; width:92% !important; margin-left:14px !important;}
 .popup-mds .label-md{ margin-top:0px !important;}
-.popup-mds .text-input-ios{ margin-bottom:10px !important; margin-top:0px !important;}
-.popup-mds .label-ios{ margin-top:0px !important;}
+
 .popup-mds .scroll-content form .label-lb				    {font-size:17px; font-weight:400; margin-top:0px; margin-bottom:8px; padding-left:10px;}
 .popup-mds .scroll-content form .item-datetime    			{padding-left:8px !important;}
-.popup-mds .scroll-content form .select-brd 				{width:94%; margin-bottom:10px; margin-left: 7px;}
+.popup-mds .scroll-content form .select-brd 				{width:94%; height:45px;margin-bottom:10px; margin-left: 7px;}
 .popup-mds .scroll-content form .select-brds				{border:1px solid #ccc !important;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15);color:#555;font-size:18px;font-weight:400;
-															 padding: 7px 10px 9px 20px !important;width:92% !important; margin-left:7px !important;}
+															     padding: 13px 10px 10px 20px!important;width:91% !important; margin-left:15px !important;}
 .alert-md .alert-radio-label								{font-size:16px !important; font-weight:400;}
 .price-clr													{color:red !important; color:18px !important; font-weight:400; font-size:16px !important;}
 .rating-clr	ul.rating .ion-icon								{font-weight:400; font-size:20px !important;}
@@ -1022,58 +1168,51 @@ white-space: normal;}
 .body-clr												    {background:#fff;}
 .label-tittle												{ padding-left:10px !important;}
 .popup-mds > .ion-label									    {font-size:15px; text-align:center;}
-.job-view .item-md .item-inner .input-wrapper .label-md h2{ font-size:17px !important;}
+.reply-comm{ font-size:12px !important; color:#404996 !important;}
 .liks-comments{font-size:14px !important; color:#0a399a !important;}
 .liks-comments i{color:#6e6e6f !important;}
-.reply-shows{ border-left:1px solid #dddfe2;margin-bottom:15px;margin-left:8px; margin-top:10px;} 
-.reply-shows .list-md ion-col .item-md .item-inner .input-wrapper .label-md h2{ font-size:15px; color:#424a95;text-indent:0px !important;}
-.reply-shows .list-ios ion-col .item-ios .item-inner .input-wrapper .label-ios h2{ font-size:15px; color:#424a95;text-indent:0 !important;}
-.reply-shows .list-md ion-col .item-md .item-inner .input-wrapper .label-md p{ font-size:11px; color:#777;}
-.reply-shows .list-ios ion-col .item-ios .item-inner .input-wrapper .label-ios p{ font-size:11px; color:#777;}
+.reply-shows{margin-bottom:15px;margin-left:30px; margin-top:0px; background:#fff;} 
+.attached{ width:40px; height:40px; border-radius:50%; background:#ccc;}
+.reply-shows .list-md .item-md .item-inner .input-wrapper .label-md h5{ font-size:14px !important; color:#424a95;text-indent:0px !important;}
+.reply-shows .list-md .item-md .item-inner .input-wrapper .label-md em{float:left;font-size:9px !important;width:100%; text-indent:0px; }
+.reply-shows .list-ios .item-ios .item-inner .input-wrapper .label-ios em{float:left;font-size:9px !important;width:100%; text-indent:0px; }
+.reply-shows .list-ios .item-ios .item-inner .input-wrapper .label-ios h5{ font-size:15px; color:#424a95;text-indent:0 !important;}
+.reply-shows .list-md .item-md .item-inner .input-wrapper .label-md small{ font-size:12px !important; color:#777;}
+.reply-shows .list-md .item-md .item-inner .input-wrapper .label-md{line-height:15px !important;}
+.reply-shows .list-ios .item-ios .item-inner .input-wrapper .label-ios small{ font-size:12px; color:#777;}
 .texts-lefts h2{ text-indent:0px !important; font-size:15px !important;}
-.texts-lefts p.comm-datetime{ font-size:11px !important;}
-.texts-lefts p{ text-indent:0px !important; font-size:14px !important;}
-.comment-liks{ background:#f7f7f7; border-top:1px solid #efefef;}
-.item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#424a95; margin-top:0px !important; font-weight:400;}
+.reply-hei ion-col{padding:0px;}
+.reply-hei ion-col .button-md{margin:0px !important; padding:0px !important; height:20px !important; text-align:center; width:100%;}
+.reply-hei ion-col .button-ios{margin:0px !important; padding:0px !important; height:20px !important; text-align:center; width:100%;}
+.texts-lefts p.comm-datetime                                {font-size:11px !important;}
+.texts-lefts p                                              {text-indent:0px !important; font-size:14px !important;}
+.comment-liks                                               {background:#f7f7f7; border-top:1px solid #efefef;}
+.item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#424a95 !important; margin-top:0px !important; font-weight:400;}
 .item-inner > .input-wrapper > .label-md				    {color:#777;font-size:16px; padding-right:0px !important; }
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ bottom:4px;}
-.marg-info img											    {}
 .item-md .item-button									    {height:30px;}
 .text-input-md											    {font-size:15px;width: calc(100% - 8px - 8px);}
 .add-depends												{ background:#fe7fe6;}
 page-dashboard .dashboard								    {padding:0px 0px !important;}
 .des-card												    {background:#fff	!important;}
-.name-person											    {font-size:22px !important;  font-weight:600;color:#888aef; float:left;}
+.name-person											    {font-size:22px !important;  font-weight:600;color:#a8a9a8; float:left;}
 .name-elder												    {color:#404998!important;float:left;font-size:17px!important;font-weight:400 !important;padding-left:10px !important;text-transform:capitalize;}
 .edit-eld												    {color:#1E90FF; padding:3px; font-size:20px !important; border-radius:3px; width:20px; height:20px;}
 .trash-del												    {color:#a4a5a7; padding:3px;font-size:20px !important; border-radius:3px; width:20px; height:20px;}
 .create-message .item-md									{padding-left:0px !important;}
 .alert-button											    {font-size:15px !important;}
-.create-message .item-md .text-input-md						{width: calc(100% - 8px - 7px);}
-.create-message .item-ios .text-input-ios					{width: calc(100% - 8px - 5px);}
+.create-message .item-md .item-inner .input-wrapper .input-md .text-input-md { width:92%; margin-left:13px;}
+.create-message .item-ios .item-inner .input-wrapper .input-ios .text-input-ios { width:92%; margin-left:13px;}
 .create-message .completer-holder .completer-input 			{border:1px solid #ccc !important;border-radius:0;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);color:#555;font-size:15px;
-                                                             font-weight:400;padding:7px; margin-left:10px !important; width:94%;}
+                                                             font-weight:400;padding:7px; margin-left:13px !important; width:92%;}
+.comment-liks .button-md							{ padding:0px !important; width:100%; }
+.comment-liks .button-ios							{ padding:0px !important; width:100%;}
 /*-------------------------------------Android platform css end-------------------------------------*/
-.external-listed .card-title-md h1{ color: #424a95;
-    font-family: "Open Sans",sans-serif;
-    font-size: 18px;
-    margin: 0;
-    padding:0px 0 0 10px;}
-.external-listed .card-content-md p{  color: #777;
-    display: block;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
-    margin-left:11px;
-   }
-.lastupdate .item-inner .input-wrapper .label-md h2 {
-   
-    float: left;
-    font-size: 19px !important;
-    text-align:left;
-    width: 100%;
-}
-.lastupdate{ margin:10px;}
+.external-listed .item-md{padding-left:0px !important;}
+.external-listed  h1	                        {color:#424a95;font-family:"Open Sans",sans-serif;font-size:18px;margin: 0;padding:0px 0 0 0px; text-indent:0px;}
+.external-listed p                         {color:#777;display:block;font-size:15px;font-style:normal;font-weight:400;margin-left:11px;}
+.lastupdate .item-inner .input-wrapper .label-md h2         {float:left;font-size:19px !important;text-align:left;width:100%;}
+.lastupdate                                                 {margin:10px;}
 //venkat
 .item-inner 											    {border-bottom-color: transparent !important;box-shadow: none !important;}
 .required:after { content:" *"; color: red; }

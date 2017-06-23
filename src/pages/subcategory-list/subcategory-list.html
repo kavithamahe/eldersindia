@@ -29,17 +29,17 @@
 		      <img [src]= "logoUrl+service_list?.logo">
 		    </ion-thumbnail>
 		</ion-col>
-		<ion-col width-60>			
+		<ion-col width-60 class="text-alg">			
 		<h2 (click)="serviceInfo(service_list)">{{service_list.name}}</h2>
 			 <p  class="rating-clr"><rating readOnly="true" [(ngModel)]="rate" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"> 
 			  </rating>
 		 	 </p>
 		    <p style="color:#777; font-size:l7px;">
-			<i class="fa fa-inr" aria-hidden="true" style="color:red"></i> <span style="color:red; font-size:15px;">{{service_list.service_cost - service_list.percentage_cost}}</span>
-		    <i class="fa fa-inr" aria-hidden="true" style="text-decoration: line-through;"> {{service_list.service_cost}}</i> <span style="color:#1D6AB2; font-size:15px;"> {{service_list.service_type}}</span></p>
+			<i class="fa fa-inr" aria-hidden="true" style="color:red"></i> <span style="color:red; font-size:14px;">{{service_list.service_cost - service_list.percentage_cost}}</span>
+		    <i class="fa fa-inr" aria-hidden="true" style="text-decoration: line-through;"> {{service_list.service_cost}}</i> <span style="color:#1D6AB2; font-size:14px;"> {{service_list.service_type}}</span></p>
 			<p class="price-clr">
-			<span style="color:#777; font-size:15px;"> 
-		    You Save <i class="fa fa-inr"style="color:red; font-size:15px;"></i> <span style="color:red; font-size:15px;">{{service_list.percentage_cost}}</span> (<span style="color:#777;">{{service_list.discount_rate}} % </span>)
+			<span style="color:#777; font-size:14px;"> 
+		    You Save <i class="fa fa-inr"style="color:red; font-size:14px;"></i> <span style="color:red; font-size:14px;">{{service_list.percentage_cost}}</span> (<span style="color:#777;">{{service_list.discount_rate}} % </span>)
 		    </span>
 		    </p>
 			<button ion-button small *ngIf="dependentLen" (click)="openModal('scheduleModal',service_list)" class="btn-warnings"> Schedule</button>

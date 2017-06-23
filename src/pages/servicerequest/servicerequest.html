@@ -17,7 +17,7 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center text-capitalize>Service Requests</ion-title>
+    <ion-title text-center text-capitalize>My Service Requests</ion-title>
     <!--<ion-buttons right>    
       <button ion-button icon-only>
         <ion-icon name="search"></ion-icon>
@@ -27,6 +27,9 @@
 </ion-header>
 
 <ion-content padding class="content-intop">
+<div>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+</div>
 <ion-card *ngFor="let service of serviceRequestInfo; let i=index;">
   <ion-card-content style=" padding:0px;">
   <ion-grid>
@@ -35,7 +38,7 @@
 	<img src="{{imageUrl}}{{service?.logo}}" width="100" />
 	<a class="token-primarys" (click)="makeCall(service?.contact_number)"><i class="fa fa-phone"></i></a>
 	  
-  <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="cancelRequest(service?.id)">
+  <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="showConfirm(service?.id)">
 <i class="fa fa-times" aria-hidden="true"></i>
   </a>
  
@@ -43,7 +46,9 @@
 
     <ion-col width-80 (click)="viewRequest(service?.id)">
 	<ion-row>
-		<h2 item-text-wrap class="service-req">{{service?.vendor_name}}</h2><small *ngIf="(service?.enquiry_date!='0000-00-00 00:00:00')" class="token-date">{{service?.enquiry_date | date :'MMM dd y h:mm a'}}</small>
+		<h2 item-text-wrap class="service-req">{{service?.vendor_name}}</h2>
+		<!-- <small *ngIf="(service?.enquiry_date!='0000-00-00 00:00:00')" class="token-date">{{service?.enquiry_date | date :'MMM dd y h:mm a'}}</small>  -->
+	
 	</ion-row>
 
 	<ion-row>
@@ -55,6 +60,7 @@
 	<span *ngFor="let venStatus of vendorStatus" >
    <p *ngIf="venStatus.id==service?.vendor_status"><ion-badge class="{{venStatus.label}}"> {{venStatus.label}}</ion-badge></p>
 	</span>
+		 
 	</ion-col>
 	<ion-col width-30>
 	
@@ -66,30 +72,30 @@
   </ion-row>
   <ion-row>
 
-  <ion-col>
+ <!--  <ion-col>
   <button ion-button icon-left small *ngIf="(service?.vendor_status==5 &&(!service?.vendor_remarks))"(click)="enableRemark(i)">
        Mark as Complete
   </button>
-  </ion-col>
+  </ion-col> -->
   </ion-row>
 
 
   </ion-grid>
-  <ion-row>
+  <!-- <ion-row>
   <ion-col width-20></ion-col>
   <ion-col width-80>
-  <button ion-button icon-left clear small *ngIf="(service?.vendor_status==2 &&(!service?.vendor_remarks))"(click)="enableRemark(i)">
-        <i class="fa fa-star"></i>
-        <div> Remarks</div>
+  
+  <button ion-button class="remarks-btns" *ngIf="(service?.vendor_status==2 &&(!service?.vendor_remarks))"(click)="enableRemark(i)">
+       <i class="fa fa-comments"></i>
   </button>
   </ion-col>
-  </ion-row>
+  </ion-row> -->
 
 
   <ion-list *ngIf="(i==showRemark)">
   <hr>
    <ion-item>
-    <ion-label>Rating</ion-label>
+    <h2>Rating</h2>
     
  </ion-item>
 <rating [(ngModel)]="rating" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
@@ -99,7 +105,7 @@
   </ion-item>-->
   <ion-item text-wrap>
     <ion-label>Remarks</ion-label>
-    <ion-select [(ngModel)]="remarks">
+    <ion-select [(ngModel)]="remarks" class="select-brds">
       <ion-option *ngFor="let remarkList of getRemarksList" value="{{remarkList.id}}">{{remarkList.remarks}}</ion-option>
     </ion-select>
   </ion-item>
@@ -116,5 +122,37 @@
 </ion-content>
 <style>
 ion-badge{font-weight:400;}
-
+#dragMe {
+			position: absolute;
+			top: 15px;
+			left: 15px;
+			width: 250px;
+			height: 250px;
+			border: 1px #333 solid;
+			background: #06a;
+			color: #fff;
+			font-size: 12px;
+			font-family: sans-serif;
+		}
+		
+		#withMe {
+			width: 242px;
+			background: #666;
+			border-bottom: 1px #333 solid;
+			cursor: move;
+			padding: 4px;
+		}
+		
+		#dragMe p {
+			padding: 4px;
+		}
+		
+		p.text {
+			color: #999;
+			font-size: 32px;
+			font-family: "URW Chancery L", cursive;
+			width: 650px;
+			margin: 0 auto;
+			padding: 200px 0;
+		}
 </style>

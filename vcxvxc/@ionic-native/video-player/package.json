@@ -1,0 +1,51 @@
+{
+  "_from": "@ionic-native/video-player@3.12.1",
+  "_id": "@ionic-native/video-player@3.12.1",
+  "_inBundle": false,
+  "_integrity": "sha512-g5F2LI2xNF9osbohiHcjy0fNSzKlu3w3Ljk0yDCBpbfUxwWejMPVYcIYWtpn8mt+lfISp9WUp2WUwWuShVRTQw==",
+  "_location": "/@ionic-native/video-player",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@ionic-native/video-player@3.12.1",
+    "name": "@ionic-native/video-player",
+    "escapedName": "@ionic-native%2fvideo-player",
+    "scope": "@ionic-native",
+    "rawSpec": "3.12.1",
+    "saveSpec": null,
+    "fetchSpec": "3.12.1"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@ionic-native/video-player/-/video-player-3.12.1.tgz",
+  "_shasum": "a6ae9f1983fcf354c76b8dc89e4959e2d79df462",
+  "_spec": "@ionic-native/video-player@3.12.1",
+  "_where": "D:\\kavi\\mob-elder",
+  "author": {
+    "name": "ionic"
+  },
+  "bugs": {
+    "url": "https://github.com/ionic-team/ionic-native/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Ionic Native - Native plugins for ionic apps",
+  "homepage": "https://github.com/ionic-team/ionic-native#readme",
+  "license": "MIT",
+  "module": "index.js",
+  "name": "@ionic-native/video-player",
+  "peerDependencies": {
+    "@ionic-native/core": "^3.6.0",
+    "@angular/core": "*",
+    "rxjs": "^5.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionic-team/ionic-native.git"
+  },
+  "typings": "index.d.ts",
+  "version": "3.12.1"
+}

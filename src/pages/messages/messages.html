@@ -3,7 +3,8 @@
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
---><ion-header>
+-->
+<ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
       <button ion-button icon-only menuToggle>
@@ -11,23 +12,22 @@
       </button>
     </ion-buttons>
     <ion-buttons left>
-    <button ion-button icon-only (click)="dashboardPage()">
+      <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title text-center>Messages</ion-title>
-    <ion-buttons right (click)="createMessage()">    
-      <button ion-button icon-only>
-        <ion-icon name="create"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding style="background:#fff;">
+ <ion-fab  right bottom>
+    <button class="add-depends" ion-fab mini (click)="createMessage()" end><ion-icon name="create">
+     </ion-icon></button>
+    </ion-fab>
 <div padding>
-  <ion-segment [(ngModel)]="messages" (ionChange)="changeSlide($event)">
+  <ion-segment [(ngModel)]="messages">
     <ion-segment-button value="inbox" color="orange" (click)="onInit()">
       Inbox
     </ion-segment-button>
@@ -38,9 +38,11 @@
 </div>
 
 <div [ngSwitch]="messages">
- <ion-slides (ionSlideWillChange)="slideChanged($event)">
- <ion-slide>
-  <ion-list>
+  <ion-list *ngSwitchCase="'inbox'">
+  <!-- <div>
+    <ion-searchbar (ionInput)="getItems($event)">
+    </ion-searchbar>
+  </div> -->
      <p *ngIf="inboxInfo.length<=0" class="recordnotfound">No Record Found</p>
       <ion-list *ngFor="let inbox of inboxInfo">
       <ion-item-sliding  class="inbox-sends">
@@ -59,7 +61,7 @@
                   <small>{{inbox?.author_name}}</small>
                 </ion-item>
                 <ion-col width-30 style="text-align-last: end; padding: 0px !important">
-                <p><i class="fa fa-clock-o"></i>{{inbox?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p>
+                <p class="time-small"><i class="fa fa-clock-o"></i>&nbsp;{{inbox?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p>
                 </ion-col>
               </ion-row>
               <ion-row *ngIf="inbox.subject">
@@ -80,13 +82,22 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
+    <ion-row>
+    <ion-col offset-33>
+      <button *ngIf="nextPageURL1!=null && nextPageURL1!=''" ion-button color="dark" clear 
+    (click)="doInfinite1($event)"><i class="fa fa-angle-down"></i></button>
+    </ion-col>
+    </ion-row>
+ <!--  <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
+ </ion-infinite-scroll> -->
   </ion-list>
-</ion-slide>
-      <ion-slide>
-  <ion-list>
+
+  <ion-list *ngSwitchCase="'sent'">
+  <!-- <div>
+    <ion-searchbar (ionInput)="setItems($event)">
+    </ion-searchbar>
+  </div> -->
   <p *ngIf="sentInfo.length<=0" class="recordnotfound">No Record Found</p>
   <ion-list *ngFor="let sent of sentInfo">
       <ion-item-sliding class="inbox-sends">
@@ -106,7 +117,7 @@
                 <small>{{sent?.name}}</small>
                 </ion-item>
                 <ion-col width-30 style="text-align-last: end; padding: 0px !important">
-                <p><i class="fa fa-clock-o"></i>{{sent?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p>
+                <p><i class="fa fa-clock-o"></i>&nbsp;{{sent?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p>
                 </ion-col>
               </ion-row>
               <ion-row *ngIf="sent.subject">
@@ -124,13 +135,14 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
+    <ion-row>
+    <ion-col offset-33>
+     <button *ngIf="nextPageURL2!=null && nextPageURL2!=''" ion-button color="dark" clear 
+     (click)="doInfinite2($event)"><i class="fa fa-angle-down"></i></button>
+	 </ion-col>
+   </ion-row>
   </ion-list>
-</ion-slide>
 
-</ion-slides>
 </div>
 
 
@@ -147,6 +159,6 @@ white-space: nowrap;
  }
  .unreadmsg
  {
-  background-color:red !important;
+
  }
 </style>

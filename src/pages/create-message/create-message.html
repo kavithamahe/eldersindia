@@ -11,18 +11,22 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons left>
+    <!-- <ion-buttons left>
     <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
+    </ion-buttons> -->
+    <ion-title text-center>Compose Message</ion-title>
+     <ion-buttons right>
+    <button ion-button (click)="openCamera()">
+        <i class="fa fa-paperclip" style="margin-right:5px; font-size:22px;"></i></button>
     </ion-buttons>
-    <ion-title text-center>Compose</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding style="background:#fff;">
-<form (ngSubmit)="sendMessage()" [formGroup]="messageForm">
+<form [formGroup]="messageForm">
 <br>
 <ion-list class="create-message">
 
@@ -31,14 +35,15 @@
   <p *ngIf="!messageForm.controls.toAddress.valid && (messageForm.controls.toAddress.dirty || submitAttempt)" class="err-reds">Please select to</p>
   <p *ngIf="customErr" class="err-reds">Please select Valid To address</p>
   <ion-item>
-    <ion-input type="text" placeholder="Subject" formControlName="subject" [(ngModel)]="subject"></ion-input>
+    <ion-input type="text"  placeholder="Subject" formControlName="subject" [(ngModel)]="subject"></ion-input>
   </ion-item>
   <p *ngIf="!messageForm.controls.subject.valid && (messageForm.controls.subject.dirty || submitAttempt)" class="err-reds">Please enter subject</p>
   <ion-item>
      <ion-textarea placeholder="Message" formControlName="message" [(ngModel)]="message"></ion-textarea>
   </ion-item>
   <p *ngIf="!messageForm.controls.message.valid && (messageForm.controls.message.dirty || submitAttempt)" class="err-reds">Please enter message</p>
-  <button ion-button class="btn-right">
+          <p>{{file_name}}</p>
+  <button ion-button class="btn-right" (click)="sendMessage()">
   <ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;
   Send
 </button>

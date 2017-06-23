@@ -35,7 +35,8 @@
     <div [ngSwitch]="getconnections">
       <ion-list *ngSwitchCase="'myConnections'"> 
         <ion-list *ngIf="connectionsaction == 'received'">
-        <ion-segment-button>Received</ion-segment-button>
+        <ion-segment-button>Received Requests</ion-segment-button>
+        <ion-searchbar *ngIf="receivedRquestInfo.length != 0" (input)="receivedsearch($event)"></ion-searchbar>
             <div *ngFor="let request of receivedRquestInfo">
               <ion-item-sliding class="inbox-sends">
                 <ion-item>
@@ -47,7 +48,7 @@
                     </ion-col>
                     <ion-col width-67>
                       <h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} </h6>
-                      <p class="connection-pages"><i class="fa fa-inbox"> </i> {{request?.connections?.email}}</p>
+                      <p class="connection-page"><i class="fa fa-inbox"> </i> {{request?.connections?.email}}</p>
                       <p class="connection-page" [hidden]="!request?.connections?.location">
                       <i class="fa fa-map-marker"></i> {{request?.connections?.location}}    
                       </p>
@@ -66,7 +67,8 @@
             </ion-infinite-scroll>   
           </ion-list>
           <ion-list *ngIf="connectionsaction == 'sent'">
-          <ion-segment-button>Sent</ion-segment-button>  
+          <ion-segment-button>Sent Requests</ion-segment-button>
+           <ion-searchbar *ngIf="sentRquestInfo.length != 0" (input)="sendsearch($event)"></ion-searchbar>  
             <div *ngFor="let request of sentRquestInfo">
               <ion-grid>
                 <ion-row>
@@ -77,7 +79,7 @@
                   </ion-col>
                   <ion-col width-67>
                     <h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}}</h6>
-                    <p class="connection-pages"><i class="fa fa-inbox"> </i> {{request?.connections?.email}}</p>
+                    <p class="connection-page"><i class="fa fa-inbox"> </i> {{request?.connections?.email}}</p>
                     <p class="connection-page" [hidden]="!request?.connections?.location">
                     <i class="fa fa-map-marker"></i> {{request?.connections?.location}}    
                     </p>
@@ -91,8 +93,8 @@
           </ion-list>
 
           <ion-list *ngIf="connectionsaction == 'all'">
-          <ion-segment-button>All</ion-segment-button>
-            <ion-searchbar (input)="search($event)"></ion-searchbar>
+          <ion-segment-button>All Connections</ion-segment-button>
+            <ion-searchbar *ngIf="allConnectionsInfo.length != 0" (input)="search($event)"></ion-searchbar>
             <div *ngFor="let all of allConnectionsInfo; let islast=last;">
               <ion-grid>
                 <ion-row>
@@ -103,7 +105,7 @@
                   </ion-col>
                 <ion-col width-67>
                   <h6 class="name-conne" (click)="CommunityUserWall(all?.id)">{{all?.connections?.name}} </h6>
-                  <p class="connection-pages"><i class="fa fa-inbox"> </i> {{all?.connections?.email}}
+                  <p class="connection-page"><i class="fa fa-inbox"> </i> {{all?.connections?.email}}
                   </p>
                   <p class="connection-page" [hidden]="!all?.connections?.location">
                   <i class="fa fa-map-marker"></i> {{all?.connections?.location}}</p>
@@ -118,7 +120,7 @@
 
           </ion-list>
         <ion-list *ngSwitchCase="'addConnections'"> 
-          <ion-searchbar (input)="search1($event)"></ion-searchbar>
+          <ion-searchbar *ngIf="addConnectionInfo.length != 0" (input)="search1($event)"></ion-searchbar>
             <ion-list *ngFor="let request of addConnectionInfo">
               <ion-grid>
                 <ion-row>

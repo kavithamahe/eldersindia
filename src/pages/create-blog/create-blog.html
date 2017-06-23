@@ -20,7 +20,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="contect-bg-moblie">
+<ion-content padding style="background:#fff;">
 <ion-list class="createblog-form">
 <form  [formGroup]="blogForm">
 
@@ -47,31 +47,50 @@
 	</ion-item>
 	<p *ngIf="!blogForm.controls.description.valid && (blogForm.controls.description.dirty || submitAttempt)" class="err-reds">Please enter description</p>
   </form>
-  <ion-label stacked class="liste-names">Featured Image</ion-label>
-   <button ion-button (click)="accessGallery('featured')">Browse</button>
-    <img [src]="featuredImage" *ngIf="featuredImage" />
-    <ion-label stacked class="liste-names">Banner Image</ion-label>
-    <button ion-button (click)="accessGallery('banner')">Browse</button>
+  <ion-row>
+  <ion-col>
+   <ion-label stacked class="upimag">Featured Image</ion-label>
+  	<button ion-button (click)="accessGallery('featured')" class="brw-btn"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Browse</button>
+	<img [src]="featuredImage" *ngIf="featuredImage" />
+  </ion-col>
+  </ion-row>
+    <ion-row>
+    <ion-col>
+      <ion-label stacked class="upimag">Banner Image</ion-label>
+    <button ion-button (click)="accessGallery('banner')" class="brw-btn"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Browse</button>
     <img [src]="bannerImage" *ngIf="bannerImage" />
-    <ion-label stacked class="liste-names">Tags:</ion-label>
+  </ion-col>
+    </ion-row>
+<ion-row>
+<ion-col>
+    <ion-label stacked class="upimag">Tags:</ion-label>
     <!--<rl-tag-input [(ngModel)]="tagsModel" [addOnBlur]="true" [addOnEnter]="true" [autocomplete]="true"  [autocompleteItems]="tags" placeholder="Tags"></rl-tag-input>-->
         <rl-tag-input class="rd-tags" [(ngModel)]="tagsModel" [addOnBlur]="false" [addOnEnter]="true"  [autocompleteItems]="tags" [autocomplete]="true" placeholder="Tags" (keyup)="getTagsList($event)" [ngModelOptions]="{standalone: true}"></rl-tag-input>
-  <div radio-group [(ngModel)]="allowComments" [ngModelOptions]="{standalone: true}">
-  <ion-list-header style=" background:#fff; margin-bottom:0px;">
-   <p class="liste-names"> Allow Comments</p>
-  </ion-list-header>
-  <ion-item>
-    <ion-label class="liste-names">Yes</ion-label>
-    <ion-radio value="1"></ion-radio>
-  </ion-item>
-  <ion-item>
-    <ion-label class="liste-names">No</ion-label>
-    <ion-radio value="0"></ion-radio>
-  </ion-item> 
+</ion-col>
+</ion-row>
+    
+
+
+  <div radio-group [(ngModel)]="allowComments" [ngModelOptions]="{standalone: true}" style="margin-top:5px;">
+
+<ion-row>
+<ion-col width-50>
+   <p class="upimag" style="padding-left:8px !important;"> Allow Comments :</p>
+   </ion-col>
+<ion-col width-30>
+ <ion-radio value="1">Yes</ion-radio><ion-label style=" float:left; margin:0px; font-size:15px; color:#404996;">Yes &nbsp;</ion-label>
+
+	</ion-col>
+	  <ion-col width-20>
+
+    <ion-radio value="0"></ion-radio>    <ion-label style="float:left;margin:0px;font-size:15px;color:#404996;">No&nbsp;</ion-label>
+	</ion-col>
+  </ion-row>
+
 </div>
-<button ion-button icon-left full (click)="createBlog()">
-  Save
-</button>
+<br/>
+<button ion-button class="brw-btns" icon-left full (click)="createBlog()"> Save</button>
+<br/><br/>
 </ion-list>
 </ion-content>
 
@@ -79,4 +98,15 @@
 .list-header-md{border-top:0px solid #222;}
 [_nghost-fub-42]{}
 .liste-names{padding-left:0px; color:#404998;}
+.rd-tags{  border: 1px solid #ccc;
+    border-radius: 0;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    margin-left:7px;
+    max-height: 300px;
+    min-height: 80px;
+    padding: 7px;
+    width:96%;}
 </style>

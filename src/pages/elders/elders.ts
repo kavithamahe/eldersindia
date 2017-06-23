@@ -482,7 +482,7 @@ imageURL:any;
 
           if(this.functionality == "edit"){
           if(!this.authForm.valid){
-            this.submitAttempt = true;
+            this.submitAttempt = true; 
            }
           else
           {
@@ -537,6 +537,7 @@ imageURL:any;
         if(this.functionality != "edit" && this.functionality !="profileEdit"){      
     if(!this.authForm.valid){
       this.submitAttempt = true;
+      this.communityServices.showToast("Please Enter The Required Details");
     }
     else{
       this.submitAttempt = false;

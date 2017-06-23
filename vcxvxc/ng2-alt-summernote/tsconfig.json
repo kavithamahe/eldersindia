@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "sourceMap": true,
+    "inlineSources": true,
+    "target": "es5",
+    "declaration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipDefaultLibCheck": true
+  },
+  "lib": [
+    "es2015",
+    "dom"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "files": [
+    "ng2-alt-summernote.ts"
+  ]
+}

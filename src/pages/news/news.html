@@ -21,12 +21,13 @@
 </ion-header>
 
 
-<ion-content padding>
-<ion-card *ngFor="let news of newsLists" >
+<ion-content padding class="content-intop">
+<!-- <ion-searchbar (input)="newssearch($event)"></ion-searchbar> -->
+<ion-card *ngFor="let news of newsLists"  class="newslisted">
 <div (click)="viewNews(news?.id)">
  <img src="{{imageUrl+news?.featured_image}}" [hidden]="!news?.featured_image">
   <ion-item text-wrap>   
-    <h2 class="primary-color pro-info">{{news?.title}}</h2>
+    <h2>{{news?.title}}</h2>
     <p class="timedate"><ion-icon ios="ios-person" md="md-person"></ion-icon> {{news?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{news?.post_date | date :"MMM dd y"}}</p>
   </ion-item>
  <!-- <ion-card-content>
@@ -44,3 +45,4 @@
  </ion-item>
  </ion-card>
 </ion-content>
+<style>.item-ios{padding-left:none;}</style>

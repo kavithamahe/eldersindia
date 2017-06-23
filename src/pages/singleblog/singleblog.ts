@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController,ToastController } from 'ionic-angular';
+import { NavController, NavParams,ActionSheetController,LoadingController,ToastController,Platform } from 'ionic-angular';
 //import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
@@ -36,7 +36,7 @@ showReply:any;
 replyPost:any;
 commentForm: FormGroup;
 submitAttempt: boolean = false;
-  constructor(public formBuilder: FormBuilder,public navCtrl: NavController, public navParams: NavParams,public blogListService:BlogListService,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
+  constructor(public formBuilder: FormBuilder,public navCtrl: NavController,public platform: Platform,public actionsheetCtrl: ActionSheetController, public navParams: NavParams,public blogListService:BlogListService,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('id').then((id) => { this.user_id=id;});
@@ -80,8 +80,47 @@ submitAttempt: boolean = false;
       }
     );
   }
-  
- 
+  openMenu(id) {
+    let actionSheet = this.actionsheetCtrl.create({
+      title: '',
+      cssClass: 'action-sheets-basic-page',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'trash' : null,
+          handler: () => {
+            this.deleteComment(id);
+          }
+        },
+      
+      ]
+    });
+    actionSheet.present();
+  }
+ public deleteComment(commentId)
+  {
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.blogListService.deleteComment(commentId).subscribe(
+     (deleteComment) => {
+       this.viewComments(this.blogId);
+     this.showToaster(deleteComment.result);  
+      loader.dismiss(); 
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+         loader.dismiss();
+      }
+    );   
+  }
   public blogComment(blogId)
   {
     if(!this.commentForm.valid){
@@ -133,29 +172,7 @@ submitAttempt: boolean = false;
     );
     
   }
-  public deleteComment(commentId)
-  {
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-    this.blogListService.deleteComment(commentId).subscribe(
-     (deleteComment) => {
-       this.viewComments(this.blogId);
-     this.showToaster(deleteComment.result);  
-      loader.dismiss(); 
-    },
-    (err) => { 
-        if(err.status===401)
-        {
-        this.showToaster(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-        }
-         loader.dismiss();
-      }
-    );   
-  }
+  
   public showToaster(message)
   {
    let toast = this.toastCtrl.create({

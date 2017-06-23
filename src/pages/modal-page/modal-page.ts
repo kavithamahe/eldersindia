@@ -21,6 +21,7 @@ import { Storage } from '@ionic/storage';
 export class ModalContentPage {
 
   dependentLists:any=[];
+  lead_time:any=[];
   userType:any;
   submitAttempt:any;
   modalForm: FormGroup;
@@ -38,11 +39,12 @@ export class ModalContentPage {
      //let loading = this.loadingCtrl.create({content: 'Please wait...!'});
      //loading.present();
      this.dependentLists = params.get("dependentList");
+     this.lead_time = params.get("lead_time");
      if(params.get("vendor") != undefined){
       this.vendor = this.params.get("vendor").name;
     }
      this.modalForm = formBuilder.group({
-        problem: ['',Validators.compose([Validators.minLength(5), Validators.required])],
+        problem: ['',Validators.compose([Validators.required])],
         date: ['',Validators.compose([Validators.required])],
         time: ['',Validators.compose([Validators.required])],
         contact: ['',Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.pattern('[0-9]*'), Validators.required])],
@@ -82,6 +84,7 @@ export class ModalContentPage {
     
     if(!this.modalForm.valid || (this.terms == false)){
       this.submitAttempt = true;
+      this.providerService.showToast("Please Enter The Required Fields");
           if(this.terms == false){
             this.checkTerms = true;
           }

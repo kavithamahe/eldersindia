@@ -179,7 +179,7 @@ modal(){
     }
 
   toggleRequestService(){
-     let service_modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.vendorList.dependentLists,vendor:this.vendorList.vendorDetails});    
+     let service_modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor:this.vendorList.vendorDetails});    
     service_modal.present();
     service_modal.onDidDismiss(data =>{
       if(data == "dismiss"){

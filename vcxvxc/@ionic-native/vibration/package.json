@@ -1,0 +1,51 @@
+{
+  "_from": "@ionic-native/vibration@3.12.1",
+  "_id": "@ionic-native/vibration@3.12.1",
+  "_inBundle": false,
+  "_integrity": "sha512-xqdUtcvVu2rM5A/RbK8x4EGVtEbAaqwtS/lJ9sGjcvOcEoxfQbBRGEgkwzhj20u0hyznx6do9Sx4Wn2Ns2YM7g==",
+  "_location": "/@ionic-native/vibration",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@ionic-native/vibration@3.12.1",
+    "name": "@ionic-native/vibration",
+    "escapedName": "@ionic-native%2fvibration",
+    "scope": "@ionic-native",
+    "rawSpec": "3.12.1",
+    "saveSpec": null,
+    "fetchSpec": "3.12.1"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@ionic-native/vibration/-/vibration-3.12.1.tgz",
+  "_shasum": "9ebaa9278db27d4a653e506f7898cc9eebc7d3be",
+  "_spec": "@ionic-native/vibration@3.12.1",
+  "_where": "D:\\kavi\\mob-elder",
+  "author": {
+    "name": "ionic"
+  },
+  "bugs": {
+    "url": "https://github.com/ionic-team/ionic-native/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Ionic Native - Native plugins for ionic apps",
+  "homepage": "https://github.com/ionic-team/ionic-native#readme",
+  "license": "MIT",
+  "module": "index.js",
+  "name": "@ionic-native/vibration",
+  "peerDependencies": {
+    "@ionic-native/core": "^3.6.0",
+    "@angular/core": "*",
+    "rxjs": "^5.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionic-team/ionic-native.git"
+  },
+  "typings": "index.d.ts",
+  "version": "3.12.1"
+}

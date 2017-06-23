@@ -46,7 +46,7 @@ status:any;
       // this.blogId=navParams.get("blogId");
       if(this.messages=='inbox')
       {
-      this.onInit();
+      this.onInit("");
       }
       else
       {
@@ -55,37 +55,12 @@ status:any;
       })
   	});
   }
-   slideChanged() {
-    let currentIndex = this.prev_index;
-    if(currentIndex == 1){
-      this.messages = "inbox";
-       this.onInit();
-    }else{
-      this.messages = "sent";
-      this.sent();
-    }
-    this.prev_index = this.slides.getActiveIndex();
-    console.log("Current index is", currentIndex);
-  }
-   changeSlide(){
-    this.slides.freeMode = true;
-    if(this.messages == 'sent'){
-    this.slides.slideTo(1);  
-    //this.slides.slideNext(300,true);
-    
-    
-    }else{
-      this.slides.slideTo(0);  
-      //this.slides.slidePrev(300,true);
-      
-    }
-    
-  }
-  public onInit()
+  
+  public onInit(searchData)
   {
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.messagesService.inbox().subscribe(
+    this.messagesService.inbox(searchData).subscribe(
      (inbox) => {
       this.inboxInfo=inbox.result.data;
       this.status=this.inboxInfo.read_status;
@@ -106,6 +81,13 @@ status:any;
       }
     );
   }
+   getItems(ev) {
+    
+    var val = ev.target.value;
+    this.onInit(val);
+   
+  }
+  
   public sent()
   {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -160,7 +142,7 @@ status:any;
       else{
         infiniteScroll.enable(false);
       }
-      infiniteScroll.complete();
+      
     }, 500);
   }
   inboxscroll()
@@ -176,7 +158,7 @@ status:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -195,7 +177,6 @@ status:any;
       else{
         infiniteScroll.enable(false);
       }
-      infiniteScroll.complete();
     }, 500);
   }
   sentScroll()
@@ -222,8 +203,7 @@ status:any;
   }
   showConfirm(messageId,viewType){
      let confirm = this.alertCtrl.create({
-     title:'Confirm',
-     subTitle: 'Message will be deleted',
+     subTitle: 'This Message will be deleted',
        buttons: [
         {
           text: 'Cancel',
@@ -253,7 +233,7 @@ status:any;
       } 
       else
       {
-        this.onInit();
+        this.onInit("");
         loader.dismiss();
       }  
     },

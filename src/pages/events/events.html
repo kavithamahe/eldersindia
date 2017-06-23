@@ -21,13 +21,13 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="content-intop">
 <ion-card *ngFor="let events of eventsLists" >
 <div (click)="viewEvents(events?.id)">
  <img src="{{imageUrl+events?.featured_image}}" [hidden]="!events?.featured_image">
-  <ion-item text-wrap>   
-    <h2 class="primary-color feed-post pro-info" >{{events?.title}}</h2>
-    <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{events?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{events?.post_date | date :"MMM dd y"}}</p>
+  <ion-item text-wrap class="events-shows">   
+    <h2>{{events?.title}}</h2>
+    <p class="timedate" style="padding-left:3px;"><i class="fa fa-user" aria-hidden="true"></i> {{events?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{events?.post_date | date :"MMM dd y"}}</p>
   </ion-item>
   <!--<ion-card-content>
     <p [innerHTML]="events?.description | words : 60 : '...'"></p>
@@ -39,7 +39,7 @@
  </ion-infinite-scroll>
  <ion-card *ngIf="eventsLists.length<=0">
  <ion-item>
- <p>No Record Found.</p>
+ <p style="color:red; text-align:center;">No Record Found.</p>
  </ion-item>
  </ion-card>
 </ion-content>

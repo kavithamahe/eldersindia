@@ -23,7 +23,7 @@
 </ion-header>
 
 
-<ion-content padding style="background:#fff;">
+<ion-content padding style="background:#fff;" class="signup-style">
 
 <div class="profile-edit">
 
@@ -58,7 +58,29 @@
   </div>
 </div>
 </ion-content>
-
+<ion-footer>
+<ion-navbar color="primary">
+  <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
+    <ion-buttons>
+      <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
+        <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
+        <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+        <div style="padding-left: 10px !important;">
+          Back
+        </div>
+      </button>
+      <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()">
+        <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
+        <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+        <div style="padding-left: 10px !important;">
+          Back
+        </div>
+      </button>
+    </ion-buttons>
+   
+  </ion-toolbar>
+  </ion-navbar>
+</ion-footer>
 <style>
 .text-input-md{ margin:0px;}
 .item-block{ border-bottom:none !important;}

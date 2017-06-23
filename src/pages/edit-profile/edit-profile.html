@@ -5,15 +5,15 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
+<ion-navbar color="primary">
+  
     <ion-title>Edit Profile</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding style="background:#fff;">
-<div class="profile-edit"><span  *ngIf="user_type =='sponsor' " class="profile-img"><img [src]="imageURL+profileData?.logo" > </span>
+<div class="profile-edit"><span  *ngIf="user_type =='sponsor' " class="profile-img"><img [src]="imageURL+profileData?.avatar" > </span>
 			<p>{{profileData?.company_name}}</p></div>
 
 	<form [formGroup]="edit_profile_Form">
@@ -85,7 +85,7 @@
 	   
 	    <ion-row>
 		<ion-col>
-	    <button ion-button class="uploadimg" color="primary" (click)="accessGallery()"><i class="fa fa-upload"></i>&nbsp; Browse...</button>
+	    <button ion-button class="uploadimg" color="primary" (click)="accessGallery()"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Browse...</button>
 				</ion-col>
 				<ion-col>
 				 <img [src]="base64Image" *ngIf="base64Image" width="90" height="90" />
@@ -98,18 +98,19 @@
 	
 </ion-content>
 <ion-footer>
+<ion-navbar color="primary">
   <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
     <ion-buttons>
       <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
-        <ion-icon class="gly-rotate-180" name="send"></ion-icon>
+     <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
         <div style="padding-left: 10px !important;">
           Back
         </div>
       </button>
       <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()">
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
-        <ion-icon class="gly-rotate-180" name="send"></ion-icon>
+  <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
         <div style="padding-left: 10px !important;">
           Back
         </div>
@@ -126,6 +127,7 @@
       </button>
     </ion-buttons>
   </ion-toolbar>
+  </ion-navbar>
 </ion-footer>
 <style>
 .text-input-md{ margin:0px;}

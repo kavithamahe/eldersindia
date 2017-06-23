@@ -9,6 +9,7 @@ import { FilePath } from '@ionic-native/file-path';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 
 
+
 @Injectable()
 export class CommunityServices {
   headers:any;
@@ -31,7 +32,7 @@ export class CommunityServices {
   //id:number;
   user_id:number = 0;
   getCommunityPostsUrl:any;
-   constructor(private transfer: Transfer, private filePath: FilePath,public appConfig:AppConfig,public http: Http,public storage:Storage,public toastCtrl: ToastController) {
+   constructor(public appConfig:AppConfig,public http: Http,private transfer: Transfer,private filePath: FilePath,public storage:Storage,public toastCtrl: ToastController) {
      this.getCommunityPostsUrl = appConfig.setrooturl();
     this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
@@ -46,32 +47,31 @@ export class CommunityServices {
    }); 
   }
 
-  fileTransferIonic(uri){
-     const fileTransfer: TransferObject = this.transfer.create();
-
-
-    // regarding detailed description of this you cn just refere ionic 2 transfer plugin in official website
-      let options1: FileUploadOptions = {
-         fileKey: 'file',
-         fileName: 'avatar.png',
-         // headers: this.options,
-         params: {"app_key":"Testappkey","name":"saravanan","dob":"09-04-1995", "mobile":"9566631107"},
-         chunkedMode : false
-      
-      }
-
-      fileTransfer.upload(uri, encodeURI('http://192.168.1.200:8095/fileup/fileupload.php'), options1)
-       .then((data) => {
-       // success
-       console.log(data);
-       alert("success"+JSON.stringify(data));
-       }, (err) => {
-       // error
-       console.log(err);
-       alert("error"+JSON.stringify(err));
-           });
+  initialize(){
+    this.storage.ready().then(() => {
+    this.storage.get('token').then((token) => { this.token=token;
+      })    
+    this.storage.get('rooturl').then((rooturl) => { this.getCommunityPostsUrl=rooturl; });
+    this.storage.get('id').then((id) => { this.user_id=id; })
+    
+   }); 
   }
-  file_Path:any;
+
+  fileUpload(id,file){
+ let formdata = new FormData()
+ let posts:{community_id:string,image:File,videourl:string,message:string} = { community_id:id, image:file,videourl:"",message:"" }
+     return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,posts,this.options)
+      .map(res =>res.json());
+  }
+
+  postCommunity(id,image,videoUrl,posts,links){
+    console.log("kavitha"+image);
+     this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links, "app":'' }
+
+     return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,this.posts,this.options)
+      .map(res =>res.json());
+  }
+file_Path:any;
     upload(imageData)
     {
       
@@ -94,8 +94,8 @@ export class CommunityServices {
          headers: {}
       
       }
-
-  fileTransfer.upload(imageData, 'http://192.168.1.200:8095/fileup/fileupload.php', options1)
+      
+  fileTransfer.upload(imageData, `${this.getCommunityPostsUrl }sendMessage`,options1)
    .then((data) => {
      // success
      alert("success");
@@ -105,23 +105,31 @@ export class CommunityServices {
    });
  
 }
-  initialize(){
-    this.storage.ready().then(() => {
-    this.storage.get('token').then((token) => { this.token=token;
-      })    
-    this.storage.get('rooturl').then((rooturl) => { this.getCommunityPostsUrl=rooturl; });
-    this.storage.get('id').then((id) => { this.user_id=id; })
+  fileUploads(id,file){
+    this.headers = new Headers();
+    this.headers.append('Content-Type',undefined);
+    //this.headers.append('Authorization','Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEwMSwiaXNzIjoiaHR0cDpcL1wvMTgzLjgyLjMzLjIzMjo4MDk3XC9hcGlcL2xvZ2luIiwiaWF0IjoxNDk2MzE0ODMyLCJleHAiOjE0OTcxNzg4MzIsIm5iZiI6MTQ5NjMxNDgzMiwianRpIjoiREI3cVloa2Zva3k4OUk2SiJ9.ZGZUZaNUDMONtvL2kes4SqSsu-JvLYhJYX4EU3WL0aE');
+    this.options = new RequestOptions({headers: this.headers});
+
+
+     let fd = new FormData();
+        fd.append('file_name', name);
+        fd.append('file_path', file);
+        fd.append('name',"avatar");
+        let send:{message:{attachments:[{file_name:FormData,file_path:ImageData}],to:{title:string,description:string,image:string,originalObject:{id:string,avatar:string,email:string,user_type:string,friend_name:string}},subject:string,message:string
+    }} = {"message":{"attachments":[{"file_name":name,"file_path":file}],"to":{"title":"","description":"","image":"","originalObject":{"id":id,"avatar":"","email":"","user_type":"","friend_name":""}},"subject":"","message":""
+    }}
+       return this.http.post(`${this.getCommunityPostsUrl }sendMessage`, send,this.options).map(res => res.json());
+
+  }
+sendMessage(id,subject,message,name,file23){
+    this.send = {"message":{"attachments":[{"file_name":name,"file_path":file23}],"to":{"title":"","description":"","image":"","originalObject":{"id":id,"avatar":"","email":"","user_type":"","friend_name":""}},"subject":subject,"message":message,
     
-   }); 
-  }
+}}
 
-  fileUpload(id,file){
- let formdata = new FormData()
- let posts:{community_id:string,image:File,videourl:string,message:string} = { community_id:id, image:file,videourl:"",message:"" }
-     return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,posts,this.options)
+   return this.http.post(`${this.getCommunityPostsUrl }sendMessage`,this.send,this.options)
       .map(res =>res.json());
-  }
-
+}
   showToast(messageData){
     let toast = this.toastCtrl.create({
         message: messageData,
@@ -230,12 +238,7 @@ myprofile(id){
       .map(res =>res.json());
 }
  
- sendMessage(id,attachment,subject,message){
-    this.send = {"message":{"attachments":[],"to":{"title":"","description":"","image":"","originalObject":{"id":id,"avatar":"","email":"","user_type":"","friend_name":""}},"subject":subject,"message":message}}
-
-   return this.http.post(`${this.getCommunityPostsUrl }sendMessage`,this.send,this.options)
-      .map(res =>res.json());
-}
+ 
  
  //-------------------------------//
 
@@ -314,12 +317,6 @@ myprofile(id){
   }
 
 
-  postCommunity(id,image,videoUrl,posts,links){
-     this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links, "app":'' }
-
-     return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,this.posts,this.options)
-      .map(res =>res.json());
-  }
 
  deleteComment(id){
    this.delete={"info": {"comment_id": id}}

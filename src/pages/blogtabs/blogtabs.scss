@@ -1,0 +1,8 @@
+page-blogtabs {
+.tabs-md .tabbar{ background:#404996;}
+.tabs-md .tab-button-icon{ color:#fff;}
+.tabs-md .tab-button[aria-selected="true"]{ color:#fff;}
+.tabs-md .tab-button[aria-selected="true"] .tab-button-icon{ color:#fff; }
+
+.tabs-md[tabsLayout="icon-top"] .has-icon .tab-button-text{ color:#fff;}
+}

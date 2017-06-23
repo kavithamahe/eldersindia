@@ -1,19 +1,21 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Compose Message
-    </ion-title>
-     <ion-buttons start item-right class="close-iconss">
-      <button ion-button (click)="dismiss()">
-        <span ion-text color="primary" showWhen="ios">Cancel</span>
-        <ion-icon ios="ios-close-circle-outline" md="md-close-circle" ></ion-icon>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dismiss()">
+         <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-  </ion-toolbar>
+    <ion-title text-center>Compose Message</ion-title>
+     <ion-buttons right>
+    <button ion-button (click)="openCamera()">
+         <i class="fa fa-paperclip" style="margin-right:5px; font-size:22px;"></i></button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
-<ion-content>
+<ion-content class="content-intop">
+<div class="change-pass-content">
 	<form [formGroup]="authForm">
-		<ion-card padding>
+<br/>
   			<ion-list>
       			<ion-row>
 		        	<ion-label>To</ion-label>
@@ -42,13 +44,12 @@
 			    </ion-row>
             	<div *ngIf="!authForm.controls.message.valid  && (authForm.controls.message.dirty || submitAttempt)">
                 	<p style="color:red" class="valid">This field is required</p>
-           		</div>
-	       			 <br>
-     			<button ion-button color="dark" outline (click)="openCamera()">
-     			<ion-icon name="add"></ion-icon>Attachment</button>
+           		</div>	
+     			<p>{{file_name}}</p>
       			<button (click)="sendMessage()" ion-button class="btn-right">
   				<ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;Send</button>
 			</ion-list>
-  		</ion-card>
+  
   	</form>
+	</div>
 </ion-content>

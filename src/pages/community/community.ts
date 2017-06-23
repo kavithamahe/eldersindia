@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ModalController,ActionSheetController , NavController, NavParams,AlertController,LoadingController,Platform,ToastController,PopoverController } from 'ionic-angular';
+import { ModalController,ActionSheetController, NavController, NavParams,AlertController,LoadingController,Platform,ToastController,PopoverController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
@@ -99,8 +99,7 @@ files:any;
   }
 showConfirm(id){
      let confirm = this.alertCtrl.create({
-     title:'Confirm',
-     subTitle: 'comment will be deleted',
+     subTitle: 'This post will be deleted',
        buttons: [
         {
           text: 'Cancel',
@@ -153,11 +152,6 @@ toggleContent(){
       return null;
     }
   }
-  getDate(stringDate){
-      var dateOut = new Date(stringDate);
-      dateOut.setDate(dateOut.getDate());
-      return dateOut;
-    };
   showComment(post){
     let commentModal = this.modal.create(CommunitycommentsPage, { posts: post });
    commentModal.present();
@@ -207,7 +201,7 @@ toggleContent(){
       this.communityDetailData = users.result.info;
       this.members =  users.result.info.members;
       this.show_member = this.members.length;
-      if(this.show_member>3){
+      if(this.show_member>7){
         this.viewMore=true;
       }
       loader.dismiss();
@@ -264,7 +258,7 @@ toggleContent(){
     loader.present();
 
    this.communityServices.addLike(likeObj).subscribe(data =>{
-     this.showToast(data.result);
+     this.showToast(data.result.info.message);
       this.communityList(this.community_id);
       loader.dismiss();
    },
@@ -328,6 +322,7 @@ metaLink:any = "";
     })
      }
      else{
+       loader.dismiss();
      this.showToast("Enter message and Post");
    }
    }
@@ -426,7 +421,7 @@ metaLink:any = "";
  showModel(member)
    {
     
-   let modal = this.popoverCtrl.create(CommunitymembersPage,{members:member});
+   let modal = this.modal.create(CommunitymembersPage,{members:member});
     modal.present();
      
    }  

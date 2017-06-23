@@ -10,6 +10,7 @@
 	        <ion-icon name="home"></ion-icon>
 	    </button>
     </ion-buttons>
+   
     <ion-title text-center text-capitalize>{{communityDetailData?.community_name}}</ion-title>
   </ion-navbar>
 </ion-header>
@@ -37,12 +38,13 @@
       			<p> &nbsp;Members</p>
 			</ion-item>
 				<div *ngFor="let member of members; let i=index" text-wrap>
-					<div *ngIf="i<= 2">
-						<ion-item class="memb-list">
+					<div *ngIf="i<= 6">
+						<ion-item class="memb-list" [hidden]="!member?.avatar">
 							<ion-col>
 								<img (click)="membersProfile(member.uid)" 
-								[src]="imageUrl+member?.avatar" [hidden]="!member?.avatar" width="100" height="52" />
-								<small class="mem-name">{{member.name | words :1 : '....'}}</small>
+								[src]="imageUrl+member?.avatar" width="100" height="52" />
+								<small class="mem-name">{{member.name | words :1 : '....'}}
+								</small>
 							</ion-col>
 						</ion-item>
 					</div>
@@ -56,7 +58,6 @@
 				</ion-item>
 		</ion-item>
 	</div>
-
 	<div *ngIf="communityDetailData?.isJoined" class="mem-name-update">
 		<h2 class="wel-comemem">Update Status</h2>
 			<div style="padding:0px !important;">
@@ -89,11 +90,12 @@
 								</ion-item>
 									<small style=" float:left;">( Youtube,Dailymotion,Vimeo,Wine)
 									</small>
-								<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
-	                				<p style="color:red" class="valid">Please enter valid video url</p>
-           						</div>
+								
 							</ion-col>
 						</ion-row>
+						<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
+	                	<p style="color:red; font-size: 14px;" class="valid">Please enter valid video url</p>
+           				</div>
 					</form>
 				</div>
 		   	</div>
@@ -111,9 +113,9 @@
 	        		</ion-col>
 	        		<ion-col width-60>
 			          	<h2 (click)="communityProfile(user.uid)">{{user.name}}</h2>
-			          		<p class="time-datem"><i class="fa fa-clock-o"></i>
+			          		<em class="time-datem"><i class="fa fa-clock-o"></i>
 			          		{{user.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
-			          		</p>
+			          		</em>
 			        </ion-col>
 					<ion-col width-20>
 						<button *ngIf="user.uid == user_id" ion-button color="dark" clear 
@@ -146,22 +148,28 @@
 					<p (click)="openUrl(user.metalink_url)">{{user.metalink_description}}</p>
 	         	</ion-card-content>
 			</div>
-	       	<div class="comment-liks">
+			     	<div class="comment-liks">
+
 	      		<ion-row>
-	        	    <ion-col style="padding:0px !important;">
+	        	    <ion-col text-left width-33 style="padding:0px !important;">
 				    <button ion-button clear small *ngIf=(user.likes.emoji)
 						[innerHTML]="user.likes.emoji | emojis" 
 						(click)="emojiPicker(user.id)">
 					</button>
 				      <button *ngIf=(!(user.likes.emoji)) ion-button  clear small (click)="emojiPicker(user.id)">
 
-						<p class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp; {{user.likecount}}Likes</p>
+						<p class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;{{user.likecount}}Like</p>
 						</button>
 				    </ion-col>
-				    <ion-col style="padding:0px !important;">
+				    <ion-col text-left width-33 text-left style="padding:0px !important;">
 				      <button ion-button icon-left clear small (click)="showComment(user)">
-  						<p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{user.comment_count}}+Comments</p>
+  						<p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{user.comment_count}}&nbsp;Comment</p>
 				      </button>
+				    </ion-col>
+				    <ion-col>
+					    <button ion-button icon-left clear small  
+					    *ngIf="!user.likecount == 0">
+	  					<p class="liks-comments">&nbsp;{{user.likecount}}+like it</p></button>
 				    </ion-col>
 				</ion-row>
 			</div>
@@ -172,6 +180,7 @@
     	<ion-infinite-scroll-content></ion-infinite-scroll-content>
   	</ion-infinite-scroll>	      					
 </ion-content>
+
 
 <style>
 .text-input-ios{}

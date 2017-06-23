@@ -105,8 +105,7 @@ export class CommunityprofilePage {
   }
 showConfirm(id){
      let confirm = this.alertCtrl.create({
-     title:'Confirm',
-     subTitle: 'comment will be deleted',
+     subTitle: 'This post will be deleted',
        buttons: [
         {
           text: 'Cancel',
@@ -351,7 +350,7 @@ showConfirm(id){
     loader.present();
 
    this.communityServices.addLike(likeObj).subscribe(data =>{
-     this.showToast(data.result);
+     this.showToast(data.result.info.message);
       this.profileCommunity(this.profile_uid);
       loader.dismiss();
    },

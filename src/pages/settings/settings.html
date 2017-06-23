@@ -16,36 +16,36 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Privacy Settings</ion-title>
+    <ion-title text-center>Settings</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content style="background:#fff;">
-  <ion-card>
+<ion-content class="content-intop">
+  <ion-card class="seetingslist">
       <ion-list>
 
-        <ion-item color="mistyrose" (tap)="toggle('privacy_name')">
-          <ion-label>Name</ion-label>
+        <ion-item (tap)="toggle('privacy_name')">
+          <ion-label><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Name</ion-label>
           <ion-toggle [(ngModel)]="privacy_name"></ion-toggle>
         </ion-item>
 
-        <ion-item color="seashell" (tap)="toggle('privacy_email')">
-          <ion-label>Email</ion-label>
+        <ion-item (tap)="toggle('privacy_email')">
+          <ion-label><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;Email</ion-label>
           <ion-toggle [(ngModel)]="privacy_email"></ion-toggle>
         </ion-item>
  
-        <ion-item color="mistyrose" (tap)="toggle('privacy_mobile')">
-          <ion-label>Mobile</ion-label>
+        <ion-item (tap)="toggle('privacy_mobile')">
+          <ion-label><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Mobile</ion-label>
           <ion-toggle [(ngModel)]="privacy_mobile"></ion-toggle>
         </ion-item>
 
-        <ion-item color="seashell" (tap)="toggle('privacy_location')">
-          <ion-label>Location</ion-label>
+        <ion-item (tap)="toggle('privacy_location')">
+          <ion-label><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;Location</ion-label>
           <ion-toggle [(ngModel)]="privacy_location"></ion-toggle>
         </ion-item>
 
-        <ion-item color="mistyrose" (tap)="toggle('privacy_birthday')">
-          <ion-label>Birthday</ion-label>
+        <ion-item (tap)="toggle('privacy_birthday')">
+          <ion-label><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;Birthday</ion-label>
           <ion-toggle [(ngModel)]="privacy_birthday"></ion-toggle>
         </ion-item>
 
@@ -54,13 +54,13 @@
           <ion-toggle [(ngModel)]="privacy_avatar"></ion-toggle>
         </ion-item>
         <hr/> -->
-        <ion-item color="seashell" (tap)="toggle('privacy_connection')">
-          <ion-label>Connections</ion-label>
+        <ion-item (tap)="toggle('privacy_connection')">
+          <ion-label><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Connections</ion-label>
           <ion-toggle [(ngModel)]="privacy_connection"></ion-toggle>
         </ion-item>
 
-        <ion-item color="mistyrose" (tap)="toggle('privacy_profile')">
-          <ion-label>Profile</ion-label>
+        <ion-item (tap)="toggle('privacy_profile')">
+          <ion-label><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Profile</ion-label>
           <ion-toggle [(ngModel)]="privacy_profile"></ion-toggle>
         </ion-item>
 
@@ -69,31 +69,23 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
+  <ion-toolbar color="primary"> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
     <ion-buttons>
       <button ion-button color="royal" large icon-left showWhen="ios" (click)="dashboardPage()">
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
-        <ion-icon class="gly-rotate-180" name="send"></ion-icon>
-        <div style="padding-left: 10px !important;">
-          Back
-        </div>
+         <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back
+       
       </button>
       <button ion-button color="light" large icon-left hideWhen="ios" (click)="dashboardPage()">
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
-        <ion-icon class="gly-rotate-180" name="send"></ion-icon>
-        <div style="padding-left: 10px !important;">
-          Back
-        </div>
+         <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back
+     
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button color="royal" large icon-right showWhen="ios" (click)="update()">
-        Update
-        <ion-icon name="send"></ion-icon>
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="update()">Update&nbsp;<ion-icon name="send"></ion-icon>
       </button>
-      <button ion-button color="light" large icon-right hideWhen="ios" (click)="update()">
-        Update
-        <ion-icon name="send"></ion-icon>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="update()">Update&nbsp;<ion-icon name="send"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>

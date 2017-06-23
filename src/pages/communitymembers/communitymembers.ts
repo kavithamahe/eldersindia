@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {ViewController, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { CommunityprofilePage } from '../communityprofile/communityprofile';
@@ -21,7 +21,7 @@ export class CommunitymembersPage {
  member_profiles = [];
  token:any;
  imageUrl:any;
-  constructor(public nav: NavController, public navParams: NavParams,public storage:Storage) {
+  constructor(public nav: NavController, public navParams: NavParams,public viewCtrl: ViewController,public storage:Storage) {
   	this.nav=nav;
 
   	 this.storage.ready().then(() => {
@@ -38,5 +38,7 @@ export class CommunitymembersPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommunitymembersPage');
   }
-
+dismiss(){
+    this.viewCtrl.dismiss();
+  }
 }
