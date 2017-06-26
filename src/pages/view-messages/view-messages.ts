@@ -94,7 +94,7 @@ console.log("Source file path  "+ file_path);
    this.showToaster("Downloaded Succesfully"); 
   },
    (error) => {
-    //console.log("error");
+    console.log("error");
   });
          });
 

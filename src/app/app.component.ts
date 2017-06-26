@@ -373,16 +373,11 @@ initializePreview() {
           console.log('error');
         });
 
-      push.setApplicationIconBadgeNumber(function() {
-        console.log('success');
-      }, function() {
-        console.log('error');
-      }, +data.count);
-      push.setApplicationIconBadgeNumber(function() {
+  push.setApplicationIconBadgeNumber(function() {
   console.log('success');
 }, function() {
   console.log('error');
-});
+}, 2);
       
        if (data.additionalData.foreground) {
          this.showToaster(data.message);
