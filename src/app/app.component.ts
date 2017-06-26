@@ -2,9 +2,9 @@ import { Component, ViewChild} from '@angular/core';
 
 import { Platform, MenuController, Nav, AlertController,ToastController,LoadingController } from 'ionic-angular';
 
-import { StatusBar, Splashscreen, Push } from 'ionic-native';
-import { Diagnostic } from 'ionic-native';
-import { CameraPreview, CameraPreviewRect } from 'ionic-native';
+//import { StatusBar, Splashscreen, Push } from 'ionic-native';
+//import { Diagnostic } from 'ionic-native';
+import { CameraPreview, CameraPreviewRect, Diagnostic,StatusBar, Splashscreen, Push } from 'ionic-native';
 //import { Geolocation } from '@ionic-native/geolocation';
 
 

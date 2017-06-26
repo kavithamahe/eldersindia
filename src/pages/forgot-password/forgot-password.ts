@@ -34,7 +34,7 @@ export class ForgotPasswordPage {
 submit() {
 	if(this.modalType == 'forgotPassword'){
 			if( this.mailId == ''){
-				this.service.showToast("Enter a valid E-Mail..!")	
+				this.service.showToast("Enter a valid e-mail..!")	
 			}else{
 				let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     			loader.present();

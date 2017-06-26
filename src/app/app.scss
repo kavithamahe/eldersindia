@@ -45,7 +45,7 @@ ion-content{
 }
 .post:hover{
 		background-color: #ff4000;
-
+.required:after { content:" *"; color: red; }
 }
 
 .edit{
@@ -1215,3 +1215,4 @@ page-dashboard .dashboard								    {padding:0px 0px !important;}
 .lastupdate                                                 {margin:10px;}
 //venkat
 .item-inner 											    {border-bottom-color: transparent !important;box-shadow: none !important;}
+.required:after { content:" *"; color: red; }

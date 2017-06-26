@@ -47,6 +47,7 @@ export class ModalContentPage {
       this.vendor = this.params.get("vendor").name;
     }
      this.modalForm = formBuilder.group({
+        problem: ['',Validators.compose([])],
         date: ['',Validators.compose([Validators.required])],
         time: ['',Validators.compose([Validators.required])],
         contact: ['',Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.pattern('[0-9]*'), Validators.required])],
