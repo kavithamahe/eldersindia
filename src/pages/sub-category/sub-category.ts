@@ -108,7 +108,7 @@ openSelected(sub_category_Data){
 let location_id = this.serviceLocation;
     let sub_service = sub_category_Data;
     if(this.serviceLocation==""){
-      this.providerService.showToast("Please Select the Location!");
+      this.providerService.showToast("Please select the location!");
     }else{
     this.navCtrl.push(SubCategoryServicePage,{location_id,sub_service});  
     }

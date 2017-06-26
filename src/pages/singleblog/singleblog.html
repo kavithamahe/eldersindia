@@ -53,7 +53,7 @@
   <ion-item style="padding-left:0px;">
     <ion-textarea placeholder="Comment" formControlName="comment"></ion-textarea>
   </ion-item>
-  <p *ngIf="!commentForm.controls.comment.valid && (commentForm.controls.comment.dirty || submitAttempt)" class="err-reds">Please enter comment.</p>
+  <p *ngIf="!commentForm.controls.comment.valid && (commentForm.controls.comment.dirty || submitAttempt)" class="err-reds">Please enter the comment</p>
   </form>
   <ion-item class="commend-btns">
   <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)" class="commend-btn">Submit</button>
@@ -135,5 +135,7 @@
 </ion-content>
 <style>
 .list-md .item-input:last-child{ border-bottom:0px !important;}
-
+.err-reds {
+    color: red !important;
+}
 </style>

@@ -21,9 +21,9 @@
 
 		
 		<ion-label class="liste-edit" *ngIf="user_type =='elder' ">Name</ion-label>
-		<ion-label class="liste-edit" *ngIf="user_type =='sponsor' ">Sponsor name</ion-label>
+		<ion-label class="liste-edit required" *ngIf="user_type =='sponsor' ">Sponsor name</ion-label>
 		<ion-item>
-	    <ion-input type="text" formControlName="name"></ion-input>
+	    <ion-input type="text" formControlName="name" placeholder="Sponsor name"></ion-input>
 	    </ion-item>
 		<p *ngIf="!edit_profile_Form.controls.name.valid  && (edit_profile_Form.controls.name.touched || submitAttempt)" class="err-reds">Please enter the valid Name</p>
         
@@ -40,21 +40,21 @@
       
 		<ion-label *ngIf="user_type =='sponsor' " class="liste-edit">Designation</ion-label>
         <ion-item *ngIf="user_type =='sponsor' ">
-	    <ion-input type="text" formControlName="designation"></ion-input>
+	    <ion-input type="text" formControlName="designation" placeholder="Designation"></ion-input>
 	    </ion-item>	
            				    
 
-	<ion-label class="liste-edit">Mobile number</ion-label>
+	<ion-label class="liste-edit required">Mobile number</ion-label>
         <ion-item>
-		 <ion-input type="text" formControlName="mobile_number"></ion-input>
+		 <ion-input type="text" formControlName="mobile_number" placeholder="Mobile number"></ion-input>
 	    </ion-item>
 		   
-           		<p class="err-reds" *ngIf="!edit_profile_Form.controls.mobile_number.valid  && (edit_profile_Form.controls.mobile_number.touched || submitAttempt)">Please enter the mobile  number</p>
+           		<p class="err-reds" *ngIf="!edit_profile_Form.controls.mobile_number.valid  && (edit_profile_Form.controls.mobile_number.touched || submitAttempt)">Please enter the valid mobile  number</p>
    
 	 
-        <ion-label class="liste-edit">Location</ion-label>
+        <ion-label class="liste-edit required">Location</ion-label>
 		<ion-item>
-	    <ion-input type="text" formControlName="location"></ion-input>
+	    <ion-input type="text" formControlName="location" placeholder="Location"></ion-input>
 	    </ion-item>
 	    <p class="err-reds" *ngIf="!edit_profile_Form.controls.location.valid  && (edit_profile_Form.controls.location.touched || submitAttempt)">Please enter the location</p>
 

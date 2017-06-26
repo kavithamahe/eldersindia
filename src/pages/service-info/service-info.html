@@ -50,8 +50,8 @@
    <form [formGroup]="requestForm" *ngIf(showRequestService)>
         <div class="select-detalis-in" padding style="background:#fff; border:1px solid #159deb; border-top:none;">
            <br>
-      <ion-label stacked class="label-lb">Describe The Problem</ion-label>
-          <ion-input formControlName = "problem" type="text" ></ion-input>
+      <ion-label stacked class="label-lb">Describe the problem</ion-label>
+          <ion-input formControlName = "problem" type="text" placeholder="Describe the problem" ></ion-input>
       <small *ngIf="!requestForm.controls.problem.valid  && (requestForm.controls.problem.dirty || submitAttempt)">
                 <p class="err-reds">Please enter the describe problem</p>
             </small>

@@ -29,7 +29,7 @@ blogObject:any;
 categoriesList:any;
 highlights:any='';
 tags:any=[];
-allowComments:any;
+allowComments:any=1;
 items:any;
 featuredImage:any='';
 tagsModel:any=[];
