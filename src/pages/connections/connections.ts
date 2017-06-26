@@ -284,7 +284,7 @@ All:any;
   public CommunityUserWall(profile_uid)
   {
     console.log(profile_uid);
-    this.navCtrl.setRoot(CommunityprofilePage,{profile_uid});
+    this.navCtrl.push(CommunityprofilePage,{profile_uid});
   }
   public dashboardPage()
   {
@@ -442,13 +442,13 @@ All:any;
 @Component({
   template: `<ion-list>
 <ion-item (click)="requests('all')">
-All
+All Requests
 </ion-item>
 <ion-item (click)="requests('received')">
-Received
+Received Requests
 </ion-item>
 <ion-item (click)="requests('sent')">
-Sent
+Sent Requests
 </ion-item>
 </ion-list>
   `

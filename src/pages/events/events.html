@@ -37,9 +37,7 @@
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
- <ion-card *ngIf="eventsLists.length<=0">
- <ion-item>
- <p style="color:red; text-align:center;">No Record Found.</p>
- </ion-item>
- </ion-card>
+  <ion-item padding *ngIf="!eventsLists">
+     <p class="error-clr">{{emptyRecord}}</p>
+   </ion-item>
 </ion-content>

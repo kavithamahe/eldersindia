@@ -18,22 +18,17 @@
   <form [formGroup]="modalForm">
   <br>
 			<ion-label stacked class="label-lb">Describe the need</ion-label>
-          <ion-input type="text" formControlName="problem" ></ion-input>
-	
-                <p class="err-reds" *ngIf="!modalForm.controls.problem.valid  && (modalForm.controls.problem.dirty || submitAttempt)">Please enter the need</p>
+          <ion-input type="text" [(ngModel)]="problem"  [ngModelOptions]="{standalone:true}"></ion-input>
            <ion-label stacked class="label-lb">Scheduled Date</ion-label>
 		   <ion-item>
-           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" formControlName ="date"></ion-datetime>
+           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" formControlName ="date" min={{date}} max="2070-10-31" [(ngModel)]="date">
+             </ion-datetime>
           </ion-item>
    
                 <p class="err-reds" *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">Please enter the scheduled date</p>
-       
-		
-
-          
-            <ion-label stacked class="label-lb">Scheduled Time</ion-label>
+       <ion-label stacked class="label-lb">Scheduled Time</ion-label>
 			<ion-item>
-            <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" formControlName ="time" class="select-brd"></ion-datetime>
+            <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" formControlName ="time" class="select-brd" ></ion-datetime>
 			
           </ion-item>
 		   <p class="err-reds" *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">Please enter the scheduled time</p>
@@ -42,16 +37,15 @@
 
 		  <ion-label stacked class="label-lb">Alternate Contact Number</ion-label>
 
-          <ion-input type="text" formControlName="contact"></ion-input>
+          <ion-input type="text" formControlName="contact" placeholder="9865475487">
+            
+          </ion-input>
 		   <p class="err-reds" *ngIf="!modalForm.controls.contact.valid  && (modalForm.controls.contact.dirty || submitAttempt)">Please enter the alternate contact number</p>
 	
-		
-          
-		     <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb">Select Dependent
+		<ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb">Select Dependent
          </ion-label>
 			 <ion-item *ngIf = "userType =='sponsor'">
-	
-              <ion-select formControlName="dependents" class="select-brds" >
+	         <ion-select formControlName="dependents" class="select-brds" >
               <ion-option *ngFor = "let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}}
               </ion-option>
             </ion-select>

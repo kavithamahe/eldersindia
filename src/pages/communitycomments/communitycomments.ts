@@ -351,29 +351,33 @@ sendComment(postID){
   dismiss(){
   	this.viewCtrl.dismiss();
   }
-  emojiPicker1(post_id)
+  emojiPicker1(ev,post_id)
    {
     let  likeEmoji={type:'commentEmoji'};
-   let modal = this.popoverCtrl.create(EmojiPickerPage,likeEmoji);
-    modal.present();
-     modal.onDidDismiss(data => {
+   let popover = this.popoverCtrl.create(EmojiPickerPage,likeEmoji);
+    popover.present({
+      ev: ev
+    });
+     popover.onDidDismiss(data => {
       if(data!=null)
       {
       this.post_comment=this.post_comment+' '+data.emojiImage;
-      this.sendComment(post_id);
+      //this.sendComment(post_id);
       }
      })
    }
-   emojiPicker2(commendId,postProfileId)
+   emojiPicker2(ev,commendId,postProfileId)
    {
      let  likeEmoji={type:'commentEmoji'};
-   let modal = this.popoverCtrl.create(EmojiPickerPage,likeEmoji);
-    modal.present();
-     modal.onDidDismiss(data => {
+   let popover = this.popoverCtrl.create(EmojiPickerPage,likeEmoji);
+    popover.present({
+      ev: ev
+    });
+     popover.onDidDismiss(data => {
       if(data!=null)
       {
       this.reply_comment=this.reply_comment+' '+data.emojiImage;
-      this.sendReply(commendId,postProfileId);
+      //this.sendReply(commendId,postProfileId);
       }
      })
    }  

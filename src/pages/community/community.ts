@@ -259,7 +259,7 @@ toggleContent(){
 
    this.communityServices.addLike(likeObj).subscribe(data =>{
      this.showToast(data.result.info.message);
-      this.communityList(this.community_id);
+     this.communityList(this.community_id);
       loader.dismiss();
    },
      err =>{
@@ -378,12 +378,14 @@ metaLink:any = "";
   {
     this.nav.setRoot(DashboardPage);
   }
-  emojiPicker(userId)
+  emojiPicker(ev,userId,id)
    {
     let  likeEmoji={type:'likeEmoji'};
-   let modal = this.popoverCtrl.create(EmojiPickerPage,likeEmoji);
-    modal.present();
-     modal.onDidDismiss(data => {
+   let popover = this.popoverCtrl.create(EmojiPickerPage,likeEmoji);
+    popover.present({
+      ev: ev
+    });
+     popover.onDidDismiss(data => {
       if(data!=null)
       {
         let emojiSymbol=data.emojiImage;

@@ -33,7 +33,7 @@
 			  
 			    <ion-row>
 			 	  <ion-col class="mess-accept">
-					  <p *ngIf="(status === 3 && (communityProfileData?.id != my_id))"><button ion-button (click)="connectMember(communityProfileData)">Connect
+					  <p *ngIf="(status === 3 && (communityProfileData?.id != my_id))"><button ion-button (click)="connectMember(communityProfileData)"><i class="fa fa-plug" aria-hidden="true"></i>
 					  </button></p>
 					  <p *ngIf ="status === 0 && (communityProfileData?.id != my_id)"><button ion-button disabled="true"><i class="fa fa-paper-plane-o"></i></button></p>
 					  <p *ngIf="status === 2 && (communityProfileData?.id != my_id)"><button ion-button disabled="true"><i class="fa fa-paper-plane-o"></i></button></p>
@@ -165,16 +165,16 @@
 	      				<ion-row>
 		        			<ion-col style="padding:0px !important;">
 			          			<button ion-button clear *ngIf=(community.likes.emoji)
-			          			[innerHTML]="community.likes.emoji | emojis" (click)="emojiPicker(community.id)"></button>
-			          			<button *ngIf=(!(community.likes.emoji)) ion-button  clear small (click)="emojiPicker(community.id)">
-								<p class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp; {{community.likecount}}Likes</p>
+			          			[innerHTML]="community.likes.emoji | emojis" (click)="emojiPicker($event,community.id)"></button>
+			          			<button *ngIf=(!(community.likes.emoji)) ion-button  clear small (click)="emojiPicker($event,community.id)">
+								<p class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp; {{community.likecount}}&nbsp;Likes</p>
 								</button>
 		        			</ion-col>
 		        	
 		        			<ion-col style="padding:0px !important;">
 			          			<button ion-button color="dark" clear 
 			          			(click)="showComment(community)">
-			          				<p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{community.comment_count}}+Comments</p>
+			          				<p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{community.comment_count}}&nbsp;Comments</p>
 			          			</button>
 		          			</ion-col>
 		          		<ion-col>

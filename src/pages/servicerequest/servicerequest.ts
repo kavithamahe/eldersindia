@@ -93,7 +93,7 @@ vendorStatus:any=[];
   }
   showConfirm(serviceId){
      let confirm = this.alertCtrl.create({
-     subTitle: '1 request will be deleted',
+     subTitle: 'This request will be deleted',
        buttons: [
         {
           text: 'Cancel',
@@ -258,7 +258,7 @@ vendorStatus:any=[];
    }
    else
    {
-    this.showToaster("There is no contact nuber");
+    this.showToaster("There is no contact number");
    }
   }
 }

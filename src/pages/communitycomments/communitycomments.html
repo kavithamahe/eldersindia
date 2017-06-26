@@ -60,7 +60,7 @@
 			 </ion-col>
 			  <ion-col style="padding:0px;">
 			<button *ngIf="comment.comment_reply[0] != null" ion-button item-right clear 
-			(click)="showComments(j)"><p class="liks-comments"> <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;View </p></button>
+			(click)="showComments(j)"><p class="liks-comments"> <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;Replies </p></button>
 			 </ion-col>
 			
 			
@@ -106,8 +106,9 @@
 					<ion-row>
 						<ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important; -webkit-user-select:all !important;" placeholder="write a reply..">
 						</ion-textarea>
-						<p style="margin:5px;" class="message-container" [innerHTML]="':smile:  ' | emojis"  
-						(click)="emojiPicker2(reply.uid_to,reply.com_post_cmt_id)"></p>
+						<p style="margin:5px;" class="message-container" 
+						[innerHTML]="':smile:  ' | emojis"  
+						(click)="emojiPicker2($event,reply.uid_to,reply.com_post_cmt_id)"></p>
 					</ion-row>
 					<div class="send-req">
 						<button (click)="sendReply(reply.uid_to,reply.com_post_cmt_id)" ion-button class="secon-sdms" color="secondary" round> <ion-icon ios="ios-send" md="md-send"></ion-icon> </button>
@@ -117,8 +118,9 @@
 		</div>
 		<div *ngIf="j==Reply">
 			<ion-row>
-				<ion-textarea [(ngModel)]="reply_comment" style=" margin:0px !important;-webkit-user-select:all !important;" placeholder="write a reply.."></ion-textarea>
-				<p style="margin:5px;" class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker2(comment.uid_from,comment.comments_id)"></p>
+				<ion-textarea [(ngModel)]="reply_comment" style=" margin:0px !important;-webkit-user-select:all !important;" placeholder="write a reply..">
+				</ion-textarea>
+				<p style="margin:5px;" class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker2($event,comment.uid_from,comment.comments_id)"></p>
 			</ion-row>
 			<div class="send-req">
 				<button (click)="sendReply(comment.uid_from,comment.comments_id)" ion-button class="secon-sdms" color="secondary" round><i class="fa fa-paper-plane-o" aria-hidden="true">
@@ -130,7 +132,7 @@
 	<ion-card>
 		<ion-row>
 			<ion-textarea [(ngModel)]="post_comment" style=" margin:0px !important;-webkit-user-select:all !important;" placeholder="Enter Comments"></ion-textarea>             
-			<p style="margin:5px;" class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker1(post_id)"></p>		
+			<p style="margin:5px;" class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker1($event,post_id)"></p>		
         </ion-row>
 		<div class="send-req">
 			<button ion-button (click)="sendComment(post_id,'post')" class="secon-sdms" color="secondary" round>  <ion-icon ios="ios-send" md="md-send"></ion-icon></button>

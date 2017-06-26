@@ -4,8 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { BlogsPage } from '../../pages/blogs/blogs';
 import { CreateBlogPage } from '../../pages/create-blog/create-blog';
 import { ManageBlogsPage } from '../../pages/manage-blogs/manage-blogs';
-import { DashboardPage } from '../../pages/dashboard/dashboard';
-
+import { DashboardPage } from '../../pages/dashboard/dashboard'
 
 @Component({
   selector: 'page-blogtabs',

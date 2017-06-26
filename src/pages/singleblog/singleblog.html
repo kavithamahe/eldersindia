@@ -64,13 +64,13 @@
   <ion-row>
 <ion-col width-20>
     <ion-avatar item-left>
-      <img (click)="CommunityUserWall(viewComments?.user_id)" src="{{imageUrl+viewComments?.avatar}}"  
+      <img src="{{imageUrl+viewComments?.avatar}}"  
       [hidden]="!viewComments?.avatar">
     </ion-avatar>
 	</ion-col>
 	<ion-col width-80 class="blogs-tittle">
  <ion-item text-wrap style="padding-left:0px;">
-    <h2 (click)="CommunityUserWall(viewComments?.user_id)">{{viewComments?.user_name}}</h2>
+    <h2>{{viewComments?.user_name}}</h2>
 
 	 
     <p class="timedate">{{viewComments?.created_at | date :"MMM dd y h:mm a"}}</p>
@@ -102,9 +102,9 @@
           <ion-col offset-10>
             <ion-item class="blog-reply">
               <ion-avatar item-left>
-                <img (click)="CommunityUserWall(reply?.uid_from)" src="{{imageUrl+reply?.profile_image}}" [hidden]="!reply?.profile_image" width="30" height="30"/>
+                <img src="{{imageUrl+reply?.profile_image}}" [hidden]="!reply?.profile_image" width="30" height="30"/>
               </ion-avatar>
-              <h5 (click)="CommunityUserWall(reply?.uid_from)">{{reply.name_from}}-{{reply.name_to}}</h5>
+              <h5>{{reply.name_from}}-{{reply.name_to}}</h5>
               <p item-text-wrap>{{reply.comments_replay}}</p>
               <button ion-button icon-right clear end small item-right *ngIf="user_id==reply?.uid_to" 
               (click)="openMenu(reply?.comments_replay_id)">

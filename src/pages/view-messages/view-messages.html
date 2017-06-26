@@ -55,7 +55,7 @@
         <!-- <span>Download progress : {{downloadProgress}} %</span> -->
       </div>
      <ion-row class="replay-forward">
-        <ion-col *ngIf ="viewType == 'inbox'" (click)="messageReply(veiwMessagesInfo?.sender_name,veiwMessagesInfo?.subject)">
+        <ion-col *ngIf ="viewType == 'inbox'" (click)="messageReply(veiwMessagesInfo?.sender_name,veiwMessagesInfo?.subject,veiwMessagesInfo?.sender_id)">
           <button ion-button icon-left clear small>
             <i class="fa fa-reply"></i>&nbsp;<p>Reply</p>
           </button>

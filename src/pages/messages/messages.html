@@ -39,11 +39,14 @@
 
 <div [ngSwitch]="messages">
   <ion-list *ngSwitchCase="'inbox'">
+  <ion-item padding *ngIf="!inboxInfo">
+     <p class="error-clr">{{emptyRecord}}</p>
+   </ion-item>
   <!-- <div>
     <ion-searchbar (ionInput)="getItems($event)">
     </ion-searchbar>
   </div> -->
-     <p *ngIf="inboxInfo.length<=0" class="recordnotfound">No Record Found</p>
+     
       <ion-list *ngFor="let inbox of inboxInfo">
       <ion-item-sliding  class="inbox-sends">
         <ion-item (click)="viewMessages(inbox?.id,'inbox')" 
@@ -98,7 +101,9 @@
     <ion-searchbar (ionInput)="setItems($event)">
     </ion-searchbar>
   </div> -->
-  <p *ngIf="sentInfo.length<=0" class="recordnotfound">No Record Found</p>
+ <ion-item padding *ngIf="!sentInfo">
+     <p class="error-clr">{{emptyRecord}}</p>
+   </ion-item>
   <ion-list *ngFor="let sent of sentInfo">
       <ion-item-sliding class="inbox-sends">
         <ion-item (click)="viewMessages(sent?.id,'sent')" 
@@ -122,7 +127,8 @@
               </ion-row>
               <ion-row *ngIf="sent.subject">
 			     <ion-col style="padding: 0px !important">
-              <ion-item class="subject-details" [ngClass]="sent.read_status?'readmsg':'unreadmsg'"><b>Subject :</b>{{sent?.subject}}</ion-item>
+              <ion-item class="subject-details" 
+              [ngClass]="sent.read_status?'readmsg':'unreadmsg'"><b>Subject :</b>{{sent?.subject}}</ion-item>
 			    </ion-col>
               </ion-row>
             </ion-col>

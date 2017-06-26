@@ -82,29 +82,25 @@ console.log("Source file path  "+ file_path);
         this.platform.ready().then(() => {
             
   const fileTransfer: TransferObject = this.transfer.create();
-  const url = "http://52.91.174.4:8095/" + file_path;
-  console.log("constructed url =" + url);
+  //const url = this.rootUrl + file_path;
+  var uri = encodeURI(this.rootUrl + file_path);
+  console.log("constructed url =" + uri);
   
    var targetPath = "file:///storage/emulated/0/Download/" + file_name;
    console.log("target"+targetPath);
-  fileTransfer.download(url, targetPath,  true ).then((entry) => {
+  fileTransfer.download(uri, targetPath).then((entry) => {
     console.log("success");
     console.log("download complete:" + entry.toURL());
    this.showToaster("Downloaded Succesfully"); 
   },
    (error) => {
-    console.log("error");
+    //console.log("error");
   });
-         }, (progress) => {
-                    this.downloadProgress = (progress.loaded / progress.total) * 100;
-              }
-         );
+         });
 
   }
  
-
-
-  public dashboardPage()
+public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);
   }
@@ -119,17 +115,19 @@ console.log("Source file path  "+ file_path);
   }
   public CommunityUserWall(profile_uid)
   {
-    this.navCtrl.setRoot(CommunityprofilePage,{profile_uid});
+    this.navCtrl.push(CommunityprofilePage,{profile_uid});
   }
-  public messageReply(to,subject)
+  public messageReply(to,subject,sender_id)
   {
-    let msgObject={"to":to,"subject":subject};
-    this.navCtrl.setRoot(CreateMessagePage,msgObject);
+    let msgObject={"to":to,"subject":subject,"id":sender_id};
+   // this.navCtrl.setRoot(CreateMessagePage,msgObject);
+    this.navCtrl.push(CreateMessagePage,msgObject);
   }
   public messageForward(subject,message)
   {
     let msgObject={"subject":subject,"message":message};
-    this.navCtrl.setRoot(CreateMessagePage,msgObject);
+    //this.navCtrl.setRoot(CreateMessagePage,msgObject);
+    this.navCtrl.push(CreateMessagePage,msgObject);
   }
   deleteMessage(messageId,viewType)
   {

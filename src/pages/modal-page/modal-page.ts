@@ -28,12 +28,15 @@ export class ModalContentPage {
   vendor:any="";
   dependent:string = "";
   elderId:any;
-
+  problem:any;
   terms:boolean = false;
   checkTerms:any= false;
+  date:any;
 
   constructor(public modalCtrl: ModalController, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
+     this.date = new Date().toISOString();
+
      console.log("this is modal page");
      console.log("modal content page",params.get("vendor"));
      //let loading = this.loadingCtrl.create({content: 'Please wait...!'});
@@ -44,7 +47,6 @@ export class ModalContentPage {
       this.vendor = this.params.get("vendor").name;
     }
      this.modalForm = formBuilder.group({
-        problem: ['',Validators.compose([Validators.required])],
         date: ['',Validators.compose([Validators.required])],
         time: ['',Validators.compose([Validators.required])],
         contact: ['',Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.pattern('[0-9]*'), Validators.required])],
@@ -97,7 +99,7 @@ export class ModalContentPage {
       this.dependent = this.modalForm.value.dependents;
     }
       
-      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
+      let serviceData = {"problem": this.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
       console.log(serviceData);
       this.viewCtrl.dismiss(serviceData);
     } 
