@@ -41,12 +41,11 @@
 </div>
 
   	<div class="view-storedet">
-  <ion-row>
+    <ion-row>
     <ion-col class="brder-cor">
       <button ion-button full (click)="toggleRequestService()">
         <b>Request Services </b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
-      </button>
-      
+      </button>      
    <form [formGroup]="requestForm" *ngIf(showRequestService)>
         <div class="select-detalis-in" padding style="background:#fff; border:1px solid #159deb; border-top:none;">
            <br>
@@ -104,45 +103,13 @@
       </form>
     </ion-col>
   </ion-row>
+
   <ion-row>
     <ion-col class="brder-cor">
       <button ion-button item-left full (click)="modal()">        
         <b>Services Offered</b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
       </button>
-                                        <!-- <div *ngIf(showServiceOffered)>
-                                        <ion-card *ngFor = "let service of vendorList.serviceOffered">
-                                        <ion-list *ngFor = "let category_list of service.category_lists">
-                                        <button class="sub" ion-item (click)="show_sub_category()">
-                                        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
-                                        {{category_list.category}}  
-                                        </button >
-                                        <ion-item *ngIf(sub_category)>
-                                        <ion-card *ngFor="let subcategory_list of category_list.service_sub_category_lists; let i=index " >
-                                        <ion-list (click)="showService(i)">
-                                        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
-                                        {{subcategory_list.subcategory}}
-                                        </ion-list>
-                                        <ion-item *ngIf= "i === show_service">
-                                        <ion-card *ngFor="let services of subcategory_list.services" >
-                                        <ion-list>
-                                        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
-                                        {{services.service}}
-                                        </ion-list>
-                                        </ion-card> 
-                                        </ion-item>
-                                        </ion-card> 
-                                        </ion-item>
-
-                                        </ion-list>
-                                        </ion-card>
-
-                                        <ion-card *ngIf="!vendorList.serviceOffered">
-                                        <ion-card-content>
-                                        No Records Found..!
-                                        </ion-card-content>
-                                        </ion-card>    
-
-                                        </div>    -->
+                                     
     </ion-col>
   </ion-row>
   <ion-row>

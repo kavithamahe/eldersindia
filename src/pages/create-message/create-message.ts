@@ -42,8 +42,9 @@ submitAttempt: boolean = false;
 subject1:any='';
 customErr:any=false;
 file_path:any;
-nativepath: any;
-file_name:any;
+nativepath: any='';
+file_name:any='';
+replyId:any;
 //protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
  constructor(private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public formBuilder: FormBuilder,private completerService: CompleterService,public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public messagesService:MessagesService) {
   this.storage.ready().then(() => {
@@ -55,6 +56,7 @@ file_name:any;
 
   });
   this.toAddress=navParams.get("to");
+  //this.replyId=navParams.get("id");
   this.subject=navParams.get("subject");
   this.message=navParams.get("message");
    this.messageForm = formBuilder.group({
@@ -80,7 +82,7 @@ file_name:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -126,6 +128,7 @@ file_name:any;
       else
        {
     this.messageObj= {"message":{"attachments":[{file_name:this.file_name,file_path:this.nativepath}],"to":{"title":this.toAddress,"description":this.toEmail,"image":"","originalObject":{"id":this.toId,"avatar":"","email":this.toEmail,"user_type":this.user_type,"friend_name":""}},"subject":subject,"message":message}};
+    //this.messageObj= {"message":{"attachments":[],"to":{"title":this.toAddress,"description":this.toEmail,"image":"","originalObject":{"id":this.toId,"avatar":"","email":this.toEmail,"user_type":this.user_type,"friend_name":""}},"subject":subject,"message":message}};
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     this.messagesService.sendMessage(this.messageObj).subscribe(

@@ -123,24 +123,10 @@ modal(){
     modal.present();
 }
 
-// ngViewInit() {
-//     this.sliderOptions = {
-//       initialSlide: 0,
-//     loop: true,
-//     autoplay:2000,
-//     autoplayDisableOnInteraction: false
-//     }
-//     this.slider.startAutoplay();
-// };
-
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);
   }
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad ServiceInfoPage');
-  //   this.slider.startAutoplay();
-  // }
 
   sendRequestService(data){
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
@@ -165,17 +151,6 @@ modal(){
 
     let modal = this.modalCtrl.create(ServiceModalPage,{service:"contact",vendorList:this.vendorList});    
     modal.present();
-
-      // this.showServiceOffered = false;
-      // this.showRequestService = false;
-      // this.show_service = false;
-
-      // if (this.showDetails){
-      //   this.showDetails = false;
-      // }else
-      // {
-      //   this.showDetails = true;
-      // }
     }
 
   toggleRequestService(){
@@ -189,19 +164,8 @@ modal(){
       }
     })
 
-      // this.submitAttempt = false;
-      // this.showServiceOffered = false;
-      // this.showDetails = false;
-      // this.show_service = false;
-
-      // if (this.showRequestService){
-      //   this.showRequestService = false;
-      // }else
-      // {
-      //   this.showRequestService = true;
-      // }
-
   }
+
 
   toggleServiceOffered(){
     this.showDetails = false;

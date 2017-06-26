@@ -67,11 +67,9 @@
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
- <ion-card *ngIf="manageblogsLists.length<=0">
- <ion-item>
- <p>No Record Found.</p>
- </ion-item>
- </ion-card>
+ <ion-item padding *ngIf="!manageblogsLists">
+     <p class="error-clr">{{emptyRecord}}</p>
+   </ion-item>
 </ion-content>
 <style type="text/css">
 .alert-message,.alertbox

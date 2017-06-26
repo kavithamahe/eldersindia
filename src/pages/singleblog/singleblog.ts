@@ -36,8 +36,9 @@ showReply:any;
 replyPost:any;
 commentForm: FormGroup;
 submitAttempt: boolean = false;
+ 
   constructor(public formBuilder: FormBuilder,public navCtrl: NavController,public platform: Platform,public actionsheetCtrl: ActionSheetController, public navParams: NavParams,public blogListService:BlogListService,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
-  	this.storage.ready().then(() => {
+    this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('id').then((id) => { this.user_id=id;});
       storage.get('token').then((token) => { this.token=token; 
@@ -50,6 +51,7 @@ submitAttempt: boolean = false;
         comment: ['', Validators.compose([Validators.required])]
          });
     this.showComment=true;
+
   }
   public leaveComment()
   { if(this.showComment)
@@ -234,9 +236,9 @@ submitAttempt: boolean = false;
   public CommunityUserWall(profile_uid)
   {
     console.log(profile_uid);
-    this.navCtrl.setRoot(CommunityprofilePage,{profile_uid});
-  }
+    this.navCtrl.push(CommunityprofilePage,{profile_uid});
 
+  }
 
   public dashboardPage()
   {

@@ -28,6 +28,7 @@ import { CommunitylistPage } from '../pages/communitylist/communitylist';
 import { CommunityPage } from '../pages/community/community';
 import { ManagePage } from '../pages/manage/manage';
 import { BlogtabsPage } from '../pages/blogtabs/blogtabs';
+import { BlogsPage } from '../pages/blogs/blogs';
 
 
 import { ChangePasswordPage } from '../pages/change-password/change-password';
@@ -242,7 +243,7 @@ export class MyApp {
   {
    let toast = this.toastCtrl.create({
         message: message,
-        duration: 3000,
+        duration: 5000,
         position: 'top'
         });
    toast.present();
@@ -372,41 +373,41 @@ initializePreview() {
           console.log('error');
         });
 
-      // push.setApplicationIconBadgeNumber(function() {
-      //   console.log('success');
-      // }, function() {
-      //   console.log('error');
-      // }, +data.count);
+      push.setApplicationIconBadgeNumber(function() {
+        console.log('success');
+      }, function() {
+        console.log('error');
+      }, +data.count);
       push.setApplicationIconBadgeNumber(function() {
   console.log('success');
 }, function() {
   console.log('error');
-}, 2);
-      // let self = this;
-      //if user using app and push notification comes
-      if (data.additionalData.foreground) {
+});
+      
+       if (data.additionalData.foreground) {
+         this.showToaster(data.message);
 
-            let confirm = this.alertCtrl.create({
-            title: 'Elder India Notification',
-            subTitle: data.message,
-            buttons: [
-              {
-                text: 'Disagree',          
-                role: 'cancel'
+      //       let confirm = this.alertCtrl.create({
+      //       title: 'Elder India Notification',
+      //       subTitle: data.message,
+      //       buttons: [
+      //         {
+      //           text: 'Disagree',          
+      //           role: 'cancel'
                 
-              },
-              {
-                text: 'View',
-                handler: () => {
-                  this.getPage(data);
-                  console.log('Notification View clicked');
-                }
-              }
-            ]
-          });
-          confirm.present();
+      //         },
+      //         {
+      //           text: 'View',
+      //           handler: () => {
+      //             this.getPage(data);
+      //             console.log('Notification View clicked');
+      //           }
+      //         }
+      //       ]
+      //     });
+      //     confirm.present();
 
-      } else {
+       } else {
         //if user NOT using app and push notification comes
         //TODO: Your logic on click of push notification directly
         this.getPage(data);
@@ -416,8 +417,8 @@ initializePreview() {
           console.log('error');
           }, 'push-1');
         console.log("Push notification clicked");
-
-      }
+}
+      
     });
     push.on('error', (e) => {
       console.log(e.message);
@@ -440,6 +441,10 @@ initializePreview() {
        case "service_request": this.nav.push(ServicerequestPage);
                        break;
        case "message" : this.nav.push(ViewMessagesPage, {messageId:data.additionalData.page_details.id,viewType:"inbox"});
+                       break;
+       case "blogs" : this.nav.push(BlogsPage);
+                       break;
+       case "events" : this.nav.push(EventsPage);
                        break;
      }
   }

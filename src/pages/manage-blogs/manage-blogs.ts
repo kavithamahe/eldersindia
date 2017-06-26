@@ -23,6 +23,8 @@ manageblogsLists:any=[];
 blogStatus:any=[];
 nextPageURL:any='';
 manageBlogscrollLists:any=[];
+emptyRecord:any;
+
   constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -47,11 +49,12 @@ manageBlogscrollLists:any=[];
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+        this.emptyRecord = (JSON.parse(err._body).error);
         }
         else
         {
           this.showToaster("Try again later");
+          this.emptyRecord = "No Records Found"
         }
         loader.dismiss();
       }

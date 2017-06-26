@@ -23,15 +23,15 @@ export class CommunitymessagePage {
    message:any;
    member_id:any;
    file_path:any;
-   nativepath: any;
-   file_name:any;
+   nativepath: any='';
+   file_name:any='';
    name:any;
 
   constructor(private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams,public communityServices: CommunityServices, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
   	 
      this.member_name = navParams.get("member_data").name;
      this.member_id = navParams.get("member_data").id;
-     console.log("member name in message",this.member_name);
+    // console.log("member name in message",this.member_name);
      this.authForm = formBuilder.group({
         subject : ['', Validators.compose([Validators.required])],
         message : ['', Validators.compose([Validators.required])]

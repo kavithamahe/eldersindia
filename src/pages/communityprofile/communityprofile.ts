@@ -64,7 +64,9 @@ export class CommunityprofilePage {
     authForm:FormGroup;
     submitAttempt:any;
     message:any;
+    //tabBarElement: any;
   constructor(public nav: NavController, public actionsheetCtrl: ActionSheetController,public platform: Platform, public storage:Storage,public formBuilder: FormBuilder,public popoverCtrl: PopoverController, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+        //this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
         this.isAndroid = platform.is('android');
       this.nav=nav;
       this.profile_uid=navParams.get("profile_uid");
@@ -472,12 +474,14 @@ metaLink:any = "";
   {
     this.nav.setRoot(DashboardPage);
   }
- emojiPicker(userId)
+ emojiPicker(ev,userId)
    {
     let  likeEmoji={type:'likeEmoji'};
-   let modal = this.popoverCtrl.create(EmojiPickerPage,likeEmoji);
-    modal.present();
-     modal.onDidDismiss(data => {
+   let popover = this.popoverCtrl.create(EmojiPickerPage,likeEmoji);
+   popover.present({
+      ev: ev
+    });
+         popover.onDidDismiss(data => {
       if(data!=null)
       {
         let emojiSymbol=data.emojiImage;
@@ -598,7 +602,13 @@ metaLink:any = "";
     this.communityServices.showErrorToast(err);
   });
   }
-  
+  // ionViewWillEnter() {
+  //   this.tabBarElement.style.display = 'none';
+  // }
+ 
+  // ionViewWillLeave() {
+  //   this.tabBarElement.style.display = 'none';
+  // }
 
  }
 

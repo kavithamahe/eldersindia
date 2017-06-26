@@ -33,6 +33,7 @@ nextPageURL2:any='';
 inboxScrollLists:any=[];
 sentScrolllLists:any=[];
 status:any;
+emptyRecord:any;
 
    constructor(public navCtrl: NavController,public alertCtrl: AlertController, public navParams: NavParams,platform: Platform,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   	this.isAndroid = platform.is('android');
@@ -71,11 +72,12 @@ status:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+        this.emptyRecord = (JSON.parse(err._body).error);
         }
         else
         {
           this.showToaster("Try again later");
+           this.emptyRecord = "No Records Found"
         }
         loader.dismiss();
       }
@@ -101,11 +103,12 @@ status:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.emptyRecord = (JSON.parse(err._body).error);
         }
         else
         {
           this.showToaster("Try again later");
+          this.emptyRecord = "No Records Found"
         }
         loader.dismiss();
       }
@@ -130,7 +133,7 @@ status:any;
   }
   public createMessage()
   {
-  this.navCtrl.push(CreateMessagePage);
+    this.navCtrl.push(CreateMessagePage);
   }
 
   doInfinite1(infiniteScroll) {
