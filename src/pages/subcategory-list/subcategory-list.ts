@@ -144,7 +144,7 @@ loadSubcategoryList(subCategory_id,location_id){
   serviceRequestCall(service_request_data,vendorId){
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
-    let requestServiceData = {"location_id":this.location_id,"vendor_id":vendorId, "category_id":this.serviceData.category_id, "sub_category_id":this.serviceData.sub_category_id, "service_id":this.serviceData.service_id, "problem":service_request_data.problem, "datetime":service_request_data.datetime, "dependentid":service_request_data.dependentId, "mobile":service_request_data.mobile_no,"lead_time":this.lead_time}
+    let requestServiceData = {"category":this.serviceData.category,"category_id":this.serviceData.category_id,"location_id":this.location_id,"vendor_id":vendorId, "sub_category_id":this.serviceData.sub_category_id, "service_id":this.serviceData.service_id, "problem":service_request_data.problem,"service":this.serviceData.service, "datetime":service_request_data.datetime, "dependentid":service_request_data.dependentId, "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,"subcategory":this.serviceData.subcategory}
 
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
        .subscribe(

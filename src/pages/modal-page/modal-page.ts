@@ -25,6 +25,7 @@ export class ModalContentPage {
   userType:any;
   submitAttempt:any;
   modalForm: FormGroup;
+  authForm: FormGroup;
   vendor:any="";
   dependent:string = "";
   elderId:any;
@@ -46,13 +47,18 @@ export class ModalContentPage {
      if(params.get("vendor") != undefined){
       this.vendor = this.params.get("vendor").name;
     }
-     this.modalForm = formBuilder.group({
-        problem: ['',Validators.compose([])],
+    this.modalForm = formBuilder.group({
+     problem: ['',Validators.compose([Validators.required])],
         date: ['',Validators.compose([Validators.required])],
         time: ['',Validators.compose([Validators.required])],
         contact: ['',Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.pattern('[0-9]*'), Validators.required])],
-        dependents: ['',Validators.compose([])]
+        //dependents: ['',Validators.compose([Validators.required])]
     });
+ this.authForm = formBuilder.group({
+   dependents: ['',Validators.compose([Validators.required])]
+ })
+  
+
     // loading.dismiss();
      // this.userType = "elder";
      storage.get('user_type').then((user_type) => { this.userType=user_type;});
@@ -60,6 +66,7 @@ export class ModalContentPage {
 
         storage.get('id').then((id) => { this.elderId=id;});
       }
+
    }
 
    termsChanged(){
@@ -84,7 +91,28 @@ export class ModalContentPage {
    }
 
   submit() {
-    
+     if(this.userType == 'sponsor'){
+       if(!this.authForm.valid || (this.terms == false)){
+          this.submitAttempt = true;
+           if(this.terms == false){
+            this.checkTerms = true;
+          }
+       }
+       else{
+          this.submitAttempt = false;
+      
+      if(this.userType != 'sponsor'){
+      this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.authForm.value.dependents;
+    }
+      
+      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
+      console.log(serviceData);
+      this.viewCtrl.dismiss(serviceData);
+       }
+     }
+else{
     if(!this.modalForm.valid || (this.terms == false)){
       this.submitAttempt = true;
       this.providerService.showToast("Please Enter The Required Fields");
@@ -97,15 +125,26 @@ export class ModalContentPage {
       if(this.userType != 'sponsor'){
       this.dependent = this.elderId ;
     }else{
-      this.dependent = this.modalForm.value.dependents;
+      this.dependent = this.authForm.value.dependents;
     }
       
-      let serviceData = {"problem": this.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
+      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
       console.log(serviceData);
       this.viewCtrl.dismiss(serviceData);
-    } 
+    }
+}
+      
+    
+  
   }
-
+// edit(){
+// if(this.userType != 'sponsor'){
+//       this.dependent = this.elderId ;
+//     }
+//      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
+//       console.log(serviceData);
+//       this.viewCtrl.dismiss(serviceData);
+// }
   dismiss(){
       this.viewCtrl.dismiss("dismiss");
   }

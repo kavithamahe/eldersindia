@@ -42,7 +42,6 @@ submitAttempt:any;
   constructor(public storage:Storage,public loadingCtrl: LoadingController,public formBuilder:FormBuilder,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController) {
 
       this.profileData = navParams.get("profileData");
-      console.log("xxxxxxxxxxx");
       console.log(this.profileData);
       console.log("person"+this.profileData.personal_email);
       this.pemail=this.profileData.personal_email;
@@ -56,7 +55,6 @@ submitAttempt:any;
       
       
       this.user_dob = this.profileData.dob;
-
       this.user_type = this.profileData.user_type;
       if(this.user_type == 'sponsor'){
       this.my_location = this.profileData.locationName;  
@@ -67,20 +65,21 @@ submitAttempt:any;
       
       // this.gender = this.profileData.gender;
       this.edit_profile_Form = formBuilder.group({
-        name: [this.profileData.name,Validators.compose([Validators.required])],
+        name: [{value:this.profileData.name,disabled: true},Validators.compose([Validators.required])],
         company: [{value:this.profileData.company_name,disabled: true}],
         designation: [{value:this.profileData.designation,disabled: true},Validators.compose([Validators.minLength(3), Validators.required])],
        // gender: [this.profileData.gender,Validators.compose([Validators.required])],
         mobile_number: [this.profileData.mobile,Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.required])],
-        location: [{value:this.my_location,disabled:true},Validators.compose([Validators.required])],
-         dob: [{value:this.my_location,disabled:false},Validators.compose([])],
+        location: [{value:this.my_location,disabled:true},Validators.compose([])],
+         dob: [{value:this.profileData.dob},Validators.compose([])],
         email: [{value:this.profileData.email,disabled:true},Validators.compose([Validators.required])],
-        personal_email: ['',Validators.compose([])],
+        personal_email: ['',Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
         user_type: [{value:this.user_type,disabled:true},Validators.compose([Validators.required])]        
     });
      
    
   }
+
 
   loadMyProfile(){
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -100,6 +99,7 @@ submitAttempt:any;
 
   getDate(datepar){
      var dateParts = datepar.split("-").reverse().join("-");
+     console.log("fdsF"+dateParts)
      // let date = dateParts[2]+"-"+dateParts[1]+"-"+dateParts[0];
      return dateParts;
   }
@@ -136,11 +136,21 @@ submitAttempt:any;
     loader.present();
     let data = this.edit_profile_Form.value;
 //     if(this.user_type == 'elder'){
-this.updateData = {name: data.name,mobile:data.mobile_number,personal_email:data.personal_email,dob:this.user_dob ,app:"",avatar1:this.avatar};
-//     }else{
-// this.updateData = {name: data.name,mobile:data.mobile_number,dob:this.user_dob ,app:"",avatar1:this.avatar};
-    // }
-    // 
+  this.updateData = { id:this.profileData.id,company_id:this.profileData.company_id,branch_id:this.profileData.branch_id,
+   name:this.profileData.name,last_name:this.profileData.last_name, 
+  avatar:this.avatar,location:this.profileData.location,designation:this.profileData.designation,
+  "email":this.profileData.official_email,"gender":this.profileData.gender,"employee_id":this.profileData.employee_id,
+  "business_unit":this.profileData.business_unit,"division":this.profileData.division,
+"dob":data.dob,"email_verified":this.profileData.email_verified,"mobile_verified":this.profileData.mobile_verified, 
+"mobile":data.mobile_number,"personal_email":data.personal_email,"status":this.profileData.status,"offboard":this.profileData.offboard,
+"created_at":this.profileData.created_at,"updated_at":this.profileData.updated_at,"offboarded_on":this.profileData.offboarded_on,"email_sent":this.profileData.email_sent,
+"message_sent":this.profileData.message_sent,
+"mail_code":this.profileData.mail_code,"message_code":this.profileData.message_code,"company_name":this.profileData.company_name,
+"locationName":this.profileData.locationName,"logo":this.profileData.logo,
+"user_type":this.profileData.user_type,"official_email":this.profileData.official_email,
+"avatar1":this.avatar}
+   
+ 
     
     this.providerService.webServiceCall(`myaccountEdit`,this.updateData)
     .subscribe(data=>{

@@ -12,7 +12,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard'
 })
 export class BlogtabsPage {
   tab1Root = BlogsPage;
-  tab2Root = ManageBlogsPage;
+  tab2Root  = ManageBlogsPage;
   tab3Root = CreateBlogPage;
   constructor(public navParams: NavParams, public nav: NavController) {
   	this.nav=nav;
@@ -25,4 +25,5 @@ export class BlogtabsPage {
   {
     this.nav.setRoot(DashboardPage);
   }
+
 }

@@ -19,7 +19,7 @@ import { AppliedJobsPage } from '../../pages/applied-jobs/applied-jobs';
 })
 export class SinglejobPage {
 jobId:number;
-imageUrl:any;
+imageUrl:any='';
 token:any;
 singleJobInfo:any;
 applyJobInfo:any;

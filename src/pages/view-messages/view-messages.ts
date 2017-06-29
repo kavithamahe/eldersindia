@@ -11,7 +11,7 @@ import { CommunityprofilePage } from '../../pages/communityprofile/communityprof
 import { CreateMessagePage } from '../../pages/create-message/create-message';
 import { MessagesPage } from '../../pages/messages/messages';
 import { InAppBrowser } from 'ionic-native';
-//declare var cordova: any;
+declare var cordova: any;
 
 /*
   Generated class for the ViewMessages page.
@@ -77,28 +77,51 @@ downloadProgress:any;
       }
     );    
   }
+//  downloadFile(file_path,file_name) {
+// console.log("Source file path  "+ file_path);
+//         this.platform.ready().then(() => {
+            
+//   const fileTransfer: TransferObject = this.transfer.create();
+//   //const url = this.rootUrl + file_path;
+//   var uri = encodeURI(this.rootUrl + file_path);
+//   console.log("constructed url =" + uri);
+//   var targetPath = cordova.file.externalRootDirectory + file_name;
+//    //var targetPath = "file:///storage/emulated/0/Download/" + file_name;
+//    console.log("target"+targetPath);
+//   fileTransfer.download(uri,targetPath,true).then((entry) => {
+//     console.log("success");
+//     console.log("download complete:" + entry.toURL());
+//    this.showToaster("Downloaded Succesfully"); 
+//   },
+//    (error) => {
+//     console.log("error");
+//   });
+//          });
+
+//   }
  downloadFile(file_path,file_name) {
 console.log("Source file path  "+ file_path);
         this.platform.ready().then(() => {
             
   const fileTransfer: TransferObject = this.transfer.create();
-  //const url = this.rootUrl + file_path;
-  var uri = encodeURI(this.rootUrl + file_path);
-  console.log("constructed url =" + uri);
+  const url = "http://52.91.174.4:8096/" + file_path;
+  console.log("constructed url =" + url);
   
-   var targetPath = "file:///storage/emulated/0/Download/" + file_name;
+   var targetPath = cordova.file.externalRootDirectory + file_name;
    console.log("target"+targetPath);
-  fileTransfer.download(uri, targetPath).then((entry) => {
+  fileTransfer.download(url, targetPath,  true ).then((entry) => {
     console.log("success");
     console.log("download complete:" + entry.toURL());
    this.showToaster("Downloaded Succesfully"); 
   },
    (error) => {
     console.log("error");
-  });
+  }); 
+
          });
 
   }
+
  
 public dashboardPage()
   {

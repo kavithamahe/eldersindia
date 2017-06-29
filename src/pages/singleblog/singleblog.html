@@ -20,15 +20,15 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="content-intop">
+<ion-content padding style="background:#fff;">
 <ion-card>
 <ion-row>
 <ion-col width-20>
 <ion-avatar item-left text-wrap>
       <img src="{{imageUrl+singleBlogInfo?.details?.avatar}}" [hidden]="!singleBlogInfo?.details?.avatar">
     </ion-avatar>
-	</ion-col>
-	<ion-col width-80 class="blogs-tittle">
+  </ion-col>
+  <ion-col width-80 class="blogs-tittle">
   <ion-item text-wrap>
     <h2>{{singleBlogInfo?.details?.title}}</h2>
     <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{singleBlogInfo?.details?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i>  {{singleBlogInfo?.details?.created_at | date :"MMM dd y"}}</p>
@@ -53,9 +53,9 @@
   <ion-item style="padding-left:0px;">
     <ion-textarea placeholder="Comment" formControlName="comment"></ion-textarea>
   </ion-item>
-  <p *ngIf="!commentForm.controls.comment.valid && (commentForm.controls.comment.dirty || submitAttempt)" class="err-reds">Please enter the comment</p>
+  <p *ngIf="!commentForm.controls.comment.valid && (commentForm.controls.comment.dirty || submitAttempt)" class="err-reds">Please enter comment.</p>
   </form>
-  <ion-item class="commend-btns">
+  <ion-item text-right>
   <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)" class="commend-btn">Submit</button>
   </ion-item>
   </div>
@@ -67,27 +67,27 @@
       <img src="{{imageUrl+viewComments?.avatar}}"  
       [hidden]="!viewComments?.avatar">
     </ion-avatar>
-	</ion-col>
-	<ion-col width-80 class="blogs-tittle">
+  </ion-col>
+  <ion-col width-80 class="blogs-tittle">
  <ion-item text-wrap style="padding-left:0px;">
     <h2>{{viewComments?.user_name}}</h2>
 
-	 
+   
     <p class="timedate">{{viewComments?.created_at | date :"MMM dd y h:mm a"}}</p>
     <p item-text-wrap class="page-down">{{viewComments?.comment}}</p>
    
-    	<button ion-button icon-right clear end small item-right *ngIf="user_id==viewComments?.user_id" 
-     (click)="openMenu(viewComments?.id)">
-        <i class="fa fa-angle-down"></i>      
+      <button ion-button icon-right clear end small item-right *ngIf="user_id==viewComments?.user_id" 
+      (click)="deleteComment(viewComments?.id)">
+        <ion-icon ios="ios-trash" md="md-trash"></ion-icon>      
       </button>
      
-	  	 </ion-item>
-<button style="padding:0px;" class="replys" ion-button *ngIf="user_id != viewComments?.user_id" (click)="viewReply(i)" clear>
-     <i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply
+       </ion-item>
+
+    </ion-col>
+    </ion-row>
+     <button ion-button *ngIf="user_id != viewComments?.user_id" (click)="viewReply(i)" clear>
+     <i class="fa fa-reply" aria-hidden="true"></i>
      </button>
-	  </ion-col>
-	  </ion-row>
-     
      <div *ngIf="i==showReply">
      <ion-row>
         <ion-item>
@@ -100,15 +100,16 @@
        <ion-list *ngFor="let reply of viewComments.comment_reply; let j=index">
         <ion-row>
           <ion-col offset-10>
-            <ion-item class="blog-reply">
+            <ion-item>
               <ion-avatar item-left>
-                <img src="{{imageUrl+reply?.profile_image}}" [hidden]="!reply?.profile_image" width="30" height="30"/>
+                <img src="{{imageUrl+reply?.profile_image}}" [hidden]="!reply?.profile_image">
               </ion-avatar>
-              <h5>{{reply.name_from}}-{{reply.name_to}}</h5>
+              <h2>{{reply.name_from}}-{{reply.name_to}}
+              </h2>
               <p item-text-wrap>{{reply.comments_replay}}</p>
               <button ion-button icon-right clear end small item-right *ngIf="user_id==reply?.uid_to" 
-              (click)="openMenu(reply?.comments_replay_id)">
-                <i class="fa fa-angle-down"></i>    
+              (click)="deleteComment(reply?.comments_replay_id)">
+                <ion-icon ios="ios-trash" md="md-trash"></ion-icon>      
               </button>
             </ion-item>
             <button ion-button *ngIf="user_id != reply?.uid_from" (click)="replyblogPost(j)" clear><i class="fa fa-reply" aria-hidden="true"></i></button>
@@ -135,7 +136,5 @@
 </ion-content>
 <style>
 .list-md .item-input:last-child{ border-bottom:0px !important;}
-.err-reds {
-    color: red !important;
-}
+
 </style>

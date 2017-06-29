@@ -58,10 +58,10 @@ show_option:boolean =false;
       this.allowedElderFlag=manages.result.allowedElderFlag;
       loader.dismiss();
      },
-     (err) => {         
-        loader.dismiss();
-      }
-     );
+      err =>{
+        
+          loader.dismiss();
+      });
       
    }
 manage_elder:any;
@@ -108,7 +108,7 @@ manage_elder:any;
     loader.present();
     this.communityServices.deleteDetail(id).subscribe(datas =>{
      this.showToast(datas.result);
-     this.closeOption();
+     //this.closeOption();
      this.manageDetail();
      loader.dismiss();
      },
