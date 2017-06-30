@@ -13,7 +13,8 @@
 </ion-header>
 
 <ion-content padding style="background:#fff;">
-<div class="profile-edit"><span  *ngIf="user_type =='sponsor' " class="profile-img"><img [src]="imageURL+profileData?.avatar" > </span>
+<div class="profile-edit"><span  *ngIf="user_type =='sponsor' " class="profile-img"><img 
+[src]="imageURL+profileData?.avatar" > </span>
 			<p>{{profileData?.company_name}}</p></div>
 
 	<form [formGroup]="edit_profile_Form">
@@ -21,11 +22,10 @@
 
 		
 		<ion-label class="liste-edit" *ngIf="user_type =='elder' ">Name</ion-label>
-		<ion-label class="liste-edit required" *ngIf="user_type =='sponsor' ">Sponsor name</ion-label>
+		<ion-label class="liste-edit" *ngIf="user_type =='sponsor' ">Sponsor name</ion-label>
 		<ion-item>
 	    <ion-input type="text" formControlName="name" placeholder="Sponsor name"></ion-input>
 	    </ion-item>
-		<p *ngIf="!edit_profile_Form.controls.name.valid  && (edit_profile_Form.controls.name.touched || submitAttempt)" class="err-reds">Please enter the valid Name</p>
         
 
 	<!--<ion-label class="liste-edit">Gender</ion-label>
@@ -46,21 +46,24 @@
 
 	<ion-label class="liste-edit required">Mobile number</ion-label>
         <ion-item>
-		 <ion-input type="text" formControlName="mobile_number" placeholder="Mobile number"></ion-input>
+		 <ion-input type="text" formControlName="mobile_number" placeholder="Mobile number"   [class.invalid]="!edit_profile_Form.controls.mobile_number.valid && (edit_profile_Form.controls.mobile_number.dirty)"></ion-input>
 	    </ion-item>
-		   
-           		<p class="err-reds" *ngIf="!edit_profile_Form.controls.mobile_number.valid  && (edit_profile_Form.controls.mobile_number.touched || submitAttempt)">Please enter the valid mobile  number</p>
+	    <small  *ngIf="!edit_profile_Form.controls.mobile_number.valid  && (edit_profile_Form.controls.mobile_number.dirty || submitAttempt)">
+                <p class="valid err-reds">Please enter valid mobile number.</p>
+              </small>
    
 	 
-        <ion-label class="liste-edit required">Location</ion-label>
+        <ion-label class="liste-edit">Location</ion-label>
 		<ion-item>
 	    <ion-input type="text" formControlName="location" placeholder="Location"></ion-input>
 	    </ion-item>
-	    <p class="err-reds" *ngIf="!edit_profile_Form.controls.location.valid  && (edit_profile_Form.controls.location.touched || submitAttempt)">Please enter the location</p>
+	  
 
-		<ion-label class="liste-edit">Date of birth</ion-label>
+		<ion-label class="liste-edit required">Date of birth</ion-label>
 		<ion-item>
-	    <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" formControlName="dob" [(ngModel)]="user_dob">
+	    <ion-datetime class="select-brd" displayFormat="MMM DD, YYYY" formControlName="dob" 
+	    [(ngModel)]="user_dob" placeholder="Date of birth"
+                [class.invalid]="!edit_profile_Form.controls.dob.valid && (edit_profile_Form.controls.dob.dirty)">
 	    </ion-datetime>
 	    </ion-item>
 	 
@@ -70,10 +73,14 @@
 	    <ion-input type="text" formControlName="email"></ion-input>
 	    </ion-item>
 	    
-	    		<ion-label class="liste-edit">Personal email</ion-label>
+	    		<ion-label class="liste-edit required">Personal email</ion-label>
 		<ion-item>
-	    <ion-input type="text" formControlName="personal_email" [(ngModel)]="profileData.personal_email"></ion-input>
+	    <ion-input type="text" formControlName="personal_email" 
+	    [(ngModel)]="profileData.personal_email" [class.invalid]="!edit_profile_Form.controls.personal_email.valid && (edit_profile_Form.controls.personal_email.dirty)"></ion-input>
 	    </ion-item>
+	     <small  *ngIf="!edit_profile_Form.controls.personal_email.valid  && (edit_profile_Form.controls.personal_email.dirty || submitAttempt)">
+                <p class="valid err-reds">Please enter valid Email.</p>
+              </small>
 
 		<ion-label class="liste-edit">User type</ion-label>
 	    <ion-item>

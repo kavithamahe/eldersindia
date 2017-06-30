@@ -5,4 +5,8 @@ page-blogtabs {
 .tabs-md .tab-button[aria-selected="true"] .tab-button-icon{ color:#fff; }
 
 .tabs-md[tabsLayout="icon-top"] .has-icon .tab-button-text{ color:#fff;}
+
+ion-tabs.hidden div.tabbar {
+    display: none
+}
 }

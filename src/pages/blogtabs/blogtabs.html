@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar color="primary" hide-nav-bar="true">
     <ion-buttons left>
       <button ion-button icon-only menuToggle>
         <ion-icon name="menu"></ion-icon>
@@ -14,9 +14,9 @@
   </ion-navbar>
 </ion-header>
 <ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="View Blogs"  tabsHideOnSubPages="false" tabIcon="md-eye">
+  <ion-tab [root]="tab1Root" tabTitle="View Blogs"  tabsHideOnSubPages="false"  tabIcon="md-eye">
   </ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="My Blogs"  tabsHideOnSubPages="false" tabIcon="logo-rss">
+  <ion-tab [root]="tab2Root" tabTitle="My Blogs" tabsHideOnSubPages="false" tabIcon="logo-rss">
   </ion-tab>
    <ion-tab [root]="tab3Root" tabTitle="Create Blog"  tabsHideOnSubPages="false" tabIcon="add">
   </ion-tab>

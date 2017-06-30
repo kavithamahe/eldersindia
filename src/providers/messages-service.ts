@@ -130,7 +130,7 @@ file:any;
   }
   sentScroll(nextPageURL)
   {
-    let _request= {searchValue: ""}
+    let _request= {search: ""}
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
   }

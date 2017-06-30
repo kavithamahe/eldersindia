@@ -93,7 +93,7 @@ education_data:any;
 experience_data:any;
 emergency_data:any;
 skill_data:any;
-
+mytype:string ="password";
 //-----------------------END-------------------//
 
   constructor(public providerService:ServiceProvider, public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
@@ -142,6 +142,12 @@ skill_data:any;
         elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
         elder_password:['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
+        education_graduation: ['', Validators.compose([Validators.required])],
+        education_specialization: ['', Validators.compose([Validators.required])],
+        education_college: ['', Validators.compose([Validators.required])],
+        // experience_industry: ['', Validators.compose([Validators.required])],
+        // experience_years: ['', Validators.compose([Validators.required])],
+        // experience_duration: ['', Validators.compose([Validators.required])],
        /* emergency_numbers: ['', Validators.compose([Validators.required])],
         experienceYears: ['', Validators.compose([Validators.required])],
         college: ['', Validators.compose([Validators.required])],
@@ -328,16 +334,20 @@ imageURL:any;
   addExperience(count){
     // this.getElderMasterDetails();
     this.experience_list.push({experience:""});
+    console.log(this.experience_list);
   }
   removeExperience(index){
     this.experience_list.splice(index,1);
     this.experience_industry.splice(index,1);
     this.experience_years.splice(index,1);
     this.experience_duration.splice(index,1);
+
   }
 
   addEducation(){
     this.education_list.push({education:""});
+    console.log(this.education_list);
+  
   }
   removeEducation(index){
    this.education_list.splice(index,1);

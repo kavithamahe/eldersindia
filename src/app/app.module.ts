@@ -145,7 +145,7 @@ import { ServiceProvider } from '../providers/service-provider';
   ],
   imports: [
     IonicModule.forRoot(MyApp,AppConfig,{
-       tabsHideOnSubPages:false
+       tabsHideOnSubPages:true
     }),
     TruncateModule,
     RlTagInputModule,

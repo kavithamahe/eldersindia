@@ -64,9 +64,9 @@ export class CommunityprofilePage {
     authForm:FormGroup;
     submitAttempt:any;
     message:any;
-    //tabBarElement: any;
+    tabBarElement: any;
   constructor(public nav: NavController, public actionsheetCtrl: ActionSheetController,public platform: Platform, public storage:Storage,public formBuilder: FormBuilder,public popoverCtrl: PopoverController, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
-        //this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+       this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
         this.isAndroid = platform.is('android');
       this.nav=nav;
       this.profile_uid=navParams.get("profile_uid");
@@ -87,6 +87,13 @@ export class CommunityprofilePage {
         this.addComments=false;
         this.itemComments=false;
  
+  }
+    ionViewWillEnter() {
+    this.tabBarElement.style.display = 'none';
+  }
+ 
+  ionViewWillLeave() {
+    this.tabBarElement.style.display = 'flex';
   }
 
   loadThisPage(id){
@@ -602,13 +609,6 @@ metaLink:any = "";
     this.communityServices.showErrorToast(err);
   });
   }
-  // ionViewWillEnter() {
-  //   this.tabBarElement.style.display = 'none';
-  // }
- 
-  // ionViewWillLeave() {
-  //   this.tabBarElement.style.display = 'none';
-  // }
 
  }
 

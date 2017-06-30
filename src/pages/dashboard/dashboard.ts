@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {  Platform,NavController, NavParams,AlertController,ToastController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import {CallNumber, Vibration, NativeAudio} from 'ionic-native';
+import { CallNumber, Vibration, NativeAudio} from 'ionic-native';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { LocalNotifications, Geolocation } from 'ionic-native';
 
@@ -32,8 +32,10 @@ export class DashboardPage {
   ambulance:any;
   call_sponsor:any;
   hooterOn:boolean=false;
+  tabBarElement: any;
   constructor(public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
-  	this.storage.ready().then(() => {
+  	 this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+    this.storage.ready().then(() => {
       storage.get('token').then((token) => { this.token=token;  })
       storage.get('user_type').then((user_type) => { this.user_type=user_type;  })
       storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor;  })
@@ -42,6 +44,13 @@ export class DashboardPage {
   });
     this.fetchLocation();
      //alert(this.call_sponsor);
+  }
+   ionViewWillEnter() {
+    this.tabBarElement.style.display = 'none';
+  }
+ 
+  ionViewWillLeave() {
+    this.tabBarElement.style.display = 'flex';
   }
    fetchLocation(){
     if (!this.platform.is('cordova')) {
@@ -114,6 +123,7 @@ console.log("location ready");
   }
   public makeCall(number)
   {
+    console.log("number"+number);
     if(number)
     {
     CallNumber.callNumber(number, true)

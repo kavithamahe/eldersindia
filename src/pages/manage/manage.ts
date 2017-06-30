@@ -111,7 +111,7 @@ manage_elder:any;
     loader.present();
     this.communityServices.deleteDetail(id).subscribe(datas =>{
      this.showToast(datas.result);
-     this.closeOption();
+     //this.closeOption();
      this.manageDetail();
      loader.dismiss();
      },
