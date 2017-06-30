@@ -45,6 +45,8 @@ file_path:any;
 nativepath: any='';
 file_name:any='';
 replyId:any;
+msgType:any='create';
+customTo:any=false;
 //protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
  constructor(private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public formBuilder: FormBuilder,private completerService: CompleterService,public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public messagesService:MessagesService) {
   this.storage.ready().then(() => {
@@ -59,11 +61,21 @@ replyId:any;
   //this.replyId=navParams.get("id");
   this.subject=navParams.get("subject");
   this.message=navParams.get("message");
+  this.msgType=navParams.get("msgType");
+  if(this.msgType=='reply'){
+  this.messageForm = formBuilder.group({
+        toAddress: [{value:this.toAddress,disabled: true},, Validators.compose([Validators.required])],
+        subject: [{value:this.subject,disabled: true}, Validators.compose([Validators.required])],
+        message: ['', Validators.compose([Validators.required])]
+         });
+  this.customTo=true;
+    }else{  
    this.messageForm = formBuilder.group({
         toAddress: ['', Validators.compose([Validators.required])],
         subject: ['', Validators.compose([Validators.required])],
         message: ['', Validators.compose([Validators.required])]
          });
+ }
   }
   
   public getFriendsList()
@@ -136,6 +148,7 @@ replyId:any;
        this.toAddress='';
        this.subject='';
        this.message='';
+       this.msgType='';
        this.navCtrl.setRoot(MessagesPage);
       this.showToaster(sendMessage.result.info); 
       loader.dismiss();

@@ -49,8 +49,9 @@ sponser_id:any;
   elder_name:any="";
   elder_service:any="";
   elder_number:any="";
-
-  elder_dob:any="1977-01-01";
+  myDate:any=new Date();
+  //(this.myDate.getFullYear() -40)+"-01-01";
+  elder_dob:String=(this.myDate.getFullYear() -40)+"-01-01";
   elder_address:any="";
   elder_location:any="";
   emergency_numbers:any;
@@ -98,7 +99,7 @@ skill_data:any;
   constructor(public providerService:ServiceProvider, public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
 
       // this.getElderMasterDetails();
-      
+     // setFullYear(myDate.getFullYear() + 5); 
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
 
@@ -185,6 +186,9 @@ skill_data:any;
               });
   }
   this.nav=nav;
+}
+onlyNumberKey(event) {
+    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
 }
 
  loadManageDependentData(elderId){

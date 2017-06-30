@@ -27,6 +27,7 @@ jobDependentId:any;
 user_type:any;
 user_type_id:any;
 file_name:any;
+functional_area:any=[];
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public jobBoardService:JobBoardService,public modalCtrl: ModalController) {
   	this.jobId=navParams.get("jobId");
     this.storage.ready().then(() => {
@@ -45,12 +46,16 @@ file_name:any;
     this.jobBoardService.singleJob(this.jobId).subscribe(
      (singleJob) => {
       this.singleJobInfo=singleJob.result.info;  
+      this.functional_area=singleJob.result.info.functional_area;
+      console.log(this.singleJobInfo);
       loader.dismiss();
     },
     (err) => { 
         if(err.status===401)
         {
           this.showToaster(JSON.parse(err._body).error);
+          this.singleJobInfo=[];
+          this.functional_area=[];
         }
         else
         {

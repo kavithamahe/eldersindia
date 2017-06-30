@@ -32,11 +32,20 @@ export class ModalContentPage {
   terms:boolean = false;
   checkTerms:any= false;
   date:any;
+  minDate:any="";
+  maxDate:any="";
+  theBigDay:any=new Date();
+  //currentDate:any=new Date();
 
   constructor(public modalCtrl: ModalController, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
+    // this.minDate=new Date();
+    // this.maxDate=(new Date().getFullYear() +40)+"-12-31";
      this.date = new Date().toISOString();
-
+    //  let formalDate = new Date(this.currentDate.getFullYear()+5);
+    // this.currentDate=this.currentDate.setDate(formalDate.getFullYear()+"-"+formalDate.getMonth()+"-"+formalDate.getDate());
+     // this.currentDate=this.currentDate.getFullYear()+3;
+    // console.log("date"+this.currentDate.setDate(formalDate.getFullYear()+5).toISOString());
      console.log("this is modal page");
      console.log("modal content page",params.get("vendor"));
      //let loading = this.loadingCtrl.create({content: 'Please wait...!'});

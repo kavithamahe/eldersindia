@@ -60,11 +60,11 @@
             <i class="fa fa-reply"></i>&nbsp;<p>Reply</p>
           </button>
         </ion-col>
-        <ion-col *ngIf ="viewType == 'sent'" (click)="messageReply(veiwMessagesInfo?.receiver_name,veiwMessagesInfo?.subject)">
+        <!--<ion-col *ngIf ="viewType == 'sent'" (click)="messageReply(veiwMessagesInfo?.receiver_name,veiwMessagesInfo?.subject)">
           <button ion-button icon-left clear small>
             <i class="fa fa-reply"></i>&nbsp;<p>Reply</p>
           </button>
-        </ion-col>
+        </ion-col>-->
 	       <ion-col (click)="deleteMessage(veiwMessagesInfo?.id,viewType)">
             <button ion-button icon-left clear small>
              <i class="fa fa-trash-o"></i>&nbsp;<p>Delete</p>

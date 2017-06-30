@@ -46,7 +46,7 @@ rootUrl:any;
       .map(res => res.json()); 
   }
   sent() {  
-   let _request= {searchValue: ""}
+   let _request= {search: ""}
     return this.http.post(this.rootUrl+'listSent',_request,this.options)
       .map(res => res.json()); 
   }

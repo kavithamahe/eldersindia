@@ -1,5 +1,5 @@
 import { Component , ViewChild } from '@angular/core';
-import { ModalController,LoadingController,NavController, NavParams, Slides, Platform } from 'ionic-angular';
+import { ModalController,LoadingController,NavController, ToastController,NavParams, Slides, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -51,7 +51,7 @@ lead_time:any='00:00';
 @ViewChild('ghbslides') slider: Slides;
 // @ViewChild('ghbslides') ghbslides: any;
 
-  constructor(public modalCtrl: ModalController, public platform: Platform, public formBuilder: FormBuilder,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public navCtrl: NavController, public navParams: NavParams, public storage:Storage) {
+  constructor(public modalCtrl: ModalController, public platform: Platform,public toastCtrl: ToastController, public formBuilder: FormBuilder,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public navCtrl: NavController, public navParams: NavParams, public storage:Storage) {
        console.log("this is service info page");
      // this.url = this.providerService.getUrl();
       this.subCategoryId = navParams.get("subCategoryId");
@@ -148,12 +148,25 @@ modal(){
   }
 
   toggleContact(){
-
+    alert("test1");
     let modal = this.modalCtrl.create(ServiceModalPage,{service:"contact",vendorList:this.vendorList});    
     modal.present();
     }
-
+  showToast(messageData){
+    let toast = this.toastCtrl.create({
+        message: messageData,
+        position:"top",
+        duration: 3000
+      });
+      toast.present();
+   }
   toggleRequestService(){
+     
+     if((this.vendorList.dependentLists.length<=0) && this.userType == 'sponsor')
+      {
+        this.showToast("There is no dependent. You can not apply job!");      
+      
+      }else{
      let service_modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor:this.vendorList.vendorDetails});    
     service_modal.present();
     service_modal.onDidDismiss(data =>{
@@ -163,7 +176,7 @@ modal(){
        this.sendRequestService(data);
       }
     })
-
+    }
   }
 
 

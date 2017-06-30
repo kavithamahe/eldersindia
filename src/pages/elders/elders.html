@@ -59,7 +59,7 @@
           </small> 
 		   <ion-label class="label-tittle required">Mobile number</ion-label>
             <ion-item>
-              <ion-input type="text" formControlName="elder_number" placeholder="Mobile number"
+              <ion-input type="text" formControlName="elder_number" (keypress)="onlyNumberKey($event)" maxlength="12" placeholder="Mobile number"
                   [class.invalid]="!authForm.controls.elder_number.valid && (authForm.controls.elder_number.dirty)" [(ngModel)]="elder_number" value={{elder_number}}>
               </ion-input>
 			     </ion-item>
@@ -120,7 +120,7 @@
             <ion-label class="label-tittle">Number</ion-label>
          <ion-item>
               <ion-input type="text" [(ngModel)]="emergency_no[i]" placeholder="Number"
-              [ngModelOptions]="{standalone: true}"></ion-input>
+              [ngModelOptions]="{standalone: true}" maxlength="12" (keypress)="onlyNumberKey($event)"></ion-input>
            </ion-item>
              
           <ion-row>
@@ -358,9 +358,9 @@
     </ion-buttons>
 
     <ion-buttons end>
-      <button ion-button color="royal" large icon-right showWhen="ios" (click)="addDependent()">&nbsp;Update<ion-icon ios="md-send" md="md-send"></ion-icon>
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="addDependent()">&nbsp;Submit<ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button ion-button color="light" large icon-right hideWhen="ios" (click)="addDependent()">&nbsp;Update<ion-icon ios="md-send" md="md-send"></ion-icon>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="addDependent()">&nbsp;Submit<ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>

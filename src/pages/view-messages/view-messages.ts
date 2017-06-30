@@ -119,7 +119,7 @@ public dashboardPage()
   }
   public messageReply(to,subject,sender_id)
   {
-    let msgObject={"to":to,"subject":subject,"id":sender_id};
+    let msgObject={"to":to,"subject":subject,"id":sender_id,msgType:"reply"};
    // this.navCtrl.setRoot(CreateMessagePage,msgObject);
     this.navCtrl.push(CreateMessagePage,msgObject);
   }
