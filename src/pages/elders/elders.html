@@ -59,7 +59,9 @@
           </small> 
        <ion-label class="label-tittle">Number <small class="req-field">*</small></ion-label>
             <ion-item>
-              <ion-input type="text" formControlName="elder_number"
+
+              <ion-input type="text" formControlName="elder_number" (keypress)="onlyNumberKey($event)" maxlength="12" placeholder="Mobile number"
+
                   [class.invalid]="!authForm.controls.elder_number.valid && (authForm.controls.elder_number.dirty)" [(ngModel)]="elder_number" value={{elder_number}}>
               </ion-input>
            </ion-item>
@@ -119,7 +121,8 @@
             </ion-item>
             <ion-label class="label-tittle">Number</ion-label>
          <ion-item>
-              <ion-input type="text" [(ngModel)]="emergency_no[i]" 
+
+              <ion-input type="text" [(ngModel)]="emergency_no[i]" placeholder="Number"
               [ngModelOptions]="{standalone: true}"></ion-input>
            </ion-item>
              

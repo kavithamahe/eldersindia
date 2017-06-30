@@ -46,7 +46,12 @@
 		   
 		     <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb required">Select dependent
          </ion-label>
+<<<<<<< HEAD
+			 <ion-item *ngIf = "userType =='sponsor'">
+	            <ion-label>Select dependent</ion-label>
+=======
          <ion-item *ngIf = "userType =='sponsor'">
+>>>>>>> d45700c58803050cd174141605c129e0ae3ce001
               <ion-select formControlName="dependents" class="select-brds" placeholder="Select dependent" >
               <ion-option *ngFor = "let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}}
               </ion-option>
