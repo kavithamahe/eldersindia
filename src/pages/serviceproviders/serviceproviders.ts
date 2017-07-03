@@ -54,6 +54,7 @@ export class ServiceprovidersPage {
     err =>{
       this.providerService.showErrorToast(err);
       console.log("Response for get service offered: "+err);
+      this.services=[];
       loading.dismiss();
     })      
   }

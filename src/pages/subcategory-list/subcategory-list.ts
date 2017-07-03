@@ -193,19 +193,19 @@ loadSubcategoryList(subCategory_id,location_id){
 </ion-header>
 
 <ion-content class="popup-mds" style="background:#fff;">
-  <ion-item *ngIf(selected)>
-  <p class="err-reds"> Dependent not selected</p>
-  </ion-item>
+  
 <br/>
-   <ion-label style=" font-size:17px; padding-left:10px; padding-top:10px; line-height:20px; float:left;">Select Dependent</ion-label>
+   <ion-label style=" font-size:17px; padding-left:10px; padding-top:10px; line-height:20px; float:left;" class="required">Select dependent</ion-label>
       <ion-item >
-           
-              <ion-select class="select-brd" style=" margin-left:13px; width:92% !important; text-align:left; font-size:15px;" [(ngModel)]="dependentData">
+           <ion-label style="padding-left:15px;">Select dependent</ion-label>
+              <ion-select class="select-brd" style=" width:92% !important; margin-right:15px; text-align:left; font-size:15px;" [(ngModel)]="dependentData" placeholder="Select dependent">
                 <ion-option *ngFor = "let dependent of dependentLists" [value]="dependent">{{dependent.name}}
                 </ion-option>
               </ion-select>
           </ion-item>
- 
+ <ion-item *ngIf(selected)>
+  <p class="err-reds" style="color:red;"> Please select the dependent</p>
+  </ion-item>
 
 
 

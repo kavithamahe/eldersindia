@@ -30,12 +30,12 @@
 <br>
 <ion-list class="create-message">
 
-            <ng2-completer [(ngModel)]="toAddress" formControlName="toAddress" [datasource]="friendsList" placeholder="To *" [minSearchLength]="0" (focus)="hiddeEorr()"></ng2-completer>
+            <ng2-completer disableInput="{{customTo}}" [(ngModel)]="toAddress" formControlName="toAddress" [datasource]="friendsList" placeholder="To *" [minSearchLength]="0" (focus)="hiddeEorr()"></ng2-completer>
 
   <p *ngIf="!messageForm.controls.toAddress.valid && (messageForm.controls.toAddress.dirty || submitAttempt)" class="err-reds">Please select to</p>
   <p *ngIf="customErr" class="err-reds">Please select valid to address</p>
   <ion-item>
-    <ion-input type="text"  placeholder="Subject *" formControlName="subject" [(ngModel)]="subject"></ion-input>
+    <ion-input type="text" placeholder="Subject *" formControlName="subject" [(ngModel)]="subject"></ion-input>
   </ion-item>
   <p *ngIf="!messageForm.controls.subject.valid && (messageForm.controls.subject.dirty || submitAttempt)" class="err-reds">Please enter the subject</p>
   <ion-item>

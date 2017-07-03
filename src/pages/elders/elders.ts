@@ -49,8 +49,9 @@ sponser_id:any;
   elder_name:any="";
   elder_service:any="";
   elder_number:any="";
-
-  elder_dob:any="1977-01-01";
+  myDate:any=new Date();
+  //(this.myDate.getFullYear() -40)+"-01-01";
+  elder_dob:String=(this.myDate.getFullYear() -40)+"-01-01";
   elder_address:any="";
   elder_location:any="";
   emergency_numbers:any;
@@ -92,13 +93,13 @@ education_data:any;
 experience_data:any;
 emergency_data:any;
 skill_data:any;
-mytype:string ="password";
+
 //-----------------------END-------------------//
 
   constructor(public providerService:ServiceProvider, public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
 
       // this.getElderMasterDetails();
-      
+     // setFullYear(myDate.getFullYear() + 5); 
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
 
@@ -135,18 +136,12 @@ mytype:string ="password";
         elder_name : ['', Validators.compose([ Validators.maxLength(30), 
               Validators.pattern('[a-zA-Z ]*'),Validators.required])],
         elder_service : ['', Validators.compose([Validators.required])],
-        elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.minLength(5),Validators.maxLength(12),Validators.required])],
+        elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.minLength(10),Validators.maxLength(10),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
         elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
         elder_password:['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
-        education_graduation: ['', Validators.compose([Validators.required])],
-        education_specialization: ['', Validators.compose([Validators.required])],
-        education_college: ['', Validators.compose([Validators.required])],
-        // experience_industry: ['', Validators.compose([Validators.required])],
-        // experience_years: ['', Validators.compose([Validators.required])],
-        // experience_duration: ['', Validators.compose([Validators.required])],
        /* emergency_numbers: ['', Validators.compose([Validators.required])],
         experienceYears: ['', Validators.compose([Validators.required])],
         college: ['', Validators.compose([Validators.required])],
@@ -191,6 +186,9 @@ mytype:string ="password";
               });
   }
   this.nav=nav;
+}
+onlyNumberKey(event) {
+    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
 }
 
  loadManageDependentData(elderId){
@@ -241,6 +239,7 @@ imageURL:any;
           this.job_interest = this.manageDependentData.job_interested;
 
           if(this.job_interest){
+            console.log("interested in job");
             this.area_of_interest = this.manageDependentData.area_interest;
             this.job_type = this.manageDependentData.job_type;
 
@@ -330,20 +329,16 @@ imageURL:any;
   addExperience(count){
     // this.getElderMasterDetails();
     this.experience_list.push({experience:""});
-    console.log(this.experience_list);
   }
   removeExperience(index){
     this.experience_list.splice(index,1);
     this.experience_industry.splice(index,1);
     this.experience_years.splice(index,1);
     this.experience_duration.splice(index,1);
-
   }
 
   addEducation(){
     this.education_list.push({education:""});
-    console.log(this.education_list);
-  
   }
   removeEducation(index){
    this.education_list.splice(index,1);

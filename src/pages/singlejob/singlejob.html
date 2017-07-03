@@ -36,10 +36,6 @@
 </ion-list>
 <ion-item class="job-dates">
 <p><span *ngIf="singleJob?.created_at"><i class="fa fa-calendar-o"> </i>&nbsp;{{singleJob?.created_at |  date :'MMM dd y'}}</span></p>
-<!-- <span *ngIf="singleJob?.job_expiry">&nbsp;(To)&nbsp;{{singleJob?.job_expiry }}</span>
- -->
-
-
    <p><i class="fa fa-map-marker" aria-hidden="true" style="padding-left:3px;"></i>&nbsp;
    <span *ngFor="let locations of singleJob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
   </ion-item>
@@ -47,11 +43,13 @@
 <hr/>
   
 <ion-row>
+
 <ion-col class="single-jobs">
 <div>   <small>Job Type</small>
-    <span *ngFor="let jobType of singleJob?.job_type; let isLast2=last">{{jobType?.name}}{{isLast2 ? '' : ', '}}</span></div>
+    <span *ngFor="let jobType of singleJob?.job_type; let isLast2=last">{{jobType?.name}}{{isLast2 ? '' : ', '}}</span>
+   </div>
 <div *ngIf="singleJob?.salary"> <small>Salary</small><p><i class="fa fa-inr"> </i>&nbsp;<span>{{singleJob?.salary}} </span> </p></div>
- <p *ngIf="singleJob?.functional_area"><span *ngFor="let funArea of singleJob?.functional_area">{{funArea?.name}}</span> </p>
+ <p><span *ngFor="let funArea of functional_area">{{funArea?.name}}</span> </p>
    
    <div> <small>Experience</small><p><span>{{singleJob?.min_experience}} - {{singleJob?.max_experience}} years</span> </p></div>
     

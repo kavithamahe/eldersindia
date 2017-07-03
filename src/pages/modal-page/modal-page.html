@@ -23,7 +23,7 @@
                 <p class="err-reds" *ngIf="!modalForm.controls.problem.valid  && (modalForm.controls.problem.dirty || submitAttempt)">Please enter the describe need</p>
            <ion-label stacked class="label-lb required">Scheduled date</ion-label>
 		   <ion-item>
-           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" min={{this.date}} formControlName ="date"></ion-datetime>
+           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" min={{this.date}}  formControlName ="date"></ion-datetime>
           </ion-item>
          <p class="err-reds" *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">Please enter the scheduled date
          </p>
@@ -46,7 +46,9 @@
 		   
 		     <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb required">Select dependent
          </ion-label>
-         <ion-item *ngIf = "userType =='sponsor'">
+
+			 <ion-item *ngIf = "userType =='sponsor'">
+	            <ion-label>Select dependent</ion-label>
               <ion-select formControlName="dependents" class="select-brds" placeholder="Select dependent" >
               <ion-option *ngFor = "let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}}
               </ion-option>

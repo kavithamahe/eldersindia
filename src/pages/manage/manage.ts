@@ -17,7 +17,7 @@ show_option:boolean =false;
 
   manageLists:boolean;
   managesLists:boolean;
-  manages:any;
+  manages:any=[];
   showblock:string = null;
   education:any;
   adds:any;
@@ -58,10 +58,13 @@ show_option:boolean =false;
       this.allowedElderFlag=manages.result.allowedElderFlag;
       loader.dismiss();
      },
-      err =>{
-        
-          loader.dismiss();
-      });
+     (err) => {   
+        this.manages=[]; 
+        this.showToast(JSON.parse(err._body).error.error_msg);
+        this.allowedElderFlag=JSON.parse(err._body).error.allowedElderFlag;             
+        loader.dismiss();
+      }
+     );
       
    }
 manage_elder:any;
