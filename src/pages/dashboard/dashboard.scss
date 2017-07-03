@@ -4,8 +4,18 @@ page-dashboard {
     padding: 35px 0px;
     color: #fff;
     text-decoration: none;
-    background: #1d2939;
+   background:#eee;
 }
 .dash-icon{ font-size: 5.2em !important; padding-bottom:10px;}
+.dashboard ion-row ion-col span{background:#fff;}
+.dashboard-listed{    border:none;
 
+    float: left;
+    padding: 5px;
+    width:100%;-moz-box-shadow:    inset 0 0 10px #999;
+   -webkit-box-shadow: inset 0 0 10px #999;
+   box-shadow:         inset 0 0 10px #999;
+}
+.dashboard-listed i{margin-top:10px !important; font-size:50px;}
+.dashboard-listed p{margin:0px; color:#858585; padding:5px;}
 }
