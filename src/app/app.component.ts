@@ -441,6 +441,8 @@ initializePreview() {
                        break;
        case "events" : this.nav.push(EventsPage);
                        break;
+       case "news" : this.nav.push(NewsPage);
+                       break;
      }
   }
 

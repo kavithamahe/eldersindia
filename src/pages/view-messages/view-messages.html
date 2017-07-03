@@ -52,7 +52,7 @@
       </ion-card-content>
       <div *ngFor="let attachment of attachmentInfo">
         <p (click)="downloadFile(attachment.file_path,attachment.file_name)">{{attachment.file_name}}</p>
-        <span>Download progress : {{downloadProgress}} %</span> 
+        <!-- <span>Download progress : {{downloadProgress}} %</span> --> 
       </div>
      <ion-row class="replay-forward">
         <ion-col *ngIf ="viewType == 'inbox'" (click)="messageReply(veiwMessagesInfo?.sender_name,veiwMessagesInfo?.subject,veiwMessagesInfo?.sender_id)">
@@ -65,7 +65,7 @@
             <i class="fa fa-reply"></i>&nbsp;<p>Reply</p>
           </button>
         </ion-col>-->
-	       <ion-col (click)="deleteMessage(veiwMessagesInfo?.id,viewType)">
+	        <ion-col (click)="deleteMessage(veiwMessagesInfo?.id,viewType)">
             <button ion-button icon-left clear small>
              <i class="fa fa-trash-o"></i>&nbsp;<p>Delete</p>
             </button>

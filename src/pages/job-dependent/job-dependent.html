@@ -18,10 +18,10 @@
 <ion-row style="margin:px;">
    
   <ion-col>
-   <ion-label style=" font-size:17px; padding-left:10px; padding-top:10px; line-height:20px;">Select Dependent</ion-label>
+   <ion-label style=" font-size:17px; padding-left:10px; padding-top:10px; line-height:20px;">Select dependent</ion-label>
 <ion-item>
-
-    <ion-select [(ngModel)]="dependent" class="select-brddd">
+    <ion-label>Dependent</ion-label>
+    <ion-select [(ngModel)]="dependent" class="select-brddd" placeholder="Select dependent">
       <ion-option *ngFor="let dependent of getDependentList" [value]="dependent?.id">{{dependent?.name}}</ion-option>    
 	  </ion-select>
 
