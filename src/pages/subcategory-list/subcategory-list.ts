@@ -34,10 +34,13 @@ export class SubcategoryListPage {
   serviceTitle:any;
   rate:any;
 	token:any;
+  date:any;
   dependentLen:any=true;
   scheduleModal:any='';
   lead_time:any='00:00';
   constructor( public loadingCtrl: LoadingController, public providerService: ServiceProvider, public navCtrl: NavController, public altCtrl:AlertController, public navParams: NavParams,public toastCtrl: ToastController,public modalCtrl: ModalController, public mp:ModalContentPage, public storage:Storage) {
+    this.date = new Date().toISOString();
+    console.log(this.date);
     console.log("this is sub category list page");
       this.location_id = navParams.get("location_id");
       this.service_id = navParams.get("service").id;
@@ -118,7 +121,7 @@ loadSubcategoryList(subCategory_id,location_id){
 
   openModal(modalPage,vendorData){
     if(modalPage == "instant"){
-      this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,service:this.serviceTitle,vendor:vendorData});
+      this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,lead_time:this.lead_time,service:this.serviceTitle,vendor:vendorData});
     }else{
       this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists,lead_time:this.lead_time,vendor:vendorData});
     }
@@ -240,7 +243,9 @@ loadSubcategoryList(subCategory_id,location_id){
 export class InstantRequestModalPage {
   dependentLists:any;
   dependentData:any = "";
+  lists:any;
   service:any="";
+  lead_time:any;
   selected:boolean=false;
   vendor:any="";
   constructor(
@@ -249,6 +254,9 @@ export class InstantRequestModalPage {
   ) {
     console.log("modal page called");
     this.dependentLists = this.params.get('dependentList');
+    console.log(this.dependentLists);
+    this.lead_time = this.params.get('lead_time');
+    console.log(this.lead_time);
     this.service = this.params.get('service');
     if(params.get("vendor") != undefined){
       this.vendor = this.params.get("vendor").name;
@@ -268,7 +276,11 @@ export class InstantRequestModalPage {
 
     let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
     d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
-    console.log(d,datestring);
+    console.log( d,datestring);
+    let time =("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+    console.log(time);
+    let lead_time = (this.lead_time + time);
+    console.log(lead_time);
 
     let serviceRequestData = {"problem": this.service, "datetime": datestring, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile};
     this.viewCtrl.dismiss(serviceRequestData);

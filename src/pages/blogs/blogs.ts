@@ -19,6 +19,7 @@ imageUrl:string;
 nextPageURL:any='';
 eventScrollLists:any;
 emptyRecord:any;
+categoryLists:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -27,7 +28,7 @@ emptyRecord:any;
     })
 
   });
-  
+  this.getCategory();
   }
   public blog()
   { 
@@ -53,6 +54,17 @@ emptyRecord:any;
         loader.dismiss();
       }
     );   
+  }
+   public getCategory(){
+    this.blogListService.getBlogCategory().
+     subscribe(mycategory => {
+      this.categoryLists = mycategory.result;
+       
+  },
+    err =>{
+    this.showToaster(err);
+  });
+
   }
   public blogsearch(searchEvent) {
     let term = searchEvent.target.value;

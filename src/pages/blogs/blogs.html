@@ -16,6 +16,16 @@
 </ion-header>
 
 <ion-content padding style="background:#fff;">
+          <ion-list>
+            <ion-item>
+              <ion-label>select category</ion-label>
+                <ion-select  (ionChange)='getCategory($event)' >
+                  <ion-option *ngFor="let category of categoryLists" 
+                 >
+                  </ion-option>
+                </ion-select>
+            </ion-item>
+          </ion-list>
 <ion-searchbar (input)="blogsearch($event)"></ion-searchbar>
 <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)">
 <ion-row>

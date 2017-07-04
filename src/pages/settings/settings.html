@@ -16,14 +16,17 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Settings</ion-title>
+    <ion-title text-center>Privacy Settings</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="content-intop">
   <ion-card class="seetingslist">
       <ion-list>
-
+         <ion-item (tap)="toggle('privacy_profile')">
+          <ion-label><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Profile</ion-label>
+          <ion-toggle [(ngModel)]="privacy_profile"></ion-toggle>
+        </ion-item>
         <ion-item (tap)="toggle('privacy_name')">
           <ion-label><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Name</ion-label>
           <ion-toggle [(ngModel)]="privacy_name"></ion-toggle>
@@ -59,10 +62,7 @@
           <ion-toggle [(ngModel)]="privacy_connection"></ion-toggle>
         </ion-item>
 
-        <ion-item (tap)="toggle('privacy_profile')">
-          <ion-label><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Profile</ion-label>
-          <ion-toggle [(ngModel)]="privacy_profile"></ion-toggle>
-        </ion-item>
+       
 
       </ion-list>
 	  </ion-card>

@@ -33,6 +33,7 @@ user_id:any;
     return this.http.post(this.rootUrl+`normaListBlog`,_request,this.options)
       .map(res => res.json()); 
   }
+ 
   searchConnection(term) {  
    let _request= {"search":{"title":term}};
     return this.http.post(this.rootUrl+'normaListBlog',_request,this.options)

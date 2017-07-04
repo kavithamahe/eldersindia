@@ -12,7 +12,7 @@
       </button>
     </ion-buttons>
     <ion-buttons left>
-    <button ion-button icon-only (click)="dashboardPage()">
+      <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
@@ -27,14 +27,14 @@
  <img src="{{imageUrl+events?.featured_image}}" [hidden]="!events?.featured_image">
   <ion-item text-wrap class="events-shows">   
     <h2>{{events?.title}}</h2>
-    <p class="timedate" style="padding-left:3px;"><i class="fa fa-user" aria-hidden="true"></i> {{events?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{events?.post_date | date :"MMM dd y"}}</p>
+    <p class="timedate" style="padding-left:3px;" text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{events?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{events?.post_date | date :"MMM dd y"}} To {{events?.end_date | date :"MMM dd y"}} | {{events?.venue}}</p> 
   </ion-item>
   <!--<ion-card-content>
     <p [innerHTML]="events?.description | words : 60 : '...'"></p>
   </ion-card-content>-->
   </div>
 </ion-card>
-<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+ <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
   <ion-item padding *ngIf="!eventsLists">
