@@ -140,15 +140,21 @@ modal(){
                  loading.dismiss();
                 },
         err =>{
-                  this.providerService.showErrorToast(err);
-                  console.log("Response for serviceRequest: "+err);
+          if(err.status===401)
+        {
+          this.showToast(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToast("Try again later");
+        }
                   loading.dismiss();
               })
 
   }
+   
 
   toggleContact(){
-    alert("test1");
     let modal = this.modalCtrl.create(ServiceModalPage,{service:"contact",vendorList:this.vendorList});    
     modal.present();
     }

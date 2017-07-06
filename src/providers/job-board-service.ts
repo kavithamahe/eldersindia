@@ -38,11 +38,11 @@ locationSearch:any=[];
  {
    if(functionalArea!='' && functionalArea!=null)
    {
-     this.functionalSearch=[functionalArea];
+     this.functionalSearch=functionalArea;
    } 
    if(location!='' && location!=null)
    {
-     this.locationSearch=[location];
+     this.locationSearch=location;
    }
    let _request= {"search":{"location":this.locationSearch,"functional_area":this.functionalSearch},"get":["FunctionalArea","Location","SkillSet"],"info":{"uid":this.user_id}};
     return this.http.post(this.rootUrl+'getJobList',_request,this.options)

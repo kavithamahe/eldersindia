@@ -101,6 +101,7 @@ manage_elder:any;
 
   editElder(){
     let elder = this.manage_elder;
+    console.log(elder);
     let data={"fuctionality":"edit","editData":elder};
     this.nav.push(EldersPage,data);
   }

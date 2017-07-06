@@ -3,7 +3,11 @@ import { NavController,LoadingController, NavParams} from 'ionic-angular';
 import { Camera } from 'ionic-native';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service-provider';
-import {FormBuilder,FormGroup,Validators} from '@angular/forms';
+import {FormBuilder,FormGroup,Validators,FormArray} from '@angular/forms';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { FilePath } from '@ionic-native/file-path';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+
 
 import { CommunityServices } from '../../providers/community-services';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -12,10 +16,11 @@ import { ManagePage } from '../../pages/manage/manage';
 
 @Component({
   selector: 'page-elders',
-  templateUrl: 'elders.html'
+  templateUrl: 'elders.html',
 })
 export class EldersPage {
 authForm : FormGroup;
+myForm : FormGroup;
 base64Image:any;
 avatar:any='';
 title:any;
@@ -32,9 +37,9 @@ relations:any=[];
 functionality:String = "";
 sponser_id:any;
 
-  emergency_name:any = [];
-  emergency_no:any =[];
-  elderGraduation:any=[];
+  emergency_name = [];
+  emergency_no =[];
+  elderGraduation=[];
   
   area_interest:any;
   tags:any;
@@ -49,36 +54,35 @@ sponser_id:any;
   elder_name:any="";
   elder_service:any="";
   elder_number:any="";
-  myDate:any=new Date();
-  //(this.myDate.getFullYear() -40)+"-01-01";
-  elder_dob:String=(this.myDate.getFullYear() -40)+"-01-01";
+
+  elder_dob:any="1977-01-01";
   elder_address:any="";
   elder_location:any="";
   emergency_numbers:any;
   job_interest:boolean;
   area_of_interest:any="";
   job_type:any="";
-  skill_set:any=[];
-  skills:any=[];
-  experience_industry:any=[];
-  experience_years:any=[];
-  experience_duration:any=[];
+  skill_set=[];
+  skills=[];
+  experience_industry=[];
+  experience_years=[];
+  experience_duration=[];
 
-  education_graduation:any=[];
-  education_specialization:any=[];
-  education_college:any=[];
+  education_graduation=[];
+  education_specialization=[];
+  education_college=[];
   
 
-  emergency_list:any=[{emergency:""}];
-  experience_list:any=[{experience:""}];
-  education_list:any=[{education:""}];
+  emergency_list=[];
+  experience_list=[];
+  education_list=[];
 
 
-  industry_set:any=[];
-  elder_skills:any=[];
-  elder_emergency:any=[];
-  elder_experience:any=[];
-  elder_education:any=[];
+  industry_set=[];
+  elder_skills=[];
+  elder_emergency=[];
+  elder_experience=[];
+  elder_education=[];
   imageUrl:any;
   user_id:any;
   token:any;
@@ -93,13 +97,16 @@ education_data:any;
 experience_data:any;
 emergency_data:any;
 skill_data:any;
-
+mytype:string ="password";
+ file_path:any;
+  nativepath: any='';
+  file_name:any;
 //-----------------------END-------------------//
 
-  constructor(public providerService:ServiceProvider, public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
+  constructor(private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public providerService:ServiceProvider, public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
 
       // this.getElderMasterDetails();
-     // setFullYear(myDate.getFullYear() + 5); 
+      
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
 
@@ -127,6 +134,7 @@ skill_data:any;
     // this.today = "";
      
      this.job_interest=false;
+     
          
   // }
   if(navParams.get("fuctionality")!= "edit" && navParams.get("fuctionality") !="profileEdit"){
@@ -136,12 +144,22 @@ skill_data:any;
         elder_name : ['', Validators.compose([ Validators.maxLength(30), 
               Validators.pattern('[a-zA-Z ]*'),Validators.required])],
         elder_service : ['', Validators.compose([Validators.required])],
-        elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.minLength(10),Validators.maxLength(10),Validators.required])],
+        elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.minLength(5),Validators.maxLength(12),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
         elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
         elder_password:['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
+        
+         emergency_list: this. formBuilder.array([
+                this.emergencyAddress(),
+            ]),
+        // education_graduation: ['', Validators.compose([Validators.required])],
+        // education_specialization: ['', Validators.compose([Validators.required])],
+        // education_college: ['', Validators.compose([Validators.required])],
+        // experience_industry: ['', Validators.compose([Validators.required])],
+        // experience_years: ['', Validators.compose([Validators.required])],
+        // experience_duration: ['', Validators.compose([Validators.required])],
        /* emergency_numbers: ['', Validators.compose([Validators.required])],
         experienceYears: ['', Validators.compose([Validators.required])],
         college: ['', Validators.compose([Validators.required])],
@@ -149,13 +167,8 @@ skill_data:any;
         elderSpecialization: ['', Validators.compose([Validators.required])],
         functional_area: ['', Validators.compose([Validators.required])],
         functional_duration: ['', Validators.compose([Validators.required])]*/
-        emergency_numbers: ['', Validators.compose([])],
-        experienceYears: ['', Validators.compose([])],
-        college: ['', Validators.compose([])],
-        elderGraduation: ['', Validators.compose([])],
-        elderSpecialization: ['', Validators.compose([])],
-        functional_area: ['', Validators.compose([])],
-        functional_duration: ['', Validators.compose([])]
+       
+       
               });
   }
   else
@@ -169,6 +182,15 @@ skill_data:any;
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
+        // education_list: this. formBuilder.array([
+        //         this.educationAddress(),
+        //     ]),
+        //  experience_list: this. formBuilder.array([
+        //         this.experienceAddress(),
+        //     ]),
+         emergency_list: this. formBuilder.array([
+                this.emergencyAddress(),
+            ]),
        /* emergency_numbers: ['', Validators.compose([Validators.required])],
         experienceYears: ['', Validators.compose([Validators.required])],
         college: ['', Validators.compose([Validators.required])],
@@ -176,20 +198,48 @@ skill_data:any;
         elderSpecialization: ['', Validators.compose([Validators.required])],
         functional_area: ['', Validators.compose([Validators.required])],
         functional_duration: ['', Validators.compose([Validators.required])]*/
-        emergency_numbers: ['', Validators.compose([])],
-        experienceYears: ['', Validators.compose([])],
-        college: ['', Validators.compose([])],
-        elderGraduation: ['', Validators.compose([])],
-        elderSpecialization: ['', Validators.compose([])],
-        functional_area: ['', Validators.compose([])],
-        functional_duration: ['', Validators.compose([])]
+        // area_of_interest: ['', Validators.compose([Validators.required])],
+        // job_type: ['', Validators.compose([Validators.required])],
+        // skill_set: ['', Validators.compose([Validators.required])],
+        
               });
   }
+   this.myForm = formBuilder.group({
+    
+      education_list: this. formBuilder.array([
+                this.educationAddress(),
+            ]),
+         experience_list: this. formBuilder.array([
+                this.experienceAddress(),
+            ]),
+          area_of_interest: ['', Validators.compose([Validators.required])],
+        job_type: ['', Validators.compose([Validators.required])],
+        skill_set: ['', Validators.compose([Validators.required])],
+        file_name: ['', Validators.compose([Validators.required])],
+   })
+ 
   this.nav=nav;
 }
-onlyNumberKey(event) {
-    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-}
+    educationAddress() {
+    return this.formBuilder.group({
+        education_graduation: ['', Validators.compose([Validators.required])],
+        education_specialization: ['', Validators.compose([Validators.required])],
+        education_college: ['', Validators.compose([Validators.required])],
+        });
+    }
+    experienceAddress(){
+      return this.formBuilder.group({
+        experience_industry: ['', Validators.compose([Validators.required])],
+        experience_years: ['', Validators.compose([Validators.required])],
+        experience_duration: ['', Validators.compose([Validators.required])],
+        });
+    }
+    emergencyAddress(){
+      return this.formBuilder.group({
+        emergency_name: ['', Validators.compose([Validators.required])],
+        emergency_no: ['', Validators.compose([Validators.required])],
+     });
+    }
 
  loadManageDependentData(elderId){
 
@@ -203,7 +253,26 @@ onlyNumberKey(event) {
  }
  
 imageURL:any;
+public emergencies =  [
+        {
+            "name": "Police",
+            "val" : "1"
+          },
+           {
+            "name": "Ambulance",
+            "val" : "2"
+          },
+           {
+            "name": "Hospital",
+            "val" : "3"
+          },
+           {
+            "name": "Son",
+            "val" : "4"
+          }
+            
 
+        ];
  loadForm(data){
               // this.manageDependentData = data[0] ;
               this.manageDependentData = data;
@@ -225,35 +294,40 @@ imageURL:any;
           this.elder_relation = this.manageDependentData.relation;
           this.elder_address= this.manageDependentData.address;   
 
-          let emergency = this.manageDependentData.emergency;
-          if(emergency.length != 0 ){
-            this.emergency_list.pop();
-            for(let i = 0; i < emergency.length;i++)
+          let emergencies = this.manageDependentData.emergency;
+          //console.log(emergencies.length);
+          if(emergencies.length != 0 ){
+           //this.emergency_list.pop();
+            for(let i = 0; i < emergencies.length;i++)
             {
-              this.emergency_name.push(emergency[i].person);
-              this.emergency_no.push(emergency[i].mobile);
-              this.emergency_list.push({emergency:[i]});
+               this.emergency_name =[];
+               this.emergency_no =[];
+              this.emergency_name.push(emergencies[i].person);
+              this.emergency_no.push(emergencies[i].mobile);
+              //this.emergency_list.push({emergency:[i]});
 
             }
+           // console.log(this.emergency_no);
           }
           this.job_interest = this.manageDependentData.job_interested;
 
           if(this.job_interest){
-            console.log("interested in job");
             this.area_of_interest = this.manageDependentData.area_interest;
             this.job_type = this.manageDependentData.job_type;
+            //this.attach_resume = this.manageDependentData.docs;
 
             let experiences = this.manageDependentData.experience;
             // console.log(this.manageDependentData.experience);
             if(experiences.length != 0)
             {
-              this.experience_list.pop();
+              //this.experience_list.pop();
               for(let i = 0; i < experiences.length;i++)
               {
                 this.experience_industry.push(experiences[i].functional_id);
                 this.experience_years.push(experiences[i].year);
                 this.experience_duration.push(experiences[i].duration);
-                this.experience_list.push({experience:[i]});
+                console.log(this.experience_years);
+                //this.experience_list.push({experience:[i]});
               }  
             }
 
@@ -266,13 +340,13 @@ imageURL:any;
             let educations =  this.manageDependentData.education;
             if(educations.length != 0)
             {
-              this.education_list.pop();
+              //this.education_list.pop();
               for(let i = 0; i < educations.length;i++)
               {
                 this.education_graduation.push(educations[i].graduation);
                 this.education_specialization.push(educations[i].specialization);
                 this.education_college.push(educations[i].university);
-                this.education_list.push({education:[i]});
+                //this.education_list.push({education:[i]});
               }  
             }
           }
@@ -295,14 +369,14 @@ imageURL:any;
                     this.specializations=masterData.result.Specialization;
                     this.locations=masterData.result.Locations;
                     this.areaOfInterest=masterData.result.AreaofInterest;
-
+                    
                     let skillset =masterData.result.Skills;
                     for(let i=0;i<skillset.length;i++){
                       this.skills.push(skillset[i].skill)
                     }
-
                     this.relations=masterData.result.Relations;
                     this.in_service=masterData.result.InService;
+
                     loader.dismiss();
                      },
                      err =>{
@@ -318,35 +392,47 @@ imageURL:any;
       }
 
   addEmergency(){
-    this.emergency_list.push({emergency:""});
+    
+    const control = <FormArray>this.authForm.controls['emergency_list'];
+        control.push(this.emergencyAddress());
+        
   }
   removeEmergency(index){
-    this.emergency_list.splice(index,1);
-    this.emergency_name.splice(index,1);
-    this.emergency_no.splice(index,1);
+     const control = <FormArray>this.authForm.controls['emergency_list'];
+        control.removeAt(index);
+         this.emergency_name.splice(index,1);
+         this.emergency_no.splice(index,1);
   }
 
-  addExperience(count){
-    // this.getElderMasterDetails();
-    this.experience_list.push({experience:""});
+  addExperience(){
+    const control = <FormArray>this.myForm.controls['experience_list'];
+        control.push(this.experienceAddress());
   }
   removeExperience(index){
-    this.experience_list.splice(index,1);
-    this.experience_industry.splice(index,1);
-    this.experience_years.splice(index,1);
-    this.experience_duration.splice(index,1);
+    const control = <FormArray>this.myForm.controls['experience_list'];
+        control.removeAt(index);
+         this.experience_industry.splice(index,1);
+         this.experience_years.splice(index,1);
+         this.experience_duration.splice(index,1);
+
   }
 
   addEducation(){
-    this.education_list.push({education:""});
+
+     const control = <FormArray>this.myForm.controls['education_list'];
+        control.push(this.educationAddress());
+    //this.education_list.push({education:""});
+    // console.log(this.education_list);
+  
   }
   removeEducation(index){
-   this.education_list.splice(index,1);
-   this.education_graduation.splice(index,1);
+    const control = <FormArray>this.myForm.controls['education_list'];
+        control.removeAt(index);
+  //this.education_list.splice(index,1);
+    this.education_graduation.splice(index,1);
    this.education_specialization.splice(index,1);
-   this.education_college.splice(index,1);
+  this.education_college.splice(index,1);
 
-   console.log(this.education_list,this.education_graduation,this.education_specialization,this.education_college)
   }
 
   getElderSkills(){
@@ -364,12 +450,12 @@ imageURL:any;
 
   getEmergencyNumber(){
     if(this.functionality != "edit" && this.functionality !="profileEdit"){
-      for(let i=0;i<this.emergency_no.length;i++){
-            this.elder_emergency.push({"id":(i+1),"person":this.emergency_name[i],"mobile":this.emergency_no[i]})  
+      for(let i=0;i<this.emergency_name.length;i++){
+            this.elder_emergency.push({"person":this.emergency_name[i],"mobile":this.emergency_no[i]})  
           }
         }
   else{
-    for(let i=0;i<this.emergency_no.length;i++){
+    for(let i=0;i<this.emergency_name.length;i++){
             this.elder_emergency.push({"elder_id":this.elder_id,"person":this.emergency_name[i],"mobile":this.emergency_no[i]})  
           }
        }
@@ -395,48 +481,54 @@ imageURL:any;
        }
        else{
          for(let i=0;i<this.education_graduation.length;i++){
-           console.log("data pushed..!")
             this.elder_education.push({"elder_id":this.elder_id,"graduation":this.education_graduation[i],"specialization":this.education_specialization[i],"university":this.education_college[i]})  
           }
        }
   }
+   openCamera(){
+console.log("open success");
+    this.fileChooser.open()
+      .then((imageData) => {
 
+      console.log("filedfsdf"+imageData );
+         (<any>window).FilePath.resolveNativePath(imageData, (result) => {
+    this.nativepath = result;
+     this.file_name = this.nativepath.split("/").pop();
+console.log("name"+this.file_name);
+    console.log("nativepath"+ this.nativepath);
+    
+  })
+        this.communityServices.manageupload(imageData);
+      });
+
+  }
   addDependent(){
     //---------------------------------edited-------------------------------//
 
-    this.getElderSkills();
-    this.skill_data= this.elder_skills;
+        
 
-    this.getEmergencyNumber();
-    this.emergency_data = this.elder_emergency;
-
-    this.getElderExperience();
-    this.experience_data = this.elder_experience;
-
-    this.getElderEducation();
-    this.education_data = this.elder_education;
-
-    let dependentData = {"info":
-                          [{"email":this.authForm.value.elder_email,
-                          "relation":this.elder_relation,
-                          "password":this.authForm.value.elder_password,
-                          "name":this.authForm.value.elder_name,
-                          "dob":this.elder_dob,
-                          "mobile":this.authForm.value.elder_number,
-                          "in_service":this.elder_service,
-                          "address":this.authForm.value.elder_address,
-                          "location":this.elder_location,
-                          "area_interest":this.area_of_interest,
-                          "job_type":this.job_type,
-                          "skills":this.skill_data,
-                          "emergency":this.emergency_data,
-                          "emergency_numbers":this.mobile,
-                          "experience":this.experience_data,
-                          "education":this.education_data,
-                          "sponsor_id":this.sponsor_id,
-                          "job_interested":this.job_interest
-                          }]
-                        };
+    // let dependentData = {"info":
+    //                       [{"email":this.authForm.value.elder_email,
+    //                       "relation":this.elder_relation,
+    //                       "password":this.authForm.value.elder_password,
+    //                       "name":this.authForm.value.elder_name,
+    //                       "dob":this.elder_dob,
+    //                       "mobile":this.authForm.value.elder_number,
+    //                       "in_service":this.elder_service,
+    //                       "address":this.authForm.value.elder_address,
+    //                       "location":this.elder_location,
+    //                       "area_interest":this.area_of_interest,
+    //                       "job_type":this.job_type,
+    //                       "skills":this.skill_data,
+    //                       "emergency":this.emergency_data,
+    //                       "emergency_numbers":this.mobile,
+    //                       "experience":this.experience_data,
+    //                       "education":this.education_data,
+    //                       "sponsor_id":this.sponsor_id,
+    //                       "job_interested":this.job_interest,
+    //                       //"docs":this.file_name
+    //                       }]
+    //                     };
     
                         //-------------------modified----------------------------//
 
@@ -451,8 +543,86 @@ imageURL:any;
         if(this.authForm.value.elder_address != ""){
             this.elder_address = this.authForm.value.elder_address;
         }
+        if(this.functionality =="profileEdit")
+        {
+        this.getElderSkills();
+    this.skill_data= this.elder_skills;
 
+    this.getEmergencyNumber();
+    this.emergency_data = this.elder_emergency;
+
+    this.getElderExperience();
+    this.experience_data = this.elder_experience;
+
+    this.getElderEducation();
+    this.education_data = this.elder_education;
+}
         let profileEditData = {
+        "id":this.elder_id,
+        "area_interest":this.area_of_interest,
+        "location":this.elder_location,
+        "locationName":this.manageDependentData.locationName,
+        "job_type":this.job_type,        
+        "sponsor_id":this.sponsor_id,
+        "name":this.elder_name,
+        "last_name":this.manageDependentData.last_name,
+        "docs":this.manageDependentData.docs,
+        "avatar":this.manageDependentData.avatar,
+        "relation":this.elder_relation,
+        "gender":this.manageDependentData.gender,
+        "dob":this.elder_dob,
+        "mobile":this.elder_number,
+        "mobile_verified":this.manageDependentData.mobile_verified, 
+        "email":this.elder_email,
+        "email_verified":this.manageDependentData.email_verified,
+        "email_sent":this.manageDependentData.email_sent,
+        "message_sent":this.manageDependentData.message_sent,
+        "mail_code":this.manageDependentData.mail_code,
+        "message_code":this.manageDependentData.message_code,
+        "in_service":this.elder_service,
+        "job_interested":this.job_interest,
+        "address":this.elder_address,
+        "city":this.manageDependentData.city,
+        "state":this.manageDependentData.state,
+        "status":this.manageDependentData.status,
+        "created_at":this.manageDependentData.created_at,
+        "updated_at":this.manageDependentData.updated_at,
+        "city_name":this.manageDependentData.city_name,
+        "state_name":this.manageDependentData.state_name,
+        "user_type":this.manageDependentData.user_type,
+        // "skills":this.skill_data,
+        // "emergency":this.emergency_data,
+        // "experience":this.experience_data,
+        // "education":this.education_data,
+        // "app":"",
+        "avatar1":this.manageDependentData.avatar
+      }
+      
+
+        let editedData ={"info": [profileEditData]};
+
+          if(this.functionality == "edit"){
+            if(this.job_interest != false){
+               if(!this.authForm.valid && !this.myForm.value){
+            this.submitAttempt = true; 
+           }
+          else
+          {
+           this.submitAttempt = false;
+    this.getElderSkills();
+    this.skill_data= this.elder_skills;
+
+    this.getEmergencyNumber();
+    this.emergency_data = this.elder_emergency;
+
+    this.getElderExperience();
+    this.experience_data = this.elder_experience;
+
+    this.getElderEducation();
+    this.education_data = this.elder_education;
+           let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+            loader.present();
+            this.communityServices.editSubmit({"info": [{
         "id":this.elder_id,
         "area_interest":this.area_of_interest,
         "location":this.elder_location,
@@ -480,20 +650,7 @@ imageURL:any;
         "education":this.education_data,
         "app":"",
         "avatar1":this.avatar
-      }
-
-        let editedData ={"info": [profileEditData]};
-
-          if(this.functionality == "edit"){
-          if(!this.authForm.valid){
-            this.submitAttempt = true; 
-           }
-          else
-          {
-           this.submitAttempt = false;
-           let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-            loader.present();
-            this.communityServices.editSubmit(editedData).subscribe(elders =>{
+      }]}).subscribe(elders =>{
                     // console.log(elders); 
                     let msg='';
               if(elders.result.updated!='')
@@ -515,6 +672,70 @@ imageURL:any;
               })
              
             }
+            }
+            else{
+               if(!this.authForm.valid){
+            this.submitAttempt = true; 
+           }
+          else
+          {
+           this.submitAttempt = false;
+            this.getEmergencyNumber();
+            this.emergency_data = this.elder_emergency;
+           let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+            loader.present();
+            this.communityServices.editSubmit({"info": [{
+        "id":this.elder_id,
+        //"area_interest":this.area_of_interest,
+        "location":this.elder_location,
+        //"job_type":this.job_type,        
+        "sponsor_id":this.sponsor_id,
+        "name":this.elder_name,
+        "avatar":this.manageDependentData.avatar,
+        "relation":this.elder_relation,
+        "gender":this.manageDependentData.gender,
+        "dob":this.elder_dob,
+        "mobile":this.elder_number,
+        "email":this.elder_email,
+        "in_service":this.elder_service,
+        "job_interested":this.job_interest,
+        "address":this.elder_address,
+        "city":this.manageDependentData.city,
+        "state":this.manageDependentData.state,
+        "status":this.manageDependentData.status,
+        "created_at":this.manageDependentData.created_at,
+        "city_name":this.manageDependentData.city_name,
+        "state_name":this.manageDependentData.state_name,
+        //"skills":this.skill_data,
+        "emergency":this.emergency_data,
+        //"experience":this.experience_data,
+        //"education":this.education_data,
+        "app":"",
+        "avatar1":this.avatar
+      }]}).subscribe(elders =>{
+                    // console.log(elders); 
+                    let msg='';
+              if(elders.result.updated!='')
+              {
+                this.nav.setRoot(ManagePage);
+                msg="Elder details updated successfully.";
+                this.communityServices.showToast(msg); 
+              } 
+              else 
+              {
+               msg="Elder details can not updated.";
+               this.communityServices.showToast(msg); 
+              } 
+               loader.dismiss();       
+             },
+             err =>{
+                    this.communityServices.showErrorToast(err);
+                    loader.dismiss();
+              })
+             
+            }
+            }
+         
           }else{
             let loader = this.loadingCtrl.create({ content: "Please wait..." });     
             loader.present();
@@ -538,16 +759,50 @@ imageURL:any;
         {
         
        // }
-        if(this.functionality != "edit" && this.functionality !="profileEdit"){      
-    if(!this.authForm.valid){
+        if(this.functionality != "edit" && this.functionality !="profileEdit"){   
+        if(this.job_interest != false){
+
+          if(!this.authForm.valid && !this.myForm.valid){
       this.submitAttempt = true;
       this.communityServices.showToast("Please Enter The Required Details");
     }
     else{
       this.submitAttempt = false;
+      this.getElderSkills();
+    this.skill_data= this.elder_skills;
+
+    this.getEmergencyNumber();
+      this.emergency_data = this.elder_emergency;
+
+    this.getElderExperience();
+    this.experience_data = this.elder_experience;
+
+    this.getElderEducation();
+    this.education_data = this.elder_education;
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-       this.communityServices.addSubmit(dependentData).subscribe(
+       this.communityServices.addSubmit({"info":
+                          [{"email":this.authForm.value.elder_email,
+                          "relation":this.elder_relation,
+                          "password":this.authForm.value.elder_password,
+                          "name":this.authForm.value.elder_name,
+                          "dob":this.elder_dob,
+                          "mobile":this.authForm.value.elder_number,
+                          "in_service":this.elder_service,
+                          "address":this.authForm.value.elder_address,
+                          "location":this.elder_location,
+                          "area_interest":this.area_of_interest,
+                          "job_type":this.job_type,
+                          "skills":this.skill_data,
+                          "emergency":this.emergency_data,
+                          "emergency_numbers":this.mobile,
+                          "experience":this.experience_data,
+                          "education":this.education_data,
+                          "sponsor_id":this.sponsor_id,
+                          "job_interested":this.job_interest,
+                          "docs":this.file_name
+                          }]
+                        }).subscribe(
            elders=>{
               let msg='';
               if(elders.result.added!='')
@@ -572,6 +827,66 @@ imageURL:any;
               })
     
      }
+        }  
+        else{
+          if(!this.authForm.valid){
+      this.submitAttempt = true;
+      this.communityServices.showToast("Please Enter The Required Details");
+    }
+    else{
+      this.submitAttempt = false;
+      this.getEmergencyNumber();
+      this.emergency_data = this.elder_emergency;
+      let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+       this.communityServices.addSubmit({"info":
+                          [{"email":this.authForm.value.elder_email,
+                          "relation":this.elder_relation,
+                          "password":this.authForm.value.elder_password,
+                          "name":this.authForm.value.elder_name,
+                          "dob":this.elder_dob,
+                          "mobile":this.authForm.value.elder_number,
+                          "in_service":this.elder_service,
+                          "address":this.authForm.value.elder_address,
+                          "location":this.elder_location,
+                          //"area_interest":this.area_of_interest,
+                          //"job_type":this.job_type,
+                          //"skills":this.skill_data,
+                          "emergency":this.emergency_data,
+                          "emergency_numbers":this.mobile,
+                          //"experience":this.experience_data,
+                          //"education":this.education_data,
+                          "sponsor_id":this.sponsor_id,
+                          "job_interested":this.job_interest
+                          }]
+                        }).subscribe(
+           elders=>{
+              let msg='';
+              if(elders.result.added!='')
+              {
+                 this.nav.setRoot(ManagePage);
+                msg="Elder details added Successfully";
+              }
+              else if(elders.result.exist!='')
+              {
+                msg="Elder email id already exits.";
+              } 
+              else
+              {
+               msg="Elder details can not added.";
+              } 
+               this.communityServices.showToast(msg);
+               loader.dismiss();
+              },
+           err =>{
+              this.communityServices.showErrorToast(err);
+              loader.dismiss();
+              })
+    
+     }
+    
+        } 
+    
     }
 
   }

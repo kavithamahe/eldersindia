@@ -157,11 +157,17 @@ loadSubcategoryList(subCategory_id,location_id){
                }
                loading.dismiss();
                 },
-        err =>{
-                this.providerService.showErrorToast(err);
-                console.log("Response for serviceRequest: "+err);
-                loading.dismiss();
-              });
+         (err) => { 
+        if(err.status===401)
+        {
+          this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+         loading.dismiss();
+      });
   }
   public showToaster(message)
   {

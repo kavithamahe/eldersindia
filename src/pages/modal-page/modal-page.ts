@@ -86,7 +86,9 @@ export class ModalContentPage {
        this.checkTerms = true;
      }
    }
-
+onlyNumberKey(event) {
+    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+}
    openTerms(){
      let termsModal = this.modalCtrl.create(TermsModalPage);
      termsModal.present();

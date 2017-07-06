@@ -105,6 +105,7 @@ file_Path:any;
    });
  
 }
+
   fileUploads(id,file){
     this.headers = new Headers();
     this.headers.append('Content-Type',undefined);
@@ -348,7 +349,7 @@ myprofile(id){
   }
 
   getElderMasterDetails(){
-   this. body = {"get":["Relations","InService","FunctionalArea","Educational","Specialization","Locations","AreaofInterest","Skills"]};
+   this. body = {"get":["FunctionalArea","Educational","Specialization","Locations","AreaofInterest","Skills","Relations","InService"]};
      return this.http.post(`${this.getCommunityPostsUrl }getElderMasterDetails`,this.body,this.options)
     .map(res =>res.json());
   }
@@ -365,7 +366,39 @@ myprofile(id){
     .map(res =>res.json());
 
   }
-  
+    manageupload(imageData)
+    {
+      
+       // imageData is either a base64 encoded string or a file URI
+       // If it's base64:
+
+     const fileTransfer: TransferObject = this.transfer.create();
+
+    this.filePath.resolveNativePath(imageData)
+     .then(filePath => {
+                console.log(filePath);
+                this.file_Path = filePath;
+            });
+
+      let file_name = this.file_Path.split("/").pop();
+
+      let options1: FileUploadOptions = {
+         fileKey: 'file',
+         fileName: file_name,
+         headers: {}
+      
+      }
+      
+  fileTransfer.upload(imageData, `${this.getCommunityPostsUrl }elderOnBoarding`,options1)
+   .then((data) => {
+     // success
+     alert("success");
+   }, (err) => {
+     // error
+     alert("error"+JSON.stringify(err));
+   });
+ 
+}
   addSubmit(dependentData){
 
    return this.http.post(`${this.getCommunityPostsUrl }elderOnBoarding`,dependentData,this.options)
