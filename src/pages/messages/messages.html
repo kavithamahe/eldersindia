@@ -50,7 +50,7 @@
       <ion-list *ngFor="let inbox of inboxInfo">
       <ion-item-sliding  class="inbox-sends">
         <ion-item (click)="viewMessages(inbox?.id,'inbox')" 
-        [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
+        [ngClass]="inbox.read_status?'readmsg':'unreadmsg'" >
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
             <ion-avatar item-left>

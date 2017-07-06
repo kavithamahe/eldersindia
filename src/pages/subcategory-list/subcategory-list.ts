@@ -96,12 +96,22 @@ loadSubcategoryList(subCategory_id,location_id){
   instantRequest(vendorData) {
     if(this.userType != "sponsor"){
       let d = new Date();
-
     let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
     d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
-    console.log(d,datestring);
+    console.log( datestring);
+    let time =("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2)
+     var hours = time;   
+      var n = hours.split(':');
 
-    let serviceRequestData = {"problem": this.serviceTitle, "datetime": datestring, "dependentId": this.elderId, "mobile_no": ""};
+      var minutess = (+n[0]) * 60 + (+n[1]);
+       var hms = this.lead_time; 
+        var a = hms.split(':'); 
+
+        var minutes = (+a[0]) * 60 + (+a[1]);
+        let getHours=(minutess + minutes)/60;
+        let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
+
+    let serviceRequestData = {"problem": this.serviceTitle, "datetime": lead_time, "dependentId": this.elderId, "mobile_no": ""};
     
             this.serviceRequestCall(serviceRequestData,vendorData.id);
     }else{
@@ -252,11 +262,11 @@ export class InstantRequestModalPage {
     public params: NavParams,
     public viewCtrl: ViewController
   ) {
+    
     console.log("modal page called");
     this.dependentLists = this.params.get('dependentList');
     console.log(this.dependentLists);
     this.lead_time = this.params.get('lead_time');
-    console.log(this.lead_time);
     this.service = this.params.get('service');
     if(params.get("vendor") != undefined){
       this.vendor = this.params.get("vendor").name;
@@ -271,18 +281,22 @@ export class InstantRequestModalPage {
     if(this.dependentData != ""){
       this.selected = false;
     let dependent_model = this.dependentData;
-    // let date = new Date();
     let d = new Date();
-
     let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
     d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
-    console.log( d,datestring);
-    let time =("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
-    console.log(time);
-    let lead_time = (this.lead_time + time);
-    console.log(lead_time);
+    console.log( datestring);
+    let time =("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2)
+     var hours = time;   
+      var n = hours.split(':');
 
-    let serviceRequestData = {"problem": this.service, "datetime": datestring, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile};
+      var minutess = (+n[0]) * 60 + (+n[1]);
+       var hms = this.lead_time; 
+        var a = hms.split(':'); 
+
+        var minutes = (+a[0]) * 60 + (+a[1]);
+        let getHours=(minutess + minutes)/60;
+        let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
+    let serviceRequestData = {"problem": this.service, "datetime": lead_time, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile};
     this.viewCtrl.dismiss(serviceRequestData);
   }else{
     this.selected = true;

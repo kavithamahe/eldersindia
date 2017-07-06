@@ -22,11 +22,11 @@
 
 
 <ion-content padding class="content-intop">
-<ion-card *ngFor="let events of eventsLists" >
+<ion-card *ngFor="let events of eventsLists">
 <div (click)="viewEvents(events?.id)">
  <img src="{{imageUrl+events?.featured_image}}" [hidden]="!events?.featured_image">
   <ion-item text-wrap class="events-shows">   
-    <h2>{{events?.title}}</h2>
+    <h2 text-capitalize>{{events?.title}}</h2>
     <p class="timedate" style="padding-left:3px;" text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{events?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{events?.post_date | date :"MMM dd y"}} To {{events?.end_date | date :"MMM dd y"}} | {{events?.venue}}</p> 
   </ion-item>
   <!--<ion-card-content>

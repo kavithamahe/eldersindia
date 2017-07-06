@@ -188,6 +188,29 @@ All:any;
       }
     );    
   }
+  cancelMember(connectionId){
+     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.connectionsService.cancelMember(connectionId).subscribe(
+     (connectionStatus) => {
+      this.showToaster(connectionStatus.result);
+      this.sentRquest();  
+      loader.dismiss(); 
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        this.sentRquest(); 
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+        loader.dismiss();
+      }
+    );    
+  }
   public search(searchEvent) {
     let term = searchEvent.target.value;
       this.connectionsService.searchConnection(term).subscribe(searchConnection => {

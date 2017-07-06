@@ -32,7 +32,7 @@
 
   <!--  <span *ngIf="user_type =='sponsor' " class="profile-img"><img alt="profile" class="mar-top" [src]="imageURL+profileData?.avatar"/> </span> -->
 
-		<p>{{profileData?.name}}</p>
+		<p text-capitalize>{{profileData?.name}}</p>
 	</div>
 	<div class="edit-profile">
        
@@ -54,7 +54,7 @@
             <p><i class="fa fa-calendar"></i>&nbsp;{{user_dob}}</p>
 			<!-- <p *ngIf="user_type =='elder' "><i class="fa fa-user userioc"></i>&nbsp;{{gender}}</p> -->
            <p><i class="fa fa-envelope-o"></i>&nbsp;{{profileData?.email}}</p>
-            <p *ngIf="user_type !='sponsor' "><i class="fa fa-map-marker userioc"></i>&nbsp;{{profileData?.address}}</p>
+            <p *ngIf="user_type !='sponsor' "><i class="fa fa-map-marker"></i>&nbsp;{{profileData?.address}}</p>
 			<p><i class="fa fa-calendar"></i>&nbsp;Last Modified: {{profileData?.updated_at}}</p>
 		
   </div>

@@ -32,7 +32,7 @@
 <ion-card *ngFor="let appliedJobs of appliedJobsList">
   <!-- <ion-col class="job-borad"> -->
   <ion-item text-wrap class="appliedjob">
-    <h2>{{appliedJobs?.title | words :5: '....'}}</h2>
+    <h2 text-capitalize>{{appliedJobs?.title | words :5: '....'}}</h2>
 	    <P style="color:#333;"><i class="fa fa-university" aria-hidden="true"></i>{{appliedJobs?.company_name}} </P>
 	 <p><i class="fa fa-briefcase" aria-hidden="true"> </i>{{appliedJobs?.min_experience}} - {{appliedJobs?.max_experience}} years</p> 
 

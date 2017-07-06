@@ -45,7 +45,11 @@
 	    <ion-label stacked class="required">Description</ion-label>
 	    <ion-textarea  formControlName="description" placeholder="Description" [(ngModel)]="description"></ion-textarea>
 	</ion-item>
-	<p *ngIf="!blogForm.controls.description.valid && (blogForm.controls.description.dirty || submitAttempt)" class="err-reds">Please enter the description</p>
+   <small *ngIf="!blogForm.controls.description.valid  && 
+   (blogForm.controls.description.dirty || submitAttempt)">
+              <p class="valid err-reds">Please enter description</p>
+          </small> 
+	
   </form>
   <ion-row>
   <ion-col>

@@ -84,6 +84,9 @@
                     <i class="fa fa-map-marker"></i> {{request?.connections?.location}}    
                     </p>
                   </ion-col>
+                   <ion-col width-20 class="connection-btn">
+                    <button ion-button (click)="cancelMember(request.connection_id)" small><i class="fa fa-ban" aria-hidden="true"></i></button>
+                  </ion-col>
                 </ion-row>
               </ion-grid>  <hr/>
             </div>
@@ -100,7 +103,8 @@
                 <ion-row>
                   <ion-col width-20>
                     <ion-avatar item-left>
-                      <img src="{{imageUrl+all?.avatar}}" [hidden]="!all?.avatar" (click)="CommunityUserWall(all?.id)">
+                      <img src="{{imageUrl+all?.avatar}}" [hidden]="!all?.avatar" 
+                      (click)="CommunityUserWall(all?.id)">
                     </ion-avatar>
                   </ion-col>
                 <ion-col width-67>

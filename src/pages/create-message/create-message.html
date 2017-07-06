@@ -18,9 +18,15 @@
     </ion-buttons> -->
     <ion-title text-center>Compose Message</ion-title>
      <ion-buttons right>
-    <button ion-button (click)="openCamera()">
-        <i class="fa fa-paperclip" style="margin-right:5px; font-size:22px;"></i></button>
+    <button ion-button (click)="openCamera()" icon-only>
+        <i class="fa fa-paperclip" style="margin-right:5px; font-size:22px;"></i>
+    </button>
     </ion-buttons>
+    <ion-buttons right>
+    <button ion-button (click)="sendMessage()" icon-only>
+  <ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;
+</button>
+</ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -39,14 +45,12 @@
   </ion-item>
   <p *ngIf="!messageForm.controls.subject.valid && (messageForm.controls.subject.dirty || submitAttempt)" class="err-reds">Please enter the subject</p>
   <ion-item>
-     <ion-textarea placeholder="Message *" formControlName="message" [(ngModel)]="message"></ion-textarea>
+     <ion-textarea placeholder="Message *" formControlName="message" [(ngModel)]="message">
+    </ion-textarea>
   </ion-item>
   <p *ngIf="!messageForm.controls.message.valid && (messageForm.controls.message.dirty || submitAttempt)" class="err-reds">Please enter the message</p>
           <p>{{file_name}}</p>
-  <button ion-button class="btn-right" (click)="sendMessage()">
-  <ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;
-  Send
-</button>
+  
 </ion-list>
 </form>
 

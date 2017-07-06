@@ -59,7 +59,8 @@
           </small> 
        <ion-label class="label-tittle required">Mobile number</ion-label>
             <ion-item>
-              <ion-input type="text" formControlName="elder_number" placeholder="Mobile number"
+              <ion-input type="text" formControlName="elder_number" 
+              placeholder="Contact number" (keypress)="onlyNumberKey($event)" maxlength="12"
                   [class.invalid]="!authForm.controls.elder_number.valid && (authForm.controls.elder_number.dirty)" [(ngModel)]="elder_number" value={{elder_number}}>
               </ion-input>
            </ion-item>
@@ -366,7 +367,7 @@
       </div>
       </div>
       </div>
-        <div *ngIf="functionality == 'add'">
+       <!--  <div *ngIf="functionality == 'add'">
       <ion-label class="label-tittle required">Attach Resume</ion-label>
            <ion-item>
               <ion-input type="text" formControlName="file_name" placeholder="Attach Resume" [(ngModel)]="file_name"
@@ -380,7 +381,7 @@
               </small>
               <button ion-button (click)="openCamera()">
                 Attachment</button>
-          </div>
+          </div> -->
     </div>
     </form>
 

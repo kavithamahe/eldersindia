@@ -6,7 +6,7 @@ import { ServiceProvider } from '../../providers/service-provider';
 import {FormBuilder,FormGroup,Validators,FormArray} from '@angular/forms';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { Transfer} from '@ionic-native/transfer';
 
 
 import { CommunityServices } from '../../providers/community-services';
@@ -273,6 +273,10 @@ public emergencies =  [
             
 
         ];
+
+        onlyNumberKey(event) {
+    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+}
  loadForm(data){
               // this.manageDependentData = data[0] ;
               this.manageDependentData = data;
@@ -599,11 +603,10 @@ console.log("name"+this.file_name);
       }
       
 
-        let editedData ={"info": [profileEditData]};
 
           if(this.functionality == "edit"){
             if(this.job_interest != false){
-               if(!this.authForm.valid && !this.myForm.value){
+               if(!this.authForm.valid && !this.myForm.valid){
             this.submitAttempt = true; 
            }
           else
@@ -762,7 +765,7 @@ console.log("name"+this.file_name);
         if(this.functionality != "edit" && this.functionality !="profileEdit"){   
         if(this.job_interest != false){
 
-          if(!this.authForm.valid && !this.myForm.valid){
+          if(!this.myForm.valid){
       this.submitAttempt = true;
       this.communityServices.showToast("Please Enter The Required Details");
     }

@@ -63,6 +63,11 @@ user_id:any;
     return this.http.post(this.rootUrl+'sendResponse',_request,this.options)
       .map(res => res.json()); 
   }
+  cancelMember(connectionId) {  
+   let _request= {"conn_req__id":connectionId,"approve_status":3};
+    return this.http.post(this.rootUrl+'sendResponse',_request,this.options)
+      .map(res => res.json()); 
+  }
   sendConnectionRequest(connect_id,name){
      let _request= {"connect_id":connect_id,"connect_name":name};
     return this.http.post(this.rootUrl+'sendConnectionRequest',_request,this.options)

@@ -19,25 +19,25 @@
           <ion-list>
             <ion-item>
               <ion-label>select category</ion-label>
-                <ion-select  (ionChange)='getCategory($event)' >
-                  <ion-option *ngFor="let category of categoryLists" 
-                 >
+                <ion-select [(ngModel)]="searchCategory1" (ionChange)='blog()'>
+                  <ion-option  *ngFor="let category of categoryLists" 
+                 value={{category.id}}>{{category.name}}
                   </ion-option>
                 </ion-select>
             </ion-item>
           </ion-list>
-<ion-searchbar (input)="blogsearch($event)"></ion-searchbar>
+<ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>
 <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)">
 <ion-row>
-<ion-col width-20>
+  <ion-col width-20>
 	  <ion-avatar item-left>
       <img src="{{imageUrl+blogs?.avatar}}" [hidden]="!blogs?.avatar">
     </ion-avatar>
 	</ion-col>
 	<ion-col width-80 class="blogs-tittle">
   <ion-item text-wrap>
-    <h2 class="pro-info">{{blogs.title}}</h2>
-    <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{blogs.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{blogs.created_at | date :"MMM dd y"}}
+    <h2 class="pro-info" text-capitalize>{{blogs.title}}</h2>
+    <p class="timedate" text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{blogs.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{blogs.created_at | date :"MMM dd y"}}
     </p>
   </ion-item>
   </ion-col>
@@ -49,13 +49,17 @@
 <!--blogs?.description | words : 3 : '...'-->
    <!-- <p [innerHTML]="blogs?.description | words : 60 : '...'"></p>-->
   </ion-card-content>
-  <img src="{{imageUrl+blogs?.featured_image}}" [hidden]="!blogs?.featured_image">
-
+  <img src="{{imageUrl+blogs?.featured_image}}" [hidden]="!blogs?.featured_image" />
+  <div>
+ <!-- <span [hidden]="!blogs.category_name"> 
+    <label class="labels-bds"> {{blogs.category_name}}</label>
+  </span> -->
+  </div>
  </ion-card> 
  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
-  <ion-item padding *ngIf="!bloglists">
+  <ion-item padding *ngIf="bloglists?.length==0">
      <p class="error-clr">{{emptyRecord}}</p>
    </ion-item>
 </ion-content>

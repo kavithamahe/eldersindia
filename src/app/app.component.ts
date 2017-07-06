@@ -166,7 +166,7 @@ export class MyApp {
     (err) => { 
         if(err.status===401)
         {
-        this.rootPage = LoginPage;
+          this.rootPage = LoginPage;
         }
         else
         {
@@ -205,7 +205,7 @@ export class MyApp {
                   { myIcon:'fa fa-external-link', title: 'Useful External Links', component: ExternallinksPage },
                   { myIcon:'fa fa-address-book-o', title: 'Profile', component: MyProfilePage },
                   { myIcon:'fa fa-unlock-alt', title: 'Change Password', component: ChangePasswordPage },
-                  { myIcon:'fa fa-cog', title: 'Settings', component: SettingsPage },
+                  { myIcon:'fa fa-cog', title: 'Privacy Settings', component: SettingsPage },
                   { myIcon:'fa fa-sign-out', title: 'Logout', component: LogoutPage },
 
                       );
