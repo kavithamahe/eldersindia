@@ -15,7 +15,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 my-theme													{
 ion-menu													{background : color($colors,secondary);}
@@ -237,7 +237,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 															 right:-1px;top:15px;width:auto;}
 .video-updates                                              {padding:0px 4px !important;}
 .user-profile												{width:80px;height:80px; border:1px solid #ccc;}
-.wel-comemem											    {color:#424a95 !important;font-family: "Open Sans",sans-serif;font-size:18px !important;margin: 0; padding:10px 0px 0px 10px;}
+.wel-comemem											    {color:#424a95 !important;font-family: 'Questrial', sans-serif;font-size:18px !important;margin: 0; padding:10px 0px 0px 10px;}
 .likecolor													{color:#1e90ff !important; font-size:17px;}
 .time-datem													{color:#949494 !important; font-size:11px !important;font-style:italic; text-indent:0px;}
 .label-opc .item-md .item-inner .label-md p					{margin:0px !important; padding-top:0px;text-indent:0px; padding-left:8px; color:#1d6ab2; font-size:20px; line-height:25px; font-weight:400;}
@@ -413,7 +413,7 @@ ul.rating li												{padding:5px 0px !important;}
 .select-text												{font-size:15px !important;}
 .members													{font-size:15px !important;}
 
-ion-app.ios													{font-family: 'Open Sans', sans-serif !important;}
+ion-app.ios													{font-family: 'Questrial', sans-serif;}
 .detalis-elder												{text-align:center;box-shadow:none; font-size:16px !important; font-weight:600 !important; color:#1976d2 !important; background:#fff; border-radius:3px; padding:4px;}
 /*-------------------------------------Common  css end -------------------------------------*/
 
@@ -425,11 +425,11 @@ ion-app.ios													{font-family: 'Open Sans', sans-serif !important;}
 .login-btn .fab-md											{ background:#888AEF !important; margin-top:10px;}
 .login-btn .fab-ios											{ background:#888AEF !important;margin-top:10px;}
 .primary-color 												{color:#1976d2 !important; font-size:15px !important;}
-.card-md p 													{color:#777;font-size:15px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
+.card-md p 													{color:#777;font-size:15px;font-weight:normal;line-height:22px;font-family: 'Questrial', sans-serif;
 														     margin: 0 0 2px;}
-ion-app.md													{font-family: 'Open Sans', sans-serif !important; }
+
 ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !important;}
-.blogs-div h2												{color:#1976d2;white-space: nowrap;font-family: "Open Sans",sans-serif !important; overflow:hidden;font-size:16px;
+.blogs-div h2												{color:#1976d2;white-space: nowrap;font-family: 'Questrial', sans-serif!important; overflow:hidden;font-size:16px;
 															 font-weight:700;line-height:20px;text-align:left;}
 .Cancelled{ font-size:14px !important; color:#f90202 !important;padding:0px !important;font-weight:600 !important;}
 .Contacted{ font-size:14px !important; color:#2196F3 !important;padding:0px !important; font-weight:600 !important;}
@@ -443,7 +443,7 @@ ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !import
     color: #333;
     height: 45px !important;
 }
-.forgot-pass												{background:none !important;  color:#337ab7 !important;font-family: 'Open Sans', sans-serif !important; font-size:15px; }
+.forgot-pass												{background:none !important;  color:#337ab7 !important;font-family: 'Questrial', sans-serif;font-size:15px; }
 .bg-back													{background:none !important; border-bottom:none !important; }
 .bg-back .item-inner .input-wrapper .label-md .forgot-pass	{ font-size:17px !important; margin-top:40px; color:#404996 !important; margin-top:10px;}
 .bg-back .item-inner .input-wrapper .label-ios .forgot-pass	{ font-size:17px !important; margin-top:10px; color:#404996 !important;margin-top:17px;}
@@ -577,11 +577,11 @@ page-service-info .service_request							{border:none !important;}
 .slider-detalis-list p									    {text-align:left; font-size:16px; color:#777 !important; margin:0px;padding-top:8px; padding-left:10px; line-height:25px;}
 .swiper-slide img											{max-height:190px; width:100%;}
 .button-ios													{font-size:16px !important;}
-.card-ios p													{color: #777;font-size:16px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
+.card-ios p													{color: #777;font-size:16px;font-weight:normal;line-height:22px;font-family: 'Questrial', sans-serif; 
 															 margin: 0 0 2px;}
 ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !important}
 .login-pages .item-wp										{background:none;}
-.forgot-pass												{background:none !important;  color:#337ab7 !important;font-family: 'Open Sans', sans-serif !important; font-size:15px; }
+.forgot-pass												{background:none !important;  color:#337ab7 !important;font-family: 'Questrial', sans-serif; font-size:15px; }
 .bg-bac												        {background:none !important; border-bottom:none !important;}
 .text-input-md  											{border: 1px solid #ccc !important;border-radius:0px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15);  padding:7px;font-size: 18px;
 .service-bg													{ height:auto !important;}															 font-weight:400; color:#555;}
@@ -668,15 +668,16 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 
 /*-------------------------------------Windows platform css -------------------------------------*/
 .usericons													{ font-size:17px;}
-.card-wp p													{color: #777;font-size:15px;font-weight:normal;line-height:22px;font-family: 'Open Sans', sans-serif !important; 
+.card-wp p													{color: #777;font-size:15px;font-weight:normal;line-height:22px;font-family: 'Questrial', sans-serif;
 															 margin: 0 0 2px;}
+ion-app.md{font-family: 'Questrial', sans-serif !important;}
 ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !important;}
 .login-pages img.logo										{margin-top:70px; width:90%; margin-left:15px;}	
 .login-pages .item-md										{background:none; padding-left:5px;}	
 .login-pages .item-md .text-input-md						{width: 92%!important;
     margin-left: 13px !important; color:#333; height:45px !important;}									
 
-.forgot-pass 												{background:none !important;box-shadow:none; color:#337ab7 !important;font-family: 'Open Sans', sans-serif !important; margin-top:10px; font-size:15px !important; text-transform:capitalize; }
+.forgot-pass 												{background:none !important;box-shadow:none; color:#337ab7 !important;font-family: 'Questrial', sans-serif; margin-top:10px; font-size:15px !important; text-transform:capitalize; }
 .bg-back .item-inner										{background:none !important; border-bottom:none !important;}
 .text-input-wp  											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size: 18px;
         													 font-weight:400; color:#555;}
@@ -1033,3 +1034,39 @@ page-dashboard .dashboard								    {padding:0px 0px !important;}
 //venkat
 .item-inner 											    {border-bottom-color: transparent !important;box-shadow: none !important;}
 .required:after { content:" *"; color: red; }
+
+
+
+@-webkit-keyframes slideIn {
+    //..snip
+}
+@-webkit-keyframes slideInSmooth {
+  0% {
+    -webkit-transform: translate3d(-100%,0,0);
+  }
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+@-webkit-keyframes slideInSmooth {
+  0% {
+    -webkit-transform: translate3d(-100%,0,0);
+  }
+ 
+  50% {
+    -webkit-transform: translate3d(50%,0,0);
+  }
+ 
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+
+.slide-in{
+   -webkit-animation: slideInSmooth ease-in 1; 
+  animation: slideInSmooth ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 750ms;
+  animation-duration: 750ms;
+}

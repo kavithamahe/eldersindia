@@ -22,7 +22,7 @@
 
 
 <ion-content padding class="content-intop">
-<ion-card *ngFor="let events of eventsLists" >
+<ion-card *ngFor="let events of eventsLists" class="slide-in">
 <div (click)="viewEvents(events?.id)">
  <img src="{{imageUrl+events?.featured_image}}" [hidden]="!events?.featured_image">
   <ion-item text-wrap class="events-shows">   
