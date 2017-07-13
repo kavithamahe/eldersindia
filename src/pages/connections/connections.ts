@@ -220,14 +220,14 @@ All:any;
   public sendsearch(searchEvent){
      let term = searchEvent.target.value;
       this.connectionsService.sendsearchConnection(term).subscribe(searchConnection => {
-        this.sentRquestInfo= searchConnection.result.info.list.data;;
+        this.sentRquestInfo= searchConnection.result.info.list.data;
       });
   
   }
  public receivedsearch(searchEvent){
      let term = searchEvent.target.value;
       this.connectionsService.receivedsearchConnection(term).subscribe(searchConnection => {
-        this.receivedRquestInfo= searchConnection.result.info.list.data;;
+        this.receivedRquestInfo= searchConnection.result.info.list.data;
       });
   }
   public search1(Event) {

@@ -38,7 +38,7 @@
 
 		  <ion-label stacked class="label-lb required">Contact number</ion-label>
 
-          <ion-input type="text" formControlName="contact" placeholder="Contact number" (keypress)="onlyNumberKey($event)" maxlength="12"></ion-input>
+          <ion-input type="text" formControlName="contact" placeholder="Contact number" (keypress)="onlyNumberKey($event)" maxlength="10"></ion-input>
 		   <p class="err-reds" *ngIf="!modalForm.controls.contact.valid  && (modalForm.controls.contact.dirty || submitAttempt)">Please enter the contact number</p>
 	</form>
   

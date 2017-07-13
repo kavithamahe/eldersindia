@@ -70,7 +70,8 @@ functional_area:any=[];
     if(this.user_type=='elder')
     {
        this.jobDependentId=this.user_type_id;
-       this.callApplyJob(jobId,this.jobDependentId,"");
+       this.jobDependent(jobId);
+       //this.callApplyJob(jobId,this.jobDependentId,"");
     }
     else
     {

@@ -302,7 +302,7 @@ metaLink:any = "";
        this.message=this.urlifyMessage(this.post);
        this.urlifyLink(this.post);
        }
-        if(this.message != ""){
+        if(this.message != "" || this.base64Image!= "" || this.authForm.value.videoUrl!=""){
        
        this.communityServices.postCommunity(id,this.base64Image,this.authForm.value.videoUrl,this.message,this.metaLink).subscribe(datas =>{
        this.showToast(datas.result);
@@ -323,7 +323,7 @@ metaLink:any = "";
      }
      else{
        loader.dismiss();
-     this.showToast("Enter message and Post");
+     //this.showToast("Enter message and Post");
    }
    }
      

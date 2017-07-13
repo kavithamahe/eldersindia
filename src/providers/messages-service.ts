@@ -40,13 +40,23 @@ rootUrl:any;
         });
    toast.present();
   }
-  inbox(data) {  
-   let _request= {search: ""}
+  inbox() {  
+   let _request= {"search": ""}
+    return this.http.post(this.rootUrl+'listInbox',_request,this.options)
+      .map(res => res.json()); 
+  }
+  inboxSearch(term){
+    let _request= {"search": term}
     return this.http.post(this.rootUrl+'listInbox',_request,this.options)
       .map(res => res.json()); 
   }
   sent() {  
-   let _request= {search: ""}
+   let _request= {"search": ""}
+    return this.http.post(this.rootUrl+'listSent',_request,this.options)
+      .map(res => res.json()); 
+  }
+  sentSearch(term){
+    let _request= {"search": term}
     return this.http.post(this.rootUrl+'listSent',_request,this.options)
       .map(res => res.json()); 
   }
@@ -55,49 +65,43 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'getInboxMessageDetails/'+messageId,_request,this.options)
       .map(res => res.json()); 
   }
-  
+
   file_Path:any;
-    upload(imageData)
+    upload_new($event)
     {
-      
-       // imageData is either a base64 encoded string or a file URI
-       // If it's base64:
 
-     const fileTransfer: TransferObject = this.transfer.create();
+    const files = $event.target.files || $event.srcElement.files;
+    const file = files[0];
+    //    const attachmnts = file.target.attachmnts || file.srcElement.attachmnts;
+    // const filee = attachmnts[0];
+       this.headers = new Headers();
+    //this.headers.append('Content-Type',undefined);
+    //this.headers.append('Authorization','Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjY3LCJpc3MiOiJodHRwOlwvXC81Mi45MS4xNzQuNDo4MDk2XC9hcGlcL2xvZ2luIiwiaWF0IjoxNDk5ODQ4MzcwLCJleHAiOjE1MDA3MTIzNzAsIm5iZiI6MTQ5OTg0ODM3MCwianRpIjoiS1dkdlVNRnNHNVJMVjR1QyJ9.dD9L-HMTDVn9LGPmWLnQNh9WPkB9mmIwwCwd5YMGZtI');
+    this.options = new RequestOptions({headers: this.headers});
 
-    this.filePath.resolveNativePath(imageData)
-     .then(filePath => {
-                console.log(filePath);
-                this.file_Path = filePath;
-            });
 
-      let file_name = this.file_Path.split("/").pop();
-
-      let options1: FileUploadOptions = {
-         fileKey: 'file',
-         fileName: file_name,
-         headers: {}
-      
-      }
-      
-  fileTransfer.upload(imageData, this.rootUrl+'sendMessage',options1)
-   .then((data) => {
-     // success
-     alert("success");
-   }, (err) => {
-     // error
-     alert("error"+JSON.stringify(err));
-   });
+     let fd = new FormData();
+        //fd.append('file_name', name);
+        fd.append('attachemts[0]', file);
+        
+        //let _request : {"attachemts":[{ "filename":FormData}]} = {"attachemts":[{ "filename":file}]}
+return this.http.post(this.rootUrl+'attachFiles',fd,this.options)
+.map(res => res.json());
+    
+}
+    upload(formData, options)
+    {
+ 
+return this.http.post(this.rootUrl+'attachFiles',formData,options)
+.map(res => res.json());
+  
  
 }
 file:any;
   fileUploads(id,file){
     this.headers = new Headers();
     this.headers.append('Content-Type',undefined);
-    //this.headers.append('Authorization','Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEwMSwiaXNzIjoiaHR0cDpcL1wvMTgzLjgyLjMzLjIzMjo4MDk3XC9hcGlcL2xvZ2luIiwiaWF0IjoxNDk2MzE0ODMyLCJleHAiOjE0OTcxNzg4MzIsIm5iZiI6MTQ5NjMxNDgzMiwianRpIjoiREI3cVloa2Zva3k4OUk2SiJ9.ZGZUZaNUDMONtvL2kes4SqSsu-JvLYhJYX4EU3WL0aE');
     this.options = new RequestOptions({headers: this.headers});
-
-
      let fd = new FormData();
         fd.append('file_name', name);
         fd.append('file_path', file);

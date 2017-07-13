@@ -50,7 +50,8 @@
               <ion-label>Services</ion-label>
                 <ion-select class="select-brd" [(ngModel)]="elder_service"  placeholder="Services"
                 formControlName="elder_service"  
-                [class.invalid]="!authForm.controls.elder_service.valid && (authForm.controls.elder_service.dirty)">
+                [class.invalid]="!authForm.controls.elder_service.valid && 
+                (authForm.controls.elder_service.dirty)">
                     <ion-option *ngFor="let service of in_service" value={{service.value}}>{{service.label}}</ion-option>
                 </ion-select>
           </ion-item>
@@ -60,7 +61,7 @@
        <ion-label class="label-tittle required">Mobile number</ion-label>
             <ion-item>
               <ion-input type="text" formControlName="elder_number" 
-              placeholder="Contact number" (keypress)="onlyNumberKey($event)" maxlength="12"
+              placeholder="Contact number" (keypress)="onlyNumberKey($event)" maxlength="10"
                   [class.invalid]="!authForm.controls.elder_number.valid && (authForm.controls.elder_number.dirty)" [(ngModel)]="elder_number" value={{elder_number}}>
               </ion-input>
            </ion-item>
@@ -307,18 +308,16 @@
                   </ion-option>
                 </ion-select>
             </ion-item>
-         
-
             <small *ngIf="!myForm.controls.education_list.
                 controls[i].controls.education_graduation.valid && (myForm.controls.education_list.
                 controls[i].controls.education_graduation.dirty || submitAttempt)">
                   <p class="valid err-reds">This field is required.</p>
             </small> 
-            <!-- <ion-item >
-             <ion-input [(ngModel)]="education_other[i]"
-                 type="text" placeholder="Other">
-                </ion-input>
-            </ion-item> -->
+             <ion-item *ngIf="education_graduation[i] == other">
+              <ion-input type="text" [(ngModel)]="graduationOther[i]" 
+              [ngModelOptions]="{standalone: true}">
+              </ion-input>
+              </ion-item>
          <ion-label class="label-tittle required">Specialization</ion-label>
             <ion-item>
               <ion-label>Specialization</ion-label>
@@ -335,6 +334,11 @@
                 controls[i].controls.education_specialization.dirty || submitAttempt)">
                   <p class="valid err-reds">This field is required.</p>
             </small> 
+             <ion-item *ngIf="education_specialization[i] == specializationsOther">
+              <ion-input type="text" [(ngModel)]="specialization_other[i]" 
+              [ngModelOptions]="{standalone: true}" type="text">
+              </ion-input>
+              </ion-item> 
             <ion-label class="label-tittle required">College/University</ion-label>
             <ion-item>
                 <ion-input [(ngModel)]="education_college[i]"  formControlName="education_college" 
@@ -367,20 +371,20 @@
       </div>
       </div>
       </div>
-       <!--  <div *ngIf="functionality == 'add'">
-      <ion-label class="label-tittle required">Attach Resume</ion-label>
+    <!--     <div *ngIf="functionality == 'add'">
+          <ion-label class="label-tittle required">Attach Resume</ion-label>
            <ion-item>
               <ion-input type="text" formControlName="file_name" placeholder="Attach Resume" [(ngModel)]="file_name"
                   [class.invalid]="!myForm.controls.file_name.valid && (myForm.controls.file_name.dirty)" >
-
-              </ion-input>
+           </ion-input>
            </ion-item>
-         
               <small  *ngIf="!myForm.controls.file_name.valid  && (myForm.controls.file_name.dirty || submitAttempt)">
                 <p class="valid err-reds">Please attach resume.</p>
               </small>
-              <button ion-button (click)="openCamera()">
-                Attachment</button>
+              <button ion-button class="add-btn" (click)="openCamera()" icon-left clear round>
+                <i class="fa fa-paperclip" style="margin-right:5px; font-size:22px;"></i>
+              </button>
+                
           </div> -->
     </div>
     </form>
@@ -392,7 +396,7 @@
   <!--END-->
   
 
-    <div  *ngIf="functionality == 'add'">
+    <div *ngIf="functionality == 'add' || functionality == 'edit'">
      
           <ion-row>
             <ion-col class="title-depen">
@@ -403,7 +407,7 @@
    
             <ion-label class="label-tittle required">Email address</ion-label>
         <ion-item>
-                <ion-input formControlName="elder_email"
+                <ion-input  [(ngModel)]="elder_email" formControlName="elder_email" 
                 [class.invalid]="!authForm.controls.elder_email.valid && (authForm.controls.elder_email.dirty)" placeholder="Email address" value={{elder_email}}>
                 </ion-input>
         </ion-item>
@@ -412,7 +416,7 @@
                 </small>
             <ion-label class="label-tittle required">Password</ion-label>
       <ion-item>
-              <ion-input formControlName="elder_password" type="{{mytype}}" placeholder="Password"
+              <ion-input [(ngModel)]="elder_password" formControlName="elder_password" type="{{mytype}}" placeholder="Password"
                 [class.invalid]="!authForm.controls.elder_password.valid && (authForm.controls.elder_password.dirty)" type="text" placeholder="Password" value={{elder_password}}>
               </ion-input>
         </ion-item>

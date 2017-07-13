@@ -34,7 +34,7 @@
   </ion-item>
   
 </ion-list>
-<ion-item class="job-dates">
+<ion-item class="job-dates" text-wrap>
 <p><span *ngIf="singleJob?.created_at"><i class="fa fa-calendar-o"> </i>&nbsp;{{singleJob?.created_at |  date :'MMM dd y'}}</span></p>
    <p><i class="fa fa-map-marker" aria-hidden="true" style="padding-left:3px;"></i>&nbsp;
    <span *ngFor="let locations of singleJob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
@@ -51,7 +51,7 @@
 <div *ngIf="singleJob?.salary"> <small>Salary</small><p><i class="fa fa-inr"> </i>&nbsp;<span>{{singleJob?.salary}} </span> </p></div>
  <p><span *ngFor="let funArea of functional_area">{{funArea?.name}}</span> </p>
    
-   <div> <small>Experience</small><p><span>{{singleJob?.min_experience}} - {{singleJob?.max_experience}} years</span> </p></div>
+   <div><small>Experience</small><p><span>{{singleJob?.min_experience}} - {{singleJob?.max_experience}} years</span> </p></div>
     
      <small>Skills</small><p *ngIf="singleJob?.skills"><span *ngFor="let skills of singleJob?.skills">{{skills?.skills}}</span> </p>
 
@@ -71,10 +71,10 @@
 <ion-row>
 <ion-col class="single-jobscotact">
 <h2>Contact Details</h2>
-<span><i class="fa fa-user-o" aria-hidden="true"></i> {{singleJob?.contact_name}}</span> 
+<span text-capitalize><i class="fa fa-user-o" aria-hidden="true"></i> {{singleJob?.contact_name}}</span> 
 <span><i class="fa fa-phone" aria-hidden="true"></i> {{singleJob?.contact_mobile}}</span> 
 <span><i class="fa fa-envelope" aria-hidden="true"></i> {{singleJob?.contact_email}}</span> 
- <span><i class="fa fa-internet-explorer" aria-hidden="true"></i> <a href="{{singleJob?.user?.website}}">{{singleJob?.user?.website}}</a></span>
+<span><i class="fa fa-internet-explorer" aria-hidden="true"></i> <a href="{{singleJob?.user?.website}}">{{singleJob?.user?.website}}</a></span>
 </ion-col>
 
 </ion-row>

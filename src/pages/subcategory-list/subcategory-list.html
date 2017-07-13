@@ -42,6 +42,7 @@
 		    You Save <i class="fa fa-inr"style="color:red; font-size:14px;"></i> <span style="color:red; font-size:14px;">{{service_list.percentage_cost}}</span> (<span style="color:#777;">{{service_list.discount_rate}} % </span>)
 		    </span>
 		    </p>
+		    <p [hidden]="!service_list?.lead_time">Minimum {{service_list.lead_time}} minute to for serve you</p>
 			<button ion-button small *ngIf="dependentLen" 
 			(click)="openModal('scheduleModal',service_list)" class="btn-warnings">Schedule
 			</button>

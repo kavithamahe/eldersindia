@@ -47,7 +47,7 @@ emptyRecord:any;
       // this.blogId=navParams.get("blogId");
       if(this.messages=='inbox')
       {
-      this.onInit("");
+      this.onInit();
       }
       else
       {
@@ -57,15 +57,15 @@ emptyRecord:any;
   	});
   }
   
-  public onInit(searchData)
+  public onInit()
   {
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.messagesService.inbox(searchData).subscribe(
+    this.messagesService.inbox().subscribe(
      (inbox) => {
       this.inboxInfo=inbox.result.data;
       this.status=this.inboxInfo.read_status;
-      console.log("status" + this.status );
+     // console.log("status" + this.status );
       this.nextPageURL1=inbox.result.next_page_url;  
       loader.dismiss();    
     },
@@ -84,11 +84,18 @@ emptyRecord:any;
       }
     );
   }
-   getItems(ev) {
-    
-    var val = ev.target.value;
-    this.onInit(val);
-   
+   public getItems(searchEvent){
+     let term = searchEvent.target.value;
+      this.messagesService.inboxSearch(term).subscribe(searchConnection => {
+      this.inboxInfo=searchConnection.result.data;
+      });
+  }
+ 
+  public setItems(searchEvent){
+     let term = searchEvent.target.value;
+      this.messagesService.sentSearch(term).subscribe(searchConnection => {
+      this.sentInfo=searchConnection.result.data;
+      });
   }
   
   public sent()
@@ -238,7 +245,7 @@ emptyRecord:any;
       } 
       else
       {
-        this.onInit("");
+        this.onInit();
         loader.dismiss();
       }  
     },

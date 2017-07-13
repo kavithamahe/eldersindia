@@ -27,6 +27,7 @@
             </ion-item>
           </ion-list>
 <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>
+
 <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)">
 <ion-row>
   <ion-col width-20>
@@ -42,7 +43,8 @@
   </ion-item>
   </ion-col>
   </ion-row>
-
+ <div>
+ 
 
   <ion-card-content>
 {{imageUrl.blogs?.featured_image}}
@@ -50,11 +52,11 @@
    <!-- <p [innerHTML]="blogs?.description | words : 60 : '...'"></p>-->
   </ion-card-content>
   <img src="{{imageUrl+blogs?.featured_image}}" [hidden]="!blogs?.featured_image" />
-  <div>
- <!-- <span [hidden]="!blogs.category_name"> 
+  <span [hidden]="!blogs.category_name"> 
     <label class="labels-bds"> {{blogs.category_name}}</label>
-  </span> -->
+  </span>
   </div>
+ 
  </ion-card> 
  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
