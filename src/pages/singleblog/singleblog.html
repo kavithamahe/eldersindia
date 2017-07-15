@@ -30,8 +30,8 @@
   </ion-col>
   <ion-col width-80 class="blogs-tittle">
   <ion-item text-wrap>
-    <h2>{{singleBlogInfo?.details?.title}}</h2>
-    <p class="timedate"><i class="fa fa-user" aria-hidden="true"></i> {{singleBlogInfo?.details?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i>  {{singleBlogInfo?.details?.created_at | date :"MMM dd y"}}</p>
+    <h2 text-capitalize>{{singleBlogInfo?.details?.title}}</h2>
+    <p class="timedate" text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{singleBlogInfo?.details?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i>  {{singleBlogInfo?.details?.created_at | date :"MMM dd y"}}</p>
   </ion-item></ion-col></ion-row>
 
   <img src="{{imageUrl+singleBlogInfo?.details?.banner_image}}" [hidden]="!singleBlogInfo?.details?.banner_image">

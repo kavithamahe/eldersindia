@@ -26,14 +26,18 @@
     <ion-item text-wrap class="left-img">
       <ion-row>
         <ion-col width-20>
-          <ion-avatar item-left>
+          <ion-avatar item-left *ngIf ="viewType == 'inbox'">
             <img (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" 
+            src="{{imageUrl+veiwMessagesInfo?.avatar}}">
+          </ion-avatar>
+          <ion-avatar item-left *ngIf ="viewType != 'inbox'">
+            <img (click)="CommunityUserWall(veiwMessagesInfo?.receiver_id)" 
             src="{{imageUrl+veiwMessagesInfo?.avatar}}">
           </ion-avatar>
         </ion-col>
         <ion-col width-80  style="padding: 0px !important" class="send-box-content">
   			  <ion-row>
-            <ion-item style="padding: 0px !important" class="view-messname">
+            <ion-item style="padding: 0px !important" *ngIf ="viewType == 'inbox'" class="view-messname">
       				<small (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" 
               *ngIf ="viewType == 'inbox'">{{veiwMessagesInfo?.sender_name}}</small>
       				<small (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" 
@@ -42,6 +46,15 @@
               {{veiwMessagesInfo?.created_at | date :'MM/dd/yy'}}</b>
   				    <span>{{veiwMessagesInfo?.subject}}</span>
   				  </ion-item>
+            <ion-item style="padding: 0px !important" *ngIf ="viewType != 'inbox'" class="view-messname">
+              <small (click)="CommunityUserWall(veiwMessagesInfo?.receiver_id)" 
+              *ngIf ="viewType == 'inbox'">{{veiwMessagesInfo?.sender_name}}</small>
+              <small (click)="CommunityUserWall(veiwMessagesInfo?.receiver_id)" 
+              *ngIf ="viewType == 'sent'">{{veiwMessagesInfo?.receiver_name}}</small>
+              <b><i class="fa fa-calendar-o"></i> 
+              {{veiwMessagesInfo?.created_at | date :'MM/dd/yy'}}</b>
+              <span>{{veiwMessagesInfo?.subject}}</span>
+            </ion-item>
           </ion-row>
         </ion-col>
       </ion-row>

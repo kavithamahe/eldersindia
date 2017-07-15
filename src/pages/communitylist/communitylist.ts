@@ -115,7 +115,7 @@ export class CommunitylistPage {
   getItems(ev) {
     
     var val = ev.target.value;
-    this. myCommunity(val);
+    this.myCommunity(val);
    
   }
   setItems(ev) {

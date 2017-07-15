@@ -12,18 +12,26 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
   providers:[BlogListService]
 })
 export class BlogsPage {
-blogsList:any;
-bloglists:any;
+blogsList:any=[];
+bloglists:any=[];
 token:string;
 imageUrl:string;
 nextPageURL:any='';
 eventScrollLists:any;
 emptyRecord:any;
+categoryLists:any;
+searchCategory1:any = "";
+searchText:any="";
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
+        let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+        loader.present();
         this.blog();
+        this.getCategory();
+        loader.dismiss(); 
     })
 
   });
@@ -31,14 +39,17 @@ emptyRecord:any;
   }
   public blog()
   { 
-  	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-   this.blogListService.blogList().subscribe(
+  	
+   this.blogListService.blogList(this.searchCategory1,this.searchText).subscribe(
      (blogsList) => {
       
       this.bloglists=blogsList.result.data;
+      if(this.bloglists.length<=0)
+      {
+        this.emptyRecord="No record found";
+      }
       this.nextPageURL=blogsList.result.next_page_url; 
-      loader.dismiss();    
+         
     },
     (err) => { 
         if(err.status===401)
@@ -50,16 +61,36 @@ emptyRecord:any;
           this.showToaster("Try again later");
           this.emptyRecord = "No Records Found"
         }
-        loader.dismiss();
+        //loader.dismiss();
       }
     );   
   }
-  public blogsearch(searchEvent) {
+  /*searchCategory(){
+    this.blogListService.searchCategory(this.searchCategory1).subscribe(searchConnection => {
+        this.bloglists= searchConnection.result.data;
+      },
+
+   err =>{
+    this.bloglists =[];
+    this.showToaster(err);
+  })
+      
+
+  }*/
+   public getCategory(){
+    this.blogListService.getBlogCategories().subscribe(mycategory => {
+      this.categoryLists=mycategory.result; 
+  },
+    err =>{
+  });
+
+  }
+  /*public blogsearch(searchEvent) {
     let term = searchEvent.target.value;
       this.blogListService.searchConnection(term).subscribe(searchConnection => {
         this.bloglists= searchConnection.result.data;
       });
-  }
+  }*/
 doInfinite(infiniteScroll) {
     setTimeout(() => {      
       if(this.nextPageURL!=null && this.nextPageURL!='')
@@ -74,7 +105,7 @@ doInfinite(infiniteScroll) {
   }
   blogscroll()
   {
-     this.blogListService.eventsscroll(this.nextPageURL).subscribe(
+     this.blogListService.eventsscroll(this.searchCategory1,this.searchText,this.nextPageURL).subscribe(
      (eventsscroll) => {
       this.eventScrollLists=eventsscroll.result.data;
       for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
@@ -95,7 +126,10 @@ doInfinite(infiniteScroll) {
         }
       });
   }
-
+  inputSearch(searchEvent){
+   this.searchText = searchEvent.target.value;
+   this.blog();
+  }
   public showToaster(message)
   {
    let toast = this.toastCtrl.create({

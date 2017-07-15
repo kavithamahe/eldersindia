@@ -106,6 +106,7 @@ export class SettingsPage {
 
   toggle(privacy){
     switch (privacy) {
+      
        case "privacy_name": {
                               if(this.privacy_name == true){
                                 this.privacy_name = false;
@@ -177,18 +178,19 @@ export class SettingsPage {
   	let requestId = {"user_id":this.user_uid};
   	this.serviceProvider.webServiceCall('getPrivacy',requestId)
   	.subscribe(data=>{
+      console.log(data);
       console.log("JSON.parse('true')",JSON.parse("true"));
   		let [info] = data.result;
   		this.user_id = info.id;
   		this.user_uid = info.uid;
-  		this.privacy_name = JSON.parse(info.privacy_name);
-  		this.privacy_email = JSON.parse(info.privacy_email);
-  		this.privacy_mobile = JSON.parse(info.privacy_mobile);
-  		this.privacy_location = JSON.parse(info.privacy_location);
-  		this.privacy_birthday = JSON.parse(info.privacy_birthday);
+  		this.privacy_name = JSON.parse(info.privacy_name || false);
+  		this.privacy_email = JSON.parse(info.privacy_email || false);
+  		this.privacy_mobile = JSON.parse(info.privacy_mobile || false);
+  		this.privacy_location = JSON.parse(info.privacy_location || false);
+  		this.privacy_birthday = JSON.parse(info.privacy_birthday || false);
   		// this.privacy_avatar = JSON.parse(info.privacy_avatar);
-      this.privacy_connection = JSON.parse(info.privacy_connection);
-      this.privacy_profile = JSON.parse(info.privacy_profile);
+      this.privacy_connection = JSON.parse(info.privacy_connection || false);
+      this.privacy_profile = JSON.parse(info.privacy_profile || false);
   		this.status = info.status;
       loader.dismiss();
   	},

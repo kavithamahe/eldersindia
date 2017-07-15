@@ -28,19 +28,30 @@ user_id:any;
    });
   }
   
-  blogList() {  
-   let _request= {"search":{"title":""}};
+  blogList(searchCategory,searchText) {  
+   let _request= {search: {"title": searchText, "category": searchCategory}};
     return this.http.post(this.rootUrl+`normaListBlog`,_request,this.options)
       .map(res => res.json()); 
   }
+ 
   searchConnection(term) {  
    let _request= {"search":{"title":term}};
     return this.http.post(this.rootUrl+'normaListBlog',_request,this.options)
       .map(res => res.json()); 
   }
-eventsscroll(nextPageURL) 
+  searchCategory(searchCategory) {  
+   let _request= {"search":{"title":"","category": searchCategory}};
+    return this.http.post(this.rootUrl+'normaListBlog',_request,this.options)
+      .map(res => res.json()); 
+  }
+  getBlogCategories(){
+     let _request= {};
+    return this.http.post(this.rootUrl+'getBlogCategories',_request,this.options)
+      .map(res => res.json());
+  }
+eventsscroll(searchCategory,searchText,nextPageURL) 
    {  
-   let _request= {"search":{"title":""}};
+   let _request= {search: {"title": searchText, "category": searchCategory}};
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }
