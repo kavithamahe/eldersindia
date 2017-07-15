@@ -15,7 +15,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-@import url('https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic');
+@import url('https://fonts.googleapis.com/css?family=Asap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 my-theme													{
 ion-menu													{background : color($colors,secondary);}
@@ -114,25 +114,7 @@ input, textarea 											{-webkit-user-select: auto !important; -khtml-user-se
 
 /*-------------------------------------Common  css -------------------------------------*/
 
-.service-bg0												{height:auto !important;min-height:80px;background:#ff7fe6;width:50%; margin-top:1px; border-right:1px solid #fff; border-bottom:1px solid #fff;}
-.service-bg1												{height:auto !important;min-height:80px;background:#8c8cec;width:50%;margin-top:1px;  border-bottom:1px solid #fff;}
-.service-bg2												{height:auto !important;min-height:80px;background:#4ec2ff;width:50%; border-right:1px solid #fff;  border-bottom:1px solid #fff;  }
-.service-bg3												{height:auto !important;min-height:80px; background:#6cddc9;width:50%; border-bottom:1px solid #fff; border-bottom:1px solid #fff; }
-.service-bg4												{height:auto !important;min-height:80px;  background:#feac48;width:50%; border-right:1px solid #fff; border-bottom:1px solid #fff; }
-.service-bg5												{height:auto !important;min-height:80px; background:#eb8b8c;width:50%;  border-bottom:1px solid #fff;}
-.service-bg6												{height:auto !important;min-height:80px; background:#DDA0DD;width:50%; border-right:1px solid #fff;}
-.service-bg7												{height:auto !important;min-height:80px; background:#BC8F8F;width:50%; border-bottom:1px solid #fff; }
-.service-bg8												{height:auto !important;min-height:80px;background:#D2B48C;width:50%; border-right:1px solid #fff; border-bottom:1px solid #fff;}
-.service-bg9												{height:auto !important;min-height:80px; background:#708090;width:50%; border-bottom:1px solid #fff; }
-.service-bg10												{height:auto !important;min-height:80px; background:#F4A460;width:50%; border-bottom:1px solid #fff; border-right:1px solid #fff;}
-.service-bg11												{height:auto !important;min-height:80px; background:#BC8F8F;width:50%;  border-bottom:1px solid #fff;}
-.left-icons													{float:left; width:100%;}
-.left-icons i                                               {font-size:40px; font-weight:400; color:#FFF;}
-.right-fnticon												{float:right; line-height:50px; color:#333;}
-.ftbtb p                                                    {color:#333; font-size:17px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:45px;  width:135px; display:block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;}
+
 .btn-warnings											    {background-color:#888aef;border-color:#eea236;color:#fff;font-size:13px !important;text-transform:capitalize;}
 .btn-infos												    {background-color:#fe7fe6;border-color:#46b8da;color:#fff;font-size:13px !important;text-transform:capitalize;}
 .info													    {font-size:13px !important;text-transform:capitalize !important;}
@@ -140,7 +122,7 @@ input, textarea 											{-webkit-user-select: auto !important; -khtml-user-se
 .btn-primarys												{background-color:#888aef;color: #fff;float: left; font-size: 14px; margin-left: 14px;margin-top: 10px;
 
     width: 91%;}
-.toolbar-background-md										{background:#337ab7; }
+
 .profile-edit												{ height:175px; background-image: url('../../assets/img/llll.jpg');  position:relative; }
 
 .profile-edit span.profile-img img							{width:100px; height:100px; position:absolute; left:50%; top:23px; border-radius:50%; border:2px solid #fff; margin-left:-50px;
@@ -196,6 +178,70 @@ ion-card img												{display:inline-block;height:auto;max-width:100%;padding
 .select-detalis-in .text-input-ios							{width:calc(100% - 8px - 8px);}
 .job-borad p h4												{font-size:15px;line-height:25px;}
 
+.service-listed{ float:left; width:100%;}
+.service-listed .service-bg0{ float:left; width:50%; background:none; padding:2px;margin-top:5px; }
+.service-listed .service-bg0 .button-inner{ width:100%; float:left;background:#bf5c96; height:80px; border-bottom:2px solid #bd4089;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg0 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg0 .button-inner .left-icons p{color:#fff; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg1{ float:left; width:50%; background:none;padding:2px; margin-top:5px; }
+.service-listed .service-bg1 .button-inner{ width:100%; float:left;background:#ea505c; height:80px; border-bottom:2px solid #ea3842;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg1 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg1 .button-inner .left-icons p{color:#fff; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+
+.service-listed .service-bg2{ float:left; width:50%; background:none;padding:2px;  }
+.service-listed .service-bg2 .button-inner{ width:100%; float:left;background:#2c71b6; height:80px; border-bottom:2px solid #1c5c9c;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg2 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg2 .button-inner .left-icons p{color:#fff; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg3{ float:left; width:50%; background:none;padding:2px; }
+.service-listed .service-bg3 .button-inner{ width:100%; float:left;background:#bac6dc; height:80px; border-bottom:2px solid #a8b2c3;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg3 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg3 .button-inner .left-icons p{color:#fff; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg3{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg3 .button-inner{ width:100%; float:left;background:#bac6dc; height:80px; border-bottom:2px solid #a8b2c3;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg3 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg3 .button-inner .left-icons p{color:#fff; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg4{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg4 .button-inner{ width:100%; float:left;background:#fec748; height:80px; border-bottom:2px solid #f9b312;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg4 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg4 .button-inner .left-icons p{color:#fff; font-size:15px; margin:0px;font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg5{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg5 .button-inner{ width:100%; float:left;background:#00b58a; height:80px; border-bottom:2px solid #03a27c;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg5 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px; text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg5 .button-inner .left-icons p{color:#fff; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg6{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg6 .button-inner{ width:100%; float:left;background:#67539b; height:80px; border-bottom:2px solid #5a3cad;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg6 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px; text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg6 .button-inner .left-icons p{color:#fff; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg7{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg7 .button-inner{ width:100%; float:left;background:#03A9F4; height:80px; border-bottom:2px solid #1b90c5;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg7 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg7 .button-inner .left-icons p{color:#fff; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg8{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg8 .button-inner{ width:100%; float:left;background:#BDB76B; height:80px; border-bottom:2px solid #afa416;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg8 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg8 .button-inner .left-icons p{color:#fff; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+
+.service-listed .service-bg9{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg9 .button-inner{ width:100%; float:left;background:#607D8B; height:80px; border-bottom:2px solid #55707d;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg9 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg9 .button-inner .left-icons p{color:#fff; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.header-md{   box-shadow: 0 5px 5px -4px #000;}
+.header-ios{   box-shadow: 0 5px 5px -4px #000;}
+/*.ftbtb p                                                    {color:#333; font-size:17px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:45px;  width:100%; display:block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;}*/
 .contact-list .item-md										{padding:5px;}
 .contact-list .item-md .item-inner .input-wrapper			{}
 .contact-list .item-md .item-inner .input-wrapper .label-md {margin:0px; text-indent: 0; border:1px solid #e9e9e9; float:left; }
@@ -218,12 +264,11 @@ span.mails-cont i 											{float:left; color:#858D9B; font-size:15px;padding-
 span.mails-cont p 											{float:left; color:#858D9B; font-size:15px;}
 page-service-info .service_request							{border:none !important;}
 ion-segment													{margin:7px; width:96%; border-radius:5px; }
-.segment-md .segment-button									{background:none; color:#000; border-bottom:none;font-size:16px;text-transform:capitalize; border-left:1px solid #888aef !important; height:35px; line-height:35px; }
+.segment-md .segment-button									{background:none; color:#000; border-bottom:none;font-size:16px;text-transform:capitalize; border-left:1px solid #888aef !important; height:35px; line-height:35px; font-family: 'Asap', sans-serif;}
 .connection-page											{margin:0px !important; font-size:14px !important; font-weight:400 !important; color:#777; }
 .connection-page											{color:#777 !important; margin:0px !important; font-size:13px;}
 .connection-page i											{width:15px; text-align:left; color:#a8a9a8;}
 .connection-page i.fa-map-marker							{ padding-left:3px;}
-
 .active-btn i                                               {background:#006400 !important; font-size:12px !important; color:#fff; padding:6px; border-radius:3px;}
 .active-btn 									            {background:none; box-shadow:none;}
 .inactive-btn 									            {background:none; box-shadow:none;}
@@ -237,7 +282,7 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 															 right:-1px;top:15px;width:auto;}
 .video-updates                                              {padding:0px 4px !important;}
 .user-profile												{width:80px;height:80px; border:1px solid #ccc;}
-.wel-comemem											    {color:#424a95 !important;font-family: 'Questrial', sans-serif;font-size:18px !important;margin: 0; padding:10px 0px 0px 10px;}
+.wel-comemem											    {color:#424a95 !important;font-size:18px !important;margin: 0; padding:10px 0px 0px 10px;}
 .likecolor													{color:#1e90ff !important; font-size:17px;}
 .time-datem													{color:#949494 !important; font-size:11px !important;font-style:italic; text-indent:0px;}
 .label-opc .item-md .item-inner .label-md p					{margin:0px !important; padding-top:0px;text-indent:0px; padding-left:8px; color:#1d6ab2; font-size:20px; line-height:25px; font-weight:400;}
@@ -249,13 +294,13 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .post-icons													{position:absolute;background:#fff !important;border-radius:50%;border:1px solid #ccc;color:red;height:40px;position:absolute;right:4px;top:25px;width:40px;}
 .createblog-form .item-md									{padding-left:10px;}
 .createblog-form .item-md .item-inner .input-wrapper .select-brd{width:97%;height:38px;}
-.rd-tags												{    border:1px solid #ccc !important;border-radius:0;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15) !important;
+.rd-tags												    {border:1px solid #ccc !important;border-radius:0;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15) !important;
 															 color:#555;font-size:18px;font-weight:400;padding:7px;width:94%; margin-left:10px; max-height:300px; min-height:80px;}
 .createblog-form .item-md .item-inner .input-wrapper .text-input-md{width: calc(100% - 9px) !important;}
 .createblog-form .item-md .item-inner .input-wrapper .label-md{ float:left; line-height:25px; margin-top:5px; text-indent:0px;}
 .createblog-form .item-ios .item-inner .input-wrapper .text-input-ios{width: calc(100% - 9px) !important;}
 .createblog-form .item-ios .item-inner .input-wrapper .label-ios{ float:left; line-height:25px; margin-top:5px; text-indent:0px;}
-.createblog-form .item-ios{ padding-left: 10px;}
+.createblog-form .item-ios									{ padding-left: 10px;}
 .newslisted .item-md{padding-left:7px !important;}
 .newslisted .item-ios{padding-left:7px !important;}
 .newslisted .item-inner .input-wrapper .label-md{ margin:0px;}
@@ -413,7 +458,7 @@ ul.rating li												{padding:5px 0px !important;}
 .select-text												{font-size:15px !important;}
 .members													{font-size:15px !important;}
 
-ion-app.ios													{font-family: 'Questrial', sans-serif;}
+ion-app.ios													{}
 .detalis-elder												{text-align:center;box-shadow:none; font-size:16px !important; font-weight:600 !important; color:#1976d2 !important; background:#fff; border-radius:3px; padding:4px;}
 /*-------------------------------------Common  css end -------------------------------------*/
 
@@ -425,11 +470,11 @@ ion-app.ios													{font-family: 'Questrial', sans-serif;}
 .login-btn .fab-md											{ background:#888AEF !important; margin-top:10px;}
 .login-btn .fab-ios											{ background:#888AEF !important;margin-top:10px;}
 .primary-color 												{color:#1976d2 !important; font-size:15px !important;}
-.card-md p 													{color:#777;font-size:15px;font-weight:normal;line-height:22px;font-family: 'Questrial', sans-serif;
+.card-md p 													{color:#777;font-size:15px;font-weight:normal;line-height:22px;
 														     margin: 0 0 2px;}
 
 ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !important;}
-.blogs-div h2												{color:#1976d2;white-space: nowrap;font-family: 'Questrial', sans-serif!important; overflow:hidden;font-size:16px;
+.blogs-div h2												{color:#1976d2;white-space: nowrap; overflow:hidden;font-size:16px;
 															 font-weight:700;line-height:20px;text-align:left;}
 .Cancelled{ font-size:14px !important; color:#f90202 !important;padding:0px !important;font-weight:600 !important;}
 .Contacted{ font-size:14px !important; color:#2196F3 !important;padding:0px !important; font-weight:600 !important;}
@@ -443,7 +488,7 @@ ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !import
     color: #333;
     height: 45px !important;
 }
-.forgot-pass												{background:none !important;  color:#337ab7 !important;font-family: 'Questrial', sans-serif;font-size:15px; }
+.forgot-pass												{background:none !important;  color:#337ab7 !important;font-size:15px; }
 .bg-back													{background:none !important; border-bottom:none !important; }
 .bg-back .item-inner .input-wrapper .label-md .forgot-pass	{ font-size:17px !important; margin-top:40px; color:#404996 !important; margin-top:10px;}
 .bg-back .item-inner .input-wrapper .label-ios .forgot-pass	{ font-size:17px !important; margin-top:10px; color:#404996 !important;margin-top:17px;}
@@ -577,11 +622,11 @@ page-service-info .service_request							{border:none !important;}
 .slider-detalis-list p									    {text-align:left; font-size:16px; color:#777 !important; margin:0px;padding-top:8px; padding-left:10px; line-height:25px;}
 .swiper-slide img											{max-height:190px; width:100%;}
 .button-ios													{font-size:16px !important;}
-.card-ios p													{color: #777;font-size:16px;font-weight:normal;line-height:22px;font-family: 'Questrial', sans-serif; 
+.card-ios p													{color: #777;font-size:16px;font-weight:normal;line-height:22px;
 															 margin: 0 0 2px;}
 ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !important}
 .login-pages .item-wp										{background:none;}
-.forgot-pass												{background:none !important;  color:#337ab7 !important;font-family: 'Questrial', sans-serif; font-size:15px; }
+.forgot-pass												{background:none !important;  color:#337ab7 !important; font-size:15px; }
 .bg-bac												        {background:none !important; border-bottom:none !important;}
 .text-input-md  											{border: 1px solid #ccc !important;border-radius:0px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15);  padding:7px;font-size: 18px;
 .service-bg													{ height:auto !important;}															 font-weight:400; color:#555;}
@@ -625,7 +670,7 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
     left:14px;
     position: absolute;
     top: 0;}
-.service-req												{color:#404998 !important;display:inline;font-size:18px !important;margin: 0;padding:0;}
+.service-req												{color:#525252 !important;display:inline;font-size:18px !important;margin: 0;padding:0;}
 .req-viewlist												{font-size:17px !important; font-weight:400 !important; color:#008B8B;}
 .req-viewlist span											{font-size:17px !important; font-weight:400 !important; color:#414994; padding-left:25px;}
 .req-viewlist p											    {font-size:15px !important; font-weight:400 !important; color:#777; padding-left:25px; padding-top:8px; }
@@ -668,16 +713,16 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 
 /*-------------------------------------Windows platform css -------------------------------------*/
 .usericons													{ font-size:17px;}
-.card-wp p													{color: #777;font-size:15px;font-weight:normal;line-height:22px;font-family: 'Questrial', sans-serif;
+.card-wp p													{color: #777;font-size:15px;font-weight:normal;line-height:22px;
 															 margin: 0 0 2px;}
-ion-app.md{font-family: 'Questrial', sans-serif !important;}
+ion-app.md{font-family: 'Asap', sans-serif;color:#525252;}
 ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !important;}
 .login-pages img.logo										{margin-top:70px; width:90%; margin-left:15px;}	
 .login-pages .item-md										{background:none; padding-left:5px;}	
 .login-pages .item-md .text-input-md						{width: 92%!important;
     margin-left: 13px !important; color:#333; height:45px !important;}									
 
-.forgot-pass 												{background:none !important;box-shadow:none; color:#337ab7 !important;font-family: 'Questrial', sans-serif; margin-top:10px; font-size:15px !important; text-transform:capitalize; }
+.forgot-pass 												{background:none !important;box-shadow:none; color:#337ab7 !important; margin-top:10px; font-size:15px !important; text-transform:capitalize; }
 .bg-back .item-inner										{background:none !important; border-bottom:none !important;}
 .text-input-wp  											{border: 1px solid #ccc !important;border-radius:25px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.15); padding:10px 10px 10px 20px;font-size: 18px;
         													 font-weight:400; color:#555;}
@@ -1005,8 +1050,8 @@ white-space: normal;}
 .texts-lefts p.comm-datetime                                {font-size:11px !important;}
 .texts-lefts p                                              {text-indent:0px !important; font-size:14px !important;}
 .comment-liks                                               {background:#f7f7f7; border-top:1px solid #efefef;}
-.item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#424a95 !important; margin-top:0px !important; font-weight:400;}
-.item-inner > .input-wrapper > .label-md				    {color:#777;font-size:16px; padding-right:0px !important; }
+.item-inner > .input-wrapper > .label-md h2				    {font-size:17px !important;color:#525252!important; margin-top:0px !important; font-weight:400; }
+.item-inner > .input-wrapper > .label-md				    {color:#777;font-size:16px; padding-right:0px !important; margin:0px; }
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ bottom:4px;}
 .item-md .item-button									    {height:30px;}
 .text-input-md											    {font-size:15px;width: calc(100% - 8px - 8px);}
@@ -1027,7 +1072,7 @@ page-dashboard .dashboard								    {padding:0px 0px !important;}
 .comment-liks .button-ios							{ padding:0px !important; width:100%;}
 /*-------------------------------------Android platform css end-------------------------------------*/
 .external-listed .item-md{padding-left:0px !important;}
-.external-listed  h1	                        {color:#424a95;font-family:"Open Sans",sans-serif;font-size:18px;margin: 0;padding:0px 0 0 0px; text-indent:0px;}
+.external-listed  h1	                        {color:#424a95;font-size:18px;margin: 0;padding:0px 0 0 0px; text-indent:0px;}
 .external-listed p                         {color:#777;display:block;font-size:15px;font-style:normal;font-weight:400;margin-left:11px;}
 .lastupdate .item-inner .input-wrapper .label-md h2         {float:left;font-size:19px !important;text-align:left;width:100%;}
 .lastupdate                                                 {margin:10px;}

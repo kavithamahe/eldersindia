@@ -22,18 +22,26 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding style="background:#fff;">
+<ion-content padding style="background:#F3F9FE;">
 <div class="service-top-title"></div>
 
-<button class ="myblock" *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full (click)="subCategory(service)" class="ftbtb service-bg{{i}}">
-<ion-col>
+<ion-row>
+   <ion-col>
+   <div class="service-listed">
+<button *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full (click)="subCategory(service)" class="myblock service-bg{{i}}">
+
 <div class="left-icons">
 <i class="{{service.icon}}" aria-hidden="true"></i>
 <i *ngIf="!service.icon" class="fa fa-bolt" aria-hidden="true"></i>
+<p>{{service.service}}</p>
 </div>
 <!--<p><ion-icon  name="ios-home"></ion-icon></p>-->
-<p>{{service.service}}</p>
-</ion-col>
+
+
 </button>
+</div>
+   </ion-col>
+</ion-row>
+
 </ion-content>
 <style>button{line-height:0px;}</style>
