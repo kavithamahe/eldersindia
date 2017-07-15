@@ -90,7 +90,7 @@ dismiss() {
   let data={'dependent':''};
    this.viewCtrl.dismiss(data);
  }
- submitDependent()
+ submitDependent(event)
  {
     if(!this.authForm.valid){
       this.submitAttempt = true;

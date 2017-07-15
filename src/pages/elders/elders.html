@@ -61,7 +61,7 @@
        <ion-label class="label-tittle required">Mobile number</ion-label>
             <ion-item>
               <ion-input type="text" formControlName="elder_number" 
-              placeholder="Contact number" (keypress)="onlyNumberKey($event)" maxlength="10"
+              placeholder="Contact number" (keypress)="onlyNumberKey($event)" maxlength="12"
                   [class.invalid]="!authForm.controls.elder_number.valid && (authForm.controls.elder_number.dirty)" [(ngModel)]="elder_number" value={{elder_number}}>
               </ion-input>
            </ion-item>

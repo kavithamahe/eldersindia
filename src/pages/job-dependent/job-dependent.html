@@ -6,10 +6,10 @@
       </button>
     </ion-buttons>
     <ion-title text-center>Apply job for dependent</ion-title>
-     <ion-buttons right>
+     <!-- <ion-buttons right>
     <button ion-button (click)="openCamera()">
          <i class="fa fa-paperclip" style="margin-right:5px; font-size:22px;"></i></button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
 </ion-header>
 
@@ -53,5 +53,5 @@
          </div> -->
          <input type="file" (change)="fileChange($event)" placeholder="Upload file" > 
 </form>
- <button ion-button class="submit-btns" ion-button item-right small (click)="submitDependent()">Submit</button>
+ <button ion-button class="submit-btns" ion-button item-right small (click)="submitDependent($event)">Submit</button>
 </ion-content>

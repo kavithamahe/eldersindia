@@ -147,9 +147,9 @@ mytype:string ="password";
         this.authForm = formBuilder.group({
         elder_relation : ['', Validators.compose([Validators.required])],
         elder_name : ['', Validators.compose([ Validators.maxLength(30), 
-              Validators.pattern('[a-zA-Z ]*'),Validators.required])],
+              ,Validators.required])],
         elder_service : ['', Validators.compose([Validators.required])],
-        elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.maxLength(10),Validators.required])],
+        elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.maxLength(12),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
         elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
@@ -181,9 +181,9 @@ mytype:string ="password";
         this.authForm = formBuilder.group({
         elder_relation : ['', Validators.compose([Validators.required])],
         elder_name : ['', Validators.compose([ Validators.maxLength(30), 
-              Validators.pattern('[a-zA-Z ]*'),Validators.required])],
+              Validators.required])],
         elder_service : ['', Validators.compose([Validators.required])],
-        elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.maxLength(10),Validators.required])],
+        elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.maxLength(12),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
@@ -349,13 +349,13 @@ public emergencies =  [
             // console.log(this.manageDependentData.experience);
             if(experiences.length != 0)
             {
-              //this.experience_list.pop();
+              this.experience_list.pop();
               for(let i = 0; i < experiences.length;i++)
               {
                 this.experience_industry.push(experiences[i].functional_id);
                 this.experience_years.push(experiences[i].year);
                 this.experience_duration.push(experiences[i].duration);
-                //this.experience_list.push({experience:[i]});
+                this.experience_list.push({experience:[i]});
               }  
             }
 
@@ -495,9 +495,14 @@ public emergencies =  [
             this.elder_experience.push({"industry":this.experience_industry[i],"year":this.experience_years[i],"duration":this.experience_duration[i]})  
             }
       }else{
+        //const control = <FormArray>this.myForm.controls['experience_list'];
         for(let i=0;i<this.experience_industry.length;i++){
+           this.addExperience();
             this.elder_experience.push({"elder_id":this.elder_id,"functional_id":this.experience_industry[i],"year":this.experience_years[i],"duration":this.experience_duration[i]})
+
           }
+         //const control = <FormArray>this.myForm.controls['experience_list'];
+        //control=this.elder_experience;
       }
   }
 
@@ -511,6 +516,7 @@ public emergencies =  [
        else{
          for(let i=0;i<this.education_graduation.length;i++){
             this.elder_education.push({"elder_id":this.elder_id,"graduation":this.education_graduation[i],"graduationOther":this.graduationOther[i],"specialization":this.education_specialization[i],"specializationOther":this.specialization_other[i],"university":this.education_college[i]})  
+
           }
        }
   }

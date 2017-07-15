@@ -62,10 +62,13 @@
 
 		<ion-label class="liste-edit required">Date of birth</ion-label>
 		<ion-item>
-	    <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" formControlName="dob" 
-	    [(ngModel)]="user_dob" placeholder="Date of birth"
+		<ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" 
+              [(ngModel)]="elder_dob" formControlName="elder_dob" placeholder="Date of birth"
+                [class.invalid]="!authForm.controls.elder_dob.valid && (authForm.controls.elder_dob.dirty)"></ion-datetime>
+	    <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" 
+	    [(ngModel)]="user_dob" formControlName="dob" placeholder="Date of birth"
                 [class.invalid]="!edit_profile_Form.controls.dob.valid && (edit_profile_Form.controls.dob.dirty)">
-	    </ion-datetime>
+	    </ion-datetime>{{user_dob}}
 	    </ion-item>
 
 		<ion-label class="liste-edit">Official email</ion-label>

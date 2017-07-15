@@ -25,24 +25,32 @@ appliedJobScrollLists:any;
 loader:any;
 searchTextBox:any='';
 emptyRecord:any;
+functionalAreaList:any=[];
+locationList:any=[];
+functionalArea:any='';
+location:any='';
    constructor(public navCtrl: NavController, public navParams: NavParams,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
-        this.appliedJobs();
+        this.onInit();
     })
 
   });
 }
- appliedJobs()
+ public onInit()
  {
+   console.log('this.functionalArea'+this.functionalArea);
+    console.log('this.location'+this.location); 
    this.loader = this.loadingCtrl.create({ content: "Please wait..." });     
     this.loader.present();
     this.appliedJobsList =[];
-   this.jobBoardService.appliedJobs().subscribe(
+   this.jobBoardService.appliedJobs(this.functionalArea,this.location).subscribe(
      (appliedJobs) => {      
-      this.appliedJobsList=appliedJobs.result.info.data; 
+       this.appliedJobsList=appliedJobs.result.info.data; 
+      this.functionalAreaList=appliedJobs.result.get.FunctionalArea; 
+      this.locationList=appliedJobs.result.get.Location; 
       this.loader.dismiss();
     },
     (err) => { 
@@ -82,7 +90,8 @@ emptyRecord:any;
   }
   public viewJob(jobId)
   {
-   this.navCtrl.push(SinglejobPage, {jobId});
+    let  appliedjobs ={fuctionality:"appliedjobs"}
+   this.navCtrl.push(SinglejobPage, {jobId,appliedjobs});
   }
    doInfinite(infiniteScroll) {
     setTimeout(() => {      

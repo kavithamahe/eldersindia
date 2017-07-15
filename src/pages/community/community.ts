@@ -254,13 +254,13 @@ toggleContent(){
    }
  
   addLikes(likeObj){
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
+    // let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    // loader.present();
 
    this.communityServices.addLike(likeObj).subscribe(data =>{
-     this.showToast(data.result.info.message);
+     //this.showToast(data.result.info.message);
      this.communityList(this.community_id);
-      loader.dismiss();
+      //loader.dismiss();
    },
      err =>{
         if(err.status===401){
@@ -272,7 +272,7 @@ toggleContent(){
     else{
       this.communityServices.showErrorToast(err);  
     }
-    loader.dismiss();
+    //loader.dismiss();
   })
     
   }
@@ -285,10 +285,7 @@ toggleContent(){
       });
       toast.present();
    }
-
-
-  
-metaLink:any = "";
+  metaLink:any = "";
 
   postCommunity(id){
      let loader = this.loadingCtrl.create({ content: "Please wait..." });     

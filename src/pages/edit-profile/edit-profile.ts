@@ -56,6 +56,7 @@ submitAttempt:any;
       
       
       this.user_dob = this.profileData.dob;
+      console.log(this.user_dob);
       this.user_type = this.profileData.user_type;
       if(this.user_type == 'sponsor'){
       this.my_location = this.profileData.locationName;  
