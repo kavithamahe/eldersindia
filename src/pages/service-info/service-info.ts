@@ -140,7 +140,7 @@ modal(){
                  loading.dismiss();
                 },
         err =>{
-          if(err.status===401)
+          if(err.status===400)
         {
           this.showToast(JSON.parse(err._body).error);
         }

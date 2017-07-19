@@ -65,44 +65,18 @@ export class CommunityServices {
   }
 
   postCommunity(id,image,videoUrl,posts,links){
-    console.log("kavitha"+image);
      this.posts = { "community_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links, "app":'' }
 
      return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,this.posts,this.options)
       .map(res =>res.json());
   }
 file_Path:any;
-    upload(imageData)
+   upload(formData, options)
     {
-      
-       // imageData is either a base64 encoded string or a file URI
-       // If it's base64:
-
-     const fileTransfer: TransferObject = this.transfer.create();
-
-    this.filePath.resolveNativePath(imageData)
-     .then(filePath => {
-                console.log(filePath);
-                this.file_Path = filePath;
-            });
-
-      let file_name = this.file_Path.split("/").pop();
-
-      let options1: FileUploadOptions = {
-         fileKey: 'file',
-         fileName: file_name,
-         headers: {}
-      
-      }
-      
-  fileTransfer.upload(imageData, `${this.getCommunityPostsUrl }sendMessage`,options1)
-   .then((data) => {
-     // success
-     alert("success");
-   }, (err) => {
-     // error
-     alert("error"+JSON.stringify(err));
-   });
+ 
+return this.http.post(`${this.getCommunityPostsUrl }attachFiles`,formData,options)
+.map(res => res.json());
+  
  
 }
 

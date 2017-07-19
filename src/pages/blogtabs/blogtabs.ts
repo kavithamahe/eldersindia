@@ -26,4 +26,5 @@ export class BlogtabsPage {
     this.nav.setRoot(DashboardPage);
   }
 
+
 }

@@ -171,7 +171,7 @@ loadSubcategoryList(subCategory_id,location_id){
                loading.dismiss();
                 },
          (err) => { 
-        if(err.status===401)
+        if(err.status===400)
         {
           this.showToaster(JSON.parse(err._body).error);
         }

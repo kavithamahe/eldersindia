@@ -44,7 +44,7 @@ locationSearch:any=[];
    {
      this.locationSearch=location;
    }
-   let _request= {"search":{"location":this.locationSearch,"functional_area":this.functionalSearch},"get":["FunctionalArea","Location","SkillSet"],"info":{"uid":this.user_id}};
+   let _request= {"search":{"location":this.locationSearch,"functional_area":this.functionalSearch},"get":["FunctionalArea","Location","SkillSet"],"info":{"q":"","uid":this.user_id}};
     return this.http.post(this.rootUrl+'getJobList',_request,this.options)
       .map(res => res.json()); 
   }
@@ -54,6 +54,11 @@ locationSearch:any=[];
    let _request= {"info":{"uid":this.user_id}};
     return this.http.post(this.rootUrl+'getJobById/'+jobId,_request,this.options)
       .map(res => res.json()); 
+  }
+  myjobrequest(jobId){
+    let _request= {"info":{"uid":this.user_id}};
+    return this.http.post(this.rootUrl+'myJobRequestById/'+jobId,_request,this.options)
+      .map(res => res.json());
   }
   file_Path:any;
     upload(imageData)
@@ -113,12 +118,20 @@ locationSearch:any=[];
     return this.http.post(this.rootUrl+'applyJob',_request,this.options)
       .map(res => res.json()); 
   }
-  appliedJobs() 
+  appliedJobs(functionalArea,location) 
   {
-  
-   let _request= {"search":"","info":{"uid":this.user_id}};
-    return this.http.post(this.rootUrl+'myJobRequests',_request,this.options)
+  if(functionalArea!='' && functionalArea!=null)
+   {
+     this.functionalSearch=functionalArea;
+   } 
+   if(location!='' && location!=null)
+   {
+     this.locationSearch=location;
+   }
+   let _request= {"search":{"location":this.locationSearch,"functional_area":this.functionalSearch},"get":["FunctionalArea","Location","SkillSet"],"info":{"uid":this.user_id,"q":""}};
+     return this.http.post(this.rootUrl+'myJobRequests',_request,this.options)
       .map(res => res.json()); 
+ 
   }
    searchConnection(term) {  
    let _request= {"search":term,"info":{"uid":this.user_id}};

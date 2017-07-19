@@ -38,20 +38,20 @@
 			<ion-item class="mem-title">
       			<p> &nbsp;Members ({{show_member}})</p>
 			</ion-item>
-			<!-- <ion-slides slidesPerView= "4"> -->
+			<ion-slides slidesPerView= "4">
 				<div *ngFor="let member of members; let i=index" text-wrap>
-					
-						<ion-item class="memb-list" [hidden]="!member?.avatar">
-							<ion-col>
+					<ion-slide [hidden]="!member?.avatar">
+						<ion-item [hidden]="!member?.avatar">
+							<ion-col [hidden]="!member?.avatar">
 								<img (click)="membersProfile(member.uid)" 
-								[src]="imageUrl+member?.avatar" width="100" height="52" />
-								<small class="mem-name">{{member.name | words :1 : '....'}}
+								[src]="imageUrl+member?.avatar" style="width: 70px; height: 70px;"  />
+								<small class="mem-name">{{member.name | words :5 : '....'}}
 								</small>
 							</ion-col>
 						</ion-item>
-					<!-- </ion-slide> -->
+					</ion-slide>
 				</div>
-				<!-- </ion-slides> -->
+				</ion-slides>
 				<div  *ngIf(viewMore) style="float:left;">
 					<ion-badge (click)="showModel(members)" class="show-members">+{{show_member}} 
 					</ion-badge>

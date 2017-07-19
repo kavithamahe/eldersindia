@@ -74,37 +74,14 @@ downloadProgress:any;
           this.showToaster("Try again later");
         }
         loader.dismiss();
-      }
-    );    
+      });    
   }
-//  downloadFile(file_path,file_name) {
-// console.log("Source file path  "+ file_path);
-//         this.platform.ready().then(() => {
-            
-//   const fileTransfer: TransferObject = this.transfer.create();
-//   //const url = this.rootUrl + file_path;
-//   var uri = encodeURI(this.rootUrl + file_path);
-//   console.log("constructed url =" + uri);
-//   var targetPath = cordova.file.externalRootDirectory + file_name;
-//    //var targetPath = "file:///storage/emulated/0/Download/" + file_name;
-//    console.log("target"+targetPath);
-//   fileTransfer.download(uri,targetPath,true).then((entry) => {
-//     console.log("success");
-//     console.log("download complete:" + entry.toURL());
-//    this.showToaster("Downloaded Succesfully"); 
-//   },
-//    (error) => {
-//     console.log("error");
-//   });
-//          });
-
-//   }
  downloadFile(file_path,file_name) {
 console.log("Source file path  "+ file_path);
         this.platform.ready().then(() => {
             
   const fileTransfer: TransferObject = this.transfer.create();
-  const url = "http://52.91.174.4:8096/" + file_path;
+  const url = this.imageUrl + file_path;
   console.log("constructed url =" + url);
   
    var targetPath = cordova.file.externalRootDirectory + file_name;
@@ -132,7 +109,7 @@ public dashboardPage()
    let toast = this.toastCtrl.create({
         message: message,
         duration: 3000,
-        position: 'top'
+        position: 'middle'
         });
    toast.present();
   }
@@ -166,7 +143,7 @@ public dashboardPage()
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {

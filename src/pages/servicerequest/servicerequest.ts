@@ -19,7 +19,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 export class ServicerequestPage {
 imageUrl:any;
 token:any;
-serviceRequestInfo:any;
+serviceRequestInfo:any=[];
 showRemark:any=null;
 rating:number=0;
 remarks:string='';
@@ -64,12 +64,6 @@ vendorStatus:any=[];
       }
     );    
   }
-  // getItems(ev) {
-    
-  //   var val = ev.target.value;
-  //   this.onInit(val);
-   
-  // }
   public getItems(searchEvent) {
     let term = searchEvent.target.value;
       this.serviceRequest.searchConnection(term).subscribe(searchConnection => {

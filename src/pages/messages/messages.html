@@ -42,10 +42,10 @@
   <ion-item padding *ngIf="!inboxInfo">
      <p class="error-clr">{{emptyRecord}}</p>
    </ion-item>
-  <!-- <div>
-    <ion-searchbar (ionInput)="getItems($event)">
+  <div>
+    <ion-searchbar *ngIf="inboxInfo.length != 0" (ionInput)="getItems($event)">
     </ion-searchbar>
-  </div> -->
+  </div>
      
       <ion-list *ngFor="let inbox of inboxInfo">
       <ion-item-sliding  class="inbox-sends">
@@ -97,13 +97,14 @@
   </ion-list>
 
   <ion-list *ngSwitchCase="'sent'">
-  <!-- <div>
-    <ion-searchbar (ionInput)="setItems($event)">
-    </ion-searchbar>
-  </div> -->
+  
  <ion-item padding *ngIf="!sentInfo">
      <p class="error-clr">{{emptyRecord}}</p>
    </ion-item>
+   <div>
+    <ion-searchbar *ngIf="sentInfo.length != 0" (ionInput)="setItems($event)">
+    </ion-searchbar>
+  </div>
   <ion-list *ngFor="let sent of sentInfo">
       <ion-item-sliding class="inbox-sends">
         <ion-item (click)="viewMessages(sent?.id,'sent')" 

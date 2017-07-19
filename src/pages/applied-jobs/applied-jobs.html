@@ -27,6 +27,19 @@
 
 
 <ion-content padding class="content-intop">
+
+ <ion-item class="select-loca">
+    <ion-label>Functional Area</ion-label>
+    <ion-select [(ngModel)]="functionalArea" (ionChange)="onInit()" multiple="true">
+      <ion-option *ngFor="let functional of functionalAreaList" value="{{functional?.id}}">{{functional?.name}}</ion-option>      
+    </ion-select>
+  </ion-item>
+  <ion-item class="select-loca">
+    <ion-label>Location</ion-label>
+    <ion-select [(ngModel)]="location" (ionChange)="onInit()"  multiple="true">
+      <ion-option *ngFor="let locations of locationList" value="{{locations?.id}}">{{locations?.location}}</ion-option>
+    </ion-select>
+  </ion-item>
    <!--  <ion-searchbar (ionInput)="jobsearch($event)">
     </ion-searchbar> -->
 <ion-card *ngFor="let appliedJobs of appliedJobsList">

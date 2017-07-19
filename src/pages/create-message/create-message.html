@@ -11,22 +11,12 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <!-- <ion-buttons left>
-    <button ion-button icon-only (click)="dashboardPage()">
-        <ion-icon name="home"></ion-icon>
-      </button>
-    </ion-buttons> -->
     <ion-title text-center>Compose Message</ion-title>
-     <ion-buttons right>
-    <button ion-button (click)="openCamera()" icon-only>
-        <i class="fa fa-paperclip" style="margin-right:5px; font-size:22px;"></i>
-    </button>
-    </ion-buttons>
-    <ion-buttons right>
-    <button ion-button (click)="sendMessage()" icon-only>
-  <ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;
-</button>
-</ion-buttons>
+      <ion-buttons right>
+        <button ion-button (click)="sendMessage()" icon-only>
+          <ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;
+        </button>
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -49,9 +39,10 @@
     </ion-textarea>
   </ion-item>
   <p *ngIf="!messageForm.controls.message.valid && (messageForm.controls.message.dirty || submitAttempt)" class="err-reds">Please enter the message</p>
-          <p>{{file_name}}</p>
   
 </ion-list>
-</form>
 
+
+</form>
+ <input type="file" (change)="fileChange($event)" placeholder="Upload file" >
 </ion-content>

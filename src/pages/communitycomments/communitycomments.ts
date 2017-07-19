@@ -32,7 +32,7 @@ token:any;
 user_id:any;
 senddata:any;
 post_likes:any;
-
+send_post_comment:any='';
   constructor(public platform: Platform,public loadingCtrl: LoadingController,public actionsheetCtrl: ActionSheetController, public viewCtrl: ViewController, public storage: Storage, public toastCtrl: ToastController, public alertCtrl:AlertController, public communityServices: CommunityServices, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
   	this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -141,33 +141,25 @@ post_likes:any;
     }
  }
  sendInlineLikescmt(id){
-     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-
    this.communityServices.sendInlineLikes(id).subscribe(data =>{
            
-           this.showToast(data.result.info.message);
+           //this.showToast(data.result.info.message);
             for(let i=0; i<this.post_comments.length;i++){
        if(this.post_comments[i].comments_id == id){
          
          this.post_comments[i].likes = data.result.info.data;
        }
      }
-      loader.dismiss();
        },
     err =>{
-    loader.dismiss();
     this.communityServices.showErrorToast(err);
   })    
     
  }
  sendInlineLikes(reply_id,comments_id,post_id){
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-
    this.communityServices.sendInlineLikes(reply_id).subscribe(data =>{
            
-           this.showToast(data.result.info.message);
+           //this.showToast(data.result.info.message);
             for(let i=0; i<this.post_comments.length;i++)
                 {
                     if(this.post_comments[i].comments_id == comments_id)
@@ -183,10 +175,8 @@ post_likes:any;
                       console.log("index of comment: ",i);
                     }
                  }
-                  loader.dismiss();
        },
     err =>{
-     loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
     
@@ -218,7 +208,7 @@ post_likes:any;
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
      this.communityServices.deleteComment(id).subscribe(datas =>{
-     this.showToast(datas.result);
+     //this.showToast(datas.result);
      this.post_comment="";
      for(let i=0; i<this.post_comments.length;i++){
      	if(this.post_comments[i].comments_id == id){
@@ -243,7 +233,7 @@ deleteReply(comment_id,reply_id,post_id)
   loader.present();
  this.communityServices.deleteComment(reply_id).subscribe(
     datas =>{
-             this.showToast(datas.result);
+             //this.showToast(datas.result);
                  for(let i=0; i<this.post_comments.length;i++)
                 {
                     if(this.post_comments[i].comments_id == comment_id)
@@ -280,19 +270,22 @@ deleteReply(comment_id,reply_id,post_id)
    }
 
 sendComment(postID){
-    if(this.post_comment != ""){
-
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-     this.communityServices.sendPosts(postID,this.post_comment).subscribe(datas =>{
+    if(this.send_post_comment != "" || this.post_comment != ""){
+     if(this.send_post_comment == ""){
+     this.send_post_comment=this.post_comment;
+   }
+    // let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    // loader.present();
+     this.communityServices.sendPosts(postID,this.send_post_comment).subscribe(datas =>{
 
      this.post_comments.push(datas.result.info.list[0])
-     this.showToast(datas.result.info.message);
+     //this.showToast(datas.result.info.message);
      this.post_comment="";
-     loader.dismiss();
+     this.send_post_comment="";
+     //loader.dismiss();
      },
      err =>{
-    loader.dismiss();
+    //loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
      
@@ -308,10 +301,10 @@ sendComment(postID){
       this.replyBlock=null;
     if(this.reply_comment != ""){
 
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
+    // let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    // loader.present();
      this.communityServices.sendReply(uid_from,comments_id,this.reply_comment).subscribe(datas =>{
-     this.showToast(datas.result.info.message);
+    // this.showToast(datas.result.info.message);
      this.reply_comment="";
      for(let i=0; i<this.post_comments.length;i++){
      	if(this.post_comments[i].comments_id == comments_id){
@@ -331,10 +324,10 @@ sendComment(postID){
      		});
      	}
      }
-     loader.dismiss();
+    // loader.dismiss();
      },
      err =>{
-    loader.dismiss();
+    //loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
      
@@ -361,8 +354,8 @@ sendComment(postID){
      popover.onDidDismiss(data => {
       if(data!=null)
       {
-      this.post_comment=this.post_comment+' '+data.emojiImage;
-      //this.sendComment(post_id);
+      this.send_post_comment=this.post_comment+' '+data.emojiImage;
+      this.sendComment(post_id);
       }
      })
    }

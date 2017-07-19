@@ -25,6 +25,8 @@
   <ion-item text-wrap  class="view-news">   
     <h2 class="primary-color pro-info" text-capitalize>{{eventsInfo?.title}}</h2>
     <p class="timedate" text-capitalize><i class="fa fa-user" aria-hidden="true"></i>  {{eventsInfo?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{eventsInfo?.post_date | date :"MMM dd y"}}</p>
+     <p class="timedate"><i class="fa fa-clock-o"></i>&nbsp;{{eventsInfo?.time}}</p>
+    <p class="timedate"><i class="fa fa-map-marker"></i>&nbsp;{{eventsInfo?.venue}}</p>
   </ion-item>
 <img src="{{imageUrl+eventsInfo?.featured_image}}" [hidden]="!eventsInfo?.featured_image">
   <ion-card-content style=" margin:10px;">

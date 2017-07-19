@@ -28,8 +28,12 @@ user_type:any;
 user_type_id:any;
 file_name:any;
 functional_area:any=[];
+appliedjobs:any;
+myjobrequestinfo:any=[];
+companyname:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public jobBoardService:JobBoardService,public modalCtrl: ModalController) {
   	this.jobId=navParams.get("jobId");
+    this.appliedjobs=navParams.get("appliedjobs");
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('user_type').then((user_type) => { this.user_type=user_type;});
@@ -41,7 +45,37 @@ functional_area:any=[];
   }
   public onInit()
   {
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    if(this.appliedjobs){
+       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.jobBoardService.myjobrequest(this.jobId).subscribe(
+     (myjobrequest) => {
+       //console.log()
+       var array=[];
+       array.push(myjobrequest.result.info.jobDetail);
+      this.myjobrequestinfo=array;//myjobrequest.result.info.jobDetail;
+      this.companyname= this.myjobrequestinfo.company_name;
+      console.log(this.companyname); 
+      //this.functional_area=myjobrequest.result.info.functional_area;
+      console.log(this.myjobrequestinfo);
+      loader.dismiss();
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+          this.showToaster(JSON.parse(err._body).error);
+         
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+        loader.dismiss();
+      }
+    );    
+    }
+    else{
+      let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     this.jobBoardService.singleJob(this.jobId).subscribe(
      (singleJob) => {
@@ -64,13 +98,16 @@ functional_area:any=[];
         loader.dismiss();
       }
     );    
-  }
+    }
+}
+
    public applyJob(jobId)
   {
     if(this.user_type=='elder')
     {
        this.jobDependentId=this.user_type_id;
-       this.callApplyJob(jobId,this.jobDependentId,"");
+       this.jobDependent(jobId);
+       //this.callApplyJob(jobId,this.jobDependentId,"");
     }
     else
     {
@@ -96,8 +133,7 @@ functional_area:any=[];
         {
           this.showToaster("Try again later");
         }
-      }
-    );
+      });
   }
   public showToaster(message)
   {

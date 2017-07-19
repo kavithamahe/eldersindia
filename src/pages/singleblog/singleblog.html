@@ -85,7 +85,7 @@
 
     </ion-col>
     </ion-row>
-     <button ion-button *ngIf="user_id != viewComments?.user_id" (click)="viewReply(i)" clear>
+     <button ion-button (click)="viewReply(i)" clear>
      <i class="fa fa-reply" aria-hidden="true"></i>
      </button>
      <div *ngIf="i==showReply">
@@ -112,7 +112,7 @@
                 <ion-icon ios="ios-trash" md="md-trash"></ion-icon>      
               </button>
             </ion-item>
-            <button ion-button *ngIf="user_id != reply?.uid_from" (click)="replyblogPost(j)" clear><i class="fa fa-reply" aria-hidden="true"></i></button>
+            <button  (click)="replyblogPost(j)" clear><i class="fa fa-reply" aria-hidden="true"></i></button>
               <div *ngIf="j==replyPost">
                 <ion-row>
                   <ion-item>

@@ -21,6 +21,7 @@ export class EditProfilePage {
 profileData:any = "";
 user_type:any ;
 edit_profile_Form:FormGroup;
+user_dob:any="1977-01-01";
 name:any;
 gender:any;
 mobile:any;
@@ -32,7 +33,7 @@ base64Image:any;
 avatar:any="";
 file: File;
 imageURL:any;
-user_dob:any;
+//user_dob:any;
 updateData:any;
 token:any;
 pemail:any='';
@@ -55,6 +56,7 @@ submitAttempt:any;
       
       
       this.user_dob = this.profileData.dob;
+      console.log(this.user_dob);
       this.user_type = this.profileData.user_type;
       if(this.user_type == 'sponsor'){
       this.my_location = this.profileData.locationName;  

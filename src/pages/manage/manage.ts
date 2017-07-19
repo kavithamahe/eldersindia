@@ -71,8 +71,7 @@ manage_elder:any;
 
    showOptions(user){
      this.manage_elder = user;
-     console.log("options are pressed");
-     if(this.show_option == false){
+       if(this.show_option == false){
        this.show_option = true;
      }
    }

@@ -33,11 +33,11 @@ subCategoryTitle:any;
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     this.storage.ready().then(() => {
       this.storage.get('service_location').then((my_location) => {
-        console.log("this.serviceLocation1",my_location);
+        //console.log("this.serviceLocation1",my_location);
           for(let i=0; i<this.locations.length;i++){
             if(this.locations[i].location == my_location || this.locations[i].id == my_location){
               this.serviceLocation = my_location;
-              console.log("this.serviceLocation2",this.serviceLocation);
+             // console.log("this.serviceLocation2",this.serviceLocation);
             }
             // else{
             //   this.serviceLocation = "";
@@ -49,21 +49,6 @@ subCategoryTitle:any;
     });
     loading.present();
     loading.dismiss();
-    /*this.storage.ready().then(() => {
-      this.storage.get('service_location').then((my_location) => {
-        console.log("this.serviceLocation1",my_location);
-          for(let i=0; i<this.locations.length;i++){
-            if(this.locations[i].location == my_location || this.locations[i].id == my_location){
-              this.serviceLocation = my_location;
-              console.log("this.serviceLocation2",this.serviceLocation);
-            }            
-          } 
-                  
-      });
-    });*/
-    
-    
-
   }	
   
 loadSubCategory(location){
@@ -82,11 +67,12 @@ loadSubCategory(location){
       if(err.status===401){
       // this.providerService.showToast(JSON.parse(err._body).result);
       // this.providerService.showToast(JSON.parse(err._body).error);  
-      this.emptyRecord = JSON.parse(err._body).result;
+      //this.emptyRecord = JSON.parse(err._body).result;
+      this.emptyRecord = "We are in the process of identifying partners in this category for this location!"
       }
       else{
        this.providerService.showToast("Please try again later..!");  
-       this.emptyRecord = "No Records Found" 
+        
       }
       loading.dismiss();
     })

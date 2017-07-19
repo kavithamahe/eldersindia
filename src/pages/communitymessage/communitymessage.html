@@ -7,9 +7,10 @@
     </ion-buttons>
     <ion-title text-center>Compose Message</ion-title>
      <ion-buttons right>
-    <button ion-button (click)="openCamera()">
-         <i class="fa fa-paperclip" style="margin-right:5px; font-size:22px;"></i></button>
+   		<button (click)="sendMessage()" ion-button icon-only>
+  		<ion-icon ios="ios-send" md="md-send"></ion-icon></button>
     </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 <ion-content class="content-intop">
@@ -45,11 +46,10 @@
             	<div *ngIf="!authForm.controls.message.valid  && (authForm.controls.message.dirty || submitAttempt)">
                 	<p style="color:red" class="valid">This field is required</p>
            		</div>	
-     			<p>{{file_name}}</p>
-      			<button (click)="sendMessage()" ion-button class="btn-right">
-  				<ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;Send</button>
+      			
 			</ion-list>
   
   	</form>
+  	<input type="file" (change)="fileChange($event)" placeholder="Upload file" >
 	</div>
 </ion-content>
