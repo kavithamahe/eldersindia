@@ -1,11 +1,12 @@
 page-subcategory-list {
 
 .subcategory-list{
-	background-color:"white";
+	background-color:#fff;
 }
-
+.toolbar-background-md{ background-color:#404996 !important;}
 .item-md ion-thumbnail ion-img, .item-md ion-thumbnail img{ width:auto; height:auto;}
 .item-ios ion-thumbnail ion-img, .item-ios ion-thumbnail img{ width:auto; height:auto;}
+.bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default{ color:#fff;}
 
 .item-inner > .input-wrapper > .label-md h2{ font-size:18px !important;}
 .item-inner > .input-wrapper > .label-ios h2{ font-size:18px !important;}
