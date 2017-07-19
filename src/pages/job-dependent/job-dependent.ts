@@ -33,6 +33,8 @@ nativepath:any;
 file_name:any;
 user_type:any;
 submitAttempt:any;
+jobId:any;
+
   constructor(public formBuilder: FormBuilder,private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -43,10 +45,12 @@ submitAttempt:any;
     })
 
   });
+this.jobId = navParams.get("jobId");
    this.authForm = formBuilder.group({
         elder_dependent: ['', Validators.compose([Validators.required])],
         //file_name: ['', Validators.compose([Validators.required])],
    })
+ 
 
 }
 
@@ -120,21 +124,21 @@ dismiss() {
 
 //   }
 
-  fileChange(event) {
-    let fileList: FileList = event.target.files;
-    if(fileList.length > 0) {
-        let file: File = fileList[0];
-        let file_name=file.name;
-        console.log(file_name);
-        console.log(file);
-        let formData:FormData = new FormData();
-        formData.append('docs', file, file.name);
-        let headers = new Headers();
-        headers.append('Authorization', 'Bearer ' + this.token);
-        headers.append('Accept', 'application/json');
-        let options = new RequestOptions({ headers: headers });
+//   fileChange(event) {
+//     let fileList: FileList = event.target.files;
+//     if(fileList.length > 0) {
+//         let file: File = fileList[0];
+//         let file_name=file.name;
+//         console.log(file_name);
+//         console.log(file);
+//         let formData:FormData = new FormData();
+//         formData.append('docs', file, file.name);
+//         let headers = new Headers();
+//         headers.append('Authorization', 'Bearer ' + this.token);
+//         headers.append('Accept', 'application/json');
+//         let options = new RequestOptions({ headers: headers });
           
       
-    }
-}
+//     }
+// }
 }

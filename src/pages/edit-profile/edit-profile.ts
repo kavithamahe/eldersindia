@@ -21,7 +21,7 @@ export class EditProfilePage {
 profileData:any = "";
 user_type:any ;
 edit_profile_Form:FormGroup;
-user_dob:any="1977-01-01";
+user_dob:any;
 name:any;
 gender:any;
 mobile:any;
@@ -73,7 +73,7 @@ submitAttempt:any;
        // gender: [this.profileData.gender,Validators.compose([Validators.required])],
         mobile_number: [this.profileData.mobile,Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.required])],
         location: [{value:this.my_location,disabled:true},Validators.compose([])],
-         dob: [{value:this.profileData.dob},Validators.compose([])],
+         user_dob: [{value:this.profileData.dob},Validators.compose([])],
         email: [{value:this.profileData.email,disabled:true},Validators.compose([Validators.required])],
         personal_email: ['',Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
         user_type: [{value:this.user_type,disabled:true},Validators.compose([Validators.required])]        
@@ -90,6 +90,7 @@ submitAttempt:any;
   .subscribe(data =>{
     this.profileData = data.result.info;
     this.user_dob=data.result.info.dob;
+    console.log("gdgd"+ this.user_dob);
     this.user_type = data.result.info.user_type;
     loader.dismiss();
   },
@@ -143,7 +144,7 @@ submitAttempt:any;
   avatar:this.avatar,location:this.profileData.location,designation:this.profileData.designation,
   "email":this.profileData.official_email,"gender":this.profileData.gender,"employee_id":this.profileData.employee_id,
   "business_unit":this.profileData.business_unit,"division":this.profileData.division,
-"dob":data.dob,"email_verified":this.profileData.email_verified,"mobile_verified":this.profileData.mobile_verified, 
+"dob":data.user_dob,"email_verified":this.profileData.email_verified,"mobile_verified":this.profileData.mobile_verified, 
 "mobile":data.mobile_number,"personal_email":data.personal_email,"status":this.profileData.status,"offboard":this.profileData.offboard,
 "created_at":this.profileData.created_at,"updated_at":this.profileData.updated_at,"offboarded_on":this.profileData.offboarded_on,"email_sent":this.profileData.email_sent,
 "message_sent":this.profileData.message_sent,

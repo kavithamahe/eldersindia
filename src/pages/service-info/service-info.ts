@@ -158,6 +158,10 @@ modal(){
     let modal = this.modalCtrl.create(ServiceModalPage,{service:"contact",vendorList:this.vendorList});    
     modal.present();
     }
+    togglePackages(){
+      let modal = this.modalCtrl.create(ServiceModalPage,{service:"packages",vendorList:this.vendorList});    
+    modal.present();
+    }
   showToast(messageData){
     let toast = this.toastCtrl.create({
         message: messageData,

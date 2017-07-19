@@ -19,6 +19,7 @@ show_service:any = null;
 sub_category:any;
 showContactDetails = false;
 showServiceOffered = false;
+showPackagesDetails = false;
 title:any;
   constructor(public storage:Storage, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams) {
    console.log("this is service modal page");
@@ -26,7 +27,12 @@ title:any;
   	if(navParams.get("service") == "contact"){
   		this.showContactDetails = true;	
   		this.title = this.vendorList.vendorDetails.name+" - Contact Details";
-  	}else{
+  	}
+    else if(navParams.get("service") == "packages"){
+      this.showPackagesDetails = true; 
+      this.title = this.vendorList.vendorDetails.name+" - Best Packages"; 
+    }
+    else{
   		this.showServiceOffered = true;
   		this.title = this.vendorList.vendorDetails.name+" - Service Offered";
   	}

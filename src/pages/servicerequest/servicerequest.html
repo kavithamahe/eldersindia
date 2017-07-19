@@ -28,7 +28,8 @@
 
 <ion-content padding class="content-intop">
 <div>
-    <ion-searchbar *ngIf="serviceRequestInfo.length != 0" (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-searchbar *ngIf="serviceRequestInfo.length != 0" (ionInput)="getItems($event)">
+    </ion-searchbar>
 </div>
 <ion-card *ngFor="let service of serviceRequestInfo; let i=index;">
   <ion-card-content style=" padding:0px;">
@@ -39,7 +40,7 @@
 	<a class="token-primarys" (click)="makeCall(service?.contact_number)"><i class="fa fa-phone"></i></a>
 	  
   <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="showConfirm(service?.id)">
-<i class="fa fa-times" aria-hidden="true"></i>
+  <i class="fa fa-times" aria-hidden="true"></i>
   </a>
  
 	</ion-col>

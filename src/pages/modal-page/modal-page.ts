@@ -60,7 +60,7 @@ export class ModalContentPage {
      problem: ['',Validators.compose([Validators.required])],
         date: ['',Validators.compose([Validators.required])],
         time: ['',Validators.compose([Validators.required])],
-        contact: ['',Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.pattern('[0-9]*'), Validators.required])],
+        contact: ['',Validators.compose([Validators.minLength(10),Validators.maxLength(12), Validators.pattern('[0-9]*'), Validators.required])],
         //dependents: ['',Validators.compose([Validators.required])]
     });
  this.authForm = formBuilder.group({

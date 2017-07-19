@@ -326,17 +326,20 @@ public emergencies =  [
           let emergencies = this.manageDependentData.emergency;
           //console.log(emergencies.length);
           if(emergencies.length != 0 ){
-           //this.emergency_list.pop();
+            console.log(emergencies.length);
+           this.emergency_list.pop();
             for(let i = 0; i < emergencies.length;i++)
             {
                this.emergency_name =[];
                this.emergency_no =[];
               this.emergency_name.push(emergencies[i].person);
               this.emergency_no.push(emergencies[i].mobile);
-              //this.emergency_list.push({emergency:[i]});
-
-            }
-           // console.log(this.emergency_no);
+              this.emergency_list.push({emergency:emergencies[i]});
+              }
+              if(emergencies.length > 1 ){
+                this.addEmergency();
+              }
+           
           }
           this.job_interest = this.manageDependentData.job_interested;
 
@@ -349,14 +352,26 @@ public emergencies =  [
             // console.log(this.manageDependentData.experience);
             if(experiences.length != 0)
             {
+              console.log(experiences.length);
               this.experience_list.pop();
               for(let i = 0; i < experiences.length;i++)
               {
                 this.experience_industry.push(experiences[i].functional_id);
                 this.experience_years.push(experiences[i].year);
                 this.experience_duration.push(experiences[i].duration);
-                this.experience_list.push({experience:[i]});
+                this.experience_list.push({experience:experiences[i]});
+                // if(experiences.length > 1){
+                  //this.addExperience();
+                  //}
+                
               }  
+             // if(experiences.length>1){
+             //   this.removeExperience(experiences.length-1);
+             // }
+              if(experiences.length > 1){
+                this.addExperience();
+              }
+            
             }
 
             let skills = this.manageDependentData.skills;
@@ -376,8 +391,14 @@ public emergencies =  [
                 this.education_specialization.push(educations[i].specialization);
                 this.specialization_other.push(educations[i].specialization_other);
                 this.education_college.push(educations[i].university);
-                //this.education_list.push({education:[i]});
+                this.education_list.push({education:[i]});
+                //this.addEducation();
+               // console.log(i);
               }  
+              if(educations.length > 1){
+                this.addEducation();
+              }
+              
             }
           }
  }
@@ -497,9 +518,8 @@ public emergencies =  [
       }else{
         //const control = <FormArray>this.myForm.controls['experience_list'];
         for(let i=0;i<this.experience_industry.length;i++){
-           this.addExperience();
             this.elder_experience.push({"elder_id":this.elder_id,"functional_id":this.experience_industry[i],"year":this.experience_years[i],"duration":this.experience_duration[i]})
-
+          
           }
          //const control = <FormArray>this.myForm.controls['experience_list'];
         //control=this.elder_experience;

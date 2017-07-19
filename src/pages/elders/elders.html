@@ -109,7 +109,11 @@
       <br/>
       <div formArrayName="emergency_list">
       <div  *ngFor="let item of authForm.controls.emergency_list.controls; let i=index">
-            
+           <ion-col *ngIf="authForm.controls.emergency_list.controls.length > 1" width-50>
+              <button class="rem-btn" (click)="removeEmergency(i)" ion-button icon-left clear>
+                <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
+              </button>
+            </ion-col> 
           <ion-label class="label-tittle required">Person </ion-label>
           <div  [formGroupName]="i">
             <ion-item>
@@ -139,6 +143,8 @@
                   <p class="valid err-reds">This field is required.</p>
             </small> 
            </div>  
+           </div>
+          </div>
           <ion-row>
             <ion-col width-50>
               <button class="add-btn" (click)="addEmergency()" ion-button icon-left clear>
@@ -146,14 +152,9 @@
                  Add More
               </button>
             </ion-col>
-            <ion-col *ngIf="i != 0" width-50>
-              <button class="rem-btn" (click)="removeEmergency(i)" ion-button icon-left clear>
-                <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
-              </button>
-            </ion-col>
+            
           </ion-row>
-          </div>
-          </div>
+          
           </div>
 
     <ion-item>
@@ -218,6 +219,11 @@
 
  <div formArrayName="experience_list">
  <div  *ngFor="let item of myForm.controls.experience_list.controls; let i=index">
+  <ion-col *ngIf="myForm.controls.experience_list.controls.length > 1" width-50>
+          <button class="rem-btn" (click)="removeExperience(i)" ion-button icon-left clear>
+            <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
+          </button>
+        </ion-col>
     <ion-label class="label-tittle required">Industry</ion-label>
      <div  [formGroupName]="i">
       <ion-item>
@@ -264,21 +270,18 @@
                   <p class="valid err-reds">This field is required.</p>
             </small> 
         </div>
+         </div>
+      </div>
        <ion-row>
         <ion-col width-50>
           <button class="add-btn" (click)="addExperience()" ion-button icon-left clear>
             <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>Add more
           </button>
         </ion-col>
-        <ion-col *ngIf="i != 0" width-50>
-          <button class="rem-btn" (click)="removeExperience(i)" ion-button icon-left clear>
-            <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
-          </button>
-        </ion-col>
+       
       </ion-row>
      <br/>
-      </div>
-      </div>
+     
 </div>
 
   <!-- Educational Details-->
@@ -294,7 +297,11 @@
 
         <div formArrayName="education_list">
           <div  *ngFor="let item of myForm.controls.education_list.controls; let i=index">
-          
+           <ion-col *ngIf="myForm.controls.education_list.controls.length > 1" width-50>
+          <button class="rem-btn" (click)="removeEducation(i)" button-right ion-button icon-left clear>
+            <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
+          </button>
+        </ion-col>
             
               <ion-label class="label-tittle required">Graduation</ion-label>
               <div  [formGroupName]="i">
@@ -354,22 +361,18 @@
                   <p class="valid err-reds">This field is required.</p>
             </small> 
             </div> 
-          
+           </div>
+      </div>
            <ion-row>
           <ion-col width-50>
               <button class="add-btn" (click)="addEducation()" ion-button icon-left clear >
                 <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon> &nbsp;Add more
               </button>
           </ion-col>
-          <ion-col *ngIf="i != 0" width-50>
-          <button class="rem-btn" (click)="removeEducation(i)" ion-button icon-left clear>
-            <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
-          </button>
-        </ion-col>
+         
       </ion-row>
       <br/>
-      </div>
-      </div>
+     
       </div>
     <!--     <div *ngIf="functionality == 'add'">
           <ion-label class="label-tittle required">Attach Resume</ion-label>
@@ -417,7 +420,7 @@
             <ion-label class="label-tittle required">Password</ion-label>
       <ion-item>
               <ion-input [(ngModel)]="elder_password" formControlName="elder_password" type="{{mytype}}" placeholder="Password"
-                [class.invalid]="!authForm.controls.elder_password.valid && (authForm.controls.elder_password.dirty)" type="text" placeholder="Password" value={{elder_password}}>
+                [class.invalid]="!authForm.controls.elder_password.valid && (authForm.controls.elder_password.dirty)" type="text" placeholder="Password" >
               </ion-input>
         </ion-item>
               <small *ngIf="!authForm.controls.elder_password.valid  && (authForm.controls.elder_password.dirty || submitAttempt)">

@@ -115,6 +115,23 @@
 				<ion-item style="color:red; font-size:15px;color:red;">"No Address Deatails To Display"</ion-item>		  
 	      	</ion-card>
       	</div>
+         <div *ngIf(showPackagesDetails) class="add-detalis">
+          <div *ngFor = "let packages of vendorList.packages">
+         <ion-card class="contact-list">
+        <ion-item text-wrap>
+        <p text-capitalize>Packeage Name:{{packages.package_name}}</p>
+        </ion-item>
+        <ion-item text-wrap>
+        <p>Packeage Cost:{{packages.package_cost}}</p>
+        </ion-item>
+        <ion-item text-wrap>
+        <p>{{packages.package_description}}</p>
+        </ion-item>
+          
+          </ion-card>
+          </div>
+       
+         </div>
 
 </ion-content>
 <ion-footer>
