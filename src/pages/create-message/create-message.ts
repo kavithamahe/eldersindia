@@ -232,7 +232,7 @@ customTo:any=false;
 //       });
 
 //   }
-
+files:any;
 fileChange(event) {
     let fileList: FileList = event.target.files;
     if(fileList.length > 0) {

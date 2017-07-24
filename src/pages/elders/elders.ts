@@ -334,7 +334,7 @@ public emergencies =  [
                this.emergency_no =[];
               this.emergency_name.push(emergencies[i].person);
               this.emergency_no.push(emergencies[i].mobile);
-              this.emergency_list.push({emergency:emergencies[i]});
+              this.emergency_list.push({emergency:[i]});
               }
               if(emergencies.length > 1 ){
                 this.addEmergency();
@@ -359,7 +359,7 @@ public emergencies =  [
                 this.experience_industry.push(experiences[i].functional_id);
                 this.experience_years.push(experiences[i].year);
                 this.experience_duration.push(experiences[i].duration);
-                this.experience_list.push({experience:experiences[i]});
+                this.experience_list.push({experience:[i]});
                 // if(experiences.length > 1){
                   //this.addExperience();
                   //}

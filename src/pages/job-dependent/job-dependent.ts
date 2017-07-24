@@ -46,6 +46,7 @@ jobId:any;
 
   });
 this.jobId = navParams.get("jobId");
+console.log(this.jobId);
    this.authForm = formBuilder.group({
         elder_dependent: ['', Validators.compose([Validators.required])],
         //file_name: ['', Validators.compose([Validators.required])],
@@ -94,7 +95,7 @@ dismiss() {
   let data={'dependent':''};
    this.viewCtrl.dismiss(data);
  }
- submitDependent(event)
+ submitDependent()
  {
     if(!this.authForm.valid){
       this.submitAttempt = true;
@@ -102,8 +103,22 @@ dismiss() {
     }
     else{
       this.submitAttempt = false;
-   let data={'dependent':this.dependent,'file_name':this.file_name};
-   this.viewCtrl.dismiss(data);
+            
+   this.jobBoardService.applyJob(this.jobId,this.dependent,this.file_name).subscribe(
+     (applyJob) => { 
+       this.showToaster(applyJob.result);
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+          this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      });
+ 
  }
  }
 //   openCamera(){
@@ -124,21 +139,19 @@ dismiss() {
 
 //   }
 
-//   fileChange(event) {
-//     let fileList: FileList = event.target.files;
-//     if(fileList.length > 0) {
-//         let file: File = fileList[0];
-//         let file_name=file.name;
-//         console.log(file_name);
-//         console.log(file);
-//         let formData:FormData = new FormData();
-//         formData.append('docs', file, file.name);
-//         let headers = new Headers();
-//         headers.append('Authorization', 'Bearer ' + this.token);
-//         headers.append('Accept', 'application/json');
-//         let options = new RequestOptions({ headers: headers });
-          
-      
-//     }
-// }
+  fileChange(event) {
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0) {
+        let file: File = fileList[0];
+        this.file_name=file.name;
+        console.log(this.file_name);
+        console.log(file);
+        let formData:FormData = new FormData();
+        formData.append('docs', file, file.name);
+        let headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + this.token);
+        headers.append('Accept', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+       }
+}
 }

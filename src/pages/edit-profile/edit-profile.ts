@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { LoadingController,NavController, NavParams,ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Camera } from 'ionic-native';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service-provider';
 import { MyProfilePage } from '../../pages/my-profile/my-profile';
+
 /*
   Generated class for the EditProfile page.
 
@@ -39,7 +41,6 @@ token:any;
 pemail:any='';
   my_location:any;
 submitAttempt:any;
-
   constructor(public storage:Storage,public loadingCtrl: LoadingController,public formBuilder:FormBuilder,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController) {
 
       this.profileData = navParams.get("profileData");
@@ -81,6 +82,7 @@ submitAttempt:any;
      
    
   }
+
 
 
   loadMyProfile(){

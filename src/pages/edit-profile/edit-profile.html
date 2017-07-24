@@ -50,7 +50,7 @@
 		 <ion-input type="text" formControlName="mobile_number" placeholder="Mobile number"   [class.invalid]="!edit_profile_Form.controls.mobile_number.valid && (edit_profile_Form.controls.mobile_number.dirty)"></ion-input>
 	    </ion-item>
 	    <small  *ngIf="!edit_profile_Form.controls.mobile_number.valid  && (edit_profile_Form.controls.mobile_number.dirty || submitAttempt)">
-                <p class="valid err-reds">Please enter valid mobile number.</p>
+            <p class="valid err-reds">Please enter valid mobile number.</p>
         </small>
    
 	 
@@ -58,15 +58,18 @@
 		<ion-item>
 	    <ion-input type="text" formControlName="location" placeholder="Location"></ion-input>
 	    </ion-item>
-	  
+
 
 		<ion-label class="liste-edit required">Date of birth</ion-label>
 		<ion-item>
-		
-		    <!-- <ion-datetime class="select-brd" style="font-size:17px;" type="date" displayFormat="DD-MM-YYYY" [(ngModel)]="user_dob" formControlName="user_dob" placeholder="Date of birth" [class.invalid]="!edit_profile_Form.controls.user_dob.valid && 
+	<!-- 	<input type="date" style="background: #ffffff;" value="{{user_dob}}" [(ngModel)]="user_dob" formControlName="user_dob" placeholder="Date of birth" [class.invalid]="!edit_profile_Form.controls.user_dob.valid && 
+	                (edit_profile_Form.controls.user_dob.dirty)"> -->
+	                
+
+		   <ion-datetime class="select-brd" style="font-size:17px;" type="date" displayFormat="DD-MM-YYYY" [(ngModel)]="user_dob" formControlName="user_dob" placeholder="Date of birth" [class.invalid]="!edit_profile_Form.controls.user_dob.valid && 
 	                (edit_profile_Form.controls.user_dob.dirty)">
-	                <ion-input type="text" formControlName="user_dob" value="{{user_dob}}"></ion-input>
-		    </ion-datetime> -->
+	            <button class="button button-block button-positive"> {{ currentDate | date:'dd - MMMM - yyyy' }}    </button>   
+		    </ion-datetime>
 	  	</ion-item>
 
 		<ion-label class="liste-edit">Official email</ion-label>
