@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CompleterService } from 'ng2-completer';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Http,Headers,RequestOptions } from '@angular/http';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -257,7 +257,7 @@ fileChange(event) {
         if(err.status===401)
         {
           this.showToaster(JSON.parse(err._body).error);
-         }
+        }
         else
         {
           this.showToaster("Try again later");

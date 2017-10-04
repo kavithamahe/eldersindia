@@ -43,13 +43,11 @@ show_password:boolean = false;
    }
 
    showPassword(){
-     console.log("show password is clicked..",this.show_password);
      if(this.show_password == false){
        this.mytype = "password";
      }else{
        this.mytype = "text";
      }
-     console.log("my type is: ",this.mytype);
    }
 
 

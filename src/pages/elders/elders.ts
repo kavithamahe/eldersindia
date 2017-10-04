@@ -7,8 +7,6 @@ import {FormBuilder,FormGroup,Validators,FormArray} from '@angular/forms';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import { Transfer} from '@ionic-native/transfer';
-
-
 import { CommunityServices } from '../../providers/community-services';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ManagePage } from '../../pages/manage/manage';
@@ -17,6 +15,7 @@ import { ManagePage } from '../../pages/manage/manage';
 @Component({
   selector: 'page-elders',
   templateUrl: 'elders.html',
+  providers:[CommunityServices]
 })
 export class EldersPage {
 authForm : FormGroup;
@@ -52,6 +51,9 @@ sponser_id:any;
   elder_id:any="";
   elder_relation:any="";
   elder_name:any="";
+  last_name:any="";
+  hobbies:any="";
+  allergic:any="";
   elder_service:any="";
   elder_number:any="";
 
@@ -133,7 +135,6 @@ mytype:string ="password";
         }else{
           this.title = "Elder Onboarding";
         }
-
       })
     }); 
     // this.today = "";
@@ -148,6 +149,10 @@ mytype:string ="password";
         elder_relation : ['', Validators.compose([Validators.required])],
         elder_name : ['', Validators.compose([ Validators.maxLength(30), 
               ,Validators.required])],
+        last_name: ['', Validators.compose([ Validators.maxLength(30), 
+              ,Validators.required])],
+        hobbies:['', Validators.compose([Validators.required])],
+        allergic:['', Validators.compose([Validators.required])],
         elder_service : ['', Validators.compose([Validators.required])],
         elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.maxLength(12),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
@@ -314,6 +319,9 @@ public emergencies =  [
           this.elder_id = this.manageDependentData.id;
           this.sponsor_id = this.manageDependentData.sponsor_id;
           this.elder_name= this.manageDependentData.name;
+          this.last_name=this.manageDependentData.last_name;
+          this.hobbies=this.manageDependentData.hobbies;
+          this.allergic=this.manageDependentData.allergic;
           this.elder_service = this.manageDependentData.in_service;
           this.elder_number= this.manageDependentData.mobile;
           this.elder_dob= this.manageDependentData.dob;//this.getDate(this.manageDependentData.dob);
@@ -345,6 +353,7 @@ public emergencies =  [
 
           if(this.job_interest){
             this.area_of_interest = this.manageDependentData.area_interest;
+            console.log(this.area_of_interest);
             this.job_type = this.manageDependentData.job_type;
             //this.attach_resume = this.manageDependentData.docs;
 
@@ -374,12 +383,14 @@ public emergencies =  [
             
             }
 
-            let skills = this.manageDependentData.skills;
-            if(skills.length != 0){
-              for(let i=0 ; i< skills.length ; i++){
-                this.skill_set.push(skills[i].skill);
-              }
-             }
+            
+
+            // let skills = this.loadManageDependentData.skills;
+            // if(skills.length != 0){
+            //   for(let i=0 ; i< skills.length ; i++){
+            //     this.skill_set.push(skills[i].skill);
+            //   }
+            //  }
             let educations =  this.manageDependentData.education;
             if(educations.length != 0)
             {
@@ -622,6 +633,8 @@ console.log("name"+this.file_name);
         "name":this.elder_name,
         "password":this.elder_password,
         "last_name":this.manageDependentData.last_name,
+        "hobbies":this.manageDependentData.hobbies,
+        "allergic":this.manageDependentData.allergic,
         "docs":this.manageDependentData.docs,
         "avatar":this.manageDependentData.avatar,
         "relation":this.elder_relation,

@@ -92,7 +92,6 @@ files:any;
             this.showConfirm(id);
           }
         },
-      
       ]
     });
     actionSheet.present();

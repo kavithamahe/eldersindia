@@ -27,15 +27,21 @@ locationSearch:any=[];
     this.headers.append('Content-Type', 'application/json');
     this.headers.append('Authorization', 'Bearer ' + this.token);
     this.options = new RequestOptions({ headers: this.headers });
+
        })    
-   
-   	storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; });
+
+    
+
+     storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; });
    	storage.get('id').then((id) => { this.user_id=id; });
    });
   }
 
  jobsList(functionalArea,location) 
  {
+
+   console.log("-------------");
+    console.log(this.headers);
    if(functionalArea!='' && functionalArea!=null)
    {
      this.functionalSearch=functionalArea;
@@ -111,7 +117,7 @@ locationSearch:any=[];
 
   }
 
- applyJob(jobId,dependantId,applyJob) 
+  applyJob(jobId,dependantId,applyJob) 
  {
   
    let _request= {"info":{"job_id":jobId,"uid":this.user_id,"dependantId":dependantId,"filename":applyJob}};  
