@@ -18,11 +18,11 @@
 <form [formGroup]="authForm">
 <ion-row style="margin:px;">
   <ion-col *ngIf="user_type!='elder'">
-   <ion-label class="required" style=" font-size:17px; padding-left:10px; padding-top:10px; line-height:20px;">Select dependent</ion-label>
-<ion-item>
-    <ion-label>Dependent</ion-label>
-    <ion-select [(ngModel)]="dependent" class="select-brddd" placeholder="Select dependent" formControlName="elder_dependent" [class.invalid]="!authForm.controls.elder_dependent.valid && (authForm.controls.elder_dependent.dirty)">
-      <ion-option *ngFor="let dependent of getDependentList" [value]="dependent?.id">{{dependent?.name}}</ion-option>    
+   <ion-label class="required">Select dependent</ion-label>
+  <ion-item>
+    <ion-select [(ngModel)]="dependent" class="select-brddd" placeholder="Select dependent" formControlName="elder_dependent" 
+    [class.invalid]="!authForm.controls.elder_dependent.valid && (authForm.controls.elder_dependent.dirty)">
+      <ion-option *ngFor="let dependent of getDependentList" value={{dependent?.id}}>{{dependent?.name}}</ion-option>    
 	  </ion-select>
 
      </ion-item>

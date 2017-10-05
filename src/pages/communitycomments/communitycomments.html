@@ -34,8 +34,8 @@
 			          		</p>
 				</ion-col>
 				<ion-col offset-20>
-					<button  *ngIf="comment.comment_reply.length == 0 && comment.uid_from == user_id" ion-button color="dark" clear (click)="showConfirm(comment.comments_id,post_id)">
-					   <i class="fa fa-trash" aria-hidden="true"></i>
+					<button  *ngIf="comment.comment_reply.length == 0 && comment.uid_from == user_id" ion-button color="dark" clear (click)="openMenu(comment.comments_id,post_id)">
+					   <i class="fa fa-angle-down" aria-hidden="true"></i>
 					 </button>
 				</ion-col>
 			</ion-row>
@@ -85,8 +85,8 @@
 						<small text-wrap [innerHTML]="reply.comments_replay | emojis"></small>
 						</ion-col>
 						<ion-col width-20>
-							<button  *ngIf="reply.uid_from == user_id" ion-button color="dark" clear (click)="showConfirmreply(reply.com_post_cmt_id,reply.comments_replay_id,post_id)">
-								<i class="fa fa-trash" aria-hidden="true"></i>
+							<button  *ngIf="reply.uid_from == user_id" ion-button color="dark" clear (click)="openReplyMenu(reply.com_post_cmt_id,reply.comments_replay_id,post_id)">
+								<i class="fa fa-angle-down" aria-hidden="true"></i>
 							</button>
 						</ion-col>
 					</ion-row>

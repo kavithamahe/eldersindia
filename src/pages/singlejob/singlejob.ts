@@ -53,10 +53,8 @@ companyname:any;
        //console.log()
        var array=[];
        array.push(myjobrequest.result.info.jobDetail);
-      this.myjobrequestinfo=array;//myjobrequest.result.info.jobDetail;
-      this.companyname= this.myjobrequestinfo.company_name;
-      console.log(this.companyname); 
-      //this.functional_area=myjobrequest.result.info.functional_area;
+      this.myjobrequestinfo=array;
+      
       console.log(this.myjobrequestinfo);
       loader.dismiss();
     },
@@ -64,8 +62,7 @@ companyname:any;
         if(err.status===401)
         {
           this.showToaster(JSON.parse(err._body).error);
-         
-        }
+         }
         else
         {
           this.showToaster("Try again later");
@@ -111,7 +108,10 @@ companyname:any;
     }
     else
     {
-      this.jobDependent(jobId);
+      let modal = this.modalCtrl.create(JobDependentPage,{jobId});
+    modal.present();
+      // this.jobDependent(jobId);
+      // console.log("fsdf" +jobId );
     }
    
   }

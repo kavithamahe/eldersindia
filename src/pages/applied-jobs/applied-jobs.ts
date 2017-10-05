@@ -29,6 +29,7 @@ functionalAreaList:any=[];
 locationList:any=[];
 functionalArea:any='';
 location:any='';
+emptyRecordSet:any='';
    constructor(public navCtrl: NavController, public navParams: NavParams,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     
   this.storage.ready().then(() => {
@@ -48,7 +49,8 @@ location:any='';
     this.appliedJobsList =[];
    this.jobBoardService.appliedJobs(this.functionalArea,this.location).subscribe(
      (appliedJobs) => {      
-       this.appliedJobsList=appliedJobs.result.info.data; 
+       this.appliedJobsList=appliedJobs.result.info.data;
+       this.nextPageURL=appliedJobs.result.info.next_page_url; 
       this.functionalAreaList=appliedJobs.result.get.FunctionalArea; 
       this.locationList=appliedJobs.result.get.Location; 
       this.loader.dismiss();
@@ -58,6 +60,9 @@ location:any='';
         if(err.status===401)
         {
         this.emptyRecord = (JSON.parse(err._body).error);
+         this.appliedJobsList=[];
+        this.nextPageURL='';
+        this.emptyRecordSet=JSON.parse(err._body).error;
         }
         else
         {
@@ -130,6 +135,8 @@ location:any='';
       }
     );
   }
+  
+ 
   ionViewDidLoad()
   {
     this.loader.dismiss();

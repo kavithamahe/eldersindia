@@ -12,8 +12,8 @@
   </ion-content>
 </ion-menu>
 
-<ion-menu id="sponsor" [content]="content" class="menus-color">
-  <ion-content class="side-item-md my-side-menu">
+<ion-menu id="sponsor" [content]="content" >
+  <ion-content>
     <ion-list>
       <button class="side-item-md my-list-item fant-size" ion-item *ngFor="let p2 of pages2" (click)="openPage(p2)"><i style="padding-right: 2px; width: 35px" class={{p2.myIcon}} aria-hidden="true"></i>
        {{p2.title}}

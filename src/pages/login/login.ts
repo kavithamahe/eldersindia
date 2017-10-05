@@ -213,6 +213,13 @@ export class LoginPage {
 
 
   }
+  ionViewDidEnter() {
+    this.menuCtrl.enable(false);
+  }
+
+  ionViewWillLeave() {
+    this.menuCtrl.enable(true);
+}
   /*ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }*/

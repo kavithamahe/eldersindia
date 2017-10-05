@@ -215,7 +215,7 @@ loadSubcategoryList(subCategory_id,location_id){
   
 <br/>
    <ion-label style=" font-size:17px; padding-left:10px; padding-top:10px; line-height:20px; float:left;" class="required">Select dependent</ion-label>
-      <ion-item >
+      <ion-item>
            <ion-label style="padding-left:15px;">Select dependent</ion-label>
               <ion-select class="select-brd" style=" width:92% !important; margin-right:15px; text-align:left; font-size:15px;" [(ngModel)]="dependentData" placeholder="Select dependent">
                 <ion-option *ngFor = "let dependent of dependentLists" [value]="dependent">{{dependent.name}}

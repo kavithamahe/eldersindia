@@ -34,6 +34,7 @@ export class CommunityServices {
   getCommunityPostsUrl:any;
    constructor(public appConfig:AppConfig,public http: Http,private transfer: Transfer,private filePath: FilePath,public storage:Storage,public toastCtrl: ToastController) {
      this.getCommunityPostsUrl = appConfig.setrooturl();
+     console.log(this.getCommunityPostsUrl);
     this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();
@@ -76,8 +77,6 @@ file_Path:any;
  
 return this.http.post(`${this.getCommunityPostsUrl }attachFiles`,formData,options)
 .map(res => res.json());
-  
- 
 }
 
   fileUploads(id,file){
@@ -317,6 +316,7 @@ myprofile(id){
   }
 
   getElder(elder_id){
+    //console.log(this.getCommunityPostsUrl);
     let elderData = {"elderId":elder_id};
     return this.http.post(`${this.getCommunityPostsUrl }getElderListById`,elderData,this.options)
     .map(res =>res.json());

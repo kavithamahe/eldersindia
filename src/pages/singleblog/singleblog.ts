@@ -79,8 +79,7 @@ submitAttempt: boolean = false;
           this.showToaster("Try again later");
         }
         loader.dismiss();
-      }
-    );
+      });
   }
   openMenu(id) {
     let actionSheet = this.actionsheetCtrl.create({
