@@ -84,7 +84,7 @@
           <small  *ngIf="!authForm.controls.elder_dob.valid  && (authForm.controls.elder_dob.dirty || submitAttempt)">
                 <p class="valid err-reds">Please select the date of birth</p>
               </small>   
-               <ion-label class="label-tittle required">Hobbies</ion-label>
+               <ion-label class="label-tittle">Hobbies</ion-label>
                <ion-item>
       
             <ion-input  type="text"  placeholder="Hobbies" [(ngModel)]="hobbies" 
@@ -143,7 +143,7 @@
             <ion-label>Emergency</ion-label>
               <ion-select class="select-brd" formControlName="emergency_name"  
               [(ngModel)]="emergency_name[i]" placeholder="Person">
-                     <ion-option  *ngFor="let person of emergencies" value={{person.name}}>{{person.name}}
+                     <ion-option  *ngFor="let person of emergencies" value={{person.val}}>{{person.name}}
                      </ion-option>
                      <!-- <ion-option value="police">Police</ion-option>
                      <ion-option value="ambulance">Ambulance</ion-option>
@@ -198,7 +198,8 @@
               <div>
             <ion-item>
                  <ion-label>Blog category</ion-label>
-                <ion-select multiple="true" [(ngModel)]="blog_interest" [ngModelOptions]="{standalone: true}" class="select-brd" placeholder="Blog category">
+                <ion-select multiple="true" [(ngModel)]="blog_interest" 
+                [ngModelOptions]="{standalone: true}" class="select-brd" placeholder="Blog category">
                   <ion-option *ngFor="let blogcategory of blog_category" value={{blogcategory.id}}>{{blogcategory.name}}
                   </ion-option>
                 </ion-select>
@@ -219,7 +220,7 @@
               <ion-label>Service Sub Category</ion-label>
               <ion-select class="select-brd" placeholder="Service Sub Category" 
               [(ngModel)]="servicesubcategorylist" [ngModelOptions]="{standalone: true}" multiple="true">
-                <ion-option *ngFor="let subcategory of servicesubcategory" value={{subcategory.name}}>{{subcategory.name}}
+                <ion-option *ngFor="let subcategory of servicesubcategory" value={{subcategory.id}}>{{subcategory.name}}
                 </ion-option>
               </ion-select>
             </ion-item>
