@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="ngocolor">
+    <ion-title text-center>Share Blog</ion-title> 
+    <ion-buttons end>
+    <button ion-button icon-only (click)="dismiss()">
+        <ion-icon item-right name="ios-close-outline"></ion-icon>
+    </button>
+  </ion-buttons>  
+  </ion-navbar>
+  
+</ion-header>
+<ion-content padding class="register-log">
+<form>
+<div class="register-form">
+<ion-grid>
+          <ion-row>
+              <ion-label class="required">To</ion-label>
+          
+             <ion-select multiple="true" [(ngModel)]="selectedConnections" [ngModelOptions]="{standalone: true}">
+			    <ion-option *ngFor="let name of connectionInfo" [value] = "name.id">{{name.friend_name}}
+			    </ion-option>
+			  </ion-select> 
+		 </ion-row>
+			         
+           
+  <button ion-button round full (click)="shareBlogToFriends()" class="btn-blue">Share</button>
+</ion-grid>
+</div>
+</form>
+</ion-content>

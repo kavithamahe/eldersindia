@@ -36,7 +36,9 @@
 				</ion-col>
 			</ion-row>
 			<ion-item class="mem-title">
-      			<p> &nbsp;Members ({{show_member}})</p>
+      			<p> &nbsp;Members ({{show_member}})</p> <button ion-button icon-only medium (click)="presentPopover($event,communityDetailData?.id)" class="postedimgvideos">
+								<i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Invite Your Contacts
+							</button>
 			</ion-item>
 			<ion-slides slidesPerView= "4">
 				<div *ngFor="let member of members; let i=index" text-wrap>

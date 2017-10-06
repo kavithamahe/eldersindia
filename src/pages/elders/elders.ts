@@ -133,6 +133,7 @@ mytype:string ="password";
       storage.get('token').then((token) => { this.token=token; 
         
         this.functionality=navParams.get("fuctionality");
+        console.log(navParams.get("editData"));
       if(this.functionality == 'edit'){
           this.title = "Edit Elder Details"
           if(navParams.get("editData")!= null){
@@ -282,7 +283,7 @@ mytype:string ="password";
     }
 
  loadManageDependentData(elderId){
-
+    console.log(elderId);
    this.communityServices.getElder(elderId).subscribe(
        elder=>{
           this.loadForm(elder.result.info[0]);
@@ -335,14 +336,20 @@ public emergencies =  [
           //this.elder_password= this.manageDependentData.password;
           this.elder_location = this.manageDependentData.location;        
           this.elder_relation = this.manageDependentData.relation;
-          this.elder_address= this.manageDependentData.address;   
+          this.elder_address= this.manageDependentData.address; 
+          //console.log('-----');console.log(this.manageDependentData);  
           let bloginterests = this.manageDependentData.blog_interest;
           console.log(bloginterests);
             if(bloginterests.length != 0){
               for(let i=0 ; i< bloginterests.length ; i++){
+<<<<<<< HEAD
                 this.blog_interest=[];
                 this.blog_interest.push(bloginterests[i].id);
                  //console.log(this.area_of_interest);
+=======
+                this.blog_interest=bloginterests[i].id;
+                 console.log(this.area_of_interest);
+>>>>>>> 88ff7a0c5bea1b2b485a5bde0e9d5334336beb4c
               }
              }
              let serviceinterest=this.manageDependentData.service_interest;
@@ -358,8 +365,13 @@ public emergencies =  [
               if(servicesubinterest.length != 0){
                 this.servicesubcategorylist=[];
               for(let i=0 ; i< servicesubinterest.length ; i++){
+<<<<<<< HEAD
                 this.servicesubcategorylist.push(servicesubinterest[i].id);
                  //console.log(this.area_of_interest);
+=======
+                this.servicesubcategorylist=servicesubinterest[i].id;
+                 console.log(this.area_of_interest);
+>>>>>>> 88ff7a0c5bea1b2b485a5bde0e9d5334336beb4c
               }
              }
           let emergencies = this.manageDependentData.emergency;
@@ -546,17 +558,22 @@ public emergencies =  [
 getblog_category(){
   
    if(this.functionality !="edit" && this.functionality !="profileEdit"){
+    //console.log(this.blog_interest);
+    if(this.blog_interest != undefined){
       for(let i=0;i<this.blog_interest.length;i++){
         console.log(this.blog_interest.length);
         this.blog_categoryinterest.push({"id":this.blog_interest[i]})  
       }
+    }
     }else{
  console.log(this.blog_interest.length);
+    if(this.blog_interest != undefined){
       for(let i=0;i<this.blog_interest.length;i++){
         console.log(this.blog_interest.length);
         this.blog_categoryinterest.push({"elder_id":this.elder_id,"id":this.blog_interest[i]})  
       }
     }
+  }
   
 }
 getservicecategory(){

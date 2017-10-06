@@ -48,6 +48,7 @@ import { ServicerequestPage } from '../pages/servicerequest/servicerequest';
 import { ViewServiceRequestPage } from '../pages/view-service-request/view-service-request';
 import { BlogsPage } from '../pages/blogs/blogs';
 import { SingleblogPage } from '../pages/singleblog/singleblog';
+import { ShareBlogPagePage } from '../pages/share-blog/share-blog';
 import { CreateBlogPage } from '../pages/create-blog/create-blog';
 import { NewsPage } from '../pages/news/news';
 import { ViewNewsPage } from '../pages/view-news/view-news';
@@ -62,9 +63,11 @@ import { EmojiPickerPage } from '../pages/emoji-picker/emoji-picker';
 // Kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
 import { CommunityPage } from '../pages/community/community';
+import { CommunityPopoverPage } from '../pages/community/community';
 import { CommunityprofilePage } from '../pages/communityprofile/communityprofile';
 import { CommunitymessagePage } from '../pages/communitymessage/communitymessage';
 import { CommunitycommentsPage } from '../pages/communitycomments/communitycomments';
+
 import { MyprofilesettingPage } from '../pages/myprofilesetting/myprofilesetting';
 import { CommunitymembersPage } from '../pages/communitymembers/communitymembers';
 import { PopoverPage } from '../pages/connections/connections';
@@ -108,6 +111,7 @@ const cloudSettings: CloudSettings = {
     ConnectionsPage,
     CommunitylistPage,
     CommunityPage,
+    CommunityPopoverPage,
     CommunityprofilePage,
     CommunitymessagePage,
     CommunitycommentsPage,
@@ -115,6 +119,7 @@ const cloudSettings: CloudSettings = {
     EmojiPickerPage,
     CommunitymembersPage,
     PopoverPage,
+    ShareBlogPagePage,
     ManagePage,
     EldersPage,
     JobboardPage,
@@ -181,8 +186,10 @@ const cloudSettings: CloudSettings = {
     EmojiPickerPage,
     CommunitymembersPage,
     PopoverPage,
+    ShareBlogPagePage,
     BlogtabsPage, 
     CommunityPage,
+    CommunityPopoverPage,
     ManagePage,
     EldersPage,
     JobboardPage,
