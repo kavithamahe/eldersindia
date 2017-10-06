@@ -832,7 +832,7 @@ getareaof_interest(){
         "service_interest":this.servicecategory,
         "serviceCategory_interest":this.servicecategoryinterest_data,
         "app":"",
-        "docs":""
+        "docs":this.file_name
       }]}).subscribe(elders =>{
                     // console.log(elders); 
                     let msg='';
@@ -918,7 +918,7 @@ getareaof_interest(){
         "service_interest":this.servicecategory,
         "serviceCategory_interest":this.servicecategoryinterest_data,
         "app":"",
-        "docs":""
+        "docs":this.file_name
       }]}).subscribe(elders =>{
                     // console.log(elders); 
                     let msg='';
@@ -1129,7 +1129,23 @@ getareaof_interest(){
     {
       this.nav.setRoot(DashboardPage);
     }
-
+fileChange(event) {
+    let fileList: FileList = event.target.files;
+   // this.file_name=fileList[0].name;
+    //console.log( this.file_name);
+    if(fileList.length > 0) {
+        let file: File = fileList[0];
+        this.file_name=file.name;
+        console.log(file.name);
+        let formData:FormData = new FormData();
+        formData.append('attachemts[0]', file, file.name);
+        let headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + this.token);
+        headers.append('Accept', 'application/json');
+       
+      
+    }
+}
 
 }
 
