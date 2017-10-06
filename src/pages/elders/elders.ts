@@ -90,6 +90,8 @@ sponser_id:any;
 
   blog_categoryinterest=[];
   blog_data:any;
+  serviceCategory_interests=[];
+  servicecategoryinterest_data:any;
   areaofinterestdata=[];
   area_of_interest_data:any;
   industry_set=[];
@@ -553,7 +555,23 @@ getblog_category(){
     }
   
 }
-getareaofinterest(){
+getservicecategory(){
+  
+   if(this.functionality !="edit" && this.functionality !="profileEdit"){
+      for(let i=0;i<this.servicesubcategorylist.length;i++){
+        console.log(this.servicesubcategorylist.length);
+        this.serviceCategory_interests.push({"id":this.servicesubcategorylist[i]})  
+      }
+    }else{
+ console.log(this.blog_interest.length);
+      for(let i=0;i<this.servicesubcategorylist.length;i++){
+        console.log(this.servicesubcategorylist.length);
+        this.serviceCategory_interests.push({"elder_id":this.elder_id,"id":this.servicesubcategorylist[i]})  
+      }
+    }
+  
+}
+getareaof_interest(){
    if(this.functionality !="edit" && this.functionality !="profileEdit"){
       for(let i=0;i<this.area_of_interest.length;i++){
         this.areaofinterestdata.push({"id":this.area_of_interest[i]})  
@@ -561,7 +579,7 @@ getareaofinterest(){
     }else{
 
       for(let i=0;i<this.area_of_interest.length;i++){
-        console.log(this.area_of_interest);
+        console.log("ttert"+ this.area_of_interest);
         this.areaofinterestdata.push({"elder_id":this.elder_id,"id":this.area_of_interest[i]})  
       console.log(this.areaofinterestdata);
       }
@@ -699,7 +717,7 @@ console.log("name"+this.file_name);
     this.blog_data=this.blog_categoryinterest;
     console.log(this.blog_data);
 
-    this.getareaofinterest();
+    this.getareaof_interest();
      this.area_of_interest_data=this.areaofinterestdata;
      console.log(this.area_of_interest_data);
 }
@@ -759,14 +777,15 @@ console.log("name"+this.file_name);
              this.getblog_category();
     this.blog_data=this.blog_categoryinterest;
     console.log(this.blog_data);
+    this.getservicecategory();
+    this.servicecategoryinterest_data=this.serviceCategory_interests;
+    this.getareaof_interest();
 
-    this.getareaofinterest();
-    
-     this.area_of_interest_data=this.areaofinterestdata;
+     this.area_of_interest_data= this.areaofinterestdata;
      console.log(this.area_of_interest_data);
 
     this.getElderSkills();
-    this.skill_data= this.elder_skills;
+    this.skill_data = this.elder_skills;
 
     this.getEmergencyNumber();
     this.emergency_data = this.elder_emergency;
@@ -819,7 +838,7 @@ console.log("name"+this.file_name);
         "education":this.education_data,
         "blog_interest":this.blog_data,
         "service_interest":this.servicecategory,
-        "serviceCategory_interest":this.servicesubcategorylist,
+        "serviceCategory_interest":this.servicecategoryinterest_data,
         "app":"",
         "docs":""
       }]}).subscribe(elders =>{
@@ -854,36 +873,60 @@ console.log("name"+this.file_name);
            this.submitAttempt = false;
             this.getEmergencyNumber();
             this.emergency_data = this.elder_emergency;
+
+              this.getblog_category();
+    this.blog_data=this.blog_categoryinterest;
+    console.log(this.blog_data);
+
+      this.getservicecategory();
+    this.servicecategoryinterest_data=this.serviceCategory_interests;
+
            let loader = this.loadingCtrl.create({ content: "Please wait..." });     
             loader.present();
             this.communityServices.editSubmit({"info": [{
         "id":this.elder_id,
-        //"area_interest":this.area_of_interest,
+        //"area_interest":this.area_of_interest_data,
         "location":this.elder_location,
         //"job_type":this.job_type,        
         "sponsor_id":this.sponsor_id,
-        "name":this.elder_name,
         "password":this.elder_password,
+        "name":this.elder_name,
+        "last_name":this.last_name,
         "avatar":this.manageDependentData.avatar,
         "relation":this.elder_relation,
         "gender":this.manageDependentData.gender,
         "dob":this.elder_dob,
+        "allergic":this.allergic,
+        "hobbies":this.hobbies,
         "mobile":this.elder_number,
+        "mobile_verified":this.manageDependentData.mobile_verified,
         "email":this.elder_email,
+        "email_verified":this.manageDependentData.email_verified,
+        "email_sent":this.manageDependentData.email_sent,
+        "message_sent":this.manageDependentData.message_sent,
+        "mail_code":this.manageDependentData.mail_code,
+        "message_code":this.manageDependentData.message_code,
         "in_service":this.elder_service,
         "job_interested":this.job_interest,
         "address":this.elder_address,
         "city":this.manageDependentData.city,
         "state":this.manageDependentData.state,
         "status":this.manageDependentData.status,
+        "direct":this.manageDependentData.direct,
         "created_at":this.manageDependentData.created_at,
+        "updated_at":this.manageDependentData.updated_at,
+        "reject_comments":this.manageDependentData.reject_comments,
         "city_name":this.manageDependentData.city_name,
         "state_name":this.manageDependentData.state_name,
         //"skills":this.skill_data,
         "emergency":this.emergency_data,
         //"experience":this.experience_data,
         //"education":this.education_data,
-        "app":""
+        "blog_interest":this.blog_data,
+        "service_interest":this.servicecategory,
+        "serviceCategory_interest":this.servicecategoryinterest_data,
+        "app":"",
+        "docs":""
       }]}).subscribe(elders =>{
                     // console.log(elders); 
                     let msg='';
@@ -947,7 +990,7 @@ console.log("name"+this.file_name);
     this.blog_data=this.blog_categoryinterest;
     console.log(this.blog_data);
 
-    this.getareaofinterest();
+    this.getareaof_interest();
      this.area_of_interest_data=this.areaofinterestdata;
      console.log(this.area_of_interest_data);
     this.getEmergencyNumber();
