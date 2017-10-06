@@ -386,13 +386,13 @@ public emergencies =  [
             //this.area_of_interest = this.manageDependentData.area_interest;
             
             let areainterest = this.manageDependentData.area_interest;
+             this.area_of_interest=[];
             if(areainterest.length != 0){
-              for(let i=0 ; i< areainterest.length ; i++){
-                this.area_of_interest=[];
+              for(let i=0 ; i< areainterest.length ; i++){               
                 this.area_of_interest.push(areainterest[i].id);
               }
              }
-
+             console.log(this.area_of_interest);
             this.job_type = this.manageDependentData.job_type;
             //this.attach_resume = this.manageDependentData.docs;
 
