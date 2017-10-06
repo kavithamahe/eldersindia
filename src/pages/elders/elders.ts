@@ -31,6 +31,12 @@ educations:any=[];
 specializations:any=[];
 locations:any=[];
 areaOfInterest:any;
+blog_category:any;
+service_category:any;
+servicesubcategory:any=[];
+servicesubcategorylist:any;
+servicecategory:any;
+blog_interest:any;
 in_service:any;
 relations:any=[];
 functionality:String = "";
@@ -82,7 +88,10 @@ sponser_id:any;
   experience_list=[];
   education_list=[];
 
-
+  blog_categoryinterest=[];
+  blog_data:any;
+  areaofinterestdata=[];
+  area_of_interest_data:any;
   industry_set=[];
   elder_skills=[];
   elder_emergency=[];
@@ -151,14 +160,13 @@ mytype:string ="password";
               ,Validators.required])],
         last_name: ['', Validators.compose([ Validators.maxLength(30), 
               ,Validators.required])],
-        hobbies:['', Validators.compose([Validators.required])],
-        allergic:['', Validators.compose([Validators.required])],
+       
         elder_service : ['', Validators.compose([Validators.required])],
         elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.maxLength(12),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
-        elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
-        elder_password:['', Validators.compose([Validators.required])],
+        // elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
+        // elder_password:['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
         
          emergency_list: this. formBuilder.array([
@@ -295,10 +303,6 @@ public emergencies =  [
            {
             "name": "Hospital",
             "val" : "3"
-          },
-           {
-            "name": "Son",
-            "val" : "4"
           }
             
 
@@ -326,11 +330,33 @@ public emergencies =  [
           this.elder_number= this.manageDependentData.mobile;
           this.elder_dob= this.manageDependentData.dob;//this.getDate(this.manageDependentData.dob);
           this.elder_email= this.manageDependentData.email;
-          this.elder_password= this.manageDependentData.password;
+          //this.elder_password= this.manageDependentData.password;
           this.elder_location = this.manageDependentData.location;        
           this.elder_relation = this.manageDependentData.relation;
           this.elder_address= this.manageDependentData.address;   
-
+          let bloginterests = this.manageDependentData.blog_interest;
+          console.log(bloginterests);
+            if(bloginterests.length != 0){
+              for(let i=0 ; i< bloginterests.length ; i++){
+                this.blog_interest=bloginterests[i].id;
+                 //console.log(this.area_of_interest);
+              }
+             }
+             let serviceinterest=this.manageDependentData.service_interest;
+              if(serviceinterest.length != 0){
+              for(let i=0 ; i< serviceinterest.length ; i++){
+                this.servicecategory=serviceinterest[i];
+                 //console.log(this.area_of_interest);
+              }
+             }
+             let servicesubinterest=this.manageDependentData.service_checked_interest;
+             console.log(servicesubinterest);
+              if(servicesubinterest.length != 0){
+              for(let i=0 ; i< servicesubinterest.length ; i++){
+                this.servicesubcategorylist=servicesubinterest[i].id;
+                 //console.log(this.area_of_interest);
+              }
+             }
           let emergencies = this.manageDependentData.emergency;
           //console.log(emergencies.length);
           if(emergencies.length != 0 ){
@@ -341,6 +367,7 @@ public emergencies =  [
                this.emergency_name =[];
                this.emergency_no =[];
               this.emergency_name.push(emergencies[i].person);
+              console.log(this.emergency_name);
               this.emergency_no.push(emergencies[i].mobile);
               this.emergency_list.push({emergency:[i]});
               }
@@ -352,13 +379,20 @@ public emergencies =  [
           this.job_interest = this.manageDependentData.job_interested;
 
           if(this.job_interest){
-            this.area_of_interest = this.manageDependentData.area_interest;
-            console.log(this.area_of_interest);
+            //this.area_of_interest = this.manageDependentData.area_interest;
+            
+            let areainterest = this.manageDependentData.area_interest;
+            if(areainterest.length != 0){
+              for(let i=0 ; i< areainterest.length ; i++){
+                this.area_of_interest=areainterest[i].id;
+              }
+             }
+
             this.job_type = this.manageDependentData.job_type;
             //this.attach_resume = this.manageDependentData.docs;
 
             let experiences = this.manageDependentData.experience;
-            // console.log(this.manageDependentData.experience);
+            console.log(experiences);
             if(experiences.length != 0)
             {
               console.log(experiences.length);
@@ -385,12 +419,13 @@ public emergencies =  [
 
             
 
-            // let skills = this.loadManageDependentData.skills;
-            // if(skills.length != 0){
-            //   for(let i=0 ; i< skills.length ; i++){
-            //     this.skill_set.push(skills[i].skill);
-            //   }
-            //  }
+            let skills = this.manageDependentData.skills;
+            console.log(skills);
+            if(skills.length != 0){
+              for(let i=0 ; i< skills.length ; i++){
+                this.skill_set.push(skills[i].skill);
+              }
+             }
             let educations =  this.manageDependentData.education;
             if(educations.length != 0)
             {
@@ -398,6 +433,7 @@ public emergencies =  [
               for(let i = 0; i < educations.length;i++)
               {
                 this.education_graduation.push(educations[i].graduation);
+                console.log(this.education_graduation);
                 this.graduationOther.push(educations[i].graduation_other);
                 this.education_specialization.push(educations[i].specialization);
                 this.specialization_other.push(educations[i].specialization_other);
@@ -432,7 +468,8 @@ public emergencies =  [
                     this.specializationsOther=this.specializations[20].value;
                     this.locations=masterData.result.Locations;
                     this.areaOfInterest=masterData.result.AreaofInterest;
-                    
+                    this.blog_category=masterData.result.BlogCategory;
+                    this.service_category=masterData.result.ServiceOffered;
                     let skillset =masterData.result.Skills;
                     for(let i=0;i<skillset.length;i++){
                       this.skills.push(skillset[i].skill)
@@ -449,7 +486,13 @@ public emergencies =  [
        
 
    }
+  selectsubcategory(servicecategory){
+  this.communityServices.selectsubcategory(servicecategory).subscribe( 
+      (servicecategoryinfo) => {
+          this.servicesubcategory=servicecategoryinfo.result;
+        });
 
+  }
    ionViewWillEnter(){
         this.getElderMasterDetails();
       }
@@ -494,10 +537,40 @@ public emergencies =  [
   this.education_college.splice(index,1);
 
   }
+getblog_category(){
+  
+   if(this.functionality !="edit" && this.functionality !="profileEdit"){
+      for(let i=0;i<this.blog_interest.length;i++){
+        console.log(this.blog_interest.length);
+        this.blog_categoryinterest.push({"id":this.blog_interest[i]})  
+      }
+    }else{
+ console.log(this.blog_interest.length);
+      for(let i=0;i<this.blog_interest.length;i++){
+        console.log(this.blog_interest.length);
+        this.blog_categoryinterest.push({"elder_id":this.elder_id,"id":this.blog_interest[i]})  
+      }
+    }
+  
+}
+getareaofinterest(){
+   if(this.functionality !="edit" && this.functionality !="profileEdit"){
+      for(let i=0;i<this.area_of_interest.length;i++){
+        this.areaofinterestdata.push({"id":this.area_of_interest[i]})  
+      }
+    }else{
 
+      for(let i=0;i<this.area_of_interest.length;i++){
+        console.log(this.area_of_interest);
+        this.areaofinterestdata.push({"elder_id":this.elder_id,"id":this.area_of_interest[i]})  
+      console.log(this.areaofinterestdata);
+      }
+    }
+}
   getElderSkills(){
      if(this.functionality !="edit" && this.functionality !="profileEdit"){
       for(let i=0;i<this.skill_set.length;i++){
+        //console.log(this.skill_set);
         this.elder_skills.push({"skill":this.skill_set[i]})  
       }
     }else{
@@ -568,7 +641,7 @@ console.log("name"+this.file_name);
       });
 
   }
-  addDependent(){
+ addDependent(){
     //---------------------------------edited-------------------------------//
 
         
@@ -622,10 +695,17 @@ console.log("name"+this.file_name);
 
     this.getElderEducation();
     this.education_data = this.elder_education;
+    this.getblog_category();
+    this.blog_data=this.blog_categoryinterest;
+    console.log(this.blog_data);
+
+    this.getareaofinterest();
+     this.area_of_interest_data=this.areaofinterestdata;
+     console.log(this.area_of_interest_data);
 }
         let profileEditData = {
         "id":this.elder_id,
-        "area_interest":this.area_of_interest,
+        "area_interest":this.area_of_interest_data,
         "location":this.elder_location,
         "locationName":this.manageDependentData.locationName,
         "job_type":this.job_type,        
@@ -633,8 +713,6 @@ console.log("name"+this.file_name);
         "name":this.elder_name,
         "password":this.elder_password,
         "last_name":this.manageDependentData.last_name,
-        "hobbies":this.manageDependentData.hobbies,
-        "allergic":this.manageDependentData.allergic,
         "docs":this.manageDependentData.docs,
         "avatar":this.manageDependentData.avatar,
         "relation":this.elder_relation,
@@ -677,6 +755,16 @@ console.log("name"+this.file_name);
           else
           {
            this.submitAttempt = false;
+
+             this.getblog_category();
+    this.blog_data=this.blog_categoryinterest;
+    console.log(this.blog_data);
+
+    this.getareaofinterest();
+    
+     this.area_of_interest_data=this.areaofinterestdata;
+     console.log(this.area_of_interest_data);
+
     this.getElderSkills();
     this.skill_data= this.elder_skills;
 
@@ -692,33 +780,48 @@ console.log("name"+this.file_name);
             loader.present();
             this.communityServices.editSubmit({"info": [{
         "id":this.elder_id,
-        "area_interest":this.area_of_interest,
+        "area_interest":this.area_of_interest_data,
         "location":this.elder_location,
         "job_type":this.job_type,        
         "sponsor_id":this.sponsor_id,
         "password":this.elder_password,
         "name":this.elder_name,
+        "last_name":this.last_name,
         "avatar":this.manageDependentData.avatar,
         "relation":this.elder_relation,
         "gender":this.manageDependentData.gender,
         "dob":this.elder_dob,
+        "allergic":this.allergic,
+        "hobbies":this.hobbies,
         "mobile":this.elder_number,
+        "mobile_verified":this.manageDependentData.mobile_verified,
         "email":this.elder_email,
+        "email_verified":this.manageDependentData.email_verified,
+        "email_sent":this.manageDependentData.email_sent,
+        "message_sent":this.manageDependentData.message_sent,
+        "mail_code":this.manageDependentData.mail_code,
+        "message_code":this.manageDependentData.message_code,
         "in_service":this.elder_service,
         "job_interested":this.job_interest,
         "address":this.elder_address,
         "city":this.manageDependentData.city,
         "state":this.manageDependentData.state,
         "status":this.manageDependentData.status,
+        "direct":this.manageDependentData.direct,
         "created_at":this.manageDependentData.created_at,
+        "updated_at":this.manageDependentData.updated_at,
+        "reject_comments":this.manageDependentData.reject_comments,
         "city_name":this.manageDependentData.city_name,
         "state_name":this.manageDependentData.state_name,
         "skills":this.skill_data,
         "emergency":this.emergency_data,
         "experience":this.experience_data,
         "education":this.education_data,
+        "blog_interest":this.blog_data,
+        "service_interest":this.servicecategory,
+        "serviceCategory_interest":this.servicesubcategorylist,
         "app":"",
-        "avatar1":this.avatar
+        "docs":""
       }]}).subscribe(elders =>{
                     // console.log(elders); 
                     let msg='';
@@ -780,8 +883,7 @@ console.log("name"+this.file_name);
         "emergency":this.emergency_data,
         //"experience":this.experience_data,
         //"education":this.education_data,
-        "app":"",
-        "avatar1":this.avatar
+        "app":""
       }]}).subscribe(elders =>{
                     // console.log(elders); 
                     let msg='';
@@ -840,7 +942,14 @@ console.log("name"+this.file_name);
       this.submitAttempt = false;
       this.getElderSkills();
     this.skill_data= this.elder_skills;
+    console.log(this.skill_data);
+    this.getblog_category();
+    this.blog_data=this.blog_categoryinterest;
+    console.log(this.blog_data);
 
+    this.getareaofinterest();
+     this.area_of_interest_data=this.areaofinterestdata;
+     console.log(this.area_of_interest_data);
     this.getEmergencyNumber();
       this.emergency_data = this.elder_emergency;
 
@@ -852,20 +961,25 @@ console.log("name"+this.file_name);
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
        this.communityServices.addSubmit({"info":
-                          [{"email":this.authForm.value.elder_email,
+                          [{"email":this.elder_email,
                           "relation":this.elder_relation,
-                          "password":this.authForm.value.elder_password,
+                          "password":this.elder_password,
                           "name":this.authForm.value.elder_name,
+                          "last_name":this.last_name,
                           "dob":this.elder_dob,
                           "mobile":this.authForm.value.elder_number,
                           "in_service":this.elder_service,
                           "address":this.authForm.value.elder_address,
                           "location":this.elder_location,
-                          "area_interest":this.area_of_interest,
+                          "allergic":this.allergic,
+                          "hobbies":this.hobbies,
+                          "area_interest":this.area_of_interest_data,
+                          "blog_interest":this.blog_data,
+                          "service_interest":this.servicecategory,
+                          "serviceCategory_interest":this.servicesubcategorylist,
                           "job_type":this.job_type,
                           "skills":this.skill_data,
                           "emergency":this.emergency_data,
-                          "emergency_numbers":this.mobile,
                           "experience":this.experience_data,
                           "education":this.education_data,
                           "sponsor_id":this.sponsor_id,
@@ -905,27 +1019,31 @@ console.log("name"+this.file_name);
     }
     else{
       this.submitAttempt = false;
+      this.getblog_category();
+    this.blog_data=this.blog_categoryinterest;
+    console.log(this.blog_data);
       this.getEmergencyNumber();
       this.emergency_data = this.elder_emergency;
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
        this.communityServices.addSubmit({"info":
-                          [{"email":this.authForm.value.elder_email,
+                          [{"email":this.elder_email,
                           "relation":this.elder_relation,
-                          "password":this.authForm.value.elder_password,
+                          "password":this.elder_password,
                           "name":this.authForm.value.elder_name,
+                          "last_name":this.last_name,
                           "dob":this.elder_dob,
                           "mobile":this.authForm.value.elder_number,
                           "in_service":this.elder_service,
                           "address":this.authForm.value.elder_address,
                           "location":this.elder_location,
-                          //"area_interest":this.area_of_interest,
-                          //"job_type":this.job_type,
-                          //"skills":this.skill_data,
+                          "allergic":this.allergic,
+                          "hobbies":this.hobbies,
                           "emergency":this.emergency_data,
+                          "blog_interest":this.blog_data,
+                          "service_interest":this.servicecategory,
+                          "serviceCategory_interest":this.servicesubcategorylist,
                           "emergency_numbers":this.mobile,
-                          //"experience":this.experience_data,
-                          //"education":this.education_data,
                           "sponsor_id":this.sponsor_id,
                           "job_interested":this.job_interest
                           }]
@@ -968,7 +1086,6 @@ console.log("name"+this.file_name);
     
 
 }
-
  cancel(){
      this.nav.pop();
    }    

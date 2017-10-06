@@ -72,6 +72,7 @@ import { PopoverPage } from '../pages/connections/connections';
 import { BlogtabsPage } from '../pages/blogtabs/blogtabs';
 
 import { ManagePage } from '../pages/manage/manage';
+
 import { EldersPage } from '../pages/elders/elders';
 import { CommunityServices } from '../providers/community-services';
 

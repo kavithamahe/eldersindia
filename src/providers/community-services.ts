@@ -323,9 +323,14 @@ myprofile(id){
     return this.http.post(`${this.getCommunityPostsUrl }getElderListById`,elderData,this.options)
     .map(res =>res.json());
   }
+selectsubcategory(servicecategory){
+   this.manage={"categoryId":[servicecategory]}
 
+    return this.http.post(`${this.getCommunityPostsUrl }getServiceByCategory`,this.manage,this.options)
+    .map(res =>res.json());
+}
   getElderMasterDetails(){
-   this. body = {"get":["FunctionalArea","Educational","Specialization","Locations","AreaofInterest","Skills","Relations","InService"]};
+   this. body = {"get":["FunctionalArea","Educational","Specialization","Locations","AreaofInterest","Skills","Relations","InService","serviceCategory","BlogCategory","ServiceOffered"]};
      return this.http.post(`${this.getCommunityPostsUrl }getElderMasterDetails`,this.body,this.options)
     .map(res =>res.json());
   }
