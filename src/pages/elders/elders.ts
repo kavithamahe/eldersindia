@@ -131,6 +131,7 @@ mytype:string ="password";
       storage.get('token').then((token) => { this.token=token; 
         
         this.functionality=navParams.get("fuctionality");
+        console.log(this.functionality);
       if(this.functionality == 'edit'){
           this.title = "Edit Elder Details"
           if(navParams.get("editData")!= null){
@@ -333,10 +334,11 @@ public emergencies =  [
           //this.elder_password= this.manageDependentData.password;
           this.elder_location = this.manageDependentData.location;        
           this.elder_relation = this.manageDependentData.relation;
-          this.elder_address= this.manageDependentData.address;   
+          this.elder_address= this.manageDependentData.address; 
+          console.log(this.manageDependentData);  
           let bloginterests = this.manageDependentData.blog_interest;
           console.log(bloginterests);
-            if(bloginterests.length != 0){
+            if(bloginterests != undefined){
               for(let i=0 ; i< bloginterests.length ; i++){
                 this.blog_interest=bloginterests[i].id;
                  //console.log(this.area_of_interest);

@@ -63,7 +63,9 @@ selectedConnections:any;
         loader.dismiss();
 
         this.showToaster(connections.result);
-        //this.navCtrl.push(BlogsPage);
+        this.navCtrl.push(BlogsPage);
+        //let modal = this.modalCtrl.create(ShareBlogPagePage,{blogID:id});
+       // modal.close();
 
      },
     (err) => { 
