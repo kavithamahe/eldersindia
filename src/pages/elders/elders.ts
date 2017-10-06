@@ -340,22 +340,25 @@ public emergencies =  [
           console.log(bloginterests);
             if(bloginterests.length != 0){
               for(let i=0 ; i< bloginterests.length ; i++){
-                this.blog_interest=bloginterests[i].id;
+                this.blog_interest=[];
+                this.blog_interest.push(bloginterests[i].id);
                  //console.log(this.area_of_interest);
               }
              }
              let serviceinterest=this.manageDependentData.service_interest;
               if(serviceinterest.length != 0){
               for(let i=0 ; i< serviceinterest.length ; i++){
-                this.servicecategory=serviceinterest[i];
+                this.servicecategory=[];
+                this.servicecategory.push(serviceinterest[i]);
                  //console.log(this.area_of_interest);
               }
              }
              let servicesubinterest=this.manageDependentData.service_checked_interest;
              console.log(servicesubinterest);
               if(servicesubinterest.length != 0){
+                this.servicesubcategorylist=[];
               for(let i=0 ; i< servicesubinterest.length ; i++){
-                this.servicesubcategorylist=servicesubinterest[i].id;
+                this.servicesubcategorylist.push(servicesubinterest[i].id);
                  //console.log(this.area_of_interest);
               }
              }
@@ -386,7 +389,8 @@ public emergencies =  [
             let areainterest = this.manageDependentData.area_interest;
             if(areainterest.length != 0){
               for(let i=0 ; i< areainterest.length ; i++){
-                this.area_of_interest=areainterest[i].id;
+                this.area_of_interest=[];
+                this.area_of_interest.push(areainterest[i].id);
               }
              }
 

@@ -63,8 +63,8 @@ show_password:boolean = false;
       this.password_submit = false; 
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
       loader.present();     
-      let change_password_data = {"current_password": this.change_password_Form.value.currentPassword, "new_password": this.change_password_Form.value.newPassword, "confirm_password": this.change_password_Form.value.re_enterPassword};
-      this.service.webServiceCall(`changePassword`,change_password_data)
+      let change_password_data = {"current_password": this.change_password_Form.value.currentPassword, "new_password": this.change_password_Form.value.newPassword, "confirm_password": this.change_password_Form.value.re_enterPassword,"personnal_email":this.change_password_Form.value.personnal};
+      this.service.firsttimelogin(`changePassword`,change_password_data)
       .subscribe(data =>{      	
       		this.service.showToast(data.result);
       		this.change_password_Form.reset();
