@@ -239,12 +239,11 @@
  <form [formGroup]="myForm">
   <div *ngIf="job_interest">
      <ion-label class="label-tittle required">Area of interest</ion-label>
-
         <ion-item>
           <ion-label>Interest</ion-label>
             <ion-select class="select-brd" multiple="true" [(ngModel)]="area_of_interest" placeholder="Area of interest" formControlName="area_of_interest"
                 [class.invalid]="!myForm.controls.area_of_interest.valid && (myForm.controls.area_of_interest.dirty)">
-                <ion-option *ngFor="let industry of functionalArea" selected="item?.select" value={{industry.id}}>{{industry.name}}
+                <ion-option *ngFor="let industry of functionalArea" selected="item?.select" value={{industry.id}} [selected]="industry.id == area_of_interest">{{industry.name}}
               </ion-option>
             </ion-select>
         </ion-item>
