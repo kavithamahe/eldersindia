@@ -40,6 +40,8 @@ import { AppliedJobsPage } from '../pages/applied-jobs/applied-jobs';
 import { MessagesPage } from '../pages/messages/messages';
 import { CreateMessagePage } from '../pages/create-message/create-message';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
+import { FirsttimeloginPagePage } from '../pages/firsttimelogin/firsttimelogin';
+
 
 import { ServiceprovidersPage } from '../pages/serviceproviders/serviceproviders';
 import { ServicerequestPage } from '../pages/servicerequest/servicerequest';
@@ -131,6 +133,7 @@ const cloudSettings: CloudSettings = {
     ViewServiceRequestPage,
     BlogsPage,
     SingleblogPage,
+    FirsttimeloginPagePage,
     CreateBlogPage,
     LogoutPage,
     JobDependentPage,
@@ -200,6 +203,7 @@ const cloudSettings: CloudSettings = {
     ViewServiceRequestPage,
     BlogsPage,
     SingleblogPage,
+    FirsttimeloginPagePage,
     CreateBlogPage,
     LogoutPage,
     JobDependentPage,
