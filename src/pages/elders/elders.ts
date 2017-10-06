@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController,LoadingController, NavParams} from 'ionic-angular';
-import { Camera } from 'ionic-native';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service-provider';
 import {FormBuilder,FormGroup,Validators,FormArray} from '@angular/forms';
-import { FileChooser } from '@ionic-native/file-chooser';
-import { FilePath } from '@ionic-native/file-path';
-import { Transfer} from '@ionic-native/transfer';
 import { CommunityServices } from '../../providers/community-services';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ManagePage } from '../../pages/manage/manage';
@@ -121,7 +117,7 @@ mytype:string ="password";
   
 //-----------------------END-------------------//
 
-  constructor(private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public providerService:ServiceProvider, public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
+  constructor(public providerService:ServiceProvider, public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
 
       // this.getElderMasterDetails();
       
@@ -342,14 +338,9 @@ public emergencies =  [
           console.log(bloginterests);
             if(bloginterests.length != 0){
               for(let i=0 ; i< bloginterests.length ; i++){
-<<<<<<< HEAD
                 this.blog_interest=[];
                 this.blog_interest.push(bloginterests[i].id);
                  //console.log(this.area_of_interest);
-=======
-                this.blog_interest=bloginterests[i].id;
-                 console.log(this.area_of_interest);
->>>>>>> 88ff7a0c5bea1b2b485a5bde0e9d5334336beb4c
               }
              }
              let serviceinterest=this.manageDependentData.service_interest;
@@ -363,15 +354,11 @@ public emergencies =  [
              let servicesubinterest=this.manageDependentData.service_checked_interest;
              console.log(servicesubinterest);
               if(servicesubinterest.length != 0){
-                this.servicesubcategorylist=[];
+               
               for(let i=0 ; i< servicesubinterest.length ; i++){
-<<<<<<< HEAD
+                 this.servicesubcategorylist=[];
                 this.servicesubcategorylist.push(servicesubinterest[i].id);
                  //console.log(this.area_of_interest);
-=======
-                this.servicesubcategorylist=servicesubinterest[i].id;
-                 console.log(this.area_of_interest);
->>>>>>> 88ff7a0c5bea1b2b485a5bde0e9d5334336beb4c
               }
              }
           let emergencies = this.manageDependentData.emergency;
@@ -663,23 +650,7 @@ getareaof_interest(){
           }
        }
   }
-   openCamera(){
-console.log("open success");
-    this.fileChooser.open()
-      .then((imageData) => {
-
-      console.log("filedfsdf"+imageData );
-         (<any>window).FilePath.resolveNativePath(imageData, (result) => {
-    this.nativepath = result;
-     this.file_name = this.nativepath.split("/").pop();
-console.log("name"+this.file_name);
-    console.log("nativepath"+ this.nativepath);
-    
-  })
-        this.communityServices.manageupload(imageData);
-      });
-
-  }
+ 
  addDependent(){
     //---------------------------------edited-------------------------------//
 
@@ -1159,17 +1130,7 @@ console.log("name"+this.file_name);
       this.nav.setRoot(DashboardPage);
     }
 
-    accessGallery(){
-   Camera.getPicture({
-     sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
-     destinationType: Camera.DestinationType.DATA_URL
-    }).then((imageData) => {
-      this.base64Image = 'data:image/jpeg;base64,'+imageData;
-      this.avatar = this.base64Image;
-     }, (err) => {
-      console.log(err);
-    });
-  }
+
 }
 
 
