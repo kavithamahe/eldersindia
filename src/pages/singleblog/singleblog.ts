@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,ActionSheetController,LoadingController,ToastController,Platform } from 'ionic-angular';
+import { NavController, NavParams,ActionSheetController,ModalController,LoadingController,ToastController,Platform } from 'ionic-angular';
 //import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { BlogListService } from '../../providers/blog-list-service';
 import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
-
+import { ShareBlogPagePage } from '../../pages/share-blog/share-blog';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 /*
   Generated class for the Singleblog page.
@@ -22,6 +22,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 })
 export class SingleblogPage {
 blogId:number;
+id:any;
 singleBlogInfo:{};
 token:string;
 imageUrl:string;
@@ -37,7 +38,7 @@ replyPost:any;
 commentForm: FormGroup;
 submitAttempt: boolean = false;
  
-  constructor(public formBuilder: FormBuilder,public navCtrl: NavController,public platform: Platform,public actionsheetCtrl: ActionSheetController, public navParams: NavParams,public blogListService:BlogListService,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
+  constructor(public formBuilder: FormBuilder,public modalCtrl: ModalController, public navCtrl: NavController,public platform: Platform,public actionsheetCtrl: ActionSheetController, public navParams: NavParams,public blogListService:BlogListService,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('id').then((id) => { this.user_id=id;});
@@ -59,6 +60,11 @@ submitAttempt: boolean = false;
      document.getElementById('commentsView').scrollIntoView();
      }
     this.showComment=!this.showComment;
+  }
+  shareblog(id){ 
+     let modal = this.modalCtrl.create(ShareBlogPagePage,{blogID:id});
+    modal.present();
+     
   }
   public onInit(blogId)
   {
@@ -237,8 +243,7 @@ submitAttempt: boolean = false;
     console.log(profile_uid);
     this.navCtrl.push(CommunityprofilePage,{profile_uid});
 
-  }
-
+  } 
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);

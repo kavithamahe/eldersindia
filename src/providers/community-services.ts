@@ -29,6 +29,8 @@ export class CommunityServices {
   connectlist:any;
   send:any;
   token:any;
+  CommunityId:any;
+  friendsID:any;
   //id:number;
   user_id:number = 0;
   getCommunityPostsUrl:any;
@@ -378,5 +380,19 @@ myprofile(id){
    return this.http.post(`${this.getCommunityPostsUrl }elderOnBoarding`,dependentData,this.options)
     .map(res =>res.json());
   }
+   getConnections(){
+       let _request= {};
+      // console.log(this.rootUrl+'getConnections');
+    return this.http.post(`${this.getCommunityPostsUrl }getConnections`,_request,this.options)
+      .map(res => res.json()); 
+   } 
+   inviteFriends(CommunityId,friendsID){
+    let _request= {'friends':{'user_id':friendsID},'shareurl':this.getCommunityPostsUrl+'/#/communityDetail/'+CommunityId};
+     //let _request={};
+       console.log(_request);
+     
+    return this.http.post(`${this.getCommunityPostsUrl }inivtefriend`,_request,this.options)
+      .map(res => res.json()); 
+   }  
     
 }

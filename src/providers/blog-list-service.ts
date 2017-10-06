@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
+import { ToastController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 /*
   Generated class for the BlogListService provider.
@@ -15,7 +16,9 @@ token:string;
 options:any;
 rootUrl:any;
 user_id:any;
-  constructor(public http: Http, public storage:Storage) {
+BlogId:any;
+friendsID:any;
+  constructor(public http: Http, public storage:Storage,public toastCtrl: ToastController) {
     this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();
@@ -23,7 +26,9 @@ user_id:any;
     this.headers.append('Authorization', 'Bearer ' + this.token);
     this.options = new RequestOptions({ headers: this.headers });
        })    
-    storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; });
+    storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
+      console.log(this.rootUrl);
+      });
      storage.get('id').then((id) => { this.user_id=id; })
    });
   }
@@ -121,5 +126,36 @@ eventsscroll(searchCategory,searchText,nextPageURL)
       let _request= {};
     return this.http.post(this.rootUrl+'getBlog/'+blogId,_request,this.options)
       .map(res => res.json());      
+   }
+   getConnections(rootUrl){
+       let _request= {};
+       console.log(this.rootUrl+'getConnections');
+    return this.http.post(this.rootUrl+'getConnections',_request,this.options)
+      .map(res => res.json()); 
+   }
+   shareBlog(BlogId,friendsID){
+      let _request= {'friends':{'user_id':friendsID},'shareurl':this.rootUrl+'/#/blog/details/'+BlogId};
+     //let _request={};
+       console.log(_request);
+     
+    return this.http.post(this.rootUrl+'shareblog',_request,this.options)
+      .map(res => res.json()); 
+   }
+   showErrorToast(error){
+    if(error.status===401){
+      this.showToast(JSON.parse(error._body).error);
+    }
+    else{
+      this.showToast("Please try again later");
+    }
+  }
+  showToast(messageData){
+    let toast = this.toastCtrl.create({
+        message: messageData,
+        position:"top",
+        duration: 1000,
+        cssClass: "invalidvalue",
+      });
+      toast.present();
    }
 }

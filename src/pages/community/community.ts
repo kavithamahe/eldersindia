@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ModalController,ActionSheetController, NavController, NavParams,AlertController,LoadingController,Platform,ToastController,PopoverController } from 'ionic-angular';
+import { ModalController,ActionSheetController, ViewController,PopoverController,NavController, NavParams,AlertController,LoadingController,Platform,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
@@ -55,7 +55,7 @@ export class CommunityPage {
     user_id:any= 0;
     authForm:FormGroup;
     message:any='';
-  constructor(public platform: Platform, public actionsheetCtrl: ActionSheetController,public modal: ModalController, public formBuilder: FormBuilder,public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices,public popoverCtrl: PopoverController ) {
+  constructor(public platform: Platform,public popoverCtrl: PopoverController, public actionsheetCtrl: ActionSheetController,public modal: ModalController, public formBuilder: FormBuilder,public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices) {
     this.nav=nav;
 
     this.storage.ready().then(() => {
@@ -95,6 +95,21 @@ files:any;
       ]
     });
     actionSheet.present();
+  }
+  presentPopover(ev,id) {
+    console.log(id);
+    let popover = this.popoverCtrl.create(CommunityPopoverPage, {"communityID":id
+    });
+    popover.present({
+      ev: ev
+    });
+    popover.onDidDismiss(() => {
+      //this.ngoListInfores();
+       this.community_id=this.navParams.get("community_id");
+       this.communityList(this.community_id);
+       this.communityDetail(this.community_id);
+   
+    })
   }
 showConfirm(id){
      let confirm = this.alertCtrl.create({
@@ -468,3 +483,84 @@ doInfinite(infiniteScroll) {
   }
 
 
+
+@Component({
+  template: `<ion-title text-center text-capitalize>Request to join communities</ion-title> 
+  <div class="register-form">
+<ion-grid>
+          <ion-row>
+              <ion-label class="required">To</ion-label>
+          
+             <ion-select multiple="true" [(ngModel)]="selectedConnections" [ngModelOptions]="{standalone: true}">
+          <ion-option *ngFor="let name of connectionInfo" [value] = "name">{{name.friend_name}}
+          </ion-option>
+        </ion-select> 
+     </ion-row>
+               
+           
+  <button ion-button round full (click)="inviteFriends()" class="btn-blue">Invite</button>
+</ion-grid>
+</div> 
+  `
+})
+export class CommunityPopoverPage {
+  selectedConnections:any;
+  connectionInfo:any; 
+  friendsId:any;
+  communityId:any;
+  constructor(public viewCtrl: ViewController,public toastCtrl: ToastController,public communityServices: CommunityServices,public loadingCtrl: LoadingController,public storage:Storage) {  
+    this.getConnections();
+   }
+  getConnections(){
+  
+  //let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    //loader.present();    
+      this.communityServices.getConnections().subscribe(connections => {
+        this.connectionInfo=connections.result;
+        //console.log(this.connectionInfo);
+       // loader.dismiss();
+     },
+   err =>{
+    //loader.dismiss();
+      this.communityServices.showErrorToast(err);
+  })
+ }
+ inviteFriends(){ 
+if(this.selectedConnections != undefined){
+ let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();    
+      this.communityServices.inviteFriends(this.communityId,this.selectedConnections).subscribe(connections => {
+       //this.connectionInfo=connections.result;
+        loader.dismiss();
+
+        this.showToaster(connections.result);
+        //this.navCtrl.push(BlogsPage);
+        this.viewCtrl.dismiss();
+     },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+        loader.dismiss();
+      });
+    }else{
+      this.showToaster("Please Select atleast one");
+    }
+ }
+  public showToaster(message)
+  {
+   let toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000,
+        position: 'top'
+        });
+   toast.present();
+  }
+
+ 
+}
