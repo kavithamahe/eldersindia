@@ -336,40 +336,44 @@ public emergencies =  [
           //console.log('-----');console.log(this.manageDependentData);  
           let bloginterests = this.manageDependentData.blog_interest;
           console.log(bloginterests);
+          this.blog_interest=[];
             if(bloginterests.length != 0){
               for(let i=0 ; i< bloginterests.length ; i++){
-                this.blog_interest=[];
+                
                 this.blog_interest.push(bloginterests[i].id);
                  //console.log(this.area_of_interest);
               }
              }
              let serviceinterest=this.manageDependentData.service_interest;
+             this.servicecategory=[];
               if(serviceinterest.length != 0){
               for(let i=0 ; i< serviceinterest.length ; i++){
-                this.servicecategory=[];
+                
                 this.servicecategory.push(serviceinterest[i]);
                  //console.log(this.area_of_interest);
               }
              }
              let servicesubinterest=this.manageDependentData.service_checked_interest;
              console.log(servicesubinterest);
+             this.servicesubcategorylist=[];
               if(servicesubinterest.length != 0){
                
               for(let i=0 ; i< servicesubinterest.length ; i++){
-                 this.servicesubcategorylist=[];
+                 
                 this.servicesubcategorylist.push(servicesubinterest[i].id);
                  //console.log(this.area_of_interest);
               }
              }
           let emergencies = this.manageDependentData.emergency;
           //console.log(emergencies.length);
+           this.emergency_name =[];
+               this.emergency_no =[];
           if(emergencies.length != 0 ){
             console.log(emergencies.length);
            this.emergency_list.pop();
             for(let i = 0; i < emergencies.length;i++)
             {
-               this.emergency_name =[];
-               this.emergency_no =[];
+              
               this.emergency_name.push(emergencies[i].person);
               console.log(this.emergency_name);
               this.emergency_no.push(emergencies[i].mobile);
@@ -832,7 +836,7 @@ getareaof_interest(){
         "service_interest":this.servicecategory,
         "serviceCategory_interest":this.servicecategoryinterest_data,
         "app":"",
-        "docs":this.file_name
+        "docs":""
       }]}).subscribe(elders =>{
                     // console.log(elders); 
                     let msg='';
@@ -917,8 +921,7 @@ getareaof_interest(){
         "blog_interest":this.blog_data,
         "service_interest":this.servicecategory,
         "serviceCategory_interest":this.servicecategoryinterest_data,
-        "app":"",
-        "docs":this.file_name
+        "app":""
       }]}).subscribe(elders =>{
                     // console.log(elders); 
                     let msg='';
@@ -1019,7 +1022,7 @@ getareaof_interest(){
                           "education":this.education_data,
                           "sponsor_id":this.sponsor_id,
                           "job_interested":this.job_interest,
-                          "docs":this.file_name
+                          "docs":""
                           }]
                         }).subscribe(
            elders=>{

@@ -1,11 +1,11 @@
-import { Component,NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { Platform,NavController, NavParams,AlertController, LoadingController, ModalController, ToastController,MenuController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { LocalNotifications, Geolocation } from 'ionic-native';
+import { LocalNotifications } from 'ionic-native';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 //import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
-import { Diagnostic } from 'ionic-native';
-import { CameraPreview, CameraPreviewRect } from 'ionic-native';
+//import { Diagnostic } from 'ionic-native';
+//import { CameraPreview, CameraPreviewRect } from 'ionic-native';
 
 import { Login } from '../../models/login';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
