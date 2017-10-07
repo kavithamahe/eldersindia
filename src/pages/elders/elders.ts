@@ -339,10 +339,10 @@ public emergencies =  [
           console.log(this.last_name);console.log('-----');console.log(this.manageDependentData);  
           let bloginterests = this.manageDependentData.blog_interest;
 
-          if(bloginterests != undefined){
+          if(bloginterests != undefined){ 
+            this.blog_interest=[];
             if(bloginterests.length != 0){
-              this.blog_interest=[];
-              for(let i=0 ; i< bloginterests.length ; i++){                
+              for(let i=0 ; i< bloginterests.length ; i++){    
                 this.blog_interest.push(bloginterests[i].id);
                  console.log(this.blog_interest);
               }
@@ -351,18 +351,18 @@ public emergencies =  [
              let serviceinterest=this.manageDependentData.service_interest;
              if(serviceinterest !=undefined){
               if(serviceinterest.length != 0){
-                this.servicecategory=[];
-              for(let i=0 ; i< serviceinterest.length ; i++){
-                
+              this.servicecategory=[];
+              for(let i=0 ; i< serviceinterest.length ; i++){                
                 this.servicecategory.push(serviceinterest[i]);
                  console.log(this.servicecategory);
               }
              }
            }
              let servicesubinterest=this.manageDependentData.service_checked_interest;
+
              if(servicesubinterest !=undefined){
-              if(servicesubinterest.length != 0){
-               this.servicesubcategorylist=[];
+             this.servicesubcategorylist=[];
+              if(servicesubinterest.length != 0){           
               for(let i=0 ; i< servicesubinterest.length ; i++){
                  
                 this.servicesubcategorylist.push(servicesubinterest[i].id);
@@ -371,6 +371,7 @@ public emergencies =  [
              }
            }
           let emergencies = this.manageDependentData.emergency;
+
           if(emergencies != undefined){
           if(emergencies.length != 0 ){
             console.log(emergencies.length);
@@ -390,8 +391,7 @@ public emergencies =  [
               }
            
           }
-        }
-        console.log(emergencies);
+        }       
           this.job_interest = this.manageDependentData.job_interested;
 
           if(this.job_interest){
@@ -929,8 +929,7 @@ getareaof_interest(){
         "blog_interest":this.blog_data,
         "service_interest":this.servicecategory,
         "serviceCategory_interest":this.servicecategoryinterest_data,
-        "app":"",
-        "docs":""
+        "app":""
       }]}).subscribe(elders =>{
                     // console.log(elders); 
                     let msg='';
@@ -1031,7 +1030,7 @@ getareaof_interest(){
                           "education":this.education_data,
                           "sponsor_id":this.sponsor_id,
                           "job_interested":this.job_interest,
-                          "docs":this.file_name
+                          "docs":""
                           }]
                         }).subscribe(
            elders=>{
@@ -1141,7 +1140,23 @@ getareaof_interest(){
     {
       this.nav.setRoot(DashboardPage);
     }
-
+fileChange(event) {
+    let fileList: FileList = event.target.files;
+   // this.file_name=fileList[0].name;
+    //console.log( this.file_name);
+    if(fileList.length > 0) {
+        let file: File = fileList[0];
+        this.file_name=file.name;
+        console.log(file.name);
+        let formData:FormData = new FormData();
+        formData.append('attachemts[0]', file, file.name);
+        let headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + this.token);
+        headers.append('Accept', 'application/json');
+       
+      
+    }
+}
 
 }
 

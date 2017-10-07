@@ -201,7 +201,7 @@
                  <ion-label>Blog category</ion-label>
                 <ion-select multiple="true" [(ngModel)]="blog_interest" 
                 [ngModelOptions]="{standalone: true}" class="select-brd" placeholder="Blog category">
-                  <ion-option *ngFor="let blogcategory of blog_category" value={{blogcategory.id}}>{{blogcategory.name}}
+                  <ion-option *ngFor="let blogcategory of blog_category" value={{blogcategory.id}} [selected]="blogcategory.id == blog_interest">{{blogcategory.name}}
                   </ion-option>
                 </ion-select>
             </ion-item>
@@ -210,7 +210,7 @@
             <ion-item>
               <ion-label>Service Category</ion-label>
               <ion-select class="select-brd" multiple="true" [(ngModel)]="servicecategory" [ngModelOptions]="{standalone: true}" placeholder="Service Category" (ionChange)="selectsubcategory(servicecategory)">
-                <ion-option *ngFor="let ser_category of service_category" value={{ser_category.id}}>{{ser_category.service}}
+                <ion-option *ngFor="let ser_category of service_category" value={{ser_category.id}} [selected]="ser_category.id == servicecategory">{{ser_category.service}}
                 </ion-option>
               </ion-select>
             </ion-item>
@@ -221,7 +221,7 @@
               <ion-label>Service Sub Category</ion-label>
               <ion-select class="select-brd" placeholder="Service Sub Category" 
               [(ngModel)]="servicesubcategorylist" [ngModelOptions]="{standalone: true}" multiple="true">
-                <ion-option *ngFor="let subcategory of servicesubcategory" value={{subcategory.id}}>{{subcategory.name}}
+                <ion-option *ngFor="let subcategory of servicesubcategory" value={{subcategory.id}} [selected]="subcategory.id == servicesubcategorylist">{{subcategory.name}}
                 </ion-option>
               </ion-select>
             </ion-item>
@@ -446,9 +446,12 @@
       <br/>
      
       </div>
-  
+    <!--   <p></p>
+  <div>
+   <input type="file" (change)="fileChange($event)" placeholder="Upload file" >
+  </div> -->
     </div>
-    <input type="file">
+    
     </form>
 
    

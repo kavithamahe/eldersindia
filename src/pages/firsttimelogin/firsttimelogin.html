@@ -82,22 +82,7 @@
 </ion-content>
 <ion-footer color="primary">
   <ion-toolbar color="primary"> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
-    <ion-buttons>
-      <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
-        <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
-      <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
-        <div style="padding-left: 10px !important;">
-          Back
-        </div>
-      </button>
-      <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()">
-        <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
-   <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
-        <div style="padding-left: 10px !important;">
-          Back
-        </div>
-      </button>
-    </ion-buttons>
+ 
     <ion-buttons end>
       <button ion-button color="royal" large icon-right showWhen="ios" (click)="submit()">
         Update

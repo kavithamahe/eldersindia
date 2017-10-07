@@ -55,6 +55,9 @@
   <span [hidden]="!blogs.category_name"> 
     <label class="labels-bds"> {{blogs.category_name}}</label>
   </span>
+  <span *ngIf="blogs.allow_featured == 1"> 
+    <label>Featured</label>
+  </span>
   </div>
  
  </ion-card> 
