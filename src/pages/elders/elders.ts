@@ -129,7 +129,7 @@ mytype:string ="password";
       storage.get('token').then((token) => { this.token=token; 
         
         this.functionality=navParams.get("fuctionality");
-        console.log(navParams.get("editData"));
+       // console.log(navParams.get("editData"));
       if(this.functionality == 'edit'){
           this.title = "Edit Elder Details"
           if(navParams.get("editData")!= null){
@@ -191,9 +191,12 @@ mytype:string ="password";
   else
   {
         this.authForm = formBuilder.group({
-        elder_relation : ['', Validators.compose([Validators.required])],
+        elder_relation : ['', Validators.compose([])],
         elder_name : ['', Validators.compose([ Validators.maxLength(30), 
               Validators.required])],
+        last_name: ['', Validators.compose([ Validators.maxLength(30), 
+              ,Validators.required])],
+       
         elder_service : ['', Validators.compose([Validators.required])],
         elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.maxLength(12),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
@@ -324,7 +327,7 @@ public emergencies =  [
           this.elder_id = this.manageDependentData.id;
           this.sponsor_id = this.manageDependentData.sponsor_id;
           this.elder_name= this.manageDependentData.name;
-          this.last_name=this.manageDependentData.last_name;
+          this.last_name =this.manageDependentData.last_name;
           this.hobbies=this.manageDependentData.hobbies;
           this.allergic=this.manageDependentData.allergic;
           this.elder_service = this.manageDependentData.in_service;
@@ -335,47 +338,51 @@ public emergencies =  [
           this.elder_location = this.manageDependentData.location;        
           this.elder_relation = this.manageDependentData.relation;
           this.elder_address= this.manageDependentData.address; 
-          //console.log('-----');console.log(this.manageDependentData);  
+          console.log(this.last_name);console.log('-----');console.log(this.manageDependentData);  
           let bloginterests = this.manageDependentData.blog_interest;
-          console.log(bloginterests);
-          this.blog_interest=[];
+
+          if(bloginterests != undefined){ 
+            this.blog_interest=[];
             if(bloginterests.length != 0){
-              for(let i=0 ; i< bloginterests.length ; i++){
-                
+              for(let i=0 ; i< bloginterests.length ; i++){    
                 this.blog_interest.push(bloginterests[i].id);
-                 //console.log(this.area_of_interest);
+                 console.log(this.blog_interest);
               }
              }
+           }
              let serviceinterest=this.manageDependentData.service_interest;
-             this.servicecategory=[];
+             if(serviceinterest !=undefined){
               if(serviceinterest.length != 0){
-              for(let i=0 ; i< serviceinterest.length ; i++){
-                
+              this.servicecategory=[];
+              for(let i=0 ; i< serviceinterest.length ; i++){                
                 this.servicecategory.push(serviceinterest[i]);
-                 //console.log(this.area_of_interest);
+                 console.log(this.servicecategory);
               }
              }
+           }
              let servicesubinterest=this.manageDependentData.service_checked_interest;
-             console.log(servicesubinterest);
+
+             if(servicesubinterest !=undefined){
              this.servicesubcategorylist=[];
-              if(servicesubinterest.length != 0){
-               
+              if(servicesubinterest.length != 0){           
               for(let i=0 ; i< servicesubinterest.length ; i++){
                  
                 this.servicesubcategorylist.push(servicesubinterest[i].id);
                  //console.log(this.area_of_interest);
               }
              }
+           }
           let emergencies = this.manageDependentData.emergency;
-          //console.log(emergencies.length);
-           this.emergency_name =[];
-               this.emergency_no =[];
+
+          if(emergencies != undefined){
           if(emergencies.length != 0 ){
             console.log(emergencies.length);
            this.emergency_list.pop();
+
+               this.emergency_name =[];
+               this.emergency_no =[];
             for(let i = 0; i < emergencies.length;i++)
             {
-              
               this.emergency_name.push(emergencies[i].person);
               console.log(this.emergency_name);
               this.emergency_no.push(emergencies[i].mobile);
@@ -386,6 +393,7 @@ public emergencies =  [
               }
            
           }
+        }       
           this.job_interest = this.manageDependentData.job_interested;
 
           if(this.job_interest){
