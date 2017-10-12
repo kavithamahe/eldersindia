@@ -14,7 +14,8 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Diagnostic } from 'ionic-native';
 import { CameraPreview, CameraPreviewRect } from 'ionic-native';
 //import { Permissions } from '@ionic-native/android-permissions';
-import { CalendarModule } from "ion2-calendar";
+// import { CalendarModule } from 'ion2-calendar';
+import { Calendar } from '@ionic-native/calendar';
 
 
 import {MomentModule} from 'angular2-moment';
@@ -164,7 +165,7 @@ const cloudSettings: CloudSettings = {
     TermsModalPage
   ],
   imports: [
-  
+
     IonicModule.forRoot(MyApp,AppConfig,{
        tabsHideOnSubPages:true
     }),
@@ -177,6 +178,7 @@ const cloudSettings: CloudSettings = {
     BrowserModule,
     Ng2EmojiModule,
     MomentModule,
+    // CalendarModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -236,6 +238,6 @@ const cloudSettings: CloudSettings = {
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider, AppConfig,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,Calendar,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider, AppConfig,Storage] // Add GithubUsers provider
 })
 export class AppModule {}
