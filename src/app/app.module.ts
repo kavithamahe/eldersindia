@@ -1,6 +1,5 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
 import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
@@ -91,11 +90,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service-provider';
 // import { Externallinks } from '../providers/externallinks';
 
-const cloudSettings: CloudSettings = {
-  'core': {
-    'app_id': '23354506'
-  }
-};
+
 
 @NgModule({
   declarations: [
@@ -153,7 +148,6 @@ const cloudSettings: CloudSettings = {
     IonicModule.forRoot(MyApp,AppConfig,{
        tabsHideOnSubPages:true
     }),
-    CloudModule.forRoot(cloudSettings),
 
     TruncateModule,
     RlTagInputModule,

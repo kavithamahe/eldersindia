@@ -533,12 +533,7 @@ ion-app.ios [padding], ion-app.ios [padding] .scroll-content{padding:0px !import
 .Shedule{ font-size:14px !important; color:#9370db !important;padding:0px !important;font-weight:600 !important;}
 .Delivered{ font-size:14px !important; color:#808000!important;padding:0px !important;font-weight:600 !important;}
 
-.login-pages .item-ios									    {background:none;}
-.login-pages .item-ios .text-input-ios						{    width: 92% !important;
-    margin-left: 13px !important;
-    color: #333;
-    height: 45px !important;
-}
+
 .forgot-pass												{background:none !important;  color:#337ab7 !important;font-size:15px; }
 .bg-back													{background:none !important; border-bottom:none !important; }
 .bg-back .item-inner .input-wrapper .label-md .forgot-pass	{ font-size:17px !important; margin-top:40px; color:#404996 !important; margin-top:10px;}
@@ -768,10 +763,8 @@ ion-app.wp [padding], ion-app.wp [padding] .scroll-content  {padding:1px !import
 															 margin: 0 0 2px;}
 ion-app.md{font-family: 'Asap', sans-serif;color:#525252;}
 ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !important;}
-.login-pages img.logo										{margin-top:70px; width:90%; margin-left:15px;}	
-.login-pages .item-md										{background:none; padding-left:5px;}	
-.login-pages .item-md .text-input-md						{width: 92%!important;
-    margin-left: 13px !important; color:#333; height:45px !important;}									
+
+								
 
 .forgot-pass 												{background:none !important;box-shadow:none; color:#337ab7 !important; margin-top:10px; font-size:15px !important; text-transform:capitalize; }
 .bg-back .item-inner										{background:none !important; border-bottom:none !important;}
