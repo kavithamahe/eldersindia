@@ -39,13 +39,13 @@
    <p>{{viewServiceRequestInfo?.contact_number}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>
+  <!-- <ion-row>
    
     <ion-col width-100 class="child_menu">
 	<span>Enquiry About</span>
    <p>{{viewServiceRequestInfo?.problem}}</p>
    </ion-col>
-  </ion-row>
+  </ion-row> -->
   <ion-row>
    
     <ion-col width-100 class="child_menu">
@@ -77,18 +77,24 @@
 
   <ion-row>  
     <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.enquiry_date!='0000-00-00 00:00:00')">
-	<span>Enquiry Date</span>
-   <p>{{viewServiceRequestInfo?.enquiry_date | date:'dd/M/yyyy h:m a'}}</p>
+	<span>Preferred date</span>
+   <p>{{viewServiceRequestInfo?.enquiry_date | date:'dd/M/yyyy'}}</p>
    </ion-col>
   </ion-row>
 
   <ion-row>   
-    <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.scheduled_at!='0000-00-00 00:00:00')">
-	<span>Scheduled Date</span>
-   <p>{{viewServiceRequestInfo?.scheduled_at | date:'dd/M/yyyy h:m a'}}</p>
+    <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.updated_at!='0000-00-00 00:00:00')">
+	<span>Service requested Date</span>
+   <p>{{viewServiceRequestInfo?.updated_at | date:'dd/M/yyyy h:m a'}}</p>
    </ion-col>
   </ion-row>
-  <ion-row> 
+  <ion-row>   
+    <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.preferred_time!='0000-00-00 00:00:00')">
+  <span>Preferred time</span>
+   <p>{{viewServiceRequestInfo?.preferred_time}}</p>
+   </ion-col>
+  </ion-row>
+  <!-- <ion-row> 
     <ion-col width-100 class="child_menu">
 	<span>Remarks</span>
    <p>{{viewServiceRequestInfo?.remarks}}</p>
@@ -100,6 +106,6 @@
 	<span>Service Provider Comments</span>
    <p>{{viewServiceRequestInfo?.comments}}</p>
    </ion-col>
-  </ion-row>
+  </ion-row> -->
 </ion-card>
 </ion-content>

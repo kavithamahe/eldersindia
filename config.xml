@@ -55,6 +55,7 @@
     </feature>
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <engine name="android" spec="^6.2.3" />
+    <plugin name="cordova-plugin-calendar" spec="^4.6.0" />
     <plugin name="cordova-plugin-console" spec="1.0.5" />
     <plugin name="cordova-plugin-device" spec="1.1.4" />
     <plugin name="cordova-plugin-geolocation" spec="~2.4.3" />
@@ -67,4 +68,5 @@
     <plugin name="phonegap-plugin-push" spec="1.10.2">
         <variable name="SENDER_ID" value="604025131571" />
     </plugin>
+    
 </widget>

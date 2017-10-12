@@ -2,7 +2,7 @@
 <ion-header>
   <ion-toolbar class="hei-head" color="primary">
     <ion-title color="primary" class="tittles-md" text-capitalize>
-      {{vendor}} - Schedule Request
+      {{vendor}} - Avail Services
     </ion-title>
     <ion-buttons start item-right class="close-iconss">
       <button ion-button (click)="dismiss()">
@@ -17,44 +17,173 @@
 
   <form [formGroup]="modalForm">
   <br>
-		
+  
+  <!-- <button ion-button (click)="openCalendar()">Open Calendar on Current Date</button> -->
         <ion-label stacked class="label-lb required">Describe the need</ion-label>
           <ion-input type="text" formControlName="problem" ></ion-input>
                 <p class="err-reds" *ngIf="!modalForm.controls.problem.valid  && (modalForm.controls.problem.dirty || submitAttempt)">Please enter the describe need</p>
-           <ion-label stacked class="label-lb required">Scheduled date</ion-label>
-		    <ion-item>
-           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" min={{this.date}}  formControlName ="date"></ion-datetime>
-        </ion-item>
-         <p class="err-reds" *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">Please enter the scheduled date
-         </p>
-        <ion-label stacked class="label-lb required">Scheduled time</ion-label>
-       <ion-item>
-            <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" placeholder="Scheduled time" formControlName ="time" class="select-brd"></ion-datetime>
-            </ion-item>
-		   <p class="err-reds" *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">Please enter the scheduled time</p>
-	
-		
-
-		  <ion-label stacked class="label-lb required">Contact number</ion-label>
+        <ion-label stacked class="label-lb required">Contact number</ion-label>
 
           <ion-input type="text" formControlName="contact" placeholder="Contact number" (keypress)="onlyNumberKey($event)" maxlength="12"></ion-input>
-		   <p class="err-reds" *ngIf="!modalForm.controls.contact.valid  && (modalForm.controls.contact.dirty || submitAttempt)">Please enter the contact number</p>
-	</form>
-  
-  <form [formGroup]="authForm">
-		   
-		     <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb required">Select dependent
+       <p class="err-reds" *ngIf="!modalForm.controls.contact.valid  && (modalForm.controls.contact.dirty || submitAttempt)">Please enter the contact number</p>
+        <form [formGroup]="authForm">
+       
+         <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb required">Select dependent
          </ion-label>
 
-			      <ion-item *ngIf = "userType =='sponsor'">
-	            <ion-label>Select dependent</ion-label>
+            <ion-item *ngIf = "userType =='sponsor'">
+              <ion-label>Select dependent</ion-label>
               <ion-select formControlName="dependents" class="select-brds" placeholder="Select dependent" >
               <ion-option *ngFor = "let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}}
               </ion-option>
             </ion-select>
               </ion-item>
                  <small *ngIf="!authForm.controls.dependents.valid  && (authForm.controls.dependents.dirty || submitAttempt)"><p *ngIf = "userType =='sponsor'" class="err-reds">Please select the dependents</p></small>
-	</form>
+
+      </form>
+          <ion-label>Service Type</ion-label>
+      <ion-list radio-group>
+   <ion-item>
+    <ion-label>One time</ion-label>
+    <ion-radio value="goe" (click)="onetime(searchButton)"></ion-radio>
+  </ion-item>
+   <ion-item>
+    <ion-label>Recurring</ion-label>
+    <ion-radio value="go" (click)="recurringtime(recurring)"></ion-radio>
+  </ion-item>
+</ion-list>
+      <!-- <p>------------------------One Time----------------------------</p> -->
+
+       <div *ngIf(searchButton)>
+           <ion-label stacked class="label-lb required">Preferred date</ion-label>
+     
+		    <ion-item>
+           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" min={{this.date}}  formControlName ="date"></ion-datetime>
+        </ion-item>
+         <p class="err-reds" *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">Please enter the scheduled date
+         </p>
+       <ion-list>
+            <ion-item>
+              <ion-label stacked class="label-lb required">Preferred Time</ion-label>
+              <ion-select formControlName ="time" class="select-brds">
+                <ion-option value="12.00 AM - 01.00 AM">12.00 AM - 01.00 AM</ion-option>
+                <ion-option value="01.00 AM - 02.00 AM">01.00 AM - 02.00 AM</ion-option>
+                <ion-option value="02.00 AM - 03.00 AM">02.00 AM - 03.00 AM</ion-option>
+                <ion-option value="03.00 AM - 04.00 AM">03.00 AM - 04.00 AM</ion-option>
+                <ion-option value="04.00 AM - 05.00 AM">04.00 AM - 05.00 AM</ion-option>
+                <ion-option value="05.00 AM - 06.00 AM">05.00 AM - 06.00 AM</ion-option>
+                <ion-option value="06.00 AM - 07.00 AM">06.00 AM - 07.00 AM</ion-option>
+                <ion-option value="08.00 AM - 09.00 AM">08.00 AM - 09.00 AM</ion-option>
+                <ion-option value="10.00 AM - 11.00 AM">10.00 AM - 11.00 AM</ion-option>
+                <ion-option value="11.00 AM - 12.00 PM">11.00 AM - 12.00 PM</ion-option>
+                <ion-option value="12.00 PM - 01.00 PM">12.00 PM - 01.00 PM</ion-option>
+                <ion-option value="01.00 PM - 02.00 PM">01.00 PM - 02.00 PM</ion-option>
+                <ion-option value="02.00 PM - 03.00 PM">02.00 PM - 03.00 PM</ion-option>
+                <ion-option value="03.00 PM - 04.00 PM">03.00 PM - 04.00 PM</ion-option>
+                <ion-option value="04.00 PM - 05.00 PM">04.00 PM - 05.00 PM</ion-option>
+                <ion-option value="05.00 PM - 06.00 PM">05.00 PM - 06.00 PM</ion-option>
+                <ion-option value="06.00 PM - 07.00 PM">06.00 PM - 07.00 PM</ion-option>
+                <ion-option value="08.00 PM - 09.00 PM">08.00 PM - 09.00 PM</ion-option>
+                <ion-option value="10.00 PM - 11.00 PM">10.00 PM - 11.00 PM</ion-option>
+                <ion-option value="11.00 PM - 12.00 AM">11.00 PM - 12.00 AM</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+           <!--  <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" placeholder="Scheduled time" formControlName ="time" class="select-brd"></ion-datetime>
+            </ion-item> -->
+		   <p class="err-reds" *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">Please enter the scheduled time</p>
+	
+		</div>
+
+  <!-- <p>--------------------------one time end----------------------------</p> -->
+
+  <!-- <p>--------------------------recurring time start--------------------------</p> -->
+
+    <div *ngIf(recurring)>
+           <ion-label stacked class="label-lb required">Start date</ion-label>
+     
+        <ion-item>
+           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Start date" min={{this.date}} formControlName ="startdate"></ion-datetime>
+        </ion-item>
+          <p class="err-reds" *ngIf="!modalForm.controls.startdate.valid  && (modalForm.controls.startdate.dirty || submitAttempt)">Please enter the start date</p>
+            <ion-label stacked class="label-lb required">End date</ion-label>
+     
+        <ion-item>
+           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="End date" min={{this.date}} formControlName ="enddate"></ion-datetime>
+        </ion-item>
+          <p class="err-reds" *ngIf="!modalForm.controls.enddate.valid  && (modalForm.controls.enddate.dirty || submitAttempt)">Please enter the end date</p>
+      
+      <ion-label>Frequency</ion-label>
+      <ion-list radio-group>
+   <ion-item>
+    <ion-label>Fixed hours</ion-label>
+    <ion-radio value="fixedhours" (click)="fixed(fixedd)"></ion-radio>
+  </ion-item>
+   <ion-item>
+    <ion-label>Full Day</ion-label>
+    <ion-radio value="fullday" (click)="fullday(fulldays)"></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>Time slot</ion-label>
+    <ion-radio value="timeslot" (click)="timeslot(timeslots)"></ion-radio>
+  </ion-item>
+</ion-list>
+   <div *ngIf(fixedd)>
+           <ion-label stacked class="label-lb required">From time</ion-label>
+     
+        <ion-item>
+            <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" placeholder="Scheduled time" class="select-brd" formControlName ="fromtime"></ion-datetime>
+        </ion-item>
+         <p class="err-reds" *ngIf="!modalForm.controls.fromtime.valid  && (modalForm.controls.fromtime.dirty || submitAttempt)">Please enter the fromtime</p>
+            <ion-label stacked class="label-lb required">To time</ion-label>
+     
+        <ion-item>
+           <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" placeholder="Scheduled time" class="select-brd" formControlName ="totime"></ion-datetime>
+        </ion-item>
+         <p class="err-reds" *ngIf="!modalForm.controls.totime.valid  && (modalForm.controls.totime.dirty || submitAttempt)">Please enter the totime</p>
+        </div>
+         <div *ngIf(timeslots)>
+         <ion-list>
+            <ion-item>
+              <ion-label stacked class="label-lb required">Preferred Time</ion-label>
+              <ion-select formControlName ="preferredtime" class="select-brds">
+                <ion-option value="12.00 AM - 01.00 AM">12.00 AM - 01.00 AM</ion-option>
+                <ion-option value="01.00 AM - 02.00 AM">01.00 AM - 02.00 AM</ion-option>
+                <ion-option value="02.00 AM - 03.00 AM">02.00 AM - 03.00 AM</ion-option>
+                <ion-option value="03.00 AM - 04.00 AM">03.00 AM - 04.00 AM</ion-option>
+                <ion-option value="04.00 AM - 05.00 AM">04.00 AM - 05.00 AM</ion-option>
+                <ion-option value="05.00 AM - 06.00 AM">05.00 AM - 06.00 AM</ion-option>
+                <ion-option value="06.00 AM - 07.00 AM">06.00 AM - 07.00 AM</ion-option>
+                <ion-option value="08.00 AM - 09.00 AM">08.00 AM - 09.00 AM</ion-option>
+                <ion-option value="10.00 AM - 11.00 AM">10.00 AM - 11.00 AM</ion-option>
+                <ion-option value="11.00 AM - 12.00 PM">11.00 AM - 12.00 PM</ion-option>
+                <ion-option value="12.00 PM - 01.00 PM">12.00 PM - 01.00 PM</ion-option>
+                <ion-option value="01.00 PM - 02.00 PM">01.00 PM - 02.00 PM</ion-option>
+                <ion-option value="02.00 PM - 03.00 PM">02.00 PM - 03.00 PM</ion-option>
+                <ion-option value="03.00 PM - 04.00 PM">03.00 PM - 04.00 PM</ion-option>
+                <ion-option value="04.00 PM - 05.00 PM">04.00 PM - 05.00 PM</ion-option>
+                <ion-option value="05.00 PM - 06.00 PM">05.00 PM - 06.00 PM</ion-option>
+                <ion-option value="06.00 PM - 07.00 PM">06.00 PM - 07.00 PM</ion-option>
+                <ion-option value="08.00 PM - 09.00 PM">08.00 PM - 09.00 PM</ion-option>
+                <ion-option value="10.00 PM - 11.00 PM">10.00 PM - 11.00 PM</ion-option>
+                <ion-option value="11.00 PM - 12.00 AM">11.00 PM - 12.00 AM</ion-option>
+              </ion-select>
+            </ion-item>
+             <p class="err-reds" *ngIf="!modalForm.controls.preferredtime.valid  && (modalForm.controls.preferredtime.dirty || submitAttempt)">Please enter the preferredtime</p>
+          </ion-list>
+
+        </div>
+    
+ 
+    </div>
+<!-- <p>---------recurring time end-----------------</p> -->
+
+   
+
+
+    	</form>
+  
+
 
              <ion-item class="check-bx">
              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>	
@@ -66,6 +195,13 @@
             <small *ngIf="checkTerms">
                 <p class="err-reds">Kindly agree to the terms and conditions</p>
             </small>
+
+<!-- 
+            <ion-calendar [(ngModel)]="dateMulti"
+              [options]="optionsMulti"
+              [type]="type"
+              [format]="'YYYY-MM-DD'">
+            </ion-calendar> -->
 </ion-content>
 
 
@@ -84,10 +220,10 @@
     </ion-buttons>
     
     <ion-buttons end >
-      <button ion-button color="royal" large icon-right showWhen="ios" (click)="submit()">&nbsp;Submit
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="submit()">&nbsp;Next
        <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button ion-button color="light" large icon-right hideWhen="ios" (click)="submit()">&nbsp;Submit
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="submit()">&nbsp;Next
         <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>

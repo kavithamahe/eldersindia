@@ -29,6 +29,8 @@ export class CommunityServices {
   connectlist:any;
   send:any;
   token:any;
+  CommunityId:any;
+  friendsID:any;
   //id:number;
   user_id:number = 0;
   getCommunityPostsUrl:any;
@@ -59,7 +61,7 @@ export class CommunityServices {
   }
 
   fileUpload(id,file){
- let formdata = new FormData()
+ //let formdata = new FormData()
  let posts:{community_id:string,image:File,videourl:string,message:string} = { community_id:id, image:file,videourl:"",message:"" }
      return this.http.post(`${this.getCommunityPostsUrl }addCommunityPost`,posts,this.options)
       .map(res =>res.json());
@@ -283,8 +285,8 @@ myprofile(id){
      return this.http.post(`${this.getCommunityPostsUrl }sendComments`,this.post,this.options)
       .map(res =>res.json());
   }
-  sendReply(uid_from,comments_id,comments){
-    this.post = {"info":{"comments":comments,"uid_from":this.user_id,"uid_to":uid_from,"comment_id":comments_id}}
+  sendReply(uid_from,post_id,comments_id,comments){
+    this.post = {"info":{"comments":comments,"post_id":post_id,"uid_from":this.user_id,"uid_to":uid_from,"comment_id":comments_id}}
 
      return this.http.post(`${this.getCommunityPostsUrl }sendReply`,this.post,this.options)
       .map(res =>res.json());
@@ -321,9 +323,14 @@ myprofile(id){
     return this.http.post(`${this.getCommunityPostsUrl }getElderListById`,elderData,this.options)
     .map(res =>res.json());
   }
+selectsubcategory(servicecategory){
+   this.manage={"categoryId":[servicecategory]}
 
+    return this.http.post(`${this.getCommunityPostsUrl }getServiceByCategory`,this.manage,this.options)
+    .map(res =>res.json());
+}
   getElderMasterDetails(){
-   this. body = {"get":["FunctionalArea","Educational","Specialization","Locations","AreaofInterest","Skills","Relations","InService"]};
+   this. body = {"get":["FunctionalArea","Educational","Specialization","Locations","AreaofInterest","Skills","Relations","InService","serviceCategory","BlogCategory","ServiceOffered"]};
      return this.http.post(`${this.getCommunityPostsUrl }getElderMasterDetails`,this.body,this.options)
     .map(res =>res.json());
   }
@@ -378,5 +385,19 @@ myprofile(id){
    return this.http.post(`${this.getCommunityPostsUrl }elderOnBoarding`,dependentData,this.options)
     .map(res =>res.json());
   }
+   getConnections(){
+       let _request= {};
+      // console.log(this.rootUrl+'getConnections');
+    return this.http.post(`${this.getCommunityPostsUrl }getConnections`,_request,this.options)
+      .map(res => res.json()); 
+   } 
+   inviteFriends(CommunityId,friendsID){
+    let _request= {'friends':{'user_id':friendsID},'shareurl':this.getCommunityPostsUrl+'/#/communityDetail/'+CommunityId};
+     //let _request={};
+       console.log(_request);
+     
+    return this.http.post(`${this.getCommunityPostsUrl }inivtefriend`,_request,this.options)
+      .map(res => res.json()); 
+   }  
     
 }

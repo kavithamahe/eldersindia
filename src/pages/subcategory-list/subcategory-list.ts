@@ -40,8 +40,8 @@ export class SubcategoryListPage {
   lead_time:any='00:00';
   constructor( public loadingCtrl: LoadingController, public providerService: ServiceProvider, public navCtrl: NavController, public altCtrl:AlertController, public navParams: NavParams,public toastCtrl: ToastController,public modalCtrl: ModalController, public mp:ModalContentPage, public storage:Storage) {
     this.date = new Date().toISOString();
-    console.log(this.date);
-    console.log("this is sub category list page");
+    //console.log(this.date);
+    //console.log("this is sub category list page");
       this.location_id = navParams.get("location_id");
       this.service_id = navParams.get("service").id;
       this.serviceTitle = navParams.get("service").name;   
@@ -62,7 +62,7 @@ export class SubcategoryListPage {
     }
     
 loadSubcategoryList(subCategory_id,location_id){
-      console.log("loading vendor list for the service");
+      //console.log("loading vendor list for the service");
       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
       this.subCategorydata = {subCategoryId : subCategory_id, flag:"1", locationId : location_id};
@@ -72,14 +72,15 @@ loadSubcategoryList(subCategory_id,location_id){
                             this.sublists = data.result.info;
                             this.dependentLists = data.result.info.dependentLists;
                             this.serviceData = data.result.info.requestServices;
+                            //console.log(this.serviceData);
                             this.lead_time =data.result.info.lists[0].lead_time;
-                            console.log(this.dependentLists);
+                            //console.log(this.dependentLists);
                             if((Object.keys(this.dependentLists).length<=0) && this.userType == 'sponsor')
                             {
                              this.showToaster("There is no dependent. You can not apply job!.");
                             this.dependentLen=false;
                             }
-                            console.log("dependentList data : "+this.dependentLists);
+                            //console.log("dependentList data : "+this.dependentLists);
                             loading.dismiss();
                             },
                       (err) =>{               
@@ -111,7 +112,8 @@ loadSubcategoryList(subCategory_id,location_id){
         let getHours=(minutess + minutes)/60;
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
 
-    let serviceRequestData = {"problem": this.serviceTitle, "datetime": lead_time, "dependentId": this.elderId, "mobile_no": ""};
+    let serviceRequestData = {"problem": this.serviceTitle, "datetime": lead_time, "dependentId": this.elderId, "mobile_no": "","serviceType":"One time",
+    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":""};
     
             this.serviceRequestCall(serviceRequestData,vendorData.id);
     }else{
@@ -146,7 +148,7 @@ loadSubcategoryList(subCategory_id,location_id){
     
     this.modal.present();
     if(modalPage != "instant"){
-      console.log("test venkatesh");
+      //console.log("test venkatesh");
      // this.navCtrl.setRoot(ServicerequestPage);
     }
   }
@@ -157,12 +159,22 @@ loadSubcategoryList(subCategory_id,location_id){
   serviceRequestCall(service_request_data,vendorId){
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
-    let requestServiceData = {"category":this.serviceData.category,"category_id":this.serviceData.category_id,"location_id":this.location_id,"vendor_id":vendorId, "sub_category_id":this.serviceData.sub_category_id, "service_id":this.serviceData.service_id, "problem":service_request_data.problem,"service":this.serviceData.service, "datetime":service_request_data.datetime, "dependentid":service_request_data.dependentId, "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,"subcategory":this.serviceData.subcategory}
+   
+
+    let requestServiceData = {"category":this.serviceData.category,"service":this.serviceData.service,
+    "category_id":this.serviceData.category_id,"location_id":this.location_id,"vendor_id":vendorId,
+     "sub_category_id":this.serviceData.sub_category_id,
+      "service_id":this.serviceData.service_id, "problem":service_request_data.problem,
+     "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
+      "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,
+      "subcategory":this.serviceData.subcategory, "durations":"",
+       "exclude_days":"","from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"package_id":"","quantity":"",
+       "selected_dates":"","serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time}
 
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
        .subscribe(
         data =>{
-          console.log("service request web service");
+         // console.log("service request web service");
                  console.log(".......",data.result);
                  this.providerService.showToast(data.result);
                   if(this.scheduleModal != "instant"){
@@ -296,7 +308,8 @@ export class InstantRequestModalPage {
         var minutes = (+a[0]) * 60 + (+a[1]);
         let getHours=(minutess + minutes)/60;
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
-    let serviceRequestData = {"problem": this.service, "datetime": lead_time, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile};
+    let serviceRequestData = {"problem": this.service, "datetime": lead_time, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile,"serviceType":"One time",
+    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":""};
     this.viewCtrl.dismiss(serviceRequestData);
   }else{
     this.selected = true;

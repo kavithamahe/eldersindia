@@ -58,6 +58,7 @@ user_dob:any;
     if(this.user_type == "sponsor"){
       this.navCtrl.push(EditProfilePage,{profileData:this.profileData});
     }else{
+      console.log(this.profileData);
       this.navCtrl.push(EldersPage,{fuctionality:"profileEdit",profileData:this.profileData});
     }
   }
