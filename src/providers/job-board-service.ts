@@ -124,6 +124,21 @@ locationSearch:any=[];
     return this.http.post(this.rootUrl+'applyJob',_request,this.options)
       .map(res => res.json()); 
   }
+    applyjobelder(dependantId,user_id,file_name,jobId) 
+ {
+  let body=new FormData();
+  console.log(body);
+  body.append('job_id',jobId);
+  body.append('uid',user_id);
+  body.append('dependantId',dependantId);
+  body.append('filename',file_name);
+
+    let headers = new Headers();
+     headers.append("Content-Type","application/formdata");
+      //let _request={"info":body};
+     return this.http.post(this.rootUrl+'applyJob',body,headers)
+      .map(res => res.json()); 
+  }
   appliedJobs(functionalArea,location) 
   {
   if(functionalArea!='' && functionalArea!=null)

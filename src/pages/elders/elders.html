@@ -451,11 +451,41 @@
   </div> -->
     </div>
     
-    </form>
+   
 
    
 
-    <div *ngIf="functionality == 'add' || functionality == 'edit'">
+    <div *ngIf="functionality == 'add'">
+     
+          <ion-row>
+            <ion-col class="title-depen">
+              <div class="personal-d"><p>Login details</p></div>
+            </ion-col>
+          </ion-row>
+     <br/>
+   
+            <ion-label class="label-tittle required">Email address</ion-label>
+        <ion-item>
+                <ion-input read-only [(ngModel)]="elder_email" formControlName="elder_email"
+                [class.invalid]="!myForm.controls.elder_email.valid && (myForm.controls.elder_email.dirty)" placeholder="Email address" value={{elder_email}}>
+                </ion-input>
+        </ion-item>
+        <small *ngIf="!myForm.controls.elder_email.valid  && (myForm.controls.elder_email.dirty || submitAttempt)">
+                <p class="valid err-reds">This field is required.</p>
+          </small>
+            <ion-label class="label-tittle required">Password</ion-label>
+      <ion-item>
+         <ion-input [(ngModel)]="elder_password" formControlName="elder_password"
+                [class.invalid]="!myForm.controls.elder_password.valid && (myForm.controls.elder_password.dirty)" type="{{mytype}}" placeholder="Password">
+              </ion-input>
+        </ion-item>
+        <small *ngIf="!myForm.controls.elder_password.valid  && (myForm.controls.elder_password.dirty || submitAttempt)">
+                <p class="valid err-reds">This field is required.</p>
+          </small>
+          </div>  
+           </form>
+
+    <div *ngIf="functionality == 'edit'">
      
           <ion-row>
             <ion-col class="title-depen">
@@ -469,12 +499,14 @@
                 <ion-input read-only [(ngModel)]="elder_email" [ngModelOptions]="{standalone: true}" placeholder="Email address" value={{elder_email}}>
                 </ion-input>
         </ion-item>
+      
             <ion-label class="label-tittle">Password</ion-label>
       <ion-item>
-              <ion-input [(ngModel)]="elder_password" [ngModelOptions]="{standalone: true}" type="{{mytype}}" placeholder="Password">
+            <ion-input [(ngModel)]="elder_password" [ngModelOptions]="{standalone: true}" type="{{mytype}}" placeholder="Password">
               </ion-input>
         </ion-item>
-          </div>  
+       
+          </div> 
       <br/>
       </form>
      

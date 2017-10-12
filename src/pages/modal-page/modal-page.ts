@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController,LoadingController,ModalController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {DatePicker} from 'ionic-native';
+import { CalendarComponentOptions } from 'ion2-calendar'
+import {Platform} from 'ionic-angular';
+
 
 import { ServiceProvider } from '../../providers/service-provider';
 import { TermsModalPage } from '../../pages/terms-modal/terms-modal';
+// import { Modelpage1PagePage } from '../../pages/modelpage1/modelpage1';
+
 
 import { Storage } from '@ionic/storage';
 
@@ -37,9 +43,23 @@ export class ModalContentPage {
   maxDate:any="";
   theBigDay:any=new Date();
   //currentDate:any=new Date();
-
-  constructor(public modalCtrl: ModalController, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
+  searchButton:boolean=false;
+  searchValue:any;
+  recurring:boolean=false;
+  searchValues:any;
+  fixedd:boolean=false;
+  searchValuess:any;
+  timeslots:boolean=false;
+  searchValuesss:any;
+  fulldays:boolean=false;
+  searchValuessss:any;
+  onetimes:any;
+  constructor(platform: Platform,public modalCtrl: ModalController, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
+   
+
+
+
     // this.minDate=new Date();
     // this.maxDate=(new Date().getFullYear() +40)+"-12-31";
      this.date = new Date().toISOString();
@@ -62,6 +82,11 @@ export class ModalContentPage {
         time: ['',Validators.compose([Validators.required])],
         contact: ['',Validators.compose([Validators.minLength(10),Validators.maxLength(12), Validators.pattern('[0-9]*'), Validators.required])],
         //dependents: ['',Validators.compose([Validators.required])]
+        startdate:['',Validators.compose([Validators.required])],
+        enddate:['',Validators.compose([Validators.required])],
+        fromtime:['',Validators.compose([Validators.required])],
+        totime:['',Validators.compose([Validators.required])],
+        preferredtime:['',Validators.compose([Validators.required])],
     });
  this.authForm = formBuilder.group({
    dependents: ['',Validators.compose([Validators.required])]
@@ -77,6 +102,7 @@ export class ModalContentPage {
       }
 
    }
+   
 
    termsChanged(){
      console.log(this.terms);
@@ -89,6 +115,31 @@ export class ModalContentPage {
 onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
 }
+
+  onetime(searchValue){
+    this.recurring=false;
+     this.searchButton=!searchValue;
+   }
+   recurringtime(searchValues){
+    this.searchButton=false;
+     this.recurring=!searchValues;
+   }
+     fixed(searchValuess){
+      this.timeslots=false;
+       this.fulldays=false;
+     this.fixedd=!searchValuess;
+   }
+    timeslot(searchValuesss){
+      this.fixedd=false;
+      this.fulldays=false;
+     this.timeslots=!searchValuesss;
+   }
+   fullday(searchValuessss){
+    this.timeslots=false;
+     this.fixedd=false;
+      this.fulldays=!searchValuessss;
+   }
+
    openTerms(){
      let termsModal = this.modalCtrl.create(TermsModalPage);
      termsModal.present();
@@ -100,13 +151,65 @@ onlyNumberKey(event) {
       }
      })
    }
-
+// submit(){
+//        if(this.userType == 'sponsor'){
+//        if(!this.authForm.valid || (this.terms == false)){
+//           this.submitAttempt = true;
+//            if(this.terms == false){
+//             this.checkTerms = true;
+//           }
+//        }
+//        else{
+//           this.submitAttempt = false;
+      
+//       if(this.userType != 'sponsor'){
+//       this.dependent = this.elderId ;
+//     }else{
+//       this.dependent = this.authForm.value.dependents;
+//     }
+      
+//       let serviceDatas = {"problem": this.modalForm.value.problem, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
+//       console.log(serviceDatas);
+//       let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceDatas});
+//    serviceModal.present();
+//        }
+//      }
+// else{
+//     if(!this.modalForm.valid || (this.terms == false)){
+//       this.submitAttempt = true;
+//       this.providerService.showToast("Please Enter The Required Fields");
+//           if(this.terms == false){
+//             this.checkTerms = true;
+//           }
+//     }else{
+//       this.submitAttempt = false;
+      
+//       if(this.userType != 'sponsor'){
+//       this.dependent = this.elderId ;
+//     }else{
+//       this.dependent = this.authForm.value.dependents;
+//     }
+//  let serviceDatas = {"problem": this.modalForm.value.problem, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
+    
+//    let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceDatas});
+//    serviceModal.present();
+//      }
+// }
+// }
   submit() {
+      if(this.searchButton == true){
+        this.onetimes = "One time";
+      }else{
+        this.onetimes = "Recurring";
+      }
+      console.log(this.onetimes);
+    console.log(this.onetime);
      if(this.userType == 'sponsor'){
        if(!this.authForm.valid || (this.terms == false)){
           this.submitAttempt = true;
            if(this.terms == false){
             this.checkTerms = true;
+          
           }
        }
        else{
@@ -117,8 +220,11 @@ onlyNumberKey(event) {
     }else{
       this.dependent = this.authForm.value.dependents;
     }
-      
-      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
+    
+      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":"",
+       "exclude_days":"","from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"package_id":"","quantity":"","selected_dates":"",
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime};
       console.log(serviceData);
       this.viewCtrl.dismiss(serviceData);
        }
@@ -139,23 +245,23 @@ else{
       this.dependent = this.authForm.value.dependents;
     }
       
-      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
-      console.log(serviceData);
-      this.viewCtrl.dismiss(serviceData);
-    }
-}
+       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
+       console.log(serviceData);
+       this.viewCtrl.dismiss(serviceData);
+     }
+ }
       
     
   
   }
-// edit(){
-// if(this.userType != 'sponsor'){
-//       this.dependent = this.elderId ;
-//     }
-//      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
-//       console.log(serviceData);
-//       this.viewCtrl.dismiss(serviceData);
-// }
+edit(){
+if(this.userType != 'sponsor'){
+      this.dependent = this.elderId ;
+    }
+     let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
+      console.log(serviceData);
+      this.viewCtrl.dismiss(serviceData);
+}
   dismiss(){
       this.viewCtrl.dismiss("dismiss");
   }

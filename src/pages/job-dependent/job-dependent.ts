@@ -32,7 +32,10 @@ nativepath:any;
 file_name:any;
 user_type:any;
 submitAttempt:any;
+jobId:any;
   constructor(public formBuilder: FormBuilder,private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
+  this.jobId=navParams.get("jobId");
+console.log(this.jobId);
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
     storage.get('user_type').then((user_type) => { this.user_type=user_type;});
@@ -44,7 +47,7 @@ submitAttempt:any;
   });
    this.authForm = formBuilder.group({
         elder_dependent: ['', Validators.compose([Validators.required])],
-        file_name: ['', Validators.compose([Validators.required])],
+        //file_name: ['', Validators.compose([Validators.required])],
    })
 
 }
@@ -91,31 +94,55 @@ dismiss() {
  }
  submitDependent()
  {
+  console.log(this.dependent);
     if(!this.authForm.valid){
       this.submitAttempt = true;
       this.showToaster("Enter the required fields");
     }
     else{
       this.submitAttempt = false;
-   let data={'dependent':this.dependent,'file_name':this.file_name};
-   this.viewCtrl.dismiss(data);
- }
- }
-  openCamera(){
-console.log("open success");
-    this.fileChooser.open()
-      .then((imageData) => {
+      this.jobBoardService.applyjobelder(this.dependent,this.user_id,this.file_name,this.jobId).subscribe((applyjob) => {
+        console.log(applyjob);
+ })
+   // let data={'dependent':this.dependent,'file_name':this.file_name,};
+   // console.log(data);
+   // this.viewCtrl.dismiss(data);
 
-      console.log("filedfsdf"+imageData );
-         (<any>window).FilePath.resolveNativePath(imageData, (result) => {
-    this.nativepath = result;
-     this.file_name = this.nativepath.split("/").pop();
-console.log("name"+this.file_name);
-    console.log("nativepath"+ this.nativepath);
+ }
+ }
+//   openCamera(){
+// console.log("open success");
+//     this.fileChooser.open()
+//       .then((imageData) => {
+
+//       console.log("filedfsdf"+imageData );
+//          (<any>window).FilePath.resolveNativePath(imageData, (result) => {
+//     this.nativepath = result;
+//      this.file_name = this.nativepath.split("/").pop();
+// console.log("name"+this.file_name);
+//     console.log("nativepath"+ this.nativepath);
     
-  })
-        this.jobBoardService.upload(imageData);
-      });
+//   })
+//         this.jobBoardService.upload(imageData);
+//       });
 
-  }
+//   }
+  fileChange(event) {
+    let fileList: FileList = event.target.files;
+   // this.file_name=fileList[0].name;
+    //console.log( this.file_name);
+    if(fileList.length > 0) {
+        let file: File = fileList[0];
+        this.file_name=file.name;
+        console.log(file.name);
+        let formData:FormData = new FormData();
+        formData.append('docs[0]', file, file.name);
+        console.log(formData);
+        let headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + this.token);
+        headers.append('Accept', 'application/json');
+       
+      
+    }
+}
 }

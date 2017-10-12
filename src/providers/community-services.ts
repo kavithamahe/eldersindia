@@ -285,8 +285,8 @@ myprofile(id){
      return this.http.post(`${this.getCommunityPostsUrl }sendComments`,this.post,this.options)
       .map(res =>res.json());
   }
-  sendReply(uid_from,comments_id,comments){
-    this.post = {"info":{"comments":comments,"uid_from":this.user_id,"uid_to":uid_from,"comment_id":comments_id}}
+  sendReply(uid_from,post_id,comments_id,comments){
+    this.post = {"info":{"comments":comments,"post_id":post_id,"uid_from":this.user_id,"uid_to":uid_from,"comment_id":comments_id}}
 
      return this.http.post(`${this.getCommunityPostsUrl }sendReply`,this.post,this.options)
       .map(res =>res.json());

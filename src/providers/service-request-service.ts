@@ -30,12 +30,12 @@ rootUrl:any;
   serviceRequestList() 
   {
   
-   let _request= {"info":{"list":true,"searchValue":"","status":""}};
+   let _request= {"info":{"list":true,"sort":"","searchValue":"","status":""}};
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
   }
   searchConnection(term){
-     let _request= {"info":{"list":true,"searchValue":term,"status":""}};
+     let _request= {"info":{"list":true,"sort":"","searchValue":term,"status":""}};
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
   }
@@ -56,7 +56,7 @@ rootUrl:any;
   }
   serviceRequestScroll(nextPageURL)
    {
-     let _request= {"info":{"list":true,"searchValue":"","status":""}};
+     let _request= {"info":{"list":true,"sort":"","searchValue":"","status":""}};
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }

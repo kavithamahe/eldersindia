@@ -14,6 +14,9 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Diagnostic } from 'ionic-native';
 import { CameraPreview, CameraPreviewRect } from 'ionic-native';
 //import { Permissions } from '@ionic-native/android-permissions';
+import { CalendarModule } from "ion2-calendar";
+
+
 import {MomentModule} from 'angular2-moment';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
@@ -85,6 +88,7 @@ import { InstantRequestModalPage } from '../pages/subcategory-list/subcategory-l
 import { ServiceInfoPage } from '../pages/service-info/service-info';
 import { ServiceModalPage } from '../pages/service-modal/service-modal';
 import { ModalContentPage } from '../pages/modal-page/modal-page';
+import { Modelpage1PagePage } from '../pages/modelpage1/modelpage1';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
@@ -144,6 +148,7 @@ const cloudSettings: CloudSettings = {
     SubcategoryListPage,
     ServiceInfoPage,
     ModalContentPage,
+    Modelpage1PagePage,
     InstantRequestModalPage,
     NewsPage,
     ViewNewsPage,
@@ -159,6 +164,7 @@ const cloudSettings: CloudSettings = {
     TermsModalPage
   ],
   imports: [
+  
     IonicModule.forRoot(MyApp,AppConfig,{
        tabsHideOnSubPages:true
     }),
@@ -213,6 +219,7 @@ const cloudSettings: CloudSettings = {
     SubcategoryListPage,
     ServiceInfoPage,
     ModalContentPage,
+    Modelpage1PagePage,
     InstantRequestModalPage,
     NewsPage,
     ViewNewsPage,

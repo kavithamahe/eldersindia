@@ -52,7 +52,8 @@
 					<button ion-button clear (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p class="liks-comments"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</p></button>
 		 		</ion-col>
 				<ion-col *ngIf="comment.likes == 0 || comment.likes == null" style="padding:0px;">
-					<button ion-button clear (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p class="liks-comments">&nbsp;Like</p></button>
+					<button ion-button clear (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p class="liks-comments">&nbsp;Like</p>
+					</button>
 				</ion-col>
 			 
 			  <ion-col style="padding:0px;">

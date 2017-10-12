@@ -233,6 +233,8 @@ mytype:string ="password";
                 this.experienceAddress(),
             ]),
           area_of_interest: ['', Validators.compose([Validators.required])],
+           elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
+        elder_password:['', Validators.compose([Validators.required])],
         job_type: ['', Validators.compose([Validators.required])],
         skill_set: ['', Validators.compose([Validators.required])],
         //file_name: ['', Validators.compose([Validators.required])],

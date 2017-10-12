@@ -29,12 +29,12 @@
 					<ion-row>
 						<ion-col width-20>
 							<ion-avatar item-left>
-					          	<img  [src]="useful.metalink_image" (click)="openUrl(useful.metalink_url)" 
-					          	[hidden]="!useful?.metalink_image">
+					          	<img  [src]="useful.featured_image" (click)="openUrl(useful.news_link)" 
+					          	[hidden]="!useful?.featured_image">
 					      	</ion-avatar>
 					    </ion-col>
 						<ion-col width-80>		
-							<h1 (click)="openUrl(useful.metalink_url)" text-capitalize>{{useful.metalink_title}}</h1>
+							<h1 (click)="openUrl(useful.news_link)" text-capitalize>{{useful.title}}</h1>
 
 						    <em class="time-datem"><i class="fa fa-clock-o"></i>
 			          		{{useful.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}

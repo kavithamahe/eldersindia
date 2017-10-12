@@ -31,7 +31,8 @@
 		</ion-col>
 		<ion-col width-60 class="text-alg">			
 		<h2 (click)="serviceInfo(service_list)">{{service_list.name}}</h2>
-			 <p  class="rating-clr"><rating readOnly="true" [(ngModel)]="rate" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"> 
+			 <p  class="rating-clr"><rating readOnly="true" [(ngModel)]="rate" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" 
+			 nullable="false"> 
 			  </rating>
 		 	 </p>
 		    <p style="color:#777; font-size:l7px;">
@@ -42,7 +43,7 @@
 		    You Save <i class="fa fa-inr"style="color:red; font-size:14px;"></i> <span style="color:red; font-size:14px;">{{service_list.percentage_cost}}</span> (<span style="color:#777;">{{service_list.discount_rate}} % </span>)
 		    </span>
 		    </p>
-		    <p [hidden]="!service_list?.lead_time">Minimum {{service_list.lead_time}} minute to for serve you</p>
+		    <p [hidden]="!service_list?.lead_time">Minimum {{service_list.lead_time}} hour to for serve you</p>
 			<button ion-button small *ngIf="dependentLen" 
 			(click)="openModal('scheduleModal',service_list)" class="btn-warnings">Schedule
 			</button>

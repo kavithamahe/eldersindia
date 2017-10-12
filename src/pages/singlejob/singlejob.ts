@@ -108,7 +108,7 @@ companyname:any;
     }
     else
     {
-      let modal = this.modalCtrl.create(JobDependentPage,{jobId});
+      let modal = this.modalCtrl.create(JobDependentPage,{"jobId":jobId});
     modal.present();
       // this.jobDependent(jobId);
       // console.log("fsdf" +jobId );

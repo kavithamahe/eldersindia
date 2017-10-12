@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController,LoadingController } from 'ionic-angular';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
-import { Http,Headers,RequestOptions } from '@angular/http';
+import { Headers,RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
 
 import { CommunityServices } from '../../providers/community-services';
 
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { Transfer } from '@ionic-native/transfer';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class CommunitymessagePage {
    subject:any;
    message:any;
    member_id:any;
-   file_path:any;
+   file_path:any='';
    nativepath: any='';
    file_name:any='';
    name:any;
