@@ -331,6 +331,8 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .tid-cd 											        {color:#025fa9 !important;font-size:17px !important;font-weight:400 !important;text-align:left !important; float:left;}
 .labels-bds													{background:rgba(19, 19, 20, 0.58) !important;border-right:4px solid #1d6ab2 !important;color:#fff !important; font-weight:600;float:left;font-size:12px !important;padding:9px;position:absolute;
 															 right:-1px;top:15px;width:auto;}
+.labels-bdss													{background:rgba(19, 19, 20, 0.58) !important;border-right:4px solid #1d6ab2 !important;color:#fff !important; font-weight:600;float:left;font-size:12px !important;padding:9px;position:absolute;
+															 right:-1px;bottom:50px;width:auto;}															 
 .video-updates                                              {padding:0px 4px !important;}
 .user-profile												{width:80px;height:80px; border:1px solid #ccc;}
 .wel-comemem											    {color:#424a95 !important;font-size:18px !important;margin: 0; padding:10px 0px 0px 10px;}
@@ -460,9 +462,8 @@ ion-segment													{margin:7px; width:96%; border-radius:5px; }
 .edit-profile-view .item-md .item-inner .input-wrapper .input-md .text-input-md{ font-size:15px; width:95%; margin-left:2px;}
 .edit-profile-view .item-md .item-inner .input-wrapper .select-brd{width:95% !important; font-size:15px; padding-left:6px !important; height:38px; margin-left:2px;}
 
-.listed-profiles{  margin:10px !important; float:left;width:94%;background:rgba(111, 134, 210, 0.18); border-left:4px solid #ff7fe6;}
-.listed-profiles p{ font-size:16px; padding-left:10px; border-bottom:1px solid #F0FFFF;  margin:0px;padding:6px;}
-.listed-profiles p i{ width:22px; font-size:16px; color:#808080;}
+
+
 .depende-elder button .button-inner{justify-content:left;}
 .depende-elder button .button-inner p{ width:90%; text-align:left;}
 .footer-defent .item-md{ background:#404996 !important;}
@@ -803,6 +804,7 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content  {padding:0px !import
 
 
 /*-------------------------------------Android platform css -------------------------------------*/
+
 .list-md{ margin:0px !important;}
 .my-list-item	{    display: block;
     position: relative;

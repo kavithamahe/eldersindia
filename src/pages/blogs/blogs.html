@@ -28,7 +28,7 @@
           </ion-list>
 <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>
 
-<ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)">
+<ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)" class="community-img">
 <ion-row>
   <ion-col width-20>
 	  <ion-avatar item-left>
@@ -53,7 +53,7 @@
   </ion-card-content>
   <img src="{{imageUrl+blogs?.featured_image}}" [hidden]="!blogs?.featured_image" />
   <span [hidden]="!blogs.category_name"> 
-    <label class="labels-bds"> {{blogs.category_name}}</label>
+    <label class="labels-bdss"> {{blogs.category_name}}</label>
   </span>
   <span *ngIf="blogs.allow_featured == 1"> 
     <label>Featured</label>
