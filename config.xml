@@ -68,5 +68,4 @@
     <plugin name="phonegap-plugin-push" spec="1.10.2">
         <variable name="SENDER_ID" value="604025131571" />
     </plugin>
-    
 </widget>

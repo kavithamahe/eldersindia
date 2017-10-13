@@ -1,0 +1,63 @@
+<!--
+  Generated template for the PackageRequestPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Package Requests</ion-title>
+   <!-- <ion-buttons right>    
+      <button ion-button icon-only>
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>-->
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>
+<ion-item>
+  <ion-label>Status</ion-label>
+  <ion-select [(ngModel)]="packstatus" (ionChange)="onSelectChange($event)">
+    <ion-option value="0">Pending</ion-option>
+    <ion-option value="1">Active</ion-option>
+    <ion-option value="2">Rejected</ion-option>
+  </ion-select>
+</ion-item>
+<ion-card *ngFor="let package of packageRequest" class="job-detailsview">
+  <ion-item (click)="viewJob(package?.id)" test-wrap>
+  <ion-row>
+  <ion-col width-75 text-wrap>
+    <h2 text-wrap text-capitalize>{{package?.package_name}}</h2>
+
+    <ion-badge *ngIf="package.req_status == 1">Active</ion-badge>
+    <ion-badge *ngIf="package.req_status == 0">Pending</ion-badge>
+    <ion-badge *ngIf="package.req_status == 2">Rejected</ion-badge>
+    <p>Service provider : {{package?.vendor_name}} </p>
+    <p>Elder Name : {{package?.name}} {{package.last_name}} </p>
+    <p>Requested Date : {{package?.created_at}}</p>	
+    <p>Expiry Date :{{package?.expire}} </p>
+	</ion-col>
+  <ion-col width-25>
+ 	
+
+  </ion-col>
+  </ion-row>
+  </ion-item>
+</ion-card>
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

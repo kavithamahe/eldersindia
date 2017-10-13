@@ -24,11 +24,42 @@
 </ion-header>
 
 <ion-content padding style="background:#F3F9FE;">
+
 <div class="service-top-title"></div>
 
 <ion-row>
    <ion-col>
    <div class="service-listed">
+   <ion-item class="mem-title">
+            
+      <ion-label><p>Location</p></ion-label>
+      <ion-select [(ngModel)]="serviceLocation" class="sub-cate-slec" (ionChange)='locationChanged()'>
+        <ion-option class="sub-cate-slec" value="">Select location</ion-option>
+           <ion-option class="sub-cate-slec" *ngFor = "let location of locations" value={{location.id}}>{{location.location}}
+        </ion-option>
+      </ion-select>
+     
+      </ion-item> 
+      <ion-item> <p> &nbsp;Packages ({{packageCount}}) </p> </ion-item>  
+    <ion-slides slidesPerView= "2">
+        <div *ngFor="let package of packages; let i=index" text-wrap>
+           <ion-slide (click)="viewPackage(package.id)" class="slide-border">
+            <ion-item style="padding-left:0px;" >
+              <ion-col> 
+                <div style="float:left;width:25%;" >
+                <img [src]="imageUrl+package?.logo" style="height:50px;width:50px;margin:2px;" />
+                </div>
+                <div style="float:left;width:65%;margin:5px">
+                <p>{{package.package_name | words :1 : '....'}} </p>
+                <p class='ellipsis'>{{package.package_description}}</p>
+                <p class="package-color">{{package.package_amount}}</p>
+                </div>
+              </ion-col>
+            </ion-item>
+          </ion-slide>
+        </div>
+        </ion-slides>
+
 <button *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full (click)="subCategory(service)" class="myblock service-bg{{i}}">
 
 <div class="left-icons">
@@ -36,9 +67,6 @@
 <i *ngIf="!service.icon" class="fa fa-bolt" aria-hidden="true"></i>
 <p>{{service.service}}</p>
 </div>
-<!--<p><ion-icon  name="ios-home"></ion-icon></p>-->
-
-
 </button>
 </div>
    </ion-col>

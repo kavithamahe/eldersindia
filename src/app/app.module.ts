@@ -13,7 +13,8 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Diagnostic } from 'ionic-native';
 import { CameraPreview, CameraPreviewRect } from 'ionic-native';
 //import { Permissions } from '@ionic-native/android-permissions';
-import { CalendarModule } from "ion2-calendar";
+import { CalendarModule } from 'ionic3-calendar';
+import { Calendar } from '@ionic-native/calendar';
 
 
 import {MomentModule} from 'angular2-moment';
@@ -44,6 +45,9 @@ import { CreateMessagePage } from '../pages/create-message/create-message';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 import { FirsttimeloginPagePage } from '../pages/firsttimelogin/firsttimelogin';
 
+//packages related pages
+import {PackageRequestPagePage } from '../pages/package-request/package-request';
+import {PackageDetailPagePage } from '../pages/package-detail/package-detail'; 
 
 import { ServiceprovidersPage } from '../pages/serviceproviders/serviceproviders';
 import { ServicerequestPage } from '../pages/servicerequest/servicerequest';
@@ -128,6 +132,8 @@ import { ServiceProvider } from '../providers/service-provider';
     CreateMessagePage,
     ViewMessagesPage,
     ServiceprovidersPage,
+    PackageRequestPagePage,
+    PackageDetailPagePage,
     ServicerequestPage,
     ViewServiceRequestPage,
     BlogsPage,
@@ -159,7 +165,7 @@ import { ServiceProvider } from '../providers/service-provider';
     TermsModalPage
   ],
   imports: [
-  
+
     IonicModule.forRoot(MyApp,AppConfig,{
        tabsHideOnSubPages:true
     }),
@@ -171,6 +177,7 @@ import { ServiceProvider } from '../providers/service-provider';
     BrowserModule,
     Ng2EmojiModule,
     MomentModule,
+    CalendarModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -199,6 +206,8 @@ import { ServiceProvider } from '../providers/service-provider';
     CreateMessagePage,
     ViewMessagesPage,
     ServiceprovidersPage,
+    PackageRequestPagePage,
+    PackageDetailPagePage,
     ServicerequestPage,
     ViewServiceRequestPage,
     BlogsPage,
@@ -230,6 +239,6 @@ import { ServiceProvider } from '../providers/service-provider';
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider, AppConfig,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,Calendar,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider, AppConfig,Storage] // Add GithubUsers provider
 })
 export class AppModule {}
