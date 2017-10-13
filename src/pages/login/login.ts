@@ -26,6 +26,7 @@ import { CommunityServices } from '../../providers/community-services';
 */
 
 @Component({
+	selector: 'page-login',
    templateUrl: 'login.html',
    providers:[CommunityServices],
 })

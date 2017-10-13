@@ -1,6 +1,5 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
 import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
@@ -14,7 +13,8 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Diagnostic } from 'ionic-native';
 import { CameraPreview, CameraPreviewRect } from 'ionic-native';
 //import { Permissions } from '@ionic-native/android-permissions';
-import { CalendarModule } from "ion2-calendar";
+// import { CalendarModule } from 'ion2-calendar';
+import { Calendar } from '@ionic-native/calendar';
 
 
 import {MomentModule} from 'angular2-moment';
@@ -104,11 +104,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service-provider';
 // import { Externallinks } from '../providers/externallinks';
 
-const cloudSettings: CloudSettings = {
-  'core': {
-    'app_id': '23354506'
-  }
-};
+
 
 @NgModule({
   declarations: [
@@ -169,11 +165,10 @@ const cloudSettings: CloudSettings = {
     TermsModalPage
   ],
   imports: [
-  
+
     IonicModule.forRoot(MyApp,AppConfig,{
        tabsHideOnSubPages:true
     }),
-    CloudModule.forRoot(cloudSettings),
 
     TruncateModule,
     RlTagInputModule,
@@ -182,6 +177,7 @@ const cloudSettings: CloudSettings = {
     BrowserModule,
     Ng2EmojiModule,
     MomentModule,
+    // CalendarModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -243,6 +239,6 @@ const cloudSettings: CloudSettings = {
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider, AppConfig,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,Calendar,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider, AppConfig,Storage] // Add GithubUsers provider
 })
 export class AppModule {}
