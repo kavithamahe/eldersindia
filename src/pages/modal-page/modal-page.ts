@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, ViewController,LoadingController,ModalController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {DatePicker} from 'ionic-native';
-// import { CalendarComponentOptions } from 'ion2-calendar'
+import { CalendarComponentOptions } from 'ion2-calendar'
 import {Platform} from 'ionic-angular';
 // import { Calendar } from '@ionic-native/calendar';
 
@@ -26,11 +26,11 @@ import { Storage } from '@ionic/storage';
   providers:[TermsModalPage]
 })
 export class ModalContentPage {
- // dateMulti: string[];
- //  type: 'string'; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
- //  optionsMulti: CalendarComponentOptions = {
- //    pickMode: 'multi'
- //  };
+ dateMulti: string[];
+  type: 'string'; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
+  optionsMulti: CalendarComponentOptions = {
+    pickMode: 'multi'
+  };
   dependentLists:any=[];
   lead_time:any=[];
   userType:any;
