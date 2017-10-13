@@ -25,7 +25,9 @@ export class ServiceprovidersPage {
    mailID:any;
    newPassword:any;
    token:any;
-
+   packages:any;
+   packageCount;
+   serviceLocation:any;
   constructor(public alertCtrl: AlertController, public modalCtrl:ModalController,public loadingCtrl: LoadingController, public platform: Platform, public navCtrl: NavController, public providerService: ServiceProvider, public storage:Storage) {
     console.log("this is service provider page");
    this.storage.ready().then(() => {
@@ -33,14 +35,19 @@ export class ServiceprovidersPage {
       storage.get('token').then((token) => { this.token=token; 
       this.loadServiceProvider();
       this.loadLocations();
+      this.loadPackages();
       })
     });
-    
-    
-    
-    // alert('Device UUID is: ' + Device.uuid);
   }
-
+  locationChanged(){
+    console.log("this.serviceLocation4",this.serviceLocation);
+     this.storage.ready().then(() => {
+      this.storage.set('service_location',this.serviceLocation);
+      console.log("change location"+this.serviceLocation);     
+      this.loadPackagesByLocationID(this.serviceLocation);
+    });
+   
+  }
   loadServiceProvider(){
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
@@ -58,7 +65,37 @@ export class ServiceprovidersPage {
       loading.dismiss();
     })      
   }
-
+  viewPackage(){
+    //this.navCtrl.setRoot(PackagePage);
+  }
+  loadPackagesByLocationID(locationId){
+    this.providerService.webServiceCall(`getPackage`,{"locationId":locationId})
+      .subscribe(data =>{
+        //console.log(data);
+       this.packages =  data.result;
+       //console.log(this.packages.length);
+       this.packageCount = this.packages.length;
+    },
+    err =>{
+      this.providerService.showErrorToast(err);
+      console.log("Response for get service offered: "+err);
+      this.services=[];      
+    })
+  }
+  loadPackages(){
+    this.providerService.webServiceCall(`getPackage`,{"locationId":""})
+      .subscribe(data =>{
+        //console.log(data);
+       this.packages =  data.result;
+       //console.log(this.packages.length);
+       this.packageCount = this.packages.length;
+    },
+    err =>{
+      this.providerService.showErrorToast(err);
+      console.log("Response for get service offered: "+err);
+      this.services=[];      
+    }) 
+  }
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);

@@ -30,6 +30,9 @@ import { ManagePage } from '../pages/manage/manage';
 import { BlogtabsPage } from '../pages/blogtabs/blogtabs';
 import { BlogsPage } from '../pages/blogs/blogs';
 
+//packages related pages
+import {PackageRequestPagePage } from '../pages/package-request/package-request';
+//import {PackageDetailPagePage } from '../pages/package-detail/PackageDetailPagePage';
 
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
@@ -40,6 +43,7 @@ import { Subscription }   from 'rxjs/Subscription';
 import { AppConfig } from '../providers/app-config';
 import { ServiceProvider } from '../providers/service-provider';
 import { CommunityServices } from '../providers/community-services';
+
 // import { Externallinks } from '../providers/externallinks';
 
 import { Storage } from '@ionic/storage';
@@ -214,6 +218,7 @@ export class MyApp {
                   { myIcon:'fa fa-users', title: 'Manage Dependents', component: ManagePage },
                   { myIcon:'fa fa-snowflake-o', title: 'Services', component: ServiceprovidersPage },
                   { myIcon:'fa fa-cogs', title: 'My Service Requests', component: ServicerequestPage },
+                  { myIcon:'fa fa-gift', title: 'Package Requests', component: PackageRequestPagePage },
                   { myIcon:'fa fa-cubes', title: 'Jobs', component: JobboardPage },
                   { myIcon:'fa fa-th-list', title: 'Applied Jobs', component: AppliedJobsPage },
                   { myIcon:'fa fa-recycle', title: 'Communities', component: CommunitylistPage },

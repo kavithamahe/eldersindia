@@ -45,6 +45,9 @@ import { CreateMessagePage } from '../pages/create-message/create-message';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 import { FirsttimeloginPagePage } from '../pages/firsttimelogin/firsttimelogin';
 
+//packages related pages
+import {PackageRequestPagePage } from '../pages/package-request/package-request';
+import {PackageDetailPagePage } from '../pages/package-detail/package-detail'; 
 
 import { ServiceprovidersPage } from '../pages/serviceproviders/serviceproviders';
 import { ServicerequestPage } from '../pages/servicerequest/servicerequest';
@@ -129,6 +132,8 @@ import { ServiceProvider } from '../providers/service-provider';
     CreateMessagePage,
     ViewMessagesPage,
     ServiceprovidersPage,
+    PackageRequestPagePage,
+    PackageDetailPagePage,
     ServicerequestPage,
     ViewServiceRequestPage,
     BlogsPage,
@@ -201,6 +206,8 @@ import { ServiceProvider } from '../providers/service-provider';
     CreateMessagePage,
     ViewMessagesPage,
     ServiceprovidersPage,
+    PackageRequestPagePage,
+    PackageDetailPagePage,
     ServicerequestPage,
     ViewServiceRequestPage,
     BlogsPage,
