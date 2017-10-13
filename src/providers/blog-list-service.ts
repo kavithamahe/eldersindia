@@ -18,6 +18,7 @@ rootUrl:any;
 user_id:any;
 BlogId:any;
 friendsID:any;
+Url:any;
   constructor(public http: Http, public storage:Storage,public toastCtrl: ToastController) {
     this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
@@ -60,12 +61,25 @@ eventsscroll(searchCategory,searchText,nextPageURL)
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }
+
   singleBlog(blogId) {  
    let _request= {};
     return this.http.post(this.rootUrl+'getBlogDetails/'+blogId,_request,this.options)
       .map(res => res.json()); 
   }
+getPackageRequest(Url,searchText,packstatus){
+  //console.log(Url);
+       let _request= {info: {"list": true, "search": searchText, "status": packstatus, "token": null}};
+    return this.http.post(Url+`getPackageRequest`,_request,this.options)
+      .map(res => res.json()); 
+}
+  eventscrolls(nextPageURL,searchText,packstatus) 
+   {  
+   let _request= {info: {"list": true, "search": searchText, "status": packstatus, "token": null}};
 
+    return this.http.post(nextPageURL,_request,this.options)
+      .map(res => res.json()); 
+   }
   blogComment(blogId,commandObj) {  
     let _request=commandObj;
     return this.http.post(this.rootUrl+'postComments/'+blogId,_request,this.options)

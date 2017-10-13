@@ -53,6 +53,7 @@ webServiceCall(serviceName,bodyData){
   return this.http.post(this.rootUrl+serviceName, bodyData, this.head)
     .map(res => res.json());
 }
+
 firsttimelogin(serviceName,bodyData){
       this.headers = new Headers();
       this.headers.append('Content-Type', 'application/json');

@@ -59,6 +59,8 @@
     "ionic2-calendar": "^0.3.10",
     "ionic2-rating": "^1.2.2",
     "ionicons": "3.0.0",
+    "localforage": "^1.5.2",
+    "localforage-cordovasqlitedriver": "^1.6.0",
     "moment": "^2.19.1",
     "ng-emoticons": "^2.1.0",
     "ng2-alt-summernote": "^0.1.46",

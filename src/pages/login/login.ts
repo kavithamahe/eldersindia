@@ -115,15 +115,20 @@ export class LoginPage {
          this.storage.set('rooturl',this.appConfig.setrooturl());
          // this.storage.set('service_location','');
          this.storage.set('islogin',1);
-         this.enableUserTypeMenu(loginuser['details']['user_type'])
-         if(loginuser.details.first_login == 1)
-         {
-          this.navCtrl.setRoot(DashboardPage);
-         }
-         else{
-           this.navCtrl.setRoot(FirsttimeloginPagePage);
-         }
-          
+         this.enableUserTypeMenu(loginuser['details']['user_type']);
+         console.log(loginuser['details']['user_type']);
+         if(loginuser['details']['user_type'] != 'vendor' && loginuser['details']['user_type'] != 'admin'){
+             if(loginuser.details.first_login == 1)
+             {
+              this.navCtrl.setRoot(DashboardPage);
+             }
+             else{
+               this.navCtrl.setRoot(FirsttimeloginPagePage);
+             }
+          }else{
+
+             this.showToaster("Try with different credentials");
+          }
           
        })
         // alert(loginuser['token']);
