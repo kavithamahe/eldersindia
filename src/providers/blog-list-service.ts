@@ -55,6 +55,7 @@ Url:any;
     return this.http.post(this.rootUrl+'getBlogCategories',_request,this.options)
       .map(res => res.json());
   }
+  
 eventsscroll(searchCategory,searchText,nextPageURL) 
    {  
    let _request= {search: {"title": searchText, "category": searchCategory}};
@@ -73,12 +74,30 @@ getPackageRequest(Url,searchText,packstatus){
     return this.http.post(Url+`getPackageRequest`,_request,this.options)
       .map(res => res.json()); 
 }
-  eventscrolls(nextPageURL,searchText,packstatus) 
+eventscrolls(nextPageURL,searchText,packstatus) 
    {  
    let _request= {info: {"list": true, "search": searchText, "status": packstatus, "token": null}};
 
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
+   }
+getPackageRequestById(rootUrl,packageId){
+     let _request= {"id":packageId};
+    return this.http.post(rootUrl+'getPackageRequestById',_request,this.options)
+      .map(res => res.json());
+  }
+  getServicesForByElders(rootUrl,packageId,elder,location_id){
+       let _request= {"pack_id": packageId, "elder": elder, "location_id": location_id}
+    return this.http.post(rootUrl+'getServicesForByElders',_request,this.options)
+      .map(res => res.json());
+  }
+   getVendorpackageDetails(rootUrl,vendor_id,location_id){
+    if(location_id == undefined || location_id == ''){
+      location_id= 'null';
+    }
+    let _request= {"vendor_id": vendor_id, "location_id": location_id}
+    return this.http.post(rootUrl+'getVendorpackageDetails',_request,this.options)
+      .map(res => res.json());
    }
   blogComment(blogId,commandObj) {  
     let _request=commandObj;
@@ -147,6 +166,7 @@ getPackageRequest(Url,searchText,packstatus){
     return this.http.post(this.rootUrl+'getConnections',_request,this.options)
       .map(res => res.json()); 
    }
+
    shareBlog(BlogId,friendsID){
       let _request= {'friends':{'user_id':friendsID},'shareurl':this.rootUrl+'/#/blog/details/'+BlogId};
      //let _request={};

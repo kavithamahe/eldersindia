@@ -44,7 +44,8 @@ import { MessagesPage } from '../pages/messages/messages';
 import { CreateMessagePage } from '../pages/create-message/create-message';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 import { FirsttimeloginPagePage } from '../pages/firsttimelogin/firsttimelogin';
-
+import { ViewpackagePagePage } from '../pages/viewpackage/viewpackage';
+import { ElderservicePagePage } from '../pages/elderservice/elderservice';
 //packages related pages
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
 import {PackageDetailPagePage } from '../pages/package-detail/package-detail'; 
@@ -99,7 +100,7 @@ import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { SettingsPage } from '../pages/settings/settings';
 import { SubCategoryServicePage } from '../pages/sub-category-service/sub-category-service';
 import { TermsModalPage } from '../pages/terms-modal/terms-modal';
-
+import { GetpackagePagePage } from '../pages/getpackage/getpackage';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service-provider';
 // import { Externallinks } from '../providers/externallinks';
@@ -123,6 +124,9 @@ import { ServiceProvider } from '../providers/service-provider';
     CommunitymembersPage,
     PopoverPage,
     ShareBlogPagePage,
+    GetpackagePagePage,
+    ViewpackagePagePage,
+    ElderservicePagePage,
     ManagePage,
     EldersPage,
     JobboardPage,
@@ -192,11 +196,14 @@ import { ServiceProvider } from '../providers/service-provider';
     MyprofilesettingPage,
     EmojiPickerPage,
     CommunitymembersPage,
+    ViewpackagePagePage,
     PopoverPage,
     ShareBlogPagePage,
+    GetpackagePagePage,
     BlogtabsPage, 
     CommunityPage,
     CommunityPopoverPage,
+    ElderservicePagePage,
     ManagePage,
     EldersPage,
     JobboardPage,
