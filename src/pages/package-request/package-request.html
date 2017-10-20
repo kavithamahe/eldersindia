@@ -37,7 +37,7 @@
   </ion-select>
 </ion-item>
 <ion-card *ngFor="let package of packageRequest" class="job-detailsview">
-  <ion-item (click)="viewJob(package?.id)" test-wrap>
+  <ion-item test-wrap>
   <ion-row>
   <ion-col width-75 text-wrap>
     <h2 text-wrap text-capitalize>{{package?.package_name}}</h2>
