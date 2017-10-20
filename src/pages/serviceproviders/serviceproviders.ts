@@ -8,6 +8,7 @@ import { SubCategoryPage } from '../sub-category/sub-category';
 import { ServiceProvider } from '../../providers/service-provider';
 // import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { PackageDetailPagePage } from '../../pages/package-detail/package-detail';
 /*
   Generated class for the Serviceproviders page.
 
@@ -65,8 +66,10 @@ export class ServiceprovidersPage {
       loading.dismiss();
     })      
   }
-  viewPackage(){
-    //this.navCtrl.setRoot(PackagePage);
+  viewPackage(vendor_id){
+    console.log(this.serviceLocation);
+    console.log(vendor_id);
+    this.navCtrl.setRoot(PackageDetailPagePage,{"vendor_id":vendor_id,'location_id':this.serviceLocation});
   }
   loadPackagesByLocationID(locationId){
     this.providerService.webServiceCall(`getPackage`,{"locationId":locationId})
