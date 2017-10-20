@@ -6,13 +6,14 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons left>
+
+    <ion-title text-center>Connections</ion-title>
+	    <ion-buttons right>
     <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Connections</ion-title>
-    <ion-buttons end *ngIf="getconnections == 'myConnections'" >
+    <ion-buttons end *ngIf="getconnections == 'myConnections'" right>
       <button ion-button icon-only (click)="presentPopover($event)">
         <ion-icon name="more"></ion-icon>
       </button>
