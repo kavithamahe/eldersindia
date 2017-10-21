@@ -18,13 +18,13 @@ export class GetpackagePagePage {
 packId:any;
 rootUrl:any;
   constructor(public navParams: NavParams,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
-  	this.storage.ready().then(() => {     
-        storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
-          this.getConnections(this.rootUrl);
-      });
-        this.packId = navParams.get("packID");
-        console.log(this.packId);
-   });
+  	// this.storage.ready().then(() => {     
+   //      storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
+   //        this.getConnections(this.rootUrl);
+   //    });
+   //      this.packId = navParams.get("packID");
+   //      console.log(this.packId);
+   // });
 
   }
   dismiss(){

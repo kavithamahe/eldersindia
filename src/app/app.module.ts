@@ -13,7 +13,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Diagnostic } from 'ionic-native';
 import { CameraPreview, CameraPreviewRect } from 'ionic-native';
 //import { Permissions } from '@ionic-native/android-permissions';
-import { CalendarModule } from 'ionic3-calendar';
+//import { CalendarModule } from 'ionic3-calendar';
 import { Calendar } from '@ionic-native/calendar';
 
 
@@ -181,7 +181,6 @@ import { ServiceProvider } from '../providers/service-provider';
     BrowserModule,
     Ng2EmojiModule,
     MomentModule,
-    CalendarModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
