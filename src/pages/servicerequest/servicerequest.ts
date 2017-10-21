@@ -27,12 +27,19 @@ nextPageURL:any='';
 getRemarksList:any=[];
 serviceRequestScrollLists:any=[];
 vendorStatus:any=[];
+sr_token:any;
   constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
-      // this.blogId=navParams.get("blogId");
-  		this.onInit();
+      this.sr_token=navParams.get("sr_token");
+      if(navParams.get("sr_token")){
+        this.onInits();
+      }
+      else{
+       this.onInit(); 
+      }
+  		
       this.getRemarks();
       })
   	});
@@ -44,6 +51,32 @@ vendorStatus:any=[];
     loader.present();
     this.serviceRequestInfo =[];
     this.serviceRequest.serviceRequestList().subscribe(
+     (serviceRequest) => {
+      this.serviceRequestInfo=serviceRequest.result.info.list.data; 
+      this.vendorStatus=serviceRequest.result.info.status;
+      this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
+      loader.dismiss();    
+    },
+    (err) => { 
+      this.serviceRequestInfo =[];
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+        loader.dismiss();
+      }
+    );    
+  }
+  public onInits()
+  {
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.serviceRequestInfo =[];
+    this.serviceRequest.serviceRequestLists(this.sr_token).subscribe(
      (serviceRequest) => {
       this.serviceRequestInfo=serviceRequest.result.info.list.data; 
       this.vendorStatus=serviceRequest.result.info.status;

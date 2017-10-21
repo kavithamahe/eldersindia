@@ -22,6 +22,8 @@ import { EventsPage } from '../pages/events/events';
 import { ExternallinksPage } from '../pages/externallinks/externallinks';
 import { LogoutPage } from '../pages/logout/logout';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
+import { RecurringPagePage } from '../pages/recurring/recurring';
+
 
 // kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
@@ -220,6 +222,7 @@ export class MyApp {
                   { myIcon:'fa fa-snowflake-o', title: 'Services', component: ServiceprovidersPage },
                   { myIcon:'fa fa-cogs', title: 'My Service Requests', component: ServicerequestPage },
                   { myIcon:'fa fa-gift', title: 'Package Requests', component: PackageRequestPagePage },
+                  { myIcon:'fa fa-gift', title: 'Recurring Requests', component: RecurringPagePage },
                   { myIcon:'fa fa-cubes', title: 'Jobs', component: JobboardPage },
                   { myIcon:'fa fa-th-list', title: 'Applied Jobs', component: AppliedJobsPage },
                   { myIcon:'fa fa-recycle', title: 'Communities', component: CommunitylistPage },
