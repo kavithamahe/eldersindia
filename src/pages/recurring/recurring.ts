@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,LoadingController } from 'ionic-angular';
+import { NavController, NavParams,LoadingController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -24,7 +24,7 @@ rootUrl:any;
 searchText:any;
 nextPageURL:any='';
 serviceRequestScrollLists:any=[];
-  constructor(public navCtrl: NavController,public blogListService: BlogListService,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
   	this.storage.ready().then(() => {
   		storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
 	    
