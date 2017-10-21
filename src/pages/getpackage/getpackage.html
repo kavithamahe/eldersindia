@@ -18,5 +18,21 @@
 
 
 <ion-content padding>
-
+<form>
+<div class="register-form">
+<ion-grid>
+          <ion-row>
+              <ion-label class="required">To</ion-label>
+          
+             <ion-select [(ngModel)]="selectedConnections" [ngModelOptions]="{standalone: true}">
+          <ion-option *ngFor="let name of dependentLists" [value] = "name.id">{{name.name}}
+          </ion-option>
+        </ion-select> 
+     </ion-row>
+               
+           
+  <button ion-button round full (click)="getPackage()" class="btn-blue">Get Package</button>
+</ion-grid>
+</div>
+</form>
 </ion-content>

@@ -15,21 +15,41 @@ import { BlogListService } from '../../providers/blog-list-service';
   providers:[BlogListService]
 })
 export class GetpackagePagePage {
-packId:any;
+connectionInfo:any;
 rootUrl:any;
+packId:any;
+selectedConnections:any;
+dependentLists:any=[];
   constructor(public navParams: NavParams,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
-  	// this.storage.ready().then(() => {     
-   //      storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
-   //        this.getConnections(this.rootUrl);
-   //    });
-   //      this.packId = navParams.get("packID");
-   //      console.log(this.packId);
-   // });
 
+  	this.storage.ready().then(() => {     
+        storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
+          //this.getConnections(this.rootUrl);
+      });
+        this.packId = navParams.get("packID");
+        this.dependentLists = navParams.get("dependents");
+        console.log(this.dependentLists);
+        console.log(this.packId);
+   });
   }
   dismiss(){
   	this.viewCtrl.dismiss();
   }
+
+    getPackage(){
+  let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();    
+      this.blogListService.getPackage(this.selectedConnections,this.packId).subscribe(connections => {
+        this.connectionInfo=connections.result;
+        this.blogListService.showToast(this.connectionInfo);
+        this.dismiss();
+        loader.dismiss();
+     },
+   err =>{
+    loader.dismiss();
+      this.blogListService.showErrorToast(err);
+  })
+ }
   ionViewDidLoad() {
     console.log('ionViewDidLoad GetpackagePagePage');
   }

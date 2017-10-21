@@ -1,0 +1,51 @@
+<!--
+  Generated template for the RecurringviewPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+	 <ion-title text-center text-capitalize> Recurring Services</ion-title>    
+    <ion-buttons right>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+   
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<ion-card  *ngFor="let recurring of recurringRequestinfo" class="job-detailsview">
+  <ion-item text-wrap>
+  <ion-row>
+  <ion-col width-70 text-wrap>
+    <h2 text-wrap text-capitalize></h2>
+    <p># Token : {{recurring.sr_token}}</p>
+    <p>Service provider : {{recurring.vendor_name}}</p>
+    <p>Preferred date & time : {{recurring.created_at}} {{recurring.preferred_time}}</p>
+    <p>Scheduled date : {{recurring.scheduled_at}}</p>	
+    <p *ngIf="recurring?.status == 0">Pending</p>
+    <p *ngIf="recurring?.status == 4">Scheduled</p>
+    <p *ngIf="recurring?.status == 2">Completed</p>
+    <p *ngIf="recurring?.status == 5">Delivered</p>
+    <p *ngIf="recurring?.status == 1">Contacted</p>
+    <p *ngIf="recurring?.status == 3">Cancelled</p>
+	</ion-col>
+  <ion-col width-30>
+	<ion-badge (click)="viewrecurring(recurring.sr_token)"><i class="fa fa-eye" aria-hidden="true"></i>
+	</ion-badge>
+
+  </ion-col>
+  </ion-row>
+  </ion-item>
+</ion-card>
+
+</ion-content>

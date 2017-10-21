@@ -30,7 +30,14 @@ rootUrl:any;
   serviceRequestList() 
   {
   
-   let _request= {"info":{"list":true,"sort":"","searchValue":"","status":""}};
+   let _request= {"info":{"list":true,"sort":"","searchValue":"","status":"","token":""}};
+    return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
+      .map(res => res.json()); 
+  }
+   serviceRequestLists(sr_token) 
+  {
+  
+   let _request= {"info":{"list":true,"sort":"","searchValue":"","status":"","token":sr_token}};
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
   }

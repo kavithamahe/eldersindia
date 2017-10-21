@@ -3,6 +3,9 @@ import { NavController, NavParams, LoadingController,ModalController,ToastContro
 import { BlogListService } from '../../providers/blog-list-service';
 import { GetpackagePagePage } from  '../../pages/getpackage/getpackage';
 import { Storage } from '@ionic/storage';
+
+import { DashboardPage } from '../../pages/dashboard/dashboard';
+
 /*
   Generated class for the PackageDetailPage page.
 
@@ -73,11 +76,11 @@ vendorLogo:any;
     if(this.dependents.length == 1){
       this.dependentId = this.dependents[0].id;
     }
-    let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id});
+    let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id,dependents:this.dependents});
     modal.present();
   }
   dashboardPage(){
-
+    this.navCtrl.setRoot(DashboardPage);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PackageDetailPagePage');

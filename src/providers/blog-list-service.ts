@@ -55,14 +55,34 @@ Url:any;
     return this.http.post(this.rootUrl+'getBlogCategories',_request,this.options)
       .map(res => res.json());
   }
-  
+  getrecurringRequest(rootUrl){
+    let _request= {search: ""};
+    return this.http.post(rootUrl+'getRecurringServiceList',_request,this.options)
+      .map(res => res.json());
+  }
+  recurringRequestScroll(nextPageURL){
+     let _request= {search: ""};
+     return this.http.post(nextPageURL,_request,this.options)
+      .map(res => res.json());
+  }
+  getrecurringRequestdetail(rootUrl,recurring){
+    let _request= {"data":recurring};
+    return this.http.post(rootUrl+'getRecurringServiceById',_request,this.options)
+      .map(res => res.json());
+  }
 eventsscroll(searchCategory,searchText,nextPageURL) 
    {  
    let _request= {search: {"title": searchText, "category": searchCategory}};
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }
-
+viewrecurring(sr_token) 
+  {
+  
+   let _request= {"info":{"list":true,"sort":"","searchValue":"","status":"","token":sr_token}};
+    return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
+      .map(res => res.json()); 
+  }
   singleBlog(blogId) {  
    let _request= {};
     return this.http.post(this.rootUrl+'getBlogDetails/'+blogId,_request,this.options)
@@ -173,6 +193,11 @@ getPackageRequestById(rootUrl,packageId){
        console.log(_request);
      
     return this.http.post(this.rootUrl+'shareblog',_request,this.options)
+      .map(res => res.json()); 
+   }
+   getPackage(selectedConnections,packId){
+    let _request= {"pack_id": packId, "dependent_id": selectedConnections};
+    return this.http.post(this.rootUrl+'availPackage',_request,this.options)
       .map(res => res.json()); 
    }
    showErrorToast(error){

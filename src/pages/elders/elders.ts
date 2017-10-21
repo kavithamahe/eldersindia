@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController,LoadingController, NavParams} from 'ionic-angular';
+import { Http,Headers,RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service-provider';
 import {FormBuilder,FormGroup,Validators,FormArray} from '@angular/forms';
@@ -14,6 +15,8 @@ import { ManagePage } from '../../pages/manage/manage';
   providers:[CommunityServices]
 })
 export class EldersPage {
+  headers:any;
+  options:any;
 authForm : FormGroup;
 myForm : FormGroup;
 base64Image:any;
@@ -127,7 +130,11 @@ mytype:string ="password";
       storage.get('user_type_id').then((id) => { this.sponsor_id=id;});
 
       storage.get('token').then((token) => { this.token=token; 
-        
+         this.headers = new Headers();
+    this.headers.append('Content-Type', 'application/json');
+    this.headers.append('Authorization', 'Bearer ' + this.token);
+    this.options = new RequestOptions({ headers: this.headers });
+        this.getElderMasterDetails();
         this.functionality=navParams.get("fuctionality");
        // console.log(navParams.get("editData"));
       if(this.functionality == 'edit'){
@@ -144,6 +151,7 @@ mytype:string ="password";
           this.title = "Elder Onboarding";
         }
       })
+      
     }); 
     // this.today = "";
      
@@ -478,7 +486,7 @@ public emergencies =  [
  getElderMasterDetails(){
    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-     this.communityServices.getElderMasterDetails()
+     this.communityServices.getElderMasterDetails(this.options)
        .subscribe(masterData =>{
                     this.functionalArea=masterData.result.FunctionalArea;
                     this.educations=masterData.result.Educational;
@@ -512,9 +520,9 @@ public emergencies =  [
         });
 
   }
-   ionViewWillEnter(){
-        this.getElderMasterDetails();
-      }
+   // ionViewWillEnter(){
+   //      this.getElderMasterDetails();
+   //    }
 
   addEmergency(){
     

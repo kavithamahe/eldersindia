@@ -66,6 +66,8 @@ import { LogoutPage } from '../pages/logout/logout';
 import { JobDependentPage } from '../pages/job-dependent/job-dependent';
 import { ManageBlogsPage } from '../pages/manage-blogs/manage-blogs';
 import { EmojiPickerPage } from '../pages/emoji-picker/emoji-picker';
+import { RecurringPagePage } from '../pages/recurring/recurring';
+import { RecurringviewPagePage } from '../pages/recurringview/recurringview';
 
 // Kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
@@ -138,6 +140,8 @@ import { ServiceProvider } from '../providers/service-provider';
     ServiceprovidersPage,
     PackageRequestPagePage,
     PackageDetailPagePage,
+    RecurringPagePage,
+    RecurringviewPagePage,
     ServicerequestPage,
     ViewServiceRequestPage,
     BlogsPage,
@@ -214,6 +218,8 @@ import { ServiceProvider } from '../providers/service-provider';
     ServiceprovidersPage,
     PackageRequestPagePage,
     PackageDetailPagePage,
+    RecurringPagePage,
+    RecurringviewPagePage,
     ServicerequestPage,
     ViewServiceRequestPage,
     BlogsPage,
