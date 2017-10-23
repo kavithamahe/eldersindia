@@ -116,8 +116,8 @@
 	      	</ion-card>
       	</div>
          <div *ngIf(showPackagesDetails) class="add-detalis">
-          <div *ngFor = "let packages of vendorList.packages">
-         <ion-card class="contact-list">
+          <!-- <div *ngFor = "let packages of vendorList.packages"> -->
+         <!-- 
         <ion-item text-wrap>
         <p text-capitalize>Packeage Name:{{packages.package_name}}</p>
         </ion-item>
@@ -126,11 +126,43 @@
         </ion-item>
         <ion-item text-wrap>
         <p>{{packages.package_description}}</p>
-        </ion-item>
-          
-          </ion-card>
-          </div>
-       
+        </ion-item>-->
+        <ion-card class="contact-list">
+            <!-- <ion-slides slidesPerView= ""> -->
+              <div *ngFor="let pack of vendorList.packages; let i=index" text-wrap>
+                 <!-- <ion-slide class="slide-border"> -->
+                  <ion-item style="padding-left:0px;" >
+                    <ion-col> 
+                      <div class="plan featured orangeColor">
+                      <h3>{{pack.package_name}}</h3>                    
+                      <div class="circle-pic" *ngIf="pack.discount_rate_package == NULL"><span><i class="fa fa-inr"> {{pack.package_amount}}</i></span><span>/-</span></div>
+                      <div class="circle-pic" *ngIf="pack.discount_rate_package != NULL"><span><i class="fa fa-inr">{{pack.package_amount - pack.package_amount*pack.discount_rate_package/100}}</i></span><span>/-</span></div>
+                      <h5 *ngIf="pack.discount_rate_package != NULL">     
+                      <span><small><i class="fa fa-rupee"></i>{{pack.package_amount}} </small></span>
+                      <span>  {{pack.discount_rate_package}} % off </span>
+                      <!-- <span >{{service_type}}</span> -->
+                      </h5>
+                      <p>For {{pack.package_validity}} </p>
+                      <p>{{pack.package_description}}</p>                      
+                       <div *ngIf="vendorList.dependentLists.length != 1">
+                        <!-- <div *ngIf="pack.package_available == 0"> -->
+                        <a (click)="openRequestPackage(pack.id)" class="lan-select">Get Package</a>
+                        <!-- </div> -->
+                      </div> 
+                      <div *ngIf="pack.package_available > 0"><a class="lan-select">You've already purchased this</a>
+                      </div>
+                      <ul>                  
+                        <li *ngFor="let pack_serve of pack.packages_service; let i=index" ><i class="fa fa-check check-plan" aria-hidden="true">
+                          </i> {{pack_serve.name}} {{pack_serve.quantity}}  {{pack_serve.common_type.replace('Per', '')}}</li>
+                      </ul>
+                      </div>
+                    </ion-col>
+                  </ion-item>
+                <!-- </ion-slide> -->
+              </div>
+        <!-- </ion-slides> -->
+          </ion-card> 
+          <!-- </div> -->       
          </div>
 
 </ion-content>

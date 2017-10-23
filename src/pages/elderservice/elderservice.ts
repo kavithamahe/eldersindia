@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { ViewController,NavController, NavParams,LoadingController,ToastController } from 'ionic-angular';
 import { BlogListService } from '../../providers/blog-list-service';
-
+import { ServiceInfoPage } from '../../pages/service-info/service-info';
 /*
   Generated class for the ElderservicePage page.
 
@@ -22,6 +22,7 @@ packageId:any;
 packageData:any;
 rootUrl:any;
 packageStatus:any;
+vendorId:any;
   constructor(public navCtrl: NavController,public viewCtrl: ViewController,public storage:Storage,public toastCtrl: ToastController,public loadingCtrl: LoadingController, public navParams: NavParams,public blogListService:BlogListService) {
   	 this.storage.ready().then(() => {      
     	storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
@@ -47,6 +48,11 @@ getServicesForByElder(){
       this.blogListService.showErrorToast(err);     
       loading.dismiss();
     }) 
+}
+getServicedetails(serviceId,vendor){
+  this.vendorId={"id":vendor}
+  let servieListData = {"vendor": this.vendorId, "subCategoryId": serviceId, "flag": "1", "location_id": this.location_id};
+  this.navCtrl.push(ServiceInfoPage,servieListData);
 }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ElderservicePagePage');

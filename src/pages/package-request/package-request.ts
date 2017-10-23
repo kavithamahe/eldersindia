@@ -50,6 +50,8 @@ elderId:any;
       console.log("Recieved filtered data :"+this.packageRequest);
     },
     err =>{
+      //console.log("sdfsdf");
+      this.packageRequest="";
       this.blogListService.showErrorToast(err);     
       loading.dismiss();
     }) 
