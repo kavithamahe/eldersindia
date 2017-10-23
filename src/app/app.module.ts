@@ -68,6 +68,7 @@ import { ManageBlogsPage } from '../pages/manage-blogs/manage-blogs';
 import { EmojiPickerPage } from '../pages/emoji-picker/emoji-picker';
 import { RecurringPagePage } from '../pages/recurring/recurring';
 import { RecurringviewPagePage } from '../pages/recurringview/recurringview';
+import { RecurringcancelPagePage } from '../pages/recurringcancel/recurringcancel';
 
 // Kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
@@ -142,6 +143,7 @@ import { ServiceProvider } from '../providers/service-provider';
     PackageDetailPagePage,
     RecurringPagePage,
     RecurringviewPagePage,
+    RecurringcancelPagePage,
     ServicerequestPage,
     ViewServiceRequestPage,
     BlogsPage,
@@ -220,6 +222,7 @@ import { ServiceProvider } from '../providers/service-provider';
     PackageDetailPagePage,
     RecurringPagePage,
     RecurringviewPagePage,
+    RecurringcancelPagePage,
     ServicerequestPage,
     ViewServiceRequestPage,
     BlogsPage,

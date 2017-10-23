@@ -30,13 +30,13 @@
 	</ion-col>
   <ion-col width-30>
 <ion-badge (click)="viewrecurring(recurring)"><i class="fa fa-eye" aria-hidden="true"></i></ion-badge>
-    <ion-badge (click)="deleteviewrecurring()"><i class="fa fa-trash" aria-hidden="true"></i></ion-badge>
+    <ion-badge *ngIf="recurring?.status == 0 || recurring?.status == 1 || recurring?.status == 4" (click)="deleteviewrecurring(recurring)"><i class="fa fa-trash" aria-hidden="true"></i></ion-badge>
 
   </ion-col>
   </ion-row>
   </ion-item>
 </ion-card>
-<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

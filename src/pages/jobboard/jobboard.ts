@@ -46,8 +46,8 @@ file_name:any;
 
   public onInit()
   { 
-    console.log('this.functionalArea'+this.functionalArea);
-    console.log('this.location'+this.location); 	
+    // console.log('this.functionalArea'+this.functionalArea);
+    // console.log('this.location'+this.location); 	
     this.loader = this.loadingCtrl.create({ content: "Please wait..." });     
     this.loader.present();
     this.jobBoardService.jobsList(this.functionalArea,this.location).subscribe(
