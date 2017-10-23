@@ -21,7 +21,7 @@
 <form>
 <div class="register-form">
 <ion-grid>
-          <ion-row>
+          <ion-row *ngIf="user_type !='elder'">
               <ion-label class="required">To</ion-label>
           
              <ion-select [(ngModel)]="selectedConnections" [ngModelOptions]="{standalone: true}">

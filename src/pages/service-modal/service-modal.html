@@ -149,6 +149,10 @@
                         <a (click)="openRequestPackage(pack.id)" class="lan-select">Get Package</a>
                         <!-- </div> -->
                       </div> 
+
+                        <div *ngIf="pack.package_available == 0">
+                        <a (click)="openRequestPackage(pack.id)" class="lan-select">Get Package</a>                      
+                         </div>
                       <div *ngIf="pack.package_available > 0"><a class="lan-select">You've already purchased this</a>
                       </div>
                       <ul>                  

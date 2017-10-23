@@ -22,6 +22,7 @@ showServiceOffered = false;
 showPackagesDetails = false;
  dependentId:any;
 title:any;
+user_type
   constructor(public storage:Storage,public modalCtrl: ModalController, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams) {
    console.log("this is service modal page");
   	this.vendorList = navParams.get("vendorList");
@@ -38,6 +39,7 @@ title:any;
   		this.showServiceOffered = true;
   		this.title = this.vendorList.vendorDetails.name+" - Service Offered";
   	}
+    
   	
   }
 
