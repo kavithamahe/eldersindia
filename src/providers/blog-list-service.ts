@@ -55,19 +55,29 @@ Url:any;
     return this.http.post(this.rootUrl+'getBlogCategories',_request,this.options)
       .map(res => res.json());
   }
-  getrecurringRequest(rootUrl){
-    let _request= {search: ""};
+  getrecurringRequest(rootUrl,searchText){
+    let _request= {"search": searchText};
     return this.http.post(rootUrl+'getRecurringServiceList',_request,this.options)
       .map(res => res.json());
   }
-  recurringRequestScroll(nextPageURL){
-     let _request= {search: ""};
+  recurringRequestScroll(nextPageURL,searchText){
+     let _request= {"search": searchText};
      return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json());
   }
   getrecurringRequestdetail(rootUrl,recurring){
     let _request= {"data":recurring};
     return this.http.post(rootUrl+'getRecurringServiceById',_request,this.options)
+      .map(res => res.json());
+  }
+  getrecurringRequestdelete(rootUrl,recurring){
+     let _request= {"data":recurring};
+    return this.http.post(rootUrl+'getBulkRecurringService',_request,this.options)
+      .map(res => res.json());
+  }
+  deleterecurringrequest(rootUrl,recurring){
+    let _request= {"data":recurring};
+    return this.http.post(rootUrl+'deleteBulkRecurringService',_request,this.options)
       .map(res => res.json());
   }
 eventsscroll(searchCategory,searchText,nextPageURL) 

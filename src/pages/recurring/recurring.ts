@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,LoadingController,ToastController } from 'ionic-angular';
+import { NavController, NavParams,LoadingController,ToastController,ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { RecurringviewPagePage } from '../../pages/recurringview/recurringview';
+import { RecurringcancelPagePage } from '../../pages/recurringcancel/recurringcancel';
 
 import { BlogListService } from '../../providers/blog-list-service';
 
@@ -21,10 +22,10 @@ import { BlogListService } from '../../providers/blog-list-service';
 export class RecurringPagePage {
 recurringRequest:any=[];
 rootUrl:any;
-searchText:any;
+searchText:any="";
 nextPageURL:any='';
 serviceRequestScrollLists:any=[];
-  constructor(public navCtrl: NavController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController,public modalCtrl: ModalController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
   	this.storage.ready().then(() => {
   		storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
 	    
@@ -36,7 +37,7 @@ serviceRequestScrollLists:any=[];
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecurringPagePage');
-  }
+  } 
   inputSearch(searchEvent){
    this.searchText = searchEvent.target.value;
    this.getrecurringRequest();
@@ -53,7 +54,7 @@ serviceRequestScrollLists:any=[];
   getrecurringRequest(){
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
-    this.blogListService.getrecurringRequest(this.rootUrl)
+    this.blogListService.getrecurringRequest(this.rootUrl,this.searchText)
       .subscribe(data =>{ 
       	this.recurringRequest = data.result.data;
         this.nextPageURL=data.result.next_page_url;  
@@ -78,7 +79,7 @@ serviceRequestScrollLists:any=[];
   }
   recurringRequestScroll()
   {
-    this.blogListService.recurringRequestScroll(this.nextPageURL).subscribe(
+    this.blogListService.recurringRequestScroll(this.nextPageURL,this.searchText).subscribe(
      (serviceRequestScroll) => {
       this.serviceRequestScrollLists=serviceRequestScroll.result.data; 
        for (let i = 0; i < Object.keys(this.serviceRequestScrollLists).length; i++) {
@@ -100,6 +101,10 @@ serviceRequestScrollLists:any=[];
     );
      
   }
+  deleteviewrecurring(recurring){
+    let modal = this.modalCtrl.create(RecurringcancelPagePage,{recurringview:recurring});
+    modal.present();
+    }
   viewrecurring(recurring){
     this.navCtrl.push(RecurringviewPagePage,{recurringview:recurring});
   	

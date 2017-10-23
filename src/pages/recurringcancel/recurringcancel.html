@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title text-center text-capitalize>Cancel Request</ion-title> 
+    <ion-buttons end>
+    <button ion-button icon-only (click)="dismiss()">
+        <ion-icon item-right name="ios-close-outline"></ion-icon>
+    </button>
+  </ion-buttons>  
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content padding>
+	<ion-item text-wrap>
+	   <h1>You can cancel the follow services</h1>
+	   <div *ngFor="let recurring of recurringRequest">
+	   			<ion-badge>{{recurring.sr_token}}</ion-badge>
+	   	</div>
+	   <h2>Are you sure you want to delete this recurring service !</h2>
+	</ion-item>
+	<button ion-button (click)="cancel()">No</button>
+	<button ion-button (click)="delete()">Yes</button>
+</ion-content>
