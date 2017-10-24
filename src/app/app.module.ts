@@ -106,6 +106,7 @@ import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 import { GetpackagePagePage } from '../pages/getpackage/getpackage';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service-provider';
+
 // import { Externallinks } from '../providers/externallinks';
 
 

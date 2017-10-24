@@ -80,6 +80,10 @@ file_Path:any;
 return this.http.post(`${this.getCommunityPostsUrl }attachFiles`,formData,options)
 .map(res => res.json());
 }
+resumeupload(formData, options){
+  return this.http.post(`${this.getCommunityPostsUrl }attachResume`,formData,options)
+.map(res => res.json());
+}
 
   fileUploads(id,file){
     this.headers = new Headers();
