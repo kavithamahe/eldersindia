@@ -33,7 +33,7 @@
     <p>Balance Quantity	 :{{package?.quantity}}- {{package?.available_package_service}} visit </p>
 	</ion-col>
   <ion-col width-25>
-    <ion-badge *ngIf="packageStatus == 1">Avail</ion-badge> 	
+    <ion-badge *ngIf="packageStatus == 1" (click)="getServicedetails(package?.id,package?.vendor_id)">Avail</ion-badge> 	
   </ion-col>
   </ion-row>
   </ion-item>

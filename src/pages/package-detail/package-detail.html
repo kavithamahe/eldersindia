@@ -31,7 +31,7 @@
    </ion-item>
    <ion-item>
    	<ion-title>Packages</ion-title>
-    	<div *ngFor="let pack of packages; let i=index" text-wrap>
+    	<div *ngFor="let pack of packages; let i=index" text-wrap class="packagelist">
             <ion-item style="padding-left:0px;" >
               <ion-col> 
                <div class="plan featured orangeColor">
@@ -51,7 +51,7 @@
 						<div *ngIf="pack.package_available > 0"><a class="lan-select">You've already purchased this</a>
 						</div>
 						<ul>									
-							<li *ngFor="let pack_serve of packages_service; let i=index" ><i class="fa fa-check check-plan" aria-hidden="true">
+							<li *ngFor="let pack_serve of pack.packages_service; let i=index" ><i class="fa fa-check check-plan" aria-hidden="true">
 								</i> {{pack_serve.name}} {{pack_serve.quantity}}  {{pack_serve.common_type.replace('Per', '')}}</li>
 						</ul>
 						</div>

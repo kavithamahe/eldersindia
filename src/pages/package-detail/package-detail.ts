@@ -61,10 +61,10 @@ vendorLogo:any;
     		this.vendoraddress = this.packageData.address;
     		this.vendorLogo = this.packageData.logo;
         this.packages = data.result.info.packages;
-        this.packages_service = this.packages.packages_service;
+        // this.packages_service = this.packages.packages_service;
         this.dependents = data.result.info.dependentLists;
         this.banner = data.result.info.banners;
-          //console.log(this.packageData);   
+          // console.log(this.packages_service);   
         loading.dismiss();
     },
     err =>{
