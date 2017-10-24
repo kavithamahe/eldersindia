@@ -63,7 +63,11 @@ firsttimelogin(serviceName,bodyData){
   return this.http.post(this.rootUrl+serviceName, bodyData, this.head)
     .map(res => res.json());
 }
-
+ packageListsInfo(location_id,service_id,dependents,vendor_id){
+     let _request= {locationId: location_id, dependent_id: dependents, service_id: service_id, vendor_id: vendor_id};
+    return this.http.post(this.rootUrl+'getpackagesbasedServices',_request,this.head)
+      .map(res => res.json());
+  }
 forgotPassword(serviceName,bodyData){
       this.rootUrl= this.app.setrooturl();
       this.headers = new Headers();
