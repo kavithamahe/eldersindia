@@ -5,14 +5,58 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>packageDetail</ion-title>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center text-capitalize>{{vendorname}}</ion-title>    
+	  
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-
+<ion-item>
+   <img [src]="imageUrl+vendorLogo" style="height:50px;width:50px;margin:2px;" />
+   <p>{{vendorDesc}}</p>
+   <p><i class="fa fa-envelope"></i> {{vendoremail}}</p>
+   <p><i class="fa fa-map-marker"></i> {{vendoraddress}}</p>
+   </ion-item>
+   <ion-item>
+   	<ion-title>Packages</ion-title>
+    	<div *ngFor="let pack of packages; let i=index" text-wrap class="packagelist">
+            <ion-item style="padding-left:0px;" >
+              <ion-col> 
+               <div class="plan featured orangeColor">
+					<h3>{{pack.package_name}}</h3>										
+						<div class="circle-pic" *ngIf="pack.discount_rate_package == NULL"><span><i class="fa fa-inr"> {{pack.package_amount}}</i></span><span>/-</span></div>
+						<div class="circle-pic" *ngIf="pack.discount_rate_package != NULL"><span><i class="fa fa-inr">{{pack.package_amount - pack.package_amount*pack.discount_rate_package/100}}</i></span><span>/-</span></div>
+						<h5 *ngIf="pack.discount_rate_package != NULL"> 		
+						<span><small><i class="fa fa-rupee"></i>{{pack.package_amount}} </small></span>
+						<span>  {{pack.discount_rate_package}} % off </span>
+						<!-- <span >{{service_type}}</span> -->
+						</h5>
+						<p>For {{pack.package_validity}} </p>
+						<p>{{pack.package_description}}</p>
+						<div *ngIf="dependents.length != 1">
+							<div *ngIf="pack.package_available == 0 || user_type=='sponsor'"><a (click)="openRequestPackage(pack.id)" class="lan-select">Get Package</a></div>
+						</div>
+						<div *ngIf="pack.package_available > 0"><a class="lan-select">You've already purchased this</a>
+						</div>
+						<ul>									
+							<li *ngFor="let pack_serve of pack.packages_service; let i=index" ><i class="fa fa-check check-plan" aria-hidden="true">
+								</i> {{pack_serve.name}} {{pack_serve.quantity}}  {{pack_serve.common_type.replace('Per', '')}}</li>
+						</ul>
+						</div>
+              </ion-col>
+            </ion-item>         
+        </div>
+   </ion-item>
 </ion-content>

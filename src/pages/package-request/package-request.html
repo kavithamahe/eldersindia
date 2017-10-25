@@ -37,9 +37,9 @@
   </ion-select>
 </ion-item>
 <ion-card *ngFor="let package of packageRequest" class="job-detailsview">
-  <ion-item (click)="viewJob(package?.id)" test-wrap>
+  <ion-item test-wrap>
   <ion-row>
-  <ion-col width-75 text-wrap>
+  <ion-col width-70 text-wrap>
     <h2 text-wrap text-capitalize>{{package?.package_name}}</h2>
 
     <ion-badge *ngIf="package.req_status == 1">Active</ion-badge>
@@ -50,8 +50,11 @@
     <p>Requested Date : {{package?.created_at}}</p>	
     <p>Expiry Date :{{package?.expire}} </p>
 	</ion-col>
-  <ion-col width-25>
- 	
+  <ion-col width-30>
+   <ion-badge (click)="getPackageRequestBy(package?.req_id)"><i class="fa fa-eye" aria-hidden="true"></i></ion-badge>
+    <ion-badge *ngIf="package?.req_status != 2" (click)="getServicesForByElders(package?.id,package?.location_id,package?.elder_id,package.req_status)"><i class="fa fa-check-square-o" aria-hidden="true"></i></ion-badge>
+ 	<!-- <button type="button" title="View Details" (click)="getPackageRequestBy(package?.req_id)"><i class="fa fa-eye" aria-hidden="true"></i></button>
+ 	<button type="button" *ngIf="package?.req_status != 2" title="View Details" (click)="getServicesForByElders(package?.id,package?.location_id,package?.elder_id)"><i class="fa fa-check-square-o" aria-hidden="true"></i></button> -->
 
   </ion-col>
   </ion-row>

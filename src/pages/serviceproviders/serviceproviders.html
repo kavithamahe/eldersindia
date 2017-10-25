@@ -43,7 +43,7 @@
       <ion-item> <p> &nbsp;Packages ({{packageCount}}) </p> </ion-item>  
     <ion-slides slidesPerView= "2">
         <div *ngFor="let package of packages; let i=index" text-wrap>
-           <ion-slide (click)="viewPackage(package.id)" class="slide-border">
+           <ion-slide (click)="viewPackage(package.vendor_id)" class="slide-border">
             <ion-item style="padding-left:0px;" >
               <ion-col> 
                 <div style="float:left;width:25%;" >

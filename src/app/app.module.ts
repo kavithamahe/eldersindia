@@ -13,8 +13,8 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Diagnostic } from 'ionic-native';
 import { CameraPreview, CameraPreviewRect } from 'ionic-native';
 //import { Permissions } from '@ionic-native/android-permissions';
-
-
+//import { CalendarModule } from 'ionic3-calendar';
+import { Calendar } from '@ionic-native/calendar';
 import {MomentModule} from 'angular2-moment';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
@@ -42,7 +42,8 @@ import { MessagesPage } from '../pages/messages/messages';
 import { CreateMessagePage } from '../pages/create-message/create-message';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 import { FirsttimeloginPagePage } from '../pages/firsttimelogin/firsttimelogin';
-
+import { ViewpackagePagePage } from '../pages/viewpackage/viewpackage';
+import { ElderservicePagePage } from '../pages/elderservice/elderservice';
 //packages related pages
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
 import {PackageDetailPagePage } from '../pages/package-detail/package-detail'; 
@@ -63,6 +64,9 @@ import { LogoutPage } from '../pages/logout/logout';
 import { JobDependentPage } from '../pages/job-dependent/job-dependent';
 import { ManageBlogsPage } from '../pages/manage-blogs/manage-blogs';
 import { EmojiPickerPage } from '../pages/emoji-picker/emoji-picker';
+import { RecurringPagePage } from '../pages/recurring/recurring';
+import { RecurringviewPagePage } from '../pages/recurringview/recurringview';
+import { RecurringcancelPagePage } from '../pages/recurringcancel/recurringcancel';
 
 // Kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
@@ -97,9 +101,10 @@ import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { SettingsPage } from '../pages/settings/settings';
 import { SubCategoryServicePage } from '../pages/sub-category-service/sub-category-service';
 import { TermsModalPage } from '../pages/terms-modal/terms-modal';
-
+import { GetpackagePagePage } from '../pages/getpackage/getpackage';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service-provider';
+
 // import { Externallinks } from '../providers/externallinks';
 
 
@@ -121,6 +126,9 @@ import { ServiceProvider } from '../providers/service-provider';
     CommunitymembersPage,
     PopoverPage,
     ShareBlogPagePage,
+    GetpackagePagePage,
+    ViewpackagePagePage,
+    ElderservicePagePage,
     ManagePage,
     EldersPage,
     JobboardPage,
@@ -132,6 +140,9 @@ import { ServiceProvider } from '../providers/service-provider';
     ServiceprovidersPage,
     PackageRequestPagePage,
     PackageDetailPagePage,
+    RecurringPagePage,
+    RecurringviewPagePage,
+    RecurringcancelPagePage,
     ServicerequestPage,
     ViewServiceRequestPage,
     BlogsPage,
@@ -189,11 +200,14 @@ import { ServiceProvider } from '../providers/service-provider';
     MyprofilesettingPage,
     EmojiPickerPage,
     CommunitymembersPage,
+    ViewpackagePagePage,
     PopoverPage,
     ShareBlogPagePage,
+    GetpackagePagePage,
     BlogtabsPage, 
     CommunityPage,
     CommunityPopoverPage,
+    ElderservicePagePage,
     ManagePage,
     EldersPage,
     JobboardPage,
@@ -205,6 +219,9 @@ import { ServiceProvider } from '../providers/service-provider';
     ServiceprovidersPage,
     PackageRequestPagePage,
     PackageDetailPagePage,
+    RecurringPagePage,
+    RecurringviewPagePage,
+    RecurringcancelPagePage,
     ServicerequestPage,
     ViewServiceRequestPage,
     BlogsPage,

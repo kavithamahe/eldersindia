@@ -54,26 +54,26 @@ export class ModalContentPage {
   fulldays:boolean=false;
   searchValuessss:any;
   onetimes:any;
+  packageLists:any=[];
+   packageListss:any=[];
+
+  location_id:any;
+  service_id:any;
+  vendor_id:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
    
-
-
-    // this.minDate=new Date();
-    // this.maxDate=(new Date().getFullYear() +40)+"-12-31";
      this.date = new Date().toISOString();
-    //  let formalDate = new Date(this.currentDate.getFullYear()+5);
-    // this.currentDate=this.currentDate.setDate(formalDate.getFullYear()+"-"+formalDate.getMonth()+"-"+formalDate.getDate());
-     // this.currentDate=this.currentDate.getFullYear()+3;
-    // console.log("date"+this.currentDate.setDate(formalDate.getFullYear()+5).toISOString());
-     console.log("this is modal page");
-     console.log("modal content page",params.get("vendor"));
-     //let loading = this.loadingCtrl.create({content: 'Please wait...!'});
-     //loading.present();
+  
      this.dependentLists = params.get("dependentList");
      this.lead_time = params.get("lead_time");
+     this.location_id = params.get("location_id");
+     if(params.get("serviceData") != undefined){
+     this.service_id = this.params.get("serviceData").service_id;
+     }
      if(params.get("vendor") != undefined){
       this.vendor = this.params.get("vendor").name;
+      this.vendor_id = this.params.get("vendor").vendor_id;
     }
     this.modalForm = formBuilder.group({
      problem: ['',Validators.compose([Validators.required])],
@@ -91,9 +91,6 @@ export class ModalContentPage {
    dependents: ['',Validators.compose([Validators.required])]
  })
   
-
-    // loading.dismiss();
-     // this.userType = "elder";
      storage.get('user_type').then((user_type) => { this.userType=user_type;});
      if(this.userType != 'sponsor'){
 
@@ -149,6 +146,15 @@ onlyNumberKey(event) {
        this.terms = JSON.parse(data);
       }
      })
+   }
+   packageinfo(){
+    
+    this.providerService.packageListsInfo(this.location_id,this.service_id,this.authForm.value.dependents,this.vendor_id)
+      .subscribe(data =>{ 
+        this.packageLists=data.result.info.lists;
+        //this.packageLists =this.packageListss[1];
+        console.log(this.packageLists);       
+    })
    }
 // submit(){
 //        if(this.userType == 'sponsor'){

@@ -1,3 +1,28 @@
 page-package-detail {
+.circle-pic{
+	background-color: #e54822;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 90px;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
 
+}
+.orangeColor{
+	font-family: 'Raleway', Arial, sans-serif;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+    }
+.orangeColor .lan-select{
+    background-color: #e54922;
+    cursor: pointer;
+    width: 86%;
+    margin: 0 auto;
+    border-radius: 4px;
+    }
+    .packagelist{
+        border:1px solid #eee;
+    }
 }

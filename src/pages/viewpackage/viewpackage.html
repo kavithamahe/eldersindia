@@ -1,0 +1,103 @@
+<!--
+  Generated template for the ViewpackagePage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+<ion-navbar color="primary">
+<ion-buttons left>
+      <button ion-button icon-only (click)="dismiss()">
+         <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+<ion-buttons center>
+    <ion-title text-center>
+      Package Request Detail
+    </ion-title>
+ </ion-buttons>  
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<ion-item>
+<ion-row>
+  <ion-col width-50 text-wrap>
+  	<h2>Elder Name  : </h2>
+  </ion-col>
+  <ion-col width-50 text-wrap>
+  {{packageData?.name}}{{packageData?.last_name}}
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col width-50 text-wrap>
+  <h2>Email  : </h2>
+  </ion-col>
+  <ion-col width-50 text-wrap>
+  {{packageData?.elder_email}}
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col width-50 text-wrap>
+  <h2>Mobile number  : </h2>
+  </ion-col>
+  <ion-col width-50 text-wrap>
+  {{packageData?.elder_mobile}}
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col width-50 text-wrap>
+  <h2>Location  : </h2>
+  </ion-col>
+  <ion-col width-50 text-wrap>
+  {{packageData?.location}}
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col width-50 text-wrap>
+  <h2>Package : </h2>
+  </ion-col>
+  <ion-col width-50 text-wrap>
+  {{packageData?.package_name}}
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col width-50 text-wrap>
+  <h2>Cost : </h2>
+  </ion-col>
+  <ion-col width-50 text-wrap>
+  {{packageData?.package_amount}}
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col width-50 text-wrap>
+  <h2>Package Status : </h2>
+  </ion-col>
+  <ion-col width-50 text-wrap>
+  	<p *ngIf="packageData?.req_status == 0"> Pending</p>
+  <p *ngIf="packageData?.req_status == 1"> Active</p>
+   <p *ngIf="packageData?.req_status == 2"> Rejected</p>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col width-50 text-wrap>
+  <h2>Package validity : </h2>
+  </ion-col>
+  <ion-col width-50 text-wrap>
+  {{packageData?.package_validity}}
+  </ion-col>
+</ion-row>
+<div *ngIf="packageData?.payment_remark != '' ">
+<ion-row>
+  <ion-col width-50 text-wrap>
+  <h2>Payment Status : </h2>
+  </ion-col>
+  <ion-col width-50 text-wrap>
+  {{packageData?.payment_remark}}
+  </ion-col>
+</ion-row>
+</div>
+</ion-item>
+
+</ion-content>

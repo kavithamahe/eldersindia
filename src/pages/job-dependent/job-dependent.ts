@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController, ViewController  } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Http,Headers,RequestOptions } from '@angular/http';
 
 import { JobBoardService } from '../../providers/job-board-service';
 import {FormBuilder,FormGroup,Validators,FormArray} from '@angular/forms';
@@ -30,6 +31,7 @@ getDependentList:any;
 dependent:any;
 nativepath:any;
 file_name:any;
+file_path:any;
 user_type:any;
 submitAttempt:any;
 jobId:any;
@@ -79,6 +81,39 @@ console.log(this.jobId);
       }
     );  
  }
+ fileChange(event) {
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0) {
+        let file: File = fileList[0];
+        let formData:FormData = new FormData();
+        formData.append('attachemts[0]', file, file.name);
+        let headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + this.token);
+        headers.append('Accept', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+           this.jobBoardService.resumeupload( formData, options)
+        .subscribe(
+     (sendMessage) => { 
+      console.log(sendMessage);
+      this.file_name=sendMessage[0].file_name;
+      this.file_path=sendMessage[0].file_path;
+      console.log(this.file_path);
+      console.log(this.file_name);
+      
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+          this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      });
+      
+    }
+}
  public showToaster(message)
   {
    let toast = this.toastCtrl.create({
@@ -101,7 +136,8 @@ dismiss() {
     }
     else{
       this.submitAttempt = false;
-      this.jobBoardService.applyjobelder(this.dependent,this.user_id,this.file_name,this.jobId).subscribe((applyjob) => {
+      this.jobBoardService.applyjobelder(this.dependent,this.user_id,this.jobId,this.file_name,
+        this.file_path).subscribe((applyjob) => {
         console.log(applyjob);
  })
    // let data={'dependent':this.dependent,'file_name':this.file_name,};
@@ -127,22 +163,4 @@ dismiss() {
 //       });
 
 //   }
-  fileChange(event) {
-    let fileList: FileList = event.target.files;
-   // this.file_name=fileList[0].name;
-    //console.log( this.file_name);
-    if(fileList.length > 0) {
-        let file: File = fileList[0];
-        this.file_name=file.name;
-        console.log(file.name);
-        let formData:FormData = new FormData();
-        formData.append('docs[0]', file, file.name);
-        console.log(formData);
-        let headers = new Headers();
-        headers.append('Authorization', 'Bearer ' + this.token);
-        headers.append('Accept', 'application/json');
-       
-      
-    }
-}
-}
+ }

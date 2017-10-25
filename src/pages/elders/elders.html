@@ -22,9 +22,11 @@
 
 <div *ngIf="functionality != 'profileEdit'">
     <ion-label class="label-tittle required">Relationship</ion-label>
-        <ion-item> 
- <ion-label class="sel-label">Relationship</ion-label>        
-            <ion-select class="select-brd"  [(ngModel)]="elder_relation" 
+
+          <ion-item>      
+ <ion-label class="sel-label">Relationship</ion-label>  		
+            <ion-select class="select-brd"  [(ngModel)]="elder_relation" placeholder="Relationship"
+
             formControlName="elder_relation" [class.invalid]="!authForm.controls.elder_relation.valid && (authForm.controls.elder_relation.dirty)">
                 <ion-option  *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
             </ion-select>
@@ -437,7 +439,10 @@
      
  
      
-      </div>
+      </div>    
+  <div>
+   <input type="file" (change)="fileChange($event)" placeholder="Upload file" >
+  </div>
 
     </div>
     

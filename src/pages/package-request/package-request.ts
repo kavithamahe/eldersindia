@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,LoadingController,ToastController } from 'ionic-angular';
+import { NavController, NavParams,ModalController,LoadingController,ToastController } from 'ionic-angular';
 import { BlogListService } from '../../providers/blog-list-service';
 import { Storage } from '@ionic/storage';
-
+import { ViewpackagePagePage } from '../../pages/viewpackage/viewpackage';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
-
+import {ElderservicePagePage } from '../../pages/elderservice/elderservice';
 /*
   Generated class for the PackageRequestPage page.
 
@@ -23,7 +23,12 @@ export class PackageRequestPagePage {
 	searchText:any="";
 eventScrollLists:any;
 packstatus:any="";
-  constructor(public navCtrl: NavController,public toastCtrl: ToastController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams, public blogListService:BlogListService) {
+packbstatus:any;
+packageId:any;
+id:any;
+locationId:any;
+elderId:any;
+  constructor(public navCtrl: NavController,public modalCtrl: ModalController,public toastCtrl: ToastController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams, public blogListService:BlogListService) {
   	 this.storage.ready().then(() => {      
     	storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
       console.log(this.rootUrl);
@@ -45,6 +50,8 @@ packstatus:any="";
       console.log("Recieved filtered data :"+this.packageRequest);
     },
     err =>{
+      //console.log("sdfsdf");
+      this.packageRequest="";
       this.blogListService.showErrorToast(err);     
       loading.dismiss();
     }) 
@@ -103,6 +110,14 @@ doInfinite(infiniteScroll) {
   onSelectChange(selectedValue: any) {
     this.packstatus = selectedValue;
     this.getPackageRequests();
+  }
+  getPackageRequestBy(packageId){
+  	 let modal = this.modalCtrl.create(ViewpackagePagePage,{packageId:packageId});
+    modal.present();
+  }
+  getServicesForByElders(id,locationId,elderId,status){
+  	 let modal1 = this.modalCtrl.create(ElderservicePagePage,{pack_id: id, elder: elderId, location_id: locationId,packbstatus:status});
+    modal1.present();
   }
 public dashboardPage()
   {

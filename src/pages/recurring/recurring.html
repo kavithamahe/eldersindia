@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Recurring Requests</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>
+<ion-card  *ngFor="let recurring of recurringRequest" class="job-detailsview">
+  <ion-item>
+  <ion-row>
+  <ion-col width-70 text-wrap>
+    <h2 text-wrap text-capitalize></h2>
+    <p>Request Id : {{recurring.sr_token}}</p>
+    <p>Elder Name : {{recurring.elder_name}}</p>
+    <p>Service Provider : {{recurring.elder_name}}</p>	
+    <p>Request count : {{recurring.req_count}}</p>	
+    <p>Request Date : {{recurring.updated_at}}</p>
+	</ion-col>
+  <ion-col width-30>
+<ion-badge (click)="viewrecurring(recurring)"><i class="fa fa-eye" aria-hidden="true"></i></ion-badge>
+    <ion-badge *ngIf="recurring?.status == 0 || recurring?.status == 1 || recurring?.status == 4" (click)="deleteviewrecurring(recurring)"><i class="fa fa-trash" aria-hidden="true"></i></ion-badge>
+
+  </ion-col>
+  </ion-row>
+  </ion-item>
+</ion-card>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

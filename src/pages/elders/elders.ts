@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController,LoadingController, NavParams} from 'ionic-angular';
+import { Http,Headers,RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service-provider';
 import {FormBuilder,FormGroup,Validators,FormArray} from '@angular/forms';
@@ -14,6 +15,8 @@ import { ManagePage } from '../../pages/manage/manage';
   providers:[CommunityServices]
 })
 export class EldersPage {
+  headers:any;
+  options:any;
 authForm : FormGroup;
 myForm : FormGroup;
 base64Image:any;
@@ -127,7 +130,11 @@ mytype:string ="password";
       storage.get('user_type_id').then((id) => { this.sponsor_id=id;});
 
       storage.get('token').then((token) => { this.token=token; 
-        
+         this.headers = new Headers();
+    this.headers.append('Content-Type', 'application/json');
+    this.headers.append('Authorization', 'Bearer ' + this.token);
+    this.options = new RequestOptions({ headers: this.headers });
+        this.getElderMasterDetails();
         this.functionality=navParams.get("fuctionality");
        // console.log(navParams.get("editData"));
       if(this.functionality == 'edit'){
@@ -144,6 +151,7 @@ mytype:string ="password";
           this.title = "Elder Onboarding";
         }
       })
+      
     }); 
     // this.today = "";
      
@@ -478,7 +486,7 @@ public emergencies =  [
  getElderMasterDetails(){
    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-     this.communityServices.getElderMasterDetails()
+     this.communityServices.getElderMasterDetails(this.options)
        .subscribe(masterData =>{
                     this.functionalArea=masterData.result.FunctionalArea;
                     this.educations=masterData.result.Educational;
@@ -512,9 +520,9 @@ public emergencies =  [
         });
 
   }
-   ionViewWillEnter(){
-        this.getElderMasterDetails();
-      }
+   // ionViewWillEnter(){
+   //      this.getElderMasterDetails();
+   //    }
 
   addEmergency(){
     
@@ -664,7 +672,39 @@ getareaof_interest(){
           }
        }
   }
- 
+ fileChange(event) {
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0) {
+        let file: File = fileList[0];
+        let formData:FormData = new FormData();
+        formData.append('attachemts[0]', file, file.name);
+        let headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + this.token);
+        headers.append('Accept', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+           this.communityServices.resumeupload( formData, options)
+        .subscribe(
+     (sendMessage) => { 
+      console.log(sendMessage);
+      this.file_name=sendMessage[0].file_name;
+      this.file_path=sendMessage[0].file_path;
+      console.log(this.file_path);
+      console.log(this.file_name);
+      
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+          this.communityServices.showToast(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.communityServices.showToast("Try again later");
+        }
+      });
+      
+    }
+}
  addDependent(){
     //---------------------------------edited-------------------------------//
 
@@ -846,7 +886,8 @@ getareaof_interest(){
         "service_interest":this.servicecategory,
         "serviceCategory_interest":this.servicecategoryinterest_data,
         "app":"",
-        "docs":""
+        "file_name":this.file_name,
+        "file_path":this.file_path
       }]}).subscribe(elders =>{
                     // console.log(elders); 
                     let msg='';
@@ -1032,7 +1073,8 @@ getareaof_interest(){
                           "education":this.education_data,
                           "sponsor_id":this.sponsor_id,
                           "job_interested":this.job_interest,
-                          "docs":""
+                          "file_name":this.file_name,
+                          "file_path":this.file_path
                           }]
                         }).subscribe(
            elders=>{
@@ -1142,23 +1184,7 @@ getareaof_interest(){
     {
       this.nav.setRoot(DashboardPage);
     }
-fileChange(event) {
-    let fileList: FileList = event.target.files;
-   // this.file_name=fileList[0].name;
-    //console.log( this.file_name);
-    if(fileList.length > 0) {
-        let file: File = fileList[0];
-        this.file_name=file.name;
-        console.log(file.name);
-        let formData:FormData = new FormData();
-        formData.append('attachemts[0]', file, file.name);
-        let headers = new Headers();
-        headers.append('Authorization', 'Bearer ' + this.token);
-        headers.append('Accept', 'application/json');
-       
-      
-    }
-}
+
 
 }
 

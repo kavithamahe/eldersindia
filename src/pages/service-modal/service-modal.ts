@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController,ViewController, NavParams } from 'ionic-angular';
+import { NavController,ViewController, NavParams, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
+import { GetpackagePagePage } from  '../../pages/getpackage/getpackage';
 import { SubcategoryListPage } from '../subcategory-list/subcategory-list';
 /*
   Generated class for the ServiceModal page.
@@ -20,10 +20,13 @@ sub_category:any;
 showContactDetails = false;
 showServiceOffered = false;
 showPackagesDetails = false;
+ dependentId:any;
 title:any;
-  constructor(public storage:Storage, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams) {
+user_type
+  constructor(public storage:Storage,public modalCtrl: ModalController, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams) {
    console.log("this is service modal page");
   	this.vendorList = navParams.get("vendorList");
+    console.log(this.vendorList);
   	if(navParams.get("service") == "contact"){
   		this.showContactDetails = true;	
   		this.title = this.vendorList.vendorDetails.name+" - Contact Details";
@@ -36,16 +39,14 @@ title:any;
   		this.showServiceOffered = true;
   		this.title = this.vendorList.vendorDetails.name+" - Service Offered";
   	}
+    
   	
   }
 
   dismiss(){
 	this.viewCtrl.dismiss();
   }
-
-
   showService(event){
-    // this.comment="";
     if(this.show_service==event){
         this.show_service=null;
     }
@@ -54,7 +55,13 @@ title:any;
     }
 
  }
-
+ openRequestPackage(id){
+  if(this.vendorList.dependentLists.length == 1){
+      this.dependentId = this.vendorList.dependentLists[0].id;
+    }
+    let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id,dependents:this.vendorList.dependentLists});
+    modal.present();
+ }
  goToService(sub_service){
    let service = {id:sub_service.service_id, name:sub_service.service};
     let location_id = this.locationId;

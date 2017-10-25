@@ -55,13 +55,44 @@ Url:any;
     return this.http.post(this.rootUrl+'getBlogCategories',_request,this.options)
       .map(res => res.json());
   }
+  getrecurringRequest(rootUrl,searchText){
+    let _request= {"search": searchText};
+    return this.http.post(rootUrl+'getRecurringServiceList',_request,this.options)
+      .map(res => res.json());
+  }
+  recurringRequestScroll(nextPageURL,searchText){
+     let _request= {"search": searchText};
+     return this.http.post(nextPageURL,_request,this.options)
+      .map(res => res.json());
+  }
+  getrecurringRequestdetail(rootUrl,recurring){
+    let _request= {"data":recurring};
+    return this.http.post(rootUrl+'getRecurringServiceById',_request,this.options)
+      .map(res => res.json());
+  }
+  getrecurringRequestdelete(rootUrl,recurring){
+     let _request= {"data":recurring};
+    return this.http.post(rootUrl+'getBulkRecurringService',_request,this.options)
+      .map(res => res.json());
+  }
+  deleterecurringrequest(rootUrl,recurring){
+    let _request= {"data":recurring};
+    return this.http.post(rootUrl+'deleteBulkRecurringService',_request,this.options)
+      .map(res => res.json());
+  }
 eventsscroll(searchCategory,searchText,nextPageURL) 
    {  
    let _request= {search: {"title": searchText, "category": searchCategory}};
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }
-
+viewrecurring(sr_token) 
+  {
+  
+   let _request= {"info":{"list":true,"sort":"","searchValue":"","status":"","token":sr_token}};
+    return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
+      .map(res => res.json()); 
+  }
   singleBlog(blogId) {  
    let _request= {};
     return this.http.post(this.rootUrl+'getBlogDetails/'+blogId,_request,this.options)
@@ -73,12 +104,30 @@ getPackageRequest(Url,searchText,packstatus){
     return this.http.post(Url+`getPackageRequest`,_request,this.options)
       .map(res => res.json()); 
 }
-  eventscrolls(nextPageURL,searchText,packstatus) 
+eventscrolls(nextPageURL,searchText,packstatus) 
    {  
    let _request= {info: {"list": true, "search": searchText, "status": packstatus, "token": null}};
 
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
+   }
+getPackageRequestById(rootUrl,packageId){
+     let _request= {"id":packageId};
+    return this.http.post(rootUrl+'getPackageRequestById',_request,this.options)
+      .map(res => res.json());
+  }
+  getServicesForByElders(rootUrl,packageId,elder,location_id){
+       let _request= {"pack_id": packageId, "elder": elder, "location_id": location_id}
+    return this.http.post(rootUrl+'getServicesForByElders',_request,this.options)
+      .map(res => res.json());
+  }
+   getVendorpackageDetails(rootUrl,vendor_id,location_id){
+    if(location_id == undefined || location_id == ''){
+      location_id= 'null';
+    }
+    let _request= {"vendor_id": vendor_id, "location_id": location_id}
+    return this.http.post(rootUrl+'getVendorpackageDetails',_request,this.options)
+      .map(res => res.json());
    }
   blogComment(blogId,commandObj) {  
     let _request=commandObj;
@@ -147,12 +196,18 @@ getPackageRequest(Url,searchText,packstatus){
     return this.http.post(this.rootUrl+'getConnections',_request,this.options)
       .map(res => res.json()); 
    }
+
    shareBlog(BlogId,friendsID){
       let _request= {'friends':{'user_id':friendsID},'shareurl':this.rootUrl+'/#/blog/details/'+BlogId};
      //let _request={};
        console.log(_request);
      
     return this.http.post(this.rootUrl+'shareblog',_request,this.options)
+      .map(res => res.json()); 
+   }
+   getPackage(selectedConnections,packId){
+    let _request= {"pack_id": packId, "dependent_id": selectedConnections};
+    return this.http.post(this.rootUrl+'availPackage',_request,this.options)
       .map(res => res.json()); 
    }
    showErrorToast(error){
