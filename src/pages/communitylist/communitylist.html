@@ -19,32 +19,34 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content class="segments-info" style="background:#F3F7FF;">
+<ion-content padding>
      <ion-segment [(ngModel)]="community" class="segment-top" 
      (ionChange)="changeSlide($event)">
         <ion-segment-button (click)="myCommunity()" value="my_community">
           My Communities
         </ion-segment-button>
         <ion-segment-button (click)="otherCommunity()" value="other_community">
-          Recommended Community
+          Active Communities
         </ion-segment-button>
       </ion-segment>
     <div [ngSwitch]="community">
       <ion-slides (ionSlideWillChange)="slideChanged($event)">
       <ion-slide>
       <ion-list>
-        <ion-card *ngIf(searchButton)>
+        <div *ngIf(searchButton) class="select-cat">
           <ion-list>
             <ion-item>
+	
               <ion-label>select category</ion-label>
                 <ion-select  (ionChange)='getCategory($event)' >
                   <ion-option *ngFor="let category of categoryLists" 
                   value={{category.id}}>{{category.name}}
                   </ion-option>
                 </ion-select>
+			
             </ion-item>
           </ion-list>
-        </ion-card>
+        </div>
         <div *ngIf(searchButton)>
           <ion-searchbar [(ngModel)]="searchTextBox" (ionInput)="getItems($event)">
           </ion-searchbar>
@@ -53,7 +55,8 @@
         <ion-card style="position:relative;" *ngFor="let community of communitylists; let i= index" 
         (click)="getPost(community.id)">
           <div class="community-img">
-               <img  [src]="imageUrl+community?.banner" style="width:100%; height:200px;" [hidden]="!community?.banner" />
+		  <!-- <img class="center-image" src="assets/img/saa.jpg"  style="width:100%; height:180px;" /> -->
+               <img  [src]="imageUrl+community?.banner" style="width:100%; height:200px;" [hidden]="!community?.banner" /> 
         			   <div class="label-opc">
             			   <ion-item text-wrap style="text-align:left !important;"  
                      (click)="getPost(community.id)"><p>{{community.community_name | words :2: '....'}}</p></ion-item>
@@ -72,7 +75,7 @@
       </ion-slide>
       <ion-slide>
       <ion-list >
-        <ion-card *ngIf(searchButton)>
+        <div *ngIf(searchButton) class="select-cat">
           <ion-list>
             <ion-item>
                 <ion-label>select category</ion-label>
@@ -82,7 +85,7 @@
                 </ion-select>
             </ion-item>
           </ion-list>
-        </ion-card>
+        </div>
         <div *ngIf(searchButton)>
           <ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
         </div>

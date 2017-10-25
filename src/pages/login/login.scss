@@ -1,11 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
 page-login{
-	
+.lgoin-logo												{height:200px;background-image: url('../assets/img/maxresdefault (1).jpg');width:100%;background-repeat: no-repeat; background-size: cover; }
+.logsimg												{background:#fff;  border-radius:50%;position: fixed;top:8%;left: 0;right:0;height:0;text-align:center;}
+.logsimg img											{background:#fff; border-radius:50%;  padding:10px;}
+.item-md												{padding-left:0px !important;}	
+.item-ios												{padding-left:0px !important;}	
+.login-pages	{background:#ffffff;}
+/*.login-pages											{background-image: url('../assets/img/bgss.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}*/
+.login-detalis 											{margin-top:-30px;  padding:10px; position:relative; background:#fff;}
+.login-detalis h1 									    { text-align:center !important; color:#004784; font-size:20px;}
+.text-input-md{padding:10px; border:1px solid #ccc;border-radius:20px;font-family: 'Open Sans Condensed', sans-serif;}
+.text-input-ios{padding:10px; border:1px solid #ccc;border-radius:20px;font-family: 'Open Sans Condensed', sans-serif;}
+.logoin-btn{ background: rgba(0, 0, 0, 0) linear-gradient(45deg, #fe5722 0%, #fe5722 30%, #ff906b 50%, #fe5722 71%, #fe5722 100%) repeat scroll 0 0;width:100%;height:40px; border-radius:20px;  }
+.item-md{background:none !important;}
+.item-ios{background:none !important;}
 
-.item-md												 {padding-left:0px !important;}	
-.item-ios												 {padding-left:0px !important;}	
-.login-pages											 {background-image: url('../assets/img/ddd.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
-.elder-logo												 {text-align:center; margin-top:30px; margin-bottom:10px;}
-.text-input-md{padding:10px;}
-.text-input-ios{padding:10px;}
+.list-ios > .item-block:first-child{ border:none  !important;}
 
 }

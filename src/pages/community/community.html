@@ -16,7 +16,7 @@
   </ion-navbar>
 </ion-header>
   
-<ion-content style="background:#F3F7FF;">
+<ion-content padding class="login-bgimg">
 	<div class="one-half-responsive" style="background:#fff;">
 	   <p class="image-column-left">
 			<img [src]="imageUrl+communityDetailData?.logo"  
@@ -27,6 +27,7 @@
         </p>
 		<div class="decoration hide-if-responsive"></div>
 	</div>
+	<br/>
   	<div  *ngIf="userType == 'sponsor'" class="memberareas">
 	  	<ion-item>
 			<ion-row *ngIf="!communityDetailData?.isJoined">
@@ -37,23 +38,26 @@
 				</ion-col>
 			</ion-row>
 			<ion-item class="mem-title">
-      			<p> &nbsp;Members ({{show_member}})</p> <button ion-button icon-only medium (click)="presentPopover($event,communityDetailData?.id)" class="postedimgvideos">
-								<i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Invite Your Contacts
-							</button>
+      			<h1> &nbsp;Members ({{show_member}})</h1> 
+				<button ion-button icon-only medium (click)="presentPopover($event,communityDetailData?.id)" class="postedimgvideos">
+				<i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Invite Your Contacts
+			   </button>
 			</ion-item>
-			<ion-slides slidesPerView= "4">
+			<ion-slides slidesPerView= "3">
+			
 				<div *ngFor="let member of members; let i=index" text-wrap>
 					<ion-slide [hidden]="!member?.avatar">
 						<ion-item [hidden]="!member?.avatar">
 							<ion-col [hidden]="!member?.avatar">
 								<img (click)="membersProfile(member.uid)" 
-								[src]="imageUrl+member?.avatar" style="width: 70px; height: 70px;"  />
+								[src]="imageUrl+member?.avatar" style="width:100px; height:80px;"  />
 								<small class="mem-name">{{member.name | words :5 : '....'}}
 								</small>
 							</ion-col>
 						</ion-item>
 					</ion-slide>
 				</div>
+				
 				</ion-slides>
 				<!-- <div  *ngIf(viewMore) style="float:left;">
 					<ion-badge (click)="showModel(members)" class="show-members">+{{show_member}} 
@@ -70,15 +74,15 @@
 				<ion-textarea style="-webkit-user-select:all !important;" [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
 				</ion-textarea>
 			</div>
-			<div style="padding:0px !important;">
+			<div class="posted-video-img">
 		    	<ion-row>
 					<ion-col>
-						<button ion-button (click)="accessGallery()" icon-only class="video">
-							<i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;
+						<button ion-button (click)="accessGallery()" icon-only class="img">
+							<i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Add photos
 						</button>
 						<img [src]="base64Image" *ngIf="base64Image" />
 							<button ion-button (click)="addVideos()" icon-only medium class="video">
-							<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp;
+							<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp; Add videos
 						</button>
 							<button ion-button icon-only medium (click)="postCommunity(communityDetailData?.id)" class="postedimgvideos">
 								<i class="fa fa-paper-plane-o" aria-hidden="true"></i>&nbsp; Post
@@ -94,16 +98,17 @@
 		            					[class.invalid]="!authForm.controls.videoUrl.valid && (authForm.controls.videoUrl.dirty )">
 									</ion-input>
 								</ion-item>
-									<small style=" float:left;">( Youtube,Dailymotion,Vimeo,Wine)
+									<small>( Youtube,Dailymotion,Vimeo,Wine)
 									</small>
 								
 							</ion-col>
 						</ion-row>
 						<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
-	                	<p style="color:red; font-size: 14px;" class="valid">Please enter valid video url</p>
+	                	<p class="valid">Please enter valid video url</p>
            				</div>
 					</form>
 				</div>
+				<br/>
 		   	</div>
 	</div>
 	
@@ -119,9 +124,9 @@
 	        		</ion-col>
 	        		<ion-col width-60>
 			          	<h2 (click)="communityProfile(user.uid)">{{user.name}}</h2>
-			          		<em class="time-datem"><i class="fa fa-clock-o"></i>
+			          		<p class="time-datem"><i class="fa fa-clock-o"></i>
 			          		{{user.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
-			          		</em>
+			          		</p>
 			        </ion-col>
 					<ion-col width-20>
 						<button *ngIf="user.uid == user_id" ion-button color="dark" clear 
@@ -131,7 +136,7 @@
 	          		</ion-col>
 				</ion-row>
 	    	</ion-item>
-			<div>
+			<div class="posted-area">
 	      		<ion-card-content [hidden]="!user?.post_message">
 		          	<p item-text-wrap class="feed-post" [innerHTML]="user.post_message">
 		          	<a href=""></a>{{user.post_message}}</p>
@@ -157,7 +162,7 @@
 			     	<div class="comment-liks">
 
 	      		<ion-row>
-	        	    <ion-col text-left width-33 style="padding:0px !important;">
+	        	    <ion-col text-left width-30 style="padding:0px !important;">
 				    <button ion-button clear small *ngIf=(user.likes.emoji)
 						[innerHTML]="user.likes.emoji | emojis" 
 						(click)="emojiPicker($event,user.id)">
@@ -167,12 +172,12 @@
 						<p class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;{{user.likecount}}&nbsp;Like</p>
 						</button>
 				    </ion-col>
-				    <ion-col text-left width-33 text-left style="padding:0px !important;">
+				    <ion-col  width-30 text-left style="padding:0px !important;">
 				      <button ion-button icon-left clear small (click)="showComment(user)">
   						<p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{user.comment_count}}&nbsp;Comment</p>
 				      </button>
 				    </ion-col>
-				    <ion-col>
+				    <ion-col width-30 text-left style="padding:0px !important;">
 					    <button ion-button icon-left clear small  
 					    *ngIf="!user.likecount == 0">
 	  					<p class="liks-comments">&nbsp;{{user.likecount}}+like it</p></button>

@@ -1,27 +1,47 @@
 <div >
-<ion-menu id="elder" [content]="content" class="menus-color">
-  <ion-content>
+<ion-menu id="elder" [content]="content">
+  <ion-header class="hed-new">
+      	<ion-toolbar class="img-log">
+	
+
+    <div text-center>
+<img class="center-image" src="assets/img/elders-logo.png"  style="align-items:center; background:#fff; border-radius:50%;" />
+
+	<p>Elders<b>India</b></p></div>
+  </ion-toolbar>
+  </ion-header>
+  <ion-content class="left-menus">
     <ion-list>
-      <button class="side-item-md my-list-item fant-size" ion-item *ngFor="let p of pages" (click)="openPage(p)"><i style="padding-right: 2px; width: 35px" class={{p.myIcon}} aria-hidden="true"></i>
+      <button class="side-item-md my-list-item fant-size" ion-item *ngFor="let p of pages" (click)="openPage(p)"><i style="padding-right:0px; width:20px" class={{p.myIcon}} aria-hidden="true"></i>
        {{p.title}}
       </button>
     </ion-list>	
 	<br/>
 	<br/>
-	  <br/>
+	
   </ion-content>
 </ion-menu>
 
-<ion-menu id="sponsor" [content]="content" >
-  <ion-content>
+<ion-menu id="sponsor" [content]="content">
+  <ion-header class="hed-new">
+      	<ion-toolbar class="img-log">
+	
+
+    <div text-center>
+<img class="center-image" src="assets/img/elders-logo.png"  style="align-items:center; background:#fff; border-radius:50%;" />
+
+	<p>Elders<b>India</b></p></div>
+  </ion-toolbar>
+  </ion-header>
+  <ion-content class="left-menus">
     <ion-list>
-      <button class="side-item-md my-list-item fant-size" ion-item *ngFor="let p2 of pages2" (click)="openPage(p2)"><i style="padding-right: 2px; width: 35px" class={{p2.myIcon}} aria-hidden="true"></i>
+      <button class="side-item-md my-list-item fant-size" ion-item *ngFor="let p2 of pages2" (click)="openPage(p2)"><i style="padding-right:0px; width:20px" class={{p2.myIcon}} aria-hidden="true"></i>
        {{p2.title}}
       </button>
     </ion-list> 
   <br/>
   <br/>
-   <br/>
+  
     
   </ion-content>
 </ion-menu>
