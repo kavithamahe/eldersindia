@@ -168,6 +168,7 @@ toggleContent(){
   }
   showComment(post){
     let commentModal = this.modal.create(CommunitycommentsPage, { posts: post });
+    console.log(post);
    commentModal.present();
   }
 
@@ -268,13 +269,13 @@ toggleContent(){
    }
  
   addLikes(likeObj){
-    // let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    // loader.present();
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
 
    this.communityServices.addLike(likeObj).subscribe(data =>{
      //this.showToast(data.result.info.message);
      this.communityList(this.community_id);
-      //loader.dismiss();
+      loader.dismiss();
    },
      err =>{
         if(err.status===401){
@@ -286,7 +287,7 @@ toggleContent(){
     else{
       this.communityServices.showErrorToast(err);  
     }
-    //loader.dismiss();
+    loader.dismiss();
   })
     
   }
@@ -371,20 +372,7 @@ toggleContent(){
   })
   }
   
-  deleteComment(id){
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-     loader.present();
-     this.communityServices.deleteComment(id).subscribe(datas =>{
-     this.showToast(datas.result);
-     this.comment="";
-     this.communityList(this.community_id);
-     loader.dismiss();
-     },
-     err =>{
-    loader.dismiss();
-    this.communityServices.showErrorToast(err);
-  })
-  }
+
   public dashboardPage()
   {
     this.nav.setRoot(DashboardPage);

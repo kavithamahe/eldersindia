@@ -27,7 +27,7 @@
 			  </ion-col>
 			
 			  <ion-col text-capitalize class="name-conne">
-				  <p *ngIf="communityProfileData?.id != my_id" style="text-align:left;">{{communityProfileData?.name}}</p>
+				  <p *ngIf="communityProfileData?.id != my_id" style="text-align:left;">{{communityProfileData?.name}} {{communityProfileData?.last_name}}</p>
 				  <p *ngIf="communityProfileData?.id == my_id" style="text-align:left;">You
 				  </p>
 			  </ion-col>

@@ -43,7 +43,7 @@ export class CommunityprofilePage {
     communityProfile:any;
     communityProfileData:any;
     getPrivacyLists:any;
-    getCommunityMembers:any;
+    getCommunityMembers:any=[];
     base64Image:any="";
     status:any;
     request_sent:any;
@@ -100,6 +100,7 @@ export class CommunityprofilePage {
     this.allConnections=[];
     this.communityProfile=[];
     this.communityProfileData=[];
+    this.getCommunityMembers=[];
     this.community="activity";
     this.status=[];
      
