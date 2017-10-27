@@ -78,7 +78,7 @@ resumeupload(formData, options){
     return this.http.post(this.rootUrl+'applyJob',_request,this.options)
       .map(res => res.json()); 
   }
-    applyjobelder(dependantId,user_id,jobId,file_name,file_path) 
+    applyjobelder(jobData) 
  {
   let _request= {"info":{"job_id":jobId,"uid":user_id,"dependantId":dependantId,"file_name":file_name,"file_path":file_path}};
 
@@ -91,6 +91,7 @@ resumeupload(formData, options){
                 "userId": user_id};
 
      return this.http.post(this.rootUrl+'getJobAvailAlert',_request,this.options)
+
       .map(res => res.json()); 
   }
   appliedJobs(functionalArea,location) 

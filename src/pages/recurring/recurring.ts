@@ -12,6 +12,7 @@ import { BlogListService } from '../../providers/blog-list-service';
   Generated class for the RecurringPage page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  
   Ionic pages and navigation.
 */
 @Component({
@@ -41,6 +42,9 @@ serviceRequestScrollLists:any=[];
   inputSearch(searchEvent){
    this.searchText = searchEvent.target.value;
    this.getrecurringRequest();
+   if(this.searchText.length == 0){
+    this.getrecurringRequest();
+   }
   }
    public showToaster(message)
   {
@@ -54,6 +58,7 @@ serviceRequestScrollLists:any=[];
   getrecurringRequest(){
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
+    this.recurringRequest = [];
     this.blogListService.getrecurringRequest(this.rootUrl,this.searchText)
       .subscribe(data =>{ 
       	this.recurringRequest = data.result.data;
@@ -61,6 +66,7 @@ serviceRequestScrollLists:any=[];
         loading.dismiss();
     },
     err =>{
+      this.recurringRequest = [];
       this.blogListService.showErrorToast(err);     
       loading.dismiss();
     })

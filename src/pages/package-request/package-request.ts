@@ -51,7 +51,7 @@ elderId:any;
     },
     err =>{
       //console.log("sdfsdf");
-      this.packageRequest="";
+      this.packageRequest= [];
       this.blogListService.showErrorToast(err);     
       loading.dismiss();
     }) 
