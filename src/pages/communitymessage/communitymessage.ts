@@ -104,8 +104,6 @@ fileChange(event) {
       console.log(sendMessage);
       this.file_name=sendMessage[0].file_name;
       this.file_path=sendMessage[0].file_path;
-      console.log(this.file_path);
-      console.log(this.file_name);
       
     },
     (err) => { 

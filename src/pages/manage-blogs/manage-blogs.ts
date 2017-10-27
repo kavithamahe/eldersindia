@@ -23,23 +23,32 @@ manageblogsLists:any=[];
 blogStatus:any=[];
 nextPageURL:any='';
 manageBlogscrollLists:any=[];
+categoryLists:any;
 emptyRecord:any;
+searchText:any="";
+searchCategory:any = "";
+searchstatus:any="";
 
   constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
         this.manageblogs();
+        this.getCategory();
     })
 
   });
   
   }
+   inputSearch(searchEvent){
+   this.searchText = searchEvent.target.value;
+   this.manageblogs();
+  }
   public manageblogs()
   { 
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-   this.blogListService.manageblogs().subscribe(
+   this.blogListService.manageblogs(this.searchCategory,this.searchText,this.searchstatus).subscribe(
      (manageblogs) => {      
       this.manageblogsLists=manageblogs.result.list.data;  
        this.blogStatus=manageblogs.result.status; 
@@ -59,6 +68,14 @@ emptyRecord:any;
         loader.dismiss();
       }
     );   
+  }
+     public getCategory(){
+    this.blogListService.getBlogCategories().subscribe(mycategory => {
+      this.categoryLists=mycategory.result; 
+  },
+    err =>{
+  });
+
   }
   public showToaster(message)
   {
@@ -129,7 +146,7 @@ emptyRecord:any;
   }
   manageBlogscroll()
   {
-     this.blogListService.manageBlogscroll(this.nextPageURL).subscribe(
+     this.blogListService.manageBlogscroll(this.nextPageURL,this.searchCategory,this.searchText,this.searchstatus).subscribe(
      (manageBlogscroll) => {
       this.manageBlogscrollLists=manageBlogscroll.result.list.data; 
       for (let i = 0; i < Object.keys(this.manageBlogscrollLists).length; i++) {

@@ -100,19 +100,19 @@ companyname:any;
 
    public applyJob(jobId)
   {
-    if(this.user_type=='elder')
-    {
-       this.jobDependentId=this.user_type_id;
-       this.jobDependent(jobId);
-       //this.callApplyJob(jobId,this.jobDependentId,"");
-    }
-    else
-    {
+    // if(this.user_type=='elder')
+    // {
+    //    this.jobDependentId=this.user_type_id;
+    //    this.jobDependent(jobId);
+    //    //this.callApplyJob(jobId,this.jobDependentId,"");
+    // }
+    // else
+    // {
       let modal = this.modalCtrl.create(JobDependentPage,{"jobId":jobId});
     modal.present();
       // this.jobDependent(jobId);
       // console.log("fsdf" +jobId );
-    }
+    //}
    
   }
   callApplyJob(jobId,jobDependentId,file_name)

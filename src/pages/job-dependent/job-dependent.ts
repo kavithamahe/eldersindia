@@ -27,6 +27,7 @@ authForm : FormGroup;
 token:any;
 imageUrl:any;
 user_id:any;
+user_type_id:any;
 getDependentList:any;
 dependent:any;
 nativepath:any;
@@ -35,23 +36,25 @@ file_path:any;
 user_type:any;
 submitAttempt:any;
 jobId:any;
+dependentstatus:any;
   constructor(public formBuilder: FormBuilder,private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.jobId=navParams.get("jobId");
-console.log(this.jobId);
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
     storage.get('user_type').then((user_type) => { this.user_type=user_type;});
+    storage.get('user_type_id').then((user_type_id) => { this.user_type_id=user_type_id;});
     storage.get('id').then((id) => { this.user_id=id;});
       storage.get('token').then((token) => { this.token=token; 
         this.getDependent();
     })
 
   });
+  console.log(this.user_type);
+  if(this.user_type !='sponsor'){
    this.authForm = formBuilder.group({
         elder_dependent: ['', Validators.compose([Validators.required])],
-        //file_name: ['', Validators.compose([Validators.required])],
    })
-
+}
 }
 
  getDependent()
@@ -71,7 +74,7 @@ console.log(this.jobId);
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -80,6 +83,12 @@ console.log(this.jobId);
          loader.dismiss();
       }
     );  
+ }
+ checkDependent(){
+  this.jobBoardService.checkDependent(this.user_id,this.dependent,this.jobId).subscribe((checkjob) => {
+        this.dependentstatus=checkjob.status;
+        this.showToaster(checkjob.result);
+ })
  }
  fileChange(event) {
     let fileList: FileList = event.target.files;
@@ -97,9 +106,6 @@ console.log(this.jobId);
       console.log(sendMessage);
       this.file_name=sendMessage[0].file_name;
       this.file_path=sendMessage[0].file_path;
-      console.log(this.file_path);
-      console.log(this.file_name);
-      
     },
     (err) => { 
         if(err.status===401)
@@ -129,38 +135,62 @@ dismiss() {
  }
  submitDependent()
  {
-  console.log(this.dependent);
-    if(!this.authForm.valid){
-      this.submitAttempt = true;
-      this.showToaster("Enter the required fields");
-    }
-    else{
-      this.submitAttempt = false;
+  console.log(this.file_name);
+  if(this.file_name == undefined){
+    this.showToaster("Please select the file");
+  }
+  else{
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    // if(!this.authForm.valid){
+    //   this.submitAttempt = true;
+    //   this.showToaster("Enter the required fields");
+    // }
+    //else{
+      //this.submitAttempt = false;
+      if(this.user_type == 'sponsor'){
       this.jobBoardService.applyjobelder(this.dependent,this.user_id,this.jobId,this.file_name,
         this.file_path).subscribe((applyjob) => {
-        console.log(applyjob);
- })
-   // let data={'dependent':this.dependent,'file_name':this.file_name,};
-   // console.log(data);
-   // this.viewCtrl.dismiss(data);
+          this.showToaster(applyjob.result);
+           loader.dismiss();
+       },
+        (err) => { 
+        if(err.status===401)
+        {
+          this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+         loader.dismiss();
+      }
+    ); 
+      }
+      else{
+        console.log(this.jobId);
+        this.jobBoardService.applyjobelder(this.user_type_id,this.user_id,this.jobId,this.file_name,
+        this.file_path).subscribe((applyjob) => {
+          this.showToaster(applyjob.result);
+           loader.dismiss();
+        },
+      (err) => { 
+        if(err.status===401)
+        {
+          this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+         loader.dismiss();
+      }
+    ); 
+        
+      }
+
 
  }
  }
-//   openCamera(){
-// console.log("open success");
-//     this.fileChooser.open()
-//       .then((imageData) => {
 
-//       console.log("filedfsdf"+imageData );
-//          (<any>window).FilePath.resolveNativePath(imageData, (result) => {
-//     this.nativepath = result;
-//      this.file_name = this.nativepath.split("/").pop();
-// console.log("name"+this.file_name);
-//     console.log("nativepath"+ this.nativepath);
-    
-//   })
-//         this.jobBoardService.upload(imageData);
-//       });
-
-//   }
  }

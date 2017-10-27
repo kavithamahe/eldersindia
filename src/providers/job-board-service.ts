@@ -66,56 +66,7 @@ locationSearch:any=[];
     return this.http.post(this.rootUrl+'myJobRequestById/'+jobId,_request,this.options)
       .map(res => res.json());
   }
-//   file_Path:any;
-//     upload(imageData)
-//     {
-      
-//        // imageData is either a base64 encoded string or a file URI
-//        // If it's base64:
 
-//      const fileTransfer: TransferObject = this.transfer.create();
-
-//     this.filePath.resolveNativePath(imageData)
-//      .then(filePath => {
-//                 console.log(filePath);
-//                 this.file_Path = filePath;
-//             });
-
-//       let file_name = this.file_Path.split("/").pop();
-
-//       let options1: FileUploadOptions = {
-//          fileKey: 'file',
-//          fileName: file_name,
-//          headers: {}
-      
-//       }
-      
-//   fileTransfer.upload(imageData, this.rootUrl+'applyJob',options1)
-//    .then((data) => {
-//      // success
-//      alert("success");
-//    }, (err) => {
-//      // error
-//      alert("error"+JSON.stringify(err));
-//    });
- 
-// }
-//   fileUploads(id,file){
-//     this.headers = new Headers();
-//     this.headers.append('Content-Type',undefined);
-//     //this.headers.append('Authorization','Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEwMSwiaXNzIjoiaHR0cDpcL1wvMTgzLjgyLjMzLjIzMjo4MDk3XC9hcGlcL2xvZ2luIiwiaWF0IjoxNDk2MzE0ODMyLCJleHAiOjE0OTcxNzg4MzIsIm5iZiI6MTQ5NjMxNDgzMiwianRpIjoiREI3cVloa2Zva3k4OUk2SiJ9.ZGZUZaNUDMONtvL2kes4SqSsu-JvLYhJYX4EU3WL0aE');
-//     this.options = new RequestOptions({headers: this.headers});
-
-
-//      let fd = new FormData();
-//         fd.append('file_name', name);
-//         fd.append('file_path', file);
-//         fd.append('name',"avatar");
-//         let _request:{"info":{"job_id":string,"uid":string,"dependantId":string,"filename":FormData}} 
-//         =   {"info":{"job_id":"","uid":"","dependantId":"","filename":name}};
-//        return this.http.post(this.rootUrl+'applyJob', _request,this.options).map(res => res.json());
-
-//   }
 resumeupload(formData, options){
   return this.http.post(this.rootUrl+'attachResume',formData,options)
 .map(res => res.json());
@@ -129,18 +80,17 @@ resumeupload(formData, options){
   }
     applyjobelder(dependantId,user_id,jobId,file_name,file_path) 
  {
-  let body=new FormData();
-  console.log(body);
-  body.append('job_id',jobId);
-  body.append('uid',user_id);
-  body.append('dependantId',dependantId);
-  body.append('file_name',file_name);
-  body.append('file_path',file_path);
+  let _request= {"info":{"job_id":jobId,"uid":user_id,"dependantId":dependantId,"file_name":file_name,"file_path":file_path}};
 
-    let headers = new Headers();
-     headers.append("Content-Type","application/formdata");
-      //let _request={"info":body};
-     return this.http.post(this.rootUrl+'applyJob',body,headers)
+     return this.http.post(this.rootUrl+'applyJob',_request,this.options)
+      .map(res => res.json()); 
+  }
+  checkDependent(user_id,dependent,jobId){
+     let _request= {"elderId": dependent,
+                "jobId": jobId,
+                "userId": user_id};
+
+     return this.http.post(this.rootUrl+'getJobAvailAlert',_request,this.options)
       .map(res => res.json()); 
   }
   appliedJobs(functionalArea,location) 
