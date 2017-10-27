@@ -11,10 +11,15 @@ page-login{
 .login-detalis h1 									    { text-align:center !important; color:#004784; font-size:20px;}
 .text-input-md{padding:10px; border:1px solid #ccc;border-radius:20px;font-family: 'Open Sans Condensed', sans-serif;}
 .text-input-ios{padding:10px; border:1px solid #ccc;border-radius:20px;font-family: 'Open Sans Condensed', sans-serif;}
-.logoin-btn{ background: rgba(0, 0, 0, 0) linear-gradient(45deg, #fe5722 0%, #fe5722 30%, #ff906b 50%, #fe5722 71%, #fe5722 100%) repeat scroll 0 0;width:100%;height:40px; border-radius:20px;  }
+.logoin-btn{  font-size: 16px;
+    font-weight:600; color:#fff;
+    font-family: 'Muli', sans-serif;background: rgba(0, 0, 0, 0) linear-gradient(45deg, #fe5722 0%, #fe5722 30%, #ff906b 50%, #fe5722 71%, #fe5722 100%) repeat scroll 0 0;width:100%;height:40px; border-radius:20px;  }
 .item-md{background:none !important;}
 .item-ios{background:none !important;}
 
 .list-ios > .item-block:first-child{ border:none  !important;}
-
+.forgot-pass{ background:none; box-shadow: none;}
+.forgot-pass p{ text-align:center;        color: #007994 !important;
+    font-family: "Muli",sans-serif;
+    font-size: 17px !important; line-height:100px;}
 }

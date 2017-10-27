@@ -5,36 +5,61 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons left>
+	<ion-title text-center>Recurring Requests</ion-title>
+    <ion-buttons right>
     <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Recurring Requests</ion-title>
+    
   </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="content-intop">
 <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>
 <ion-card  *ngFor="let recurring of recurringRequest" class="job-detailsview">
-  <ion-item>
+<ion-grid class="package-needs">
   <ion-row>
-  <ion-col width-70 text-wrap>
-    <h2 text-wrap text-capitalize></h2>
-    <p>Request Id : {{recurring.sr_token}}</p>
-    <p>Elder Name : {{recurring.elder_name}}</p>
-    <p>Service Provider : {{recurring.elder_name}}</p>	
-    <p>Request count : {{recurring.req_count}}</p>	
-    <p>Request Date : {{recurring.updated_at}}</p>
-	</ion-col>
-  <ion-col width-30>
-<ion-badge (click)="viewrecurring(recurring)"><i class="fa fa-eye" aria-hidden="true"></i></ion-badge>
-    <ion-badge *ngIf="recurring?.status == 0 || recurring?.status == 1 || recurring?.status == 4" (click)="deleteviewrecurring(recurring)"><i class="fa fa-trash" aria-hidden="true"></i></ion-badge>
-
-  </ion-col>
+  <ion-col col-12 text-wrap>
+    <h2 text-wrap text-capitalize>Heading</h2>
+	  </ion-col>
   </ion-row>
-  </ion-item>
+    <ion-row>
+  <ion-col col-12 text-wrap>
+    <b>Request Id </b><p>{{recurring.sr_token}}</p>
+	  </ion-col>
+  </ion-row>
+  
+    <ion-row>
+  <ion-col col-12 text-wrap>
+    <b>Elder Name</b><p> {{recurring.elder_name}}</p>
+		  </ion-col>
+  </ion-row>
+  
+      <ion-row>
+  <ion-col col-12 text-wrap>
+    <b>Service Provider</b><p>{{recurring.elder_name}}</p>
+		  </ion-col>
+  </ion-row>
+   <ion-row>
+  <ion-col col-12 text-wrap>  
+    <b>Request count</b><p>{{recurring.req_count}}</p>	
+	  </ion-col>
+  </ion-row>
+     <ion-row>
+  <ion-col col-12 text-wrap> 
+    <b>Request Date</b><p>{{recurring.updated_at}}</p>
+	  </ion-col>
+  </ion-row>
+   <ion-row>
+  <ion-col class="view-serv">
+<ion-badge (click)="viewrecurring(recurring)"><i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
+<ion-badge class="dele" *ngIf="recurring?.status == 0 || recurring?.status == 1 || recurring?.status == 4" (click)="deleteviewrecurring(recurring)"><i class="fa fa-trash" aria-hidden="true"></i> Delete</ion-badge>
+	</ion-col>
+   </ion-row>
+
+  </ion-grid>
 </ion-card>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>

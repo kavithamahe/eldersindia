@@ -1,4 +1,61 @@
 page-singlejob {
 .toolbar-title-md{ text-align:center !important;}
 .toolbar-title-ios{ text-align:center;}
+.job-detailsvie{margin:10px;}
+.job-detailsvie div{margin:10px;}
+.job-detailsvie div h2 {
+    color: #007994 !important;
+    font-family: "Muli",sans-serif;
+    font-size: 17px !important;
+    padding-bottom: 8px;
+    margin: 0;
+}
+.job-detailsvie div p {
+    color: #333 !important;
+    font-family: "Muli",sans-serif;
+    font-size: 15px !important;
+    padding-bottom: 15px;
+    margin: 0; width:100%; float:left;
+    padding: 0;
+}
+.job-detailsvie div p i { width:10px;
+   
+
+    font-size: 13px !important;
+    color: #C0C0C0;
+}
+.job-detailsvie div p span {
+    color: #333 !important;
+    font-family: "Muli",sans-serif;
+    font-size: 15px !important;
+    margin: 0;
+    padding: 0px 0px 0px 10px;
+}
+.single-jobs{background:#F0FFFF; margin-top:10px; padding:10px; width:100%;}
+.single-jobs b{ font-family: "Muli",sans-serif; font-size:15px; font-weight:600;color:hsl(0, 0%, 20%) !important; float:left; padding-bottom:8px;  width:100%;}
+.single-jobs span{ font-family: "Muli",sans-serif; font-size:15px; font-weight:400;color:hsl(0, 0%, 20%) !important; float:left;  padding: 0 0 10px 0px !important;margin:0px !important; }
+
+
+.oranges {border-radius:2px;
+    background:#FE5722;
+    font-size: 15px;
+    font-weight: 400;
+    text-transform: capitalize;
+
+    height: 35px;
+    float: left;
+    font-family: 'Muli', sans-serif;
+}
+.single-jobscotact{ background:#FFFAFA; padding:5px; border:3px double #ccc;}
+.single-jobscotact span{
+ color: hsl(0, 0%, 20%) !important;
+    font-family: "Muli",sans-serif;
+    font-size: 15px !important;
+    margin: 0;
+    padding: 0 0 5px 0px; width:100%; float:left;}
+.single-jobscotact span i{
+    color: hsl(0, 0%, 75%);
+    font-size: 13px !important;
+    width:20px;
+}
 }

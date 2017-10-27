@@ -44,7 +44,9 @@ page-elders{
 .add-depentsform .item-md.checked-empyt{ border:none !important;}
 .add-depentsform .item-md.checked-empyt .checkbox-md{  margin: 18px 9px 9px 4px !important;}
 .add-depentsform .item-md.checked-empyt .item-inner .input-wrapper ion-label{ padding-top:10px;}
-
+	.logoin-btn{ font-size: 16px;
+    font-weight:600; color:#fff;
+    font-family: 'Muli', sans-serif; text-transform: capitalize;background: rgba(0, 0, 0, 0) linear-gradient(45deg, #fe5722 0%, #fe5722 30%, #ff906b 50%, #fe5722 71%, #fe5722 100%) repeat scroll 0 0;width:100%;height:40px; border-radius:20px; margin-top: 20px;  }
 .add-depentsform .item-ios.checked-empyt{ border:none !important;}
 .add-depentsform .item-ios.checked-empyt .checkbox-ios{  margin: 18px 9px 9px 4px !important;}
 .add-depentsform .item-ios.checked-empyt .item-inner .input-wrapper ion-label{ padding-top:10px;}

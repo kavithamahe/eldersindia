@@ -26,41 +26,40 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="content-intop">
-
- <ion-item class="select-loca">
+<ion-content  class="content-intop">
+<ion-card class="sel-packages">
+ <ion-item>
     <ion-label>Functional Area</ion-label>
     <ion-select [(ngModel)]="functionalArea" (ionChange)="onInit()"	multiple="true">
       <ion-option *ngFor="let functional of functionalAreaList" value="{{functional?.id}}">{{functional?.name}}</ion-option>      
     </ion-select>
   </ion-item>
-  <ion-item class="select-loca">
+ </ion-card>
+ <ion-card class="sel-packages">
+  <ion-item>
     <ion-label>Location</ion-label>
     <ion-select [(ngModel)]="location" (ionChange)="onInit()"  multiple="true">
       <ion-option *ngFor="let locations of locationList" value="{{locations?.id}}">{{locations?.location}}</ion-option>
     </ion-select>
   </ion-item>
+ </ion-card>
 
-<ion-item class="select-locas">
+<ion-card class="select-locas">
 <p>Current job openings</p>
-</ion-item>
+</ion-card>
 <ion-card *ngFor="let jobBoard of jobBoardInfo" class="job-detailsview">
-  <ion-item (click)="viewJob(jobBoard?.id)" test-wrap>
-  <ion-row>
-  <ion-col width-75 text-wrap>
+
+  <ion-row (click)="viewJob(jobBoard?.id)" test-wrap>
+  <ion-col col-12 text-wrap>
     <h2 text-wrap text-capitalize>{{jobBoard?.title}}</h2>
-    <P style=" color:#333 !important;" text-capitalize><i class="fa fa-university" aria-hidden="true" ></i>&nbsp;{{jobBoard?.company_name}}</P>
-    <P><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;{{jobBoard?.min_experience}} - {{jobBoard?.max_experience}} years</P>
+    <P><i class="fa fa-university" aria-hidden="true" ></i><span>{{jobBoard?.company_name}}</span></P>
+    <P><i class="fa fa-briefcase" aria-hidden="true"></i><span>{{jobBoard?.min_experience}} - {{jobBoard?.max_experience}} years</span></P>
 	
-    <P><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;{{jobBoard?.location}} </P>
+    <P><i class="fa fa-map-marker" aria-hidden="true"></i><span>{{jobBoard?.location}}</span></P>
 	</ion-col>
-  <ion-col width-25>
 
-  <img src="assets/img/moble.png">
-
-    </ion-col>
   </ion-row>
-  </ion-item>
+
 </ion-card>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>

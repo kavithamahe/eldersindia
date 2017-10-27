@@ -15,6 +15,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 @import url('https://fonts.googleapis.com/css?family=Muli');
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
 button{font-family: 'Muli', sans-serif; }
 .list-md .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus){border-bottom-color:none !important;box-shadow:none  !important;}
 .list-md .item-input.input-has-focus:last-child{border-bottom-color:none !important;box-shadow:none  !important;}
@@ -35,13 +36,7 @@ button{font-family: 'Muli', sans-serif; }
 /********************************menu scss********************************/
 
 .left-menus {
-   background: -moz-linear-gradient(45deg, rgba(0,71,132,1) 0%, rgba(5,193,255,1) 50%, rgba(0,71,132,1) 100%); /* ff3.6+ */
-background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(0,71,132,1)), color-stop(50%, rgba(5,193,255,1)), color-stop(100%, rgba(0,71,132,1))); /* safari4+,chrome */
-background: -webkit-linear-gradient(45deg, rgba(0,71,132,1) 0%, rgba(5,193,255,1) 50%, rgba(0,71,132,1) 100%); /* safari5.1+,chrome10+ */
-background: -o-linear-gradient(45deg, rgba(0,71,132,1) 0%, rgba(5,193,255,1) 50%, rgba(0,71,132,1) 100%); /* opera 11.10+ */
-background: -ms-linear-gradient(45deg, rgba(0,71,132,1) 0%, rgba(5,193,255,1) 50%, rgba(0,71,132,1) 100%); /* ie10+ */
-background: linear-gradient(45deg, rgba(0,71,132,1) 0%, rgba(5,193,255,1) 50%, rgba(0,71,132,1) 100%); /* w3c */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004784', endColorstr='#004784',GradientType=1 ); /* ie6-9 */
+  background:#007A95;
 }
 .left-menus .list-md .item-md {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
@@ -54,7 +49,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004784', end
 }
 
 .left-menus .list-md .item-md .item-inner .input-wrapper .label-md {
-    color: #000; font-weight:400;
+    color: #fff; font-weight:400;
    font-family: 'Muli', sans-serif !important; 
     font-size:17px;
     margin: 0;
@@ -65,35 +60,93 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004784', end
     height: 160px;
 }
 
+
+
+
+
+.left-menus .list-ios .item-ios {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    margin: 0;
+    padding-left: 0 !important;
+}
+
+.left-menus .list-ios .item-block .item-inner {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios {
+    color: #fff; font-weight:400;
+   font-family: 'Muli', sans-serif !important; 
+    font-size:17px;
+    margin: 0;
+    padding-left:10px;
+}
+.left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios i{ margin-right:5px;}
+.hed-new .toolbar-ios {
+    height: 160px;
+}
+
+
+
+
 .img-log .toolbar-background-md {background:#fff;
-   background-image: url("../assets/img/abstract-background-ground-back-wallpaper-wallpapers.jpg") !important;
+   background-image: url("../assets/img/top-logbg.png") !important;
     background-repeat: no-repeat;
     background-size: cover;
 }
+.center-image{ background:#fff; border-radius:50%; padding:5px;}
 .item-md{padding-left:0px;}
 .item-ios{padding-left:0px;}
 .hed-new .toolbar-md .toolbar-content-md p {
-    color: #ED7F22;
+    color:#fff;
     font-size: 30px;
     font-weight: 400;
     margin: 0;
-    text-align: center;
+    text-align: center;font-family: 'Muli', sans-serif;
 }
 
+
+.img-log .toolbar-background-ios {background:#fff;
+   background-image: url("../assets/img/top-logbg.png") !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.item-ios{padding-left:0px;}
+.hed-new .toolbar-ios .toolbar-content-ios p {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 400;
+    margin: 0;
+    text-align: center;font-family: 'Muli', sans-serif;
+}
+.list-md .item-input:last-child{ border:none !important;}
+.list-ios .item-input:last-child{ border:none !important;}
+.list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{border:none;}
 /********************************menu scss end********************************/
 
 /********************************segment scss********************************/
-
 ion-segment{ background:#C0C0C0; border-radius:50px; height:40px; line-height:40px;font-family:'Muli', sans-serif;}
 .segment-md .segment-button{border-radius:50px; height:40px;line-height:40px;margin-left:3px;margin-right:3px;font-family:'Muli', sans-serif; text-transform:capitalize; color:#333; border:none;}
 .segment-md .segment-button.activated, .segment-md .segment-button.segment-activated{border-bottom:none !important;line-height:34px; background:#fff; color:#333; height:34px; font-family:'Muli', sans-serif;}
-
 ion-segment{ background:#C0C0C0; border-radius:50px; height:40px; line-height:40px;font-family:'Muli', sans-serif;}
 .segment-ios .segment-button{border-radius:50px; height:40px;line-height:40px;margin-left:3px; padding:0px 7px;margin-right:3px;font-family:'Muli', sans-serif; text-transform:capitalize; color:#333; border:none;}
 .segment-ios .segment-button.activated, .segment-ios .segment-button.segment-activated{border-bottom:none !important;line-height:34px; background:#fff; color:#333; height:34px; font-family:'Muli', sans-serif;}
 .segment-ios .segment-button:first-of-type{border-radius:50px !important;}
 .segment-ios .segment-button:last-of-type{border-radius:50px !important;}
-
 /********************************segment scss end********************************/
-
 .ios page-community ion-content, .md page-community ion-content{ background-color:#fff !important;}
+.alert-wrapper > .alert-head {font-family:'Muli', sans-serif; font-size:17px; color:#fff;background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(191, 100%, 29%) 0%, hsl(195, 100%, 51%) 50%, hsl(191, 100%, 29%) 100%) repeat scroll 0 0;color: hsl(0, 0%, 100%);}
+.alert-message{overflow-y:auto;}
+.alert-md .alert-button-group{padding:0px; background: hsla(0, 0%, 0%, 0) linear-gradient(89deg, hsl(0, 0%, 50%) 0%, hsl(0, 0%, 100%) 100%) repeat scroll 0 0;}
+.alert-md .alert-head {padding:4px 10px 10px;}
+.alert-ios .alert-head {padding:4px 10px 10px;}
+.alert-radio-label{font-family:'Muli', sans-serif; font-size:15px;}
+.alert-md .alert-checkbox-label{font-family:'Muli', sans-serif; font-size:15px;}
+.alert-ios .alert-checkbox-label{font-family:'Muli', sans-serif; font-size:15px;}
+.toolbar-md-primary .toolbar-background-md{background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(191, 100%, 29%) 0%, hsl(195, 100%, 51%) 50%, hsl(191, 100%, 29%) 100%) repeat scroll 0 0;}
+.toolbar-ios-primary .toolbar-background-ios{background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(191, 100%, 29%) 0%, hsl(195, 100%, 51%) 50%, hsl(191, 100%, 29%) 100%) repeat scroll 0 0;}
+.searchbar-md .searchbar-search-icon {background-image:url("../assets/img/search.png");height:21px;left:16px;top:11px;width:21px;}
+.searchbar-ios .searchbar-search-icon {background-image:url("../assets/img/search.png");height:21px;left:16px;top:11px;width:21px;}
+.searchbar-md .searchbar-input{border:1px solid #0074bd;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100%) 0%, hsl(66, 100%, 98%) 100%) repeat scroll 0 0;}
+.searchbar-ios .searchbar-input{border:1px solid #0074bd;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100%) 0%, hsl(66, 100%, 98%) 100%) repeat scroll 0 0; }
