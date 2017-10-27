@@ -136,31 +136,19 @@ dismiss() {
     }
     else{
       this.submitAttempt = false;
-      this.jobBoardService.applyjobelder(this.dependent,this.user_id,this.jobId,this.file_name,
-        this.file_path).subscribe((applyjob) => {
+      this.jobBoardService.applyjobelder({"info": [{
+             
+        "job_id":this.jobId,
+        "uid":this.user_id,
+        "dependantId":this.dependent,
+        "file_name":this.file_name,
+        "file_path":this.file_path
+        
+      }]}).subscribe((applyjob) => {
         console.log(applyjob);
  })
-   // let data={'dependent':this.dependent,'file_name':this.file_name,};
-   // console.log(data);
-   // this.viewCtrl.dismiss(data);
 
  }
  }
-//   openCamera(){
-// console.log("open success");
-//     this.fileChooser.open()
-//       .then((imageData) => {
 
-//       console.log("filedfsdf"+imageData );
-//          (<any>window).FilePath.resolveNativePath(imageData, (result) => {
-//     this.nativepath = result;
-//      this.file_name = this.nativepath.split("/").pop();
-// console.log("name"+this.file_name);
-//     console.log("nativepath"+ this.nativepath);
-    
-//   })
-//         this.jobBoardService.upload(imageData);
-//       });
-
-//   }
  }
