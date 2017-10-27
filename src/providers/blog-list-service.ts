@@ -168,8 +168,8 @@ getPackageRequestById(rootUrl,packageId){
     return this.http.get(this.rootUrl+'getBlogTags/'+tagsInput,this.options)
       .map(res => res.json());
   }
-  manageblogs() {  
-   let _request= {"search":{"title":"","status":"","category":"","posted_by":"others","author":this.user_id}};
+  manageblogs(searchCategory,searchText,searchstatus) {  
+   let _request= {"search":{"title":searchText,"status":searchstatus,"category":searchCategory,"posted_by":"others","author":this.user_id}};
     return this.http.post(this.rootUrl+'listBlog',_request,this.options)
       .map(res => res.json()); 
   }
@@ -178,9 +178,9 @@ getPackageRequestById(rootUrl,packageId){
     return this.http.post(this.rootUrl+'deleteBlog',_request,this.options)
       .map(res => res.json()); 
   }
-  manageBlogscroll(nextPageURL)
+  manageBlogscroll(nextPageURL,searchCategory,searchText,searchstatus)
    {
-   let _request= {"search":{"title":"","status":"","category":"","posted_by":"others","author":this.user_id}};
+   let _request= {"search":{"title":searchText,"status":searchstatus,"category":searchCategory,"posted_by":"others","author":this.user_id}};
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }

@@ -77,7 +77,9 @@
 <ion-card class="job-detailsvie" *ngIf(appliedjobs)>
 
 <div *ngFor="let applyjob of myjobrequestinfo">
-
+  <ion-list class="job-view">
+  <ion-item text-wrap>
+ <h2 text-capitalize>{{applyjob?.title}}</h2>
 
 
  <h2 text-capitalize>{{applyjob?.title}}   </h2>

@@ -28,6 +28,27 @@
 </ion-header>
 
 <ion-content padding class="content-intop">
+          <ion-list>
+            <ion-item>
+              <ion-label>select category</ion-label>
+                <ion-select [(ngModel)]="searchCategory" (ionChange)='manageblogs()'>
+                  <ion-option  *ngFor="let category of categoryLists" 
+                 value={{category.id}}>{{category.name}}
+                  </ion-option>
+                </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-list>
+            <ion-item>
+              <ion-label>select status</ion-label>
+                <ion-select [(ngModel)]="searchstatus" (ionChange)='manageblogs()'>
+                  <ion-option  *ngFor="let status of blogStatus" 
+                 value={{status.id}}>{{status.label}}
+                  </ion-option>
+                </ion-select>
+            </ion-item>
+          </ion-list>
+    <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>
 <ion-card *ngFor="let manageBlog of manageblogsLists; let i=index;">
   <ion-card-content style=" padding:0px;">
   <ion-grid>

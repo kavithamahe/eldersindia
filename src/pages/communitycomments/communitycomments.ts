@@ -33,15 +33,19 @@ user_id:any;
 senddata:any;
 post_likes:any;
 send_post_comment:any='';
+community_id:any;
   constructor(public platform: Platform,public loadingCtrl: LoadingController,public actionsheetCtrl: ActionSheetController, public viewCtrl: ViewController, public storage: Storage, public toastCtrl: ToastController, public alertCtrl:AlertController, public communityServices: CommunityServices, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
   	this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
       this.posts = navParams.get("posts");
+
         this.post_comments = this.posts.comments;
         this.post_likes = this.posts.comments.likes;
         this.post_id = this.posts.id;
         this.post_profile_id = this.posts.profile_id;
+        this.community_id = this.posts.com_id;
+        console.log(this.community_id);
     });
       storage.get('id').then((id) => { this.user_id=id; })
     });
@@ -342,7 +346,7 @@ sendComment(postID){
   }
 
   dismiss(){
-  	this.viewCtrl.dismiss();
+  	this.viewCtrl.dismiss({community_id:this.community_id});
   }
   emojiPicker1(ev,post_id)
    {

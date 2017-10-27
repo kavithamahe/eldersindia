@@ -135,6 +135,7 @@ loadSubcategoryList(subCategory_id,location_id){
     if(modalPage == "instant"){
       this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,lead_time:this.lead_time,service:this.serviceTitle,vendor:vendorData});
     }else{
+      console.log(vendorData);
       this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists,lead_time:this.lead_time,vendor:vendorData,location_id:this.location_id,serviceData:this.serviceData});
     }
     this.scheduleModal=modalPage;
@@ -168,8 +169,9 @@ loadSubcategoryList(subCategory_id,location_id){
      "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
       "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,
       "subcategory":this.serviceData.subcategory, "durations":"",
-       "exclude_days":"","from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"package_id":"","quantity":"",
-       "selected_dates":"","serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time}
+       "exclude_days":"","from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
+       "selected_dates":"","serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
+     "package_id":service_request_data.package_id}
 
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
        .subscribe(

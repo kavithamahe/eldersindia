@@ -105,7 +105,10 @@ lead_time:any='00:00';
                    this.vendorList = data.result.info;
                    this.serviceData = data.result.info.requestServices;
                    this.website = this.vendorList.vendorDetails.website;
-                   this.lead_time=data.result.info.serviceOffered[0].category_lists[0].service_sub_category_lists[0].lead_time;
+                   //console.log(data.result.info.serviceOffered[0]);
+                   if(data.result.info.serviceOffered[0] != undefined){
+                       this.lead_time=data.result.info.serviceOffered[0].category_lists[0].service_sub_category_lists[0].lead_time;
+                    }
                    loading.dismiss();
                   },
           err =>{

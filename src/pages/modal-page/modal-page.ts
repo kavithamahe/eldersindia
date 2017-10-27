@@ -56,16 +56,18 @@ export class ModalContentPage {
   onetimes:any;
   packageLists:any=[];
    packageListss:any=[];
-
+  flag:any;
   location_id:any;
   service_id:any;
   vendor_id:any;
+  recurringType:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
    
      this.date = new Date().toISOString();
-  
+      console.log(params.get("vendor"));
      this.dependentLists = params.get("dependentList");
+     //this.dependents = this.dependentLists[0].id;
      this.lead_time = params.get("lead_time");
      this.location_id = params.get("location_id");
      if(params.get("serviceData") != undefined){
@@ -74,6 +76,7 @@ export class ModalContentPage {
      if(params.get("vendor") != undefined){
       this.vendor = this.params.get("vendor").name;
       this.vendor_id = this.params.get("vendor").vendor_id;
+      //this.recurringType = this.params.get("vendor").recurring;
     }
     this.modalForm = formBuilder.group({
      problem: ['',Validators.compose([Validators.required])],
@@ -153,8 +156,15 @@ onlyNumberKey(event) {
       .subscribe(data =>{ 
         this.packageLists=data.result.info.lists;
         //this.packageLists =this.packageListss[1];
+        this.flag="1";
         console.log(this.packageLists);       
-    })
+    },
+
+    (err) => { 
+        console.log("you can not login");
+        //this.packageLists='';
+        this.flag="0";
+    },)
    }
 // submit(){
 //        if(this.userType == 'sponsor'){
@@ -228,8 +238,8 @@ onlyNumberKey(event) {
     
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":"",
-       "exclude_days":"","from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"package_id":"","quantity":"","selected_dates":"",
-       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime};
+       "exclude_days":"","from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":"",
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
       console.log(serviceData);
       this.viewCtrl.dismiss(serviceData);
        }

@@ -6,21 +6,19 @@
       </button>
     </ion-buttons>
     <ion-title text-center>Apply job for dependent</ion-title>
-     <!-- <ion-buttons right>
-    <button ion-button (click)="openCamera()">
-         <i class="fa fa-paperclip" style="margin-right:5px; font-size:22px;"></i></button>
-    </ion-buttons> -->
+   
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding style="background:#fff;">
-<form [formGroup]="authForm">
+
 <ion-row style="margin:px;">
   <ion-col *ngIf="user_type!='elder'">
+  <form [formGroup]="authForm">
    <ion-label class="required">Select dependent</ion-label>
   <ion-item>
-    <ion-select [(ngModel)]="dependent" class="select-brddd" placeholder="Select dependent" formControlName="elder_dependent" 
+    <ion-select [(ngModel)]="dependent" (ionChange)="checkDependent()" class="select-brddd" placeholder="Select dependent" formControlName="elder_dependent" 
     [class.invalid]="!authForm.controls.elder_dependent.valid && (authForm.controls.elder_dependent.dirty)">
       <ion-option *ngFor="let dependent of getDependentList" value={{dependent?.id}}>{{dependent?.name}}</ion-option>    
 	  </ion-select>
@@ -30,28 +28,14 @@
               <p class="valid err-reds">Please select the dependent.</p>
           </small> 
         <br/>
-        
+     </form>   
   </ion-col>
 
 </ion-row>
-<!-- <div>
-<ion-row style="margin:px;">
-<ion-col>
-<ion-label class="required" style=" font-size:17px; padding-left:10px; padding-top:10px; line-height:20px;">Attach Resume</ion-label>
-            <ion-item>
-              <ion-input type="text" formControlName="file_name" placeholder="Attach Resume" [(ngModel)]="file_name"
-                  [class.invalid]="!authForm.controls.file_name.valid && (authForm.controls.file_name.dirty)" >
-              </ion-input>
-            </ion-item>
-              <p>(example:docx,pdf,odt,txt)</p>
-              <small  *ngIf="!authForm.controls.file_name.valid  && (authForm.controls.file_name.dirty || submitAttempt)">
-                <p class="valid err-reds">Please attach resume.</p>
-              </small>
-             
-        </ion-col>
-         </ion-row>
-         </div> -->
+
+         <ion-label class="required">Select File</ion-label>
          <input type="file" (change)="fileChange($event)" placeholder="Upload file"> 
-</form>
- <button ion-button class="submit-btns" ion-button item-right small (click)="submitDependent($event)">Submit</button>
+
+ <button ion-button class="submit-btns" ion-button item-right small (click)="submitDependent($event)" *ngIf="dependentstatus == 0">Apply</button>
+ <button ion-button class="submit-btns" ion-button item-right small *ngIf="dependentstatus == 1">Applied</button>
 </ion-content>
