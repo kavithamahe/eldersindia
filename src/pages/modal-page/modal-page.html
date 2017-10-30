@@ -127,7 +127,7 @@
         </ion-item>
           <p class="err-reds" *ngIf="!modalForm.controls.enddate.valid  && (modalForm.controls.enddate.dirty || submitAttempt)">Please enter the end date</p>
       <ion-item>
-           <ion-input class="select-brd" placeholder="Number of days" formControlName ="enddate" value="{{(startdate - enddate)  / 1000 / 60 / 60 / 24}}"></ion-input>
+           <ion-label>Number of days : </ion-label>
         </ion-item>
      
       <ion-label>Frequency</ion-label>
