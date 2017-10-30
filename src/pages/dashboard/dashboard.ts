@@ -21,6 +21,7 @@ import { BlogtabsPage } from '../../pages/blogtabs/blogtabs';
   Ionic pages and navigation.
 */
 @Component({
+
   selector: 'page-dashboard',
   templateUrl: 'dashboard.html'
 })

@@ -22,8 +22,8 @@
 </ion-header>
 
 
-<ion-content padding style="background:#fff;">
- <div padding>
+<ion-content padding>
+
   <ion-segment [(ngModel)]="getconnections">
     <ion-segment-button value="myConnections" color="orange" (click)="onInit()">
      My Connections 
@@ -32,7 +32,7 @@
       People you may know
     </ion-segment-button>
    </ion-segment>
-  </div>
+
     <div [ngSwitch]="getconnections">
       <ion-list *ngSwitchCase="'myConnections'"> 
         <ion-list *ngIf="connectionsaction == 'received'">

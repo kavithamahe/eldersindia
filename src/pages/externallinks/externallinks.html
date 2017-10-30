@@ -22,24 +22,24 @@
 </ion-header>
 
 
-<ion-content padding class="content-intop">
+<ion-content class="content-intop">
 	<ion-list *ngFor="let useful of externalLinks">
 		<ion-card class="external-listed">
 	
 			<ion-item text-wrap>
 					<ion-row>
 						<ion-col width-20>
-							<ion-avatar item-left>
-					          	<img  [src]="useful.featured_image" (click)="openUrl(useful.news_link)" 
+				
+					          	<img height="50"  [src]="useful.featured_image" (click)="openUrl(useful.news_link)" 
 					          	[hidden]="!useful?.featured_image">
-					      	</ion-avatar>
+					      
 					    </ion-col>
 						<ion-col width-80>		
 							<h1 (click)="openUrl(useful.news_link)" text-capitalize>{{useful.title}}</h1>
 
-						    <em class="time-datem"><i class="fa fa-clock-o"></i>
+						    <small class="time-datem"><i class="fa fa-clock-o"></i>
 			          		{{useful.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
-			          		</em>
+			          		</small>
 					    </ion-col>
 					</ion-row>
 			     </ion-item>

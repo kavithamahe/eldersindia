@@ -1,4 +1,57 @@
 page-jobboard {
 .toolbar-title-md{ text-align:center !important;}
 .toolbar-title-ios{ text-align:center;}
+
+
+.content-intop										{background-image: url('../assets/img/jobs.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
+.sel-packages {
+    border: 1px solid hsl(0, 0%, 66%);
+    border-radius: 0;
+    box-shadow: none;
+}
+.sel-packages .item-md .item-inner .label-md {
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    padding-left: 10px;
+}
+.select-locas{ border:none; background:#E6E6FA; padding:6px; box-shadow:none; border-radius:0px;}
+.select-locas  p{ color:#333 !important; 
+  
+    font-family: "Muli",sans-serif;
+    font-size: 18px !important;
+    margin: 0; text-align:center;
+    padding: 0;
+}
+.item-md.item-block .item-inner{border:none;}
+.item-ios.item-block .item-inner{border:none;}
+
+.job-detailsview											{ background:rgba(255,255,255, 0.0); box-shadow:none; border:1px solid #E6E6FA; padding:4px;}
+.job-detailsview ion-row ion-col h2 {color: hsl(191, 100%, 29%) !important;
+  
+    font-family: "Muli",sans-serif; 
+    font-size:17px !important; padding-bottom:8px;
+    margin: 0;
+   }
+	.job-detailsview ion-row ion-col p{color:#333!important;
+  
+    font-family: "Muli",sans-serif;
+    font-size:15px !important; padding-bottom:15px;
+    margin: 0;
+    padding: 0;}
+	.job-detailsview ion-row ion-col p span{color:#333!important; 
+  
+    font-family: "Muli",sans-serif;
+    font-size:15px !important;
+    margin: 0;
+    padding:0px 0px 0px 10px;}
+	.job-detailsview ion-row ion-col p i{  width:10px; text-align:center;
+
+    font-size:13px !important;  color:#C0C0C0;
+    }
+.sel-packages .item-ios .item-inner .label-ios {
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    padding-left: 10px;
+}
+
 }

@@ -14,7 +14,7 @@
     
   </ion-navbar>
 </ion-header>
-<ion-content padding style="background:#F3F7FF;" (tap)="closeOption()">
+<ion-content (tap)="closeOption()" class="manage-depen">
   
  <div *ngIf="allowedElderFlag">
   <ion-fab  right bottom>
@@ -31,7 +31,7 @@
    
         <ion-card (tap)="toggleDetails(i)" class="des-card">
         <ion-row>
-        <ion-col width-100 class="depende-elder">
+        <ion-col width-100 class="depende-elder" style="border:1px solid red;">
          <button ion-button color="dark" clear (press)="showOptions(manage)" style="margin:0px!important; padding:4px; width:100%;">
          <i class="fa fa-user name-person"></i><p name="person" class="name-elder">{{manage.relation}}</p>&nbsp;<i class="fa fa-angle-down"></i>
           </button>

@@ -22,20 +22,21 @@
 </ion-header>
 
 
-<ion-content padding class="dashboard">
+<ion-content class="dashboard">
 <!--*ngIf="user_type=='elder'" -->
-<span style="margin-top:12px;float:left;width:100%;"></span>
+<span style="margin-top:18px;float:left;width:100%;"></span>
 <div *ngIf="user_type=='elder'" >
 <ion-grid class="dashboard">
+
   <ion-row>
 
-    <ion-col width-50 class="ambulance" text-center  (click)="makeCall(ambulance)"> 
+    <ion-col width-50 class="ambulance cards1" text-center  (click)="makeCall(ambulance)"> 
 	<span class="dashboard-listed">
     <i class="fa fa-ambulance fa-5x"></i>
     <p>AMBULANCE</p>
 	</span>
     </ion-col>
-    <ion-col width-50 class="police" text-center (click)="makeCall(police)">
+    <ion-col width-50 class="police cards2" text-center (click)="makeCall(police)">
 	<span class="dashboard-listed">
     <i class="fa fa-users fa-5x"></i>
     <p>POLICE</p>
@@ -69,14 +70,14 @@
  <ion-grid class="dashboard">
   <ion-row>
 
-    <ion-col width-50 class="services" text-center (click)="servicesPage()">
+    <ion-col width-50 class="services cards1" text-center (click)="servicesPage()">
 	<span class="dashboard-listed">
     <i class="fa fa-cog fa-5x"></i>
 	
     <p>SERVICES</p>
 	</span>
     </ion-col>
-    <ion-col width-50 class="jobs" text-center (click)="jobsPage()">
+    <ion-col width-50 class="jobs cards2" text-center (click)="jobsPage()">
 		<span class="dashboard-listed">
     <i class="fa fa-cubes fa-5x"></i>
 	<p>JOBS</p>

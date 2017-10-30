@@ -1,3 +1,36 @@
 page-recurring {
+.package-needs ion-row ion-col h2{font-family: 'Muli', sans-serif; font-size:16px; font-weight:600; color:#007A95 !important; background:#fff; padding:5px; border-bottom:1px solid #DCDCDC; padding-bottom:10px;}
+.package-needs ion-row ion-col b{font-family: 'Muli', sans-serif; font-size:14px; color:#000; font-weight:bold; width:100%; float:left; margin-bottom:1px;}
+.package-needs ion-row ion-col p{font-family: 'Muli', sans-serif; font-size:16px; color:#333; }
+.package-needs{background-image: url('../assets/img/servamp.png');background-repeat: no-repeat; background-size: cover; }
 
+.act{ background:#008000;font-family: 'Muli', sans-serif; font-size:13px; font-weight:400; float:right;}
+.content-intop {
+    background: hsl(218, 100%, 98%) none repeat scroll 0 0 !important;
+}
+.view-serv .badge-md {
+    background: hsl(207, 98%, 34%) none repeat scroll 0 0;
+    float: right;
+    font-family: "Muli",sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    margin-right: 3px;
+}
+.view-serv .badge-ios {
+    background: hsl(207, 98%, 34%) none repeat scroll 0 0;
+    float: right;
+    font-family: "Muli",sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    margin-right: 3px;
+}
+
+.view-serv .badge-md.dele {
+    background:#DCDCDC;
+    float: right; color:#333;
+    font-family: "Muli",sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    margin-right: 3px;
+}
 }

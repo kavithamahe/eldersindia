@@ -4,16 +4,32 @@ page-dashboard {
     padding: 35px 0px;
     color: #fff;
     text-decoration: none;
-   background:#eee;
+   background:#F0FFFF;
 }
 .dash-icon{ font-size: 5.2em !important; padding-bottom:10px;}
-.dashboard ion-row ion-col span{background:#fff;}
+.dashboard ion-row ion-col span{background: rgba(0, 0, 0, 0) radial-gradient(ellipse at center center , white 0%, #dbefff 100%) repeat scroll 0 0;}
 .dashboard-listed{    border-radius:3px; box-shadow: 0 4px 2px -2px #dcdcdc;
 
     float: left;
     padding: 5px;
     width:100%;
 }
+.dashboard {
+    padding: 0 !important;
+}
+.cards1{ margin-top:8px;}
+.cards2{ margin-top:8px;}
 .dashboard-listed i{margin-top:10px !important; font-size:50px;}
-.dashboard-listed p{margin:0px; color:#525252; padding:5px; font-size:15px; font-family: 'Asap', sans-serif;}
+.dashboard-listed p{margin:0px; color:#525252; padding:5px; font-size:15px; font-family: 'Muli', sans-serif;}
+.services span.dashboard-listed > i 												{color:#5dade2 !important;}
+.jobs span.dashboard-listed > i													{color:#e74c3c !important;}
+.community span.dashboard-listed > i 												{color:#1976d2 !important;}
+.connection span.dashboard-listed > i 											{color:#58d68d !important;}
+.blogs span.dashboard-listed > i													{color:#F4A460 !important;}
+.messagess span.dashboard-listed > i												{color:#FA8072 !important;}
+.ambulance span.dashboard-listed > i												{color:#BDB76B !important;}
+.police span.dashboard-listed > i													{color:#008B8B !important;}
+.hooter span.dashboard-listed > i													{color:#DEB887 !important;}
+.hooter span.dashboard-listed > i													{color:#DEB887 !important;}
+.call-sponsor span.dashboard-listed> i 											{color:	#9370DB !important;}
 }

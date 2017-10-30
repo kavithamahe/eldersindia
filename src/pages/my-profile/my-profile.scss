@@ -1,13 +1,28 @@
 page-my-profile {
 .profile-edit{
-	 background-image: url('../assets/img/Background-4.jpg');
+	 background-image: url('../assets/img/Bprofiler.png');
   -webkit-background-image: url('../assets/img/Background-4.jpg');
 }
+.change-log											{background-image: url('../assets/img/pr-b.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
 .toolbar-title-md{ text-align:center !important;}
 .listed-profiles{  margin:10px !important; float:left;width:94%;background:rgba(111, 134, 210, 0.18); border-left:4px solid #ccc;}
-.listed-profiles p{ font-size:16px; color:#333; padding-left:15px; border-bottom:1px solid #F0FFFF;  margin:0px;padding:6px;}
+.listed-profiles p{ font-size:14px; color:#007994 !important; padding-left:15px; border-bottom:1px solid #F0FFFF;  margin:0px;padding:6px; font-family: 'Muli', sans-serif;}
 .listed-profiles p i{ width:22px; font-size:15px; color:#808080; border-right:1px solid #ccc;}
-.edit-profiles{ background:#ccc;}
+.edit-profiles{ background:#fff; color:#039ECB; font-size:15px;}
 .toolbar-title-md{ text-align:center;}
 .toolbar-title-ios{ text-align:center;}
+
+.profile-edit {
+    background-image: url("../assets/img/Background-4.jpg") ; height: 175px;
+    position: relative;
+}
+.profile-edit p {
+    color: hsl(0, 0%, 100%); font-family: 'Muli', sans-serif;
+    float: left;
+    font-size: 19px;
+    font-weight: 600;
+    padding-top: 115px;
+    text-align: center;
+    width: 100%;
+}
 }

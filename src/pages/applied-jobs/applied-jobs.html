@@ -27,31 +27,36 @@
 </ion-header>
 
 
-<ion-content padding class="content-intop">
-
+<ion-content class="content-intop">
+<ion-card class="sel-packages">
  <ion-item class="select-loca">
     <ion-label>Functional Area</ion-label>
     <ion-select [(ngModel)]="functionalArea" (ionChange)="onInit()" multiple="true">
       <ion-option *ngFor="let functional of functionalAreaList" value="{{functional?.id}}">{{functional?.name}}</ion-option>      
     </ion-select>
   </ion-item>
+  
+  </ion-card>
+  <ion-card class="sel-packages">
   <ion-item class="select-loca">
     <ion-label>Location</ion-label>
     <ion-select [(ngModel)]="location" (ionChange)="onInit()"  multiple="true">
       <ion-option *ngFor="let locations of locationList" value="{{locations?.id}}">{{locations?.location}}</ion-option>
     </ion-select>
   </ion-item>
+  </ion-card>
    <!--  <ion-searchbar (ionInput)="jobsearch($event)">
     </ion-searchbar> -->
-<ion-card *ngFor="let appliedJobs of appliedJobsList">
-  <ion-item text-wrap class="appliedjob" (click)="viewJob(appliedJobs?.id)">
+<ion-card *ngFor="let appliedJobs of appliedJobsList" class="job-detailsview">
+  <ion-row text-wrap class="appliedjob" (click)="viewJob(appliedJobs?.id)">
+  <ion-col col-12 text-wrap>
     <h2 text-capitalize>{{appliedJobs?.title | words :5: '....'}}</h2>
-	    <P style="color:#333;"><i class="fa fa-university" aria-hidden="true"></i>{{appliedJobs?.company_name}} </P>
-	 <p><i class="fa fa-briefcase" aria-hidden="true"> </i>{{appliedJobs?.min_experience}} - {{appliedJobs?.max_experience}} years</p> 
+	    <P style="color:#333;"><i class="fa fa-university" aria-hidden="true"></i><span>{{appliedJobs?.company_name}} </span></P>
+	 <p><i class="fa fa-briefcase" aria-hidden="true"> </i><span>{{appliedJobs?.min_experience}} - {{appliedJobs?.max_experience}} years</span></p> 
 
-    <p *ngIf="(appliedJobs?.requested_date!='0000-00-00 00:00:00')"><i class="fa fa-calendar-o" aria-hidden="true"></i>{{appliedJobs?.requested_date | date:'dd/M/yyyy h:m a'}}</p>
-  
-  </ion-item>
+    <p *ngIf="(appliedJobs?.requested_date!='0000-00-00 00:00:00')"><i class="fa fa-calendar-o" aria-hidden="true"></i><span>{{appliedJobs?.requested_date | date:'dd/M/yyyy h:m a'}}</span></p>
+  </ion-col>
+  </ion-row>
 </ion-card>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>

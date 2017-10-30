@@ -2,10 +2,46 @@ page-settings {
 .toolbar-title-md{ text-align:center !important;}
 .toolbar-title-ios{ text-align:center;}
 .toggle-md .toggle-checked{ background:#fca4eb !important;}
-.toggle-md .toggle-icon{ background:#777677 !important;}
-.toggle-md .toggle-checked .toggle-inner{ background:#fb6ae0 !important;}
-.seetingslist{
-  background-image:url('../assets/img/seee.png');
-  -webkit-background-image: url('../assets/img/seee.png');
-  }
+.toggle-md .toggle-icon{ background:#B0C4DE !important;}
+.toggle-md .toggle-checked .toggle-inner{ background:#6B8E23 !important;}
+.content-intop										{background:#F5F9FF;}
+.seetingslist {
+    background-image: url("../assets/img/prss.png");
+}
+  .seetingslist .list-md .item-md {
+    background: hsla(0, 0%, 0%, 0) none repeat scroll 0 0;
+
+}
+.seetingslist .list-md .item-md .item-inner .input-wrapper .label-md {
+
+        color: #007994 !important;
+    font-family: "Muli",sans-serif;
+    font-size: 17px !important;
+    padding-bottom: 8px;
+    margin: 0;
+
+}
+.seetingslist .item-md i { text-align:center;
+    color: hsl(120, 1%, 66%);
+    width: 25px;
+}
+
+
+  .seetingslist .list-ios .item-ios {
+    background: hsla(0, 0%, 0%, 0) none repeat scroll 0 0;
+
+}
+.seetingslist .list-ios .item-ios .item-inner .input-wrapper .label-ios {
+
+        color: #007994 !important;
+    font-family: "Muli",sans-serif;
+    font-size: 17px !important;
+    padding-bottom: 8px;
+    margin: 0;
+
+}
+.seetingslist .item-ios i { text-align:center;
+    color: hsl(120, 1%, 66%);
+    width: 25px;
+}
 }

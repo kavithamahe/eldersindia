@@ -11,12 +11,13 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons left>
+	    <ion-title text-center>Package Requests</ion-title>
+    <ion-buttons right>
     <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Package Requests</ion-title>
+
    <!-- <ion-buttons right>    
       <button ion-button icon-only>
         <ion-icon name="search"></ion-icon>
@@ -26,8 +27,9 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="content-intop">
 <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>
+<ion-card class="sel-packages">
 <ion-item>
   <ion-label>Status</ion-label>
   <ion-select [(ngModel)]="packstatus" (ionChange)="onSelectChange($event)">
@@ -36,29 +38,56 @@
     <ion-option value="2">Rejected</ion-option>
   </ion-select>
 </ion-item>
+</ion-card>
 <ion-card *ngFor="let package of packageRequest" class="job-detailsview">
-  <ion-item test-wrap>
+<ion-grid class="package-needs">
   <ion-row>
-  <ion-col width-70 text-wrap>
-    <h2 text-wrap text-capitalize>{{package?.package_name}}</h2>
+  <ion-col text-wrap col-12>
+    <h2 text-wrap text-capitalize>{{package?.package_name}} </h2>
 
-    <ion-badge *ngIf="package.req_status == 1">Active</ion-badge>
-    <ion-badge *ngIf="package.req_status == 0">Pending</ion-badge>
-    <ion-badge *ngIf="package.req_status == 2">Rejected</ion-badge>
-    <p>Service provider : {{package?.vendor_name}} </p>
-    <p>Elder Name : {{package?.name}} {{package.last_name}} </p>
-    <p>Requested Date : {{package?.created_at}}</p>	
-    <p>Expiry Date :{{package?.expire}} </p>
 	</ion-col>
-  <ion-col width-30>
-   <ion-badge (click)="getPackageRequestBy(package?.req_id)"><i class="fa fa-eye" aria-hidden="true"></i></ion-badge>
-    <ion-badge *ngIf="package?.req_status != 2" (click)="getServicesForByElders(package?.id,package?.location_id,package?.elder_id,package.req_status)"><i class="fa fa-check-square-o" aria-hidden="true"></i></ion-badge>
- 	<!-- <button type="button" title="View Details" (click)="getPackageRequestBy(package?.req_id)"><i class="fa fa-eye" aria-hidden="true"></i></button>
- 	<button type="button" *ngIf="package?.req_status != 2" title="View Details" (click)="getServicesForByElders(package?.id,package?.location_id,package?.elder_id)"><i class="fa fa-check-square-o" aria-hidden="true"></i></button> -->
+	  </ion-row>
+	    <ion-row>
+		<ion-col col-12>
+    <b>Service provider </b>
+	<p>{{package?.vendor_name}} </p>
+		</ion-col>
+		  </ion-row>
+		    <ion-row>
+			<ion-col col-12>
+			<b>Elder Name</b>
+			   <p>{{package?.name}} {{package.last_name}} </p>
+				</ion-col>
+				  </ion-row>
+				    <ion-row>
+ 	<ion-col col-12><b>Requested Date / Expiry Date</b>    <p>{{package?.created_at}} / </p><p> {{package?.expire}} </p></ion-col>
+	  </ion-row>
+
+    
+  <ion-row>
+
+    <ion-col>
+   	<b>Status</b>
+	<br/>
+	  <ion-badge *ngIf="package.req_status == 1" class="act">Active</ion-badge>
+    <ion-badge *ngIf="package.req_status == 0" class="pen">Pending</ion-badge>
+    <ion-badge *ngIf="package.req_status == 2" class="rej">Rejected</ion-badge>
+
+
+    </ion-col>
+		  </ion-row>
+  <ion-row>
+
+    <ion-col class="view-serv">
+	<ion-badge *ngIf="package?.req_status != 2" (click)="getServicesForByElders(package?.id,package?.location_id,package?.elder_id,package.req_status)"><i class="fa fa-check-square-o" aria-hidden="true"></i>  Services</ion-badge>
+   <ion-badge (click)="getPackageRequestBy(package?.req_id)"><i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
+    
+ 	
 
   </ion-col>
+
   </ion-row>
-  </ion-item>
+</ion-grid>
 </ion-card>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>

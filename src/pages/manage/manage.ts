@@ -8,9 +8,10 @@ import { CommunityServices } from '../../providers/community-services';
 
 
 @Component({
-  selector: 'page-manage',
-  templateUrl: 'manage.html',
-  providers:[CommunityServices]
+ 
+selector: 'page-manage',
+  templateUrl: 'manage.html'
+  
 })
 export class ManagePage {
 show_option:boolean =false;

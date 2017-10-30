@@ -15,15 +15,18 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content style=" background:#fff;">
+<ion-content padding>
 <div class="add-depentsform">
  <form [formGroup]="authForm">
   
-<br/>
+
 <div *ngIf="functionality != 'profileEdit'">
     <ion-label class="label-tittle required">Relationship</ion-label>
-        <ion-item>         
+
+          <ion-item>      
+ <ion-label class="sel-label">Relationship</ion-label>  		
             <ion-select class="select-brd"  [(ngModel)]="elder_relation" placeholder="Relationship"
+
             formControlName="elder_relation" [class.invalid]="!authForm.controls.elder_relation.valid && (authForm.controls.elder_relation.dirty)">
                 <ion-option  *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
             </ion-select>
@@ -35,7 +38,7 @@
       <ion-label class="label-tittle required">Elder Name</ion-label>
       <ion-item>
       
-          <ion-input  type="text" formControlName="elder_name" placeholder="Elder name"
+          <ion-input  type="text" formControlName="elder_name" 
             [class.invalid]="!authForm.controls.elder_name.valid && (authForm.controls.elder_name.dirty)" [(ngModel)]="elder_name" value={{elder_name}}>
             </ion-input>
       </ion-item>
@@ -45,7 +48,7 @@
           <ion-label class="label-tittle required">Last Name</ion-label>
                <ion-item>
       
-            <ion-input  type="text" formControlName="last_name" placeholder="Last Name"
+            <ion-input  type="text" formControlName="last_name"
             [class.invalid]="!authForm.controls.last_name.valid && (authForm.controls.last_name.dirty)" [(ngModel)]="last_name" value={{last_name}}>
             </ion-input>
       </ion-item>
@@ -54,7 +57,7 @@
           </small> 
     <ion-label class="label-tittle required">Services</ion-label>
           <ion-item>
-              <ion-label>Services</ion-label>
+              <ion-label class="sel-label">Services</ion-label>
                 <ion-select class="select-brd" [(ngModel)]="elder_service"  placeholder="Services"
                 formControlName="elder_service"  
                 [class.invalid]="!authForm.controls.elder_service.valid && 
@@ -112,7 +115,7 @@
           </small>
        <ion-label class="label-tittle required">Location</ion-label>
           <ion-item>
-            <ion-label>Location</ion-label>
+            <ion-label class="sel-label">Location</ion-label>
               <ion-select  class="select-brd" [(ngModel)]="elder_location"  
               formControlName="elder_location"  placeholder="Location"
                 [class.invalid]="!authForm.controls.elder_location.valid && (authForm.controls.elder_location.dirty)">
@@ -124,25 +127,25 @@
           <small *ngIf="!authForm.controls.elder_location.valid  && (authForm.controls.elder_location.dirty || submitAttempt)">
                 <p class="valid err-reds">Please select the location</p>
           </small>
-    <br/>
+ 
     <div>
           <ion-row>
             <ion-col class="title-depen">
               <div class="personal-d"><p>Emergency contacts</p></div>
             </ion-col>
           </ion-row>
-      <br/>
+ 
       <div formArrayName="emergency_list">
       <div  *ngFor="let item of authForm.controls.emergency_list.controls; let i=index">
-           <ion-col *ngIf="authForm.controls.emergency_list.controls.length > 1" width-50>
+           <div *ngIf="authForm.controls.emergency_list.controls.length > 1">
               <button class="rem-btn" (click)="removeEmergency(i)" ion-button icon-left clear>
                 <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
               </button>
-            </ion-col> 
+            </div> 
           <ion-label class="label-tittle required">Person </ion-label>
           <div  [formGroupName]="i">
             <ion-item>
-            <ion-label>Emergency</ion-label>
+            <ion-label class="sel-label">Emergency</ion-label>
               <ion-select class="select-brd" formControlName="emergency_name"  
               [(ngModel)]="emergency_name[i]" placeholder="Person">
                      <ion-option  *ngFor="let person of emergencies" value={{person.val}}>{{person.name}}
@@ -173,15 +176,12 @@
            </div>  
            </div>
           </div>
-          <ion-row>
-            <ion-col width-50>
+     
               <button class="add-btn" (click)="addEmergency()" ion-button icon-left clear>
                 <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
                  Add More
               </button>
-            </ion-col>
-            
-          </ion-row>
+         
           
           </div>
 
@@ -190,7 +190,7 @@
               <div class="personal-d"><p>Interest</p></div>
             </ion-col>
           </ion-row>
-    <br/>
+
 
         <div *ngIf="functionality != 'profileEdit'">
           <div>
@@ -199,7 +199,7 @@
               <ion-label class="label-tittle">Blog category</ion-label>
               <div>
             <ion-item>
-                 <ion-label>Blog category</ion-label>
+                 <ion-label class="sel-label">Blog category</ion-label>
                 <ion-select multiple="true" [(ngModel)]="blog_interest" 
                 [ngModelOptions]="{standalone: true}" class="select-brd" placeholder="Blog category">
                   <ion-option *ngFor="let blogcategory of blog_category" value={{blogcategory.id}} [selected]="blogcategory.id == blog_interest">{{blogcategory.name}}
@@ -209,7 +209,7 @@
            
          <ion-label class="label-tittle">Service Category</ion-label>
             <ion-item>
-              <ion-label>Service Category</ion-label>
+              <ion-label class="sel-label">Service Category</ion-label>
               <ion-select class="select-brd" multiple="true" [(ngModel)]="servicecategory" [ngModelOptions]="{standalone: true}" placeholder="Service Category" (ionChange)="selectsubcategory(servicecategory)">
                 <ion-option *ngFor="let ser_category of service_category" value={{ser_category.id}} [selected]="ser_category.id == servicecategory">{{ser_category.service}}
                 </ion-option>
@@ -219,7 +219,7 @@
            
             <ion-label class="label-tittle">Service Sub Category</ion-label>
               <ion-item>
-              <ion-label>Service Sub Category</ion-label>
+              <ion-label class="sel-label">Service Sub Category</ion-label>
               <ion-select class="select-brd" placeholder="Service Sub Category" 
               [(ngModel)]="servicesubcategorylist" [ngModelOptions]="{standalone: true}" multiple="true">
                 <ion-option *ngFor="let subcategory of servicesubcategory" value={{subcategory.id}} [selected]="subcategory.id == servicesubcategorylist">{{subcategory.name}}
@@ -231,18 +231,18 @@
            </div>
       </div>
 
-    <ion-item>
+    <ion-item class="checked-empyt">
    <ion-label style="text-align:left !important;">Interested in elder job opportunities?
    </ion-label>
     <ion-checkbox [(ngModel)]="job_interest" [ngModelOptions]="{standalone: true}"> 
     </ion-checkbox>
     </ion-item>
-<br/>
+
  <form [formGroup]="myForm">
   <div *ngIf="job_interest">
      <ion-label class="label-tittle required">Area of interest</ion-label>
         <ion-item>
-          <ion-label>Interest</ion-label>
+          <ion-label class="sel-label">Interest</ion-label>
             <ion-select class="select-brd" multiple="true" [(ngModel)]="area_of_interest" placeholder="Area of interest" formControlName="area_of_interest"
                 [class.invalid]="!myForm.controls.area_of_interest.valid && (myForm.controls.area_of_interest.dirty)">
                 <ion-option *ngFor="let industry of functionalArea" selected="item?.select" value={{industry.id}} [selected]="industry.id == area_of_interest">{{industry.name}}
@@ -254,7 +254,7 @@
           </small>
     <ion-label class="label-tittle required">Job type</ion-label>
         <ion-item>
-        <ion-label>Job type</ion-label>
+        <ion-label class="sel-label">Job type</ion-label>
           <ion-select class="select-brd" [(ngModel)]="job_type" placeholder="Job type"  formControlName="job_type"
                 [class.invalid]="!myForm.controls.job_type.valid && (myForm.controls.job_type.dirty)">
               <ion-option  value="full time">Full Time</ion-option>
@@ -281,26 +281,26 @@
          <small *ngIf="!myForm.controls.skill_set.valid  && (myForm.controls.skill_set.dirty || submitAttempt)">
                 <p class="valid err-reds">This field is required.</p>
           </small>
-<br/>
+
 <div>
     <ion-row>
       <ion-col class="title-depen">
         <div class="personal-d"><p>Experience details</div>
       </ion-col>
     </ion-row>
-<br/>
+
 
  <div formArrayName="experience_list">
  <div  *ngFor="let item of myForm.controls.experience_list.controls; let i=index">
-  <ion-col *ngIf="myForm.controls.experience_list.controls.length > 1" width-50>
+  <div *ngIf="myForm.controls.experience_list.controls.length > 1">
           <button class="rem-btn" (click)="removeExperience(i)" ion-button icon-left clear>
             <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
           </button>
-        </ion-col>
+        </div>
     <ion-label class="label-tittle required">Industry</ion-label>
      <div [formGroupName]="i">
       <ion-item>
-         <ion-label>Industry</ion-label>
+         <ion-label class="sel-label">Industry</ion-label>
             <ion-select class="select-brd" [(ngModel)]="experience_industry[i]" placeholder="Industry" formControlName="experience_industry" 
                 [class.invalid]="!myForm.controls.experience_list.
                 controls[i].controls.experience_industry.valid && (myForm.controls.experience_list.
@@ -345,15 +345,11 @@
         </div>
          </div>
       </div>
-       <ion-row>
-        <ion-col width-50>
+   
           <button class="add-btn" (click)="addExperience()" ion-button icon-left clear>
             <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>Add more
           </button>
-        </ion-col>
-       
-      </ion-row>
-     <br/>
+  
      
 </div>
 
@@ -370,16 +366,16 @@
 
         <div formArrayName="education_list">
           <div  *ngFor="let item of myForm.controls.education_list.controls; let i=index">
-           <ion-col *ngIf="myForm.controls.education_list.controls.length > 1" width-50>
+           <div *ngIf="myForm.controls.education_list.controls.length > 1">
           <button class="rem-btn" (click)="removeEducation(i)" button-right ion-button icon-left clear>
             <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
           </button>
-        </ion-col>
+        </div>
             
               <ion-label class="label-tittle required">Graduation</ion-label>
               <div  [formGroupName]="i">
             <ion-item>
-                 <ion-label>Graduation</ion-label>
+                 <ion-label class="sel-label">Graduation</ion-label>
                 <ion-select class="select-brd" [(ngModel)]="education_graduation[i]" placeholder="Graduation" formControlName="education_graduation" 
                 [class.invalid]="!myForm.controls.education_list.
                 controls[i].controls.education_graduation.valid && (myForm.controls.education_list.
@@ -400,7 +396,7 @@
               </ion-item>
          <ion-label class="label-tittle required">Specialization</ion-label>
             <ion-item>
-              <ion-label>Specialization</ion-label>
+              <ion-label class="sel-label">Specialization</ion-label>
               <ion-select class="select-brd" [(ngModel)]="education_specialization[i]" placeholder="Specialization"  formControlName="education_specialization" 
                 [class.invalid]="!myForm.controls.education_list.
                 controls[i].controls.education_specialization.valid && (myForm.controls.education_list.
@@ -436,21 +432,19 @@
             </div> 
            </div>
       </div>
-           <ion-row>
-          <ion-col width-50>
+  
               <button class="add-btn" (click)="addEducation()" ion-button icon-left clear >
                 <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon> &nbsp;Add more
               </button>
-          </ion-col>
-         
-      </ion-row>
-      <br/>
      
-      </div>
-    
+ 
+     
+      </div> 
+<br/>	  
   <div>
    <input type="file" (change)="fileChange($event)" placeholder="Upload file" >
   </div>
+
     </div>
     
    
@@ -464,7 +458,7 @@
               <div class="personal-d"><p>Login details</p></div>
             </ion-col>
           </ion-row>
-     <br/>
+ 
    
             <ion-label class="label-tittle required">Email address</ion-label>
         <ion-item>
@@ -511,8 +505,11 @@
           </div> 
       <br/>
       </form>
-     
+	  
+	   <!-- <button class="logoin-btn"> Submit </button> -->
+      <!-- <br/> -->
 </div>
+
 
 
 </ion-content>

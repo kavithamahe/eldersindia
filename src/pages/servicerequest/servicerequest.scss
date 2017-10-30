@@ -1,18 +1,79 @@
 page-servicerequest {
 .toolbar-title-md{ text-align:center !important;}
 .toolbar-title-ios{ text-align:center;}
-.custom-icon {
-  color : red;
+.token-primarys {
+    width: 35px;
+    height: 35px;
+    margin-left: 4px;
+    margin-top: 5px;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 50%;
 }
-.alert-title
-{
- color : red !important;
+.token-primarys i {
+    line-height: 35px;
+    color: #00a651;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
 }
-.alert-md .alert-radio-label{
-    white-space: normal !important;
+.req-cancel {
+    width: 35px;
+    height: 35px;
+    margin-left: 4px;
+    margin-top: 5px;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 50%;
 }
-.lower {
-    text-transform: lowercase;
+.req-cancel i {
+    line-height: 33px;
+    color: #ff5722;
+    text-align: center;
+    width: 100%;
+    font-size: 17px;
+    font-weight: 400;
 }
- 
+.Pending													{font-family: 'Muli', sans-serif;color:#f8b106; padding:0px; font-size:14px; font-weight:400 !important; }
+.Schedule{font-family: 'Muli', sans-serif;color:#1E90FF; padding:0px; font-size:14px; font-weight:400 !important; }
+.Completed{font-family: 'Muli', sans-serif;color:#228B22; padding:0px; font-size:14px; font-weight:400 !important; }
+.Cancelled{font-family: 'Muli', sans-serif;color:red; padding:0px; font-size:14px; font-weight:400 !important; }
+.service-cont {
+    font-size: 15px !important;
+    font-weight: 400;
+    width: 100%; color:#777;font-family: 'Muli', sans-serif;
+}
+.service-req {
+    color:#007A95!important;
+    display: inline;font-family: 'Muli', sans-serif;
+    font-size: 18px !important;
+    margin: 0;
+    padding: 0;
+}
+.service-cards{background: hsla(0, 0%, 0%, 0) linear-gradient(313deg, hsl(205, 51%, 80%) 0%, hsl(0, 0%, 100%) 18%, hsl(0, 0%, 100%) 100%) repeat scroll 0 0; }
+.tocken-no {
+    color:#FF69B4!important;
+    font-size: 15px !important;
+    font-weight: 600 !important;font-family: 'Muli', sans-serif;
+    text-align: center;
+}
+.left-service img{ border:1px solid #ccc;   }
+.content-intop {
+    background: hsl(218, 100%, 98%) none repeat scroll 0 0 !important;
+}
+.searchbar-md .searchbar-input{border:1px solid #87CEFA;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;background: -moz-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* ff3.6+ */
+background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(254,255,245,1))); /* safari4+,chrome */
+background: -webkit-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* safari5.1+,chrome10+ */
+background: -o-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* opera 11.10+ */
+background: -ms-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* ie10+ */
+background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* w3c */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FEFFF5', endColorstr='#ffffff',GradientType=1 ); /* ie6-9 */ }
+
+.searchbar-ios .searchbar-input{border:1px solid #87CEFA;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;background: -moz-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* ff3.6+ */
+background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(254,255,245,1))); /* safari4+,chrome */
+background: -webkit-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* safari5.1+,chrome10+ */
+background: -o-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* opera 11.10+ */
+background: -ms-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* ie10+ */
+background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* w3c */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FEFFF5', endColorstr='#ffffff',GradientType=1 ); /* ie6-9 */ }
 }
