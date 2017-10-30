@@ -126,7 +126,10 @@
            <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="End date" min={{this.date}} formControlName ="enddate"></ion-datetime>
         </ion-item>
           <p class="err-reds" *ngIf="!modalForm.controls.enddate.valid  && (modalForm.controls.enddate.dirty || submitAttempt)">Please enter the end date</p>
-      
+      <ion-item>
+           <ion-input class="select-brd" placeholder="Number of days" formControlName ="enddate" value="{{(startdate - enddate)  / 1000 / 60 / 60 / 24}}"></ion-input>
+        </ion-item>
+     
       <ion-label>Frequency</ion-label>
       <ion-list radio-group>
        <ion-item>
@@ -187,23 +190,23 @@
           </ion-list>
 
         </div>
-    
+        <ion-item>
+        <ion-label>Deselect specific date</ion-label>
+        <ion-select multiple>
+          <ion-option [value] = "0" >Sunday</ion-option>
+          <ion-option [value] = "1" >Monday</ion-option>
+          <ion-option [value] = "2" >Tuesday</ion-option>
+          <ion-option [value] = "3" >Wednesday</ion-option>
+          <ion-option [value] = "4" >Thursday</ion-option>
+          <ion-option [value] = "5" >Friday</ion-option>
+          <ion-option [value] = "6" >Saturday</ion-option>
+        </ion-select>
+      </ion-item>
  
     </div>                          
 <!-- <p>---------recurring time end-----------------</p> -->
 
-    <ion-item>
-    <ion-label>Deselect specific date</ion-label>
-    <ion-select multiple>
-      <ion-option [value] = "0" >Sunday</ion-option>
-      <ion-option [value] = "1" >Monday</ion-option>
-      <ion-option [value] = "2" >Tuesday</ion-option>
-      <ion-option [value] = "3" >Wednesday</ion-option>
-      <ion-option [value] = "4" >Thursday</ion-option>
-      <ion-option [value] = "5" >Friday</ion-option>
-      <ion-option [value] = "6" >Saturday</ion-option>
-    </ion-select>
-  </ion-item>
+    
 
     	</form>
              <ion-item class="check-bx">

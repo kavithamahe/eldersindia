@@ -81,7 +81,7 @@ export class ModalContentPage {
      if(params.get("vendor") != undefined){
       this.vendor = this.params.get("vendor").name;
       this.vendor_id = this.params.get("vendor").vendor_id;
-      //this.recurringType = this.params.get("vendor").recurring;
+      this.recurringType = this.params.get("vendor").recurring;
     }
     this.modalForm = formBuilder.group({
      problem: ['',Validators.compose([Validators.required])],
