@@ -1,4 +1,197 @@
 page-communityprofile {
 .toolbar-title-md{ text-align:center;}
 .toolbar-title-ios{ text-align:center;}
+.content-intop{ background:#F5F9FF;}
+.mess-accept p .button-md {
+    background:#025FA9;
+    border-radius: 35px;
+    height: 40px;
+    width: 40px;
+}
+.mess-accept p{ float:left;}
+.cont-conn{ background:#fff; padding:5px !important;}
+.name-conne p{     color: #007994 !important;
+    font-family: "Muli",sans-serif;
+    font-size: 17px !important;
+    padding-bottom: 8px;
+    margin: 0;}
+.updated-staus-btn{padding:5px !important; background:#fff; }
+.updated-staus-btn h2 {
+     color: #007994 !important;
+  padding-left:5px;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    padding-bottom: 10px;
+}
+.updated-staus-btn ion-textarea {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    font-family: 'Muli', sans-serif;
+    padding: 3px; margin:5px; width:97%;}
+.mem-name-update ion-row ion-col button.video-c{background:#025FA9 !important;
+    font-size: 15px;
+    font-weight: 400;
+    float: left;
+    width:48%;
+    height: 35px;
+    text-transform: capitalize; border-radius:30px;
+    font-family: 'Muli', sans-serif;}
+.mem-name-update ion-row ion-col button.video-cv{background:#025FA9 !important;
+    font-size: 15px;
+    font-weight: 400;
+    float:right;
+    width:48%;
+    height: 35px;
+    text-transform: capitalize; border-radius:20px;
+    font-family: 'Muli', sans-serif;}
+.mem-name-update ion-row ion-col button.postedimgvideos {
+    background: #FE5722;
+    font-size: 15px; border-radius:20px;
+    font-weight: 400;
+    text-transform: capitalize;
+    width:99.6%;
+    height:35px;
+    float: left; margin-top:8px;
+    font-family: 'Muli', sans-serif;
+}
+.post-urls ion-row ion-col .item-md .item-inner .input-wrapper ion-input.input-md .text-input-md {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    font-family: 'Muli', sans-serif;
+    width: 99%;
+    margin-left: 3px;
+    padding: 8px;
+}
+.post-urls ion-row ion-col .item-ios .item-inner .input-wrapper ion-input.input-ios .text-input-ios {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    font-family: 'Muli', sans-serif;
+    width: 99%;
+    margin-left: 3px;
+    padding: 8px;
+}
+
+.post-urls small {
+    font-size: 13px;
+    font-weight: 400px;
+    color: #666;
+    font-family: 'Muli', sans-serif;
+    text-align: left;
+    width: 100%;
+    float: left;
+}
+.list-md .item-block .item-inner{ border:none;}
+.list-ios .item-block .item-inner{ border:none;}
+.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:none !important; box-shadow:none !important;}
+.listed-comments .item-md .item-inner .input-wrapper .label-md h2 {
+    font-size:16px;
+    color:#007994 !important;
+    font-weight:400;
+    font-family: 'Muli', sans-serif;
+  
+}
+.video-updates iframe {
+    border: 1px solid #ccc;
+    width: 100%;
+}
+.postesd{ border:1px solid red;}
+.listed-comments .item-md .item-inner .input-wrapper .label-md p {
+    font-size: 11px !important;
+    color: #909090;
+    font-family: 'Muli', sans-serif;
+}
+.listed-comments .item-ios .item-inner .input-wrapper .label-ios p {
+    font-size: 11px !important;
+    color: #909090;
+    font-family: 'Muli', sans-serif;
+}
+.feed-post {
+    color: #777;
+    font-size: 15px !important;
+    font-family: 'Muli', sans-serif;
+}
+.listed-comments .item-md .item-inner .input-wrapper .label-md img {
+    border-radius: 0px !important;
+}
+.listed-comments .item-md .item-inner .input-wrapper .label-md img {
+    border-radius: 0px !important;
+}
+.listed-comments .item-ios .item-inner .input-wrapper .label-ios {
+    margin: 0px !important;
+}
+.comment-liks ion-row {
+    background: #F5F5F5;
+}
+.comment-liks ion-row ion-col button .button-inner p {
+    color: #777;
+    font-size: 13px !important;
+    font-family: 'Muli', sans-serif;
+    text-transform: capitalize;
+}
+p.valid{ color:red; font-size:13px !important;font-family: 'Muli', sans-serif;}
+.feed-post{color:#777; font-size:15px !important;font-family: 'Muli', sans-serif;}
+.posted-area .card-content-md{ padding:5px;}
+.posted-area .card-content-ios{ padding:5px;}
+
+.comment-liks ion-row{ background:#F5F5F5;}
+.comment-liks ion-row ion-col button .button-inner p{color:#777; font-size:13px !important;font-family: 'Muli', sans-serif;  text-transform: capitalize;}
+.video-updates p{    color: #777;
+    font-size:15px !important;
+    font-family: 'Muli', sans-serif;}
+.labels-bds {
+    background: rgba(20, 20, 21, 0.58) none repeat scroll 0 0 !important;
+    border-right: 4px solid #1d6bb4 !important;
+    color: white !important;
+    float: left;
+    font-size: 12px !important;
+    font-weight: 600;
+    padding: 9px;
+    position: absolute;
+    right: -1px;
+    top: 15px;
+    font-family: 'Muli', sans-serif;
+    width: auto;
+}
+.community-img {
+    position: relative;
+}
+.label-opc .item-md .item-inner .label-md p {
+    color:#007994 !important;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 25px;
+    margin: 0 !important;
+    padding-left: 8px;
+    padding-top: 0;
+    text-indent: 0;
+    font-family: 'Muli', sans-serif;
+}
+.label-opc .item-ios .item-inner .label-ios p {
+    color:#007994 !important;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 25px;
+    margin: 0 !important;
+    padding-left: 8px;
+    padding-top: 0;
+    text-indent: 0;
+    font-family: 'Muli', sans-serif;
+}
+.inbox-sends h1 {
+    color: #007994 !important;
+    font-family: "Muli",sans-serif;
+    font-size: 17px !important;
+    padding-bottom: 8px;
+    margin: 0;
+}
+.inbox-sends p span {
+    color: #333 !important;
+    font-family: "Muli",sans-serif;
+    font-size:14px !important;
+}
+.inbox-sends p i {
+    font-size:13px !important;
+    color: #666 !important;
+    width:20px;
+}
 }

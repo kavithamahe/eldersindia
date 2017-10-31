@@ -16,8 +16,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding style="background:#fff;">
-          <ion-list>
+<ion-content class="content-intop">
+          <ion-card class="sel-packages">
             <ion-item>
               <ion-label>select category</ion-label>
                 <ion-select [(ngModel)]="searchCategory1" (ionChange)='blog()'>
@@ -26,15 +26,15 @@
                   </ion-option>
                 </ion-select>
             </ion-item>
-          </ion-list>
+          </ion-card>
     <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>
 
 <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)" class="community-img">
 <ion-row>
   <ion-col width-20>
-	  <ion-avatar item-left>
-      <img src="{{imageUrl+blogs?.avatar}}" [hidden]="!blogs?.avatar">
-    </ion-avatar>
+ 
+      <img src="{{imageUrl+blogs?.avatar}}" [hidden]="!blogs?.avatar" height="50">
+ 
 	</ion-col>
 	<ion-col width-80 class="blogs-tittle">
   <ion-item text-wrap>
@@ -57,7 +57,7 @@
     <label class="labels-bdss"> {{blogs.category_name}}</label>
   </span>
   <span *ngIf="blogs.allow_featured == 1"> 
-    <label>Featured</label>
+    <label class="labels-bdss">Featured</label>
   </span>
   </div>
  
@@ -65,7 +65,7 @@
  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
-  <ion-item padding *ngIf="bloglists?.length==0">
-     <p class="error-clr">{{emptyRecord}}</p>
-   </ion-item>
+
+     <p class="error-clr" *ngIf="bloglists?.length==0">{{emptyRecord}}</p>
+
 </ion-content>

@@ -1,4 +1,90 @@
 page-blogs {
 .toolbar-title-md{ text-align:center;}
  .toolbar-title-ios{ text-align:center;}
+ .content-intop {
+    background: #F5F9FF;
+}
+
+.sel-packages {
+    border: 1px solid #A9A9A9;
+    box-shadow: none;
+    border-radius: 0px;
+}
+ .sel-packages .item-md .item-inner .label-md {
+    font-family: 'Muli', sans-serif;
+    font-size: 15px;
+    padding-left: 10px;}
+	 .sel-packages .item-ios .item-inner .label-ios {
+    font-family: 'Muli', sans-serif;
+    font-size: 15px;
+    padding-left: 10px;}
+.error-clr{ text-align:center; font-size:15px; color:red; font-family: 'Muli', sans-serif;}
+
+.blogs-tittle .item-inner .input-wrapper .label-md{ margin:0px;}
+.blogs-tittle .item-inner .input-wrapper .label-md h2 {
+    color: #007994 !important;
+    font-family: "Muli",sans-serif;
+    font-size: 17px !important;
+    padding-bottom: 8px;
+    margin: 0;
+}
+.blogs-tittle  .item-inner .input-wrapper .label-md p {
+    color: #7b8da0 !important;
+    font-family: "Muli",sans-serif;
+    font-size: 13px !important;
+    padding-bottom: 8px;
+    margin: 0;
+}
+.community-img row col img{ border:1px solid #ccc;}
+.hide, [hidden], template {
+    display: block !important;
+}
+
+
+
+.sel-packages .item-ios .item-inner .label-ios {
+    font-family: 'Muli', sans-serif;
+    font-size: 15px;
+    padding-left: 10px;}
+	 .sel-packages .item-ios .item-inner .label-ios {
+    font-family: 'Muli', sans-serif;
+    font-size: 15px;
+    padding-left: 10px;}
+
+
+.blogs-tittle .item-inner .input-wrapper .label-ios{ margin:0px;}
+.blogs-tittle .item-inner .input-wrapper .label-ios h2 {
+    color: #007994 !important;
+    font-family: "Muli",sans-serif;
+    font-size: 17px !important;
+    padding-bottom: 8px;
+    margin: 0;
+}
+.blogs-tittle  .item-inner .input-wrapper .label-ios p {
+    color: #7b8da0 !important;
+    font-family: "Muli",sans-serif;
+    font-size: 13px !important;
+    padding-bottom: 8px;
+    margin: 0;
+}
+
+
+
+.community-img{position:relative;}
+
+.labels-bdss {
+    background: hsla(240, 2%, 8%, 0.58) none repeat scroll 0 0 !important;
+    border-right: 4px solid hsl(209, 72%, 41%) !important;
+    color: hsl(0, 0%, 100%) !important;
+    float: left;
+    font-family: "Muli",sans-serif;
+    font-size: 12px !important;
+    font-weight: 600;
+    padding: 9px;
+    position: absolute;
+    right: -1px;
+    top:150px;
+    width: auto;
+}
+
 }

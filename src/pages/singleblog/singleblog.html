@@ -21,7 +21,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding style="background:#fff;">
+<ion-content>
 <ion-card>
 <ion-row>
 <ion-col width-20>
@@ -32,18 +32,18 @@
   <ion-col width-80 class="blogs-tittle">
   <ion-item text-wrap>
     <h2 text-capitalize>{{singleBlogInfo?.details?.title}}</h2>
-    <p class="timedate" text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{singleBlogInfo?.details?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i>  {{singleBlogInfo?.details?.created_at | date :"MMM dd y"}} | <i class="fa fa-share-alt" aria-hidden="true" (click)="shareblog(singleBlogInfo?.details?.id)"> Share</i></p>
+    <p text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{singleBlogInfo?.details?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i>  {{singleBlogInfo?.details?.created_at | date :"MMM dd y"}} | <i class="fa fa-share-alt" aria-hidden="true" (click)="shareblog(singleBlogInfo?.details?.id)"></i> Share</p>
   </ion-item></ion-col></ion-row>
 
   <img src="{{imageUrl+singleBlogInfo?.details?.banner_image}}" [hidden]="!singleBlogInfo?.details?.banner_image">
-  <ion-card-content style="padding:10px !important; font-size:17px !important;">
-    <p [innerHTML]="singleBlogInfo?.details?.description" style="font-size:17px;"></p>
+  <ion-card-content>
+    <p [innerHTML]="singleBlogInfo?.details?.description"></p>
   </ion-card-content>
  <ion-row (click)="leaveComment()">
     <ion-col>
       <button ion-button icon-left clear small>
         <ion-icon name="text"></ion-icon>
-        <div> Comment</div>
+        Comment
       </button>
     </ion-col>
   </ion-row>
@@ -56,8 +56,8 @@
   </ion-item>
   <p *ngIf="!commentForm.controls.comment.valid && (commentForm.controls.comment.dirty || submitAttempt)" class="err-reds">Please enter comment.</p>
   </form>
-  <ion-item text-right>
-  <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)" class="commend-btn">Submit</button>
+  <ion-item class="comments-btn">
+  <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)" class="oranges">Submit</button>
   </ion-item>
   </div>
   <hr/>
@@ -69,59 +69,70 @@
       [hidden]="!viewComments?.avatar">
     </ion-avatar>
   </ion-col>
-  <ion-col width-80 class="blogs-tittle">
+  <ion-col width-80 class="blogs-tittle" style="border:1px solid red;">
  <ion-item text-wrap style="padding-left:0px;">
     <h2>{{viewComments?.user_name}}</h2>
 
    
-    <p class="timedate">{{viewComments?.created_at | date :"MMM dd y h:mm a"}}</p>
-    <p item-text-wrap class="page-down">{{viewComments?.comment}}</p>
-   
-      <button ion-button icon-right clear end small item-right *ngIf="user_id==viewComments?.user_id" 
-      (click)="deleteComment(viewComments?.id)">
-        <ion-icon ios="ios-trash" md="md-trash"></ion-icon>      
-      </button>
+    <small class="timedate">{{viewComments?.created_at | date :"MMM dd y h:mm a"}}</small>
+    <strong item-text-wrap class="page-down">{{viewComments?.comment}}</strong>
+
      
        </ion-item>
-
-    </ion-col>
-    </ion-row>
+	      <ion-item class="reply-deletd">
      <button ion-button (click)="viewReply(i)" clear>
-     <i class="fa fa-reply" aria-hidden="true"></i>
+     <i class="fa fa-reply" aria-hidden="true"></i>&nbsp; Reply
      </button>
+	    
+      <button ion-button clear end *ngIf="user_id==viewComments?.user_id" 
+      (click)="deleteComment(viewComments?.id)">
+        <i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Delete 
+      </button>
+	     </ion-item>
+    </ion-col>
+	
+    </ion-row>
+
      <div *ngIf="i==showReply">
      <ion-row>
         <ion-item>
         <ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important;" placeholder="write a reply.."></ion-textarea>
         </ion-item>
-        <button ion-button icon-only (click)="postReply(viewComments.id,viewComments?.user_id)" round><i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+		
+        <button ion-button class="orange-reply" (click)="postReply(viewComments.id,viewComments?.user_id)"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>
         </button>
       </ion-row>
       </div>
+
        <ion-list *ngFor="let reply of viewComments.comment_reply; let j=index">
         <ion-row>
           <ion-col offset-10>
-            <ion-item>
+            <ion-item item-text-wrap class="reply-reply">
               <ion-avatar item-left>
                 <img src="{{imageUrl+reply?.profile_image}}" [hidden]="!reply?.profile_image">
               </ion-avatar>
-              <h2>{{reply.name_from}}-{{reply.name_to}}
-              </h2>
+              <h2>{{reply.name_from}}-{{reply.name_to}}</h2>
               <p item-text-wrap>{{reply.comments_replay}}</p>
-              <button ion-button icon-right clear end small item-right *ngIf="user_id==reply?.uid_to" 
-              (click)="deleteComment(reply?.comments_replay_id)">
-                <ion-icon ios="ios-trash" md="md-trash"></ion-icon>      
-              </button>
+			  <br/>
+			  <div class="reply-btt">
+			   <button  (click)="replyblogPost(j)" clear><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply</button>
+              <button icon-right clear end *ngIf="user_id==reply?.uid_to" 
+              (click)="deleteComment(reply?.comments_replay_id)"><i class="fa fa-trash" _ngcontent-uuk-81="" aria-hidden="true"></i>&nbsp;Delete</button>
+			 
+			  </div>
             </ion-item>
-            <button  (click)="replyblogPost(j)" clear><i class="fa fa-reply" aria-hidden="true"></i></button>
+     
+	 	 
               <div *ngIf="j==replyPost">
                 <ion-row>
                   <ion-item>
                       <ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important;" placeholder="write a reply.."></ion-textarea>
                   </ion-item>
-                  <button ion-button icon-only (click)="postReply(viewComments.id,user_id)" round>
+				       <ion-item>
+                  <button (click)="postReply(viewComments.id,user_id)" class="orange-reply">
                   <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
                   </button>
+				      </ion-item>
                 </ion-row>
               </div>
             </ion-col>

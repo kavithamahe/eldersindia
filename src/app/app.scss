@@ -15,7 +15,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 @import url('https://fonts.googleapis.com/css?family=Muli');
-@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+@import url('https://fonts.googleapis.com/css?family=Exo+2');
 button{font-family: 'Muli', sans-serif; }
 .list-md .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus){border-bottom-color:none !important;box-shadow:none  !important;}
 .list-md .item-input.input-has-focus:last-child{border-bottom-color:none !important;box-shadow:none  !important;}
@@ -102,7 +102,7 @@ button{font-family: 'Muli', sans-serif; }
     font-size: 30px;
     font-weight: 400;
     margin: 0;
-    text-align: center;font-family: 'Muli', sans-serif;
+    text-align: center;font-family: 'Exo 2', sans-serif;
 }
 
 
@@ -118,7 +118,7 @@ button{font-family: 'Muli', sans-serif; }
     font-size: 30px;
     font-weight: 400;
     margin: 0;
-    text-align: center;font-family: 'Muli', sans-serif;
+    text-align: center;font-family: 'Exo 2', sans-serif;
 }
 .list-md .item-input:last-child{ border:none !important;}
 .list-ios .item-input:last-child{ border:none !important;}
@@ -149,4 +149,5 @@ ion-segment{ background:#C0C0C0; border-radius:50px; height:40px; line-height:40
 .searchbar-md .searchbar-search-icon {background-image:url("../assets/img/search.png");height:21px;left:16px;top:11px;width:21px;}
 .searchbar-ios .searchbar-search-icon {background-image:url("../assets/img/search.png");height:21px;left:16px;top:11px;width:21px;}
 .searchbar-md .searchbar-input{border:1px solid #0074bd;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100%) 0%, hsl(66, 100%, 98%) 100%) repeat scroll 0 0;}
-.searchbar-ios .searchbar-input{border:1px solid #0074bd;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100%) 0%, hsl(66, 100%, 98%) 100%) repeat scroll 0 0; }
+.searchbar-ios .searchbar-input{border:1px solid #0074bd; height:40px;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100%) 0%, hsl(66, 100%, 98%) 100%) repeat scroll 0 0; }
+.searchbar-ios{ background:none !important; border:none !important;}
