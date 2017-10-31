@@ -88,6 +88,18 @@ export class CommunityprofilePage {
         this.itemComments=false;
  
   }
+  ionViewDidEnter(){
+    this.storage.ready().then(() => {
+      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      this.storage.get('id').then((id) => { this.my_id=id; });
+      this.storage.get('token').then((token) => { this.token=token;
+       this.profileCommunity(this.profile_uid);
+      this.memberProfile(this.profile_uid);
+      this.getPrivacy(this.profile_uid);
+    })
+      
+    });
+  }
     ionViewWillEnter() {
     this.tabBarElement.style.display = 'none';
   }
@@ -164,8 +176,9 @@ showConfirm(id){
     
   }
   showComment(post){
-    let commentModal = this.modalCtrl.create(CommunitycommentsPage, { posts: post });
-   commentModal.present();
+    this.nav.push(CommunitycommentsPage, { posts: post });
+   //  let commentModal = this.modalCtrl.create(CommunitycommentsPage, { posts: post });
+   // commentModal.present();
   }
   messageModel(member) {
 

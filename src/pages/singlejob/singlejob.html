@@ -53,7 +53,8 @@
 </ion-row>
 <ion-row>
 <ion-col>
-  <button ion-button  class="oranges" full (click)="applyJob(singleJob?.id)"><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button>
+  <button ion-button  class="oranges" full *ngIf="is_applied == 0" (click)="applyJob(singleJob?.id)"><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button>
+   <button ion-button  class="oranges" *ngIf="is_applied == 1" full><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
   </ion-col>
 </ion-row>
 <hr/>

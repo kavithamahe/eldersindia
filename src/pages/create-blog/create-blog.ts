@@ -58,7 +58,7 @@ actionUrl:any='addBlog';
          this.blogTitle="Edit Blog";
          this.getEditBlog(this.blogId);
        }
-      this.getBlogCategories();      
+     // this.getBlogCategories();      
       })
     });
     this.blogForm = formBuilder.group({
@@ -67,7 +67,23 @@ actionUrl:any='addBlog';
         description: ['', Validators.compose([Validators.required])]
          });
   }
-
+ionViewDidEnter() {
+     this.storage.ready().then(() => {
+      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      this.storage.get('id').then((id) => { this.user_id=id;});
+      this.storage.get('user_type').then((user_type) => { this.user_type=user_type;});
+      this.storage.get('token').then((token) => { this.token=token; 
+       this.blogId=this.navParams.get("blogId");
+       this.action=this.navParams.get("action");     
+       if(this.blogId>0 && this.action=='edit')
+       {
+         this.blogTitle="Edit Blog";
+         this.getEditBlog(this.blogId);
+       }
+      this.getBlogCategories();      
+      })
+    });  
+  }
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);
@@ -213,6 +229,11 @@ actionUrl:any='addBlog';
      (createBlog) => {
       this.navCtrl.push(ManageBlogsPage);
       this.showToaster(createBlog.result);
+      this.category = "";
+      this.allowComments = "";
+      this.title = "";
+      this.highlights = "";
+      this.description = "";
       loader.dismiss();
       //console.log(createBlog.result);
     },

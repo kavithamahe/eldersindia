@@ -33,16 +33,31 @@ searchstatus:any="";
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
-        this.manageblogs();
-        this.getCategory();
+        // this.manageblogs();
+        // this.getCategory();
     })
 
   });
   
   }
-   inputSearch(searchEvent){
-   this.searchText = searchEvent.target.value;
-   this.manageblogs();
+  ionViewDidEnter() {
+      this.storage.ready().then(() => {
+    this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      this.storage.get('token').then((token) => { this.token=token; 
+        this.manageblogs();
+        this.getCategory();
+    })
+
+  });
+  }
+  //  inputSearch(searchEvent){
+  //  this.searchText = searchEvent.target.value;
+  //  this.manageblogs();
+  // }
+    getItems(searchEvent){
+   this.searchText = searchEvent;
+
+  this.manageblogs();
   }
   public manageblogs()
   { 
@@ -56,9 +71,10 @@ searchstatus:any="";
        loader.dismiss();
     },
     (err) => { 
+      this.manageblogsLists =[];
         if(err.status===401)
         {
-        this.emptyRecord = (JSON.parse(err._body).error);
+          this.emptyRecord = (JSON.parse(err._body).error);
         }
         else
         {
@@ -89,8 +105,8 @@ searchstatus:any="";
   deleteBlog(blogId)
   {
      let confirm = this.alertCtrl.create({
-      title: 'Are you delete the blog',
-      message: 'Are you sure to delete this blog',
+      title: 'Are you sure to delete this blog',
+     // message: '',
       cssClass:'alertbox',
       buttons: [
         {
