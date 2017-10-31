@@ -27,7 +27,13 @@
                 </ion-select>
             </ion-item>
           </ion-card>
-    <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>
+<!--    <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>-->
+        
+  <!-- <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar> -->
+ <ion-row>
+<ion-col><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
+  <ion-col><button (click)="getItems(searchText)" ion-button>Go</button> </ion-col>
+</ion-row>
 
 <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)" class="community-img">
 <ion-row>

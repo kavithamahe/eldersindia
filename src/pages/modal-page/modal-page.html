@@ -120,16 +120,17 @@
            <ion-label stacked class="label-lb required">Start date</ion-label>
      
         <ion-item>
-           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Start date" min={{this.date}} formControlName ="startdate"></ion-datetime>
+           <ion-datetime class="select-brd" [(ngModel)]="startDate" displayFormat="DD-MM-YYYY" pickerFormat="DD MMMM YYYY" placeholder="Start date" min={{this.date}} (ionChange)="fromDateChange()" formControlName ="startdate"></ion-datetime>
         </ion-item>
           <p class="err-reds" *ngIf="!modalForm.controls.startdate.valid  && (modalForm.controls.startdate.dirty || submitAttempt)">Please enter the start date</p>
             <ion-label stacked class="label-lb required">End date</ion-label>
      
         <ion-item>
-           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="End date" min={{this.date}} formControlName ="enddate"></ion-datetime>
+           <ion-datetime class="select-brd" [(ngModel)]="endDate" displayFormat="DD-MM-YYYY" pickerFormat="DD MMMM YYYY" placeholder="End date" min={{this.date}} (ionChange)="calculateDays(startDate,endDate)" formControlName ="enddate"></ion-datetime>
         </ion-item>
           <p class="err-reds" *ngIf="!modalForm.controls.enddate.valid  && (modalForm.controls.enddate.dirty || submitAttempt)">Please enter the end date</p>
       
+           <ion-label>Number of days : </ion-label> <p>{{datCount}}</p>
       <ion-label>Frequency</ion-label>
       <ion-list radio-group>
        <ion-item>
@@ -190,10 +191,22 @@
           </ion-list>
 
         </div>
-    
+        <ion-item>
+        <ion-label>Deselect specific date</ion-label>
+        <ion-select multiple [(ngModel)]="mySelect" [ngModelOptions]="{standalone: true}" (ionChange)="exclude(mySelect)">
+          <ion-option [value] = "0" >Sunday</ion-option>
+          <ion-option [value] = "1" >Monday</ion-option>
+          <ion-option [value] = "2" >Tuesday</ion-option>
+          <ion-option [value] = "3" >Wednesday</ion-option>
+          <ion-option [value] = "4" >Thursday</ion-option>
+          <ion-option [value] = "5" >Friday</ion-option>
+          <ion-option [value] = "6" >Saturday</ion-option>
+        </ion-select>
+      </ion-item>
  
     </div>                          
 <!-- <p>---------recurring time end-----------------</p> -->
+
  <ion-label>Deselect specific date</ion-label>
     <ion-item class="one-timereq">
     <ion-label>Deselect specific date</ion-label>

@@ -62,8 +62,8 @@ export class CommunityPage {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
         this.community_id=this.navParams.get("community_id");
-        this.communityList(this.community_id);
-        this.communityDetail(this.community_id);
+        // this.communityList(this.community_id);
+        // this.communityDetail(this.community_id);
         this.addComments=false;
         this.itemComments=false;
         this.userType="sponsor";
@@ -76,7 +76,21 @@ export class CommunityPage {
     });
 
 }
+  ionViewDidEnter(){
+      this.storage.ready().then(() => {
+      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      this.storage.get('token').then((token) => { this.token=token; 
+        this.community_id=this.navParams.get("community_id");
+        this.communityList(this.community_id);
+        this.communityDetail(this.community_id);
+        this.addComments=false;
+        this.itemComments=false;
+        this.userType="sponsor";
+      });
+      this.storage.get('id').then((id) => { this.user_id=id; })
+    });
 
+  }
 files:any;
 
  openMenu(id) {
@@ -167,9 +181,10 @@ toggleContent(){
     }
   }
   showComment(post){
-    let commentModal = this.modal.create(CommunitycommentsPage, { posts: post });
-    console.log(post);
-   commentModal.present();
+    this.nav.push(CommunitycommentsPage, { posts: post });
+   //  let commentModal = this.modal.create(CommunitycommentsPage, { posts: post });
+   //  console.log(post);
+   // commentModal.present();
   }
 
 
@@ -455,22 +470,9 @@ doInfinite(infiniteScroll) {
   });
   }
 
- /* ionViewWillEnter(){
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-    
-    this.community_id=this.navParams.get("community_id");
-        this.communityList(this.community_id);
-        this.communityDetail(this.community_id);
-        this.addComments=false;
-        this.itemComments=false;
-        loader.dismiss();
-        this.userType="sponsor";
-  }*/
-
-  }
 
 
+}
 
 @Component({
   template: `<ion-title text-center text-capitalize>Request to join communities</ion-title> 

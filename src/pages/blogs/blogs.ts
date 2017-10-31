@@ -29,13 +29,26 @@ searchText:any="";
       storage.get('token').then((token) => { this.token=token; 
         let loader = this.loadingCtrl.create({ content: "Please wait..." });     
         loader.present();
+        // this.blog();
+        // this.getCategory();
+        loader.dismiss(); 
+    })
+
+  });
+  
+  }
+  ionViewDidEnter() {
+    this.storage.ready().then(() => {
+    this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      this.storage.get('token').then((token) => { this.token=token; 
+        let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+        loader.present();
         this.blog();
         this.getCategory();
         loader.dismiss(); 
     })
 
   });
-  
   }
   public blog()
   { 
@@ -65,18 +78,11 @@ searchText:any="";
       }
     );   
   }
-  /*searchCategory(){
-    this.blogListService.searchCategory(this.searchCategory1).subscribe(searchConnection => {
-        this.bloglists= searchConnection.result.data;
-      },
+  getItems(searchEvent){
+   this.searchText = searchEvent;
 
-   err =>{
-    this.bloglists =[];
-    this.showToaster(err);
-  })
-      
-
-  }*/
+  this.blog();
+  }
    public getCategory(){
     this.blogListService.getBlogCategories().subscribe(mycategory => {
       this.categoryLists=mycategory.result; 
@@ -126,10 +132,10 @@ doInfinite(infiniteScroll) {
         }
       });
   }
-  inputSearch(searchEvent){
-   this.searchText = searchEvent.target.value;
-   this.blog();
-  }
+  // inputSearch(searchEvent){
+  //  this.searchText = searchEvent.target.value;
+  //  this.blog();
+  // }
   public showToaster(message)
   {
    let toast = this.toastCtrl.create({
