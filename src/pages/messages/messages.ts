@@ -88,14 +88,42 @@ emptyRecord:any;
      let term = searchEvent.target.value;
       this.messagesService.inboxSearch(term).subscribe(searchConnection => {
       this.inboxInfo=searchConnection.result.data;
-      });
+      },
+      (err) => { 
+        this.inboxInfo =[];
+        if(err.status===401)
+        {
+          this.showToaster(JSON.parse(err._body).error);
+        this.emptyRecord = (JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+           this.emptyRecord = "No Records Found"
+        }
+      }
+      );
   }
  
   public setItems(searchEvent){
      let term = searchEvent.target.value;
       this.messagesService.sentSearch(term).subscribe(searchConnection => {
       this.sentInfo=searchConnection.result.data;
-      });
+      },
+      (err) => {
+      this.sentInfo =[]; 
+        if(err.status===401)
+        {
+          this.showToaster(JSON.parse(err._body).error);
+        this.emptyRecord = (JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+           this.emptyRecord = "No Records Found"
+        }
+      }
+      );
   }
   
   public sent()

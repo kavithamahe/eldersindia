@@ -39,7 +39,7 @@
         <ion-segment-button>Received Requests</ion-segment-button>
         <ion-searchbar *ngIf="receivedRquestInfo.length != 0" (input)="receivedsearch($event)"></ion-searchbar>
             <div *ngFor="let request of receivedRquestInfo">
-              <ion-item-sliding class="inbox-sends">
+              <!-- <ion-item-sliding class="inbox-sends"> -->
                 <ion-item>
                   <ion-row>
                     <ion-col width-20>
@@ -55,13 +55,16 @@
                       </p>
                     </ion-col>
                   </ion-row>
-                </ion-item>
-                <ion-item-options side="right">
-                  <button ion-button icon-only class="active-btn"(click)="connectionStatus(request?.connection_id,1)"><i class="fa fa-check"></i></button>
+                    <button ion-button icon-only class="active-btn"(click)="connectionStatus(request?.connection_id,1)"><i class="fa fa-check"></i></button>
                   <button ion-button icon-only class="inactive-btn" (click)="connectionStatus(request?.connection_id,2)"><i class="fa fa-times" aria-hidden="true"></i>
                   </button>
-                </ion-item-options>
-              </ion-item-sliding>
+                </ion-item>
+                <!-- <ion-item-options side="right"> -->
+                <!--   <button ion-button icon-only class="active-btn"(click)="connectionStatus(request?.connection_id,1)"><i class="fa fa-check"></i></button>
+                  <button ion-button icon-only class="inactive-btn" (click)="connectionStatus(request?.connection_id,2)"><i class="fa fa-times" aria-hidden="true"></i>
+                  </button> -->
+                <!-- </ion-item-options> -->
+              <!-- </ion-item-sliding> -->
             </div>
             <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
             <ion-infinite-scroll-content></ion-infinite-scroll-content>

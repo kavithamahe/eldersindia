@@ -31,8 +31,11 @@ functional_area:any=[];
 appliedjobs:any;
 myjobrequestinfo:any=[];
 companyname:any;
+is_applied:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public jobBoardService:JobBoardService,public modalCtrl: ModalController) {
   	this.jobId=navParams.get("jobId");
+    this.is_applied=navParams.get("status");
+    console.log(this.is_applied);
     this.appliedjobs=navParams.get("appliedjobs");
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});

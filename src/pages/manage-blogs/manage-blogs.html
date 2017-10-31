@@ -18,16 +18,22 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    
-    <!--<ion-buttons right>    
-      <button ion-button icon-only>
-        <ion-icon name="search"></ion-icon>
-      </button>
-    </ion-buttons>-->
+   
   </ion-navbar>
 </ion-header>
 
 <ion-content padding class="content-intop">
+       <!--   <ion-list>
+            <ion-item>
+              <ion-label>Bulk Action</ion-label>
+                <ion-select [(ngModel)]="bulkstatus">
+                  <ion-option value="archives">Move to archives
+                  </ion-option>
+                  <ion-option value="trash">Move to trash
+                  </ion-option>
+                </ion-select>
+            </ion-item>
+          </ion-list> -->
           <ion-list>
             <ion-item>
               <ion-label>select category</ion-label>
@@ -48,7 +54,11 @@
                 </ion-select>
             </ion-item>
           </ion-list>
-    <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>
+   <!--  <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar> -->
+   <ion-row>
+<ion-col><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
+  <ion-col><button (click)="getItems(searchText)" ion-button>Go</button> </ion-col>
+</ion-row>
 <ion-card *ngFor="let manageBlog of manageblogsLists; let i=index;">
   <ion-card-content style=" padding:0px;">
   <ion-grid>

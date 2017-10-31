@@ -215,26 +215,74 @@ All:any;
     let term = searchEvent.target.value;
       this.connectionsService.searchConnection(term).subscribe(searchConnection => {
         this.allConnectionsInfo= searchConnection.result.info.list.data;
-      });
+      },
+      (err) => { 
+        this.allConnectionsInfo = [];
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+      );
   }
   public sendsearch(searchEvent){
      let term = searchEvent.target.value;
       this.connectionsService.sendsearchConnection(term).subscribe(searchConnection => {
         this.sentRquestInfo= searchConnection.result.info.list.data;
-      });
+      },
+       (err) => { 
+        this.sentRquestInfo = [];
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+      );
   
   }
  public receivedsearch(searchEvent){
      let term = searchEvent.target.value;
       this.connectionsService.receivedsearchConnection(term).subscribe(searchConnection => {
         this.receivedRquestInfo= searchConnection.result.info.list.data;
-      });
+      },
+      (err) => { 
+        this.receivedRquestInfo = [];
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+      );
   }
   public search1(Event) {
     let term = Event.target.value;
       this.connectionsService.addsearchConnection(term).subscribe(searchConnections => {
         this.addConnectionInfo= searchConnections.result.info.data;
-      });
+      },
+      (err) => { 
+        this.addConnectionInfo = [];
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+      );
   }
  public connectMember(connect_id,connect_name){
    let loader = this.loadingCtrl.create({ content: "Please wait..." });     

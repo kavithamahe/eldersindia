@@ -77,9 +77,9 @@ file_name:any;
     
   }
 
-  public viewJob(jobId)
+  public viewJob(jobId,status)
   {
-   this.navCtrl.push(SinglejobPage, {jobId});
+   this.navCtrl.push(SinglejobPage, {jobId,status});
   }
 
   public applyJob(jobId)
