@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController,LoadingController,ModalController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {DatePicker} from 'ionic-native';
+//import {DatePicker} from 'ionic-native';
 import {Platform} from 'ionic-angular';
 // import { Calendar } from '@ionic-native/calendar';
 
-
+import moment from 'moment';
 import { ServiceProvider } from '../../providers/service-provider';
 import { TermsModalPage } from '../../pages/terms-modal/terms-modal';
 // import { Modelpage1PagePage } from '../../pages/modelpage1/modelpage1';
@@ -36,6 +36,9 @@ export class ModalContentPage {
   dependent:string = "";
   elderId:any;
   problem:any;
+  days:any;
+  count:any=0;
+
   terms:boolean = false;
   checkTerms:any= false;
   date:any;
@@ -54,13 +57,20 @@ export class ModalContentPage {
   fulldays:boolean=false;
   searchValuessss:any;
   onetimes:any;
+  datCount:any;
+  selectedDates:any=[];
+  excludeDays:any=[];
+  to_date:any;
+  starDate:any;
+  enDate:any;
   packageLists:any=[];
-   packageListss:any=[];
+  packageListss:any=[];
   flag:any;
   location_id:any;
   service_id:any;
   vendor_id:any;
   recurringType:any;
+  durations:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
    
@@ -124,21 +134,79 @@ onlyNumberKey(event) {
      this.recurring=!searchValues;
    }
      fixed(searchValuess){
+      this.durations = "";
+      this.durations = "Fixed hours";
       this.timeslots=false;
        this.fulldays=false;
      this.fixedd=!searchValuess;
    }
     timeslot(searchValuesss){
+      this.durations = "";
+      this.durations = "Time slot";
       this.fixedd=false;
       this.fulldays=false;
      this.timeslots=!searchValuesss;
    }
    fullday(searchValuessss){
+     this.durations = "";
+      this.durations = "Full Day";
     this.timeslots=false;
      this.fixedd=false;
       this.fulldays=!searchValuessss;
    }
+   fromDateChange(){
+    this.selectedDates=[];
+    this.excludeDays=[];
+    this.to_date="";
+  }
+  calculateDays(sDate,eDate){
+  this.starDate = moment(sDate).format("YYYY-MM-DD");
+ 
+  this.enDate = moment(eDate).format("YYYY-MM-DD");  
+  this.selectedDates=[];
+  this.excludeDays;
+  this.enDate = moment(this.enDate).add(1, 'days');
+  this.enDate =moment(this.enDate).format("YYYY-MM-DD"); 
+     while (moment(this.starDate).isBefore(moment(this.enDate),'day')) {
+            this.starDate = moment(this.starDate);
+            this.selectedDates.push(this.starDate);
+            this.starDate= moment(this.starDate).add(1, 'days');   
+            console.log(this.starDate);         
+           // this.starDate = moment(this.starDate).format("YYYY-MM-DD");
+          }        
+      console.log(this.selectedDates);
+      this.dayCalculation();
+                                                                                              
+  }
+  dayCalculation(){
+   this.days = [];
+   this.count = this.selectedDates.length;
+    console.log(this.selectedDates);     
+      for(let data of this.selectedDates) {
+        let date = moment(data).format('YYYY-MM-DD');
 
+        let weekoff=moment(date).day();
+           console.log(date);
+           console.log(weekoff);
+           console.log(this.excludeDays);
+           let _index= this.excludeDays.indexOf(weekoff);
+           console.log(_index);
+             if(_index>=0 ){
+                    console.log('minus');
+                    if(this.count>0){
+                    this.count=this.count-1;
+                }
+             }  
+       }
+     this.datCount = this.count;
+     console.log(this.datCount);
+  }
+ 
+  exclude(day){
+    this.excludeDays=[];
+     this.excludeDays=day;    
+    this.dayCalculation();
+  }
    openTerms(){
      let termsModal = this.modalCtrl.create(TermsModalPage);
      termsModal.present();
@@ -237,8 +305,8 @@ onlyNumberKey(event) {
     }
     
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":"",
-       "exclude_days":"","from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":"",
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
       console.log(serviceData);
       this.viewCtrl.dismiss(serviceData);

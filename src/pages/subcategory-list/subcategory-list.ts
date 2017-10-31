@@ -168,9 +168,9 @@ loadSubcategoryList(subCategory_id,location_id){
       "service_id":this.serviceData.service_id, "problem":service_request_data.problem,
      "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
       "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,
-      "subcategory":this.serviceData.subcategory, "durations":"",
-       "exclude_days":"","from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
-       "selected_dates":"","serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
+      "subcategory":this.serviceData.subcategory, "durations":service_request_data.durations,
+       "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
+       "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
      "package_id":service_request_data.package_id}
 
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
