@@ -565,7 +565,7 @@ public emergencies =  [
 
   }
 getblog_category(){
-  
+  if(this.functionality !="profileEdit"){
    if(this.functionality !="edit" && this.functionality !="profileEdit"){
     //console.log(this.blog_interest);
     if(this.blog_interest != undefined){
@@ -583,10 +583,11 @@ getblog_category(){
       }
     }
   }
+}
   
 }
 getservicecategory(){
-  
+  if(this.functionality !="profileEdit"){
    if(this.functionality !="edit" && this.functionality !="profileEdit"){
       for(let i=0;i<this.servicesubcategorylist.length;i++){
         console.log(this.servicesubcategorylist.length);
@@ -599,9 +600,10 @@ getservicecategory(){
         this.serviceCategory_interests.push({"elder_id":this.elder_id,"id":this.servicesubcategorylist[i]})  
       }
     }
-  
+  }
 }
 getareaof_interest(){
+  if(this.functionality !="profileEdit"){
    if(this.functionality !="edit" && this.functionality !="profileEdit"){
       for(let i=0;i<this.area_of_interest.length;i++){
         this.areaofinterestdata.push({"id":this.area_of_interest[i]})  
@@ -614,6 +616,7 @@ getareaof_interest(){
       console.log(this.areaofinterestdata);
       }
     }
+  }
 }
   getElderSkills(){
      if(this.functionality !="edit" && this.functionality !="profileEdit"){

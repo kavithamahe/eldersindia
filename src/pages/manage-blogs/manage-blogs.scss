@@ -6,4 +6,51 @@ page-manage-blogs {
 	display:block !important;
 }
 
+.sel-packages {
+    border: 1px solid #a8a8a8;
+    border-radius: 0;
+    box-shadow: none;
+}
+ .sel-packages .item-md .item-inner .label-md {
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    padding-left: 10px;
+}
+ .sel-packages .item-ios .item-inner .label-ios {
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    padding-left: 10px;
+}
+.job-detailsview {
+ 
+  
+
+    padding: 4px;
+}
+.job-detailsview ion-row ion-col h2 {
+    color: #007994 !important;
+    font-family: "Muli",sans-serif;
+    font-size: 17px !important;
+    padding-bottom:3px;
+    margin: 0;
+}
+.job-detailsview ion-row ion-col p {
+    color: #333 !important;
+    font-family: "Muli",sans-serif;
+    font-size:11px !important;
+    padding-bottom: 15px;
+    margin: 0;
+    padding: 0;
+}
+ .content-intop {
+    background: #F5F9FF;
+}
+
+
+.edit-blogs ion-col button.edits{ color:#025fa9 !important;text-transform: capitalize; background:none;
+    font-family: "Muli",sans-serif;
+    font-size:12px !important; font-weight:600;}
+.edit-blogs ion-col button.delets{ color:#f44336 !important;text-transform: capitalize; background:none;
+    font-family: "Muli",sans-serif;font-weight:600;
+    font-size:12px !important;}
 }

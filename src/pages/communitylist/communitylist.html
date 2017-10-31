@@ -19,7 +19,8 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
+<ion-card class="segment-card">
      <ion-segment [(ngModel)]="community" class="segment-top" 
      (ionChange)="changeSlide($event)">
         <ion-segment-button (click)="myCommunity()" value="my_community">
@@ -29,6 +30,7 @@
           Active Communities
         </ion-segment-button>
       </ion-segment>
+</ion-card>
     <div [ngSwitch]="community">
       <ion-slides (ionSlideWillChange)="slideChanged($event)">
       <ion-slide>

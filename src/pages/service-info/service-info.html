@@ -20,7 +20,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="marg-info" style="background:#fff;">
+<ion-content class="marg-info">
   <div *ngIf="vendorList?.banners">
   <ion-slides class="slide_height" initialSlide="0" loop="true" pager="true" autoplay="3000">
       <ion-slide *ngFor="let slide of vendorList.banners" style="height:200px;">
@@ -29,25 +29,25 @@
   </ion-slides>  
   </div>
 
-<div class="slider-detalis-list">
-<ion-card>
-  <ion-card-header>
+
+<ion-card class="message-boxs">
+
          <h2> Welcome to {{vendorList?.vendorDetails?.name}}</h2>
-  </ion-card-header>
-  <ion-card-content>
+
+
    <p> {{vendorList?.vendorDetails?.description}} </p>
-  </ion-card-content>
+
 </ion-card>
-</div>
+
 
   	<div class="view-storedet">
     <ion-row>
     <ion-col class="brder-cor">
-      <button ion-button full (click)="toggleRequestService()">
+      <button ion-button full class="btn-default-ser" (click)="toggleRequestService()">
         <b>Request Services </b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
       </button>      
    <form [formGroup]="requestForm" *ngIf(showRequestService)>
-        <div class="select-detalis-in" padding style="background:#fff; border:1px solid #159deb; border-top:none;">
+        <ion-card class="select-detalis-in" padding style="background:#fff; border:1px solid #159deb; border-top:none;">
            <br>
       <ion-label stacked class="label-lb">Describe the problem</ion-label>
           <ion-input formControlName = "problem" type="text" placeholder="Describe the problem" ></ion-input>
@@ -99,14 +99,14 @@
       		<ion-col offset-33>
 			<button class="btn-primarys" ion-button item-right small (click)="sendRequestService()">Submit</button></ion-col>
           </ion-row>
-        </div>
+        </ion-card>
       </form>
     </ion-col>
   </ion-row>
 
   <ion-row>
     <ion-col class="brder-cor">
-      <button ion-button item-left full (click)="modal()">        
+      <button ion-button item-left full class="btn-default-ser" (click)="modal()">        
         <b>Services Offered</b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
       </button>
                                      
@@ -115,7 +115,7 @@
   <ion-row>
     <ion-col class="brder-cor">
 
-      <button ion-button item-left full (click)="toggleContact()">
+      <button class="btn-default-ser" ion-button item-left full (click)="toggleContact()">
         
         <b>Contact Details</b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
       </button>
@@ -125,7 +125,7 @@
   <ion-row>
     <ion-col class="brder-cor">
 
-      <button ion-button item-left full (click)="togglePackages()">
+      <button class="btn-default-ser" ion-button item-left full (click)="togglePackages()">
         
         <b>Best Packages</b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
       </button>

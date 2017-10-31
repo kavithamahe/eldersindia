@@ -1,19 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+@import url('https://fonts.googleapis.com/css?family=Exo+2');
+
 page-login{
-.lgoin-logo												{height:200px;background-image: url('../assets/img/maxresdefault (1).jpg');width:100%;background-repeat: no-repeat; background-size: cover; }
-.logsimg												{background:#fff;  border-radius:50%;position: fixed;top:8%;left: 0;right:0;height:0;text-align:center;}
-.logsimg img											{background:#fff; border-radius:50%;  padding:10px;}
+.lgoin-logo												{height:200px;background-image: url('../assets/img/met-design.jpg');width:100%;background-repeat: no-repeat; background-size: cover; }
+.lgoin-logo p{ width:100%; text-align:center; font-size:30px; padding-top:90px; font-weight:600; color:#fff;font-family: 'Exo 2', sans-serif;}
+.logsimg												{background:#fff;   border-radius:50%;left: 0;right:0;height:0;text-align:center;}
+.logsimg img											{background:#fff;margin-top:20px; border-radius:50%;  padding:10px;}
 .item-md												{padding-left:0px !important;}	
 .item-ios												{padding-left:0px !important;}	
 .login-pages	{background:#ffffff;}
 /*.login-pages											{background-image: url('../assets/img/bgss.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}*/
-.login-detalis 											{margin-top:-30px;  padding:10px; position:relative; background:#fff;}
-.login-detalis h1 									    { text-align:center !important; color:#004784; font-size:20px;}
+.login-detalis 											{margin-top:-30px;  padding:5px; position:relative; background:#fff;}
+.login-detalis h1 									    { text-align:center !important; color:#007994 !important; font-size:20px;  font-family: "Muli",sans-serif;}
 .text-input-md{padding:10px; border:1px solid #ccc;border-radius:20px;font-family: 'Open Sans Condensed', sans-serif;}
 .text-input-ios{padding:10px; border:1px solid #ccc;border-radius:20px;font-family: 'Open Sans Condensed', sans-serif;}
 .logoin-btn{  font-size: 16px;
     font-weight:600; color:#fff;
-    font-family: 'Muli', sans-serif;background: rgba(0, 0, 0, 0) linear-gradient(45deg, #fe5722 0%, #fe5722 30%, #ff906b 50%, #fe5722 71%, #fe5722 100%) repeat scroll 0 0;width:100%;height:40px; border-radius:20px;  }
+    font-family: 'Muli', sans-serif;background: rgba(0, 0, 0, 0) linear-gradient(45deg, #fe5722 0%, #fe5722 30%, #ff906b 50%, #fe5722 71%, #fe5722 100%) repeat scroll 0 0;width:95%;height:40px; border-radius:20px; margin-left:10px;}
 .item-md{background:none !important;}
 .item-ios{background:none !important;}
 
@@ -22,4 +25,6 @@ page-login{
 .forgot-pass p{ text-align:center;        color: #007994 !important;
     font-family: "Muli",sans-serif;
     font-size: 17px !important; line-height:100px;}
+.item-md.item-block .item-inner{padding-right:0px;}
+.item-ios.item-block .item-inner{padding-right:0px;}
 }
