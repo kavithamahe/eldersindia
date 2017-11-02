@@ -7,7 +7,7 @@ import {FormBuilder,FormGroup,Validators,FormArray} from '@angular/forms';
 import { CommunityServices } from '../../providers/community-services';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ManagePage } from '../../pages/manage/manage';
-
+import moment from 'moment';
 
 @Component({
   selector: 'page-elders',
@@ -62,7 +62,7 @@ sponser_id:any;
   elder_service:any="";
   elder_number:any="";
 
-  elder_dob:any="1977-01-01";
+  elder_dob:any="";
   elder_address:any="";
   elder_location:any="";
   emergency_numbers:any;
@@ -340,7 +340,12 @@ public emergencies =  [
           this.allergic=this.manageDependentData.allergic;
           this.elder_service = this.manageDependentData.in_service;
           this.elder_number= this.manageDependentData.mobile;
-          this.elder_dob= this.manageDependentData.dob;//this.getDate(this.manageDependentData.dob);
+          //console.log(this.manageDependentData.dob)
+          this.elder_dob= moment(this.manageDependentData.dob).format("YYYY-MM-DD");
+          //new Date(this.manageDependentData.dob);//this.getDate(this.manageDependentData.dob);
+          // let today = new Date(this.manageDependentData.dob);
+          // console.log(today);
+          //this.elder_dob = today;
           this.elder_email= this.manageDependentData.email;
           //this.elder_password= this.manageDependentData.password;
           this.elder_location = this.manageDependentData.location;        

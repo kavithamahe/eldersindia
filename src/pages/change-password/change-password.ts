@@ -30,9 +30,9 @@ show_password:boolean = false;
   	this.password_submit = false;
   	this.nav = navCtrl;
   	this.change_password_Form = formBuilder.group({
-        currentPassword: ['',Validators.compose([Validators.minLength(6), Validators.required])],
-        newPassword: ['',Validators.compose([Validators.minLength(6), Validators.required])],
-        re_enterPassword: ['',Validators.compose([Validators.minLength(6), Validators.required])]
+        currentPassword: ['',Validators.compose([Validators.minLength(6),Validators.maxLength(12), Validators.required])],
+        newPassword: ['',Validators.compose([Validators.minLength(6),Validators.maxLength(12), Validators.required])],
+        re_enterPassword: ['',Validators.compose([Validators.minLength(6),Validators.maxLength(12), Validators.required])]
         
     });
 

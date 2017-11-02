@@ -33,6 +33,7 @@ export class ServiceprovidersPage {
     console.log("this is service provider page");
    this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      storage.get('service_location').then((service_location) => { this.serviceLocation=service_location;});
       storage.get('token').then((token) => { this.token=token; 
       this.loadServiceProvider();
       this.loadLocations();

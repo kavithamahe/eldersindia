@@ -6,7 +6,7 @@ import { Camera } from 'ionic-native';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service-provider';
 import { MyProfilePage } from '../../pages/my-profile/my-profile';
-
+import moment from 'moment';
 /*
   Generated class for the EditProfile page.
 
@@ -56,7 +56,7 @@ submitAttempt:any;
       });
       
       
-      this.user_dob = this.profileData.dob;
+      this.user_dob = moment(this.profileData.dob).format("YYYY-DD-MM");
       console.log(this.user_dob);
       this.user_type = this.profileData.user_type;
       if(this.user_type == 'sponsor'){

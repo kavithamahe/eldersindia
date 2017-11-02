@@ -96,12 +96,12 @@
   </ion-row>
   </ion-card-content>
 </ion-card>
+<!-- <ion-item padding *ngIf="!manageblogsLists"> -->
+     <p class="error-clr">{{emptyRecord}}</p>
+   <!-- </ion-item> -->
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
- <ion-item padding *ngIf="!manageblogsLists">
-     <p class="error-clr">{{emptyRecord}}</p>
-   </ion-item>
 </ion-content>
 <style type="text/css">
 .alert-message,.alertbox
