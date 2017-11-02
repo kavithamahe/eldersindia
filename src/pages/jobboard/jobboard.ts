@@ -80,6 +80,8 @@ file_name:any;
   public viewJob(jobId,status)
   {
    this.navCtrl.push(SinglejobPage, {jobId,status});
+   console.log(status);
+
   }
 
   public applyJob(jobId)

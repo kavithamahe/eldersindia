@@ -169,12 +169,14 @@
 					</button>
 				      <button *ngIf=(!(user.likes.emoji)) ion-button  clear small (click)="emojiPicker($event,user.id)">
 
-						<p class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;{{user.likecount}}&nbsp;Like</p>
+						<p *ngIf="user.likecount != 0" class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;{{user.likecount}}&nbsp;Like</p>
+						<p *ngIf="user.likecount == 0" class="liks-comments"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;Like</p>
 						</button>
 				    </ion-col>
 				    <ion-col  width-30 text-left style="padding:0px !important;">
 				      <button ion-button icon-left clear small (click)="showComment(user)">
-  						<p class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{user.comment_count}}&nbsp;Comment</p>
+  						<p *ngIf="user.comment_count != 0" class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{user.comment_count}}&nbsp;Comment</p>
+  						<p *ngIf="user.comment_count == 0" class="liks-comments"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;Comment</p>
 				      </button>
 				    </ion-col>
 				    <ion-col width-30 text-left style="padding:0px !important;">
