@@ -13,25 +13,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="popup-mds" style=" background:#fff !important;">
-
+<ion-content>
+<ion-card class="popup-mds">
   <form [formGroup]="modalForm">
-  <br>
+
   
   <!-- <button ion-button (click)="openCalendar()">Open Calendar on Current Date</button> -->
         <ion-label stacked class="label-lb">Describe the need</ion-label>
+		<ion-item>
           <ion-input type="text" formControlName="problem" ></ion-input>
-              
+         </ion-item>     
         <ion-label stacked class="label-lb">Contact number</ion-label>
-
+<ion-item>
           <ion-input type="text" formControlName="contact" placeholder="Contact number" (keypress)="onlyNumberKey($event)" maxlength="12"></ion-input>
-      
+      </ion-item>
         <form [formGroup]="authForm">
        
          <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb required">Select dependent
          </ion-label>
 
-            <ion-item *ngIf = "userType =='sponsor'">
+            <ion-item *ngIf = "userType =='sponsor'" class="one-timereq">
               <ion-label>Select dependent</ion-label>
               <ion-select formControlName="dependents" class="select-brds" placeholder="Select dependent" (ionChange)="packageinfo()" >
               <ion-option *ngFor = "let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}}
@@ -44,7 +45,7 @@
       <!-- <ion-item >
         -->
 
-            <ion-item *ngIf="flag ==1">
+            <ion-item *ngIf="flag ==1" class="one-timereq">
               <ion-label>Select Package</ion-label>
               <!-- <ion-label>Select Package</ion-label> -->
               <ion-select class="select-brds" placeholder="Select Package">
@@ -54,17 +55,18 @@
               </ion-item>
               <!-- </ion-item> -->
              
-              <ion-label>Service Type</ion-label>
-                <ion-list radio-group>
-                  <ion-item>
+            		  <ion-label>Service Type</ion-label>
+   
+		
+                  <ion-item class="one-timereq">
                     <ion-label>One time</ion-label>
                       <ion-radio value="goe" (click)="onetime(searchButton)"></ion-radio>
                   </ion-item>
-                  <ion-item *ngIf="recurringType == 1">
+                  <ion-item class="one-timereq" *ngIf="recurringType == 1">
                     <ion-label>Recurring</ion-label>
                       <ion-radio value="go" (click)="recurringtime(recurring)"></ion-radio>
                   </ion-item>
-                </ion-list>
+            
              
       <!-- <p>------------------------One Time----------------------------</p> -->
 
@@ -77,7 +79,8 @@
          <p class="err-reds" *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">Please enter the scheduled date
          </p>
        <ion-list>
-            <ion-item>
+	     <ion-label stacked class="label-lb required">Preferred Time</ion-label>
+            <ion-item class="one-timereq">
               <ion-label stacked class="label-lb required">Preferred Time</ion-label>
               <ion-select formControlName ="time" class="select-brds">
                 <ion-option value="12.00 AM - 01.00 AM">12.00 AM - 01.00 AM</ion-option>
@@ -204,20 +207,32 @@
     </div>                          
 <!-- <p>---------recurring time end-----------------</p> -->
 
-    
+ <ion-label>Deselect specific date</ion-label>
+    <ion-item class="one-timereq">
+    <ion-label>Deselect specific date</ion-label>
+    <ion-select multiple>
+      <ion-option [value] = "0" >Sunday</ion-option>
+      <ion-option [value] = "1" >Monday</ion-option>
+      <ion-option [value] = "2" >Tuesday</ion-option>
+      <ion-option [value] = "3" >Wednesday</ion-option>
+      <ion-option [value] = "4" >Thursday</ion-option>
+      <ion-option [value] = "5" >Friday</ion-option>
+      <ion-option [value] = "6" >Saturday</ion-option>
+    </ion-select>
+  </ion-item>
 
     	</form>
-             <ion-item class="check-bx">
+             <ion-item class="check-bx" class="one-timereq">
              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>	
              <ion-label (click)="openTerms()" style="margin:0px;">I agree to</ion-label>			  
             </ion-item>
-			 <ion-item class="terms-con">
+			 <ion-item class="terms-con one-timereq">
 			<ion-col><i class="fa fa-file-text" aria-hidden="true"></i> &nbsp;<small style="text-decoration:underline; font-size:16px;" class="required" (click)="openTerms()"s>terms and conditions </small></ion-col>
 		 </ion-item>
             <small *ngIf="checkTerms">
                 <p class="err-reds">Kindly agree to the terms and conditions</p>
             </small>
-
+</ion-card>
 
           <!--   <ion-calendar [(ngModel)]="dateMulti"
               [options]="optionsMulti"

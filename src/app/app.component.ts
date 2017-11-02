@@ -71,6 +71,7 @@ export class MyApp {
   police:any=0;
   emailId:any='';
   password:any='';
+   alert:any;
   // make HelloIonicPage the root (or first) page
 
 //-------userbased login-------------//
@@ -277,44 +278,57 @@ export class MyApp {
 
       StatusBar.styleDefault();
       Splashscreen.hide();
-      this.platform.registerBackButtonAction(() => {
-        // let nav = this.app.getActiveNav();
-        if (this.nav.canGoBack()){ //Can we go back?
-          console.log(this.nav.getActive().name);
-          this.nav.pop();
-        }else{
-                let confirmAlert = this.alertCtrl.create({
-              //  title: 'App Exit',
-                subTitle: "Are you sure you want to exit?",
-                buttons: [{
-                  text: 'NO',
-                  handler: () => {
-                    this.storage.ready().then(() => {
-                      this.storage.get('token').then((token) => { this.token=token;});
-                      this.storage.get('id').then((id) => { this.user_id=id;
-                    if((this.user_id!='' && this.user_id != null) && (this.token!='' && this.token != null))
-                     {
-    
-                      // code...
-                      this.nav.setRoot(DashboardPage);
-                    }else{
-                      this.nav.setRoot(LoginPage);
-                    }
-                  });
-                });
-                  }
-                }, {
-                  text: 'Yes',
-                  handler: () => {
-                    this.platform.exitApp(); //Exit from app
+   this.platform.registerBackButtonAction(() => {
+
+                if(this.nav.canGoBack()){
+                  this.nav.pop();
+                }else{
+                  if(this.alert){ 
+                    this.alert.dismiss();
+                    this.alert =null;     
+                  }else{
+                    this.showAlert();
                    }
-                  }]
-                });
-                confirmAlert.present();
-              }
-   });
+                }
+              });
     });
   }
+    showAlert() {
+          this.alert = this.alertCtrl.create({
+            title: 'Do you want to exit the app?',
+            //message: 'Do you want to exit the app?',
+            buttons: [
+              {
+                text: 'Cancel',
+                role: 'cancel',
+                handler: () => {
+                  this.alert =null;
+                }
+              },
+              {
+                text: 'Exit',
+                handler: () => {
+                  this.platform.exitApp();
+                }
+              }
+            ]
+          });
+          this.alert.present();
+        }
+
+          showToast() {
+            let toast = this.toastCtrl.create({
+              message: 'Press Again to exit',
+              duration: 2000,
+              position: 'bottom'
+            });
+
+            toast.onDidDismiss(() => {
+              console.log('Dismissed toast');
+            });
+
+            toast.present();
+          }
     checkPermissions() {
     Diagnostic.isCameraAuthorized().then((authorized) => {
     if(authorized)

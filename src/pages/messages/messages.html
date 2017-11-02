@@ -22,12 +22,12 @@
 </ion-header>
 
 
-<ion-content padding style="background:#fff;">
- <ion-fab  right bottom>
+<ion-content style="background:#fff;">
+ <ion-fab right bottom>
     <button class="add-depends" ion-fab mini (click)="createMessage()" end><ion-icon name="create">
      </ion-icon></button>
     </ion-fab>
-<div padding>
+<ion-col>
   <ion-segment [(ngModel)]="messages">
     <ion-segment-button value="inbox" color="orange" (click)="onInit()">
       Inbox
@@ -36,7 +36,7 @@
       Sent
     </ion-segment-button>
   </ion-segment>
-</div>
+</ion-col>
 
 <div [ngSwitch]="messages">
   <ion-list *ngSwitchCase="'inbox'">
@@ -47,6 +47,7 @@
     <ion-searchbar *ngIf="inboxInfo.length != 0" (ionInput)="getItems($event)">
     </ion-searchbar>
   </div>
+  <hr/>
      
       <ion-list *ngFor="let inbox of inboxInfo">
       <ion-item-sliding  class="inbox-sends">
@@ -106,6 +107,7 @@
     <ion-searchbar *ngIf="sentInfo.length != 0" (ionInput)="setItems($event)">
     </ion-searchbar>
   </div>
+  <hr/>
   <ion-list *ngFor="let sent of sentInfo">
       <ion-item-sliding class="inbox-sends">
         <ion-item (click)="viewMessages(sent?.id,'sent')" 

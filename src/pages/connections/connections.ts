@@ -14,6 +14,7 @@ import { ConnectionsService } from '../../providers/connections-service';
   Ionic pages and navigation.
 */
 @Component({
+	  selector: 'page-connections',
   templateUrl: 'connections.html',
   providers:[ConnectionsService]
 })

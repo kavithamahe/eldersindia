@@ -22,7 +22,9 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="content-intop">
+<ion-content class="content-intop">
+          <ion-card class="sel-packages">
+
        <!--   <ion-list>
             <ion-item>
               <ion-label>Bulk Action</ion-label>
@@ -34,7 +36,8 @@
                 </ion-select>
             </ion-item>
           </ion-list> -->
-          <ion-list>
+          
+
             <ion-item>
               <ion-label>select category</ion-label>
                 <ion-select [(ngModel)]="searchCategory" (ionChange)='manageblogs()'>
@@ -43,8 +46,8 @@
                   </ion-option>
                 </ion-select>
             </ion-item>
-          </ion-list>
-          <ion-list>
+          </ion-card>
+          <ion-card class="sel-packages">
             <ion-item>
               <ion-label>select status</ion-label>
                 <ion-select [(ngModel)]="searchstatus" (ionChange)='manageblogs()'>
@@ -53,48 +56,55 @@
                   </ion-option>
                 </ion-select>
             </ion-item>
-          </ion-list>
+
+          </ion-card>
+
+         
    <!--  <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar> -->
    <ion-row>
 <ion-col><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
   <ion-col><button (click)="getItems(searchText)" ion-button>Go</button> </ion-col>
 </ion-row>
-<ion-card *ngFor="let manageBlog of manageblogsLists; let i=index;">
-  <ion-card-content style=" padding:0px;">
+<ion-card *ngFor="let manageBlog of manageblogsLists; let i=index;"  class="job-detailsview">
+  <!--<ion-card-content style=" padding:0px;">
   <ion-grid>
    <ion-row>   
-    <ion-col width-80>
+    <ion-col width-80>-->
 	<ion-row>
+	<ion-col>
 		<h2 item-text-wrap class="service-req" text-capitalize>{{manageBlog?.title}}</h2>
+		  <h2 item-text-wrap>{{manageBlog?.category_name}}</h2>
+		  <p *ngIf="(manageBlog?.created_at!='0000-00-00 00:00:00')" class="token-date"><i class="fa fa-calendar"></i> {{manageBlog?.created_at | date :'MMM dd y h:mm a'}}</p>
+		</ion-col>
 	</ion-row>
-  <h2 item-text-wrap >{{manageBlog?.category_name}}</h2>
-	<ion-row>
-	<p *ngIf="(manageBlog?.created_at!='0000-00-00 00:00:00')" class="token-date"><i class="fa fa-calendar"></i> {{manageBlog?.created_at | date :'MMM dd y h:mm a'}}</p>
-	</ion-row>
+
+
+	
+
 	<ion-row *ngFor="let status of blogStatus" >
+		<ion-col>
 	<p item-text-wrap  class="service-cont" *ngIf="manageBlog?.status==status?.id">
 	<ion-badge color="secondary">{{status?.label}}</ion-badge></p>
+		</ion-col>
 	</ion-row>
-	<ion-row>
-			<p item-text-wrap  class="service-cont" innerHTML="{{manageBlog?.description | words:40}}"></p>
-	</ion-row>	
-	</ion-col>	
-  </ion-row>
-  </ion-grid> 
+
+<p item-text-wrap  class="service-cont" innerHTML="{{manageBlog?.description | words:40}}"></p>
+
+
+
     <hr>
-   <ion-row>
-    <ion-col (click)="editBlog(manageBlog?.id,'edit')">
-      <button ion-button icon-left clear small>
-        <i class="fa fa-pencil-square-o"> Edit</i>
+   <ion-row class="edit-blogs">
+    <ion-col>
+      <button (click)="editBlog(manageBlog?.id,'edit')" class="edits">
+        <i class="fa fa-pencil-square-o"></i>&nbsp; Edit
+      </button>
+	     <button (click)="deleteBlog(manageBlog?.id)" class="delets">
+        <i class="fa fa-trash-o"></i>&nbsp;Delete
       </button>
     </ion-col>
-    <ion-col (click)="deleteBlog(manageBlog?.id)">
-      <button ion-button icon-left clear small>
-        <i class="fa fa-trash-o"> Delete</i>
-      </button>
-    </ion-col>   
+    
   </ion-row>
-  </ion-card-content>
+
 </ion-card>
 <!-- <ion-item padding *ngIf="!manageblogsLists"> -->
      <p class="error-clr">{{emptyRecord}}</p>

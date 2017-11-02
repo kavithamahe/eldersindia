@@ -21,29 +21,31 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding style="background:#fff;">
-<ion-list class="createblog-form">
+<ion-content>
+<ion-card class="createblog-form">
 <form  [formGroup]="blogForm">
-
+<ion-label stacked class="bloag-label required" >Blog title <span>*</span></ion-label>
   <ion-item>
-    <ion-label stacked class="bloag-label required" >Blog title</ion-label><span style="color:red">*</span>
+    
     <ion-input type="text" formControlName="title" placeholder="Blog title" [(ngModel)]="title"></ion-input>
   </ion-item>
   <p *ngIf="!blogForm.controls.title.valid && (blogForm.controls.title.dirty || submitAttempt)" class="err-reds">Please enter the blog title</p>
-<ion-item>
-    <ion-label stacked class="bloag-label required"  style="text-align:left; padding-bottom:10px;">Category</ion-label>
+ <ion-label stacked class="bloag-label required"  style="text-align:left; padding-bottom:10px;">Category</ion-label>
+  <ion-item>
+   
     <ion-select class="select-brd" formControlName="category" placeholder="Category" [(ngModel)]="category">
       <ion-option *ngFor="let categories of categoriesList" [value]="categories.id">{{categories.name}}</ion-option>     
     </ion-select>
   </ion-item>
   <p *ngIf="!blogForm.controls.category.valid && (blogForm.controls.category.dirty || submitAttempt)" class="err-reds">Please enter the category</p>
+	 <ion-label stacked>Highlights</ion-label>
 	<ion-item>
-	    <ion-label stacked>Highlights</ion-label>
+	   
 	    <ion-textarea  [(ngModel)]="highlights" placeholder="Highlights" [ngModelOptions]="{standalone: true}"></ion-textarea>
 	</ion-item>
-
+<ion-label stacked class="required">Description</ion-label>
 	<ion-item>
-	    <ion-label stacked class="required">Description</ion-label>
+	    
 	    <ion-textarea  formControlName="description" placeholder="Description" [(ngModel)]="description"></ion-textarea>
 	</ion-item>
    <small *ngIf="!blogForm.controls.description.valid  && 
@@ -52,51 +54,50 @@
           </small> 
 	
   </form>
-  <ion-row>
-  <ion-col>
-   <ion-label stacked class="upimag">Featured image</ion-label>
+   <ion-label stacked class="upimag">Featured image / Banner image</ion-label>
+  <ion-item class="featured-bro">
+
+  
   	<button ion-button (click)="accessGallery('featured')" class="brw-btn"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Browse</button>
 	<img [src]="featuredImage" *ngIf="featuredImage" />
-  </ion-col>
-  </ion-row>
-    <ion-row>
-    <ion-col>
-      <ion-label stacked class="upimag">Banner image</ion-label>
-    <button ion-button (click)="accessGallery('banner')" class="brw-btn"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Browse</button>
+	
+	    <button ion-button (click)="accessGallery('banner')" class="brw-btn"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Browse</button>
     <img [src]="bannerImage" *ngIf="bannerImage" />
-  </ion-col>
-    </ion-row>
-<ion-row>
-<ion-col>
-    <ion-label stacked class="upimag">Tags</ion-label>
-    <!--<rl-tag-input [(ngModel)]="tagsModel" [addOnBlur]="true" [addOnEnter]="true" [autocomplete]="true"  [autocompleteItems]="tags" placeholder="Tags"></rl-tag-input>-->
+
+  </ion-item>
+ 
+	 <ion-label stacked class="upimag">Tags</ion-label>
+<ion-item class="featured-bro">
+
+   
+    
         <rl-tag-input class="rd-tags" [(ngModel)]="tagsModel" [addOnBlur]="false" [addOnEnter]="true"  [autocompleteItems]="tags" [autocomplete]="true" placeholder="Tags" (keyup)="getTagsList($event)" [ngModelOptions]="{standalone: true}"></rl-tag-input>
-</ion-col>
-</ion-row>
+
+</ion-item>
     
 
 
   <div radio-group [(ngModel)]="allowComments" [ngModelOptions]="{standalone: true}" style="margin-top:5px;">
-
+ <ion-label stacked class="upimag"> Allow comments</ion-label>
 <ion-row>
+
 <ion-col width-50>
-   <p class="upimag" style="padding-left:8px !important;"> Allow comments</p>
-   </ion-col>
-<ion-col width-30>
  <ion-radio value="1">Yes</ion-radio><ion-label style=" float:left; margin:0px; font-size:15px; color:#404996;">Yes &nbsp;</ion-label>
 
 	</ion-col>
-	  <ion-col width-20>
+	  <ion-col width-50>
 
-    <ion-radio value="0"></ion-radio>    <ion-label style="float:left;margin:0px;font-size:15px;color:#404996;">No&nbsp;</ion-label>
+    <ion-radio value="0"></ion-radio><ion-label style="float:left;margin:0px;font-size:15px;color:#404996;">No&nbsp;</ion-label>
 	</ion-col>
   </ion-row>
 
 </div>
 <br/>
-<button ion-button class="brw-btns" icon-left full (click)="createBlog()">Submit</button>
+
+<button ion-button class="logoin-btn" icon-left full (click)="createBlog()"> Submit</button>
+
 <br/><br/>
-</ion-list>
+</ion-card>
 </ion-content>
 
 <style>

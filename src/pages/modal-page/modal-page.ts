@@ -186,9 +186,9 @@ onlyNumberKey(event) {
         let date = moment(data).format('YYYY-MM-DD');
 
         let weekoff=moment(date).day();
-           console.log(date);
-           console.log(weekoff);
-           console.log(this.excludeDays);
+           // console.log(date);
+           // console.log(weekoff);
+           // console.log(this.excludeDays);
            let _index= this.excludeDays.indexOf(weekoff);
            console.log(_index);
              if(_index>=0 ){
@@ -196,6 +196,7 @@ onlyNumberKey(event) {
                     if(this.count>0){
                     this.count=this.count-1;
                 }
+                
              }  
        }
      this.datCount = this.count;
@@ -313,13 +314,13 @@ onlyNumberKey(event) {
        }
      }
 else{
-    if(!this.modalForm.valid || (this.terms == false)){
-      this.submitAttempt = true;
-      this.providerService.showToast("Please Enter The Required Fields");
-          if(this.terms == false){
-            this.checkTerms = true;
-          }
-    }else{
+    // if(!this.modalForm.valid || (this.terms == false)){
+    //   this.submitAttempt = true;
+    //   this.providerService.showToast("Please Enter The Required Fields");
+    //       if(this.terms == false){
+    //         this.checkTerms = true;
+    //       }
+    //}else{
       this.submitAttempt = false;
       
       if(this.userType != 'sponsor'){
@@ -328,10 +329,13 @@ else{
       this.dependent = this.authForm.value.dependents;
     }
       
-       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
-       console.log(serviceData);
+       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+      console.log(serviceData);
        this.viewCtrl.dismiss(serviceData);
-     }
+     //}
  }
       
     
