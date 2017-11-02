@@ -79,13 +79,13 @@
               <small  *ngIf="!authForm.controls.elder_number.valid  && (authForm.controls.elder_number.dirty || submitAttempt)">
                 <p class="valid err-reds">Please enter valid mobile number</p>
               </small> 
-          <ion-label class="label-tittle required">Date of birth</ion-label>
-         <ion-item>
-          
-              <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" 
+          <ion-label class="label-tittle required">Date of birth</ion-label>          
+
+          <ion-item>
+              <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="DD-MM-YYYY"
               [(ngModel)]="elder_dob" formControlName="elder_dob" placeholder="Date of birth"
                 [class.invalid]="!authForm.controls.elder_dob.valid && (authForm.controls.elder_dob.dirty)"></ion-datetime>
-          </ion-item>
+    </ion-item>
           <small  *ngIf="!authForm.controls.elder_dob.valid  && (authForm.controls.elder_dob.dirty || submitAttempt)">
                 <p class="valid err-reds">Please select the date of birth</p>
               </small>   
