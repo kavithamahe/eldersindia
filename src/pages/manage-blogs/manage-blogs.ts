@@ -65,7 +65,7 @@ searchstatus:any="";
     loader.present();
    this.blogListService.manageblogs(this.searchCategory,this.searchText,this.searchstatus).subscribe(
      (manageblogs) => {      
-      this.manageblogsLists=manageblogs.result.list.data;  
+      this.manageblogsLists=manageblogs.result.list.data;
        this.blogStatus=manageblogs.result.status; 
        this.nextPageURL=manageblogs.result.list.next_page_url;
        loader.dismiss();
@@ -74,6 +74,7 @@ searchstatus:any="";
       this.manageblogsLists =[];
         if(err.status===401)
         {
+          console.log(JSON.parse(err._body).error);
           this.emptyRecord = (JSON.parse(err._body).error);
         }
         else

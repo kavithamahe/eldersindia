@@ -54,19 +54,20 @@
             </ion-select>
               </ion-item>
               <!-- </ion-item> -->
-             
+             <ion-list radio-group>
             		  <ion-label>Service Type</ion-label>
    
 		
                   <ion-item class="one-timereq">
                     <ion-label>One time</ion-label>
-                      <ion-radio value="goe" (click)="onetime(searchButton)"></ion-radio>
+                    <ion-radio value="goe" (click)="onetime(searchButton)"></ion-radio>
                   </ion-item>
                   <ion-item class="one-timereq" *ngIf="recurringType == 1">
                     <ion-label>Recurring</ion-label>
-                      <ion-radio value="go" (click)="recurringtime(recurring)"></ion-radio>
+                      <ion-radio value="go" (click)="recurringtime(recurring)">
+                      </ion-radio>
                   </ion-item>
-            
+            </ion-list>
              
       <!-- <p>------------------------One Time----------------------------</p> -->
 
@@ -193,7 +194,7 @@
         </div>
         <ion-item>
         <ion-label>Deselect specific date</ion-label>
-        <ion-select multiple [(ngModel)]="mySelect" [ngModelOptions]="{standalone: true}" (ionChange)="exclude(mySelect)">
+        <ion-select multiple [(ngModel)]="mySelect" [ngModelOptions]="{standalone: true}" (ionChange)="exclude(mySelect)" class="one-timereq">
           <ion-option [value] = "0" >Sunday</ion-option>
           <ion-option [value] = "1" >Monday</ion-option>
           <ion-option [value] = "2" >Tuesday</ion-option>
@@ -204,22 +205,7 @@
         </ion-select>
       </ion-item>
  
-    </div>                          
-<!-- <p>---------recurring time end-----------------</p> -->
-
- <ion-label>Deselect specific date</ion-label>
-    <ion-item class="one-timereq">
-    <ion-label>Deselect specific date</ion-label>
-    <ion-select multiple>
-      <ion-option [value] = "0" >Sunday</ion-option>
-      <ion-option [value] = "1" >Monday</ion-option>
-      <ion-option [value] = "2" >Tuesday</ion-option>
-      <ion-option [value] = "3" >Wednesday</ion-option>
-      <ion-option [value] = "4" >Thursday</ion-option>
-      <ion-option [value] = "5" >Friday</ion-option>
-      <ion-option [value] = "6" >Saturday</ion-option>
-    </ion-select>
-  </ion-item>
+    </div>    
 
     	</form>
              <ion-item class="check-bx" class="one-timereq">
@@ -234,11 +220,7 @@
             </small>
 </ion-card>
 
-          <!--   <ion-calendar [(ngModel)]="dateMulti"
-              [options]="optionsMulti"
-              [format]="'YYYY-MM-DD'">
-            </ion-calendar> -->
-            <!-- <ion-calendar #calendar></ion-calendar> -->
+          
 </ion-content>
 
 
@@ -255,12 +237,19 @@
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
      <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
     </ion-buttons>
-    
-    <ion-buttons end >
-      <button ion-button color="royal" large icon-right showWhen="ios" (click)="submit()">&nbsp;Next
+    <ion-buttons end *ngIf="seviceCheck == 0">
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="next()">&nbsp;Next
        <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button ion-button color="light" large icon-right hideWhen="ios" (click)="submit()">&nbsp;Next
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="next()">&nbsp;Next
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end *ngIf="seviceCheck == 1">
+      <button *ngIf="seviceCheck == 1" ion-button color="royal" large icon-right showWhen="ios" (click)="submit()">&nbsp;Submit
+       <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+      <button *ngIf="seviceCheck == 1" ion-button color="light" large icon-right hideWhen="ios" (click)="submit()">&nbsp;Submit
         <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>

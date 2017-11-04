@@ -271,6 +271,10 @@ All:any;
     let term = Event.target.value;
       this.connectionsService.addsearchConnection(term).subscribe(searchConnections => {
         this.addConnectionInfo= searchConnections.result.info.data;
+        console.log(this.addConnectionInfo);
+        if(this.addConnectionInfo == ""){
+          this.addConnectionsList();
+        }
       },
       (err) => { 
         this.addConnectionInfo = [];

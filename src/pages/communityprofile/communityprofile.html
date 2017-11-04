@@ -169,13 +169,15 @@
 			          			<button  *ngIf=(community.likes.emoji)
 			          			[innerHTML]="community.likes.emoji | emojis" (click)="emojiPicker($event,community.id)"></button>
 			          			<button ion-button clear small *ngIf=(!(community.likes.emoji)) ion-button  clear small (click)="emojiPicker($event,community.id)">
-								<p><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp; {{community.likecount}}&nbsp;Likes</p>
+								<p *ngIf="community.likecount != 0"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp; {{community.likecount}}&nbsp;Likes</p>
+								<p *ngIf="community.likecount == 0"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;Like</p>
 								</button>
 		        			</ion-col>
 		        	
 		        			<ion-col text-left width-30 style="padding:0px !important;">
 			          			<button ion-button clear small (click)="showComment(community)">
-			          				<p><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{community.comment_count}}&nbsp;Comments</p>
+			          				<p *ngIf="community.comment_count != 0"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{community.comment_count}}&nbsp;Comments</p>
+			          				<p *ngIf="community.comment_count == 0"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;Comment</p>
 			          			</button>
 		          			</ion-col>
 		          		<ion-col text-left width-30 style="padding:0px !important;">
