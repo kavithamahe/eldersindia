@@ -71,14 +71,16 @@
           </ion-list>
           <ion-list *ngIf="connectionsaction == 'sent'">
           <ion-segment-button class="listed-rec">Sent Requests</ion-segment-button>
-           <ion-searchbar *ngIf="sentRquestInfo.length != 0" (input)="sendsearch($event)">
+           <ion-searchbar *ngIf="sentRquestInfo.length != 0" 
+           (input)="sendsearch($event)">
             </ion-searchbar>  
             <div *ngFor="let request of sentRquestInfo">
               <ion-item class="inbox-sends">
                 <ion-row>
                   <ion-col width-20>
                     <ion-avatar item-left (click)="CommunityUserWall(request?.id)">
-                      <img src="{{imageUrl+request?.avatar}}" [hidden]="!request?.avatar">
+                      <img src="{{imageUrl+request?.avatar}}" 
+                      [hidden]="!request?.avatar">
                     </ion-avatar>
                   </ion-col>
                   <ion-col width-67>
@@ -129,7 +131,8 @@
 
           </ion-list>
         <ion-list *ngSwitchCase="'addConnections'"> 
-          <ion-searchbar *ngIf="addConnectionInfo.length != 0" (input)="search1($event)"></ion-searchbar>
+       <!--    <ion-searchbar *ngIf="addConnectionInfo.length != 0" (input)="search1($event)"></ion-searchbar> -->
+           <ion-searchbar (input)="search1($event)"></ion-searchbar>
             <ion-list *ngFor="let request of addConnectionInfo">
               <ion-item class="inbox-sends">
                 <ion-row>

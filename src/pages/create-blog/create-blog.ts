@@ -196,6 +196,7 @@ ionViewDidEnter() {
 
   public createBlog()
   { 
+    console.log(this.featuredImage);
     if(!this.blogForm.valid){
       this.submitAttempt = true;
     }else{

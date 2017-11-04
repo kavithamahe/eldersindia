@@ -71,7 +71,7 @@ Url:any;
       .map(res => res.json());
   }
   getrecurringRequestdelete(rootUrl,recurring){
-     let _request= {"data":recurring};
+     let _request= {"data": {"id": recurring}}
     return this.http.post(rootUrl+'getBulkRecurringService',_request,this.options)
       .map(res => res.json());
   }

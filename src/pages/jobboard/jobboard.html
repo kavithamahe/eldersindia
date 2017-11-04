@@ -48,7 +48,6 @@
 <p>Current job openings</p>
 </ion-card>
 <ion-card *ngFor="let jobBoard of jobBoardInfo" class="job-detailsview">
-
   <ion-row (click)="viewJob(jobBoard?.id,jobBoard?.is_applied)" test-wrap>
   <ion-col col-12 text-wrap>
     <h2 text-wrap text-capitalize>{{jobBoard?.title}}</h2>

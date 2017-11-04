@@ -8,7 +8,7 @@ import {Platform} from 'ionic-angular';
 import moment from 'moment';
 import { ServiceProvider } from '../../providers/service-provider';
 import { TermsModalPage } from '../../pages/terms-modal/terms-modal';
-// import { Modelpage1PagePage } from '../../pages/modelpage1/modelpage1';
+ import { Modelpage1PagePage } from '../../pages/modelpage1/modelpage1';
 
 
 import { Storage } from '@ionic/storage';
@@ -38,6 +38,7 @@ export class ModalContentPage {
   problem:any;
   days:any;
   count:any=0;
+  seviceCheck:any=0;
 
   terms:boolean = false;
   checkTerms:any= false;
@@ -71,14 +72,17 @@ export class ModalContentPage {
   vendor_id:any;
   recurringType:any;
   durations:any;
+  name:any;
+  serviceTitle:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
-   
+    console.log(this.seviceCheck);
      this.date = new Date().toISOString();
       console.log(params.get("vendor"));
      this.dependentLists = params.get("dependentList");
      //this.dependents = this.dependentLists[0].id;
      this.lead_time = params.get("lead_time");
+     this.serviceTitle = params.get("serviceTitle");
      this.location_id = params.get("location_id");
      if(params.get("serviceData") != undefined){
      this.service_id = this.params.get("serviceData").service_id;
@@ -87,6 +91,7 @@ export class ModalContentPage {
       this.vendor = this.params.get("vendor").name;
       this.vendor_id = this.params.get("vendor").vendor_id;
       this.recurringType = this.params.get("vendor").recurring;
+      this.name = this.params.get("vendor").name;
     }
     this.modalForm = formBuilder.group({
      problem: ['',Validators.compose([Validators.required])],
@@ -235,52 +240,7 @@ onlyNumberKey(event) {
         this.flag="0";
     },)
    }
-// submit(){
-//        if(this.userType == 'sponsor'){
-//        if(!this.authForm.valid || (this.terms == false)){
-//           this.submitAttempt = true;
-//            if(this.terms == false){
-//             this.checkTerms = true;
-//           }
-//        }
-//        else{
-//           this.submitAttempt = false;
-      
-//       if(this.userType != 'sponsor'){
-//       this.dependent = this.elderId ;
-//     }else{
-//       this.dependent = this.authForm.value.dependents;
-//     }
-      
-//       let serviceDatas = {"problem": this.modalForm.value.problem, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
-//       console.log(serviceDatas);
-//       let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceDatas});
-//    serviceModal.present();
-//        }
-//      }
-// else{
-//     if(!this.modalForm.valid || (this.terms == false)){
-//       this.submitAttempt = true;
-//       this.providerService.showToast("Please Enter The Required Fields");
-//           if(this.terms == false){
-//             this.checkTerms = true;
-//           }
-//     }else{
-//       this.submitAttempt = false;
-      
-//       if(this.userType != 'sponsor'){
-//       this.dependent = this.elderId ;
-//     }else{
-//       this.dependent = this.authForm.value.dependents;
-//     }
-//  let serviceDatas = {"problem": this.modalForm.value.problem, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
-    
-//    let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceDatas});
-//    serviceModal.present();
-//      }
-// }
-// }
-  submit() {
+   next(){
       if(this.searchButton == true){
         this.onetimes = "One time";
       }else{
@@ -289,6 +249,7 @@ onlyNumberKey(event) {
       console.log(this.onetimes);
     console.log(this.onetime);
      if(this.userType == 'sponsor'){
+      if(this.onetimes == 'One time'){
        if(!this.authForm.valid || (this.terms == false)){
           this.submitAttempt = true;
            if(this.terms == false){
@@ -304,23 +265,80 @@ onlyNumberKey(event) {
     }else{
       this.dependent = this.authForm.value.dependents;
     }
+    console.log(this.modalForm.value.date);
+    if(this.modalForm.value.date != "" && this.modalForm.value.time !=""){
+
     
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
       console.log(serviceData);
-      this.viewCtrl.dismiss(serviceData);
+      let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle});
+      serviceModal.present();
+      serviceModal.onDidDismiss(data =>{
+      if(data == "dismiss"){
+        console.log(" schedule request modal dismissed..!");
+      }else{
+       this.seviceCheck = data;
+       console.log(data);
+      }
+    })
+    }
+    else{
+      this.providerService.showToast("Please Select Preferred date and time");
+    }
        }
      }
+     else{
+      console.log(this.onetimes);
+           if(!this.authForm.valid || (this.terms == false)){
+          this.submitAttempt = true;
+           if(this.terms == false){
+            this.checkTerms = true;
+          
+          }
+       }
+       else{
+          this.submitAttempt = false;
+      
+      if(this.userType != 'sponsor'){
+      this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.authForm.value.dependents;
+    }
+    // console.log(this.modalForm.value.startdate);
+    if(this.modalForm.value.startdate != undefined && this.modalForm.value.enddate != undefined){
+      // console.log(this.durations);
+    if(this.durations != undefined){
+      // if(this.durations == 'Fixed hours'){}
+      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+      console.log(serviceData);
+       let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle});
+      serviceModal.present();
+    }
+    else{
+      this.providerService.showToast("Please Select Frequency");
+    }
+    }
+    else{
+      this.providerService.showToast("Please Select start date and end date");
+    }
+       }
+     }
+     }
 else{
-    // if(!this.modalForm.valid || (this.terms == false)){
-    //   this.submitAttempt = true;
-    //   this.providerService.showToast("Please Enter The Required Fields");
-    //       if(this.terms == false){
-    //         this.checkTerms = true;
-    //       }
-    //}else{
+  if(this.onetimes == 'One time'){
+    if((this.terms == false)){
+      this.submitAttempt = true;
+      this.providerService.showToast("Please Enter The Required Fields");
+          if(this.terms == false){
+            this.checkTerms = true;
+          }
+    }else{
       this.submitAttempt = false;
       
       if(this.userType != 'sponsor'){
@@ -328,19 +346,201 @@ else{
     }else{
       this.dependent = this.authForm.value.dependents;
     }
+      if(this.modalForm.value.date != "" && this.modalForm.value.time !=""){
+       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+      console.log(serviceData);
+       let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle});
+      serviceModal.present();
+     }
+     else{
+      this.providerService.showToast("Please Select Preferred date and time");
+     }
+     }
+   }
+   else{
+       if((this.terms == false)){
+      this.submitAttempt = true;
+      this.providerService.showToast("Please Enter The Required Fields");
+          if(this.terms == false){
+            this.checkTerms = true;
+          }
+    }else{
+      this.submitAttempt = false;
       
+      if(this.userType != 'sponsor'){
+      this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.authForm.value.dependents;
+    }
+      if(this.modalForm.value.startdate != undefined && this.modalForm.value.enddate != undefined){
+        if(this.durations != undefined){
+       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+      console.log(serviceData);
+       let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle});
+      serviceModal.present();
+        }
+    else{
+      this.providerService.showToast("Please Select Frequency");
+    }
+    }
+    else{
+      this.providerService.showToast("Please Select start date and end date");
+    }
+     }
+   }
+ }
+   }
+
+  submit() {
+      if(this.searchButton == true){
+        this.onetimes = "One time";
+      }else{
+        this.onetimes = "Recurring";
+      }
+      console.log(this.onetimes);
+    console.log(this.onetime);
+     if(this.userType == 'sponsor'){
+      if(this.onetimes == 'One time'){
+       if(!this.authForm.valid || (this.terms == false)){
+          this.submitAttempt = true;
+           if(this.terms == false){
+            this.checkTerms = true;
+          
+          }
+       }
+       else{
+          this.submitAttempt = false;
+      
+      if(this.userType != 'sponsor'){
+      this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.authForm.value.dependents;
+    }
+    console.log(this.modalForm.value.date);
+    if(this.modalForm.value.date != "" && this.modalForm.value.time !=""){
+
+    
+      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+      console.log(serviceData);
+      this.viewCtrl.dismiss(serviceData);
+    }
+    else{
+      this.providerService.showToast("Please Select Preferred date and time");
+    }
+       }
+     }
+     else{
+      console.log(this.onetimes);
+           if(!this.authForm.valid || (this.terms == false)){
+          this.submitAttempt = true;
+           if(this.terms == false){
+            this.checkTerms = true;
+          
+          }
+       }
+       else{
+          this.submitAttempt = false;
+      
+      if(this.userType != 'sponsor'){
+      this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.authForm.value.dependents;
+    }
+    // console.log(this.modalForm.value.startdate);
+    if(this.modalForm.value.startdate != undefined && this.modalForm.value.enddate != undefined){
+      // console.log(this.durations);
+    if(this.durations != undefined){
+      // if(this.durations == 'Fixed hours'){}
+      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+      console.log(serviceData);
+      this.viewCtrl.dismiss(serviceData);
+    }
+    else{
+      this.providerService.showToast("Please Select Frequency");
+    }
+    }
+    else{
+      this.providerService.showToast("Please Select start date and end date");
+    }
+       }
+     }
+     }
+else{
+  if(this.onetimes == 'One time'){
+    if((this.terms == false)){
+      this.submitAttempt = true;
+      this.providerService.showToast("Please Enter The Required Fields");
+          if(this.terms == false){
+            this.checkTerms = true;
+          }
+    }else{
+      this.submitAttempt = false;
+      
+      if(this.userType != 'sponsor'){
+      this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.authForm.value.dependents;
+    }
+      if(this.modalForm.value.date != "" && this.modalForm.value.time !=""){
        let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
       console.log(serviceData);
        this.viewCtrl.dismiss(serviceData);
-     //}
- }
+     }
+     else{
+      this.providerService.showToast("Please Select Preferred date and time");
+     }
+     }
+   }
+   else{
+       if((this.terms == false)){
+      this.submitAttempt = true;
+      this.providerService.showToast("Please Enter The Required Fields");
+          if(this.terms == false){
+            this.checkTerms = true;
+          }
+    }else{
+      this.submitAttempt = false;
       
-    
-  
-  }
+      if(this.userType != 'sponsor'){
+      this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.authForm.value.dependents;
+    }
+      if(this.modalForm.value.startdate != undefined && this.modalForm.value.enddate != undefined){
+        if(this.durations != undefined){
+       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+      console.log(serviceData);
+       this.viewCtrl.dismiss(serviceData);
+        }
+    else{
+      this.providerService.showToast("Please Select Frequency");
+    }
+    }
+    else{
+      this.providerService.showToast("Please Select start date and end date");
+    }
+     }
+   }
+ }
+ }
 edit(){
 if(this.userType != 'sponsor'){
       this.dependent = this.elderId ;

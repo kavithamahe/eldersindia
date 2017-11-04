@@ -30,9 +30,9 @@ show_password:boolean = false;
   	this.password_submit = false;
   	this.nav = navCtrl;
   	this.change_password_Form = formBuilder.group({
-        currentPassword: ['',Validators.compose([Validators.minLength(6),Validators.maxLength(12), Validators.required])],
-        newPassword: ['',Validators.compose([Validators.minLength(6),Validators.maxLength(12), Validators.required])],
-        re_enterPassword: ['',Validators.compose([Validators.minLength(6),Validators.maxLength(12), Validators.required])]
+        currentPassword: ['',Validators.compose([Validators.required])],
+        newPassword: ['',Validators.compose([Validators.required])],
+        re_enterPassword: ['',Validators.compose([Validators.required])]
         
     });
 
@@ -51,8 +51,10 @@ show_password:boolean = false;
    }
 
 
+
   submit() {
-    
+
+console.log(this.change_password_Form.value.newPassword.length);
     if(this.change_password_Form.valid){
 
     if(this.change_password_Form.value.newPassword != this.change_password_Form.value.re_enterPassword){
@@ -61,6 +63,14 @@ show_password:boolean = false;
     }else{
     	this.submitAttempt = false;
       this.password_submit = false; 
+        if(this.change_password_Form.value.newPassword.length < 6){
+      this.service.showToast("Please enter minimum 6 characters");
+    }else{
+      if(this.change_password_Form.value.newPassword.length > 12){
+      this.service.showToast("Please enter maximum 12 characters");
+    }else{
+
+      console.log(this.change_password_Form.value.newPassword);
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
       loader.present();     
       let change_password_data = {"current_password": this.change_password_Form.value.currentPassword, "new_password": this.change_password_Form.value.newPassword, "confirm_password": this.change_password_Form.value.re_enterPassword};
@@ -80,10 +90,13 @@ show_password:boolean = false;
       }
 		   loader.dismiss();    
 	    })
+    }
     } 
+  }
   }else{
     this.submitAttempt = true;
   }
+
 }
   dismiss(){
   	this.password_submit = false;

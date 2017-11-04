@@ -101,6 +101,10 @@ export class CommunitylistPage {
       this.communityServices.recommendedCommunity(data).
       subscribe(mycommunity => {
       this.communitylists = mycommunity.result.info.data;
+      //console.log(this.communitylists.length);
+      if(this.communitylists.length == 0){
+        this.communityServices.showToast("No Record Found")
+      }
       this.categoryLists = mycommunity.result.get.communityCategory;
       this.nextPageURL=mycommunity.result.info.next_page_url;
       loader.dismiss();

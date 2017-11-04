@@ -49,7 +49,8 @@ submitAttempt: boolean = false;
       })
   	});
     this.commentForm = formBuilder.group({
-        comment: ['', Validators.compose([Validators.required])]
+
+        comment: ['', Validators.compose([Validators.pattern("[a-zA-z0-9_-].*\\S.*"),Validators.required])]
          });
     this.showComment=true;
 
