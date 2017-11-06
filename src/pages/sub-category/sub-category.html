@@ -22,8 +22,9 @@
 </ion-header>
 
 
-<ion-content padding style="background:#fff;">
-<ion-item class="location-catlist">
+<ion-content class="content-intop">
+<ion-card class="sel-packages">
+<ion-item>
 	<ion-label><p>Location</p></ion-label>
       <ion-select [(ngModel)]="serviceLocation" class="sub-cate-slec" (ionChange)='locationChanged()'>
         <ion-option class="sub-cate-slec" value="">Select location</ion-option>
@@ -31,10 +32,13 @@
         </ion-option>
       </ion-select>
 </ion-item>
-
+</ion-card>
+<ion-card class="pack-listed">
 <ion-item *ngFor = "let subcategory of subcategories.info" [color]="subcategory.color" class="sub-cat-listed">
    <p (click)="openSelected(subcategory)"> {{subcategory.name}} </p><i class="fa fa-chevron-right left-right-side"></i>
 </ion-item>
+</ion-card>
+ 
  <ion-item padding *ngIf="!subcategories?.info" text-wrap>
      <p class="error-clr">{{emptyRecord}}</p>
    </ion-item>

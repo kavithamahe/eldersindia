@@ -1,35 +1,132 @@
 page-serviceproviders {
+.service-listed{ float:left; width:100%;}
+.service-listed .service-bg0{ float:left; width:50%; background:none; padding:2px;margin-top:5px; }
+.service-listed .service-bg0 .button-inner{ width:100%; float:left;background:#bf5c96; height:80px; border-bottom:2px solid #bd4089;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg0 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg0 .button-inner .left-icons p{color:#fff;max-width:135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 
-.dashboard {
-    display: block;
-    padding: 35px 0px;
-    color: #fff;
-    text-decoration: none;
-   background:#eee;
+.service-listed .service-bg1{ float:left; width:50%; background:none;padding:2px; margin-top:5px; }
+.service-listed .service-bg1 .button-inner{ width:100%; float:left;background:#F08080; height:80px; border-bottom:2px solid #ef6f6f;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg1 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg1 .button-inner .left-icons p{color:#fff;max-width:135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+
+.service-listed .service-bg2{ float:left; width:50%; background:none;padding:2px;  }
+.service-listed .service-bg2 .button-inner{ width:100%; float:left;background:#2c71b6; height:80px; border-bottom:2px solid #1c5c9c;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg2 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg2 .button-inner .left-icons p{color:#fff;max-width:135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg3{ float:left; width:50%; background:none;padding:2px; }
+.service-listed .service-bg3 .button-inner{ width:100%; float:left;background:#bac6dc; height:80px; border-bottom:2px solid #a8b2c3;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg3 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg3 .button-inner .left-icons p{color:#fff; max-width:135px;font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg3{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg3 .button-inner{ width:100%; float:left;background:#bac6dc; height:80px; border-bottom:2px solid #a8b2c3;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg3 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg3 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg4{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg4 .button-inner{ width:100%; float:left;background:#fec748; height:80px; border-bottom:2px solid #f9b312;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg4 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg4 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px;font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg5{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg5 .button-inner{ width:100%; float:left;background:#00b58a; height:80px; border-bottom:2px solid #03a27c;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg5 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px; text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg5 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg6{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg6 .button-inner{ width:100%; float:left;background:#6495ED; height:80px; border-bottom:2px solid #5489e8;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg6 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px; text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg6 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg7{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg7 .button-inner{ width:100%; float:left;background:#03A9F4; height:80px; border-bottom:2px solid #1b90c5;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg7 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg7 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg8{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg8 .button-inner{ width:100%; float:left;background:#BDB76B; height:80px; border-bottom:2px solid #afa416;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg8 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg8 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+
+.service-listed .service-bg9{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg9 .button-inner{ width:100%; float:left;background:#607D8B; height:80px; border-bottom:2px solid #55707d;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg9 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg9 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg10{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg10 .button-inner{ width:100%; float:left;background:#486bea; height:80px; border-bottom:2px solid #365dec;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg10 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg10 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg11{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg11 .button-inner{ width:100%; float:left;background:#b9d03d; height:80px; border-bottom:2px solid #aabd43;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg11 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg11 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+
+.service-listed .service-bg12{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg12 .button-inner{ width:100%; float:left;background:#63a924; height:80px; border-bottom:2px solid #519415;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg12 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg12 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+
+.service-listed .service-bg13{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg13 .button-inner{ width:100%; float:left;background:#EE82EE; height:80px; border-bottom:2px solid #DA70D6;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg13 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg13 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg14{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg14 .button-inner{ width:100%; float:left;background:#7B68EE; height:80px; border-bottom:2px solid #483D8B;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg14 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg14 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg15{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg15 .button-inner{ width:100%; float:left;background:#7B68EE; height:80px; border-bottom:2px solid #483D8B;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg15 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg15 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg16{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg16 .button-inner{ width:100%; float:left;background:#7B68EE; height:80px; border-bottom:2px solid #483D8B;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg16 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg16 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg17{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg17 .button-inner{ width:100%; float:left;background:#7B68EE; height:80px; border-bottom:2px solid #483D8B;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg17 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg17 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.service-listed .service-bg18{ float:left; width:50%; background:none;padding:2px;}
+.service-listed .service-bg18 .button-inner{ width:100%; float:left;background:#7B68EE; height:80px; border-bottom:2px solid #483D8B;  box-shadow: 0 4px 2px -2px #dcdcdc;}
+.service-listed .service-bg18 .button-inner .left-icons i{ font-size:40px; color:#fff; margin-top:5px; height: 35px;  padding-bottom: 40px;  text-shadow:1px 1px 1px #333;}
+.service-listed .service-bg18 .button-inner .left-icons p{color:#fff;max-width: 135px; font-size:15px; margin:0px; font-weight:400;text-transform:capitalize; text-align:center; line-height:30px;  width:100%; display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.sel-packages {
+    border: 1px solid #a8a8a8;
+    border-radius: 0;
+    box-shadow: none;
 }
-.dash-icon{ font-size: 5.2em !important; padding-bottom:10px;}
-.dashboard ion-row ion-col span{background:#fff;}
-.dashboard-listed{    border-radius:3px; box-shadow: 0 4px 2px -2px #dcdcdc;
-
-    float: left;
-    padding: 5px;
-    width:100%;
+.sel-packages .item-md .item-inner .label-md {
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    padding-left: 10px;
 }
-.dashboard-listed i{margin-top:10px !important; font-size:50px;}
-.dashboard-listed p{margin:0px; color:#858585; padding:5px; font-size:15px;}
+.slide-border .slide-zoom .item-md .item-inner .input-wrapper .label-md{ margin:0px !important;}
+.slide-border .slide-zoom .item-md .item-inner .input-wrapper .label-md ion-row ion-col h1{color:#007994 !important;font-family: "Muli",sans-serif;font-size:17px !important;margin:0; padding-bottom:3px;}
+.slide-border .slide-zoom .item-md .item-inner .input-wrapper .label-md ion-row ion-col p{color:#666 !important;font-family: "Muli",sans-serif;font-size:13px !important;margin: 0;}
+.slide-border .slide-zoom .item-md .item-inner .input-wrapper .label-md ion-row ion-col small{color:red !important;font-family: "Muli",sans-serif; font-weight:600;font-size:11px !important;margin:0;}
 
-.toolbar-title-md{ text-align:center;}
- .toolbar-title-ios{ text-align:center;}
-
-.slide-border{border:1px solid #333;margin:5px;}
-.package-color{color:red;}
-.ellipsis {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-p.block {
-    width: 250px;
-}
-
+.slide-border .slide-zoom .item-md .item-inner{padding-right:0px;}
+.slider-card{box-shadow:none;}
+.package-list-show{color:#444 !important;font-weight:600;
+    font-family: "Muli",sans-serif;
+    font-size:16px !important;
+  padding-bottom:10px; 
+    margin: 0;}
+.package-list-show span{color:#000;}
+.item-md.item-block .item-inner{border:none;}
+.slide-border{ border:5px double #EFF5FB;}
 }

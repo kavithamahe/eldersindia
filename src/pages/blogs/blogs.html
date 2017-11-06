@@ -31,8 +31,8 @@
         
   <!-- <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar> -->
  <ion-row>
-<ion-col><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
-  <ion-col><button (click)="getItems(searchText)" ion-button>Go</button> </ion-col>
+<ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
+  <ion-col width-20><button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
 </ion-row>
 
 <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)" class="community-img">

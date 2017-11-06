@@ -58,7 +58,7 @@
             		  <ion-label>Service Type</ion-label>
    
 		
-                  <ion-item class="one-timereq">
+                  <ion-item>
                     <ion-label>One time</ion-label>
                     <ion-radio value="goe" (click)="onetime(searchButton)"></ion-radio>
                   </ion-item>
@@ -81,8 +81,8 @@
          </p>
        <ion-list>
 	     <ion-label stacked class="label-lb required">Preferred Time</ion-label>
-            <ion-item class="one-timereq">
-              <ion-label stacked class="label-lb required">Preferred Time</ion-label>
+            <ion-item>
+              <ion-label class="prefe">Preferred Time</ion-label>
               <ion-select formControlName ="time" class="select-brds">
                 <ion-option value="12.00 AM - 01.00 AM">12.00 AM - 01.00 AM</ion-option>
                 <ion-option value="01.00 AM - 02.00 AM">01.00 AM - 02.00 AM</ion-option>
