@@ -23,14 +23,15 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding style="background:#F3F9FE;">
+<ion-content>
 
 <div class="service-top-title"></div>
 
 <ion-row>
    <ion-col>
    <div class="service-listed">
-   <ion-item class="mem-title">
+   <ion-card class="sel-packages">
+   <ion-item>
             
       <ion-label><p>Location</p></ion-label>
       <ion-select [(ngModel)]="serviceLocation" class="sub-cate-slec" (ionChange)='locationChanged()'>
@@ -40,25 +41,10 @@
       </ion-select>
      
       </ion-item> 
-      <ion-item> <p> &nbsp;Packages ({{packageCount}}) </p> </ion-item>  
-    <ion-slides slidesPerView= "2">
-        <div *ngFor="let package of packages; let i=index" text-wrap>
-           <ion-slide (click)="viewPackage(package.vendor_id)" class="slide-border">
-            <ion-item style="padding-left:0px;" >
-              <ion-col> 
-                <div style="float:left;width:25%;" >
-                <img [src]="imageUrl+package?.logo" style="height:50px;width:50px;margin:2px;" />
-                </div>
-                <div style="float:left;width:65%;margin:5px">
-                <p>{{package.package_name | words :1 : '....'}} </p>
-                <p class='ellipsis'>{{package.package_description}}</p>
-                <p class="package-color">{{package.package_amount}}</p>
-                </div>
-              </ion-col>
-            </ion-item>
-          </ion-slide>
-        </div>
-        </ion-slides>
+	  </ion-card>
+	  
+     
+
 
 <button *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full (click)="subCategory(service)" class="myblock service-bg{{i}}">
 
@@ -71,6 +57,33 @@
 </div>
    </ion-col>
 </ion-row>
+<hr/>
+ 
+ <ion-card class="slider-card">
+ <h1 class="package-list-show">Packages (<span>{{packageCount}}</span>) </h1> 
+    <ion-slides slidesPerView= "1">
+        <div *ngFor="let package of packages; let i=index" text-wrap>
+           <ion-slide (click)="viewPackage(package.vendor_id)" class="slide-border">
+            <ion-item>
+			<ion-row class="pack-slider">
+              <ion-col width-33> 
+               
+                <img [src]="imageUrl+package?.logo"/>
+               
+				  </ion-col> 
+                 <ion-col width-67> 
+                <h1>{{package.package_name | words :3 : '....'}} </h1>
+                <p>{{package.package_description}}</p>
+                <small><i class="fa fa-inr" aria-hidden="true"></i> &nbsp;{{package.package_amount}}</small>
+            
+              </ion-col>
+			  </ion-row>
+            </ion-item>
+          </ion-slide>
+        </div>
+        </ion-slides>
+		</ion-card>
+
 
 </ion-content>
 <style>button{line-height:0px;}</style>

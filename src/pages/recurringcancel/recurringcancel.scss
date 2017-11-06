@@ -1,3 +1,24 @@
 page-recurringcancel {
-
+.login-pages											{background-image: url('../assets/img/donor-dsd.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
+.liste-view{padding:5px;    background: rgba(255, 255, 255, 0.7);}
+.liste-view .item-md {background:none;}
+.liste-view .item-md .item-inner .input-wrapper .label-md h1{
+    color: #444 !important;
+    font-family: "Muli",sans-serif;
+    font-size:18px !important;
+    margin-bottom:20px; padding:5px;
+   text-align:center; background:#EFF5FB;
+}
+.liste-view .item-md .item-inner .input-wrapper .label-md{margin:0px;}
+.liste-view .item-md .item-inner .input-wrapper .label-md h2{
+    color:#FF8C00;
+    font-family: "Muli",sans-serif; width:100%; float:left;
+    font-size:16px !important;
+    padding-bottom: 8px; padding-top:20px;
+    margin: 0; text-align:center;
+}
+.liste-view .item-md .item-inner .input-wrapper .label-md div .badge-md{ background:#FE5722;  float:left;margin:3px;   font-family: "Muli",sans-serif;   font-size:12px !important;}
+.item-md.item-block .item-inner{padding-right:0px;}
+.no-btn{background:#ccc; font-size:13px; color:#333; float:right;  text-transform: capitalize;}
+.yes-btn{background:#025FA9; font-size:13px; color:#fff;float:right; text-transform: capitalize;}
 }

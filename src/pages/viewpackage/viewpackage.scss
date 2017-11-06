@@ -1,3 +1,28 @@
 page-viewpackage {
+.liste-view{padding:5px;    background: rgba(255, 255, 255, 0.7);}
+.liste-view .item-md .item-inner .input-wrapper .label-md ion-row ion-col b{ float:left;font-family: 'Muli', sans-serif; font-size:14px; color:#333; font-weight:bold; width:100%;margin-bottom:5px;}
 
+.liste-view .item-md .item-inner .input-wrapper .label-md ion-row ion-col p{ float:left;font-family: 'Muli', sans-serif; font-size:16px; color:#444; }
+.login-pages											{background-image: url('../assets/img/bgs.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
+.liste-view .item-md {background:none;}
+.liste-view .item-md .item-inner .input-wrapper .label-md ion-row ion-col p.pen{  background:#FF8C00;
+    border-radius: 2px;
+    color:#fff;
+    font-size: 12px;
+    padding: 3px;}
+.liste-view .item-md .item-inner .input-wrapper .label-md ion-row ion-col p.act{  background:green;
+    border-radius: 2px;
+    color: hsl(0, 0%, 100%);
+    font-size: 12px;
+    padding: 3px;}
+.liste-view .item-md .item-inner .input-wrapper .label-md ion-row ion-col p.rej{  background:red;
+    border-radius: 2px;
+    color: hsl(0, 0%, 100%);
+    font-size: 12px;
+    padding: 3px;}
+
+.liste-view .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col b{ float:left;font-family: 'Muli', sans-serif; font-size:14px; color:#333; font-weight:bold; width:100%;margin-bottom:5px;}
+
+.liste-view .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col p{ float:left;font-family: 'Muli', sans-serif; font-size:16px; color:#444; }
+.liste-view .item-ios {background:none;}
 }

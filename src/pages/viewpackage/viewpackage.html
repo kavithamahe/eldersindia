@@ -20,84 +20,42 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="login-pages">
+<ion-card class="liste-view">
 <ion-item>
 <ion-row>
-  <ion-col width-50 text-wrap>
-  	<h2>Elder Name  : </h2>
-  </ion-col>
-  <ion-col width-50 text-wrap>
-  {{packageData?.name}}{{packageData?.last_name}}
-  </ion-col>
-</ion-row>
-<ion-row>
-  <ion-col width-50 text-wrap>
-  <h2>Email  : </h2>
-  </ion-col>
-  <ion-col width-50 text-wrap>
-  {{packageData?.elder_email}}
-  </ion-col>
-</ion-row>
-<ion-row>
-  <ion-col width-50 text-wrap>
-  <h2>Mobile number  : </h2>
-  </ion-col>
-  <ion-col width-50 text-wrap>
-  {{packageData?.elder_mobile}}
+  <ion-col>
+  	<b>Elder Name</b>
+	<p>{{packageData?.name}}{{packageData?.last_name}}</p>
+	<b>Email</b>
+	<p>{{packageData?.elder_email}}</p>
+	<b>Mobile number</b>
+	<p>{{packageData?.elder_mobile}}</p>
+	<b>Location </b>
+	<p>{{packageData?.location}}</p>
+	<b>Package</b>
+	<p>{{packageData?.package_name}}</p>
+	<b>Cost</b>
+	<p>{{packageData?.package_amount}}</p>
+	<b>Package Status</b>
+	<p *ngIf="packageData?.req_status == 0" class="pen"> Pending</p>
+  <p *ngIf="packageData?.req_status == 1" class="act"> Active</p>
+   <p *ngIf="packageData?.req_status == 2" class="rej"> Rejected</p>
+   <b>Package validity</b>
+   <p>{{packageData?.package_validity}}</p>
   </ion-col>
 </ion-row>
-<ion-row>
-  <ion-col width-50 text-wrap>
-  <h2>Location  : </h2>
+<ion-row *ngIf="packageData?.payment_remark != '' ">
+  <ion-col>
+  <b>Payment Status</b>
+  <p> {{packageData?.payment_remark}}</p>
   </ion-col>
-  <ion-col width-50 text-wrap>
-  {{packageData?.location}}
-  </ion-col>
-</ion-row>
-<ion-row>
-  <ion-col width-50 text-wrap>
-  <h2>Package : </h2>
-  </ion-col>
-  <ion-col width-50 text-wrap>
-  {{packageData?.package_name}}
-  </ion-col>
-</ion-row>
-<ion-row>
-  <ion-col width-50 text-wrap>
-  <h2>Cost : </h2>
-  </ion-col>
-  <ion-col width-50 text-wrap>
-  {{packageData?.package_amount}}
-  </ion-col>
-</ion-row>
-<ion-row>
-  <ion-col width-50 text-wrap>
-  <h2>Package Status : </h2>
-  </ion-col>
-  <ion-col width-50 text-wrap>
-  	<p *ngIf="packageData?.req_status == 0"> Pending</p>
-  <p *ngIf="packageData?.req_status == 1"> Active</p>
-   <p *ngIf="packageData?.req_status == 2"> Rejected</p>
-  </ion-col>
-</ion-row>
-<ion-row>
-  <ion-col width-50 text-wrap>
-  <h2>Package validity : </h2>
-  </ion-col>
-  <ion-col width-50 text-wrap>
-  {{packageData?.package_validity}}
-  </ion-col>
-</ion-row>
-<div *ngIf="packageData?.payment_remark != '' ">
-<ion-row>
-  <ion-col width-50 text-wrap>
-  <h2>Payment Status : </h2>
-  </ion-col>
-  <ion-col width-50 text-wrap>
-  {{packageData?.payment_remark}}
-  </ion-col>
-</ion-row>
-</div>
-</ion-item>
 
+</ion-row>
+
+
+
+
+</ion-item>
+</ion-card>
 </ion-content>
