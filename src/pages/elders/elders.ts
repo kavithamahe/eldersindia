@@ -809,11 +809,11 @@ getareaof_interest(){
         "city_name":this.manageDependentData.city_name,
         "state_name":this.manageDependentData.state_name,
         "user_type":this.manageDependentData.user_type,
-        // "skills":this.skill_data,
-        // "emergency":this.emergency_data,
-        // "experience":this.experience_data,
-        // "education":this.education_data,
-        // "app":"",
+        "skills":this.skill_data,
+        "emergency":this.emergency_data,
+        "experience":this.experience_data,
+        "education":this.education_data,
+        "app":"",
         "avatar1":this.manageDependentData.avatar
       }
       
