@@ -44,7 +44,7 @@
      <p class="error-clr">{{emptyRecord}}</p>
    </ion-item>
   <div>
-    <ion-searchbar *ngIf="inboxInfo.length != 0" (ionInput)="getItems($event)">
+    <ion-searchbar [(ngModel)]="inbox" (ionInput)="getItems(inbox)">
     </ion-searchbar>
   </div>
   <hr/>
@@ -104,7 +104,7 @@
      <p class="error-clr">{{emptyRecord}}</p>
    </ion-item>
    <div>
-    <ion-searchbar *ngIf="sentInfo.length != 0" (ionInput)="setItems($event)">
+    <ion-searchbar [(ngModel)]="outbox" (ionInput)="setItems(outbox)">
     </ion-searchbar>
   </div>
   <hr/>

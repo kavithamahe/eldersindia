@@ -93,22 +93,85 @@ export class CommunityPage {
   }
 files:any;
 
- openMenu(id) {
+ openMenu(id,poster_id) {
     let actionSheet = this.actionsheetCtrl.create({
       title: '',
       cssClass: 'action-sheets-basic-page',
       buttons: [
+        // {
+        //   text: 'Delete',
+        //   role: 'destructive',
+        //   icon: !this.platform.is('ios') ? 'trash' : null,
+        //   handler: () => {
+        //     this.showConfirm(id);
+        //   }
+        // },
         {
-          text: 'Delete',
+          text: 'Report Abuse',
           role: 'destructive',
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
-            this.showConfirm(id);
+            this.showPrompt(id,poster_id);
           }
         },
       ]
     });
     actionSheet.present();
+  }
+  reportAbuse(data,id,poster_id){
+
+   let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+
+   this.communityServices.reportAbuse(data,this.community_id,id,poster_id).subscribe(data =>{
+  this.communityServices.showToast(data);
+      loader.dismiss();
+   },
+     err =>{
+        if(err.status===401){
+      this.showToast(JSON.parse(err._body).error);
+    }
+    else if(err.status===500){
+      //this.communityList(this.community_id);
+    }
+    else{
+      this.communityServices.showErrorToast(err);  
+    }
+    loader.dismiss();
+  })
+  }
+   showPrompt(id,poster_id) {
+    let prompt = this.alertCtrl.create({
+      title: 'Report this post',
+      message: "All reports are strictly confidential. Please describe the reason",
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'reason'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            //console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Submit',
+          handler: data => {
+            //console.log(data.title);
+            if(data.title == ""){
+              this.communityServices.showToast("Please enter describe the reason")
+            }
+            else{
+            this.reportAbuse(data.title,id,poster_id);
+          }
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
   presentPopover(ev,id) {
     console.log(id);

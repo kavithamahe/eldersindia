@@ -62,7 +62,7 @@ button{font-family: 'Muli', sans-serif; }
 
 
 
-
+.required:after                                         {content:" *"; color: red; }
 
 .left-menus .list-ios .item-ios {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;

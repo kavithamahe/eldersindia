@@ -134,6 +134,12 @@ myCommunity(data){
      return this.http.post(`${this.getCommunityPostsUrl }myCommunity`,this.body,this.options)
       .map(res =>res.json());
 }
+reportAbuse(data,community_id,id,poster_id){
+   this.body = {"community_id": community_id, "post_id": id,"poster_id": poster_id,"report": data, }
+
+     return this.http.post(`${this.getCommunityPostsUrl }reportPost`,this.body,this.options)
+      .map(res =>res.json());
+}
  eventsscroll(nextPageURL) 
    {  
   this.body= {"uid": this.user_id, "search": "", "view": "grid", "get": ["communityCategory"]}

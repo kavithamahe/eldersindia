@@ -28,6 +28,7 @@ getRemarksList:any=[];
 serviceRequestScrollLists:any=[];
 vendorStatus:any=[];
 sr_token:any;
+searchEvent:any="";
   constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -49,8 +50,8 @@ sr_token:any;
   {
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.serviceRequestInfo =[];
-    this.serviceRequest.serviceRequestList().subscribe(
+    //this.serviceRequestInfo =[];
+    this.serviceRequest.serviceRequestList(this.searchEvent).subscribe(
      (serviceRequest) => {
       this.serviceRequestInfo=serviceRequest.result.info.list.data; 
       this.vendorStatus=serviceRequest.result.info.status;
@@ -76,7 +77,7 @@ sr_token:any;
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     this.serviceRequestInfo =[];
-    this.serviceRequest.serviceRequestLists(this.sr_token).subscribe(
+    this.serviceRequest.serviceRequestLists(this.sr_token,this.searchEvent).subscribe(
      (serviceRequest) => {
       this.serviceRequestInfo=serviceRequest.result.info.list.data; 
       this.vendorStatus=serviceRequest.result.info.status;
@@ -98,10 +99,11 @@ sr_token:any;
     );    
   }
   public getItems(searchEvent) {
-    let term = searchEvent.target.value;
-      this.serviceRequest.searchConnection(term).subscribe(searchConnection => {
-        this.serviceRequestInfo= searchConnection.result.info.list.data;
-      });
+    this.searchEvent = searchEvent;
+    this.onInit();
+      // this.serviceRequest.searchConnection(term).subscribe(searchConnection => {
+      //   this.serviceRequestInfo= searchConnection.result.info.list.data;
+      // });
   }
   public getRemarks()
   {

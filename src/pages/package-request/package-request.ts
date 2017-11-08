@@ -43,7 +43,6 @@ elderId:any;
     // this.providerService.loadServiceOffered()
     this.blogListService.getPackageRequest(this.rootUrl,this.searchText,this.packstatus)
       .subscribe(data =>{
-      	console.log(data);
         this.packageRequest = data.result.data;
         this.nextPageURL = data.result.next_page_url;
        loading.dismiss();
@@ -104,7 +103,7 @@ doInfinite(infiniteScroll) {
    toast.present();
   }
   inputSearch(searchEvent){
-   this.searchText = searchEvent.target.value;
+   this.searchText = searchEvent;
    this.getPackageRequests();
   }
   onSelectChange(selectedValue: any) {

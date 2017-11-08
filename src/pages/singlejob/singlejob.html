@@ -26,10 +26,11 @@
 
 <div *ngFor="let singleJob of singleJobInfo">
  <h2 text-capitalize>{{singleJob?.title}}   </h2>
-
+<p><i class="fa fa-map-marker" aria-hidden="true" style="padding-left:3px;"></i><span *ngFor="let locations of singleJob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
 <p><i class="fa fa-building-o"></i><span>{{singleJob?.company_name}}</span></p>
- <p><i class="fa fa-calendar-o"> </i><span *ngIf="singleJob?.created_at">{{singleJob?.created_at |  date :'MMM dd y'}}</span></p>
- <p><i class="fa fa-map-marker" aria-hidden="true" style="padding-left:3px;"></i><span *ngFor="let locations of singleJob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
+ <p><i class="fa fa-calendar-o"> </i><span *ngIf="singleJob?.created_at">Posted On: {{singleJob?.created_at |  date :'MMM dd y'}}</span></p>
+ <p><i class="fa fa-calendar-o"> </i><span *ngIf="singleJob?.job_expiry">Valid Upto: {{singleJob?.job_expiry}}</span></p>
+ 
 
 <ion-row>
 

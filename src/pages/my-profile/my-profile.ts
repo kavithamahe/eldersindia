@@ -25,6 +25,8 @@ imageURL:any;
 token:any;
 gender:any ="";
 user_dob:any;
+avatar:any;
+base64Image:any;
 
   constructor(public storage:Storage,public loadingCtrl: LoadingController,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {  }
 
@@ -37,6 +39,13 @@ user_dob:any;
                         .subscribe(
                           data =>{
                                     this.profileData = data.result.info;
+                                    this.avatar = this.profileData.avatar;
+                                     this.storage.ready().then(() => {
+      this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;
+      this.base64Image = this.imageURL+this.profileData.avatar;
+        });
+      });
+                                    console.log(this.avatar);
                                     this.gender = this.profileData.gender;
                                     // this.user_type = (data.result.info.user_type == 'sponosr') ? 'Sponsor' : "Elder"; 
                                     this.user_dob= this.profileData.dob;//this.getDate(this.profileData.dob);

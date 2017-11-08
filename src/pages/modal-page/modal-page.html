@@ -62,7 +62,7 @@
                     <ion-label>One time</ion-label>
                     <ion-radio value="goe" (click)="onetime(searchButton)"></ion-radio>
                   </ion-item>
-                  <ion-item class="one-timereq" *ngIf="recurringType == 1">
+                  <ion-item *ngIf="recurringType == 1">
                     <ion-label>Recurring</ion-label>
                       <ion-radio value="go" (click)="recurringtime(recurring)">
                       </ion-radio>

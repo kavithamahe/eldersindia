@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController,LoadingController, NavParams} from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
+import { Camera } from 'ionic-native';
+
 import { ServiceProvider } from '../../providers/service-provider';
 import {FormBuilder,FormGroup,Validators,FormArray} from '@angular/forms';
 import { CommunityServices } from '../../providers/community-services';
@@ -329,6 +331,7 @@ public emergencies =  [
           this.storage.ready().then(() => {
             this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;
             this.base64Image = this.imageURL+this.manageDependentData.avatar;
+            console.log(this.base64Image);
               });
             });
                     
@@ -481,7 +484,17 @@ public emergencies =  [
             }
           }
  }
-
+  accessGallery(){
+   Camera.getPicture({
+     sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+     destinationType: Camera.DestinationType.DATA_URL
+    }).then((imageData) => {
+      this.base64Image = 'data:image/jpeg;base64,'+imageData;
+      this.avatar = this.base64Image;
+     }, (err) => {
+      console.log(err);
+    });
+  }
  getDate(datepar){
      var dateParts = datepar.split("-").reverse().join("-");
      // let date = dateParts[2]+"-"+dateParts[1]+"-"+dateParts[0];
@@ -608,7 +621,7 @@ getservicecategory(){
   }
 }
 getareaof_interest(){
-  if(this.functionality !="profileEdit"){
+  // if(this.functionality !="profileEdit"){
    if(this.functionality !="edit" && this.functionality !="profileEdit"){
       for(let i=0;i<this.area_of_interest.length;i++){
         this.areaofinterestdata.push({"id":this.area_of_interest[i]})  
@@ -621,7 +634,7 @@ getareaof_interest(){
       console.log(this.areaofinterestdata);
       }
     }
-  }
+  // }
 }
   getElderSkills(){
      if(this.functionality !="edit" && this.functionality !="profileEdit"){
@@ -774,7 +787,7 @@ getareaof_interest(){
     this.getareaof_interest();
      this.area_of_interest_data=this.areaofinterestdata;
      console.log(this.area_of_interest_data);
-}
+ }
         let profileEditData = {
         "id":this.elder_id,
         "area_interest":this.area_of_interest_data,
@@ -786,13 +799,15 @@ getareaof_interest(){
         "password":this.elder_password,
         "last_name":this.manageDependentData.last_name,
         "docs":this.manageDependentData.docs,
-        "avatar":this.manageDependentData.avatar,
+        "avatar":this.avatar,
         "relation":this.elder_relation,
         "gender":this.manageDependentData.gender,
         "dob":this.elder_dob,
+        "allergic":this.allergic,
+        "hobbies":this.hobbies,
         "mobile":this.elder_number,
         "mobile_verified":this.manageDependentData.mobile_verified, 
-        "email":this.elder_email,
+       "email":this.elder_email,
         "email_verified":this.manageDependentData.email_verified,
         "email_sent":this.manageDependentData.email_sent,
         "message_sent":this.manageDependentData.message_sent,
@@ -804,17 +819,18 @@ getareaof_interest(){
         "city":this.manageDependentData.city,
         "state":this.manageDependentData.state,
         "status":this.manageDependentData.status,
+         "direct":this.manageDependentData.direct,
         "created_at":this.manageDependentData.created_at,
         "updated_at":this.manageDependentData.updated_at,
-        "city_name":this.manageDependentData.city_name,
-        "state_name":this.manageDependentData.state_name,
+        "reject_comments":this.manageDependentData.reject_comments,
+        // "city_name":this.manageDependentData.city_name,
+        // "state_name":this.manageDependentData.state_name,
         "user_type":this.manageDependentData.user_type,
         "skills":this.skill_data,
         "emergency":this.emergency_data,
         "experience":this.experience_data,
         "education":this.education_data,
-        "app":"",
-        "avatar1":this.manageDependentData.avatar
+        "avatar1":this.avatar
       }
       
 

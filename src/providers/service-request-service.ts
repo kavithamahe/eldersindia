@@ -27,17 +27,17 @@ rootUrl:any;
    	storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; });
    });
   }
-  serviceRequestList() 
+  serviceRequestList(searchText) 
   {
   
-   let _request= {"info":{"list":true,"sort":"","searchValue":"","status":"","token":""}};
+   let _request= {"info":{"list":true,"sort":"","searchValue":searchText,"status":"","token":""}};
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
   }
-   serviceRequestLists(sr_token) 
+   serviceRequestLists(sr_token,searchText) 
   {
   
-   let _request= {"info":{"list":true,"sort":"","searchValue":"","status":"","token":sr_token}};
+   let _request= {"info":{"list":true,"sort":"","searchValue":searchText,"status":"","token":sr_token}};
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
   }
