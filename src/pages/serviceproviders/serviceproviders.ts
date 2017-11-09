@@ -68,9 +68,9 @@ export class ServiceprovidersPage {
     })      
   }
   viewPackage(vendor_id){
-    console.log(this.serviceLocation);
-    console.log(vendor_id);
-    this.navCtrl.setRoot(PackageDetailPagePage,{"vendor_id":vendor_id,'location_id':this.serviceLocation});
+    // console.log(this.serviceLocation);
+    // console.log(vendor_id);
+    this.navCtrl.push(PackageDetailPagePage,{"vendor_id":vendor_id,'location_id':this.serviceLocation});
   }
   loadPackagesByLocationID(locationId){
     this.providerService.webServiceCall(`getPackage`,{"locationId":locationId})

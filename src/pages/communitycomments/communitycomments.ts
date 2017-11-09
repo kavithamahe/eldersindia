@@ -348,8 +348,12 @@ sendComment(postID){
   dismiss(){
   	this.viewCtrl.dismiss({community_id:this.community_id});
   }
+  clearInputText(){
+    console.log("kavi")
+  }
   emojiPicker1(ev,post_id)
    {
+    
     let  likeEmoji={type:'commentEmoji'};
    let popover = this.popoverCtrl.create(EmojiPickerPage,likeEmoji);
     popover.present({

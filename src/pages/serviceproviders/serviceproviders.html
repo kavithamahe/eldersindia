@@ -86,17 +86,6 @@
    </ion-col>
 </ion-row>
 
-<button *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full (click)="subCategory(service)" class="myblock service-bg{{i}}">
-
-<div class="left-icons">
-<i class="{{service.icon}}" aria-hidden="true"></i>
-<i *ngIf="!service.icon" class="fa fa-bolt" aria-hidden="true"></i>
-<p>{{service.service}}</p>
-</div>
-</button>
-</div>
-   </ion-col>
-</ion-row>
 
  
  

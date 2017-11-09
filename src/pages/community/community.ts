@@ -560,19 +560,17 @@ doInfinite(infiniteScroll) {
 @Component({
   template: `<ion-title text-center text-capitalize>Request to join communities</ion-title> 
   <div class="register-form">
-<ion-grid>
-          <ion-row>
-              <ion-label class="required">To</ion-label>
-          
+
+          <ion-item>
+          <ion-label>To</ion-label>
              <ion-select multiple="true" [(ngModel)]="selectedConnections" [ngModelOptions]="{standalone: true}">
           <ion-option *ngFor="let name of connectionInfo" [value] = "name">{{name.friend_name}}
           </ion-option>
         </ion-select> 
-     </ion-row>
                
-           
+           </ion-item>
   <button ion-button round full (click)="inviteFriends()" class="btn-blue">Invite</button>
-</ion-grid>
+
 </div> 
   `
 })

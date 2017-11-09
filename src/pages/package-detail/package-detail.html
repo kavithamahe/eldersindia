@@ -53,7 +53,8 @@
               
 					<h3>{{pack.package_name}}</h3>										
 						<ion-list class="price-bt" *ngIf="pack.discount_rate_package == NULL"><span><i class="fa fa-inr"></i>{{pack.package_amount}}/- </span></ion-list>
-						<ion-list class="price-bt" *ngIf="pack.discount_rate_package != NULL"><span><i class="fa fa-inr"></i>{{pack.package_amount - pack.package_amount*pack.discount_rate_package/100}}/-</span></ion-list>
+						<ion-list class="price-bt" *ngIf="pack.discount_rate_package != NULL"><span>
+            <i class="fa fa-inr"></i>{{pack.package_amount - pack.package_amount*pack.discount_rate_package/100}}/-</span></ion-list>
 						<ion-list *ngIf="pack.discount_rate_package != NULL" class="price-list"> 		
 						<small><i class="fa fa-rupee"></i>{{pack.package_amount}} </small>
 						<span>  {{pack.discount_rate_package}} % off  <b> For {{pack.package_validity}}</b> </span>
@@ -63,7 +64,8 @@
 						
 					
 						<ion-list *ngIf="dependents.length != 1">
-							<div *ngIf="pack.package_available == 0 || user_type=='sponsor'"><a (click)="openRequestPackage(pack.id)" class="lan-select">Get Package</a></div>
+							<div *ngIf="pack.package_available == 0 || user_type=='sponsor'"><a (click)="openRequestPackage(pack.id)" class="lan-select">Get Package</a>
+              </div>
 						</ion-list>
 						<strong class="purch-already" *ngIf="pack.package_available > 0">You've already purchased this</strong>
 						
