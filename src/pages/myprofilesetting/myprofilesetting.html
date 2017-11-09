@@ -1,33 +1,17 @@
-
-
-<ion-content padding>
-<p text-center text-capitalize>
-{{myProfile.name}}
-</p><hr>
-<ion-item *ngIf="profile == 'true'">
-			<ion-item *ngIf="birthday=='true'">
-				<i class="fa fa-birthday-cake" aria-hidden="true"></i>{{myProfile.birthday}}
-			</ion-item>
-			<ion-item text-wrap *ngIf="email=='true'">
-				<i class="fa fa-envelope" aria-hidden="true"></i>{{myProfile.email}}
-			</ion-item>
-			<ion-item *ngIf = "location=='true'">
-				<i class="fa fa-map-marker" aria-hidden="true"></i>{{myProfile.location}}
-			</ion-item>
-			<ion-item *ngIf = "mobile=='true'">
-				<i class="fa fa-map-marker" aria-hidden="true"></i>{{myProfile.mobile}}
-			</ion-item>
+<ion-content>
+<ion-item *ngIf="profile == 'true'" class="user-details">
+<ion-row>
+<ion-col>
+<b>{{myProfile.name}}</b>
+<p *ngIf="birthday=='true'"><i class="fa fa-birthday-cake" aria-hidden="true"></i>{{myProfile.birthday}}</p>
+<p *ngIf="email=='true'"><i class="fa fa-envelope" aria-hidden="true"></i>{{myProfile.email}}</p>
+<p *ngIf = "location=='true'"><i class="fa fa-map-marker" aria-hidden="true"></i>{{myProfile.location}}</p>
+<p *ngIf = "mobile=='true'"><i class="fa fa-phone" aria-hidden="true"></i>{{myProfile.mobile}}</p>
+</ion-col>
+</ion-row>
 </ion-item>
-
-	<ion-item *ngIf="profile == 'false'">
-		<h2>User Profile is Restricted</h2>
-	</ion-item>
-
-
+<ion-item *ngIf="profile == 'false'">
+<h2>User Profile is Restricted</h2>
+</ion-item>
 </ion-content>
 
-<style>
-	.item-md{
-		    padding-left: 0 !important;
-	}
-</style>

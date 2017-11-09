@@ -1,3 +1,34 @@
 page-myprofilesetting {
+.user-details{ padding:8px;}
+.user-details .item-inner .input-wrapper .label-md{ margin:0px;}
+.user-details .item-inner .input-wrapper .label-md ion-row ion-col{ margin:0px;}
+.user-details .item-inner .input-wrapper .label-md ion-row ion-col b{  color: hsl(191, 100%, 29%) !important;
+    font-family: "Muli",sans-serif;
+    font-size: 17px !important;
+    margin: 0;
+    padding-bottom:10px; width:100%; float:left;}
+.user-details .item-inner .input-wrapper .label-md ion-row ion-col p{ width:100%; float:left;   font-family: "Muli",sans-serif; padding-bottom:3px;
+    font-size:15px !important;
+    font-weight:400;}
+.user-details .item-inner .input-wrapper .label-md ion-row ion-col p i{ width:20px;
+    font-size: 12px !important;
+    font-weight:600;}
+.item-md.item-block .item-inner{border:none;}
 
+
+
+.user-details .item-inner .input-wrapper .label-ios{ margin:0px;}
+.user-details .item-inner .input-wrapper .label-ios ion-row ion-col{ margin:0px;}
+.user-details .item-inner .input-wrapper .label-ios ion-row ion-col b{  color: hsl(191, 100%, 29%) !important;
+    font-family: "Muli",sans-serif;
+    font-size: 17px !important;
+    margin: 0;
+    padding-bottom:10px; width:100%; float:left;}
+.user-details .item-inner .input-wrapper .label-ios ion-row ion-col p{ width:100%; float:left;   font-family: "Muli",sans-serif; padding-bottom:5px;
+    font-size:15px !important;
+    font-weight:400;}
+.user-details .item-inner .input-wrapper .label-ios ion-row ion-col p i{ width:20px;
+    font-size: 12px !important;
+    font-weight:600;}
+.item-ios.item-block .item-inner{border:none;}
 }

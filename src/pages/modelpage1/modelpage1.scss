@@ -1,3 +1,28 @@
 page-modelpage1 {
-
+.popup{ padding:6px;}
+.popup .item-md .item-inner .input-wrapper .label-md p{color: #333 !important;
+    font-family: "Muli",sans-serif;
+    font-size:16px !important;}
+.popup .item-md .item-inner .input-wrapper .label-md p span{color:#007994 !important;
+    font-family: "Muli",sans-serif;
+    font-size:15px !important; font-weight:600;}
+.popup .item-md .item-inner .input-wrapper .label-md p small{color:#CD5C5C !important;
+    font-family: "Muli",sans-serif;
+    font-size:13px !important; font-weight:600;}
+.popup .item-md .item-inner .input-wrapper .label-md p b{color:#20B2AA !important; padding:3px;
+    font-family: "Muli",sans-serif;
+    font-size:13px !important; font-weight:600;}
+.popup .item-md .item-inner .input-wrapper .label-md { margin:0px;}
+.eidit{
+    border-radius: 30px;
+    background: #FE5722;
+    font-size: 15px;
+    font-weight: 400;
+    text-transform: capitalize;
+    width: 99.6%;
+    height: 35px;
+    float: left;
+    font-family: 'Muli', sans-serif;
+}
+.edit-bd{ background:#025FA9;}
 }

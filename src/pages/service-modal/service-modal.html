@@ -19,7 +19,7 @@
   </ion-toolbar>
   </ion-navbar>
 </ion-header>
-<ion-content class="popup-mds" style=" background:#fff !important;">
+<ion-content class="content-intop" >
 
         <div *ngIf(showServiceOffered) class="offered-servicelist">
           <ion-item *ngFor = "let service of vendorList.serviceOffered">
@@ -35,7 +35,7 @@
 				</small>
               </ion-card-header>
               <!-- <hr *ngIf(sub_category)> -->
-                  <ion-card-content *ngIf="i==sub_category" class="offered-servicelist-two">
+                  <ion-card *ngIf="i==sub_category" class="offered-servicelist-two">
                     <ion-item *ngFor="let subcategory_list of category_list.service_sub_category_lists; let i=index " >
                     <ion-list (click)="showService(i)">
                    
@@ -59,7 +59,7 @@
                         </div>
                     </ion-item>
 
-                  </ion-card-content>
+                  </ion-card>
               
               
             </ion-card>
@@ -75,38 +75,22 @@
 
         <div *ngIf(showContactDetails) class="add-detalis">
 	        <ion-card class="contact-list">
-				<ion-item text-wrap>
-				
-				<i class="fa fa-map-marker" aria-hidden="true"></i> 
-				<p>
-				{{vendorList?.vendorDetails?.address}}
-				</p>
-				</ion-item>
-			    
-			    <ion-item>
+			<ion-item text-wrap>
+			<ion-row>
+			<ion-col>
+			<p><i class="fa fa-map-marker" aria-hidden="true"></i>  {{vendorList?.vendorDetails?.address}}</p>
+			<p><i class="fa fa-envelope" aria-hidden="true"></i>  {{vendorList?.vendorDetails?.email}}</p>
+			<p><i class="fa fa-user" aria-hidden="true"></i>  {{vendorList?.vendorDetails?.contact_name}}</p>
+			<p> <i class="fa fa-phone" aria-hidden="true"></i>  {{vendorList?.vendorDetails?.contact_number}}</p>
 			
-			    <i class="fa fa-envelope" aria-hidden="true"></i> 
-						<p>
-			    {{vendorList?.vendorDetails?.email}}
-				</p>
-			    </ion-item>
-
-			    <ion-item>
-					
-			    <i class="fa fa-user" aria-hidden="true"></i> 
-				<p>
-			    {{vendorList?.vendorDetails?.contact_name}}
-				</p>
-			    </ion-item>
-
-			    <ion-item>
-				
-			    <i class="fa fa-phone" aria-hidden="true"></i> 
-					<p>
-			    {{vendorList?.vendorDetails?.contact_number}}
-				</p>
-			    </ion-item>
-			    
+			</ion-col>
+			</ion-row>
+			
+			</ion-item>
+			
+			
+			
+		
 	      	</ion-card>
 
 		   	<ion-card *ngIf(!vendorList?.vendorDetails?.address)>
@@ -125,60 +109,63 @@
         <ion-item text-wrap>
         <p>{{packages.package_description}}</p>
         </ion-item>-->
-        <ion-card class="contact-list">
+        <ion-card class="packagelist" *ngFor="let pack of vendorList.packages; let i=index" text-wrap>
             <!-- <ion-slides slidesPerView= ""> -->
-              <div *ngFor="let pack of vendorList.packages; let i=index" text-wrap>
+          
                  <!-- <ion-slide class="slide-border"> -->
                   <ion-item style="padding-left:0px;" >
                     <ion-col> 
-                      <div class="plan featured orangeColor">
-                      <h3>{{pack.package_name}}</h3>                    
-                      <div class="circle-pic" *ngIf="pack.discount_rate_package == NULL"><span><i class="fa fa-inr"> {{pack.package_amount}}</i></span><span>/-</span></div>
-                      <div class="circle-pic" *ngIf="pack.discount_rate_package != NULL"><span><i class="fa fa-inr">{{pack.package_amount - pack.package_amount*pack.discount_rate_package/100}}</i></span><span>/-</span></div>
-                      <h5 *ngIf="pack.discount_rate_package != NULL">     
-                      <span><small><i class="fa fa-rupee"></i>{{pack.package_amount}} </small></span>
-                      <span>  {{pack.discount_rate_package}} % off </span>
+                      <!--<div class="plan featured orangeColor">-->
+                      <h3>{{pack.package_name}}</h3> 
+				  
+                      <ion-list class="price-bt" *ngIf="pack.discount_rate_package == NULL"><span><i class="fa fa-inr"></i> {{pack.package_amount}}/-</span></ion-list>
+                      <ion-list class="price-bt" *ngIf="pack.discount_rate_package != NULL"><span><i class="fa fa-inr"></i>{{pack.package_amount - pack.package_amount*pack.discount_rate_package/100}}/-</span></ion-list>
+                      <ion-list class="price-list" *ngIf="pack.discount_rate_package != NULL">     
+                      <small><i class="fa fa-rupee"></i>{{pack.package_amount}} </small>
+                      <span>  {{pack.discount_rate_package}} % off <b> For {{pack.package_validity}}</b> </span>
+					  <p>{{pack.package_description}}</p>
                       <!-- <span >{{service_type}}</span> -->
-                      </h5>
-                      <p>For {{pack.package_validity}} </p>
-                      <p>{{pack.package_description}}</p>                      
-                       <div *ngIf="vendorList.dependentLists.length != 1">
+                      </ion-list>
+					     
+						               
+                       <ion-list *ngIf="vendorList.dependentLists.length != 1">
                         <!-- <div *ngIf="pack.package_available == 0"> -->
                         <a (click)="openRequestPackage(pack.id)" class="lan-select">Get Package</a>
                         <!-- </div> -->
-                      </div> 
+                      </ion-list>   
 
-                        <div *ngIf="pack.package_available == 0">
+                        <ion-list *ngIf="pack.package_available == 0">
                         <a (click)="openRequestPackage(pack.id)" class="lan-select">Get Package</a>                      
-                         </div>
-                      <div *ngIf="pack.package_available > 0"><a class="lan-select">You've already purchased this</a>
-                      </div>
-                      <ul>                  
-                        <li *ngFor="let pack_serve of pack.packages_service; let i=index" ><i class="fa fa-check check-plan" aria-hidden="true">
-                          </i> {{pack_serve.name}} {{pack_serve.quantity}}  {{pack_serve.common_type.replace('Per', '')}}</li>
-                      </ul>
-                      </div>
+                        </ion-list>   
+                      <strong class="purch-already" *ngIf="pack.package_available > 0">You've already purchased this
+                     </strong>
+					 <ion-list *ngFor="let pack_serve of pack.packages_service; let i=index" class="listed-descr">
+							{{pack_serve.name}} {{pack_serve.quantity}}  {{pack_serve.common_type.replace('Per', '')}}</ion-list>
+                                     
+                         <ion-list class="listed-descr" *ngFor="let pack_serve of pack.packages_service; let i=index" >{{pack_serve.name}} {{pack_serve.quantity}}  {{pack_serve.common_type.replace('Per', '')}}</ion-list>
+                    
+                      <!--</div>-->
                     </ion-col>
                   </ion-item>
                 <!-- </ion-slide> -->
-              </div>
+             
         <!-- </ion-slides> -->
           </ion-card> 
           <!-- </div> -->       
          </div>
 
 </ion-content>
-<ion-footer>
-  <ion-toolbar color="primary"> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
-     <ion-buttons>
-      <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
-      <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back
-       </button>
-      <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()">
-      <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>
+<!-- <ion-footer> -->
+  <!-- <ion-toolbar color="primary"> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" --> 
+     <!-- <ion-buttons> -->
+      <!-- <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()"> -->
+      <!-- <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back -->
+       <!-- </button> -->
+      <!-- <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()"> -->
+      <!-- <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button> -->
+    <!-- </ion-buttons> -->
+  <!-- </ion-toolbar> -->
+<!-- </ion-footer> -->
 <style>
 .item-md													{background:none !important;}
 ion-content{ background:none !important;}
