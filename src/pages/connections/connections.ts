@@ -516,7 +516,7 @@ All:any;
 
 
 @Component({
-  template: `<ion-list>
+  template: `<ion-list class='send-req'>
 <ion-item (click)="requests('all')">
 All Requests
 </ion-item>

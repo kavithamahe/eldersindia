@@ -87,5 +87,21 @@ page-blogs {
     top:150px;
     width: auto;
 }
+.labels-bdss-featured_image {
+    background: hsla(240, 2%, 8%, 0.58) none repeat scroll 0 0 !important;
+    border-left: 4px solid red;
+    color: hsl(0, 0%, 100%) !important;
+    float: left;
+    font-family: "Muli",sans-serif;
+    font-size: 12px !important;
+    font-weight: 600;
+    padding: 9px;
+    position: absolute;
+
+    top:150px;
+    width: auto;
+}
+
+
 
 }

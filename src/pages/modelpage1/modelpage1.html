@@ -13,14 +13,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="popup-mds" style=" background:#fff !important;">
-
-  <br>
-		 <ion-item text-wrap>
-        <p>You are availing {{serviceTitle}}({{serviceType}}) service from {{name}} at {{datetime}} {{preferred_time}}</p>
+<ion-content>
+<ion-card class="popup">
+		 <ion-item text-wrap >
+        <p>You are availing {{serviceTitle}} (<span>{{serviceType}}</span>) service from <b>{{name}}</b> <br/>at<small> {{datetime}} / {{preferred_time}}</small></p>
      </ion-item>
-      <button ion-button color="royal" large (click)="edit()">Click here to edit
-      </button>
+      <!-- <button ion-button small large (click)="edit()" class="eidit">Click here to edit -->
+      <!-- </button> -->
+	  </ion-card>
+	  <ion-fab bottom right>
+  <button ion-fab mini icon-only (click)="edit()" class="edit-bd"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+</ion-fab>
+
+
 </ion-content>
 
 

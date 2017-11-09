@@ -27,10 +27,7 @@
 
 <div class="service-top-title"></div>
 
-<ion-row>
-   <ion-col>
-   <div class="service-listed">
-   <ion-card class="sel-packages">
+  <ion-card class="sel-packages">
    <ion-item>
             
       <ion-label><p>Location</p></ion-label>
@@ -42,8 +39,8 @@
      
       </ion-item> 
 	  </ion-card>
-	  
-    <ion-card class="slider-card">
+ <hr/>
+ <ion-card class="slider-card">
  <h1 class="package-list-show">Packages (<span>{{packageCount}}</span>) </h1> 
     <ion-slides slidesPerView= "1">
         <div *ngFor="let package of packages; let i=index" text-wrap>
@@ -66,9 +63,28 @@
           </ion-slide>
         </div>
         </ion-slides>
-    </ion-card>
+		</ion-card>
+		
+<hr/>
+<ion-row>
+   <ion-col>
+   <div class="service-listed">
  
+	  
+     
 
+
+<button *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full (click)="subCategory(service)" class="myblock service-bg{{i}}">
+
+<div class="left-icons">
+<i class="{{service.icon}}" aria-hidden="true"></i>
+<i *ngIf="!service.icon" class="fa fa-bolt" aria-hidden="true"></i>
+<p>{{service.service}}</p>
+</div>
+</button>
+</div>
+   </ion-col>
+</ion-row>
 
 <button *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full (click)="subCategory(service)" class="myblock service-bg{{i}}">
 
