@@ -61,9 +61,9 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'serviceRating',_request,this.options)
       .map(res => res.json()); 
   }
-  serviceRequestScroll(nextPageURL)
+  serviceRequestScroll(nextPageURL,searchEvent)
    {
-     let _request= {"info":{"list":true,"sort":"","searchValue":"","status":""}};
+     let _request= {"info":{"list":true,"sort":"","searchValue":searchEvent,"status":""}};
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }

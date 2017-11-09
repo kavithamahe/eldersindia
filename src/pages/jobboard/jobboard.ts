@@ -46,13 +46,14 @@ file_name:any;
 
   public onInit()
   { 
-    // console.log('this.functionalArea'+this.functionalArea);
-    // console.log('this.location'+this.location); 	
     this.loader = this.loadingCtrl.create({ content: "Please wait..." });     
     this.loader.present();
     this.jobBoardService.jobsList(this.functionalArea,this.location).subscribe(
      (jobBoard) => {
       this.jobBoardInfo=jobBoard.result.info.data; 
+      if(this.jobBoardInfo.length == 0){
+        this.showToaster("No Records Found")
+      }
       this.nextPageURL=jobBoard.result.info.next_page_url;
       this.functionalAreaList=jobBoard.result.get.FunctionalArea; 
       this.locationList=jobBoard.result.get.Location; 

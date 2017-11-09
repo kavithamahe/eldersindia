@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,LoadingController,ToastController,ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { CallNumber } from 'ionic-native';
+
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { RecurringviewPagePage } from '../../pages/recurringview/recurringview';
@@ -40,7 +42,7 @@ serviceRequestScrollLists:any=[];
     console.log('ionViewDidLoad RecurringPagePage');
   } 
   inputSearch(searchEvent){
-   this.searchText = searchEvent.target.value;
+   this.searchText = searchEvent;
    this.getrecurringRequest();
    if(this.searchText.length == 0){
     this.getrecurringRequest();
@@ -92,7 +94,7 @@ serviceRequestScrollLists:any=[];
         this.recurringRequest.push(this.serviceRequestScrollLists[i]);
         }
       
-       this.nextPageURL=serviceRequestScroll.result.list.next_page_url;     
+       this.nextPageURL=serviceRequestScroll.result.next_page_url;     
     },
     (err) => { 
         if(err.status===401)
@@ -118,5 +120,17 @@ serviceRequestScrollLists:any=[];
  dashboardPage(){
     this.navCtrl.setRoot(DashboardPage);
   }
-  
+   public makeCall(number)
+  {
+    if(number)
+    {
+    CallNumber.callNumber(number, true)
+  .then(() => console.log('Launched dialer!'))
+  .catch(() => console.log('Error launching dialer'));
+   }
+   else
+   {
+    this.showToaster("There is no contact number");
+   }
+  }
 }

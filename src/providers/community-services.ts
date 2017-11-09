@@ -395,10 +395,10 @@ myprofile(id){
    return this.http.post(`${this.getCommunityPostsUrl }elderOnBoarding`,dependentData,this.options)
     .map(res =>res.json());
   }
-   getConnections(){
-       let _request= {};
+   getConnections(user_id){
+       let _request= {'user_id':user_id};
       // console.log(this.rootUrl+'getConnections');
-    return this.http.post(`${this.getCommunityPostsUrl }getConnections`,_request,this.options)
+    return this.http.post(`${this.getCommunityPostsUrl }getInviteContacts`,_request,this.options)
       .map(res => res.json()); 
    } 
    inviteFriends(CommunityId,friendsID){

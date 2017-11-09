@@ -42,14 +42,15 @@ emptyRecordSet:any='';
 }
  public onInit()
  {
-   console.log('this.functionalArea'+this.functionalArea);
-    console.log('this.location'+this.location); 
    this.loader = this.loadingCtrl.create({ content: "Please wait..." });     
     this.loader.present();
     this.appliedJobsList =[];
    this.jobBoardService.appliedJobs(this.functionalArea,this.location).subscribe(
      (appliedJobs) => {      
        this.appliedJobsList=appliedJobs.result.info.data;
+       if(this.appliedJobsList.length == 0){
+        this.showToaster("No Records Found")
+      }
        this.nextPageURL=appliedJobs.result.info.next_page_url; 
       this.functionalAreaList=appliedJobs.result.get.FunctionalArea; 
       this.locationList=appliedJobs.result.get.Location; 

@@ -44,8 +44,6 @@ submitAttempt:any;
   constructor(public storage:Storage,public loadingCtrl: LoadingController,public formBuilder:FormBuilder,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController) {
 
       this.profileData = navParams.get("profileData");
-      console.log(this.profileData);
-      console.log("person"+this.profileData.personal_email);
       this.pemail=this.profileData.personal_email;
       this.avatar = this.profileData.avatar;
 
@@ -57,7 +55,6 @@ submitAttempt:any;
       
       
       this.user_dob = moment(this.profileData.dob).format("YYYY-DD-MM");
-      console.log(this.user_dob);
       this.user_type = this.profileData.user_type;
       if(this.user_type == 'sponsor'){
       this.my_location = this.profileData.locationName;  
@@ -79,8 +76,7 @@ submitAttempt:any;
         personal_email: ['',Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
         user_type: [{value:this.user_type,disabled:true},Validators.compose([Validators.required])]        
     });
-     
-   
+ 
   }
 
 
@@ -92,7 +88,6 @@ submitAttempt:any;
   .subscribe(data =>{
     this.profileData = data.result.info;
     this.user_dob=data.result.info.dob;
-    console.log("gdgd"+ this.user_dob);
     this.user_type = data.result.info.user_type;
     loader.dismiss();
   },
@@ -104,7 +99,6 @@ submitAttempt:any;
 
   getDate(datepar){
      var dateParts = datepar.split("-").reverse().join("-");
-     console.log("fdsF"+dateParts)
      // let date = dateParts[2]+"-"+dateParts[1]+"-"+dateParts[0];
      return dateParts;
   }

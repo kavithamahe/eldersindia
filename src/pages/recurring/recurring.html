@@ -17,7 +17,11 @@
 
 
 <ion-content class="content-intop">
-<ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>
+<!-- <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar> -->
+ <ion-row>
+<ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
+  <ion-col width-20><button (click)="inputSearch(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
+</ion-row>
 <ion-card  *ngFor="let recurring of recurringRequest" class="job-detailsview">
 <ion-grid class="package-needs">
   <ion-row>
@@ -27,7 +31,7 @@
   </ion-row>
     <ion-row>
   <ion-col col-12 text-wrap>
-    <b>Request Id </b><p>{{recurring.sr_token}}</p>
+    <b>Request Id </b><p>{{recurring.sr_token}} to {{recurring.req_count}}</p>
 	  </ion-col>
   </ion-row>
   
@@ -39,8 +43,14 @@
   
       <ion-row>
   <ion-col col-12 text-wrap>
-    <b>Service Provider</b><p>{{recurring.elder_name}}</p>
+    <b>Service Provider</b><p>{{recurring.vendor_name}}</p>
+    <p (click)="makeCall(recurring?.vendor_contact_number)"><i class="fa fa-phone" aria-hidden="true"></i>{{recurring.vendor_contact_number}}</p>
 		  </ion-col>
+  </ion-row>
+    <ion-row>
+  <ion-col col-12 text-wrap>
+    <b>Service Type</b><p>{{recurring.service_type}}</p>
+      </ion-col>
   </ion-row>
    <ion-row>
   <ion-col col-12 text-wrap>  

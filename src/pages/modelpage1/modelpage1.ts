@@ -26,6 +26,7 @@ export class Modelpage1PagePage {
   datetime:any;
   preferred_time:any;
   serviceTitle:any;
+  vendor:any;
   constructor(public modalCtrl: ModalController,public nav: NavController,public navParams: NavParams, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {  
     this.serviceDatas =  navParams.get("serviceDatas");
@@ -34,6 +35,7 @@ export class Modelpage1PagePage {
     this.preferred_time = this.serviceDatas.preferred_time;
     this.name = navParams.get("name"); 
     this.serviceTitle = navParams.get("serviceTitle"); 
+    this.vendor = navParams.get("vendor");
  
   }
 

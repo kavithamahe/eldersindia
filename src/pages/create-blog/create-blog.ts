@@ -139,7 +139,7 @@ ionViewDidEnter() {
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+         this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -235,6 +235,8 @@ ionViewDidEnter() {
       this.title = "";
       this.highlights = "";
       this.description = "";
+      this.featuredImage = "";
+      this.bannerImage = "";
       loader.dismiss();
       //console.log(createBlog.result);
     },

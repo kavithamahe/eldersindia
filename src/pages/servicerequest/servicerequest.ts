@@ -255,7 +255,7 @@ searchEvent:any="";
   }
   serviceRequestScroll()
   {
-    this.serviceRequest.serviceRequestScroll(this.nextPageURL).subscribe(
+    this.serviceRequest.serviceRequestScroll(this.nextPageURL,this.searchEvent).subscribe(
      (serviceRequestScroll) => {
       this.serviceRequestScrollLists=serviceRequestScroll.result.info.list.data; 
        for (let i = 0; i < Object.keys(this.serviceRequestScrollLists).length; i++) {
@@ -267,7 +267,7 @@ searchEvent:any="";
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {

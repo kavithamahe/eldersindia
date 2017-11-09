@@ -41,6 +41,7 @@ show_service:any = null;
 submitAttempt:any;
 requestForm: FormGroup;
 sliderOptions: any;
+packageinfo:any;
 
 token:any;
 elderId:any;
@@ -103,6 +104,8 @@ lead_time:any='00:00';
         .subscribe(
           data =>{
                    this.vendorList = data.result.info;
+                   this.packageinfo = this.vendorList.packages;
+                   console.log(this.packageinfo.length);
                    this.serviceData = data.result.info.requestServices;
                    this.website = this.vendorList.vendorDetails.website;
                    //console.log(data.result.info.serviceOffered[0]);
@@ -162,8 +165,13 @@ modal(){
     modal.present();
     }
     togglePackages(){
+      if(this.packageinfo.length == 0){
+        this.showToast("No Packages Available")
+      }
+      else{
       let modal = this.modalCtrl.create(ServiceModalPage,{service:"packages",vendorList:this.vendorList});    
     modal.present();
+  }
     }
   showToast(messageData){
     let toast = this.toastCtrl.create({

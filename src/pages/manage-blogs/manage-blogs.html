@@ -81,10 +81,16 @@
 
 	
 
-	<ion-row *ngFor="let status of blogStatus" >
+	<ion-row *ngFor="let status of blogStatus">
 		<ion-col>
 	<p item-text-wrap  class="service-cont" *ngIf="manageBlog?.status==status?.id">
-	<ion-badge color="secondary">{{status?.label}}</ion-badge></p>
+	<!-- <ion-badge >{{status?.label}}</ion-badge> -->
+  <ion-badge class="warning" *ngIf="status?.id == 0">Pending</ion-badge>
+  <ion-badge class="approved" *ngIf="status?.id == 1">Approved</ion-badge>
+  <ion-badge class="rejected" *ngIf="status?.id == 2">Rejected</ion-badge>
+  <ion-badge class="deleted" *ngIf="status?.id == 3">Deleted</ion-badge>
+  <ion-badge class="archieved" *ngIf="status?.id == 4">Archieved</ion-badge>
+  </p>
 		</ion-col>
 	</ion-row>
 
@@ -107,7 +113,7 @@
 
 </ion-card>
 <!-- <ion-item padding *ngIf="!manageblogsLists"> -->
-     <p class="error-clr">{{emptyRecord}}</p>
+     <p *ngIf="!manageblogsLists" class="error-clr">{{emptyRecord}}</p>
    <!-- </ion-item> -->
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>

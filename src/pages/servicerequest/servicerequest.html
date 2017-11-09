@@ -28,10 +28,13 @@
 </ion-header>
 
 <ion-content  class="content-intop">
-
+<!-- 
     <ion-searchbar [(ngModel)]="searchEvent" (ionInput)="getItems(searchEvent)">
-    </ion-searchbar>
-
+    </ion-searchbar> -->
+ <ion-row>
+<ion-col width-80><ion-searchbar [(ngModel)]="searchEvent"></ion-searchbar></ion-col>
+  <ion-col width-20><button (click)="getItems(searchEvent)" ion-button small class="go-btn">Go</button> </ion-col>
+</ion-row>
 <ion-card *ngFor="let service of serviceRequestInfo; let i=index;" class="service-cards">
 
   <ion-grid>

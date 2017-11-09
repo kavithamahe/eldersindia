@@ -55,6 +55,7 @@ export class CommunityPage {
     user_id:any= 0;
     authForm:FormGroup;
     message:any='';
+    connectionInfo:any=[];
   constructor(public platform: Platform,public popoverCtrl: PopoverController, public actionsheetCtrl: ActionSheetController,public modal: ModalController, public formBuilder: FormBuilder,public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices) {
     this.nav=nav;
 
@@ -83,6 +84,7 @@ export class CommunityPage {
         this.community_id=this.navParams.get("community_id");
         this.communityList(this.community_id);
         this.communityDetail(this.community_id);
+        this.getConnections();
         this.addComments=false;
         this.itemComments=false;
         this.userType="sponsor";
@@ -147,7 +149,7 @@ files:any;
       inputs: [
         {
           name: 'title',
-          placeholder: 'reason'
+          placeholder: 'Reason'
         },
       ],
       buttons: [
@@ -162,7 +164,7 @@ files:any;
           handler: data => {
             //console.log(data.title);
             if(data.title == ""){
-              this.communityServices.showToast("Please enter describe the reason")
+              this.communityServices.showToast("Please enter the reason")
             }
             else{
             this.reportAbuse(data.title,id,poster_id);
@@ -173,8 +175,25 @@ files:any;
     });
     prompt.present();
   }
+   getConnections(){
+  
+  //let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    //loader.present();    
+      this.communityServices.getConnections(this.user_id).subscribe(connections => {
+        this.connectionInfo=connections.result;
+        console.log(this.connectionInfo.length);
+       // loader.dismiss();
+     },
+   err =>{
+    //loader.dismiss();
+      this.communityServices.showErrorToast(err);
+  })
+ }
   presentPopover(ev,id) {
-    console.log(id);
+    if(this.connectionInfo.length == 0){
+      this.communityServices.showToast("No Contacts")
+    }
+    else{
     let popover = this.popoverCtrl.create(CommunityPopoverPage, {"communityID":id
     });
     popover.present({
@@ -187,6 +206,7 @@ files:any;
        this.communityDetail(this.community_id);
    
     })
+  }
   }
 showConfirm(id){
      let confirm = this.alertCtrl.create({
@@ -561,16 +581,28 @@ export class CommunityPopoverPage {
   connectionInfo:any; 
   friendsId:any;
   communityId:any;
+  imageUrl:any;
+  token:any;
+  user_id:any;
   constructor(public viewCtrl: ViewController,public toastCtrl: ToastController,public communityServices: CommunityServices,public loadingCtrl: LoadingController,public storage:Storage) {  
-    this.getConnections();
+    
+     this.storage.ready().then(() => {
+      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      this.storage.get('token').then((token) => { this.token=token; 
+     
+      });
+      this.storage.get('id').then((id) => { this.user_id=id; 
+      this.getConnections();
+    })
+    });
    }
   getConnections(){
   
   //let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     //loader.present();    
-      this.communityServices.getConnections().subscribe(connections => {
+      this.communityServices.getConnections(this.user_id).subscribe(connections => {
         this.connectionInfo=connections.result;
-        //console.log(this.connectionInfo);
+        console.log(this.connectionInfo.length);
        // loader.dismiss();
      },
    err =>{
@@ -584,6 +616,7 @@ if(this.selectedConnections != undefined){
     loader.present();    
       this.communityServices.inviteFriends(this.communityId,this.selectedConnections).subscribe(connections => {
        //this.connectionInfo=connections.result;
+    
         loader.dismiss();
 
         this.showToaster(connections.result);

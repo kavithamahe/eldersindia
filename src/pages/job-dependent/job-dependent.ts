@@ -36,7 +36,7 @@ file_path:any;
 user_type:any;
 submitAttempt:any;
 jobId:any;
-dependentstatus:any;
+dependentstatus:any=0;
   constructor(public formBuilder: FormBuilder,private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.jobId=navParams.get("jobId");
   this.storage.ready().then(() => {
@@ -63,7 +63,7 @@ dependentstatus:any;
     loader.present();
    this.jobBoardService.getDependent().subscribe(
      (getDependent) => {
-      if(getDependent.length<=0)
+      if(getDependent.length<=0 && this.user_type !='elder')
       {
         this.showToaster("There is no dependent. You can not apply job!.");
         //this.dismiss();
