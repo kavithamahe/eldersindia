@@ -33,6 +33,8 @@ nextPageURL2:any='';
 inboxScrollLists:any=[];
 sentScrolllLists:any=[];
 status:any;
+inbox:any="";
+outbox:any="";
 emptyRecord:any;
 
    constructor(public navCtrl: NavController,public alertCtrl: AlertController, public navParams: NavParams,platform: Platform,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
@@ -61,15 +63,15 @@ emptyRecord:any;
   {
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.messagesService.inbox().subscribe(
+    this.messagesService.inbox(this.inbox).subscribe(
      (inbox) => {
       this.inboxInfo=inbox.result.data;
       this.status=this.inboxInfo.read_status;
-     // console.log("status" + this.status );
       this.nextPageURL1=inbox.result.next_page_url;  
       loader.dismiss();    
     },
     (err) => { 
+      this.inboxInfo =[];
         if(err.status===401)
         {
           this.showToaster(JSON.parse(err._body).error);
@@ -84,59 +86,69 @@ emptyRecord:any;
       }
     );
   }
-   public getItems(searchEvent){
-     let term = searchEvent.target.value;
-      this.messagesService.inboxSearch(term).subscribe(searchConnection => {
-      this.inboxInfo=searchConnection.result.data;
-      },
-      (err) => { 
-        this.inboxInfo =[];
-        if(err.status===401)
-        {
-          this.showToaster(JSON.parse(err._body).error);
-        this.emptyRecord = (JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-           this.emptyRecord = "No Records Found"
-        }
-      }
-      );
+   public getItems(inbox){
+
+    
+    this.inbox = inbox;
+    this.onInit();
+   
+
+     // let term = searchEvent.target.value;
+     // this.onInit();
+      // this.messagesService.inboxSearch(term).subscribe(searchConnection => {
+      // this.inboxInfo=searchConnection.result.data;
+      // },
+      // (err) => { 
+      //   this.inboxInfo =[];
+      //   if(err.status===401)
+      //   {
+      //     this.showToaster(JSON.parse(err._body).error);
+      //   this.emptyRecord = (JSON.parse(err._body).error);
+      //   }
+      //   else
+      //   {
+      //     this.showToaster("Try again later");
+      //      this.emptyRecord = "No Records Found"
+      //   }
+      // }
+      // );
   }
  
-  public setItems(searchEvent){
-     let term = searchEvent.target.value;
-      this.messagesService.sentSearch(term).subscribe(searchConnection => {
-      this.sentInfo=searchConnection.result.data;
-      },
-      (err) => {
-      this.sentInfo =[]; 
-        if(err.status===401)
-        {
-          this.showToaster(JSON.parse(err._body).error);
-        this.emptyRecord = (JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-           this.emptyRecord = "No Records Found"
-        }
-      }
-      );
+  public setItems(outbox){
+     // let term = searchEvent.target.value;
+     this.outbox = outbox;
+    this.sent();
+      // this.messagesService.sentSearch(term).subscribe(searchConnection => {
+      // this.sentInfo=searchConnection.result.data;
+      // },
+      // (err) => {
+      // this.sentInfo =[]; 
+      //   if(err.status===401)
+      //   {
+      //     this.showToaster(JSON.parse(err._body).error);
+      //   this.emptyRecord = (JSON.parse(err._body).error);
+      //   }
+      //   else
+      //   {
+      //     this.showToaster("Try again later");
+      //      this.emptyRecord = "No Records Found"
+      //   }
+      // }
+      // );
   }
   
   public sent()
   {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.messagesService.sent().subscribe(
+    this.messagesService.sent(this.outbox).subscribe(
      (sent) => {
       this.sentInfo=sent.result.data;  
       this.nextPageURL2=sent.result.next_page_url; 
       loader.dismiss();        
     },
     (err) => { 
+       this.sentInfo=[];
         if(err.status===401)
         {
           this.showToaster(JSON.parse(err._body).error);

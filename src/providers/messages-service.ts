@@ -40,8 +40,8 @@ rootUrl:any;
         });
    toast.present();
   }
-  inbox() {  
-   let _request= {"search": ""}
+  inbox(inbox) {  
+   let _request= {"search": inbox}
     return this.http.post(this.rootUrl+'listInbox',_request,this.options)
       .map(res => res.json()); 
   }
@@ -50,8 +50,8 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'listInbox',_request,this.options)
       .map(res => res.json()); 
   }
-  sent() {  
-   let _request= {"search": ""}
+  sent(searchText) {  
+   let _request= {"search": searchText}
     return this.http.post(this.rootUrl+'listSent',_request,this.options)
       .map(res => res.json()); 
   }

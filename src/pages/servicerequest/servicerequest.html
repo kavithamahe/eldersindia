@@ -29,7 +29,7 @@
 
 <ion-content  class="content-intop">
 
-    <ion-searchbar *ngIf="serviceRequestInfo.length != 0" (ionInput)="getItems($event)">
+    <ion-searchbar [(ngModel)]="searchEvent" (ionInput)="getItems(searchEvent)">
     </ion-searchbar>
 
 <ion-card *ngFor="let service of serviceRequestInfo; let i=index;" class="service-cards">

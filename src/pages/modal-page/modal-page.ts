@@ -319,6 +319,14 @@ onlyNumberKey(event) {
       console.log(serviceData);
        let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle});
       serviceModal.present();
+       serviceModal.onDidDismiss(data =>{
+      if(data == "dismiss"){
+        console.log(" schedule request modal dismissed..!");
+      }else{
+       this.seviceCheck = data;
+       console.log(data);
+      }
+    })
     }
     else{
       this.providerService.showToast("Please Select Frequency");
@@ -354,6 +362,14 @@ else{
       console.log(serviceData);
        let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle});
       serviceModal.present();
+       serviceModal.onDidDismiss(data =>{
+      if(data == "dismiss"){
+        console.log(" schedule request modal dismissed..!");
+      }else{
+       this.seviceCheck = data;
+       console.log(data);
+      }
+    })
      }
      else{
       this.providerService.showToast("Please Select Preferred date and time");
@@ -384,6 +400,14 @@ else{
       console.log(serviceData);
        let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle});
       serviceModal.present();
+       serviceModal.onDidDismiss(data =>{
+      if(data == "dismiss"){
+        console.log(" schedule request modal dismissed..!");
+      }else{
+       this.seviceCheck = data;
+       console.log(data);
+      }
+    })
         }
     else{
       this.providerService.showToast("Please Select Frequency");
