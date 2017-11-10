@@ -1,7 +1,31 @@
 page-create-message {
 .toolbar-title-md{ text-align:center !important;}
 .toolbar-title-ios{ text-align:center;}
-.create-message{padding:10px;}
-.completer-input{ width:100%; border:1px solid #ccc; height:40px; padding:5px; margin-bottom:10px;}
+.login-detalis{box-shadow:none;}
+.err-reds{color:red !important; font-size:12px;}
+.create-message .item-md .item-inner .input-wrapper .label-md input{  border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 20px;
+    height: 43px;
+    margin-left: 9px; padding-left:8px; font-family: "Muli",sans-serif;
 
+    width:96%;}
+.create-message .item-md .item-inner .input-wrapper .label-md input[type="file"]{  border:none;
+    border-radius: 20px;
+    height:auto;
+    margin-left: 9px; padding-left:8px;
+
+    width:96%;}
+.list-md .item-block .item-inner{border:none;}
+login-detalis 											{margin-top:-30px;  padding:5px; position:relative; background:#fff;}
+.login-detalis h1 									    { text-align:center !important; color:#007994 !important; font-size:20px;  font-family: "Muli",sans-serif;}
+.text-input-md{padding:10px; border:1px solid #ccc;border-radius:20px; font-family: "Muli",sans-serif;}
+.text-input-ios{padding:10px; border:1px solid #ccc;border-radius:20px; font-family: "Muli",sans-serif;}
+.logoin-btn{  font-size: 16px;
+    font-weight:600; color:#fff;
+    font-family: 'Muli', sans-serif;background: rgba(0, 0, 0, 0) linear-gradient(45deg, #fe5722 0%, #fe5722 30%, #ff906b 50%, #fe5722 71%, #fe5722 100%) repeat scroll 0 0;width:96%;height:40px; border-radius:20px; margin-left:10px;}
+.item-md{background:none !important;}
+.item-ios{background:none !important;}
+.item-md.item-block .item-inner{padding-right:0px;}
+.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:none;box-shadow:none;}
+.item-md.item-input.input-has-focus .item-inner{border-bottom-color:none;box-shadow:none;}
 }

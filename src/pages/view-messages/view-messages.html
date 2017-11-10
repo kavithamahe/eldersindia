@@ -21,7 +21,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding style="background:#fff;">
+<ion-content>
 
   <ion-list>
     <ion-item text-wrap class="left-img">
@@ -38,7 +38,7 @@
         </ion-col>
         <ion-col width-80  style="padding: 0px !important" class="send-box-content">
   			  <ion-row>
-            <ion-item style="padding: 0px !important" *ngIf ="viewType == 'inbox'" class="view-messname">
+            <ion-item *ngIf ="viewType == 'inbox'" class="view-messname">
       				<small (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" 
               *ngIf ="viewType == 'inbox'">{{veiwMessagesInfo?.sender_name}}</small>
       				<small (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" 
@@ -47,7 +47,7 @@
               {{veiwMessagesInfo?.created_at | date :'MM/dd/yy'}}</b>
   				    <span>{{veiwMessagesInfo?.subject}}</span>
   				  </ion-item>
-            <ion-item style="padding: 0px !important" *ngIf ="viewType != 'inbox'" class="view-messname">
+            <ion-item *ngIf ="viewType != 'inbox'" class="view-messname">
               <small (click)="CommunityUserWall(veiwMessagesInfo?.receiver_id)" 
               *ngIf ="viewType == 'inbox'">{{veiwMessagesInfo?.sender_name}}</small>
               <small (click)="CommunityUserWall(veiwMessagesInfo?.receiver_id)" 
@@ -64,8 +64,8 @@
       <ion-card-content item-text-wrap class="text-view-mess">
         <p>{{veiwMessagesInfo?.message}}</p>
       </ion-card-content>
-      <div *ngFor="let attachment of attachmentInfo">
-        <p (click)="downloadFile(attachment.file_path,attachment.file_name)">{{attachment.file_name}}</p>
+      <div *ngFor="let attachment of attachmentInfo" class="documents">
+        <p (click)="downloadFile(attachment.file_path,attachment.file_name)"><i class="fa fa-file-text-o" aria-hidden="true"></i> &nbsp;{{attachment.file_name}}</p>
         <!-- <span>Download progress : {{downloadProgress}} %</span> --> 
       </div>
      <ion-row class="replay-forward">
