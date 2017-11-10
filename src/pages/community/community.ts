@@ -558,10 +558,10 @@ doInfinite(infiniteScroll) {
 }
 
 @Component({
-  template: `<ion-title text-center text-capitalize>Request to join communities</ion-title> 
+  template: `<ion-title class="req-ti">Request to join communities</ion-title> 
   <div class="register-form">
 
-          <ion-item>
+          <ion-item class="sle">
           <ion-label>To</ion-label>
              <ion-select multiple="true" [(ngModel)]="selectedConnections" [ngModelOptions]="{standalone: true}">
           <ion-option *ngFor="let name of connectionInfo" [value] = "name">{{name.friend_name}}
