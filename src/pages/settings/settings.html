@@ -28,11 +28,11 @@
           <ion-label><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Profile</ion-label>
           <ion-toggle [(ngModel)]="privacy_profile"></ion-toggle>
         </ion-item>
-        
+        <!-- 
         <ion-item (tap)="toggle('privacy_name')" *ngIf="privacy_profile == true">
           <ion-label><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Name</ion-label>
           <ion-toggle [(ngModel)]="privacy_name"></ion-toggle>
-        </ion-item>
+        </ion-item> -->
         <ion-item (tap)="toggle('privacy_email')" *ngIf="privacy_profile == true">
           <ion-label><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;Email
           </ion-label>
