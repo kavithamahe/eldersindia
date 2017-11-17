@@ -14,11 +14,23 @@ page-connections {
     font-size:13px !important;
  
    }
+ .inbox-sends .item-inner .input-wrapper .label-ios ion-row ion-col p span{color: #333 !important;
+    font-family: "Muli",sans-serif;
+    font-size:13px !important;
+ 
+   }
+.list-ios > .item-block:first-child{border:none;}
 .list-md .item-block .item-inner{ border:none;}
+.item-ios.item-block .item-inner{padding-right:0px;}
+.list-ios .item-block .item-inner{ border:none;}
 .inbox-sends .item-inner .input-wrapper .label-md{ margin:0px;}
 .inbox-sends .item-inner .input-wrapper .label-md ion-row ion-col p i{font-size:12px !important; color:#666 !important; width:15px;}
+
+.inbox-sends .item-inner .input-wrapper .label-ios{ margin:0px;}
+.inbox-sends .item-inner .input-wrapper .label-ios ion-row ion-col p i{font-size:12px !important; color:#666 !important; width:15px;}
 .listed-rec{color:hsl(191, 100%, 29%) !important;
     font-family: "Muli",sans-serif; font-weight:600;
     font-size:15px !important; padding-top:10px;padding-bottom:10px;}
-.send-req{ border:1px solid red;}
+
+
 }

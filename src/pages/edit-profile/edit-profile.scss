@@ -1,8 +1,27 @@
 page-edit-profile {
 .profile-edit{
 		 background-image: url('../assets/img/Background-4.jpg');
-  -webkit-background-image: url('../assets/img/Background-4.jpg');
+  -webkit-background-image: url('../assets/img/Background-4.jpg'); height:175px;
 }
+.profile-img img {
+    border: 3px solid hsl(0, 0%, 100%);
+    border-radius: 50%;
+    box-shadow: 0 8px 6px -6px hsl(0, 0%, 0%);
+    height: 100px;
+    margin-top: 20px;
+    width: 100px;
+}
+.profile-edit p {
+    color: hsl(0, 0%, 100%);
+    float: left;
+    font-family: "Muli",sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}
+.profile-edit{text-align:center;}
 .toolbar-title-md{ text-align:center !important;}
 .toolbar-title-ios{ text-align:center;}
 }

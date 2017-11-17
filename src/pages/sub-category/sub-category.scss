@@ -11,6 +11,11 @@ page-sub-category {
     font-size: 15px;
     padding-left:10px;
 }
+.sel-packages .item-ios .item-inner .label-ios {
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    padding-left:10px;
+}
 .item-md.item-block .item-inner{border-bottom:none;}
 .error-clr{color:red; font-size:13px; font-family: "Muli",sans-serif; }
 .item-md.item-block .item-inner{padding-right:0px;}
@@ -21,5 +26,20 @@ page-sub-category {
 .sub-cat-listed .item-inner{border-bottom:1px solid #ccc;}
 .sub-cat-listed .item-inner .input-wrapper .label-md i{ font-size:12px;}
 .pack-listed{background:rgba(255,255,255, 0.6);}
+
+
+
+.item-ios.item-block .item-inner{border-bottom:none;}
+.item-ios.item-block .item-inner{padding-right:0px;}
+.sub-cat-listed.item-ios{background:none;}
+.sub-cat-listed .item-inner .input-wrapper .label-ios		{margin:0px !important; padding-left:12px;    font-family: "Muli",sans-serif; }
+.sub-cat-listed .item-inner .input-wrapper .label-ios p		{font-size:16px !important; color:#333; float:left; width:95%;     font-family: "Muli",sans-serif; }
+.sub-cat-listed .item-inner .input-wrapper                  { border-bottom:1px solid #ccc;}
+.sub-cat-listed .item-inner{border-bottom:1px solid #ccc;}
+.sub-cat-listed .item-inner .input-wrapper .label-ios i{ font-size:12px;}
+
+
+
+
 .content-intop										{background-image: url('../assets/img/donor-dsd.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
 }

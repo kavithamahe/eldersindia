@@ -22,7 +22,7 @@ button{font-family: 'Muli', sans-serif; }
 .list-md .item-input.input-has-focus:last-child{border-bottom-color:#ffffff !important;box-shadow:none;}
 .list-md .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus){border-bottom-color:#ffffff !important;box-shadow:0 -1px 0 0 #ffffff inset !important;}
 .list-md .item-input.ng-valid.input-has-value:last-child:not(.input-has-focus){border-bottom-color:#ffffff !important;box-shadow:0 -1px 0 0 #ffffff inset !important;}
-.err-reds										{color:red !important; float:right; font-size:12px !important; padding-right:15px !important; margin:0px !important;}
+
 .toolbar-title 									{text-align:center !important;font-family: 'Muli', sans-serif; font-weight:600;}
 .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:none !important;box-shadow:none !important;}
 .ios page-community p, .md page-community p{ color: hsl(0, 0%, 47%);
@@ -163,5 +163,56 @@ ion-segment{ background:#C0C0C0; border-radius:50px; height:40px; line-height:40
 .sle .item-inner .input-wrapper .label-md{ padding-left:5px;}
 .req-ti .toolbar-title{font-size:15px; text-align:left;padding-top:10px;text-align:left !important;font-family: "Muli",sans-serif;}
 .btn-blue{ margin-top:10px;background:#FE5420;font-family: "Muli",sans-serif;}
+.header-ios .toolbar-background-ios, .footer-ios .toolbar-background-ios{ border:none;}
+.err-reds { float:right;padding-left:3px;padding-right:3px;
+ margin-right:17px !important;   position: relative; background:red; color:#fff !important;font-size:11px !important;font-family: "Muli",sans-serif; border-top:3px solid #007CA1;
+       -webkit-animation-duration:5s; 
+            animation-duration:5s; 
+            -webkit-animation-fill-mode: both; 
+            animation-fill-mode: both;
+}
+ 
+.popup-container {
+       background-color: transparent;
+    }
+    .backdrop{
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+.go-btn {
+    margin-top:16px;
+}
+.err-reds:before {
+    content: "\f0de";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+
+    color:#007CA1;
+    font-size: 18px;
+    padding-right: 0.5em;
+    position: absolute;
+   top:-14px;
+  right: -4px;
+}
+
+
+         
+         @-webkit-keyframes shake {
+            0%, 100% {-webkit-transform: translateX(0);} 
+            10%, 30%, 50%, 70%, 90% {-webkit-transform: translateX(-5px);} 
+            20%, 40%, 60%, 80% {-webkit-transform: translateX(5px);} 
+         }
+         
+         @keyframes shake { 
+            0%, 100% {transform: translateX(0);} 
+            10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);} 
+            20%, 40%, 60%, 80% {transform: translateX(5px);} 
+         }
+         
+         .shake { 
+            -webkit-animation-name: shake; 
+            animation-name: shake; 
+         }
 
 
