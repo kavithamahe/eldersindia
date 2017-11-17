@@ -26,6 +26,7 @@ reply_comment:any="";
 Reply:any;
 showReply:any;
 replyBlock:any;
+addBlock:any;
 post_comment:any='';
 imageUrl:any;
 token:any;
@@ -186,7 +187,15 @@ community_id:any;
     
    
  }
-
+ addComments(event){
+   console.log("addBlock");
+    if(this.addBlock==event){
+        this.addBlock=null;
+    }
+    else{
+      this.addBlock=event;
+    }
+ }
  replyComments(event){
     this.reply_comment="";
     this.Reply=null;

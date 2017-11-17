@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController,LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Http,Headers,RequestOptions } from '@angular/http';
 
 
 import { CommunityServices } from '../../providers/community-services';
@@ -9,7 +10,8 @@ import { CommunityServices } from '../../providers/community-services';
 
 @Component({
   selector: 'page-myprofilesetting',
-  templateUrl: 'myprofilesetting.html'
+  templateUrl: 'myprofilesetting.html',
+  providers : [CommunityServices]
 })
 export class MyprofilesettingPage {
 	member_data:any;
@@ -23,15 +25,26 @@ export class MyprofilesettingPage {
 	token:any;
   connection:any="true";
   profile:any="true";
+  user_id:any;
+  headers:any;
+  options:any;
 
   constructor(public navCtrl: NavController,public loadingCtrl: LoadingController, public storage:Storage, public communityServices: CommunityServices, public navParams: NavParams, public viewCtrl: ViewController) {
- 	 this.storage.ready().then(() => {
-      storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      storage.get('token').then((token) => { this.token=token;})
-    });
- 	this.member_data=navParams.get("member_data");
- 	this.myProfile(this.member_data);
- 	this.getPrivacy(this.member_data);
+ 	  this.storage.ready().then(() => {
+    storage.get('token').then((token) => { this.token=token;
+    this.headers = new Headers();
+    this.headers.append('Content-Type', 'application/json');
+    this.headers.append('Authorization', 'Bearer ' + this.token);
+    this.options = new RequestOptions({ headers: this.headers });
+    this.member_data=navParams.get("member_data");
+  this.myProfile(this.member_data);
+  this.getPrivacy(this.member_data);
+    })    
+    storage.get('id').then((id) => { this.user_id=id; })
+    
+   }); 
+   
+ 	
   }
   myProfile(member_data){
   	 this.communityServices.myprofile(this.member_data).subscribe(users => {

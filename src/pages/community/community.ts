@@ -126,7 +126,7 @@ files:any;
     loader.present();
 
    this.communityServices.reportAbuse(data,this.community_id,id,poster_id).subscribe(data =>{
-  this.communityServices.showToast(data);
+  this.communityServices.showToast(data.result);
       loader.dismiss();
    },
      err =>{

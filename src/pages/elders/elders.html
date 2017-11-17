@@ -440,6 +440,7 @@
       </div> 
 <br/>	 
 <ion-label class="label-tittle required">Attach Resume</ion-label> 
+<p>{{file_name}}</p>
   <div>
    <input type="file" (change)="fileChange($event)" placeholder="Upload file" >
   </div>
@@ -523,9 +524,9 @@
   <ion-toolbar color="primary"> 
     
     <ion-buttons>
-      <button ion-button color="royal" large icon-left showWhen="ios" (click)="cancel()">
+    <button ion-button color="royal" large icon-left showWhen="ios" (click)="cancel()">
         <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
-      <button ion-button color="light" large icon-left hideWhen="ios" (click)="cancel()">
+    <button ion-button color="light" large icon-left hideWhen="ios" (click)="cancel()">
           <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
     </ion-buttons>
 

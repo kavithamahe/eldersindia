@@ -331,7 +331,7 @@ public emergencies =  [
           this.storage.ready().then(() => {
             this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;
             this.base64Image = this.imageURL+this.manageDependentData.avatar;
-            console.log(this.base64Image);
+         
               });
             });
                     
@@ -343,6 +343,8 @@ public emergencies =  [
           this.allergic=this.manageDependentData.allergic;
           this.elder_service = this.manageDependentData.in_service;
           this.elder_number= this.manageDependentData.mobile;
+          this.file_name=this.manageDependentData.docs;
+          console.log(this.file_name);
           //console.log(this.manageDependentData.dob)
           this.elder_dob= moment(this.manageDependentData.dob).format("YYYY-MM-DD");
           //new Date(this.manageDependentData.dob);//this.getDate(this.manageDependentData.dob);
