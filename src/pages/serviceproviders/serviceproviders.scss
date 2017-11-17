@@ -114,10 +114,21 @@ page-serviceproviders {
     font-size: 15px;
     padding-left: 10px;
 }
+.sel-packages .item-ios .item-inner .label-ios {
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    padding-left: 10px;
+}
+.slide-border .slide-zoom .item-ios .item-inner .input-wrapper .label-ios{ margin:0px !important;}
+.slide-border .slide-zoom .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col h1{color:#007994 !important;font-family: "Muli",sans-serif;font-size:17px !important;margin:0; padding-bottom:3px;}
+.slide-border .slide-zoom .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col p{color:#666 !important;font-family: "Muli",sans-serif;font-size:13px !important;margin: 0;}
+.slide-border .slide-zoom .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col small{color:red !important;font-family: "Muli",sans-serif; font-weight:600;font-size:12px !important;margin:0;}
+
+
 .slide-border .slide-zoom .item-md .item-inner .input-wrapper .label-md{ margin:0px !important;}
 .slide-border .slide-zoom .item-md .item-inner .input-wrapper .label-md ion-row ion-col h1{color:#007994 !important;font-family: "Muli",sans-serif;font-size:17px !important;margin:0; padding-bottom:3px;}
 .slide-border .slide-zoom .item-md .item-inner .input-wrapper .label-md ion-row ion-col p{color:#666 !important;font-family: "Muli",sans-serif;font-size:13px !important;margin: 0;}
-.slide-border .slide-zoom .item-md .item-inner .input-wrapper .label-md ion-row ion-col small{color:red !important;font-family: "Muli",sans-serif; font-weight:600;font-size:11px !important;margin:0;}
+.slide-border .slide-zoom .item-md .item-inner .input-wrapper .label-md ion-row ion-col small{color:red !important;font-family: "Muli",sans-serif; font-weight:600;font-size:12px !important;margin:0;}
 
 .slide-border .slide-zoom .item-md .item-inner{padding-right:0px;}
 .slider-card{box-shadow:none;}
@@ -126,7 +137,7 @@ page-serviceproviders {
     font-size:16px !important;
   padding-bottom:10px; 
     margin: 0;}
-.package-list-show span{color:#000;}
+.package-list-show span{color:#05BCF7;}
 .item-md.item-block .item-inner{border:none;}
 .slide-border{ border:5px double #EFF5FB;}
 }

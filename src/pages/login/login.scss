@@ -4,7 +4,7 @@ page-login{
 .logsimg												{background:#fff;   border-radius:50%;left: 0;right:0;height:0;text-align:center;}
 .logsimg img											{background:#fff;margin-top:20px; border-radius:50%;  padding:10px;}
 .item-md												{padding-left:0px !important;}	
-.item-ios												{padding-left:0px !important;}	
+.item-ios												{padding-left:6px !important;}	
 .login-pages	{background:#ffffff;}
 /*.login-pages											{background-image: url('../assets/img/bgss.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}*/
 .login-detalis 											{margin-top:-30px;  padding:5px; position:relative; background:#fff;}
@@ -24,4 +24,10 @@ page-login{
     font-size: 17px !important; line-height:100px;}
 .item-md.item-block .item-inner{padding-right:0px;}
 .item-ios.item-block .item-inner{padding-right:0px;}
+.login-detalis.card-ios p.err-reds:before {
+
+   top:-10px !important;
+  right: -4px;
+}
+
 }

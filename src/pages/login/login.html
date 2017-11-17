@@ -18,13 +18,13 @@
     <ion-input class="mails-left" name="email" type="text"  autocorrect="off" autocapitalize="none" formControlName="email"  placeholder="Email" ></ion-input>
   </ion-item>
   </ion-list>
-   <p *ngIf="!loginForm.controls.email.valid && (loginForm.controls.email.dirty || submitAttempt)" class="err-reds">Please enter email.</p>
+   <p *ngIf="!loginForm.controls.email.valid && (loginForm.controls.email.dirty || submitAttempt)" class="err-reds shake">Please enter email.</p>
   <ion-list>
    <ion-item>
     <ion-input name="password" class="mails-left" type="password" formControlName="password" placeholder="Password"></ion-input>
   </ion-item>
   </ion-list>
-  <p *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)" class="err-reds">Please enter password.</p>
+  <p *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)" class="err-reds shake">Please enter password.</p>
    <ion-item>
  <button class="logoin-btn" full>Submit </button>
    </ion-item>
