@@ -241,6 +241,20 @@ onlyNumberKey(event) {
     },)
    }
    next(){
+      var objFromDate = this.modalForm.value.startdate;
+    console.log(objFromDate);
+var objToDate = this.modalForm.value.enddate;
+ 
+var date1 = new Date(objFromDate);
+var date2 = new Date(objToDate);
+ // var today = new Date();
+ // console.log(today);
+    if(date1 > date2)
+    {
+        this.providerService.showToast("Start Date should be less than End Date");
+        return false; 
+    }
+    else{
       if(this.searchButton == true){
         this.onetimes = "One time";
       }else{
@@ -419,6 +433,7 @@ else{
      }
    }
  }
+}
    }
 
   submit() {

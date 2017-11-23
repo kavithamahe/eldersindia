@@ -91,6 +91,8 @@ dependentstatus:any=0;
  })
  }
  fileChange(event) {
+   let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
     let fileList: FileList = event.target.files;
     if(fileList.length > 0) {
         let file: File = fileList[0];
@@ -106,8 +108,10 @@ dependentstatus:any=0;
       console.log(sendMessage);
       this.file_name=sendMessage[0].file_name;
       this.file_path=sendMessage[0].file_path;
+      loader.dismiss();
     },
     (err) => { 
+      loader.dismiss();
         if(err.status===401)
         {
           this.showToaster(JSON.parse(err._body).error);
@@ -152,6 +156,7 @@ dismiss() {
       this.jobBoardService.applyjobelder(this.dependent,this.user_id,this.jobId,this.file_name,
         this.file_path).subscribe((applyjob) => {
           this.showToaster(applyjob.result);
+          this.dismiss();
            loader.dismiss();
        },
         (err) => { 

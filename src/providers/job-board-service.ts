@@ -63,7 +63,7 @@ locationSearch:any=[];
   }
   myjobrequest(jobId){
     let _request= {"info":{"uid":this.user_id}};
-    return this.http.post(this.rootUrl+'myJobRequestById/'+jobId,_request,this.options)
+    return this.http.post(this.rootUrl+'getJobById/'+jobId,_request,this.options)
       .map(res => res.json());
   }
 

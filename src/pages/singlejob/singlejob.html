@@ -13,8 +13,10 @@
     </ion-buttons>
 	<ion-title text-center text-capitalize><span *ngFor="let title of singleJobInfo">{{title?.title}} 
     </span></ion-title>
+    <ion-title *ngIf="appliedjobs" text-center text-capitalize><span *ngFor="let title of myjobrequestinfo">{{title?.title}} 
+    </span></ion-title>
     <ion-buttons right>
-    <button ion-button icon-only (click)="dashboardPage()">
+      <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
@@ -25,12 +27,23 @@
 <ion-card *ngIf(!appliedjobs) class="job-detailsvie">
 
 <div *ngFor="let singleJob of singleJobInfo">
- <h2 text-capitalize>{{singleJob?.title}}   </h2>
+<ion-row>
+<ion-col>
+ <h2 text-capitalize>{{singleJob?.title}}</h2>
+ </ion-col>
+ <ion-col>
+  <ion-item>
+ <ion-avatar item-start>
+ <img [src]="imageUrl+logo"  
+        [hidden]="!logo">
+        </ion-avatar>
+</ion-item>
+</ion-col>
+</ion-row>
 <p><i class="fa fa-map-marker" aria-hidden="true" style="padding-left:3px;"></i><span *ngFor="let locations of singleJob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
 <p><i class="fa fa-building-o"></i><span>{{singleJob?.company_name}}</span></p>
  <p><i class="fa fa-calendar-o"> </i><span *ngIf="singleJob?.created_at">Posted On: {{singleJob?.created_at |  date :'MMM dd y'}}</span></p>
  <p><i class="fa fa-calendar-o"> </i><span *ngIf="singleJob?.job_expiry">Valid Upto: {{singleJob?.job_expiry}}</span></p>
- 
 
 <ion-row>
 
@@ -45,7 +58,7 @@
    
 <b>Experience</b><span>{{singleJob?.min_experience}} - {{singleJob?.max_experience}} years</span> 
     
-     <b>Skills</b><span *ngIf="singleJob?.skills"><span *ngFor="let skills of singleJob?.skills">{{skills?.skills}}</span> </span>
+     <b>Skills</b><span *ngIf="singleJob?.skills"><ion-badge *ngFor="let skills of singleJob?.skills">{{skills?.skills}}</ion-badge> </span>
 
       <b>Job Description</b>
      <span [innerHtml]="singleJob?.description" style="margin:0px !important;"></span>
@@ -54,8 +67,8 @@
 </ion-row>
 <ion-row>
 <ion-col>
-  <button ion-button  class="oranges" full *ngIf="singleJob?.is_applied == 0" (click)="applyJob(singleJob?.id)"><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button>
-   <button ion-button  class="oranges" *ngIf="singleJob?.is_applied == 1" full><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
+  <button ion-button  class="oranges" full *ngIf="user_type == 'sponsor'" (click)="applyJob(singleJob?.id)"><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button>
+   <button ion-button  class="oranges" *ngIf="user_type == 'elder'" full><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
   </ion-col>
 </ion-row>
 <hr/>
@@ -79,14 +92,24 @@
 <ion-card class="job-detailsvie" *ngIf(appliedjobs)>
 
 <div *ngFor="let applyjob of myjobrequestinfo">
+<ion-row>
+<ion-col>
  <h2 text-capitalize>{{applyjob?.title}}</h2>
-
-
- <h2 text-capitalize>{{applyjob?.title}}   </h2>
+  </ion-col>
+ <ion-col>
+  <ion-item>
+ <ion-avatar item-start>
+ <img [src]="imageUrl+logo"  
+        [hidden]="!logo">
+        </ion-avatar>
+</ion-item>
+</ion-col>
+</ion-row>
 <p><i class="fa fa-building-o"></i><span>{{applyjob?.company_name}}</span></p>
 <p><i class="fa fa-calendar-o"> </i><span *ngIf="applyjob?.created_at">{{applyjob?.created_at |  date :'MMM dd y'}}</span></p>
 <p><i class="fa fa-map-marker" aria-hidden="true" style="padding-left:3px;"></i><span *ngFor="let locations of applyjob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
-
+ <p><i class="fa fa-calendar-o"> </i><span *ngIf="applyjob?.created_at">Posted On: {{applyjob?.created_at |  date :'MMM dd y'}}</span></p>
+ <p><i class="fa fa-calendar-o"> </i><span *ngIf="applyjob?.job_expiry">Valid Upto: {{applyjob?.job_expiry}}</span></p>
 
 <hr/>
   
@@ -101,7 +124,7 @@
    
   <b>Experience</b><span>{{applyjob?.min_experience}} - {{applyjob?.max_experience}} years</span> 
     
-     <b>Skills</b><span *ngIf="applyjob?.skills"><span *ngFor="let skills of applyjob?.skills">{{skills?.skills}}</span> </span>
+     <b>Skills</b><span *ngIf="applyjob?.skills"><ion-badge *ngFor="let skills of applyjob?.skills">{{skills?.skills}}</ion-badge> </span>
 
       <b>Job Description</b>
      <span [innerHtml]="applyjob?.description" style="margin:0px !important;"></span>
@@ -110,7 +133,8 @@
 </ion-row>
 <ion-row>
 <ion-col>
-  <button ion-button class="oranges" full ><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
+  <button *ngIf="user_type == 'sponsor'" (click)="applyJob(applyjob?.id)" ion-button class="oranges" full ><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button>
+  <button *ngIf="user_type == 'elder'" ion-button class="oranges" full ><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
   </ion-col>
 </ion-row>
 <hr/>

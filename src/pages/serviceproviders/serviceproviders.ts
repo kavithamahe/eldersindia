@@ -29,6 +29,7 @@ export class ServiceprovidersPage {
    packages:any;
    packageCount;
    serviceLocation:any;
+   selectserviceLocation:any;
   constructor(public alertCtrl: AlertController, public modalCtrl:ModalController,public loadingCtrl: LoadingController, public platform: Platform, public navCtrl: NavController, public providerService: ServiceProvider, public storage:Storage) {
     console.log("this is service provider page");
    this.storage.ready().then(() => {
@@ -37,7 +38,7 @@ export class ServiceprovidersPage {
       storage.get('token').then((token) => { this.token=token; 
       this.loadServiceProvider();
       this.loadLocations();
-      this.loadPackages();
+      //this.loadPackages();
       })
     });
   }
@@ -46,7 +47,7 @@ export class ServiceprovidersPage {
      this.storage.ready().then(() => {
       this.storage.set('service_location',this.serviceLocation);
       console.log("change location"+this.serviceLocation);     
-      this.loadPackagesByLocationID(this.serviceLocation);
+      //this.loadPackagesByLocationID(this.serviceLocation);
     });
    
   }
@@ -72,34 +73,7 @@ export class ServiceprovidersPage {
     // console.log(vendor_id);
     this.navCtrl.push(PackageDetailPagePage,{"vendor_id":vendor_id,'location_id':this.serviceLocation});
   }
-  loadPackagesByLocationID(locationId){
-    this.providerService.webServiceCall(`getPackage`,{"locationId":locationId})
-      .subscribe(data =>{
-        //console.log(data);
-       this.packages =  data.result;
-       //console.log(this.packages.length);
-       this.packageCount = this.packages.length;
-    },
-    err =>{
-      this.providerService.showErrorToast(err);
-      console.log("Response for get service offered: "+err);
-      this.services=[];      
-    })
-  }
-  loadPackages(){
-    this.providerService.webServiceCall(`getPackage`,{"locationId":""})
-      .subscribe(data =>{
-        //console.log(data);
-       this.packages =  data.result;
-       //console.log(this.packages.length);
-       this.packageCount = this.packages.length;
-    },
-    err =>{
-      this.providerService.showErrorToast(err);
-      console.log("Response for get service offered: "+err);
-      this.services=[];      
-    }) 
-  }
+
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);
@@ -124,61 +98,6 @@ locations:any;
     this.navCtrl.push(SubCategoryPage,{"subcategory":subcategory,'locations':this.locations});
   }
 
-  // forgotPassword(){
-  //   this.passwordCode ="";
-  //   this.createModal("forgotPassword");
-  // }
-
-  // resetPassword(){
-  //     this.passwordCode = "1234";
-  //     this.createModal("passwordReset");
-  // }
-
-  // createModal(requestData){
-  //       let requestType = {modalType:requestData,passCode:this.passwordCode};
-  //       let passwordModal = this.modalCtrl.create(ForgotPasswordPage,requestType);
-
-  //   passwordModal.onDidDismiss(data =>{
-  //     if(data == "dismiss"){
-  //       console.log(" Forgot Password modal dismissed..!");
-  //     }else{
-  //           if(data.modalType == "forgotPassword"){
-  //               this.mailID = data.modalData.emailId;
-  //               alert(this.mailID);
-  //               // this.serviceRequestCall(data);
-
-  //                 if(this.platform.is('cordova')){
-  //                     LocalNotifications.schedule({
-  //                             title: "Password Reset",
-  //                             text: "password Reset code is 1234",
-  //                             at: new Date(new Date().getTime() + 2 * 1000),
-  //                             // sound: null
-  //                         });
-  //                   console.log("forgot Password modal submitted..!");
-
-  //                   LocalNotifications.on("click", (notification, state) => {
-  //                   let alert = this.alertCtrl.create({
-  //                       title: "Notification Clicked",
-  //                       subTitle: "You just clicked the scheduled notification",
-  //                       buttons: ["OK"]
-  //                       });
-  //                     alert.present();
-  //                     });
-                      
-  //                   }else{
-  //                     console.log("current platform is not cordova..");
-  //                   }
-  //                   this.resetPassword();
-  //           }else{
-  //               this.newPassword = data.modalData.newPassword;
-  //               this.providerService.showToast("Password Reset Successful..!")
-  //           }
-  //       }
-  //     })  
-  //   passwordModal.present();
-
-
-  // }
 
 ionViewDidLoad() {
     console.log('ionViewDidLoad DependentsPage');

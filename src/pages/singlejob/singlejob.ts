@@ -32,6 +32,9 @@ appliedjobs:any;
 myjobrequestinfo:any=[];
 companyname:any;
 is_applied:any;
+eldertitle:any=[];
+user:any=[];
+logo:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public jobBoardService:JobBoardService,public modalCtrl: ModalController) {
   	this.jobId=navParams.get("jobId");
     this.is_applied=navParams.get("status");
@@ -54,11 +57,13 @@ is_applied:any;
     this.jobBoardService.myjobrequest(this.jobId).subscribe(
      (myjobrequest) => {
        //console.log()
-       var array=[];
-       array.push(myjobrequest.result.info.jobDetail);
-      this.myjobrequestinfo=array;
+      //  var array=[];
+      //  array.push(myjobrequest.result.info);
+      // this.myjobrequestinfo=array;
+      this.myjobrequestinfo=myjobrequest.result.info;
+      this.user=this.myjobrequestinfo[0].user;
+      this.logo=this.user.logo;
       
-      console.log(this.myjobrequestinfo);
       loader.dismiss();
     },
     (err) => { 
@@ -79,9 +84,10 @@ is_applied:any;
     loader.present();
     this.jobBoardService.singleJob(this.jobId).subscribe(
      (singleJob) => {
-      this.singleJobInfo=singleJob.result.info;  
+      this.singleJobInfo=singleJob.result.info;
+      this.user=this.singleJobInfo[0].user;
+      this.logo=this.user.logo;
       this.functional_area=singleJob.result.info.functional_area;
-      console.log(this.singleJobInfo);
       loader.dismiss();
     },
     (err) => { 

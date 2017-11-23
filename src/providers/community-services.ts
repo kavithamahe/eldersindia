@@ -210,9 +210,7 @@ communitydetailscroll(nextPageURL,id){
 
 myprofile(id){
     this.send = {"user_id":id}
-
-
-   return this.http.post(`${this.getCommunityPostsUrl }myprofile`,this.send,this.options)
+  return this.http.post(`${this.getCommunityPostsUrl }myprofile`,this.send,this.options)
       .map(res =>res.json());
 }
  

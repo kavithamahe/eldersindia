@@ -52,6 +52,7 @@ lead_time:any='00:00';
 @ViewChild('ghbslides') slider: Slides;
 // @ViewChild('ghbslides') ghbslides: any;
 
+
   constructor(public modalCtrl: ModalController, public platform: Platform,public toastCtrl: ToastController, public formBuilder: FormBuilder,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public navCtrl: NavController, public navParams: NavParams, public storage:Storage) {
        console.log("this is service info page");
      // this.url = this.providerService.getUrl();
@@ -135,9 +136,24 @@ modal(){
   }
 
   sendRequestService(data){
+   
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
-    let requestServiceData = {"location_id":this.locationId,"vendor_id":this.vendor_id, "category_id":this.serviceData.category_id, "sub_category_id":this.serviceData.sub_category_id, "service_id":this.serviceData.service_id, "problem":data.problem, "datetime":data.datetime, "dependentid":data.dependentId, "mobile":data.mobile_no,"lead_time":this.lead_time}    
+     let requestServiceData = {"category":this.serviceData.category,"service":this.serviceData.service,
+    "category_id":this.serviceData.category_id,"location_id":this.locationId,"vendor_id":this.vendor_id,
+     "sub_category_id":this.serviceData.sub_category_id,
+      "service_id":this.serviceData.service_id, "problem":data.problem,
+     "datetime":data.datetime,"preferred_time":data.preferred_time, "dependentid":data.dependentId,
+      "mobile":data.mobile_no,"lead_time":this.lead_time,
+      "subcategory":this.serviceData.subcategory, "durations":data.durations,
+       "exclude_days":data.exclude_days,"from_date":data.from_date,"from_time":data.from_time,"quantity":"",
+       "selected_dates":data.selected_dates,"serviceType":data.serviceType,"time_slot":data.time_slot,"to_date":data.to_date,"to_time":data.to_time,
+     "package_id":data.package_id}
+    // let requestServiceData = {"location_id":this.locationId,"vendor_id":this.vendor_id,
+    //  "category_id":this.serviceData.category_id, "sub_category_id":this.serviceData.sub_category_id,
+    //   "service_id":this.serviceData.service_id, "problem":data.problem, 
+    //   "datetime":data.datetime, "dependentid":data.dependentId, 
+    //   "mobile":data.mobile_no,"lead_time":this.lead_time}    
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
     .subscribe(
         data =>{
