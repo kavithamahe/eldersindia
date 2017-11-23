@@ -8,7 +8,9 @@ import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
 import {BrowserModule} from '@angular/platform-browser';
 import { Ng2EmojiModule } from 'ng2-emoji';
-import { NativeAudio,Geolocation } from 'ionic-native';
+import { NativeAudio } from '@ionic-native/native-audio';
+
+import { Geolocation } from 'ionic-native';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Diagnostic } from 'ionic-native';
 import { CameraPreview, CameraPreviewRect } from 'ionic-native';

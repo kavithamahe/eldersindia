@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import {  Platform,NavController, NavParams,AlertController,ToastController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { CallNumber, Vibration, NativeAudio} from 'ionic-native';
+import { CallNumber, Vibration} from 'ionic-native';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { LocalNotifications, Geolocation } from 'ionic-native';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 
 import { ServiceprovidersPage } from '../../pages/serviceproviders/serviceproviders';
@@ -34,7 +35,7 @@ export class DashboardPage {
   call_sponsor:any;
   hooterOn:boolean=false;
   tabBarElement: any;
-  constructor(public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
+  constructor(private nativeAudio: NativeAudio,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
   	 this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.storage.ready().then(() => {
       storage.get('token').then((token) => { this.token=token;  })
@@ -86,7 +87,7 @@ console.log("location ready");
   .then(
     (result: NativeGeocoderReverseResult) => {
       this.storage.ready().then(() => {
-      this.storage.set('service_location',result.city);
+      this.storage.set('service_location',"");
     });
     console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
     })
@@ -95,7 +96,7 @@ console.log("location ready");
   }
 
   ionViewDidLoad() {
-    NativeAudio.preloadSimple('uniqueId1', 'assets/sound/siren_msg_tone.mp3').then(this.onSuccess, this.onError);
+    this.nativeAudio.preloadSimple('uniqueId1', 'assets/sound/Siren 21.mp3').then(this.onSuccess, this.onError);
   }
   public servicesPage()
   {
@@ -138,17 +139,20 @@ console.log("location ready");
   }
   public hooter(hooterOn)
   {
+   console.log(hooterOn);
+    console.log('uniqueId1');
+
     if(!hooterOn)
     {
        this.hooterOn=!hooterOn;
-    Vibration.vibrate(60000);    
-    NativeAudio.play('uniqueId1').then(this.onSuccess, this.onError);
-    NativeAudio.loop('uniqueId1').then(this.onSuccess1, this.onError);
+       this.nativeAudio.preloadSimple('uniqueId1', 'assets/sound/Siren 21.mp3').then(this.onSuccess, this.onError);
+this.nativeAudio.play('uniqueId1').then(this.onSuccess, this.onError);
+
     }
     else
     {
       Vibration.vibrate(0);
-       NativeAudio.stop('uniqueId1').then(this.onSuccess, this.onError);
+      this.nativeAudio.stop('uniqueId1').then(this.onSuccess,this.onError);
       this.hooterOn=!hooterOn;
     }   
   }

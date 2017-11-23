@@ -17,6 +17,7 @@ import { InAppBrowser } from 'ionic-native';
 
 
 
+
 @Component({
   selector: 'page-community',
   templateUrl: 'community.html',

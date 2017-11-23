@@ -173,11 +173,9 @@ ion-segment{ background:#C0C0C0; border-radius:50px; height:40px; line-height:40
 }
  
 .popup-container {
-       background-color: transparent;
+       background-color: #fff !important;
     }
-    .backdrop{
-        background-color: rgba(0, 0, 0, 0.4);
-    }
+    
 .go-btn {
     margin-top:16px;
 }
