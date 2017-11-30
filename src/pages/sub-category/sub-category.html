@@ -41,8 +41,7 @@
 
  <ion-card class="slider-card">
  <h1 class="package-list-show">Packages (<span>{{packageCount}}</span>) </h1> 
-    <ion-slides pager="true">
-	<ion-slide slidesPerView= "1">
+    <ion-slides slidesPerView= "1">
         <div *ngFor="let package of packages; let i=index" text-wrap>
            <ion-slide (click)="viewPackage(package.vendor_id)" class="slide-border">
             <ion-item>
@@ -62,7 +61,6 @@
             </ion-item>
           </ion-slide>
         </div>
-		</ion-slide>
         </ion-slides>
     </ion-card>
  
