@@ -157,6 +157,14 @@ ion-segment{ background:#C0C0C0; border-radius:50px; height:40px; line-height:40
 .send-req .item-md .item-inner .input-wrapper .label-md{font-family: "Muli",sans-serif; padding-bottom:0px; padding-left:15px;
     font-size:15px !important;
     font-weight:400;}
+	
+	
+send-req {  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100%) 0%, hsl(196, 100%, 95%) 100%) repeat scroll 0 0;}
+.send-req .item-ios{background:none;}
+.send-req .item-ios .item-inner .input-wrapper .label-ios{font-family: "Muli",sans-serif; padding-bottom:0px; padding-left:15px;
+    font-size:15px !important;
+    font-weight:400;}
+	
 .sle .item-inner .input-wrapper{border:1px solid #ccc;}
 .sle.item-md.item-block .item-inner{border:none; padding-right:0px;}
 .register-form{padding:10px;}
@@ -175,10 +183,8 @@ ion-segment{ background:#C0C0C0; border-radius:50px; height:40px; line-height:40
 .popup-container {
        background-color: #fff !important;
     }
-    
-.go-btn {
-    margin-top:16px;
-}
+.sel-packages ion-row ion-col .go-btn.button-md{ margin-top:10px;}
+
 .err-reds:before {
     content: "\f0de";
     font-family: FontAwesome;

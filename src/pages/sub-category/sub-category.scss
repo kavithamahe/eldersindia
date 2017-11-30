@@ -39,13 +39,29 @@ page-sub-category {
 .sub-cat-listed .item-inner .input-wrapper .label-ios i{ font-size:12px;}
 
 .slider-card{box-shadow:none;}
+
+
+
+.slide-border .slide-zoom .item-ios .item-inner .input-wrapper .label-ios{ margin:0px !important;}
+.slide-border .slide-zoom .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col h1{color:#007994 !important;font-family: "Muli",sans-serif;font-size:17px !important;margin:0; padding-bottom:3px;}
+.slide-border .slide-zoom .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col p{color:#666 !important;font-family: "Muli",sans-serif;font-size:13px !important;margin: 0;}
+.slide-border .slide-zoom .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col small{color:red !important;font-family: "Muli",sans-serif; font-weight:600;font-size:12px !important;margin:0;}
+
+
+.slide-border .slide-zoom .item-md .item-inner .input-wrapper .label-md{ margin:0px !important;}
+.slide-border .slide-zoom .item-md .item-inner .input-wrapper .label-md ion-row ion-col h1{color:#007994 !important;font-family: "Muli",sans-serif;font-size:17px !important;margin:0; padding-bottom:3px;}
+.slide-border .slide-zoom .item-md .item-inner .input-wrapper .label-md ion-row ion-col p{color:#666 !important;font-family: "Muli",sans-serif;font-size:13px !important;margin: 0;}
+.slide-border .slide-zoom .item-md .item-inner .input-wrapper .label-md ion-row ion-col small{color:red !important;font-family: "Muli",sans-serif; font-weight:600;font-size:12px !important;margin:0;}
+
+.slide-border .slide-zoom .item-md .item-inner{padding-right:0px;}
+.slider-card{box-shadow:none;}
+
 .package-list-show{color:#444 !important;font-weight:600;
     font-family: "Muli",sans-serif;
     font-size:16px !important;
-  padding-bottom:10px; 
+  padding-bottom:18px;  padding-top:10px;
     margin: 0;}
-    .slide-border{ border:5px double #EFF5FB;}
-
-
-.content-intop										{background-image: url('../assets/img/donor-dsd.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
+.package-list-show span{color:#05BCF7;}
+.item-md.item-block .item-inner{border:none;}
+.slide-border{ border:5px double #EFF5FB; width:100%;}
 }

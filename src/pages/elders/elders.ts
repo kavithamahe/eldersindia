@@ -832,7 +832,8 @@ getareaof_interest(){
         "emergency":this.emergency_data,
         "experience":this.experience_data,
         "education":this.education_data,
-        "avatar1":this.avatar
+        "avatar1":this.avatar,
+        "app":""
       }
       
 

@@ -147,7 +147,7 @@ submitAttempt:any;
 "mail_code":this.profileData.mail_code,"message_code":this.profileData.message_code,"company_name":this.profileData.company_name,
 "locationName":this.profileData.locationName,"logo":this.profileData.logo,
 "user_type":this.profileData.user_type,"official_email":this.profileData.official_email,
-"avatar1":this.avatar}
+"avatar1":this.avatar,"app":""}
    
  
     

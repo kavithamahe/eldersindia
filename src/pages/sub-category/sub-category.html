@@ -41,19 +41,20 @@
 
  <ion-card class="slider-card">
  <h1 class="package-list-show">Packages (<span>{{packageCount}}</span>) </h1> 
-    <ion-slides slidesPerView= "2">
+    <ion-slides pager="true">
+	<ion-slide slidesPerView= "1">
         <div *ngFor="let package of packages; let i=index" text-wrap>
            <ion-slide (click)="viewPackage(package.vendor_id)" class="slide-border">
             <ion-item>
       <ion-row class="pack-slider">
-              <!-- <ion-col width-33> 
+               <ion-col width-33> 
                
                 <img [src]="imageUrl+package?.logo"/>
                
-          </ion-col>  -->
+          </ion-col>
                  <ion-col> 
                 <h1>{{package.package_name | words :3 : '....'}} </h1>
-                <!-- <p>{{package.package_description}}</p> -->
+                 <p>{{package.package_description}}</p>
                 <small><i class="fa fa-inr" aria-hidden="true"></i> &nbsp;{{package.package_amount}}</small>
             
               </ion-col>
@@ -61,6 +62,7 @@
             </ion-item>
           </ion-slide>
         </div>
+		</ion-slide>
         </ion-slides>
     </ion-card>
  
