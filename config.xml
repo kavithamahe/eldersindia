@@ -70,4 +70,5 @@
     <plugin name="cordova-plugin-calendar" spec="^4.6.0" />
     <plugin name="com.recaisinekli.rtspPlayer" spec="git+https://github.com/recaisinekli/rtspPlayer.git" />
     <plugin name="cordova-plugin-nativeaudio" spec="^3.0.9" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~1.7.0" />
 </widget>

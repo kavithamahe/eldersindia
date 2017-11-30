@@ -87,7 +87,7 @@ console.log("location ready");
   .then(
     (result: NativeGeocoderReverseResult) => {
       this.storage.ready().then(() => {
-      this.storage.set('service_location',"");
+      this.storage.set('service_location',result.city);
     });
     console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
     })
