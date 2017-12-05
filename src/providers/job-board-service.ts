@@ -37,7 +37,7 @@ locationSearch:any=[];
    });
   }
 
- jobsList(functionalArea,location) 
+ jobsList(searchText,functionalArea,location) 
  {
 
    console.log("-------------");
@@ -50,7 +50,7 @@ locationSearch:any=[];
    {
      this.locationSearch=location;
    }
-   let _request= {"search":{"location":this.locationSearch,"functional_area":this.functionalSearch},"get":["FunctionalArea","Location","SkillSet"],"info":{"q":"","uid":this.user_id}};
+   let _request= {"search":{"location":this.locationSearch,"functional_area":this.functionalSearch},"get":["FunctionalArea","Location","SkillSet"],"info":{"q":searchText,"uid":this.user_id}};
     return this.http.post(this.rootUrl+'getJobList',_request,this.options)
       .map(res => res.json()); 
   }
@@ -94,7 +94,7 @@ resumeupload(formData, options){
 
       .map(res => res.json()); 
   }
-  appliedJobs(functionalArea,location) 
+  appliedJobs(searchText,functionalArea,location) 
   {
   if(functionalArea!='' && functionalArea!=null)
    {
@@ -104,7 +104,7 @@ resumeupload(formData, options){
    {
      this.locationSearch=location;
    }
-   let _request= {"search":{"location":this.locationSearch,"functional_area":this.functionalSearch},"get":["FunctionalArea","Location","SkillSet"],"info":{"uid":this.user_id,"q":""}};
+   let _request= {"search":{"location":this.locationSearch,"functional_area":this.functionalSearch},"get":["FunctionalArea","Location","SkillSet"],"info":{"uid":this.user_id,"q":searchText}};
      return this.http.post(this.rootUrl+'myJobRequests',_request,this.options)
       .map(res => res.json()); 
  
@@ -121,7 +121,7 @@ resumeupload(formData, options){
     return this.http.post(this.rootUrl+'getDependants',_request,this.options)
       .map(res => res.json()); 
   }
-  JobBoardscroll(nextPageURL,functionalArea,location)
+  JobBoardscroll(nextPageURL,searchText,functionalArea,location)
    {  
    if(functionalArea!='' && functionalArea!=null)
    {
@@ -131,14 +131,14 @@ resumeupload(formData, options){
    {
      this.locationSearch=[location];
    }
-   let _request= {"search":{"location":this.locationSearch,"functional_area":this.functionalSearch},"get":["FunctionalArea","Location","SkillSet"],"info":{"uid":this.user_id}};
+   let _request= {"search":{"location":this.locationSearch,"functional_area":this.functionalSearch},"get":["FunctionalArea","Location","SkillSet"],"info":{"q":searchText,"uid":this.user_id}};
     
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }
-   appliedJobscroll(nextPageURL)
+   appliedJobscroll(nextPageURL,searchText,functionalArea,location)
    {
-    let _request= {"search":"","info":{"uid":this.user_id}};
+     let _request= {"search":{"location":this.locationSearch,"functional_area":this.functionalSearch},"get":["FunctionalArea","Location","SkillSet"],"info":{"uid":this.user_id,"q":searchText}};
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }

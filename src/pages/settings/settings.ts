@@ -51,7 +51,6 @@ export class SettingsPage {
       this.settings = "privacy";
     }
     this.prev_index = this.slides.getActiveIndex();
-    console.log("Current index is", currentIndex);
   }
   changeSlide(){
     this.slides.freeMode = true;
@@ -178,7 +177,6 @@ export class SettingsPage {
   	let requestId = {"user_id":this.user_uid};
   	this.serviceProvider.webServiceCall('getPrivacy',requestId)
   	.subscribe(data=>{
-      console.log(data);
       console.log("JSON.parse('true')",JSON.parse("true"));
   		let [info] = data.result;
   		this.user_id = info.id;
@@ -226,7 +224,6 @@ export class SettingsPage {
   	this.serviceProvider.webServiceCall('setPrivacy',data)
   	.subscribe(data=>{
   		this.serviceProvider.showToast(data.result);
-  		console.log(data);
   		this.getPrivacy();
       loader.dismiss();
   	},

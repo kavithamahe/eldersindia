@@ -33,6 +33,7 @@ locationList:any=[];
 functionalArea:any='';
 location:any='';
 file_name:any;
+searchText:any="";
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public jobBoardService:JobBoardService,public modalCtrl: ModalController) {
     this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -48,7 +49,7 @@ file_name:any;
   { 
     this.loader = this.loadingCtrl.create({ content: "Please wait..." });     
     this.loader.present();
-    this.jobBoardService.jobsList(this.functionalArea,this.location).subscribe(
+    this.jobBoardService.jobsList(this.searchText,this.functionalArea,this.location).subscribe(
      (jobBoard) => {
       this.jobBoardInfo=jobBoard.result.info.data; 
       if(this.jobBoardInfo.length == 0){
@@ -77,11 +78,15 @@ file_name:any;
     );
     
   }
+getItems(searchEvent){
+   this.searchText = searchEvent;
 
+  this.onInit();
+  }
   public viewJob(jobId,status)
   {
    this.navCtrl.push(SinglejobPage, {jobId,status});
-   console.log(status);
+   
 
   }
 
@@ -105,7 +110,6 @@ file_name:any;
      (applyJob) => {
      // this.applyJobInfo=applyJob.result;  
        this.showToaster(applyJob.result);
-      //console.log(singleJob);
     },
     (err) => { 
         if(err.status===401)
@@ -163,7 +167,7 @@ file_name:any;
   jobBoardscroll()
   {
 
-     this.jobBoardService.JobBoardscroll(this.nextPageURL,this.functionalArea,this.location).subscribe(
+     this.jobBoardService.JobBoardscroll(this.nextPageURL,this.searchText,this.functionalArea,this.location).subscribe(
      (JobBoardscroll) => {
       this.jobBoardScrollLists=JobBoardscroll.result.info.data;
 

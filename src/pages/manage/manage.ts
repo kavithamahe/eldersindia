@@ -31,8 +31,8 @@ show_option:boolean =false;
    this.nav=nav;  
            
     }
-   showConfirm() {
-     let DeleteId = this.manage_elder.id;
+   showConfirm(manage) {
+    let DeleteId = manage.id;
     let confirm = this.alertCtrl.create({
      subTitle: 'Confirm Deletion',
       buttons: [
@@ -84,11 +84,12 @@ manage_elder:any;
    }
 
   toggleDetails(event) {
-     
+    
     if (this.showblock == null) {
         this.showblock = event;
     } else {
        this.showblock = null;
+       
     }
 
   }
@@ -99,9 +100,8 @@ manage_elder:any;
   }
  
 
-  editElder(){
-    let elder = this.manage_elder;
-    console.log(elder);
+  editElder(manage){
+    let elder = manage;
     let data={"fuctionality":"edit","editData":elder};
     this.nav.push(EldersPage,data);
   }

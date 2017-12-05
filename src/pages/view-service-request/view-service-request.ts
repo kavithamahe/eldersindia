@@ -20,6 +20,7 @@ imageUrl:any;
 token:any;
 viewServiceRequestInfo:any;
 serviceRequestId:number;
+preffer:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -35,7 +36,8 @@ serviceRequestId:number;
     loader.present();
     this.serviceRequest.viewServiceRequest(this.serviceRequestId).subscribe(
      (viewServiceRequest) => {
-      this.viewServiceRequestInfo=viewServiceRequest; 
+      this.viewServiceRequestInfo=viewServiceRequest;
+      this.preffer= viewServiceRequest.enquiry_date;
       loader.dismiss();   
     },
     (err) => { 

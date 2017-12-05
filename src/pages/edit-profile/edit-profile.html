@@ -15,7 +15,7 @@
 <ion-content class="edit">
 <div class="profile-edit"><span  *ngIf="user_type =='sponsor' " class="profile-img"><img 
 [src]="imageURL+profileData?.avatar" > </span>
-			<p>{{profileData?.company_name}}</p></div>
+			<p>{{profileData?.name}} {{profileData?.last_name}}</p></div>
 
 	<form [formGroup]="edit_profile_Form">
 <div class="edit-profile-view">

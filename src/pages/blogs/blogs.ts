@@ -5,6 +5,8 @@ import { Storage } from '@ionic/storage';
 import { BlogListService } from '../../providers/blog-list-service';
 import { SingleblogPage } from '../../pages/singleblog/singleblog';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { CreateBlogPage } from '../../pages/create-blog/create-blog';
+import { ManageBlogsPage } from '../../pages/manage-blogs/manage-blogs';
 
 @Component({
   selector: 'page-blogs',
@@ -152,5 +154,13 @@ doInfinite(infiniteScroll) {
   public viewBlog(blogId)
   {
    this.navCtrl.push(SingleblogPage, {blogId});
+  }
+   public createBlog()
+  {
+   this.navCtrl.push(CreateBlogPage);
+  }
+  public manageBlog()
+  {
+   this.navCtrl.push(ManageBlogsPage);
   }
 }

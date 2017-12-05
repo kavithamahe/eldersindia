@@ -224,7 +224,7 @@ submitAttempt: boolean = false;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+         this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -241,7 +241,6 @@ submitAttempt: boolean = false;
 
   public CommunityUserWall(profile_uid)
   {
-    console.log(profile_uid);
     this.navCtrl.push(CommunityprofilePage,{profile_uid});
 
   } 

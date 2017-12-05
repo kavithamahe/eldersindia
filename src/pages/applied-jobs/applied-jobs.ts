@@ -30,6 +30,7 @@ locationList:any=[];
 functionalArea:any='';
 location:any='';
 emptyRecordSet:any='';
+searchText:any="";
    constructor(public navCtrl: NavController, public navParams: NavParams,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     
   this.storage.ready().then(() => {
@@ -45,7 +46,7 @@ emptyRecordSet:any='';
    this.loader = this.loadingCtrl.create({ content: "Please wait..." });     
     this.loader.present();
     this.appliedJobsList =[];
-   this.jobBoardService.appliedJobs(this.functionalArea,this.location).subscribe(
+   this.jobBoardService.appliedJobs(this.searchText,this.functionalArea,this.location).subscribe(
      (appliedJobs) => {      
        this.appliedJobsList=appliedJobs.result.info.data;
        if(this.appliedJobsList.length == 0){
@@ -74,7 +75,11 @@ emptyRecordSet:any='';
       }
     );  
  }
- 
+ getItems(searchEvent){
+   this.searchText = searchEvent;
+
+  this.onInit();
+  }
   public jobsearch(searchEvent) {
     let term = searchEvent.target.value;
       this.jobBoardService.searchConnection(term).subscribe(searchConnection => {
@@ -114,7 +119,7 @@ emptyRecordSet:any='';
   appliedJobscroll()
   {
 
-     this.jobBoardService.appliedJobscroll(this.nextPageURL).subscribe(
+     this.jobBoardService.appliedJobscroll(this.nextPageURL,this.searchText,this.functionalArea,this.location).subscribe(
      (appliedJobscroll) => {
       this.appliedJobScrollLists=appliedJobscroll.result.info.data;
 

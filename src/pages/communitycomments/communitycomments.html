@@ -13,7 +13,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-<button ion-button (click)="addComments(i)">Add a comment...</button>
+<!-- <button ion-button (click)="addComments(i)">Add a comment...</button> -->
 	<ion-list *ngFor="let comment of post_comments; let j=index" class="comm-posted">
 
 	<ion-card class="listed-comments">
@@ -52,7 +52,7 @@
 					<button ion-button clear (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p class="liks-comments"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</p></button>
 		 		</ion-col>
 				<ion-col *ngIf="comment.likes == 0 || comment.likes == null" style="padding:0px;">
-					<button ion-button clear (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p class="liks-comments">&nbsp;Like</p>
+					<button ion-button clear (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p style="color:#3b5998;" class="liks-comments">&nbsp;Liked</p>
 					</button>
 				</ion-col>
 			 
@@ -96,7 +96,7 @@
 						<button ion-button clear  (click)="sendInlineLikes(reply.comments_replay_id,reply.com_post_cmt_id,post_id)"><p class="reply-comm"><i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;Like</p></button>
 						</ion-col>
 						<ion-col  *ngIf="reply.likes == 0 || reply.likes == null" >
-						<button ion-button clear  (click)="sendInlineLikes(reply.comments_replay_id,reply.com_post_cmt_id,post_id)"><p class="reply-comm">&nbsp;Like</p></button>
+						<button ion-button clear  (click)="sendInlineLikes(reply.comments_replay_id,reply.com_post_cmt_id,post_id)"><p class="reply-comm" style="color:#3b5998;">&nbsp;Liked</p></button>
 						</ion-col>
 						<ion-col>
 						<button  ion-button clear (click)="replyComments(i)"><p class="reply-comm"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply</p></button>

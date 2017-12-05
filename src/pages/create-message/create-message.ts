@@ -125,7 +125,6 @@ customTo:any=false;
   public sendMessage()
   {
     if(!this.messageForm.valid){
-      console.log(this.messageForm.valid);
       this.submitAttempt = true;
     }else{
      let subject= this.messageForm.value.subject;
@@ -140,7 +139,6 @@ customTo:any=false;
       this.toEmail=this.getFriendsListobj[i].email; 
       }
       }
-      console.log("toId"+this.toId);
       if(this.toId=='' || this.toId===null || this.toId==undefined)
       {
         //this.showToaster("Please select valid to address");
@@ -162,7 +160,6 @@ customTo:any=false;
        this.navCtrl.setRoot(MessagesPage);
       this.showToaster(sendMessage.result.info); 
       loader.dismiss();
-      //console.log(singleJob);
     },
     (err) => { 
         if(err.status===401)
@@ -246,11 +243,8 @@ fileChange(event) {
            this.messagesService.upload( formData, options)
         .subscribe(
      (sendMessage) => { 
-      console.log(sendMessage);
       this.file_name=sendMessage[0].file_name;
       this.file_path=sendMessage[0].file_path;
-      console.log(this.file_path);
-      console.log(this.file_name);
       
     },
     (err) => { 

@@ -7,6 +7,13 @@
       </button>
     </ion-buttons>
 	  <ion-title text-center>Blogs</ion-title>
+         <ion-fab right bottom style="top: 5px;">
+    <button ion-fab ><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="createBlog()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      <button ion-fab (click)="manageBlog()"><i class="fa fa-list" aria-hidden="true"></i></button>
+    </ion-fab-list>
+  </ion-fab>
     <ion-buttons right>
     <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
@@ -37,12 +44,8 @@
 
 <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)" class="community-img">
 <ion-row>
-  <ion-col width-20>
  
-      <img src="{{imageUrl+blogs?.avatar}}" [hidden]="!blogs?.avatar" height="50">
- 
-	</ion-col>
-	<ion-col width-80 class="blogs-tittle">
+	<ion-col class="blogs-tittle">
   <ion-item text-wrap>
     <h2 class="pro-info" text-capitalize>{{blogs.title}}</h2>
     <p class="timedate" text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{blogs.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{blogs.created_at | date :"MMM dd y"}}

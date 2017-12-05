@@ -54,8 +54,7 @@ lead_time:any='00:00';
 
 
   constructor(public modalCtrl: ModalController, public platform: Platform,public toastCtrl: ToastController, public formBuilder: FormBuilder,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public navCtrl: NavController, public navParams: NavParams, public storage:Storage) {
-       console.log("this is service info page");
-     // this.url = this.providerService.getUrl();
+   
       this.subCategoryId = navParams.get("subCategoryId");
       this.locationId = navParams.get("location_id");
       this.vendor_id = navParams.get("vendor").id;    
@@ -90,7 +89,6 @@ lead_time:any='00:00';
   }
 
   openUrl() {
-        console.log("URL is ",this.website);
         this.platform.ready().then(() => {
             let browser = new InAppBrowser(this.website,'_blank');
 
@@ -106,10 +104,8 @@ lead_time:any='00:00';
           data =>{
                    this.vendorList = data.result.info;
                    this.packageinfo = this.vendorList.packages;
-                   console.log(this.packageinfo.length);
                    this.serviceData = data.result.info.requestServices;
                    this.website = this.vendorList.vendorDetails.website;
-                   //console.log(data.result.info.serviceOffered[0]);
                    if(data.result.info.serviceOffered[0] != undefined){
                        this.lead_time=data.result.info.serviceOffered[0].category_lists[0].service_sub_category_lists[0].lead_time;
                     }
@@ -118,7 +114,6 @@ lead_time:any='00:00';
           err =>{
                    this.providerService.showErrorToast(err);
                    loading.dismiss();
-                   console.log("Response for getVendorDetails: "+err);
                 })
         
   }
@@ -157,7 +152,6 @@ modal(){
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
     .subscribe(
         data =>{
-                 console.log(data);
                  this.providerService.showToast(data.result);
                  loading.dismiss();
                 },
@@ -208,7 +202,6 @@ modal(){
     service_modal.present();
     service_modal.onDidDismiss(data =>{
       if(data == "dismiss"){
-        console.log(" schedule request modal dismissed..!");
       }else{
        this.sendRequestService(data);
       }

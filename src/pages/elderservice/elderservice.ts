@@ -26,7 +26,6 @@ vendorId:any;
   constructor(public navCtrl: NavController,public viewCtrl: ViewController,public storage:Storage,public toastCtrl: ToastController,public loadingCtrl: LoadingController, public navParams: NavParams,public blogListService:BlogListService) {
   	 this.storage.ready().then(() => {      
     	storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
-      console.log(this.rootUrl);
       this.packageId=navParams.get("pack_id");
        this.elder=navParams.get("elder");
         this.location_id=navParams.get("location_id");
@@ -40,8 +39,7 @@ getServicesForByElder(){
     loading.present();    
     this.blogListService.getServicesForByElders(this.rootUrl,this.packageId,this.elder,this.location_id)
       .subscribe(data =>{
-        this.packageData = data.result;   
-          console.log(this.packageData);   
+        this.packageData = data.result;    
         loading.dismiss();
     },
     err =>{

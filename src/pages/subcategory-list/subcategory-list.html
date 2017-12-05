@@ -45,18 +45,9 @@
 		    <span><i class="fa fa-inr" aria-hidden="true"></i>{{service_list.service_cost}}</span>
 			
 			<p class="offers">{{service_list.discount_rate}} %OFF</p> <p>{{service_list.service_type}}</p>
-				 <p [hidden]="!service_list?.lead_time">Minimum {{service_list.lead_time}} hour to for serve you</p> 
+				 <p [hidden]="!service_list?.lead_time">Minimum {{service_list.lead_time}} hour to serve you</p> 
 			
 			</ion-list>
-			<!-- <ion-list class="price-clr">  -->
-			 <!-- <span>   -->
-		    <!-- You Save <i class="fa fa-inr"></i> <span>{{service_list.percentage_cost}}</span> ({{service_list.discount_rate}} %)  -->
-		   <!-- </span> -->
-		    <!-- </ion-list> -->
-		 <!-- <p [hidden]="!service_list?.lead_time">Minimum {{service_list.lead_time}} hour to for serve you</p>  -->
-			
-			
-			
 			<button class="btn-warnings"  *ngIf="dependentLen" (click)="openModal('scheduleModal',service_list)">Schedule</button>
 			<button class="instant-bt"  *ngIf="dependentLen" (click)="instantRequest(service_list)"> Instant</button>
 			</ion-col>

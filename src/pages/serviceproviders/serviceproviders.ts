@@ -43,11 +43,8 @@ export class ServiceprovidersPage {
     });
   }
   locationChanged(){
-    console.log("this.serviceLocation4",this.serviceLocation);
      this.storage.ready().then(() => {
       this.storage.set('service_location',this.serviceLocation);
-      console.log("change location"+this.serviceLocation);     
-      //this.loadPackagesByLocationID(this.serviceLocation);
     });
    
   }
@@ -59,18 +56,14 @@ export class ServiceprovidersPage {
       .subscribe(data =>{
       this.services = data.result.info.category;
       loading.dismiss();
-      console.log("Recieved filtered data :"+this.services);
     },
     err =>{
       this.providerService.showErrorToast(err);
-      console.log("Response for get service offered: "+err);
       this.services=[];
       loading.dismiss();
     })      
   }
   viewPackage(vendor_id){
-    // console.log(this.serviceLocation);
-    // console.log(vendor_id);
     this.navCtrl.push(PackageDetailPagePage,{"vendor_id":vendor_id,'location_id':this.serviceLocation});
   }
 
@@ -86,11 +79,9 @@ locations:any;
   this.providerService.webServiceCall(`getLocations`,"")
           .subscribe(data =>{
                             this.locations = data.result.info;
-                            console.log("Location data : "+this.locations);
                             },
                       err =>{                       
                             this.providerService.showErrorToast(err);
-                            console.log("Response for Location data: "+err);
                             });
 }
 

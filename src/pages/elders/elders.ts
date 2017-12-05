@@ -170,7 +170,7 @@ mytype:string ="password";
         last_name: ['', Validators.compose([ Validators.maxLength(30), 
               ,Validators.required])],
        
-        elder_service : ['', Validators.compose([Validators.required])],
+        //elder_service : ['', Validators.compose([Validators.required])],
         elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.minLength(10),Validators.maxLength(12),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
@@ -207,7 +207,7 @@ mytype:string ="password";
         last_name: ['', Validators.compose([ Validators.maxLength(30), 
               ,Validators.required])],
        
-        elder_service : ['', Validators.compose([Validators.required])],
+       // elder_service : ['', Validators.compose([Validators.required])],
         elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.maxLength(12),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
@@ -248,6 +248,7 @@ mytype:string ="password";
           area_of_interest: ['', Validators.compose([Validators.required])],
            elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
         elder_password:['', Validators.compose([Validators.required])],
+        elder_service: ['', Validators.compose([Validators.required])],
         job_type: ['', Validators.compose([Validators.required])],
         skill_set: ['', Validators.compose([Validators.required])],
         //file_name: ['', Validators.compose([Validators.required])],
@@ -264,6 +265,7 @@ mytype:string ="password";
             ]),
           area_of_interest: ['', Validators.compose([Validators.required])],
         job_type: ['', Validators.compose([Validators.required])],
+         elder_service: ['', Validators.compose([Validators.required])],
         skill_set: ['', Validators.compose([Validators.required])]
    })
  }
@@ -696,6 +698,8 @@ getareaof_interest(){
        }
   }
  fileChange(event) {
+   let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
     let fileList: FileList = event.target.files;
     if(fileList.length > 0) {
         let file: File = fileList[0];
@@ -711,11 +715,11 @@ getareaof_interest(){
       console.log(sendMessage);
       this.file_name=sendMessage[0].file_name;
       this.file_path=sendMessage[0].file_path;
-      console.log(this.file_path);
-      console.log(this.file_name);
+     loader.dismiss();
       
     },
     (err) => { 
+       loader.dismiss();
         if(err.status===401)
         {
           this.communityServices.showToast(JSON.parse(err._body).error);

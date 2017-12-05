@@ -74,18 +74,31 @@ export class ModalContentPage {
   durations:any;
   name:any;
   serviceTitle:any;
+  requestService:any;
+  category:any;
+  category_id:any;
+  service:any;
+  service_ids:any;
+  sub_category_id:any;
+  subcategory:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
-    console.log(this.seviceCheck);
      this.date = new Date().toISOString();
-      console.log(params.get("vendor"));
      this.dependentLists = params.get("dependentList");
      //this.dependents = this.dependentLists[0].id;
      this.lead_time = params.get("lead_time");
      this.serviceTitle = params.get("serviceTitle");
      this.location_id = params.get("location_id");
+    
      if(params.get("serviceData") != undefined){
      this.service_id = this.params.get("serviceData").service_id;
+      this.requestService=params.get("serviceData");
+     this.category = this.requestService.category;
+     this.category_id = this.requestService.category_id;
+     this.service = this.requestService.service;
+     this.service_ids = this.requestService.service_id;
+     this.sub_category_id = this.requestService.sub_category_id;
+     this.subcategory = this.requestService.subcategory;
      }
      if(params.get("vendor") != undefined){
       this.vendor = this.params.get("vendor").name;
@@ -119,7 +132,6 @@ export class ModalContentPage {
    
 
    termsChanged(){
-     console.log(this.terms);
      if(this.terms == true){
        this.checkTerms = false;
      }else{
@@ -139,6 +151,7 @@ onlyNumberKey(event) {
      this.recurring=!searchValues;
    }
      fixed(searchValuess){
+      this.modalForm.value.preferredtime = "";
       this.durations = "";
       this.durations = "Fixed hours";
       this.timeslots=false;
@@ -146,6 +159,9 @@ onlyNumberKey(event) {
      this.fixedd=!searchValuess;
    }
     timeslot(searchValuesss){
+      console.log(this.modalForm.value.fromtime);
+      this.modalForm.value.fromtime = "";
+      this.modalForm.value.totime = "";
       this.durations = "";
       this.durations = "Time slot";
       this.fixedd=false;
@@ -153,6 +169,9 @@ onlyNumberKey(event) {
      this.timeslots=!searchValuesss;
    }
    fullday(searchValuessss){
+    this.modalForm.value.fromtime = "";
+      this.modalForm.value.totime = "";
+      this.modalForm.value.preferredtime = "";
      this.durations = "";
       this.durations = "Full Day";
     this.timeslots=false;
@@ -176,17 +195,15 @@ onlyNumberKey(event) {
             this.starDate = moment(this.starDate);
             this.selectedDates.push(this.starDate);
             this.starDate= moment(this.starDate).add(1, 'days');   
-            console.log(this.starDate);         
+                   
            // this.starDate = moment(this.starDate).format("YYYY-MM-DD");
           }        
-      console.log(this.selectedDates);
       this.dayCalculation();
                                                                                               
   }
   dayCalculation(){
    this.days = [];
-   this.count = this.selectedDates.length;
-    console.log(this.selectedDates);     
+   this.count = this.selectedDates.length;    
       for(let data of this.selectedDates) {
         let date = moment(data).format('YYYY-MM-DD');
 
@@ -195,9 +212,7 @@ onlyNumberKey(event) {
            // console.log(weekoff);
            // console.log(this.excludeDays);
            let _index= this.excludeDays.indexOf(weekoff);
-           console.log(_index);
              if(_index>=0 ){
-                    console.log('minus');
                     if(this.count>0){
                     this.count=this.count-1;
                 }
@@ -205,7 +220,6 @@ onlyNumberKey(event) {
              }  
        }
      this.datCount = this.count;
-     console.log(this.datCount);
   }
  
   exclude(day){
@@ -230,8 +244,7 @@ onlyNumberKey(event) {
       .subscribe(data =>{ 
         this.packageLists=data.result.info.lists;
         //this.packageLists =this.packageListss[1];
-        this.flag="1";
-        console.log(this.packageLists);       
+        this.flag="1";      
     },
 
     (err) => { 
@@ -242,7 +255,6 @@ onlyNumberKey(event) {
    }
    next(){
       var objFromDate = this.modalForm.value.startdate;
-    console.log(objFromDate);
 var objToDate = this.modalForm.value.enddate;
  
 var date1 = new Date(objFromDate);
@@ -260,8 +272,6 @@ var date2 = new Date(objToDate);
       }else{
         this.onetimes = "Recurring";
       }
-      console.log(this.onetimes);
-    console.log(this.onetime);
      if(this.userType == 'sponsor'){
       if(this.onetimes == 'One time'){
        if(!this.authForm.valid || (this.terms == false)){
@@ -279,7 +289,6 @@ var date2 = new Date(objToDate);
     }else{
       this.dependent = this.authForm.value.dependents;
     }
-    console.log(this.modalForm.value.date);
     if(this.modalForm.value.date != "" && this.modalForm.value.time !=""){
 
     
@@ -287,17 +296,36 @@ var date2 = new Date(objToDate);
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
-      console.log(serviceData);
-      let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor});
+    
+       this.providerService.validateTime(serviceData,this.location_id,this.lead_time,this.vendor_id,this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,this.subcategory).subscribe(
+     (viewServiceRequest) => {
+
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.providerService.showToast(JSON.parse(err._body).error);
+        }
+       else{
+         let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+    
+         let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor});
       serviceModal.present();
-      serviceModal.onDidDismiss(data =>{
+         serviceModal.onDidDismiss(data =>{
       if(data == "dismiss"){
         console.log(" schedule request modal dismissed..!");
       }else{
        this.seviceCheck = data;
-       console.log(data);
       }
     })
+       }
+      }
+    ); 
+     
+   
     }
     else{
       this.providerService.showToast("Please Select Preferred date and time");
@@ -305,7 +333,6 @@ var date2 = new Date(objToDate);
        }
      }
      else{
-      console.log(this.onetimes);
            if(!this.authForm.valid || (this.terms == false)){
           this.submitAttempt = true;
            if(this.terms == false){
@@ -329,18 +356,34 @@ var date2 = new Date(objToDate);
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
+       "serviceType":this.onetimes,"datCount":this.datCount,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+       this.providerService.validateTimes(serviceData,this.location_id,this.lead_time,this.vendor_id,this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,this.subcategory,this.datCount).subscribe(
+     (viewServiceRequest) => {
+
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.providerService.showToast(JSON.parse(err._body).error);
+        }
+       else{
+         let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
-      console.log(serviceData);
-       let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor});
+    
+         let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor});
       serviceModal.present();
-       serviceModal.onDidDismiss(data =>{
+         serviceModal.onDidDismiss(data =>{
       if(data == "dismiss"){
         console.log(" schedule request modal dismissed..!");
       }else{
        this.seviceCheck = data;
-       console.log(data);
       }
     })
+       }
+      }
+    ); 
     }
     else{
       this.providerService.showToast("Please Select Frequency");
@@ -373,17 +416,33 @@ else{
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
-      console.log(serviceData);
-       let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor});
+      this.providerService.validateTime(serviceData,this.location_id,this.lead_time,this.vendor_id,this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,this.subcategory).subscribe(
+     (viewServiceRequest) => {
+
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.providerService.showToast(JSON.parse(err._body).error);
+        }
+       else{
+         let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+    
+         let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor});
       serviceModal.present();
-       serviceModal.onDidDismiss(data =>{
+         serviceModal.onDidDismiss(data =>{
       if(data == "dismiss"){
         console.log(" schedule request modal dismissed..!");
       }else{
        this.seviceCheck = data;
-       console.log(data);
       }
     })
+       }
+      }
+    ); 
      }
      else{
       this.providerService.showToast("Please Select Preferred date and time");
@@ -410,18 +469,34 @@ else{
        let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
+       "serviceType":this.onetimes,"datCount":this.datCount,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+     this.providerService.validateTimes(serviceData,this.location_id,this.lead_time,this.vendor_id,this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,this.subcategory,this.datCount).subscribe(
+     (viewServiceRequest) => {
+
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.providerService.showToast(JSON.parse(err._body).error);
+        }
+       else{
+         let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
-      console.log(serviceData);
-       let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor});
+    
+         let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor});
       serviceModal.present();
-       serviceModal.onDidDismiss(data =>{
+         serviceModal.onDidDismiss(data =>{
       if(data == "dismiss"){
         console.log(" schedule request modal dismissed..!");
       }else{
        this.seviceCheck = data;
-       console.log(data);
       }
     })
+       }
+      }
+    ); 
         }
     else{
       this.providerService.showToast("Please Select Frequency");
@@ -442,8 +517,6 @@ else{
       }else{
         this.onetimes = "Recurring";
       }
-      console.log(this.onetimes);
-    console.log(this.onetime);
      if(this.userType == 'sponsor'){
       if(this.onetimes == 'One time'){
        if(!this.authForm.valid || (this.terms == false)){
@@ -461,7 +534,6 @@ else{
     }else{
       this.dependent = this.authForm.value.dependents;
     }
-    console.log(this.modalForm.value.date);
     if(this.modalForm.value.date != "" && this.modalForm.value.time !=""){
 
     
@@ -469,7 +541,7 @@ else{
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
-      console.log(serviceData);
+   
       this.viewCtrl.dismiss(serviceData);
     }
     else{
@@ -502,8 +574,8 @@ else{
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
-       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
-      console.log(serviceData);
+       "serviceType":this.onetimes,"datCount":this.datCount,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+  
       this.viewCtrl.dismiss(serviceData);
     }
     else{
@@ -537,7 +609,7 @@ else{
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
-      console.log(serviceData);
+   
        this.viewCtrl.dismiss(serviceData);
      }
      else{
@@ -565,8 +637,8 @@ else{
        let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
-       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
-      console.log(serviceData);
+       "serviceType":this.onetimes,"datCount":this.datCount,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+ 
        this.viewCtrl.dismiss(serviceData);
         }
     else{
@@ -585,7 +657,7 @@ if(this.userType != 'sponsor'){
       this.dependent = this.elderId ;
     }
      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date+" "+this.modalForm.value.time, "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact};
-      console.log(serviceData);
+   
       this.viewCtrl.dismiss(serviceData);
 }
   dismiss(){

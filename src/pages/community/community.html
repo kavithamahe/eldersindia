@@ -52,7 +52,7 @@
 							<ion-col [hidden]="!member?.avatar">
 								<img (click)="membersProfile(member.uid)" 
 								[src]="imageUrl+member?.avatar" style="width:100px; height:80px;"  />
-								<small class="mem-name">{{member.name | words :5 : '....'}}
+								<small class="mem-name" (click)="membersProfile(member.uid)">{{member.name | words :5 : '....'}}
 								</small>
 							</ion-col>
 						</ion-item>
@@ -99,7 +99,7 @@
 		            					[class.invalid]="!authForm.controls.videoUrl.valid && (authForm.controls.videoUrl.dirty )">
 									</ion-input>
 								</ion-item>
-									<small>( Youtube,Dailymotion,Vimeo,Wine)
+									<small>(Youtube,Dailymotion,Vimeo,Wine)
 									</small>
 								
 							</ion-col>

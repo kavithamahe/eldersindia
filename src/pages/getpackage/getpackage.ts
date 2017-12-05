@@ -36,8 +36,6 @@ dependentLists:any=[];
    
         this.packId = navParams.get("packID");
         this.dependentLists = navParams.get("dependents");
-        console.log(this.dependentLists);
-        console.log(this.packId);
    });
   }
   dismiss(){

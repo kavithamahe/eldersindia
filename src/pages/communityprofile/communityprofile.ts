@@ -255,7 +255,6 @@ showConfirm(id){
      }
   }
    openUrl(metalink_url) {
-    console.log("URL is ",metalink_url);
         this.platform.ready().then(() => {
             let browser = new InAppBrowser(metalink_url,'_blank');
 
@@ -298,12 +297,10 @@ showConfirm(id){
      
        
        this.connection = Privacy.privacy_connection;
-       console.log("connection"+ this.connection);
     
        this.profile = Privacy.privacy_profile;
        
        }
-       console.log("Privacy" + Privacy);
       loader.dismiss();
   },
    err =>{

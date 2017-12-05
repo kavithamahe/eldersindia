@@ -41,8 +41,6 @@ submit() {
 				this.service.forgotPassword(`forgetPassword`,{"email":this.mailId})
 				.subscribe(
 					data=>{
-					      console.log(data);
-			            // this.dismiss();
 			            this.viewCtrl.dismiss("dismiss");
 			            loader.dismiss();
 			                },

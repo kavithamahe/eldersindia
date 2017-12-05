@@ -20,7 +20,6 @@ export class ViewpackagePagePage {
   constructor(public navCtrl: NavController,public viewCtrl: ViewController,public storage:Storage,public toastCtrl: ToastController,public loadingCtrl: LoadingController, public navParams: NavParams,public blogListService:BlogListService) {
   	 this.storage.ready().then(() => {      
     	storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
-      console.log(this.rootUrl);
       this.packageId=navParams.get("packageId");
   	this.getPackageRequestBy();
       });     
@@ -33,9 +32,7 @@ export class ViewpackagePagePage {
     // this.providerService.loadServiceOffered()
     this.blogListService.getPackageRequestById(this.rootUrl,this.packageId)
       .subscribe(data =>{
-      	//console.log(data);
         this.packageData = data.result;   
-          console.log(this.packageData);   
         loading.dismiss();
     },
     err =>{

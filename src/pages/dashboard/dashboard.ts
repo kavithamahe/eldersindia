@@ -62,8 +62,6 @@ export class DashboardPage {
   this.platform.ready().then(() => {
       Geolocation.getCurrentPosition().then(
       (data) => {
-            console.log('My latitude : ', data.coords.latitude);
-            console.log('My longitude: ', data.coords.longitude);
             this.getLocation(data.coords.latitude,data.coords.longitude);
         },
         (err) =>{
@@ -82,12 +80,11 @@ export class DashboardPage {
 }
 
   getLocation(d1,d2){
-console.log("location ready");
     this.nativeGeocoder.reverseGeocode(d1, d2)
   .then(
     (result: NativeGeocoderReverseResult) => {
       this.storage.ready().then(() => {
-      this.storage.set('service_location',result.city);
+      this.storage.set('service_location',"");
     });
     console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
     })
@@ -113,7 +110,7 @@ console.log("location ready");
   public blogsPage()
   {
     //alert("token"+this.token);
-  	this.navCtrl.setRoot(BlogtabsPage);
+  	this.navCtrl.setRoot(BlogsPage);
   }
   public connectionsPage()
   {
@@ -125,7 +122,6 @@ console.log("location ready");
   }
   public makeCall(number)
   {
-    console.log("number"+number);
     if(number)
     {
     CallNumber.callNumber(number, true)
@@ -139,9 +135,6 @@ console.log("location ready");
   }
   public hooter(hooterOn)
   {
-   console.log(hooterOn);
-    console.log('uniqueId1');
-
     if(!hooterOn)
     {
        this.hooterOn=!hooterOn;

@@ -77,7 +77,7 @@
 		    <ion-item>
            <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" min={{this.date}}  formControlName ="date"></ion-datetime>
         </ion-item>
-         <p class="err-reds" *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">Please enter the scheduled date
+         <p class="err-reds" *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">Please select the preferred date
          </p>
        <ion-list>
 	     <ion-label stacked class="label-lb required">Preferred Time</ion-label>
@@ -109,7 +109,7 @@
           </ion-list>
            <!--  <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" placeholder="Scheduled time" formControlName ="time" class="select-brd"></ion-datetime>
             </ion-item> -->
-		   <p class="err-reds" *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">Please enter the scheduled time</p>
+		   <p class="err-reds" *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">Please select the preferred time</p>
 	
 		</div>
 

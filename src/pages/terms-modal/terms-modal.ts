@@ -15,21 +15,6 @@ export class TermsModalPage {
 
 description:any;
 show_description:any = false;
-// show_application_use:any;
-// show_eligibility:any;
-// show_user_accounts:any;
-// show_renewal:any;
-// show_personal_info:any;
-// show_content:any;
-// show_license:any;
-// show_Intellectual:any;
-// show_trade_marks:any;
-// show_restrictions:any;
-// show_termination:any;
-// show_limitation:any;
-// show_indemnification:any;
-// show_miscellaneous:any;
-// show_contact_us:any;
 show_details:any=null;
 
   constructor(public viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams) {}

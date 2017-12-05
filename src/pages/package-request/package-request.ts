@@ -31,7 +31,7 @@ elderId:any;
   constructor(public navCtrl: NavController,public modalCtrl: ModalController,public toastCtrl: ToastController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams, public blogListService:BlogListService) {
   	 this.storage.ready().then(() => {      
     	storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
-      console.log(this.rootUrl);
+     
       this.getPackageRequests();
       });     
    });
@@ -46,10 +46,8 @@ elderId:any;
         this.packageRequest = data.result.data;
         this.nextPageURL = data.result.next_page_url;
        loading.dismiss();
-      console.log("Recieved filtered data :"+this.packageRequest);
     },
     err =>{
-      //console.log("sdfsdf");
       this.packageRequest= [];
       this.blogListService.showErrorToast(err);     
       loading.dismiss();

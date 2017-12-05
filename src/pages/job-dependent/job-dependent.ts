@@ -49,7 +49,6 @@ dependentstatus:any=0;
     })
 
   });
-  console.log(this.user_type);
   if(this.user_type !='sponsor'){
    this.authForm = formBuilder.group({
         elder_dependent: ['', Validators.compose([Validators.required])],
@@ -105,7 +104,6 @@ dependentstatus:any=0;
            this.jobBoardService.resumeupload( formData, options)
         .subscribe(
      (sendMessage) => { 
-      console.log(sendMessage);
       this.file_name=sendMessage[0].file_name;
       this.file_path=sendMessage[0].file_path;
       loader.dismiss();
@@ -139,7 +137,6 @@ dismiss() {
  }
  submitDependent()
  {
-  console.log(this.file_name);
   if(this.file_name == undefined){
     this.showToaster("Please select the file");
   }
@@ -173,7 +170,6 @@ dismiss() {
     ); 
       }
       else{
-        console.log(this.jobId);
         this.jobBoardService.applyjobelder(this.user_type_id,this.user_id,this.jobId,this.file_name,
         this.file_path).subscribe((applyjob) => {
           this.showToaster(applyjob.result);

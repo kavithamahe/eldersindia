@@ -29,11 +29,13 @@
 <div *ngIf="manages.length>0">
   <div *ngFor="let manage of manages; let i=index">
    
-        <ion-card (tap)="toggleDetails(i)" class="des-card">
+        <ion-card class="des-card">
         <ion-row>
         <ion-col width-100 class="depende-elder" style="border:1px solid red;">
-         <button ion-button color="dark" clear (press)="showOptions(manage)" style="margin:0px!important; padding:4px; width:100%;">
-         <i class="fa fa-user name-person"></i><p name="person" class="name-elder">{{manage.relation}}</p>&nbsp;<i class="fa fa-angle-down"></i>
+         <button ion-button color="dark" clear style="margin:0px!important; padding:4px; width:100%;">
+         <i (tap)="toggleDetails(i)"  class="fa fa-user name-person"></i><p (tap)="toggleDetails(i)"  name="person" class="name-elder">{{manage.relation}}</p>&nbsp;<i class="fa fa-angle-down" (tap)="toggleDetails(i)" ></i>
+         <i class="fa fa-trash" (click)="showConfirm(manage)"></i><i 
+         (click)="editElder(manage)" class="fa fa-pencil"></i>
           </button>
           </ion-col>
           <!-- <ion-col width-25>
@@ -47,7 +49,8 @@
 			
           <div class="listed-det">
 	
-            <span><i class="fa fa-user"></i><p>{{manage.name}} {{manage.last_name}}</p></span>
+            <span><i class="fa fa-user"></i><p>{{manage.name}} {{manage.last_name}}</p>
+            </span>
             <span> <i class="fa fa-phone"></i><p>{{manage.mobile}}</p></span>
             <span> <i class="fa fa-calendar"></i><p>{{manage.dob}}</p></span>
             <!--  <p><ion-icon class="depend" item-left 
