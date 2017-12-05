@@ -30,7 +30,7 @@
             </ion-select>
         </ion-item>
          <small *ngIf="!authForm.controls.elder_relation.valid  && (authForm.controls.elder_relation.dirty || submitAttempt)">
-              <p class="valid err-reds">Please select the relation</p>
+              <p class="valid err-reds shake">Please select the relation</p>
           </small> 
  </div>
       <ion-label class="label-tittle required">Elder Name</ion-label>
@@ -41,7 +41,7 @@
             </ion-input>
       </ion-item>
           <small *ngIf="!authForm.controls.elder_name.valid  && (authForm.controls.elder_name.dirty || submitAttempt)">
-                  <p class="valid err-reds">Please enter the name</p>
+                  <p class="valid err-reds shake">Please enter the name</p>
           </small> 
           <ion-label class="label-tittle required">Last Name</ion-label>
                <ion-item>
@@ -51,7 +51,7 @@
             </ion-input>
       </ion-item>
           <small *ngIf="!authForm.controls.last_name.valid  && (authForm.controls.last_name.dirty || submitAttempt)">
-                  <p class="valid err-reds">Please enter the last name</p>
+                  <p class="valid err-reds shake">Please enter the last name</p>
           </small> 
     <ion-label class="label-tittle required">Services</ion-label>
           <ion-item>
@@ -64,7 +64,7 @@
                 </ion-select>
           </ion-item>
            <small *ngIf="!authForm.controls.elder_service.valid  && (authForm.controls.elder_service.dirty || submitAttempt)">
-                  <p class="valid err-reds">Please select the services</p>
+                  <p class="valid err-reds shake">Please select the services</p>
           </small> 
         <ion-label class="label-tittle required">Mobile number</ion-label>
             <ion-item>
@@ -75,7 +75,7 @@
               </ion-input>
            </ion-item>
               <small  *ngIf="!authForm.controls.elder_number.valid  && (authForm.controls.elder_number.dirty || submitAttempt)">
-                <p class="valid err-reds">Please enter valid mobile number</p>
+                <p class="valid err-reds shake">Please enter valid mobile number</p>
               </small> 
           <ion-label class="label-tittle required">Date of birth</ion-label>          
 
@@ -85,7 +85,7 @@
                 [class.invalid]="!authForm.controls.elder_dob.valid && (authForm.controls.elder_dob.dirty)"></ion-datetime>
     </ion-item>
           <small  *ngIf="!authForm.controls.elder_dob.valid  && (authForm.controls.elder_dob.dirty || submitAttempt)">
-                <p class="valid err-reds">Please select the date of birth</p>
+                <p class="valid err-reds shake">Please select the date of birth</p>
               </small>   
                <ion-label class="label-tittle">Hobbies</ion-label>
                <ion-item>
@@ -109,7 +109,7 @@
               </ion-input>
           </ion-item>  
           <small *ngIf="!authForm.controls.elder_address.valid  && (authForm.controls.elder_address.dirty || submitAttempt)">
-                <p class="valid err-reds">Please enter the address</p>
+                <p class="valid err-reds shake">Please enter the address</p>
           </small>
        <ion-label class="label-tittle required">Location</ion-label>
           <ion-item>
@@ -123,7 +123,7 @@
             </ion-select>
           </ion-item>
           <small *ngIf="!authForm.controls.elder_location.valid  && (authForm.controls.elder_location.dirty || submitAttempt)">
-                <p class="valid err-reds">Please select the location</p>
+                <p class="valid err-reds shake">Please select the location</p>
           </small>
  
     <div>
@@ -156,7 +156,7 @@
              <small *ngIf="!authForm.controls.emergency_list.
                 controls[i].controls.emergency_name.valid && (authForm.controls.emergency_list.
                 controls[i].controls.emergency_name.dirty || submitAttempt)">
-                  <p class="valid err-reds">This field is required.</p>
+                  <p class="valid err-reds shake">This field is required.</p>
             </small> 
             <ion-label class="label-tittle required">Number</ion-label>
            <ion-item>
@@ -169,7 +169,7 @@
             <small *ngIf="!authForm.controls.emergency_list.
                 controls[i].controls.emergency_no.valid && (authForm.controls.emergency_list.
                 controls[i].controls.emergency_no.dirty || submitAttempt)">
-                  <p class="valid err-reds">This field is required.</p>
+                  <p class="valid err-reds shake">This field is required.</p>
             </small> 
            </div>  
            </div>
@@ -248,7 +248,7 @@
             </ion-select>
         </ion-item>
         <small *ngIf="!myForm.controls.area_of_interest.valid  && (myForm.controls.area_of_interest.dirty || submitAttempt)">
-                <p class="valid err-reds">This field is required.</p>
+                <p class="valid err-reds shake">This field is required.</p>
           </small>
     <ion-label class="label-tittle required">Job type</ion-label>
         <ion-item>
@@ -260,7 +260,7 @@
             </ion-select>
         </ion-item>
          <small *ngIf="!myForm.controls.job_type.valid  && (myForm.controls.job_type.dirty || submitAttempt)">
-                <p class="valid err-reds">This field is required.</p>
+                <p class="valid err-reds shake">This field is required.</p>
           </small>
 <ion-label class="label-tittle required">Skills</ion-label>
         <div class="tag-skill_set">
@@ -277,7 +277,7 @@
       </rl-tag-input>
         </div>
          <small *ngIf="!myForm.controls.skill_set.valid  && (myForm.controls.skill_set.dirty || submitAttempt)">
-                <p class="valid err-reds">This field is required.</p>
+                <p class="valid err-reds shake">This field is required.</p>
           </small>
 
 <div>
@@ -311,7 +311,7 @@
             <small *ngIf="!myForm.controls.experience_list.
                 controls[i].controls.experience_industry.valid && (myForm.controls.experience_list.
                 controls[i].controls.experience_industry.dirty || submitAttempt)">
-                  <p class="valid err-reds">This field is required.</p>
+                  <p class="valid err-reds shake">This field is required.</p>
             </small> 
          <ion-label class="label-tittle required">Total years</ion-label>
           <ion-item>
@@ -325,7 +325,7 @@
             <small *ngIf="!myForm.controls.experience_list.
                 controls[i].controls.experience_years.valid && (myForm.controls.experience_list.
                 controls[i].controls.experience_years.dirty || submitAttempt)">
-                  <p class="valid err-reds">This field is required.</p>
+                  <p class="valid err-reds shake">This field is required.</p>
             </small> 
           <ion-label class="label-tittle required">Duration</ion-label>
             <ion-item>
@@ -338,7 +338,7 @@
                <small *ngIf="!myForm.controls.experience_list.
                 controls[i].controls.experience_duration.valid && (myForm.controls.experience_list.
                 controls[i].controls.experience_duration.dirty || submitAttempt)">
-                  <p class="valid err-reds">This field is required.</p>
+                  <p class="valid err-reds shake">This field is required.</p>
             </small> 
         </div>
          </div>
@@ -385,7 +385,7 @@
             <small *ngIf="!myForm.controls.education_list.
                 controls[i].controls.education_graduation.valid && (myForm.controls.education_list.
                 controls[i].controls.education_graduation.dirty || submitAttempt)">
-                  <p class="valid err-reds">This field is required.</p>
+                  <p class="valid err-reds shake">This field is required.</p>
             </small> 
              <ion-item *ngIf="education_graduation[i] == other">
               <ion-input type="text" [(ngModel)]="graduationOther[i]" 
@@ -406,7 +406,7 @@
            <small *ngIf="!myForm.controls.education_list.
                 controls[i].controls.education_specialization.valid && (myForm.controls.education_list.
                 controls[i].controls.education_specialization.dirty || submitAttempt)">
-                  <p class="valid err-reds">This field is required.</p>
+                  <p class="valid err-reds shake">This field is required.</p>
             </small> 
              <ion-item *ngIf="education_specialization[i] == specializationsOther">
               <ion-input type="text" [(ngModel)]="specialization_other[i]" 
@@ -425,7 +425,7 @@
             <small *ngIf="!myForm.controls.education_list.
                 controls[i].controls.education_college.valid && (myForm.controls.education_list.
                 controls[i].controls.education_college.dirty || submitAttempt)">
-                  <p class="valid err-reds">This field is required.</p>
+                  <p class="valid err-reds shake">This field is required.</p>
             </small> 
             </div> 
            </div>
@@ -474,7 +474,7 @@
                 </ion-input>
         </ion-item>
         <small *ngIf="!myForm.controls.elder_email.valid  && (myForm.controls.elder_email.dirty || submitAttempt)">
-                <p class="valid err-reds">This field is required.</p>
+                <p class="valid err-reds shake">This field is required.</p>
           </small>
             <ion-label class="label-tittle required">Password</ion-label>
       <ion-item>
@@ -483,7 +483,7 @@
               </ion-input>
         </ion-item>
         <small *ngIf="!myForm.controls.elder_password.valid  && (myForm.controls.elder_password.dirty || submitAttempt)">
-                <p class="valid err-reds">This field is required.</p>
+                <p class="valid err-reds shake">This field is required.</p>
           </small>
           </div>  
            </form>

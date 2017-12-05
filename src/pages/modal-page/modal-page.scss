@@ -12,9 +12,20 @@ page-modal-page {
 .popup-mds .item-md {
     border: 1px solid #ccc; margin-top:5px;padding-left: 3px;
 }
+
+.popup-mds .item-ios {
+    border: 1px solid #ccc; margin-top:5px;padding-left: 3px;
+}
+.popup-mds .label-ios{     color: #777; margin:0px;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Muli', sans-serif; padding-bottom:8px; padding-top:8px;}
 #lbl-71{padding-left:5px;}
 .one-timereq.item-md{ border:none !important;}
+.one-timereq.item-ios{ border:none !important;}
 .prefe{ padding-left:5px !important;}
 .terms-con .item-inner .input-wrapper .label-md{    font-size:19px !important;
+    font-weight: 400;    font-family: 'Muli', sans-serif;}
+.terms-con .item-inner .input-wrapper .label-ios{    font-size:19px !important;
     font-weight: 400;    font-family: 'Muli', sans-serif;}
 }

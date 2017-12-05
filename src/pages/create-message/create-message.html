@@ -28,20 +28,22 @@
 <ion-list class="create-message">
 <ion-item>
             <ng2-completer class="to-sect" disableInput="{{customTo}}" [(ngModel)]="toAddress" formControlName="toAddress" [datasource]="friendsList" placeholder="To *" [minSearchLength]="0" 
-            (focus)="hiddeEorr()"></ng2-completer>
+            (focus)="hiddeEorr()">
+			</ng2-completer>
 
-  <p *ngIf="!messageForm.controls.toAddress.valid && (messageForm.controls.toAddress.dirty || submitAttempt)" class="err-reds">Please enter the to address</p>
-  <p *ngIf="customErr" class="err-reds">Please select valid to address</p>
+
   </ion-item>
+    <p *ngIf="!messageForm.controls.toAddress.valid && (messageForm.controls.toAddress.dirty || submitAttempt)" class="err-reds shake">Please enter the to address</p>
+  <p *ngIf="customErr" class="err-reds">Please select valid to address</p>
   <ion-item>
     <ion-input type="text" class="subject-area" placeholder="Subject *" formControlName="subject" [(ngModel)]="subject"></ion-input>
   </ion-item>
-  <p *ngIf="!messageForm.controls.subject.valid && (messageForm.controls.subject.dirty || submitAttempt)" class="err-reds">Please enter the subject</p>
+  <p *ngIf="!messageForm.controls.subject.valid && (messageForm.controls.subject.dirty || submitAttempt)" class="err-reds shake">Please enter the subject</p>
   <ion-item>
      <ion-textarea placeholder="Message *" formControlName="message" [(ngModel)]="message">
     </ion-textarea>
   </ion-item>
-  <p *ngIf="!messageForm.controls.message.valid && (messageForm.controls.message.dirty || submitAttempt)" class="err-reds">Please enter the message</p>
+  <p *ngIf="!messageForm.controls.message.valid && (messageForm.controls.message.dirty || submitAttempt)" class="err-reds shake">Please enter the message</p>
   
   <ion-item>
    <input type="file" (change)="fileChange($event)" placeholder="Upload file" >

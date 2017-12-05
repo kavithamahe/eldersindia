@@ -16,6 +16,7 @@
 // automatically applied to the <body> element in the app.
 @import url('https://fonts.googleapis.com/css?family=Muli');
 @import url('https://fonts.googleapis.com/css?family=Exo+2');
+
 button{font-family: 'Muli', sans-serif; }
 .list-md .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus){border-bottom-color:none !important;box-shadow:none  !important;}
 .list-md .item-input.input-has-focus:last-child{border-bottom-color:none !important;box-shadow:none  !important;}
@@ -173,7 +174,7 @@ send-req {  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100
 .btn-blue{ margin-top:10px;background:#FE5420;font-family: "Muli",sans-serif;}
 .header-ios .toolbar-background-ios, .footer-ios .toolbar-background-ios{ border:none;}
 .err-reds { float:right;padding-left:3px;padding-right:3px;
- margin-right:17px !important;   position: relative; background:red; color:#fff !important;font-size:11px !important;font-family: "Muli",sans-serif; border-top:3px solid #007CA1;
+ margin-right:17px !important;   position: relative; background:#FFDCE0; color:#CB2431 !important;font-size:11px !important;font-family: "Muli",sans-serif;
        -webkit-animation-duration:5s; 
             animation-duration:5s; 
             -webkit-animation-fill-mode: both; 
@@ -196,7 +197,7 @@ send-req {  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100
     font-weight: normal;
     text-decoration: inherit;
 
-    color:#007CA1;
+    color:#FFDCE0;   border-bottom-color: hsl(352, 32%, 72%);
     font-size: 18px;
     padding-right: 0.5em;
     position: absolute;

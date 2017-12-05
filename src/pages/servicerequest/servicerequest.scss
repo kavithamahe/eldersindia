@@ -43,6 +43,13 @@ page-servicerequest {
     font-weight: 400;
     width: 100%; color:#777;font-family: 'Muli', sans-serif;
 }
+
+.service-conts {
+    font-size:13px !important;
+    font-weight: 400;
+    width: 100%; color:#777;font-family: 'Muli', sans-serif;
+}
+.service-conts i{margin-right:7px; font-size:13px;}
 .service-req {
     color:#007A95!important;
     display: inline;font-family: 'Muli', sans-serif;
@@ -61,7 +68,8 @@ page-servicerequest {
 .content-intop {
     background: hsl(218, 100%, 98%) none repeat scroll 0 0 !important;
 }
-
+.btn-go .go-btn.button-md{ margin-top:15px;}
+.btn-go .go-btn.button-ios{ margin-top:8px;}
 .searchbar-md .searchbar-input{border:1px solid #87CEFA;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;background: -moz-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* ff3.6+ */
 background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(254,255,245,1))); /* safari4+,chrome */
 background: -webkit-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* safari5.1+,chrome10+ */
