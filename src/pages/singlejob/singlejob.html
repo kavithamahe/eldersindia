@@ -65,10 +65,16 @@
 </ion-col>
 
 </ion-row>
-<ion-row>
+<!-- <ion-row>
 <ion-col>
   <button ion-button  class="oranges" full *ngIf="user_type == 'sponsor'" (click)="applyJob(singleJob?.id)"><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button>
    <button ion-button  class="oranges" *ngIf="user_type == 'elder'" full><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
+  </ion-col>
+</ion-row> -->
+<ion-row>
+<ion-col>
+  <button ion-button  class="oranges" full *ngIf="singleJob.is_applied == 0" (click)="applyJob(singleJob?.id)"><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button>
+   <button ion-button  class="oranges" *ngIf="singleJob.is_applied == 1" full><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
   </ion-col>
 </ion-row>
 <hr/>
@@ -78,8 +84,8 @@
 <ion-col class="single-jobscotact">
 <h2>Contact Details</h2>
 <span text-capitalize><i class="fa fa-user-o" aria-hidden="true"></i> {{singleJob?.contact_name}}</span> 
-<span><i class="fa fa-phone" aria-hidden="true"></i> {{singleJob?.contact_mobile}}</span> 
-<span><i class="fa fa-envelope" aria-hidden="true"></i> {{singleJob?.contact_email}}</span> 
+<span><i class="fa fa-phone" aria-hidden="true" (click)="makeCall(singleJob?.contact_mobile)"></i> {{singleJob?.contact_mobile}}</span> 
+<span><i class="fa fa-envelope" aria-hidden="true"></i><a href="{{singleJob?.contact_email}}"> {{singleJob?.contact_email}}</a></span> 
 <span><i class="fa fa-internet-explorer" aria-hidden="true"></i> <a href="{{singleJob?.user?.website}}">{{singleJob?.user?.website}}</a></span>
 </ion-col>
 
@@ -144,8 +150,8 @@
 <ion-col class="single-jobscotact">
 <h2>Contact Details</h2>
 <span text-capitalize><i class="fa fa-user-o" aria-hidden="true"></i> {{applyjob?.contact_name}}</span> <br/>
-<span><i class="fa fa-phone" aria-hidden="true"></i> {{applyjob?.contact_mobile}}</span> <br/>
-<span><i class="fa fa-envelope" aria-hidden="true"></i> {{applyjob?.contact_email}}</span> <br/>
+<span><i class="fa fa-phone" aria-hidden="true" (click)="makeCall(applyjob?.contact_mobile)"></i> {{applyjob?.contact_mobile}}</span> <br/>
+<span><i class="fa fa-envelope" aria-hidden="true"></i> <a href="{{singleJob?.contact_email}}">{{applyjob?.contact_email}}</a></span> <br/>
 <span><i class="fa fa-internet-explorer" aria-hidden="true"></i> <a href="{{singleJob?.user?.website}}">{{applyjob?.user?.website}}</a></span>
 </ion-col>
 

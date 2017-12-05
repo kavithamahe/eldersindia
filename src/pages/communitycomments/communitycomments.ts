@@ -46,7 +46,6 @@ community_id:any;
         this.post_id = this.posts.id;
         this.post_profile_id = this.posts.profile_id;
         this.community_id = this.posts.com_id;
-        console.log(this.community_id);
     });
       storage.get('id').then((id) => { this.user_id=id; })
     });
@@ -177,7 +176,6 @@ community_id:any;
                             }
                         }
                         
-                      console.log("index of comment: ",i);
                     }
                  }
        },
@@ -188,7 +186,6 @@ community_id:any;
    
  }
  addComments(event){
-   console.log("addBlock");
     if(this.addBlock==event){
         this.addBlock=null;
     }
@@ -227,7 +224,6 @@ community_id:any;
      	if(this.post_comments[i].comments_id == id){
      		
      		this.post_comments.splice(i,1);
-          console.log("index of comment: ",i);
      	}
      }
       
@@ -256,11 +252,9 @@ deleteReply(comment_id,reply_id,post_id)
                             if(this.post_comments[i].comment_reply[j].comments_replay_id == reply_id)
                             {
                                 this.post_comments[i].comment_reply.splice(j,1);
-                                console.log("index of reply: ",j);
                             }
                         }
                         
-                      console.log("index of comment: ",i);
                     }
                  }
                   loader.dismiss();
@@ -309,7 +303,6 @@ sendComment(postID){
   }
 
   sendReply(uid_from,comments_id){
-     console.log("comment" + uid_from + comments_id);
       this.Reply=null;
       this.replyBlock=null;
     if(this.reply_comment != ""){
@@ -321,9 +314,7 @@ sendComment(postID){
      this.reply_comment="";
      for(let i=0; i<this.post_comments.length;i++){
      	if(this.post_comments[i].comments_id == comments_id){
-     		console.log("index of comment: ",i);
      		let list = datas.result.info.list;
-     		console.log(list);
      		this.post_comments[i].comment_reply.push({
      			com_post_cmt_id:list.com_post_cmt_id,
      			comments_replay:list.comments_replay,
@@ -358,7 +349,6 @@ sendComment(postID){
   	this.viewCtrl.dismiss({community_id:this.community_id});
   }
   clearInputText(){
-    console.log("kavi")
   }
   emojiPicker1(ev,post_id)
    {

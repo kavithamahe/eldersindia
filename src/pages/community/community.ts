@@ -182,7 +182,6 @@ files:any;
     //loader.present();    
       this.communityServices.getConnections(this.user_id).subscribe(connections => {
         this.connectionInfo=connections.result;
-        console.log(this.connectionInfo.length);
        // loader.dismiss();
      },
    err =>{
@@ -601,7 +600,6 @@ export class CommunityPopoverPage {
     //loader.present();    
       this.communityServices.getConnections(this.user_id).subscribe(connections => {
         this.connectionInfo=connections.result;
-        console.log(this.connectionInfo.length);
        // loader.dismiss();
      },
    err =>{

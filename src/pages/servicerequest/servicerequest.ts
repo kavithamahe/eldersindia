@@ -19,6 +19,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 export class ServicerequestPage {
 imageUrl:any;
 token:any;
+status:any="";
 serviceRequestInfo:any=[];
 showRemark:any=null;
 rating:number=0;
@@ -27,8 +28,10 @@ nextPageURL:any='';
 getRemarksList:any=[];
 serviceRequestScrollLists:any=[];
 vendorStatus:any=[];
+servicestatus:any=[];
 sr_token:any;
 searchEvent:any="";
+sortby:any="";
   constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -45,16 +48,42 @@ searchEvent:any="";
       })
   	});
   }
-  
+  onInitstatus(){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    //this.serviceRequestInfo =[];
+    this.serviceRequest.serviceRequestStatus(this.searchEvent,this.status).subscribe(
+     (serviceRequest) => {
+      this.serviceRequestInfo=serviceRequest.result.info.list.data; 
+      this.vendorStatus=serviceRequest.result.info.status;
+       this.servicestatus=serviceRequest.result.info.status;
+      this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
+      loader.dismiss();    
+    },
+    (err) => { 
+      this.serviceRequestInfo =[];
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+        loader.dismiss();
+      }
+    ); 
+  }
   public onInit()
   {
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     //this.serviceRequestInfo =[];
-    this.serviceRequest.serviceRequestList(this.searchEvent).subscribe(
+    this.serviceRequest.serviceRequestList(this.searchEvent,this.status,this.sortby).subscribe(
      (serviceRequest) => {
       this.serviceRequestInfo=serviceRequest.result.info.list.data; 
       this.vendorStatus=serviceRequest.result.info.status;
+       this.servicestatus=serviceRequest.result.info.status;
       this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
       loader.dismiss();    
     },
@@ -77,10 +106,11 @@ searchEvent:any="";
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     this.serviceRequestInfo =[];
-    this.serviceRequest.serviceRequestLists(this.sr_token,this.searchEvent).subscribe(
+    this.serviceRequest.serviceRequestLists(this.sr_token,this.searchEvent,this.status,this.sortby).subscribe(
      (serviceRequest) => {
       this.serviceRequestInfo=serviceRequest.result.info.list.data; 
       this.vendorStatus=serviceRequest.result.info.status;
+       this.servicestatus=serviceRequest.result.info.status;
       this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
       loader.dismiss();    
     },
@@ -255,7 +285,7 @@ searchEvent:any="";
   }
   serviceRequestScroll()
   {
-    this.serviceRequest.serviceRequestScroll(this.nextPageURL,this.searchEvent).subscribe(
+    this.serviceRequest.serviceRequestScroll(this.nextPageURL,this.searchEvent,this.status,this.sortby).subscribe(
      (serviceRequestScroll) => {
       this.serviceRequestScrollLists=serviceRequestScroll.result.info.list.data; 
        for (let i = 0; i < Object.keys(this.serviceRequestScrollLists).length; i++) {

@@ -77,18 +77,13 @@ downloadProgress:any;
       });    
   }
  downloadFile(file_path,file_name) {
-console.log("Source file path  "+ file_path);
         this.platform.ready().then(() => {
             
   const fileTransfer: TransferObject = this.transfer.create();
   const url = this.imageUrl + file_path;
-  console.log("constructed url =" + url);
   
    var targetPath = cordova.file.externalRootDirectory + file_name;
-   console.log("target"+targetPath);
   fileTransfer.download(url, targetPath,  true ).then((entry) => {
-    console.log("success");
-    console.log("download complete:" + entry.toURL());
    this.showToaster("Downloaded Succesfully"); 
   },
    (error) => {

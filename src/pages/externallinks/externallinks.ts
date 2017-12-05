@@ -93,7 +93,6 @@ export class ExternallinksPage {
    toast.present();
   }
  openUrl(metalink_url) {
-console.log("URL is ",metalink_url);
         this.platform.ready().then(() => {
             let browser = new InAppBrowser(metalink_url,'_blank');
 

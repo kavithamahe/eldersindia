@@ -35,6 +35,25 @@
 <ion-col width-80><ion-searchbar [(ngModel)]="searchEvent"></ion-searchbar></ion-col>
   <ion-col width-20 class="btn-go"><button (click)="getItems(searchEvent)" ion-button small class="go-btn">Go</button> </ion-col>
 </ion-row>
+<ion-card>
+ <ion-item>
+    <ion-label>Status</ion-label>
+    <ion-select [(ngModel)]="status" (ionChange)="onInitstatus()">
+      <ion-option *ngFor="let status of servicestatus" value="{{status?.id}}">{{status?.label}}</ion-option>      
+    </ion-select>
+  </ion-item>
+ </ion-card>
+ <ion-card>
+ <ion-item>
+    <ion-label>Sort By</ion-label>
+    <ion-select [(ngModel)]="sortby" (ionChange)="onInit()">
+      <ion-option value="preferred_asc">Preferred Date-Asc</ion-option>   
+      <ion-option value="preferred_desc">Preferred Date-Des</ion-option>  
+      <ion-option value="enquiry_asc">Enquiry Date-Asc</ion-option>  
+      <ion-option value="enquiry_desc">Enquiry Date-Asc</ion-option>      
+    </ion-select>
+  </ion-item>
+ </ion-card>
 <ion-card *ngFor="let service of serviceRequestInfo; let i=index;" class="service-cards">
 
   <ion-grid>

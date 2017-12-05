@@ -27,12 +27,22 @@ export class Modelpage1PagePage {
   preferred_time:any;
   serviceTitle:any;
   vendor:any;
+  fromdate:any;
+  todate:any;
+  fromtime:any;
+  totime:any;
+  timeslot:any;
   constructor(public modalCtrl: ModalController,public nav: NavController,public navParams: NavParams, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {  
     this.serviceDatas =  navParams.get("serviceDatas");
     this.serviceType = this.serviceDatas.serviceType;
     this.datetime = this.serviceDatas.datetime;
     this.preferred_time = this.serviceDatas.preferred_time;
+    this.fromdate = this.serviceDatas.from_date;
+    this.todate = this.serviceDatas.to_date;
+    this.fromtime = this.serviceDatas.from_time;
+    this.totime = this.serviceDatas.to_time;
+    this.timeslot = this.serviceDatas.time_slot;
     this.name = navParams.get("name"); 
     this.serviceTitle = navParams.get("serviceTitle"); 
     this.vendor = navParams.get("vendor");
@@ -45,13 +55,11 @@ export class Modelpage1PagePage {
   submit() {
     let seviceCheck = "1";
    this.viewCtrl.dismiss(seviceCheck);
-   console.log(seviceCheck);
     
 }
 edit(){
   let seviceCheck = "0";
   this.viewCtrl.dismiss(seviceCheck);
-   console.log(seviceCheck);
 }
  dismiss(){
       this.viewCtrl.dismiss("dismiss");

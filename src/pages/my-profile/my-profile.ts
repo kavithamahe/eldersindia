@@ -45,7 +45,6 @@ base64Image:any;
       this.base64Image = this.imageURL+this.profileData.avatar;
         });
       });
-                                    console.log(this.avatar);
                                     this.gender = this.profileData.gender;
                                     // this.user_type = (data.result.info.user_type == 'sponosr') ? 'Sponsor' : "Elder"; 
                                     this.user_dob= this.profileData.dob;//this.getDate(this.profileData.dob);
@@ -67,7 +66,6 @@ base64Image:any;
     if(this.user_type == "sponsor"){
       this.navCtrl.push(EditProfilePage,{profileData:this.profileData});
     }else{
-      console.log(this.profileData);
       this.navCtrl.push(EldersPage,{fuctionality:"profileEdit",profileData:this.profileData});
     }
   }

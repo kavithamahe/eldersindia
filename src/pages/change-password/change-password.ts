@@ -38,7 +38,6 @@ show_password:boolean = false;
 
    }
    reEnter(){
-     console.log("re enter password is focused..!");
      this.password_submit = false;
    }
 
@@ -54,7 +53,6 @@ show_password:boolean = false;
 
   submit() {
 
-console.log(this.change_password_Form.value.newPassword.length);
     if(this.change_password_Form.valid){
 
     if(this.change_password_Form.value.newPassword != this.change_password_Form.value.re_enterPassword){
@@ -70,7 +68,6 @@ console.log(this.change_password_Form.value.newPassword.length);
       this.service.showToast("Please enter maximum 12 characters");
     }else{
 
-      console.log(this.change_password_Form.value.newPassword);
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
       loader.present();     
       let change_password_data = {"current_password": this.change_password_Form.value.currentPassword, "new_password": this.change_password_Form.value.newPassword, "confirm_password": this.change_password_Form.value.re_enterPassword};
@@ -102,7 +99,6 @@ console.log(this.change_password_Form.value.newPassword.length);
   	this.password_submit = false;
   	this.submitAttempt = false;
     this.dashboardPage();
-    console.log("change password is attempting to close");
   }
   public dashboardPage()
   {

@@ -271,7 +271,6 @@ All:any;
     let term = Event.target.value;
       this.connectionsService.addsearchConnection(term).subscribe(searchConnections => {
         this.addConnectionInfo= searchConnections.result.info.data;
-        console.log(this.addConnectionInfo);
         if(this.addConnectionInfo == ""){
           this.addConnectionsList();
         }
@@ -328,10 +327,9 @@ All:any;
      this.connectionsService.receivedConnectionScroll(this.nextPageURL2).subscribe(
      (receivedConnectionScroll) => {
       this.receivedConnectionScrollLists=receivedConnectionScroll.result.info.list.data;  
-      // console.log(this.allConnectionScrollLists);
+    
       for (let i = 0; i < Object.keys(this.receivedConnectionScrollLists).length; i++) {        
         this.receivedRquestInfo.push(this.receivedConnectionScrollLists[i]);
-        // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
         }
       
        this.nextPageURL2=receivedConnectionScroll.result.info.list.next_page_url;   
@@ -359,7 +357,6 @@ All:any;
   }
   public CommunityUserWall(profile_uid)
   {
-    console.log(profile_uid);
     this.navCtrl.push(CommunityprofilePage,{profile_uid});
   }
   public dashboardPage()
@@ -367,7 +364,6 @@ All:any;
     this.navCtrl.setRoot(DashboardPage);
   }
    doInfinite1(infiniteScroll) {
-      console.log(this.allConnectionsInfo);
     setTimeout(() => {      
       if(this.nextPageURL1!=null && this.nextPageURL1!='')
       {
@@ -385,7 +381,7 @@ All:any;
      this.connectionsService.allConnectionScroll(this.nextPageURL1).subscribe(
      (allConnectionScroll) => {
       this.allConnectionScrollLists=allConnectionScroll.result.info.list.data;  
-      // console.log(this.allConnectionScrollLists);
+      
       for (let i = 0; i < Object.keys(this.allConnectionScrollLists).length; i++) {
         this.allConnectionsInfo.push(this.allConnectionScrollLists[i]);
         // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
@@ -406,7 +402,6 @@ All:any;
     );
   }
    doInfinite3(infiniteScroll) {
-      console.log(this.allConnectionsInfo);
     setTimeout(() => {      
       if(this.nextPageURL3!=null && this.nextPageURL3!='')
       {
@@ -424,7 +419,7 @@ All:any;
      this.connectionsService.addConnectionScroll(this.nextPageURL3).subscribe(
      (addConnectionScroll) => {
       this.allConnectionScrollLists=addConnectionScroll.result.info.data;  
-      // console.log(this.allConnectionScrollLists);
+ 
       for (let i = 0; i < Object.keys(this.allConnectionScrollLists).length; i++) {
         this.addConnectionInfo.push(this.allConnectionScrollLists[i]);
         // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
@@ -445,7 +440,6 @@ All:any;
     );
   }
    doInfinite4(infiniteScroll) {
-      console.log(this.allConnectionsInfo);
     setTimeout(() => {      
       if(this.nextPageURL4!=null && this.nextPageURL4!='')
       {
@@ -463,7 +457,7 @@ All:any;
      this.connectionsService.sentRequestScroll(this.nextPageURL4).subscribe(
      (sentRequestScroll) => {
       this.allConnectionScrollLists=sentRequestScroll.result.info.list.data;  
-      // console.log(this.allConnectionScrollLists);
+  
       for (let i = 0; i < Object.keys(this.allConnectionScrollLists).length; i++) {
         this.sentRquestInfo.push(this.allConnectionScrollLists[i]);
         // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
@@ -491,7 +485,6 @@ All:any;
     });
     popover.onDidDismiss((popoverData) => {
       this.connectionsaction = popoverData;
-      console.log(this.connectionsaction);
    if(this.connectionsaction == "all"){
       this.connectionsaction = "all";
             this.onInit();
@@ -537,7 +530,6 @@ export class PopoverPage {
  requests(data){
    this.connectionsaction=data;
    this.viewCtrl.dismiss(this.connectionsaction);
-console.log(data);
  }
  
 }

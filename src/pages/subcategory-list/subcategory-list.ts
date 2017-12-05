@@ -40,8 +40,6 @@ export class SubcategoryListPage {
   lead_time:any='00:00';
   constructor( public loadingCtrl: LoadingController, public providerService: ServiceProvider, public navCtrl: NavController, public altCtrl:AlertController, public navParams: NavParams,public toastCtrl: ToastController,public modalCtrl: ModalController, public mp:ModalContentPage, public storage:Storage) {
     this.date = new Date().toISOString();
-    //console.log(this.date);
-    //console.log("this is sub category list page");
       this.location_id = navParams.get("location_id");
       this.service_id = navParams.get("service").id;
       this.serviceTitle = navParams.get("service").name;   
@@ -62,7 +60,6 @@ export class SubcategoryListPage {
     }
     
 loadSubcategoryList(subCategory_id,location_id){
-      //console.log("loading vendor list for the service");
       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
       this.subCategorydata = {subCategoryId : subCategory_id, flag:"1", locationId : location_id};
@@ -72,15 +69,12 @@ loadSubcategoryList(subCategory_id,location_id){
                             this.sublists = data.result.info;
                             this.dependentLists = data.result.info.dependentLists;
                             this.serviceData = data.result.info.requestServices;
-                            //console.log(this.serviceData);
                             this.lead_time =data.result.info.lists[0].lead_time;
-                            //console.log(this.dependentLists);
                             if((Object.keys(this.dependentLists).length<=0) && this.userType == 'sponsor')
                             {
                              this.showToaster("There is no dependent. You can not apply job!.");
                             this.dependentLen=false;
                             }
-                            //console.log("dependentList data : "+this.dependentLists);
                             loading.dismiss();
                             },
                       (err) =>{               
@@ -99,7 +93,6 @@ loadSubcategoryList(subCategory_id,location_id){
       let d = new Date();
     let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
     d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
-    console.log( datestring);
     let time =("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2)
      var hours = time;   
       var n = hours.split(':');
@@ -117,17 +110,7 @@ loadSubcategoryList(subCategory_id,location_id){
     
             this.serviceRequestCall(serviceRequestData,vendorData.id);
     }else{
-      this.openModal("instant",vendorData);
-    // let instantRequestmodal = this.modalCtrl.create(InstantRequestModalPage, {dependentList:this.dependentLists});
-        
-    // instantRequestmodal.onDidDismiss(data =>{
-    //   if(data == "dismiss"){
-    //     console.log(" Instant Request modal dismissed..!");
-    //   }else{
-    //         this.serviceRequestCall(data);
-    //        }
-    //   })  
-    // instantRequestmodal.present();   
+      this.openModal("instant",vendorData); 
     }
   }
 
@@ -135,7 +118,6 @@ loadSubcategoryList(subCategory_id,location_id){
     if(modalPage == "instant"){
       this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,lead_time:this.lead_time,service:this.serviceTitle,vendor:vendorData});
     }else{
-      console.log(vendorData);
       this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists,lead_time:this.lead_time,vendor:vendorData,location_id:this.location_id,serviceData:this.serviceData,serviceTitle:this.serviceTitle});
     }
     this.scheduleModal=modalPage;
@@ -164,7 +146,7 @@ loadSubcategoryList(subCategory_id,location_id){
 
     let requestServiceData = {"category":this.serviceData.category,"service":this.serviceData.service,
     "category_id":this.serviceData.category_id,"location_id":this.location_id,"vendor_id":vendorId,
-     "sub_category_id":this.serviceData.sub_category_id,
+     "sub_category_id":this.serviceData.sub_category_id,"datCount":service_request_data.datCount,
       "service_id":this.serviceData.service_id, "problem":service_request_data.problem,
      "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
       "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,
@@ -176,8 +158,6 @@ loadSubcategoryList(subCategory_id,location_id){
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
        .subscribe(
         data =>{
-         // console.log("service request web service");
-                 console.log(".......",data.result);
                  this.providerService.showToast(data.result);
                   if(this.scheduleModal != "instant"){
                  this.navCtrl.setRoot(ServicerequestPage);
@@ -212,8 +192,6 @@ loadSubcategoryList(subCategory_id,location_id){
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
        .subscribe(
         data =>{
-         // console.log("service request web service");
-                 console.log(".......",data.result);
                  this.providerService.showToast(data.result);
                   if(this.scheduleModal != "instant"){
                  this.navCtrl.setRoot(ServicerequestPage);
@@ -317,9 +295,7 @@ export class InstantRequestModalPage {
     public viewCtrl: ViewController
   ) {
     
-    console.log("modal page called");
     this.dependentLists = this.params.get('dependentList');
-    console.log(this.dependentLists);
     this.lead_time = this.params.get('lead_time');
     this.service = this.params.get('service');
     if(params.get("vendor") != undefined){
@@ -338,7 +314,7 @@ export class InstantRequestModalPage {
     let d = new Date();
     let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
     d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
-    console.log( datestring);
+   
     let time =("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2)
      var hours = time;   
       var n = hours.split(':');

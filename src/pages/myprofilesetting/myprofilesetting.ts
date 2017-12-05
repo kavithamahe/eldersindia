@@ -71,7 +71,6 @@ export class MyprofilesettingPage {
        this.name = Privacy.privacy_name;
        this.profile = Privacy.privacy_profile;
       
-       console.log(this.location);
        }
       // else{
      //       this.communityServices.showToast("No Data");

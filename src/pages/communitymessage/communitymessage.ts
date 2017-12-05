@@ -51,7 +51,6 @@ export class CommunitymessagePage {
    });
      this.member_name = navParams.get("member_data").name;
      this.member_id = navParams.get("member_data").id;
-    // console.log("member name in message",this.member_name);
      this.authForm = formBuilder.group({
         subject : ['', Validators.compose([Validators.required])],
         message : ['', Validators.compose([Validators.required])]
@@ -101,7 +100,6 @@ fileChange(event) {
            this.communityServices.upload( formData, options)
         .subscribe(
      (sendMessage) => { 
-      console.log(sendMessage);
       this.file_name=sendMessage[0].file_name;
       this.file_path=sendMessage[0].file_path;
       

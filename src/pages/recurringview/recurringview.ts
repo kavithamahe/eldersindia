@@ -58,7 +58,6 @@ recurringlist:any;
   }
   viewrecurring(sr_token){
     this.navCtrl.push(ServicerequestPage,{sr_token:sr_token});
-    console.log(sr_token);
   }
   dismiss(){
   	this.viewCtrl.dismiss();

@@ -27,17 +27,24 @@ rootUrl:any;
    	storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; });
    });
   }
-  serviceRequestList(searchText) 
+  serviceRequestList(searchText,status,sort) 
   {
   
-   let _request= {"info":{"list":true,"sort":"","searchValue":searchText,"status":"","token":""}};
+   let _request= {"info":{"list":true,"sort":sort,"searchValue":searchText,"status":status,"token":""}};
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
   }
-   serviceRequestLists(sr_token,searchText) 
+  serviceRequestStatus(searchText,status){
+     let _request= {"info":{"list":true,"sort":"","searchValue":searchText,"status":status,"token":""}};
+    return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
+      .map(res => res.json()); 
+  }
+
+   serviceRequestLists(sr_token,searchText,status,sort) 
+  
   {
   
-   let _request= {"info":{"list":true,"sort":"","searchValue":searchText,"status":"","token":sr_token}};
+   let _request= {"info":{"list":true,"sort":sort,"searchValue":searchText,"status":status,"token":sr_token}};
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
   }
@@ -61,9 +68,9 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'serviceRating',_request,this.options)
       .map(res => res.json()); 
   }
-  serviceRequestScroll(nextPageURL,searchEvent)
+  serviceRequestScroll(nextPageURL,searchEvent,status,sort)
    {
-     let _request= {"info":{"list":true,"sort":"","searchValue":searchEvent,"status":""}};
+     let _request= {"info":{"list":true,"sort":sort,"searchValue":searchEvent,"status":status}};
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }

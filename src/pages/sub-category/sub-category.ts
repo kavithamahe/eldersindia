@@ -27,6 +27,7 @@ subCategoryId:any;
 subCategoryTitle:any;
  packageCount;
 packages:any=[];
+imageUrl:any;
 selectserviceLocation:any;
 		// subcategories: Array<{title: string, lists: any, color: string}>;
 
@@ -38,6 +39,7 @@ selectserviceLocation:any;
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     platform.ready().then(() => {
     this.storage.ready().then(() => {
+      storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       this.storage.get('service_location').then((my_location) => {
         console.log("this.serviceLocation1",my_location);
           for(let i=0; i<this.locations.length;i++){
@@ -61,29 +63,24 @@ selectserviceLocation:any;
     loadPackagesByLocationID(locationId){
     this.providerService.webServiceCall(`getPackage`,{"locationId":locationId})
       .subscribe(data =>{
-        //console.log(data);
        this.packages =  data.result;
-       //console.log(this.packages.length);
        this.packageCount = this.packages.length;
     },
     err =>{
       this.providerService.showErrorToast(err);
-      console.log("Response for get service offered: "+err);
-      // this.services=[];      
+      
     })
   }
    loadPackages(location){
     this.providerService.webServiceCall(`getPackage`,{"locationId":location})
       .subscribe(data =>{
-        //console.log(data);
        this.packages =  data.result;
-       //console.log(this.packages.length);
        this.packageCount = this.packages.length;
     },
     err =>{
       this.providerService.showErrorToast(err);
       console.log("Response for get service offered: "+err);
-      //this.services=[];      
+        
     }) 
   }
    viewPackage(vendor_id){
@@ -103,10 +100,6 @@ loadSubCategory(location){
     },
     err =>{
       if(err.status===401){
-      // this.providerService.showToast(JSON.parse(err._body).result);
-      // this.providerService.showToast(JSON.parse(err._body).error);  
-      //this.emptyRecord = JSON.parse(err._body).result;
-      console.log(this.serviceLocation);
       if(this.serviceLocation != ""){
       this.emptyRecord = "We are in the process of identifying partners in this category for this location!"
       }}
@@ -119,11 +112,8 @@ loadSubCategory(location){
 }
 
 locationChanged(){
-console.log("this.serviceLocation4",this.serviceLocation);
      this.storage.ready().then(() => {
       this.storage.set('service_location',this.serviceLocation);
-      console.log(this.serviceLocation);
-      console.log("change location"+this.serviceLocation);
       // let locationBasedData = {"serviceOfferedId":this.subCategoryId,"locationId":this.serviceLocation};
       this.subcategories="";
       this.loadSubCategory(this.serviceLocation);

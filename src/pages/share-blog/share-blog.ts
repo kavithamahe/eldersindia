@@ -47,19 +47,16 @@ selectedConnections:any;
       this.blogListService.showErrorToast(err);
   })
  }
- shareBlogToFriends(){
- //console.log(this.selectedConnections); 
+ shareBlogToFriends(){ 
  if(this.selectedConnections != undefined){
  this.friendsId={};
  for (var i = 0; i < this.selectedConnections.length; i++) {
    this.friendsId[i]= {"id":this.selectedConnections[i]};
-   //console.log(this.friendsId);
  };
- console.log(this.friendsId);
  let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();    
       this.blogListService.shareBlog(this.BlogId,this.friendsId).subscribe(connections => {
-       //this.connectionInfo=connections.result;
+      
         loader.dismiss();
 
         this.showToaster(connections.result);

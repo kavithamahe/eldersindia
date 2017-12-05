@@ -196,7 +196,6 @@ ionViewDidEnter() {
 
   public createBlog()
   { 
-    console.log(this.featuredImage);
     if(!this.blogForm.valid){
       this.submitAttempt = true;
     }else{
@@ -223,7 +222,6 @@ ionViewDidEnter() {
      this.blogObject.id=this.blogId;
      this.blogObject.author=this.user_id;
      this.blogObject.author_type=this.user_type;
-     console.log(this.blogObject);
     }
     
     this.blogListService.createBlog(this.blogObject,this.actionUrl).subscribe(
@@ -238,7 +236,6 @@ ionViewDidEnter() {
       this.featuredImage = "";
       this.bannerImage = "";
       loader.dismiss();
-      //console.log(createBlog.result);
     },
     (err) => { 
         if(err.status===401)

@@ -32,9 +32,7 @@ import { ManagePage } from '../pages/manage/manage';
 import { BlogtabsPage } from '../pages/blogtabs/blogtabs';
 import { BlogsPage } from '../pages/blogs/blogs';
 
-//packages related pages
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
-//import {PackageDetailPagePage } from '../pages/package-detail/PackageDetailPagePage';
 
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
@@ -46,13 +44,7 @@ import { AppConfig } from '../providers/app-config';
 import { ServiceProvider } from '../providers/service-provider';
 import { CommunityServices } from '../providers/community-services';
 
-
-// import { Externallinks } from '../providers/externallinks';
-
 import { Storage } from '@ionic/storage';
-// import { TermsModalPage } from '../pages/terms-modal/terms-modal';
-
-// import {ModalContentPage} from '../pages/modal-page/modal-page';
 
 
 @Component({//selector:'my-theme',
@@ -209,7 +201,7 @@ export class MyApp {
                   { myIcon:'fa fa-recycle', title: 'Communities', component: CommunitylistPage },
                   { myIcon:'fa fa-sitemap', title: 'Connections', component: ConnectionsPage },
                   { myIcon:'fa fa-envelope', title: 'Messages', component: MessagesPage },
-                  { myIcon:'fa fa-rss', title: 'Blogs', component: BlogtabsPage },
+                  { myIcon:'fa fa-rss', title: 'Blogs', component: BlogsPage },
                   { myIcon:'fa fa-newspaper-o', title: 'News', component: NewsPage },
                   { myIcon:'fa fa-random', title: 'Events', component: EventsPage },
                   { myIcon:'fa fa-external-link', title: 'Useful External Links', component: ExternallinksPage },
@@ -231,7 +223,7 @@ export class MyApp {
                   { myIcon:'fa fa-recycle', title: 'Communities', component: CommunitylistPage },
                   { myIcon:'fa fa-sitemap', title: 'Connections', component: ConnectionsPage },
                   { myIcon:'fa fa-envelope', title: 'Messages', component: MessagesPage },
-                  { myIcon:'fa fa-rss', title: 'Blogs', component: BlogtabsPage },
+                  { myIcon:'fa fa-rss', title: 'Blogs', component: BlogsPage },
                   { myIcon:'fa fa-newspaper-o', title: 'News', component: NewsPage },
                   { myIcon:'fa fa-random', title: 'Events', component: EventsPage },
                   { myIcon:'fa fa-external-link', title: 'Useful External Links', component: ExternallinksPage },

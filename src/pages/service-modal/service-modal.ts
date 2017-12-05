@@ -26,7 +26,6 @@ user_type
   constructor(public storage:Storage,public modalCtrl: ModalController, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams) {
    console.log("this is service modal page");
   	this.vendorList = navParams.get("vendorList");
-    console.log(this.vendorList);
   	if(navParams.get("service") == "contact"){
   		this.showContactDetails = true;	
   		this.title = this.vendorList.vendorDetails.name+" - Contact Details";

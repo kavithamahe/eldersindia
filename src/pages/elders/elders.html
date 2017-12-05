@@ -25,7 +25,9 @@
 
           <ion-item>      
        <ion-label class="sel-label">Relationship</ion-label>  		
-            <ion-select class="select-brd"  [(ngModel)]="elder_relation" placeholder="Relationship" formControlName="elder_relation" [class.invalid]="!authForm.controls.elder_relation.valid && (authForm.controls.elder_relation.dirty)">
+            <ion-select class="select-brd"  [(ngModel)]="elder_relation" 
+            placeholder="Relationship" formControlName="elder_relation" 
+            [class.invalid]="!authForm.controls.elder_relation.valid && (authForm.controls.elder_relation.dirty)">
                 <ion-option  *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
             </ion-select>
         </ion-item>
@@ -52,19 +54,6 @@
       </ion-item>
           <small *ngIf="!authForm.controls.last_name.valid  && (authForm.controls.last_name.dirty || submitAttempt)">
                   <p class="valid err-reds shake">Please enter the last name</p>
-          </small> 
-    <ion-label class="label-tittle required">Services</ion-label>
-          <ion-item>
-              <ion-label class="sel-label">Services</ion-label>
-                <ion-select class="select-brd" [(ngModel)]="elder_service"  placeholder="Services"
-                formControlName="elder_service"  
-                [class.invalid]="!authForm.controls.elder_service.valid && 
-                (authForm.controls.elder_service.dirty)">
-                    <ion-option *ngFor="let service of in_service" value={{service.value}}>{{service.label}}</ion-option>
-                </ion-select>
-          </ion-item>
-           <small *ngIf="!authForm.controls.elder_service.valid  && (authForm.controls.elder_service.dirty || submitAttempt)">
-                  <p class="valid err-reds shake">Please select the services</p>
           </small> 
         <ion-label class="label-tittle required">Mobile number</ion-label>
             <ion-item>
@@ -262,6 +251,24 @@
          <small *ngIf="!myForm.controls.job_type.valid  && (myForm.controls.job_type.dirty || submitAttempt)">
                 <p class="valid err-reds shake">This field is required.</p>
           </small>
+             <ion-label class="label-tittle required">In Service?</ion-label>
+          <ion-item>
+              <ion-label class="sel-label">Services</ion-label>
+                <ion-select class="select-brd" [(ngModel)]="elder_service"  placeholder="Services"
+                formControlName="elder_service"  
+                [class.invalid]="!myForm.controls.elder_service.valid && 
+                (myForm.controls.elder_service.dirty)">
+                    <ion-option *ngFor="let service of in_service" value={{service.value}}>{{service.label}}</ion-option>
+                </ion-select>
+          </ion-item>
+           <small *ngIf="!myForm.controls.elder_service.valid  && (myForm.controls.elder_service.dirty || submitAttempt)">
+                  <p class="valid err-reds">Please select the services</p>
+          </small> 
+          <ion-label class="label-tittle required">Attach Resume</ion-label> 
+<p>{{file_name}}</p>
+  <div>
+   <input type="file" (change)="fileChange($event)" placeholder="Upload file" >
+  </div>
 <ion-label class="label-tittle required">Skills</ion-label>
         <div class="tag-skill_set">
       
@@ -439,11 +446,7 @@
      
       </div> 
 <br/>	 
-<ion-label class="label-tittle required">Attach Resume</ion-label> 
-<p>{{file_name}}</p>
-  <div>
-   <input type="file" (change)="fileChange($event)" placeholder="Upload file" >
-  </div>
+
 
     </div>
     

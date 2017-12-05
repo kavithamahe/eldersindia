@@ -24,12 +24,8 @@
 <ion-content>
 <ion-card>
 <ion-row>
-<ion-col width-20>
-<ion-avatar item-left text-wrap>
-      <img src="{{imageUrl+singleBlogInfo?.details?.avatar}}" [hidden]="!singleBlogInfo?.details?.avatar">
-    </ion-avatar>
-  </ion-col>
-  <ion-col width-80 class="blogs-tittle">
+
+  <ion-col class="blogs-tittle">
   <ion-item text-wrap>
     <h2 text-capitalize>{{singleBlogInfo?.details?.title}}</h2>
     <p text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{singleBlogInfo?.details?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i>  {{singleBlogInfo?.details?.created_at | date :"MMM dd y"}} | <i class="fa fa-share-alt" aria-hidden="true" (click)="shareblog(singleBlogInfo?.details?.id)"></i> Share</p>
@@ -63,7 +59,7 @@
   <hr/>
   <ion-item *ngFor="let viewComments of viewCommentsList; let i=index">
   <ion-row>
-<ion-col width-20>
+<ion-col width-20 (click)="CommunityUserWall(viewComments?.user_id)">
     <ion-avatar item-left>
       <img src="{{imageUrl+viewComments?.avatar}}"  
       [hidden]="!viewComments?.avatar">
@@ -71,7 +67,7 @@
   </ion-col>
   <ion-col width-80 class="blogs-tittle" style="border:1px solid red;">
  <ion-item text-wrap style="padding-left:0px;">
-    <h2>{{viewComments?.user_name}}</h2>
+    <h2 (click)="CommunityUserWall(viewComments?.user_id)">{{viewComments?.user_name}}</h2>
 
    
     <small class="timedate">{{viewComments?.created_at | date :"MMM dd y h:mm a"}}</small>
@@ -106,7 +102,7 @@
 
        <ion-list *ngFor="let reply of viewComments.comment_reply; let j=index">
         <ion-row>
-          <ion-col offset-10>
+          <ion-col offset-10 (click)="CommunityUserWall(reply?.uid_from)">
             <ion-item item-text-wrap class="reply-reply">
               <ion-avatar item-left>
                 <img src="{{imageUrl+reply?.profile_image}}" [hidden]="!reply?.profile_image">

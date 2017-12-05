@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController,ToastController,ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { CallNumber } from 'ionic-native';
+
 
 import { JobBoardService } from '../../providers/job-board-service';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -51,7 +53,7 @@ logo:any;
   }
   public onInit()
   {
-    if(this.appliedjobs){
+    if(this.appliedjobs){  
        let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     this.jobBoardService.myjobrequest(this.jobId).subscribe(
@@ -168,5 +170,18 @@ logo:any;
      }
      });
     modal.present();
+  }
+   public makeCall(number)
+  {
+    if(number)
+    {
+    CallNumber.callNumber(number, true)
+  .then(() => console.log('Launched dialer!'))
+  .catch(() => console.log('Error launching dialer'));
+   }
+   else
+   {
+    this.showToaster("There is no contact number");
+   }
   }
 }

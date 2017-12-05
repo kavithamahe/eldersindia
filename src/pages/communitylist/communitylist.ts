@@ -54,7 +54,6 @@ export class CommunitylistPage {
       this.otherCommunity("");
     }
     this.prev_index = this.slides.getActiveIndex();
-    console.log("Current index is", currentIndex);
   }
    changeSlide(){
     this.slides.freeMode = true;
@@ -101,7 +100,6 @@ export class CommunitylistPage {
       this.communityServices.recommendedCommunity(data).
       subscribe(mycommunity => {
       this.communitylists = mycommunity.result.info.data;
-      //console.log(this.communitylists.length);
       if(this.communitylists.length == 0){
         this.communityServices.showToast("No Record Found")
       }
