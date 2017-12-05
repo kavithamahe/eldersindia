@@ -64,6 +64,7 @@
 						
 					
 						<ion-list *ngIf="dependents.length != 1">
+
 							<div *ngIf="pack.package_available == 0 || user_type=='sponsor'"><button 
               ion-button (click)="openRequestPackage(pack.id)" class="lan-select">Get Package</button>
               </div>

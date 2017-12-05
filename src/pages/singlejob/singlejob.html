@@ -28,17 +28,17 @@
 
 <div *ngFor="let singleJob of singleJobInfo">
 <ion-row>
-<ion-col>
+ <ion-col width-20>
+
+
+ <img [src]="imageUrl+logo" [hidden]="!logo" width="80" height="40"/>
+  
+
+</ion-col>
+<ion-col width-80>
  <h2 text-capitalize>{{singleJob?.title}}</h2>
  </ion-col>
- <ion-col>
-  <ion-item>
- <ion-avatar item-start>
- <img [src]="imageUrl+logo"  
-        [hidden]="!logo">
-        </ion-avatar>
-</ion-item>
-</ion-col>
+
 </ion-row>
 <p><i class="fa fa-map-marker" aria-hidden="true" style="padding-left:3px;"></i><span *ngFor="let locations of singleJob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
 <p><i class="fa fa-building-o"></i><span>{{singleJob?.company_name}}</span></p>

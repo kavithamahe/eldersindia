@@ -7,13 +7,8 @@ page-elders{
     text-align: left;
     margin-right:11px !important;
 }
-.err-reds {
-    color: red !important;
-    float: right;
-    font-size: 12px !important;
-    margin: 3px !important;
-    padding-right:0px ;
-}
+.err-reds{margin-right:0px !important;margin-top:7px;}
+.err-reds::before{top:-10px;}
 .datetime-md {
     padding: 13px 8px 13px 4px;}
 
