@@ -65,8 +65,8 @@
 					
 						<ion-list *ngIf="dependents.length != 1">
 
-							<div *ngIf="pack.package_available == 0 || user_type=='sponsor'"><button 
-              ion-button (click)="openRequestPackage(pack.id)" class="lan-select">Get Package</button>
+							<div *ngIf="pack.package_available == 0 || user_type=='sponsor'" class="get-pack">
+							<button ion-button (click)="openRequestPackage(pack.id)">Get Package</button>
               </div>
 						</ion-list>
 						<strong class="purch-already" *ngIf="pack.package_available > 0">You've already purchased this</strong>
