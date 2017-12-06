@@ -24,4 +24,49 @@ page-edit-profile {
 .profile-edit{text-align:center;}
 .toolbar-title-md{ text-align:center !important;}
 .toolbar-title-ios{ text-align:center;}
+.edit-profile-view{margin:10px;}
+.edit-profile-view .item-md{ background:none;border: 1px solid #ccc;}
+
+.edit-profile-view .label-md {padding-left:0px; float:left; padding-bottom:5px;
+    color: #777;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Muli', sans-serif;
+}
+
+
+.edit-profile-view .item-ios{ background:none;border: 1px solid #ccc;}
+
+.edit-profile-view .label-ios {padding-left:0px; float:left; padding-bottom:5px;
+    color: #777;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Muli', sans-serif;
+}
+.item-md.item-block .item-inner{border-bottom:none;}
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{border-bottom-color:#fff;box-shadow:none;}
+.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:#fff !important;box-shadow:none;}
+
+
+.item-ios.item-block .item-inner{border-bottom:none;}
+.item-ios.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{border-bottom-color:#fff;box-shadow:none;}
+.item-ios.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:#fff !important;box-shadow:none;}
+.button-md{ background: hsl(207, 98%, 34%) none repeat scroll 0 0;
+    border-radius: 30px;
+    float: left;
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    height: 35px;
+    text-transform: capitalize;
+    }
+	.button-ios{ background: hsl(207, 98%, 34%) none repeat scroll 0 0;
+    border-radius: 30px;
+    float: left;
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    height: 35px;
+    text-transform: capitalize;
+    }
 }
