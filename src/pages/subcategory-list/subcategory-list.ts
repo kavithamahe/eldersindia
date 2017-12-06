@@ -106,7 +106,7 @@ loadSubcategoryList(subCategory_id,location_id){
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
 
     let serviceRequestData = {"problem": this.serviceTitle, "datetime": lead_time, "dependentId": this.elderId, "mobile_no": "","serviceType":"One time",
-    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":""};
+    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":""};
     
             this.serviceRequestCall(serviceRequestData,vendorData.id);
     }else{
@@ -187,7 +187,7 @@ loadSubcategoryList(subCategory_id,location_id){
       "subcategory":this.serviceData.subcategory, "durations":service_request_data.durations,
        "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
        "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
-     "package_id":service_request_data.package_id,"instant":""}
+     "package_id":service_request_data.package_id,"instant":service_request_data.instant}
      
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
        .subscribe(
@@ -277,6 +277,9 @@ loadSubcategoryList(subCategory_id,location_id){
     /* -webkit-box-align: center; */
     /* align-self: center; */
 }
+
+
+.toolbar-background-md{background:red;}
 </style>
 `
 })
@@ -325,7 +328,7 @@ export class InstantRequestModalPage {
         let getHours=(minutess + minutes)/60;
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
     let serviceRequestData = {"problem": this.service, "datetime": lead_time, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile,"serviceType":"One time",
-    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":""};
+    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":""};
     this.viewCtrl.dismiss(serviceRequestData);
   }else{
     this.selected = true;

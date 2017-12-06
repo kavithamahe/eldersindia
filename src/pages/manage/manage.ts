@@ -9,7 +9,7 @@ import { CommunityServices } from '../../providers/community-services';
 
 @Component({
  
-selector: 'page-manage',
+  selector: 'page-manage',
   templateUrl: 'manage.html'
   
 })
