@@ -241,7 +241,7 @@ loadSubcategoryList(subCategory_id,location_id){
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="popup-mds" style="background:#fff;">
+<ion-content class="popup-mds">
   
 <br/>
    <ion-label style=" font-size:17px; padding-left:10px; padding-top:10px; line-height:20px; float:left;" class="required">Select dependent</ion-label>
@@ -268,6 +268,7 @@ loadSubcategoryList(subCategory_id,location_id){
     position: absolute;
     top: 150px;
     left: 0;
+	
     /* display: block; */
     width: 100%;
     height: 40%;
@@ -277,8 +278,6 @@ loadSubcategoryList(subCategory_id,location_id){
     /* -webkit-box-align: center; */
     /* align-self: center; */
 }
-
-
 .toolbar-background-md{background:red;}
 </style>
 `

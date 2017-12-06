@@ -188,7 +188,9 @@ send-req {  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100
 .sel-packages ion-row ion-col .go-btn.button-md{ margin-top:10px;}
 
 
-.modal-wrapper{background-color:rgba(0, 0, 0, 0.5);}
+
+.modal-wrapper{background-color:#fff;}
+
 
 .err-reds:before {
     content: "\f0de";
