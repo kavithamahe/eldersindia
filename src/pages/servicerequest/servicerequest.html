@@ -35,7 +35,7 @@
 <ion-col width-80><ion-searchbar [(ngModel)]="searchEvent"></ion-searchbar></ion-col>
   <ion-col width-20 class="btn-go"><button (click)="getItems(searchEvent)" ion-button small class="go-btn">Go</button> </ion-col>
 </ion-row>
-<ion-card>
+<ion-card class="sel-packages">
  <ion-item>
     <ion-label>Status</ion-label>
     <ion-select [(ngModel)]="status" (ionChange)="onInitstatus()">
@@ -43,7 +43,7 @@
     </ion-select>
   </ion-item>
  </ion-card>
- <ion-card>
+ <ion-card class="sel-packages">
  <ion-item>
     <ion-label>Sort By</ion-label>
     <ion-select [(ngModel)]="sortby" (ionChange)="onInit()">
