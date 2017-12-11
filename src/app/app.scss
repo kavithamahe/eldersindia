@@ -185,9 +185,10 @@ send-req {  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100
 .popup-container {
        background-color: #fff !important;
     }
-.sel-packages ion-row ion-col .go-btn.button-md{ margin-top:10px;}
+.sel-packages ion-row ion-col .go-btn.button-md{ margin-top:15px;}
+.sel-packages ion-row ion-col .go-btn.button-ios{ margin-top:15px;}
 
-
+ul.rating[_ngcontent-dgd-43]   li[_ngcontent-dgd-43]{padding:0px !important;}
 
 .modal-wrapper{background-color:#fff;}
 

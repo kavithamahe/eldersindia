@@ -23,7 +23,7 @@
 		<ion-item>
           <ion-input type="text" formControlName="problem" ></ion-input>
          </ion-item>     
-        <ion-label stacked class="label-lb">Contact number</ion-label>
+        <ion-label stacked class="label-lb">Alternate contact number</ion-label>
 <ion-item>
           <ion-input type="text" formControlName="contact" placeholder="Contact number" (keypress)="onlyNumberKey($event)" maxlength="12"></ion-input>
       </ion-item>
@@ -32,9 +32,9 @@
          <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb required">Select dependent
          </ion-label>
 
-            <ion-item *ngIf = "userType =='sponsor'" class="one-timereq">
+            <ion-item *ngIf = "userType =='sponsor'" class="select-brds">
               <ion-label>Select dependent</ion-label>
-              <ion-select formControlName="dependents" class="select-brds" placeholder="Select dependent" (ionChange)="packageinfo()" >
+              <ion-select formControlName="dependents"  placeholder="Select dependent" (ionChange)="packageinfo()" >
               <ion-option *ngFor = "let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}}
               </ion-option>
             </ion-select>

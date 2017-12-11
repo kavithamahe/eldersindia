@@ -14,7 +14,7 @@ import { CommunityServices } from '../../providers/community-services';
   
 })
 export class ManagePage {
-show_option:boolean =false;
+show_option:boolean =false; 
 
   manageLists:boolean;
   managesLists:boolean;
@@ -82,17 +82,23 @@ manage_elder:any;
      }
      
    }
-
-  toggleDetails(event) {
-    
-    if (this.showblock == null) {
-        this.showblock = event;
+ toggleDetails(manages) {
+    if (manages.showDetails) {
+        manages.showDetails = false;
     } else {
-       this.showblock = null;
-       
+        manages.showDetails = true;
     }
-
   }
+  // toggleDetails(event) {
+    
+  //   if (this.showblock == null) {
+  //       this.showblock = event;
+  //   } else {
+  //      this.showblock = null;
+       
+  //   }
+
+  // }
 
   addElder(){
     let data={fuctionality:"add"};

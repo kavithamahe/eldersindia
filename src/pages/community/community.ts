@@ -112,7 +112,7 @@ files:any;
         {
           text: 'Report Abuse',
           role: 'destructive',
-          icon: !this.platform.is('ios') ? 'trash' : null,
+          //icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
             this.showPrompt(id,poster_id);
           }

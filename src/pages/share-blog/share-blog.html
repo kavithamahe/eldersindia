@@ -11,18 +11,26 @@
 </ion-header>
 
 <ion-content padding class="register-log">
-<form>
+<form [formGroup]="shareForm">
 <div class="register-form">
 <ion-grid>
-          <ion-row>
+       
+          <ion-item>
               <ion-label class="required">To</ion-label>
-          
-             <ion-select multiple="true" [(ngModel)]="selectedConnections" [ngModelOptions]="{standalone: true}">
+            <ion-select multiple="true" [(ngModel)]="selectedConnections" [ngModelOptions]="{standalone: true}">
 			    <ion-option *ngFor="let name of connectionInfo" [value] = "name.id">{{name.friend_name}}
 			    </ion-option>
 			  </ion-select> 
-		 </ion-row>
-			         
+        </ion-item>
+		 
+       <ion-label class="required">Description</ion-label>
+        <ion-item>
+         
+          <ion-input type="text" placeholder="Description" [(ngModel)]="description" formControlName="description">
+          </ion-input>
+        </ion-item>
+        <p *ngIf="!shareForm.controls.description.valid && (shareForm.controls.description.dirty || submitAttempt)" class="err-reds shake">Please enter the description</p>
+          
            
   <button ion-button round full (click)="shareBlogToFriends()" class="btn-blue">Share</button>
 </ion-grid>
