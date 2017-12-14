@@ -6,7 +6,7 @@ import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResul
 import { LocalNotifications, Geolocation } from 'ionic-native';
 import { NativeAudio } from '@ionic-native/native-audio';
 
-
+import { ServiceProvider } from '../../providers/service-provider';
 import { ServiceprovidersPage } from '../../pages/serviceproviders/serviceproviders';
 import { JobboardPage } from '../../pages/jobboard/jobboard';
 import { CommunitylistPage } from '../../pages/communitylist/communitylist';
@@ -35,9 +35,12 @@ export class DashboardPage {
   call_sponsor:any;
   hooterOn:boolean=false;
   tabBarElement: any;
-  constructor(private nativeAudio: NativeAudio,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
-  	 this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+  serviceLocation:any;
+  constructor(private nativeAudio: NativeAudio,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
+  	
+     this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.storage.ready().then(() => {
+     
       storage.get('token').then((token) => { this.token=token;  })
       storage.get('user_type').then((user_type) => { this.user_type=user_type;  })
       storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor;  })
@@ -45,6 +48,7 @@ export class DashboardPage {
       storage.get('police').then((police) => { this.police=police;  })
   });
     this.fetchLocation();
+    // this.checkLocation();
      //alert(this.call_sponsor);
   }
    ionViewWillEnter() {
@@ -83,14 +87,38 @@ export class DashboardPage {
     this.nativeGeocoder.reverseGeocode(d1, d2)
   .then(
     (result: NativeGeocoderReverseResult) => {
-      this.storage.ready().then(() => {
-      this.storage.set('service_location',"");
-    });
+     
     console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
+    this.providerService.chechLocationID(result.city)
+      .subscribe(data =>{
+      this.serviceLocation=data.result.id;
+      console.log(this.serviceLocation);
+       this.storage.ready().then(() => {
+        console.log(this.serviceLocation);
+      this.storage.set('service_location',this.serviceLocation);
+    });
+    },
+    err =>{
+      this.providerService.showErrorToast(err);
+      
+    })
+
     })
     
   .catch((error: any) => console.log(error));
   }
+  // checkLocation(){
+  //    console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
+  //    this.providerService.chechLocationID(result.city)
+  //     .subscribe(data =>{
+  //     this.serviceLocation=data.result.id;
+  //     console.log(this.serviceLocation);
+  //   },
+  //   err =>{
+  //     this.providerService.showErrorToast(err);
+      
+  //   })
+  // }
 
   ionViewDidLoad() {
     this.nativeAudio.preloadSimple('uniqueId1', 'assets/sound/Siren 21.mp3').then(this.onSuccess, this.onError);

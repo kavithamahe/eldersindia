@@ -11,13 +11,12 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-	<ion-title text-center>Privacy Settings</ion-title>
-    <ion-buttons right>
+    <ion-buttons left>
     <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    
+    <ion-title text-center>Privacy Settings</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -63,8 +62,12 @@
           <ion-label><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Connections</ion-label>
           <ion-toggle [(ngModel)]="privacy_connection"></ion-toggle>
         </ion-item>
+         <ion-item>
+          <ion-label (click)="userBasedMenu()"><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;User Menu</ion-label>
+          <!-- <ion-toggle [(ngModel)]="privacy_connection"></ion-toggle> -->
+        </ion-item>
 
-       
+      
 
       </ion-list>
 	  </ion-card>

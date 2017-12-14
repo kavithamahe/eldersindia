@@ -91,9 +91,11 @@ export class MyApp {
     public community_service:CommunityServices,
     public storage:Storage
   ) {
+
     this.storage.ready().then(() => {
     storage.get('user_type').then((userType)=>{
     this.user_type = userType;  
+       
     });
      storage.get('token').then((token) => { this.token=token;})
      storage.get('email').then((email) => { this.emailId=email;})
@@ -243,7 +245,7 @@ export class MyApp {
     });
     
   }
-  
+ 
   showToaster(message)
   {
    let toast = this.toastCtrl.create({
@@ -264,6 +266,7 @@ export class MyApp {
   this.menu.enable(false, 'sponsor');
   }
   }
+
   initializeApp() {
 
     this.platform.ready().then(() => {

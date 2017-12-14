@@ -111,7 +111,7 @@ export class ModalContentPage {
      problem: ['',Validators.compose([Validators.required])],
         date: ['',Validators.compose([Validators.required])],
         time: ['',Validators.compose([Validators.required])],
-        contact: ['',Validators.compose([Validators.minLength(10),Validators.maxLength(12), Validators.pattern('[0-9]*'), Validators.required])],
+        contact: ['',Validators.compose([Validators.maxLength(12), Validators.pattern('[0-9]*')])],
         //dependents: ['',Validators.compose([Validators.required])]
         startdate:['',Validators.compose([Validators.required])],
         enddate:['',Validators.compose([Validators.required])],

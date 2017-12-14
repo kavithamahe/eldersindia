@@ -33,7 +33,11 @@ rootUrl:any;
       
    });  
 }
- 
+chechLocationID(serviceLocation){
+   let _request= {"location":serviceLocation};
+    return this.http.post(this.rootUrl+'setAutoCityLocation',_request,this.head)
+      .map(res => res.json());
+} 
 serviceInit(token){
       this.rootUrl= this.app.setrooturl();
       this.storage.ready().then(() => {

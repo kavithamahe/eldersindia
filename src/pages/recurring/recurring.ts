@@ -29,7 +29,7 @@ searchText:any="";
 nextPageURL:any='';
 serviceRequestScrollLists:any=[];
   constructor(public navCtrl: NavController,public modalCtrl: ModalController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
-  	this.storage.ready().then(() => {
+  	this.storage.ready().then(() => {  
   		storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
 	    
 	  	this.getrecurringRequest();

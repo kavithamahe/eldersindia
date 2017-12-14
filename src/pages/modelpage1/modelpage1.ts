@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController,NavParams, ViewController,LoadingController,ModalController} from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 import { ServiceProvider } from '../../providers/service-provider';
-import { SubcategoryListPage } from '../../pages/subcategory-list/subcategory-list';
 
 
 import { Storage } from '@ionic/storage';

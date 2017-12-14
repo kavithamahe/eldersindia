@@ -32,7 +32,6 @@ import { CommunityServices } from '../../providers/community-services';
 })
 export class LoginPage {
   loginuser: Login[];
-
   passwordCode:any;
   mailID:any;
   newPassword:any;
@@ -43,7 +42,7 @@ export class LoginPage {
   callSponsor:any=0;
   ambulance:any=0;
   police:any=0;
-  constructor(public menuCtrl: MenuController, public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
+  constructor(public menuCtrl: MenuController,public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
   this.storage.ready().then(() => { 
      storage.get('id').then((id) => { this.id=id; 
      });
@@ -58,6 +57,7 @@ export class LoginPage {
     // this.initializePreview();
 
   }
+  
    public login() {  
     if(!this.loginForm.valid){
       this.submitAttempt = true;
@@ -82,7 +82,7 @@ export class LoginPage {
            this.loginUser.currentUser("sponsor");
          }
          this.storage.ready().then(() => {
-           this.storage.clear();
+         this.storage.clear();
          this.storage.set('id', loginuser['details']['id']);
          this.storage.set('name', loginuser['details']['name']);
          this.storage.set('email', loginuser['details']['email']);

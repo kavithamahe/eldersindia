@@ -27,9 +27,10 @@ show_option:boolean =false;
   user_id:any;
   token:any;
   allowedElderFlag:any=true;
+
   constructor(public alertCtrl: AlertController, public nav: NavController,public storage:Storage, public navParams: NavParams,public toastCtrl: ToastController,public loadingCtrl: LoadingController,public communityServices: CommunityServices) {
    this.nav=nav;  
-           
+       
     }
    showConfirm(manage) {
     let DeleteId = manage.id;

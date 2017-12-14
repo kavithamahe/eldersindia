@@ -29,6 +29,7 @@ subCategoryTitle:any;
 packages:any=[];
 imageUrl:any;
 selectserviceLocation:any;
+servicelocationid:any;
 		// subcategories: Array<{title: string, lists: any, color: string}>;
 
   constructor(public platform: Platform,public storage:Storage, public loadingCtrl: LoadingController, public navCtrl: NavController, public navPara: NavParams,public providerService: ServiceProvider) {
@@ -45,13 +46,14 @@ selectserviceLocation:any;
           for(let i=0; i<this.locations.length;i++){
             if(this.locations[i].location == my_location || this.locations[i].id == my_location){
               this.serviceLocation = my_location;
-             // console.log("this.serviceLocation2",this.serviceLocation);
+             console.log("this.serviceLocation2",this.serviceLocation);
             }
             // else{
             //   this.serviceLocation = "";
             //   console.log("this.serviceLocation3",this.serviceLocation);
             // }
-          }          
+          } 
+                   
           this.loadSubCategory(this.serviceLocation);      
           this.loadPackages(this.serviceLocation);    
       });
@@ -60,6 +62,7 @@ selectserviceLocation:any;
     loading.present();
     loading.dismiss();
   }	
+
     loadPackagesByLocationID(locationId){
     this.providerService.webServiceCall(`getPackage`,{"locationId":locationId})
       .subscribe(data =>{
