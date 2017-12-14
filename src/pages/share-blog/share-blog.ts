@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams,LoadingController,ViewController,ToastController } from 'ionic-angular';
 import { BlogListService } from '../../providers/blog-list-service';
 import { Storage } from '@ionic/storage';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+
 import { BlogsPage } from '../../pages/blogs/blogs';
 /*
   Generated class for the ShareBlogPage page.
@@ -16,11 +18,14 @@ import { BlogsPage } from '../../pages/blogs/blogs';
 })
 export class ShareBlogPagePage {
 connectionInfo:any;
+shareForm: FormGroup;
 rootUrl:any;
 BlogId:any;
 friendsId:any;
 selectedConnections:any;
-  constructor(public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController,public blogListService:BlogListService) {  
+submitAttempt: boolean = false;
+description:any;
+  constructor(public navCtrl: NavController,public toastCtrl: ToastController,public formBuilder: FormBuilder,public viewCtrl: ViewController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController,public blogListService:BlogListService) {  
       this.storage.ready().then(() => {     
         storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
           this.getConnections(this.rootUrl);
@@ -28,7 +33,9 @@ selectedConnections:any;
         this.BlogId = navParams.get("blogID");
         //console.log(this.BlogId);
    });
-
+  this.shareForm = formBuilder.group({
+        description: ['', Validators.compose([Validators.required])]
+         });
 
   }
   dismiss() {
@@ -53,9 +60,13 @@ selectedConnections:any;
  for (var i = 0; i < this.selectedConnections.length; i++) {
    this.friendsId[i]= {"id":this.selectedConnections[i]};
  };
+ if(!this.shareForm.valid){
+      this.submitAttempt = true;
+    }else{
+      this.submitAttempt = false;
  let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();    
-      this.blogListService.shareBlog(this.BlogId,this.friendsId).subscribe(connections => {
+      this.blogListService.shareBlog(this.BlogId,this.friendsId,this.description).subscribe(connections => {
       
         loader.dismiss();
 
@@ -76,9 +87,11 @@ selectedConnections:any;
         }
         loader.dismiss();
       });
+    }
       }else{
         this.showToaster("Please Select atleast one ");
-      }
+      
+    }
  }
   public showToaster(message)
   {

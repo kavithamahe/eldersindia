@@ -6,7 +6,7 @@ page-subcategory-list {
 .subcategory-list .item-inner .input-wrapper .label-md{ margin:0px;}
 .subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col img{border:1px solid hsl(210, 55%, 96%);}
 .subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col h2{color:#007994 !important;font-family: "Muli",sans-serif;font-size:17px !important;margin: 0; padding-bottom:0px;}
-.rating-clr ul.rating li{ float:left; list-style-type: none; margin-right:3px; height:6px;}
+.rating-clr ul.rating li{ float:left; list-style-type: none; margin-right:3px; padding:0px !important; margin-bottom:5px;height:6px;}
 .rating-clr ul.rating{   float: left;
     margin-left: -40px;
     margin-top: 1px;
@@ -54,4 +54,10 @@ page-subcategory-list {
 
 
 .modal-wrapper{background:none !important;}
+ul.rating[_ngcontent-ydl-43]   li[_ngcontent-ydl-43]{padding:0px !important;}
+
+
+
+
+.modal-wrapper{background-color:none;}
 }

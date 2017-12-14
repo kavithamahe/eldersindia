@@ -27,13 +27,13 @@
     </button>
     </div> -->
 <div *ngIf="manages.length>0">
-  <div *ngFor="let manage of manages; let i=index">
+  <div *ngFor="let manage of manages" (click)="toggleDetails(manage)">
    
         <ion-card class="des-card">
         <ion-row>
-        <ion-col width-100 class="depende-elder" style="border:1px solid red;">
+        <ion-col width-100 class="depende-elder">
          <button ion-button color="dark" clear style="margin:0px!important; padding:4px; width:100%;">
-         <i (tap)="toggleDetails(i)"  class="fa fa-user name-person"></i><p (tap)="toggleDetails(i)"  name="person" class="name-elder">{{manage.relation}}</p>&nbsp;<i class="fa fa-angle-down" (tap)="toggleDetails(i)" ></i>
+         <i   class="fa fa-user name-person"></i><p name="person" class="name-elder">{{manage.relation}}</p>&nbsp;<i class="fa fa-angle-down"></i>
          <i class="fa fa-trash" (click)="showConfirm(manage)"></i><i 
          (click)="editElder(manage)" class="fa fa-pencil"></i>
           </button>
@@ -45,7 +45,7 @@
           </ion-row>
         </ion-card>
       
-        <ion-card *ngIf="i==showblock" style="padding:7px;">
+        <ion-card  *ngIf="manage.showDetails" style="padding:7px;">
 			
           <div class="listed-det">
 	

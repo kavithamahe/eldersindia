@@ -197,10 +197,9 @@ getPackageRequestById(rootUrl,packageId){
       .map(res => res.json()); 
    }
 
-   shareBlog(BlogId,friendsID){
-      let _request= {'friends':{'user_id':friendsID},'shareurl':this.rootUrl+'/#/blog/details/'+BlogId};
-     //let _request={};
-       console.log(_request);
+   shareBlog(BlogId,friendsID,description){
+      let _request= {'friends':{'user_id':friendsID,'description':description},'shareurl':this.rootUrl+'/#/blog/details/'+BlogId};
+    
      
     return this.http.post(this.rootUrl+'shareblog',_request,this.options)
       .map(res => res.json()); 

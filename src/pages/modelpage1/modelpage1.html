@@ -15,7 +15,7 @@
 
 <ion-content>
 <ion-card class="popup">
-		 <ion-item text-wrap >
+		 <ion-item text-wrap>
         <p>You are availing {{serviceTitle}} (<span>{{serviceType}}</span>) service from <b>{{name}}</b> <br/>at<small> {{datetime}} / {{preferred_time}}</small>
         <small *ngIf="fromdate != '' "> {{fromdate}} to {{todate}}</small><small *ngIf="fromtime != '' ">{{fromtime}} to {{totime}}
         </small> <small>{{timeslot}}</small></p>
@@ -24,7 +24,7 @@
       <!-- </button> -->
 	  </ion-card>
 	  <ion-fab bottom right>
-  <button ion-fab mini icon-only (click)="edit()" class="edit-bd"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+  <button ion-fab mini icon-only (click)="edit()" class="edit-bd">Edit</button>
 </ion-fab>
 
 

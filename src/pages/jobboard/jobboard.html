@@ -27,12 +27,12 @@
 </ion-header>
 
 <ion-content  class="content-intop">
-<ion-card class="sel-packages">
+<ion-item class="sel-packages" style="border:none;">
 <ion-row>
 <ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
   <ion-col width-20><button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
 </ion-row>
-</ion-card>
+</ion-item>
 <ion-card class="sel-packages">
  <ion-item>
     <ion-label>Functional Area</ion-label>
