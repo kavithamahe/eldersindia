@@ -26,7 +26,7 @@
   </ion-list>
   <p *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)" class="err-reds shake">Please enter password.</p>
    <ion-item>
- <button class="logoin-btn" full>Submit</button>
+ <button class="logoin-btn" full (press)="pressLogin()">Submit</button>
    </ion-item>
 
 
@@ -36,7 +36,7 @@
 </form>
 
 <ion-card class="forgot-pass">
-<p (click)="forgotPassword()">Forgot Password?</p>  
+<p (click)="forgotPassword()" (press)="pressevent()">Forgot Password?</p>  
 </ion-card>
 </ion-content>
       

@@ -251,30 +251,7 @@ export class SettingsPage {
   		});
       })  
   }
-  userBasedMenu(){
-     this.alert = this.alertCtrl.create({
-            title: 'Do you want to left or side menu?',
-            buttons: [
-              {
-                text: 'Left',
-                handler: () => {
-                   let data="leftside";
-               this.storage.set('usermenu',data);
-                }
-              },
-              {
-                text: 'Right',
-                handler: () => {
-                  let data="rightside";
-                  this.storage.set('usermenu',data);
-               // this.navCtrl.setRoot(DashboardPage,{"data":data});
-   
-                }
-              }
-            ]
-          });
-          this.alert.present();
-  }
+  
   dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);

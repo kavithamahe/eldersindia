@@ -197,12 +197,19 @@ getPackageRequestById(rootUrl,packageId){
       .map(res => res.json()); 
    }
 
-   shareBlog(BlogId,friendsID,description){
-      let _request= {'friends':{'user_id':friendsID,'description':description},'shareurl':this.rootUrl+'/#/blog/details/'+BlogId};
-    
-     
-    return this.http.post(this.rootUrl+'shareblog',_request,this.options)
+   shareBlog(BlogId,friendsID,description,selectedCommunity){
+   if(selectedCommunity != undefined){
+    let _request={"friends":{"addType":"Communities","comm_id":selectedCommunity,"description":description},"shareurl":this.rootUrl+'/#/blog/details/'+BlogId}  
+ return this.http.post(this.rootUrl+'shareblog',_request,this.options)
       .map(res => res.json()); 
+ }
+ else{
+      let _request= {'friends':{"addType":"Friends",'user_id':friendsID,'description':description},'shareurl':this.rootUrl+'/#/blog/details/'+BlogId};
+       return this.http.post(this.rootUrl+'shareblog',_request,this.options)
+      .map(res => res.json()); 
+ }
+     
+   
    }
    getPackage(selectedConnections,packId){
     let _request= {"pack_id": packId, "dependent_id": selectedConnections};

@@ -41,7 +41,9 @@ show_password:boolean = false;
    reEnter(){
      this.password_submit = false;
    }
-
+pressevent(){
+  this.submit();
+}
    showPassword(){
      if(this.show_password == false){
        this.mytype = "password";

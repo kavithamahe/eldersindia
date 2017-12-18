@@ -399,7 +399,9 @@ toggleContent(){
       toast.present();
    }
   metaLink:any = "";
-
+pressevent(id){
+  this.postCommunity(id);
+}
   postCommunity(id){
      let loader = this.loadingCtrl.create({ content: "Please wait..." });     
      loader.present();

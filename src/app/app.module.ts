@@ -14,8 +14,6 @@ import { Geolocation } from 'ionic-native';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Diagnostic } from 'ionic-native';
 import { CameraPreview, CameraPreviewRect } from 'ionic-native';
-//import { Permissions } from '@ionic-native/android-permissions';
-//import { CalendarModule } from 'ionic3-calendar';
 import { Calendar } from '@ionic-native/calendar';
 import {MomentModule} from 'angular2-moment';
 import { FileChooser } from '@ionic-native/file-chooser';
@@ -23,18 +21,9 @@ import { FilePath } from '@ionic-native/file-path';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 
 
-// import { Geolocation } from '@ionic-native';
-//Venkatesh
 import { LoginPage } from '../pages/login/login';
 import { AppConfig } from '../providers/app-config';
 import { LoginUser } from '../providers/login-user';
-//import { ConnectionsService } from '../providers/connections-service';
-//import { MessagesService } from '../providers/messages-service';
-//import { JobBoardService } from '../providers/job-board-service';
-//import { ServiceRequestService } from '../providers/service-request-service';
-//import { BlogListService } from '../providers/blog-list-service';
-//import { NewsService } from '../providers/news-service';
-//import { EventsService } from '../providers/events-service';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { ConnectionsPage } from '../pages/connections/connections';
 import { JobboardPage } from '../pages/jobboard/jobboard';

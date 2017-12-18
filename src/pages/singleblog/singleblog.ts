@@ -37,6 +37,7 @@ showReply:any;
 replyPost:any;
 commentForm: FormGroup;
 submitAttempt: boolean = false;
+communitylist:any=[];
  
   constructor(public formBuilder: FormBuilder,public modalCtrl: ModalController, public navCtrl: NavController,public platform: Platform,public actionsheetCtrl: ActionSheetController, public navParams: NavParams,public blogListService:BlogListService,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.storage.ready().then(() => {
@@ -62,11 +63,7 @@ submitAttempt: boolean = false;
      }
     this.showComment=!this.showComment;
   }
-  shareblog(id){ 
-     let modal = this.modalCtrl.create(ShareBlogPagePage,{blogID:id});
-    modal.present();
-     
-  }
+  
   public onInit(blogId)
   {
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -74,6 +71,7 @@ submitAttempt: boolean = false;
     this.blogListService.singleBlog(blogId).subscribe(
      (singleBlog) => {
       this.singleBlogInfo=singleBlog.result;  
+      this.communitylist=singleBlog.result.community_list;
       loader.dismiss();   
     },
     (err) => { 
@@ -87,6 +85,11 @@ submitAttempt: boolean = false;
         }
         loader.dismiss();
       });
+  }
+  shareblog(id){ 
+     let modal = this.modalCtrl.create(ShareBlogPagePage,{blogID:id,communitylists:this.communitylist});
+    modal.present();
+     
   }
   openMenu(id) {
     let actionSheet = this.actionsheetCtrl.create({

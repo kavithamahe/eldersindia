@@ -30,7 +30,9 @@ export class ForgotPasswordPage {
   	this.modalType = navParams.get("modalType");
   	this.passwordCode = navParams.get("passCode");
   }
-
+pressevent(){
+	this.submit();
+}
 submit() {
 	if(this.modalType == 'forgotPassword'){
 			if( this.mailId == ''){

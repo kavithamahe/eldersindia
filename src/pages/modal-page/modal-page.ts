@@ -43,7 +43,7 @@ export class ModalContentPage {
   terms:boolean = false;
   checkTerms:any= false;
   date:any;
-  minDate:any="";
+  minDate:any=""; 
   maxDate:any="";
   theBigDay:any=new Date();
   //currentDate:any=new Date();
@@ -186,7 +186,6 @@ onlyNumberKey(event) {
   }
   calculateDays(sDate,eDate){
   this.starDate = moment(sDate).format("YYYY-MM-DD");
- 
   this.enDate = moment(eDate).format("YYYY-MM-DD");  
   this.selectedDates=[];
   this.excludeDays;
@@ -253,6 +252,9 @@ onlyNumberKey(event) {
         //this.packageLists='';
         this.flag="0";
     },)
+   }
+   pressnext(){
+    this.next();
    }
    next(){
       var objFromDate = this.modalForm.value.startdate;
@@ -510,6 +512,9 @@ else{
    }
  }
 }
+   }
+   presssubmit(){
+    this.submit();
    }
 
   submit() {

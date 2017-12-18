@@ -27,6 +27,7 @@ show_option:boolean =false;
   user_id:any;
   token:any;
   allowedElderFlag:any=true;
+  searchText:any="";
 
   constructor(public alertCtrl: AlertController, public nav: NavController,public storage:Storage, public navParams: NavParams,public toastCtrl: ToastController,public loadingCtrl: LoadingController,public communityServices: CommunityServices) {
    this.nav=nav;  
@@ -51,10 +52,44 @@ show_option:boolean =false;
     });
     confirm.present();
   }
+ mailSender(manage) {
+  let mailId = manage.id;
+    let prompt = this.alertCtrl.create({
+      title: 'Confirm Mail',
+      message: "Do you want to send login information?",
+      
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+          }
+        },
+        {
+          text: 'Send',
+          handler: data => {
+            this.sendMail(mailId);
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+  sendMail(mailId){
+      let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.communityServices.loginDetail(mailId).subscribe(datas =>{
+     this.showToast(datas.result);
+     loader.dismiss();
+     },
+     err =>{
+          this.communityServices.showErrorToast(err);
+          loader.dismiss();
+      })
+  }
   manageDetail(){
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-      this.communityServices.manageLists().subscribe(manages =>{
+      this.communityServices.manageLists(this.searchText).subscribe(manages =>{
      
       this.manages=manages.result.info.data;
       this.allowedElderFlag=manages.result.allowedElderFlag;
@@ -69,6 +104,11 @@ show_option:boolean =false;
      );
       
    }
+    getItems(searchEvent){
+   this.searchText = searchEvent;
+
+  this.manageDetail();
+  }
 manage_elder:any;
 
    showOptions(user){

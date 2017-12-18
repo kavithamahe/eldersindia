@@ -23,15 +23,19 @@ rootUrl:any;
 BlogId:any;
 friendsId:any;
 selectedConnections:any;
+selectedCommunity:any;
 submitAttempt: boolean = false;
 description:any;
+communitylists:any=[];
+friends:boolean=false;
+community:boolean=false;
   constructor(public navCtrl: NavController,public toastCtrl: ToastController,public formBuilder: FormBuilder,public viewCtrl: ViewController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController,public blogListService:BlogListService) {  
       this.storage.ready().then(() => {     
         storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
           this.getConnections(this.rootUrl);
       });
         this.BlogId = navParams.get("blogID");
-        //console.log(this.BlogId);
+        this.communitylists = navParams.get("communitylists");
    });
   this.shareForm = formBuilder.group({
         description: ['', Validators.compose([Validators.required])]
@@ -54,8 +58,18 @@ description:any;
       this.blogListService.showErrorToast(err);
   })
  }
+  friendslist(searchValue){
+    this.selectedCommunity ="";
+    this.community=false;
+     this.friends=!searchValue;
+   }
+   communitylistsss(searchValues){
+    this.selectedConnections = "";
+    this.friends=false;
+     this.community=!searchValues;
+   }
  shareBlogToFriends(){ 
- if(this.selectedConnections != undefined){
+ if(this.selectedConnections != undefined || this.selectedCommunity != undefined){
  this.friendsId={};
  for (var i = 0; i < this.selectedConnections.length; i++) {
    this.friendsId[i]= {"id":this.selectedConnections[i]};
@@ -66,12 +80,12 @@ description:any;
       this.submitAttempt = false;
  let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();    
-      this.blogListService.shareBlog(this.BlogId,this.friendsId,this.description).subscribe(connections => {
+      this.blogListService.shareBlog(this.BlogId,this.friendsId,this.description,this.selectedCommunity).subscribe(connections => {
       
         loader.dismiss();
 
         this.showToaster(connections.result);
-        this.navCtrl.push(BlogsPage);
+        this.navCtrl.setRoot(BlogsPage);
         //let modal = this.modalCtrl.create(ShareBlogPagePage,{blogID:id});
        // modal.close();
 

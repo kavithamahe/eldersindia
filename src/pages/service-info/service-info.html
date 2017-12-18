@@ -43,7 +43,8 @@
   	<div class="view-storedet">
     <ion-row>
     <ion-col class="brder-cor">
-      <button ion-button full class="btn-default-ser" (click)="toggleRequestService()">
+      <button ion-button full class="btn-default-ser" (press)="pressRequestService()" 
+      (click)="toggleRequestService()">
         <b>Request Services </b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
       </button>      
    <form [formGroup]="requestForm" *ngIf(showRequestService)>
@@ -106,7 +107,8 @@
 
   <ion-row>
     <ion-col class="brder-cor">
-      <button ion-button item-left full class="btn-default-ser" (click)="modal()">        
+      <button ion-button item-left full class="btn-default-ser" (click)="modal()" 
+      (press)="pressmodel()">        
         <b>Services Offered</b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
       </button>
                                      
@@ -115,7 +117,7 @@
   <ion-row>
     <ion-col class="brder-cor">
 
-      <button class="btn-default-ser" ion-button item-left full (click)="toggleContact()">
+      <button class="btn-default-ser" ion-button item-left full (click)="toggleContact()" (press)="pressContact()">
         
         <b>Contact Details</b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
       </button>
@@ -125,7 +127,8 @@
   <ion-row>
     <ion-col class="brder-cor">
 
-      <button class="btn-default-ser" ion-button item-left full (click)="togglePackages()">
+      <button class="btn-default-ser" ion-button item-left full 
+      (click)="togglePackages()" (press)="pressPackages()">
         
         <b>Best Packages</b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
       </button>

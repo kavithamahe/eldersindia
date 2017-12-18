@@ -57,7 +57,13 @@ export class LoginPage {
     // this.initializePreview();
 
   }
-  
+  pressevent(){
+    console.log("pressed");
+    this.forgotPassword();
+  }
+  pressLogin(){
+    this.login();
+  }
    public login() {  
     if(!this.loginForm.valid){
       this.submitAttempt = true;
