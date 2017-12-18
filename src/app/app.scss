@@ -142,7 +142,15 @@ ion-segment{ background:#C0C0C0; border-radius:50px; height:40px; line-height:40
 .alert-md .alert-button-group{padding:0px; background: hsla(0, 0%, 0%, 0) linear-gradient(89deg, hsl(0, 0%, 50%) 0%, hsl(0, 0%, 100%) 100%) repeat scroll 0 0;}
 .alert-md .alert-head {padding:4px 10px 10px;}
 .alert-ios .alert-head {padding:4px 10px 10px;}
-.alert-radio-label{font-family:'Muli', sans-serif; font-size:15px;}
+.alert-radio-label{font-family:'Muli', sans-serif; font-size:17px; font-weight:400; color:hsl(191, 100%, 29%) !important;}
+.alert-md .alert-radio-label {
+    flex: 1 1 0;
+    overflow: hidden;
+    padding: 8px 0 8px 25px;}
+.alert-ios .alert-radio-label {
+    flex: 1 1 0;
+    overflow: hidden;
+    padding: 8px 0 8px 25px;}
 .alert-md .alert-checkbox-label{font-family:'Muli', sans-serif; font-size:15px;}
 .alert-ios .alert-checkbox-label{font-family:'Muli', sans-serif; font-size:15px;}
 .toolbar-md-primary .toolbar-background-md{background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(191, 100%, 29%) 0%, hsl(195, 100%, 51%) 50%, hsl(191, 100%, 29%) 100%) repeat scroll 0 0;}
@@ -173,14 +181,15 @@ send-req {  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100
 .req-ti .toolbar-title{font-size:15px; text-align:left;padding-top:10px;text-align:left !important;font-family: "Muli",sans-serif;}
 .btn-blue{ margin-top:10px;background:#FE5420;font-family: "Muli",sans-serif;}
 .header-ios .toolbar-background-ios, .footer-ios .toolbar-background-ios{ border:none;}
-.err-reds { float:right;padding-left:3px;padding-right:3px;
- margin-right:17px !important;   position: relative; background:#FFDCE0; color:#CB2431 !important;font-size:11px !important;font-family: "Muli",sans-serif;
+.err-reds { float:right;padding-left:3px;padding-right:3px; font-weight:600;
+ margin-right:17px !important;   position: relative; background:#FFDCE0; color:red !important;font-size:12px !important;font-family: "Muli",sans-serif;
        -webkit-animation-duration:5s; 
             animation-duration:5s; 
             -webkit-animation-fill-mode: both; 
             animation-fill-mode: both;
 }
- 
+.ion-md-close-circle{font-size:21px;}
+.ion-ios-close-circle{font-size:21px;}
 
 .popup-container {
        background-color: #fff !important;
@@ -196,12 +205,11 @@ ul.rating[_ngcontent-dgd-43]   li[_ngcontent-dgd-43]{padding:0px !important;}
 .err-reds:before {
     content: "\f0de";
     font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
+
     text-decoration: inherit;
 
     color:#FFDCE0;   border-bottom-color: hsl(352, 32%, 72%);
-    font-size: 18px;
+    font-size: 18px !important;
     padding-right: 0.5em;
     position: absolute;
    top:-14px;

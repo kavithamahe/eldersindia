@@ -78,7 +78,8 @@
 		    <ion-item>
            <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" min={{date}}  formControlName ="date"></ion-datetime>
         </ion-item>
-         <p class="err-reds" *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">Please select the preferred date
+		
+         <p class="err-reds shake" *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">Please select the preferred date
          </p>
        <ion-list>
 	     <ion-label stacked class="label-lb required">Preferred Time</ion-label>
@@ -110,7 +111,7 @@
           </ion-list>
            <!--  <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" placeholder="Scheduled time" formControlName ="time" class="select-brd"></ion-datetime>
             </ion-item> -->
-		   <p class="err-reds" *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">Please select the preferred time</p>
+		   <p class="err-reds shake" *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">Please select the preferred time</p>
 	
 		</div>
 
@@ -124,13 +125,13 @@
         <ion-item>
            <ion-datetime class="select-brd" [(ngModel)]="startDate" displayFormat="DD-MM-YYYY" pickerFormat="DD MMMM YYYY" placeholder="Start date" min={{this.date}} (ionChange)="fromDateChange()" formControlName ="startdate"></ion-datetime>
         </ion-item>
-          <p class="err-reds" *ngIf="!modalForm.controls.startdate.valid  && (modalForm.controls.startdate.dirty || submitAttempt)">Please enter the start date</p>
+          <p class="err-reds shake" *ngIf="!modalForm.controls.startdate.valid  && (modalForm.controls.startdate.dirty || submitAttempt)">Please enter the start date</p>
             <ion-label stacked class="label-lb required">End date</ion-label>
      
         <ion-item>
            <ion-datetime class="select-brd" [(ngModel)]="endDate" displayFormat="DD-MM-YYYY" pickerFormat="DD MMMM YYYY" placeholder="End date" min={{this.date}} (ionChange)="calculateDays(startDate,endDate)" formControlName ="enddate"></ion-datetime>
         </ion-item>
-          <p class="err-reds" *ngIf="!modalForm.controls.enddate.valid  && (modalForm.controls.enddate.dirty || submitAttempt)">Please enter the end date</p>
+          <p class="err-reds shake" *ngIf="!modalForm.controls.enddate.valid  && (modalForm.controls.enddate.dirty || submitAttempt)">Please enter the end date</p>
       
            <ion-label>Number of days : </ion-label> <p>{{datCount}}</p>
       <ion-label>Frequency</ion-label>
@@ -154,13 +155,13 @@
         <ion-item>
             <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" placeholder="Scheduled time" class="select-brd" formControlName ="fromtime"></ion-datetime>
         </ion-item>
-         <p class="err-reds" *ngIf="!modalForm.controls.fromtime.valid  && (modalForm.controls.fromtime.dirty || submitAttempt)">Please enter the fromtime</p>
+         <p class="err-reds shake" *ngIf="!modalForm.controls.fromtime.valid  && (modalForm.controls.fromtime.dirty || submitAttempt)">Please enter the fromtime</p>
             <ion-label stacked class="label-lb required">To time</ion-label>
      
         <ion-item>
            <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" placeholder="Scheduled time" class="select-brd" formControlName ="totime"></ion-datetime>
         </ion-item>
-         <p class="err-reds" *ngIf="!modalForm.controls.totime.valid  && (modalForm.controls.totime.dirty || submitAttempt)">Please enter the totime</p>
+         <p class="err-reds shake" *ngIf="!modalForm.controls.totime.valid  && (modalForm.controls.totime.dirty || submitAttempt)">Please enter the totime</p>
         </div>
          <div *ngIf(timeslots)>
          <ion-list>
@@ -189,7 +190,7 @@
                 <ion-option value="11.00 PM - 12.00 AM">11.00 PM - 12.00 AM</ion-option>
               </ion-select>
             </ion-item>
-             <p class="err-reds" *ngIf="!modalForm.controls.preferredtime.valid  && (modalForm.controls.preferredtime.dirty || submitAttempt)">Please enter the preferredtime</p>
+             <p class="err-reds shake" *ngIf="!modalForm.controls.preferredtime.valid  && (modalForm.controls.preferredtime.dirty || submitAttempt)">Please enter the preferredtime</p>
           </ion-list>
 
         </div>
@@ -217,7 +218,7 @@
 			<ion-col><i class="fa fa-file-text" aria-hidden="true"></i> &nbsp;<small style="text-decoration:underline; font-size:16px;" class="required" (click)="openTerms()"s>terms and conditions </small></ion-col>
 		 </ion-item>
             <small *ngIf="checkTerms">
-                <p class="err-reds">Kindly agree to the terms and conditions</p>
+                <p class="err-reds shake">Kindly agree to the terms and conditions</p>
             </small>
 </ion-card>
 

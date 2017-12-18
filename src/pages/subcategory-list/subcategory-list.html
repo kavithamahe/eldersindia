@@ -22,17 +22,18 @@
 </ion-header>
 
 <ion-content class="content-intop">
-<ion-card>
-	<ion-item text-wrap class="subcategory-list" *ngFor="let service_list of sublists.lists">
+<ion-card  *ngFor="let service_list of sublists.lists">
+	<ion-item text-wrap class="subcategory-list">
 	
 		<ion-row>
-		<ion-col width-33  (click)="serviceInfo(service_list)">
+		<ion-col width-33 (click)="serviceInfo(service_list)">
 		    <ion-thumbnail item-left>
 		      <img [src]= "logoUrl+service_list?.logo">
 		    </ion-thumbnail>
 
 		<span class="off-price"><p>{{service_list.discount_rate}}% <br/>Off</p></span>
 		</ion-col>
+			
 		<ion-col width-67 class="text-alg">			
 		<h2 (click)="serviceInfo(service_list)">{{service_list.name}}</h2>
 			 <h3 class="rating-clr">
@@ -61,6 +62,14 @@
 			<button class="instant-bt"  *ngIf="dependentLen" (click)="instantRequest(service_list)" (press)="pressinstant(service_list)"> Instant</button>
 			</ion-col>
 			
+		 </ion-row>
+		 <ion-col>
+		 <button class="btn-warnings"  *ngIf="dependentLen" (click)="openModal('scheduleModal',service_list)">Schedule</button>
+			<button class="instant-bt"  *ngIf="dependentLen" (click)="instantRequest(service_list)"> Instant</button>
+		 </ion-col>
+		 <br/>
+		 <ion-row>
+		 
 		 </ion-row>
 	
 	</ion-item>

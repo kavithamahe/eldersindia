@@ -34,32 +34,32 @@ page-servicerequest {
     font-size: 17px;
     font-weight: 400;
 }
-.Pending													{font-family: 'Muli', sans-serif;color:#f8b106; padding:0px; font-size:14px; font-weight:400 !important; }
+.Pending													{font-family: 'Muli', sans-serif;color:#fff !important; padding:5px 10px; font-size:12px; font-weight:600 !important; background:#f8b106; border-radius:15px; }
 .Schedule{font-family: 'Muli', sans-serif;color:#1E90FF; padding:0px; font-size:14px; font-weight:400 !important; }
 .Completed{font-family: 'Muli', sans-serif;color:#228B22; padding:0px; font-size:14px; font-weight:400 !important; }
 .Cancelled{font-family: 'Muli', sans-serif;color:red; padding:0px; font-size:14px; font-weight:400 !important; }
 .service-cont {
-    font-size: 15px !important;
-    font-weight: 400;
-    width: 100%; color:#777;font-family: 'Muli', sans-serif;
+    font-size:13px !important;
+    font-weight:600;
+    width: 100%; color:#444;font-family: 'Muli', sans-serif; padding-top:3px; padding-bottom:3px;
 }
 
 .service-conts {
-    font-size:13px !important;
-    font-weight: 400;
-    width: 100%; color:#777;font-family: 'Muli', sans-serif;
+    font-size:11px !important;
+    font-weight:600;
+    width: 100%; color:#666;font-family: 'Muli', sans-serif;
 }
 .service-conts i{margin-right:7px; font-size:13px;}
 .service-req {
     color:#007A95!important;
     display: inline;font-family: 'Muli', sans-serif;
-    font-size: 18px !important;
+    font-size:14px !important; font-weight:600;
     margin: 0;
     padding: 0;
 }
 .service-cards{background: hsla(0, 0%, 0%, 0) linear-gradient(313deg, hsl(205, 51%, 80%) 0%, hsl(0, 0%, 100%) 18%, hsl(0, 0%, 100%) 100%) repeat scroll 0 0; }
 .tocken-no {
-    color:#FF69B4!important;
+    color:#08298A!important;
     font-size: 15px !important;
     font-weight: 600 !important;font-family: 'Muli', sans-serif;
     text-align: center;
@@ -68,21 +68,23 @@ page-servicerequest {
 .content-intop {
     background: hsl(218, 100%, 98%) none repeat scroll 0 0 !important;
 }
+.sel-packages .item-md .item-inner .label-md {
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    padding-left: 10px; font-weight:600;
+}
+.select-text{ font-weight:600;   font-family: "Muli",sans-serif;
+    font-size: 15px; color:hsl(192, 99%, 31%);}
+.sel-packages .item-ios .item-inner .label-ios {
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    padding-left: 10px; font-weight:600;
+}
+.alert-md .alert-radio-label{ padding:0px 0px 0px 10px; font-weight:600;}
+.alert-md .alert-tappable{height:30px !important;}
 .btn-go .go-btn.button-md{ margin-top:15px;}
 .btn-go .go-btn.button-ios{ margin-top:8px;}
-.searchbar-md .searchbar-input{border:1px solid #87CEFA;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;background: -moz-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* ff3.6+ */
-background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(254,255,245,1))); /* safari4+,chrome */
-background: -webkit-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* safari5.1+,chrome10+ */
-background: -o-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* opera 11.10+ */
-background: -ms-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* ie10+ */
-background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* w3c */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FEFFF5', endColorstr='#ffffff',GradientType=1 ); /* ie6-9 */ }
+.searchbar-md .searchbar-input{border:1px solid #87CEFA; font-size:14px; font-weight:600;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px; }
 
-.searchbar-ios .searchbar-input{border:1px solid #87CEFA;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;background: -moz-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* ff3.6+ */
-background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(254,255,245,1))); /* safari4+,chrome */
-background: -webkit-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* safari5.1+,chrome10+ */
-background: -o-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* opera 11.10+ */
-background: -ms-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* ie10+ */
-background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(254,255,245,1) 100%); /* w3c */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FEFFF5', endColorstr='#ffffff',GradientType=1 ); /* ie6-9 */ }
+.searchbar-ios .searchbar-input{border:1px solid #87CEFA;font-size:14px; font-weight:600;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;}
 }
