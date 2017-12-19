@@ -32,7 +32,6 @@ export class SubcategoryListPage {
   modal:any;
   serviceData:any;
   serviceTitle:any;
-  rate:any;
 	token:any;
   date:any;
   dependentLen:any=true;
@@ -44,7 +43,7 @@ export class SubcategoryListPage {
       this.service_id = navParams.get("service").id;
       this.serviceTitle = navParams.get("service").name;   
       // this.userType = "elder";
-      this.rate = 3;
+      
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.logoUrl=imageurl;});
       storage.get('user_type').then((user_type) => { this.userType=user_type;});
@@ -58,7 +57,7 @@ export class SubcategoryListPage {
     });
 
     }
-    
+     
 loadSubcategoryList(subCategory_id,location_id){
       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
@@ -87,7 +86,9 @@ loadSubcategoryList(subCategory_id,location_id){
     let servieListData = {"vendor": vendor, "subCategoryId": this.service_id, "flag": "1", "location_id": this.location_id};
     this.navCtrl.push(ServiceInfoPage,servieListData);
   }
-
+pressinstant(vendorData){
+  this.instantRequest(vendorData);
+}
   instantRequest(vendorData) {
     if(this.userType != "sponsor"){
       let d = new Date();
@@ -113,7 +114,9 @@ loadSubcategoryList(subCategory_id,location_id){
       this.openModal("instant",vendorData); 
     }
   }
-
+pressevent(modalPage,vendorData){
+  this.openModal(modalPage,vendorData);
+}
   openModal(modalPage,vendorData){
     if(modalPage == "instant"){
       this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,lead_time:this.lead_time,service:this.serviceTitle,vendor:vendorData});
@@ -255,10 +258,10 @@ loadSubcategoryList(subCategory_id,location_id){
  <ion-item *ngIf(selected)>
   <p class="err-reds" style="color:red;"> Please select the dependent</p>
   </ion-item>
+      <button class="btn-primarys" ion-button item-right small (press)="presscancel()" (click)="cancel()">Cancel</button>
 
+    <button class="btn-primarys" ion-button item-right small (press)="presssubmit()" (click)="submit()">Submit</button>
 
-
-  <button class="btn-primarys" ion-button item-right small (click)="submit()">Submit</button>
 
  
 </ion-content>
@@ -306,6 +309,15 @@ export class InstantRequestModalPage {
 
   dismiss() {
     this.viewCtrl.dismiss("dismiss");
+  }
+  presssubmit(){
+    this.submit();
+  }
+  presscancel(){
+    this.cancel();
+  }
+  cancel(){
+    this.dismiss();
   }
   submit(){
     if(this.dependentData != ""){

@@ -15,14 +15,36 @@
 <div class="register-form">
 <ion-grid>
        
-          <ion-item>
-              <ion-label class="required">To</ion-label>
-            <ion-select multiple="true" [(ngModel)]="selectedConnections" [ngModelOptions]="{standalone: true}">
-			    <ion-option *ngFor="let name of connectionInfo" [value] = "name.id">{{name.friend_name}}
-			    </ion-option>
-			  </ion-select> 
-        </ion-item>
-		 
+       
+          <ion-list radio-group>
+                  <ion-label class="required">To</ion-label>
+                  <ion-item>
+                    <ion-label>Friends</ion-label>
+                    <ion-radio value="frnds" (click)="friendslist(friends)" >
+                    </ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Communities</ion-label>
+                      <ion-radio value="communitiess" (click)="communitylistsss(community)">
+                      </ion-radio>
+                  </ion-item>
+            </ion-list>
+        <ion-item *ngIf(friends)>
+          <ion-label>Friends</ion-label>
+            <ion-select multiple="true" [(ngModel)]="selectedConnections" 
+            [ngModelOptions]="{standalone: true}">
+              <ion-option *ngFor="let name of connectionInfo" [value] = "name.id">{{name.friend_name}}
+              </ion-option>
+            </ion-select> 
+          </ion-item>
+           <ion-item *ngIf(community)>
+          <ion-label>Communities</ion-label>
+            <ion-select multiple="true" [(ngModel)]="selectedCommunity" 
+            [ngModelOptions]="{standalone: true}">
+              <ion-option *ngFor="let name of communitylists" [value] ="name">{{name.community_name}}
+              </ion-option>
+            </ion-select> 
+          </ion-item>
        <ion-label class="required">Description</ion-label>
         <ion-item>
          

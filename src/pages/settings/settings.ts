@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Slides, NavController, NavParams,LoadingController } from 'ionic-angular';
+import { Slides, NavController, NavParams,LoadingController,AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { ServiceProvider } from '../../providers/service-provider';
@@ -18,7 +18,7 @@ export class SettingsPage {
   @ViewChild(Slides) slides: Slides;
   settings:string="privacy";
   records:number = 5;
-
+   alert:any;
 	privacy_name:any;
 	privacy_email:any;
 	privacy_mobile:any;
@@ -30,11 +30,12 @@ export class SettingsPage {
 	status:any;
 	user_uid:any;
 	user_id:any;
-
   prev_index:any = 0;
 
 
-  constructor(public storage:Storage,public loadingCtrl: LoadingController, public serviceProvider:ServiceProvider, public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public storage:Storage,public loadingCtrl: LoadingController,public alertCtrl: AlertController, public serviceProvider:ServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
+  
+  }
 
   update(){
     if(this.settings=="paginate"){
@@ -250,7 +251,7 @@ export class SettingsPage {
   		});
       })  
   }
-
+  
   dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);

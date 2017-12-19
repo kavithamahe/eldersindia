@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams,LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
 import { ServiceProvider } from '../../providers/service-provider';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 
@@ -26,9 +25,11 @@ change_password_Form: FormGroup;
 mytype:string ="password";
 show_password:boolean = false;
 
+
   constructor(public formBuilder:FormBuilder,public loadingCtrl: LoadingController,public service:ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
   	this.password_submit = false;
   	this.nav = navCtrl;
+   
   	this.change_password_Form = formBuilder.group({
         currentPassword: ['',Validators.compose([Validators.required])],
         newPassword: ['',Validators.compose([Validators.required])],
@@ -40,7 +41,9 @@ show_password:boolean = false;
    reEnter(){
      this.password_submit = false;
    }
-
+pressevent(){
+  this.submit();
+}
    showPassword(){
      if(this.show_password == false){
        this.mytype = "password";

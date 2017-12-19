@@ -85,7 +85,8 @@
 <button ion-button icon-only class="video-c" (click)="accessGallery()"><i class="fa fa-picture-o"></i>&nbsp; Add photos</button>
 <img [src]="base64Image" *ngIf="base64Image" />
 <button ion-button (click)="addVideos()" icon-only medium class="video-cv"><i class="fa fa-video-camera"></i>&nbsp; Add Videos</button>
-<button ion-button medium icon-only (click)="addUserPosts (communityProfileData?.id)" class="postedimgvideos"><i class="fa fa-paper-plane"></i>&nbsp; Send</button>
+<button ion-button medium icon-only (press)="pressevent(communityProfileData?.id)" 
+(click)="addUserPosts(communityProfileData?.id)" class="postedimgvideos"><i class="fa fa-paper-plane"></i>&nbsp; Send</button>
 					</ion-col>
 				</ion-row> 
 				<div *ngIf(addVideo) class="post-urls">

@@ -27,8 +27,10 @@ gender:any ="";
 user_dob:any;
 avatar:any;
 base64Image:any;
-
-  constructor(public storage:Storage,public loadingCtrl: LoadingController,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {  }
+  constructor(public storage:Storage,public loadingCtrl: LoadingController,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {  
+  
+     
+  }
 
 
   loadMyProfile(){
@@ -40,7 +42,7 @@ base64Image:any;
                           data =>{
                                     this.profileData = data.result.info;
                                     this.avatar = this.profileData.avatar;
-                                     this.storage.ready().then(() => {
+                                    this.storage.ready().then(() => {
       this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;
       this.base64Image = this.imageURL+this.profileData.avatar;
         });

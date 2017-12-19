@@ -47,7 +47,7 @@
 
 	<ion-label class="liste-edit required">Mobile number</ion-label>
         <ion-item>
-		 <ion-input type="text" formControlName="mobile_number" placeholder="Mobile number"   [class.invalid]="!edit_profile_Form.controls.mobile_number.valid && (edit_profile_Form.controls.mobile_number.dirty)"></ion-input>
+		 <ion-input type="number" formControlName="mobile_number" placeholder="Mobile number"   [class.invalid]="!edit_profile_Form.controls.mobile_number.valid && (edit_profile_Form.controls.mobile_number.dirty)"></ion-input>
 	    </ion-item>
 	    <small  *ngIf="!edit_profile_Form.controls.mobile_number.valid  && (edit_profile_Form.controls.mobile_number.dirty || submitAttempt)">
             <p class="valid err-reds">Please enter valid mobile number.</p>

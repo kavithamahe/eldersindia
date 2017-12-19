@@ -24,7 +24,7 @@
 <ion-content>
 <ion-card class="createblog-form">
 <form  [formGroup]="blogForm">
-<ion-label stacked class="bloag-label required" >Blog title <span>*</span></ion-label>
+<ion-label stacked class="bloag-label required" >Blog title</ion-label>
   <ion-item>
     
     <ion-input type="text" formControlName="title" placeholder="Blog title" [(ngModel)]="title"></ion-input>
@@ -94,7 +94,8 @@
 </div>
 <br/>
 
-<button ion-button class="logoin-btn" icon-left full (click)="createBlog()"> Submit</button>
+<button ion-button class="logoin-btn" icon-left full (click)="createBlog()" 
+(press)="pressevent()"> Submit</button>
 
 <br/><br/>
 </ion-card>

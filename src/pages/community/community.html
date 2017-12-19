@@ -84,7 +84,7 @@
 							<button ion-button (click)="addVideos()" icon-only medium class="video">
 							<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp; Add videos
 						</button>
-							<button ion-button icon-only medium (click)="postCommunity(communityDetailData?.id)" class="postedimgvideos">
+							<button ion-button icon-only medium (press)="pressevent(communityDetailData?.id)" (click)="postCommunity(communityDetailData?.id)" class="postedimgvideos">
 								<i class="fa fa-paper-plane-o" aria-hidden="true"></i>&nbsp; Post
 							</button>
 					</ion-col>

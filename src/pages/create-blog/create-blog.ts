@@ -192,7 +192,9 @@ ionViewDidEnter() {
       console.log(err);
     });
   }
-
+pressevent(){
+  this.createBlog();
+}
 
   public createBlog()
   { 

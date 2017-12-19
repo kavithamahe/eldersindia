@@ -13,13 +13,76 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-<ion-card class="popup">
-		 <ion-item text-wrap>
-        <p>You are availing {{serviceTitle}} (<span>{{serviceType}}</span>) service from <b>{{name}}</b> <br/>at<small> {{datetime}} / {{preferred_time}}</small>
+<ion-content class="content-intop">
+<ion-label>Thank You! Please confirm your request...</ion-label>
+<ion-card class="req-viewlist">
+
+     <ion-row>
+  
+    <ion-col width-100 class="child_menu">
+  <span>Service Title</span>
+   <p>{{serviceTitle}}</p>
+   </ion-col>
+  </ion-row>
+     <ion-row>
+  
+    <ion-col width-100 class="child_menu">
+  <span>Service Type</span>
+   <p>{{serviceType}}</p>
+   </ion-col>
+  </ion-row>
+  <ion-row>
+  <ion-col width-100 class="child_menu">
+  <span>Service Name</span>
+   <p>{{name}}</p>
+   </ion-col>
+  </ion-row>
+   <ion-row  *ngIf="datetime != '' ">
+  <ion-col width-100 class="child_menu">
+  <span>Preferred date</span>
+   <p>{{datetime}}</p>
+   </ion-col>
+  </ion-row>
+   <ion-row *ngIf="preferred_time != '' ">
+  <ion-col width-100 class="child_menu">
+  <span>Preferred time</span>
+   <p>{{preferred_time}}</p>
+   </ion-col>
+  </ion-row>
+     <ion-row *ngIf="fromdate != '' ">
+  <ion-col width-100 class="child_menu">
+  <span>From date</span>
+   <p>{{fromdate}}</p>
+   </ion-col>
+  </ion-row>
+    <ion-row *ngIf="fromdate != '' ">
+  <ion-col width-100 class="child_menu">
+  <span>To date</span>
+   <p>{{todate}}</p>
+   </ion-col>
+  </ion-row>
+    <ion-row *ngIf="fromtime != '' ">
+  <ion-col width-100 class="child_menu">
+  <span>From time</span>
+   <p>{{fromtime}}</p>
+   </ion-col>
+  </ion-row>
+   <ion-row *ngIf="fromtime != '' ">
+  <ion-col width-100 class="child_menu">
+  <span>To time</span>
+   <p>{{totime}}</p>
+   </ion-col>
+  </ion-row>
+   <ion-row *ngIf="timeslot != '' ">
+  <ion-col width-100 class="child_menu">
+  <span>Timeslot</span>
+   <p>{{timeslot}}</p>
+   </ion-col>
+  </ion-row>
+       <!--  <p>You are availing {{serviceTitle}} (<span>{{serviceType}}</span>) service from <b>{{name}}</b> <br/>at<small> {{datetime}} / {{preferred_time}}</small>
         <small *ngIf="fromdate != '' "> {{fromdate}} to {{todate}}</small><small *ngIf="fromtime != '' ">{{fromtime}} to {{totime}}
-        </small> <small>{{timeslot}}</small></p>
-     </ion-item>
+        </small> <small>{{timeslot}}</small></p> -->
+    
       <!-- <button ion-button small large (click)="edit()" class="eidit">Click here to edit -->
       <!-- </button> -->
 	  </ion-card>

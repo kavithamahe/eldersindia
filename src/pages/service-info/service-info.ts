@@ -118,7 +118,9 @@ lead_time:any='00:00';
         
   }
 
-
+pressmodel(){
+  this.modal();
+}
 modal(){
 
     let modal = this.modalCtrl.create(ServiceModalPage,{service:"service_offered",vendorList:this.vendorList});    
@@ -169,10 +171,15 @@ modal(){
 
   }
    
-
+pressContact(){
+  this.toggleContact();
+}
   toggleContact(){
     let modal = this.modalCtrl.create(ServiceModalPage,{service:"contact",vendorList:this.vendorList});    
     modal.present();
+    }
+    pressPackages(){
+      this.togglePackages();
     }
     togglePackages(){
       if(this.packageinfo.length == 0){
@@ -190,6 +197,9 @@ modal(){
         duration: 3000
       });
       toast.present();
+   }
+   pressRequestService(){
+    this.toggleRequestService();
    }
   toggleRequestService(){
      

@@ -25,6 +25,7 @@ eventScrollLists:any;
 emptyRecord:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public eventsService:EventsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.storage.ready().then(() => {
+       
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
         this.eventsList();

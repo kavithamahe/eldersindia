@@ -57,7 +57,8 @@
           </small> 
         <ion-label class="label-tittle required">Mobile number</ion-label>
             <ion-item>
-              <ion-input type="text" formControlName="elder_number" [(ngModel)]="elder_number" value={{elder_number}}
+              <ion-input type="number" formControlName="elder_number" 
+              [(ngModel)]="elder_number" value={{elder_number}}
               placeholder="Contact number" (keypress)="onlyNumberKey($event)" maxlength="12" 
               [class.invalid]="!authForm.controls.elder_number.valid && 
                 (authForm.controls.elder_number.dirty)">
@@ -70,9 +71,8 @@
 
           <ion-item>
               <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="DD-MM-YYYY"
-              [(ngModel)]="elder_dob" formControlName="elder_dob" placeholder="Date of birth"
-                [class.invalid]="!authForm.controls.elder_dob.valid && (authForm.controls.elder_dob.dirty)"></ion-datetime>
-    </ion-item>
+              [(ngModel)]="elder_dob" formControlName="elder_dob" placeholder="Date of birth" [class.invalid]="!authForm.controls.elder_dob.valid && (authForm.controls.elder_dob.dirty)"></ion-datetime>
+          </ion-item>
           <small  *ngIf="!authForm.controls.elder_dob.valid  && (authForm.controls.elder_dob.dirty || submitAttempt)">
                 <p class="valid err-reds shake">Please select the date of birth</p>
               </small>   

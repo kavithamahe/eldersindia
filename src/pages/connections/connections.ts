@@ -61,6 +61,7 @@ All:any;
     
     this.messages="inbox";
     this.storage.ready().then(() => {
+    
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
        storage.get('id').then((id) => { this.user_id=id;
        });

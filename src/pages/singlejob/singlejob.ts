@@ -58,10 +58,6 @@ logo:any;
     loader.present();
     this.jobBoardService.myjobrequest(this.jobId).subscribe(
      (myjobrequest) => {
-       //console.log()
-      //  var array=[];
-      //  array.push(myjobrequest.result.info);
-      // this.myjobrequestinfo=array;
       this.myjobrequestinfo=myjobrequest.result.info;
       this.user=this.myjobrequestinfo[0].user;
       this.logo=this.user.logo;
@@ -108,32 +104,23 @@ logo:any;
     );    
     }
 }
-
+pressevent(jobId){
+  this.applyJob(jobId);
+}
    public applyJob(jobId)
   {
-    // if(this.user_type=='elder')
-    // {
-    //    this.jobDependentId=this.user_type_id;
-    //    this.jobDependent(jobId);
-    //    //this.callApplyJob(jobId,this.jobDependentId,"");
-    // }
-    // else
-    // {
+ 
       let modal = this.modalCtrl.create(JobDependentPage,{"jobId":jobId});
     modal.present();
-      // this.jobDependent(jobId);
-      // console.log("fsdf" +jobId );
-    //}
+    
    
   }
   callApplyJob(jobId,jobDependentId,file_name)
   {
     this.jobBoardService.applyJob(jobId,jobDependentId,file_name).subscribe(
      (applyJob) => {
-     // this.applyJobInfo=applyJob.result;  
        this.showToaster(applyJob.result);
        this.navCtrl.setRoot(AppliedJobsPage);
-      //console.log(singleJob);
     },
     (err) => { 
         if(err.status===401)

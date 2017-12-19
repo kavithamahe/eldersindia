@@ -418,7 +418,9 @@ showConfirm(id){
  
   
 metaLink:any = "";
-
+pressevent(id){
+  this.addUserPosts(id);
+}
    addUserPosts(id){   
      if(!this.authForm.valid){
       this.submitAttempt = true;

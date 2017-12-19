@@ -108,9 +108,15 @@ doInfinite(infiniteScroll) {
     this.packstatus = selectedValue;
     this.getPackageRequests();
   }
+  pressview(packageId){
+    this.getPackageRequestBy(packageId);
+  }
   getPackageRequestBy(packageId){
   	 let modal = this.modalCtrl.create(ViewpackagePagePage,{packageId:packageId});
     modal.present();
+  }
+  pressservices(id,locationId,elderId,status){
+  this.getServicesForByElders(id,locationId,elderId,status);
   }
   getServicesForByElders(id,locationId,elderId,status){
   	 let modal1 = this.modalCtrl.create(ElderservicePagePage,{pack_id: id, elder: elderId, location_id: locationId,packbstatus:status});

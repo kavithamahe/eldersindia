@@ -312,10 +312,16 @@ myprofile(id){
    return this.http.post(`${this.getCommunityPostsUrl }removeFeedpost`,this.delete,this.options)
    .map(res =>res.json());
  }
- manageLists(){
-    this.lists={"searchValue":""}
+ manageLists(searchText){
+    this.lists={"searchValue":searchText}
       
     return this.http.post(`${this.getCommunityPostsUrl }getElderListBySponser`,this.lists,this.options)
+    .map(res =>res.json());
+  }
+  loginDetail(id){
+     this.lists={"id":id}
+      
+    return this.http.post(`${this.getCommunityPostsUrl }SendElderVerificationMail`,this.lists,this.options)
     .map(res =>res.json());
   }
    searchManageLists(data){
