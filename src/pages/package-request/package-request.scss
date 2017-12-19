@@ -6,13 +6,19 @@ page-package-request {
 .sel-packages{border:1px solid #A9A9A9;box-shadow:none; border-radius:0px;}
 .sel-packages .item-md .item-inner .label-md{font-family: 'Muli', sans-serif; font-size:15px; padding-left:10px;}
 .package-needs ion-row ion-col h2{font-family: 'Muli', sans-serif; font-size:16px; font-weight:600; color:#007A95 !important; background:#fff; padding:5px; border-bottom:1px solid #DCDCDC; padding-bottom:10px;}
-.package-needs ion-row ion-col b{font-family: 'Muli', sans-serif; font-size:14px; color:#000; font-weight:bold; width:100%; float:left; margin-bottom:3px;}
-.package-needs ion-row ion-col p{font-family: 'Muli', sans-serif; font-size:16px; color:#333; }
-.package-needs{background-image: url('../assets/img/servamp.png');background-repeat: no-repeat; background-size: cover; }
+.package-needs ion-row ion-col b{font-family: 'Muli', sans-serif; font-size:17px; color:hsl(192, 99%, 34%); font-weight:bold; width:100%; float:left; margin-bottom:3px;}
+.package-needs ion-row ion-col p{font-family: 'Muli', sans-serif; font-size:17px; color:#333; }
+.package-needs{background: -moz-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 83%, rgba(192,192,192,1) 100%); /* ff3.6+ */
+background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(83%, rgba(255,255,255,1)), color-stop(100%, rgba(192,192,192,1))); /* safari4+,chrome */
+background: -webkit-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 83%, rgba(192,192,192,1) 100%); /* safari5.1+,chrome10+ */
+background: -o-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 83%, rgba(192,192,192,1) 100%); /* opera 11.10+ */
+background: -ms-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 83%, rgba(192,192,192,1) 100%); /* ie10+ */
+background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 83%, rgba(192,192,192,1) 100%); /* w3c */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c0c0c0', endColorstr='#ffffff',GradientType=1 ); /* ie6-9 */}
 
-.act{ background:#008000;font-family: 'Muli', sans-serif; font-size:13px; font-weight:400;}
-.pen{ background:#FF8C00;font-family: 'Muli', sans-serif; font-size:13px;font-weight:400;}
-.rej{ background:red;font-family: 'Muli', sans-serif; font-size:13px;font-weight:400;}
+.act{ background:#008000;font-family: 'Muli', sans-serif; font-size:13px; font-weight:600; margin-top:3px;}
+.pen{ background:#FF8C00;font-family: 'Muli', sans-serif; font-size:13px;font-weight:600; margin-top:3px;}
+.rej{ background:red;font-family: 'Muli', sans-serif; font-size:13px;font-weight:600; margin-top:3px;}
 .view-serv .badge-md{background:#025FA9; float:right; margin-right:3px;font-family: 'Muli', sans-serif; font-size:12px;font-weight:400;}
 .view-serv .badge-ios{background:#025FA9; float:right; margin-right:3px;font-family: 'Muli', sans-serif; font-size:12px;font-weight:400;}
 .btn-go .go-btn.button-md{ margin-top:15px;}

@@ -6,23 +6,24 @@ page-singleblog {
 }
 .blogs-tittle .item-inner .input-wrapper .label-md h2 {
     color: #007994 !important;
-    font-family: "Muli",sans-serif;
+    font-family: "Muli",sans-serif; font-weight:600;
     font-size: 17px !important;
     padding-bottom:5px;
     margin: 0;
 }
 .blogs-tittle .item-md .item-inner .input-wrapper .label-md p {
     color: #7b8da0 !important;
-    font-family: "Muli",sans-serif;
+    font-family: "Muli",sans-serif; font-weight:600;
     font-size: 13px !important;
     padding-bottom: 3px;
     margin: 0;
 }
+.cmts{ font-weight:600 !important; font-size:17px !important;}
 .blogs-tittle .item-inner .input-wrapper .label-md{margin:0px;}
 .card-content-md p {
     color: #666 !important;
     font-family: "Muli",sans-serif;
-    font-size: 14px !important;
+    font-size:17px !important; font-weight:400;
     padding-bottom: 8px;
     margin: 0;
 }
@@ -56,15 +57,15 @@ page-singleblog {
     color: #7b8da0 !important;
     font-family: "Muli",sans-serif;
     font-size:11px !important;
-    padding-bottom: 8px;
+    padding-bottom: 8px; font-weight:600;
     margin: 0;}
 .item-md.item-block .item-inner{ padding-right:0px;}
-.text-input-md{ border:1px solid #ccc;    font-family: 'Muli', sans-serif;padding:5px;}
+.text-input-md{ border:1px solid #ccc;    font-family: 'Muli', sans-serif;padding:5px; font-weight:600;}
  .oranges {
     border-radius: 2px;
     background: #FE5722;
     font-size:17px !important;
-    font-weight: 400;
+    font-weight:600;
     text-transform: capitalize;
     height: 35px !important;
     float: left;
@@ -84,7 +85,7 @@ page-singleblog {
 
 .reply-deletd .item-inner .label-md button .button-inner{ color: #7b8da0 !important;text-transform: capitalize;
     font-family: "Muli",sans-serif;
-    font-size:11px !important;}
+    font-size:12px !important; font-weight:600;}
 .reply-deletd .item-inner .label-ios button .button-inner{ color: #7b8da0 !important;text-transform: capitalize;
     font-family: "Muli",sans-serif;
     font-size:11px !important;}
@@ -92,7 +93,7 @@ page-singleblog {
 .blogs-tittle .item-md .item-inner .input-wrapper .label-md strong {
     color:#666 !important;
     font-family: "Muli",sans-serif;
-    font-size: 13px !important;
+    font-size:17px !important; font-weight:400;
     margin: 0;
     padding-bottom: 3px; margin-top:5px; float:left; font-weight:400; width:100%;
 }
@@ -107,12 +108,12 @@ page-singleblog {
 .reply-reply .item-inner .label-md {margin:0px;}
 .reply-reply .item-inner .label-md h2{     color:hsl(191, 100%, 29%) !important; 
     font-family: "Muli",sans-serif;
-    font-size:13px !important;}
+    font-size:13px !important; font-weight:600;}
 .reply-reply .item-inner .label-md p{     color:#666 !important;
     font-family: "Muli",sans-serif;
-    font-size:12px !important;}
+    font-size:15px !important; font-weight:400;}
 .reply-reply .item-inner .label-md .reply-btt button{ color: #7b8da0 !important;text-transform: capitalize; background:none;
-    font-family: "Muli",sans-serif;
+    font-family: "Muli",sans-serif; font-weight:600;
     font-size:11px !important;}
 .reply-btt{ width:100%; }
 }

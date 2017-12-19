@@ -11,7 +11,7 @@ page-communityprofile {
 .mess-accept p{ float:left;}
 .cont-conn{ background:#fff; padding:5px !important;}
 .name-conne p{     color: #007994 !important;
-    font-family: "Muli",sans-serif;
+    font-family: "Muli",sans-serif; font-weight:600;
     font-size: 17px !important;
     padding-bottom: 8px;
     margin: 0;}
@@ -19,18 +19,18 @@ page-communityprofile {
 .updated-staus-btn h2 {
      color: #007994 !important;
   padding-left:5px;
-    font-size: 18px !important;
-    font-weight: 400 !important;
+    font-size:17px !important;
+    font-weight:600 !important;
     padding-bottom: 10px;
 }
 .updated-staus-btn ion-textarea {
-    border: 1px solid #ccc;
+    border: 1px solid #ccc; font-weight:600;
     margin-bottom: 20px;
     font-family: 'Muli', sans-serif;
     padding: 3px; margin:5px; width:97%;}
 .mem-name-update ion-row ion-col button.video-c{background:#025FA9 !important;
     font-size: 15px;
-    font-weight: 400;
+    font-weight:600;
     float: left;
     width:48%;
     height: 35px;
@@ -38,7 +38,7 @@ page-communityprofile {
     font-family: 'Muli', sans-serif;}
 .mem-name-update ion-row ion-col button.video-cv{background:#025FA9 !important;
     font-size: 15px;
-    font-weight: 400;
+    font-weight:600;
     float:right;
     width:48%;
     height: 35px;
@@ -46,8 +46,8 @@ page-communityprofile {
     font-family: 'Muli', sans-serif;}
 .mem-name-update ion-row ion-col button.postedimgvideos {
     background: #FE5722;
-    font-size: 15px; border-radius:20px;
-    font-weight: 400;
+    font-size:16px; border-radius:20px;
+    font-weight:600;
     text-transform: capitalize;
     width:99.6%;
     height:35px;
@@ -73,7 +73,7 @@ page-communityprofile {
 
 .post-urls small {
     font-size: 13px;
-    font-weight: 400px;
+    font-weight:600;
     color: #666;
     font-family: 'Muli', sans-serif;
     text-align: left;
@@ -84,9 +84,9 @@ page-communityprofile {
 .list-ios .item-block .item-inner{ border:none;}
 .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:none !important; box-shadow:none !important;}
 .listed-comments .item-md .item-inner .input-wrapper .label-md h2 {
-    font-size:16px;
+    font-size:17px;
     color:#007994 !important;
-    font-weight:400;
+    font-weight:600;
     font-family: 'Muli', sans-serif;
   
 }
@@ -96,7 +96,7 @@ page-communityprofile {
 }
 .postesd{ border:1px solid red;}
 .listed-comments .item-md .item-inner .input-wrapper .label-md p {
-    font-size: 11px !important;
+    font-size: 11px !important; font-weight:600;
     color: #909090;
     font-family: 'Muli', sans-serif;
 }
@@ -125,11 +125,11 @@ page-communityprofile {
 .comment-liks ion-row ion-col button .button-inner p {
     color: #777;
     font-size: 13px !important;
-    font-family: 'Muli', sans-serif;
+    font-family: 'Muli', sans-serif; font-weight:600;
     text-transform: capitalize;
 }
 p.valid{ color:red; font-size:13px !important;font-family: 'Muli', sans-serif;}
-.feed-post{color:#777; font-size:15px !important;font-family: 'Muli', sans-serif;}
+.feed-post{color:#444; font-size:17px !important;font-family: 'Muli', sans-serif; font-weight:400;}
 .posted-area .card-content-md{ padding:5px;}
 .posted-area .card-content-ios{ padding:5px;}
 
@@ -158,7 +158,7 @@ p.valid{ color:red; font-size:13px !important;font-family: 'Muli', sans-serif;}
 .label-opc .item-md .item-inner .label-md p {
     color:#007994 !important;
     font-size: 17px;
-    font-weight: 400;
+    font-weight:600;
     line-height: 25px;
     margin: 0 !important;
     padding-left: 8px;
@@ -179,15 +179,16 @@ p.valid{ color:red; font-size:13px !important;font-family: 'Muli', sans-serif;}
 }
 .inbox-sends h1 {
     color: #007994 !important;
-    font-family: "Muli",sans-serif;
+    font-family: "Muli",sans-serif; font-weight:600;
     font-size: 17px !important;
     padding-bottom: 8px;
     margin: 0;
 }
+.item-md.item-input.input-has-focus .item-inner{border-bottom-color:#fff !important;box-shadow:0 -1px 0 0 #fff !important;}
 .inbox-sends p span {
-    color: #333 !important;
+    color: #333 !important; font-weight:400;
     font-family: "Muli",sans-serif;
-    font-size:14px !important;
+    font-size:17px !important;
 }
 .inbox-sends p i {
     font-size:13px !important;

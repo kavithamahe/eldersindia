@@ -152,13 +152,13 @@
   <ion-col width-80>
     <ion-item>
 
-    <ion-textarea type="text" [(ngModel)]="post_comment" placeholder="Enter Comments" value="">
+    <ion-textarea type="text" class="text-bx" [(ngModel)]="post_comment" placeholder="Enter Comments" value="">
     </ion-textarea>
     </ion-item>
     </ion-col>
     <ion-col width-20>
-    <ion-icon name="sad" item-right (click)="emojiPicker1($event,post_id)"></ion-icon>
-    <ion-icon name="send" item-right (click)="sendComment(post_id,'post')"></ion-icon>
+    <ion-icon name="sad" class="em-icon" item-right (click)="emojiPicker1($event,post_id)"></ion-icon>
+    <ion-icon name="send" class="send-icon" item-right (click)="sendComment(post_id,'post')"></ion-icon>
     </ion-col>
   </ion-row>
   </ion-toolbar>
