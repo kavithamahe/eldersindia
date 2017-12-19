@@ -23,9 +23,9 @@ page-blogs {
 
 .blogs-tittle .item-inner .input-wrapper .label-md{ margin:0px;}
 .blogs-tittle .item-inner .input-wrapper .label-md h2 {
-    color: #007994 !important;
+    color: #007994 !important; font-weight:600;
     font-family: "Muli",sans-serif;
-    font-size:16px !important;
+    font-size:17px !important;
     padding-bottom: 8px;
     margin: 0;
 }
@@ -33,7 +33,7 @@ page-blogs {
     color: #7b8da0 !important;
     font-family: "Muli",sans-serif;
     font-size:12px !important;
-    padding-bottom: 8px;
+    padding-bottom: 8px; font-weight:600;
     margin: 0;
 }
 .community-img row col img{ border:1px solid #ccc;}
@@ -79,7 +79,7 @@ page-blogs {
     color: hsl(0, 0%, 100%) !important;
     float: left;
     font-family: "Muli",sans-serif;
-    font-size: 12px !important;
+    font-size:15px !important;
     font-weight: 600;
     padding: 9px;
     position: absolute;
@@ -93,7 +93,7 @@ page-blogs {
     color: hsl(0, 0%, 100%) !important;
     float: left;
     font-family: "Muli",sans-serif;
-    font-size: 12px !important;
+    font-size:15px !important;
     font-weight: 600;
     padding: 9px;
     position: absolute;

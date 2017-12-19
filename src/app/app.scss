@@ -26,12 +26,12 @@ button{font-family: 'Muli', sans-serif; }
 
 .toolbar-title 									{text-align:center !important;font-family: 'Muli', sans-serif; font-weight:600;}
 .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:none !important;box-shadow:none !important;}
-.ios page-community p, .md page-community p{ color: hsl(0, 0%, 47%);
+.ios page-community p, .md page-community p{ color:#444; padding:5px;
     font-family: "Muli",sans-serif;
-    font-size: 15px !important;}
-	.ios page-community p, .ios page-community p{ color: hsl(0, 0%, 47%);
+    font-size:17px !important;}
+	.ios page-community p, .ios page-community p{ color:#444;padding:5px;
     font-family: "Muli",sans-serif;
-    font-size: 15px !important;}
+    font-size:17px !important;}
 
 
 /********************************menu scss********************************/
@@ -50,7 +50,7 @@ button{font-family: 'Muli', sans-serif; }
 }
 
 .left-menus .list-md .item-md .item-inner .input-wrapper .label-md {
-    color: #fff; font-weight:400;
+    color: #fff; font-weight:600;
    font-family: 'Muli', sans-serif !important; 
     font-size:17px;
     margin: 0;
@@ -112,7 +112,9 @@ button{font-family: 'Muli', sans-serif; }
     background-repeat: no-repeat;
     background-size: cover;
 }
-
+.item-md.item-input.input-has-focus .item-inner{border-bottom-color:#fff !important;box-shadow:none!important;}
+.item-ios.item-input.input-has-focus .item-inner{border-bottom-color:#fff !important;box-shadow:none!important;}
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{border-bottom-color:#fff !important;box-shadow:none !important;}
 .item-ios{padding-left:0px;}
 .hed-new .toolbar-ios .toolbar-content-ios p {
     color: #fff;
@@ -128,11 +130,11 @@ button{font-family: 'Muli', sans-serif; }
 
 /********************************segment scss********************************/
 ion-segment{ background:#C0C0C0; border-radius:50px; height:40px; line-height:40px;font-family:'Muli', sans-serif;}
-.segment-md .segment-button{border-radius:50px; height:40px;line-height:40px;margin-left:3px;margin-right:3px;font-family:'Muli', sans-serif; text-transform:capitalize; color:#333; border:none;}
-.segment-md .segment-button.activated, .segment-md .segment-button.segment-activated{border-bottom:none !important;line-height:34px; background:#fff; color:#333; height:34px; font-family:'Muli', sans-serif;}
+.segment-md .segment-button{border-radius:50px; height:40px;line-height:40px;margin-left:3px;margin-right:3px;font-family:'Muli', sans-serif;  font-size:14px !important; font-weight:600;text-transform:capitalize; color:#333; border:none;}
+.segment-md .segment-button.activated, .segment-md .segment-button.segment-activated{border-bottom:none !important;line-height:34px !important; font-size:14px !important; font-weight:600; background:#fff; color:#333; height:34px; font-family:'Muli', sans-serif;}
 ion-segment{ background:#C0C0C0; border-radius:50px; height:40px; line-height:40px;font-family:'Muli', sans-serif;}
-.segment-ios .segment-button{border-radius:50px; height:40px;line-height:40px;margin-left:3px; padding:0px 7px;margin-right:3px;font-family:'Muli', sans-serif; text-transform:capitalize; color:#333; border:none;}
-.segment-ios .segment-button.activated, .segment-ios .segment-button.segment-activated{border-bottom:none !important;line-height:34px; background:#fff; color:#333; height:34px; font-family:'Muli', sans-serif;}
+.segment-ios .segment-button{border-radius:50px; height:40px;line-height:40px;margin-left:3px; padding:0px 7px;margin-right:3px;font-size:14px !important; font-weight:600;font-family:'Muli', sans-serif; text-transform:capitalize; color:#333; border:none;}
+.segment-ios .segment-button.activated, .segment-ios .segment-button.segment-activated{border-bottom:none !important;line-height:34px;font-size:14px !important; font-weight:600; background:#fff; color:#333; height:34px; font-family:'Muli', sans-serif;}
 .segment-ios .segment-button:first-of-type{border-radius:50px !important;}
 .segment-ios .segment-button:last-of-type{border-radius:50px !important;}
 /********************************segment scss end********************************/
@@ -151,8 +153,8 @@ ion-segment{ background:#C0C0C0; border-radius:50px; height:40px; line-height:40
     flex: 1 1 0;
     overflow: hidden;
     padding: 8px 0 8px 25px;}
-.alert-md .alert-checkbox-label{font-family:'Muli', sans-serif; font-size:15px;}
-.alert-ios .alert-checkbox-label{font-family:'Muli', sans-serif; font-size:15px;}
+.alert-md .alert-checkbox-label{font-family:'Muli', sans-serif; font-size:15px; font-weight:600;}
+.alert-ios .alert-checkbox-label{font-family:'Muli', sans-serif; font-size:15px;font-weight:600;}
 .toolbar-md-primary .toolbar-background-md{background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(191, 100%, 29%) 0%, hsl(195, 100%, 51%) 50%, hsl(191, 100%, 29%) 100%) repeat scroll 0 0;}
 .toolbar-ios-primary .toolbar-background-ios{background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(191, 100%, 29%) 0%, hsl(195, 100%, 51%) 50%, hsl(191, 100%, 29%) 100%) repeat scroll 0 0;}
 .searchbar-md .searchbar-search-icon {background-image:url("../assets/img/search.png");height:21px;left:16px;top:11px;width:21px;}
@@ -194,8 +196,8 @@ send-req {  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100
 .popup-container {
        background-color: #fff !important;
     }
-.sel-packages ion-row ion-col .go-btn.button-md{ margin-top:15px;}
-.sel-packages ion-row ion-col .go-btn.button-ios{ margin-top:15px;}
+.sel-packages ion-row ion-col .go-btn.button-md{ margin-top:15px; font-weight:600;}
+.sel-packages ion-row ion-col .go-btn.button-ios{ margin-top:15px;font-weight:600;}
 
 ul.rating[_ngcontent-dgd-43]   li[_ngcontent-dgd-43]{padding:0px !important;}
 
@@ -212,7 +214,7 @@ ul.rating[_ngcontent-dgd-43]   li[_ngcontent-dgd-43]{padding:0px !important;}
     font-size: 18px !important;
     padding-right: 0.5em;
     position: absolute;
-   top:-14px;
+   top:-12px;
   right: -4px;
 }
 

@@ -11,13 +11,14 @@ page-jobboard {
 }
 .sel-packages .item-md .item-inner .label-md {
     font-family: "Muli",sans-serif;
-    font-size: 15px;
+    font-size:17px;
     padding-left: 10px;
 }
+.select-text{font-size:17px; font-weight:600; color:hsl(191, 100%, 29%) !important;}
 .select-locas{ border:none; background:#E6E6FA; padding:6px; box-shadow:none; border-radius:0px;}
 .select-locas  p{ color:#333 !important; 
   
-    font-family: "Muli",sans-serif;
+    font-family: "Muli",sans-serif; font-weight:600;
     font-size: 18px !important;
     margin: 0; text-align:center;
     padding: 0;
@@ -29,7 +30,7 @@ page-jobboard {
 .job-detailsview ion-row ion-col h2 {color: hsl(191, 100%, 29%) !important;
   
     font-family: "Muli",sans-serif; 
-    font-size:17px !important; padding-bottom:8px;
+    font-size:17px !important; padding-bottom:8px; font-weight:600;
     margin: 0;
    }
 	.job-detailsview ion-row ion-col p{color:#333!important;
@@ -38,20 +39,23 @@ page-jobboard {
     font-size:15px !important; padding-bottom:15px;
     margin: 0;
     padding: 0;}
-	.job-detailsview ion-row ion-col p span{color:#333!important; 
+	.job-detailsview ion-row ion-col p span{color:#333!important; white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; width:95%; float:left;
   
     font-family: "Muli",sans-serif;
-    font-size:15px !important;
+    font-size:17px !important;
     margin: 0;
     padding:0px 0px 0px 10px;}
-	.job-detailsview ion-row ion-col p i{  width:10px; text-align:center;
+	.job-detailsview ion-row ion-col p i{  width:5%; line-height:25px; text-align:center;  float:left;
 
-    font-size:13px !important;  color:#C0C0C0;
+    font-size:15px !important;  color:#C0C0C0;
     }
 .sel-packages .item-ios .item-inner .label-ios {
     font-family: "Muli",sans-serif;
     font-size: 15px;
     padding-left: 10px;
 }
+.go-btn{margin-top:15px; font-weight:600;}
 
 }

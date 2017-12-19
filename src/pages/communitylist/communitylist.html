@@ -61,7 +61,7 @@
                <img  [src]="imageUrl+community?.banner" style="width:100%; height:200px;" [hidden]="!community?.banner" /> 
         			   <div class="label-opc">
             			   <ion-item text-wrap style="text-align:left !important;"  
-                     (click)="getPost(community.id)"><p>{{community.community_name | words :2: '....'}}</p></ion-item>
+                     (click)="getPost(community.id)"><p>{{community.community_name | words :3: '....'}}</p></ion-item>
         			   </div>
 
                 <span [hidden]="!community.category_name"> 

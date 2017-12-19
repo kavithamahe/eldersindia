@@ -20,8 +20,7 @@
 
 	<div class="one-half-responsive" style="background:#fff;">
 	   <p class="image-column-left">
-			<img [src]="imageUrl+communityDetailData?.logo"  
-				[hidden]="!communityDetailData?.logo">
+			<img height="70" [src]="imageUrl+communityDetailData?.logo" [hidden]="!communityDetailData?.logo" />
             <strong class="wel-comemem">Welcome to {{communityDetailData?.community_name}}
             </strong>
 			<em  style="" *ngIf(!show_description)>{{communityDetailData?.description | words : 50 : '...'}}</em>
