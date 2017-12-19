@@ -88,7 +88,7 @@
 
 
 </ion-row>
- <ion-row>
+ <ion-row *ngIf="service?.preferred_date != '0000-00-00'">
 
   <p class="service-conts"><i class="fa fa-calendar" aria-hidden="true"></i>{{service?.preferred_date}} {{service?.preferred_time}}</p>
 <!-- <small *ngIf="(service?.enquiry_date!='0000-00-00 00:00:00')" class="token-date">{{service?.enquiry_date | date :'MMM dd y h:mm a'}}</small>  -->

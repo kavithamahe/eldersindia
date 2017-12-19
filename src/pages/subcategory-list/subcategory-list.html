@@ -58,14 +58,14 @@
 			 <i class="fa fa-map-marker" aria-hidden="true"></i>
 				<p>{{service_list.location}}</p>
 				</ion-row>
-			<button class="btn-warnings"  *ngIf="dependentLen" (click)="openModal('scheduleModal',service_list)" (press)="pressevent('scheduleModal',service_list)">Schedule</button>
-			<button class="instant-bt"  *ngIf="dependentLen" (click)="instantRequest(service_list)" (press)="pressinstant(service_list)"> Instant</button>
+			<!-- <button class="btn-warnings"  *ngIf="dependentLen" (click)="openModal('scheduleModal',service_list)" >Schedule</button>
+			<button class="instant-bt"  *ngIf="dependentLen" (click)="instantRequest(service_list)" > Instant</button> -->
 			</ion-col>
 			
 		 </ion-row>
 		 <ion-col>
-		 <button class="btn-warnings"  *ngIf="dependentLen" (click)="openModal('scheduleModal',service_list)">Schedule</button>
-			<button class="instant-bt"  *ngIf="dependentLen" (click)="instantRequest(service_list)"> Instant</button>
+		 <button class="btn-warnings"  *ngIf="dependentLen" (click)="openModal('scheduleModal',service_list)" (press)="pressevent('scheduleModal',service_list)">Schedule</button>
+			<button class="instant-bt"  *ngIf="dependentLen" (click)="instantRequest(service_list)" (press)="pressinstant(service_list)"> Instant</button>
 		 </ion-col>
 		 <br/>
 		 <ion-row>

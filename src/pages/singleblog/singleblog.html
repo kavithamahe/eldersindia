@@ -37,23 +37,25 @@
   </ion-card-content>
  <ion-row (click)="leaveComment()">
     <ion-col>
-      <button ion-button icon-left clear small>
+      <button ion-button icon-left clear small autofocus>
         <ion-icon name="text"></ion-icon>
         Comment
       </button>
     </ion-col>
   </ion-row>
 
-<ion-list [hidden]="showComment">  
+<!-- <ion-list [hidden]="showComment">   -->
+<ion-list>
 <div id="commentsView">
    <form [formGroup]="commentForm">
   <ion-item style="padding-left:0px;">
-    <ion-textarea placeholder="Comment" formControlName="comment"></ion-textarea>
+    <ion-textarea placeholder="Comment" formControlName="comment" autofocus>
+    </ion-textarea>
   </ion-item>
   <p *ngIf="!commentForm.controls.comment.valid && (commentForm.controls.comment.dirty || submitAttempt)" class="err-reds">Please enter comment.</p>
   </form>
   <ion-item class="comments-btn">
-  <button ion-button (click)="blogComment(singleBlogInfo?.details?.id)" class="oranges">Submit</button>
+  <button ion-button autofocus (click)="blogComment(singleBlogInfo?.details?.id)" class="oranges">Submit</button>
   </ion-item>
   </div>
   <hr/>
@@ -67,7 +69,8 @@
   </ion-col>
   <ion-col width-80 class="blogs-tittle" style="border:1px solid red;">
  <ion-item text-wrap style="padding-left:0px;">
-    <h2 (click)="CommunityUserWall(viewComments?.user_id)">{{viewComments?.user_name}}</h2>
+    <h2 (click)="CommunityUserWall(viewComments?.user_id)">{{viewComments?.user_name}}
+    </h2>
 
    
     <small class="timedate">{{viewComments?.created_at | date :"MMM dd y h:mm a"}}</small>
@@ -92,7 +95,7 @@
      <div *ngIf="i==showReply">
      <ion-row>
         <ion-item>
-        <ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important;" placeholder="write a reply.."></ion-textarea>
+        <ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important;" placeholder="write a reply.." autofocus></ion-textarea>
         </ion-item>
 		
         <button ion-button class="orange-reply" (click)="postReply(viewComments.id,viewComments?.user_id)"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>
@@ -113,7 +116,8 @@
 			  <div class="reply-btt">
 			   <button  (click)="replyblogPost(j)" clear><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply</button>
               <button icon-right clear end *ngIf="user_id==reply?.uid_to" 
-              (click)="deleteComment(reply?.comments_replay_id)"><i class="fa fa-trash" _ngcontent-uuk-81="" aria-hidden="true"></i>&nbsp;Delete</button>
+              (click)="deleteComment(reply?.comments_replay_id)">
+              <i class="fa fa-trash" _ngcontent-uuk-81="" aria-hidden="true"></i>&nbsp;Delete</button>
 			 
 			  </div>
             </ion-item>
