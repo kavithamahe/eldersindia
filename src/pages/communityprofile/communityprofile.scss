@@ -11,16 +11,16 @@ page-communityprofile {
 .mess-accept p{ float:left;}
 .cont-conn{ background:#fff; padding:5px !important;}
 .name-conne p{     color: #007994 !important;
-    font-family: "Muli",sans-serif; font-weight:600;
-    font-size: 17px !important;
+    font-family: "Muli",sans-serif; font-weight:400;letter-spacing:0.2px;
+    font-size:19px !important;
     padding-bottom: 8px;
     margin: 0;}
 .updated-staus-btn{padding:5px !important; background:#fff; }
 .updated-staus-btn h2 {
      color: #007994 !important;
   padding-left:5px;
-    font-size:17px !important;
-    font-weight:600 !important;
+    font-size:19px !important;
+    font-weight:400 !important;letter-spacing:0.2px;
     padding-bottom: 10px;
 }
 .updated-staus-btn ion-textarea {
@@ -84,10 +84,10 @@ page-communityprofile {
 .list-ios .item-block .item-inner{ border:none;}
 .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:none !important; box-shadow:none !important;}
 .listed-comments .item-md .item-inner .input-wrapper .label-md h2 {
-    font-size:17px;
+    font-size:19px;
     color:#007994 !important;
-    font-weight:600;
-    font-family: 'Muli', sans-serif;
+    font-weight:400;
+    font-family: 'Muli', sans-serif;letter-spacing:0.2px;
   
 }
 .video-updates iframe {
@@ -129,14 +129,14 @@ page-communityprofile {
     text-transform: capitalize;
 }
 p.valid{ color:red; font-size:13px !important;font-family: 'Muli', sans-serif;}
-.feed-post{color:#444; font-size:17px !important;font-family: 'Muli', sans-serif; font-weight:400;}
+.feed-post{color:#777; padding:5px; font-size:17px !important;font-family: 'Muli', sans-serif; font-weight:400; line-height:25px;letter-spacing:0.2px;}
 .posted-area .card-content-md{ padding:5px;}
 .posted-area .card-content-ios{ padding:5px;}
 
 .comment-liks ion-row{ background:#F5F5F5;}
 .comment-liks ion-row ion-col button .button-inner p{color:#777; font-size:13px !important;font-family: 'Muli', sans-serif;  text-transform: capitalize;}
-.video-updates p{    color: #777;
-    font-size:15px !important;
+.video-updates p{    color: #777; padding:5px;
+    font-size:17px !important; font-weight:400;letter-spacing:0.2px;
     font-family: 'Muli', sans-serif;}
 .labels-bds {
     background: rgba(20, 20, 21, 0.58) none repeat scroll 0 0 !important;
@@ -157,8 +157,8 @@ p.valid{ color:red; font-size:13px !important;font-family: 'Muli', sans-serif;}
 }
 .label-opc .item-md .item-inner .label-md p {
     color:#007994 !important;
-    font-size: 17px;
-    font-weight:600;
+    font-size:19px;
+    font-weight:400;
     line-height: 25px;
     margin: 0 !important;
     padding-left: 8px;
@@ -179,14 +179,14 @@ p.valid{ color:red; font-size:13px !important;font-family: 'Muli', sans-serif;}
 }
 .inbox-sends h1 {
     color: #007994 !important;
-    font-family: "Muli",sans-serif; font-weight:600;
-    font-size: 17px !important;
-    padding-bottom: 8px;
+    font-family: "Muli",sans-serif; font-weight:400;
+    font-size:19px !important;
+
     margin: 0;
 }
 .item-md.item-input.input-has-focus .item-inner{border-bottom-color:#fff !important;box-shadow:0 -1px 0 0 #fff !important;}
 .inbox-sends p span {
-    color: #333 !important; font-weight:400;
+    color: #444 !important; font-weight:400;letter-spacing:0.2px;
     font-family: "Muli",sans-serif;
     font-size:17px !important;
 }

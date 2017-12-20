@@ -41,31 +41,25 @@
 			 nullable="false"> 
 			  </rating>
 		 	 </h3>
-		 	
-		 	
-		    <ion-list>
-		      <p>Service Cost:</p>
-			 <b><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{service_list.service_cost - service_list.percentage_cost}}</b>
-			 <span> / </span>
-		    <span><i class="fa fa-inr" aria-hidden="true"></i>{{service_list.service_cost}}</span>
+		 	 <b><small> Service Cost: </small>&nbsp; <i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{service_list.service_cost - service_list.percentage_cost}}</b>
+		    
 			
-			<!-- <p class="offers">{{service_list.discount_rate}} %OFF</p> -->
-			 <p>{{service_list.service_type}}</p>
+			<br/>
+			
+			
+			
+			
+			<span>/&nbsp;<i class="fa fa-inr" aria-hidden="true"></i><strong>{{service_list.service_cost}}</strong> {{service_list.service_type}}</span>
+		
 				 <p *ngIf="service_list.lead_time != '00:00'" 
 				 [hidden]="!service_list?.lead_time">Minimum {{service_list.lead_time}} hour to serve you</p> 
-			</ion-list>
-			<ion-row>
-			 <i class="fa fa-map-marker" aria-hidden="true"></i>
-				<p>{{service_list.location}}</p>
-				</ion-row>
-			<button class="btn-warnings"  *ngIf="dependentLen" (click)="openModal('scheduleModal',service_list)" (press)="pressevent('scheduleModal',service_list)">Schedule</button>
-			<button class="instant-bt"  *ngIf="dependentLen" (click)="instantRequest(service_list)" (press)="pressinstant(service_list)"> Instant</button>
+				  
+				<p><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;{{service_list.location}}</p>
 			</ion-col>
-			
-		 </ion-row>
+			</ion-row>
 		 <ion-col>
-		 <button class="btn-warnings"  *ngIf="dependentLen" (click)="openModal('scheduleModal',service_list)">Schedule</button>
-			<button class="instant-bt"  *ngIf="dependentLen" (click)="instantRequest(service_list)"> Instant</button>
+		<button class="btn-warnings"  *ngIf="dependentLen" (click)="openModal('scheduleModal',service_list)" (press)="pressevent('scheduleModal',service_list)">Schedule</button>
+		<button class="instant-bt"  *ngIf="dependentLen" (click)="instantRequest(service_list)" (press)="pressinstant(service_list)"> Instant</button>
 		 </ion-col>
 		 <br/>
 		 <ion-row>

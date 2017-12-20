@@ -6,24 +6,24 @@ page-singleblog {
 }
 .blogs-tittle .item-inner .input-wrapper .label-md h2 {
     color: #007994 !important;
-    font-family: "Muli",sans-serif; font-weight:600;
-    font-size: 17px !important;
+    font-family: "Muli",sans-serif; font-weight:400;
+    font-size:19px !important;
     padding-bottom:5px;
     margin: 0;
 }
 .blogs-tittle .item-md .item-inner .input-wrapper .label-md p {
     color: #7b8da0 !important;
     font-family: "Muli",sans-serif; font-weight:600;
-    font-size: 13px !important;
+    font-size:12px !important;
     padding-bottom: 3px;
     margin: 0;
 }
-.cmts{ font-weight:600 !important; font-size:17px !important;}
+.cmts{ font-weight:600 !important; font-size:15px !important;}
 .blogs-tittle .item-inner .input-wrapper .label-md{margin:0px;}
 .card-content-md p {
     color: #666 !important;
     font-family: "Muli",sans-serif;
-    font-size:17px !important; font-weight:400;
+    font-size:17px !important; font-weight:400;letter-spacing:0.2px; line-height:25px;
     padding-bottom: 8px;
     margin: 0;
 }
@@ -60,11 +60,11 @@ page-singleblog {
     padding-bottom: 8px; font-weight:600;
     margin: 0;}
 .item-md.item-block .item-inner{ padding-right:0px;}
-.text-input-md{ border:1px solid #ccc;    font-family: 'Muli', sans-serif;padding:5px; font-weight:600;}
+.text-input-md{ border:1px solid #ccc;    font-family: 'Muli', sans-serif;padding:5px; font-weight:400; font-size:15px;}
  .oranges {
     border-radius: 2px;
     background: #FE5722;
-    font-size:17px !important;
+    font-size:17px !important; border-radius:20px;
     font-weight:600;
     text-transform: capitalize;
     height: 35px !important;
@@ -93,7 +93,7 @@ page-singleblog {
 .blogs-tittle .item-md .item-inner .input-wrapper .label-md strong {
     color:#666 !important;
     font-family: "Muli",sans-serif;
-    font-size:17px !important; font-weight:400;
+    font-size:17px !important; font-weight:400;letter-spacing:0.2px; line-height:25px;
     margin: 0;
     padding-bottom: 3px; margin-top:5px; float:left; font-weight:400; width:100%;
 }
@@ -108,7 +108,7 @@ page-singleblog {
 .reply-reply .item-inner .label-md {margin:0px;}
 .reply-reply .item-inner .label-md h2{     color:hsl(191, 100%, 29%) !important; 
     font-family: "Muli",sans-serif;
-    font-size:13px !important; font-weight:600;}
+    font-size:15px !important; font-weight:400;}
 .reply-reply .item-inner .label-md p{     color:#666 !important;
     font-family: "Muli",sans-serif;
     font-size:15px !important; font-weight:400;}

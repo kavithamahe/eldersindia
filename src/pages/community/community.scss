@@ -13,44 +13,44 @@ page-community {
 
 .image-column-left strong {
     display: block;
-    font-size:17px !important;
-    font-weight:600;
-    padding-bottom: 5px;font-family: 'Muli', sans-serif; 
+    font-size:19px !important;
+    font-weight:400 !important;
+    padding-bottom: 5px;font-family: 'Muli', sans-serif; letter-spacing:0.2px;
     width: 100%;
 }
 .wel-comemem {
-    color:#007994 !important; font-weight:600 !important;
-    font-size:17px !important;
+    color:#007994 !important; font-weight:400 !important;
+    font-size:19px !important;letter-spacing:0.2px;
     margin: 0;
    font-family: 'Muli', sans-serif; 
 }
 .image-column-left em {
-    color:#444 !important;
+    color:#444 !important; line-height:25px;
     display: block;
     font-size:17px;
-    font-style: normal;
+    font-style: normal;letter-spacing:0.2px;
     font-weight: 400; 
     font-family: 'Muli', sans-serif; 
   
 }
 .mem-title h1 {
     color:#007994 !important;
-    font-size:17px !important;
-    font-weight:600 !important; padding-bottom:10px;
+    font-size:19px !important;
+    font-weight:400 !important; padding-bottom:10px;
 }
 .memberareas{border-bottom:1px solid #ccc;}
 .memberareas .item-md .item-inner .input-wrapper .label-md{ margin:5px 8px 13px 0px;}
 .memberareas .item-md .item-inner .input-wrapper .label-md button{ background: hsl(14, 99%, 56%) none repeat scroll 0 0 !important;
     font-size:16px;
-    font-weight:600;
+    font-weight:600; height:35px;
     padding: 10px;
     text-transform: capitalize;}
 .memberareas .item-md .item-inner .input-wrapper .label-md img { border:1px solid #ccc;}
 	
 .memberareas .item-ios .item-inner .input-wrapper .label-ios{ margin:5px 8px 13px 0px;}
 .memberareas .item-ios .item-inner .input-wrapper .label-ios button{ background: hsl(14, 99%, 56%) none repeat scroll 0 0 !important;
-    font-size: 15px;
-    font-weight: 400;
+    font-size:16px;
+    font-weight:600; height:35px;
     padding: 10px;
     text-transform: capitalize;}
 	.item-md.item-block .item-inner{ border-bottom:none;}
@@ -87,12 +87,12 @@ page-community {
 .listed-comments{ border:1px solid #E6E6FA; margin:0px !important; width:auto !important;}
 .listed-comments .item-md .item-inner .input-wrapper .label-md img {border-radius:0px !important;}
 .listed-comments .item-md .item-inner .input-wrapper .label-md{ margin:0px !important;}
-.listed-comments .item-md .item-inner .input-wrapper .label-md h2{ font-size:17px; font-weight:600; color:#007994 !important;font-family: 'Muli', sans-serif; padding-top:10px;}
+.listed-comments .item-md .item-inner .input-wrapper .label-md h2{ font-size:19px; font-weight:400; color:#007994 !important;font-family: 'Muli', sans-serif; padding-top:10px;}
 .listed-comments .item-md .item-inner .input-wrapper .label-md p{ font-size:12px !important;font-weight:600; color:#909090;font-family: 'Muli', sans-serif; }
 
 .listed-comments .item-ios .item-inner .input-wrapper .label-ios img {border-radius:0px !important;}
 .listed-comments .item-ios .item-inner .input-wrapper .label-ios{ margin:0px !important;}
-.listed-comments .item-ios .item-inner .input-wrapper .label-ios h2{ font-size:17px;font-weight:600; color:#007994 !important;font-family: 'Muli', sans-serif; padding-top:10px;}
+.listed-comments .item-ios .item-inner .input-wrapper .label-ios h2{ font-size:19px;font-weight:400; color:#007994 !important;font-family: 'Muli', sans-serif; padding-top:10px;}
 .listed-comments .item-ios .item-inner .input-wrapper .label-ios p{ font-size:12px !important;font-weight:600; margin:0px; color:#909090;font-family: 'Muli', sans-serif; }
 .post-urls ion-row ion-col .item-md .item-inner .input-wrapper ion-input.input-md .text-input-md{border:1px solid #ccc; margin-bottom:20px;font-family: 'Muli', sans-serif; width:99%; margin-left:3px; padding:8px;}
 .post-urls ion-row ion-col .item-ios .item-inner .input-wrapper ion-input.input-ios .text-input-ios{border:1px solid #ccc; margin-bottom:20px;font-family: 'Muli', sans-serif; width:99%; margin-left:3px; padding:8px;}

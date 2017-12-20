@@ -3,16 +3,16 @@ page-service-info {
 .toolbar-title-ios{ text-align:center;}
 .message-boxs{ box-shadow:none;}
 .message-boxs h2{color: #007994 !important;
-    font-family: "Muli",sans-serif;
-    font-size: 17px !important;
+    font-family: "Muli",sans-serif; font-weight:400;
+    font-size:19px !important;
     padding-bottom: 8px;
     margin: 0;}
 .message-boxs p{color: #333 !important;
-    font-family: "Muli",sans-serif;
-    font-size: 15px !important;
+    font-family: "Muli",sans-serif; font-weight:400;
+    font-size:17px !important; line-height:25px;letter-spacing:0.2px;
     margin: 0;
   
 }
-.btn-default-ser{    background: transparent linear-gradient(45deg, #fe5722 0%, #fe5722 30%, #ff906b 50%, #fe5722 71%, #fe5722 100%) repeat scroll 0 0; color:#fff;  border-radius:30px; text-align:left;}
+.btn-default-ser{    background: transparent linear-gradient(45deg, #fe5722 0%, #fe5722 30%, #ff906b 50%, #fe5722 71%, #fe5722 100%) repeat scroll 0 0; color:#fff; font-weight:600; font-size:17px;  border-radius:30px; text-align:left;}
 
 }

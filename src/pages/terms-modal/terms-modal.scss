@@ -4,21 +4,21 @@ page-terms-modal {
 .lastupdate .item-inner .input-wrapper .label-md{ margin:0px;}
 .lastupdate .item-inner .input-wrapper .label-md h2 {
     color: #007994 !important;
-    font-family: "Muli",sans-serif; font-weight:600;
-    font-size:17px !important; padding-bottom:10px;
+    font-family: "Muli",sans-serif; font-weight:400;
+    font-size:19px !important; padding-bottom:10px;
    
     margin: 0;
 }
 
 .lastupdate .item-inner .input-wrapper .label-md p  {
-    color:#666 !important;
+    color:#444 !important;letter-spacing:0.2px; 
     font-family: "Muli",sans-serif; line-height:25px;
     font-size:17px !important; font-weight:400;
    
     margin: 0;
 }
 .lastupdate .item-inner .input-wrapper .label-ios p  {
-    color:#666 !important;
+     color:#444 !important;letter-spacing:0.2px; 
     font-family: "Muli",sans-serif; line-height:25px;
     font-size:17px !important; font-weight:400;
    
@@ -45,11 +45,11 @@ page-terms-modal {
 .listed-terms .card-md{box-shadow:none; border:1px solid #039FCC; }
 .listed-terms .card-md .item-md{ padding-left:5px; border-left:2px solid #039FCC; box-shadow:none; background:#EFF5FB; border-radius:0px; height:35px;}
 .listed-terms .card-md .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
-.listed-terms .card-md .item-md .item-inner .input-wrapper .label-md p{ width:80%; float:left; color:#333;    font-family: "Muli",sans-serif; font-size:16px; font-weight:600;}
+.listed-terms .card-md .item-md .item-inner .input-wrapper .label-md p{ width:80%; float:left; color:#333;letter-spacing:0.2px;     font-family: "Muli",sans-serif; font-size:19px; font-weight:400;}
 .listed-terms .card-md .item-md .item-inner .input-wrapper .label-md span{ width:20%; float:left;}
 .listed-terms .card-md .item-md .item-inner .input-wrapper .label-md span{text-align:center; color:#333;}
-.listed-terms .card-md .card-content-md p{  padding: 8px 0 0; font-size:17px; line-height:25px;font-family: "Muli",sans-serif;}
-.listed-terms .card-md .card-content-md b{font-size: 15px; float:left; width:100%;line-height: 25px;padding: 8px;font-family: "Muli",sans-serif;}
+.listed-terms .card-md .card-content-md p{  padding: 8px 0 0; font-size:17px; line-height:25px;font-family: "Muli",sans-serif;letter-spacing:0.2px; }
+.listed-terms .card-md .card-content-md b{font-size: 15px; float:left; width:100%;line-height: 25px;padding: 8px;font-family: "Muli",sans-serif;letter-spacing:0.2px; }
 .listed-terms .card-ios{box-shadow:none; border:1px solid #888aef; }
 .listed-terms .card-ios{box-shadow:none; border:1px solid #888aef; }
 .listed-terms .card-ios .item-ios{ padding-left:5px; border-left:2px solid #5c5fea; box-shadow:none; background:#888aef; border-radius:0px;}
@@ -57,7 +57,7 @@ page-terms-modal {
 .listed-terms .card-ios .item-ios .item-inner .input-wrapper .label-ios p{ width:80%; float:left; color:#fff; font-size:18px; font-weight:600;}
 .listed-terms .card-ios .item-ios .item-inner .input-wrapper .label-ios span{ width:20%; float:left;}
 .listed-terms .card-ios .item-ios .item-inner .input-wrapper .label-ios span{text-align:center; color:#333;}
-.listed-terms .card-ios .card-content-ios p{ padding:8px; font-size:15px; line-height:25px;}
-.listed-terms .card-ios .card-content-ios b{font-size: 15px; float:left; width:100%;line-height:25px;padding:8px;}
+.listed-terms .card-ios .card-content-ios p{  padding: 8px 0 0; font-size:17px; line-height:25px;font-family: "Muli",sans-serif;letter-spacing:0.2px; }
+.listed-terms .card-ios .card-content-ios b{font-size: 15px; float:left; width:100%;line-height:25px;padding:8px;letter-spacing:0.2px; }
 
 }

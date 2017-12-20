@@ -230,9 +230,9 @@ pressevent(modalPage,vendorData){
 
 @Component({
   template: `
-<div class="ion-modal-popup" style="">
-<ion-header>
-<ion-toolbar class="hei-head">
+<div class="ion-modal-popup">
+<ion-header class="hei-head">
+<ion-toolbar>
     <ion-title color="primary" class="tittles-md">
       {{vendor}} - Instant Request
     </ion-title>

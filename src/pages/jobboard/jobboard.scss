@@ -27,21 +27,21 @@ page-jobboard {
 .item-ios.item-block .item-inner{border:none;}
 
 .job-detailsview											{ background:rgba(255,255,255, 0.7); box-shadow:none; border:1px solid #E6E6FA; padding:4px;}
-.job-detailsview ion-row ion-col h2 {color: hsl(191, 100%, 29%) !important;
+.job-detailsview ion-row ion-col h2 {color: hsl(191, 100%, 29%) !important; 
   
     font-family: "Muli",sans-serif; 
-    font-size:17px !important; padding-bottom:8px; font-weight:600;
+    font-size:19px !important; padding-bottom:8px; font-weight:400;letter-spacing:0.2px;
     margin: 0;
    }
-	.job-detailsview ion-row ion-col p{color:#333!important;
+	.job-detailsview ion-row ion-col p{color:#444!important; float:left; width:100%;
   
     font-family: "Muli",sans-serif;
     font-size:15px !important; padding-bottom:15px;
     margin: 0;
     padding: 0;}
-	.job-detailsview ion-row ion-col p span{color:#333!important; white-space: nowrap;
+	.job-detailsview ion-row ion-col p span{color:#444!important; white-space: nowrap;letter-spacing:0.2px;
   overflow: hidden;
-  text-overflow: ellipsis; width:95%; float:left;
+  text-overflow: ellipsis; width:85%; float:left;
   
     font-family: "Muli",sans-serif;
     font-size:17px !important;

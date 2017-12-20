@@ -193,17 +193,18 @@ send-req {  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100
 .ion-md-close-circle{font-size:21px;}
 .ion-ios-close-circle{font-size:21px;}
 
-.popup-container {
-       background-color: #fff !important;
-    }
+
 .sel-packages ion-row ion-col .go-btn.button-md{ margin-top:15px; font-weight:600;}
 .sel-packages ion-row ion-col .go-btn.button-ios{ margin-top:15px;font-weight:600;}
 
 ul.rating[_ngcontent-dgd-43]   li[_ngcontent-dgd-43]{padding:0px !important;}
-
-.modal-wrapper{background-color:#fff;}
-
-
+.badge-md{margin-right:5px;}
+.badge-ios{margin-right:5px;}
+.modal-wrapper {
+    background:#fff !important;
+}
+.toolbar-md-primary .bar-button-light-md, .toolbar-md-primary .bar-button-clear-md-light, .toolbar-md-primary .bar-button-md-light{font-weight:600; font-size:17px;}
+.toolbar-ios-primary .bar-button-light-ios, .toolbar-ios-primary .bar-button-clear-ios-light, .toolbar-ios-primary .bar-button-ios-light{font-weight:600; font-size:17px;}
 .err-reds:before {
     content: "\f0de";
     font-family: FontAwesome;

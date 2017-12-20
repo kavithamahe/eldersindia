@@ -5,7 +5,7 @@ page-subcategory-list {
 .item-md.item-block .item-inner{padding-right:0px;}
 .subcategory-list .item-inner .input-wrapper .label-md{ margin:0px;}
 .subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col img{border:1px solid hsl(210, 55%, 96%);}
-.subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col h2{color:#007994 !important;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:600;margin: 0; padding-bottom:0px; padding-top:9px;}
+.subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col h2{color:#007994 !important;font-family: "Muli",sans-serif;font-size:19px !important; font-weight:400;margin: 0; padding-bottom:0px; padding-top:9px;}
 .rating-clr ul.rating li{ float:left; list-style-type: none; margin-right:3px; padding:0px !important; margin-bottom:5px;height:6px;}
 .rating-clr ul.rating{   float: left;
     margin-left: -40px;
@@ -19,7 +19,8 @@ page-subcategory-list {
 .subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col .list-md p{color:#666; font-weight:400; padding-right:6px; font-size:16px;  float:left;font-family: "Muli",sans-serif; padding-top:1px;}
 .subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col .list-md p.offers{font-weight:400;  padding-top:2px;color:green;font-family: "Muli",sans-serif; font-size:16px;}
 
-
+.hei-head{background:red;}
+.tittles-md{background:red;}
 
 .item-ios.item-block .item-inner{padding-right:0px;}
 .subcategory-list .item-inner .input-wrapper .label-ios{ margin:0px;}
@@ -33,11 +34,12 @@ page-subcategory-list {
 	
 .rating-clr ul.rating li .ion-ios-star{ color:#FFB700; font-size:19px;}
 .rating-clr ul.rating li .ion-ios-star-outline{color:#FFB700;font-size:19px;}
-.subcategory-list .item-inner .input-wrapper .label-ios ion-row ion-col .list-ios{ width:100%; float:left; padding-bottom:5px;}
-.subcategory-list .item-inner .input-wrapper .label-ios ion-row ion-col .list-ios b{color:red;float:left; padding-right:6px; font-weight:600;font-size:12px; font-family: "Muli",sans-serif;}
-.subcategory-list .item-inner .input-wrapper .label-ios ion-row ion-col .list-ios span{float:left;color:#666;padding-right:6px; font-size:12px; font-weight:600;font-family: "Muli",sans-serif; padding-top:0px;  padding-right:3px; text-decoration: line-through;}
-.subcategory-list .item-inner .input-wrapper .label-ios ion-row ion-col .list-ios p{color:#666; font-weight:600; padding-right:6px; font-size:12px;  float:left;font-family: "Muli",sans-serif; padding-top:1px;}
-.subcategory-list .item-inner .input-wrapper .label-ios ion-row ion-col .list-ios p.offers{font-weight:600;  padding-top:2px;color:green;font-family: "Muli",sans-serif; font-size:12px;}
+.text-alg b{color:#B12704!important; float:left; width:100%;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400; padding-left:3px; padding-top:1px;}
+.text-alg small{color:#444 !important;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
+.text-alg span{color:#444!important; float:left; width:100%;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
+.text-alg p{color:#444!important; float:left; width:100%;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
+.text-alg strong{color:#444!important;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400; text-decoration: line-through;}
+
 
 
 .off-price{ width:50px; height:50px;   margin-left: 15px; background:red; color:#fff !important; float:left; text-align:center; line-height:50px; border-radius:50%;}
@@ -46,12 +48,12 @@ page-subcategory-list {
     font-weight: 600;
     line-height: 17px;
     padding-top: 14px;}
-.btn-warnings{background:#025FA9 !important; height:30px;   font-size:15px; color:#fff; border-radius:20px; width:45%;
+.btn-warnings{background:#025FA9 !important; height:35px;   font-size:15px; color:#fff; border-radius:20px; width:45%;
     font-weight:600;
     float: left;margin-bottom:10px;
     text-transform: capitalize;
     font-family: 'Muli', sans-serif;}
-.instant-bt{ float:right;height:30px; margin-bottom:10px;   background:#FE5722 !important;width:45%;font-size:15px;color:#fff;border-radius:20px;font-weight:600;margin-left:5px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
+.instant-bt{ float:right;height:35px; margin-bottom:10px;   background:#FE5722 !important;width:45%;font-size:15px;color:#fff;border-radius:20px;font-weight:600;margin-left:5px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
 
 
 .modal-wrapper{background:none !important;}
