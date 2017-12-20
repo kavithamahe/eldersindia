@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
 import { NavController, NavParams,ModalController,LoadingController,ToastController } from 'ionic-angular';
 import { BlogListService } from '../../providers/blog-list-service';
 import { Storage } from '@ionic/storage';
@@ -17,6 +18,7 @@ import {ElderservicePagePage } from '../../pages/elderservice/elderservice';
   providers:[BlogListService]
 })
 export class PackageRequestPagePage {
+  @ViewChild(Content) content: Content;
 	rootUrl:any;
 	packageRequest:any;
 	nextPageURL:any='';
@@ -36,6 +38,12 @@ elderId:any;
       });     
    });
   	
+  }
+   scrollToTop() {
+    this.content.scrollToTop();
+  }
+  scrollToBottom(){
+    this.content.scrollToBottom();
   }
   getPackageRequests(){
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});

@@ -255,9 +255,6 @@ pressevent(modalPage,vendorData){
                 </ion-option>
               </ion-select>
           </ion-item>
- <ion-item *ngIf(selected)>
-  <p class="err-reds" style="color:red;"> Please select the dependent</p>
-  </ion-item>
       <button class="btn-primarys" ion-button item-right small (press)="presscancel()" (click)="cancel()">Cancel</button>
 
     <button class="btn-primarys" ion-button item-right small (press)="presssubmit()" (click)="submit()">Submit</button>
@@ -295,7 +292,8 @@ export class InstantRequestModalPage {
   vendor:any="";
   constructor(
     public params: NavParams,
-    public viewCtrl: ViewController
+    public viewCtrl: ViewController,
+    public toastCtrl: ToastController
   ) {
     
     this.dependentLists = this.params.get('dependentList');
@@ -319,9 +317,18 @@ export class InstantRequestModalPage {
   cancel(){
     this.dismiss();
   }
+    public showToaster(message)
+  {
+   let toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000,
+        position: 'top'
+        });
+   toast.present();
+  }
   submit(){
+    console.log(this.dependentData);
     if(this.dependentData != ""){
-      this.selected = false;
     let dependent_model = this.dependentData;
     let d = new Date();
     let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
@@ -342,7 +349,7 @@ export class InstantRequestModalPage {
     "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":""};
     this.viewCtrl.dismiss(serviceRequestData);
   }else{
-    this.selected = true;
+    this.showToaster("Please select the dependent");
     }
   }
 }

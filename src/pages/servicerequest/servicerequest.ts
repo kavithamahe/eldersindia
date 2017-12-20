@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
 import { NavController, NavParams, LoadingController,ToastController,AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CallNumber } from 'ionic-native';
@@ -17,6 +18,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
   providers:[ServiceRequestService]
 })
 export class ServicerequestPage {
+    @ViewChild(Content) content: Content;
 imageUrl:any;
 token:any;
 status:any="";
@@ -47,6 +49,12 @@ sortby:any="";
       this.getRemarks();
       })
   	});
+  }
+    scrollToTop() {
+    this.content.scrollToTop();
+  }
+  scrollToBottom(){
+    this.content.scrollToBottom();
   }
   onInitstatus(){
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     

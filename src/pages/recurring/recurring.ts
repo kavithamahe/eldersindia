@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
 import { NavController, NavParams,LoadingController,ToastController,ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CallNumber } from 'ionic-native';
@@ -23,6 +24,7 @@ import { BlogListService } from '../../providers/blog-list-service';
   providers:[BlogListService]
 })
 export class RecurringPagePage {
+  @ViewChild(Content) content: Content;
 recurringRequest:any=[];
 rootUrl:any;
 searchText:any="";
@@ -47,6 +49,12 @@ serviceRequestScrollLists:any=[];
    if(this.searchText.length == 0){
     this.getrecurringRequest();
    }
+  }
+   scrollToTop() {
+    this.content.scrollToTop();
+  }
+  scrollToBottom(){
+    this.content.scrollToBottom();
   }
    public showToaster(message)
   {

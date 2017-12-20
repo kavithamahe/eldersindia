@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
 import { NavController, NavParams, LoadingController,Platform,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
@@ -19,6 +20,7 @@ import { InAppBrowser } from 'ionic-native';
   providers:[Externallinks]
 })
 export class ExternallinksPage {
+  @ViewChild(Content) content: Content;
 	imageUrl:any;
 	token:any;
 	externalLinks:any;
@@ -37,7 +39,12 @@ export class ExternallinksPage {
   });
 
   }
-
+ scrollToTop() {
+    this.content.scrollToTop();
+  }
+  scrollToBottom(){
+    this.content.scrollToBottom();
+  }
  externalLinksList(){
  	 let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();

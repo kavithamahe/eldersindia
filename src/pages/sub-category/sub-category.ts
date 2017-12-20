@@ -81,6 +81,7 @@ servicelocationid:any;
        this.packageCount = this.packages.length;
     },
     err =>{
+
       this.providerService.showErrorToast(err);
       console.log("Response for get service offered: "+err);
         
@@ -88,6 +89,20 @@ servicelocationid:any;
   }
    viewPackage(vendor_id){
     this.navCtrl.push(PackageDetailPagePage,{"vendor_id":vendor_id,'location_id':this.serviceLocation});
+  }
+    getItems(ev) {
+    // Reset items back to all of the items
+    // this.loadSubCategory("");
+
+    // set val to the value of the ev target
+    var val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.subcategories = this.subcategories.filter((item) => {
+        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
   }
 loadSubCategory(location){
   let loading = this.loadingCtrl.create({content: 'Please wait...!'});

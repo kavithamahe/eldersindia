@@ -20,6 +20,9 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+<ion-fab top right edge>
+    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
+  </ion-fab>
 <ion-card class="segment-card">
      <ion-segment [(ngModel)]="community" class="segment-top" 
      (ionChange)="changeSlide($event)">
@@ -105,13 +108,16 @@
          
         </ion-card>
 		</div>
-         <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+        <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+       <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
       </ion-list>
       </ion-slide>
       </ion-slides>
     </div>
-	
+   <ion-fab bottom right edge>
+    <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
+    </ion-icon></button>
+  </ion-fab>
 </ion-content>
   

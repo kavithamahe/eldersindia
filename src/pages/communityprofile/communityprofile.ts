@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
 import { NavController, NavParams,ActionSheetController, ModalController, ViewController,AlertController,LoadingController,PopoverController,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
@@ -24,6 +25,7 @@ import { CommunityServices } from '../../providers/community-services';
   providers : [CommunityServices]
 })
 export class CommunityprofilePage {
+  @ViewChild(Content) content: Content;
     userType:any;
     addComments: boolean;
     itemComments:boolean;
@@ -87,6 +89,12 @@ export class CommunityprofilePage {
         this.addComments=false;
         this.itemComments=false;
  
+  }
+  scrollToTop() {
+    this.content.scrollToTop();
+  }
+  scrollToBottom(){
+    this.content.scrollToBottom();
   }
   ionViewDidEnter(){
     this.storage.ready().then(() => {

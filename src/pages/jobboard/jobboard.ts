@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild  } from '@angular/core';
 import { NavController, NavParams, LoadingController,ToastController,ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
+import { Content } from 'ionic-angular';
 import { JobBoardService } from '../../providers/job-board-service';
 import { SinglejobPage } from '../../pages/singlejob/singlejob';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -18,6 +18,7 @@ import { JobDependentPage } from '../../pages/job-dependent/job-dependent';
   providers:[JobBoardService]
 })
 export class JobboardPage {
+   @ViewChild(Content) content: Content;
 imageUrl:any;
 token:any;
 jobBoardInfo:any;
@@ -44,7 +45,12 @@ searchText:any="";
       });
   	});
   }
-
+ scrollToTop() {
+    this.content.scrollToTop();
+  }
+  scrollToBottom(){
+    this.content.scrollToBottom();
+  }
   public onInit()
   { 
     this.loader = this.loadingCtrl.create({ content: "Please wait..." });     

@@ -50,6 +50,9 @@
     </ion-select>
   </ion-item>
   </ion-card>
+  <ion-fab top right edge>
+    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
+  </ion-fab>
    <!--  <ion-searchbar (ionInput)="jobsearch($event)">
     </ion-searchbar> -->
 <ion-card *ngFor="let appliedJobs of appliedJobsList" class="job-detailsview">
@@ -63,6 +66,9 @@
   </ion-col>
   </ion-row>
 </ion-card>
+<ion-fab bottom right edge>
+    <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"></ion-icon></button>
+  </ion-fab>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>

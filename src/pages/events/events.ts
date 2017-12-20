@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
@@ -17,6 +18,7 @@ import { EventsService } from '../../providers/events-service';
   providers:[EventsService]
 })
 export class EventsPage {
+@ViewChild(Content) content: Content;
 token:string;
 imageUrl:string;
 eventsLists:any[]=[];
@@ -61,7 +63,12 @@ emptyRecord:any;
       }
     );  
   }
-
+  scrollToTop() {
+    this.content.scrollToTop();
+  }
+  scrollToBottom(){
+    this.content.scrollToBottom();
+  }
   public showToaster(message)
   {
    let toast = this.toastCtrl.create({

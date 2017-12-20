@@ -32,12 +32,19 @@
     </ion-segment-button>
    </ion-segment>
 </ion-card>
+       <ion-fab top right edge 
+       *ngIf="addConnectionInfo.length != 0 || receivedRquestInfo.length != 0 || sentRquestInfo.length != 0 || allConnectionsInfo.length != 0">
+        <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown">
+          </ion-icon></button>
+        </ion-fab>
+    
     <div [ngSwitch]="getconnections">
       <ion-list *ngSwitchCase="'myConnections'"> 
         <ion-list *ngIf="connectionsaction == 'received'">
         <ion-segment-button class="listed-rec">Received Requests</ion-segment-button>
         <!-- <ion-searchbar *ngIf="receivedRquestInfo.length != 0" (input)="receivedsearch($event)"></ion-searchbar> -->
         <ion-searchbar (input)="receivedsearch($event)"></ion-searchbar>
+       
             <div *ngFor="let request of receivedRquestInfo">
               <!-- <ion-item-sliding class="inbox-sends"> -->
                 <ion-item text-wrap class="inbox-sends">
@@ -50,7 +57,7 @@
                     </ion-col>
                     <ion-col width-67>
                       <h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}</h6>
-                      <p><i class="fa fa-inbox"> </i> <span>{{request?.connections?.email}}</span></p>
+                   
                       <p [hidden]="!request?.connections?.location"><i class="fa fa-map-marker"></i> <span>{{request?.connections?.location}}</span></p>
                     </ion-col>
                   </ion-row>
@@ -58,13 +65,8 @@
                   <button ion-button icon-only class="inactive-btn" (click)="connectionStatus(request?.connection_id,2)"><i class="fa fa-times" aria-hidden="true"></i>
                   </button>
                 </ion-item>
-                <!-- <ion-item-options side="right"> -->
-                <!--   <button ion-button icon-only class="active-btn"(click)="connectionStatus(request?.connection_id,1)"><i class="fa fa-check"></i></button>
-                  <button ion-button icon-only class="inactive-btn" (click)="connectionStatus(request?.connection_id,2)"><i class="fa fa-times" aria-hidden="true"></i>
-                  </button> -->
-                <!-- </ion-item-options> -->
-              <!-- </ion-item-sliding> -->
             </div>
+           
             <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
             <ion-infinite-scroll-content></ion-infinite-scroll-content>
             </ion-infinite-scroll>   
@@ -73,6 +75,7 @@
           <ion-segment-button class="listed-rec">Sent Requests</ion-segment-button>
            <ion-searchbar (input)="sendsearch($event)">
             </ion-searchbar>  
+            
             <div *ngFor="let request of sentRquestInfo">
               <ion-item class="inbox-sends">
                 <ion-row>
@@ -86,7 +89,6 @@
                     <h6 class="name-conne" [hidden]="!request?.connections?.name" 
                     (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}
                     </h6>
-                    <p [hidden]="!request?.connections?.email"><i class="fa fa-inbox"> </i> <span>{{request?.connections?.email}}</span></p>
                     <p [hidden]="!request?.connections?.location"><i class="fa fa-map-marker"></i><span> {{request?.connections?.location}}</span>   
                     </p>
                   </ion-col>
@@ -95,7 +97,8 @@
                   </ion-col>
                 </ion-row>
               </ion-item>  <hr/>
-            </div>
+           </div>
+            
             <ion-infinite-scroll (ionInfinite)="doInfinite4($event)">
             <ion-infinite-scroll-content></ion-infinite-scroll-content>
             </ion-infinite-scroll>   
@@ -105,6 +108,7 @@
           <ion-segment-button class="listed-rec">All Connections</ion-segment-button>
             <ion-searchbar (input)="search($event)">
             </ion-searchbar>
+             
             <div *ngFor="let all of allConnectionsInfo; let islast=last;">
               <ion-item class="inbox-sends">
                 <ion-row>
@@ -116,22 +120,25 @@
                   </ion-col>
                 <ion-col width-67>
                   <h6 class="name-conne" (click)="CommunityUserWall(all?.id)">{{all?.connections?.name}} {{all?.connections?.last_name}}</h6>
-                  <p><i class="fa fa-inbox"> </i> <span>{{all?.connections?.email}}</span></p>
+             
                   <p [hidden]="!all?.connections?.location"><i class="fa fa-map-marker"></i><span> {{all?.connections?.location}}</span></p>
                 </ion-col>
               </ion-row> 
             </ion-item>
 			
           </div>
+          
           <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
           <ion-infinite-scroll-content></ion-infinite-scroll-content>
           </ion-infinite-scroll>    
         </ion-list><hr/>
 
           </ion-list>
+         
         <ion-list *ngSwitchCase="'addConnections'"> 
        <!--    <ion-searchbar *ngIf="addConnectionInfo.length != 0" (input)="search1($event)"></ion-searchbar> -->
            <ion-searchbar (input)="search1($event)"></ion-searchbar>
+        
             <ion-list *ngFor="let request of addConnectionInfo">
               <ion-item class="inbox-sends">
                 <ion-row>
@@ -141,7 +148,8 @@
                     </ion-avatar>
                   </ion-col>
                   <ion-col width-60>
-                    <h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}</h6>
+                    <h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}
+                    </h6>
                     <p [hidden]="!request?.connections?.location">
                     <i class="fa fa-map-marker"></i> <span>{{request?.connections?.location}}</span> </p>
                   </ion-col>
@@ -151,11 +159,29 @@
                 </ion-row>
               </ion-item>
             </ion-list><hr/>
+        
               <ion-infinite-scroll (ionInfinite)="doInfinite3($event)">
                 <ion-infinite-scroll-content></ion-infinite-scroll-content>
               </ion-infinite-scroll> 
           </ion-list>
-    </div>
+
+       </div>
+        <ion-fab bottom right edge *ngIf="allConnectionsInfo.length != 0">
+        <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
+        </ion-icon></button>
+      </ion-fab>
+       <ion-fab bottom right edge *ngIf="sentRquestInfo.length != 0">
+            <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
+            </ion-icon></button>
+            </ion-fab>
+          <ion-fab bottom right edge *ngIf="receivedRquestInfo.length != 0">
+            <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
+            </ion-icon></button>
+            </ion-fab>
+          <ion-fab bottom right edge *ngIf="addConnectionInfo.length != 0">
+          <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
+            </ion-icon></button>
+          </ion-fab>
 
 </ion-content>
 

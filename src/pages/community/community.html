@@ -17,7 +17,9 @@
 </ion-header>
   
 <ion-content padding class="login-bgimg">
-
+<ion-fab top right edge>
+    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
+  </ion-fab>
 	<div class="one-half-responsive" style="background:#fff;">
 	   <p class="image-column-left">
 			<img height="70" [src]="imageUrl+communityDetailData?.logo" [hidden]="!communityDetailData?.logo" />
@@ -151,14 +153,15 @@
 	         		</iframe>
 	         	</ion-card-content>
 	         	<ion-card-content [hidden]="!user?.metalink_image">
-		          	<img  [src]="user.metalink_image" (click)="openUrl(user.metalink_url)" 
+		          	<img  [src]="imageUrl+user.metalink_image" (click)="openUrl(user.metalink_url)" 
 		          	[hidden]="!user?.metalink_image">
 	       		</ion-card-content>
-	       		<ion-card-content class="video-updates" [hidden]="!user?.metalink_title">
+	       	<ion-card-content class="video-updates" [hidden]="!user?.metalink_title">
 					<p (click)="openUrl(user.metalink_url)">{{user.metalink_title}}</p>
 	         	</ion-card-content>
-	         	<ion-card-content class="video-updates" [hidden]="!user?.metalink_description">
-					<p (click)="openUrl(user.metalink_url)">{{user.metalink_description}}</p>
+	         	<ion-card-content class="video-updates" 
+	         	[hidden]="!user?.metalink_description">
+					<p (click)="openUrl(user.metalink_url)">{{user.metalink_description | words : 30 : '...'}}</p>
 	         	</ion-card-content>
 			</div>
 			     	<div class="comment-liks">
@@ -190,7 +193,10 @@
 			</div>
 		</ion-card>    		
 	</ion-list>
-
+	<ion-fab bottom right edge>
+    <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
+    </ion-icon></button>
+  </ion-fab>
  	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     	<ion-infinite-scroll-content></ion-infinite-scroll-content>
   	</ion-infinite-scroll>	      					
