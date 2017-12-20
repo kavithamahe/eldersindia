@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
 import { NavController,Slides, NavParams,ToastController,LoadingController } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -14,6 +15,7 @@ import { CommunityServices } from '../../providers/community-services';
   providers : [CommunityServices]
 })
 export class CommunitylistPage {
+  @ViewChild(Content) content: Content;
   @ViewChild(Slides) slides: Slides;
    // private start:number=0;
 	community: String = "my_community";
@@ -54,6 +56,12 @@ export class CommunitylistPage {
       this.otherCommunity("");
     }
     this.prev_index = this.slides.getActiveIndex();
+  }
+  scrollToTop() {
+    this.content.scrollToTop();
+  }
+  scrollToBottom(){
+    this.content.scrollToBottom();
   }
    changeSlide(){
     this.slides.freeMode = true;

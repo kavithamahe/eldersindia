@@ -1,4 +1,5 @@
-import { Component} from '@angular/core';
+import { Component,ViewChild} from '@angular/core';
+import { Content } from 'ionic-angular';
 import { ModalController,ActionSheetController, ViewController,PopoverController,NavController, NavParams,AlertController,LoadingController,Platform,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
@@ -25,6 +26,7 @@ import { InAppBrowser } from 'ionic-native';
 })
 
 export class CommunityPage {
+   @ViewChild(Content) content: Content;
    submitAttempt:any;
     userType:any;
     addComments: boolean;
@@ -78,6 +80,12 @@ export class CommunityPage {
     });
 
 }
+scrollToTop() {
+    this.content.scrollToTop();
+  }
+  scrollToBottom(){
+    this.content.scrollToBottom();
+  }
   ionViewDidEnter(){
       this.storage.ready().then(() => {
       this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});

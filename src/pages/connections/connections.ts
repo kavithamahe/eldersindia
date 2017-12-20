@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
 import { PopoverController,ViewController,Slides,NavController, NavParams,ActionSheetController,LoadingController,ToastController,Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
@@ -19,6 +20,7 @@ import { ConnectionsService } from '../../providers/connections-service';
   providers:[ConnectionsService]
 })
 export class ConnectionsPage {
+@ViewChild(Content) content: Content;
 @ViewChild(Slides) slides: Slides;
 getconnections:string;
 connections:string;  
@@ -71,7 +73,12 @@ All:any;
       })
     });
   }
-
+scrollToTop() {
+    this.content.scrollToTop();
+  }
+  scrollToBottom(){
+    this.content.scrollToBottom();
+  }
   public onInit()
   {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -103,6 +110,7 @@ All:any;
     this.connectionsService.receivedRquest().subscribe(
      (receivedRquest) => {
       this.receivedRquestInfo=receivedRquest.result.info.list.data;
+      console.log("dgdf"+ this.receivedRquestInfo.length);
       this.orgReceivedRquestInfo=receivedRquest.result.info.list.data; 
        this.nextPageURL2=receivedRquest.result.info.list.next_page_url;  
        loader.dismiss();   

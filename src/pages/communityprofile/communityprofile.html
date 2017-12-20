@@ -16,7 +16,9 @@
 </ion-header>
 
 <ion-content class="content-intop">
-  
+  <ion-fab top right edge>
+    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
+  </ion-fab>
 	  <div class="cont-conn">
 		  <ion-row >
 			  <ion-col width-20>
@@ -236,9 +238,9 @@
 		    		</ion-col>
 	    			<ion-col width-80 class="inbox-sends">
 	    				<h1 (click)="loadThisPage(connection?.id)">{{connection?.connections?.name}}</h1>
-		    				<p class="comp-name"><i class="fa fa-building-o" aria-hidden="true"></i><span>{{connection?.connections?.company_name}}</span></p>
-		    				<p><i class="fa fa-briefcase" [hidden]="!connection?.connections?.designation"></i><span> {{connection?.connections?.designation}}</span></p>
-		 					<p><i class="fa fa-phone" [hidden]="!connection?.connections?.mobile"></i><span>{{connection?.connections?.mobile}}</span></p>
+		    				<!-- <p class="comp-name"><i class="fa fa-building-o" aria-hidden="true"></i><span>{{connection?.connections?.company_name}}</span></p> -->
+		    				<!-- <p><i class="fa fa-briefcase" [hidden]="!connection?.connections?.designation"></i><span> {{connection?.connections?.designation}}</span></p> -->
+		 					<p><i class="fa fa-map-marker" [hidden]="!connection?.connections?.location"></i><span>{{connection?.connections?.location}}</span></p>
 	    			</ion-col>
 	      		</ion-row>  
 </ion-item>				
@@ -248,5 +250,9 @@
 	  			</ion-infinite-scroll>
 		</ion-list>
 	</div>
+	<ion-fab bottom right edge>
+    <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
+    </ion-icon></button>
+  </ion-fab>
 </ion-content>
 	

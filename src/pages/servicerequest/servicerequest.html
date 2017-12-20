@@ -1,9 +1,4 @@
-<!--
-  Generated template for the Servicerequest page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
@@ -17,19 +12,14 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-  
-    <!--<ion-buttons right>    
-      <button ion-button icon-only>
-        <ion-icon name="search"></ion-icon>
-      </button>
-    </ion-buttons>-->
   </ion-navbar>
 </ion-header>
 
 <ion-content  class="content-intop">
-<!-- 
-    <ion-searchbar [(ngModel)]="searchEvent" (ionInput)="getItems(searchEvent)">
-    </ion-searchbar> -->
+ <ion-fab top right edge *ngIf="serviceRequestInfo.length != 0">
+    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown">
+    </ion-icon></button>
+  </ion-fab>
  <ion-row>
 <ion-col width-80><ion-searchbar [(ngModel)]="searchEvent"></ion-searchbar></ion-col>
   <ion-col width-20 class="btn-go"><button (click)="getItems(searchEvent)" ion-button small class="go-btn">Go</button> </ion-col>
@@ -156,10 +146,11 @@
   <ion-item>
   <button ion-button full (click)="submitRemark(service?.id)">Submit</button>
   </ion-item>
-  </ion-list>
-
-  
+  </ion-list>  
 </ion-card>
+<ion-fab bottom right edge *ngIf="serviceRequestInfo.length != 0">
+    <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"></ion-icon></button>
+  </ion-fab>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>

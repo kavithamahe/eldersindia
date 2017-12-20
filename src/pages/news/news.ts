@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
@@ -18,6 +19,7 @@ import { NewsService } from '../../providers/news-service';
   providers:[NewsService]
 })
 export class NewsPage {
+  @ViewChild(Content) content: Content;
 token:string;
 imageUrl:string;
 newsLists:any[]=[];
@@ -34,6 +36,12 @@ emptyRecord:any;
 
   });
   
+  }
+  scrollToTop() {
+    this.content.scrollToTop();
+  }
+  scrollToBottom(){
+    this.content.scrollToBottom();
   }
   public newsList()
   { 
