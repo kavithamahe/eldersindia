@@ -36,7 +36,7 @@
 
 </ion-col>
 <ion-col width-80>
- <h2 text-capitalize>{{singleJob?.title}}</h2>
+ <h2>{{singleJob?.title}}</h2>
  </ion-col>
 
 </ion-row>
@@ -100,17 +100,17 @@
 
 <div *ngFor="let applyjob of myjobrequestinfo">
 <ion-row>
-<ion-col>
- <h2 text-capitalize>{{applyjob?.title}}</h2>
-  </ion-col>
- <ion-col>
+ <ion-col width-20>
   <ion-item>
- <ion-avatar item-start>
- <img [src]="imageUrl+logo"  
-        [hidden]="!logo">
-        </ion-avatar>
+
+ <img [src]="imageUrl+logo" [hidden]="!logo" width="80" height="40"/>
+      
 </ion-item>
 </ion-col>
+<ion-col width-80>
+ <h2 text-capitalize>{{applyjob?.title}}</h2>
+  </ion-col>
+
 </ion-row>
 <p><i class="fa fa-building-o"></i><span>{{applyjob?.company_name}}</span></p>
 <p><i class="fa fa-calendar-o"> </i><span *ngIf="applyjob?.created_at">{{applyjob?.created_at |  date :'MMM dd y'}}</span></p>

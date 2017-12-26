@@ -21,22 +21,22 @@ ion-datetime{position:relative;}
 .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:none !important;box-shadow:none !important;}
 .item-md.item-input.input-has-focus .item-inner{border:none;box-shadow:none !important;}
 .add-depentsform .item-md { border:1px solid #ccc;}
-.add-depentsform .label-md {color:#777;font-size:16px;font-weight:400;font-family:'Muli', sans-serif;}
+.add-depentsform .label-md {color:#777;font-size:19px;font-weight:400;font-family:'Muli', sans-serif;}
 .add-depentsform .item-md{padding-left:0px !important;}
-
+.uploadimg { border-radius:20px;}
 .item-ios.item-block .item-inner{ border-bottom:none;}
 .item-ios.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:none !important;box-shadow:none !important;}
 .item-ios.item-input.input-has-focus .item-inner{border:none !important;box-shadow:none !important;}
 .add-depentsform .item-ios { border:1px solid #ccc;}
-.add-depentsform .label-ios {color:#777;font-size:16px;font-weight:400;font-family:'Muli', sans-serif;}
+.add-depentsform .label-ios {color:#777;font-size:19px;font-weight:400;font-family:'Muli', sans-serif;}
 .add-depentsform .item-ios{padding-left:5px !important;}
 .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{border-bottom-color:none !important;box-shadow:none !important;}
 .item-ios.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{border-bottom-color:none !important;box-shadow:none !important;}
 .datetime{margin-left:3px !important;}
-.rem-btn.button-md{ background:#fe5722; margin:15px 0px 0px 0px !important;  height:35px; width:100%; color:#fff; font-size:15px !important;  font-weight:300;}
-.add-btn.button-md{ background:#204d74; margin:15px 0px 0px 0px !important;  height:35px;width:100%; color:#fff; font-size:15px !important;  font-weight:300;}
-.rem-btn.button-ios{ background:#fe5722; margin:15px 0px 0px 0px !important;  height:35px;width:100%; color:#fff; font-size:15px !important;  font-weight:300;}
-.add-btn.button-ios{ background:#204d74; margin:15px 0px 0px 0px !important;  height:35px;width:100%; color:#fff; font-size:15px !important;  font-weight:300;}
+.rem-btn.button-md{ background:#fe5722; margin:15px 0px 0px 0px !important;  border-radius:20px; height:35px; width:100%; color:#fff; font-size:15px !important;  font-weight:600;}
+.add-btn.button-md{ background:#204d74; margin:15px 0px 0px 0px !important; border-radius:20px;  height:35px;width:100%; color:#fff; font-size:15px !important;  font-weight:600;}
+.rem-btn.button-ios{ background:#fe5722; margin:15px 0px 0px 0px !important;  border-radius:20px; height:35px;width:100%; color:#fff; font-size:15px !important;  font-weight:600;}
+.add-btn.button-ios{ background:#204d74; margin:15px 0px 0px 0px !important; border-radius:20px;  height:35px;width:100%; color:#fff; font-size:15px !important;  font-weight:600;}
 .add-depentsform .item-md.checked-empyt{ border:none !important;}
 .add-depentsform .item-md.checked-empyt .checkbox-md{  margin: 18px 9px 9px 4px !important;}
 .add-depentsform .item-md.checked-empyt .item-inner .input-wrapper ion-label{ padding-top:10px;}
@@ -46,7 +46,7 @@ ion-datetime{position:relative;}
 .add-depentsform .item-ios.checked-empyt{ border:none !important;}
 .add-depentsform .item-ios.checked-empyt .checkbox-ios{  margin: 18px 9px 9px 4px !important;}
 .add-depentsform .item-ios.checked-empyt .item-inner .input-wrapper ion-label{ padding-top:10px;}
-.title-depen .personal-d p{ font-weight:600; font-size:15px !important; padding-left:0px;text-transform: uppercase;  color:#007994 !important;  }
+.title-depen .personal-d p{ font-weight:600; font-size:17px !important; padding-left:0px;text-transform: uppercase;  color:#007994 !important;  }
 .title-depen{padding:10px 0px 0px 0px!important;}
 .tag-skill_set input[type=text]{ height:55px; border:1px solid #ccc; width:100%;}
 .ng2-tag-input-focus[_nghost-qkx-41]{box-shadow:none !important;}

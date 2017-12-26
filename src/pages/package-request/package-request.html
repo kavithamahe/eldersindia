@@ -77,12 +77,14 @@
 
     </ion-col>
 		  </ion-row>
+		  	<br/>
   <ion-row>
 
     <ion-col class="view-serv">
 	 <ion-badge *ngIf="package?.req_status != 2" (press)="pressservices(package?.id,package?.location_id,package?.elder_id,package.req_status)" 
-       (click)="getServicesForByElders(package?.id,package?.location_id,package?.elder_id,package.req_status)"><i class="fa fa-check-square-o" aria-hidden="true"></i>  Services</ion-badge>
-   <ion-badge (click)="getPackageRequestBy(package?.req_id)" (press)="pressview(package?.req_id)"><i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
+       (click)="getServicesForByElders(package?.id,package?.location_id,package?.elder_id,package.req_status)" class="services"><i class="fa fa-check-square-o" aria-hidden="true"></i>  Services</ion-badge>
+   
+   <ion-badge (click)="getPackageRequestBy(package?.req_id)" (press)="pressview(package?.req_id)" class="services-view"><i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
     
  	
 

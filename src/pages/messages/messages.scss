@@ -7,12 +7,12 @@ page-messages {
 }
 .inbox-sends .item-md .item-inner .input-wrapper .label-md ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-md small {
     color:#007994 !important;    font-family: "Muli",sans-serif;
-    font-size: 17px;
+    font-size: 17px; font-weight:400;
 }
 
 .subject-details .item-inner .input-wrapper .label-md b {
     float: left;
-    font-size: 13px;
+    font-size:14px;
     font-weight: 400;
     padding-right: 5px;    font-family: "Muli",sans-serif;
 }

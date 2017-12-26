@@ -10,7 +10,7 @@ page-applied-jobs {
 .sel-packages .item-md .item-inner .label-md {
     font-family: "Muli",sans-serif;
     font-size: 15px;
-    padding-left: 10px;
+    padding-left: 10px; font-weight:600;
 }
 .select-locas{ border:none; background:#E6E6FA; padding:6px; box-shadow:none; border-radius:0px;}
 .select-locas  p{ color:#333 !important; 
@@ -20,6 +20,8 @@ page-applied-jobs {
     margin: 0; text-align:center;
     padding: 0;
 }
+.go-btn{margin-top:15px; font-weight:600;}
+.search-quk{box-shadow:none;}
 .item-md.item-block .item-inner{border:none;}
 .item-ios.item-block .item-inner{border:none;}
 
@@ -27,19 +29,19 @@ page-applied-jobs {
 .job-detailsview ion-row ion-col h2 {color: hsl(191, 100%, 29%) !important;
   
     font-family: "Muli",sans-serif; 
-    font-size:17px !important; padding-bottom:8px;
+    font-size:19px !important;  letter-spacing: 0.2px;
     margin: 0;
    }
 	.job-detailsview ion-row ion-col p{color:#333!important;
   
     font-family: "Muli",sans-serif;
-    font-size:15px !important; padding-bottom:15px;
+    font-size:17px !important; padding-bottom:15px;
     margin: 0;
     padding: 0;}
 	.job-detailsview ion-row ion-col p span{color:#333!important; 
   
     font-family: "Muli",sans-serif;
-    font-size:15px !important;
+    font-size:17px !important;  letter-spacing: 0.2px;
     margin: 0;
     padding:0px 0px 0px 10px;}
 	.job-detailsview ion-row ion-col p i{  width:10px; text-align:center;
