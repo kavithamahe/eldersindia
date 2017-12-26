@@ -159,8 +159,8 @@ ion-segment{ background:#C0C0C0; border-radius:50px; height:40px; line-height:40
 .toolbar-ios-primary .toolbar-background-ios{background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(191, 100%, 29%) 0%, hsl(195, 100%, 51%) 50%, hsl(191, 100%, 29%) 100%) repeat scroll 0 0;}
 .searchbar-md .searchbar-search-icon {background-image:url("../assets/img/search.png");height:21px;left:16px;top:11px;width:21px;}
 .searchbar-ios .searchbar-search-icon {background-image:url("../assets/img/search.png");height:21px;left:16px;top:11px;width:21px;}
-.searchbar-md .searchbar-input{border:1px solid #0074bd;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100%) 0%, hsl(66, 100%, 98%) 100%) repeat scroll 0 0;}
-.searchbar-ios .searchbar-input{border:1px solid #0074bd; height:40px;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100%) 0%, hsl(66, 100%, 98%) 100%) repeat scroll 0 0; }
+.searchbar-md .searchbar-input{border:1px solid #0074bd;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px; }
+.searchbar-ios .searchbar-input{border:1px solid #0074bd; height:40px;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;  }
 .searchbar-ios{ background:none !important; border:none !important;}
 .send-req.list-md {margin:0px 0px 0px 0px !important; }
 .send-req {  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100%) 0%, hsl(196, 100%, 95%) 100%) repeat scroll 0 0;}

@@ -1,6 +1,5 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 import { Storage } from '@ionic/storage';
@@ -178,8 +177,7 @@ import { ServiceProvider } from '../providers/service-provider';
     Ng2CompleterModule,
     BrowserModule,
     Ng2EmojiModule,
-    MomentModule,
-    Ng2SearchPipeModule
+    MomentModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

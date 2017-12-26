@@ -8,10 +8,15 @@ page-externallinks {
 .external-listed .item-md .item-inner .input-wrapper .label-md ion-row ion-col img{ border:1px solid #ccc;}
 .external-listed .item-md .item-inner .input-wrapper .label-md ion-row ion-col h1{    color: #007994 !important;
     font-family: "Muli",sans-serif;
-    font-size:17px !important;
+    font-size:19px !important;letter-spacing: 0.2px; font-weight:400;
 
     margin: 0;}
-.external-listed .item-md .item-inner .input-wrapper .label-md ion-row ion-col small{    font-size: 11px !important;
+.external-listed .item-md .item-inner .input-wrapper .label-md ion-row ion-col p{ color:#7b8da0 !important;
+    font-family: "Muli",sans-serif;
+    font-size:17px !important; font-weight:400;letter-spacing: 0.2px;
+    padding-bottom: 8px;
+    margin: 0;}
+.external-listed .item-md .item-inner .input-wrapper .label-md ion-row ion-col small{    font-size:14px !important;
     color: #909090 !important;
     font-family: 'Muli', sans-serif;}
 .external-listed .item-md .item-inner .input-wrapper .label-md {margin:0px;}

@@ -46,7 +46,7 @@
       <ion-row>
   <ion-col col-12 text-wrap>
     <b>Service Provider</b><p>{{recurring.vendor_name}}</p>
-    <p (click)="makeCall(recurring?.vendor_contact_number)"><i class="fa fa-phone" aria-hidden="true"></i>{{recurring.vendor_contact_number}}</p>
+    <p (click)="makeCall(recurring?.vendor_contact_number)"> &nbsp;{{recurring.vendor_contact_number}}</p>
 		  </ion-col>
   </ion-row>
     <ion-row>
@@ -66,8 +66,8 @@
   </ion-row>
    <ion-row>
   <ion-col class="view-serv">
-<ion-badge (click)="viewrecurring(recurring)"><i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
-<ion-badge class="dele" *ngIf="recurring?.status == 0 || recurring?.status == 1 || recurring?.status == 4" (click)="deleteviewrecurring(recurring)"><i class="fa fa-trash" aria-hidden="true"></i> Delete</ion-badge>
+<ion-badge (click)="viewrecurring(recurring)" class="services"><i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
+<ion-badge class="dele" *ngIf="recurring?.status == 0 || recurring?.status == 1 || recurring?.status == 4" (click)="deleteviewrecurring(recurring)" class="services-del"><i class="fa fa-trash" aria-hidden="true"></i> Delete</ion-badge>
 	</ion-col>
    </ion-row>
 
