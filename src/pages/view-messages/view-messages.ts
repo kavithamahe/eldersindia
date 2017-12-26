@@ -62,6 +62,7 @@ downloadProgress:any;
      (viewMessages) => {
       this.veiwMessagesInfo=viewMessages.result.details;
       this.attachmentInfo=viewMessages.result.attachments;
+      console.log(this.attachmentInfo);
       loader.dismiss(); 
     },
     (err) => { 

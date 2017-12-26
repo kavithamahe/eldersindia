@@ -22,9 +22,9 @@
 </ion-header>
 
 <ion-content class="content-intop">
-<ion-fab top right edge *ngIf="eventsLists.length != 0">
+<!-- <ion-fab top right edge *ngIf="eventsLists.length != 0">
     <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
-  </ion-fab>
+  </ion-fab> -->
 <ion-card *ngFor="let events of eventsLists" class="slide-in">
 <div (click)="viewEvents(events?.id)">
  <img src="{{imageUrl+events?.featured_image}}" [hidden]="!events?.featured_image">

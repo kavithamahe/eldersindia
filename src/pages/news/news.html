@@ -24,9 +24,9 @@
 
 
 <ion-content class="content-intop">
-<ion-fab top right edge *ngIf="newsLists.length != 0">
+<!-- <ion-fab top right edge *ngIf="newsLists.length != 0">
     <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
-  </ion-fab>
+  </ion-fab> -->
 <!-- <ion-searchbar (input)="newssearch($event)"></ion-searchbar> -->
 <ion-card *ngFor="let news of newsLists"  class="newslisted">
 <div (click)="viewNews(news?.id)">

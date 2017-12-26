@@ -32,11 +32,11 @@
     </ion-segment-button>
    </ion-segment>
 </ion-card>
-       <ion-fab top right edge 
+       <!-- <ion-fab top right edge 
        *ngIf="addConnectionInfo.length != 0 || receivedRquestInfo.length != 0 || sentRquestInfo.length != 0 || allConnectionsInfo.length != 0">
         <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown">
           </ion-icon></button>
-        </ion-fab>
+        </ion-fab> -->
     
     <div [ngSwitch]="getconnections">
       <ion-list *ngSwitchCase="'myConnections'"> 
