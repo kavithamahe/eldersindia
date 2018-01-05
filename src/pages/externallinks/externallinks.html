@@ -56,8 +56,8 @@
 		</ion-card>
 
 	</ion-list>
-	<ion-fab top right edge>
-    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
+<ion-fab bottom right edge class="scroll">
+    <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"></ion-icon></button>
   </ion-fab>
 	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>

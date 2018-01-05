@@ -68,6 +68,7 @@ submitAttempt:any;
         name: [{value:this.profileData.name,disabled: true},Validators.compose([Validators.required])],
         company: [{value:this.profileData.company_name,disabled: true}],
         designation: [{value:this.profileData.designation,disabled: true},Validators.compose([Validators.minLength(3), Validators.required])],
+        empid: [{value:this.profileData.employee_id,disabled: true},Validators.compose([Validators.minLength(3), Validators.required])],
        // gender: [this.profileData.gender,Validators.compose([Validators.required])],
         mobile_number: [this.profileData.mobile,Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.required])],
         location: [{value:this.my_location,disabled:true},Validators.compose([])],

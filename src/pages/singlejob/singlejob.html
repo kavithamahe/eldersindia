@@ -51,8 +51,8 @@
 <ion-col class="single-jobs">
 <b>Job Type</b>
 <span *ngFor="let jobType of singleJob?.job_type; let isLast2=last">{{jobType?.name}}{{isLast2 ? '' : ', '}}</span>
-
- 
+<b>Functional area</b>
+ <span>{{singleJob?.name}}</span>
 <b>Salary</b>
 <span *ngIf="singleJob?.salary">RS:{{singleJob?.salary}} </span> 
  <span *ngFor="let funArea of functional_area">{{funArea?.name}}</span> 
@@ -86,7 +86,8 @@
 <h2>Contact Details</h2>
 <span text-capitalize><i class="fa fa-user-o" aria-hidden="true"></i> {{singleJob?.contact_name}}</span> 
 <span><i class="fa fa-phone" aria-hidden="true" (click)="makeCall(singleJob?.contact_mobile)"></i> {{singleJob?.contact_mobile}}</span> 
-<span><i class="fa fa-envelope" aria-hidden="true"></i><a href="{{singleJob?.contact_email}}"> {{singleJob?.contact_email}}</a></span> 
+<span><i class="fa fa-envelope" aria-hidden="true"></i>{{singleJob?.contact_email}}
+</span> 
 <span><i class="fa fa-internet-explorer" aria-hidden="true"></i> <a href="{{singleJob?.user?.website}}">{{singleJob?.user?.website}}</a></span>
 </ion-col>
 
@@ -101,11 +102,8 @@
 <div *ngFor="let applyjob of myjobrequestinfo">
 <ion-row>
  <ion-col width-20>
-  <ion-item>
-
  <img [src]="imageUrl+logo" [hidden]="!logo" width="80" height="40"/>
       
-</ion-item>
 </ion-col>
 <ion-col width-80>
  <h2 text-capitalize>{{applyjob?.title}}</h2>
@@ -125,7 +123,8 @@
 <ion-col class="single-jobs">
 <b>Job Type</b>
     <span *ngFor="let jobType of applyjob?.job_type; let isLast2=last">{{jobType?.name}}{{isLast2 ? '' : ', '}}</span>
-   
+ <b>Functional area</b>
+ <span>{{applyjob?.name}}</span>  
 <b>Salary</b><span *ngIf="applyjob?.salary">{{applyjob?.salary}} </span> 
  <span *ngFor="let funArea of functional_area">{{funArea?.name}}</span> 
    
@@ -152,7 +151,7 @@
 <h2>Contact Details</h2>
 <span text-capitalize><i class="fa fa-user-o" aria-hidden="true"></i> {{applyjob?.contact_name}}</span> <br/>
 <span><i class="fa fa-phone" aria-hidden="true" (click)="makeCall(applyjob?.contact_mobile)"></i> {{applyjob?.contact_mobile}}</span> <br/>
-<span><i class="fa fa-envelope" aria-hidden="true"></i> <a href="{{singleJob?.contact_email}}">{{applyjob?.contact_email}}</a></span> <br/>
+<span><i class="fa fa-envelope" aria-hidden="true"></i>{{applyjob?.contact_email}}</span> <br/>
 <span><i class="fa fa-internet-explorer" aria-hidden="true"></i> <a href="{{singleJob?.user?.website}}">{{applyjob?.user?.website}}</a></span>
 </ion-col>
 

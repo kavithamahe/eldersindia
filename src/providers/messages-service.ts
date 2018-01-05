@@ -144,4 +144,11 @@ file:any;
     return this.http.post(this.rootUrl+'deleteMessage/'+messageId,_request,this.options)
       .map(res => res.json());
   }
+  deleteBulkMessages(messageId,viewType){
+
+      let _request= {"viewType":viewType,"ids":messageId}
+    return this.http.post(this.rootUrl+'deleteBulkMessage',_request,this.options)
+      .map(res => res.json());
+
+  }
 }

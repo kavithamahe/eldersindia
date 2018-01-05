@@ -61,7 +61,6 @@ logo:any;
       this.myjobrequestinfo=myjobrequest.result.info;
       this.user=this.myjobrequestinfo[0].user;
       this.logo=this.user.logo;
-      
       loader.dismiss();
     },
     (err) => { 

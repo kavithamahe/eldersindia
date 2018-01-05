@@ -22,7 +22,8 @@
   </ion-fab> -->
 	<div class="one-half-responsive" style="background:#fff;">
 	   <p class="image-column-left">
-			<img height="70" [src]="imageUrl+communityDetailData?.logo" [hidden]="!communityDetailData?.logo" />
+			<img height="70" [src]="imageUrl+communityDetailData?.logo" 
+			[hidden]="!communityDetailData?.logo" />
             <strong class="wel-comemem">Welcome to {{communityDetailData?.community_name}}
             </strong>
 			<em  style="" *ngIf(!show_description)>{{communityDetailData?.description | words : 50 : '...'}}</em>
@@ -30,7 +31,7 @@
 		<div class="decoration hide-if-responsive"></div>
 	</div>
 	<br/>
-  	<div  *ngIf="userType == 'sponsor'" class="memberareas">
+  	<div *ngIf="userType == 'sponsor'" class="memberareas">
 	  	<ion-item>
 			<ion-row *ngIf="!communityDetailData?.isJoined">
 		    	<ion-col>
@@ -193,7 +194,7 @@
 			</div>
 		</ion-card>    		
 	</ion-list>
-	<ion-fab bottom right edge>
+	<ion-fab bottom right edge class="scroll">
     <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
     </ion-icon></button>
   </ion-fab>

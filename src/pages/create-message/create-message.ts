@@ -52,6 +52,7 @@ replyId:any;
 msgType:any='create';
 customTo:any=false;
 sender_id:any;
+filename:any;
 //protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
  constructor(public http: Http,private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public formBuilder: FormBuilder,private completerService: CompleterService,public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public messagesService:MessagesService) {
  
@@ -73,7 +74,9 @@ sender_id:any;
   this.toId=navParams.get("id");
   this.subject=navParams.get("subject");
   this.message=navParams.get("message");
+  this.filename=navParams.get("filename");
   this.msgType=navParams.get("msgType");
+  console.log(this.msgType);
   if(this.msgType=='reply'){
   this.messageForm = formBuilder.group({
        // toAddress: [{value:this.toAddress,disabled: true}, Validators.compose([Validators.required])],
@@ -129,9 +132,6 @@ sender_id:any;
   }
   public sendMessage()
   { 
-    console.log(this.toAddress);
-    console.log(this.subject);
-    console.log(this.toId);
     if(!this.messageForm.valid){
       this.submitAttempt = true;
     }else{

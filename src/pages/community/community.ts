@@ -171,9 +171,11 @@ files:any;
         {
           text: 'Submit',
           handler: data => {
+            
             //console.log(data.title);
             if(data.title == ""){
-              this.communityServices.showToast("Please enter the reason")
+              this.communityServices.showToast("Please enter the reason");
+               return false;
             }
             else{
             this.reportAbuse(data.title,id,poster_id);

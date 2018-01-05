@@ -7,6 +7,8 @@ import { MyApp } from './app.component';
 import { TruncateModule } from 'ng2-truncate';
 import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import {BrowserModule} from '@angular/platform-browser';
 import { Ng2EmojiModule } from 'ng2-emoji';
 import { NativeAudio } from '@ionic-native/native-audio';
@@ -63,6 +65,7 @@ import { RecurringcancelPagePage } from '../pages/recurringcancel/recurringcance
 // Kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
 import { CommunityPage } from '../pages/community/community';
+
 import { CommunityPopoverPage } from '../pages/community/community';
 import { CommunityprofilePage } from '../pages/communityprofile/communityprofile';
 import { CommunitymessagePage } from '../pages/communitymessage/communitymessage';
@@ -175,6 +178,7 @@ import { ServiceProvider } from '../providers/service-provider';
     RlTagInputModule,
     Ionic2RatingModule,
     Ng2CompleterModule,
+    Ng2SearchPipeModule,
     BrowserModule,
     Ng2EmojiModule,
     MomentModule

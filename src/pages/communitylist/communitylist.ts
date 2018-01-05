@@ -63,20 +63,20 @@ export class CommunitylistPage {
   scrollToBottom(){
     this.content.scrollToBottom();
   }
-   changeSlide(){
-    this.slides.freeMode = true;
-    if(this.community == 'other_community'){
-    this.slides.slideTo(1);  
-    //this.slides.slideNext(300,true);
+  //  changeSlide(){
+  //   this.slides.freeMode = true;
+  //   if(this.community == 'other_community'){
+  //   this.slides.slideTo(1);  
+  //   //this.slides.slideNext(300,true);
     
     
-    }else{
-      this.slides.slideTo(0);  
-      //this.slides.slidePrev(300,true);
+  //   }else{
+  //     this.slides.slideTo(0);  
+  //     //this.slides.slidePrev(300,true);
       
-    }
+  //   }
     
-  }
+  // }
   
   myCommunity(searchData){
     this.prev_index = this.slides.getActiveIndex();

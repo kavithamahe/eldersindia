@@ -24,8 +24,7 @@
     <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
   </ion-fab> -->
 <ion-card class="segment-card">
-     <ion-segment [(ngModel)]="community" class="segment-top" 
-     (ionChange)="changeSlide($event)">
+     <ion-segment [(ngModel)]="community" class="segment-top">
         <ion-segment-button (click)="myCommunity()" value="my_community">
           My Communities
         </ion-segment-button>
@@ -115,7 +114,7 @@
       </ion-slide>
       </ion-slides>
     </div>
-   <ion-fab bottom right edge>
+   <ion-fab bottom right edge class="scroll">
     <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
     </ion-icon></button>
   </ion-fab>

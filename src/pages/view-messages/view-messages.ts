@@ -62,7 +62,7 @@ downloadProgress:any;
      (viewMessages) => {
       this.veiwMessagesInfo=viewMessages.result.details;
       this.attachmentInfo=viewMessages.result.attachments;
-      console.log(this.attachmentInfo);
+      console.log(this.attachmentInfo.length);
       loader.dismiss(); 
     },
     (err) => { 
@@ -119,10 +119,9 @@ public dashboardPage()
    // this.navCtrl.setRoot(CreateMessagePage,msgObject);
     this.navCtrl.push(CreateMessagePage,msgObject);
   }
-  public messageForward(subject,message)
+  public messageForward(filename,subject,message)
   {
-    let msgObject={"subject":subject,"message":message};
-    //this.navCtrl.setRoot(CreateMessagePage,msgObject);
+    let msgObject={"filename":filename,"subject":subject,"message":message,msgType:"forward"};
     this.navCtrl.push(CreateMessagePage,msgObject);
   }
   deleteMessage(messageId,viewType)

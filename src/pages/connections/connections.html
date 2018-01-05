@@ -41,9 +41,21 @@
     <div [ngSwitch]="getconnections">
       <ion-list *ngSwitchCase="'myConnections'"> 
         <ion-list *ngIf="connectionsaction == 'received'">
+        <ion-row>
+        <ion-col width-50>
         <ion-segment-button class="listed-rec">Received Requests</ion-segment-button>
-        <!-- <ion-searchbar *ngIf="receivedRquestInfo.length != 0" (input)="receivedsearch($event)"></ion-searchbar> -->
-        <ion-searchbar (input)="receivedsearch($event)"></ion-searchbar>
+        </ion-col>
+           <ion-col width-50>
+           <ion-segment-button class="listed-rec"><i class="fa fa-blind"></i>-Elder
+           </ion-segment-button>
+           </ion-col>
+          </ion-row>
+         <ion-row>
+            <ion-col width-80><ion-searchbar [(ngModel)]="searchrec"></ion-searchbar>
+            </ion-col>
+              <ion-col width-20><button (click)="receivedsearch(searchrec)" ion-button small 
+              class="go-btn">Go</button> </ion-col>
+            </ion-row>
        
             <div *ngFor="let request of receivedRquestInfo">
               <!-- <ion-item-sliding class="inbox-sends"> -->
@@ -56,7 +68,8 @@
                       </ion-avatar>
                     </ion-col>
                     <ion-col width-67>
-                      <h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}</h6>
+                    <p><i class="fa fa-blind" *ngIf="request?.user_type == 'elder' "></i> 
+                <span><h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}</h6></span></p>
                    
                       <p [hidden]="!request?.connections?.location"><i class="fa fa-map-marker"></i> <span>{{request?.connections?.location}}</span></p>
                     </ion-col>
@@ -72,9 +85,23 @@
             </ion-infinite-scroll>   
           </ion-list>
           <ion-list *ngIf="connectionsaction == 'sent'">
+           <ion-row>
+            <ion-col width-50>
           <ion-segment-button class="listed-rec">Sent Requests</ion-segment-button>
-           <ion-searchbar (input)="sendsearch($event)">
-            </ion-searchbar>  
+          </ion-col>
+           <ion-col width-50>
+           <ion-segment-button class="listed-rec"><i class="fa fa-blind"></i>-Elder
+           </ion-segment-button>
+           </ion-col>
+          </ion-row>
+         <!--   <ion-searchbar (input)="sendsearch($event)">
+            </ion-searchbar>  --> 
+               <ion-row>
+            <ion-col width-80><ion-searchbar [(ngModel)]="searchsend"></ion-searchbar>
+            </ion-col>
+              <ion-col width-20><button (click)="sendsearch(searchsend)" ion-button small 
+              class="go-btn">Go</button> </ion-col>
+            </ion-row>
             
             <div *ngFor="let request of sentRquestInfo">
               <ion-item class="inbox-sends">
@@ -86,9 +113,10 @@
                     </ion-avatar>
                   </ion-col>
                   <ion-col width-67>
+                   <p><i class="fa fa-blind" *ngIf="request?.user_type == 'elder' "></i> <span>
                     <h6 class="name-conne" [hidden]="!request?.connections?.name" 
                     (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}
-                    </h6>
+                    </h6></span></p>
                     <p [hidden]="!request?.connections?.location"><i class="fa fa-map-marker"></i><span> {{request?.connections?.location}}</span>   
                     </p>
                   </ion-col>
@@ -105,9 +133,23 @@
           </ion-list>
 
           <ion-list *ngIf="connectionsaction == 'all'">
+          <ion-row>
+          <ion-col width-50>
           <ion-segment-button class="listed-rec">All Connections</ion-segment-button>
-            <ion-searchbar (input)="search($event)">
-            </ion-searchbar>
+          </ion-col>
+           <ion-col width-50>
+           <ion-segment-button class="listed-rec"><i class="fa fa-blind"></i>-Elder
+           </ion-segment-button>
+           </ion-col>
+          </ion-row>
+            <ion-row>
+            <ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
+            </ion-col>
+              <ion-col width-20><button (click)="search(searchText)" ion-button small 
+              class="go-btn">Go</button> </ion-col>
+            </ion-row>
+         <!--    <ion-searchbar (input)="search($event)">
+            </ion-searchbar> -->
              
             <div *ngFor="let all of allConnectionsInfo; let islast=last;">
               <ion-item class="inbox-sends">
@@ -119,8 +161,10 @@
                     </ion-avatar>
                   </ion-col>
                 <ion-col width-67>
+                <p><i class="fa fa-blind" *ngIf="all?.user_type == 'elder' "></i> 
+                <span>
                   <h6 class="name-conne" (click)="CommunityUserWall(all?.id)">{{all?.connections?.name}} {{all?.connections?.last_name}}</h6>
-             
+                </span></p>
                   <p [hidden]="!all?.connections?.location"><i class="fa fa-map-marker"></i><span> {{all?.connections?.location}}</span></p>
                 </ion-col>
               </ion-row> 
@@ -137,7 +181,13 @@
          
         <ion-list *ngSwitchCase="'addConnections'"> 
        <!--    <ion-searchbar *ngIf="addConnectionInfo.length != 0" (input)="search1($event)"></ion-searchbar> -->
-           <ion-searchbar (input)="search1($event)"></ion-searchbar>
+           <!-- <ion-searchbar (input)="search1($event)"></ion-searchbar> -->
+           <ion-row>
+            <ion-col width-80><ion-searchbar [(ngModel)]="searchadd"></ion-searchbar>
+            </ion-col>
+              <ion-col width-20><button (click)="search1(searchadd)" ion-button small 
+              class="go-btn">Go</button> </ion-col>
+            </ion-row>
         
             <ion-list *ngFor="let request of addConnectionInfo">
               <ion-item class="inbox-sends">
@@ -166,22 +216,9 @@
           </ion-list>
 
        </div>
-        <ion-fab bottom right edge *ngIf="allConnectionsInfo.length != 0">
+        <ion-fab bottom right edge *ngIf="allConnectionsInfo.length != 0" class="scroll">
         <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
         </ion-icon></button>
       </ion-fab>
-       <ion-fab bottom right edge *ngIf="sentRquestInfo.length != 0">
-            <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
-            </ion-icon></button>
-            </ion-fab>
-          <ion-fab bottom right edge *ngIf="receivedRquestInfo.length != 0">
-            <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
-            </ion-icon></button>
-            </ion-fab>
-          <ion-fab bottom right edge *ngIf="addConnectionInfo.length != 0">
-          <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
-            </ion-icon></button>
-          </ion-fab>
-
 </ion-content>
 

@@ -34,6 +34,13 @@ page-servicerequest {
     font-size: 17px;
     font-weight: 400;
 }
+.rating-clr ul.rating li{ float:left; list-style-type: none; margin-right:3px; padding:0px !important; margin-bottom:5px;height:6px;}
+.rating-clr ul.rating{   float: left;
+    margin-left: -40px;
+    margin-top: 1px;
+    width: 100%;}
+.rating-clr ul.rating li .ion-md-star{ color:#FFB700; font-size:22px;}
+.rating-clr ul.rating li .ion-md-star-outline{color:#FFB700;font-size:22px;}
 .Contacted{font-family: 'Muli', sans-serif;color:#fff !important; padding:5px 10px; font-size:15px; font-weight:600 !important; background:#FF8861; border-radius:3px; }
 .Pending													{font-family: 'Muli', sans-serif;color:#fff !important; padding:5px; font-size:15px; font-weight:600 !important; background:#f8b106; border-radius:3px; }
 .Schedule{font-family: 'Muli', sans-serif;color:#fff; background:#1E90FF; padding:5px; font-size:14px; font-weight:600 !important; border-radius:3px; }
@@ -69,6 +76,14 @@ page-servicerequest {
 .content-intop {
     background: hsl(218, 100%, 98%) none repeat scroll 0 0 !important;
 }
+.rating-clr ul.rating li{ float:left; list-style-type: none; margin-right:3px; height:6px;}
+.rating-clr ul.rating{   float: left;
+    margin-left: -40px;
+    margin-top: 1px;
+    width: 100%;}
+    
+.rating-clr ul.rating li .ion-ios-star{ color:#FFB700; font-size:19px;}
+.rating-clr ul.rating li .ion-ios-star-outline{color:#FFB700;font-size:19px;}
 .sel-packages .item-md .item-inner .label-md {
     font-family: "Muli",sans-serif;
     font-size: 15px;

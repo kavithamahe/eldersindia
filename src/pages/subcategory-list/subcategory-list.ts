@@ -156,7 +156,7 @@ pressevent(modalPage,vendorData){
       "subcategory":this.serviceData.subcategory, "durations":service_request_data.durations,
        "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
        "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
-     "package_id":service_request_data.package_id}
+     "package_id":service_request_data.package_id,"instant":service_request_data.instant}
 
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
        .subscribe(
@@ -230,55 +230,57 @@ pressevent(modalPage,vendorData){
 
 @Component({
   template: `
-<div class="ion-modal-popup">
-<ion-header class="hei-head">
-<ion-toolbar>
-    <ion-title color="primary" class="tittles-md">
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dismiss()">
+         <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>
       {{vendor}} - Instant Request
     </ion-title>
-    <ion-buttons start item-right class="close-iconss">
-      <button ion-button (click)="dismiss()">
+     <ion-buttons right>
+       <button ion-button (click)="dismiss()">
         <ion-icon ios="ios-close-circle-outline" md="md-close-circle" ></ion-icon>
       </button>
     </ion-buttons>
-  </ion-toolbar>
+
+  </ion-navbar>
 </ion-header>
 
+
 <ion-content class="popup-mds">
-  
+
 <br/>
    <ion-label style=" font-size:17px; padding-left:10px; padding-top:10px; line-height:20px; float:left;" class="required">Select dependent</ion-label>
-      <ion-item>
-           <ion-label style="padding-left:15px;">Select dependent</ion-label>
-              <ion-select class="select-brd" style=" width:92% !important; margin-right:15px; text-align:left; font-size:15px;" [(ngModel)]="dependentData" placeholder="Select dependent">
+      <ion-item class="sel-label">
+           <ion-label>Select dependent</ion-label>
+              <ion-select style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="dependentData" placeholder="Select dependent">
                 <ion-option *ngFor = "let dependent of dependentLists" [value]="dependent">{{dependent.name}}
                 </ion-option>
               </ion-select>
           </ion-item>
-      <button class="btn-primarys" ion-button item-right small (press)="presscancel()" (click)="cancel()">Cancel</button>
+          <ion-row>
+          <ion-col>
+      <button class="btn-warnings" (press)="presscancel()" (click)="cancel()">Cancel</button>
 
-    <button class="btn-primarys" ion-button item-right small (press)="presssubmit()" (click)="submit()">Submit</button>
-
+    <button class="instant-bt" (press)="presssubmit()" (click)="submit()">Submit</button>
+    </ion-col>
+    </ion-row>
 
  
 </ion-content>
-</div>
 <style>
-.ion-modal-popup {
-    position: absolute;
-    top: 150px;
-    left: 0;
-	
-    /* display: block; */
-    width: 100%;
-    height: 40%;
-    /* contain: strict; */
-    /* padding-top: 0%; */
-    /* align-content: center; */
-    /* -webkit-box-align: center; */
-    /* align-self: center; */
-}
-.toolbar-background-md{background:red;}
+.sel-label{margin-left:5px !important; border: 2px solid #a8aaad;
+    border-radius: 25px; margin-right:5px !important;}
+.btn-warnings{background:#025FA9 !important; height:35px; padding-left:20px;  font-size:15px; color:#fff; border-radius:20px; width:40%;
+    font-weight:600;
+    float: left;margin-bottom:10px;
+    text-transform: capitalize;
+    font-family: 'Muli', sans-serif;}
+    .instant-bt{ float:right;height:35px; margin-bottom:10px;   background:#FE5722 !important;width:40%;font-size:15px;color:#fff;border-radius:20px;font-weight:600;margin-left:5px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
+
 </style>
 `
 })

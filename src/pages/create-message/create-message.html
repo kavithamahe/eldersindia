@@ -11,7 +11,9 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Compose Message</ion-title>
+    <ion-title text-center *ngIf="msgType == 'reply' ">Reply Message</ion-title>
+    <ion-title text-center *ngIf="msgType == 'forward' ">Forward Message</ion-title>
+    <ion-title text-center *ngIf="msgType == undefined ">Compose Message</ion-title>
       <ion-buttons right>
         <button ion-button (click)="sendMessage()" icon-only>
           <ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;
@@ -43,11 +45,16 @@
      <ion-textarea placeholder="Message *" formControlName="message" [(ngModel)]="message">
     </ion-textarea>
   </ion-item>
+
   <p *ngIf="!messageForm.controls.message.valid && (messageForm.controls.message.dirty || submitAttempt)" class="err-reds shake">Please enter the message</p>
   
-  <ion-item>
-   <input type="file" (change)="fileChange($event)" placeholder="Upload file" >
+  <ion-item *ngIf="filename != undefined">
+    <div class="documents" *ngIf="filename != undefined">
+   <p><i class="fa fa-file-text-o" aria-hidden="true"></i> &nbsp;{{filename}}</p>
+   </div>
+  
   </ion-item>
+   <input type="file" (change)="fileChange($event)" placeholder="Upload file" >
 </ion-list>
 </ion-card>
 

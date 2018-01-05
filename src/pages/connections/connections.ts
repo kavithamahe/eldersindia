@@ -52,6 +52,10 @@ receivedConnectionScrollLists:any=[];
 prev_index:any = 0;
 data:any;
 All:any;
+searchText:any="";
+searchrec:any="";
+searchsend:any="";
+searchadd:any="";
    constructor(private popoverCtrl: PopoverController,public platform: Platform,public navCtrl: NavController, public actionsheetCtrl: ActionSheetController,public navParams: NavParams,public storage:Storage,public connectionsService:ConnectionsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.getconnections="myConnections";
     this.connectionsaction ="all";
@@ -110,7 +114,6 @@ scrollToTop() {
     this.connectionsService.receivedRquest().subscribe(
      (receivedRquest) => {
       this.receivedRquestInfo=receivedRquest.result.info.list.data;
-      console.log("dgdf"+ this.receivedRquestInfo.length);
       this.orgReceivedRquestInfo=receivedRquest.result.info.list.data; 
        this.nextPageURL2=receivedRquest.result.info.list.next_page_url;  
        loader.dismiss();   
@@ -221,9 +224,10 @@ scrollToTop() {
       }
     );    
   }
+  
   public search(searchEvent) {
-    let term = searchEvent.target.value;
-      this.connectionsService.searchConnection(term).subscribe(searchConnection => {
+   this.searchText = searchEvent;
+      this.connectionsService.searchConnection(this.searchText).subscribe(searchConnection => {
         this.allConnectionsInfo= searchConnection.result.info.list.data;
       },
       (err) => { 
@@ -240,8 +244,8 @@ scrollToTop() {
       );
   }
   public sendsearch(searchEvent){
-     let term = searchEvent.target.value;
-      this.connectionsService.sendsearchConnection(term).subscribe(searchConnection => {
+     this.searchsend=searchEvent;
+      this.connectionsService.sendsearchConnection(this.searchsend).subscribe(searchConnection => {
         this.sentRquestInfo= searchConnection.result.info.list.data;
       },
        (err) => { 
@@ -258,9 +262,10 @@ scrollToTop() {
       );
   
   }
+   
  public receivedsearch(searchEvent){
-     let term = searchEvent.target.value;
-      this.connectionsService.receivedsearchConnection(term).subscribe(searchConnection => {
+     this.searchrec = searchEvent;
+      this.connectionsService.receivedsearchConnection(this.searchrec).subscribe(searchConnection => {
         this.receivedRquestInfo= searchConnection.result.info.list.data;
       },
       (err) => { 
@@ -277,8 +282,8 @@ scrollToTop() {
       );
   }
   public search1(Event) {
-    let term = Event.target.value;
-      this.connectionsService.addsearchConnection(term).subscribe(searchConnections => {
+    this.searchadd=Event;
+      this.connectionsService.addsearchConnection(this.searchadd).subscribe(searchConnections => {
         this.addConnectionInfo= searchConnections.result.info.data;
         if(this.addConnectionInfo == ""){
           this.addConnectionsList();
@@ -333,7 +338,7 @@ scrollToTop() {
   }
   receivedConnectionScroll()
   {
-     this.connectionsService.receivedConnectionScroll(this.nextPageURL2).subscribe(
+     this.connectionsService.receivedConnectionScroll(this.nextPageURL2,this.searchrec).subscribe(
      (receivedConnectionScroll) => {
       this.receivedConnectionScrollLists=receivedConnectionScroll.result.info.list.data;  
     
@@ -387,7 +392,7 @@ scrollToTop() {
   allConnectionScroll()
   {
    
-     this.connectionsService.allConnectionScroll(this.nextPageURL1).subscribe(
+     this.connectionsService.allConnectionScroll(this.nextPageURL1,this.searchText).subscribe(
      (allConnectionScroll) => {
       this.allConnectionScrollLists=allConnectionScroll.result.info.list.data;  
       
@@ -425,7 +430,7 @@ scrollToTop() {
   addConnectionScroll()
   {
    
-     this.connectionsService.addConnectionScroll(this.nextPageURL3).subscribe(
+     this.connectionsService.addConnectionScroll(this.nextPageURL3,this.searchadd).subscribe(
      (addConnectionScroll) => {
       this.allConnectionScrollLists=addConnectionScroll.result.info.data;  
  
@@ -463,7 +468,7 @@ scrollToTop() {
   sentRequestScroll()
   {
    
-     this.connectionsService.sentRequestScroll(this.nextPageURL4).subscribe(
+     this.connectionsService.sentRequestScroll(this.nextPageURL4,this.searchsend).subscribe(
      (sentRequestScroll) => {
       this.allConnectionScrollLists=sentRequestScroll.result.info.list.data;  
   

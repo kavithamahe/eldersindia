@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,LoadingController } from 'ionic-angular';
+import { NavController, NavParams,LoadingController,AlertController } from 'ionic-angular';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { EditProfilePage } from '../edit-profile/edit-profile';
@@ -27,7 +27,7 @@ gender:any ="";
 user_dob:any;
 avatar:any;
 base64Image:any;
-  constructor(public storage:Storage,public loadingCtrl: LoadingController,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {  
+  constructor(public storage:Storage,public alertCtrl: AlertController,public loadingCtrl: LoadingController,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {  
   
      
   }
@@ -79,7 +79,60 @@ base64Image:any;
   {
     this.navCtrl.setRoot(DashboardPage);
   }
+  sendotp(){
+      this.providerService.sendotp().subscribe(otp => {
+        this.providerService.showToast(otp.result);
+     },
+   err =>{
+    //loader.dismiss();
+      this.providerService.showErrorToast(err);
+  })
+  }
   
+  showPrompt() {
+    this.sendotp();
+    let prompt = this.alertCtrl.create({
+      title: 'Mobile number verification',
+      //message: "All reports are strictly confidential. Please describe the reason",
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Enter one time password'
+        },
+      ],
+    
+      buttons: [
+       {
+          text: 'Resend OTP',
+          handler: data => {
+            this.sendotp();
+             prompt.present();
+          }
+        },
+        {
+          text: 'Submit',
+          handler: data => {
+              if(data.title == ""){
+              this.providerService.showToast("Enter one time password");
+               return false;
+            }
+            else{
+            this.verifyotp(data.title);
+          }
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+  verifyotp(otp){
+     this.providerService.verifyotp(otp).subscribe(otp => {
+        this.providerService.showToast(otp.result);
+     },
+   err =>{
+      this.providerService.showErrorToast(err);
+  })
+  }
   ionViewWillEnter(){
     this.storage.ready().then(() => {
       this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;});

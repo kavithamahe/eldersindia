@@ -61,11 +61,11 @@ rootUrl:any;
       .map(res => res.json()); 
   }
   
-  submitRemark(serviceId,rating,remarks) 
+  submitRemark(serviceId,rating,remarks,other) 
   {
   
-   let _request= {info: {starvalue: rating, remarks: remarks, srid: serviceId, statusFlag: 2}};
-    return this.http.post(this.rootUrl+'serviceRating',_request,this.options)
+   let _request= {info: {"starvalue": rating, "remarks": remarks, "id": serviceId,"other":other,"status": 2}};
+    return this.http.post(this.rootUrl+'updateServiceReceiveStatus',_request,this.options)
       .map(res => res.json()); 
   }
   serviceRequestScroll(nextPageURL,searchEvent,status,sort)

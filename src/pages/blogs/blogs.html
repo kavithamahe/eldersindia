@@ -18,6 +18,7 @@
 </ion-header>
 
 <ion-content class="content-intop">
+
           <ion-card class="sel-packages">
             <ion-item>
               <ion-label>select category</ion-label>
@@ -28,13 +29,15 @@
                 </ion-select>
             </ion-item>
           </ion-card>
+          <ion-row>
+<ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
+  <ion-col width-20><button (click)="getItems(searchText)" ion-button small 
+  class="go-btn">Go</button> </ion-col>
+</ion-row>
 <!--    <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>-->
         
   <!-- <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar> -->
- <ion-row>
-<ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
-  <ion-col width-20><button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
-</ion-row>
+ 
 
 <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)" class="community-img">
 <ion-row>
@@ -71,7 +74,7 @@
   </ion-infinite-scroll>
 
      <p class="error-clr" *ngIf="bloglists?.length==0">{{emptyRecord}}</p>
-     <ion-fab right bottom style="top: 5px;">
+     <ion-fab right top style="top: 5px;">
     <button ion-fab ><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
     <ion-fab-list side="left">
       <button ion-fab (click)="createBlog()"><i class="fa fa-plus" aria-hidden="true"></i></button>
