@@ -41,7 +41,7 @@
 			 nullable="false"> 
 			  </rating>
 		 	 </h3>
-		 	 <b><small> Service Cost: </small>&nbsp; <i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{service_list.service_cost - service_list.percentage_cost}}</b>
+		 	 <b><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{service_list.service_cost - service_list.percentage_cost}} <span>/&nbsp;<i class="fa fa-inr" aria-hidden="true"></i><strong>{{service_list.service_cost}}</strong> {{service_list.service_type}}</span></b>
 		    
 			
 			<br/>
@@ -49,7 +49,7 @@
 			
 			
 			
-			<span>/&nbsp;<i class="fa fa-inr" aria-hidden="true"></i><strong>{{service_list.service_cost}}</strong> {{service_list.service_type}}</span>
+			
 		
 				 <p *ngIf="service_list.lead_time != '00:00'" 
 				 [hidden]="!service_list?.lead_time">Minimum {{service_list.lead_time}} hour to serve you</p>   

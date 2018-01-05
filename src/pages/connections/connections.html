@@ -32,7 +32,7 @@
     </ion-segment-button>
    </ion-segment>
 </ion-card>
-       <ion-fab top right edge 
+       <ion-fab top right  
        *ngIf="addConnectionInfo.length != 0 || receivedRquestInfo.length != 0 || sentRquestInfo.length != 0 || allConnectionsInfo.length != 0">
         <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown">
           </ion-icon></button>
@@ -55,15 +55,18 @@
                         <img src="{{imageUrl+request?.avatar}}" [hidden]="!request?.avatar">
                       </ion-avatar>
                     </ion-col>
-                    <ion-col width-67>
+                    <ion-col width-60>
                       <h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}</h6>
                    
                       <p [hidden]="!request?.connections?.location"><i class="fa fa-map-marker"></i> <span>{{request?.connections?.location}}</span></p>
                     </ion-col>
                   </ion-row>
-                    <button ion-button icon-only class="active-btn"(click)="connectionStatus(request?.connection_id,1)"><i class="fa fa-check"></i></button>
-                  <button ion-button icon-only class="inactive-btn" (click)="connectionStatus(request?.connection_id,2)"><i class="fa fa-times" aria-hidden="true"></i>
-                  </button>
+				  <ion-row>
+				  <ion-col>
+                    <button ion-button icon-only class="active-btn"(click)="connectionStatus(request?.connection_id,1)">Accept</button>
+                  <button ion-button icon-only class="inactive-btn" (click)="connectionStatus(request?.connection_id,2)">Reject</button>
+				    </ion-col>
+				  </ion-row>
                 </ion-item>
             </div>
            
@@ -85,7 +88,7 @@
                       [hidden]="!request?.avatar">
                     </ion-avatar>
                   </ion-col>
-                  <ion-col width-67>
+                  <ion-col width-60>
                     <h6 class="name-conne" [hidden]="!request?.connections?.name" 
                     (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}
                     </h6>
@@ -118,7 +121,7 @@
                       (click)="CommunityUserWall(all?.id)">
                     </ion-avatar>
                   </ion-col>
-                <ion-col width-67>
+                <ion-col width-60>
                   <h6 class="name-conne" (click)="CommunityUserWall(all?.id)">{{all?.connections?.name}} {{all?.connections?.last_name}}</h6>
              
                   <p [hidden]="!all?.connections?.location"><i class="fa fa-map-marker"></i><span> {{all?.connections?.location}}</span></p>
@@ -147,18 +150,17 @@
                     <img src="{{imageUrl+request?.avatar}}" [hidden]="!request?.avatar">
                     </ion-avatar>
                   </ion-col>
-                  <ion-col width-60>
-                    <h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}
+                  <ion-col width-80 text-wrap>
+                    <h6 class="name-conne" text-wrap (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}
                     </h6>
                     <p [hidden]="!request?.connections?.location">
                     <i class="fa fa-map-marker"></i> <span>{{request?.connections?.location}}</span> </p>
+					<button ion-button (click)="connectMember(request.id,request.connections.name)"  small class="conneted-area">Connect</button>
                   </ion-col>
-                  <ion-col width-20 class="connection-btn">
-                    <button ion-button (click)="connectMember(request.id,request.connections.name)"  small><i class="fa fa-plus" aria-hidden="true"></i></button>
-                  </ion-col>
+          
                 </ion-row>
               </ion-item>
-            </ion-list><hr/>
+            </ion-list>
         
               <ion-infinite-scroll (ionInfinite)="doInfinite3($event)">
                 <ion-infinite-scroll-content></ion-infinite-scroll-content>
@@ -166,22 +168,23 @@
           </ion-list>
 
        </div>
-        <ion-fab bottom right edge *ngIf="allConnectionsInfo.length != 0">
+
+        <ion-fab bottom right *ngIf="allConnectionsInfo.length != 0" style="">
         <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
         </ion-icon></button>
       </ion-fab>
-       <ion-fab bottom right edge *ngIf="sentRquestInfo.length != 0">
-            <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
-            </ion-icon></button>
-            </ion-fab>
-          <ion-fab bottom right edge *ngIf="receivedRquestInfo.length != 0">
-            <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
-            </ion-icon></button>
-            </ion-fab>
-          <ion-fab bottom right edge *ngIf="addConnectionInfo.length != 0">
-          <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
-            </ion-icon></button>
-          </ion-fab>
+       <!-- <ion-fab bottom right edge *ngIf="sentRquestInfo.length != 0"> -->
+            <!-- <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"> -->
+            <!-- </ion-icon></button> -->
+            <!-- </ion-fab> -->
+          <!-- <ion-fab bottom right edge *ngIf="receivedRquestInfo.length != 0"> -->
+            <!-- <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"> -->
+            <!-- </ion-icon></button> -->
+            <!-- </ion-fab> -->
+          <!-- <ion-fab bottom right edge *ngIf="addConnectionInfo.length != 0"> -->
+          <!-- <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"> -->
+            <!-- </ion-icon></button> -->
+          <!-- </ion-fab> -->
 
 </ion-content>
 

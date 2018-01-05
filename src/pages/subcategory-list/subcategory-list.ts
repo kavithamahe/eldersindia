@@ -230,7 +230,7 @@ pressevent(modalPage,vendorData){
 
 @Component({
   template: `
-<div class="ion-modal-popup">
+
 <ion-header class="hei-head">
 <ion-toolbar>
     <ion-title color="primary" class="tittles-md">
@@ -262,7 +262,7 @@ pressevent(modalPage,vendorData){
 
  
 </ion-content>
-</div>
+
 <style>
 .ion-modal-popup {
     position: absolute;

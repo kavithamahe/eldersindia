@@ -40,17 +40,17 @@ page-community {
 }
 .memberareas{border-bottom:1px solid #ccc;}
 .memberareas .item-md .item-inner .input-wrapper .label-md{ margin:5px 8px 13px 0px;}
-.memberareas .item-md .item-inner .input-wrapper .label-md button{ background: hsl(14, 99%, 56%) none repeat scroll 0 0 !important;
+.memberareas .item-md .item-inner .input-wrapper .label-md button{ background:#FE5420!important;
     font-size:16px;
-    font-weight:600; height:35px;
+    font-weight:600; height:35px; border-radius:20px;
     padding: 10px;
     text-transform: capitalize;}
 .memberareas .item-md .item-inner .input-wrapper .label-md img { border:1px solid #ccc;}
 	
 .memberareas .item-ios .item-inner .input-wrapper .label-ios{ margin:5px 8px 13px 0px;}
-.memberareas .item-ios .item-inner .input-wrapper .label-ios button{ background: hsl(14, 99%, 56%) none repeat scroll 0 0 !important;
+.memberareas .item-ios .item-inner .input-wrapper .label-ios button{ background:#FE5420!important;
     font-size:16px;
-    font-weight:600; height:35px;
+    font-weight:600; height:35px;border-radius:20px;
     padding: 10px;
     text-transform: capitalize;}
 	.item-md.item-block .item-inner{ border-bottom:none;}
@@ -62,7 +62,7 @@ page-community {
     overflow: hidden;
     text-overflow: ellipsis;font-family: 'Muli', sans-serif; 
     white-space: nowrap;
-    width:70px; color:#025fa9;
+    width:45px; color:#025fa9;
 }
 .mem-name-update{ border-bottom:1px solid #ccc;}
 .mem-name-update h2 {
@@ -105,6 +105,8 @@ p.valid{ color:red; font-size:13px !important;font-family: 'Muli', sans-serif;}
 .posted-area .card-content-ios{ padding:5px;}
 
 .comment-liks ion-row{ background:#F5F5F5;}
+.comment-liks ion-row .button-clear-md{ height:35px;}
+.comment-liks ion-row .button-clear-ios{ height:35px;}
 .comment-liks ion-row ion-col button .button-inner p{color:#777; font-weight:600; font-size:13px !important;font-family: 'Muli', sans-serif;  text-transform: capitalize;}
 
 }

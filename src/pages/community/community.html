@@ -17,7 +17,7 @@
 </ion-header>
   
 <ion-content padding class="login-bgimg">
-<ion-fab top right edge>
+<ion-fab top right>
     <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
   </ion-fab>
 	<div class="one-half-responsive" style="background:#fff;">
@@ -34,9 +34,9 @@
 	  	<ion-item>
 			<ion-row *ngIf="!communityDetailData?.isJoined">
 		    	<ion-col>
-		    		<div>
+		    	
 						<button ion-button  style=" float:right;"(click)="joinCommunity(communityDetailData?.id)" class="post">Join</button>
-					</div>
+				
 				</ion-col>
 			</ion-row>
 			<ion-item class="mem-title">
@@ -45,14 +45,17 @@
 				<i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Invite Your Contacts
 			   </button>
 			</ion-item>
-			<ion-slides slidesPerView= "3">
+			<ion-slides slidesPerView= "4">
 			
 				<div *ngFor="let member of members; let i=index" text-wrap>
 					<ion-slide [hidden]="!member?.avatar">
 						<ion-item [hidden]="!member?.avatar">
 							<ion-col [hidden]="!member?.avatar">
+							<ion-avatar>
 								<img (click)="membersProfile(member.uid)" 
 								[src]="imageUrl+member?.avatar" style="width:100px; height:80px;"  />
+								</ion-avatar>
+								
 								<small class="mem-name" (click)="membersProfile(member.uid)">{{member.name | words :5 : '....'}}
 								</small>
 							</ion-col>
@@ -193,7 +196,7 @@
 			</div>
 		</ion-card>    		
 	</ion-list>
-	<ion-fab bottom right edge>
+	<ion-fab bottom right>
     <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
     </ion-icon></button>
   </ion-fab>

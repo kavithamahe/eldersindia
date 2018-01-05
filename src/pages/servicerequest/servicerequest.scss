@@ -69,6 +69,8 @@ page-servicerequest {
 .content-intop {
     background: hsl(218, 100%, 98%) none repeat scroll 0 0 !important;
 }
+.sel-packages{margin-top:10px;}
+
 .sel-packages .item-md .item-inner .label-md {
     font-family: "Muli",sans-serif;
     font-size: 15px;
@@ -83,8 +85,8 @@ page-servicerequest {
 }
 .alert-md .alert-radio-label{ padding:0px 0px 0px 10px; font-weight:600;}
 .alert-md .alert-tappable{height:30px !important;}
-.btn-go .go-btn.button-md{ margin-top:15px; font-weight:600;}
-.btn-go .go-btn.button-ios{ margin-top:8px;font-weight:600;}
+.btn-go .go-btn.button-md{ margin-top:13px; font-weight:600; height:35px; width:50px;}
+.btn-go .go-btn.button-ios{ margin-top:4px;font-weight:600; height:35px; width:50px;}
 .searchbar-md .searchbar-input{border:1px solid #87CEFA; font-size:14px; font-weight:600;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px; }
 
 .searchbar-ios .searchbar-input{border:1px solid #87CEFA;font-size:14px; font-weight:600;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;}

@@ -21,12 +21,17 @@
 </ion-header>
 
 <ion-content  class="content-intop">
+<br/><br/>
+<ion-fab top right>
+    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
+  </ion-fab>
 <ion-item  style="border:none;">
 <ion-row>
 <ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
   <ion-col width-20><button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
 </ion-row>
 </ion-item>
+
 <ion-card class="sel-packages">
  <ion-item>
     <ion-label>Functional Area</ion-label>
@@ -43,9 +48,6 @@
     </ion-select>
   </ion-item>
  </ion-card>
-<ion-fab top right edge>
-    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
-  </ion-fab>
 <ion-card class="select-locas">
 <p>Current job openings</p>
 </ion-card>
@@ -63,7 +65,7 @@
   </ion-row>
 
 </ion-card>
-<ion-fab bottom right edge class="btm-scroll">
+<ion-fab bottom right>
     <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"></ion-icon></button>
   </ion-fab>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

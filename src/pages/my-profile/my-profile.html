@@ -51,7 +51,7 @@
             <p><i class="fa fa-phone"></i>&nbsp;{{profileData?.mobile}}</p>			
            <p *ngIf="user_type =='sponsor' "><i class="fa fa-envelope-o"></i>&nbsp;{{profileData?.personal_email}}</p>
 		   <p><i class="fa fa-map-marker"></i>&nbsp;{{profileData?.locationName}}</p>
-            <p><i class="fa fa-calendar"></i>&nbsp;{{user_dob}}</p>
+            <p><i class="fa fa-birthday-cake" aria-hidden="true"></i>&nbsp;{{user_dob}}</p>
 			<!-- <p *ngIf="user_type =='elder' "><i class="fa fa-user userioc"></i>&nbsp;{{gender}}</p> -->
            <p><i class="fa fa-envelope-o"></i>&nbsp;{{profileData?.email}}</p>
             <p *ngIf="user_type !='sponsor' "><i class="fa fa-map-marker"></i>&nbsp;{{profileData?.address}}</p>

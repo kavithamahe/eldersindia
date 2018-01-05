@@ -7,16 +7,32 @@ page-connections {
     font-family: "Muli",sans-serif;
     font-size:19px !important;
     padding-bottom:0px; font-weight:400;
-    margin: 0;}
+    margin: 0;
+	
+	  width:95%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+	}
+.conneted-area{  background:#FE5722;
+    border-radius: 30px;
+    float: left;
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    height:30px;
+    text-transform: capitalize;
+    width: 48%;}
+
 
 .inbox-sends .item-inner .input-wrapper .label-md ion-row ion-col p span{color: #333 !important;
     font-family: "Muli",sans-serif; font-weight:400;
-    font-size:17px !important;
+    font-size:16px !important;
  
    }
  .inbox-sends .item-inner .input-wrapper .label-ios ion-row ion-col p span{color: #333 !important;
     font-family: "Muli",sans-serif; font-weight:400;
-    font-size:17
+    font-size:16px;
  
    }
 .list-ios > .item-block:first-child{border:none;}
@@ -24,13 +40,31 @@ page-connections {
 .item-ios.item-block .item-inner{padding-right:0px;}
 .list-ios .item-block .item-inner{ border:none;}
 .inbox-sends .item-inner .input-wrapper .label-md{ margin:0px;}
-.inbox-sends .item-inner .input-wrapper .label-md ion-row ion-col p i{font-size:12px !important; color:#666 !important; width:15px;}
+.inbox-sends .item-inner .input-wrapper .label-md ion-row ion-col p i{font-size:15px !important; color:#1976D2 !important; width:10px;}
 
 .inbox-sends .item-inner .input-wrapper .label-ios{ margin:0px;}
-.inbox-sends .item-inner .input-wrapper .label-ios ion-row ion-col p i{font-size:12px !important; color:#666 !important; width:15px;}
+.inbox-sends .item-inner .input-wrapper .label-ios ion-row ion-col p i{font-size:15px !important; color:#1976D2 !important; width:10px;}
 .listed-rec{color:hsl(191, 100%, 29%) !important;
     font-family: "Muli",sans-serif; font-weight:600;
     font-size:15px !important; padding-top:10px;padding-bottom:10px;}
+.active-btn{background: hsl(207, 98%, 34%) none repeat scroll 0 0;
+    border-radius: 30px;
+    float:left;
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    height: 35px !important;
+    text-transform: capitalize;
+    width: 48%;}
+.inactive-btn{background:#FE5722;
+    border-radius: 30px;
+    float: right;
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    height: 35px !important;
+    text-transform: capitalize;
+    width: 48%;}
 
 
 }
