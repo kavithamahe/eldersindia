@@ -42,11 +42,11 @@ servicelocationid:any;
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       this.storage.get('service_location').then((my_location) => {
-        console.log("this.serviceLocation1",my_location);
+        // console.log("this.serviceLocation1",my_location);
           for(let i=0; i<this.locations.length;i++){
             if(this.locations[i].location == my_location || this.locations[i].id == my_location){
               this.serviceLocation = my_location;
-             console.log("this.serviceLocation2",this.serviceLocation);
+             // console.log("this.serviceLocation2",this.serviceLocation);
             }
             // else{
             //   this.serviceLocation = "";

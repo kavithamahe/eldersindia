@@ -34,6 +34,7 @@ servicestatus:any=[];
 sr_token:any;
 searchEvent:any="";
 sortby:any="";
+other:any;
   constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -147,7 +148,7 @@ sortby:any="";
   {
     this.serviceRequest.getRemarks().subscribe(
      (getRemarks) => {
-      this.getRemarksList=getRemarks.result.info.remark;       
+      this.getRemarksList=getRemarks.result.info.remark.data;       
     },
     (err) => { 
         if(err.status===401)
@@ -248,7 +249,7 @@ sortby:any="";
     {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.serviceRequest.submitRemark(serviceId,this.rating,this.remarks).subscribe(
+    this.serviceRequest.submitRemark(serviceId,this.rating,this.remarks,this.other).subscribe(
      (submitRemark) => {      
       this.showToaster(submitRemark.result);  
       this.remarks='';

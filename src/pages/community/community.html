@@ -17,12 +17,10 @@
 </ion-header>
   
 <ion-content padding class="login-bgimg">
-<ion-fab top right>
-    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
-  </ion-fab>
 	<div class="one-half-responsive" style="background:#fff;">
 	   <p class="image-column-left">
-			<img height="70" [src]="imageUrl+communityDetailData?.logo" [hidden]="!communityDetailData?.logo" />
+			<img height="70" [src]="imageUrl+communityDetailData?.logo" 
+			[hidden]="!communityDetailData?.logo" />
             <strong class="wel-comemem">Welcome to {{communityDetailData?.community_name}}
             </strong>
 			<em  style="" *ngIf(!show_description)>{{communityDetailData?.description | words : 50 : '...'}}</em>
@@ -30,7 +28,7 @@
 		<div class="decoration hide-if-responsive"></div>
 	</div>
 	<br/>
-  	<div  *ngIf="userType == 'sponsor'" class="memberareas">
+  	<div *ngIf="userType == 'sponsor'" class="memberareas">
 	  	<ion-item>
 			<ion-row *ngIf="!communityDetailData?.isJoined">
 		    	<ion-col>
@@ -159,7 +157,7 @@
 		          	<img  [src]="imageUrl+user.metalink_image" (click)="openUrl(user.metalink_url)" 
 		          	[hidden]="!user?.metalink_image">
 	       		</ion-card-content>
-	       	<ion-card-content class="video-updates" [hidden]="!user?.metalink_title">
+	       	   <ion-card-content class="video-updates" [hidden]="!user?.metalink_title">
 					<p (click)="openUrl(user.metalink_url)">{{user.metalink_title}}</p>
 	         	</ion-card-content>
 	         	<ion-card-content class="video-updates" 

@@ -27,7 +27,7 @@
 				    </ion-avatar>
 				</ion-col>
 				<ion-col width-60>
-			    	<h2 class="cmmpost" (click)="profileImage(comment.uid_from)">{{comment.name_from}}
+			    	<h2 class="cmmpost" (click)="profileImage(comment.uid_from)">{{comment.name_from}} {{comment.last_name}}
 			    	</h2>
 					<p class="time-datem" [hidden]="!comment?.created_at"><i class="fa fa-clock-o"></i>
 			          		{{comment.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
@@ -49,10 +49,10 @@
 		
 	      		<ion-row>
 				 <ion-col *ngIf="comment.likes == 1" style="padding:0px;">
-					<button ion-button clear (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p class="liks-comments"><i class="fa fa-thumbs-o-up"></i>&nbsp;Like</p></button>
+					<button ion-button clear (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p class="liks-comments">Like</p></button>
 		 		</ion-col>
 				<ion-col *ngIf="comment.likes == 0 || comment.likes == null" style="padding:0px;">
-					<button ion-button clear (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p style="color:#3b5998;" class="liks-comments">&nbsp;Liked</p>
+					<button ion-button clear (click)="sendInlineLikescmt(comment.comments_id,post_id)"> <p style="color:#3b5998;" class="liks-comments">&nbsp;<i class="fa fa-thumbs-o-up"></i>&nbsp;Liked</p>
 					</button>
 				</ion-col>
 			 
@@ -78,7 +78,7 @@
 						</ion-avatar>
 						</ion-col>
 						<ion-col width-60 class="texts-lefts">
-						<h5>{{reply.name_from}}-{{reply.name_to}}</h5>
+						<h5>{{reply.name_from}} {{reply.last_from}}-{{reply.name_to}} {{reply.last_to}}</h5>
 					  	<p class="time-datem" [hidden]="!reply?.created_at"><i class="fa fa-clock-o">
 					  	</i>
 			          		{{reply.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
@@ -93,10 +93,12 @@
 					</ion-row>
 					<ion-row class="reply-hei">
 						<ion-col *ngIf="reply.likes == 1">
-						<button ion-button clear  (click)="sendInlineLikes(reply.comments_replay_id,reply.com_post_cmt_id,post_id)"><p class="reply-comm"><i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;Like</p></button>
+						<button ion-button clear  (click)="sendInlineLikes(reply.comments_replay_id,reply.com_post_cmt_id,post_id)"><p class="reply-comm">Like</p></button>
 						</ion-col>
 						<ion-col  *ngIf="reply.likes == 0 || reply.likes == null" >
-						<button ion-button clear  (click)="sendInlineLikes(reply.comments_replay_id,reply.com_post_cmt_id,post_id)"><p class="reply-comm" style="color:#3b5998;">&nbsp;Liked</p></button>
+						<button ion-button clear  (click)="sendInlineLikes(reply.comments_replay_id,reply.com_post_cmt_id,post_id)"><p class="reply-comm" style="color:#3b5998;">&nbsp;<i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;Liked</p>
+						</button>
+
 						</ion-col>
 						<ion-col>
 						<button  ion-button clear (click)="replyComments(i)"><p class="reply-comm"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply</p></button>

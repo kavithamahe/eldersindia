@@ -5,7 +5,7 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-	 <ion-title text-capitalize>{{communityProfileData?.name}} Wall</ion-title>
+	 <ion-title text-capitalize>{{communityProfileData?.name}} {{communityProfileData?.last_name}} Wall</ion-title>
     <ion-buttons right>
     <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
@@ -16,9 +16,9 @@
 </ion-header>
 
 <ion-content class="content-intop">
-  <ion-fab top right edge>
+  <!-- <ion-fab top right edge>
     <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
-  </ion-fab>
+  </ion-fab> -->
 	  <div class="cont-conn">
 		  <ion-row >
 			  <ion-col width-20>
@@ -250,7 +250,7 @@
 	  			</ion-infinite-scroll>
 		</ion-list>
 	</div>
-	<ion-fab bottom right edge>
+	<ion-fab bottom right edge class="scroll">
     <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
     </ion-icon></button>
   </ion-fab>

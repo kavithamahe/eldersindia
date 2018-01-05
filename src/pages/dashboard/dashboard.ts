@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Http,Headers,RequestOptions } from '@angular/http';
 import {  Platform,NavController, NavParams,AlertController,ToastController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CallNumber, Vibration} from 'ionic-native';
@@ -36,18 +37,28 @@ export class DashboardPage {
   hooterOn:boolean=false;
   tabBarElement: any;
   serviceLocation:any;
+  headers:any;
+  head:any;
   constructor(private nativeAudio: NativeAudio,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
   	
      this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.storage.ready().then(() => {
+    
      
-      storage.get('token').then((token) => { this.token=token;  })
+      storage.get('token').then((token) => { this.token=token; 
+       this.headers = new Headers();
+      this.headers.append('Content-Type', 'application/json');
+      this.headers.append('Authorization', 'Bearer ' + this.token);
+      this.head = new RequestOptions({ headers: this.headers });
+      console.log(this.head); 
+    this.fetchLocation();
+  })
       storage.get('user_type').then((user_type) => { this.user_type=user_type;  })
       storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor;  })
       storage.get('ambulance').then((ambulance) => { this.ambulance=ambulance;  })
       storage.get('police').then((police) => { this.police=police;  })
   });
-    this.fetchLocation();
+    
     // this.checkLocation();
      //alert(this.call_sponsor);
   }
@@ -84,12 +95,13 @@ export class DashboardPage {
 }
 
   getLocation(d1,d2){
+    console.log(this.head);
     this.nativeGeocoder.reverseGeocode(d1, d2)
   .then(
     (result: NativeGeocoderReverseResult) => {
      
     console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
-    this.providerService.chechLocationID(result.city)
+    this.providerService.chechLocationID(result.city,this.head)
       .subscribe(data =>{
       this.serviceLocation=data.result.id;
       console.log(this.serviceLocation);

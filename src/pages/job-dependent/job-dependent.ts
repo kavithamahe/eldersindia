@@ -135,6 +135,10 @@ dismiss() {
   let data={'dependent':''};
    this.viewCtrl.dismiss(data);
  }
+ cancelDependent(){
+  let data={'dependent':''};
+   this.viewCtrl.dismiss(data);
+ }
  submitDependent()
  {
   if(this.file_name == undefined){

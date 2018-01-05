@@ -401,7 +401,7 @@ initializePreview() {
 }, 2);
       
        if (data.additionalData.foreground) {
-         // this.showToaster(data.message);
+         this.showToaster(data.message);
 
       //       let confirm = this.alertCtrl.create({
       //       title: 'Elder India Notification',

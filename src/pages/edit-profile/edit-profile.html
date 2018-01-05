@@ -21,31 +21,37 @@
 <div class="edit-profile-view">
 
 		
-		<ion-label class="liste-edit" *ngIf="user_type =='elder' ">Name</ion-label>
-		<ion-label class="liste-edit" *ngIf="user_type =='sponsor' ">Sponsor name</ion-label>
+		<!-- <ion-label class="liste-edit" *ngIf="user_type =='elder' ">Name</ion-label>
+		<ion-label class="liste-edit" *ngIf="user_type =='sponsor' ">Sponsor name
+		</ion-label>
 		<ion-item>
 	    <ion-input type="text" formControlName="name" placeholder="Sponsor name"></ion-input>
 	    </ion-item>
-        
-
-	<!--<ion-label class="liste-edit">Gender</ion-label>
+         -->
+      	 <ion-label class="liste-edit">Employee id</ion-label>
 		<ion-item>
-		<ion-select formControlName="gender">
-	    <ion-option value="male">Male</ion-option>
-	    <ion-option value="female">Female</ion-option>
-	    </ion-select>
+	    <ion-input type="text" formControlName="empid" placeholder="Employee id"></ion-input>
 	    </ion-item>
-
-           		<p class="err-reds" *ngIf="!edit_profile_Form.controls.gender.valid  && (edit_profile_Form.controls.gender.touched || submitAttempt)">Please select your Gender</p>-->
-      
 		<ion-label *ngIf="user_type =='sponsor' " class="liste-edit">Designation</ion-label>
         <ion-item *ngIf="user_type =='sponsor' ">
 	    <ion-input type="text" formControlName="designation" placeholder="Designation">
 	    </ion-input>
 	    </ion-item>	
-           				    
-
-	<ion-label class="liste-edit required">Mobile number</ion-label>
+         
+        <ion-label class="liste-edit">Location</ion-label>
+		<ion-item>
+	    <ion-input type="text" formControlName="location" placeholder="Location"></ion-input>
+	    </ion-item>
+   				    
+	    <ion-label class="liste-edit">Official email</ion-label>
+		<ion-item>
+	    <ion-input type="text" formControlName="email"></ion-input>
+	    </ion-item>
+	    <ion-label class="liste-edit">User type</ion-label>
+	    <ion-item>
+	    <ion-input type="text" formControlName="user_type"></ion-input>
+	    </ion-item>
+	   <ion-label class="liste-edit required">Mobile number</ion-label>
         <ion-item>
 		 <ion-input type="number" formControlName="mobile_number" placeholder="Mobile number"   [class.invalid]="!edit_profile_Form.controls.mobile_number.valid && (edit_profile_Form.controls.mobile_number.dirty)"></ion-input>
 	    </ion-item>
@@ -53,30 +59,18 @@
             <p class="valid err-reds">Please enter valid mobile number.</p>
         </small>
    
-	 
-        <ion-label class="liste-edit">Location</ion-label>
-		<ion-item>
-	    <ion-input type="text" formControlName="location" placeholder="Location"></ion-input>
-	    </ion-item>
-
+	
 
 		<ion-label class="liste-edit required">Date of birth</ion-label>
 		<ion-item>
-	<!-- 	<input type="date" style="background: #ffffff;" value="{{user_dob}}" [(ngModel)]="user_dob" formControlName="user_dob" placeholder="Date of birth" [class.invalid]="!edit_profile_Form.controls.user_dob.valid && 
-	                (edit_profile_Form.controls.user_dob.dirty)"> -->
-	                
-
-		   <ion-datetime class="select-brd" style="font-size:17px;" type="date" displayFormat="DD-MM-YYYY" [(ngModel)]="user_dob" formControlName="user_dob" placeholder="Date 
-		   of birth" [class.invalid]="!edit_profile_Form.controls.user_dob.valid && 
+		<ion-datetime class="select-brd" style="font-size:17px;" type="date" displayFormat="DD-MM-YYYY" [(ngModel)]="user_dob" formControlName="user_dob" placeholder="Date of birth" 
+		[class.invalid]="!edit_profile_Form.controls.user_dob.valid && 
 	                (edit_profile_Form.controls.user_dob.dirty)">
 	            <button class="button button-block button-positive"> {{ currentDate | date:'dd - MMMM - yyyy' }}    </button>   
 		    </ion-datetime>
 	  	</ion-item>
 
-		<ion-label class="liste-edit">Official email</ion-label>
-		<ion-item>
-	    <ion-input type="text" formControlName="email"></ion-input>
-	    </ion-item>
+		
 	    	<ion-label class="liste-edit required">Personal email</ion-label>
 		<ion-item>
 	    <ion-input type="text" formControlName="personal_email" 
@@ -86,10 +80,7 @@
             <p class="valid err-reds">Please enter valid Email.</p>
          </small>
 
-		<ion-label class="liste-edit">User type</ion-label>
-	    <ion-item>
-	    <ion-input type="text" formControlName="user_type"></ion-input>
-	    </ion-item>
+		
 		<br/>
 	  	<ion-row>
 		<ion-col>
@@ -113,14 +104,14 @@
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
      <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
         <div style="padding-left: 10px !important;">
-          Back
+          Cancel
         </div>
       </button>
       <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()">
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
   <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
         <div style="padding-left: 10px !important;">
-          Back
+          Cancel
         </div>
       </button>
     </ion-buttons>

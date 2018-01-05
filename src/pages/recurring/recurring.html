@@ -17,10 +17,9 @@
 
 
 <ion-content class="content-intop">
-  <ion-fab top right>
+<!--   <ion-fab top right edge>
     <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
-  </ion-fab>
-  <br/>  <br/>  <br/>
+  </ion-fab> -->
  <ion-row>
 <ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
   <ion-col width-20><button (click)="inputSearch(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
@@ -40,8 +39,16 @@
   
     <ion-row>
   <ion-col col-12 text-wrap>
-    <b>Elder Name</b><p> {{recurring.elder_name}}</p>
+    <b>Elder</b><p> {{recurring.elder_name}}</p>
 		  </ion-col>
+  </ion-row>
+   <ion-row>
+    <i class="fa fa-envelope" aria-hidden="true"></i>
+   <p>{{recurring.email}}</p>
+  </ion-row>
+   <ion-row>
+   <i class="fa fa-phone" aria-hidden="true"></i>
+   <p>{{recurring.eo_mobile}}</p>
   </ion-row>
   
       <ion-row>
@@ -74,7 +81,7 @@
 
   </ion-grid>
 </ion-card>
-<ion-fab bottom right edge>
+<ion-fab bottom right edge class="scroll">
     <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"></ion-icon></button>
   </ion-fab>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

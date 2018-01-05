@@ -16,11 +16,10 @@
 </ion-header>
 
 <ion-content  class="content-intop">
- <ion-fab top right  *ngIf="serviceRequestInfo.length != 0">
+ <!-- <ion-fab top right edge *ngIf="serviceRequestInfo.length != 0">
     <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown">
     </ion-icon></button>
-  </ion-fab>
-  <br/><br/><br/>
+  </ion-fab> -->
  <ion-row>
 <ion-col width-80><ion-searchbar [(ngModel)]="searchEvent"></ion-searchbar></ion-col>
   <ion-col width-20 class="btn-go"><button (click)="getItems(searchEvent)" ion-button small class="go-btn">Go</button> </ion-col>
@@ -30,6 +29,8 @@
  <ion-item>
     <ion-label>Status</ion-label>
     <ion-select [(ngModel)]="status" (ionChange)="onInitstatus()">
+     <ion-option>All
+     </ion-option>    
       <ion-option *ngFor="let status of servicestatus" value="{{status?.id}}">{{status?.label}}</ion-option>      
     </ion-select>
   </ion-item>
@@ -108,16 +109,16 @@
   </ion-row>
   <ion-row>
 
- <!--  <ion-col>
+  <ion-col>
   <button ion-button icon-left small *ngIf="(service?.vendor_status==5 &&(!service?.vendor_remarks))"(click)="enableRemark(i)">
        Mark as Complete
   </button>
-  </ion-col> -->
+  </ion-col>
   </ion-row>
 
 
   </ion-grid>
-  <!-- <ion-row>
+  <ion-row>
   <ion-col width-20></ion-col>
   <ion-col width-80>
   
@@ -125,7 +126,7 @@
        <i class="fa fa-comments"></i>
   </button>
   </ion-col>
-  </ion-row> -->
+  </ion-row>
 
 
   <ion-list *ngIf="(i==showRemark)">
@@ -134,7 +135,9 @@
     <h2>Rating</h2>
     
  </ion-item>
+  <h3 class="rating-clr">
 <rating [(ngModel)]="rating" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+</h3>
 
  <!-- <ion-item>
     <ion-input [(ngModel)]="remarks" type="text" placeholder="Remarks"></ion-input>
@@ -144,6 +147,11 @@
     <ion-select [(ngModel)]="remarks" class="select-brds">
       <ion-option *ngFor="let remarkList of getRemarksList" value="{{remarkList.id}}">{{remarkList.remarks}}</ion-option>
     </ion-select>
+  </ion-item>
+  <ion-item>
+  <ion-input type="text" placeholder="say something about your service experience.." 
+  [(ngModel)]="other">
+  </ion-input>
   </ion-item>
   <ion-item>
   <button ion-button full (click)="submitRemark(service?.id)">Submit</button>

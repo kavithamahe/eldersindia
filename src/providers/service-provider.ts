@@ -33,9 +33,10 @@ rootUrl:any;
       
    });  
 }
-chechLocationID(serviceLocation){
+chechLocationID(serviceLocation,head){
+  console.log(head);
    let _request= {"location":serviceLocation};
-    return this.http.post(this.rootUrl+'setAutoCityLocation',_request,this.head)
+    return this.http.post(this.rootUrl+'setAutoCityLocation',_request,head)
       .map(res => res.json());
 } 
 serviceInit(token){
@@ -47,7 +48,16 @@ serviceInit(token){
     console.log("token intialized",token);
     console.log("root url: ",this.rootUrl);   
 }
-
+sendotp(){
+   let _request= {};
+    return this.http.post(this.rootUrl+'sendOtp',_request,this.head)
+      .map(res => res.json());
+}
+verifyotp(otp){
+  let _request= {"otpcode":otp};
+    return this.http.post(this.rootUrl+'verifyOtp',_request,this.head)
+      .map(res => res.json());
+}
 webServiceCall(serviceName,bodyData){
       this.headers = new Headers();
       this.headers.append('Content-Type', 'application/json');

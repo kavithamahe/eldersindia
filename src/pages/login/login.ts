@@ -3,9 +3,6 @@ import { Platform,NavController, NavParams,AlertController, LoadingController, M
 import { Storage } from '@ionic/storage';
 import { LocalNotifications } from 'ionic-native';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
-//import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
-//import { Diagnostic } from 'ionic-native';
-//import { CameraPreview, CameraPreviewRect } from 'ionic-native';
 
 import { Login } from '../../models/login';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -58,7 +55,6 @@ export class LoginPage {
 
   }
   pressevent(){
-    console.log("pressed");
     this.forgotPassword();
   }
   pressLogin(){
@@ -116,6 +112,7 @@ export class LoginPage {
          this.storage.set('police', this.police);
          }
          this.storage.set('token', loginuser['token']);
+         console.log(loginuser.token);
          this.storage.set('imageurl',this.appConfig.setImageurl());
          this.storage.set('rooturl',this.appConfig.setrooturl());
          // this.storage.set('service_location','');

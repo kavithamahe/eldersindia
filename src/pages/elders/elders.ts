@@ -124,8 +124,6 @@ mytype:string ="password";
 
   constructor(public providerService:ServiceProvider, public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
 
-      // this.getElderMasterDetails();
-      
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
 
@@ -296,7 +294,6 @@ mytype:string ="password";
     }
 
  loadManageDependentData(elderId){
-    console.log(elderId);
    this.communityServices.getElder(elderId).subscribe(
        elder=>{
           this.loadForm(elder.result.info[0]);
@@ -346,19 +343,13 @@ public emergencies =  [
           this.elder_service = this.manageDependentData.in_service;
           this.elder_number= this.manageDependentData.mobile;
           this.file_name=this.manageDependentData.docs;
-          console.log(this.file_name);
-          //console.log(this.manageDependentData.dob)
           this.elder_dob= moment(this.manageDependentData.dob).format("YYYY-MM-DD");
-          //new Date(this.manageDependentData.dob);//this.getDate(this.manageDependentData.dob);
-          // let today = new Date(this.manageDependentData.dob);
-          // console.log(today);
-          //this.elder_dob = today;
+      
           this.elder_email= this.manageDependentData.email;
           //this.elder_password= this.manageDependentData.password;
           this.elder_location = this.manageDependentData.location;        
           this.elder_relation = this.manageDependentData.relation;
           this.elder_address= this.manageDependentData.address; 
-          console.log(this.last_name);console.log('-----');console.log(this.manageDependentData);  
           let bloginterests = this.manageDependentData.blog_interest;
 
           if(bloginterests != undefined){ 
@@ -366,7 +357,6 @@ public emergencies =  [
             if(bloginterests.length != 0){
               for(let i=0 ; i< bloginterests.length ; i++){    
                 this.blog_interest.push(bloginterests[i].id);
-                 console.log(this.blog_interest);
               }
              }
            }
@@ -376,19 +366,19 @@ public emergencies =  [
               this.servicecategory=[];
               for(let i=0 ; i< serviceinterest.length ; i++){                
                 this.servicecategory.push(serviceinterest[i]);
-                 console.log(this.servicecategory);
+                 this.selectsubcategory(serviceinterest[i]);
               }
              }
            }
-             let servicesubinterest=this.manageDependentData.service_checked_interest;
 
+             let servicesubinterest=this.manageDependentData.service_checked_interest;
              if(servicesubinterest !=undefined){
              this.servicesubcategorylist=[];
               if(servicesubinterest.length != 0){           
               for(let i=0 ; i< servicesubinterest.length ; i++){
                  
                 this.servicesubcategorylist.push(servicesubinterest[i].id);
-                 //console.log(this.area_of_interest);
+
               }
              }
            }
@@ -426,15 +416,12 @@ public emergencies =  [
                 this.area_of_interest.push(areainterest[i].id);
               }
              }
-             console.log(this.area_of_interest);
             this.job_type = this.manageDependentData.job_type;
             //this.attach_resume = this.manageDependentData.docs;
 
             let experiences = this.manageDependentData.experience;
-            console.log(experiences);
             if(experiences.length != 0)
             {
-              console.log(experiences.length);
               this.experience_list.pop();
               for(let i = 0; i < experiences.length;i++)
               {
@@ -459,7 +446,6 @@ public emergencies =  [
             
 
             let skills = this.manageDependentData.skills;
-            console.log(skills);
             if(skills.length != 0){
               for(let i=0 ; i< skills.length ; i++){
                 this.skill_set.push(skills[i].skill);
@@ -592,15 +578,12 @@ getblog_category(){
     //console.log(this.blog_interest);
     if(this.blog_interest != undefined){
       for(let i=0;i<this.blog_interest.length;i++){
-        console.log(this.blog_interest.length);
         this.blog_categoryinterest.push({"id":this.blog_interest[i]})  
       }
     }
     }else{
- console.log(this.blog_interest.length);
     if(this.blog_interest != undefined){
       for(let i=0;i<this.blog_interest.length;i++){
-        console.log(this.blog_interest.length);
         this.blog_categoryinterest.push({"elder_id":this.elder_id,"id":this.blog_interest[i]})  
       }
     }
@@ -612,13 +595,10 @@ getservicecategory(){
   if(this.functionality !="profileEdit"){
    if(this.functionality !="edit" && this.functionality !="profileEdit"){
       for(let i=0;i<this.servicesubcategorylist.length;i++){
-        console.log(this.servicesubcategorylist.length);
         this.serviceCategory_interests.push({"id":this.servicesubcategorylist[i]})  
       }
     }else{
- console.log(this.blog_interest.length);
       for(let i=0;i<this.servicesubcategorylist.length;i++){
-        console.log(this.servicesubcategorylist.length);
         this.serviceCategory_interests.push({"elder_id":this.elder_id,"id":this.servicesubcategorylist[i]})  
       }
     }
@@ -633,9 +613,8 @@ getareaof_interest(){
     }else{
 
       for(let i=0;i<this.area_of_interest.length;i++){
-        console.log("ttert"+ this.area_of_interest);
         this.areaofinterestdata.push({"elder_id":this.elder_id,"id":this.area_of_interest[i]})  
-      console.log(this.areaofinterestdata);
+    
       }
     }
   // }

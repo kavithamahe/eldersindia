@@ -17,6 +17,18 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
+     <ion-buttons end right *ngIf="hidedelete == true">
+      <button ion-button icon-only 
+      (click)="logDeleteStudents('inbox')"> <ion-icon name="trash"></ion-icon>
+
+      </button>
+    </ion-buttons>
+     <ion-buttons end right *ngIf="senddelete == true">
+      <button ion-button icon-only 
+      (click)="logDeleteStudents('send')"> <ion-icon name="trash"></ion-icon>
+
+      </button>
+    </ion-buttons>
    
   </ion-navbar>
 </ion-header>
@@ -45,15 +57,21 @@
      <p class="error-clr">{{emptyRecord}}</p>
    </ion-item>
   <div>
-    <ion-searchbar [(ngModel)]="inbox" (ionInput)="getItems(inbox)">
-    </ion-searchbar>
+  <ion-row>
+<ion-col width-80><ion-searchbar [(ngModel)]="inbox"></ion-searchbar></ion-col>
+  <ion-col width-20><button (click)="getItems(inbox)" ion-button small class="go-btn">Go</button> </ion-col>
+</ion-row>
+   <!--  <ion-searchbar [(ngModel)]="inbox" (ionInput)="getItems(inbox)">
+    </ion-searchbar> -->
   </div>
   <hr/>
-     
+    
+
       <ion-list *ngFor="let inbox of inboxInfo">
       <ion-item-sliding  class="inbox-sends">
-        <ion-item (click)="viewMessages(inbox?.id,'inbox')" 
-        [ngClass]="inbox.read_status?'readmsg':'unreadmsg'" >
+   <!--      <ion-item (click)="viewMessages(inbox?.id,'inbox')" 
+        [ngClass]="inbox.read_status?'readmsg':'unreadmsg'" > -->
+         <ion-item (press)="deleteMultipel(inbox)" (click)="viewMessages(inbox?.id,'inbox')" [ngClass]="{ active: inbox.selected }">
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
             <ion-avatar item-left>
@@ -105,13 +123,18 @@
      <p class="error-clr">{{emptyRecord}}</p>
    </ion-item>
    <div>
-    <ion-searchbar [(ngModel)]="outbox" (ionInput)="setItems(outbox)">
-    </ion-searchbar>
+   <ion-row>
+<ion-col width-80><ion-searchbar [(ngModel)]="outbox"></ion-searchbar></ion-col>
+  <ion-col width-20><button (click)="setItems(outbox)" ion-button small class="go-btn">Go</button> </ion-col>
+</ion-row>
+ <!--    <ion-searchbar [(ngModel)]="outbox" (ionInput)="setItems(outbox)">
+    </ion-searchbar> -->
+  
   </div>
   <hr/>
   <ion-list *ngFor="let sent of sentInfo">
       <ion-item-sliding class="inbox-sends">
-        <ion-item (click)="viewMessages(sent?.id,'sent')" 
+        <ion-item (click)="viewMessages(sent?.id,'sent')" (press)="deletesendMultipel(sent)"
         [ngClass]="sent.read_status?'readmsg':'unreadmsg'">
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>

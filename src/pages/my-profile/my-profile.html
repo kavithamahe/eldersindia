@@ -48,8 +48,10 @@
             <p *ngIf="user_type =='sponsor' "><i class="fa fa-building-o"></i>&nbsp;{{profileData?.company_name}}</p>
             <p *ngIf="user_type =='sponsor' "><i class="fa fa-user-secret"></i>&nbsp;{{profileData?.designation}}</p>
             <p *ngIf="user_type !='elder' "><i class="fa fa-suitcase"></i>&nbsp;{{profileData?.employee_id}}</p>
-            <p><i class="fa fa-phone"></i>&nbsp;{{profileData?.mobile}}</p>			
+            <p><i class="fa fa-phone"></i>&nbsp;{{profileData?.mobile}} <button ion-button clear (click)="showPrompt()" *ngIf="profileData?.mobile_verified == 0"><i class="fa fa-share-square" aria-hidden="true"></i>verify</button>
+            <button ion-button clear *ngIf="profileData?.mobile_verified == 1"><i class="fa fa-share-square" aria-hidden="true"></i>verified</button></p>			
            <p *ngIf="user_type =='sponsor' "><i class="fa fa-envelope-o"></i>&nbsp;{{profileData?.personal_email}}</p>
+           <p><i class="fa fa-user"></i>&nbsp;{{profileData?.user_type}}</p>
 		   <p><i class="fa fa-map-marker"></i>&nbsp;{{profileData?.locationName}}</p>
             <p><i class="fa fa-birthday-cake" aria-hidden="true"></i>&nbsp;{{user_dob}}</p>
 			<!-- <p *ngIf="user_type =='elder' "><i class="fa fa-user userioc"></i>&nbsp;{{gender}}</p> -->

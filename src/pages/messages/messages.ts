@@ -36,6 +36,10 @@ status:any;
 inbox:any="";
 outbox:any="";
 emptyRecord:any;
+delete:any;
+deleteSelected =[];
+hidedelete:any;
+senddelete:any;
    constructor(public navCtrl: NavController,public alertCtrl: AlertController, public navParams: NavParams,platform: Platform,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   	this.isAndroid = platform.is('android');
     if(navParams.get("viewType")!='' && navParams.get("viewType")!=null)
@@ -58,6 +62,47 @@ emptyRecord:any;
   	});
   }
   
+ deleteMultipel(student) {
+     var index = this.deleteSelected.indexOf(student);
+    if(index > -1) {
+        this.deleteSelected.splice(index, 1);
+       student.selected = false;
+    } else {
+        this.deleteSelected.push(student.id);
+       student.selected = true;
+       this.hidedelete = student.selected;
+       this.senddelete = "true";
+    }
+  }
+  deletesendMultipel(student) {
+     var index = this.deleteSelected.indexOf(student);
+    if(index > -1) {
+        this.deleteSelected.splice(index, 1);
+       student.selected = false;
+    } else {
+        this.deleteSelected.push(student.id);
+       student.selected = true;
+       this.senddelete = student.selected;
+    }
+  }
+  logDeleteStudents(viewType) {
+      this.messagesService.deleteBulkMessages(this.deleteSelected,viewType).subscribe(
+     (deleteMessage) => {
+       this.showToaster(deleteMessage.result);
+      // if(viewType =='sent')
+      // {
+      //   this.sent();
+      //   loader.dismiss();
+      // } 
+      // else
+      // {
+      //   this.onInit();
+      //   loader.dismiss();
+      // }  
+    });
+  }
+ 
+
   public onInit()
   {
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -74,7 +119,7 @@ emptyRecord:any;
         if(err.status===401)
         {
           this.showToaster(JSON.parse(err._body).error);
-        this.emptyRecord = (JSON.parse(err._body).error);
+          this.emptyRecord = (JSON.parse(err._body).error);
         }
         else
         {

@@ -47,8 +47,8 @@ user_id:any;
     return this.http.post(this.rootUrl+'getSentRequestLists',_request,this.options)
       .map(res => res.json()); 
   }
-  sentRequestScroll(nextPageURL){
-     let _request= {"searchValue":""};
+  sentRequestScroll(nextPageURL,searchsend){
+     let _request= {"searchValue":searchsend};
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
   }
@@ -98,21 +98,21 @@ user_id:any;
     return this.http.post(nextURL,_request,this.options)
       .map(res => res.json()); 
   }
-  allConnectionScroll(nextPageURL)
+  allConnectionScroll(nextPageURL,searchText)
    {
-    let _request= {"user_id":this.user_id,"searchValue":""};
+    let _request= {"user_id":this.user_id,"searchValue":searchText};
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }
-   addConnectionScroll(nextPageURL){
-      let _request= {"search_value":""};
+   addConnectionScroll(nextPageURL,searchadd){
+      let _request= {"search_value":searchadd};
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }
 
-   receivedConnectionScroll(nextPageURL)
+   receivedConnectionScroll(nextPageURL,searchValue)
    {
-    let _request= {"searchValue":""};
+    let _request= {"searchValue":searchValue};
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }

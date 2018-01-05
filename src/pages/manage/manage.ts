@@ -31,7 +31,13 @@ show_option:boolean =false;
 
   constructor(public alertCtrl: AlertController, public nav: NavController,public storage:Storage, public navParams: NavParams,public toastCtrl: ToastController,public loadingCtrl: LoadingController,public communityServices: CommunityServices) {
    this.nav=nav;  
-       
+        this.storage.ready().then(() => {
+      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      this.storage.get('id').then((id) => { this.user_id=id;});
+      this.storage.get('token').then((token) => { this.token=token; 
+       this.manageDetail();
+      })
+    });  
     }
    showConfirm(manage) {
     let DeleteId = manage.id;
