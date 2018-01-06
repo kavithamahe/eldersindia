@@ -17,9 +17,6 @@
 </ion-header>
   
 <ion-content padding class="login-bgimg">
-<!-- <ion-fab top right edge>
-    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
-  </ion-fab> -->
 	<div class="one-half-responsive" style="background:#fff;">
 	   <p class="image-column-left">
 			<img height="70" [src]="imageUrl+communityDetailData?.logo" 
@@ -35,9 +32,9 @@
 	  	<ion-item>
 			<ion-row *ngIf="!communityDetailData?.isJoined">
 		    	<ion-col>
-		    		<div>
+		    	
 						<button ion-button  style=" float:right;"(click)="joinCommunity(communityDetailData?.id)" class="post">Join</button>
-					</div>
+				
 				</ion-col>
 			</ion-row>
 			<ion-item class="mem-title">
@@ -46,14 +43,17 @@
 				<i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Invite Your Contacts
 			   </button>
 			</ion-item>
-			<ion-slides slidesPerView= "3">
+			<ion-slides slidesPerView= "4">
 			
 				<div *ngFor="let member of members; let i=index" text-wrap>
 					<ion-slide [hidden]="!member?.avatar">
 						<ion-item [hidden]="!member?.avatar">
 							<ion-col [hidden]="!member?.avatar">
+							<ion-avatar>
 								<img (click)="membersProfile(member.uid)" 
 								[src]="imageUrl+member?.avatar" style="width:100px; height:80px;"  />
+								</ion-avatar>
+								
 								<small class="mem-name" (click)="membersProfile(member.uid)">{{member.name | words :5 : '....'}}
 								</small>
 							</ion-col>
@@ -125,18 +125,18 @@
 	          				(click)="communityProfiles(user.uid)"/>
 	        			</ion-avatar>
 	        		</ion-col>
-	        		<ion-col width-60>
+	        		<ion-col width-70>
 			          	<h2 (click)="communityProfile(user.uid)">{{user.name}} {{user.last_name}}</h2>
 			          		<p class="time-datem"><i class="fa fa-clock-o"></i>
 			          		{{user.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
 			          		</p>
 			        </ion-col>
-					<ion-col width-20>
-						<button *ngIf="user.uid == user_id" ion-button color="dark" clear (click)="showConfirm(user.id)">
-		          			<ion-icon name="close"></ion-icon>
+					<ion-col width-10 class="bt-s">
+						<button *ngIf="user.uid == user_id" ion-button  clear (click)="showConfirm(user.id)">
+		          			<i class="fa fa-times-circle" aria-hidden="true"></i>
 		          		</button>
-		          		<button *ngIf="user.uid != user_id" ion-button color="dark" clear (click)="openMenu(user.id,user.profile_id)">
-		          			<ion-icon name="more"></ion-icon>
+		          		<button *ngIf="user.uid != user_id" ion-button  clear (click)="openMenu(user.id,user.profile_id)">
+		          			<i class="fa fa-ellipsis-v" aria-hidden="true"></i>
 		          		</button>
 	          		</ion-col>
 				</ion-row>
@@ -194,7 +194,7 @@
 			</div>
 		</ion-card>    		
 	</ion-list>
-	<ion-fab bottom right edge class="scroll">
+	<ion-fab bottom right>
     <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
     </ion-icon></button>
   </ion-fab>

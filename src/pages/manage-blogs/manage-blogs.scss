@@ -47,11 +47,11 @@ page-manage-blogs {
 
     padding: 4px;
 }
-.go-btn{background:#025FA9;margin-top: 15px;}
+.go-btn{margin-top:10px; width:50px; height:35px;}
 .job-detailsview ion-row ion-col h2 {
-    color: #007994 !important;
+    color: #444 !important;
     font-family: "Muli",sans-serif;
-    font-size: 17px !important;
+    font-size:19px !important;
     padding-bottom:3px;
     margin: 0;
 }
@@ -66,12 +66,28 @@ page-manage-blogs {
  .content-intop {
     background: #F5F9FF;
 }
+.service-cont p{    color: #444 !important;
+    font-family: "Muli",sans-serif;
+    font-size:19px !important;
+    padding-bottom:3px; padding-left:10px;
+    margin: 0;}
+
+.job-detailsview ion-row ion-col h1 {
+    color: #007994 !important;
+    font-family: "Muli",sans-serif;
+    font-size:19px !important;
+    padding-bottom:3px;
+    margin: 0;
+}
 
 
 .edit-blogs ion-col button.edits{ color:#025fa9 !important;text-transform: capitalize; background:none;
     font-family: "Muli",sans-serif;
-    font-size:12px !important; font-weight:600;}
+    font-size:17px !important; font-weight:600;}
 .edit-blogs ion-col button.delets{ color:#f44336 !important;text-transform: capitalize; background:none;
     font-family: "Muli",sans-serif;font-weight:600;
-    font-size:12px !important;}
+    font-size:17px !important;}
+	
+	
+.service-req{color:#444 !important;}
 }

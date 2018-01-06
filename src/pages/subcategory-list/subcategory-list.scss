@@ -34,11 +34,11 @@ page-subcategory-list {
 	
 .rating-clr ul.rating li .ion-ios-star{ color:#FFB700; font-size:19px;}
 .rating-clr ul.rating li .ion-ios-star-outline{color:#FFB700;font-size:19px;}
-.text-alg b{color:red!important; float:left; width:100%;font-family: "Muli",sans-serif;font-size:16px !important; font-weight:600; padding-left:3px; padding-top:1px;}
+.text-alg b{color:red!important; float:left; font-family: "Muli",sans-serif;font-size:16px !important; font-weight:600; padding-left:3px; padding-top:1px;}
 .text-alg small{color:#444 !important;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
-.text-alg span{color:#444!important; float:left; width:100%;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
+.text-alg span{color:#444!important; font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
 .text-alg p{color:#444!important; float:left; width:100%;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
-.text-alg strong{color:#444!important;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400; text-decoration: line-through;}
+.text-alg strong{color:#777 !important;font-family: "Muli",sans-serif;font-size:15px !important; font-weight:400; text-decoration: line-through;}
 .text-alg p i.fa-map-marker{ color:#025FA9;}
 
 
@@ -60,7 +60,13 @@ page-subcategory-list {
 ul.rating[_ngcontent-ydl-43]   li[_ngcontent-ydl-43]{padding:0px !important;}
 
 
+.btn-warnings{ background:red;}
 
 
-.modal-wrapper{background-color:none;}
+
+
+
+
+
+
 }

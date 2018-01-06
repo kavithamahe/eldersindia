@@ -56,7 +56,18 @@ button{font-family: 'Muli', sans-serif; }
     margin: 0;
     padding-left:10px;
 }
+
+.left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios {
+    color: #fff; font-weight:600;
+   font-family: 'Muli', sans-serif !important; 
+    font-size:17px;
+    margin: 0;
+    padding-left:10px;
+}
+
 .left-menus .list-md .item-md .item-inner .input-wrapper .label-md i{ margin-right:5px;}
+
+.left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios i{ margin-right:5px;}
 .hed-new .toolbar-md {
     height: 160px;
 }
@@ -75,19 +86,13 @@ button{font-family: 'Muli', sans-serif; }
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios {
-    color: #fff; font-weight:400;
-   font-family: 'Muli', sans-serif !important; 
-    font-size:17px;
-    margin: 0;
-    padding-left:10px;
-}
+
 .left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios i{ margin-right:5px;}
 .hed-new .toolbar-ios {
     height: 160px;
 }
 
-
+.modal-wrapper{background:#fff;}
 
 
 .img-log .toolbar-background-md {background:#fff;
@@ -194,17 +199,21 @@ send-req {  background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100
 .ion-ios-close-circle{font-size:21px;}
 
 
-.sel-packages ion-row ion-col .go-btn.button-md{ margin-top:15px; font-weight:600;}
-.sel-packages ion-row ion-col .go-btn.button-ios{ margin-top:15px;font-weight:600;}
+.sel-packages ion-row ion-col .go-btn.button-md{ margin-top:10px; font-weight:600; font-size:15px; width:50px; height:36px;}
+.sel-packages ion-row ion-col .go-btn.button-ios{ margin-top:4px;font-weight:600; font-size:15px;width:50px; height:36px;}
 
 ul.rating[_ngcontent-dgd-43]   li[_ngcontent-dgd-43]{padding:0px !important;}
 .badge-md{margin-right:5px;}
 .badge-ios{margin-right:5px;}
-.modal-wrapper {
-    background:#fff !important;
-}
+
 .toolbar-md-primary .bar-button-light-md, .toolbar-md-primary .bar-button-clear-md-light, .toolbar-md-primary .bar-button-md-light{font-weight:600; font-size:17px;}
 .toolbar-ios-primary .bar-button-light-ios, .toolbar-ios-primary .bar-button-clear-ios-light, .toolbar-ios-primary .bar-button-ios-light{font-weight:600; font-size:17px;}
+
+.alert-md .alert-button .button-inner{font-size:15px; font-weight:600;}
+.alert-ios .alert-button .button-inner{font-size:15px; font-weight:600;}
+.alert-md .alert-message{font-size:18px;font-weight:400; padding-top:10px; color:#333;}
+.alert-ios .alert-message{font-size:18px;font-weight:400; padding-top:10px; color:#333;}
+
 .err-reds:before {
     content: "\f0de";
     font-family: FontAwesome;

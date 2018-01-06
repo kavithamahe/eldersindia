@@ -72,7 +72,7 @@
     <ion-col width-80>-->
 	<ion-row>
 	<ion-col>
-		<h2 item-text-wrap class="service-req" text-capitalize>{{manageBlog?.title}}</h2>
+		<h1 item-text-wrap class="service-req" text-capitalize>{{manageBlog?.title}}</h1>
 		  <h2 item-text-wrap>{{manageBlog?.category_name}}</h2>
 		  <p *ngIf="(manageBlog?.created_at!='0000-00-00 00:00:00')" class="token-date"><i class="fa fa-calendar"></i> {{manageBlog?.created_at | date :'MMM dd y h:mm a'}}</p>
 		</ion-col>
@@ -83,7 +83,7 @@
 
 	<ion-row *ngFor="let status of blogStatus">
 		<ion-col>
-	<p item-text-wrap  class="service-cont" *ngIf="manageBlog?.status==status?.id">
+	<p item-text-wrap *ngIf="manageBlog?.status==status?.id">
 	<!-- <ion-badge >{{status?.label}}</ion-badge> -->
   <ion-badge class="warning" *ngIf="status?.id == 0">Pending</ion-badge>
   <ion-badge class="approved" *ngIf="status?.id == 1">Approved</ion-badge>

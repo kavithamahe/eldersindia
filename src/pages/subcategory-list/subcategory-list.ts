@@ -250,10 +250,11 @@ pressevent(modalPage,vendorData){
 </ion-header>
 
 
-<ion-content class="popup-mds">
+<ion-content padding class="popup-mds">
 
 <br/>
-   <ion-label style=" font-size:17px; padding-left:10px; padding-top:10px; line-height:20px; float:left;" class="required">Select dependent</ion-label>
+
+   <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Select dependent</ion-label>
       <ion-item class="sel-label">
            <ion-label>Select dependent</ion-label>
               <ion-select style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="dependentData" placeholder="Select dependent">
@@ -261,25 +262,27 @@ pressevent(modalPage,vendorData){
                 </ion-option>
               </ion-select>
           </ion-item>
+		  <br/>
           <ion-row>
           <ion-col>
-      <button class="btn-warnings" (press)="presscancel()" (click)="cancel()">Cancel</button>
+      <button class="btn-warnings" color="primary" (press)="presscancel()" (click)="cancel()">Cancel</button>
 
     <button class="instant-bt" (press)="presssubmit()" (click)="submit()">Submit</button>
     </ion-col>
     </ion-row>
 
- 
+
 </ion-content>
 <style>
-.sel-label{margin-left:5px !important; border: 2px solid #a8aaad;
-    border-radius: 25px; margin-right:5px !important;}
-.btn-warnings{background:#025FA9 !important; height:35px; padding-left:20px;  font-size:15px; color:#fff; border-radius:20px; width:40%;
+.sel-label{border:1px solid #a8aaad;
+    border-radius:20px; margin-right:5px !important;}
+.btn-warnings{background:#025FA9 !important; height:35px;  font-size:15px; color:#fff; border-radius:20px; width:40%;
     font-weight:600;
     float: left;margin-bottom:10px;
     text-transform: capitalize;
     font-family: 'Muli', sans-serif;}
-    .instant-bt{ float:right;height:35px; margin-bottom:10px;   background:#FE5722 !important;width:40%;font-size:15px;color:#fff;border-radius:20px;font-weight:600;margin-left:5px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
+    .instant-bt{ float:right;height:35px; margin-bottom:10px;   background:#FE5722 !important;width:40%;font-size:15px;color:#fff;border-radius:20px;font-weight:600;text-transform:capitalize;font-family: 'Muli', sans-serif;}
+
 
 </style>
 `

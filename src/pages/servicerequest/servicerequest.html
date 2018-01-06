@@ -24,6 +24,7 @@
 <ion-col width-80><ion-searchbar [(ngModel)]="searchEvent"></ion-searchbar></ion-col>
   <ion-col width-20 class="btn-go"><button (click)="getItems(searchEvent)" ion-button small class="go-btn">Go</button> </ion-col>
 </ion-row>
+
 <ion-card class="sel-packages">
  <ion-item>
     <ion-label>Status</ion-label>
@@ -157,7 +158,7 @@
   </ion-item>
   </ion-list>  
 </ion-card>
-<ion-fab bottom right edge *ngIf="serviceRequestInfo.length != 0" class="scroll">
+<ion-fab right bottom  *ngIf="serviceRequestInfo.length != 0">
     <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"></ion-icon></button>
   </ion-fab>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

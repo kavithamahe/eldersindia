@@ -11,32 +11,69 @@
 </ion-header>
 
 
-<ion-content padding style="background:#fff;">
-
-<ion-row style="margin:px;">
-  <ion-col *ngIf="user_type!='elder'">
+<ion-content class="content-intop">
+<ion-card class="sel-packages">
+<ion-list *ngIf="user_type!='elder'">
   <form [formGroup]="authForm">
-   <ion-label class="required">Select dependent</ion-label>
-  <ion-item>
+<ion-item>
+<ion-label class="required">Select dependent</ion-label>
     <ion-select [(ngModel)]="dependent" (ionChange)="checkDependent()" class="select-brddd" placeholder="Select dependent" formControlName="elder_dependent" 
     [class.invalid]="!authForm.controls.elder_dependent.valid && (authForm.controls.elder_dependent.dirty)">
       <ion-option *ngFor="let dependent of getDependentList" value={{dependent?.id}}>{{dependent?.name}}</ion-option>    
 	  </ion-select>
-
-     </ion-item>
-      <small *ngIf="!authForm.controls.elder_dependent.valid  && (authForm.controls.elder_dependent.dirty || submitAttempt)">
+	      <small *ngIf="!authForm.controls.elder_dependent.valid  && (authForm.controls.elder_dependent.dirty || submitAttempt)">
               <p class="valid err-reds">Please select the dependent.</p>
           </small> 
-        <br/>
-     </form>   
-  </ion-col>
+</ion-item>
+   </form>   
+</ion-list>
 
-</ion-row>
+</ion-card>
 
+<!-- <input type="file" name="file" (change)="fileChange($event)" id="file" class="inputfile" /> -->
+<!-- <label for="file">Choose a file</label> -->
+ 
+ <ion-card class="sele-file"> 
+  
+    <ion-label class="required">Select File</ion-label> 
+ <input type="file" (change)="fileChange($event)" class="custom-file-input" placeholder="Upload file"> 
+</ion-card> 
+
+
+
+<!-- <ion-card> -->
+<!-- <ion-row style="margin:px;" class="job-details"> -->
+  <!-- <ion-col  width-100> -->
+  <!-- <form [formGroup]="authForm"> -->
+   <!-- <ion-label class="required">Select dependent</ion-label> -->
+  <!-- <ion-item> -->
+    <!-- <ion-select [(ngModel)]="dependent" (ionChange)="checkDependent()" class="select-brddd" placeholder="Select dependent" formControlName="elder_dependent"  -->
+    <!-- [class.invalid]="!authForm.controls.elder_dependent.valid && (authForm.controls.elder_dependent.dirty)"> -->
+      <!-- <ion-option *ngFor="let dependent of getDependentList" value={{dependent?.id}}>{{dependent?.name}}</ion-option>     -->
+	  <!-- </ion-select> -->
+
+     <!-- </ion-item> -->
+      <!-- <small *ngIf="!authForm.controls.elder_dependent.valid  && (authForm.controls.elder_dependent.dirty || submitAttempt)"> -->
+              <!-- <p class="valid err-reds">Please select the dependent.</p> -->
+          <!-- </small>  -->
+        <!-- <br/> -->
+     <!-- </form>    -->
+  <!-- </ion-col> -->
+  <!-- <ion-col> -->
+  
+           <!-- <ion-label class="required">Select File</ion-label> -->
+         <!-- <input type="file" (change)="fileChange($event)" placeholder="Upload file">  -->
+  <!-- </ion-col> -->
+<!-- </ion-row> -->
+
+<!-- </ion-card> -->
+<br/>
+<ion-card class="btn-cars">
          <ion-label class="required">Select File</ion-label>
          <input type="file" (change)="fileChange($event)" placeholder="Upload file"> 
          <p>(example:docx,pdf,odt,txt)</p>
          <button ion-button class="submit-btns" ion-button item-right small (click)="cancelDependent()">Cancel</button>
  <button ion-button class="submit-btns" ion-button item-right small (click)="submitDependent($event)" *ngIf="dependentstatus == 0">Apply</button>
  <button ion-button class="submit-btns" ion-button item-right small *ngIf="dependentstatus == 1">Applied</button>
+ </ion-card>
 </ion-content>

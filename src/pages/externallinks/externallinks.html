@@ -31,9 +31,10 @@
 			<ion-item text-wrap>
 					<ion-row>
 						<ion-col width-20>
-							<img height="50"  [src]="useful.featured_image" (click)="openUrl(useful.news_link)" 
+						  <ion-avatar>
+							<img   [src]="useful.featured_image" (click)="openUrl(useful.news_link)" 
 					          	[hidden]="!useful?.featured_image">
-					      
+					        </ion-avatar>
 					    </ion-col>
 						<ion-col width-80>		
 							<h1 (click)="openUrl(useful.news_link)" text-capitalize>{{useful.title}}</h1>

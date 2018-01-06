@@ -1,4 +1,47 @@
 page-job-dependent {
 .toolbar-title-md{ text-align:center !important;}
 .toolbar-title-ios{ text-align:center;}
+.sel-packages{border:1px solid hsl(0, 0%, 66%); border-radius:0px; box-shadow:none; }
+.sel-packages .item-md .item-inner .label-md{font-family:"Muli",sans-serif; font-size:15px; padding-left:10px;font-weight:600;}
+.sel-packages .item-ios .item-inner .label-ios{font-family:"Muli",sans-serif; font-size:15px; padding-left:10px;font-weight:600;}
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+}
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+.content-intop										{background-image: url('../assets/img/jobs.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
+.btn-cars{border-radius:0px; box-shadow:none; }
+.sele-file{border-radius:0px; box-shadow:none; }
+.sele-file ion-label{font-family:"Muli",sans-serif; font-size:15px; font-weight:600; }
+.custom-file-input{border:1px solid #ccc; width:99%; height:40px; }
+.submit-btns{ background: hsl(14, 99%, 56%) none repeat scroll 0 0 !important;
+    border-radius: 20px;
+    color: hsl(0, 0%, 100%);
+   
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    height: 35px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    text-transform: capitalize;
+    width:95%;}
 }
