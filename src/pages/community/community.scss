@@ -109,4 +109,15 @@ p.valid{ color:red; font-size:13px !important;font-family: 'Muli', sans-serif;}
 .comment-liks ion-row .button-clear-ios{ height:35px;}
 .comment-liks ion-row ion-col button .button-inner p{color:#777; font-weight:600; font-size:13px !important;font-family: 'Muli', sans-serif;  text-transform: capitalize;}
 
+
+.bt-s .button-md{margin:0px; padding:0px;}
+.bt-s .button-md i.fa-times-circle{ font-size:17px; color:red; font-weight:400;}
+.bt-s .button-md i.fa-ellipsis-v{ font-size:17px; color:#1976D2; font-weight:400;}
+
+
+
+.bt-s .button-ios{margin:0px; padding:0px;}
+.bt-s .button-ios i.fa-times-circle{ font-size:17px; color:red; font-weight:400;}
+.bt-s .button-ios i.fa-ellipsis-v{ font-size:17px; color:#1976D2; font-weight:400;}
+
 }

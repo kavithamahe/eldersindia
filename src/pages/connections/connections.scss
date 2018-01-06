@@ -24,7 +24,7 @@ page-connections {
     text-transform: capitalize;
     width: 48%;}
 
-
+.go-btn{width:50px; height:35px; margin-top:10px;}
 .inbox-sends .item-inner .input-wrapper .label-md ion-row ion-col p span{color: #333 !important;
     font-family: "Muli",sans-serif; font-weight:400;
     font-size:16px !important;
@@ -46,7 +46,7 @@ page-connections {
 .inbox-sends .item-inner .input-wrapper .label-ios ion-row ion-col p i{font-size:15px !important; color:#1976D2 !important; width:10px;}
 .listed-rec{color:hsl(191, 100%, 29%) !important;
     font-family: "Muli",sans-serif; font-weight:600;
-    font-size:15px !important; padding-top:10px;padding-bottom:10px;}
+    font-size:17px !important; padding-top:10px;padding-bottom:10px;}
 .active-btn{background: hsl(207, 98%, 34%) none repeat scroll 0 0;
     border-radius: 30px;
     float:left;

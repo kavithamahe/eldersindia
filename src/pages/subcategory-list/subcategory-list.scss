@@ -38,7 +38,7 @@ page-subcategory-list {
 .text-alg small{color:#444 !important;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
 .text-alg span{color:#444!important; font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
 .text-alg p{color:#444!important; float:left; width:100%;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
-.text-alg strong{color:#212121 !important;font-family: "Muli",sans-serif;font-size:15px !important; font-weight:400; text-decoration: line-through;}
+.text-alg strong{color:#777 !important;font-family: "Muli",sans-serif;font-size:15px !important; font-weight:400; text-decoration: line-through;}
 .text-alg p i.fa-map-marker{ color:#025FA9;}
 
 
@@ -60,9 +60,13 @@ page-subcategory-list {
 ul.rating[_ngcontent-ydl-43]   li[_ngcontent-ydl-43]{padding:0px !important;}
 
 
+.btn-warnings{ background:red;}
 
 
-.modal-wrapper{background-color:none;}
 
-.popup-mds{background:red !important;}
+
+
+
+
+
 }

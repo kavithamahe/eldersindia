@@ -56,7 +56,7 @@
 </ion-card>
 <ion-card *ngFor="let jobBoard of jobBoardInfo" class="job-detailsview">
   <ion-row (click)="viewJob(jobBoard?.id,jobBoard?.is_applied)" test-wrap>
-  <ion-col width-80 text-wrap>
+  <ion-col width-90 text-wrap>
     <h2 text-wrap text-capitalize>{{jobBoard?.title | words :3: '....'}}</h2>
 
     <P><i class="fa fa-university" aria-hidden="true" ></i><span>{{jobBoard?.company_name}}</span></P>
@@ -70,7 +70,7 @@
     </span></P>
     
 	</ion-col>
-     <ion-col width-20>
+     <ion-col width-10>
      <i class="fa fa-arrow-right" aria-hidden="true"></i>
      </ion-col>
   </ion-row>

@@ -56,7 +56,18 @@ button{font-family: 'Muli', sans-serif; }
     margin: 0;
     padding-left:10px;
 }
+
+.left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios {
+    color: #fff; font-weight:600;
+   font-family: 'Muli', sans-serif !important; 
+    font-size:17px;
+    margin: 0;
+    padding-left:10px;
+}
+
 .left-menus .list-md .item-md .item-inner .input-wrapper .label-md i{ margin-right:5px;}
+
+.left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios i{ margin-right:5px;}
 .hed-new .toolbar-md {
     height: 160px;
 }
@@ -75,19 +86,13 @@ button{font-family: 'Muli', sans-serif; }
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios {
-    color: #fff; font-weight:400;
-   font-family: 'Muli', sans-serif !important; 
-    font-size:17px;
-    margin: 0;
-    padding-left:10px;
-}
+
 .left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios i{ margin-right:5px;}
 .hed-new .toolbar-ios {
     height: 160px;
 }
 
-
+.modal-wrapper{background:#fff;}
 
 
 .img-log .toolbar-background-md {background:#fff;

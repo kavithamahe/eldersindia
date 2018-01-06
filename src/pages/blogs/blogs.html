@@ -74,11 +74,11 @@
   </ion-infinite-scroll>
 
      <p class="error-clr" *ngIf="bloglists?.length==0">{{emptyRecord}}</p>
-     <ion-fab right top style="top: 5px;">
-    <button ion-fab ><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
-    <ion-fab-list side="left">
-      <button ion-fab (click)="createBlog()"><i class="fa fa-plus" aria-hidden="true"></i></button>
-      <button ion-fab (click)="manageBlog()"><i class="fa fa-list" aria-hidden="true"></i></button>
+     <ion-fab bottom right>
+    <button ion-fab class="top-bttn1"><i class="fa fa-arrow-up"></i></button>
+    <ion-fab-list side="top">
+      <button ion-fab class="top-bttn" (click)="createBlog()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      <button ion-fab class="top-bttn" (click)="manageBlog()"><i class="fa fa-address-card-o" aria-hidden="true"></i></button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>
