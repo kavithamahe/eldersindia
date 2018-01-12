@@ -27,11 +27,14 @@ page-job-dependent {
 .inputfile + label {
 	cursor: pointer; /* "hand" cursor */
 }
-.content-intop										{background-image: url('../assets/img/jobs.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
+/*.content-intop										{background-image: url('../assets/img/jobs.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}*/
 .btn-cars{border-radius:0px; box-shadow:none; }
 .sele-file{border-radius:0px; box-shadow:none; }
-.sele-file ion-label{font-family:"Muli",sans-serif; font-size:15px; font-weight:600; }
-.custom-file-input{border:1px solid #ccc; width:99%; height:40px; }
+.sele-file ion-label{font-family:"Muli",sans-serif; font-size:17px; font-weight:400; color: hsl(0, 0%, 47%);}
+.sele-file p{font-family:"Muli",sans-serif; font-size:17px; font-weight:400; color: hsl(0, 0%, 47%); margin-top:10px;}
+
+.sele-file p b{color:#1976D2;}
+.custom-file-input{border:1px solid #ccc; width:99%; height:40px; padding:8px; }
 .submit-btns{ background:#025FA9;
     border-radius: 20px;
     color: hsl(0, 0%, 100%);
@@ -57,4 +60,12 @@ page-job-dependent {
     margin-left: 5px;
     text-transform: capitalize;
     width:95%;}
+	
+.createblog-form .label-md{  color: hsl(0, 0%, 47%);
+    font-family: "Muli",sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    margin: 0;
+    padding-bottom: 8px;
+    padding-top: 10px; padding-left:10px;}
 }

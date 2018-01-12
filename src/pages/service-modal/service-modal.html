@@ -134,7 +134,7 @@
                         <!-- </div> -->
                       </ion-list>   
 
-                        <ion-list *ngIf="pack.package_available == 0">
+                        <ion-list *ngIf="pack.package_available == 0" text-center>
                         <a (click)="openRequestPackage(pack.id)" class="lan-select">Get Package</a>                      
                         </ion-list>   
                       <strong class="purch-already" *ngIf="pack.package_available > 0">You've already purchased this

@@ -7,8 +7,8 @@ import { MyApp } from './app.component';
 import { TruncateModule } from 'ng2-truncate';
 import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+// // import { Ng2SearchPipeModule } from 'ng2-search-filter';
+// import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 
 import {BrowserModule} from '@angular/platform-browser';
@@ -182,7 +182,7 @@ import { ServiceProvider } from '../providers/service-provider';
     RlTagInputModule,
     Ionic2RatingModule,
     Ng2CompleterModule,
-    Ng2SearchPipeModule,
+    // Ng2SearchPipeModule,
     BrowserModule,
     Ng2EmojiModule,
     MomentModule
@@ -254,6 +254,6 @@ import { ServiceProvider } from '../providers/service-provider';
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider, InAppBrowser,AppConfig,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
 })
 export class AppModule {}

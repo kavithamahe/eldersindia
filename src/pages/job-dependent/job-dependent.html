@@ -13,7 +13,7 @@
 
 <ion-content class="content-intop">
 
-<ion-list *ngIf="user_type!='elder'">
+<ion-card *ngIf="user_type!='elder'" class="createblog-form">
   <form [formGroup]="authForm">
   <ion-label class="required">Select dependent</ion-label>
 <ion-card>
@@ -29,7 +29,7 @@
 </ion-item>
 </ion-card>
    </form>   
-</ion-list>
+
 
 
 <!-- <input type="file" name="file" (change)="fileChange($event)" id="file" class="inputfile" /> -->
@@ -39,7 +39,7 @@
   
     <ion-label class="required">Attachment</ion-label> 
  <input type="file" (change)="fileChange($event)" class="custom-file-input" placeholder="Upload file"> 
- <p>(example:docx,pdf,odt,txt)</p>
+ <p><b>Example</b> :  docx,pdf,odt,txt</p>
 </ion-card> 
 
 
@@ -72,12 +72,10 @@
 <!-- </ion-card> -->
 <br/>
 <ion-card class="btn-cars">
-         <ion-label class="required">Select File</ion-label>
-         <input type="file" (change)="fileChange($event)" placeholder="Upload file"> 
-         <p>(example:docx,pdf,odt,txt)</p> 
-         <button ion-button class="submit-btns" ion-button item-right small (click)="cancelDependent()">Cancel</button>
+        
  <button ion-button class="submit-btns" ion-button item-right small (click)="submitDependent($event)" *ngIf="dependentstatus == 0">Apply</button>
  <button ion-button class="submit-btns" ion-button item-right small *ngIf="dependentstatus == 1">Applied</button>
   <button ion-button class="submit-btns-can" ion-button item-right small (click)="cancelDependent()">Cancel</button>
+ </ion-card>
  </ion-card>
 </ion-content>
