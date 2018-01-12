@@ -32,7 +32,20 @@ page-job-dependent {
 .sele-file{border-radius:0px; box-shadow:none; }
 .sele-file ion-label{font-family:"Muli",sans-serif; font-size:15px; font-weight:600; }
 .custom-file-input{border:1px solid #ccc; width:99%; height:40px; }
-.submit-btns{ background: hsl(14, 99%, 56%) none repeat scroll 0 0 !important;
+.submit-btns{ background:#025FA9;
+    border-radius: 20px;
+    color: hsl(0, 0%, 100%);
+   
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    height: 35px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    text-transform: capitalize;
+    width:95%;}
+	
+.submit-btns-can{ background: hsl(14, 99%, 56%) none repeat scroll 0 0 !important;
     border-radius: 20px;
     color: hsl(0, 0%, 100%);
    

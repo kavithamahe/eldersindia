@@ -72,8 +72,9 @@
          <ion-label class="required">Select File</ion-label>
          <input type="file" (change)="fileChange($event)" placeholder="Upload file"> 
          <p>(example:docx,pdf,odt,txt)</p>
-         <button ion-button class="submit-btns" ion-button item-right small (click)="cancelDependent()">Cancel</button>
+        
  <button ion-button class="submit-btns" ion-button item-right small (click)="submitDependent($event)" *ngIf="dependentstatus == 0">Apply</button>
  <button ion-button class="submit-btns" ion-button item-right small *ngIf="dependentstatus == 1">Applied</button>
+  <button ion-button class="submit-btns-can" ion-button item-right small (click)="cancelDependent()">Cancel</button>
  </ion-card>
 </ion-content>

@@ -45,5 +45,6 @@ page-modal-page {
     font-weight:600;    font-family: 'Muli', sans-serif;color:hsl(191, 100%, 29%) !important;}
 .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:none;box-shadow:none;}
 .item-md.item-input.input-has-focus .item-inner{border-bottom-color:none;box-shadow:none;}
-
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{border-bottom-color:none;box-shadow:none;}
+.modal-wrapper{background:#fff;}
 }

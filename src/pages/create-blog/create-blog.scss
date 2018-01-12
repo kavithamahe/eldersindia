@@ -16,9 +16,6 @@ page-create-blog {
 }
 
 .createblog-form .item-md {    border: 1px solid #ccc;}
-.createblog-form .item-md .item-inner{padding-right:0px;}
-
-
 
 
 .list-ios .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus){border-bottom-color:none !important;}
@@ -63,4 +60,6 @@ page-create-blog {
 
 .rd-tags{background:#ccc; margin-right:3px; float:letf; margin-bottom:10px;}
 .ng2-tag-input-field {   border: 1px solid #ccc; margin-top:10px; height:45px; width:100%; padding:3px;}
+
+.radio-img .label-md{padding-top:0px !important;}
 }
