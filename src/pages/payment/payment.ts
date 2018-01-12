@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { BlogListService } from '../../providers/blog-list-service';
 import { Storage } from '@ionic/storage';
 import { Http,Headers,RequestOptions } from '@angular/http';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 /**
  * Generated class for the PaymentPage page.
@@ -35,7 +34,7 @@ surl:any;
 furl:any;
 service_provider:any;
 udf1:any;
-   constructor(public http: Http,private iab: InAppBrowser,public navCtrl: NavController,public storage:Storage,public blogListService:BlogListService, public navParams: NavParams) {
+   constructor(public http: Http,public navCtrl: NavController,public storage:Storage,public blogListService:BlogListService, public navParams: NavParams) {
   this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();
