@@ -60,6 +60,13 @@ Url:any;
     return this.http.post(rootUrl+'getRecurringServiceList',_request,this.options)
       .map(res => res.json());
   }
+  paymentTran(rootUrl,key,productinfo,txnid,amount,firstname,email,
+      phone,surl,service_provider,udf1){
+     let _request= {"key":key,"amount":amount,"txnid":txnid,"phone":phone,"firstname":firstname,
+     "email":email,"productinfo":productinfo,"surl":surl,"udf1":udf1,"service_provider":service_provider};
+    return this.http.post(rootUrl+'checkpayUmoneyforSRMbl',_request,this.options)
+      .map(res => res.json());
+  }
   recurringRequestScroll(nextPageURL,searchText){
      let _request= {"search": searchText};
      return this.http.post(nextPageURL,_request,this.options)

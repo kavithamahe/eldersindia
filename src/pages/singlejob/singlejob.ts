@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController,ToastController,ModalController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController,ToastController,Platform,ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CallNumber } from 'ionic-native';
-
+import { InAppBrowser } from 'ionic-native';
 
 import { JobBoardService } from '../../providers/job-board-service';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -37,7 +37,7 @@ is_applied:any;
 eldertitle:any=[];
 user:any=[];
 logo:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public jobBoardService:JobBoardService,public modalCtrl: ModalController) {
+  constructor(public platform: Platform,public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public jobBoardService:JobBoardService,public modalCtrl: ModalController) {
   	this.jobId=navParams.get("jobId");
     this.is_applied=navParams.get("status");
     console.log(this.is_applied);
@@ -169,5 +169,18 @@ pressevent(jobId){
    {
     this.showToaster("There is no contact number");
    }
+  }
+
+  openUrl(website) {
+        this.platform.ready().then(() => {
+            let browser = new InAppBrowser(website,'_blank');
+
+        });
+  }
+  openUrlemail(email){
+    this.platform.ready().then(() => {
+            let browser = new InAppBrowser(email,'_blank');
+
+        });
   }
 }

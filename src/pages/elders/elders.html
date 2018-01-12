@@ -139,7 +139,7 @@
             <ion-label class="sel-label">Emergency</ion-label>
               <ion-select class="select-brd" formControlName="emergency_name"  
               [(ngModel)]="emergency_name[i]" placeholder="Person">
-                     <ion-option  *ngFor="let person of emergencies" value={{person.val}}>{{person.name}}
+                     <ion-option  *ngFor="let person of emergencies" value={{person.name}}>{{person.name}}
                      </ion-option>
                      <!-- <ion-option value="police">Police</ion-option>
                      <ion-option value="ambulance">Ambulance</ion-option>

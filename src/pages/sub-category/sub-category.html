@@ -35,13 +35,14 @@
 </ion-card>
  <!-- <ion-searchbar ></ion-searchbar> -->
 <ion-card class="shs">
- <ion-input type="text" class="search" [(ngModel)]="term" placeholder="search"></ion-input>
+ <ion-input type="text" class="search" [(ngModel)]="term" placeholder="search">
+   
+ </ion-input>
 </ion-card>
 <ion-card class="pack-listed">
-<!-- <ion-item *ngFor = "let subcategory of subcategories.info | filter:term"  -->
-<!-- [color]="subcategory.color" class="sub-cat-listed"> -->
-<ion-item *ngFor = "let subcategory of subcategories.info" 
+<ion-item *ngFor = "let subcategory of subcategories.info | filter:term" 
 [color]="subcategory.color" class="sub-cat-listed">
+
    <p (click)="openSelected(subcategory)"> {{subcategory.name}} </p><i class="fa fa-chevron-right left-right-side"></i>
 </ion-item>
 </ion-card>

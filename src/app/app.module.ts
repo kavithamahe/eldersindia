@@ -7,7 +7,9 @@ import { MyApp } from './app.component';
 import { TruncateModule } from 'ng2-truncate';
 import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
-// import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 
 import {BrowserModule} from '@angular/platform-browser';
 import { Ng2EmojiModule } from 'ng2-emoji';
@@ -16,12 +18,11 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { Geolocation } from 'ionic-native';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Diagnostic } from 'ionic-native';
-import { CameraPreview, CameraPreviewRect } from 'ionic-native';
-import { Calendar } from '@ionic-native/calendar';
+import { CameraPreview } from 'ionic-native';
 import {MomentModule} from 'angular2-moment';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { Transfer } from '@ionic-native/transfer';
 
 
 import { LoginPage } from '../pages/login/login';
@@ -38,6 +39,8 @@ import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 import { FirsttimeloginPagePage } from '../pages/firsttimelogin/firsttimelogin';
 import { ViewpackagePagePage } from '../pages/viewpackage/viewpackage';
 import { ElderservicePagePage } from '../pages/elderservice/elderservice';
+import { PaymentPage } from '../pages/payment/payment';
+
 //packages related pages
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
 import {PackageDetailPagePage } from '../pages/package-detail/package-detail'; 
@@ -124,6 +127,7 @@ import { ServiceProvider } from '../providers/service-provider';
     GetpackagePagePage,
     ViewpackagePagePage,
     ElderservicePagePage,
+    PaymentPage,
     ManagePage,
     EldersPage,
     JobboardPage,
@@ -178,7 +182,7 @@ import { ServiceProvider } from '../providers/service-provider';
     RlTagInputModule,
     Ionic2RatingModule,
     Ng2CompleterModule,
-    // Ng2SearchPipeModule,
+    Ng2SearchPipeModule,
     BrowserModule,
     Ng2EmojiModule,
     MomentModule
@@ -204,6 +208,7 @@ import { ServiceProvider } from '../providers/service-provider';
     CommunityPage,
     CommunityPopoverPage,
     ElderservicePagePage,
+    PaymentPage,
     ManagePage,
     EldersPage,
     JobboardPage,
@@ -249,6 +254,6 @@ import { ServiceProvider } from '../providers/service-provider';
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider, AppConfig,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider, InAppBrowser,AppConfig,Storage] // Add GithubUsers provider
 })
 export class AppModule {}

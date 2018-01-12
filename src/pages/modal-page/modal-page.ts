@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, ViewController,LoadingController,ModalController} from 'ionic-angular';
+import { NavParams, ViewController,LoadingController,ModalController,NavController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //import {DatePicker} from 'ionic-native';
 import {Platform} from 'ionic-angular';
@@ -9,6 +9,7 @@ import moment from 'moment';
 import { ServiceProvider } from '../../providers/service-provider';
 import { TermsModalPage } from '../../pages/terms-modal/terms-modal';
  import { Modelpage1PagePage } from '../../pages/modelpage1/modelpage1';
+ import { PaymentPage } from '../../pages/payment/payment';
 
 
 import { Storage } from '@ionic/storage';
@@ -81,7 +82,10 @@ export class ModalContentPage {
   service_ids:any;
   sub_category_id:any;
   subcategory:any;
-  constructor(platform: Platform,public modalCtrl: ModalController, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
+  service_cost:any;
+  percentage_cost:any;
+  servicecost:any;
+  constructor(platform: Platform,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
      this.date = new Date().toISOString();
      this.dependentLists = params.get("dependentList");
@@ -102,7 +106,10 @@ export class ModalContentPage {
      }
      if(params.get("vendor") != undefined){
       this.vendor = this.params.get("vendor").name;
-      console.log(this.vendor);
+      this.service_cost = this.params.get("vendor").service_cost;
+      this.percentage_cost = this.params.get("vendor").percentage_cost;
+      this.servicecost = this.service_cost - this.percentage_cost;
+      console.log(this.servicecost);
       this.vendor_id = this.params.get("vendor").vendor_id;
       this.recurringType = this.params.get("vendor").recurring;
       this.name = this.params.get("vendor").name;
@@ -255,6 +262,19 @@ onlyNumberKey(event) {
    }
    pressnext(){
     this.next();
+   }
+   paynow(){
+    // this.navCtrl.setRoot(PaymentPage);
+    let serviceModal = this.modalCtrl.create(PaymentPage);
+      serviceModal.present();
+       serviceModal.onDidDismiss(data =>{
+      if(data == "dismiss"){
+        console.log(" schedule request modal dismissed..!");
+      }else{
+       this.seviceCheck = data;
+      }
+    })
+
    }
    next(){
       var objFromDate = this.modalForm.value.startdate;

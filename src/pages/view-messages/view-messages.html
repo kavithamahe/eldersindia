@@ -64,7 +64,7 @@
       <ion-card-content item-text-wrap class="text-view-mess">
         <p>{{veiwMessagesInfo?.message}}</p>
       </ion-card-content>
-      <p  *ngIf="attachmentInfo.length != 0"><i class="fa fa-paperclip" aria-hidden="true"></i><span>Attachment</span></p>
+      <p *ngIf="attachmentInfo.length != 0"><i class="fa fa-paperclip" aria-hidden="true"></i><span>Attachment</span></p>
       <div *ngFor="let attachment of attachmentInfo" class="documents">
 
         <p (click)="downloadFile(attachment.file_path,attachment.file_name)"><i class="fa fa-file-text-o" aria-hidden="true"></i> &nbsp;{{attachment.file_name}}</p>
@@ -86,7 +86,7 @@
              <i class="fa fa-trash-o"></i>&nbsp;<p>Delete</p>
             </button>
           </ion-col> 
-          <ion-col (click)="messageForward(attachment.file_name,veiwMessagesInfo?.subject,veiwMessagesInfo?.message)">
+          <ion-col (click)="messageForward(veiwMessagesInfo?.subject,veiwMessagesInfo?.message)">
             <button ion-button icon-left clear small>
               <i class="fa fa-share"></i>&nbsp;<p>Forward</p> 
             </button>

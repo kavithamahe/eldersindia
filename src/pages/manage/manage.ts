@@ -185,15 +185,15 @@ manage_elder:any;
       toast.present();
    }
 
-   ionViewWillEnter(){
-     this.storage.ready().then(() => {
-      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      this.storage.get('id').then((id) => { this.user_id=id;});
-      this.storage.get('token').then((token) => { this.token=token; 
-       this.manageDetail();
-      })
-    });   
-  }
+  //  ionViewWillEnter(){
+  //    this.storage.ready().then(() => {
+  //     this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+  //     this.storage.get('id').then((id) => { this.user_id=id;});
+  //     this.storage.get('token').then((token) => { this.token=token; 
+  //      this.manageDetail();
+  //     })
+  //   });   
+  // }
   public dashboardPage()
   {
     this.nav.setRoot(DashboardPage);
