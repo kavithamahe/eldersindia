@@ -75,6 +75,7 @@ filename:any;
   this.subject=navParams.get("subject");
   this.message=navParams.get("message");
   this.filename=navParams.get("filename");
+  console.log(this.filename);
   this.msgType=navParams.get("msgType");
   console.log(this.msgType);
   if(this.msgType=='reply'){

@@ -18,55 +18,47 @@
 </ion-header>
 
 <ion-content class="content-intop">
-
-          <ion-card class="sel-packages">
-            <ion-item>
-              <ion-label>select category</ion-label>
-                <ion-select [(ngModel)]="searchCategory1" (ionChange)='blog()'>
-                  <ion-option  *ngFor="let category of categoryLists" 
+    <ion-card class="sel-packages">
+        <ion-item>
+            <ion-label>select category</ion-label>
+              <ion-select [(ngModel)]="searchCategory1" (ionChange)='blog()'>
+                <ion-option  *ngFor="let category of categoryLists" 
                  value={{category.id}}>{{category.name}}
-                  </ion-option>
-                </ion-select>
-            </ion-item>
-          </ion-card>
-          <ion-row>
-<ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
-  <ion-col width-20><button (click)="getItems(searchText)" ion-button small 
-  class="go-btn">Go</button> </ion-col>
-</ion-row>
-<!--    <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar>-->
-        
-  <!-- <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar> -->
- 
-
-<ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)" class="community-img">
-<ion-row>
- 
-	<ion-col class="blogs-tittle">
-  <ion-item text-wrap>
-    <h2 class="pro-info" text-capitalize>{{blogs.title}}</h2>
-    <p class="timedate" text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{blogs.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{blogs.created_at | date :"MMM dd y"}}
-    </p>
-  </ion-item>
-  </ion-col>
-  </ion-row>
- <div>
- 
- 
-  <ion-card-content>
-{{imageUrl.blogs?.featured_image}}
+                </ion-option>
+              </ion-select>
+          </ion-item>
+    </ion-card>
+    <ion-row>
+      <ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
+      </ion-col>
+      <ion-col width-20><button (click)="getItems(searchText)" ion-button small 
+        class="go-btn">Go</button> </ion-col>
+    </ion-row>
+    <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)" class="community-img">
+      <ion-row>
+        <ion-col class="blogs-tittle">
+          <ion-item text-wrap>
+            <h2 class="pro-info" text-capitalize>{{blogs.title}}</h2>
+            <p class="timedate" text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{blogs.author_name }} | <i class="fa fa-calendar" aria-hidden="true">
+            </i> {{blogs.created_at | date :"MMM dd y"}}
+            </p>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    <div>
+      <ion-card-content>
+        {{imageUrl.blogs?.featured_image}}
 <!--blogs?.description | words : 3 : '...'-->
    <!-- <p [innerHTML]="blogs?.description | words : 60 : '...'"></p>-->
-  </ion-card-content>
-  <img src="{{imageUrl+blogs?.featured_image}}" [hidden]="!blogs?.featured_image" />
-  <span [hidden]="!blogs.category_name"> 
-    <label class="labels-bdss"> {{blogs.category_name}}</label>
-  </span>
-  <span *ngIf="blogs.allow_featured == 1"> 
-    <label class="labels-bdss-featured_image">Featured</label>
-  </span>
-
-  </div>
+      </ion-card-content>
+      <img src="{{imageUrl+blogs?.featured_image}}" [hidden]="!blogs?.featured_image" />
+      <span [hidden]="!blogs.category_name"> 
+        <label class="labels-bdss"> {{blogs.category_name}}</label>
+      </span>
+      <span *ngIf="blogs.allow_featured == 1"> 
+        <label class="labels-bdss-featured_image">Featured</label>
+      </span>
+     </div>
  
  </ion-card> 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

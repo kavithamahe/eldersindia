@@ -47,13 +47,15 @@
   </ion-item>
 
   <p *ngIf="!messageForm.controls.message.valid && (messageForm.controls.message.dirty || submitAttempt)" class="err-reds shake">Please enter the message</p>
-  
+  <div *ngFor="let filenames of filename">
   <ion-item *ngIf="filename != undefined">
     <div class="documents" *ngIf="filename != undefined">
-   <p><i class="fa fa-file-text-o" aria-hidden="true"></i> &nbsp;{{filename}}</p>
+   <p><i class="fa fa-file-text-o" aria-hidden="true"></i> &nbsp;{{filenames.file_name}}</p>
    </div>
   
   </ion-item>
+  </div>
+  <div>Attachment</div>
    <input type="file" (change)="fileChange($event)" placeholder="Upload file" >
 </ion-list>
 </ion-card>

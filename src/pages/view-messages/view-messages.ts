@@ -119,9 +119,10 @@ public dashboardPage()
    // this.navCtrl.setRoot(CreateMessagePage,msgObject);
     this.navCtrl.push(CreateMessagePage,msgObject);
   }
-  public messageForward(filename,subject,message)
+  public messageForward(subject,message)
   {
-    let msgObject={"filename":filename,"subject":subject,"message":message,msgType:"forward"};
+    console.log(this.attachmentInfo);
+    let msgObject={"filename":this.attachmentInfo,"subject":subject,"message":message,msgType:"forward"};
     this.navCtrl.push(CreateMessagePage,msgObject);
   }
   deleteMessage(messageId,viewType)

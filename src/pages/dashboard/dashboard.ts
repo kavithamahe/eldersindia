@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Http,Headers,RequestOptions } from '@angular/http';
-import {  Platform,NavController, NavParams,AlertController,ToastController} from 'ionic-angular';
+import { Platform,NavController, NavParams,AlertController,ToastController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CallNumber, Vibration} from 'ionic-native';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
@@ -15,6 +15,8 @@ import { BlogsPage } from '../../pages/blogs/blogs';
 import { ConnectionsPage } from '../../pages/connections/connections';
 import { MessagesPage } from '../../pages/messages/messages';
 import { BlogtabsPage } from '../../pages/blogtabs/blogtabs';
+import { PaymentPage } from '../../pages/payment/payment';
+
 
 /*
   Generated class for the Dashboard page.
@@ -134,6 +136,9 @@ export class DashboardPage {
 
   ionViewDidLoad() {
     this.nativeAudio.preloadSimple('uniqueId1', 'assets/sound/Siren 21.mp3').then(this.onSuccess, this.onError);
+  }
+  payment(){
+    this.navCtrl.setRoot(PaymentPage);
   }
   public servicesPage()
   {

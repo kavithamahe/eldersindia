@@ -55,11 +55,14 @@
             </ion-select>
               </ion-item>
               <!-- </ion-item> -->
+              <ion-item>
+              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecost}}
+              </ion-label>
+
+              </ion-item>
              <ion-list radio-group>
             		  <ion-label>Service Type</ion-label>
-   
-		
-                  <ion-item>
+                 <ion-item>
                     <ion-label>One time</ion-label>
                     <ion-radio value="goe" (click)="onetime(searchButton)"></ion-radio>
                   </ion-item>
@@ -231,13 +234,21 @@
 
 <ion-footer>
   <ion-toolbar color="primary"> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
-    <ion-buttons>
+    <ion-buttons *ngIf="seviceCheck == 0">
       <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
    <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
       <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()">
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
      <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
+    </ion-buttons>
+     <ion-buttons  *ngIf="seviceCheck == 1">
+      <button *ngIf="seviceCheck == 1" ion-button color="royal" large icon-right showWhen="ios" (click)="paynow()">&nbsp;Pay Now
+       <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+      <button *ngIf="seviceCheck == 1" ion-button color="light" large icon-right hideWhen="ios" (click)="paynow()">&nbsp;Pay Now
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
     </ion-buttons>
     <ion-buttons end *ngIf="seviceCheck == 0">
       <button ion-button color="royal" large icon-right showWhen="ios" 
@@ -249,11 +260,12 @@
         <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>
+    
     <ion-buttons end *ngIf="seviceCheck == 1">
-      <button *ngIf="seviceCheck == 1" ion-button color="royal" large icon-right showWhen="ios" (click)="submit()" (press)="presssubmit()">&nbsp;Submit
+      <button *ngIf="seviceCheck == 1" ion-button color="royal" large icon-right showWhen="ios" (click)="submit()" (press)="presssubmit()">&nbsp;Pay Later
        <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button *ngIf="seviceCheck == 1" ion-button color="light" large icon-right hideWhen="ios" (click)="submit()" (press)="presssubmit()">&nbsp;Submit
+      <button *ngIf="seviceCheck == 1" ion-button color="light" large icon-right hideWhen="ios" (click)="submit()" (press)="presssubmit()">&nbsp;Pay Later
         <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>
