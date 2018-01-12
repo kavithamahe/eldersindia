@@ -200,7 +200,8 @@
          <ion-label class="label-tittle">Service Category</ion-label>
             <ion-item>
               <ion-label class="sel-label">Service Category</ion-label>
-              <ion-select class="select-brd" multiple="true" [(ngModel)]="servicecategory" [ngModelOptions]="{standalone: true}" placeholder="Service Category" (ionChange)="selectsubcategory(servicecategory)">
+              <ion-select class="select-brd" multiple="true" 
+              [(ngModel)]="servicecategory" [ngModelOptions]="{standalone: true}" placeholder="Service Category" (ionChange)="selectsubcategory(servicecategory)">
                 <ion-option *ngFor="let servicecategory of service_category" value={{servicecategory.id}} [selected]="servicecategory.id == servicecategory">{{servicecategory.service}}
                 </ion-option>
               </ion-select>
