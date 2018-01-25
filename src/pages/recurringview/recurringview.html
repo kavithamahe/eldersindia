@@ -26,9 +26,9 @@
 <ion-card  *ngFor="let recurring of recurringRequestinfo" class="job-detailsview">
 <ion-grid class="package-needs">
   <ion-row>
-  <ion-col col-12 text-wrap>
+  <!-- <ion-col col-12 text-wrap>
     <h2 text-wrap text-capitalize>Heading</h2>
-	</ion-col>
+	</ion-col> -->
 	  </ion-row>
 	    <ion-row>
   <ion-col col-12 text-wrap>
@@ -45,7 +45,7 @@
     <b>Preferred date & time </b><p>{{recurring.created_at}} {{recurring.preferred_time}}</p>
 		</ion-col>
 	  </ion-row>
-	  	  	  	    <ion-row>
+	 <ion-row *ngIf="recurring.scheduled_at != null">
   <ion-col col-12 text-wrap>
     <b>Scheduled date</b><p>{{recurring.scheduled_at}}</p>
 	</ion-col>

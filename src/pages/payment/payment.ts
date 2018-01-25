@@ -34,7 +34,10 @@ surl:any;
 furl:any;
 service_provider:any;
 udf1:any;
+servicecost:any;
    constructor(public http: Http,public navCtrl: NavController,public storage:Storage,public blogListService:BlogListService, public navParams: NavParams) {
+  this.servicecost = navParams.get("servicecost");
+  console.log(this.servicecost);
   this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();
@@ -52,7 +55,7 @@ udf1:any;
   
    this.key="rjQUPktU";
  this.productinfo="We are ApnaCare, a comprehensive healthcare resources company that is committed to take care of the health and wellness of the elderly in India. To do so, we have over the years built our expertise in the curation and delivery of the best-in-class elderly healthcare services, healthcare professionals and home care. Our specialists offer a range of home healthcare services including post hospitalization care, rehab care, physiotherapy, doctor visits, diagnostics, supply of medical equipment, and assistance in identifying suitable living spaces for the elderly. Our services can be accessed globally to serve the elderly living in Bangalore, Chennai, Hyderabad, Kolkata and Mumbai.";
-this.amount='1';
+this.amount=this.servicecost;
 this.firstname='arun';
 this.email="muthu.k@quadrupleindia.com";
 this.phone="82203780131";

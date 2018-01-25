@@ -43,7 +43,7 @@
 
 <p><i class="fa fa-map-marker" aria-hidden="true" style="padding-left:3px;"></i><span *ngFor="let locations of singleJob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
 <p><i class="fa fa-building-o"></i><span>{{singleJob?.company_name}}</span></p>
- <p><i class="fa fa-calendar-o"> </i><span *ngIf="singleJob?.created_at">Posted On: {{singleJob?.created_at |  date :'MMM dd y'}}</span></p>
+ <p><i class="fa fa-calendar-o"> </i><span *ngIf="singleJob?.created_at">Posted On: {{singleJob?.created_at}}</span></p>
  <p><i class="fa fa-calendar-o"> </i><span *ngIf="singleJob?.job_expiry">Valid Upto: {{singleJob?.job_expiry}}</span></p>
 
 <ion-row>
@@ -54,7 +54,7 @@
 <b>Functional area</b>
  <span>{{singleJob?.name}}</span>
 <b>Salary</b>
-<span *ngIf="singleJob?.salary">RS:{{singleJob?.salary}} </span> 
+<span *ngIf="singleJob?.salary"><i class="fa fa-inr"> </i>{{singleJob?.salary}} </span> 
  <span *ngFor="let funArea of functional_area">{{funArea?.name}}</span> 
    
 <b>Experience</b><span>{{singleJob?.min_experience}} - {{singleJob?.max_experience}} years</span> 
@@ -125,7 +125,7 @@
     <span *ngFor="let jobType of applyjob?.job_type; let isLast2=last">{{jobType?.name}}{{isLast2 ? '' : ', '}}</span>
  <b>Functional area</b>
  <span>{{applyjob?.name}}</span>  
-<b>Salary</b><span *ngIf="applyjob?.salary">{{applyjob?.salary}} </span> 
+<b>Salary</b><span *ngIf="applyjob?.salary"><i class="fa fa-inr"> </i>{{applyjob?.salary}} </span> 
  <span *ngFor="let funArea of functional_area">{{funArea?.name}}</span> 
    
   <b>Experience</b><span>{{applyjob?.min_experience}} - {{applyjob?.max_experience}} years</span> 

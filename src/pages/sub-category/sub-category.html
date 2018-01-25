@@ -40,7 +40,7 @@
  </ion-input>
 </ion-card>
 <ion-card class="pack-listed">
-<ion-item *ngFor = "let subcategory of subcategories.info" 
+<ion-item *ngFor = "let subcategory of subcategories.info | filter: term" 
 [color]="subcategory.color" class="sub-cat-listed">
 
    <p (click)="openSelected(subcategory)"> {{subcategory.name}} </p><i class="fa fa-chevron-right left-right-side"></i>
@@ -65,7 +65,7 @@
                  <p>{{package.loc_name}}</p>
                 <small><i class="fa fa-inr" aria-hidden="true"></i> &nbsp;{{package.package_amount}}</small>
             
-</ion-item>
+      </ion-item>
               </ion-col>
         </ion-row>
             </ion-item>

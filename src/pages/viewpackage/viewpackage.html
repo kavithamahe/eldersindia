@@ -26,7 +26,7 @@
 <ion-row>
   <ion-col>
   	<b>Elder Name</b>
-	<p>{{packageData?.name}}{{packageData?.last_name}}</p>
+	<p>{{packageData?.name}} {{packageData?.last_name}}</p>
 	<b>Email</b>
 	<p>{{packageData?.elder_email}}</p>
 	<b>Mobile number</b>
@@ -36,7 +36,7 @@
 	<b>Package</b>
 	<p>{{packageData?.package_name}}</p>
 	<b>Cost</b>
-	<p>{{packageData?.package_amount}}</p>
+	<p><i class="fa fa-inr" aria-hidden="true"></i>{{packageData?.package_amount}}</p>
 	<b>Package Status</b>
 	<p *ngIf="packageData?.req_status == 0" class="pen"> Pending</p>
   <p *ngIf="packageData?.req_status == 1" class="act"> Active</p>
@@ -48,7 +48,9 @@
 <ion-row *ngIf="packageData?.payment_remark != '' ">
   <ion-col>
   <b>Payment Status</b>
-  <p> {{packageData?.payment_remark}}</p>
+  <p *ngIf="packageData?.payment_type == 1">Cash payment</p>
+  <p *ngIf="packageData?.payment_type == 2">Cheque payment</p>
+  <p *ngIf="packageData?.payment_type == 3">Online payment</p>
   </ion-col>
 
 </ion-row>

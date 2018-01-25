@@ -36,7 +36,6 @@ export class CommunityServices {
   getCommunityPostsUrl:any;
    constructor(public appConfig:AppConfig,public http: Http,private transfer: Transfer,private filePath: FilePath,public storage:Storage,public toastCtrl: ToastController) {
      this.getCommunityPostsUrl = appConfig.setrooturl();
-     console.log(this.getCommunityPostsUrl);
     this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();
@@ -312,10 +311,10 @@ myprofile(id){
    return this.http.post(`${this.getCommunityPostsUrl }removeFeedpost`,this.delete,this.options)
    .map(res =>res.json());
  }
- manageLists(searchText){
+ manageLists(searchText,options){
     this.lists={"searchValue":searchText}
       
-    return this.http.post(`${this.getCommunityPostsUrl }getElderListBySponser`,this.lists,this.options)
+    return this.http.post(`${this.getCommunityPostsUrl }getElderListBySponser`,this.lists,options)
     .map(res =>res.json());
   }
   loginDetail(id){

@@ -119,6 +119,7 @@ mytype:string ="password";
   nativepath: any='';
   file_name:any;
   other:any;
+  avatar1:any="";
   
 //-----------------------END-------------------//
 
@@ -480,7 +481,7 @@ public emergencies =  [
      destinationType: Camera.DestinationType.DATA_URL
     }).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,'+imageData;
-      this.avatar = this.base64Image;
+      this.avatar1 = this.base64Image;
      }, (err) => {
       console.log(err);
     });
@@ -713,7 +714,11 @@ getareaof_interest(){
 }
  addDependent(){
     //---------------------------------edited-------------------------------//
-
+  if(this.avatar1 != ""){
+    this.avatar = this.avatar1;
+  }else{
+    this.avatar = "";
+  }
         
 
     // let dependentData = {"info":
