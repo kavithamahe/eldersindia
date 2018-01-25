@@ -169,6 +169,7 @@ getHashKey()
       this.phone,this.surl,this.service_provider,this.udf1).subscribe(     
       (loginuser) => {
         console.log(loginuser);
+        this.hash = loginuser.result;
     },
 
     (err) => { 
