@@ -17,7 +17,7 @@ import { Http,Headers,RequestOptions } from '@angular/http';
   providers:[BlogListService]
 })
 export class PaymentPage {
-	headers;
+  headers;
 token:string;
 options:any;
 rootUrl:any;
@@ -34,10 +34,71 @@ surl:any;
 furl:any;
 service_provider:any;
 udf1:any;
+serviceData:any;
+subcategory:any;
+sub_category_id:any;
+service_ids:any;
+service:any;
+category_id:any;
+category:any;
 servicecost:any;
+datetime:any;
+dependentId:any;
+durations:any;
+exclude_days:any;
+from_date:any;
+from_time:any;
+serviceType:any;
+selected_dates:any;
+time_slot:any;
+to_date:any;
+to_time:any;
+location_id:any;
+lead_time:any;
+vendor_id:any;
+package_id:any;
+preferred_time:any;
+quantity:any;
+serviceTypes:any;
+service_request_id:any;
+
    constructor(public http: Http,public navCtrl: NavController,public storage:Storage,public blogListService:BlogListService, public navParams: NavParams) {
-  this.servicecost = navParams.get("servicecost");
-  console.log(this.servicecost);
+  
+  this.serviceData=navParams.get("serviceData");
+    this.serviceData=navParams.get("serviceData");
+    this.datetime=this.serviceData.datetime;
+    this.dependentId =this.serviceData.dependentId;
+    this.durations =this.serviceData.durations;
+    this.exclude_days =this.serviceData.exclude_days;
+    this.from_date=this.serviceData.from_date;
+    this.from_time=this.serviceData.from_time;
+    this.serviceType =this.serviceData.serviceType;
+    this.selected_dates=this.serviceData.selected_dates;
+    this.time_slot=this.serviceData.time_slot;
+    this.to_date=this.serviceData.to_date;
+    this.to_time=this.serviceData.to_time;
+    this.package_id = this.serviceData.package_id;
+    this.preferred_time= this.serviceData.preferred_time;
+    this.quantity= this.serviceData.quantity;
+    this.location_id=navParams.get("location_id");
+    this.lead_time=navParams.get("lead_time");
+    this.vendor_id=navParams.get("vendor_id");
+
+  this.servicecost=navParams.get("servicecost");
+
+  this.category=navParams.get("category");
+
+  this.category_id=navParams.get("category_id");
+
+  this.service=navParams.get("service");
+
+  this.service_ids=navParams.get("service_ids");
+
+  this.sub_category_id=navParams.get("sub_category_id");
+
+  this.subcategory=navParams.get("subcategory");
+
+  console.log(this.serviceData);
   this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();
@@ -48,6 +109,7 @@ servicecost:any;
     storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
       console.log(this.rootUrl);
       this.getHashKey();
+      this.serviceRequestSubmitbeforePayment();
       });
      storage.get('id').then((id) => { this.user_id=id; })
    });
@@ -55,7 +117,7 @@ servicecost:any;
   
    this.key="rjQUPktU";
  this.productinfo="We are ApnaCare, a comprehensive healthcare resources company that is committed to take care of the health and wellness of the elderly in India. To do so, we have over the years built our expertise in the curation and delivery of the best-in-class elderly healthcare services, healthcare professionals and home care. Our specialists offer a range of home healthcare services including post hospitalization care, rehab care, physiotherapy, doctor visits, diagnostics, supply of medical equipment, and assistance in identifying suitable living spaces for the elderly. Our services can be accessed globally to serve the elderly living in Bangalore, Chennai, Hyderabad, Kolkata and Mumbai.";
-this.amount=this.servicecost;
+this.amount='1';
 this.firstname='arun';
 this.email="muthu.k@quadrupleindia.com";
 this.phone="82203780131";
@@ -69,15 +131,39 @@ this.udf1="6";
     console.log('ionViewDidLoad PaymentPage');
 
   }
+
+
+
+
+
+  serviceRequestSubmitbeforePayment(){
+    this.blogListService.serviceRequestSubmitbeforePayment(this.rootUrl,this.servicecost,
+      this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,
+     this.subcategory,this.datetime,this.dependentId,this.durations,this.exclude_days,
+     this.from_date,this.from_time,this.serviceType,this.selected_dates,this.time_slot,
+     this.to_date,this.to_time,this.package_id,this.preferred_time,this.quantity,
+     this.location_id,this.lead_time,this.vendor_id).subscribe(     
+      (loginuser) => {
+        console.log(loginuser.result);
+        this.serviceTypes= loginuser.result.serviceType;
+        console.log(this.serviceTypes);
+        this.service_request_id = loginuser.result.service_request_id;
+        this.getHashKey();
+    },
+
+    (err) => { 
+        console.log(err);
+        
+    },
+  )
+  }
+
 getHashKey()
 {
-	
      this.blogListService.paymentTran(this.rootUrl,this.key,this.productinfo,this.txnid,this.amount,this.firstname,this.email,
       this.phone,this.surl,this.service_provider,this.udf1).subscribe(     
       (loginuser) => {
-        console.log(loginuser.result);
-        this.hash = loginuser.result;
-        
+        this.hash=loginuser.result;
     },
 
     (err) => { 
@@ -88,8 +174,8 @@ getHashKey()
 }
 
    submitForm(sendParam){
-   	document.forms["sendParam"].submit();
-   	//document.sendParam.submit();
+    document.forms["sendParam"].submit();
+    //document.sendParam.submit();
 
   }
  
