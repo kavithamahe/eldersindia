@@ -34,7 +34,69 @@ surl:any;
 furl:any;
 service_provider:any;
 udf1:any;
+serviceData:any;
+subcategory:any;
+sub_category_id:any;
+service_ids:any;
+service:any;
+category_id:any;
+category:any;
+servicecost:any;
+datetime:any;
+dependentId:any;
+durations:any;
+exclude_days:any;
+from_date:any;
+from_time:any;
+serviceType:any;
+selected_dates:any;
+time_slot:any;
+to_date:any;
+to_time:any;
+location_id:any;
+lead_time:any;
+vendor_id:any;
+package_id:any;
+preferred_time:any;
+quantity:any;
    constructor(public http: Http,public navCtrl: NavController,public storage:Storage,public blogListService:BlogListService, public navParams: NavParams) {
+  
+  // this.serviceData=navParams.get("serviceData");
+  //   this.serviceData=navParams.get("serviceData");
+  //   this.datetime=this.serviceData.datetime;
+  //   this.dependentId =this.serviceData.dependentId;
+  //   console.log(this.dependentId);
+  //   this.durations =this.serviceData.durations;
+  //   this.exclude_days =this.serviceData.exclude_days;
+  //   this.from_date=this.serviceData.from_date;
+  //   this.from_time=this.serviceData.from_time;
+  //   this.serviceType =this.serviceData.serviceType;
+  //   this.selected_dates=this.serviceData.selected_dates;
+  //   this.time_slot=this.serviceData.time_slot;
+  //   this.to_date=this.serviceData.to_date;
+  //   this.to_time=this.serviceData.to_time;
+  //   this.package_id = this.serviceData.package_id;
+  //   this.preferred_time= this.serviceData.preferred_time;
+  //   this.quantity= this.serviceData.quantity;
+  //   this.location_id=navParams.get("location_id");
+  //   this.lead_time=navParams.get("lead_time");
+  //   this.vendor_id=navParams.get("vendor_id");
+
+  // this.servicecost=navParams.get("servicecost");
+
+  // this.category=navParams.get("category");
+
+  // this.category_id=navParams.get("category_id");
+
+  // this.service=navParams.get("service");
+
+  // this.service_ids=navParams.get("service_ids");
+
+  // this.sub_category_id=navParams.get("sub_category_id");
+
+  // this.subcategory=navParams.get("subcategory");
+
+  // console.log(this.serviceData);
   this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();
@@ -66,15 +128,47 @@ this.udf1="6";
     console.log('ionViewDidLoad PaymentPage');
 
   }
+
+
+
+
+// package_id
+// :
+// ""
+// preferred_time
+// :
+// "03:00 AM - 04:00 AM"
+// quantity
+// :
+// ""
+
+
+
+
+  // serviceRequestSubmitbeforePayment(){
+  //   this.blogListService.serviceRequestSubmitbeforePayment(this.rootUrl,this.servicecost,
+  //     this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,
+  //    this.subcategory).subscribe(     
+  //     (loginuser) => {
+  //       console.log(loginuser.result);
+  //       this.hash = loginuser.result;
+        
+  //   },
+
+  //   (err) => { 
+  //       console.log(err);
+        
+  //   },
+  // )
+  // }
+
 getHashKey()
 {
 	
      this.blogListService.paymentTran(this.rootUrl,this.key,this.productinfo,this.txnid,this.amount,this.firstname,this.email,
       this.phone,this.surl,this.service_provider,this.udf1).subscribe(     
       (loginuser) => {
-        console.log(loginuser.result);
-        this.hash = loginuser.result;
-        
+        console.log(loginuser);
     },
 
     (err) => { 
