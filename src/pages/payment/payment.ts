@@ -4,6 +4,9 @@ import { BlogListService } from '../../providers/blog-list-service';
 import { Storage } from '@ionic/storage';
 import { Http,Headers,RequestOptions } from '@angular/http';
 
+declare var RazorpayCheckout: any;
+
+
 /**
  * Generated class for the PaymentPage page.
  *
@@ -61,68 +64,102 @@ preferred_time:any;
 quantity:any;
    constructor(public http: Http,public navCtrl: NavController,public storage:Storage,public blogListService:BlogListService, public navParams: NavParams) {
   
-  // this.serviceData=navParams.get("serviceData");
-  //   this.serviceData=navParams.get("serviceData");
-  //   this.datetime=this.serviceData.datetime;
-  //   this.dependentId =this.serviceData.dependentId;
-  //   console.log(this.dependentId);
-  //   this.durations =this.serviceData.durations;
-  //   this.exclude_days =this.serviceData.exclude_days;
-  //   this.from_date=this.serviceData.from_date;
-  //   this.from_time=this.serviceData.from_time;
-  //   this.serviceType =this.serviceData.serviceType;
-  //   this.selected_dates=this.serviceData.selected_dates;
-  //   this.time_slot=this.serviceData.time_slot;
-  //   this.to_date=this.serviceData.to_date;
-  //   this.to_time=this.serviceData.to_time;
-  //   this.package_id = this.serviceData.package_id;
-  //   this.preferred_time= this.serviceData.preferred_time;
-  //   this.quantity= this.serviceData.quantity;
-  //   this.location_id=navParams.get("location_id");
-  //   this.lead_time=navParams.get("lead_time");
-  //   this.vendor_id=navParams.get("vendor_id");
+//   // this.serviceData=navParams.get("serviceData");
+//   //   this.serviceData=navParams.get("serviceData");
+//   //   this.datetime=this.serviceData.datetime;
+//   //   this.dependentId =this.serviceData.dependentId;
+//   //   console.log(this.dependentId);
+//   //   this.durations =this.serviceData.durations;
+//   //   this.exclude_days =this.serviceData.exclude_days;
+//   //   this.from_date=this.serviceData.from_date;
+//   //   this.from_time=this.serviceData.from_time;
+//   //   this.serviceType =this.serviceData.serviceType;
+//   //   this.selected_dates=this.serviceData.selected_dates;
+//   //   this.time_slot=this.serviceData.time_slot;
+//   //   this.to_date=this.serviceData.to_date;
+//   //   this.to_time=this.serviceData.to_time;
+//   //   this.package_id = this.serviceData.package_id;
+//   //   this.preferred_time= this.serviceData.preferred_time;
+//   //   this.quantity= this.serviceData.quantity;
+//   //   this.location_id=navParams.get("location_id");
+//   //   this.lead_time=navParams.get("lead_time");
+//   //   this.vendor_id=navParams.get("vendor_id");
 
-  // this.servicecost=navParams.get("servicecost");
+//   // this.servicecost=navParams.get("servicecost");
 
-  // this.category=navParams.get("category");
+//   // this.category=navParams.get("category");
 
-  // this.category_id=navParams.get("category_id");
+//   // this.category_id=navParams.get("category_id");
 
-  // this.service=navParams.get("service");
+//   // this.service=navParams.get("service");
 
-  // this.service_ids=navParams.get("service_ids");
+//   // this.service_ids=navParams.get("service_ids");
 
-  // this.sub_category_id=navParams.get("sub_category_id");
+//   // this.sub_category_id=navParams.get("sub_category_id");
 
-  // this.subcategory=navParams.get("subcategory");
+//   // this.subcategory=navParams.get("subcategory");
 
-  // console.log(this.serviceData);
-  this.storage.ready().then(() => {
-    storage.get('token').then((token) => { this.token=token;
-    this.headers = new Headers();
-    this.headers.append('Content-Type', 'application/json');
-    this.headers.append('Authorization', 'Bearer ' + this.token);
-    this.options = new RequestOptions({ headers: this.headers });
-       })    
-    storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
-      console.log(this.rootUrl);
-      this.getHashKey();
-      });
-     storage.get('id').then((id) => { this.user_id=id; })
-   });
-  this.getTxnId();
+//   // console.log(this.serviceData);
+//   this.storage.ready().then(() => {
+//     storage.get('token').then((token) => { this.token=token;
+//     this.headers = new Headers();
+//     this.headers.append('Content-Type', 'application/json');
+//     this.headers.append('Authorization', 'Bearer ' + this.token);
+//     this.options = new RequestOptions({ headers: this.headers });
+//        })    
+//     storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
+//       console.log(this.rootUrl);
+//       this.getHashKey();
+//       });
+//      storage.get('id').then((id) => { this.user_id=id; })
+//    });
+//   this.getTxnId();
   
-   this.key="rjQUPktU";
- this.productinfo="We are ApnaCare, a comprehensive healthcare resources company that is committed to take care of the health and wellness of the elderly in India. To do so, we have over the years built our expertise in the curation and delivery of the best-in-class elderly healthcare services, healthcare professionals and home care. Our specialists offer a range of home healthcare services including post hospitalization care, rehab care, physiotherapy, doctor visits, diagnostics, supply of medical equipment, and assistance in identifying suitable living spaces for the elderly. Our services can be accessed globally to serve the elderly living in Bangalore, Chennai, Hyderabad, Kolkata and Mumbai.";
-this.amount='1';
-this.firstname='arun';
-this.email="muthu.k@quadrupleindia.com";
-this.phone="82203780131";
-this.surl="http://192.168.1.187:8000/paymentRenderforSR";
-this.furl="http://192.168.1.187:8000/paymentfailureforSR";
-this.service_provider="payu_paisa";
-this.udf1="6";
+//    this.key="rjQUPktU";
+//  this.productinfo="We are ApnaCare, a comprehensive healthcare resources company that is committed to take care of the health and wellness of the elderly in India. To do so, we have over the years built our expertise in the curation and delivery of the best-in-class elderly healthcare services, healthcare professionals and home care. Our specialists offer a range of home healthcare services including post hospitalization care, rehab care, physiotherapy, doctor visits, diagnostics, supply of medical equipment, and assistance in identifying suitable living spaces for the elderly. Our services can be accessed globally to serve the elderly living in Bangalore, Chennai, Hyderabad, Kolkata and Mumbai.";
+// this.amount='1';
+// this.firstname='arun';
+// this.email="muthu.k@quadrupleindia.com";
+// this.phone="82203780131";
+// this.surl="http://192.168.1.187:8000/paymentRenderforSR";
+// this.furl="http://192.168.1.187:8000/paymentfailureforSR";
+// this.service_provider="payu_paisa";
+// this.udf1="6";
   }
+  pay() {
+    var options = {
+      description: 'Credits towards consultation',
+      image: 'https://i.imgur.com/3g7nmJC.png',
+      currency: 'INR',
+      key: 'rzp_test_1DP5mmOlF5G5ag',
+      amount: '5000',
+      name: 'foo',
+      prefill: {
+        email: 'demo@email.com',
+        contact: '1234567890',
+        name: 'My Name'
+      },
+      theme: {
+        color: '#F37254'
+      },
+      modal: {
+        ondismiss: function() {
+          alert('dismissed')
+        }
+      }
+    };
+
+    var successCallback = function(payment_id) {
+      alert('payment_id: ' + payment_id);
+    };
+
+    var cancelCallback = function(error) {
+      alert(error.description + ' (Error ' + error.code + ')');
+    };
+
+    RazorpayCheckout.open(options, successCallback, cancelCallback);
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PaymentPage');
@@ -132,73 +169,63 @@ this.udf1="6";
 
 
 
-// package_id
-// :
-// ""
-// preferred_time
-// :
-// "03:00 AM - 04:00 AM"
-// quantity
-// :
-// ""
 
 
 
-
-  // serviceRequestSubmitbeforePayment(){
-  //   this.blogListService.serviceRequestSubmitbeforePayment(this.rootUrl,this.servicecost,
-  //     this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,
-  //    this.subcategory).subscribe(     
-  //     (loginuser) => {
-  //       console.log(loginuser.result);
-  //       this.hash = loginuser.result;
+//   // serviceRequestSubmitbeforePayment(){
+//   //   this.blogListService.serviceRequestSubmitbeforePayment(this.rootUrl,this.servicecost,
+//   //     this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,
+//   //    this.subcategory).subscribe(     
+//   //     (loginuser) => {
+//   //       console.log(loginuser.result);
+//   //       this.hash = loginuser.result;
         
-  //   },
+//   //   },
 
-  //   (err) => { 
-  //       console.log(err);
+//   //   (err) => { 
+//   //       console.log(err);
         
-  //   },
-  // )
-  // }
+//   //   },
+//   // )
+//   // }
 
-getHashKey()
-{
+// getHashKey()
+// {
 	
-     this.blogListService.paymentTran(this.rootUrl,this.key,this.productinfo,this.txnid,this.amount,this.firstname,this.email,
-      this.phone,this.surl,this.service_provider,this.udf1).subscribe(     
-      (loginuser) => {
-        console.log(loginuser);
-        this.hash = loginuser.result;
-    },
+//      this.blogListService.paymentTran(this.rootUrl,this.key,this.productinfo,this.txnid,this.amount,this.firstname,this.email,
+//       this.phone,this.surl,this.service_provider,this.udf1).subscribe(     
+//       (loginuser) => {
+//         console.log(loginuser);
+//         this.hash = loginuser.result;
+//     },
 
-    (err) => { 
-        console.log(err);
+//     (err) => { 
+//         console.log(err);
         
-    },
-  )   
-}
+//     },
+//   )   
+// }
 
-   submitForm(sendParam){
-   	document.forms["sendParam"].submit();
-   	//document.sendParam.submit();
+//    submitForm(sendParam){
+//    	document.forms["sendParam"].submit();
+//    	//document.sendParam.submit();
 
-  }
+//   }
  
- guid() {
-          return this.s4() + this.s4() +  this.s4() + this.s4();
-    }
+//  guid() {
+//           return this.s4() + this.s4() +  this.s4() + this.s4();
+//     }
 
-     s4() {
-      return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-    }
+//      s4() {
+//       return Math.floor((1 + Math.random()) * 0x10000)
+//       .toString(16)
+//       .substring(1);
+//     }
 
-    getTxnId(){
+//     getTxnId(){
       
-       this.txnid = this.guid();
-    }
+//        this.txnid = this.guid();
+//     }
  
 
 }
