@@ -23,6 +23,8 @@ import {MomentModule} from 'angular2-moment';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import { Transfer } from '@ionic-native/transfer';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 
 
 import { LoginPage } from '../pages/login/login';
@@ -254,6 +256,6 @@ import { ServiceProvider } from '../providers/service-provider';
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,InAppBrowser,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
 })
 export class AppModule {}

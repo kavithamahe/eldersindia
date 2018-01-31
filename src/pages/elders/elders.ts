@@ -343,7 +343,7 @@ public emergencies =  [
           this.allergic=this.manageDependentData.allergic;
           this.elder_service = this.manageDependentData.in_service;
           this.elder_number= this.manageDependentData.mobile;
-          this.file_name=this.manageDependentData.docs;
+          this.file_name=this.manageDependentData.docs_name;
           this.elder_dob= moment(this.manageDependentData.dob).format("YYYY-MM-DD");
       
           this.elder_email= this.manageDependentData.email;
@@ -901,8 +901,8 @@ getareaof_interest(){
         "service_interest":this.servicecategory,
         "serviceCategory_interest":this.servicecategoryinterest_data,
         "app":"",
-        "file_name":this.file_name,
-        "file_path":this.file_path
+        "document_name":this.file_name,
+        "docs":this.file_path
       }]}).subscribe(elders =>{
                     // console.log(elders); 
                     let msg='';
@@ -1088,8 +1088,8 @@ getareaof_interest(){
                           "education":this.education_data,
                           "sponsor_id":this.sponsor_id,
                           "job_interested":this.job_interest,
-                          "file_name":this.file_name,
-                          "file_path":this.file_path
+                          "document_name":this.file_name,
+                          "docs":this.file_path
                           }]
                         }).subscribe(
            elders=>{

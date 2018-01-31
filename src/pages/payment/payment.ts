@@ -1,8 +1,16 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams ,Platform} from 'ionic-angular';
 import { BlogListService } from '../../providers/blog-list-service';
 import { Storage } from '@ionic/storage';
 import { Http,Headers,RequestOptions } from '@angular/http';
+
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+import { SubcategoryListPage } from '../../pages/subcategory-list/subcategory-list';
+
+declare var cordova;
+declare var RazorpayCheckout: any;
+
 
 /**
  * Generated class for the PaymentPage page.
@@ -61,8 +69,10 @@ preferred_time:any;
 quantity:any;
 serviceTypes:any;
 service_request_id:any;
-
-   constructor(public http: Http,public navCtrl: NavController,public storage:Storage,public blogListService:BlogListService, public navParams: NavParams) {
+udf2:any;
+udf3:any;
+salt:any;
+   constructor(public iab:InAppBrowser,public platform: Platform,public http: Http,public navCtrl: NavController,public storage:Storage,public blogListService:BlogListService, public navParams: NavParams) {
   
   this.serviceData=navParams.get("serviceData");
     this.serviceData=navParams.get("serviceData");
@@ -108,7 +118,7 @@ service_request_id:any;
        })    
     storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
       console.log(this.rootUrl);
-      this.getHashKey();
+      //this.getHashKey();
       this.serviceRequestSubmitbeforePayment();
       });
      storage.get('id').then((id) => { this.user_id=id; })
@@ -116,12 +126,13 @@ service_request_id:any;
   this.getTxnId();
   
    this.key="rjQUPktU";
+   this.salt="e5iIg1jwi8"
  this.productinfo="We are ApnaCare, a comprehensive healthcare resources company that is committed to take care of the health and wellness of the elderly in India. To do so, we have over the years built our expertise in the curation and delivery of the best-in-class elderly healthcare services, healthcare professionals and home care. Our specialists offer a range of home healthcare services including post hospitalization care, rehab care, physiotherapy, doctor visits, diagnostics, supply of medical equipment, and assistance in identifying suitable living spaces for the elderly. Our services can be accessed globally to serve the elderly living in Bangalore, Chennai, Hyderabad, Kolkata and Mumbai.";
-this.amount='1';
+this.amount=this.servicecost;
 this.firstname='arun';
 this.email="muthu.k@quadrupleindia.com";
 this.phone="82203780131";
-this.surl="http://192.168.1.187:8000/paymentRenderforSR";
+this.surl="http://192.168.1.187:8000/paymentsuccessforSR";
 this.furl="http://192.168.1.187:8000/paymentfailureforSR";
 this.service_provider="payu_paisa";
 this.udf1="6";
@@ -145,9 +156,9 @@ this.udf1="6";
      this.location_id,this.lead_time,this.vendor_id).subscribe(     
       (loginuser) => {
         console.log(loginuser.result);
-        this.serviceTypes= loginuser.result.serviceType;
-        console.log(this.serviceTypes);
-        this.service_request_id = loginuser.result.service_request_id;
+        this.udf3= loginuser.result.serviceType;
+        console.log(this.udf3);
+        this.udf2 = loginuser.result.service_request_id;
         this.getHashKey();
     },
 
@@ -161,7 +172,7 @@ this.udf1="6";
 getHashKey()
 {
      this.blogListService.paymentTran(this.rootUrl,this.key,this.productinfo,this.txnid,this.amount,this.firstname,this.email,
-      this.phone,this.surl,this.service_provider,this.udf1).subscribe(     
+      this.phone,this.surl,this.service_provider,this.udf1,this.udf2,this.udf3).subscribe(     
       (loginuser) => {
         this.hash=loginuser.result;
     },
@@ -174,9 +185,30 @@ getHashKey()
 }
 
    submitForm(sendParam){
-    document.forms["sendParam"].submit();
-    //document.sendParam.submit();
+   // var url = "https://www.payumoney/payuBiz.html?amount="+amt+"&name="+name+"&mobileNo="+mobile+"&email="+email+"&bookingId="+bookingId+"&productinfo="+productinfo+"&hash="+encrypttext+"&salt="+salt+"&key="+key ;
 
+    
+    
+    var url = "https://test.payu.in/_payment?key="+this.key+"&amount="+this.amount+"&firstname="+this.firstname+"&phone="+this.phone+"&email="+this.email+"&txnid="+this.txnid+"&productinfo="+this.productinfo+"&hash="+this.hash+"&surl="+this.surl+"&furl="+this.furl+"&service_provider="+this.service_provider+"&udf1="+this.udf1+"&udf2="+this.udf2+"&udf3="+this.udf3 ;
+
+    //var url = "https://test.payu.in/_payment?amount="+this.amount+"&firstname="+this.firstname+"&phone="+this.phone+"&email="+this.email+"&txnid="+this.txnid+"&productinfo="+this.productinfo+"&hash="+this.hash+"&key="+this.key+"&salt="+this.salt+"&surl="+this.surl+"&service_provider="+this.service_provider+"&udf1="+this.udf1+"&udf2="+this.udf2+"&udf3="+this.udf3 ;
+     console.log(url);
+     // cordovaInAppBrowser.open(url, '_blank', options)
+ //      this.platform.ready().then(() => {
+ //   let browser = new InAppBrowser(url,'_blank');
+ // });
+      const browser = this.iab.create(url,'_blank');
+      // const watch = browser.on('loadstart').subscribe(function(event){
+      //   console.log('loadstart');
+      // });
+      //  .then(function(event) {
+      //    // success
+      //  })
+      //  .catch(function(event) {
+      // //   // error
+      //  });
+   document.forms["sendParam"].submit();
+   
   }
  
  guid() {
@@ -194,6 +226,38 @@ getHashKey()
        this.txnid = this.guid();
     }
  
+ pay() {
+    var options = {
+      description: 'Credits towards consultation',
+      image: 'https://i.imgur.com/3g7nmJC.png',
+      currency: 'INR',
+      key: 'rzp_test_1DP5mmOlF5G5ag',
+      amount: '5000',
+      name: 'foo',
+      prefill: {
+        email: 'demo@email.com',
+        contact: '1234567890',
+        name: 'My Name'
+      },
+      theme: {
+        color: '#F37254'
+      },
+      modal: {
+        ondismiss: function() {
+          alert('dismissed')
+        }
+      }
+    };
 
+    var successCallback = function(payment_id) {
+      alert('payment_id: ' + payment_id);
+    };
+
+    var cancelCallback = function(error) {
+      alert(error.description + ' (Error ' + error.code + ')');
+    };
+
+    RazorpayCheckout.open(options, successCallback, cancelCallback);
+  }
 }
 

@@ -90,7 +90,7 @@ pressinstant(vendorData){
   this.instantRequest(vendorData);
 }
   instantRequest(vendorData) {
-    if(this.userType != "sponsor"){
+    if(this.userType != "sponsor"){ 
       let d = new Date();
     let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
     d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
