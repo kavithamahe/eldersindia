@@ -50,6 +50,7 @@ userType:any;
 website:any;
 lead_time:any='00:00';
 @ViewChild('ghbslides') slider: Slides;
+vendor:any;
 // @ViewChild('ghbslides') ghbslides: any;
 
 
@@ -58,7 +59,8 @@ lead_time:any='00:00';
       this.subCategoryId = navParams.get("subCategoryId");
       this.locationId = navParams.get("location_id");
       this.vendor_id = navParams.get("vendor").id;    
-      this.vendor_name = navParams.get("vendor").name;    
+      this.vendor_name = navParams.get("vendor").name; 
+      this.vendor=navParams.get("vendor");
       this.showDetails = false;
       this.showRequestService = false;
       this.sub_category = false ;
@@ -208,7 +210,8 @@ pressContact(){
         this.showToast("There is no dependent. You can not apply job!");      
       
       }else{
-     let service_modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor:this.vendorList.vendorDetails});    
+        console.log(this.vendorList.vendorDetails);
+     let service_modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor:this.vendor});    
     service_modal.present();
     service_modal.onDidDismiss(data =>{
       if(data == "dismiss"){

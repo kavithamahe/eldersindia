@@ -76,8 +76,10 @@ serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id
       .map(res => res.json());
   }
   paymentTran(rootUrl,key,productinfo,txnid,amount,firstname,email,
-      phone,surl,service_provider,udf1){
+      phone,surl,service_provider,udf1,udf2,udf3){
+
      let _request= {"key":key,"amount":amount,"txnid":txnid,"phone":phone,"firstname":firstname,
+
      "email":email,"productinfo":productinfo,"surl":surl,"udf1":udf1,"service_provider":service_provider,"udf3":"serviceType",
      "udf2":"service_request_id"};
     return this.http.post(rootUrl+'checkpayUmoneyforSRMbl',_request,this.options)

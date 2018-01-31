@@ -81,11 +81,18 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'getRemarks',_request,this.options)
       .map(res => res.json()); 
   }
-  cancelRequest(serviceId) 
+  // cancelRequest(serviceId) 
+  // {
+  
+  //  let _request= {"sr_id":serviceId};
+  //   return this.http.post(this.rootUrl+'cancelServiceRequest',_request,this.options)
+  //     .map(res => res.json()); 
+  // }
+    cancelRequest(title,serviceId) 
   {
   
-   let _request= {"sr_id":serviceId};
-    return this.http.post(this.rootUrl+'cancelServiceRequest',_request,this.options)
+   let _request= {"info":{"status":3,"id":serviceId,"comments":title,"cancel_time":"","scheduled_date":""}}
+    return this.http.post(this.rootUrl+'updateServiceReceiveStatus',_request,this.options)
       .map(res => res.json()); 
   }
 }

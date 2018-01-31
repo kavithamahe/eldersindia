@@ -119,6 +119,7 @@ mytype:string ="password";
   nativepath: any='';
   file_name:any;
   other:any;
+  avatar1:any="";
   
 //-----------------------END-------------------//
 
@@ -342,7 +343,7 @@ public emergencies =  [
           this.allergic=this.manageDependentData.allergic;
           this.elder_service = this.manageDependentData.in_service;
           this.elder_number= this.manageDependentData.mobile;
-          this.file_name=this.manageDependentData.docs;
+          this.file_name=this.manageDependentData.docs_name;
           this.elder_dob= moment(this.manageDependentData.dob).format("YYYY-MM-DD");
       
           this.elder_email= this.manageDependentData.email;
@@ -480,7 +481,7 @@ public emergencies =  [
      destinationType: Camera.DestinationType.DATA_URL
     }).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,'+imageData;
-      this.avatar = this.base64Image;
+      this.avatar1 = this.base64Image;
      }, (err) => {
       console.log(err);
     });
@@ -713,7 +714,11 @@ getareaof_interest(){
 }
  addDependent(){
     //---------------------------------edited-------------------------------//
-
+  if(this.avatar1 != ""){
+    this.avatar = this.avatar1;
+  }else{
+    this.avatar = "";
+  }
         
 
     // let dependentData = {"info":
@@ -896,8 +901,8 @@ getareaof_interest(){
         "service_interest":this.servicecategory,
         "serviceCategory_interest":this.servicecategoryinterest_data,
         "app":"",
-        "file_name":this.file_name,
-        "file_path":this.file_path
+        "document_name":this.file_name,
+        "docs":this.file_path
       }]}).subscribe(elders =>{
                     // console.log(elders); 
                     let msg='';
@@ -1083,8 +1088,8 @@ getareaof_interest(){
                           "education":this.education_data,
                           "sponsor_id":this.sponsor_id,
                           "job_interested":this.job_interest,
-                          "file_name":this.file_name,
-                          "file_path":this.file_path
+                          "document_name":this.file_name,
+                          "docs":this.file_path
                           }]
                         }).subscribe(
            elders=>{

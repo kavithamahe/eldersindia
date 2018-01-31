@@ -106,7 +106,8 @@ base64Image:any;
           text: 'Resend OTP',
           handler: data => {
             this.sendotp();
-             prompt.present();
+            return false;
+            // prompt.present();
           }
         },
         {
@@ -128,6 +129,7 @@ base64Image:any;
   verifyotp(otp){
      this.providerService.verifyotp(otp).subscribe(otp => {
         this.providerService.showToast(otp.result);
+        this.loadMyProfile();
      },
    err =>{
       this.providerService.showErrorToast(err);

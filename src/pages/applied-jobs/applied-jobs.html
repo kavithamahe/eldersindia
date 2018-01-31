@@ -31,7 +31,7 @@
   <ion-card class="sel-packages">
     <ion-item class="select-loca">
       <ion-label>Functional Area</ion-label>
-      <ion-select [(ngModel)]="functionalArea" (ionChange)="onInit()" multiple="true">
+      <ion-select [(ngModel)]="functionalArea" (ionChange)="onInit()">
         <ion-option *ngFor="let functional of functionalAreaList" value="{{functional?.id}}">{{functional?.name}}</ion-option>      
       </ion-select>
     </ion-item>

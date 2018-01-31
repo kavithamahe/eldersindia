@@ -22,16 +22,20 @@
 <div class="register-form">
 <ion-grid>
           <ion-row *ngIf="user_type !='elder'">
-              <ion-label class="required">To</ion-label>
-          
-             <ion-select [(ngModel)]="selectedConnections" [ngModelOptions]="{standalone: true}">
+          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">To</ion-label>
+          <ion-item class="sel-label">
+          <ion-label>To</ion-label>
+             <ion-select  style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="selectedConnections" 
+             [ngModelOptions]="{standalone: true}">
           <ion-option *ngFor="let name of dependentLists" [value] = "name.id">{{name.name}}
           </ion-option>
-        </ion-select> 
+        </ion-select>  
+        </ion-item>
      </ion-row>
                
            
-  <button ion-button round full (click)="getPackage()" class="btn-blue">Get Package</button>
+  <button ion-button round full (click)="getPackage()" class="btn-blue">Get Package
+  </button>
 </ion-grid>
 </div>
 </form>
