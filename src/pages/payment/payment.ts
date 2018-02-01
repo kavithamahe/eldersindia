@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { SafariViewController } from '@ionic-native/safari-view-controller';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Storage } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+import { BlogListService } from '../../providers/blog-list-service';
+
 
 import 'rxjs/add/operator/map';
 
@@ -10,14 +13,29 @@ declare var RazorpayCheckout: any;
 
 @Component({
   selector: 'page-payment',
-  templateUrl: 'payment.html'
+  templateUrl: 'payment.html',
+  providers:[BlogListService]
+
 })
 export class PaymentPage {
+headers;
+token:string;
+options:any;
+rootUrl:any;
+user_id:any;
 
+  constructor(private iab: InAppBrowser,public storage:Storage,public blogListService:BlogListService,public navCtrl: NavController,private http: Http) {
 
-  constructor(private iab: InAppBrowser,public navCtrl: NavController,private safariViewController: SafariViewController,private http: Http) {
-
-
+this.storage.ready().then(() => {
+    storage.get('token').then((token) => { this.token=token;
+    this.headers = new Headers();
+    this.headers.append('Content-Type', 'application/json');
+    this.headers.append('Authorization', 'Bearer ' + this.token);
+    this.options = new RequestOptions({ headers: this.headers });
+       })    
+    storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl;       });
+     storage.get('id').then((id) => { this.user_id=id; })
+   });
 }
 
   pay() {
