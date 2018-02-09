@@ -8,6 +8,7 @@ import { CallNumber } from 'ionic-native';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { RecurringviewPagePage } from '../../pages/recurringview/recurringview';
 import { RecurringcancelPagePage } from '../../pages/recurringcancel/recurringcancel';
+import { PackagepaymentPagePage } from '../../pages/packagepayment/packagepayment';
 
 import { BlogListService } from '../../providers/blog-list-service';
 
@@ -64,6 +65,11 @@ serviceRequestScrollLists:any=[];
         position: 'top'
         });
    toast.present();
+  }
+   paynow(service_cost,service_id){
+    let service_type = "Recurring";
+    let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"service_type":service_type,"service_cost":service_cost,"service_id":service_id});
+      serviceModal.present();
   }
   getrecurringRequest(){
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});

@@ -104,6 +104,21 @@
 	<p class="tocken-no"><i class="fa fa-id-card-o"></i> {{service?.sr_token}}</p>
 	</ion-col>
 	</ion-row>	
+  <ion-row>
+  <ion-col width-50 style="padding-left:0px;">
+  
+  <span>
+   <p *ngIf="service.Paymentstatus == null"><ion-badge 
+   (click)="paynow(service.sr_token,service.service_cost,service?.id)">Pay Now</ion-badge></p>
+   <p *ngIf="service.Paymentstatus == 'captured'"><ion-badge>Paid</ion-badge></p>
+  </span>
+     
+  </ion-col>
+  <ion-col width-30>
+  
+  <p class="tocken-no"><i class="fa fa-rupee"></i>{{service.service_cost}}</p>
+  </ion-col>
+  </ion-row>  
 	</ion-col>	
 
   </ion-row>

@@ -57,7 +57,7 @@
                 <ion-item text-wrap class="inbox-sends">
 
                   <ion-row>
-                    <ion-col width-20>
+                    <ion-col width-20 [hidden]="!request?.avatar">
                       <ion-avatar item-left (click)="CommunityUserWall(request?.id)">
                         <img src="{{imageUrl+request?.avatar}}" [hidden]="!request?.avatar">
                       </ion-avatar>
@@ -111,13 +111,20 @@
                     </ion-avatar>
                   </ion-col>
                   <ion-col width-67>
-                   <p><i class="fa fa-blind" *ngIf="request?.user_type == 'elder' "></i> <span>
-                    <h6 class="name-conne" [hidden]="!request?.connections?.name" 
+                   <p><i class="fa fa-blind" *ngIf="request?.user_type == 'elder' "></i> 
+                   <span>
+                    <h6 class="name-conne"
                     (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}
-                    </h6></span></p>
+                    </h6>
+                      <h6 class="name-conne" *ngIf="request?.connections?.name == null" 
+                    (click)="CommunityUserWall(request?.id)">Name
+                    </h6>
+                    </span></p>
                     <p [hidden]="!request?.connections?.location"><i class="fa fa-map-marker"></i><span> {{request?.connections?.location}}</span>   
                     </p>
-                  </ion-col>
+
+                    <p *ngIf="request?.connections?.location == null"><i class="fa fa-map-marker"></i><span> Location</span>   
+                    </p>                  </ion-col>
                    <ion-col width-20 class="connection-btn">
                     <button ion-button (click)="cancelMember(request.connection_id)" small><i class="fa fa-ban" aria-hidden="true"></i></button>
                   </ion-col>

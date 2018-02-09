@@ -77,6 +77,24 @@
    </ion-col>
   </ion-row>
 
+ <ion-row>
+  
+    <ion-col width-100 class="child_menu">
+  <span>Service Cost</span>
+   <p>{{viewServiceRequestInfo?.service_cost}}</p>
+   
+   </ion-col>
+  </ion-row>
+
+ <ion-row>
+  
+    <ion-col width-100 class="child_menu">
+  <span>Payment Status</span>
+  <p *ngIf="viewServiceRequestInfo?.payUmny_payment_status == 'captured' ">Paid</p>
+   <p *ngIf="viewServiceRequestInfo?.payUmny_payment_status == null ">Not Paid</p>
+   </ion-col>
+  </ion-row>
+
   
 
   <ion-row>   

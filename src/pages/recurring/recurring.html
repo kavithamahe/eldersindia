@@ -67,9 +67,31 @@
       </ion-col>
   </ion-row>
    <ion-row>
-  <ion-col col-12 text-wrap>  
+  <ion-col col-12 >  
     <b>Request count</b><p>{{recurring.req_count}}</p>	
 	  </ion-col>
+  </ion-row>
+   <ion-row>
+  <ion-col col-12 *ngIf="recurring.payment_method == 'Partial Payment'">  
+    <b>Total Service cost</b><p>{{recurring.service_cost}}</p>  
+    </ion-col>
+     <ion-col col-12 >  
+    <b>Total Service cost</b><p>{{recurring.discount_service_cost}}</p>  
+    </ion-col>
+  </ion-row>
+   <ion-row>
+  <ion-col col-12>  
+    <b>Paid amount</b><p>{{recurring.discount_service_cost}}</p>  
+    </ion-col>
+  </ion-row>
+   <ion-row *ngIf="recurring.payment_method == 'Partial Payment'">
+  <ion-col col-12>  
+    <b>Balance amount </b><p>{{recurring.service_cost - recurring.discount_service_cost}}</p>  
+    </ion-col>
+      <ion-col col-12 *ngIf="recurring.payment_method == 'Partial Payment'">  
+    <button ion-button clear (click)="paynow(recurring.service_cost - recurring.discount_service_cost,recurring.service_id)">Pay Now</button> 
+    </ion-col>
+  
   </ion-row>
      <ion-row>
   <ion-col col-12 text-wrap> 

@@ -56,11 +56,8 @@
             </ion-select>
               </ion-item>
               <!-- </ion-item> -->
-              <ion-item>
-              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecost}}
-              </ion-label>
-
-              </ion-item>
+            
+            
              <ion-list radio-group>
             		  <ion-label>Service Type</ion-label>
                  <ion-item>
@@ -77,10 +74,15 @@
       <!-- <p>------------------------One Time----------------------------</p> -->
 
        <div *ngIf(searchButton)>
+         <ion-item>
+              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecost}}
+              </ion-label>
+
+              </ion-item>
            <ion-label stacked class="label-lb required">Preferred date</ion-label>
      
 		    <ion-item>
-           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" min={{date}}  formControlName ="date"></ion-datetime>
+           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" min={{date}}  formControlName ="date" ></ion-datetime>
         </ion-item>
 		
          <p class="err-reds shake" *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">Please select the preferred date
@@ -124,6 +126,11 @@
   <!-- <p>--------------------------recurring time start--------------------------</p> -->
 
     <div *ngIf(recurring)>
+       <ion-item>
+              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecosts}}
+              </ion-label>
+
+              </ion-item>
            <ion-label stacked class="label-lb required">Start date</ion-label>
      
         <ion-item>
@@ -216,7 +223,48 @@
           <ion-option [value] = "6" >Saturday</ion-option>
         </ion-select>
       </ion-item>
- 
+           <ion-list radio-group *ngIf ="datCount >= 10"> 
+                  <ion-label>Payment Type</ion-label>
+                 <ion-item>
+                    <ion-label>Partial Payment</ion-label>
+                    <ion-radio value="partialpay" (click)="partialpay(partialpays)"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Full Payment</ion-label>
+                      <ion-radio value="fullpay" (click)="fullpay(fullpays)" (ionChange)="getdiscountrecurringvalues">
+                      </ion-radio>
+                  </ion-item>
+            </ion-list>
+            <ion-list *ngIf(fullpays)>
+            <div>
+             <ion-item>
+             <ion-label></ion-label>
+             <ion-select (ionChange)="fullpaymentinfo()" [(ngModel)]="fullgetpaidPayment"  [ngModelOptions]="{standalone: true}">
+             <ng-container *ngFor="let payment of getpaymentDiscount">
+          <ion-option value={{payment.paidPayment}} *ngIf="payment.paidPayment >= 100">{{payment.paidPayment}}</ion-option>
+          </ng-container>
+        </ion-select>
+            </ion-item>
+            <ion-item *ngFor="let payment of fullpayDiscount">
+            <p *ngIf="payment.paidPayment >= 100">Discount : {{payment.paymentDiscount}} %</p>
+            <p *ngIf="payment.paidPayment >= 100">Price after discount : {{finalcost}}</p>
+            </ion-item>
+            </div>
+            </ion-list>
+            <ion-list *ngIf(partialpays)>
+            <ion-item>
+             <ion-label></ion-label>
+             <ion-select (ionChange)="paymentinfo()" [(ngModel)]="getpaidPayment"  [ngModelOptions]="{standalone: true}">
+             <ng-container *ngFor="let payment of getpaymentDiscount">
+          <ion-option value={{payment.paidPayment}} *ngIf="payment.paidPayment < 100">{{payment.paidPayment}}</ion-option>
+          </ng-container>
+        </ion-select>
+            </ion-item>
+            <ion-item *ngFor="let getpaidPayment of getpaidPaymentinfo"> 
+            <p>Discount : {{totalservice_cost}}%</p>
+            <p>Price after discount : {{finalcost}}</p>
+            </ion-item>
+            </ion-list>
     </div>    
 
     	</form>
@@ -268,7 +316,7 @@
       <button *ngIf="seviceCheck == 1" ion-button color="royal" large icon-right showWhen="ios" (click)="submit()" (press)="presssubmit()">&nbsp;Pay Later
        <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button *ngIf="seviceCheck == 1" ion-button color="light" large icon-right hideWhen="ios" (click)="submit()" (press)="presssubmit()">&nbsp;Pay Later
+      <button *ngIf="seviceCheck == 1 && searchButton" ion-button color="light" large icon-right hideWhen="ios" (click)="submit()" (press)="presssubmit()">&nbsp;Pay Later
         <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>

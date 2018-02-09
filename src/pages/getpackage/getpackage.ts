@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,ToastController,LoadingController,ViewController } from 'ionic-angular';
+import { NavController, NavParams,ToastController,LoadingController,ViewController,ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { PackageRequestPagePage }  from '../../pages/package-request/package-request';
 import { BlogListService } from '../../providers/blog-list-service';
+ import { PaymentPage } from '../../pages/payment/payment';
+ import { PackagepaymentPagePage } from '../../pages/packagepayment/packagepayment';
+
+
 /*
   Generated class for the GetpackagePage page.
 
@@ -20,8 +24,12 @@ rootUrl:any;
 packId:any;
 user_type:any;
 selectedConnections:any;
+paymenttype:any;
 dependentLists:any=[];
-  constructor(public navParams: NavParams,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
+vendor_id:any;
+package_validity:any;
+package_amount:any;
+  constructor(public navParams: NavParams,public modalCtrl: ModalController,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
 
   	this.storage.ready().then(() => { 
     storage.get('user_type').then((user_type) => { 
@@ -35,6 +43,9 @@ dependentLists:any=[];
       
    
         this.packId = navParams.get("packID");
+        this.vendor_id = navParams.get("vendor_id");
+        this.package_validity = navParams.get("package_validity");
+        this.package_amount = navParams.get("package_amount");
         this.dependentLists = navParams.get("dependents");
    });
   }
@@ -43,6 +54,11 @@ dependentLists:any=[];
   }
 
     getPackage(){
+      if(this.selectedConnections == undefined || this.paymenttype == undefined){
+        this.blogListService.showToast("Please select above details");
+      }
+      else{
+        if(this.paymenttype == "Offline Payment"){
   let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();    
       this.blogListService.getPackage(this.selectedConnections,this.packId).subscribe(connections => {
@@ -57,6 +73,13 @@ dependentLists:any=[];
     loader.dismiss();
       this.blogListService.showErrorToast(err);
   })
+    }
+    else{
+     let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
+      "package_amount":this.package_amount});
+      serviceModal.present();
+    }
+    }
  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad GetpackagePagePage');

@@ -42,6 +42,7 @@ import { FirsttimeloginPagePage } from '../pages/firsttimelogin/firsttimelogin';
 import { ViewpackagePagePage } from '../pages/viewpackage/viewpackage';
 import { ElderservicePagePage } from '../pages/elderservice/elderservice';
 import { PaymentPage } from '../pages/payment/payment';
+import { PackagepaymentPagePage } from '../pages/packagepayment/packagepayment';
 
 //packages related pages
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
@@ -172,7 +173,8 @@ import { ServiceProvider } from '../providers/service-provider';
     ChangePasswordPage,
     SettingsPage,
     ServiceModalPage,
-    TermsModalPage
+    TermsModalPage,
+    PackagepaymentPagePage
   ],
   imports: [
 
@@ -252,7 +254,8 @@ import { ServiceProvider } from '../providers/service-provider';
     ChangePasswordPage,
     SettingsPage,
     ServiceModalPage,
-    TermsModalPage
+    TermsModalPage,
+    PackagepaymentPagePage
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider

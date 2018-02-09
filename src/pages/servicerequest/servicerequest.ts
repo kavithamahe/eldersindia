@@ -1,11 +1,13 @@
 import { Component,ViewChild } from '@angular/core';
 import { Content } from 'ionic-angular';
-import { NavController, NavParams, LoadingController,ToastController,AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController,ToastController,AlertController,ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CallNumber } from 'ionic-native';
 import { ServiceRequestService } from '../../providers/service-request-service';
 import { ViewServiceRequestPage } from '../../pages/view-service-request/view-service-request';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+ import { PackagepaymentPagePage } from '../../pages/packagepayment/packagepayment';
+
 /*
   Generated class for the Servicerequest page.
 
@@ -35,7 +37,7 @@ sr_token:any;
 searchEvent:any="";
 sortby:any="";
 other:any;
-  constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
+  constructor(public alertCtrl: AlertController,public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
@@ -82,6 +84,10 @@ other:any;
         loader.dismiss();
       }
     ); 
+  }
+  paynow(sr_token,service_cost,service_id){
+    let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":service_cost,"service_id":service_id});
+      serviceModal.present();
   }
   public onInit()
   {

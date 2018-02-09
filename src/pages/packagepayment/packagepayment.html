@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="hei-head" color="primary">
     <ion-title color="primary" class="tittles-md" text-capitalize>
-     Online Payment
+      Payment
     </ion-title>
     <ion-buttons start item-right class="close-iconss">
       <button ion-button (click)="dismiss()">
@@ -12,6 +12,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+<button ion-button (click)="pay()" *ngIf="service_type == undefind">Click Here To Pay</button>
+<button ion-button (click)="paypartial()" *ngIf="service_type != undefind">Click Here To partial</button>
 
-<button ion-button (click)="pay()" >Continue To Pay</button>
 </ion-content>

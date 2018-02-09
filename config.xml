@@ -91,4 +91,5 @@
         <variable name="DEEPLINK_5_HOST" value=" " />
     </plugin>
     <plugin name="com.razorpay.cordova" spec="git+https://github.com/razorpay/razorpay-cordova.git" />
+    <plugin name="cordova-plugin-toaster" spec="0.0.2" />
 </widget>

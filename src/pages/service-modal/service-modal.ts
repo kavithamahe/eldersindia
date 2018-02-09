@@ -54,11 +54,11 @@ user_type
     }
 
  }
- openRequestPackage(id){
+ openRequestPackage(id,vendor_id,package_validity,package_amount){
   if(this.vendorList.dependentLists.length == 1){
       this.dependentId = this.vendorList.dependentLists[0].id;
     }
-    let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id,dependents:this.vendorList.dependentLists});
+    let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id,vendor_id:vendor_id,package_validity:package_validity,package_amount:package_amount,dependents:this.vendorList.dependentLists});
     modal.present();
  }
  goToService(sub_service){

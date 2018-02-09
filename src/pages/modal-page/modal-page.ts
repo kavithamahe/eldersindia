@@ -86,8 +86,26 @@ export class ModalContentPage {
   percentage_cost:any;
   servicecost:any;
   vendorr:any;
+  getpaymentDiscount:any=[];
+  fullpays:boolean=false;
+  partialpays:boolean=false;
+  getpaidPayment:any;
+  getpaidPaymentinfo:any =[];
+  totalservice_costs:any;
+  totalservice_cost:any;
+  servicecosts:any;
+  paidPayment:any;
+  totalservice_costss:any;
+  finalcost:any;
+  paymenttype:any;
+  getfullpaidPayment:any;
+  fullpayDiscount:any =[];
+  fullgetpaidPayment:any;
+  fullpaymentdiscount:any;
+  finalpaymentfull:any;
+
   constructor(platform: Platform,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
-   {    
+   {   
      this.date = new Date().toISOString();
      this.dependentLists = params.get("dependentList");
      //this.dependents = this.dependentLists[0].id;
@@ -161,6 +179,14 @@ onlyNumberKey(event) {
     this.searchButton=false;
      this.recurring=!searchValues;
    }
+   fullpay(full){
+    this.fullpays=!full;
+    this.partialpays=false;
+   }
+   partialpay(partialpay){
+    this.partialpays=!partialpay;
+    this.fullpays=false;
+   }
      fixed(searchValuess){
       this.modalForm.value.preferredtime = "";
       this.durations = "";
@@ -184,7 +210,7 @@ onlyNumberKey(event) {
       this.modalForm.value.totime = "";
       this.modalForm.value.preferredtime = "";
      this.durations = "";
-      this.durations = "Full Day";
+      this.durations = "Full day";
     this.timeslots=false;
      this.fixedd=false;
       this.fulldays=!searchValuessss;
@@ -230,10 +256,27 @@ onlyNumberKey(event) {
              }  
        }
      this.datCount = this.count;
+     this.servicecosts=this.servicecost*this.count;
+     this.getRecurringDiscount(this.datCount);
+  }
+  getRecurringDiscount(datCount){
+     this.providerService.getRecurringDiscount(datCount)
+      .subscribe(data =>{ 
+          this.getpaymentDiscount = data.result;
+    },
+
+    (err) => { 
+     console.log(err);
+    },)
   }
  
   exclude(day){
-    this.excludeDays=[];
+    this.fullpays=false;
+    this.partialpays=false;
+    this.getpaidPayment="";
+    this.totalservice_cost="";
+    this.finalcost="";
+      this.excludeDays=[];
      this.excludeDays=day;    
     this.dayCalculation();
   }
@@ -247,6 +290,40 @@ onlyNumberKey(event) {
        this.terms = JSON.parse(data);
       }
      })
+   }
+   fullpaymentinfo(){
+     this.providerService.getdiscountrecurringvalues(this.fullgetpaidPayment)
+      .subscribe(data =>{ 
+        this.fullpayDiscount=data.result;
+        this.getfullpaidPayment=this.fullpayDiscount[0].paymentDiscount;
+        this.fullpaymentdiscount=this.servicecosts * this.getfullpaidPayment / 100;
+        this.finalcost=this.servicecosts - this.fullpaymentdiscount;
+        console.log(this.finalcost);
+    },
+
+    (err) => { 
+        console.log("you can not login");
+        //this.packageLists='';
+        this.flag="0";
+    },)
+   }
+   paymentinfo(){
+     this.providerService.getdiscountrecurringvalues(this.getpaidPayment)
+      .subscribe(data =>{ 
+        this.getpaidPaymentinfo=data.result;
+        this.totalservice_cost=this.getpaidPaymentinfo[0].paymentDiscount;
+        this.paidPayment=this.getpaidPaymentinfo[0].paidPayment;
+        this.totalservice_costs=this.servicecosts * this.paidPayment / 100;
+        this.totalservice_costss=this.totalservice_costs * this.totalservice_cost / 100;
+        this.finalcost = this.totalservice_costs - this.totalservice_costss;
+        console.log(this.finalcost);
+    },
+
+    (err) => { 
+        console.log("you can not login");
+        //this.packageLists='';
+        this.flag="0";
+    },)
    }
    packageinfo(){
     
@@ -267,10 +344,43 @@ onlyNumberKey(event) {
     this.next();
    }
    paynow(){
+     if(this.fullpays == true){
+        this.paymenttype = "Full Payment";
+      }
+      else if(this.finalcost == undefined){
+        this.paymenttype = "CommonRate";
+      }
+      else{
+        this.paymenttype = "Partial Payment";
+      }
+    if(this.datCount != undefined){
+      console.log(this.finalcost);
      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"datCount":this.datCount,"payment":this.paymenttype, 
+       "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+    
+    // this.navCtrl.setRoot(PaymentPage);
+    let serviceModal = this.modalCtrl.create(PaymentPage,{serviceData:serviceData,servicecost:this.servicecost,service_costs:this.servicecosts,servicediscountcost:this.finalcost,
+      category:this.category,category_id:this.category_id,service:this.service,service_ids:this.service_ids,
+      sub_category_id:this.sub_category_id,subcategory:this.subcategory,
+      location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id});
+      serviceModal.present();
+       serviceModal.onDidDismiss(data =>{
+      if(data == "dismiss"){
+        console.log(" schedule request modal dismissed..!");
+      }else{
+       this.seviceCheck = data;
+      }
+    })
+     }
+     else{
+      console.log("dfggfdg");
+         let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+ 
     // this.navCtrl.setRoot(PaymentPage);
     let serviceModal = this.modalCtrl.create(PaymentPage,{serviceData:serviceData,servicecost:this.servicecost,
       category:this.category,category_id:this.category_id,service:this.service,service_ids:this.service_ids,
@@ -284,6 +394,7 @@ onlyNumberKey(event) {
        this.seviceCheck = data;
       }
     })
+     }
 
    }
    next(){
@@ -389,7 +500,8 @@ var date2 = new Date(objToDate);
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
-       "serviceType":this.onetimes,"datCount":this.datCount,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+       "serviceType":this.onetimes,"datCount":this.datCount,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0],"service_cost":this.servicecost,"servicecost":this.servicecosts,
+       "payment":"CommonRate"};
        this.providerService.validateTimes(serviceData,this.location_id,this.lead_time,this.vendor_id,this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,this.subcategory,this.datCount).subscribe(
      (viewServiceRequest) => {
 
@@ -397,6 +509,10 @@ var date2 = new Date(objToDate);
     (err) => { 
         if(err.status===401)
         {
+
+
+
+
         this.providerService.showToast(JSON.parse(err._body).error);
         }
        else{
@@ -502,7 +618,8 @@ else{
        let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
-       "serviceType":this.onetimes,"datCount":this.datCount,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+       "serviceType":this.onetimes,"datCount":this.datCount,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0],"service_cost":this.servicecost,"servicecost":this.servicecosts,
+       "payment":"CommonRate"};
      this.providerService.validateTimes(serviceData,this.location_id,this.lead_time,this.vendor_id,this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,this.subcategory,this.datCount).subscribe(
      (viewServiceRequest) => {
 
@@ -574,7 +691,7 @@ else{
 
     
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"service_cost":this.servicecost,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
    
@@ -608,7 +725,7 @@ else{
     if(this.durations != undefined){
       // if(this.durations == 'Fixed hours'){}
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"service_cost":this.servicecost,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"datCount":this.datCount,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
   
@@ -642,7 +759,7 @@ else{
     }
       if(this.modalForm.value.date != "" && this.modalForm.value.time !=""){
        let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"service_cost":this.servicecost,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
    
@@ -671,7 +788,7 @@ else{
       if(this.modalForm.value.startdate != undefined && this.modalForm.value.enddate != undefined){
         if(this.durations != undefined){
        let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"service_cost":this.servicecost,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"datCount":this.datCount,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
  
