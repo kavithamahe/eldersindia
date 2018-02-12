@@ -13,8 +13,8 @@
 </ion-header>
 
 <ion-content class="edit">
-<div class="profile-edit"><span  *ngIf="user_type =='sponsor' " class="profile-img"><img 
-[src]="imageURL+profileData?.avatar" > </span>
+<div class="profile-edit"><span  *ngIf="user_type =='sponsor' " class="profile-img">
+<img [src]="imageURL+profileData?.avatar" > </span>
 			<p>{{profileData?.name}} {{profileData?.last_name}}</p></div>
 
 	<form [formGroup]="edit_profile_Form">
@@ -84,7 +84,8 @@
 		<br/>
 	  	<ion-row>
 		<ion-col>
-	    <button ion-button class="uploadimg" color="primary" (click)="accessGallery()"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Browse...</button>
+	    <button ion-button class="uploadimg" color="primary" (click)="accessGallery()">
+	    <i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Browse...</button>
 				</ion-col>
 				<ion-col>
 				 <img [src]="base64Image" *ngIf="base64Image" width="90" height="90" />

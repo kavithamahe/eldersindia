@@ -30,7 +30,7 @@
 </ion-card>
    </form>   
 
-
+</ion-card>
 
 <!-- <input type="file" name="file" (change)="fileChange($event)" id="file" class="inputfile" /> -->
 <!-- <label for="file">Choose a file</label> -->
@@ -72,10 +72,10 @@
 <!-- </ion-card> -->
 <br/>
 <ion-card class="btn-cars">
-        
- <button ion-button class="submit-btns" ion-button item-right small (click)="submitDependent($event)" *ngIf="dependentstatus == 0">Apply</button>
+ <button ion-button class="submit-btns" ion-button item-right small 
+ (click)="submitDependent($event)" *ngIf="dependentstatus == 0">Apply</button>
  <button ion-button class="submit-btns" ion-button item-right small *ngIf="dependentstatus == 1">Applied</button>
   <button ion-button class="submit-btns-can" ion-button item-right small (click)="cancelDependent()">Cancel</button>
  </ion-card>
- </ion-card>
+ 
 </ion-content>

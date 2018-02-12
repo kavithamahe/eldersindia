@@ -159,29 +159,64 @@ other:any;
       }
     );
   }
-  showConfirm(serviceId){
-     let confirm = this.alertCtrl.create({
-     subTitle: 'This request will be deleted',
-       buttons: [
+    showConfirm(serviceId){
+    let prompt = this.alertCtrl.create({
+      title: 'Cancel Service Request',
+     // message: "All reports are strictly confidential. Please describe the reason",
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Comments'
+        },
+      ],
+      buttons: [
         {
           text: 'Cancel',
-         },
+          handler: data => {
+            //console.log('Cancel clicked');
+          }
+        },
         {
-          text: 'Ok',
-          handler: () => {
-           this.cancelRequest(serviceId);
-          
+          text: 'Submit',
+          handler: data => {
+            
+            //console.log(data.title);
+            if(data.title == ""){
+              this.showToaster("Please enter the reason");
+               return false;
+            }
+            else{
+            this.cancelRequest(data.title,serviceId);
+          }
           }
         }
       ]
     });
-    confirm.present();
+    prompt.present();
   }
-  public cancelRequest(serviceId)
+  // showConfirm(serviceId){
+  //    let confirm = this.alertCtrl.create({
+  //    subTitle: 'This request will be deleted',
+  //      buttons: [
+  //       {
+  //         text: 'Cancel',
+  //        },
+  //       {
+  //         text: 'Ok',
+  //         handler: () => {
+  //          this.cancelRequest(serviceId);
+          
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   confirm.present();
+  // }
+  public cancelRequest(title,serviceId)
   {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.serviceRequest.cancelRequest(serviceId).subscribe(
+    this.serviceRequest.cancelRequest(title,serviceId).subscribe(
      (cancelRequest) => {
       this.getRemarksList=cancelRequest.result;   
       this.showToaster(cancelRequest.result); 

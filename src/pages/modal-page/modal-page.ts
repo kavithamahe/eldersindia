@@ -85,12 +85,13 @@ export class ModalContentPage {
   service_cost:any;
   percentage_cost:any;
   servicecost:any;
+  vendorr:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
      this.date = new Date().toISOString();
      this.dependentLists = params.get("dependentList");
      //this.dependents = this.dependentLists[0].id;
-     this.lead_time = params.get("lead_time");
+     this.lead_time = params.get("lead_time"); 
      this.serviceTitle = params.get("serviceTitle");
      this.location_id = params.get("location_id");
     
@@ -105,6 +106,8 @@ export class ModalContentPage {
      this.subcategory = this.requestService.subcategory;
      }
      if(params.get("vendor") != undefined){
+      this.vendorr = this.params.get("vendor");
+      console.log(this.vendorr);
       this.vendor = this.params.get("vendor").name;
       this.service_cost = this.params.get("vendor").service_cost;
       this.percentage_cost = this.params.get("vendor").percentage_cost;
@@ -264,8 +267,15 @@ onlyNumberKey(event) {
     this.next();
    }
    paynow(){
+     let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
     // this.navCtrl.setRoot(PaymentPage);
-    let serviceModal = this.modalCtrl.create(PaymentPage);
+    let serviceModal = this.modalCtrl.create(PaymentPage,{serviceData:serviceData,servicecost:this.servicecost,
+      category:this.category,category_id:this.category_id,service:this.service,service_ids:this.service_ids,
+      sub_category_id:this.sub_category_id,subcategory:this.subcategory,
+      location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id});
       serviceModal.present();
        serviceModal.onDidDismiss(data =>{
       if(data == "dismiss"){

@@ -24,8 +24,8 @@
       </button>
     </ion-buttons>
      <ion-buttons end right *ngIf="senddelete == true">
-      <button ion-button icon-only 
-      (click)="logDeleteStudents('send')"> <ion-icon name="trash"></ion-icon>
+      <button ion-button icon-only
+      (click)="sentlogDeleteStudents('sent')"> <ion-icon name="trash"></ion-icon>
 
       </button>
     </ion-buttons>
@@ -36,6 +36,8 @@
 
 
 <ion-content style="background:#fff;">
+
+
  <ion-fab right bottom>
     <button class="add-depends" ion-fab mini (click)="createMessage()" end><ion-icon name="create">
      </ion-icon></button>
@@ -71,7 +73,7 @@
       <ion-item-sliding  class="inbox-sends">
    <!--      <ion-item (click)="viewMessages(inbox?.id,'inbox')" 
         [ngClass]="inbox.read_status?'readmsg':'unreadmsg'" > -->
-         <ion-item (press)="deleteMultipel(inbox)" (click)="viewMessages(inbox?.id,'inbox')" [ngClass]="{ active: inbox.selected }">
+         <ion-item (press)="deleteMultipel(inbox)" (click)="viewMessages(inbox?.id,'inbox')" [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
             <ion-avatar item-left>
@@ -80,17 +82,22 @@
             </ion-col>
             <ion-col width-80  style="padding: 0px !important" class="send-box-content">
               <ion-row>
-                <ion-item width-70 style="padding: 0px !important" text-wrap 
+                <ion-item width-60 style="padding: 0px !important" text-wrap 
                 [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
                   <small>{{inbox?.author_name}}</small>
                 </ion-item>
+                <ion-col *ngIf = "inbox.attachemts != null">
+                <ion-icon name="attach"></ion-icon>
+                </ion-col>
                 <ion-col width-30 style="text-align-last: end; padding: 0px !important">
+
                 <p class="time-small"><i class="fa fa-clock-o"></i>&nbsp;{{inbox?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p>
                 </ion-col>
               </ion-row>
               <ion-row *ngIf="inbox.subject">
           <ion-col style="padding: 0px !important">
-        <ion-item class="subject-details" [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
+        <ion-item class="subject-details" 
+        [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
         
         <b>Subject :</b><span>{{inbox?.subject}}</span>
         </ion-item>
@@ -108,8 +115,7 @@
     </ion-list>
     <ion-row>
     <ion-col offset-33>
-      <button *ngIf="nextPageURL1!=null && nextPageURL1!=''" ion-button color="dark" clear 
-    (click)="doInfinite1($event)"><i class="fa fa-angle-down"></i></button>
+      <button *ngIf="nextPageURL1!=null && nextPageURL1!=''" ion-button color="dark" clear (click)="doInfinite1($event)"><i class="fa fa-angle-down"></i></button>
     </ion-col>
     </ion-row>
  <!--  <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
@@ -134,8 +140,7 @@
   <hr/>
   <ion-list *ngFor="let sent of sentInfo">
       <ion-item-sliding class="inbox-sends">
-        <ion-item (click)="viewMessages(sent?.id,'sent')" (press)="deletesendMultipel(sent)"
-        [ngClass]="sent.read_status?'readmsg':'unreadmsg'">
+        <ion-item (click)="viewMessages(sent?.id,'sent')" (press)="deletesendMultipel(sent)" [ngClass]="{active :  sent===selected }">
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
             <ion-avatar item-left>
@@ -145,18 +150,20 @@
           
             <ion-col width-80 class="send-box-content" style="padding: 0px !important">
               <ion-row>
-                <ion-item width-70 style="padding: 0px !important" text-wrap 
-                [ngClass]="sent.read_status?'readmsg':'unreadmsg'">
+                <ion-item width-70 style="padding: 0px !important" text-wrap>
                 <small>{{sent?.name}}</small>
                 </ion-item>
+                <ion-col *ngIf = "sent.attachments != null">
+                <ion-icon name="attach"></ion-icon>
+                </ion-col>
                 <ion-col width-30 style="text-align-last: end; padding: 0px !important">
                 <p><i class="fa fa-clock-o"></i>&nbsp;{{sent?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p>
                 </ion-col>
               </ion-row>
               <ion-row *ngIf="sent.subject">
 			     <ion-col style="padding: 0px !important">
-              <ion-item class="subject-details" 
-              [ngClass]="sent.read_status?'readmsg':'unreadmsg'"><b>Subject :</b>{{sent?.subject}}</ion-item>
+              <ion-item class="subject-details"><b>Subject :</b>{{sent?.subject}}
+              </ion-item>
 			    </ion-col>
               </ion-row>
             </ion-col>
@@ -171,8 +178,7 @@
     </ion-list>
     <ion-row>
     <ion-col offset-33>
-     <button *ngIf="nextPageURL2!=null && nextPageURL2!=''" ion-button color="dark" clear 
-     (click)="doInfinite2($event)"><i class="fa fa-angle-down"></i></button>
+     <button *ngIf="nextPageURL2!=null && nextPageURL2!=''" ion-button color="dark" clear (click)="doInfinite2($event)"><i class="fa fa-angle-down"></i></button>
 	 </ion-col>
    </ion-row>
   </ion-list>
@@ -207,6 +213,7 @@ white-space: nowrap;
  }
  .unreadmsg
  {
-
- }
+background-color: #F3F3F4;
+}
+.active a{color:red;}
 </style>

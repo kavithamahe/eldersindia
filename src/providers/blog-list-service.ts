@@ -60,10 +60,25 @@ Url:any;
     return this.http.post(rootUrl+'getRecurringServiceList',_request,this.options)
       .map(res => res.json());
   }
+  serviceRequestSubmitbeforePayment(rootUrl,servicecost,
+      category,category_id,service,service_ids,sub_category_id,
+     subcategory,datetime,dependentId,durations,exclude_days,
+    from_date,from_time,serviceType,selected_dates,time_slot,
+     to_date,to_time,package_id,preferred_time,quantity,
+     location_id,lead_time,vendor_id){
+    let _request= {"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
+dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
+from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
+"quantity":quantity,"selected_dates":selected_dates,"service":service,"serviceType":
+serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
+,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id};
+    return this.http.post(rootUrl+'serviceRequestSubmitbeforePayment',_request,this.options)
+      .map(res => res.json());
+  }
   paymentTran(rootUrl,key,productinfo,txnid,amount,firstname,email,
-      phone,surl,service_provider,udf1){
+      phone,surl,service_provider,udf1,udf2,udf3){
      let _request= {"key":key,"amount":amount,"txnid":txnid,"phone":phone,"firstname":firstname,
-     "email":email,"productinfo":productinfo,"surl":surl,"udf1":udf1,"service_provider":service_provider};
+     "email":email,"productinfo":productinfo,"surl":surl,"udf1":udf1,"service_provider":service_provider,"udf2":udf2,"udf3":udf3};
     return this.http.post(rootUrl+'checkpayUmoneyforSRMbl',_request,this.options)
       .map(res => res.json());
   }

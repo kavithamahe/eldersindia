@@ -28,6 +28,7 @@ import { RecurringPagePage } from '../pages/recurring/recurring';
 // kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
 import { CommunityPage } from '../pages/community/community';
+import { CommunityprofilePage } from '../pages/communityprofile/communityprofile';
 import { ManagePage } from '../pages/manage/manage';
 import { BlogtabsPage } from '../pages/blogtabs/blogtabs';
 import { BlogsPage } from '../pages/blogs/blogs';
@@ -464,6 +465,8 @@ initializePreview() {
                        break;
        case "news" : this.nav.push(NewsPage);
                        break;
+       case "blog" : this.nav.push(CommunityprofilePage,{profile_uid:data.additionalData.page_details.id});
+                break;
      }
   }
 

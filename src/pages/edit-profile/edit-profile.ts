@@ -33,6 +33,7 @@ email:any;
 logoUrl:any;
 base64Image:any;
 avatar:any="";
+avatar1:any = "";
 file: File;
 imageURL:any;
 //user_dob:any;
@@ -115,7 +116,7 @@ submitAttempt:any;
      destinationType: Camera.DestinationType.DATA_URL
     }).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,'+imageData;
-      this.avatar = this.base64Image;
+      this.avatar1 = this.base64Image;
      }, (err) => {
       console.log(err);
     });
@@ -123,6 +124,11 @@ submitAttempt:any;
 
 
  updateProfile(){
+  if(this.avatar1 != ""){
+    this.avatar = this.avatar1;
+  }else{
+    this.avatar = "";
+  }
    
    if(!this.edit_profile_Form.valid){
             this.submitAttempt = true;
@@ -155,7 +161,7 @@ submitAttempt:any;
     this.providerService.webServiceCall(`myaccountEdit`,this.updateData)
     .subscribe(data=>{
       this.showToaster(data.result);
-      this.navCtrl.setRoot(MyProfilePage);
+     this.navCtrl.setRoot(MyProfilePage);
       loader.dismiss();
           },
     err=>{

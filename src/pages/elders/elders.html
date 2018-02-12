@@ -32,7 +32,7 @@
             <ion-select class="select-brd"  [(ngModel)]="elder_relation" 
             placeholder="Relationship" formControlName="elder_relation" 
             [class.invalid]="!authForm.controls.elder_relation.valid && (authForm.controls.elder_relation.dirty)">
-                <ion-option  *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
+              <ion-option  *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
             </ion-select>
         </ion-item>
          <small *ngIf="!authForm.controls.elder_relation.valid  && (authForm.controls.elder_relation.dirty || submitAttempt)">
@@ -139,7 +139,7 @@
             <ion-label class="sel-label">Emergency</ion-label>
               <ion-select class="select-brd" formControlName="emergency_name"  
               [(ngModel)]="emergency_name[i]" placeholder="Person">
-                     <ion-option  *ngFor="let person of emergencies" value={{person.name}}>{{person.name}}
+                     <ion-option  *ngFor="let person of emergencies" value={{person.val}}>{{person.name}}
                      </ion-option>
                      <!-- <ion-option value="police">Police</ion-option>
                      <ion-option value="ambulance">Ambulance</ion-option>
@@ -200,7 +200,8 @@
          <ion-label class="label-tittle">Service Category</ion-label>
             <ion-item>
               <ion-label class="sel-label">Service Category</ion-label>
-              <ion-select class="select-brd" multiple="true" [(ngModel)]="servicecategory" [ngModelOptions]="{standalone: true}" placeholder="Service Category" (ionChange)="selectsubcategory(servicecategory)">
+              <ion-select class="select-brd" multiple="true" 
+              [(ngModel)]="servicecategory" [ngModelOptions]="{standalone: true}" placeholder="Service Category" (ionChange)="selectsubcategory(servicecategory)">
                 <ion-option *ngFor="let servicecategory of service_category" value={{servicecategory.id}} [selected]="servicecategory.id == servicecategory">{{servicecategory.service}}
                 </ion-option>
               </ion-select>

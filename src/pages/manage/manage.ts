@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController,LoadingController, NavParams,ToastController,AlertController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Http,Headers,RequestOptions } from '@angular/http';
 import { EldersPage } from '../../pages/elders/elders';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 
@@ -15,7 +16,8 @@ import { CommunityServices } from '../../providers/community-services';
 })
 export class ManagePage {
 show_option:boolean =false; 
-
+   headers:any;
+  options:any;
   manageLists:boolean;
   managesLists:boolean;
   manages:any=[];
@@ -31,24 +33,34 @@ show_option:boolean =false;
 
   constructor(public alertCtrl: AlertController, public nav: NavController,public storage:Storage, public navParams: NavParams,public toastCtrl: ToastController,public loadingCtrl: LoadingController,public communityServices: CommunityServices) {
    this.nav=nav;  
-        this.storage.ready().then(() => {
-      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      this.storage.get('id').then((id) => { this.user_id=id;});
-      this.storage.get('token').then((token) => { this.token=token; 
-       this.manageDetail();
-      })
-    });  
+
+     this.storage.ready().then(() => {
+        this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+    storage.get('token').then((token) => { this.token=token;
+        
+    this.headers = new Headers();
+    this.headers.append('Content-Type', 'application/json');
+    this.headers.append('Authorization', 'Bearer ' + this.token);
+    this.options = new RequestOptions({ headers: this.headers
+       
+        });
+    this.manageDetail();
+    })    
+    storage.get('id').then((id) => { this.user_id=id; })
+     
+   }); 
     }
    showConfirm(manage) {
     let DeleteId = manage.id;
     let confirm = this.alertCtrl.create({
-     subTitle: 'Confirm Deletion',
+     title: 'Confirm Deletion',
+     message: "Are you sure you want to delete this dependent !!",
       buttons: [
         {
           text: 'Cancel',
          },
         {
-          text: 'Agree',
+          text: 'Delete',
           handler: () => {
            this.deleteElder(DeleteId);
            this.manageDetail();
@@ -95,7 +107,7 @@ show_option:boolean =false;
   manageDetail(){
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-      this.communityServices.manageLists(this.searchText).subscribe(manages =>{
+      this.communityServices.manageLists(this.searchText,this.options).subscribe(manages =>{
      
       this.manages=manages.result.info.data;
       this.allowedElderFlag=manages.result.allowedElderFlag;
