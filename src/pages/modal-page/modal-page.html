@@ -266,16 +266,14 @@
              [ngModelOptions]="{standalone: true}">
              <ng-container *ngFor="let payment of getpaymentDiscount">
           <!-- <ion-option value={{payment.paidPayment}} *ngIf="payment.paidPayment < 100">{{payment.paidPayment}}</ion-option> -->
-         <ion-option value={{payment.discount_25}}>25%</ion-option>
-          <ion-option value={{payment.discount_50}}>50%</ion-option>
-          <ion-option value={{payment.discount_75}}>75%</ion-option>
+         <ion-option value="25">25%</ion-option>
+          <ion-option value="50">50%</ion-option>
+          <ion-option value="75">75%</ion-option>
           </ng-container>
         </ion-select>
             </ion-item>
-             <ion-item *ngFor="let payment of getpaymentDiscounts"> 
-            <p *ngIf="payment.discount_25">Discount : {{payment.discount_25}}%</p>
-            <p *ngIf="payment.discount_50">Discount : {{payment.discount_50}}%</p>
-            <p *ngIf="payment.discount_75">Discount : {{payment.discount_75}}%</p>
+             <ion-item> 
+            <p>Discount : {{discount}}%</p>
             <p>Price after discount : {{finalcost}}</p>
             </ion-item>
            <!--  <ion-item *ngFor="let getpaidPayment of getpaidPaymentinfo"> 

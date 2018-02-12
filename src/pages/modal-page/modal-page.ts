@@ -100,10 +100,11 @@ export class ModalContentPage {
   paymenttype:any;
   getfullpaidPayment:any;
   fullpayDiscount:any =[];
+  getpaymentDiscounts:any=[];
   fullgetpaidPayment:any;
   fullpaymentdiscount:any;
   finalpaymentfull:any;
-
+  discount:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {   
      this.date = new Date().toISOString();
@@ -308,10 +309,31 @@ onlyNumberKey(event) {
     },)
    }
    paymentinfo(){
+  
+    for(let data of this.getpaymentDiscount) {
+    if(this.getpaidPayment == "25"){
+      this.discount = data.discount_25;
+      console.log(this.discount);
+    }
+    if(this.getpaidPayment == "50"){
+       this.discount = data.discount_50;
+      console.log(this.discount);
+    }
+    if(this.getpaidPayment == "75"){
+       this.discount = data.discount_75;
+      console.log(this.discount);
+    }
+  }
+   
+ 
     console.log(this.getpaidPayment);
     this.paidPayment = this.servicecosts * this.getpaidPayment / 100;
     console.log(this.paidPayment);
-    this.finalcost = this.servicecosts - this.paidPayment;
+    this.totalservice_costss = this.paidPayment * this.discount / 100;
+    console.log(this.totalservice_costss);
+    this.finalcost = this.paidPayment - this.totalservice_costss;
+    console.log(this.finalcost);
+
    }
 
    // paymentinfo(){
