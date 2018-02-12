@@ -61,14 +61,15 @@
   <div>
   <ion-row>
 <ion-col width-80><ion-searchbar [(ngModel)]="inbox"></ion-searchbar></ion-col>
-  <ion-col width-20><button (click)="getItems(inbox)" ion-button small class="go-btn">Go</button> </ion-col>
+  <ion-col width-20><button (click)="getItems(inbox)" ion-button small class="go-btn">Go
+  </button> </ion-col>
 </ion-row>
    <!--  <ion-searchbar [(ngModel)]="inbox" (ionInput)="getItems(inbox)">
     </ion-searchbar> -->
   </div>
   <hr/>
-    
-
+    <div>
+ <!-- <i class="fa fa-check" aria-hidden="true" *ngIf="selected == true"></i> -->
       <ion-list *ngFor="let inbox of inboxInfo">
       <ion-item-sliding  class="inbox-sends">
    <!--      <ion-item (click)="viewMessages(inbox?.id,'inbox')" 
@@ -82,6 +83,8 @@
             </ion-col>
             <ion-col width-80  style="padding: 0px !important" class="send-box-content">
               <ion-row>
+             
+
                 <ion-item width-60 style="padding: 0px !important" text-wrap 
                 [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
                   <small>{{inbox?.author_name}}</small>
@@ -113,6 +116,7 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
+    </div>
     <ion-row>
     <ion-col offset-33>
       <button *ngIf="nextPageURL1!=null && nextPageURL1!=''" ion-button color="dark" clear (click)="doInfinite1($event)"><i class="fa fa-angle-down"></i></button>
@@ -204,6 +208,12 @@
 
 <style type="text/css">
 .list-md{margin:3px;}
+ .selected {
+    background-color: red !important;
+}
+.unselected{
+    background-color: white !important;
+}
 .inbox-sends .item-md .item-inner .input-wrapper .label-md{line-height:0px !important;}
  .ellipse-text
  {

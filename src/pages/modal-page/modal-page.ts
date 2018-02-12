@@ -308,23 +308,30 @@ onlyNumberKey(event) {
     },)
    }
    paymentinfo(){
-     this.providerService.getdiscountrecurringvalues(this.getpaidPayment)
-      .subscribe(data =>{ 
-        this.getpaidPaymentinfo=data.result;
-        this.totalservice_cost=this.getpaidPaymentinfo[0].paymentDiscount;
-        this.paidPayment=this.getpaidPaymentinfo[0].paidPayment;
-        this.totalservice_costs=this.servicecosts * this.paidPayment / 100;
-        this.totalservice_costss=this.totalservice_costs * this.totalservice_cost / 100;
-        this.finalcost = this.totalservice_costs - this.totalservice_costss;
-        console.log(this.finalcost);
-    },
-
-    (err) => { 
-        console.log("you can not login");
-        //this.packageLists='';
-        this.flag="0";
-    },)
+    console.log(this.getpaidPayment);
+    this.paidPayment = this.servicecosts * this.getpaidPayment / 100;
+    console.log(this.paidPayment);
+    this.finalcost = this.servicecosts - this.paidPayment;
    }
+
+   // paymentinfo(){
+   //   this.providerService.getdiscountrecurringvalues(this.getpaidPayment)
+   //    .subscribe(data =>{ 
+   //      this.getpaidPaymentinfo=data.result;
+   //      this.totalservice_cost=this.getpaidPaymentinfo[0].paymentDiscount;
+   //      this.paidPayment=this.getpaidPaymentinfo[0].paidPayment;
+   //      this.totalservice_costs=this.servicecosts * this.paidPayment / 100;
+   //      this.totalservice_costss=this.totalservice_costs * this.totalservice_cost / 100;
+   //      this.finalcost = this.totalservice_costs - this.totalservice_costss;
+   //      console.log(this.finalcost);
+   //  },
+
+   //  (err) => { 
+   //      console.log("you can not login");
+   //      //this.packageLists='';
+   //      this.flag="0";
+   //  },)
+   // }
    packageinfo(){
     
     this.providerService.packageListsInfo(this.location_id,this.service_id,this.authForm.value.dependents,this.vendor_id)

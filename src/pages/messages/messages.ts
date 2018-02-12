@@ -40,6 +40,7 @@ delete:any;
 deleteSelected =[];
 hidedelete: boolean = false;
 senddelete: boolean = false;
+selected:any;
    constructor(public navCtrl: NavController,public alertCtrl: AlertController, public navParams: NavParams,platform: Platform,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   	this.isAndroid = platform.is('android');
     if(navParams.get("viewType")!='' && navParams.get("viewType")!=null)
@@ -69,10 +70,13 @@ senddelete: boolean = false;
     if(index > -1) {
         this.deleteSelected.splice(index, 1);
        student.selected = false;
+       this.selected = student.selected;
+       console.log(this.selected);
     } else {
         this.deleteSelected.push(student.id);
        student.selected = true;
        this.hidedelete = student.selected;
+       this.selected = student.selected;
        //this.senddelete = "true";
     }
   }
