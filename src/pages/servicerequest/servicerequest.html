@@ -110,7 +110,7 @@
   <ion-row>
 
   <ion-col>
-  <button ion-button icon-left small *ngIf="(service?.vendor_status==5 &&(!service?.vendor_remarks))"(click)="enableRemark(i)">
+  <button class="make-rate" *ngIf="(service?.vendor_status==5 &&(!service?.vendor_remarks))"(click)="enableRemark(i)">
        Mark as Complete
   </button>
   </ion-col>
@@ -120,7 +120,7 @@
   </ion-grid>
   <ion-row>
   <ion-col width-20></ion-col>
-  <ion-col width-80>
+  <ion-col width-80 >
   
   <button ion-button class="remarks-btns" *ngIf="(service?.vendor_status==2 &&(!service?.vendor_remarks))"(click)="enableRemark(i)">
        <i class="fa fa-comments"></i>
@@ -129,34 +129,36 @@
   </ion-row>
 
 
-  <ion-list *ngIf="(i==showRemark)">
-  <hr>
-   <ion-item>
+  <ion-list *ngIf="(i==showRemark)" class="show-hiden">
+
     <h2>Rating</h2>
     
- </ion-item>
-  <h3 class="rating-clr">
+
+  <h3 class="rating-clr paa-ff">
 <rating [(ngModel)]="rating" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
 </h3>
 
  <!-- <ion-item>
     <ion-input [(ngModel)]="remarks" type="text" placeholder="Remarks"></ion-input>
   </ion-item>-->
+  <ion-card class="sel-packages pack-select">
   <ion-item text-wrap>
     <ion-label>Remarks</ion-label>
-    <ion-select [(ngModel)]="remarks" class="select-brds">
+    <ion-select [(ngModel)]="remarks" >
       <ion-option *ngFor="let remarkList of getRemarksList" value="{{remarkList.id}}">{{remarkList.remarks}}</ion-option>
     </ion-select>
   </ion-item>
+  </ion-card>
   <ion-item>
-  <ion-input type="text" placeholder="say something about your service experience.." 
-  [(ngModel)]="other">
-  </ion-input>
+  <ion-textarea autosize placeholder="say something about your service experience.." 
+  [(ngModel)]="other" class="remarks-listed">
+  </ion-textarea>
   </ion-item>
-  <ion-item>
-  <button ion-button full (click)="submitRemark(service?.id)">Submit</button>
-  </ion-item>
+
+  <button (click)="submitRemark(service?.id)" class="remarks-sb">Submit</button>
+
   </ion-list>  
+
 </ion-card>
 <ion-fab right bottom  *ngIf="serviceRequestInfo.length != 0">
     <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"></ion-icon></button>

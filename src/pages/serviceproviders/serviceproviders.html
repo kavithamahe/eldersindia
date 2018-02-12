@@ -1,45 +1,27 @@
-<!--
-  Generated template for the Serviceproviders page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
+<!------------------ header start ------------------>
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
       <button ion-button icon-only menuToggle>
-        <ion-icon name="menu"></ion-icon>
+      <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-   <ion-title text-center text-capitalize>Services</ion-title>   
+    <ion-title text-center text-capitalize>Services</ion-title>
     <ion-buttons right>
-    <button ion-button icon-only (click)="dashboardPage()">
-        <ion-icon name="home"></ion-icon>
+      <button ion-button icon-only (click)="dashboardPage()">
+      <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    
-    
   </ion-navbar>
 </ion-header>
+<!------------------ header start ------------------>
+<!------------------ content start ------------------>
 <ion-content class="content-intop">
-<ion-card class="pack-listed">
-<button *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full (click)="subCategory(service)" class="myblock service-bg{{i}}">
-
-
-<i class="{{service.icon}}" aria-hidden="true"></i>
-<i *ngIf="!service.icon" class="fa fa-bolt" aria-hidden="true"></i>
-<p>{{service.service}}</p>
-
-
-</button>
-</ion-card>
-
-		
-
-
-
- 
- 
-
+  <ion-card class="pack-listed">
+    <button *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full (click)="subCategory(service)" class="myblock service-bg{{i}}">
+    <i class="{{service.icon}}" aria-hidden="true"></i> <i *ngIf="!service.icon" class="fa fa-bolt" aria-hidden="true"></i>
+    <p>{{service.service}}</p>
+    </button>
+  </ion-card>
 </ion-content>
-<style>button{line-height:0px;}</style>
+<!------------------ content end ------------------>

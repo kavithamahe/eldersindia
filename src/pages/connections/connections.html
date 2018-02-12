@@ -51,7 +51,7 @@
               <ion-col width-20><button (click)="receivedsearch(searchrec)" ion-button small 
               class="go-btn">Go</button> </ion-col>
             </ion-row>
-       
+       <hr/>
             <div *ngFor="let request of receivedRquestInfo">
               <!-- <ion-item-sliding class="inbox-sends"> -->
                 <ion-item text-wrap class="inbox-sends">
@@ -63,8 +63,8 @@
                       </ion-avatar>
                     </ion-col>
                     <ion-col width-67>
-                    <p><i class="fa fa-blind" *ngIf="request?.user_type == 'elder' "></i> 
-                <span><h6 class="name-conne" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}</h6></span></p>
+                    <p>
+                <span><h6 class="name-conne" (click)="CommunityUserWall(request?.id)"><i class="fa fa-blind" *ngIf="request?.user_type == 'elder' "></i>  {{request?.connections?.name}} {{request?.connections?.last_name}}</h6></span></p>
                    
                       <p [hidden]="!request?.connections?.location"><i class="fa fa-map-marker"></i> <span>{{request?.connections?.location}}</span></p>
                     </ion-col>
@@ -111,9 +111,9 @@
                     </ion-avatar>
                   </ion-col>
                   <ion-col width-67>
-                   <p><i class="fa fa-blind" *ngIf="request?.user_type == 'elder' "></i> <span>
+                   <p> <span>
                     <h6 class="name-conne" [hidden]="!request?.connections?.name" 
-                    (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}
+                    (click)="CommunityUserWall(request?.id)"><i class="fa fa-blind" *ngIf="request?.user_type == 'elder' "></i> {{request?.connections?.name}} {{request?.connections?.last_name}}
                     </h6></span></p>
                     <p [hidden]="!request?.connections?.location"><i class="fa fa-map-marker"></i><span> {{request?.connections?.location}}</span>   
                     </p>
@@ -159,9 +159,9 @@
                     </ion-avatar>
                   </ion-col>
                 <ion-col width-67>
-                <p><i class="fa fa-blind" *ngIf="all?.user_type == 'elder' "></i> 
+                <p>
                 <span>
-                  <h6 class="name-conne" (click)="CommunityUserWall(all?.id)">{{all?.connections?.name}} {{all?.connections?.last_name}}</h6>
+                  <h6 class="name-conne" (click)="CommunityUserWall(all?.id)"><i class="fa fa-blind" *ngIf="all?.user_type == 'elder' "></i>  {{all?.connections?.name}} {{all?.connections?.last_name}}</h6>
                 </span></p>
                   <p [hidden]="!all?.connections?.location"><i class="fa fa-map-marker"></i><span> {{all?.connections?.location}}</span></p>
                 </ion-col>

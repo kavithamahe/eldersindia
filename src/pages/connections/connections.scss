@@ -41,6 +41,33 @@ page-connections {
 .list-ios .item-block .item-inner{ border:none;}
 .inbox-sends .item-inner .input-wrapper .label-md{ margin:0px;}
 .inbox-sends .item-inner .input-wrapper .label-md ion-row ion-col p i{font-size:15px !important; color:#1976D2 !important; width:10px;}
+.inbox-sends{ border-bottom:1px solid #FDEEE1 !important; }
+.inbox-sends .item-inner .input-wrapper .label-md ion-row { border-bottom:3px solid #ccc !important;  border-width: 3px;
+    border-style: solid;
+    -webkit-border-image: 
+      -webkit-gradient(linear, 0 0, 0 100%, from(#ED8023), to(rgba(0, 0, 0, 0))) 1 100%;
+    -webkit-border-image: 
+      -webkit-linear-gradient(#ED8023, rgba(0, 0, 0, 0)) 1 100%;
+    -moz-border-image:
+      -moz-linear-gradient(#ED8023, rgba(0, 0, 0, 0)) 1 100%;    
+    -o-border-image:
+      -o-linear-gradient(#ED8023, rgba(0, 0, 0, 0)) 1 100%;
+    border-image:
+      linear-gradient(to bottom, #ED8023, rgba(0, 0, 0, 0)) 1 100%;}
+.inbox-sends .item-inner .input-wrapper .label-ios ion-row {border-bottom:3px solid #ccc !important;  border-width: 3px;
+    border-style: solid;
+    -webkit-border-image: 
+      -webkit-gradient(linear, 0 0, 0 100%, from(#ED8023), to(rgba(0, 0, 0, 0))) 1 100%;
+    -webkit-border-image: 
+      -webkit-linear-gradient(#ED8023, rgba(0, 0, 0, 0)) 1 100%;
+    -moz-border-image:
+      -moz-linear-gradient(#ED8023, rgba(0, 0, 0, 0)) 1 100%;    
+    -o-border-image:
+      -o-linear-gradient(#ED8023, rgba(0, 0, 0, 0)) 1 100%;
+    border-image:
+      linear-gradient(to bottom, #ED8023, rgba(0, 0, 0, 0)) 1 100%;}
+.inbox-sends .item-inner .input-wrapper .label-md ion-row ion-col p i.fa-blind{color:#ED8023 !important; font-size:18px !important;}
+.inbox-sends .item-inner{padding-right:0px !important;}
 
 .inbox-sends .item-inner .input-wrapper .label-ios{ margin:0px;}
 .inbox-sends .item-inner .input-wrapper .label-ios ion-row ion-col p i{font-size:15px !important; color:#1976D2 !important; width:10px;}

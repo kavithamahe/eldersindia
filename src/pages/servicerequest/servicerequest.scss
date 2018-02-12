@@ -57,6 +57,31 @@ page-servicerequest {
     font-weight:400;
     width: 100%; color:#666;font-family: 'Muli', sans-serif;letter-spacing:0.2px;
 }
+ .remarks-sb{background: hsl(207, 98%, 34%) none repeat scroll 0 0;
+    border-radius: 30px;
+    float: left;
+    font-family: "Muli",sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    height: 35px; color:#fff;
+    text-transform: capitalize; margin-bottom:15px; margin-top:15px;
+    width:100%;
+}
+
+
+.make-rate{ border-radius:30px; color:#fff; background:#FE5722;font-size:16px; font-weight:600;  text-transform: capitalize; width:99.6%; height:35px; float:left;font-family: 'Muli', sans-serif; }
+.show-hiden{ margin:10px; }
+.select-brds{ border:1px solid #333;}
+.show-hiden .item-md{ background:none;}
+.show-hiden .item-ios{ background:none;}
+.show-hiden h2{color:#666;font-family: 'Muli', sans-serif;letter-spacing:0.2px; color:hsl(191, 100%, 29%) !important; font-size:18px; padding-bottom:6px;}
+.paa-ff{ margin-bottom:40px;}
+.show-hiden .item-md .item-inner .input-wrapper ion-textarea{border:1px solid #ccc; width:100%; margin-top:10px;}
+.show-hiden .item-md .item-inner{padding-right:0px;}
+
+.show-hiden .item-ios .item-inner .input-wrapper ion-textarea{border:1px solid #ccc; width:100%; margin-top:10px;}
+.show-hiden .item-ios .item-inner{padding-right:0px;}
+.pack-select{box-shadow:none;  margin:0px; width:100%; border:1px solid #ccc;}
 .service-conts i{margin-right:7px; font-size:15px; color:#333;}
 .service-req {
     color:#007A95!important;
