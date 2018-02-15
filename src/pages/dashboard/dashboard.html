@@ -1,137 +1,82 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-row>
-   <ion-col width-40><div>
-    <button ion-button icon-only menuToggle>
-      <ion-icon name="menu"></ion-icon> 
-    </button>
-    </div>
-    </ion-col>  
-    <ion-col width-50 center><div>
-    <ion-title>
-      Dashboard
-    </ion-title>
-    </div>
-    </ion-col>
-    <ion-col end>
-    </ion-col>
-    
-    
+      <ion-col width-40>
+        <div>
+          <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+      </ion-col>
+      <ion-col width-50 center>
+        <div>
+          <ion-title> Dashboard </ion-title>
+        </div>
+      </ion-col>
+      <ion-col end> </ion-col>
     </ion-row>
   </ion-navbar>
 </ion-header>
-
-
-
-
 <ion-content class="dashboard">
-<!--*ngIf="user_type=='elder'" -->
-
-<div *ngIf="user_type=='elder'" >
-<ion-grid class="dashboard">
-
-  <ion-row>
-
-    <ion-col width-50 class="ambulance" text-center  (click)="makeCall(ambulance)"> 
-	<span class="dashboard-listed">
-    <i class="fa fa-ambulance fa-5x"></i>
-    <p>AMBULANCE</p>
-	</span>
-    </ion-col>
-    <ion-col width-50 class="police" text-center (click)="makeCall(police)">
-	<span class="dashboard-listed">
-    <i class="fa fa-users fa-5x"></i>
-    <p>POLICE</p>
-	</span>
-	
-	</ion-col>
-  </ion-row>
-</ion-grid>
-<ion-grid class="dashboard">
-  <ion-row>
-
-    <ion-col width-50 class="hooter" text-center (click)="hooter(hooterOn)">
-	<span class="dashboard-listed">
-    <i class="fa fa-bell-o fa-5x"></i><p>
-    HOOTER</p>
-	</span>
-    </ion-col>
-    <ion-col width-50 class="call-sponsor" text-center (click)="makeCall(call_sponsor)">
-	<span class="dashboard-listed">
-	<i class="fa fa-phone-square fa-5x"></i>
-    <!--<img src="assets/img/headshot.jpg" class="img-circle">-->
-    <p>CALL SPONSOR</p>
-	</span>
-	
-	
-	</ion-col>
-  </ion-row>
-</ion-grid>
-</div>
-
- <ion-grid class="dashboard">
-  <ion-row>
-
-    <ion-col width-50 class="services" text-center (click)="servicesPage()">
-	<span class="dashboard-listed">
-    <i class="fa fa-cog fa-5x"></i>
-	
-    <p>SERVICES</p>
-	</span>
-    </ion-col>
-    <ion-col width-50 class="jobs" text-center (click)="jobsPage()">
-		<span class="dashboard-listed">
-    <i class="fa fa-cubes fa-5x"></i>
-	<p>JOBS</p>
-	</span>
-	</ion-col>
-  </ion-row>
-</ion-grid>
-
-<ion-grid class="dashboard">
-  <ion-row>
-    <ion-col width-50 class="community" text-center (click)="communityPage()">
-		<span class="dashboard-listed">
-    <i class="fa fa-universal-access fa-5x"></i>
-    <p>COMMUNITIES</p>
-	</span>
-	</ion-col>
-    <ion-col width-50 class="blogs" text-center (click)="blogsPage()">
-		<span class="dashboard-listed">
-    <i class="fa fa-rss fa-5x"></i>
-    <p>BLOGS</p>
-	</span>
-	</ion-col>
-  </ion-row>
-</ion-grid>
-<ion-grid class="dashboard">
-  <ion-row>
-    <ion-col width-50 class="connection" text-center (click)="connectionsPage()">
-	
-	<span class="dashboard-listed">
-     <i class="fa fa-sitemap fa-5x"></i><p>CONNECTIONS</p>
-	 
-	 </span>
-	 </ion-col>
-    <ion-col width-50 class="messagess" text-center (click)="messagesPage()">
-	<span class="dashboard-listed">
-   <i class="fa fa-envelope-o fa-5x"></i><p>MESSAGES</p>
-   
-      </span>
-   </ion-col>
-
-  </ion-row>
-</ion-grid>
-<!-- <ion-grid class="dashboard">
-  <ion-row>
-    <ion-col width-50 class="connection" text-center (click)="payment()">
-  
-  <span class="dashboard-listed">
-     <i class="fa fa-sitemap fa-5x"></i><p>Payment</p>
-   
-   </span>
-   </ion-col>
-
-  </ion-row>
-</ion-grid> -->
+  <!--*ngIf="user_type=='elder'" -->
+  <div *ngIf="user_type=='elder'" >
+    <ion-grid class="dashboard">
+      <ion-row>
+        <ion-col width-50 class="ambulance" text-center  (click)="makeCall(ambulance)"> <span class="dashboard-listed"> <i class="fa fa-ambulance fa-5x"></i>
+          <p>AMBULANCE</p>
+          </span> </ion-col>
+        <ion-col width-50 class="police" text-center (click)="makeCall(police)"> <span class="dashboard-listed"> <i class="fa fa-users fa-5x"></i>
+          <p>POLICE</p>
+          </span> </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid class="dashboard">
+      <ion-row>
+        <ion-col width-50 class="hooter" text-center (click)="hooter(hooterOn)"> <span class="dashboard-listed"> <i class="fa fa-bell-o fa-5x"></i>
+          <p> HOOTER</p>
+          </span> </ion-col>
+        <ion-col width-50 class="call-sponsor" text-center (click)="makeCall(call_sponsor)"> <span class="dashboard-listed"> <i class="fa fa-phone-square fa-5x"></i>
+          <!--<img src="assets/img/headshot.jpg" class="img-circle">-->
+          <p>CALL SPONSOR</p>
+          </span> </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-grid class="dashboard">
+    <ion-row>
+      <ion-col width-50 class="services" text-center (click)="servicesPage()"> <span class="dashboard-listed"> <i class="fa fa-cog fa-5x"></i>
+        <p>SERVICES</p>
+        </span> </ion-col>
+      <ion-col width-50 class="jobs" text-center (click)="jobsPage()"> <span class="dashboard-listed"> <i class="fa fa-cubes fa-5x"></i>
+        <p>JOBS</p>
+        </span> </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="dashboard">
+    <ion-row>
+      <ion-col width-50 class="community" text-center (click)="communityPage()"> <span class="dashboard-listed"> <i class="fa fa-universal-access fa-5x"></i>
+        <p>COMMUNITIES</p>
+        </span> </ion-col>
+      <ion-col width-50 class="blogs" text-center (click)="blogsPage()"> <span class="dashboard-listed"> <i class="fa fa-rss fa-5x"></i>
+        <p>BLOGS</p>
+        </span> </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="dashboard">
+    <ion-row>
+      <ion-col width-50 class="connection" text-center (click)="connectionsPage()"> <span class="dashboard-listed"> <i class="fa fa-sitemap fa-5x"></i>
+        <p>CONNECTIONS</p>
+        </span> </ion-col>
+      <ion-col width-50 class="messagess" text-center (click)="messagesPage()"> <span class="dashboard-listed"> <i class="fa fa-envelope-o fa-5x"></i>
+        <p>MESSAGES</p>
+        </span> </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="dashboard">
+    <ion-row>
+      <ion-col width-50 class="connection" text-center (click)="remote()"> <span class="dashboard-listed"><i class="fa fa-video-camera fa-5x" aria-hidden="true"></i>
+        <p>REMOTE MONITORING</p>
+        </span> </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
