@@ -109,6 +109,8 @@ export class ModalContentPage {
   afterdiscount_one_service:any;
   servicediscountcost:any;
   servicediscountcost_one_service:any;
+  discountpartial:any;
+  patialdiscount:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {   
      this.date = new Date().toISOString();
@@ -360,6 +362,8 @@ onlyNumberKey(event) {
     console.log(this.getpaidPayment);
     this.paidPayment = this.servicecosts * this.getpaidPayment / 100;
     console.log(this.paidPayment);
+    this.patialdiscount= (this.servicecosts/this.datCount) * this.getpaidPayment / 100;
+    this.discountpartial = (this.servicecosts/this.datCount) - this.patialdiscount;
     this.totalservice_costss = this.paidPayment * this.discount / 100;
     console.log(this.totalservice_costss);
    this.servicediscountcost = this.paidPayment -this.totalservice_costss;
@@ -453,7 +457,7 @@ onlyNumberKey(event) {
       category:this.category,category_id:this.category_id,service:this.service,service_ids:this.service_ids,
       sub_category_id:this.sub_category_id,subcategory:this.subcategory,
       location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id,discounts:this.discounts,totalservice_costss:this.totalservice_costss,afterdiscount_one_service:this.afterdiscount_one_service,
-      paidPayment:this.paidPayment,servicediscountcost_one_service:this.servicediscountcost_one_service});
+      paidPayment:this.paidPayment,servicediscountcost_one_service:this.servicediscountcost_one_service,discountpartial:this.discountpartial});
       serviceModal.present();
        serviceModal.onDidDismiss(data =>{
       if(data == "dismiss"){

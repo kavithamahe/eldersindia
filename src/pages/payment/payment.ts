@@ -81,6 +81,7 @@ totalservice_costss:any;
 paidPayment:any;
 afterdiscount_one_service:any;
 servicediscountcost_one_service:any;
+discountpartial:any;
 // payment_success:any ="";
   constructor(public platform:Platform,private iab: InAppBrowser,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public navCtrl: NavController,private http: Http) {
     // localStorage.getItem("payment_success");
@@ -117,6 +118,7 @@ this.serviceData=navParams.get("serviceData");
     this.paidPayment = navParams.get("paidPayment");
     this.afterdiscount_one_service = navParams.get("afterdiscount_one_service");
     this.servicediscountcost_one_service = navParams.get("servicediscountcost_one_service");
+    this.discountpartial = navParams.get("discountpartial");
 
   this.servicecost=navParams.get("servicecost");
   this.service_cost=this.servicecost*100;
@@ -173,7 +175,8 @@ console.log("recurring time");
      this.from_date,this.from_time,this.serviceType,this.selected_dates,this.time_slot,
      this.to_date,this.to_time,this.package_id,this.preferred_time,this.quantity,
      this.location_id,this.lead_time,this.vendor_id,this.datCount,this.service_costs,this.servicediscountcosts,
-     this.paymenttype,paymentflag,this.discounts,this.totalservice_costss,this.paidPayment,this.afterdiscount_one_service,this.servicediscountcost_one_service).subscribe(     
+     this.paymenttype,paymentflag,this.discounts,this.totalservice_costss,this.paidPayment,this.afterdiscount_one_service,this.servicediscountcost_one_service,
+     this.discountpartial).subscribe(     
       (loginuser) => {
         this.udf3= loginuser.result.serviceType;
         this.udf2 = loginuser.result.service_request_id;

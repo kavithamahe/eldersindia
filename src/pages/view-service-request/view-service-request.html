@@ -106,7 +106,7 @@
   
     <ion-col width-100 class="child_menu">
   <span>Paid amount</span>
- <p *ngIf="viewServiceRequestInfo?.payment_method=='partial_payment'"><i class="fa fa-rupee">{{viewServiceRequestInfo?.discount_service_cost}}</i></p>
+ <p *ngIf="viewServiceRequestInfo?.payment_method=='partial_payment'"><i class="fa fa-rupee">{{viewServiceRequestInfo?.servicediscountcost_one_service}}</i></p>
   <p *ngIf="viewServiceRequestInfo?.payment_method=='full_payment'"><i class="fa fa-rupee">{{viewServiceRequestInfo?.service_cost - viewServiceRequestInfo?.afterdiscount}}</i></p>
    <p *ngIf="viewServiceRequestInfo?.payment_method==''">0</p>
    </ion-col>
