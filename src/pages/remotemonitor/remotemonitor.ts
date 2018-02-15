@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 
 /*
@@ -13,11 +15,19 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
   templateUrl: 'remotemonitor.html'
 })
 export class RemotemonitorPagePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+username:any;
+password:any;
+  constructor(private iab: InAppBrowser,public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RemotemonitorPagePage');
   }
-
+ dashboardPage(){
+    this.navCtrl.setRoot(DashboardPage);
+  }
+  submit(){
+  	var usernames = this.username;
+  	var passwords = this.password;
+  	  const browser = this.iab.create("http://eldercam1.dlinkddns.com:8033/mjpeg.cgi?user="+usernames+"&password="+passwords+" ");
+  }
 }

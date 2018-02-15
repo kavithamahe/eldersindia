@@ -6,7 +6,6 @@ import { CallNumber, Vibration} from 'ionic-native';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { LocalNotifications, Geolocation } from 'ionic-native';
 import { NativeAudio } from '@ionic-native/native-audio';
-  import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { ServiceProvider } from '../../providers/service-provider';
 import { ServiceprovidersPage } from '../../pages/serviceproviders/serviceproviders';
@@ -16,7 +15,9 @@ import { BlogsPage } from '../../pages/blogs/blogs';
 import { ConnectionsPage } from '../../pages/connections/connections';
 import { MessagesPage } from '../../pages/messages/messages';
 import { BlogtabsPage } from '../../pages/blogtabs/blogtabs';
-import { PaymentPage } from '../../pages/payment/payment';
+import { RemotemonitorPagePage } from '../../pages/remotemonitor/remotemonitor';
+
+
 
 
 /*
@@ -42,7 +43,7 @@ export class DashboardPage {
   serviceLocation:any;
   headers:any;
   head:any;
-  constructor(private iab: InAppBrowser,private nativeAudio: NativeAudio,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
+  constructor(private nativeAudio: NativeAudio,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
   	
      this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.storage.ready().then(() => {
@@ -122,24 +123,14 @@ export class DashboardPage {
     
   .catch((error: any) => console.log(error));
   }
-  // checkLocation(){
-  //    console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
-  //    this.providerService.chechLocationID(result.city)
-  //     .subscribe(data =>{
-  //     this.serviceLocation=data.result.id;
-  //     console.log(this.serviceLocation);
-  //   },
-  //   err =>{
-  //     this.providerService.showErrorToast(err);
-      
-  //   })
-  // }
 
   ionViewDidLoad() {
     this.nativeAudio.preloadSimple('uniqueId1', 'assets/sound/Siren 21.mp3').then(this.onSuccess, this.onError);
   }
   remote(){
-       const browser = this.iab.create('http://eldercam1.dlinkddns.com:8033/mjpeg.cgi?user=[remoteview]&password=[elder!@#]');
+    
+    this.navCtrl.setRoot(RemotemonitorPagePage);
+     
 
   }
   public servicesPage()

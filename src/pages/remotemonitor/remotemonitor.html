@@ -16,5 +16,13 @@
 </ion-header>
 
 <ion-content padding>
-
+	<ion-label>Username:</ion-label>
+	<ion-item>
+		<ion-input type="text" placeholder="Username" [(ngModel)]="username"></ion-input>
+	</ion-item>
+	<ion-label>Password:</ion-label>
+	<ion-item>
+		<ion-input type="text" placeholder="Password" [(ngModel)]="password"></ion-input>
+	</ion-item>
+	<button ion-button (click)="submit()">Submit</button>
 </ion-content>
