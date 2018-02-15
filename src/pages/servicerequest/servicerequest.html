@@ -107,10 +107,18 @@
   <ion-row>
   <ion-col width-50 style="padding-left:0px;">
   
-  <span>
-   <p *ngIf="service.Paymentstatus == null"><ion-badge 
+ <!--  <span>
+   <p *ngIf="service.Paymentstatus == 'captured' && service.payment_method == 'partial_payment'"><ion-badge 
    (click)="paynow(service.sr_token,service.service_cost,service?.id)">Pay Now</ion-badge></p>
-   <p *ngIf="service.Paymentstatus == 'captured'"><ion-badge>Paid</ion-badge></p>
+   <p *ngIf="service.Paymentstatus == 'captured' &&  service.payment_method == 'full_payment'"><ion-badge>Paid</ion-badge></p>
+  </span> -->
+   <span>
+   <p *ngIf="service.Paymentstatus!='captured'"><ion-badge 
+   (click)="paynow(service.sr_token,service.service_cost,service?.id)">Pay Now</ion-badge></p>
+   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='partial_payment'"><ion-badge 
+   (click)="paynow(service.sr_token,service.service_cost,service?.id)">Pay Now</ion-badge></p>
+   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method==''"><ion-badge>Paid</ion-badge></p>
+   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='full_payment'"><ion-badge>Paid</ion-badge></p>
   </span>
      
   </ion-col>

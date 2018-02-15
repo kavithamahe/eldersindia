@@ -76,6 +76,9 @@ email:any;
 phone:any;
 service_costss:any;
 servicediscountcosts:any;
+discounts:any;
+totalservice_costss:any;
+paidPayment:any;
 // payment_success:any ="";
   constructor(public platform:Platform,private iab: InAppBrowser,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public navCtrl: NavController,private http: Http) {
     // localStorage.getItem("payment_success");
@@ -107,6 +110,9 @@ this.serviceData=navParams.get("serviceData");
     this.location_id=navParams.get("location_id");
     this.lead_time=navParams.get("lead_time");
     this.vendor_id=navParams.get("vendor_id");
+    this.discounts=navParams.get("discounts");
+    this.totalservice_costss=navParams.get("totalservice_costss");
+    this.paidPayment = navParams.get("paidPayment");
 
   this.servicecost=navParams.get("servicecost");
   this.service_cost=this.servicecost*100;
@@ -154,15 +160,16 @@ localStorage.setItem('key', this.token);
      localStorage.setItem('service_costss', this.service_costss);
 }
  serviceRequestSubmitbeforePayment(){
+  let paymentflag="1";
   if(this.datCount != undefined){
-
+console.log("recurring time");
     this.blogListService.serviceRequestSubmitbeforePayment(this.rootUrl,this.servicecost,
       this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,
      this.subcategory,this.datetime,this.dependentId,this.durations,this.exclude_days,
      this.from_date,this.from_time,this.serviceType,this.selected_dates,this.time_slot,
      this.to_date,this.to_time,this.package_id,this.preferred_time,this.quantity,
      this.location_id,this.lead_time,this.vendor_id,this.datCount,this.service_costs,this.servicediscountcosts,
-     this.paymenttype).subscribe(     
+     this.paymenttype,paymentflag,this.discounts,this.totalservice_costss,this.paidPayment).subscribe(     
       (loginuser) => {
         this.udf3= loginuser.result.serviceType;
         this.udf2 = loginuser.result.service_request_id;
@@ -175,12 +182,13 @@ localStorage.setItem('key', this.token);
   )
   }
   else{
+    console.log("one time");
     this.blogListService.serviceRequestSubmitbeforePayments(this.rootUrl,this.servicecost,
       this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,
      this.subcategory,this.datetime,this.dependentId,this.durations,this.exclude_days,
      this.from_date,this.from_time,this.serviceType,this.selected_dates,this.time_slot,
      this.to_date,this.to_time,this.package_id,this.preferred_time,this.quantity,
-     this.location_id,this.lead_time,this.vendor_id).subscribe(     
+     this.location_id,this.lead_time,this.vendor_id,paymentflag).subscribe(     
       (loginuser) => {
         this.udf3= loginuser.result.serviceType;
         this.udf2 = loginuser.result.service_request_id;

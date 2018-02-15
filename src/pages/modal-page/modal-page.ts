@@ -86,7 +86,7 @@ export class ModalContentPage {
   percentage_cost:any;
   servicecost:any;
   vendorr:any;
-  getpaymentDiscount:any=[];
+  getpaymentDiscount:any;
   fullpays:boolean=false;
   partialpays:boolean=false;
   getpaidPayment:any;
@@ -105,6 +105,7 @@ export class ModalContentPage {
   fullpaymentdiscount:any;
   finalpaymentfull:any;
   discount:any;
+  discounts:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {   
      this.date = new Date().toISOString();
@@ -292,40 +293,62 @@ onlyNumberKey(event) {
       }
      })
    }
+   // fullpaymentinfo(){
+   //   this.providerService.getdiscountrecurringvalues(this.fullgetpaidPayment)
+   //    .subscribe(data =>{ 
+   //      this.fullpayDiscount=data.result;
+   //      this.getfullpaidPayment=this.fullpayDiscount[0].paymentDiscount;
+   //      this.fullpaymentdiscount=this.servicecosts * this.getfullpaidPayment / 100;
+   //      this.finalcost=this.servicecosts - this.fullpaymentdiscount;
+   //      console.log(this.finalcost);
+   //  },
+
+   //  (err) => { 
+   //      console.log("you can not login");
+   //      //this.packageLists='';
+   //      this.flag="0";
+   //  },)
+   // }
    fullpaymentinfo(){
-     this.providerService.getdiscountrecurringvalues(this.fullgetpaidPayment)
+    this.providerService.getRecurringDiscount(this.datCount)
       .subscribe(data =>{ 
-        this.fullpayDiscount=data.result;
-        this.getfullpaidPayment=this.fullpayDiscount[0].paymentDiscount;
-        this.fullpaymentdiscount=this.servicecosts * this.getfullpaidPayment / 100;
-        this.finalcost=this.servicecosts - this.fullpaymentdiscount;
-        console.log(this.finalcost);
+          this.getpaymentDiscount = data.result;
+           if(this.fullgetpaidPayment == "100"){
+      this.discount = data.result.discount_100;
+      console.log(this.discount);
+   }
+    console.log(this.fullgetpaidPayment);
+    this.paidPayment = this.servicecosts * this.fullgetpaidPayment / 100;
+    console.log(this.paidPayment);
+    this.totalservice_costss = this.paidPayment * this.discount / 100;
+    console.log(this.totalservice_costss);
+    this.finalcost = this.paidPayment - this.totalservice_costss;
+    console.log(this.finalcost);
     },
 
     (err) => { 
-        console.log("you can not login");
-        //this.packageLists='';
-        this.flag="0";
+     console.log(err);
     },)
    }
    paymentinfo(){
-  
-    for(let data of this.getpaymentDiscount) {
-    if(this.getpaidPayment == "25"){
-      this.discount = data.discount_25;
+  this.providerService.getRecurringDiscount(this.datCount)
+      .subscribe(data =>{ 
+          this.getpaymentDiscount = data.result;
+           if(this.getpaidPayment == "25"){
+      this.discount = data.result.discount_25;
+      this.discounts = "discount_25";
       console.log(this.discount);
     }
     if(this.getpaidPayment == "50"){
-       this.discount = data.discount_50;
+       this.discount = data.result.discount_50;
+       this.discounts = "discount_50";
       console.log(this.discount);
     }
     if(this.getpaidPayment == "75"){
-       this.discount = data.discount_75;
+       this.discount = data.result.discount_75;
+       this.discounts = "discount_75";
       console.log(this.discount);
     }
-  }
-   
- 
     console.log(this.getpaidPayment);
     this.paidPayment = this.servicecosts * this.getpaidPayment / 100;
     console.log(this.paidPayment);
@@ -333,6 +356,29 @@ onlyNumberKey(event) {
     console.log(this.totalservice_costss);
     this.finalcost = this.paidPayment - this.totalservice_costss;
     console.log(this.finalcost);
+    },
+
+    (err) => { 
+     console.log(err);
+    },)
+  
+  //   for(let data of this.getpaymentDiscount) {
+  //   if(this.getpaidPayment == "25"){
+  //     this.discount = data.discount_25;
+  //     console.log(this.discount);
+  //   }
+  //   if(this.getpaidPayment == "50"){
+  //      this.discount = data.discount_50;
+  //     console.log(this.discount);
+  //   }
+  //   if(this.getpaidPayment == "75"){
+  //      this.discount = data.discount_75;
+  //     console.log(this.discount);
+  //   }
+  // }
+   
+ 
+    
 
    }
 
@@ -374,13 +420,13 @@ onlyNumberKey(event) {
    }
    paynow(){
      if(this.fullpays == true){
-        this.paymenttype = "Full Payment";
+        this.paymenttype = "full_payment";
       }
       else if(this.finalcost == undefined){
         this.paymenttype = "CommonRate";
       }
       else{
-        this.paymenttype = "Partial Payment";
+        this.paymenttype = "partial_payment";
       }
     if(this.datCount != undefined){
       console.log(this.finalcost);
@@ -393,7 +439,8 @@ onlyNumberKey(event) {
     let serviceModal = this.modalCtrl.create(PaymentPage,{serviceData:serviceData,servicecost:this.servicecost,service_costs:this.servicecosts,servicediscountcost:this.finalcost,
       category:this.category,category_id:this.category_id,service:this.service,service_ids:this.service_ids,
       sub_category_id:this.sub_category_id,subcategory:this.subcategory,
-      location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id});
+      location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id,discounts:this.discounts,totalservice_costss:this.totalservice_costss,
+      paidPayment:this.paidPayment});
       serviceModal.present();
        serviceModal.onDidDismiss(data =>{
       if(data == "dismiss"){

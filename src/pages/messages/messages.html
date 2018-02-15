@@ -69,12 +69,13 @@
   </div>
   <hr/>
     <div>
- <!-- <i class="fa fa-check" aria-hidden="true" *ngIf="selected == true"></i> -->
       <ion-list *ngFor="let inbox of inboxInfo">
+
+
       <ion-item-sliding  class="inbox-sends">
    <!--      <ion-item (click)="viewMessages(inbox?.id,'inbox')" 
         [ngClass]="inbox.read_status?'readmsg':'unreadmsg'" > -->
-         <ion-item (press)="deleteMultipel(inbox)" (click)="viewMessages(inbox?.id,'inbox')" [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
+         <ion-item (press)="clickedAvatar(inbox.id)" [class]="isInArray(inbox.id) ? 'selected' : 'not-selected'" (click)="viewMessages(inbox?.id,'inbox')" >
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
             <ion-avatar item-left>
@@ -144,7 +145,7 @@
   <hr/>
   <ion-list *ngFor="let sent of sentInfo">
       <ion-item-sliding class="inbox-sends">
-        <ion-item (click)="viewMessages(sent?.id,'sent')" (press)="deletesendMultipel(sent)" [ngClass]="{active :  sent===selected }">
+        <ion-item (click)="viewMessages(sent?.id,'sent')" (press)="deletesendMultipel(sent.id)" [class]="isInArraySend(sent.id) ? 'selected' : 'not-selected'">
           <ion-row>
             <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
             <ion-avatar item-left>
@@ -208,8 +209,10 @@
 
 <style type="text/css">
 .list-md{margin:3px;}
- .selected {
-    background-color: red !important;
+.selected ion-row{
+   /* background-color: red !important;*/
+   opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 .unselected{
     background-color: white !important;
