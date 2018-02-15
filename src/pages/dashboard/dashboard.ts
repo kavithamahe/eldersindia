@@ -6,7 +6,6 @@ import { CallNumber, Vibration} from 'ionic-native';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { LocalNotifications, Geolocation } from 'ionic-native';
 import { NativeAudio } from '@ionic-native/native-audio';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { ServiceProvider } from '../../providers/service-provider';
 import { ServiceprovidersPage } from '../../pages/serviceproviders/serviceproviders';
@@ -42,7 +41,7 @@ export class DashboardPage {
   serviceLocation:any;
   headers:any;
   head:any;
-  constructor(private iab: InAppBrowser,private nativeAudio: NativeAudio,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
+  constructor(private nativeAudio: NativeAudio,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
   	
      this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.storage.ready().then(() => {
@@ -138,10 +137,7 @@ export class DashboardPage {
   ionViewDidLoad() {
     this.nativeAudio.preloadSimple('uniqueId1', 'assets/sound/Siren 21.mp3').then(this.onSuccess, this.onError);
   }
-  remote(){
-       const browser = this.iab.create('http://eldercam1.dlinkddns.com:8033/mjpeg.cgi');
-
-  }
+  
   public servicesPage()
   {
   	this.navCtrl.setRoot(ServiceprovidersPage);
