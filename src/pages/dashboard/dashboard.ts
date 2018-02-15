@@ -139,7 +139,7 @@ export class DashboardPage {
     this.nativeAudio.preloadSimple('uniqueId1', 'assets/sound/Siren 21.mp3').then(this.onSuccess, this.onError);
   }
   remote(){
-       const browser = this.iab.create('http://eldercam1.dlinkddns.com:8033/mjpeg.cgi');
+       const browser = this.iab.create('http://eldercam1.dlinkddns.com:8033/mjpeg.cgi?user=[remoteview]&password=[elder!@#]');
 
   }
   public servicesPage()
