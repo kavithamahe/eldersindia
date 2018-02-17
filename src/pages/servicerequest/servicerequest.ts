@@ -37,6 +37,9 @@ sr_token:any;
 searchEvent:any="";
 sortby:any="";
 other:any;
+result:any;
+deduction_amount:any;
+dedaction_service_cost:any;
   constructor(public alertCtrl: AlertController,public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -165,10 +168,52 @@ other:any;
       }
     );
   }
-    showConfirm(serviceId){
+    showConfirm(serviceId,hours,service_id,sub_category_id,status,servicediscountcost_one_service,service_type,txnid){
+      if(service_type == "Recurring"){
+        
+    this.serviceRequest.getcancelRecurringPolicyConfig(hours,service_id,sub_category_id,status,servicediscountcost_one_service).subscribe(
+     (cancelRequest) => {
+      this.result = cancelRequest.result;
+      this.deduction_amount=servicediscountcost_one_service * (this.result / 100);
+      this.dedaction_service_cost = servicediscountcost_one_service - this.deduction_amount;
+      var number = parseFloat(this.dedaction_service_cost).toFixed(2);
+      console.log(number);
+      this.showConfirms(serviceId,this.result,number,service_type,status,txnid); 
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      });
+  }
+  else{
+    this.serviceRequest.getcancelPolicyConfig(hours,service_id,sub_category_id,status).subscribe(
+     (cancelRequest) => {
+      this.result = cancelRequest.result;  
+      this.showOnetime(serviceId,this.result,service_type,status,txnid); 
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      });
+  }
+    
+  }
+  showConfirms(serviceId,result,number,service_type,status,txnid){
     let prompt = this.alertCtrl.create({
       title: 'Cancel Service Request',
-     // message: "All reports are strictly confidential. Please describe the reason",
+      message: "Service cancellation percentage :"+ result +" % Service cancellation amount "+ number+"",
       inputs: [
         {
           name: 'title',
@@ -183,7 +228,7 @@ other:any;
           }
         },
         {
-          text: 'Submit',
+          text: 'Confirm',
           handler: data => {
             
             //console.log(data.title);
@@ -192,7 +237,44 @@ other:any;
                return false;
             }
             else{
-            this.cancelRequest(data.title,serviceId);
+            this.cancelRequest(data.title,serviceId,number,service_type,txnid);
+          }
+          }
+        }
+      ]
+    });
+    prompt.present();
+    
+  
+  }
+  showOnetime(serviceId,result,service_type,status,txnid){
+     let prompt = this.alertCtrl.create({
+      title: 'Cancel Service Request',
+      message: "Your service date and time was expired,If you cancelled the service request service amount could not be refunded.",
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Comments'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            //console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Confirm',
+          handler: data => {
+            
+            //console.log(data.title);
+            if(data.title == ""){
+              this.showToaster("Please enter the reason");
+               return false;
+            }
+            else{
+            this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid);
           }
           }
         }
@@ -200,29 +282,12 @@ other:any;
     });
     prompt.present();
   }
-  // showConfirm(serviceId){
-  //    let confirm = this.alertCtrl.create({
-  //    subTitle: 'This request will be deleted',
-  //      buttons: [
-  //       {
-  //         text: 'Cancel',
-  //        },
-  //       {
-  //         text: 'Ok',
-  //         handler: () => {
-  //          this.cancelRequest(serviceId);
-          
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   confirm.present();
-  // }
-  public cancelRequest(title,serviceId)
+ 
+  public cancelRequest(title,serviceId,dedaction_service_cost,service_type,txnid)
   {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.serviceRequest.cancelRequest(title,serviceId).subscribe(
+    this.serviceRequest.cancelRequest(title,serviceId,dedaction_service_cost,service_type,txnid).subscribe(
      (cancelRequest) => {
       this.getRemarksList=cancelRequest.result;   
       this.showToaster(cancelRequest.result); 
@@ -232,7 +297,30 @@ other:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+         this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+        loader.dismiss();
+      });
+  }
+  public razorPaymentResponseforCancel(title,serviceId,service_type,txnid)
+  {
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.serviceRequest.razorPaymentResponseforCancel(title,serviceId,service_type,txnid).subscribe(
+     (cancelRequest) => {
+      this.getRemarksList=cancelRequest.result;   
+      this.showToaster(cancelRequest.result); 
+      loader.dismiss(); 
+      this.onInit();   
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+         this.showToaster(JSON.parse(err._body).error);
         }
         else
         {

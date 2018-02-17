@@ -40,7 +40,10 @@ serviceRequestScrollLists:any=[];
   	
   });
   }
-
+    // parseFloat(value)
+    // {
+    //     return parseFloat(value);
+    // }
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecurringPagePage');
   } 

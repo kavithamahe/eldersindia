@@ -119,7 +119,7 @@ var ajaxCallCheck = function(payment_id){
 console.log(localStorage.getItem("service_costss"));
   
 
-  var url  = "http://192.168.1.187:8000/api/razorPaymentResponseforPartialPayment";
+  var url  = "http://192.168.1.187:8000/api/razorPaymentResponsependingPayment";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 

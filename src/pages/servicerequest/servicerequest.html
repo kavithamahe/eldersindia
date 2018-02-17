@@ -54,7 +54,7 @@
 	<img src="{{imageUrl}}{{service?.logo}}" width="100"  height="50"/>
 	<a class="token-primarys" (click)="makeCall(service?.contact_number)"><i class="fa fa-phone"></i></a>
 	  
-  <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="showConfirm(service?.id)">
+  <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5) && service?.payment_method == 'full_payment' || (service?.payment_method == '' && service?.Paymentstatus=='captured'))" (click)="showConfirm(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid)">
   <i class="fa fa-times" aria-hidden="true"></i>
   </a>
  
@@ -114,9 +114,9 @@
   </span> -->
    <span>
    <p *ngIf="service.Paymentstatus!='captured'"><ion-badge 
-   (click)="paynow(service.sr_token,service.service_cost,service?.id)">Pay Now</ion-badge></p>
+   (click)="paynow(service.sr_token,service.final_service_cost,service?.id)">Pay Now</ion-badge></p>
    <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='partial_payment'"><ion-badge 
-   (click)="paynow(service.sr_token,service.service_cost,service?.id)">Pay Now</ion-badge></p>
+   (click)="paynow(service.sr_token,service.final_service_cost,service?.id)">Pay Now</ion-badge></p>
    <p *ngIf="service.Paymentstatus=='captured' && service.payment_method==''"><ion-badge>Paid</ion-badge></p>
    <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='full_payment'"><ion-badge>Paid</ion-badge></p>
   </span>

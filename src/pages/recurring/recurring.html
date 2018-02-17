@@ -78,17 +78,22 @@
   </ion-row>
    <ion-row>
   <ion-col col-12>  
-    <b>Discount Service cost: </b><p>{{recurring.discount_service_cost}}</p>  
+    <b>Discount Service cost: </b>
+    <p *ngIf="recurring.payment_method=='partial_payment'"><i class="fa fa-rupee">{{ parseFloat(recurring.servicediscountcost_one_service) + parseFloat(recurring.final_service_cost)}}</i> </p>
+    <p *ngIf="recurring.payment_method==''"><i class="fa fa-rupee">0</i></p>
+    <p *ngIf="recurring.payment_method=='full_payment'"><i class="fa fa-rupee">{{recurring.servicediscountcost_one_service}}</i> </p>
     </ion-col>
   </ion-row>
    <ion-row>
   <ion-col col-12>  
-    <b>Paid amount</b><p>{{recurring.discount_service_cost}}</p>  
+    <b>Paid amount</b><p *ngIf="recurring.payment_method=='partial_payment'"><i class="fa fa-rupee">{{recurring.servicediscountcost_one_service}}</i></p>  
+    <p *ngIf="recurring.payment_method==''"><i class="fa fa-rupee">0</i></p> 
+    <p *ngIf="recurring.payment_method=='full_payment'"><i class="fa fa-rupee">{{recurring.servicediscountcost_one_service}}</i></p> 
     </ion-col>
   </ion-row>
    <ion-row *ngIf="recurring.payment_method == 'partial_payment'">
   <ion-col col-12>  
-    <b>Balance amount </b><p>{{recurring.service_cost - recurring.discount_service_cost}}</p>  
+    <b>Balance amount </b><p><i class="fa fa-rupee">{{recurring.final_service_cost}}</i></p>  
     </ion-col>
       <ion-col col-12 *ngIf="recurring.payment_method == 'partial_payment'">  
     <button ion-button clear (click)="paynow(recurring.service_cost - recurring.discount_service_cost,recurring.service_id)">Pay Now</button> 
