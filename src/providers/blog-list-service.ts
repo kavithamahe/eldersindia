@@ -121,7 +121,6 @@ viewrecurring(sr_token)
       .map(res => res.json()); 
   }
 getPackageRequest(Url,searchText,packstatus){
-  //console.log(Url);
        let _request= {info: {"list": true, "search": searchText, "status": packstatus, "token": null}};
     return this.http.post(Url+`getPackageRequest`,_request,this.options)
       .map(res => res.json()); 
