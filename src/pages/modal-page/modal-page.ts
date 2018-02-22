@@ -134,6 +134,7 @@ export class ModalContentPage {
       this.vendorr = this.params.get("vendor");
       console.log(this.vendorr);
       this.vendor = this.params.get("vendor").name;
+      console.log(this.vendor);
       this.service_cost = this.params.get("vendor").service_cost;
       this.percentage_cost = this.params.get("vendor").percentage_cost;
       this.servicecost = this.service_cost - this.percentage_cost;
