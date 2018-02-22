@@ -200,7 +200,7 @@
                     </h6>
                     <p [hidden]="!request?.connections?.location">
                     <i class="fa fa-map-marker"></i> <span>{{request?.connections?.location}}</span> </p>
-					<button ion-button (click)="connectMember(request.id,request.connections.name)"  small class="conneted-area">Connect</button>
+					<button ion-button (click)="connectMember(request.id,request.connections.name,request.connections.last_name)"  small class="conneted-area">Connect</button>
                   </ion-col>
           
                 </ion-row>

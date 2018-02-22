@@ -88,17 +88,17 @@ serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id
       .map(res => res.json());
   }
   getrecurringRequestdetail(rootUrl,recurring){
-    let _request= {"data":recurring};
+    let _request= {"id":recurring};
     return this.http.post(rootUrl+'getRecurringServiceById',_request,this.options)
       .map(res => res.json());
   }
   getrecurringRequestdelete(rootUrl,recurring){
-     let _request= {"data": {"id": recurring}}
+     let _request= {"id": recurring}
     return this.http.post(rootUrl+'getBulkRecurringService',_request,this.options)
       .map(res => res.json());
   }
   deleterecurringrequest(rootUrl,recurring){
-    let _request= {"data":recurring};
+    let _request= {"id":recurring};
     return this.http.post(rootUrl+'deleteBulkRecurringService',_request,this.options)
       .map(res => res.json());
   }

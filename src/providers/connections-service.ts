@@ -68,8 +68,8 @@ user_id:any;
     return this.http.post(this.rootUrl+'sendResponse',_request,this.options)
       .map(res => res.json()); 
   }
-  sendConnectionRequest(connect_id,name){
-     let _request= {"connect_id":connect_id,"connect_name":name};
+  sendConnectionRequest(connect_id,name,last_name){
+     let _request= {"connect_id":connect_id,"connect_name":name,"last_name":last_name};
     return this.http.post(this.rootUrl+'sendConnectionRequest',_request,this.options)
       .map(res => res.json()); 
   }

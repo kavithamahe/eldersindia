@@ -18,8 +18,6 @@ import { BlogtabsPage } from '../../pages/blogtabs/blogtabs';
 import { RemotemonitorPagePage } from '../../pages/remotemonitor/remotemonitor';
 
 
-
-
 /*
   Generated class for the Dashboard page.
 
@@ -128,7 +126,7 @@ export class DashboardPage {
     this.nativeAudio.preloadSimple('uniqueId1', 'assets/sound/Siren 21.mp3').then(this.onSuccess, this.onError);
   }
   remote(){
-    
+
     this.navCtrl.setRoot(RemotemonitorPagePage);
      
 

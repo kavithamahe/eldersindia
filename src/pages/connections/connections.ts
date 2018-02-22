@@ -302,10 +302,10 @@ scrollToTop() {
       }
       );
   }
- public connectMember(connect_id,connect_name){
+ public connectMember(connect_id,connect_name,last_name){
    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.connectionsService.sendConnectionRequest(connect_id,connect_name).subscribe(
+    this.connectionsService.sendConnectionRequest(connect_id,connect_name,last_name).subscribe(
      (connectionMember) => {
        this.showToaster(connectionMember.result.info);
        this.addConnectionsList();
