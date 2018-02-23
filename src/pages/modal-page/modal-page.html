@@ -56,7 +56,7 @@
             </ion-select>
               </ion-item>
               <!-- </ion-item> -->
-              <ion-item>
+              <ion-item *ngIf="servicecost != 'NaN'">
               <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecost}}
               </ion-label>
 
