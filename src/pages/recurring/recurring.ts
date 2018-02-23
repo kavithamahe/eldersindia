@@ -31,6 +31,7 @@ rootUrl:any;
 searchText:any="";
 nextPageURL:any='';
 serviceRequestScrollLists:any=[];
+discountcost:any;
   constructor(public navCtrl: NavController,public modalCtrl: ModalController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
   	this.storage.ready().then(() => {  
   		storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
@@ -75,19 +76,25 @@ serviceRequestScrollLists:any=[];
       serviceModal.present();
   }
   getrecurringRequest(){
-  	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
-    loading.present();
+  	// let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+   //  loading.present();
     this.recurringRequest = [];
     this.blogListService.getrecurringRequest(this.rootUrl,this.searchText)
       .subscribe(data =>{ 
-      	this.recurringRequest = data.result.data;
+        var dataList=data.result.data;
+        for(let data of dataList) {
+  data.discountcost = parseFloat(data.servicediscountcost_one_service) + parseFloat(data.final_service_cost);
+ // dataList.push(dataList);
+  console.log(data.value);
+}
+this.recurringRequest = dataList;
         this.nextPageURL=data.result.next_page_url;  
-        loading.dismiss();
+        // loading.dismiss();
     },
     err =>{
       this.recurringRequest = [];
       this.blogListService.showErrorToast(err);     
-      loading.dismiss();
+      // loading.dismiss();
     })
   }
   doInfinite(infiniteScroll) {

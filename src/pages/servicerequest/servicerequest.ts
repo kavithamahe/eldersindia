@@ -330,9 +330,9 @@ dedaction_service_cost:any;
       });
   }
   
-  public viewRequest(serviceRequestId)
+  public viewRequest(serviceRequestId,service)
   {
-     this.navCtrl.push(ViewServiceRequestPage, {serviceRequestId});
+     this.navCtrl.push(ViewServiceRequestPage, {serviceRequestId,service});
   }
   public showToaster(message)
   {
