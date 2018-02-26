@@ -124,7 +124,7 @@ mytype:string ="password";
 //-----------------------END-------------------//
 
   constructor(public providerService:ServiceProvider, public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
-
+    this.elder_dob = new Date().toISOString();
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
 

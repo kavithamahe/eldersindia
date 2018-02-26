@@ -92,6 +92,7 @@ export class ModalContentPage {
      this.dependentLists = params.get("dependentList");
      //this.dependents = this.dependentLists[0].id;
      this.lead_time = params.get("lead_time"); 
+     // this.service_cost = params.get("vendorservice_cost"); 
      this.serviceTitle = params.get("serviceTitle");
      this.location_id = params.get("location_id");
     

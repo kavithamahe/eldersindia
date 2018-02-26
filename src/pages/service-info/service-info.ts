@@ -51,6 +51,7 @@ website:any;
 lead_time:any='00:00';
 @ViewChild('ghbslides') slider: Slides;
 vendor:any;
+service_cost:any;
 // @ViewChild('ghbslides') ghbslides: any;
 
 
@@ -61,6 +62,7 @@ vendor:any;
       this.vendor_id = navParams.get("vendor").id;    
       this.vendor_name = navParams.get("vendor").name; 
       this.vendor=navParams.get("vendor");
+      this.service_cost = navParams.get("vendor").service_cost;
       this.showDetails = false;
       this.showRequestService = false;
       this.sub_category = false ;
@@ -211,7 +213,7 @@ pressContact(){
       
       }else{
         console.log(this.vendorList.vendorDetails);
-     let service_modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor:this.vendorList.vendorDetails});    
+     let service_modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor:this.vendorList.vendorDetails,vendorservice_cost:this.service_cost});    
     service_modal.present();
     service_modal.onDidDismiss(data =>{
       if(data == "dismiss"){

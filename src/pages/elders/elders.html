@@ -75,7 +75,7 @@
 
           <ion-item>
               <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="DD-MM-YYYY"
-              [(ngModel)]="elder_dob" formControlName="elder_dob" placeholder="Date of birth" [class.invalid]="!authForm.controls.elder_dob.valid && (authForm.controls.elder_dob.dirty)"></ion-datetime>
+              [(ngModel)]="elder_dob" formControlName="elder_dob" min={{elder_dob}} placeholder="Date of birth" [class.invalid]="!authForm.controls.elder_dob.valid && (authForm.controls.elder_dob.dirty)"></ion-datetime>
           </ion-item>
           <small  *ngIf="!authForm.controls.elder_dob.valid  && (authForm.controls.elder_dob.dirty || submitAttempt)">
                 <p class="valid err-reds shake">Please select the date of birth</p>

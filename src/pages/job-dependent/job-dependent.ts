@@ -141,8 +141,8 @@ dismiss() {
  }
  submitDependent()
  {
-  if(this.file_name == undefined){
-    this.showToaster("Please select the file");
+  if(this.file_name == undefined || this.dependent == undefined){
+    this.showToaster("Enter the required fields");
   }
   else{
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
