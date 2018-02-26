@@ -84,8 +84,7 @@ discountcost:any;
         var dataList=data.result.data;
         for(let data of dataList) {
   data.discountcost = parseFloat(data.servicediscountcost_one_service) + parseFloat(data.final_service_cost);
- // dataList.push(dataList);
-  console.log(data.value);
+ 
 }
 this.recurringRequest = dataList;
         this.nextPageURL=data.result.next_page_url;  

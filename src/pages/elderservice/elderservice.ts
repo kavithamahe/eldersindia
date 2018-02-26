@@ -41,15 +41,16 @@ getServicesForByElder(){
     loading.present();    
     this.blogListService.getServicesForByElders(this.rootUrl,this.packageId,this.elder,this.location_id)
       .subscribe(data =>{
-        this.packageData = data.result; 
-  //     for (var i =0; i <= pack.length - 1; i++ ) {
-  //       this.common_type=pack[i].common_type;
-  // var str = this.common_type;
-  //        this.commontype = str.replace("Per" ,"");
-  //        console.log(this.commontype);
+        var dataList = data.result; 
+        // this.packageData = data.result; 
+        for(let data of dataList) {
+           data.common_type=data.common_type;
+         var str = data.common_type;
+         data.common_type = str.replace("Per" ,"");
+         console.log(data.common_type);
 
-  //     }
-            
+        }
+       this.packageData = dataList; 
         loading.dismiss();
     },
     err =>{
