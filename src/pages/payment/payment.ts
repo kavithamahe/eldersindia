@@ -5,8 +5,7 @@ import { Storage } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { BlogListService } from '../../providers/blog-list-service';
-import { DashboardPage } from '../../pages/dashboard/dashboard';
-
+import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
 
 
 import 'rxjs/add/operator/map';
@@ -202,6 +201,9 @@ console.log("recurring time");
   }
     
   }
+  payno(){
+    this.dismiss();
+  }
 
   pay() {
     var options = {
@@ -225,13 +227,7 @@ console.log("recurring time");
       theme: {
         color: '#208ad6'
       },
-      modal: {
-        ondismiss: function() {
-          localStorage.getItem("payment_success");
-    console.log(localStorage.getItem("payment_success"));
-          alert('dismissed')
-        }
-      }
+
     };
 
 
@@ -246,32 +242,27 @@ xmlhttp.open("POST", url,true);
 xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
 xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"service_cost":  localStorage.getItem("service_costss")}));
-console.log(localStorage.getItem("service_costss"));
-// xmlhttp.send(JSON.stringify({ "service_cost":  localStorage.getItem("service_costss")}));
-
-console.log(xmlhttp.responseText);
-
 
 xmlhttp.onload = function () {
   var users = JSON.parse(xmlhttp.responseText);
  var result=users.result;
  alert(result);
- // let payment_success ="1";
- // localStorage.setItem('payment_success', payment_success);
 
   }
 }
 
  var successCallback = function(payment_id) {
       ajaxCallCheck(payment_id);
-       // this.navCtrl.push(DashboardPage,{
-       //         //status: result
-       //    });
+     
     }
 
 var cancelCallback = function(error) {
   alert(error.description + ' (Error '+error.code+')')
 }
+// var result = function() {
+//      this.navCtrl.push(ServicerequestPage);
+     
+//     }
 
 RazorpayCheckout.on('payment.success', successCallback);
 RazorpayCheckout.on('payment.cancel', cancelCallback);
