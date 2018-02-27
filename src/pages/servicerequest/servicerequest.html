@@ -39,6 +39,8 @@
  <ion-item>
     <ion-label>Sort By</ion-label>
     <ion-select [(ngModel)]="sortby" (ionChange)="onInit()">
+      <ion-option>All
+     </ion-option> 
       <ion-option value="preferred_asc">Preferred Date-Asc</ion-option>   
       <ion-option value="preferred_desc">Preferred Date-Des</ion-option>  
       <ion-option value="enquiry_asc">Enquiry Date-Asc</ion-option>  

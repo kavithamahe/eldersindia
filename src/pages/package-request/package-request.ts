@@ -46,6 +46,10 @@ elderId:any;
     this.content.scrollToBottom();
   }
   getPackageRequests(){
+    console.log(this.packstatus);
+     if(this.packstatus == "All"){
+      this.packstatus = "";
+    }
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
     // this.providerService.loadServiceOffered()
@@ -78,6 +82,7 @@ doInfinite(infiniteScroll) {
   }
   packagescroll()
   {
+
      this.blogListService.eventscrolls(this.nextPageURL,this.searchText,this.packstatus).subscribe(
      (eventsscroll) => {
       this.eventScrollLists=eventsscroll.result.data;
@@ -113,6 +118,8 @@ doInfinite(infiniteScroll) {
    this.getPackageRequests();
   }
   onSelectChange(selectedValue: any) {
+    console.log(this.packstatus);
+   
     this.packstatus = selectedValue;
     this.getPackageRequests();
   }

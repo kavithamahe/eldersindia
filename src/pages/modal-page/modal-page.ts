@@ -185,7 +185,7 @@ onlyNumberKey(event) {
       this.modalForm.value.totime = "";
       this.modalForm.value.preferredtime = "";
      this.durations = "";
-      this.durations = "Full Day";
+      this.durations = "Full day";
     this.timeslots=false;
      this.fixedd=false;
       this.fulldays=!searchValuessss;
