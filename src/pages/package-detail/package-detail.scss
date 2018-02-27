@@ -1,90 +1,46 @@
 page-package-detail {
-.price-bt{  width: 100px;
-    height: 100px;
-    background:#FE5420;
-    position: relative;margin:0px auto;}
-.price-bt:before {
-    content: "";
-    width: 42px;
-    height: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-bottom: 29px solid #FE5420;
-    border-left: 29px solid #fff;
-    border-right: 29px solid #fff;
-}
-.price-bt:after {
-    content: "";
-    width: 42px;
-    height: 0;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-top: 29px solid #FE5420;
-    border-left: 29px solid #fff;
-    border-right: 29px solid #fff;
-} 
-.price-bt span  {float:left; color:#fff; font-weight:600; font-size:18px;
-    line-height:100px;
-    text-align:center;   font-family: "Muli",sans-serif;
-    width:100%;}
-.price-list{ float:left; width:100%; margin-top:20px;text-align:center;font-family: "Muli",sans-serif;}
-.price-list p{ float:left; width:100%; color:#018DB2; margin-top:20px;text-align:center; margin:0px;font-family: "Muli",sans-serif;letter-spacing:0.2px;padding-top:5px;font-size:17px; font-weight:400; } 
-.price-list small{ font-size:17px;   font-family: "Muli",sans-serif; text-align:center; color:red;text-decoration: line-through;letter-spacing:0.2px;}
-.price-list span{ color:green;    font-family: "Muli",sans-serif;font-size:17px; font-weight:400; letter-spacing:0.2px;}
-.price-list b{ font-size:17px;   font-family: "Muli",sans-serif; text-align:center; color:#444;letter-spacing:0.2px; font-weight:400;}
-.purch-already{font-weight:600;font-size:17px;width:100%; float:left; padding-top:10px;   font-family: "Muli",sans-serif; text-align:center; color:#FE5722;letter-spacing:0.2px;}
-.listed-descr{position: relative; padding-left:18px; font-weight:400; font-size:17px;width:100%; float:left; padding-top:10px;  letter-spacing:0.2px; font-family: "Muli",sans-serif; text-align:left; color:#333;}
-.listed-descr:before {
-    content: "\f111";
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-
-    color:#999;
-    font-size:9px;
-    padding-right: 0.5em;
-    position: absolute;
-    top:16px;
-    left:0px;
-}
-
-
-
-.circle-pic span{float:left;font-size:15px;text-align:center;width:100%;font-weight:600; color:#fff;line-height:100px;}
-.item-md.item-block .item-inner{padding-right:0px;}
-
-.orangeColor{font-family: 'Raleway', Arial, sans-serif;text-align:center;font-size:16px;width:100%;}
-.orangeColor .lan-select{background-color:#e54922;cursor:pointer;width:86%;margin:0 auto;border-radius:4px;}
-.packagelist{border:1px solid #eee;}
-.packges-det{ margin-top:5px;}
-.packges-det .item-inner .input-wrapper .label-md{ margin:0px;}
-.packges-det .item-inner .input-wrapper .label-md ion-row ion-col img{ border:1px solid #EFF5FB;}
-.packges-det .item-inner .input-wrapper .label-md ion-row ion-col h1{color:#007994 !important; font-weight:400;font-family: "Muli",sans-serif;font-size:19px !important;letter-spacing:0.5px;margin: 0; padding-bottom:5px;}
-.packges-det .item-inner .input-wrapper .label-md ion-row ion-col p{color:#444 !important;font-family: "Muli",sans-serif;font-size:17px !important;margin: 0; font-weight:400;letter-spacing:0.5px;}
-.packges-det .item-inner .input-wrapper .label-md ion-row ion-col small{color:#444 !important; padding-bottom:5px; float:left;letter-spacing:0.2px;font-family: "Muli",sans-serif;font-size:17px !important;margin: 0; font-weight:400;}
-.packges-det .item-inner .input-wrapper .label-md ion-row ion-col small i{ width:20px; text-align:center; color:#03A1D0;letter-spacing:0.2px; font-weight:400;}
-.email-loca{background:#EFF5FB;}
-.packagelist .item-md{background:#fff;}
-.packagelist .item-ios{background:#fff;}
-.get-pack{text-align:center;}
-.get-pack .button-md{text-transform:capitalize; height:30px; margin-top:10px;}
-.get-pack .button-ios{text-transform:capitalize; height:30px;margin-top:10px;}
-.packges-det .item-inner .input-wrapper .label-ios{ margin:0px;}
-.packges-det .item-inner .input-wrapper .label-ios ion-row ion-col img{ border:1px solid #EFF5FB;}
-.packges-det .item-inner .input-wrapper .label-ios ion-row ion-col h1{color:#007994 !important; font-weight:600;font-family: "Muli",sans-serif;font-size:17px !important;letter-spacing:0.5px;margin: 0; padding-bottom:5px;}
-.packges-det .item-inner .input-wrapper .label-ios ion-row ion-col p{color:#444 !important;font-family: "Muli",sans-serif;font-size:17px !important;margin: 0; font-weight:400;letter-spacing:0.5px;}
-.packges-det .item-inner .input-wrapper .label-ios ion-row ion-col small{color:#444 !important;letter-spacing:0.5px;font-family: "Muli",sans-serif;font-size:12px !important;margin: 0; font-weight:600;}
-.packges-det .item-inner .input-wrapper .label-ios ion-row ion-col small i{ width:20px;letter-spacing:0.5px; text-align:center; color:#03A1D0; font-weight:600;}
-.lan-select{float:left;}
-.item-ios.item-block .item-inner{padding-right:0px;}
-.package-list-show{color:#444 !important;font-weight:600;letter-spacing:0.5px;font-family: "Muli",sans-serif;font-size:18px !important;padding-bottom:5px; padding-top:10px; text-align:left;margin: 0;padding-left:10px;}
-
-.packagelist .item-md .item-inner .input-wrapper .label-md{margin:5px 8px 13px 0px;}
-.packagelist .item-md .item-inner .input-wrapper .label-md ion-col h3{letter-spacing:0.2px;color:#007994 !important;font-family: "Muli",sans-serif;font-size:19px !important; font-weight:400;margin:0; text-align:center; padding-bottom:20px; }
-
-.packagelist .item-ios .item-inner .input-wrapper .label-ios{margin:5px 8px 13px 0px;}
-.packagelist .item-ios .item-inner .input-wrapper .label-ios ion-col h3{letter-spacing:0.2px;color:#007994 !important;font-family: "Muli",sans-serif;font-size:19px !important; font-weight:400;margin:0; text-align:center; padding-bottom:20px; }
+.price-bt																	{width:100px;height:100px;background:#FE5420;position:relative;margin:0px auto;}
+.price-bt:before 															{content: "";width:42px;height:0;position:absolute;top:0;left:0;border-bottom: 29px solid #FE5420;border-left:29px solid #fff;border-right:29px solid #fff;}
+.price-bt:after 															{content: "";width:42px;height:0;position:absolute;bottom:0;left:0;border-top:29px solid #FE5420;border-left:29px solid #fff;border-right:29px solid #fff;} 
+.price-bt span  															{float:left;color:#fff;font-weight:600;font-size:18px;line-height:100px;text-align:center;font-family: "Muli",sans-serif;width:100%;}
+.price-list																	{float:left;width:100%; margin-top:20px;text-align:center;font-family: "Muli",sans-serif;}
+.price-list p																{float:left;width:100%;color:#018DB2;margin-top:20px;text-align:center; margin:0px;font-family: "Muli",sans-serif;letter-spacing:0.2px;padding-top:5px;font-size:17px; font-weight:400; } 
+.price-list small															{font-size:17px;font-family: "Muli",sans-serif;text-align:center;color:red;text-decoration: line-through;letter-spacing:0.2px;}
+.price-list span															{color:green;font-family: "Muli",sans-serif;font-size:17px; font-weight:400; letter-spacing:0.2px;}
+.price-list b																{font-size:17px;font-family: "Muli",sans-serif; text-align:center; color:#444;letter-spacing:0.2px; font-weight:400;}
+.purch-already																{font-weight:600;font-size:17px;width:100%; float:left; padding-top:10px;   font-family: "Muli",sans-serif; text-align:center; color:#FE5722;letter-spacing:0.2px;}
+.listed-descr																{position: relative; padding-left:18px; font-weight:400; font-size:17px;width:100%; float:left; padding-top:10px;  letter-spacing:0.2px; font-family: "Muli",sans-serif; text-align:left; color:#333;}
+.listed-descr:before 														{content: "\f111";font-family: FontAwesome;font-style:normal;font-weight:normal;text-decoration: inherit;
+																			 color:#999;font-size:9px;padding-right:0.5em;position:absolute;top:16px;left:0px;}
+.circle-pic span															{float:left;font-size:15px;text-align:center;width:100%;font-weight:600; color:#fff;line-height:100px;}
+.item-md.item-block .item-inner												{padding-right:0px;}
+.orangeColor																{font-family: 'Raleway', Arial, sans-serif;text-align:center;font-size:16px;width:100%;}
+.orangeColor .lan-select													{background-color:#e54922;cursor:pointer;width:86%;margin:0 auto;border-radius:4px;}
+.packagelist																{border:1px solid #eee;}
+.packges-det																{margin-top:5px;}
+.packges-det .item-inner .input-wrapper .label-md							{margin:0px;}
+.packges-det .item-inner .input-wrapper .label-md ion-row ion-col img		{border:1px solid #EFF5FB;}
+.packges-det .item-inner .input-wrapper .label-md ion-row ion-col h1		{color:#007994 !important; font-weight:400;font-family: "Muli",sans-serif;font-size:19px !important;letter-spacing:0.5px;margin: 0; padding-bottom:5px;}
+.packges-det .item-inner .input-wrapper .label-md ion-row ion-col p			{color:#444 !important;font-family: "Muli",sans-serif;font-size:17px !important;margin: 0; font-weight:400;letter-spacing:0.5px;}
+.packges-det .item-inner .input-wrapper .label-md ion-row ion-col small		{color:#444 !important; padding-bottom:5px; float:left;letter-spacing:0.2px;font-family: "Muli",sans-serif;font-size:17px !important;margin: 0; font-weight:400;}
+.packges-det .item-inner .input-wrapper .label-md ion-row ion-col small i	{ width:20px; text-align:center; color:#03A1D0;letter-spacing:0.2px; font-weight:400;}
+.email-loca																	{background:#EFF5FB;}
+.packagelist .item-md														{background:#fff;}
+.packagelist .item-ios														{background:#fff;}
+.get-pack																	{text-align:center;}
+.get-pack .button-md														{text-transform:capitalize; height:30px; margin-top:10px;}
+.get-pack .button-ios														{text-transform:capitalize; height:30px;margin-top:10px;}
+.packges-det .item-inner .input-wrapper .label-ios							{margin:0px;}
+.packges-det .item-inner .input-wrapper .label-ios ion-row ion-col img		{border:1px solid #EFF5FB;}
+.packges-det .item-inner .input-wrapper .label-ios ion-row ion-col h1		{color:#007994 !important; font-weight:600;font-family: "Muli",sans-serif;font-size:17px !important;letter-spacing:0.5px;margin: 0; padding-bottom:5px;}
+.packges-det .item-inner .input-wrapper .label-ios ion-row ion-col p		{color:#444 !important;font-family: "Muli",sans-serif;font-size:17px !important;margin: 0; font-weight:400;letter-spacing:0.5px;}
+.packges-det .item-inner .input-wrapper .label-ios ion-row ion-col small	{color:#444 !important;letter-spacing:0.5px;font-family: "Muli",sans-serif;font-size:12px !important;margin: 0; font-weight:600;}
+.packges-det .item-inner .input-wrapper .label-ios ion-row ion-col small i	{width:20px;letter-spacing:0.5px; text-align:center; color:#03A1D0; font-weight:600;}
+.lan-select																	{float:left;}
+.item-ios.item-block .item-inner											{padding-right:0px;}
+.package-list-show															{color:#444 !important;font-weight:600;letter-spacing:0.5px;font-family: "Muli",sans-serif;font-size:18px !important;padding-bottom:5px; padding-top:10px; text-align:left;margin: 0;padding-left:10px;}
+.packagelist .item-md .item-inner .input-wrapper .label-md					{margin:5px 8px 13px 0px;}
+.packagelist .item-md .item-inner .input-wrapper .label-md ion-col h3		{letter-spacing:0.2px;color:#007994 !important;font-family: "Muli",sans-serif;font-size:19px !important; font-weight:400;margin:0; text-align:center; padding-bottom:20px; }
+.packagelist .item-ios .item-inner .input-wrapper .label-ios				{margin:5px 8px 13px 0px;}
+.packagelist .item-ios .item-inner .input-wrapper .label-ios ion-col h3		{letter-spacing:0.2px;color:#007994 !important;font-family: "Muli",sans-serif;font-size:19px !important; font-weight:400;margin:0; text-align:center; padding-bottom:20px; }
 }

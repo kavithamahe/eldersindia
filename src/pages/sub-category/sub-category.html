@@ -1,46 +1,44 @@
-<!--
-  Generated template for the SubCategory page.
+<!------------------ header start ------------------>
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
       <button ion-button icon-only menuToggle>
-        <ion-icon name="menu"></ion-icon>
+      <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-	<ion-title text-center text-capitalize>{{subCategoryTitle}}</ion-title>    
+    <ion-title text-center text-capitalize>{{subCategoryTitle}}</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="dashboardPage()">
-        <ion-icon name="home"></ion-icon>
+      <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    
   </ion-navbar>
 </ion-header>
-
-
+<!------------------ header end ------------------>
+<!------------------ content start ------------------>
 <ion-content class="content-intop">
-<ion-card class="sel-packages">
-<ion-item>
-	<ion-label><p>Location</p></ion-label>
+  <ion-card class="sel-packages">
+    <ion-item>
+      <ion-label>
+        <p>Location</p>
+      </ion-label>
       <ion-select [(ngModel)]="serviceLocation" class="sub-cate-slec" (ionChange)='locationChanged()'>
         <ion-option class="sub-cate-slec" value="">Select location</ion-option>
-        <ion-option class="sub-cate-slec" *ngFor = "let location of locations" value={{location.id}}>{{location.location}}
-        </ion-option>
+        <ion-option class="sub-cate-slec" *ngFor = "let location of locations" value={{location.id}}>{{location.location}} </ion-option>
       </ion-select>
+
 </ion-item>
 </ion-card>
  <!-- <ion-searchbar ></ion-searchbar> -->
 <ion-card class="shs">
- <ion-input type="text" class="search" [(ngModel)]="term" placeholder="search">
+ <!-- <ion-input type="text" class="search" [(ngModel)]="term" placeholder="search"> -->
    
- </ion-input>
+ <!-- </ion-input> -->
 </ion-card>
 <ion-card class="pack-listed">
-<ion-item *ngFor = "let subcategory of subcategories.info | filter: term" 
+
+<ion-item *ngFor = "let subcategory of subcategories.info" 
 [color]="subcategory.color" class="sub-cat-listed">
 
    <p (click)="openSelected(subcategory)"> {{subcategory.name}} </p><i class="fa fa-chevron-right left-right-side"></i>
@@ -78,5 +76,4 @@
      <p>{{emptyRecord}}</p>
    </ion-item>
 </ion-content>
-
-
+<!------------------ content end ------------------>

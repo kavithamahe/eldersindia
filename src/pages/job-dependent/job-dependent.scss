@@ -1,24 +1,11 @@
 page-job-dependent {
-.toolbar-title-md{ text-align:center !important;}
-.toolbar-title-ios{ text-align:center;}
-.sel-packages{border:1px solid hsl(0, 0%, 66%); border-radius:0px; box-shadow:none; }
-.sel-packages .item-md .item-inner .label-md{font-family:"Muli",sans-serif; font-size:15px; padding-left:10px;font-weight:600;}
-.sel-packages .item-ios .item-inner .label-ios{font-family:"Muli",sans-serif; font-size:15px; padding-left:10px;font-weight:600;}
-.inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-}
-.inputfile + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: black;
-    display: inline-block;
-}
+.toolbar-title-md																	{text-align:center !important;}
+.toolbar-title-ios																	{text-align:center !important;}
+.sel-packages																		{border:1px solid hsl(0, 0%, 66%); border-radius:0px; box-shadow:none; }
+.sel-packages .item-md .item-inner .label-md										{font-family:"Muli",sans-serif; font-size:15px; padding-left:10px;font-weight:600;}
+.sel-packages .item-ios .item-inner .label-ios										{font-family:"Muli",sans-serif; font-size:15px; padding-left:10px;font-weight:600;}
+.inputfile 																			{width:0.1px;height:0.1px;opacity:0;overflow:hidden;position:absolute;z-index: -1;}
+.inputfile + label 																	{font-size:1.25em;font-weight:700;color:#fff;background-color:black;display:inline-block;}
 
 .inputfile:focus + label,
 .inputfile + label:hover {
@@ -34,7 +21,7 @@ page-job-dependent {
 .sele-file p{font-family:"Muli",sans-serif; font-size:17px; font-weight:400; color: hsl(0, 0%, 47%); margin-top:10px;}
 
 .sele-file p b{color:#1976D2;}
-.custom-file-input{border:1px solid #ccc; width:99%; height:40px; padding:8px; }
+.custom-file-input{border:1px solid #ccc; width:99%;  }
 .submit-btns{ background:#025FA9;
     border-radius: 20px;
     color: hsl(0, 0%, 100%);

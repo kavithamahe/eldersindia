@@ -4,83 +4,57 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+<!------------------ header start ------------------>
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
       <button ion-button icon-only menuToggle>
-        <ion-icon name="menu"></ion-icon>
+      <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-	 <ion-title text-center text-capitalize>{{vendorname}}</ion-title>   
+    <ion-title text-center text-capitalize>{{vendorname}}</ion-title>
     <ion-buttons right>
-    <button ion-button icon-only (click)="dashboardPage()">
-        <ion-icon name="home"></ion-icon>
+      <button ion-button icon-only (click)="dashboardPage()">
+      <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    
-	  
   </ion-navbar>
 </ion-header>
-
-
+<!------------------ header end ------------------>
+<!------------------ content start ------------------>
 <ion-content class="content-intop">
-
-<ion-item text-wrap class="packges-det">
-<ion-row>
-<ion-col width-33>
-   <img [src]="imageUrl+vendorLogo" style="height:50px;width:50px;margin:2px;" />
-   </ion-col>
-   <ion-col width-67>
-   <h1>{{vendorname}}</h1>
-   <p>{{vendorDesc}}</p>
-  
+  <ion-item text-wrap class="packges-det">
+    <ion-row>
+      <ion-col width-33> <img [src]="imageUrl+vendorLogo" style="height:50px;width:50px;margin:2px;" /> </ion-col>
+      <ion-col width-67>
+        <h1>{{vendorname}}</h1>
+        <p>{{vendorDesc}}</p>
       </ion-col>
-
-   </ion-row>
-   <ion-row class="email-loca">
-   	<ion-col>
-	 <small><i class="fa fa-envelope"></i>&nbsp;{{vendoremail}}</small><br/>
-   <small><i class="fa fa-map-marker"></i>&nbsp;{{vendoraddress}}</small>
-	</ion-col>
-   </ion-row>
-   </ion-item>
-
-
-   	<h1 class="package-list-show">Packages</h1>
-    	<ion-card *ngFor="let pack of packages; let i=index" text-wrap class="packagelist">
-            <ion-item>
-              <ion-col> 
-              
-					<h3>{{pack.package_name}}</h3>										
-						<ion-list class="price-bt" *ngIf="pack.discount_rate_package == NULL"><span><i class="fa fa-inr"></i>{{pack.package_amount}}/- </span></ion-list>
-						<ion-list class="price-bt" *ngIf="pack.discount_rate_package != NULL"><span>
-            <i class="fa fa-inr"></i>{{pack.package_amount - pack.package_amount*pack.discount_rate_package/100}}/-</span></ion-list>
-						<ion-list *ngIf="pack.discount_rate_package != NULL" class="price-list"> 		
-						<small><i class="fa fa-rupee"></i>{{pack.package_amount}} </small>
-						<span>  {{pack.discount_rate_package}} % off  <b> For {{pack.package_validity}}</b> </span>
-							<p>{{pack.package_description}}</p>
-			
-						</ion-list>
-						
-					
-						<ion-list *ngIf="dependents.length != 1">
-
-							<div *ngIf="pack.package_available == 0 || user_type=='sponsor'" class="get-pack">
-							<button ion-button (click)="openRequestPackage(pack.id)">Get Package</button>
-              </div>
-						</ion-list>
-						<strong class="purch-already" *ngIf="pack.package_available > 0">You've already purchased this</strong>
-						
-					<ion-list *ngFor="let pack_serve of pack.packages_service; let i=index" class="listed-descr">
-							{{pack_serve.name}} {{pack_serve.quantity}}  {{pack_serve.common_type.replace('Per', '')}}</ion-list>
-						
-              </ion-col>
-								
-							
-							
-					
-		
-            </ion-item>         
-        </ion-card>
-
+    </ion-row>
+    <ion-row class="email-loca">
+      <ion-col> <small><i class="fa fa-envelope"></i>&nbsp;{{vendoremail}}</small><br/>
+        <small><i class="fa fa-map-marker"></i>&nbsp;{{vendoraddress}}</small> </ion-col>
+    </ion-row>
+  </ion-item>
+  <h1 class="package-list-show">Packages</h1>
+  <ion-card *ngFor="let pack of packages; let i=index" text-wrap class="packagelist">
+    <ion-item>
+      <ion-col>
+        <h3>{{pack.package_name}}</h3>
+        <ion-list class="price-bt" *ngIf="pack.discount_rate_package == NULL"><span><i class="fa fa-inr"></i>{{pack.package_amount}}/- </span></ion-list>
+        <ion-list class="price-bt" *ngIf="pack.discount_rate_package != NULL"><span> <i class="fa fa-inr"></i>{{pack.package_amount - pack.package_amount*pack.discount_rate_package/100}}/-</span></ion-list>
+        <ion-list *ngIf="pack.discount_rate_package != NULL" class="price-list"> <small><i class="fa fa-rupee"></i>{{pack.package_amount}} </small> <span> {{pack.discount_rate_package}} % off <b> For {{pack.package_validity}}</b> </span>
+          <p>{{pack.package_description}}</p>
+        </ion-list>
+        <ion-list *ngIf="dependents.length != 1">
+          <div *ngIf="pack.package_available == 0 || user_type=='sponsor'" class="get-pack">
+            <button ion-button (click)="openRequestPackage(pack.id)">Get Package</button>
+          </div>
+        </ion-list>
+        <strong class="purch-already" *ngIf="pack.package_available > 0">You've already purchased this</strong>
+        <ion-list *ngFor="let pack_serve of pack.packages_service; let i=index" class="listed-descr"> {{pack_serve.name}} {{pack_serve.quantity}}  {{pack_serve.common_type.replace('Per', '')}}</ion-list>
+      </ion-col>
+    </ion-item>
+  </ion-card>
 </ion-content>
+<!------------------ content end ------------------>
