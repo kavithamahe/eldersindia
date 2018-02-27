@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController,NavParams,Platform,ViewController } from 'ionic-angular';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+// import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { BlogListService } from '../../providers/blog-list-service';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -82,7 +82,7 @@ paidPayment:any;
 afterdiscount_one_service:any;
 servicediscountcost_one_service:any;
 discountpartial:any;
-  constructor(public platform:Platform,private iab: InAppBrowser,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public navCtrl: NavController,private http: Http) {
+  constructor(public platform:Platform,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public navCtrl: NavController,private http: Http) {
   
 this.serviceData=navParams.get("serviceData");
     this.serviceData=navParams.get("serviceData");

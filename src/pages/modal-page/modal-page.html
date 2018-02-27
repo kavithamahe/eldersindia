@@ -333,12 +333,13 @@
     </ion-buttons>
     
     <ion-buttons end *ngIf="seviceCheck == 1">
+	    <button *ngIf="seviceCheck == 1 && searchButton" ion-button color="light" large icon-right hideWhen="ios" (click)="submit()" (press)="presssubmit()">&nbsp;Pay Later
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
       <button *ngIf="seviceCheck == 1" ion-button color="royal" large icon-right showWhen="ios" (click)="submit()" (press)="presssubmit()">&nbsp;Pay Later
        <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button *ngIf="seviceCheck == 1 && searchButton" ion-button color="light" large icon-right hideWhen="ios" (click)="submit()" (press)="presssubmit()">&nbsp;Pay Later
-        <ion-icon ios="md-send" md="md-send"></ion-icon>
-      </button>
+  
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
