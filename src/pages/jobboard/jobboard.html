@@ -35,8 +35,8 @@
 <ion-card class="sel-packages">
  <ion-item>
     <ion-label>Functional Area</ion-label>
-    <ion-select [(ngModel)]="functionalArea" (ionChange)="onInit()">
-    <ion-option>All
+    <ion-select [(ngModel)]="functionalArea" (ionChange)="onSelectChange($event)">
+    <ion-option value="All">All
      </ion-option>
       <ion-option *ngFor="let functional of functionalAreaList" value="{{functional?.id}}">{{functional?.name}}</ion-option>      
     </ion-select>

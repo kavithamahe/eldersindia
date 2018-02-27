@@ -46,7 +46,6 @@ elderId:any;
     this.content.scrollToBottom();
   }
   getPackageRequests(){
-    console.log(this.packstatus);
      if(this.packstatus == "All"){
       this.packstatus = "";
     }
@@ -118,10 +117,15 @@ doInfinite(infiniteScroll) {
    this.getPackageRequests();
   }
   onSelectChange(selectedValue: any) {
-    console.log(this.packstatus);
-   
-    this.packstatus = selectedValue;
+   if(this.packstatus == "All"){
+    this.packstatus = "";
     this.getPackageRequests();
+   }
+   else{
+      this.packstatus = selectedValue;
+    this.getPackageRequests();
+   }
+  
   }
   pressview(packageId){
     this.getPackageRequestBy(packageId);
