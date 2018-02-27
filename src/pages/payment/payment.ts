@@ -82,15 +82,8 @@ paidPayment:any;
 afterdiscount_one_service:any;
 servicediscountcost_one_service:any;
 discountpartial:any;
-// payment_success:any ="";
   constructor(public platform:Platform,private iab: InAppBrowser,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public navCtrl: NavController,private http: Http) {
-    // localStorage.getItem("payment_success");
-    // console.log(localStorage.getItem("payment_success"));
-    // this.payment_success=localStorage.getItem("payment_success");
-    // if(this.payment_success == 1){
-    //   this.blogListService.showToast("Request submitted successfully. Service provider will contact you shortly.")
-    //   this.payment_success == "";
-    // }
+  
 this.serviceData=navParams.get("serviceData");
     this.serviceData=navParams.get("serviceData");
     console.log(this.serviceData);

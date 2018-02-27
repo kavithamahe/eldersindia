@@ -12,6 +12,12 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-
-<button ion-button (click)="pay()" >Continue To Pay</button>
+  <ion-item>
+     <h1>Confirm Your Payment</h1>
+  </ion-item>
+  <ion-item text-wrap>
+     <p>Are You Sure Want TO Continue This Payment.This Page Will Redirect To Razorpay Payment Gateway.</p>
+  </ion-item>
+<button ion-button>No</button>
+<button ion-button (click)="pay()">Yes</button>
 </ion-content>

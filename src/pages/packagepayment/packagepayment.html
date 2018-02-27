@@ -12,7 +12,20 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <ion-item>
+     <h1>Confirm Your Payment</h1>
+  </ion-item>
+  <ion-item text-wrap>
+     <p>Are You Sure Want To Continue This Payment.This Page Will Redirect To Razorpay Payment Gateway.</p>
+  </ion-item>
+<button ion-button>No</button>
+<button ion-button (click)="pay()" *ngIf="service_type == undefind">Yes</button>
+<button ion-button (click)="paypartial()" *ngIf="service_type != undefind">Yes</button>
+
+</ion-content>
+<!-- 
+<ion-content>
 <button ion-button (click)="pay()" *ngIf="service_type == undefind">Click Here To Pay</button>
 <button ion-button (click)="paypartial()" *ngIf="service_type != undefind">Click Here To partial</button>
 
-</ion-content>
+</ion-content> -->
