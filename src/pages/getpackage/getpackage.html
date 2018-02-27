@@ -32,6 +32,17 @@
         </ion-select>  
         </ion-item>
      </ion-row>
+      <ion-row>
+          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">To</ion-label>
+          <ion-item class="sel-label">
+          <ion-label>Payment Type</ion-label>
+             <ion-select  style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="paymenttype" 
+             [ngModelOptions]="{standalone: true}">
+          <ion-option value="Offline Payment">Offline Payment</ion-option>
+          <ion-option value="Online Payment">Online Payment</ion-option>
+        </ion-select>  
+        </ion-item>
+     </ion-row>
                
            
   <button ion-button round full (click)="getPackage()" class="btn-blue">Get Package

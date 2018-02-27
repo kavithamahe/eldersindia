@@ -1,31 +1,26 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams ,Platform} from 'ionic-angular';
-import { BlogListService } from '../../providers/blog-list-service';
+import { Component } from '@angular/core';
+import { NavController,NavParams,Platform,ViewController } from 'ionic-angular';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
-import { Http,Headers,RequestOptions } from '@angular/http';
-
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
-import { SubcategoryListPage } from '../../pages/subcategory-list/subcategory-list';
+import { BlogListService } from '../../providers/blog-list-service';
+import { DashboardPage } from '../../pages/dashboard/dashboard';
 
-declare var cordova;
+
+
+import 'rxjs/add/operator/map';
+
 declare var RazorpayCheckout: any;
-
-
-/**
- * Generated class for the PaymentPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-payment',
   templateUrl: 'payment.html',
   providers:[BlogListService]
+
 })
 export class PaymentPage {
-  headers;
+ headers;
 token:string;
 options:any;
 rootUrl:any;
@@ -36,8 +31,6 @@ user_id:any;
  productinfo:any;
  amount:any;
 firstname:any;
-email:any;
-phone:any;
 surl:any;
 furl:any;
 service_provider:any;
@@ -72,11 +65,31 @@ service_request_id:any;
 udf2:any;
 udf3:any;
 salt:any;
-   constructor(public iab:InAppBrowser,public platform: Platform,public http: Http,public navCtrl: NavController,public storage:Storage,public blogListService:BlogListService, public navParams: NavParams) {
+service_cost:any;
+result:any;
+datCount:any;
+service_costs:any;
+servicediscountcost:any;
+paymenttype:any;
+name:any;
+email:any;
+phone:any;
+service_costss:any;
+servicediscountcosts:any;
+discounts:any;
+totalservice_costss:any;
+paidPayment:any;
+afterdiscount_one_service:any;
+servicediscountcost_one_service:any;
+discountpartial:any;
+  constructor(public platform:Platform,private iab: InAppBrowser,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public navCtrl: NavController,private http: Http) {
   
-  this.serviceData=navParams.get("serviceData");
+this.serviceData=navParams.get("serviceData");
     this.serviceData=navParams.get("serviceData");
+    console.log(this.serviceData);
+    this.datCount=this.serviceData.datCount;
     this.datetime=this.serviceData.datetime;
+    this.paymenttype =this.serviceData.payment;
     this.dependentId =this.serviceData.dependentId;
     this.durations =this.serviceData.durations;
     this.exclude_days =this.serviceData.exclude_days;
@@ -93,9 +106,21 @@ salt:any;
     this.location_id=navParams.get("location_id");
     this.lead_time=navParams.get("lead_time");
     this.vendor_id=navParams.get("vendor_id");
+    this.discounts=navParams.get("discounts");
+    this.totalservice_costss=navParams.get("totalservice_costss");
+    this.paidPayment = navParams.get("paidPayment");
+    this.afterdiscount_one_service = navParams.get("afterdiscount_one_service");
+    this.servicediscountcost_one_service = navParams.get("servicediscountcost_one_service");
+    this.discountpartial = navParams.get("discountpartial");
 
   this.servicecost=navParams.get("servicecost");
+  this.service_cost=this.servicecost*100;
+  this.service_costs=navParams.get("service_costs");
+  this.servicediscountcosts=navParams.get("servicediscountcost");
 
+
+
+  this.servicediscountcost=navParams.get("servicediscountcost") * 100;
   this.category=navParams.get("category");
 
   this.category_id=navParams.get("category_id");
@@ -107,59 +132,47 @@ salt:any;
   this.sub_category_id=navParams.get("sub_category_id");
 
   this.subcategory=navParams.get("subcategory");
-
-  console.log(this.serviceData);
-  this.storage.ready().then(() => {
+this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
+   
+localStorage.setItem('key', this.token);
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
     this.headers.append('Authorization', 'Bearer ' + this.token);
     this.options = new RequestOptions({ headers: this.headers });
        })    
     storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
-      console.log(this.rootUrl);
-      //this.getHashKey();
-      this.serviceRequestSubmitbeforePayment();
-      });
+ this.serviceRequestSubmitbeforePayment();
+          });
      storage.get('id').then((id) => { this.user_id=id; })
+     storage.get('name').then((name) => { this.name=name; })
+     storage.get('email').then((email) => { this.email=email; })
+     storage.get('phone').then((phone) => { this.phone=phone; })
    });
-  this.getTxnId();
-  
-   this.key="rjQUPktU";
-   this.salt="e5iIg1jwi8"
- this.productinfo="We are ApnaCare, a comprehensive healthcare resources company that is committed to take care of the health and wellness of the elderly in India. To do so, we have over the years built our expertise in the curation and delivery of the best-in-class elderly healthcare services, healthcare professionals and home care. Our specialists offer a range of home healthcare services including post hospitalization care, rehab care, physiotherapy, doctor visits, diagnostics, supply of medical equipment, and assistance in identifying suitable living spaces for the elderly. Our services can be accessed globally to serve the elderly living in Bangalore, Chennai, Hyderabad, Kolkata and Mumbai.";
-this.amount=this.servicecost;
-this.firstname='arun';
-this.email="muthu.k@quadrupleindia.com";
-this.phone="82203780131";
-this.surl="http://192.168.1.187:8000/paymentsuccessforSR";
-this.furl="http://192.168.1.187:8000/paymentfailureforSR";
-this.service_provider="payu_paisa";
-this.udf1="6";
-  }
+     if(this.datCount != undefined){
+      this.service_costss=this.servicediscountcost;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PaymentPage');
-
-  }
-
-
-
-
-
-  serviceRequestSubmitbeforePayment(){
+     }
+     else{
+      this.service_costss=this.service_cost;
+     }
+     localStorage.setItem('service_costss', this.service_costss);
+}
+ serviceRequestSubmitbeforePayment(){
+  let paymentflag="1";
+  if(this.datCount != undefined){
+console.log("recurring time");
     this.blogListService.serviceRequestSubmitbeforePayment(this.rootUrl,this.servicecost,
       this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,
      this.subcategory,this.datetime,this.dependentId,this.durations,this.exclude_days,
      this.from_date,this.from_time,this.serviceType,this.selected_dates,this.time_slot,
      this.to_date,this.to_time,this.package_id,this.preferred_time,this.quantity,
-     this.location_id,this.lead_time,this.vendor_id).subscribe(     
+     this.location_id,this.lead_time,this.vendor_id,this.datCount,this.service_costs,this.servicediscountcosts,
+     this.paymenttype,paymentflag,this.discounts,this.totalservice_costss,this.paidPayment,this.afterdiscount_one_service,this.servicediscountcost_one_service,
+     this.discountpartial).subscribe(     
       (loginuser) => {
-        console.log(loginuser.result);
         this.udf3= loginuser.result.serviceType;
-        console.log(this.udf3);
         this.udf2 = loginuser.result.service_request_id;
-        this.getHashKey();
     },
 
     (err) => { 
@@ -168,96 +181,105 @@ this.udf1="6";
     },
   )
   }
-
-getHashKey()
-{
-     this.blogListService.paymentTran(this.rootUrl,this.key,this.productinfo,this.txnid,this.amount,this.firstname,this.email,
-      this.phone,this.surl,this.service_provider,this.udf1,this.udf2,this.udf3).subscribe(     
+  else{
+    console.log("one time");
+    this.blogListService.serviceRequestSubmitbeforePayments(this.rootUrl,this.servicecost,
+      this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,
+     this.subcategory,this.datetime,this.dependentId,this.durations,this.exclude_days,
+     this.from_date,this.from_time,this.serviceType,this.selected_dates,this.time_slot,
+     this.to_date,this.to_time,this.package_id,this.preferred_time,this.quantity,
+     this.location_id,this.lead_time,this.vendor_id,paymentflag).subscribe(     
       (loginuser) => {
-        this.hash=loginuser.result;
+        this.udf3= loginuser.result.serviceType;
+        this.udf2 = loginuser.result.service_request_id;
     },
 
     (err) => { 
         console.log(err);
         
     },
-  )   
-}
-
-   submitForm(sendParam){
-   // var url = "https://www.payumoney/payuBiz.html?amount="+amt+"&name="+name+"&mobileNo="+mobile+"&email="+email+"&bookingId="+bookingId+"&productinfo="+productinfo+"&hash="+encrypttext+"&salt="+salt+"&key="+key ;
-
-    
-    
-    var url = "https://test.payu.in/_payment?key="+this.key+"&amount="+this.amount+"&firstname="+this.firstname+"&phone="+this.phone+"&email="+this.email+"&txnid="+this.txnid+"&productinfo="+this.productinfo+"&hash="+this.hash+"&surl="+this.surl+"&furl="+this.furl+"&service_provider="+this.service_provider+"&udf1="+this.udf1+"&udf2="+this.udf2+"&udf3="+this.udf3 ;
-
-    //var url = "https://test.payu.in/_payment?amount="+this.amount+"&firstname="+this.firstname+"&phone="+this.phone+"&email="+this.email+"&txnid="+this.txnid+"&productinfo="+this.productinfo+"&hash="+this.hash+"&key="+this.key+"&salt="+this.salt+"&surl="+this.surl+"&service_provider="+this.service_provider+"&udf1="+this.udf1+"&udf2="+this.udf2+"&udf3="+this.udf3 ;
-     console.log(url);
-     // cordovaInAppBrowser.open(url, '_blank', options)
- //      this.platform.ready().then(() => {
- //   let browser = new InAppBrowser(url,'_blank');
- // });
-      const browser = this.iab.create(url,'_blank');
-      // const watch = browser.on('loadstart').subscribe(function(event){
-      //   console.log('loadstart');
-      // });
-      //  .then(function(event) {
-      //    // success
-      //  })
-      //  .catch(function(event) {
-      // //   // error
-      //  });
-   document.forms["sendParam"].submit();
-   
+  )
   }
- 
- guid() {
-          return this.s4() + this.s4() +  this.s4() + this.s4();
-    }
+    
+  }
 
-     s4() {
-      return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-    }
-
-    getTxnId(){
-      
-       this.txnid = this.guid();
-    }
- 
- pay() {
+  pay() {
     var options = {
-      description: 'Credits towards consultation',
-      image: 'https://i.imgur.com/3g7nmJC.png',
+      description: 'Razorpay',
+      image: 'assets/img/elders-logo.png',
       currency: 'INR',
-      key: 'rzp_test_1DP5mmOlF5G5ag',
-      amount: '5000',
-      name: 'foo',
+      key: 'rzp_test_53tdpMxkK8bFKw',
+      amount: this.service_costss,
+      name: "EldersIndia",
       prefill: {
-        email: 'demo@email.com',
-        contact: '1234567890',
+        email: this.email,
+        contact: "82203780131",
         name: 'My Name'
       },
+      
+       notes: {
+        service_id:this.udf2,
+        service_type:this.udf3,
+        email: this.email,
+      },
       theme: {
-        color: '#F37254'
+        color: '#208ad6'
       },
       modal: {
         ondismiss: function() {
+          localStorage.getItem("payment_success");
+    console.log(localStorage.getItem("payment_success"));
           alert('dismissed')
         }
       }
     };
 
-    var successCallback = function(payment_id) {
-      alert('payment_id: ' + payment_id);
-    };
 
-    var cancelCallback = function(error) {
-      alert(error.description + ' (Error ' + error.code + ')');
-    };
+var ajaxCallCheck = function(payment_id){
 
-    RazorpayCheckout.open(options, successCallback, cancelCallback);
+  
+
+  var url  = "http://192.168.1.187:8000/api/razorPaymentResponse";
+   var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"service_cost":  localStorage.getItem("service_costss")}));
+console.log(localStorage.getItem("service_costss"));
+// xmlhttp.send(JSON.stringify({ "service_cost":  localStorage.getItem("service_costss")}));
+
+console.log(xmlhttp.responseText);
+
+
+xmlhttp.onload = function () {
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+ alert(result);
+ // let payment_success ="1";
+ // localStorage.setItem('payment_success', payment_success);
+
   }
 }
 
+ var successCallback = function(payment_id) {
+      ajaxCallCheck(payment_id);
+       // this.navCtrl.push(DashboardPage,{
+       //         //status: result
+       //    });
+    }
+
+var cancelCallback = function(error) {
+  alert(error.description + ' (Error '+error.code+')')
+}
+
+RazorpayCheckout.on('payment.success', successCallback);
+RazorpayCheckout.on('payment.cancel', cancelCallback);
+RazorpayCheckout.open(options, successCallback, cancelCallback);
+  }
+
+dismiss(){
+      this.viewCtrl.dismiss("dismiss");
+  }
+
+}

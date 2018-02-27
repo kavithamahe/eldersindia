@@ -23,6 +23,8 @@ packageData:any;
 rootUrl:any;
 packageStatus:any;
 vendorId:any;
+common_type:any="";
+commontype:any;
   constructor(public navCtrl: NavController,public viewCtrl: ViewController,public storage:Storage,public toastCtrl: ToastController,public loadingCtrl: LoadingController, public navParams: NavParams,public blogListService:BlogListService) {
   	 this.storage.ready().then(() => {      
     	storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
@@ -39,7 +41,16 @@ getServicesForByElder(){
     loading.present();    
     this.blogListService.getServicesForByElders(this.rootUrl,this.packageId,this.elder,this.location_id)
       .subscribe(data =>{
-        this.packageData = data.result;    
+        var dataList = data.result; 
+        // this.packageData = data.result; 
+        for(let data of dataList) {
+           data.common_type=data.common_type;
+         var str = data.common_type;
+         data.common_type = str.replace("Per" ,"");
+         console.log(data.common_type);
+
+        }
+       this.packageData = dataList; 
         loading.dismiss();
     },
     err =>{

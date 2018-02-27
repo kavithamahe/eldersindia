@@ -137,9 +137,7 @@ export class DashboardPage {
   ionViewDidLoad() {
     this.nativeAudio.preloadSimple('uniqueId1', 'assets/sound/Siren 21.mp3').then(this.onSuccess, this.onError);
   }
-  payment(){
-    this.navCtrl.setRoot(PaymentPage);
-  }
+  
   public servicesPage()
   {
   	this.navCtrl.setRoot(ServiceprovidersPage);

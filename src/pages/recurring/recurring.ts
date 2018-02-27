@@ -8,6 +8,7 @@ import { CallNumber } from 'ionic-native';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { RecurringviewPagePage } from '../../pages/recurringview/recurringview';
 import { RecurringcancelPagePage } from '../../pages/recurringcancel/recurringcancel';
+import { PackagepaymentPagePage } from '../../pages/packagepayment/packagepayment';
 
 import { BlogListService } from '../../providers/blog-list-service';
 
@@ -30,6 +31,7 @@ rootUrl:any;
 searchText:any="";
 nextPageURL:any='';
 serviceRequestScrollLists:any=[];
+discountcost:any;
   constructor(public navCtrl: NavController,public modalCtrl: ModalController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
   	this.storage.ready().then(() => {  
   		storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
@@ -39,7 +41,10 @@ serviceRequestScrollLists:any=[];
   	
   });
   }
-
+    // parseFloat(value)
+    // {
+    //     return parseFloat(value);
+    // }
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecurringPagePage');
   } 
@@ -65,20 +70,30 @@ serviceRequestScrollLists:any=[];
         });
    toast.present();
   }
+   paynow(service_cost,service_id){
+    let service_type = "Recurring";
+    let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"service_type":service_type,"service_cost":service_cost,"service_id":service_id});
+      serviceModal.present();
+  }
   getrecurringRequest(){
-  	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
-    loading.present();
+  	// let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+   //  loading.present();
     this.recurringRequest = [];
     this.blogListService.getrecurringRequest(this.rootUrl,this.searchText)
       .subscribe(data =>{ 
-      	this.recurringRequest = data.result.data;
+        var dataList=data.result.data;
+        for(let data of dataList) {
+  data.discountcost = parseFloat(data.servicediscountcost_one_service) + parseFloat(data.final_service_cost);
+ 
+}
+this.recurringRequest = dataList;
         this.nextPageURL=data.result.next_page_url;  
-        loading.dismiss();
+        // loading.dismiss();
     },
     err =>{
       this.recurringRequest = [];
       this.blogListService.showErrorToast(err);     
-      loading.dismiss();
+      // loading.dismiss();
     })
   }
   doInfinite(infiniteScroll) {

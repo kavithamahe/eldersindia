@@ -58,6 +58,17 @@ verifyotp(otp){
     return this.http.post(this.rootUrl+'verifyOtp',_request,this.head)
       .map(res => res.json());
 }
+getRecurringDiscount(datCount){
+   let _request= {"count":datCount};
+    return this.http.post(this.rootUrl+'getRecurringDiscount',_request,this.head)
+      .map(res => res.json());
+}
+getdiscountrecurringvalues(getpaidPayment){
+  let _request= {"paidPayment":getpaidPayment};
+    return this.http.post(this.rootUrl+'getdiscountrecurringvalues',_request,this.head)
+      .map(res => res.json());
+}
+
 webServiceCall(serviceName,bodyData){
       this.headers = new Headers();
       this.headers.append('Content-Type', 'application/json');
@@ -103,11 +114,11 @@ validateTime(serviceData,location_id,lead_time,vendor_id,category,category_id,se
       .map(res => res.json());
 }
 validateTimes(serviceData,location_id,lead_time,vendor_id,category,category_id,service,service_id,sub_category_id,subcategory,datCount){
-   let _request= {"category": category, "category_id": category_id,"datCount":datCount,"preferred_time":serviceData.preferred_time,
+   let _request= {"category": category, "category_id": category_id,"datCount":datCount,
     "dependentid": serviceData.dependentId,"durations":serviceData.durations,"exclude_days":serviceData.exclude_days,"from_date":serviceData.from_date,
     "from_time":serviceData.from_time,"lead_time":lead_time,"location_id":location_id,"package_id":serviceData.package_id,"quantity":"","selected_dates":serviceData.selected_dates,
     "service":service,"serviceType":serviceData.serviceType,"service_id":service_id,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":serviceData.time_slot,
-    'to_date':serviceData.to_date,"to_time":serviceData.to_time,"vendor_id":vendor_id};
+    'to_date':serviceData.to_date,"to_time":serviceData.to_time,"vendor_id":vendor_id,"service_cost":serviceData.service_cost,"servicecost":serviceData.servicecost,"payment":serviceData.payment};
 
     return this.http.post(this.rootUrl+'validateLeadTime',_request,this.head)
       .map(res => res.json());

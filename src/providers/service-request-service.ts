@@ -34,6 +34,16 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
   }
+  getcancelRecurringPolicyConfig(hours,service_id,sub_category_id,status,servicediscountcost_one_service){
+    let _request= {"hour":hours,"service_id":service_id,"servicediscountcost_one_service":servicediscountcost_one_service,"status":status,"sub_category_id":sub_category_id};
+    return this.http.post(this.rootUrl+'getcancelRecurringPolicyConfig',_request,this.options)
+      .map(res => res.json()); 
+  }
+  getcancelPolicyConfig(hours,service_id,sub_category_id,status){
+    let _request= {"hour":hours,"service_id":service_id,"status":status,"sub_category_id":sub_category_id};
+    return this.http.post(this.rootUrl+'getcancelPolicyConfig',_request,this.options)
+      .map(res => res.json()); 
+  }
   serviceRequestStatus(searchText,status){
      let _request= {"info":{"list":true,"sort":"","searchValue":searchText,"status":status,"token":""}};
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
@@ -81,18 +91,17 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'getRemarks',_request,this.options)
       .map(res => res.json()); 
   }
-  // cancelRequest(serviceId) 
-  // {
-  
-  //  let _request= {"sr_id":serviceId};
-  //   return this.http.post(this.rootUrl+'cancelServiceRequest',_request,this.options)
-  //     .map(res => res.json()); 
-  // }
-    cancelRequest(title,serviceId) 
+ 
+    cancelRequest(title,serviceId,dedaction_service_cost,service_type,txnid) 
   {
   
-   let _request= {"info":{"status":3,"id":serviceId,"comments":title,"cancel_time":"","scheduled_date":""}}
-    return this.http.post(this.rootUrl+'updateServiceReceiveStatus',_request,this.options)
+   let _request= {"status":3,"id":serviceId,"comments":title,"razorpay_payment_id":txnid,"service_cancel_amount":dedaction_service_cost,"service_type":service_type};
+    return this.http.post(this.rootUrl+'razorPaymentResponseforCancel',_request,this.options)
       .map(res => res.json()); 
+  }
+  razorPaymentResponseforCancel(title,serviceId,service_type,txnid){
+    let _request= {"status":3,"id":serviceId,"comments":title,"razorpay_payment_id":txnid,"service_type":service_type};
+    return this.http.post(this.rootUrl+'razorPaymentResponseforCancel',_request,this.options)
+      .map(res => res.json());
   }
 }

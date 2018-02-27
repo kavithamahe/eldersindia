@@ -65,20 +65,48 @@ Url:any;
      subcategory,datetime,dependentId,durations,exclude_days,
     from_date,from_time,serviceType,selected_dates,time_slot,
      to_date,to_time,package_id,preferred_time,quantity,
-     location_id,lead_time,vendor_id){
+     location_id,lead_time,vendor_id,datCount,service_costs,servicediscountcost,paymenttype,paymentflag,discounts,totalservice_costss,paidPayment,
+     afterdiscount_one_service,servicediscountcost_one_service,discountpartial){
     let _request= {"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
 dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
 from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
 "quantity":quantity,"selected_dates":selected_dates,"service":service,"serviceType":
 serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
-,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id};
+,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id,"datCount":datCount,"servicecost":service_costs,"servicediscountcost":servicediscountcost,
+"problem":"","pay_method":paymenttype,"mobile":"","paymentflag":paymentflag,"afterdiscount":totalservice_costss,
+"discount":discounts,"discountcost":paidPayment,"payment_type":paymenttype,"afterdiscount_one_service":afterdiscount_one_service,"servicediscountcost_one_service":servicediscountcost_one_service,
+"discountpartial":discountpartial};
     return this.http.post(rootUrl+'serviceRequestSubmitbeforePayment',_request,this.options)
+      .map(res => res.json());
+  }
+   serviceRequestSubmitbeforePayments(rootUrl,servicecost,
+      category,category_id,service,service_ids,sub_category_id,
+     subcategory,datetime,dependentId,durations,exclude_days,
+    from_date,from_time,serviceType,selected_dates,time_slot,
+     to_date,to_time,package_id,preferred_time,quantity,
+     location_id,lead_time,vendor_id,paymentflag){
+    let _request= {"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
+dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
+from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
+"quantity":quantity,"selected_dates":selected_dates,"service":service,"serviceType":
+serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
+,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id,"paymentflag":paymentflag};
+    return this.http.post(rootUrl+'serviceRequestSubmitbeforePayment',_request,this.options)
+      .map(res => res.json());
+  }
+  razorPaymentResponses(rootUrl,payment_id){
+    let _request= {"razorpay_payment_id": payment_id};
+    console.log(_request);
+     return this.http.post(rootUrl+'razorPaymentResponse',_request,this.options)
       .map(res => res.json());
   }
   paymentTran(rootUrl,key,productinfo,txnid,amount,firstname,email,
       phone,surl,service_provider,udf1,udf2,udf3){
+
      let _request= {"key":key,"amount":amount,"txnid":txnid,"phone":phone,"firstname":firstname,
-     "email":email,"productinfo":productinfo,"surl":surl,"udf1":udf1,"service_provider":service_provider,"udf2":udf2,"udf3":udf3};
+
+     "email":email,"productinfo":productinfo,"surl":surl,"udf1":udf1,"service_provider":service_provider,"udf3":"serviceType",
+     "udf2":"service_request_id"};
     return this.http.post(rootUrl+'checkpayUmoneyforSRMbl',_request,this.options)
       .map(res => res.json());
   }
