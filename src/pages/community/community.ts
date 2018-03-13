@@ -58,6 +58,7 @@ export class CommunityPage {
     authForm:FormGroup;
     message:any='';
     connectionInfo:any=[];
+     alert:any;
   constructor(public platform: Platform,public popoverCtrl: PopoverController, public actionsheetCtrl: ActionSheetController,public modal: ModalController, public formBuilder: FormBuilder,public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices) {
     this.nav=nav;
 
@@ -65,8 +66,6 @@ export class CommunityPage {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
         this.community_id=this.navParams.get("community_id");
-        // this.communityList(this.community_id);
-        // this.communityDetail(this.community_id);
         this.addComments=false;
         this.itemComments=false;
         this.userType="sponsor";
@@ -108,18 +107,9 @@ files:any;
       title: '',
       cssClass: 'action-sheets-basic-page',
       buttons: [
-        // {
-        //   text: 'Delete',
-        //   role: 'destructive',
-        //   icon: !this.platform.is('ios') ? 'trash' : null,
-        //   handler: () => {
-        //     this.showConfirm(id);
-        //   }
-        // },
         {
           text: 'Report Abuse',
           role: 'destructive',
-          //icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
             this.showPrompt(id,poster_id);
           }
@@ -142,7 +132,6 @@ files:any;
       this.showToast(JSON.parse(err._body).error);
     }
     else if(err.status===500){
-      //this.communityList(this.community_id);
     }
     else{
       this.communityServices.showErrorToast(err);  
@@ -164,14 +153,12 @@ files:any;
         {
           text: 'Cancel',
           handler: data => {
-            //console.log('Cancel clicked');
           }
         },
         {
           text: 'Submit',
           handler: data => {
             
-            //console.log(data.title);
             if(data.title == ""){
               this.communityServices.showToast("Please enter the reason");
                return false;
@@ -198,7 +185,9 @@ files:any;
       this.communityServices.showErrorToast(err);
   })
  }
+
   presentPopover(ev,id) {
+    
     if(this.connectionInfo.length == 0){
       this.communityServices.showToast("No Contacts")
     }
@@ -209,7 +198,6 @@ files:any;
       ev: ev
     });
     popover.onDidDismiss(() => {
-      //this.ngoListInfores();
        this.community_id=this.navParams.get("community_id");
        this.communityList(this.community_id);
        this.communityDetail(this.community_id);
@@ -274,9 +262,6 @@ toggleContent(){
   }
   showComment(post){
     this.nav.push(CommunitycommentsPage, { posts: post });
-   //  let commentModal = this.modal.create(CommunitycommentsPage, { posts: post });
-   //  console.log(post);
-   // commentModal.present();
   }
 
 

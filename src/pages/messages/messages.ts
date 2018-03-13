@@ -69,21 +69,6 @@ selected:any;
       })
     });
   }
- // deleteMultipel(student) {
- //     var index = this.deleteSelected.indexOf(student);
- //    if(index > -1) {
- //        this.deleteSelected.splice(index, 1);
- //       student.selected = false;
- //       this.selected = student.selected;
- //       console.log(this.selected);
- //    } else {
- //        this.deleteSelected.push(student.id);
- //       student.selected = true;
- //       this.hidedelete = student.selected;
- //       this.selected = student.selected;
- //       //this.senddelete = "true";
- //    }
- //  }
   clickedAvatar(id){
 
        if(this.isInArray(id)){
@@ -106,18 +91,6 @@ selected:any;
       }
       return check;
     }
-  // deletesendMultipel(id) {
-  //    student.active = !student.active;    
-  //    var index = this.deleteSelected.indexOf(student);
-  //   if(index > -1) {
-  //       this.deleteSelected.splice(index, 1);
-  //      student.selected = false;
-  //   } else {
-  //       this.deleteSelected.push(student.id);
-  //      student.selected = true;
-  //      this.senddelete = student.selected;
-  //   }
-  // }
    deletesendMultipel(id) {
    
        if(this.isInArraySend(id)){
@@ -144,17 +117,7 @@ selected:any;
       this.messagesService.deleteBulkMessages(this.selectedContacts,viewType).subscribe(
      (deleteMessage) => {
        this.showToaster(deleteMessage.result);
-       this.onInit();
-      // if(viewType =='sent')
-      // {
-      //   this.sent();
-      //   loader.dismiss();
-      // } 
-      // else
-      // {
-      //   this.onInit();
-      //   loader.dismiss();
-      // }  
+       this.onInit(); 
     });
   }
  

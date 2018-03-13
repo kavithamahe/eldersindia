@@ -6,7 +6,6 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { Login } from '../../models/login';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
-import { FirsttimeloginPagePage } from '../../pages/firsttimelogin/firsttimelogin';
 
 
 import { LoginUser } from '../../providers/login-user';

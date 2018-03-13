@@ -190,7 +190,7 @@ pressContact(){
         this.showToast("No Packages Available")
       }
       else{
-      let modal = this.modalCtrl.create(ServiceModalPage,{service:"packages",vendorList:this.vendorList});    
+      let modal = this.modalCtrl.create(ServiceModalPage,{service:"packages",vendorList:this.vendorList,location_id:this.locationId});    
     modal.present();
   }
     }

@@ -54,7 +54,7 @@
        <hr/>
             <div *ngFor="let request of receivedRquestInfo">
               <!-- <ion-item-sliding class="inbox-sends"> -->
-                <ion-item text-wrap class="inbox-sends">
+                <ion-item text-wrap class="inbox-sends" *ngIf="error != 'No records found'">
 
                   <ion-row>
                     <ion-col width-20>
@@ -71,7 +71,7 @@
                   </ion-row>
 				  <ion-row>
 				  <ion-col>
-                    <button ion-button icon-only class="active-btn"(click)="connectionStatus(request?.connection_id,1)">Accept</button>
+                  <button ion-button icon-only class="active-btn"(click)="connectionStatus(request?.connection_id,1)">Accept</button>
                   <button ion-button icon-only class="inactive-btn" (click)="connectionStatus(request?.connection_id,2)">Reject</button>
 				    </ion-col>
 				  </ion-row>
@@ -188,7 +188,7 @@
             </ion-row>
         
             <ion-list *ngFor="let request of addConnectionInfo">
-              <ion-item class="inbox-sends">
+              <ion-item class="inbox-sends" *ngIf="error != 'No records found'">
                 <ion-row>
                   <ion-col width-20>
                     <ion-avatar item-left (click)="CommunityUserWall(request?.id)">
@@ -200,7 +200,7 @@
                     </h6>
                     <p [hidden]="!request?.connections?.location">
                     <i class="fa fa-map-marker"></i> <span>{{request?.connections?.location}}</span> </p>
-					<button ion-button (click)="connectMember(request.id,request.connections.name,request.connections.last_name)"  small class="conneted-area">Connect</button>
+					<button ion-button (click)="connectMember(request.id,request.connections.name,request.connections.last_name)" small class="conneted-area">Connect</button>
                   </ion-col>
           
                 </ion-row>
@@ -218,18 +218,6 @@
         <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
         </ion-icon></button>
       </ion-fab>
-       <!-- <ion-fab bottom right edge *ngIf="sentRquestInfo.length != 0"> -->
-            <!-- <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"> -->
-            <!-- </ion-icon></button> -->
-            <!-- </ion-fab> -->
-          <!-- <ion-fab bottom right edge *ngIf="receivedRquestInfo.length != 0"> -->
-            <!-- <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"> -->
-            <!-- </ion-icon></button> -->
-            <!-- </ion-fab> -->
-          <!-- <ion-fab bottom right edge *ngIf="addConnectionInfo.length != 0"> -->
-          <!-- <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"> -->
-            <!-- </ion-icon></button> -->
-          <!-- </ion-fab> -->
 
 </ion-content>
 

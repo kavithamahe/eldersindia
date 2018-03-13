@@ -124,7 +124,7 @@ mytype:string ="password";
 //-----------------------END-------------------//
 
   constructor(public providerService:ServiceProvider, public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
-    this.elder_dob = new Date().toISOString();
+    
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
 
@@ -137,29 +137,24 @@ mytype:string ="password";
     this.options = new RequestOptions({ headers: this.headers });
         this.getElderMasterDetails();
         this.functionality=navParams.get("fuctionality");
-       // console.log(navParams.get("editData"));
       if(this.functionality == 'edit'){
           this.title = "Edit Elder Details"
           if(navParams.get("editData")!= null){
-            // let dependent = navParams.get("editData");
             this.loadManageDependentData(navParams.get("editData").id);
          }
         }else if(this.functionality == 'profileEdit'){
-          this.title = "Profile Edit"
-          console.log("....edit profile..",navParams.get('profileData'));
+          this.title = "Profile Edit";
           this.loadForm(navParams.get('profileData'));
         }else{
           this.title = "Elder Onboarding";
+          this.elder_dob = new Date().toISOString();
         }
       })
       
     }); 
-    // this.today = "";
-     
      this.job_interest=false;
      
-         
-  // }
+        
   if(navParams.get("fuctionality") !="profileEdit"){
     
         this.authForm = formBuilder.group({
@@ -169,30 +164,14 @@ mytype:string ="password";
         last_name: ['', Validators.compose([ Validators.maxLength(30), 
               ,Validators.required])],
        
-        //elder_service : ['', Validators.compose([Validators.required])],
         elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.minLength(10),Validators.maxLength(12),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
-        // elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
-        // elder_password:['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
         
          emergency_list: this. formBuilder.array([
                 this.emergencyAddress(),
             ]),
-        // education_graduation: ['', Validators.compose([Validators.required])],
-        // education_specialization: ['', Validators.compose([Validators.required])],
-        // education_college: ['', Validators.compose([Validators.required])],
-        // experience_industry: ['', Validators.compose([Validators.required])],
-        // experience_years: ['', Validators.compose([Validators.required])],
-        // experience_duration: ['', Validators.compose([Validators.required])],
-       /* emergency_numbers: ['', Validators.compose([Validators.required])],
-        experienceYears: ['', Validators.compose([Validators.required])],
-        college: ['', Validators.compose([Validators.required])],
-        elderGraduation: ['', Validators.compose([Validators.required])],
-        elderSpecialization: ['', Validators.compose([Validators.required])],
-        functional_area: ['', Validators.compose([Validators.required])],
-        functional_duration: ['', Validators.compose([Validators.required])]*/
        
        
               });
@@ -205,32 +184,14 @@ mytype:string ="password";
               Validators.required])],
         last_name: ['', Validators.compose([ Validators.maxLength(30), 
               ,Validators.required])],
-       
-       // elder_service : ['', Validators.compose([Validators.required])],
         elder_number : ['', Validators.compose([Validators.pattern('[0-9]*'),Validators.maxLength(12),Validators.required])],
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
-        // education_list: this. formBuilder.array([
-        //         this.educationAddress(),
-        //     ]),
-        //  experience_list: this. formBuilder.array([
-        //         this.experienceAddress(),
-        //     ]),
+    
          emergency_list: this. formBuilder.array([
                 this.emergencyAddress(),
             ]),
-       /* emergency_numbers: ['', Validators.compose([Validators.required])],
-        experienceYears: ['', Validators.compose([Validators.required])],
-        college: ['', Validators.compose([Validators.required])],
-        elderGraduation: ['', Validators.compose([Validators.required])],
-        elderSpecialization: ['', Validators.compose([Validators.required])],
-        functional_area: ['', Validators.compose([Validators.required])],
-        functional_duration: ['', Validators.compose([Validators.required])]*/
-        // area_of_interest: ['', Validators.compose([Validators.required])],
-        // job_type: ['', Validators.compose([Validators.required])],
-        // skill_set: ['', Validators.compose([Validators.required])],
-        
               });
   }
     if(navParams.get("fuctionality")!= "edit" && navParams.get("fuctionality") !="profileEdit")
@@ -250,7 +211,6 @@ mytype:string ="password";
         elder_service: ['', Validators.compose([Validators.required])],
         job_type: ['', Validators.compose([Validators.required])],
         skill_set: ['', Validators.compose([Validators.required])],
-        //file_name: ['', Validators.compose([Validators.required])],
    })
  }
  else{
@@ -274,9 +234,7 @@ mytype:string ="password";
     educationAddress() {
     return this.formBuilder.group({
         education_graduation: ['', Validators.compose([Validators.required])],
-        // graduationOther: ['', Validators.compose([Validators.required])],
         education_specialization: ['', Validators.compose([Validators.required])],
-       // specialization_other: ['', Validators.compose([])],
         education_college: ['', Validators.compose([])],
         });
     }
@@ -344,8 +302,9 @@ public emergencies =  [
           this.elder_service = this.manageDependentData.in_service;
           this.elder_number= this.manageDependentData.mobile;
           this.file_name=this.manageDependentData.docs_name;
-          this.elder_dob= moment(this.manageDependentData.dob).format("YYYY-MM-DD");
-      
+          // this.elder_dob =moment(this.manageDependentData.dob,"DD-MM-YYYY").toISOString();//.toISOString();
+          this.elder_dob =moment(this.manageDependentData.dob,"DD-MM-YYYY").add(1, 'days').toISOString();
+          console.log(this.elder_dob);
           this.elder_email= this.manageDependentData.email;
           //this.elder_password= this.manageDependentData.password;
           this.elder_location = this.manageDependentData.location;        
@@ -387,7 +346,6 @@ public emergencies =  [
 
           if(emergencies != undefined){
           if(emergencies.length != 0 ){
-            console.log(emergencies.length);
            this.emergency_list.pop();
 
                this.emergency_name =[];
@@ -395,7 +353,6 @@ public emergencies =  [
             for(let i = 0; i < emergencies.length;i++)
             {
               this.emergency_name.push(emergencies[i].person);
-              console.log(this.emergency_name);
               this.emergency_no.push(emergencies[i].mobile);
               this.emergency_list.push({emergency:[i]});
               }
@@ -720,31 +677,6 @@ getareaof_interest(){
     this.avatar = "";
   }
         
-
-    // let dependentData = {"info":
-    //                       [{"email":this.authForm.value.elder_email,
-    //                       "relation":this.elder_relation,
-    //                       "password":this.authForm.value.elder_password,
-    //                       "name":this.authForm.value.elder_name,
-    //                       "dob":this.elder_dob,
-    //                       "mobile":this.authForm.value.elder_number,
-    //                       "in_service":this.elder_service,
-    //                       "address":this.authForm.value.elder_address,
-    //                       "location":this.elder_location,
-    //                       "area_interest":this.area_of_interest,
-    //                       "job_type":this.job_type,
-    //                       "skills":this.skill_data,
-    //                       "emergency":this.emergency_data,
-    //                       "emergency_numbers":this.mobile,
-    //                       "experience":this.experience_data,
-    //                       "education":this.education_data,
-    //                       "sponsor_id":this.sponsor_id,
-    //                       "job_interested":this.job_interest,
-    //                       //"docs":this.file_name
-    //                       }]
-    //                     };
-    
-                        //-------------------modified----------------------------//
 
       if(this.functionality=="edit" || this.functionality =="profileEdit")
       {

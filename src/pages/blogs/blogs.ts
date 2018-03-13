@@ -24,6 +24,7 @@ emptyRecord:any;
 categoryLists:any;
 searchCategory1:any = "";
 searchText:any="";
+searchButton:boolean=false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.storage.ready().then(() => {
@@ -51,6 +52,20 @@ searchText:any="";
     })
 
   });
+  }
+   searchCall(searchValue){
+     this.searchButton=!searchValue;
+   }
+  onSelectChange(selectedValue: any) {
+   if(this.searchCategory1 == "All"){
+    this.searchCategory1 = "";
+    this.blog();
+   }
+   else{
+      this.searchCategory1 = selectedValue;
+    this.blog();
+   }
+  
   }
   public blog()
   { 
@@ -93,12 +108,6 @@ searchText:any="";
   });
 
   }
-  /*public blogsearch(searchEvent) {
-    let term = searchEvent.target.value;
-      this.blogListService.searchConnection(term).subscribe(searchConnection => {
-        this.bloglists= searchConnection.result.data;
-      });
-  }*/
 doInfinite(infiniteScroll) {
     setTimeout(() => {      
       if(this.nextPageURL!=null && this.nextPageURL!='')
@@ -134,10 +143,6 @@ doInfinite(infiniteScroll) {
         }
       });
   }
-  // inputSearch(searchEvent){
-  //  this.searchText = searchEvent.target.value;
-  //  this.blog();
-  // }
   public showToaster(message)
   {
    let toast = this.toastCtrl.create({

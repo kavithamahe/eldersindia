@@ -86,9 +86,13 @@ export class ModalContentPage {
   percentage_cost:any;
   servicecost:any;
   vendorr:any;
+  startDate:any;
+  endDate:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
      this.date = new Date().toISOString();
+     this.startDate = new Date().toISOString();
+     this.endDate = new Date().toISOString();
      this.dependentLists = params.get("dependentList");
      //this.dependents = this.dependentLists[0].id;
      this.lead_time = params.get("lead_time"); 
@@ -288,6 +292,7 @@ onlyNumberKey(event) {
 
    }
    next(){
+     this.modalForm.value.date= moment(this.modalForm.value.date).format("YYYY-MM-DD");
       var objFromDate = this.modalForm.value.startdate;
 var objToDate = this.modalForm.value.enddate;
  

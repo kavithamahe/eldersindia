@@ -14,7 +14,6 @@ import { CommunitylistPage } from '../../pages/communitylist/communitylist';
 import { BlogsPage } from '../../pages/blogs/blogs';
 import { ConnectionsPage } from '../../pages/connections/connections';
 import { MessagesPage } from '../../pages/messages/messages';
-import { BlogtabsPage } from '../../pages/blogtabs/blogtabs';
 import { RemotemonitorPagePage } from '../../pages/remotemonitor/remotemonitor';
 
 
@@ -52,7 +51,6 @@ export class DashboardPage {
       this.headers.append('Content-Type', 'application/json');
       this.headers.append('Authorization', 'Bearer ' + this.token);
       this.head = new RequestOptions({ headers: this.headers });
-      console.log(this.head); 
     this.fetchLocation();
   })
       storage.get('user_type').then((user_type) => { this.user_type=user_type;  })
@@ -61,8 +59,6 @@ export class DashboardPage {
       storage.get('police').then((police) => { this.police=police;  })
   });
     
-    // this.checkLocation();
-     //alert(this.call_sponsor);
   }
    ionViewWillEnter() {
     this.tabBarElement.style.display = 'none';

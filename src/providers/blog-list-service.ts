@@ -121,7 +121,7 @@ viewrecurring(sr_token)
       .map(res => res.json()); 
   }
 getPackageRequest(Url,searchText,packstatus){
-       let _request= {info: {"list": true, "search": searchText, "status": packstatus, "token": null}};
+       let _request= {info: {"list": true, "search": searchText, "status": packstatus,"token": null}};
     return this.http.post(Url+`getPackageRequest`,_request,this.options)
       .map(res => res.json()); 
 }
@@ -219,21 +219,19 @@ getPackageRequestById(rootUrl,packageId){
    }
 
    shareBlog(BlogId,friendsID,description,selectedCommunity){
-   if(selectedCommunity != undefined){
+   if(selectedCommunity != ""){
     let _request={"friends":{"addType":"Communities","comm_id":selectedCommunity,"description":description},"shareurl":this.rootUrl+'/#/blog/details/'+BlogId}  
- return this.http.post(this.rootUrl+'shareblog',_request,this.options)
+    return this.http.post(this.rootUrl+'shareblog',_request,this.options)
       .map(res => res.json()); 
  }
  else{
       let _request= {'friends':{"addType":"Friends",'user_id':friendsID,'description':description},'shareurl':this.rootUrl+'/#/blog/details/'+BlogId};
        return this.http.post(this.rootUrl+'shareblog',_request,this.options)
       .map(res => res.json()); 
- }
-     
-   
-   }
-   getPackage(selectedConnections,packId){
-    let _request= {"pack_id": packId, "dependent_id": selectedConnections};
+     }
+      }
+   getPackage(selectedConnections,packId,location_id){
+    let _request= {"pack_id": packId, "dependent_id": selectedConnections,"location_id":location_id};
     return this.http.post(this.rootUrl+'availPackage',_request,this.options)
       .map(res => res.json()); 
    }

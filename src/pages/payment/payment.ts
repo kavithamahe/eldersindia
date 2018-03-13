@@ -185,28 +185,11 @@ getHashKey()
 }
 
    submitForm(sendParam){
-   // var url = "https://www.payumoney/payuBiz.html?amount="+amt+"&name="+name+"&mobileNo="+mobile+"&email="+email+"&bookingId="+bookingId+"&productinfo="+productinfo+"&hash="+encrypttext+"&salt="+salt+"&key="+key ;
-
-    
-    
     var url = "https://test.payu.in/_payment?key="+this.key+"&amount="+this.amount+"&firstname="+this.firstname+"&phone="+this.phone+"&email="+this.email+"&txnid="+this.txnid+"&productinfo="+this.productinfo+"&hash="+this.hash+"&surl="+this.surl+"&furl="+this.furl+"&service_provider="+this.service_provider+"&udf1="+this.udf1+"&udf2="+this.udf2+"&udf3="+this.udf3 ;
 
-    //var url = "https://test.payu.in/_payment?amount="+this.amount+"&firstname="+this.firstname+"&phone="+this.phone+"&email="+this.email+"&txnid="+this.txnid+"&productinfo="+this.productinfo+"&hash="+this.hash+"&key="+this.key+"&salt="+this.salt+"&surl="+this.surl+"&service_provider="+this.service_provider+"&udf1="+this.udf1+"&udf2="+this.udf2+"&udf3="+this.udf3 ;
-     console.log(url);
-     // cordovaInAppBrowser.open(url, '_blank', options)
- //      this.platform.ready().then(() => {
- //   let browser = new InAppBrowser(url,'_blank');
- // });
+   
       const browser = this.iab.create(url,'_blank');
-      // const watch = browser.on('loadstart').subscribe(function(event){
-      //   console.log('loadstart');
-      // });
-      //  .then(function(event) {
-      //    // success
-      //  })
-      //  .catch(function(event) {
-      // //   // error
-      //  });
+    
    document.forms["sendParam"].submit();
    
   }

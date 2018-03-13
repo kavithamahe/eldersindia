@@ -13,22 +13,28 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
+     <ion-buttons right>
+      <button ion-button icon-only (click)="searchCall(searchButton)">
+          <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+    </ion-buttons>
   
   </ion-navbar>
 </ion-header>
 
 <ion-content class="content-intop">
-    <ion-card class="sel-packages">
+    <ion-card class="sel-packages" *ngIf(searchButton)>
         <ion-item>
             <ion-label>select category</ion-label>
-              <ion-select [(ngModel)]="searchCategory1" (ionChange)='blog()'>
+              <ion-select [(ngModel)]="searchCategory1" (ionChange)="onSelectChange($event)">
+               <ion-option value="All">All</ion-option>
                 <ion-option  *ngFor="let category of categoryLists" 
                  value={{category.id}}>{{category.name}}
                 </ion-option>
               </ion-select>
           </ion-item>
     </ion-card>
-    <ion-row>
+    <ion-row *ngIf(searchButton)>
       <ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
       </ion-col>
       <ion-col width-20><button (click)="getItems(searchText)" ion-button small 
@@ -48,8 +54,6 @@
     <div>
       <ion-card-content>
         {{imageUrl.blogs?.featured_image}}
-<!--blogs?.description | words : 3 : '...'-->
-   <!-- <p [innerHTML]="blogs?.description | words : 60 : '...'"></p>-->
       </ion-card-content>
       <img src="{{imageUrl+blogs?.featured_image}}" [hidden]="!blogs?.featured_image" />
       <span [hidden]="!blogs.category_name"> 

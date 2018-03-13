@@ -105,12 +105,12 @@
 
        <ion-list *ngFor="let reply of viewComments.comment_reply; let j=index">
         <ion-row>
-          <ion-col offset-10 (click)="CommunityUserWall(reply?.uid_from)">
+          <ion-col offset-10>
             <ion-item item-text-wrap class="reply-reply">
-              <ion-avatar item-left>
+              <ion-avatar item-left (click)="CommunityUserWall(reply?.uid_from)">
                 <img src="{{imageUrl+reply?.profile_image}}" [hidden]="!reply?.profile_image">
               </ion-avatar>
-              <h2>{{reply.name_from}}-{{reply.name_to}}</h2>
+              <h2 (click)="CommunityUserWall(reply?.uid_from)">{{reply.name_from}}-{{reply.name_to}}</h2>
               <p item-text-wrap>{{reply.comments_replay}}</p>
 			  <br/>
 			  <div class="reply-btt">
