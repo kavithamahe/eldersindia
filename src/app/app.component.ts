@@ -129,6 +129,7 @@ export class MyApp {
          this.storage.set('id', loginuser['details']['id']);
          this.storage.set('name', loginuser['details']['name']);
          this.storage.set('email',loginuser['details']['email']);
+         this.storage.set('phone',loginuser['details']['phone']);
          this.storage.set('password',this.registerCredentials.password);
          this.storage.set('user_type', loginuser['details']['user_type']);
          this.storage.set('user_type_id', loginuser['details']['user_type_id']);

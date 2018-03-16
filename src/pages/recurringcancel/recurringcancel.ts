@@ -21,6 +21,10 @@ import { BlogListService } from '../../providers/blog-list-service';
 export class RecurringcancelPagePage {
 rootUrl:any;
 recurring_request_id:any;
+dedction_amounts:any=[];
+refund_amount:any;
+dedction_amount:any;
+remaining_amount:any;
 recurringRequest:any=[];
 recurringlist:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,public blogListService: BlogListService,public loadingCtrl: LoadingController,public storage:Storage,) {
@@ -39,6 +43,10 @@ recurringlist:any;
     this.blogListService.getrecurringRequestdelete(this.rootUrl,this.recurring_request_id)
       .subscribe(data =>{ 
       	this.recurringRequest = data.result;
+        this.dedction_amounts = data.result[0];
+        this.refund_amount = this.dedction_amounts.refund_amount;
+        this.dedction_amount= this.dedction_amounts.dedction_amount;
+        this.remaining_amount = this.dedction_amounts.remaining_amount;
         loading.dismiss();
     },
     err =>{
@@ -55,7 +63,8 @@ recurringlist:any;
   delete(){
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
-    this.blogListService.deleterecurringrequest(this.rootUrl,this.recurring_request_id)
+    this.blogListService.deleterecurringrequest(this.rootUrl,this.recurring_request_id,this.dedction_amount,this.refund_amount,
+      this.remaining_amount)
       .subscribe(data =>{ 
       	this.blogListService.showToast(data.result);
       	this.navCtrl.pop();

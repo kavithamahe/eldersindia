@@ -81,11 +81,18 @@ paidPayment:any;
 afterdiscount_one_service:any;
 servicediscountcost_one_service:any;
 discountpartial:any;
+serviceTitle:any;
+base_cost:any;
+payableamount:any;
+servicediscost:any;
+payableamounts:any;
   constructor(public platform:Platform,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public navCtrl: NavController,private http: Http) {
   
 this.serviceData=navParams.get("serviceData");
     this.serviceData=navParams.get("serviceData");
     console.log(this.serviceData);
+    this.serviceTitle=this.serviceData.serviceTitle;
+    this.base_cost=this.serviceData.base_cost
     this.datCount=this.serviceData.datCount;
     this.datetime=this.serviceData.datetime;
     this.paymenttype =this.serviceData.payment;
@@ -116,9 +123,11 @@ this.serviceData=navParams.get("serviceData");
   this.service_cost=this.servicecost*100;
   this.service_costs=navParams.get("service_costs");
   this.servicediscountcosts=navParams.get("servicediscountcost");
+  this.servicediscost = navParams.get("servicediscountcost");
+  this.payableamount = navParams.get("payableamount");
 
 
-
+  this.payableamounts = this.payableamount * 100;
   this.servicediscountcost=navParams.get("servicediscountcost") * 100;
   this.category=navParams.get("category");
 
@@ -149,7 +158,12 @@ localStorage.setItem('key', this.token);
      storage.get('phone').then((phone) => { this.phone=phone; })
    });
      if(this.datCount != undefined){
-      this.service_costss=this.servicediscountcost;
+      if(this.paymenttype == "partial_payment"){
+        this.service_costss=this.payableamounts;
+      }
+      else{
+        this.service_costss=this.servicediscountcost;
+      }
 
      }
      else{
@@ -158,6 +172,9 @@ localStorage.setItem('key', this.token);
      localStorage.setItem('service_costss', this.service_costss);
 }
  serviceRequestSubmitbeforePayment(){
+  if(this.paymenttype == "partial_payment"){
+    this.servicediscountcosts = this.payableamount;
+  }
   let paymentflag="1";
   if(this.datCount != undefined){
 console.log("recurring time");
@@ -168,7 +185,7 @@ console.log("recurring time");
      this.to_date,this.to_time,this.package_id,this.preferred_time,this.quantity,
      this.location_id,this.lead_time,this.vendor_id,this.datCount,this.service_costs,this.servicediscountcosts,
      this.paymenttype,paymentflag,this.discounts,this.totalservice_costss,this.paidPayment,this.afterdiscount_one_service,this.servicediscountcost_one_service,
-     this.discountpartial).subscribe(     
+     this.discountpartial,this.base_cost,this.servicediscost).subscribe(     
       (loginuser) => {
         this.udf3= loginuser.result.serviceType;
         this.udf2 = loginuser.result.service_request_id;
@@ -187,7 +204,7 @@ console.log("recurring time");
      this.subcategory,this.datetime,this.dependentId,this.durations,this.exclude_days,
      this.from_date,this.from_time,this.serviceType,this.selected_dates,this.time_slot,
      this.to_date,this.to_time,this.package_id,this.preferred_time,this.quantity,
-     this.location_id,this.lead_time,this.vendor_id,paymentflag).subscribe(     
+     this.location_id,this.lead_time,this.vendor_id,paymentflag,this.base_cost).subscribe(     
       (loginuser) => {
         this.udf3= loginuser.result.serviceType;
         this.udf2 = loginuser.result.service_request_id;
@@ -207,7 +224,7 @@ console.log("recurring time");
 
   pay() {
     var options = {
-      description: 'Razorpay',
+      description: this.serviceTitle,
       image: 'assets/img/elders-logo.png',
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
@@ -235,7 +252,7 @@ var ajaxCallCheck = function(payment_id){
 
   
 
-  var url  = "http://192.168.1.187:8000/api/razorPaymentResponse";
+  var url  = "http://192.168.1.187:8085/api/razorPaymentResponse";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 

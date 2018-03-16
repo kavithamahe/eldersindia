@@ -39,8 +39,8 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'getcancelRecurringPolicyConfig',_request,this.options)
       .map(res => res.json()); 
   }
-  getcancelPolicyConfig(hours,service_id,sub_category_id,status){
-    let _request= {"hour":hours,"service_id":service_id,"status":status,"sub_category_id":sub_category_id};
+  getcancelPolicyConfig(hours,service_id,sub_category_id,status,id,service_type){
+    let _request= {"hour":hours,"service_id":service_id,"status":status,"sub_category_id":sub_category_id,"cancel_id":id,"service_type":service_type};
     return this.http.post(this.rootUrl+'getcancelPolicyConfig',_request,this.options)
       .map(res => res.json()); 
   }
@@ -95,12 +95,14 @@ rootUrl:any;
     cancelRequest(title,serviceId,dedaction_service_cost,service_type,txnid) 
   {
   
-   let _request= {"status":3,"id":serviceId,"comments":title,"razorpay_payment_id":txnid,"service_cancel_amount":dedaction_service_cost,"service_type":service_type};
+   let _request= {"status":3,"id":serviceId,"comments":title,"razorpay_payment_id":txnid,"service_cancel_amount":dedaction_service_cost,"service_type":service_type,
+   "dedaction_amount":"","payment_status":"","recurring_req_id":"","reduction_percentage":""};
     return this.http.post(this.rootUrl+'razorPaymentResponseforCancel',_request,this.options)
       .map(res => res.json()); 
   }
-  razorPaymentResponseforCancel(title,serviceId,service_type,txnid){
-    let _request= {"status":3,"id":serviceId,"comments":title,"razorpay_payment_id":txnid,"service_type":service_type};
+  razorPaymentResponseforCancel(title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount){
+    let _request= {"status":3,"id":serviceId,"comments":title,"razorpay_payment_id":txnid,"service_type":service_type,
+    "dedaction_amount":deductionamount,"payment_status":payment_status,"recurring_req_id":"","reduction_percentage":percentage,"service_cancel_amount":servicecancelamount};
     return this.http.post(this.rootUrl+'razorPaymentResponseforCancel',_request,this.options)
       .map(res => res.json());
   }

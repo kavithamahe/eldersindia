@@ -53,29 +53,31 @@
     <ion-col width-20 class="left-service">
 	<img src="{{imageUrl}}{{service?.logo}}" width="100"  height="50"/>
 	<a class="token-primarys" (click)="makeCall(service?.contact_number)"><i class="fa fa-phone"></i></a>
-	  
-  <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5) && service?.payment_method == 'full_payment' || (service?.payment_method == '' && service?.Paymentstatus=='captured'))" (click)="showConfirm(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid)">
+	  <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="showConfirm(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid,service?.id,service?.service_cost)">
   <i class="fa fa-times" aria-hidden="true"></i>
   </a>
+  <!-- <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5) && service?.payment_method == 'full_payment' || (service?.payment_method == '' && service?.Paymentstatus=='captured'))" (click)="showConfirm(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid)">
+  <i class="fa fa-times" aria-hidden="true"></i>
+  </a> -->
  
 	</ion-col>
 
-    <ion-col width-80 (click)="viewRequest(service?.id,service)">
-	<ion-row>
+    <ion-col width-80>
+	<ion-row (click)="viewRequest(service?.id,service)">
 		<h2 item-text-wrap class="service-req">{{service?.vendor_name}}</h2>
 		
 	
 	</ion-row>
 
-	<ion-row>
+	<ion-row (click)="viewRequest(service?.id,service)">
 			<p item-text-wrap  class="service-cont">{{service?.enquiry_about | words : 10}}</p>
 	</ion-row>
 
-  <ion-row>
+  <ion-row (click)="viewRequest(service?.id,service)">
  
   <p class="service-conts"><i class="fa fa-user" aria-hidden="true"></i>{{service?.dependent_name}} {{service?.dependent_lastname}}</p>
 </ion-row>
- <ion-row>
+ <ion-row (click)="viewRequest(service?.id,service)">
 
  <p *ngIf="(service?.enquiry_date!='0000-00-00 00:00:00')" class="service-conts"> <i class="fa fa-question-circle" aria-hidden="true"></i>{{service?.enquiry_date | date :'MMM dd y h:mm a'}}</p> 
 
@@ -113,16 +115,18 @@
    <p *ngIf="service.Paymentstatus == 'captured' &&  service.payment_method == 'full_payment'"><ion-badge>Paid</ion-badge></p>
   </span> -->
    <span>
-   <p *ngIf="service.Paymentstatus!='captured'"><ion-badge 
-   (click)="paynow(service.sr_token,service.final_service_cost,service?.id)">Pay Now</ion-badge></p>
-   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='partial_payment'"><ion-badge 
-   (click)="paynow(service.sr_token,service.final_service_cost,service?.id)">Pay Now</ion-badge></p>
-   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method==''"><ion-badge>Paid</ion-badge></p>
-   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='full_payment'"><ion-badge>Paid</ion-badge></p>
+    <p *ngIf="service.service_type =='Recurring'" (click)="viewRecurring()"><ion-badge>View Recurring Requests</ion-badge></p>
+   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost!='0'&& service.additional_service_cost_status=='0' && service.status=='5'"><ion-badge 
+   (click)="paynow(service.sr_token,service.service_cost,service?.id)">Pay Now</ion-badge>
+   </p>
+  <!--  <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='partial_payment'"><ion-badge 
+   (click)="paynow(service.sr_token,service.final_service_cost,service?.id)">Pay Now</ion-badge></p> -->
+   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost=='0'"><ion-badge>Paid</ion-badge></p>
+   <!-- <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='full_payment'"><ion-badge>Paid</ion-badge></p> -->
   </span>
      
   </ion-col>
-  <ion-col width-30>
+  <ion-col width-30 *ngIf="service.service_type=='One time'">
   
   <p class="tocken-no"><i class="fa fa-rupee"></i>{{service.service_cost}}</p>
   </ion-col>

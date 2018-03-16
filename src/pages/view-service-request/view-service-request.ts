@@ -26,6 +26,8 @@ payment_method:any;
 discountservicecost:any;
 paidamount:any;
 balanceamount:any;
+Paymentstatus:any;
+additional_service_cost:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -33,6 +35,8 @@ balanceamount:any;
         this.serviceRequestId=navParams.get("serviceRequestId");
         this.service = navParams.get("service");
         this.payment_method= this.service.payment_method;
+        this.Paymentstatus = this.service.Paymentstatus;
+        this.additional_service_cost = this.service.additional_service_cost;
         if(this.payment_method == "partial_payment"){
           this.discountservicecost = parseFloat(this.service.servicediscountcost_one_service)+parseFloat(this.service.final_service_cost);
           this.paidamount = this.service.servicediscountcost_one_service;
@@ -42,6 +46,7 @@ balanceamount:any;
           this.discountservicecost = parseFloat(this.service.servicediscountcost_one_service)+parseFloat(this.service.final_service_cost);
           this.paidamount = parseFloat(this.service.servicediscountcost_one_service) + parseFloat(this.service.final_service_cost);
           this.balanceamount = "0";
+
 
         }
         if(this.payment_method == ""){

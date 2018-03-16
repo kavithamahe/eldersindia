@@ -119,7 +119,7 @@ var ajaxCallCheck = function(payment_id){
 console.log(localStorage.getItem("service_costss"));
   
 
-  var url  = "http://192.168.1.187:8000/api/razorPaymentResponsependingPayment";
+  var url  = "http://192.168.1.187:8085/api/razorPaymentResponseforPartialPayment";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -148,7 +148,7 @@ RazorpayCheckout.on('payment.cancel', cancelCallback);
     RazorpayCheckout.open(optionsss, successCallback, cancelCallback);
 }
    pay() {
-
+console.log(this.service_costs);
 
    	if(this.sr_token == undefined){
     var options = {
@@ -187,7 +187,7 @@ var ajaxCallCheck = function(payment_id){
 
   
 
-  var url  = "http://192.168.1.187:8000/api/razorPaymentResponseforPackage";
+  var url  = "http://192.168.1.187:8085/api/razorPaymentResponseforPackage";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -250,7 +250,7 @@ var ajaxCallCheck = function(payment_id){
 
   
 
-  var url  = "http://192.168.1.187:8000/api/razorPaymentResponsependingPayment";
+  var url  = "http://192.168.1.187:8085/api/razorPaymentResponseforPartialPayment";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -279,7 +279,9 @@ RazorpayCheckout.on('payment.cancel', cancelCallback);
     RazorpayCheckout.open(optionss, successCallback, cancelCallback);
   }
 }
-
+  payno(){
+    this.dismiss();
+  }
 dismiss(){
       this.viewCtrl.dismiss("dismiss");
   }

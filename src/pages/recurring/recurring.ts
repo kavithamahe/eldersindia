@@ -83,10 +83,11 @@ discountcost:any;
       .subscribe(data =>{ 
         var dataList=data.result.data;
         for(let data of dataList) {
-  data.discountcost = parseFloat(data.servicediscountcost_one_service) + parseFloat(data.final_service_cost);
- 
-}
-this.recurringRequest = dataList;
+      data.discountcost = parseFloat(data.servicediscountcost_one_service) + parseFloat(data.final_service_cost);
+      data.totalServicecost = data.service_cost * data.req_count;
+      data.balanceamount = data.total_service_cost - data.paid_amount;
+    }
+        this.recurringRequest = dataList;
         this.nextPageURL=data.result.next_page_url;  
         // loading.dismiss();
     },
@@ -112,11 +113,18 @@ this.recurringRequest = dataList;
   {
     this.blogListService.recurringRequestScroll(this.nextPageURL,this.searchText).subscribe(
      (serviceRequestScroll) => {
-      this.serviceRequestScrollLists=serviceRequestScroll.result.data; 
-       for (let i = 0; i < Object.keys(this.serviceRequestScrollLists).length; i++) {
-        this.recurringRequest.push(this.serviceRequestScrollLists[i]);
-        }
+       var dataList=serviceRequestScroll.result.data;
+        for(let data of dataList) {
+      data.discountcost = parseFloat(data.servicediscountcost_one_service) + parseFloat(data.final_service_cost);
+      data.totalServicecost = data.service_cost * data.req_count;
+      data.balanceamount = data.total_service_cost - data.paid_amount;
+    }
       
+      //this.serviceRequestScrollLists=serviceRequestScroll.result.data; 
+       for (let i = 0; i < Object.keys(dataList).length; i++) {
+        this.recurringRequest.push(dataList[i]);
+        }
+        // this.recurringRequest = dataList;
        this.nextPageURL=serviceRequestScroll.result.next_page_url;     
     },
     (err) => { 

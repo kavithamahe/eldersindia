@@ -84,7 +84,7 @@ export class LoginPage {
            this.loginUser.currentUser("sponsor");
          }
          this.storage.ready().then(() => {
-         this.storage.clear();
+         // this.storage.clear();
          this.storage.set('id', loginuser['details']['id']);
          this.storage.set('name', loginuser['details']['name']);
          this.storage.set('email', loginuser['details']['email']);

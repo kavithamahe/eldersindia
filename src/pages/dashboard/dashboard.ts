@@ -41,6 +41,7 @@ export class DashboardPage {
   serviceLocation:any;
   headers:any;
   head:any;
+  phone:any;
   constructor(private nativeAudio: NativeAudio,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
   	
      this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
@@ -56,9 +57,13 @@ export class DashboardPage {
     this.fetchLocation();
   })
       storage.get('user_type').then((user_type) => { this.user_type=user_type;  })
+      console.log(this.user_type);
       storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor;  })
       storage.get('ambulance').then((ambulance) => { this.ambulance=ambulance;  })
       storage.get('police').then((police) => { this.police=police;  })
+
+     storage.get('phone').then((phone) => { this.phone=phone; })
+     console.log(this.phone);
   });
     
     // this.checkLocation();

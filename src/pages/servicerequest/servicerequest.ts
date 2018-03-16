@@ -7,6 +7,8 @@ import { ServiceRequestService } from '../../providers/service-request-service';
 import { ViewServiceRequestPage } from '../../pages/view-service-request/view-service-request';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
  import { PackagepaymentPagePage } from '../../pages/packagepayment/packagepayment';
+ import { RecurringPagePage } from '../../pages/recurring/recurring';
+
 
 /*
   Generated class for the Servicerequest page.
@@ -40,6 +42,10 @@ other:any;
 result:any;
 deduction_amount:any;
 dedaction_service_cost:any;
+payment_status:any;
+percentage:any;
+deductionamount:any;
+servicecancelamount:any;
   constructor(public alertCtrl: AlertController,public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -168,7 +174,7 @@ dedaction_service_cost:any;
       }
     );
   }
-    showConfirm(serviceId,hours,service_id,sub_category_id,status,servicediscountcost_one_service,service_type,txnid){
+    showConfirm(serviceId,hours,service_id,sub_category_id,status,servicediscountcost_one_service,service_type,txnid,id,service_cost){
       if(service_type == "Recurring"){
         
     this.serviceRequest.getcancelRecurringPolicyConfig(hours,service_id,sub_category_id,status,servicediscountcost_one_service).subscribe(
@@ -192,10 +198,14 @@ dedaction_service_cost:any;
       });
   }
   else{
-    this.serviceRequest.getcancelPolicyConfig(hours,service_id,sub_category_id,status).subscribe(
+    this.serviceRequest.getcancelPolicyConfig(hours,service_id,sub_category_id,status,id,service_type).subscribe(
      (cancelRequest) => {
       this.result = cancelRequest.result;  
-      this.showOnetime(serviceId,this.result,service_type,status,txnid); 
+      this.percentage = this.result.percentage;
+      this.payment_status = this.result.payment_status;
+      this.deductionamount = service_cost * this.percentage/100;
+      this.servicecancelamount = service_cost - this.deductionamount;
+      this.showOnetime(serviceId,this.result,service_type,status,txnid,this.percentage,this.payment_status,this.deductionamount,this.servicecancelamount); 
     },
     (err) => { 
         if(err.status===401)
@@ -247,10 +257,10 @@ dedaction_service_cost:any;
     
   
   }
-  showOnetime(serviceId,result,service_type,status,txnid){
+  showOnetime(serviceId,result,service_type,status,txnid,percentage,payment_status,deductionamount,servicecancelamount){
      let prompt = this.alertCtrl.create({
       title: 'Cancel Service Request',
-      message: "Your service date and time was expired,If you cancelled the service request service amount could not be refunded.",
+      message: "Service refund amount",
       inputs: [
         {
           name: 'title',
@@ -274,7 +284,7 @@ dedaction_service_cost:any;
                return false;
             }
             else{
-            this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid);
+            this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount);
           }
           }
         }
@@ -306,11 +316,11 @@ dedaction_service_cost:any;
         loader.dismiss();
       });
   }
-  public razorPaymentResponseforCancel(title,serviceId,service_type,txnid)
+  public razorPaymentResponseforCancel(title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount)
   {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.serviceRequest.razorPaymentResponseforCancel(title,serviceId,service_type,txnid).subscribe(
+    this.serviceRequest.razorPaymentResponseforCancel(title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount).subscribe(
      (cancelRequest) => {
       this.getRemarksList=cancelRequest.result;   
       this.showToaster(cancelRequest.result); 
@@ -457,5 +467,8 @@ dedaction_service_cost:any;
    {
     this.showToaster("There is no contact number");
    }
+  }
+  viewRecurring(){
+    this.navCtrl.push(RecurringPagePage);
   }
 }
