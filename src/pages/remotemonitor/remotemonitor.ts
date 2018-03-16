@@ -38,14 +38,18 @@ url:any;
     var remoteurl = this.url;
   	  // const browser = this.iab.create(""+remoteurl+"user="+usernames+"&password="+passwords+" ");
      startApp.set({
-"action": "ACTION_SEND",
-"package": "com.claritaz.ipplayer",
-"type": "text/plain",
-"uri": "+918958312000"
-}, {
-  "extraKey2":""+remoteurl+"user="+usernames+"&password="+passwords+" ",
-"EXTRA_TEXT":"Text...by vkm ",
-"chat": true
-}).start();
+      "action": "ACTION_SEND",
+      "package": "com.claritaz.ipplayer",
+      "type": "text/plain",
+      "uri": "+918958312000"
+      }, {
+        // "extraKey2":""+remoteurl+"user="+usernames+"&password="+passwords+" ",
+                "extraKey2":"http://192.168.1.46:8033/mjpeg.cgi?",
+                "username":"admin",
+                "password":"ctl",
+
+      "EXTRA_TEXT":"Text...by vkm ",
+      "chat": true
+      }).start();
+        }
   }
-}
