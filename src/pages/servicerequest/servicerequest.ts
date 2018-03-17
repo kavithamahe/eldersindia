@@ -46,6 +46,7 @@ payment_status:any;
 percentage:any;
 deductionamount:any;
 servicecancelamount:any;
+servicecost:any;
   constructor(public alertCtrl: AlertController,public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -94,8 +95,14 @@ servicecancelamount:any;
       }
     ); 
   }
-  paynow(sr_token,service_cost,service_id){
-    let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":service_cost,"service_id":service_id});
+  paynow(sr_token,service_cost,service_id,additional_service_cost){
+    if(additional_service_cost == "0"){
+      this.servicecost = service_cost;
+    }
+    else{
+      this.servicecost = additional_service_cost;
+    }
+    let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":service_id});
       serviceModal.present();
   }
   public onInit()
@@ -210,7 +217,7 @@ servicecancelamount:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -260,7 +267,7 @@ servicecancelamount:any;
   showOnetime(serviceId,result,service_type,status,txnid,percentage,payment_status,deductionamount,servicecancelamount){
      let prompt = this.alertCtrl.create({
       title: 'Cancel Service Request',
-      message: "Service refund amount",
+      message: "Service cancellation percentage :"+ percentage +" % Service cancellation amount :"+ deductionamount+"Service refund amount :"+ servicecancelamount+" ",
       inputs: [
         {
           name: 'title',
