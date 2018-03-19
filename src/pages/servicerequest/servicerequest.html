@@ -53,7 +53,7 @@
     <ion-col width-20 class="left-service">
 	<img src="{{imageUrl}}{{service?.logo}}" width="100"  height="50"/>
 	<a class="token-primarys" (click)="makeCall(service?.contact_number)"><i class="fa fa-phone"></i></a>
-	  <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="showConfirm(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid,service?.id,service?.service_cost)">
+	  <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="showConfirm(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid,service?.id,service?.service_cost,service?.recurring_request_id,service?.req_count)">
   <i class="fa fa-times" aria-hidden="true"></i>
   </a>
   <!-- <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5) && service?.payment_method == 'full_payment' || (service?.payment_method == '' && service?.Paymentstatus=='captured'))" (click)="showConfirm(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid)">
@@ -96,7 +96,7 @@
 <ion-row *ngIf="service.service_type=='One time'">
 <p class="tocken-no">Service Cost: <i class="fa fa-rupee"></i>{{service.service_cost}}</p>
 </ion-row>
-<ion-row>
+<ion-row *ngIf="service.service_type=='One time'">
 <p class="tocken-no">Additional Service Cost: <i class="fa fa-rupee"></i>{{service.additional_service_cost}}</p>
 </ion-row>
 	<ion-row>
