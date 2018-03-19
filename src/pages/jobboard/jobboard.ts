@@ -52,14 +52,14 @@ searchText:any="";
     this.content.scrollToBottom();
   }
   onSelectChange(selectedValue: any) {
-   if(this.functionalArea == "All"){
-    this.functionalArea = "";
-    this.onInit();
-   }
-   else{
+   // if(this.functionalArea == "All"){
+   //  this.functionalArea = "";
+   //  this.onInit();
+   // }
+   // else{
       this.functionalArea = selectedValue;
     this.onInit();
-   }
+  // }
   
   }
   public onInit()

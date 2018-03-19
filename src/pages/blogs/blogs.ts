@@ -57,19 +57,18 @@ searchButton:boolean=false;
      this.searchButton=!searchValue;
    }
   onSelectChange(selectedValue: any) {
-   if(this.searchCategory1 == "All"){
-    this.searchCategory1 = "";
-    this.blog();
-   }
-   else{
+   // if(this.searchCategory1 == "All"){
+   //  this.searchCategory1 = "";
+   //  this.blog();
+   // }
+   // else{
       this.searchCategory1 = selectedValue;
     this.blog();
-   }
+  // }
   
   }
   public blog()
   { 
-  	
    this.blogListService.blogList(this.searchCategory1,this.searchText).subscribe(
      (blogsList) => {
       
