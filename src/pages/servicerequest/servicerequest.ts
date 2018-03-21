@@ -50,6 +50,10 @@ servicecost:any;
 totalcostofrecurring:any;
 paid_amount:any;
 utilized_service_cost:any;
+cancelCharges:any;
+service_remaing_cost:any;
+new_service_amount:any;
+final_payable_amount:any;
   constructor(public alertCtrl: AlertController,public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -192,11 +196,34 @@ utilized_service_cost:any;
       this.result = cancelRequest.result;
       this.percentage = this.result.percentage;
       this.paid_amount = this.result.paid_amount;
+      this.service_remaing_cost = this.result.service_remaing_cost;
       this.utilized_service_cost = this.result.utilized_service_cost;
-      this.deduction_amount=servicediscountcost_one_service * (this.result / 100);
-      this.dedaction_service_cost = servicediscountcost_one_service - this.deduction_amount;
-      var number = parseFloat(this.dedaction_service_cost).toFixed(2);
-      this.showConfirms(serviceId,this.result,number,service_type,status,txnid,this.percentage,this.totalcostofrecurring,req_count,this.paid_amount,this.utilized_service_cost,recurring_request_id); 
+       if(this.paid_amount > this.utilized_service_cost){
+          this.cancelCharges = service_cost * (this.percentage/100);
+          
+          if(this.service_remaing_cost > this.cancelCharges){
+           this.dedaction_service_cost = this.service_remaing_cost - this.cancelCharges;
+           console.log(this.dedaction_service_cost);
+          }else{
+            
+          }
+        }
+          else if(this.paid_amount == this.utilized_service_cost){
+          this.cancelCharges = service_cost*(this.percentage/100);
+          //$scope.dedaction_service_cost = parseFloat(response.data.result.service_remaing_cost - $scope.dedaction_amount).toFixed(2);
+          //$scope.dedaction_service_cost = 0;  
+         }else{
+          this.cancelCharges = service_cost*(this.percentage/100);
+          this.new_service_amount = this.utilized_service_cost + this.cancelCharges;
+         this.final_payable_amount = (this.new_service_amount - this.paid_amount).toFixed(2);
+          // $scope.service_type = response.data.result.service_type;
+         }  
+        
+      // this.deduction_amount=servicediscountcost_one_service * (this.result / 100);
+      // this.dedaction_service_cost = servicediscountcost_one_service - this.deduction_amount;
+      // var number = parseFloat(this.dedaction_service_cost).toFixed(2);
+
+      this.showConfirms(serviceId,this.result,service_type,status,txnid,this.percentage,this.totalcostofrecurring,req_count,this.paid_amount,this.utilized_service_cost,recurring_request_id,this.cancelCharges,this.dedaction_service_cost,this.service_remaing_cost,this.final_payable_amount); 
     },
     (err) => { 
         if(err.status===401)
@@ -232,7 +259,7 @@ utilized_service_cost:any;
   }
     
   }
-  showConfirms(serviceId,result,number,service_type,status,txnid,percentage,totalcostofrecurring,req_count,paid_amount,utilized_service_cost,recurring_request_id){
+  showConfirms(serviceId,result,service_type,status,txnid,percentage,totalcostofrecurring,req_count,paid_amount,utilized_service_cost,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,final_payable_amount){
       if(percentage == "hours expired"){
       let prompt = this.alertCtrl.create({
       title: 'Cancel Service Request',
@@ -260,7 +287,7 @@ utilized_service_cost:any;
                return false;
             }
             else{
-            this.cancelRequest(data.title,serviceId,number,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id);
+             this.cancelRequest(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost);
           }
           }
         }
@@ -269,9 +296,10 @@ utilized_service_cost:any;
     prompt.present();
      }
      else{
-    let prompt = this.alertCtrl.create({
+      if(paid_amount>utilized_service_cost && service_remaing_cost > cancelCharges){
+       let prompt = this.alertCtrl.create({
       title: 'Cancel Service Request',
-      message: "Total services requests :"+ req_count +" Total cost of the recurring :"+ totalcostofrecurring+" Total Paid Amount :"+paid_amount+" Cost of the utlizing SRs :"+utilized_service_cost+" ",
+      message: "Total services requests :"+ req_count +" Total cost of the recurring :"+ totalcostofrecurring+" Total Paid Amount :"+paid_amount+" Cost of the utlizing SRs :"+utilized_service_cost+" Cancellation Charges :"+cancelCharges+" Refund on Cancellation :"+dedaction_service_cost+" ",
       inputs: [
         {
           name: 'title',
@@ -295,13 +323,51 @@ utilized_service_cost:any;
                return false;
             }
             else{
-            this.cancelRequest(data.title,serviceId,number,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id);
+           this.cancelRequest(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost);
           }
           }
         }
       ]
     });
     prompt.present();
+     
+      }
+      else if(paid_amount<utilized_service_cost){
+        let prompt = this.alertCtrl.create({
+      title: 'Cancel Service Request',
+      message: "Total services requests :"+ req_count +" Total cost of the recurring :"+ totalcostofrecurring+" Total Paid Amount :"+paid_amount+" Cost of the utlizing SRs :"+utilized_service_cost+" Cancellation Charges :"+cancelCharges+" New service cost :"+final_payable_amount+" ",
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Comments'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            //console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Confirm',
+          handler: data => {
+            
+            //console.log(data.title);
+            if(data.title == ""){
+              this.showToaster("Please enter the reason");
+               return false;
+            }
+            else{
+            this.cancelRequests(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,service_remaing_cost,final_payable_amount);
+          }
+          }
+        }
+      ]
+    });
+    prompt.present();
+    
+      }
     
   }
   }
@@ -378,12 +444,33 @@ utilized_service_cost:any;
      }
      
   }
- 
-  public cancelRequest(title,serviceId,dedaction_service_cost,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id)
+ cancelRequests(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,service_remaing_cost,final_payable_amount){
+   let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.serviceRequest.cancelRequests(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,service_remaing_cost,final_payable_amount).subscribe(
+     (cancelRequest) => {
+      this.getRemarksList=cancelRequest.result;   
+      this.showToaster(cancelRequest.result); 
+      loader.dismiss(); 
+      this.onInit();   
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+         this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+        loader.dismiss();
+      });
+ }
+  public cancelRequest(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost)
   {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.serviceRequest.cancelRequest(title,serviceId,dedaction_service_cost,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id).subscribe(
+    this.serviceRequest.cancelRequest(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost).subscribe(
      (cancelRequest) => {
       this.getRemarksList=cancelRequest.result;   
       this.showToaster(cancelRequest.result); 
