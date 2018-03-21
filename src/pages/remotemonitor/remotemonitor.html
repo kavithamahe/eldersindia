@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+  <ion-title text-center>Remote Monitoring</ion-title>
+    <ion-buttons right>
+    <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-label>Username:</ion-label>
+	<ion-item>
+		<ion-input type="text" placeholder="Username" [(ngModel)]="username"></ion-input>
+	</ion-item>
+	<ion-label>Password:</ion-label>
+	<ion-item>
+		<ion-input type="text" placeholder="Password" [(ngModel)]="password"></ion-input>
+	</ion-item>
+    <ion-label>URL:</ion-label>
+  <ion-item>
+    <ion-input type="text" placeholder="Password" [(ngModel)]="url"></ion-input>
+  </ion-item>
+	<button ion-button (click)="submit()">Submit</button>
+</ion-content>

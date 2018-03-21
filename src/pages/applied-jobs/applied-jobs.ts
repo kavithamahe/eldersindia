@@ -52,6 +52,18 @@ scrollToTop() {
   scrollToBottom(){
     this.content.scrollToBottom();
   }
+  onSelectChange(selectedValue: any) {
+   //  console.log(this.functionalArea);
+   // if(this.functionalArea == "All"){
+   //  this.functionalArea = "";
+   //  this.onInit();
+   // }
+   // else{
+      this.functionalArea = selectedValue;
+    this.onInit();
+ //  }
+  
+  }
  public onInit()
  {
    this.loader = this.loadingCtrl.create({ content: "Please wait..." });     

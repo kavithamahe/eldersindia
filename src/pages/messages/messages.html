@@ -166,10 +166,10 @@
                 </ion-col>
               </ion-row>
               <ion-row *ngIf="sent.subject">
-			     <ion-col style="padding: 0px !important">
+           <ion-col style="padding: 0px !important">
               <ion-item class="subject-details"><b>Subject :</b>{{sent?.subject}}
               </ion-item>
-			    </ion-col>
+          </ion-col>
               </ion-row>
             </ion-col>
           </ion-row>
@@ -184,7 +184,7 @@
     <ion-row>
     <ion-col offset-33>
      <button *ngIf="nextPageURL2!=null && nextPageURL2!=''" ion-button color="dark" clear (click)="doInfinite2($event)"><i class="fa fa-angle-down"></i></button>
-	 </ion-col>
+   </ion-col>
    </ion-row>
   </ion-list>
 
@@ -193,18 +193,6 @@
 
 
 </ion-content>
-
-<!-- <ion-footer>
-  <ion-toolbar> 
-    <ion-item>
-
-    <ion-input type="text" placeholder="Type a Message" value="">
-    </ion-input>
-    <ion-icon name="attach" item-right></ion-icon>
-    <ion-icon name="send" item-right></ion-icon>
-  </ion-item>
-  </ion-toolbar>
-</ion-footer> -->
 
 
 <style type="text/css">

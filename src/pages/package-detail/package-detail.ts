@@ -61,10 +61,8 @@ vendorLogo:any;
     		this.vendoraddress = this.packageData.address;
     		this.vendorLogo = this.packageData.logo;
         this.packages = data.result.info.packages;
-        // this.packages_service = this.packages.packages_service;
         this.dependents = data.result.info.dependentLists;
-        this.banner = data.result.info.banners;
-          // console.log(this.packages_service);   
+        this.banner = data.result.info.banners;  
         loading.dismiss();
     },
     err =>{
@@ -76,7 +74,7 @@ vendorLogo:any;
     if(this.dependents.length == 1){
       this.dependentId = this.dependents[0].id;
     }
-    let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id,dependents:this.dependents});
+    let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id,dependents:this.dependents,location_id:this.location_id});
     modal.present();
   }
   dashboardPage(){

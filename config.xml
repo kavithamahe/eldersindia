@@ -92,4 +92,5 @@
     </plugin>
     <plugin name="com.razorpay.cordova" spec="git+https://github.com/razorpay/razorpay-cordova.git" />
     <plugin name="cordova-plugin-toaster" spec="0.0.2" />
+    <plugin name="com.lampa.startapp" spec="git+https://github.com/lampaa/com.lampa.startapp.git" />
 </widget>

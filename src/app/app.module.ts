@@ -7,7 +7,9 @@ import { MyApp } from './app.component';
 import { TruncateModule } from 'ng2-truncate';
 import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
-// import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DatePipe } from '@angular/common';
+
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 
@@ -25,8 +27,6 @@ import { FilePath } from '@ionic-native/file-path';
 import { Transfer } from '@ionic-native/transfer';
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
 
-
-
 import { LoginPage } from '../pages/login/login';
 import { AppConfig } from '../providers/app-config';
 import { LoginUser } from '../providers/login-user';
@@ -38,11 +38,11 @@ import { AppliedJobsPage } from '../pages/applied-jobs/applied-jobs';
 import { MessagesPage } from '../pages/messages/messages';
 import { CreateMessagePage } from '../pages/create-message/create-message';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
-import { FirsttimeloginPagePage } from '../pages/firsttimelogin/firsttimelogin';
 import { ViewpackagePagePage } from '../pages/viewpackage/viewpackage';
 import { ElderservicePagePage } from '../pages/elderservice/elderservice';
 import { PaymentPage } from '../pages/payment/payment';
 import { PackagepaymentPagePage } from '../pages/packagepayment/packagepayment';
+import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
 
 //packages related pages
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
@@ -80,7 +80,6 @@ import { CommunitycommentsPage } from '../pages/communitycomments/communitycomme
 import { MyprofilesettingPage } from '../pages/myprofilesetting/myprofilesetting';
 import { CommunitymembersPage } from '../pages/communitymembers/communitymembers';
 import { PopoverPage } from '../pages/connections/connections';
-import { BlogtabsPage } from '../pages/blogtabs/blogtabs';
 
 import { ManagePage } from '../pages/manage/manage';
 
@@ -149,12 +148,10 @@ import { ServiceProvider } from '../providers/service-provider';
     ViewServiceRequestPage,
     BlogsPage,
     SingleblogPage,
-    FirsttimeloginPagePage,
     CreateBlogPage,
     LogoutPage,
     JobDependentPage,
     ManageBlogsPage,
-    BlogtabsPage,
     SubCategoryPage,
     SubCategoryServicePage,
     SubcategoryListPage,
@@ -174,7 +171,8 @@ import { ServiceProvider } from '../providers/service-provider';
     SettingsPage,
     ServiceModalPage,
     TermsModalPage,
-    PackagepaymentPagePage
+    PackagepaymentPagePage,
+    RemotemonitorPagePage
   ],
   imports: [
 
@@ -208,7 +206,6 @@ import { ServiceProvider } from '../providers/service-provider';
     PopoverPage,
     ShareBlogPagePage,
     GetpackagePagePage,
-    BlogtabsPage, 
     CommunityPage,
     CommunityPopoverPage,
     ElderservicePagePage,
@@ -231,7 +228,6 @@ import { ServiceProvider } from '../providers/service-provider';
     ViewServiceRequestPage,
     BlogsPage,
     SingleblogPage,
-    FirsttimeloginPagePage,
     CreateBlogPage,
     LogoutPage,
     JobDependentPage,
@@ -255,10 +251,14 @@ import { ServiceProvider } from '../providers/service-provider';
     SettingsPage,
     ServiceModalPage,
     TermsModalPage,
-    PackagepaymentPagePage
+    PackagepaymentPagePage,
+ RemotemonitorPagePage
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
      providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
+
+ 
+
 })
 export class AppModule {}

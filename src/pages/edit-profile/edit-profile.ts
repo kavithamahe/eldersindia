@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { LoadingController,NavController, NavParams,ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common'
+
 
 import { Camera } from 'ionic-native';
 import { Storage } from '@ionic/storage';
@@ -36,14 +38,13 @@ avatar:any="";
 avatar1:any = "";
 file: File;
 imageURL:any;
-//user_dob:any;
 updateData:any;
 token:any;
 pemail:any='';
   my_location:any;
 submitAttempt:any;
-  constructor(public storage:Storage,public loadingCtrl: LoadingController,public formBuilder:FormBuilder,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController) {
-
+today
+  constructor(public storage:Storage,public datepipe: DatePipe,public loadingCtrl: LoadingController,public formBuilder:FormBuilder,public providerService : ServiceProvider,public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController) {
       this.profileData = navParams.get("profileData");
       this.pemail=this.profileData.personal_email;
       this.avatar = this.profileData.avatar;
@@ -53,9 +54,9 @@ submitAttempt:any;
       this.base64Image = this.imageURL+this.profileData.avatar;
         });
       });
-      
-      
-      this.user_dob = moment(this.profileData.dob).format("YYYY-DD-MM");
+     this.user_dob =moment(this.profileData.dob,"DD-MM-YYYY").add(1, 'days').toISOString();
+
+      console.log(this.user_dob);
       this.user_type = this.profileData.user_type;
       if(this.user_type == 'sponsor'){
       this.my_location = this.profileData.locationName;  
@@ -64,13 +65,11 @@ submitAttempt:any;
       this.my_location = this.profileData.address;
     }
       
-      // this.gender = this.profileData.gender;
       this.edit_profile_Form = formBuilder.group({
         name: [{value:this.profileData.name,disabled: true},Validators.compose([Validators.required])],
         company: [{value:this.profileData.company_name,disabled: true}],
         designation: [{value:this.profileData.designation,disabled: true},Validators.compose([Validators.minLength(3), Validators.required])],
         empid: [{value:this.profileData.employee_id,disabled: true},Validators.compose([Validators.minLength(3), Validators.required])],
-       // gender: [this.profileData.gender,Validators.compose([Validators.required])],
         mobile_number: [this.profileData.mobile,Validators.compose([Validators.minLength(10),Validators.maxLength(10), Validators.required])],
         location: [{value:this.my_location,disabled:true},Validators.compose([])],
          user_dob: [{value:this.profileData.dob},Validators.compose([])],
@@ -81,15 +80,13 @@ submitAttempt:any;
  
   }
 
-
-
-  loadMyProfile(){
+  loadMyProfile(){  
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     this.providerService.webServiceCall(`myaccount`,"")
   .subscribe(data =>{
     this.profileData = data.result.info;
-    this.user_dob=data.result.info.dob;
+    this.user_dob= data.result.info.dob;
     this.user_type = data.result.info.user_type;
     loader.dismiss();
   },
@@ -101,7 +98,6 @@ submitAttempt:any;
 
   getDate(datepar){
      var dateParts = datepar.split("-").reverse().join("-");
-     // let date = dateParts[2]+"-"+dateParts[1]+"-"+dateParts[0];
      return dateParts;
   }
 

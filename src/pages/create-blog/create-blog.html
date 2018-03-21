@@ -1,3 +1,4 @@
+
 <!--
   Generated template for the CreateBlog page.
 
@@ -32,7 +33,7 @@
   <p *ngIf="!blogForm.controls.title.valid && (blogForm.controls.title.dirty || submitAttempt)" class="err-reds">Please enter the blog title</p>
  <ion-label stacked class="bloag-label required"  style="text-align:left; padding-bottom:10px;">Category</ion-label>
   <ion-item>
-   
+   <ion-label>Category</ion-label>
     <ion-select class="select-brd" formControlName="category" placeholder="Category" [(ngModel)]="category">
       <ion-option *ngFor="let categories of categoriesList" [value]="categories.id">{{categories.name}}</ion-option>     
     </ion-select>

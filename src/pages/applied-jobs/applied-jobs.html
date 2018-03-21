@@ -31,7 +31,9 @@
   <ion-card class="sel-packages">
     <ion-item class="select-loca">
       <ion-label>Functional Area</ion-label>
-      <ion-select [(ngModel)]="functionalArea" (ionChange)="onInit()">
+      <ion-select [(ngModel)]="functionalArea" (ionChange)="onSelectChange($event)">
+      <!-- <ion-option value="All">All
+     </ion-option> -->
         <ion-option *ngFor="let functional of functionalAreaList" value="{{functional?.id}}">{{functional?.name}}</ion-option>      
       </ion-select>
     </ion-item>
@@ -44,11 +46,6 @@
       </ion-select>
     </ion-item>
   </ion-card>
- <!--  <ion-fab top right edge>
-    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
-  </ion-fab>
- -->   <!--  <ion-searchbar (ionInput)="jobsearch($event)">
-    </ion-searchbar> -->
   <ion-card *ngFor="let appliedJobs of appliedJobsList" class="job-detailsview">
     <ion-row text-wrap class="appliedjob" (click)="viewJob(appliedJobs?.id)">
       <ion-col width-90 text-wrap>

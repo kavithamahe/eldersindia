@@ -45,6 +45,8 @@ description:any='';
 user_id:any=0;
 user_type:any='';
 actionUrl:any='addBlog';
+featuredImages:any;
+bannerImages:any;
   constructor(public formBuilder: FormBuilder,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -183,9 +185,11 @@ ionViewDidEnter() {
      destinationType: Camera.DestinationType.DATA_URL
     }).then((imageData) => {
       if(type == 'banner'){
-      this.bannerImage = 'data:image/jpeg;base64,'+imageData;  
+        this.bannerImage = 'data:image/jpeg;base64,'+imageData;  
+      this.bannerImages = 'data:image/jpeg;base64,'+imageData;  
     }else{
       this.featuredImage = 'data:image/jpeg;base64,'+imageData;
+      this.featuredImages = 'data:image/jpeg;base64,'+imageData;
     }
       
      }, (err) => {
@@ -216,20 +220,20 @@ pressevent(){
     }
    
     this.blogObject={ "category":this.blogForm.value.category,"allow_comment":this.allowComments,"title":this.blogForm.value.title,"highlights":this.highlights,
-        "description":this.blogForm.value.description,"featured_image":this.featuredImage,"banner_image":this.bannerImage,"tags":tagsObj,"app":''
+        "description":this.blogForm.value.description,"featured_image":this.featuredImages,"banner_image":this.bannerImages,"tags":tagsObj,"app":''
     };
     if(this.action=='edit') 
     {
       this.actionUrl='editBlog/'+this.blogId;
-     this.blogObject.id=this.blogId;
+     this.blogObject.id=this.blogId; 
      this.blogObject.author=this.user_id;
      this.blogObject.author_type=this.user_type;
     }
     
     this.blogListService.createBlog(this.blogObject,this.actionUrl).subscribe(
      (createBlog) => {
-      this.navCtrl.push(ManageBlogsPage);
-      this.showToaster(createBlog.result);
+      this.navCtrl.setRoot(ManageBlogsPage);
+      this.showToaster("New blog has been posted");
       this.category = "";
       this.allowComments = "";
       this.title = "";

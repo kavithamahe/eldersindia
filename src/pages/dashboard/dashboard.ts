@@ -14,8 +14,7 @@ import { CommunitylistPage } from '../../pages/communitylist/communitylist';
 import { BlogsPage } from '../../pages/blogs/blogs';
 import { ConnectionsPage } from '../../pages/connections/connections';
 import { MessagesPage } from '../../pages/messages/messages';
-import { BlogtabsPage } from '../../pages/blogtabs/blogtabs';
-import { PaymentPage } from '../../pages/payment/payment';
+import { RemotemonitorPagePage } from '../../pages/remotemonitor/remotemonitor';
 
 
 /*
@@ -53,7 +52,6 @@ export class DashboardPage {
       this.headers.append('Content-Type', 'application/json');
       this.headers.append('Authorization', 'Bearer ' + this.token);
       this.head = new RequestOptions({ headers: this.headers });
-      console.log(this.head); 
     this.fetchLocation();
   })
       storage.get('user_type').then((user_type) => { this.user_type=user_type;  })
@@ -66,8 +64,6 @@ export class DashboardPage {
      console.log(this.phone);
   });
     
-    // this.checkLocation();
-     //alert(this.call_sponsor);
   }
    ionViewWillEnter() {
     this.tabBarElement.style.display = 'none';
@@ -126,23 +122,16 @@ export class DashboardPage {
     
   .catch((error: any) => console.log(error));
   }
-  // checkLocation(){
-  //    console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
-  //    this.providerService.chechLocationID(result.city)
-  //     .subscribe(data =>{
-  //     this.serviceLocation=data.result.id;
-  //     console.log(this.serviceLocation);
-  //   },
-  //   err =>{
-  //     this.providerService.showErrorToast(err);
-      
-  //   })
-  // }
 
   ionViewDidLoad() {
     this.nativeAudio.preloadSimple('uniqueId1', 'assets/sound/Siren 21.mp3').then(this.onSuccess, this.onError);
   }
-  
+  remote(){
+
+    this.navCtrl.setRoot(RemotemonitorPagePage);
+     
+
+  }
   public servicesPage()
   {
   	this.navCtrl.setRoot(ServiceprovidersPage);

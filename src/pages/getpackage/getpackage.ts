@@ -29,7 +29,11 @@ dependentLists:any=[];
 vendor_id:any;
 package_validity:any;
 package_amount:any;
+location_id:any;
   constructor(public navParams: NavParams,public modalCtrl: ModalController,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
+
+  // constructor(public navParams: NavParams,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
+
 
   	this.storage.ready().then(() => { 
     storage.get('user_type').then((user_type) => { 
@@ -41,7 +45,7 @@ package_amount:any;
 
       
       
-   
+        this.location_id = navParams.get("location_id");
         this.packId = navParams.get("packID");
         this.vendor_id = navParams.get("vendor_id");
         this.package_validity = navParams.get("package_validity");
@@ -61,7 +65,7 @@ package_amount:any;
         if(this.paymenttype == "Offline Payment"){
   let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();    
-      this.blogListService.getPackage(this.selectedConnections,this.packId).subscribe(connections => {
+      this.blogListService.getPackage(this.selectedConnections,this.packId,this.location_id).subscribe(connections => {
         this.connectionInfo=connections.result;
         this.blogListService.showToast(this.connectionInfo);
 

@@ -96,18 +96,6 @@ export class CommunityprofilePage {
   scrollToBottom(){
     this.content.scrollToBottom();
   }
-  // ionViewDidEnter(){
-  //   this.storage.ready().then(() => {
-  //     this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-  //     this.storage.get('id').then((id) => { this.my_id=id; });
-  //     this.storage.get('token').then((token) => { this.token=token;
-  //      this.profileCommunity(this.profile_uid);
-  //     this.memberProfile(this.profile_uid);
-  //     this.getPrivacy(this.profile_uid);
-  //   })
-      
-  //   });
-  // }
     ionViewWillEnter() {
     this.tabBarElement.style.display = 'none';
   }

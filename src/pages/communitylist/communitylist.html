@@ -56,7 +56,6 @@
         <ion-card style="position:relative;" *ngFor="let community of communitylists; let i= index" 
         (click)="getPost(community.id)">
           <div class="community-img">
-		  <!-- <img class="center-image" src="assets/img/saa.jpg"  style="width:100%; height:180px;" /> -->
                <img  [src]="imageUrl+community?.banner" style="width:100%; height:200px;" [hidden]="!community?.banner" /> 
         			   <div class="label-opc">
             			   <ion-item text-wrap style="text-align:left !important;"  
