@@ -70,9 +70,9 @@ discountcost:any;
         });
    toast.present();
   }
-   paynow(service_cost,service_id){
+   paynow(service_cost,service_id,recurring_request_id){
     let service_type = "Recurring";
-    let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"service_type":service_type,"service_cost":service_cost,"service_id":service_id});
+    let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"service_type":service_type,"service_cost":service_cost,"service_id":service_id,"recurring_request_id":recurring_request_id});
       serviceModal.present();
   }
   getrecurringRequest(){
@@ -86,6 +86,7 @@ discountcost:any;
       data.discountcost = parseFloat(data.servicediscountcost_one_service) + parseFloat(data.final_service_cost);
       data.totalServicecost = data.service_cost * data.req_count;
       data.balanceamount = data.total_service_cost - data.paid_amount;
+      data.remainingamount = parseFloat(data.remaining_amount).toFixed(2);
     }
         this.recurringRequest = dataList;
         this.nextPageURL=data.result.next_page_url;  
@@ -118,6 +119,8 @@ discountcost:any;
       data.discountcost = parseFloat(data.servicediscountcost_one_service) + parseFloat(data.final_service_cost);
       data.totalServicecost = data.service_cost * data.req_count;
       data.balanceamount = data.total_service_cost - data.paid_amount;
+      data.remainingamount = parseFloat(data.remaining_amount).toFixed(2);
+
     }
       
       //this.serviceRequestScrollLists=serviceRequestScroll.result.data; 

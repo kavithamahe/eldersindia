@@ -112,17 +112,15 @@ export class ModalContentPage {
   discountpartial:any;
   patialdiscount:any;
   payableamount:any;
-  // startDate:any;
-  // endDate:any;
+  startDate:any;
+  endDate:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {   
      this.date = new Date().toISOString();
      this.startDate = new Date().toISOString();
      this.endDate = new Date().toISOString();
      this.dependentLists = params.get("dependentList");
-     //this.dependents = this.dependentLists[0].id;
      this.lead_time = params.get("lead_time"); 
-     // this.service_cost = params.get("vendorservice_cost"); 
      this.serviceTitle = params.get("serviceTitle");
      this.location_id = params.get("location_id");
     
@@ -138,13 +136,10 @@ export class ModalContentPage {
      }
      if(params.get("vendor") != undefined){
       this.vendorr = this.params.get("vendor");
-      console.log(this.vendorr);
       this.vendor = this.params.get("vendor").name;
-      console.log(this.vendor);
       this.service_cost = this.params.get("vendor").service_cost;
       this.percentage_cost = this.params.get("vendor").percentage_cost;
       this.servicecost = this.service_cost - this.percentage_cost;
-      console.log(this.servicecost);
       this.vendor_id = this.params.get("vendor").vendor_id;
       this.recurringType = this.params.get("vendor").recurring;
       this.name = this.params.get("vendor").name;
@@ -245,8 +240,6 @@ onlyNumberKey(event) {
             this.starDate = moment(this.starDate);
             this.selectedDates.push(this.starDate);
             this.starDate= moment(this.starDate).add(1, 'days');   
-                   
-           // this.starDate = moment(this.starDate).format("YYYY-MM-DD");
           }        
       this.dayCalculation();
                                                                                               
@@ -258,9 +251,6 @@ onlyNumberKey(event) {
         let date = moment(data).format('YYYY-MM-DD');
 
         let weekoff=moment(date).day();
-           // console.log(date);
-           // console.log(weekoff);
-           // console.log(this.excludeDays);
            let _index= this.excludeDays.indexOf(weekoff);
              if(_index>=0 ){
                     if(this.count>0){
@@ -305,42 +295,20 @@ onlyNumberKey(event) {
       }
      })
    }
-   // fullpaymentinfo(){
-   //   this.providerService.getdiscountrecurringvalues(this.fullgetpaidPayment)
-   //    .subscribe(data =>{ 
-   //      this.fullpayDiscount=data.result;
-   //      this.getfullpaidPayment=this.fullpayDiscount[0].paymentDiscount;
-   //      this.fullpaymentdiscount=this.servicecosts * this.getfullpaidPayment / 100;
-   //      this.finalcost=this.servicecosts - this.fullpaymentdiscount;
-   //      console.log(this.finalcost);
-   //  },
-
-   //  (err) => { 
-   //      console.log("you can not login");
-   //      //this.packageLists='';
-   //      this.flag="0";
-   //  },)
-   // }
+  
    fullpaymentinfo(){
     this.providerService.getRecurringDiscount(this.datCount)
       .subscribe(data =>{ 
           this.getpaymentDiscount = data.result;
            if(this.fullgetpaidPayment == "100"){
       this.discount = data.result.discount_100;
-      console.log(this.discount);
    }
-    console.log(this.fullgetpaidPayment);
     this.paidPayment = this.servicecosts * this.fullgetpaidPayment / 100;
-    console.log(this.paidPayment);
     this.totalservice_costss = this.paidPayment * this.discount / 100;
-    console.log(this.totalservice_costss);
     this.servicediscountcost = this.paidPayment -this.totalservice_costss;
-    console.log(this.servicediscountcost);
     this.afterdiscount_one_service = this.totalservice_costss / this.datCount;
     this.servicediscountcost_one_service = this.servicediscountcost / this.datCount;
-    console.log(this.servicediscountcost_one_service);
    this.finalcost =this.servicecosts - (this.servicecosts * this.discount / 100);
-    console.log(this.finalcost);
    
     },
 
@@ -364,24 +332,15 @@ onlyNumberKey(event) {
        this.discount = data.result.discount_75;
        this.discounts = "discount_75";
     }
-   // console.log(this.getpaidPayment);
     this.paidPayment = this.servicecosts * this.getpaidPayment / 100;
-   // console.log(this.paidPayment);
     this.patialdiscount= (this.servicecosts/this.datCount) * this.getpaidPayment / 100;
     this.discountpartial = (this.servicecosts/this.datCount) - this.patialdiscount;
     this.totalservice_costss = this.paidPayment * this.discount / 100;
-    //console.log(this.totalservice_costss);
    this.servicediscountcost = this.paidPayment -this.totalservice_costss;
-    //console.log(this.servicediscountcost);
     this.afterdiscount_one_service = this.totalservice_costss / this.datCount;
     this.servicediscountcost_one_service = this.servicediscountcost / this.datCount;
-    //console.log(this.servicediscountcost_one_service);
-    // this.finalcost = this.paidPayment - this.totalservice_costss;
-   // console.log(this.servicecosts);
     this.finalcost =this.servicecosts - (this.servicecosts * this.discount / 100);
-    //console.log(this.finalcost);
     this.payableamount = this.finalcost * this.getpaidPayment / 100;
-    //console.log(this.payableamount);
     },
 
     (err) => { 
@@ -757,7 +716,7 @@ else{
 
     
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"service_cost":this.servicecost,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"service_cost":this.servicecost,"base_cost":this.service_cost,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
    
@@ -791,7 +750,7 @@ else{
     if(this.durations != undefined){
       // if(this.durations == 'Fixed hours'){}
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"service_cost":this.servicecost,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"service_cost":this.servicecost,"base_cost":this.service_cost,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"datCount":this.datCount,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
   
@@ -825,7 +784,7 @@ else{
     }
       if(this.modalForm.value.date != "" && this.modalForm.value.time !=""){
        let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"service_cost":this.servicecost,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"service_cost":this.servicecost,"base_cost":this.service_cost,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
    
@@ -854,7 +813,7 @@ else{
       if(this.modalForm.value.startdate != undefined && this.modalForm.value.enddate != undefined){
         if(this.durations != undefined){
        let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"service_cost":this.servicecost,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"service_cost":this.servicecost,"base_cost":this.service_cost,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"datCount":this.datCount,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
  

@@ -74,6 +74,15 @@ export class LoginPage {
 
    	this.loginUser.loginload(this.registerCredentials).subscribe(     
       (loginuser) => {
+          if(loginuser['details']['user_type'] != 'vendor' && loginuser['details']['user_type'] != 'admin'){
+             // if(loginuser.details.first_login == 1)
+             // {
+              this.navCtrl.setRoot(DashboardPage);
+             // }
+             // else{
+             //   this.navCtrl.setRoot(FirsttimeloginPagePage);
+             // }
+        
           this.service.serviceInit(loginuser['token']);
           this.community_service.initialize();
 
@@ -118,22 +127,17 @@ export class LoginPage {
          // this.storage.set('service_location','');
          this.storage.set('islogin',1);
          this.enableUserTypeMenu(loginuser['details']['user_type']);
-         if(loginuser['details']['user_type'] != 'vendor' && loginuser['details']['user_type'] != 'admin'){
-             // if(loginuser.details.first_login == 1)
-             // {
-              this.navCtrl.setRoot(DashboardPage);
-             // }
-             // else{
-             //   this.navCtrl.setRoot(FirsttimeloginPagePage);
-             // }
-          }else{
-
-             this.showToaster("Try with different credentials");
-          }
+       
           
        })
         // alert(loginuser['token']);
         loader.dismiss();
+      }
+      else{
+         loader.dismiss();
+             this.showToaster("Try with different credentials");
+          
+      }
     },
 
     (err) => { 

@@ -583,10 +583,10 @@ export class CommunityPopoverPage {
      this.storage.ready().then(() => {
       this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       this.storage.get('token').then((token) => { this.token=token; 
-     this.getConnections();
+     // this.getConnections();
       });
       this.storage.get('id').then((id) => { this.user_id=id; 
-      
+      this.getConnections();
     })
     });
    }

@@ -252,7 +252,7 @@ var ajaxCallCheck = function(payment_id){
 
   
 
-  var url  = "http://192.168.1.187:8085/api/razorPaymentResponse";
+  var url  = "http://beta.eldersindia.com/api/razorPaymentResponse";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 

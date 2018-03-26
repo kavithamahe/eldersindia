@@ -37,6 +37,7 @@ export class SubcategoryListPage {
   dependentLen:any=true;
   scheduleModal:any='';
   lead_time:any='00:00';
+  service_cost:any;
   constructor( public loadingCtrl: LoadingController, public providerService: ServiceProvider, public navCtrl: NavController, public altCtrl:AlertController, public navParams: NavParams,public toastCtrl: ToastController,public modalCtrl: ModalController, public mp:ModalContentPage, public storage:Storage) {
     this.date = new Date().toISOString();
       this.location_id = navParams.get("location_id");
@@ -91,6 +92,7 @@ pressinstant(vendorData){
 }
   instantRequest(vendorData) {
     if(this.userType != "sponsor"){ 
+      this.service_cost = vendorData.service_cost - vendorData.percentage_cost;
       let d = new Date();
     let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
     d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
@@ -107,9 +109,9 @@ pressinstant(vendorData){
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
 
     let serviceRequestData = {"problem": this.serviceTitle, "datetime": lead_time, "dependentId": this.elderId, "mobile_no": "","serviceType":"One time",
-    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":""};
+    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":"","base_cost":vendorData.service_cost,"service_cost":this.service_cost};
     
-            this.serviceRequestCall(serviceRequestData,vendorData.id);
+            this.serviceRequestCall(serviceRequestData,vendorData.id,);
     }else{
       this.openModal("instant",vendorData); 
     }
@@ -152,7 +154,7 @@ pressevent(modalPage,vendorData){
      "sub_category_id":this.serviceData.sub_category_id,"datCount":service_request_data.datCount,
       "service_id":this.serviceData.service_id, "problem":service_request_data.problem,
      "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
-      "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,
+      "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,"base_cost":service_request_data.base_cost,
       "subcategory":this.serviceData.subcategory, "durations":service_request_data.durations,"service_cost":service_request_data.service_cost,
        "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
        "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
@@ -183,7 +185,7 @@ pressevent(modalPage,vendorData){
 
     let requestServiceData = {"category":this.serviceData.category,"service":this.serviceData.service,
     "category_id":this.serviceData.category_id,"location_id":this.location_id,"vendor_id":vendorId,
-     "sub_category_id":this.serviceData.sub_category_id,
+     "sub_category_id":this.serviceData.sub_category_id,"base_cost":service_request_data.base_cost,"service_cost":service_request_data.service_cost,
       "service_id":this.serviceData.service_id, "problem":service_request_data.problem,
      "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
       "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,
@@ -295,6 +297,8 @@ export class InstantRequestModalPage {
   lead_time:any;
   selected:boolean=false;
   vendor:any="";
+  base_cost:any="";
+  service_cost:any="";
   constructor(
     public params: NavParams,
     public viewCtrl: ViewController,
@@ -306,6 +310,8 @@ export class InstantRequestModalPage {
     this.service = this.params.get('service');
     if(params.get("vendor") != undefined){
       this.vendor = this.params.get("vendor").name;
+      this.base_cost = this.params.get("vendor").service_cost;
+      this.service_cost = (this.params.get("vendor").service_cost) - (this.params.get("vendor").percentage_cost);
     }
     
   }
@@ -351,7 +357,7 @@ export class InstantRequestModalPage {
         let getHours=(minutess + minutes)/60;
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
     let serviceRequestData = {"problem": this.service, "datetime": lead_time, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile,"serviceType":"One time",
-    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":""};
+    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":"","base_cost":this.base_cost,"service_cost":this.service_cost};
     this.viewCtrl.dismiss(serviceRequestData);
   }else{
     this.showToaster("Please select the dependent");

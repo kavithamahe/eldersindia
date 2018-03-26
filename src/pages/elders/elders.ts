@@ -53,7 +53,7 @@ sponser_id:any;
   functional_duration:any ="";
   sponsor_id:any;
   mobile:any="";
-  elder_email:any="";
+  elder_email:any;
   elder_password:any="";
   elder_id:any="";
   elder_relation:any="";
@@ -303,7 +303,7 @@ public emergencies =  [
           this.elder_number= this.manageDependentData.mobile;
           this.file_name=this.manageDependentData.docs_name;
           // this.elder_dob =moment(this.manageDependentData.dob,"DD-MM-YYYY").toISOString();//.toISOString();
-          this.elder_dob =moment(this.manageDependentData.dob,"DD-MM-YYYY").add(1, 'days').toISOString();
+          this.elder_dob =moment(this.manageDependentData.dob,"YYYY-MM-DD").add(1, 'days').toISOString();
           console.log(this.elder_dob);
           this.elder_email= this.manageDependentData.email;
           //this.elder_password= this.manageDependentData.password;

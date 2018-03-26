@@ -5,7 +5,8 @@ import { Storage } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { BlogListService } from '../../providers/blog-list-service';
-import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
+
 
 
 
@@ -38,6 +39,8 @@ sr_token:any;
 service_id:any;
 service_type:any;
 service_costss:any;
+payment_status:any;
+recurring_request_id:any;
   constructor(public navCtrl: NavController,public viewCtrl: ViewController,public storage:Storage, public navParams: NavParams) {
   	if(navParams.get("service_type") != undefined){
   		this.service_type = navParams.get("service_type");
@@ -45,10 +48,13 @@ service_costss:any;
   		this.service_costss = this.service_cost * 100;
   		localStorage.setItem('service_costss', this.service_costss);
   		this.service_id = navParams.get("service_id");
+      this.recurring_request_id = navParams.get("recurring_request_id");
+      console.log(this.service_id);
   	}
   	if(navParams.get("sr_token") != undefined){
   	this.sr_token=navParams.get("sr_token");
   	this.service_cost=navParams.get("service_cost");
+    this.payment_status = navParams.get("payment_status");
   	this.service_costs = this.service_cost * 100;
   	localStorage.setItem('service_costs', this.service_costs);
   	this.service_id = navParams.get("service_id");
@@ -85,9 +91,8 @@ service_costss:any;
     console.log('ionViewDidLoad PackagepaymentPagePage');
   }
 paypartial(){
-	console.log(this.service_costss);
-	 var optionsss = {
-      description: 'Razorpay',
+	 var recurringOption = {
+      description: "Payment made for SR"+this.recurring_request_id+"",
       image: 'assets/img/elders-logo.png',
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
@@ -101,8 +106,8 @@ paypartial(){
       
        notes: {
        "service_id":this.service_id,
-		"service_type":this.service_type,
-        email: this.email,
+		   //"service_type":this.service_type,
+        "email": this.email,
       },
       theme: {
         color: '#208ad6'
@@ -113,13 +118,13 @@ paypartial(){
         }
       }
     };
-
+let nav = this.navCtrl;
 
 var ajaxCallCheck = function(payment_id){
 console.log(localStorage.getItem("service_costss"));
   
 
-  var url  = "http://192.168.1.187:8085/api/razorPaymentResponseforPartialPayment";
+  var url  = "http://beta.eldersindia.com/api/razorPaymentResponseforPartialPayment";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -137,6 +142,7 @@ xmlhttp.onload = function () {
 
  var successCallback = function(payment_id) {
      ajaxCallCheck(payment_id);
+      nav.push(ServicerequestPage);
     }
 
 var cancelCallback = function(error) {
@@ -145,7 +151,7 @@ var cancelCallback = function(error) {
 
 RazorpayCheckout.on('payment.success', successCallback);
 RazorpayCheckout.on('payment.cancel', cancelCallback);
-    RazorpayCheckout.open(optionsss, successCallback, cancelCallback);
+    RazorpayCheckout.open(recurringOption, successCallback, cancelCallback);
 }
    pay() {
 console.log(this.service_costs);
@@ -182,12 +188,12 @@ console.log(this.service_costs);
       }
     };
 
-
+let nav = this.navCtrl;
 var ajaxCallCheck = function(payment_id){
 
   
 
-  var url  = "http://192.168.1.187:8085/api/razorPaymentResponseforPackage";
+  var url  = "http://beta.eldersindia.com/api/razorPaymentResponseforPackage";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -205,6 +211,7 @@ xmlhttp.onload = function () {
 
  var successCallback = function(payment_id) {
       ajaxCallCheck(payment_id);
+       nav.push(ServicerequestPage);
     }
 
 var cancelCallback = function(error) {
@@ -217,7 +224,7 @@ RazorpayCheckout.on('payment.cancel', cancelCallback);
 }
 else{
 	  var optionss = {
-      description: this.sr_token,
+      description: "Payment made for "+this.sr_token+"",
       image: 'assets/img/elders-logo.png',
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
@@ -231,8 +238,9 @@ else{
       
        notes: {
        "service_id":this.service_id,
-		"amount":this.service_costs,
-        email: this.email,
+		   "amount":this.service_costs,
+       "email": this.email,
+       "payment_status":this.payment_status
       },
       theme: {
         color: '#208ad6'
@@ -244,13 +252,13 @@ else{
       }
     };
 
-
+let nav = this.navCtrl;
 
 var ajaxCallCheck = function(payment_id){
 
   
 
-  var url  = "http://192.168.1.187:8085/api/razorPaymentResponseforPartialPayment";
+  var url  = "http://beta.eldersindia.com/api/razorPaymentResponsependingPayment";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -262,20 +270,23 @@ xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  local
 console.log(xmlhttp.responseText);
 xmlhttp.onload = function () {
   var users = JSON.parse(xmlhttp.responseText);
+  
  var result=users.result;
   }
 }
 
  var successCallback = function(payment_id) {
      ajaxCallCheck(payment_id);
+   nav.push(ServicerequestPage);
     }
 
 var cancelCallback = function(error) {
   alert(error.description + ' (Error '+error.code+')')
 }
+// RazorpayCheckout.on('payment.success',successCallback);
 
-RazorpayCheckout.on('payment.success', successCallback);
-RazorpayCheckout.on('payment.cancel', cancelCallback);
+// RazorpayCheckout.on('payment.success', successCallback,this.navCtrl.push(PaymentredirectPagePage,{"status":"1"}));
+// RazorpayCheckout.on('payment.cancel', cancelCallback);
     RazorpayCheckout.open(optionss, successCallback, cancelCallback);
   }
 }

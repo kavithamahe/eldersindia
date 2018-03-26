@@ -102,14 +102,14 @@ final_payable_amount:any;
       }
     ); 
   }
-  paynow(sr_token,service_cost,service_id,additional_service_cost){
+  paynow(sr_token,service_cost,service_id,additional_service_cost,payment_status){
     if(additional_service_cost == "0"){
       this.servicecost = service_cost;
     }
     else{
       this.servicecost = additional_service_cost;
     }
-    let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":service_id});
+    let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":service_id,"payment_status":payment_status});
       serviceModal.present();
   }
   public onInit()
