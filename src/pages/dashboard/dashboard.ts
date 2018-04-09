@@ -54,18 +54,19 @@ export class DashboardPage {
       this.head = new RequestOptions({ headers: this.headers });
     this.fetchLocation();
   })
-      storage.get('user_type').then((user_type) => { this.user_type=user_type;  })
-      console.log(this.user_type);
+      storage.get('user_type').then((user_type) => { this.user_type=user_type; 
+      console.log(this.user_type); })
       storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor;  })
       storage.get('ambulance').then((ambulance) => { this.ambulance=ambulance;  })
       storage.get('police').then((police) => { this.police=police;  })
 
      storage.get('phone').then((phone) => { this.phone=phone; })
-     console.log(this.phone);
   });
     
   }
    ionViewWillEnter() {
+     this.storage.get('user_type').then((user_type) => { this.user_type=user_type; 
+      console.log(this.user_type); })
     this.tabBarElement.style.display = 'none';
   }
  
@@ -176,7 +177,7 @@ export class DashboardPage {
     {
        this.hooterOn=!hooterOn;
        this.nativeAudio.preloadSimple('uniqueId1', 'assets/sound/Siren 21.mp3').then(this.onSuccess, this.onError);
-this.nativeAudio.play('uniqueId1').then(this.onSuccess, this.onError);
+       this.nativeAudio.play('uniqueId1').then(this.onSuccess, this.onError);
 
     }
     else

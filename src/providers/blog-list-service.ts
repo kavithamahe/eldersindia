@@ -120,13 +120,12 @@ serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id
     return this.http.post(rootUrl+'getRecurringServiceById',_request,this.options)
       .map(res => res.json());
   }
-  getrecurringRequestdelete(rootUrl,recurring){
-     let _request= {"id": recurring}
+  getrecurringRequestdelete(rootUrl,recurring,hours,paid_cost,reamining_cost,service_cost,status,total_service_cost){
+     let _request= {"data":{"id": recurring,"hours":hours,"paid_cost":paid_cost,"reamining_cost":reamining_cost,"service_cost":service_cost,"status":status,"total_service_cost":total_service_cost}};
     return this.http.post(rootUrl+'getBulkRecurringService',_request,this.options)
       .map(res => res.json());
   }
-  deleterecurringrequest(rootUrl,recurring,dedction_amount,refund_amount,
-      remaining_amount){
+  deleterecurringrequest(rootUrl,recurring,dedction_amount,refund_amount,remaining_amount){
     let _request= {"data":{"id":recurring,"dedction_amount":dedction_amount,"refund_amount":refund_amount,"remaining_amount":remaining_amount}};
 
     return this.http.post(rootUrl+'deleteBulkRecurringService',_request,this.options)
@@ -150,14 +149,14 @@ viewrecurring(sr_token)
     return this.http.post(this.rootUrl+'getBlogDetails/'+blogId,_request,this.options)
       .map(res => res.json()); 
   }
-getPackageRequest(Url,searchText,packstatus){
-       let _request= {info: {"list": true, "search": searchText, "status": packstatus,"token": null}};
+getPackageRequest(Url,searchText,searchemail,searchid,packstatus){
+       let _request= {info: {"list": true, "search": "","elder_name":searchText,"elder_email":searchemail,"txnid":searchid, "status": packstatus,"paymentStatus":"","reqType":"","token": null}};
     return this.http.post(Url+`getPackageRequest`,_request,this.options)
       .map(res => res.json()); 
 }
-eventscrolls(nextPageURL,searchText,packstatus) 
+eventscrolls(nextPageURL,searchText,searchemail,searchid,packstatus) 
    {  
-   let _request= {info: {"list": true, "search": searchText, "status": packstatus, "token": null}};
+   let _request= {info: {"list": true, "search": "","elder_name":searchText,"elder_email":searchemail,"txnid":searchid,"status": packstatus, "token": null}};
 
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
@@ -194,6 +193,11 @@ getPackageRequestById(rootUrl,packageId){
   deleteComment(commentId) {  
    let _request= {"id":commentId};
     return this.http.post(this.rootUrl+'deleteComment',_request,this.options)
+      .map(res => res.json()); 
+  }
+  deleteReplyComment(commentId) {  
+   let _request= {"id":commentId};
+    return this.http.post(this.rootUrl+'deleteReplyComment',_request,this.options)
       .map(res => res.json()); 
   }
    postReply(commentId,to_id,comments) {  
@@ -260,8 +264,14 @@ getPackageRequestById(rootUrl,packageId){
       .map(res => res.json()); 
      }
       }
+
    getPackage(selectedConnections,packId,location_id){
     let _request= {"pack_id": packId, "dependent_id": selectedConnections,"location_id":location_id};
+    return this.http.post(this.rootUrl+'availPackage',_request,this.options)
+      .map(res => res.json()); 
+   }
+   getPackageselder(packId,location_id){
+    let _request= {"pack_id": packId,"location_id":location_id};
     return this.http.post(this.rootUrl+'availPackage',_request,this.options)
       .map(res => res.json()); 
    }

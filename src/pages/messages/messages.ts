@@ -51,12 +51,19 @@ selected:any;
     }
      this.selectedContacts = [];
      this.sendselectedContacts = [];
+      
   
   }
   ionViewWillEnter(){
       this.storage.ready().then(() => {
       this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       this.storage.get('token').then((token) => { this.token=token; 
+       this.messages=='inbox'
+      if(this.navParams.get("messages")=="sent")
+    {
+    this.messages=this.navParams.get("messages");
+    this.sent();
+    }
       // this.blogId=navParams.get("blogId");
       if(this.messages=='inbox')
       {

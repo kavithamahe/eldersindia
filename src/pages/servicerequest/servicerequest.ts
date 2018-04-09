@@ -54,8 +54,16 @@ cancelCharges:any;
 service_remaing_cost:any;
 new_service_amount:any;
 final_payable_amount:any;
+paystatus:any;
+results:any;
   constructor(public alertCtrl: AlertController,public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
-  	this.storage.ready().then(() => {
+  	this.paystatus = navParams.get("status");
+    this.results = navParams.get("result");
+    console.log(this.results);
+    if(this.paystatus == "1"){
+      this.showToaster(this.results);
+    }
+    this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
       this.sr_token=navParams.get("sr_token");
@@ -109,8 +117,9 @@ final_payable_amount:any;
     else{
       this.servicecost = additional_service_cost;
     }
-    let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":service_id,"payment_status":payment_status});
-      serviceModal.present();
+    // let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":service_id,"payment_status":payment_status});
+    //   serviceModal.present();
+    this.navCtrl.push(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":service_id,"payment_status":payment_status});
   }
   public onInit()
   {
@@ -129,7 +138,7 @@ final_payable_amount:any;
       this.serviceRequestInfo =[];
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -260,46 +269,46 @@ final_payable_amount:any;
     
   }
   showConfirms(serviceId,result,service_type,status,txnid,percentage,totalcostofrecurring,req_count,paid_amount,utilized_service_cost,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,final_payable_amount){
-      if(percentage == "hours expired"){
-      let prompt = this.alertCtrl.create({
-      title: 'Cancel Service Request',
-      message: "Your service date and time was expired,If you cancelled the service request service amount could not be refunded.",
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Comments'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            //console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Confirm',
-          handler: data => {
+    //   if(percentage == "hours expired"){
+    //   let prompt = this.alertCtrl.create({
+    //   title: 'Cancel Service Request',
+    //   message: "Your service date and time was expired,If you cancelled the service request service amount could not be refunded.",
+    //   inputs: [
+    //     {
+    //       name: 'title',
+    //       placeholder: 'Comments'
+    //     },
+    //   ],
+    //   buttons: [
+    //     {
+    //       text: 'Cancel',
+    //       handler: data => {
+    //         //console.log('Cancel clicked');
+    //       }
+    //     },
+    //     {
+    //       text: 'Confirm',
+    //       handler: data => {
             
-            //console.log(data.title);
-            if(data.title == ""){
-              this.showToaster("Please enter the reason");
-               return false;
-            }
-            else{
-             this.cancelRequest(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost);
-          }
-          }
-        }
-      ]
-    });
-    prompt.present();
-     }
-     else{
+    //         //console.log(data.title);
+    //         if(data.title == ""){
+    //           this.showToaster("Please enter the reason");
+    //            return false;
+    //         }
+    //         else{
+    //          this.cancelRequest(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost);
+    //       }
+    //       }
+    //     }
+    //   ]
+    // });
+    // prompt.present();
+    //  }
+    //  else{
       if(paid_amount>utilized_service_cost && service_remaing_cost > cancelCharges){
        let prompt = this.alertCtrl.create({
       title: 'Cancel Service Request',
-      message: "Total services requests :"+ req_count +" Total cost of the recurring :"+ totalcostofrecurring+" Total Paid Amount :"+paid_amount+" Cost of the utlizing SRs :"+utilized_service_cost+" Cancellation Charges :"+cancelCharges+" Refund on Cancellation :"+dedaction_service_cost+" ",
+      message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of the utlizing SRs : <i class='fa fa-rupee'></i>"+utilized_service_cost+" and Cancellation Charges : <i class='fa fa-rupee'></i>"+cancelCharges+" and Refund on Cancellation : <i class='fa fa-rupee'></i>"+dedaction_service_cost+" ",
       inputs: [
         {
           name: 'title',
@@ -335,7 +344,7 @@ final_payable_amount:any;
       else if(paid_amount<utilized_service_cost){
         let prompt = this.alertCtrl.create({
       title: 'Cancel Service Request',
-      message: "Total services requests :"+ req_count +" Total cost of the recurring :"+ totalcostofrecurring+" Total Paid Amount :"+paid_amount+" Cost of the utlizing SRs :"+utilized_service_cost+" Cancellation Charges :"+cancelCharges+" New service cost :"+final_payable_amount+" ",
+      message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of the utlizing SRs : <i class='fa fa-rupee'></i>"+utilized_service_cost+" and Cancellation Charges : <i class='fa fa-rupee'></i>"+cancelCharges+" and New service cost : <i class='fa fa-rupee'></i>"+final_payable_amount+" ",
       inputs: [
         {
           name: 'title',
@@ -369,13 +378,48 @@ final_payable_amount:any;
     
       }
     
-  }
+  // }
   }
   showOnetime(serviceId,result,service_type,status,txnid,percentage,payment_status,deductionamount,servicecancelamount){
-     if(percentage == "hours expired"){
+    //  if(percentage == "hours expired"){
+    //   let prompt = this.alertCtrl.create({
+    //   title: 'Cancel Service Request',
+    //   message: "Your service date and time was expired,If you cancelled the service request service amount could not be refunded.",
+    //   inputs: [
+    //     {
+    //       name: 'title',
+    //       placeholder: 'Comments'
+    //     },
+    //   ],
+    //   buttons: [
+    //     {
+    //       text: 'Cancel',
+    //       handler: data => {
+    //         //console.log('Cancel clicked');
+    //       }
+    //     },
+    //     {
+    //       text: 'Confirm',
+    //       handler: data => {
+            
+    //         //console.log(data.title);
+    //         if(data.title == ""){
+    //           this.showToaster("Please enter the reason");
+    //            return false;
+    //         }
+    //         else{
+    //         this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount);
+    //       }
+    //       }
+    //     }
+    //   ]
+    // });
+    // prompt.present();
+    //  }
+     // else{
       let prompt = this.alertCtrl.create({
       title: 'Cancel Service Request',
-      message: "Your service date and time was expired,If you cancelled the service request service amount could not be refunded.",
+      message: "Service cancellation percentage :"+ percentage +" % and Service cancellation amount : <i class='fa fa-rupee'></i>"+ deductionamount+" and Service refund amount : <i class='fa fa-rupee'></i>"+ servicecancelamount+" ",
       inputs: [
         {
           name: 'title',
@@ -406,42 +450,7 @@ final_payable_amount:any;
       ]
     });
     prompt.present();
-     }
-     else{
-      let prompt = this.alertCtrl.create({
-      title: 'Cancel Service Request',
-      message: "Service cancellation percentage :"+ percentage +" % Service cancellation amount :"+ deductionamount+"Service refund amount :"+ servicecancelamount+" ",
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Comments'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            //console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Confirm',
-          handler: data => {
-            
-            //console.log(data.title);
-            if(data.title == ""){
-              this.showToaster("Please enter the reason");
-               return false;
-            }
-            else{
-            this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount);
-          }
-          }
-        }
-      ]
-    });
-    prompt.present();
-     }
+     // }
      
   }
  cancelRequests(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,service_remaing_cost,final_payable_amount){

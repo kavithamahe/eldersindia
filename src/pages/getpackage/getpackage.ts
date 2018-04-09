@@ -50,11 +50,40 @@ location_id:any;
         this.vendor_id = navParams.get("vendor_id");
         this.package_validity = navParams.get("package_validity");
         this.package_amount = navParams.get("package_amount");
+       console.log(this.package_amount);
         this.dependentLists = navParams.get("dependents");
    });
   }
   dismiss(){
   	this.viewCtrl.dismiss();
+  }
+  getPackageselder(){
+    if(this.paymenttype == undefined){
+        this.blogListService.showToast("Please select above details");
+      }
+      else{
+        if(this.paymenttype == "Offline Payment"){
+     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();    
+      this.blogListService.getPackageselder(this.packId,this.location_id).subscribe(connections => {
+        this.connectionInfo=connections.result;
+        this.blogListService.showToast(this.connectionInfo);
+
+        this.dismiss();
+        loader.dismiss();
+        this.navCtrl.push(PackageRequestPagePage);
+     },
+   err =>{
+    loader.dismiss();
+      this.blogListService.showErrorToast(err);
+  })
+    }
+      else{
+     let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
+      "package_amount":this.package_amount});
+      serviceModal.present();
+    }
+  }
   }
 
     getPackage(){
@@ -79,6 +108,7 @@ location_id:any;
   })
     }
     else{
+      console.log(this.package_amount);
      let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
       "package_amount":this.package_amount});
       serviceModal.present();

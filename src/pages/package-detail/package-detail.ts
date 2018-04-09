@@ -70,11 +70,11 @@ vendorLogo:any;
       loading.dismiss();
     })
   }
-  openRequestPackage(id){
+  openRequestPackage(id,package_amount,package_validity){
     if(this.dependents.length == 1){
       this.dependentId = this.dependents[0].id;
     }
-    let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id,dependents:this.dependents,location_id:this.location_id});
+    let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id,dependents:this.dependents,location_id:this.location_id,package_amount:package_amount,vendor_id:this.vendor_id,package_validity:package_validity});
     modal.present();
   }
   dashboardPage(){

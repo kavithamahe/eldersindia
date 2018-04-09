@@ -8,8 +8,6 @@ import { BlogListService } from '../../providers/blog-list-service';
 import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
 
 
-
-
 import 'rxjs/add/operator/map';
 
 declare var RazorpayCheckout: any;
@@ -66,6 +64,7 @@ recurring_request_id:any;
   	this.selectedConnections=navParams.get("selectedConnections");
   	this.package_amount = navParams.get("package_amount");
   	this.package_amounts = this.package_amount * 100;
+    console.log(this.package_amounts);
   	localStorage.setItem('package_amounts', this.package_amounts);
 }
   	this.storage.ready().then(() => {
@@ -120,8 +119,29 @@ paypartial(){
     };
 let nav = this.navCtrl;
 
-var ajaxCallCheck = function(payment_id){
-console.log(localStorage.getItem("service_costss"));
+// var ajaxCallCheck = function(payment_id){
+// console.log(localStorage.getItem("service_costss"));
+  
+
+//   var url  = "http://beta.eldersindia.com/api/razorPaymentResponseforPartialPayment";
+//    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+// xmlhttp.open("POST", url,true);
+
+// xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+// xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+// xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("service_costss")}));
+
+
+// console.log(xmlhttp.responseText);
+// xmlhttp.onload = function () {
+//   var users = JSON.parse(xmlhttp.responseText);
+//  var result=users.result;
+//   }
+// }
+
+ var successCallback = function(payment_id) {
+     // ajaxCallCheck(payment_id);
+     console.log(localStorage.getItem("service_costss"));
   
 
   var url  = "http://beta.eldersindia.com/api/razorPaymentResponseforPartialPayment";
@@ -137,12 +157,10 @@ console.log(xmlhttp.responseText);
 xmlhttp.onload = function () {
   var users = JSON.parse(xmlhttp.responseText);
  var result=users.result;
+  nav.setRoot(ServicerequestPage,{"status":"1","result":result});
   }
-}
+     
 
- var successCallback = function(payment_id) {
-     ajaxCallCheck(payment_id);
-      nav.push(ServicerequestPage);
     }
 
 var cancelCallback = function(error) {
@@ -157,6 +175,7 @@ RazorpayCheckout.on('payment.cancel', cancelCallback);
 console.log(this.service_costs);
 
    	if(this.sr_token == undefined){
+      console.log(this.package_amounts);
     var options = {
       description: 'Razorpay',
       image: 'assets/img/elders-logo.png',
@@ -189,9 +208,29 @@ console.log(this.service_costs);
     };
 
 let nav = this.navCtrl;
-var ajaxCallCheck = function(payment_id){
+// var ajaxCallCheck = function(payment_id){
 
   
+
+//   var url  = "http://beta.eldersindia.com/api/razorPaymentResponseforPackage";
+//    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+// xmlhttp.open("POST", url,true);
+
+// xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+// xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+// xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("package_amounts")}));
+
+
+// console.log(xmlhttp.responseText);
+// xmlhttp.onload = function () {
+//   var users = JSON.parse(xmlhttp.responseText);
+//  var result=users.result;
+//   nav.push(ServicerequestPage,{"status":"1","result":result});
+//   }
+// }
+
+ var successCallback = function(payment_id) {
+    
 
   var url  = "http://beta.eldersindia.com/api/razorPaymentResponseforPackage";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
@@ -206,12 +245,8 @@ console.log(xmlhttp.responseText);
 xmlhttp.onload = function () {
   var users = JSON.parse(xmlhttp.responseText);
  var result=users.result;
+  nav.push(ServicerequestPage,{"status":"1","result":result});
   }
-}
-
- var successCallback = function(payment_id) {
-      ajaxCallCheck(payment_id);
-       nav.push(ServicerequestPage);
     }
 
 var cancelCallback = function(error) {
@@ -220,7 +255,7 @@ var cancelCallback = function(error) {
 
 RazorpayCheckout.on('payment.success', successCallback);
 RazorpayCheckout.on('payment.cancel', cancelCallback);
-    RazorpayCheckout.open(options, successCallback, cancelCallback);
+RazorpayCheckout.open(options, successCallback, cancelCallback);
 }
 else{
 	  var optionss = {
@@ -254,9 +289,29 @@ else{
 
 let nav = this.navCtrl;
 
-var ajaxCallCheck = function(payment_id){
+// var ajaxCallCheck = function(payment_id){
 
   
+
+//   var url  = "http://beta.eldersindia.com/api/razorPaymentResponsependingPayment";
+//    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+// xmlhttp.open("POST", url,true);
+
+// xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+// xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+// xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("service_costs")}));
+
+
+// console.log(xmlhttp.responseText);
+// xmlhttp.onload = function () {
+//   var users = JSON.parse(xmlhttp.responseText);
+  
+//  var result=users.result;
+//   }
+// }
+
+ var successCallback = function(payment_id) {
+     // ajaxCallCheck(payment_id);
 
   var url  = "http://beta.eldersindia.com/api/razorPaymentResponsependingPayment";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
@@ -272,21 +327,17 @@ xmlhttp.onload = function () {
   var users = JSON.parse(xmlhttp.responseText);
   
  var result=users.result;
+   nav.setRoot(ServicerequestPage,{"status":"1","result":result});
   }
-}
 
- var successCallback = function(payment_id) {
-     ajaxCallCheck(payment_id);
-   nav.push(ServicerequestPage);
     }
 
 var cancelCallback = function(error) {
   alert(error.description + ' (Error '+error.code+')')
 }
-// RazorpayCheckout.on('payment.success',successCallback);
 
-// RazorpayCheckout.on('payment.success', successCallback,this.navCtrl.push(PaymentredirectPagePage,{"status":"1"}));
-// RazorpayCheckout.on('payment.cancel', cancelCallback);
+RazorpayCheckout.on('payment.success', successCallback);
+RazorpayCheckout.on('payment.cancel', cancelCallback);
     RazorpayCheckout.open(optionss, successCallback, cancelCallback);
   }
 }

@@ -114,6 +114,7 @@ export class ModalContentPage {
   payableamount:any;
   startDate:any;
   endDate:any;
+  onetimetype:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {   
      this.date = new Date().toISOString();
@@ -142,6 +143,7 @@ export class ModalContentPage {
       this.servicecost = this.service_cost - this.percentage_cost;
       this.vendor_id = this.params.get("vendor").vendor_id;
       this.recurringType = this.params.get("vendor").recurring;
+      this.onetimetype = this.params.get("vendor").one_time;
       this.name = this.params.get("vendor").name;
     }
     this.modalForm = formBuilder.group({
@@ -340,7 +342,7 @@ onlyNumberKey(event) {
     this.afterdiscount_one_service = this.totalservice_costss / this.datCount;
     this.servicediscountcost_one_service = this.servicediscountcost / this.datCount;
     this.finalcost =this.servicecosts - (this.servicecosts * this.discount / 100);
-    this.payableamount = this.finalcost * this.getpaidPayment / 100;
+    this.payableamount = (this.finalcost * this.getpaidPayment / 100).toFixed(2);
     },
 
     (err) => { 
@@ -379,25 +381,28 @@ onlyNumberKey(event) {
         this.paymenttype = "partial_payment";
       }
     if(this.datCount != undefined){
+      console.log(this.payableamount);
      let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"datCount":this.datCount,"payment":this.paymenttype,"serviceTitle":this.serviceTitle, 
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,"base_cost":this.service_cost,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
     
     // this.navCtrl.setRoot(PaymentPage);
-    let serviceModal = this.modalCtrl.create(PaymentPage,{serviceData:serviceData,servicecost:this.servicecost,service_costs:this.servicecosts,servicediscountcost:this.finalcost,payableamount:this.payableamount,
+     this.navCtrl.push(PaymentPage,{serviceData:serviceData,servicecost:this.servicecost,service_costs:this.servicecosts,servicediscountcost:this.finalcost,payableamount:this.payableamount,
       category:this.category,category_id:this.category_id,service:this.service,service_ids:this.service_ids,
       sub_category_id:this.sub_category_id,subcategory:this.subcategory,
       location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id,discounts:this.discounts,totalservice_costss:this.totalservice_costss,afterdiscount_one_service:this.afterdiscount_one_service,
       paidPayment:this.paidPayment,servicediscountcost_one_service:this.servicediscountcost_one_service,discountpartial:this.discountpartial});
-      serviceModal.present();
-       serviceModal.onDidDismiss(data =>{
-      if(data == "dismiss"){
-        console.log(" schedule request modal dismissed..!");
-      }else{
-       this.seviceCheck = data;
-      }
-    })
+      // serviceModal.present();
+        let serviceDataPay = "1";
+      this.viewCtrl.dismiss(serviceDataPay);
+    //    serviceModal.onDidDismiss(data =>{
+    //   if(data == "dismiss"){
+    //     console.log(" schedule request modal dismissed..!");
+    //   }else{
+    //    this.seviceCheck = data;
+    //   }
+    // })
      }
      else{
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
@@ -406,23 +411,28 @@ onlyNumberKey(event) {
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
  
     // this.navCtrl.setRoot(PaymentPage);
-    let serviceModal = this.modalCtrl.create(PaymentPage,{serviceData:serviceData,servicecost:this.servicecost,
+    this.navCtrl.push(PaymentPage,{serviceData:serviceData,servicecost:this.servicecost,
       category:this.category,category_id:this.category_id,service:this.service,service_ids:this.service_ids,
       sub_category_id:this.sub_category_id,subcategory:this.subcategory,
       location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id});
-      serviceModal.present();
-       serviceModal.onDidDismiss(data =>{
-      if(data == "dismiss"){
-        console.log(" schedule request modal dismissed..!");
-      }else{
-       this.seviceCheck = data;
-      }
-    })
+      // serviceModal.present();
+      let serviceDataPay = "1";
+      this.viewCtrl.dismiss(serviceDataPay);
+    //    serviceModal.onDidDismiss(data =>{
+    //   if(data == "dismiss"){
+    //     console.log(" schedule request modal dismissed..!");
+    //   }else{
+    //    this.seviceCheck = data;
+    //   }
+    // })
      }
 
    }
    next(){
+    console.log(this.recurring);
      this.modalForm.value.date= moment(this.modalForm.value.date).format("YYYY-MM-DD");
+     this.modalForm.value.startdate= moment(this.modalForm.value.startdate).format("YYYY-MM-DD");
+     this.modalForm.value.enddate= moment(this.modalForm.value.enddate).format("YYYY-MM-DD");
       var objFromDate = this.modalForm.value.startdate;
 var objToDate = this.modalForm.value.enddate;
  
@@ -438,7 +448,7 @@ var date2 = new Date(objToDate);
     else{
       if(this.searchButton == true){
         this.onetimes = "One time";
-      }else{
+      }else if(this.recurring == true){
         this.onetimes = "Recurring";
       }
      if(this.userType == 'sponsor'){
@@ -477,7 +487,7 @@ var date2 = new Date(objToDate);
         }
        else{
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
     
@@ -534,15 +544,11 @@ var date2 = new Date(objToDate);
     (err) => { 
         if(err.status===401)
         {
-
-
-
-
-        this.providerService.showToast(JSON.parse(err._body).error);
+   this.providerService.showToast(JSON.parse(err._body).error);
         }
        else{
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
     
@@ -560,7 +566,13 @@ var date2 = new Date(objToDate);
     ); 
     }
     else{
-      this.providerService.showToast("Please Select Frequency");
+      if(this.onetimes == undefined){
+        this.providerService.showToast("Please Select request type");
+      }
+      else{
+         this.providerService.showToast("Please Select Frequency");
+      }
+     
     }
     }
     else{
@@ -601,7 +613,7 @@ else{
         }
        else{
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
     
@@ -656,7 +668,7 @@ else{
         }
        else{
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
     
@@ -673,8 +685,14 @@ else{
       }
     ); 
         }
-    else{
-      this.providerService.showToast("Please Select Frequency");
+      else{
+      if(this.onetimes == undefined){
+        this.providerService.showToast("Please Select request type");
+      }
+      else{
+         this.providerService.showToast("Please Select Frequency");
+      }
+     
     }
     }
     else{

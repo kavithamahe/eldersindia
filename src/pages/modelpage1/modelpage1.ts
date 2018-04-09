@@ -31,6 +31,7 @@ export class Modelpage1PagePage {
   fromtime:any;
   totime:any;
   timeslot:any;
+  servicecost:any;
   constructor(public modalCtrl: ModalController,public nav: NavController,public navParams: NavParams, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {  
     this.serviceDatas =  navParams.get("serviceDatas");
@@ -42,6 +43,12 @@ export class Modelpage1PagePage {
     this.fromtime = this.serviceDatas.from_time;
     this.totime = this.serviceDatas.to_time;
     this.timeslot = this.serviceDatas.time_slot;
+    if(this.serviceType == "One time"){
+      this.servicecost =this.serviceDatas.servicecost;
+    }else{
+      this.servicecost =this.serviceDatas.servicecosts;
+    }
+    console.log(this.servicecost);
     this.name = navParams.get("name"); 
     this.serviceTitle = navParams.get("serviceTitle"); 
     this.vendor = navParams.get("vendor");

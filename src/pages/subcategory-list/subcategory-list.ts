@@ -38,11 +38,20 @@ export class SubcategoryListPage {
   scheduleModal:any='';
   lead_time:any='00:00';
   service_cost:any;
+  paystatus:any;
   constructor( public loadingCtrl: LoadingController, public providerService: ServiceProvider, public navCtrl: NavController, public altCtrl:AlertController, public navParams: NavParams,public toastCtrl: ToastController,public modalCtrl: ModalController, public mp:ModalContentPage, public storage:Storage) {
     this.date = new Date().toISOString();
+    this.paystatus = navParams.get("status");
+    if(this.paystatus == "1"){
+      this.location_id = navParams.get("location_id");
+      this.service_id = navParams.get("service_id");
+    }
+    else{
       this.location_id = navParams.get("location_id");
       this.service_id = navParams.get("service").id;
       this.serviceTitle = navParams.get("service").name;   
+    }
+    
       // this.userType = "elder";
       
       this.storage.ready().then(() => {
@@ -130,6 +139,7 @@ pressevent(modalPage,vendorData){
       if(data == "dismiss"){
         console.log(" schedule request modal dismissed..!");
       }else{
+        console.log(data);
        this.serviceRequestCall(data,vendorData.id);
       }
     })
@@ -145,7 +155,8 @@ pressevent(modalPage,vendorData){
     this.navCtrl.setRoot(DashboardPage);
   }
   serviceRequestCall(service_request_data,vendorId){
-    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    if(service_request_data != "1"){
+      let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
    if(this.scheduleModal != "instant"){
 
@@ -165,7 +176,7 @@ pressevent(modalPage,vendorData){
         data =>{
                  this.providerService.showToast(data.result);
                   if(this.scheduleModal != "instant"){
-                 this.navCtrl.setRoot(ServicerequestPage);
+                 this.navCtrl.push(ServicerequestPage);
                }
                loading.dismiss();
                 },
@@ -199,7 +210,7 @@ pressevent(modalPage,vendorData){
         data =>{
                  this.providerService.showToast(data.result);
                   if(this.scheduleModal != "instant"){
-                 this.navCtrl.setRoot(ServicerequestPage);
+                 this.navCtrl.push(ServicerequestPage);
                }
                loading.dismiss();
                 },
@@ -216,6 +227,8 @@ pressevent(modalPage,vendorData){
       });
    }
 
+    }
+    
   }
   public showToaster(message)
   {
@@ -260,7 +273,7 @@ pressevent(modalPage,vendorData){
       <ion-item class="sel-label">
            <ion-label>Select dependent</ion-label>
               <ion-select style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="dependentData" placeholder="Select dependent">
-                <ion-option *ngFor = "let dependent of dependentLists" [value]="dependent">{{dependent.name}}
+                <ion-option *ngFor = "let dependent of dependentLists" [value]="dependent">{{dependent.name}} {{dependent.last_name}}
                 </ion-option>
               </ion-select>
           </ion-item>

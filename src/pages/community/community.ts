@@ -78,7 +78,7 @@ export class CommunityPage {
     });
 
 }
-scrollToTop() {
+  scrollToTop() {
     this.content.scrollToTop();
   }
   scrollToBottom(){
@@ -314,7 +314,7 @@ toggleContent(){
       loader.dismiss();
   },
    err =>{
-     loader.dismiss();
+    loader.dismiss();
     this.communityServices.showErrorToast(err);
   })
   }

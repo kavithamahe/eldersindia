@@ -46,7 +46,11 @@
       </form>
       <!-- <ion-item >
         -->
+           <ion-item>
+              <ion-label>Lead Time:{{lead_time}} hour(s)
+              </ion-label>
 
+              </ion-item>
             <ion-item *ngIf="flag ==1" class="one-timereq">
               <ion-label>Select Package</ion-label>
               <!-- <ion-label>Select Package</ion-label> -->
@@ -57,7 +61,7 @@
               </ion-item>
              <ion-list radio-group>
             		  <ion-label>Service Type</ion-label>
-                 <ion-item>
+                 <ion-item *ngIf="onetimetype == 1">
                     <ion-label>One time</ion-label>
                     <ion-radio value="goe" (click)="onetime(searchButton)"></ion-radio>
                   </ion-item>
@@ -123,11 +127,7 @@
   <!-- <p>--------------------------recurring time start--------------------------</p> -->
 
     <div *ngIf(recurring)>
-       <ion-item>
-              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecosts}}
-              </ion-label>
-
-              </ion-item>
+          
            <ion-label stacked class="label-lb required">Start date</ion-label>
      
         <ion-item>
@@ -146,6 +146,11 @@
 		   <ion-item>
       <p>{{datCount}} Frequency</p>
 	     </ion-item><br/>
+         <ion-item *ngIf="servicecosts != undefined">
+              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecosts}}
+              </ion-label>
+
+              </ion-item>
       <ion-list radio-group>
        <ion-item>
         <ion-label>Fixed hours</ion-label>

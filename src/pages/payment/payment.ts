@@ -126,8 +126,9 @@ this.serviceData=navParams.get("serviceData");
   this.servicediscost = navParams.get("servicediscountcost");
   this.payableamount = navParams.get("payableamount");
 
-
-  this.payableamounts = this.payableamount * 100;
+console.log(this.payableamount);
+  this.payableamounts = (this.payableamount * 100).toFixed(0);
+  console.log(this.payableamounts);
   this.servicediscountcost=navParams.get("servicediscountcost") * 100;
   this.category=navParams.get("category");
 
@@ -167,7 +168,7 @@ localStorage.setItem('key', this.token);
 
      }
      else{
-      this.service_costss=this.service_cost;
+        this.service_costss=this.service_cost;
      }
      localStorage.setItem('service_costss', this.service_costss);
 }
@@ -223,9 +224,10 @@ console.log("recurring time");
   }
 
   pay() {
+    console.log(this.service_costss);
     var options = {
       description: this.serviceTitle,
-      image: 'assets/img/elders-logo.png',
+      image: "assets/img/elders-logo.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costss,
@@ -248,9 +250,28 @@ console.log("recurring time");
     };
 
 
-var ajaxCallCheck = function(payment_id){
+// var ajaxCallCheck = function(payment_id){
 
   
+
+//   var url  = "http://beta.eldersindia.com/api/razorPaymentResponse";
+//    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+// xmlhttp.open("POST", url,true);
+
+// xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+// xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+// xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"service_cost":  localStorage.getItem("service_costss")}));
+
+// xmlhttp.onload = function () {
+//   var users = JSON.parse(xmlhttp.responseText);
+//  var result=users.result;
+//  alert(result);
+
+//   }
+// }
+let nav = this.blogListService;
+ var successCallback = function(payment_id) {
+      // ajaxCallCheck(payment_id);
 
   var url  = "http://beta.eldersindia.com/api/razorPaymentResponse";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
@@ -263,25 +284,20 @@ xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"service_cost": 
 xmlhttp.onload = function () {
   var users = JSON.parse(xmlhttp.responseText);
  var result=users.result;
- alert(result);
+ // alert(result);
+  nav.showToast(result);
 
   }
-}
-
- var successCallback = function(payment_id) {
-      ajaxCallCheck(payment_id);
+      
      
     }
 
 var cancelCallback = function(error) {
   alert(error.description + ' (Error '+error.code+')')
 }
-// var result = function() {
-//      this.navCtrl.push(ServicerequestPage);
-     
-//     }
 
-RazorpayCheckout.on('payment.success', successCallback);
+
+RazorpayCheckout.on('payment.success', successCallback,this.dismiss());
 RazorpayCheckout.on('payment.cancel', cancelCallback);
 RazorpayCheckout.open(options, successCallback, cancelCallback);
   }

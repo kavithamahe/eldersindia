@@ -3,6 +3,8 @@ import { Storage } from '@ionic/storage';
 import { ViewController,NavController, NavParams,LoadingController,ToastController } from 'ionic-angular';
 import { BlogListService } from '../../providers/blog-list-service';
 import { ServiceInfoPage } from '../../pages/service-info/service-info';
+import { DashboardPage } from '../../pages/dashboard/dashboard';
+
 /*
   Generated class for the ElderservicePage page.
 
@@ -67,9 +69,9 @@ getServicedetails(serviceId,vendor){
   ionViewDidLoad() {
     console.log('ionViewDidLoad ElderservicePagePage');
   }
-
-  dismiss(){
-  	this.viewCtrl.dismiss();
+  dashboardPage(){
+    this.navCtrl.setRoot(DashboardPage);
   }
+ 
 
 }

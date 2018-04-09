@@ -86,6 +86,9 @@ discountcost:any;
       data.discountcost = parseFloat(data.servicediscountcost_one_service) + parseFloat(data.final_service_cost);
       data.totalServicecost = data.service_cost * data.req_count;
       data.balanceamount = data.total_service_cost - data.paid_amount;
+      data.sr_token = data.sr_token
+      var str = data.sr_token;
+         data.sr_tokenend = str.replace("-1" ,"");
       data.remainingamount = parseFloat(data.remaining_amount).toFixed(2);
     }
         this.recurringRequest = dataList;
@@ -119,6 +122,9 @@ discountcost:any;
       data.discountcost = parseFloat(data.servicediscountcost_one_service) + parseFloat(data.final_service_cost);
       data.totalServicecost = data.service_cost * data.req_count;
       data.balanceamount = data.total_service_cost - data.paid_amount;
+      data.sr_token = data.sr_token
+      var str = data.sr_token;
+         data.sr_tokenend = str.replace("-1" ,"");
       data.remainingamount = parseFloat(data.remaining_amount).toFixed(2);
 
     }
@@ -133,7 +139,7 @@ discountcost:any;
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {

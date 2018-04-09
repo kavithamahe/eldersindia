@@ -60,7 +60,7 @@ bannerImages:any;
          this.blogTitle="Edit Blog";
          this.getEditBlog(this.blogId);
        }
-     // this.getBlogCategories();      
+    this.getBlogCategories();      
       })
     });
     this.blogForm = formBuilder.group({
@@ -69,23 +69,23 @@ bannerImages:any;
         description: ['', Validators.compose([Validators.required])]
          });
   }
-ionViewDidEnter() {
-     this.storage.ready().then(() => {
-      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      this.storage.get('id').then((id) => { this.user_id=id;});
-      this.storage.get('user_type').then((user_type) => { this.user_type=user_type;});
-      this.storage.get('token').then((token) => { this.token=token; 
-       this.blogId=this.navParams.get("blogId");
-       this.action=this.navParams.get("action");     
-       if(this.blogId>0 && this.action=='edit')
-       {
-         this.blogTitle="Edit Blog";
-         this.getEditBlog(this.blogId);
-       }
-      this.getBlogCategories();      
-      })
-    });  
-  }
+// ionViewDidEnter() {
+//      this.storage.ready().then(() => {
+//       this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+//       this.storage.get('id').then((id) => { this.user_id=id;});
+//       this.storage.get('user_type').then((user_type) => { this.user_type=user_type;});
+//       this.storage.get('token').then((token) => { this.token=token; 
+//        this.blogId=this.navParams.get("blogId");
+//        this.action=this.navParams.get("action");     
+//        if(this.blogId>0 && this.action=='edit')
+//        {
+//          this.blogTitle="Edit Blog";
+//          this.getEditBlog(this.blogId);
+//        }
+//       this.getBlogCategories();      
+//       })
+//     });  
+//   }
   public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);
@@ -99,7 +99,11 @@ ionViewDidEnter() {
       this.title=getEditBlog.result.title; 
       this.category =getEditBlog.result.category;   
       this.highlights= getEditBlog.result.highlights; 
+        this.highlights = this.highlights;
+      this.highlights = this.highlights.replace(/<{1}[^<>]{1,}>{1}/g," ")
       this.description= getEditBlog.result.description;
+        this.description = this.description;
+      this.description = this.description.replace(/<{1}[^<>]{1,}>{1}/g," ")
       if(getEditBlog.result.featured_image!='')
       {     
       this.featuredImage= this.imageUrl+getEditBlog.result.featured_image;  

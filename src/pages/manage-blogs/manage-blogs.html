@@ -53,17 +53,18 @@
 <ion-card *ngFor="let manageBlog of manageblogsLists; let i=index;"  class="job-detailsview">
 
 	<ion-row>
-	<ion-col>
+	<ion-col width-80>
 		<h1 item-text-wrap class="service-req" text-capitalize>{{manageBlog?.title}}</h1>
 		  <h2 item-text-wrap>{{manageBlog?.category_name}}</h2>
 		  <p *ngIf="(manageBlog?.created_at!='0000-00-00 00:00:00')" class="token-date"><i class="fa fa-calendar"></i> {{manageBlog?.created_at | date :'MMM dd y h:mm a'}}</p>
 		</ion-col>
+    <ion-col width-20 *ngIf="manageBlog?.featured_image != ''">
+     <ion-thumbnail item-right>
+          <img [src]= "imageUrl+manageBlog?.featured_image">
+        </ion-thumbnail>
+    </ion-col>
 	</ion-row>
-
-
-	
-
-	<ion-row *ngFor="let status of blogStatus">
+ <ion-row *ngFor="let status of blogStatus">
 		<ion-col>
 	<p item-text-wrap *ngIf="manageBlog?.status==status?.id">
 	<!-- <ion-badge >{{status?.label}}</ion-badge> -->

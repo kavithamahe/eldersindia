@@ -147,7 +147,7 @@ mytype:string ="password";
           this.loadForm(navParams.get('profileData'));
         }else{
           this.title = "Elder Onboarding";
-          this.elder_dob = new Date().toISOString();
+          // this.elder_dob = new Date().toISOString();
         }
       })
       
@@ -303,7 +303,8 @@ public emergencies =  [
           this.elder_number= this.manageDependentData.mobile;
           this.file_name=this.manageDependentData.docs_name;
           // this.elder_dob =moment(this.manageDependentData.dob,"DD-MM-YYYY").toISOString();//.toISOString();
-          this.elder_dob =moment(this.manageDependentData.dob,"YYYY-MM-DD").add(1, 'days').toISOString();
+          // this.elder_dob =moment(this.manageDependentData.dob,"YYYY-MM-DD").add(1, 'days').toISOString();
+           this.elder_dob =moment(this.manageDependentData.dob,"DD-MM-YYYY").add(1, 'days').toISOString();
           console.log(this.elder_dob);
           this.elder_email= this.manageDependentData.email;
           //this.elder_password= this.manageDependentData.password;
@@ -670,6 +671,7 @@ getareaof_interest(){
     }
 }
  addDependent(){
+   this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
     //---------------------------------edited-------------------------------//
   if(this.avatar1 != ""){
     this.avatar = this.avatar1;
