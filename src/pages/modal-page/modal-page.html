@@ -61,9 +61,9 @@
               </ion-label>
 
               </ion-item> -->
-             <ion-list radio-group>
-            		  <ion-label>Service Type</ion-label>
-                 <ion-item>
+          <ion-list radio-group>
+                <ion-label>Service Type</ion-label>
+                 <ion-item *ngIf="onetimetype == 1">
                     <ion-label>One time</ion-label>
                     <ion-radio value="goe" (click)="onetime(searchButton)"></ion-radio>
                   </ion-item>
@@ -73,7 +73,6 @@
                       </ion-radio>
                   </ion-item>
             </ion-list>
-             
       <!-- <p>------------------------One Time----------------------------</p> -->
 
        <div *ngIf(searchButton)>

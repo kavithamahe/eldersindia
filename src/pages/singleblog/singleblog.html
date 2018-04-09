@@ -116,7 +116,7 @@
 			  <div class="reply-btt">
 			   <button  (click)="replyblogPost(j)" clear><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply</button>
               <button icon-right clear end *ngIf="user_id==reply?.uid_to" 
-              (click)="deleteComment(reply?.comments_replay_id)">
+              (click)="deleteReplyComment(reply?.comments_replay_id)">
               <i class="fa fa-trash" _ngcontent-uuk-81="" aria-hidden="true"></i>&nbsp;Delete</button>
 			 
 			  </div>

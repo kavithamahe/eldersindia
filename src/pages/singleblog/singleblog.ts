@@ -132,6 +132,29 @@ communitylist:any=[];
       }
     );   
   }
+   public deleteReplyComment(commentId)
+  {
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.blogListService.deleteReplyComment(commentId).subscribe(
+     (deleteComment) => {
+       this.viewComments(this.blogId);
+     this.showToaster(deleteComment.result);  
+      loader.dismiss(); 
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+         loader.dismiss();
+      }
+    );   
+  }
   public blogComment(blogId)
   {
     if(!this.commentForm.valid){
