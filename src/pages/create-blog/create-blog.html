@@ -60,26 +60,20 @@
 
   
   	<button ion-button (click)="accessGallery('featured')" class="brw-btn"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Browse</button>
-	<img [src]="featuredImage" *ngIf="featuredImage" />
+	<img [src]="featuredImage" *ngIf="featuredImage != ''" />
 	
 	    <button ion-button (click)="accessGallery('banner')" class="brw-btn"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Browse</button>
-    <img [src]="bannerImage" *ngIf="bannerImage" />
+    <img [src]="bannerImage" *ngIf="bannerImage != ''" />
 
   </ion-item>
  
 	 <ion-label stacked class="upimag">Tags</ion-label>
-<ion-item class="featured-bro">
-
-   
-    
-        <rl-tag-input class="rd-tags" [(ngModel)]="tagsModel" [addOnBlur]="false" [addOnEnter]="true"  [autocompleteItems]="tags" [autocomplete]="true" placeholder="Tags" (keyup)="getTagsList($event)" [ngModelOptions]="{standalone: true}"></rl-tag-input>
-
-</ion-item>
-    
-
-
-  <div radio-group [(ngModel)]="allowComments" [ngModelOptions]="{standalone: true}" style="margin-top:5px;">
- <ion-label stacked class="upimag"> Allow comments</ion-label>
+   <ion-item class="featured-bro">
+       <rl-tag-input class="rd-tags" [(ngModel)]="tagsModel" [addOnBlur]="false" [addOnEnter]="true"  [autocompleteItems]="tags" [autocomplete]="true" placeholder="Tags" (keyup)="getTagsList($event)" [ngModelOptions]="{standalone: true}">
+        </rl-tag-input>
+    </ion-item>
+    <div radio-group [(ngModel)]="allowComments" [ngModelOptions]="{standalone: true}" style="margin-top:5px;">
+ <ion-label stacked class="upimag">Allow comments</ion-label>
 <ion-row>
 
 <ion-col width-50 class="radio-img">

@@ -88,6 +88,7 @@ export class ModalContentPage {
   vendorr:any;
   startDate:any;
   endDate:any;
+  onetimetype:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
      this.date = new Date().toISOString();
@@ -112,14 +113,13 @@ export class ModalContentPage {
      }
      if(params.get("vendor") != undefined){
       this.vendorr = this.params.get("vendor");
-      console.log(this.vendorr);
       this.vendor = this.params.get("vendor").name;
       this.service_cost = this.params.get("vendor").service_cost;
       this.percentage_cost = this.params.get("vendor").percentage_cost;
       this.servicecost = this.service_cost - this.percentage_cost;
-      console.log(this.servicecost);
       this.vendor_id = this.params.get("vendor").vendor_id;
       this.recurringType = this.params.get("vendor").recurring;
+      this.onetimetype = this.params.get("vendor").one_time;
       this.name = this.params.get("vendor").name;
     }
     this.modalForm = formBuilder.group({
@@ -175,7 +175,6 @@ onlyNumberKey(event) {
      this.fixedd=!searchValuess;
    }
     timeslot(searchValuesss){
-      console.log(this.modalForm.value.fromtime);
       this.modalForm.value.fromtime = "";
       this.modalForm.value.totime = "";
       this.durations = "";
@@ -294,10 +293,10 @@ onlyNumberKey(event) {
    next(){
      this.modalForm.value.date= moment(this.modalForm.value.date).format("YYYY-MM-DD");
       var objFromDate = this.modalForm.value.startdate;
-var objToDate = this.modalForm.value.enddate;
- 
-var date1 = new Date(objFromDate);
-var date2 = new Date(objToDate);
+      var objToDate = this.modalForm.value.enddate;
+       
+      var date1 = new Date(objFromDate);
+      var date2 = new Date(objToDate);
  // var today = new Date();
  // console.log(today);
     if(date1 > date2)
@@ -580,7 +579,7 @@ else{
 
     
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"discountCost":this.servicecost,"actualCost":this.service_cost,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
    
@@ -614,7 +613,7 @@ else{
     if(this.durations != undefined){
       // if(this.durations == 'Fixed hours'){}
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"discountCost":this.servicecost,"actualCost":this.service_cost,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"datCount":this.datCount,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
   
@@ -648,7 +647,7 @@ else{
     }
       if(this.modalForm.value.date != "" && this.modalForm.value.time !=""){
        let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"discountCost":this.servicecost,"actualCost":this.service_cost,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
    
@@ -677,7 +676,7 @@ else{
       if(this.modalForm.value.startdate != undefined && this.modalForm.value.enddate != undefined){
         if(this.durations != undefined){
        let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
+       "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"discountCost":this.servicecost,"actualCost":this.service_cost,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"datCount":this.datCount,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
  

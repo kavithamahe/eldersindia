@@ -704,11 +704,9 @@ getareaof_interest(){
     this.education_data = this.elder_education;
     this.getblog_category();
     this.blog_data=this.blog_categoryinterest;
-    console.log(this.blog_data);
 
     this.getareaof_interest();
      this.area_of_interest_data=this.areaofinterestdata;
-     console.log(this.area_of_interest_data);
  }
         let profileEditData = {
         "id":this.elder_id,
@@ -870,7 +868,6 @@ getareaof_interest(){
 
               this.getblog_category();
     this.blog_data=this.blog_categoryinterest;
-    console.log(this.blog_data);
 
       this.getservicecategory();
     this.servicecategoryinterest_data=this.serviceCategory_interests;
@@ -945,20 +942,25 @@ getareaof_interest(){
             }
          
           }else{
+              if(!this.authForm.valid){
+            this.submitAttempt = true; 
+           }
+          else
+          {
             let loader = this.loadingCtrl.create({ content: "Please wait..." });     
             loader.present();
               this.providerService.webServiceCall(`myaccountEdit`,profileEditData)
                   .subscribe(data=>{
                     this.providerService.showToast(data.result);
-                    console.log(data);
                     loader.dismiss();
+                    this.nav.pop();
                   },
                   err=>{
                     this.providerService.showErrorToast(err);
                     console.log(err);
                     loader.dismiss();
                   })
-                   
+                }   
        
           }
         
@@ -1116,10 +1118,10 @@ getareaof_interest(){
 
   }
     
-    if(this.functionality =="profileEdit")
-      {
-        this.nav.pop();
-      }
+    // if(this.functionality =="profileEdit")
+    //   {
+    //     this.nav.pop();
+    //   }
     
 
 }

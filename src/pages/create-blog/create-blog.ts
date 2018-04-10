@@ -54,12 +54,12 @@ bannerImages:any;
       storage.get('user_type').then((user_type) => { this.user_type=user_type;});
       storage.get('token').then((token) => { this.token=token; 
        this.blogId=navParams.get("blogId");
-       this.action=navParams.get("action");     
-       if(this.blogId>0 && this.action=='edit')
-       {
-         this.blogTitle="Edit Blog";
-         this.getEditBlog(this.blogId);
-       }
+       this.action=navParams.get("action");  
+       // if(this.blogId>0 && this.action=='edit')
+       // {
+       //   this.blogTitle="Edit Blog";
+       //   this.getEditBlog(this.blogId);
+       // }
      // this.getBlogCategories();      
       })
     });

@@ -130,7 +130,7 @@
       <div formArrayName="emergency_list">
       <div  *ngFor="let item of authForm.controls.emergency_list.controls; let i=index">
            <div *ngIf="authForm.controls.emergency_list.controls.length > 1">
-              <button class="rem-btn" (click)="removeEmergency(i)" ion-button icon-left clear>
+            <button class="rem-btn" (click)="removeEmergency(i)" ion-button icon-left clear>
                 <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
               </button>
             </div> 
@@ -154,7 +154,7 @@
             </small> 
             <ion-label class="label-tittle required">Number</ion-label>
            <ion-item>
-              <ion-input type="text" [(ngModel)]="emergency_no[i]" placeholder="Number"
+              <ion-input type="number" [(ngModel)]="emergency_no[i]" placeholder="Number"
               formControlName="emergency_no"           
               [class.invalid]="!authForm.controls.emergency_list.
                 controls[i].controls.emergency_no.valid && (authForm.controls.emergency_list.

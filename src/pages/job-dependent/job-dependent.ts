@@ -141,6 +141,9 @@ dismiss() {
  }
  submitDependent()
  {
+  if(this.user_type == 'sponsor'){
+
+
   if(this.file_name == undefined || this.dependent == undefined){
     this.showToaster("Enter the required fields");
   }
@@ -173,7 +176,15 @@ dismiss() {
       }
     ); 
       }
+    }
+  }
       else{
+        if(this.file_name == undefined){
+    this.showToaster("Please select the file");
+  }
+  else{
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
         this.jobBoardService.applyjobelder(this.user_type_id,this.user_id,this.jobId,this.file_name,
         this.file_path).subscribe((applyjob) => {
           this.showToaster(applyjob.result);
