@@ -96,10 +96,14 @@ ionViewDidEnter() {
     loader.present();
     this.blogListService.getEditBlog(blogId).subscribe(
      (getEditBlog) => {
-      this.title=getEditBlog.result.title; 
+         this.title=getEditBlog.result.title; 
       this.category =getEditBlog.result.category;   
       this.highlights= getEditBlog.result.highlights; 
+        this.highlights = this.highlights;
+      this.highlights = this.highlights.replace(/<{1}[^<>]{1,}>{1}/g," ")
       this.description= getEditBlog.result.description;
+        this.description = this.description;
+      this.description = this.description.replace(/<{1}[^<>]{1,}>{1}/g," ")
       if(getEditBlog.result.featured_image!='')
       {     
       this.featuredImage= this.imageUrl+getEditBlog.result.featured_image;  
