@@ -53,7 +53,8 @@ export class DashboardPage {
       this.head = new RequestOptions({ headers: this.headers });
     this.fetchLocation();
   })
-      storage.get('user_type').then((user_type) => { this.user_type=user_type;  })
+      storage.get('user_type').then((user_type) => { this.user_type=user_type; 
+      console.log(this.user_type); })
       storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor;  })
       storage.get('ambulance').then((ambulance) => { this.ambulance=ambulance;  })
       storage.get('police').then((police) => { this.police=police;  })

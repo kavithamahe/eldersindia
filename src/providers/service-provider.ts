@@ -67,7 +67,11 @@ webServiceCall(serviceName,bodyData){
   return this.http.post(this.rootUrl+serviceName, bodyData, this.head)
     .map(res => res.json());
 }
-
+getpackagesbasedServices(location_id,vendorid,dependents_id,service_ids){
+ let _request= {locationId: location_id, dependent_id: dependents_id, service_id: service_ids, vendor_id: vendorid};
+    return this.http.post(this.rootUrl+'getpackagesbasedServices',_request,this.head)
+      .map(res => res.json());
+}
 firsttimelogin(serviceName,bodyData){
       this.headers = new Headers();
       this.headers.append('Content-Type', 'application/json');

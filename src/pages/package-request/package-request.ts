@@ -138,8 +138,9 @@ doInfinite(infiniteScroll) {
   this.getServicesForByElders(id,locationId,elderId,status);
   }
   getServicesForByElders(id,locationId,elderId,status){
-  	 let modal1 = this.modalCtrl.create(ElderservicePagePage,{pack_id: id, elder: elderId, location_id: locationId,packbstatus:status});
-    modal1.present();
+    this.navCtrl.push(ElderservicePagePage,{pack_id: id, elder: elderId, location_id: locationId,packbstatus:status});
+  	 // let modal1 = this.modalCtrl.create(ElderservicePagePage,{pack_id: id, elder: elderId, location_id: locationId,packbstatus:status});
+    // modal1.present();
   }
 public dashboardPage()
   {

@@ -83,7 +83,7 @@ loadSubcategoryList(subCategory_id,location_id){
             }
 
   serviceInfo(vendor){
-    let servieListData = {"vendor": vendor, "subCategoryId": this.service_id, "flag": "1", "location_id": this.location_id};
+    let servieListData = {"vendor": vendor, "subCategoryId": this.service_id,status:"1" ,"flag": "1", "location_id": this.location_id};
     this.navCtrl.push(ServiceInfoPage,servieListData);
   }
 pressinstant(vendorData){
@@ -107,7 +107,7 @@ pressinstant(vendorData){
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
 
     let serviceRequestData = {"problem": this.serviceTitle, "datetime": lead_time, "dependentId": this.elderId, "mobile_no": "","serviceType":"One time",
-    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":""};
+    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":"","discountCost":"","actualCost":""};
     
             this.serviceRequestCall(serviceRequestData,vendorData.id);
     }else{
@@ -121,7 +121,7 @@ pressevent(modalPage,vendorData){
     if(modalPage == "instant"){
       this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,lead_time:this.lead_time,service:this.serviceTitle,vendor:vendorData});
     }else{
-      this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists,lead_time:this.lead_time,vendor:vendorData,location_id:this.location_id,serviceData:this.serviceData,serviceTitle:this.serviceTitle});
+      this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists,lead_time:this.lead_time,vendor:vendorData,location_id:this.location_id,serviceData:this.serviceData,serviceTitle:this.serviceTitle,data:"1"});
     }
     this.scheduleModal=modalPage;
     this.modal.onDidDismiss(data =>{
@@ -351,7 +351,7 @@ export class InstantRequestModalPage {
         let getHours=(minutess + minutes)/60;
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
     let serviceRequestData = {"problem": this.service, "datetime": lead_time, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile,"serviceType":"One time",
-    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":""};
+    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":"","discountCost":"","actualCost":""};
     this.viewCtrl.dismiss(serviceRequestData);
   }else{
     this.showToaster("Please select the dependent");

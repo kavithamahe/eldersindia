@@ -89,19 +89,18 @@ export class ModalContentPage {
   startDate:any;
   endDate:any;
   onetimetype:any;
+  one_time:any;
+  recurrings:any;
+  status:any;
+  dependents_id:any;
+  locationId:any;
+  serviceids:any;
+  data:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
-     this.date = new Date().toISOString();
-     this.startDate = new Date().toISOString();
-     this.endDate = new Date().toISOString();
-     this.dependentLists = params.get("dependentList");
-     //this.dependents = this.dependentLists[0].id;
-     this.lead_time = params.get("lead_time"); 
-     // this.service_cost = params.get("vendorservice_cost"); 
-     this.serviceTitle = params.get("serviceTitle");
-     this.location_id = params.get("location_id");
-    
-     if(params.get("serviceData") != undefined){
+    this.storage.ready().then(() => {
+             storage.get('user_type').then((user_type) => { this.userType=user_type; 
+      if(params.get("serviceData") != undefined){
      this.service_id = this.params.get("serviceData").service_id;
       this.requestService=params.get("serviceData");
      this.category = this.requestService.category;
@@ -112,16 +111,75 @@ export class ModalContentPage {
      this.subcategory = this.requestService.subcategory;
      }
      if(params.get("vendor") != undefined){
+      this.status = this.params.get("status");
+     if(this.userType != 'sponsor'){
+
+       storage.get('id').then((id) => { this.elderId=id;
+        if(this.status == "1"){
+         this.vendor_id = this.params.get("vendor_id");
+         this.recurringType = this.params.get("recurring");
+         this.onetimetype = this.params.get("one_time");
+       }
+         else{
+         this.location_id = params.get("location_id");
+          this.requestService=params.get("serviceData");
+       this.service_ids = this.requestService.service_id;
+          this.vendor_id = this.params.get("vendor").vendor_id;
+          this.recurringType = this.params.get("vendor").recurring;
+          this.onetimetype = this.params.get("vendor").one_time;
+         }
+        // this.location_id = this.params.get("locationId");
+        // this.service_ids = this.params.get("serviceids");
+      this.getpackageInfo();
+      });
+   
+     }
+
+      if(this.status == "1"){
+        this.dependentLists = this.params.get("dependentLists");
+        this.dependents_id = this.dependentLists[0].id;
+        this.location_id = this.params.get("locationId");
+        this.service_ids = this.params.get("serviceids");
+      }
+      if(this.status == "1"){
+         this.vendor_id = this.params.get("vendor_id");
+         this.recurringType = this.params.get("recurring");
+      this.onetimetype = this.params.get("one_time");
+       }
+         else{
+          this.vendor_id = this.params.get("vendor").vendor_id;
+          this.recurringType = this.params.get("vendor").recurring;
+         this.onetimetype = this.params.get("vendor").one_time;
+         }
+     
       this.vendorr = this.params.get("vendor");
       this.vendor = this.params.get("vendor").name;
       this.service_cost = this.params.get("vendor").service_cost;
       this.percentage_cost = this.params.get("vendor").percentage_cost;
       this.servicecost = this.service_cost - this.percentage_cost;
-      this.vendor_id = this.params.get("vendor").vendor_id;
-      this.recurringType = this.params.get("vendor").recurring;
-      this.onetimetype = this.params.get("vendor").one_time;
+      
+      
       this.name = this.params.get("vendor").name;
     }
+       })
+
+     if(this.userType != 'sponsor'){
+        storage.get('id').then((id) => { this.elderId=id;});
+        console.log(this.elderId);
+      }
+       });
+     this.date = new Date().toISOString();
+     this.startDate = new Date().toISOString();
+     this.endDate = new Date().toISOString();
+      this.dependentLists = params.get("dependentList");
+     //this.dependents = this.dependentLists[0].id;
+     this.lead_time = params.get("lead_time"); 
+     // this.service_cost = params.get("vendorservice_cost"); 
+     this.serviceTitle = params.get("serviceTitle");
+     this.location_id = params.get("location_id");
+    
+    
+   
     this.modalForm = formBuilder.group({
      problem: ['',Validators.compose([Validators.required])],
         date: ['',Validators.compose([Validators.required])],
@@ -138,14 +196,22 @@ export class ModalContentPage {
    dependents: ['',Validators.compose([Validators.required])]
  })
   
-     storage.get('user_type').then((user_type) => { this.userType=user_type;});
-     if(this.userType != 'sponsor'){
-
-        storage.get('id').then((id) => { this.elderId=id;});
-      }
+  
 
    }
-   
+   getpackageInfo(){
+    this.providerService.getpackagesbasedServices(this.location_id,this.vendor_id,this.dependents_id,this.service_ids)
+      .subscribe(data =>{                                                                             
+        this.packageLists=data.result.info.lists;
+        this.data = "1";
+
+    },
+    err =>{
+         this.data = "0";
+      this.providerService.showErrorToast(err); 
+    }) 
+    
+   }
 
    termsChanged(){
      if(this.terms == true){
@@ -154,9 +220,9 @@ export class ModalContentPage {
        this.checkTerms = true;
      }
    }
-onlyNumberKey(event) {
-    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-}
+  onlyNumberKey(event) {
+      return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+  }
 
   onetime(searchValue){
     this.recurring=false;
@@ -254,7 +320,7 @@ onlyNumberKey(event) {
    }
    packageinfo(){
     
-    this.providerService.packageListsInfo(this.location_id,this.service_id,this.authForm.value.dependents,this.vendor_id)
+    this.providerService.packageListsInfo(this.location_id,this.service_ids,this.authForm.value.dependents,this.vendor_id)
       .subscribe(data =>{ 
         this.packageLists=data.result.info.lists;
         //this.packageLists =this.packageListss[1];

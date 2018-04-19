@@ -55,6 +55,16 @@
               </ion-option>
             </ion-select>
               </ion-item>
+         
+              <ion-item *ngIf="status == '1' && userType == 'elder' && data == '1'" class="one-timereq">
+              <ion-label>Select Package</ion-label>
+              <!-- <ion-label>Select Package</ion-label> -->
+              <ion-select class="select-brds" placeholder="Select Package">
+              <ion-option *ngFor = "let package of packageLists" value={{package.package_validity.package_info}}>{{package.package_validity.package_info}}
+              </ion-option>
+              </ion-select>
+              </ion-item>
+
               <!-- </ion-item> -->
              <!--  <ion-item>
               <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecost}}
@@ -73,6 +83,7 @@
                       </ion-radio>
                   </ion-item>
             </ion-list>
+        
       <!-- <p>------------------------One Time----------------------------</p> -->
 
        <div *ngIf(searchButton)>
