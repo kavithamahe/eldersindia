@@ -40,6 +40,7 @@ export class DashboardPage {
   serviceLocation:any;
   headers:any;
   head:any;
+  sponsor_avatar:any;
   constructor(private nativeAudio: NativeAudio,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
   	
      this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
@@ -57,11 +58,14 @@ export class DashboardPage {
       console.log(this.user_type); })
       storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor;  })
       storage.get('ambulance').then((ambulance) => { this.ambulance=ambulance;  })
+     console.log(this.ambulance);
       storage.get('police').then((police) => { this.police=police;  })
   });
     
   }
    ionViewWillEnter() {
+     this.storage.get('sponsor_avatar').then((sponsor_avatar) => { this.sponsor_avatar=sponsor_avatar;  })
+      console.log(this.sponsor_avatar);
     this.tabBarElement.style.display = 'none';
   }
  
