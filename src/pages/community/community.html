@@ -73,6 +73,7 @@
 				<ion-textarea style="-webkit-user-select:all !important;" [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
 				</ion-textarea>
 			</div>
+
 			<div class="posted-video-img">
 		    	<ion-row>
 					<ion-col>
@@ -83,12 +84,7 @@
 							<button ion-button (click)="addVideos()" icon-only medium class="video">
 							<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp; Add videos
 						</button>
-							<button ion-button icon-only medium (press)="pressevent(communityDetailData?.id)" (click)="postCommunity(communityDetailData?.id)" class="postedimgvideos">
-								<i class="fa fa-paper-plane-o" aria-hidden="true"></i>&nbsp; Post
-							</button>
-					</ion-col>
-				</ion-row> 
-				<div *ngIf(addVideo) class="post-urls">
+						<div *ngIf(addVideo) class="post-urls">
 					<form [formGroup]="authForm">
 						<ion-row>
 							<ion-col>
@@ -99,7 +95,6 @@
 								</ion-item>
 									<small>(Youtube,Dailymotion,Vimeo,Wine)
 									</small>
-								
 							</ion-col>
 						</ion-row>
 						<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
@@ -107,6 +102,12 @@
            				</div>
 					</form>
 				</div>
+							<button ion-button icon-only medium (press)="pressevent(communityDetailData?.id)" (click)="postCommunity(communityDetailData?.id)" class="postedimgvideos">
+								<i class="fa fa-paper-plane-o" aria-hidden="true"></i>&nbsp; Post
+							</button>
+					</ion-col>
+				</ion-row> 
+				
 				<br/>
 		   	</div>
 	</div>

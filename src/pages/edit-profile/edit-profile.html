@@ -15,12 +15,11 @@
 <ion-content class="edit">
 <div class="profile-edit"><span  *ngIf="user_type =='sponsor' " class="profile-img">
 <img [src]="imageURL+profileData?.avatar" > </span>
-			<p>{{profileData?.name}} {{profileData?.last_name}}</p></div>
+	<p>{{profileData?.name}} {{profileData?.last_name}}</p></div>
 
 	<form [formGroup]="edit_profile_Form">
-<div class="edit-profile-view">
-
-      	 <ion-label class="liste-edit">Employee id</ion-label>
+       <div class="edit-profile-view">
+        <ion-label class="liste-edit">Employee id</ion-label>
 		<ion-item>
 	    <ion-input type="text" formControlName="empid" placeholder="Employee id"></ion-input>
 	    </ion-item>
