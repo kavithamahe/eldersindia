@@ -41,10 +41,12 @@ export class DashboardPage {
   headers:any;
   head:any;
   sponsor_avatar:any;
+  url:any;
   constructor(private nativeAudio: NativeAudio,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
   	
      this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.storage.ready().then(() => {
+      storage.get('imageurl').then((imageurl) => { this.url=imageurl;});
     
      
       storage.get('token').then((token) => { this.token=token; 
@@ -57,15 +59,15 @@ export class DashboardPage {
       storage.get('user_type').then((user_type) => { this.user_type=user_type; 
       console.log(this.user_type); })
       storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor;  })
-      storage.get('ambulance').then((ambulance) => { this.ambulance=ambulance;  })
-     console.log(this.ambulance);
+       this.storage.get('sponsor_avatar').then((sponsor_avatar) => { this.sponsor_avatar=sponsor_avatar; })
+      storage.get('ambulance').then((ambulance) => { this.ambulance=ambulance; })
       storage.get('police').then((police) => { this.police=police;  })
   });
     
   }
    ionViewWillEnter() {
-     this.storage.get('sponsor_avatar').then((sponsor_avatar) => { this.sponsor_avatar=sponsor_avatar;  })
-      console.log(this.sponsor_avatar);
+     this.storage.get('sponsor_avatar').then((sponsor_avatar) => { this.sponsor_avatar=sponsor_avatar; })
+     
     this.tabBarElement.style.display = 'none';
   }
  

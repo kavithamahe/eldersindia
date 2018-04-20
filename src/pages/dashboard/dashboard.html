@@ -35,9 +35,13 @@
         <ion-col width-50 class="hooter" text-center (click)="hooter(hooterOn)"> <span class="dashboard-listed"> <i class="fa fa-bell-o fa-5x"></i>
           <p> HOOTER</p>
           </span> </ion-col>
-        <ion-col width-50 class="call-sponsor" text-center (click)="makeCall(call_sponsor)"> <span class="dashboard-listed"> <i class="fa fa-phone-square fa-5x"></i>
-          <!--<img src="assets/img/headshot.jpg" class="img-circle">-->
-          <p>CALL SPONSOR</p>
+        <ion-col width-50 class="call-sponsor" text-center (click)="makeCall(call_sponsor)"> 
+        <span class="dashboard-listed"> 
+        <i class="fa fa-phone-square fa-5x"></i>
+         <ion-avatar>
+                <img [src]="url+sponsor_avatar" style="width:50px; height:50px;"  />
+          </ion-avatar>
+          <!-- <p>CALL SPONSOR</p> -->
           </span> </ion-col>
       </ion-row>
     </ion-grid>
