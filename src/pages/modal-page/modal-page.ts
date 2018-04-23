@@ -371,7 +371,6 @@ onlyNumberKey(event) {
     this.next();
    }
    paynow(){
-    console.log("sfsdfsf");
      if(this.fullpays == true){
         this.paymenttype = "full_payment";
       }
@@ -395,8 +394,8 @@ onlyNumberKey(event) {
       location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id,discounts:this.discounts,totalservice_costss:this.totalservice_costss,afterdiscount_one_service:this.afterdiscount_one_service,
       paidPayment:this.paidPayment,servicediscountcost_one_service:this.servicediscountcost_one_service,discountpartial:this.discountpartial});
       // serviceModal.present();
-      //   let serviceDataPay = "1";
-      // this.viewCtrl.dismiss(serviceDataPay);
+        let serviceDataPay = "1";
+      this.viewCtrl.dismiss(serviceDataPay);
     //    serviceModal.onDidDismiss(data =>{
     //   if(data == "dismiss"){
     //     console.log(" schedule request modal dismissed..!");
@@ -417,8 +416,8 @@ onlyNumberKey(event) {
       sub_category_id:this.sub_category_id,subcategory:this.subcategory,
       location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id});
       // serviceModal.present();
-      // let serviceDataPay = "1";
-      // this.viewCtrl.dismiss(serviceDataPay);
+      let serviceDataPay = "1";
+      this.viewCtrl.dismiss(serviceDataPay);
     //    serviceModal.onDidDismiss(data =>{
     //   if(data == "dismiss"){
     //     console.log(" schedule request modal dismissed..!");

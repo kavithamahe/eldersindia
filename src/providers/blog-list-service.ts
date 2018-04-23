@@ -287,8 +287,17 @@ getPackageRequestById(rootUrl,packageId){
     let toast = this.toastCtrl.create({
         message: messageData,
         position:"top",
-        duration: 1000,
-        cssClass: "invalidvalue",
+        duration: 5000,
+        cssClass: "toast-success"
+      });
+      toast.present();
+   }
+   showToaster(messageData){
+    let toast = this.toastCtrl.create({
+        message: messageData,
+        position:"top",
+        duration: 5000,
+        cssClass: "toast-cancel"
       });
       toast.present();
    }

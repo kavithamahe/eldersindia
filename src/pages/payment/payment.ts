@@ -125,10 +125,7 @@ this.serviceData=navParams.get("serviceData");
   this.servicediscountcosts=navParams.get("servicediscountcost");
   this.servicediscost = navParams.get("servicediscountcost");
   this.payableamount = navParams.get("payableamount");
-
-console.log(this.payableamount);
   this.payableamounts = (this.payableamount * 100).toFixed(0);
-  console.log(this.payableamounts);
   this.servicediscountcost=navParams.get("servicediscountcost") * 100;
   this.category=navParams.get("category");
 
@@ -293,7 +290,7 @@ xmlhttp.onload = function () {
     }
 
 var cancelCallback = function(error) {
-  alert(error.description + ' (Error '+error.code+')')
+  nav.showToaster(error.description);
 }
 
 

@@ -268,6 +268,7 @@ pressevent(){
         message: message,
         duration: 3000,
         position: 'top'
+
         });
    toast.present();
   }

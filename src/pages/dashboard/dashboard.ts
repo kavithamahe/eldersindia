@@ -99,7 +99,6 @@ export class DashboardPage {
 }
 
   getLocation(d1,d2){
-    console.log(this.head);
     this.nativeGeocoder.reverseGeocode(d1, d2)
   .then(
     (result: NativeGeocoderReverseResult) => {
