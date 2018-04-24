@@ -1,20 +1,22 @@
 page-job-dependent {
-.toolbar-title-md																	{text-align:center !important;}
-.toolbar-title-ios																	{text-align:center !important;}
-.sel-packages																		{border:1px solid hsl(0, 0%, 66%); border-radius:0px; box-shadow:none; }
-.sel-packages .item-md .item-inner .label-md										{font-family:"Muli",sans-serif; font-size:15px; padding-left:10px;font-weight:600;}
-.sel-packages .item-ios .item-inner .label-ios										{font-family:"Muli",sans-serif; font-size:15px; padding-left:10px;font-weight:600;}
-.inputfile 																			{width:0.1px;height:0.1px;opacity:0;overflow:hidden;position:absolute;z-index: -1;}
-.inputfile + label 																	{font-size:1.25em;font-weight:700;color:#fff;background-color:black;display:inline-block;}
+.toolbar-title-md                                                                   {text-align:center !important;}
+.toolbar-title-ios                                                                  {text-align:center !important;}
+.sel-packages                                                                       {border:1px solid hsl(0, 0%, 66%); border-radius:0px; box-shadow:none; }
+.sel-packages .item-md .item-inner .label-md                                        {font-family:"Muli",sans-serif; font-size:15px; padding-left:10px;font-weight:600;}
+.sel-packages .item-ios .item-inner .label-ios                                      {font-family:"Muli",sans-serif; font-size:15px; padding-left:10px;font-weight:600;}
+.sel-packages                                               {border:1px solid hsl(0, 0%, 66%);border-radius:0;box-shadow:none;}
+.sel-packages .item-md .item-inner .label-md                {font-family: "Muli",sans-serif;font-size:17px;padding-left:10px;}
+.inputfile                                                                          {width:0.1px;height:0.1px;opacity:0;overflow:hidden;position:absolute;z-index: -1;}
+.inputfile + label                                                                  {font-size:1.25em;font-weight:700;color:#fff;background-color:black;display:inline-block;}
 
 .inputfile:focus + label,
 .inputfile + label:hover {
     background-color: red;
 }
 .inputfile + label {
-	cursor: pointer; /* "hand" cursor */
+    cursor: pointer; /* "hand" cursor */
 }
-/*.content-intop										{background-image: url('../assets/img/jobs.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}*/
+/*.content-intop                                        {background-image: url('../assets/img/jobs.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}*/
 .btn-cars{border-radius:0px; box-shadow:none; }
 .sele-file{border-radius:0px; box-shadow:none; }
 .sele-file ion-label{font-family:"Muli",sans-serif; font-size:17px; font-weight:400; color: hsl(0, 0%, 47%);}
@@ -34,7 +36,7 @@ page-job-dependent {
     margin-left: 5px;
     text-transform: capitalize;
     width:95%;}
-	
+    
 .submit-btns-can{ background: hsl(14, 99%, 56%) none repeat scroll 0 0 !important;
     border-radius: 20px;
     color: hsl(0, 0%, 100%);
@@ -47,7 +49,10 @@ page-job-dependent {
     margin-left: 5px;
     text-transform: capitalize;
     width:95%;}
-	
+    .sel-packages .item-ios .item-inner .label-ios              {font-family: "Muli",sans-serif;font-size:15px;padding-left:10px;}
+    .instant-bt                                                                                {float:right;height:35px; margin-bottom:10px;   background:#FE5722 !important;width:45%;font-size:15px;color:#fff;border-radius:20px;font-weight:600;margin-left:5px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
+    .btn-warnings                                                                           {background:red;}
+    .btn-warnings                                                                           {background:#025FA9!important;height:35px;font-size:15px;color:#fff;border-radius:20px;width:45%;font-weight:600;float:left;margin-bottom:10px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
 .createblog-form .label-md{  color: hsl(0, 0%, 47%);
     font-family: "Muli",sans-serif;
     font-size: 17px;

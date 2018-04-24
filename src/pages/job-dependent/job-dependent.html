@@ -19,7 +19,7 @@
 <ion-card>
 <ion-item>
 <ion-label>Select dependent</ion-label>
-    <ion-select [(ngModel)]="dependent" (ionChange)="checkDependent()" class="select-brddd" placeholder="Select dependent" formControlName="elder_dependent" 
+    <ion-select [(ngModel)]="dependent" (ionChange)="checkDependent()" class="select-brddd"  formControlName="elder_dependent" 
     [class.invalid]="!authForm.controls.elder_dependent.valid && (authForm.controls.elder_dependent.dirty)">
       <ion-option *ngFor="let dependent of getDependentList" value={{dependent?.id}}>{{dependent?.name}}</ion-option>    
 	  </ion-select>
@@ -39,11 +39,13 @@
  <p><b>Example</b> :  docx,pdf,odt,txt</p>
 </ion-card> 
 <br/>
-<ion-card class="btn-cars">
- <button ion-button class="submit-btns" ion-button item-right small 
+<ion-row>
+<ion-col>
+ <button ion-button  class="instant-bt"
  (click)="submitDependent($event)" *ngIf="dependentstatus == 0">Apply</button>
  <button ion-button class="submit-btns" ion-button item-right small *ngIf="dependentstatus == 1">Applied</button>
-  <button ion-button class="submit-btns-can" ion-button item-right small (click)="cancelDependent()">Cancel</button>
- </ion-card>
+  <button ion-button class="btn-warnings" color="primary" (click)="cancelDependent()">Cancel</button>
+  </ion-col>
+  </ion-row>
  
 </ion-content>
