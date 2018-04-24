@@ -670,6 +670,7 @@ getareaof_interest(){
     }
 }
  addDependent(){
+  this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
     //---------------------------------edited-------------------------------//
   if(this.avatar1 != ""){
     this.avatar = this.avatar1;
