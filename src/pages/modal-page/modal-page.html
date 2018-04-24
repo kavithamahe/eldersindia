@@ -1,16 +1,19 @@
 
 <ion-header>
-  <ion-toolbar class="hei-head" color="primary">
-    <ion-title color="primary" class="tittles-md" text-capitalize>
-      {{vendor}} - Avail Services
-    </ion-title>
-    <ion-buttons start item-right class="close-iconss">
-      <button ion-button (click)="dismiss()">
-        <span ion-text color="primary" showWhen="ios"></span>
-        <ion-icon ios="ios-close-circle-outline" md="md-close-circle" ></ion-icon>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-  </ion-toolbar>
+    <ion-title text-center>{{vendor}} - Avail Services</ion-title>    
+    <ion-buttons right>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+  
+  </ion-navbar>
 </ion-header>
 
 <ion-content>

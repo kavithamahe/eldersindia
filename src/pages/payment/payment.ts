@@ -93,9 +93,9 @@ this.serviceData=navParams.get("serviceData");
     console.log(this.serviceData);
     this.serviceTitle=this.serviceData.serviceTitle;
     this.base_cost=this.serviceData.base_cost
-    this.datCount=this.serviceData.datCount;
+    this.datCount=navParams.get("datCount");
     this.datetime=this.serviceData.datetime;
-    this.paymenttype =this.serviceData.payment;
+    this.paymenttype =navParams.get("paymenttype");
     this.dependentId =this.serviceData.dependentId;
     this.durations =this.serviceData.durations;
     this.exclude_days =this.serviceData.exclude_days;

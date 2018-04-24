@@ -132,19 +132,19 @@ pressevent(modalPage,vendorData){
     if(modalPage == "instant"){
       this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,lead_time:this.lead_time,service:this.serviceTitle,vendor:vendorData});
     }else{
-      this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists,lead_time:this.lead_time,vendor:vendorData,location_id:this.location_id,serviceData:this.serviceData,serviceTitle:this.serviceTitle});
+      this.navCtrl.push(ModalContentPage,{dependentList:this.dependentLists,lead_time:this.lead_time,vendor:vendorData,location_id:this.location_id,serviceData:this.serviceData,serviceTitle:this.serviceTitle});
     }
     this.scheduleModal=modalPage;
-    this.modal.onDidDismiss(data =>{
-      if(data == "dismiss"){
-        console.log(" schedule request modal dismissed..!");
-      }else{
-        console.log(data);
-       this.serviceRequestCall(data,vendorData.id);
-      }
-    })
+    // this.modal.onDidDismiss(data =>{
+    //   if(data == "dismiss"){
+    //     console.log(" schedule request modal dismissed..!");
+    //   }else{
+    //     console.log(data);
+    //    this.serviceRequestCall(data,vendorData.id);
+    //   }
+    // })
     
-    this.modal.present();
+    // this.modal.present();
     if(modalPage != "instant"){
       //console.log("test venkatesh");
      // this.navCtrl.setRoot(ServicerequestPage);
@@ -172,7 +172,7 @@ pressevent(modalPage,vendorData){
      "package_id":service_request_data.package_id,"instant":service_request_data.instant}
 
     this.providerService.webServiceCall(`serviceRequestSubmitbeforePayLater`,requestServiceData)
-       .subscribe(
+       .subscribe( 
         data =>{
                  this.providerService.showToast(data.result);
                   if(this.scheduleModal != "instant"){
