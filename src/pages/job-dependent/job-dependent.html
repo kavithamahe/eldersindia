@@ -13,24 +13,24 @@
 
 <ion-content class="content-intop">
 
-<ion-card *ngIf="user_type!='elder'" class="createblog-form">
+<ion-list *ngIf="user_type!='elder'" class="createblog-form">
   <form [formGroup]="authForm">
   <ion-label class="required">Select dependent</ion-label>
-<ion-card>
+  <ion-card class="sel-packages">
 <ion-item>
 <ion-label>Select dependent</ion-label>
     <ion-select [(ngModel)]="dependent" (ionChange)="checkDependent()" class="select-brddd"  formControlName="elder_dependent" 
     [class.invalid]="!authForm.controls.elder_dependent.valid && (authForm.controls.elder_dependent.dirty)">
       <ion-option *ngFor="let dependent of getDependentList" value={{dependent?.id}}>{{dependent?.name}}</ion-option>    
-	  </ion-select>
-	      <small *ngIf="!authForm.controls.elder_dependent.valid  && (authForm.controls.elder_dependent.dirty || submitAttempt)">
+    </ion-select>
+        <small *ngIf="!authForm.controls.elder_dependent.valid  && (authForm.controls.elder_dependent.dirty || submitAttempt)">
               <p class="valid err-reds">Please select the dependent.</p>
-          </small> 
+        </small> 
 </ion-item>
 </ion-card>
    </form>   
 
-</ion-card>
+</ion-list>
  
  <ion-card class="sele-file"> 
   

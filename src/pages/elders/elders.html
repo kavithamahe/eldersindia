@@ -472,7 +472,7 @@
    
             <ion-label class="label-tittle required">Email address</ion-label>
         <ion-item>
-                <ion-input read-only [(ngModel)]="elder_email" formControlName="elder_email"
+                <ion-input [(ngModel)]="elder_email" formControlName="elder_email"
                 [class.invalid]="!myForm.controls.elder_email.valid && (myForm.controls.elder_email.dirty)" placeholder="Email address" value={{elder_email}}>
                 </ion-input>
         </ion-item>
@@ -502,7 +502,7 @@
    
             <ion-label class="label-tittle">Email address</ion-label>
         <ion-item>
-                <ion-input read-only [(ngModel)]="elder_email" [ngModelOptions]="{standalone: true}" placeholder="Email address" value={{elder_email}}>
+                <ion-input [readonly]="true" [(ngModel)]="elder_email" [ngModelOptions]="{standalone: true}" placeholder="Email address" value={{elder_email}}>
                 </ion-input>
         </ion-item>
       

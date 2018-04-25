@@ -125,6 +125,30 @@
    <p>{{viewServiceRequestInfo?.updated_at | date:'dd/M/yyyy h:m a'}}</p>
    </ion-col>
   </ion-row>
+  <ion-row>   
+    <ion-col width-100 class="child_menu">
+  <span>Service cost</span>
+   <p>{{viewServiceRequestInfo?.service_cost}}</p>
+   </ion-col>
+  </ion-row>
+  <ion-row>   
+    <ion-col width-100 class="child_menu">
+  <span>Additional service cost</span>
+   <p>{{viewServiceRequestInfo?.additional_service_cost}}</p>
+   </ion-col>
+  </ion-row>
+  <ion-row>   
+    <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.payUmny_payment_status!='captured')">
+  <span>Payment Status</span>
+   <p>Not Paid</p>
+   </ion-col>
+  </ion-row>
+  <ion-row>   
+    <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.payUmny_payment_status =='captured')">
+  <span>Payment Status</span>
+   <p>Paid</p>
+   </ion-col>
+  </ion-row>
   <ion-row *ngIf="(viewServiceRequestInfo?.enquiry_date!='0000-00-00')">  
     <ion-col width-100 class="child_menu">
   <span>Preferred date</span>
