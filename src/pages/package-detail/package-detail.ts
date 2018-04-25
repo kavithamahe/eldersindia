@@ -74,8 +74,8 @@ vendorLogo:any;
     if(this.dependents.length == 1){
       this.dependentId = this.dependents[0].id;
     }
-    let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id,dependents:this.dependents,location_id:this.location_id});
-    modal.present();
+    this.navCtrl.push(GetpackagePagePage,{packID:id,dependents:this.dependents,location_id:this.location_id});
+  
   }
   dashboardPage(){
     this.navCtrl.setRoot(DashboardPage);
