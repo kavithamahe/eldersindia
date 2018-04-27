@@ -125,8 +125,10 @@
             </ion-col>
           </ion-row>
  
-      <div formArrayName="emergency_list">
-      <div  *ngFor="let item of authForm.controls.emergency_list.controls; let i=index">
+      <div formArrayName="emergency_list">{{emergency_list.length}}
+      <div *ngFor="let item of emergency_list; let i=index; "></div>
+
+      <div  *ngFor="let item of authForm.controls.emergency_list.controls; let i=index; " >{{i}}
            <div *ngIf="authForm.controls.emergency_list.controls.length > 1">
               <button class="rem-btn" (click)="removeEmergency(i)" ion-button icon-left clear>
                 <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove

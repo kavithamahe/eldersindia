@@ -347,7 +347,7 @@ public emergencies =  [
 
           if(emergencies != undefined){
           if(emergencies.length != 0 ){
-           this.emergency_list.pop();
+           //this.emergency_list.pop();
 
                this.emergency_name =[];
                this.emergency_no =[];
@@ -356,6 +356,8 @@ public emergencies =  [
               this.emergency_name.push(emergencies[i].person);
               this.emergency_no.push(emergencies[i].mobile);
               this.emergency_list.push({emergency:[i]});
+              console.log("i am here");
+              console.log(this.emergency_list.length);
               }
               if(emergencies.length > 1 ){
                 this.addEmergency();

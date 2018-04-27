@@ -117,21 +117,14 @@
   <ion-row>
   <ion-col width-50 style="padding-left:0px;">
   
- <!--  <span>
-   <p *ngIf="service.Paymentstatus == 'captured' && service.payment_method == 'partial_payment'"><ion-badge 
-   (click)="paynow(service.sr_token,service.service_cost,service?.id)">Pay Now</ion-badge></p>
-   <p *ngIf="service.Paymentstatus == 'captured' &&  service.payment_method == 'full_payment'"><ion-badge>Paid</ion-badge></p>
-  </span> -->
    <span>
     <p *ngIf="service.service_type =='Recurring'" (click)="viewRecurring()"><ion-badge>View Recurring Requests</ion-badge></p>
-    <p *ngIf="service.Paymentstatus!='captured' && service.status !='3' && service.payment_method==''  && service.service_type=='One time' && service.package_id==''"><ion-badge (click)="paynow(service.sr_token,service.service_cost,service?.id,service?.additional_service_cost)">Pay Now</ion-badge>
+    <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost!='0'&& service.additional_service_cost_status=='0' && service.status=='5'"><ion-badge (click)="paynow(service.sr_token,service.service_cost,service?.id,service?.additional_service_cost)">Pay Now</ion-badge>
    </p>
-   
-  <!--  <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='partial_payment'"><ion-badge 
-   (click)="paynow(service.sr_token,service.final_service_cost,service?.id)">Pay Now</ion-badge></p> -->
-   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost =='0' && service.additional_service_cost==0 || service.additional_service_cost_status == 'success'"><ion-badge>Paid</ion-badge></p>
-  <!--  <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost_status=='success'"><ion-badge>Paid</ion-badge></p> -->
-   <!-- <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='full_payment'"><ion-badge>Paid</ion-badge></p> -->
+   <p *ngIf="service.Paymentstatus!='captured' && service.status !='3' && service.payment_method==''"><ion-badge (click)="paynow(service.sr_token,service.service_cost,service?.id,service?.additional_service_cost)">Pay Now</ion-badge>
+   </p>
+   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost=='0'"><ion-badge>Paid</ion-badge></p>
+   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost_status=='success'"><ion-badge>Paid</ion-badge></p>
   </span>
      
   </ion-col>
@@ -141,21 +134,18 @@
 
   </ion-row>
   <ion-row>
-
-  <ion-col>
-  <button class="make-rate" *ngIf="(service?.vendor_status==5 &&(!service?.vendor_remarks))"(click)="enableRemark(i)">
+  <ion-col *ngIf="service.Paymentstatus=='captured' && (service.payment_method=='' || service.payment_method=='full_payment')">
+  <button class="make-rate" *ngIf="service.vendor_status == 5" (click)="enableRemark(i)">
        Mark as Complete
   </button>
   </ion-col>
   </ion-row>
-
-
   </ion-grid>
   <ion-row>
   <ion-col width-20></ion-col>
   <ion-col width-80 >
   
-  <button ion-button class="remarks-btns" *ngIf="(service?.vendor_status==2 &&(!service?.vendor_remarks))"(click)="enableRemark(i)">
+  <button ion-button class="remarks-btns" *ngIf="(service?.vendor_status==2 &&(!service?.vendor_remarks))" (click)="enableRemark(i)">
        <i class="fa fa-comments"></i>
   </button>
   </ion-col>
