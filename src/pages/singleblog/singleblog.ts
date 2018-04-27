@@ -38,6 +38,7 @@ replyPost:any;
 commentForm: FormGroup;
 submitAttempt: boolean = false;
 communitylist:any=[];
+allow_comment:any;
  
   constructor(public formBuilder: FormBuilder,public modalCtrl: ModalController, public navCtrl: NavController,public platform: Platform,public actionsheetCtrl: ActionSheetController, public navParams: NavParams,public blogListService:BlogListService,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.storage.ready().then(() => {
@@ -45,6 +46,7 @@ communitylist:any=[];
       storage.get('id').then((id) => { this.user_id=id;});
       storage.get('token').then((token) => { this.token=token; 
        this.blogId=navParams.get("blogId");
+       this.allow_comment = navParams.get("allow_comment");
   		this.onInit(this.blogId);
       this.viewComments(this.blogId);
       })

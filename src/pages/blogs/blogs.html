@@ -40,7 +40,7 @@
       <ion-col width-20><button (click)="getItems(searchText)" ion-button small 
         class="go-btn">Go</button> </ion-col>
     </ion-row>
-    <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)" class="community-img">
+    <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id,blogs.allow_comment)" class="community-img">
       <ion-row>
         <ion-col class="blogs-tittle">
           <ion-item text-wrap>

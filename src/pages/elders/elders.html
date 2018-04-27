@@ -97,7 +97,7 @@
       </ion-item>
          
           <ion-label class="label-tittle required">Address</ion-label>
-        <ion-item>  
+          <ion-item>  
               <ion-input type="text" formControlName="elder_address" placeholder="Address"
                 [class.invalid]="!authForm.controls.elder_address.valid && (authForm.controls.elder_address.dirty)" [(ngModel)]= "elder_address" value={{elder_address}}>
               </ion-input>
@@ -128,14 +128,14 @@
           </ion-row>
  
       <div formArrayName="emergency_list">
-      <div  *ngFor="let item of authForm.controls.emergency_list.controls; let i=index">
+      <div *ngFor="let item of authForm.controls.emergency_list.controls; let i=index">
            <div *ngIf="authForm.controls.emergency_list.controls.length > 1">
             <button class="rem-btn" (click)="removeEmergency(i)" ion-button icon-left clear>
                 <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
               </button>
             </div> 
-          <ion-label class="label-tittle required">Person </ion-label>
-          <div  [formGroupName]="i">
+          <ion-label class="label-tittle required">Person</ion-label>
+          <div [formGroupName]="i">
             <ion-item>
             <ion-label class="sel-label">Emergency</ion-label>
               <ion-select class="select-brd" formControlName="emergency_name"  

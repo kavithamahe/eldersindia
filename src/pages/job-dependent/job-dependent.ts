@@ -188,6 +188,7 @@ dismiss() {
         this.jobBoardService.applyjobelder(this.user_type_id,this.user_id,this.jobId,this.file_name,
         this.file_path).subscribe((applyjob) => {
           this.showToaster(applyjob.result);
+          this.navCtrl.pop();
            loader.dismiss();
         },
       (err) => { 

@@ -50,20 +50,23 @@
             <ion-item *ngIf="flag ==1" class="one-timereq">
               <ion-label>Select Package</ion-label>
               <!-- <ion-label>Select Package</ion-label> -->
-              <ion-select class="select-brds" placeholder="Select Package">
-              <ion-option *ngFor = "let package of packageLists" value={{package.package_validity.package_info}}>{{package.package_validity.package_info}}
+              <ion-select class="select-brds" placeholder="Select Package" 
+              [(ngModel)]="package" [ngModelOptions]="{standalone: true}">
+              <ion-option *ngFor = "let package of packageLists" [value]='package'>{{package.package_validity.package_info}}
               </ion-option>
             </ion-select>
               </ion-item>
-         
-              <ion-item *ngIf="status == '1' && userType == 'elder' && data == '1'" class="one-timereq">
+          <div *ngIf="data != '0'">
+              <ion-item *ngIf="status == '1' || userType == 'elder' || data == '1'" class="one-timereq">
               <ion-label>Select Package</ion-label>
               <!-- <ion-label>Select Package</ion-label> -->
-              <ion-select class="select-brds" placeholder="Select Package">
-              <ion-option *ngFor = "let package of packageLists" value={{package.package_validity.package_info}}>{{package.package_validity.package_info}}
+              <ion-select class="select-brds" placeholder="Select Package" 
+              [(ngModel)]="package" [ngModelOptions]="{standalone: true}">
+              <ion-option *ngFor = "let package of packageLists" [value]='package'>{{package.package_validity.package_info}}
               </ion-option>
               </ion-select>
               </ion-item>
+              </div>
 
               <!-- </ion-item> -->
              <!--  <ion-item>

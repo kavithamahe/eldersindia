@@ -45,7 +45,7 @@
   </ion-row>
 
 <!-- <ion-list [hidden]="showComment">   -->
-<ion-list>
+<ion-list *ngIf="allow_comment == '1'">
 <div id="commentsView">
    <form [formGroup]="commentForm">
   <ion-item style="padding-left:0px;">
