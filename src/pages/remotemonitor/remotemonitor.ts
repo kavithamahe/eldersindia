@@ -35,6 +35,7 @@ url:any;
     // http://eldercam1.dlinkddns.com:8033/mjpeg.cgi?
   	var usernames = this.username;
   	var passwords = this.password;
+    
     var remoteurl = this.url;
   	  // const browser = this.iab.create(""+remoteurl+"user="+usernames+"&password="+passwords+" ");
      startApp.set({
@@ -43,10 +44,10 @@ url:any;
       "type": "text/plain",
       "uri": "+918958312000"
       }, {
-        // "extraKey2":""+remoteurl+"user="+usernames+"&password="+passwords+" ",
-                "extraKey2":"http://192.168.1.46:8033/mjpeg.cgi?",
-                "username":"admin",
-                "password":"ctl",
+         "extraKey2":""+remoteurl+"user="+usernames+"&password="+passwords+" ",
+                // "extraKey2":"http://192.168.1.46:8033/mjpeg.cgi?",
+                // "username":"admin",
+                // "password":"ctl",
 
       "EXTRA_TEXT":"Text...by vkm ",
       "chat": true

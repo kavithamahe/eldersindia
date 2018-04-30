@@ -34,14 +34,15 @@
       <ion-row>
         <ion-col width-50 class="hooter" text-center (click)="hooter(hooterOn)"> <span class="dashboard-listed"> <i class="fa fa-bell-o fa-5x"></i>
           <p> HOOTER</p>
-          </span> </ion-col>
+          </span> </ion-col>.
         <ion-col width-50 class="call-sponsor" text-center (click)="makeCall(call_sponsor)"> 
         <span class="dashboard-listed"> 
-        <i class="fa fa-phone-square fa-5x"></i>
-        <!--  <ion-avatar>
+          <img [src]="url+sponsor_avatar" style="width:50px; height:50px;"  />
+        <!-- <i class="fa fa-phone-square fa-5x"></i> -->
+      <!--    <ion-avatar>
                 <img [src]="url+sponsor_avatar" style="width:50px; height:50px;"  />
           </ion-avatar> -->
-          <p>CALL SPONSOR</p>
+          <p>Call Sponsor</p>
           </span> </ion-col>
       </ion-row>
     </ion-grid>
@@ -76,11 +77,11 @@
         </span> </ion-col>
     </ion-row>
   </ion-grid>
-<!--  <ion-grid class="dashboard">
+ <ion-grid class="dashboard">
     <ion-row>
       <ion-col width-50 class="connection" text-center (click)="remote()"> <span class="dashboard-listed"><i class="fa fa-video-camera fa-5x" aria-hidden="true"></i>
         <p>REMOTE MONITORING</p>
         </span> </ion-col>
     </ion-row>
-  </ion-grid> -->
+  </ion-grid>
 </ion-content>

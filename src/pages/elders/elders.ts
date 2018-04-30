@@ -188,10 +188,11 @@ mytype:string ="password";
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
-    
+        
          emergency_list: this. formBuilder.array([
                 this.emergencyAddress(),
             ]),
+
               });
   }
     if(navParams.get("fuctionality")!= "edit" && navParams.get("fuctionality") !="profileEdit")
@@ -346,7 +347,7 @@ public emergencies =  [
 
           if(emergencies != undefined){
           if(emergencies.length != 0 ){
-           this.emergency_list.pop();
+          this.emergency_list.pop();
 
                this.emergency_name =[];
                this.emergency_no =[];
@@ -355,8 +356,9 @@ public emergencies =  [
               this.emergency_name.push(emergencies[i].person);
               this.emergency_no.push(emergencies[i].mobile);
               this.emergency_list.push({emergency:[i]});
+
               }
-              if(emergencies.length > 1 ){
+              for( let i=1; i< emergencies.length;i++){
                 this.addEmergency();
               }
            
@@ -387,15 +389,8 @@ public emergencies =  [
                 this.experience_years.push(experiences[i].year);
                 this.experience_duration.push(experiences[i].duration);
                 this.experience_list.push({experience:[i]});
-                // if(experiences.length > 1){
-                  //this.addExperience();
-                  //}
-                
               }  
-             // if(experiences.length>1){
-             //   this.removeExperience(experiences.length-1);
-             // }
-              if(experiences.length > 1){
+               for( let i=1; i< experiences.length;i++){
                 this.addExperience();
               }
             
@@ -425,7 +420,7 @@ public emergencies =  [
                 //this.addEducation();
                // console.log(i);
               }  
-              if(educations.length > 1){
+              for( let i=1; i< educations.length;i++){
                 this.addEducation();
               }
               
@@ -494,7 +489,7 @@ public emergencies =  [
     
     const control = <FormArray>this.authForm.controls['emergency_list'];
         control.push(this.emergencyAddress());
-        
+
   }
   removeEmergency(index){
      const control = <FormArray>this.authForm.controls['emergency_list'];

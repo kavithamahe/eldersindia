@@ -298,7 +298,7 @@
 
 
  <div formArrayName="experience_list">
- <div  *ngFor="let item of myForm.controls.experience_list.controls; let i=index">
+ <div  *ngFor="let item of myForm.controls.experience_list.controls; let i=index ">
   <div *ngIf="myForm.controls.experience_list.controls.length > 1">
           <button class="rem-btn" (click)="removeExperience(i)" ion-button icon-left clear>
             <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
@@ -372,7 +372,7 @@
     <br/>
 
         <div formArrayName="education_list">
-          <div  *ngFor="let item of myForm.controls.education_list.controls; let i=index">
+          <div  *ngFor="let item of myForm.controls.education_list.controls; let i=index ">
            <div *ngIf="myForm.controls.education_list.controls.length > 1">
           <button class="rem-btn" (click)="removeEducation(i)" button-right ion-button icon-left clear>
             <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove

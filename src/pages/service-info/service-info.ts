@@ -159,7 +159,7 @@ modal(){
      "sub_category_id":this.serviceData.sub_category_id,"discountCost":data.discountCost,"actualCost":"",
       "service_id":this.serviceData.service_id, "problem":data.problem,
      "datetime":data.datetime,"preferred_time":data.preferred_time, "dependentid":data.dependentId,
-      "mobile":data.mobile_no,"lead_time":this.lead_time,
+      "mobile":data.mobile_no,"lead_time":this.lead_time,"datCount":data.datCount,
       "subcategory":this.serviceData.subcategory, "durations":data.durations,
        "exclude_days":data.exclude_days,"from_date":data.from_date,"from_time":data.from_time,"quantity":"",
        "selected_dates":data.selected_dates,"serviceType":data.serviceType,"time_slot":data.time_slot,"to_date":data.to_date,"to_time":data.to_time,
