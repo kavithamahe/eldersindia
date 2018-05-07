@@ -41,7 +41,6 @@ import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 import { FirsttimeloginPagePage } from '../pages/firsttimelogin/firsttimelogin';
 import { ViewpackagePagePage } from '../pages/viewpackage/viewpackage';
 import { ElderservicePagePage } from '../pages/elderservice/elderservice';
-import { PaymentPage } from '../pages/payment/payment';
 
 //packages related pages
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
@@ -129,7 +128,6 @@ import { ServiceProvider } from '../providers/service-provider';
     GetpackagePagePage,
     ViewpackagePagePage,
     ElderservicePagePage,
-    PaymentPage,
     ManagePage,
     EldersPage,
     JobboardPage,
@@ -210,7 +208,6 @@ import { ServiceProvider } from '../providers/service-provider';
     CommunityPage,
     CommunityPopoverPage,
     ElderservicePagePage,
-    PaymentPage,
     ManagePage,
     EldersPage,
     JobboardPage,

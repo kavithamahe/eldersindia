@@ -15,7 +15,6 @@ import { BlogsPage } from '../../pages/blogs/blogs';
 import { ConnectionsPage } from '../../pages/connections/connections';
 import { MessagesPage } from '../../pages/messages/messages';
 import { BlogtabsPage } from '../../pages/blogtabs/blogtabs';
-import { PaymentPage } from '../../pages/payment/payment';
 
 
 /*
@@ -137,9 +136,7 @@ export class DashboardPage {
   ionViewDidLoad() {
     this.nativeAudio.preloadSimple('uniqueId1', 'assets/sound/Siren 21.mp3').then(this.onSuccess, this.onError);
   }
-  payment(){
-    this.navCtrl.setRoot(PaymentPage);
-  }
+  
   public servicesPage()
   {
   	this.navCtrl.setRoot(ServiceprovidersPage);

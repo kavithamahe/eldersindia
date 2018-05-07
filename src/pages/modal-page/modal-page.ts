@@ -9,7 +9,6 @@ import moment from 'moment';
 import { ServiceProvider } from '../../providers/service-provider';
 import { TermsModalPage } from '../../pages/terms-modal/terms-modal';
  import { Modelpage1PagePage } from '../../pages/modelpage1/modelpage1';
- import { PaymentPage } from '../../pages/payment/payment';
 
 
 import { Storage } from '@ionic/storage';
