@@ -14,43 +14,45 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="content-intop">
+<ion-card class="login-detalis">
 <div class="change-pass-content">
 	<form [formGroup]="authForm">
 <br/>
-  			<ion-list>
-      			<ion-row>
-		        	<ion-label>To</ion-label>
-		    	</ion-row>
+  <ion-list class="create-message">
+    		<ion-label>To</ion-label>
 		    	<ion-row>
-			       <ion-input disabled type="text" class="message" value={{member_name}}>
+		
+			       <ion-input disabled type="text" placeholder="Subject" class="message" value={{member_name}}>
 			       	</ion-input>
-			       
-	       		</ion-row>
-	       		<ion-row>
-		        	<ion-label>Subject</ion-label>
-		        </ion-row>
+			       	</ion-row>
+	  			<ion-label>Subject</ion-label>
 		        <ion-row>
+	
 		        	<ion-input type="text" class="message" formControlName="subject"
 		            [class.invalid]="!authForm.controls.subject.valid && (authForm.controls.subject.dirty )"></ion-input>
 		        </ion-row>
 	            	<div *ngIf="!authForm.controls.subject.valid  && (authForm.controls.subject.dirty || submitAttempt)">
-	                	<p style="color:red" class="valid">This field is required</p>
+	                	<p class="err-reds">This field is required</p>
            			</div>
-	       		<ion-row>
-		        	<ion-label>Message</ion-label>
-		        </ion-row>
+	     	<ion-label>Message</ion-label>
 		        <ion-row>
+			
 	       			<ion-textarea type="text" class="message" formControlName="message"
 			            [class.invalid]="!authForm.controls.message.valid && (authForm.controls.message.dirty )"></ion-textarea>
 			    </ion-row>
             	<div *ngIf="!authForm.controls.message.valid  && (authForm.controls.message.dirty || submitAttempt)">
-                	<p style="color:red" class="valid">This field is required</p>
+                	<p class="err-reds">This field is required</p>
            		</div>	
       			
 			</ion-list>
+			
   
   	</form>
-  	<div>Attachment</div>
+<div class="attached-form">
+	 	<ion-label>Attachment</ion-label>
   	<input type="file" (change)="fileChange($event)" placeholder="Upload file" >
 	</div>
-</ion-content>
+	</div>
+
+	</ion-card>
+	</ion-content>

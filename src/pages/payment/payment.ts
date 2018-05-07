@@ -4,7 +4,7 @@ import { BlogListService } from '../../providers/blog-list-service';
 import { Storage } from '@ionic/storage';
 import { Http,Headers,RequestOptions } from '@angular/http';
 
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+// import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { SubcategoryListPage } from '../../pages/subcategory-list/subcategory-list';
 
@@ -72,9 +72,9 @@ service_request_id:any;
 udf2:any;
 udf3:any;
 salt:any;
-   constructor(public iab:InAppBrowser,public platform: Platform,public http: Http,public navCtrl: NavController,public storage:Storage,public blogListService:BlogListService, public navParams: NavParams) {
+   constructor(public platform: Platform,public http: Http,public navCtrl: NavController,public storage:Storage,public blogListService:BlogListService, public navParams: NavParams) {
   
-  this.serviceData=navParams.get("serviceData");
+    this.serviceData=navParams.get("serviceData");
     this.serviceData=navParams.get("serviceData");
     this.datetime=this.serviceData.datetime;
     this.dependentId =this.serviceData.dependentId;
@@ -197,7 +197,7 @@ getHashKey()
  //      this.platform.ready().then(() => {
  //   let browser = new InAppBrowser(url,'_blank');
  // });
-      const browser = this.iab.create(url,'_blank');
+      // const browser = this.iab.create(url,'_blank');
       // const watch = browser.on('loadstart').subscribe(function(event){
       //   console.log('loadstart');
       // });
