@@ -48,31 +48,30 @@
          <ion-row>
             <ion-col width-80><ion-searchbar [(ngModel)]="searchrec"></ion-searchbar>
             </ion-col>
-              <ion-col width-20><button (click)="receivedsearch(searchrec)" ion-button small 
-              class="go-btn">Go</button> </ion-col>
+              <ion-col width-20><button (click)="receivedsearch(searchrec)" ion-button small class="go-btn">Go</button> </ion-col>
             </ion-row>
        <hr/>
             <div *ngFor="let request of receivedRquestInfo">
               <!-- <ion-item-sliding class="inbox-sends"> -->
-            <ion-item text-wrap class="inbox-sends" *ngIf="error != 'No connections found'">
-
-                  <ion-row>
-                    <ion-col width-20>
-                      <ion-avatar item-left (click)="CommunityUserWall(request?.id)">
-                        <img src="{{imageUrl+request?.avatar}}" [hidden]="!request?.avatar">
-                      </ion-avatar>
-                    </ion-col>
-                    <ion-col width-67>
-                    <p>
-                <span><h6 class="name-conne" (click)="CommunityUserWall(request?.id)"><i class="fa fa-blind" *ngIf="request?.user_type == 'elder' "></i>  {{request?.connections?.name}} {{request?.connections?.last_name}}</h6></span></p>
-                   
-                      <p [hidden]="!request?.connections?.location"><i class="fa fa-map-marker"></i> <span>{{request?.connections?.location}}</span></p>
+          <ion-item text-wrap class="inbox-sends" *ngIf="error != 'No connections found'">
+            <ion-row>
+              <ion-col width-20>
+                <ion-avatar item-left (click)="CommunityUserWall(request?.id)">
+                  <img src="{{imageUrl+request?.avatar}}" [hidden]="!request?.avatar">
+                </ion-avatar>
+              </ion-col>
+              <ion-col width-67>
+              <p><span><h6 class="name-conne" (click)="CommunityUserWall(request?.id)"><i class="fa fa-blind" *ngIf="request?.user_type == 'elder' "></i>  {{request?.connections?.name}} {{request?.connections?.last_name}}</h6>
+              </span></p>
+              <p [hidden]="!request?.connections?.location"><i class="fa fa-map-marker">
+              </i> <span>{{request?.connections?.location}}</span></p>
                     </ion-col>
                   </ion-row>
 				  <ion-row>
 				  <ion-col>
                   <button ion-button icon-only class="active-btn"(click)="connectionStatus(request?.connection_id,1)">Accept</button>
-                  <button ion-button icon-only class="inactive-btn" (click)="connectionStatus(request?.connection_id,2)">Reject</button>
+                  <button ion-button icon-only class="inactive-btn" 
+                  (click)="connectionStatus(request?.connection_id,2)">Reject</button>
 				    </ion-col>
 				  </ion-row>
                 </ion-item>

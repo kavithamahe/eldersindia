@@ -10,6 +10,12 @@ page-servicerequest {
     border: 1px solid #ccc;
     border-radius: 50%;
 }
+.token-primaryss {
+    margin-top: 5px;
+    display: block;
+    font-weight: 600;
+    color: #666;
+}
 .token-primarys i {
     line-height: 35px;
     color: #00a651;
@@ -43,7 +49,7 @@ page-servicerequest {
 .rating-clr ul.rating li .ion-md-star-outline{color:#FFB700;font-size:22px;}
 .Contacted{font-family: 'Muli', sans-serif;color:#fff !important; padding:5px 10px; font-size:15px; font-weight:600 !important; background:#FF8861; border-radius:3px; }
 .Pending													{font-family: 'Muli', sans-serif;color:#fff !important; padding:5px; font-size:15px; font-weight:600 !important; background:#f8b106; border-radius:3px; }
-.Schedule{font-family: 'Muli', sans-serif;color:#fff; background:#1E90FF; padding:5px; font-size:14px; font-weight:600 !important; border-radius:3px; }
+.Scheduled{font-family: 'Muli', sans-serif;color:#fff; background:#1E90FF; padding:5px; font-size:14px; font-weight:600 !important; border-radius:3px; }
 .Completed{font-family: 'Muli', sans-serif;color:#fff; background:#228B22; padding:5px; border-radius:3px; font-size:14px; font-weight:600 !important; }
 .Cancelled{font-family: 'Muli', sans-serif;color:#fff; background:red; padding:5x; font-size:14px; font-weight:600 !important; border-radius:3px; }
 .service-cont {

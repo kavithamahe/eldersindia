@@ -256,7 +256,7 @@ myprofile(id){
 
 
   addUserPosts(id,image,videoUrl,posts,links){
-     this.posts = { "user_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links,"app":'' }
+     this.posts = { "user_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links,"app":'',"avatar":"" }
 
 
      return this.http.post(`${this.getCommunityPostsUrl }addUserPost`,this.posts,this.options)

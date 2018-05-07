@@ -23,6 +23,8 @@ import { ExternallinksPage } from '../pages/externallinks/externallinks';
 import { LogoutPage } from '../pages/logout/logout';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 import { RecurringPagePage } from '../pages/recurring/recurring';
+import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
+
 
 
 // kavitha
@@ -234,6 +236,7 @@ export class MyApp {
                   { myIcon:'fa fa-address-book-o', title: 'Profile', component: MyProfilePage },
                   { myIcon:'fa fa-unlock-alt', title: 'Change Password', component: ChangePasswordPage },
                   { myIcon:'fa fa-cog', title: 'Privacy Settings', component: SettingsPage },
+                  { myIcon:'fa fa-camera', title: 'CCTV Settings', component: RemotemonitorPagePage },
                   { myIcon:'fa fa-sign-out', title: 'Logout', component: LogoutPage },
 
                       );
@@ -369,8 +372,9 @@ initializePreview() {
       android: {
         senderID: "604025131571",
         icon:"icon",
-        iconColor:"blue"
-
+        iconColor:"blue",
+         topics: ["appAndroid"],
+          clearNotifications: "true"
       },
       ios: {
         alert: "true",

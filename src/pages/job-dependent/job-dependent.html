@@ -12,7 +12,6 @@
 
 
 <ion-content class="content-intop">
-
 <ion-list *ngIf="user_type!='elder'" class="createblog-form">
   <form [formGroup]="authForm">
   <ion-label class="required">Select dependent</ion-label>
@@ -43,7 +42,7 @@
 <ion-col>
  <button ion-button  class="instant-bt"
  (click)="submitDependent($event)" *ngIf="dependentstatus == 0">Apply</button>
- <button ion-button class="submit-btns" ion-button item-right small *ngIf="dependentstatus == 1">Applied</button>
+ <button ion-button class="instant-bt" ion-button item-right small *ngIf="dependentstatus == 1">Applied</button>
   <button ion-button class="btn-warnings" color="primary" (click)="cancelDependent()">Cancel</button>
   </ion-col>
   </ion-row>

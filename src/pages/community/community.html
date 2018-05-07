@@ -11,9 +11,7 @@
 	        <ion-icon name="home"></ion-icon>
 	    </button>
     </ion-buttons>
-   
-    
-  </ion-navbar>
+   </ion-navbar>
 </ion-header>
   
 <ion-content padding class="login-bgimg">
@@ -23,7 +21,7 @@
 			[hidden]="!communityDetailData?.logo" />
             <strong class="wel-comemem">Welcome to {{communityDetailData?.community_name}}
             </strong>
-			<em  style="" *ngIf(!show_description)>{{communityDetailData?.description | words : 50 : '...'}}</em>
+			<em style="" *ngIf(!show_description)>{{communityDetailData?.description | words : 50 : '...'}}</em>
         </p>
 		<div class="decoration hide-if-responsive"></div>
 	</div>
@@ -36,10 +34,11 @@
 						<button ion-button  style=" float:right;"(click)="joinCommunity(communityDetailData?.id)" class="post"><i class="fa fa-check" aria-hidden="true"></i> Join</button>
 				
 				</ion-col>
-			</ion-row>F
+			</ion-row>
 			<ion-item class="mem-title">
       			<h1> &nbsp;Members ({{show_member}})</h1> 
-				<button ion-button icon-only medium (click)="presentPopover($event,communityDetailData?.id)" class="postedimgvideos">
+				<button ion-button icon-only medium 
+				(click)="presentPopover($event,communityDetailData?.id)" class="postedimgvideos">
 				<i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Invite Your Contacts
 			   </button>
 			</ion-item>

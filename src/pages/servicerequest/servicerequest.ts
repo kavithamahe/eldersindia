@@ -35,9 +35,12 @@ sr_token:any;
 searchEvent:any="";
 sortby:any="";
 other:any;
+user_type:any;
   constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+       storage.get('user_type').then((user_type) => { this.user_type=user_type; 
+      console.log(this.user_type); })
       storage.get('token').then((token) => { this.token=token; 
       this.sr_token=navParams.get("sr_token");
       if(navParams.get("sr_token")){
@@ -92,7 +95,7 @@ other:any;
      (serviceRequest) => {
       this.serviceRequestInfo=serviceRequest.result.info.list.data; 
       this.vendorStatus=serviceRequest.result.info.status;
-       this.servicestatus=serviceRequest.result.info.status;
+      this.servicestatus=serviceRequest.result.info.status;
       this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
       loader.dismiss();    
     },
@@ -100,7 +103,7 @@ other:any;
       this.serviceRequestInfo =[];
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {

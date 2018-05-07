@@ -61,7 +61,7 @@ export class CommunityprofilePage {
     community: String = "activity";
     isAndroid: boolean = false;
     connection:any="true";
-    profile:any="true";
+    profile:any="true"; 
     my_id:any;
     authForm:FormGroup;
     submitAttempt:any;
@@ -95,6 +95,18 @@ export class CommunityprofilePage {
   }
   scrollToBottom(){
     this.content.scrollToBottom();
+  }
+  ionViewDidEnter(){
+      this.storage.ready().then(() => {
+      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      this.storage.get('id').then((id) => { this.my_id=id; });
+      this.storage.get('token').then((token) => { this.token=token;
+       this.profileCommunity(this.profile_uid);
+      this.memberProfile(this.profile_uid);
+      this.getPrivacy(this.profile_uid);
+    })
+      
+    });
   }
     ionViewWillEnter() {
     this.tabBarElement.style.display = 'none';
@@ -187,7 +199,11 @@ showConfirm(id){
     modal.present();
   }
   
-
+goBackToProfile(profile_id){
+        this.profileCommunity(profile_id);
+      this.memberProfile(profile_id);
+      this.getPrivacy(profile_id);
+}
   cleanURL(oldURL: string): any  {
     if(oldURL !=null){  
       let url1 = oldURL.replace('https://www.youtube.com/watch?v=','https://www.youtube.com/embed/');
