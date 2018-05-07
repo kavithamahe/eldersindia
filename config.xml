@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionicframework.elderindia668633" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>ElderIndia</name>
+    <name>EldersIndia</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
@@ -44,12 +44,13 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
-    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="SplashMaintainAspectRatio" value="true|false" />
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="100" />
+    <preference name="SplashScreenDelay" value="2000" />
     <preference name="loadUrlTimeoutValue" value="700000" />
+    <preference name="AutoHideSplashScreen" value="false" />
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
@@ -91,4 +92,5 @@
         <variable name="DEEPLINK_5_HOST" value=" " />
     </plugin>
     <plugin name="com.razorpay.cordova" spec="git+https://github.com/razorpay/razorpay-cordova.git" />
+    <plugin name="com.lampa.startapp" spec="git+https://github.com/lampaa/com.lampa.startapp.git" />
 </widget>

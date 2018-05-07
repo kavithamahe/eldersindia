@@ -83,7 +83,7 @@ loadSubcategoryList(subCategory_id,location_id){
             }
 
   serviceInfo(vendor){
-    let servieListData = {"vendor": vendor, "subCategoryId": this.service_id, "flag": "1", "location_id": this.location_id};
+    let servieListData = {"vendor": vendor, "subCategoryId": this.service_id,status:"1" ,"flag": "1", "location_id": this.location_id};
     this.navCtrl.push(ServiceInfoPage,servieListData);
   }
 pressinstant(vendorData){
@@ -107,7 +107,7 @@ pressinstant(vendorData){
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
 
     let serviceRequestData = {"problem": this.serviceTitle, "datetime": lead_time, "dependentId": this.elderId, "mobile_no": "","serviceType":"One time",
-    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":""};
+    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":"","discountCost":"","actualCost":""};
     
             this.serviceRequestCall(serviceRequestData,vendorData.id);
     }else{
@@ -121,7 +121,7 @@ pressevent(modalPage,vendorData){
     if(modalPage == "instant"){
       this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,lead_time:this.lead_time,service:this.serviceTitle,vendor:vendorData});
     }else{
-      this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists,lead_time:this.lead_time,vendor:vendorData,location_id:this.location_id,serviceData:this.serviceData,serviceTitle:this.serviceTitle});
+      this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists,lead_time:this.lead_time,vendor:vendorData,location_id:this.location_id,serviceData:this.serviceData,serviceTitle:this.serviceTitle,data:"1",statuss:"1"});
     }
     this.scheduleModal=modalPage;
     this.modal.onDidDismiss(data =>{
@@ -149,14 +149,14 @@ pressevent(modalPage,vendorData){
 
     let requestServiceData = {"category":this.serviceData.category,"service":this.serviceData.service,
     "category_id":this.serviceData.category_id,"location_id":this.location_id,"vendor_id":vendorId,
-     "sub_category_id":this.serviceData.sub_category_id,"datCount":service_request_data.datCount,
-      "service_id":this.serviceData.service_id, "problem":service_request_data.problem,
-     "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
-      "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,
-      "subcategory":this.serviceData.subcategory, "durations":service_request_data.durations,
-       "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
-       "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
-     "package_id":service_request_data.package_id,"instant":service_request_data.instant}
+    "sub_category_id":this.serviceData.sub_category_id,"datCount":service_request_data.datCount,
+    "service_id":this.serviceData.service_id, "problem":service_request_data.problem,
+    "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
+    "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,"discountCost":service_request_data.discountCost,"actualCost":service_request_data.actualCost,
+    "subcategory":this.serviceData.subcategory, "durations":service_request_data.durations,
+    "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
+    "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
+    "package_id":service_request_data.package_id,"instant":service_request_data.instant}
 
     this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
        .subscribe(
@@ -183,7 +183,7 @@ pressevent(modalPage,vendorData){
 
     let requestServiceData = {"category":this.serviceData.category,"service":this.serviceData.service,
     "category_id":this.serviceData.category_id,"location_id":this.location_id,"vendor_id":vendorId,
-     "sub_category_id":this.serviceData.sub_category_id,
+     "sub_category_id":this.serviceData.sub_category_id,"discountCost":service_request_data.discountCost,"actualCost":service_request_data.actualCost,
       "service_id":this.serviceData.service_id, "problem":service_request_data.problem,
      "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
       "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,
@@ -351,7 +351,7 @@ export class InstantRequestModalPage {
         let getHours=(minutess + minutes)/60;
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
     let serviceRequestData = {"problem": this.service, "datetime": lead_time, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile,"serviceType":"One time",
-    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":""};
+    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":"","discountCost":"","actualCost":""};
     this.viewCtrl.dismiss(serviceRequestData);
   }else{
     this.showToaster("Please select the dependent");

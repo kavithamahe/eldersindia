@@ -23,7 +23,7 @@
 <ion-content  class="content-intop">
 <br/><br/>
 <ion-fab top right>
-    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
+  <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
   </ion-fab>
 <ion-item  style="border:none;">
 <ion-row>
@@ -35,7 +35,9 @@
 <ion-card class="sel-packages">
  <ion-item>
     <ion-label>Functional Area</ion-label>
-    <ion-select [(ngModel)]="functionalArea" (ionChange)="onInit()">
+    <ion-select [(ngModel)]="functionalArea" (ionChange)="onSelectChange($event)">
+ <!--    <ion-option value="All">All
+     </ion-option> -->
       <ion-option *ngFor="let functional of functionalAreaList" value="{{functional?.id}}">{{functional?.name}}</ion-option>      
     </ion-select>
   </ion-item>

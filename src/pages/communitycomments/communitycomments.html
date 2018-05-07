@@ -13,7 +13,6 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-<!-- <button ion-button (click)="addComments(i)">Add a comment...</button> -->
 	<ion-list *ngFor="let comment of post_comments; let j=index" class="comm-posted">
 
 	<ion-card class="listed-comments">
@@ -136,15 +135,6 @@
 		</div>
 		</ion-card>
 	</ion-list>
-	<!-- <ion-card class="commen-comment">
-		<ion-row>
-			<ion-textarea [(ngModel)]="post_comment" style=" margin:0px !important;-webkit-user-select:all !important;" placeholder="Enter Comments"></ion-textarea>             
-			<p style="margin:5px;" class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker1($event,post_id)"></p>		
-        </ion-row>
-		<div class="send-req">
-			<button ion-button (click)="sendComment(post_id,'post')" class="secon-sdms">  <ion-icon ios="ios-send" md="md-send"></ion-icon> Send</button>
-		</div>
-	</ion-card> -->
 	<br/>
 	
 </ion-content>

@@ -40,12 +40,17 @@ delete:any;
 deleteSelected =[];
 hidedelete: boolean = false;
 senddelete: boolean = false;
+selected:any;
+ selectedContacts: any=[];
+ sendselectedContacts: any=[];
    constructor(public navCtrl: NavController,public alertCtrl: AlertController, public navParams: NavParams,platform: Platform,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
-  	this.isAndroid = platform.is('android');
+    this.isAndroid = platform.is('android');
     if(navParams.get("viewType")!='' && navParams.get("viewType")!=null)
     {
     this.messages=navParams.get("viewType");
     }
+     this.selectedContacts = [];
+     this.sendselectedContacts = [];
   
   }
   ionViewWillEnter(){
@@ -64,50 +69,61 @@ senddelete: boolean = false;
       })
     });
   }
- deleteMultipel(student) {
-     var index = this.deleteSelected.indexOf(student);
-    if(index > -1) {
-        this.deleteSelected.splice(index, 1);
-       student.selected = false;
-    } else {
-        this.deleteSelected.push(student.id);
-       student.selected = true;
-       this.hidedelete = student.selected;
-       //this.senddelete = "true";
+  clickedAvatar(id){
+
+       if(this.isInArray(id)){
+         let index = this.selectedContacts.indexOf(id);
+
+         this.selectedContacts.splice(index,1);
+         this.selected = false;
+       }else{
+          this.selectedContacts.push(id);
+               this.hidedelete = true;
+       }
     }
-  }
-  deletesendMultipel(student) {
-     student.active = !student.active;    
-     var index = this.deleteSelected.indexOf(student);
-    if(index > -1) {
-        this.deleteSelected.splice(index, 1);
-       student.selected = false;
-    } else {
-        this.deleteSelected.push(student.id);
-       student.selected = true;
-       this.senddelete = student.selected;
+
+    isInArray(id){
+      let check= false;
+      for(let contactId of this.selectedContacts){
+         if(contactId == id){ 
+           check = true;
+         }
+      }
+      return check;
     }
+   deletesendMultipel(id) {
+   
+       if(this.isInArraySend(id)){
+         let index = this.sendselectedContacts.indexOf(id);
+
+         this.sendselectedContacts.splice(index,1);
+         // this.selected = false;
+       }else{
+          this.sendselectedContacts.push(id);
+                this.senddelete = true;
+       }
   }
+    isInArraySend(id){
+      let check= false;
+      for(let contactId of this.sendselectedContacts){
+         if(contactId == id){ 
+           check = true;
+         }
+      }
+      return check;
+    }
   logDeleteStudents(viewType) {
-      this.messagesService.deleteBulkMessages(this.deleteSelected,viewType).subscribe(
+    this.hidedelete = false;
+      this.messagesService.deleteBulkMessages(this.selectedContacts,viewType).subscribe(
      (deleteMessage) => {
        this.showToaster(deleteMessage.result);
-       this.onInit();
-      // if(viewType =='sent')
-      // {
-      //   this.sent();
-      //   loader.dismiss();
-      // } 
-      // else
-      // {
-      //   this.onInit();
-      //   loader.dismiss();
-      // }  
+       this.onInit(); 
     });
   }
  
 sentlogDeleteStudents(viewType){
-  this.messagesService.deleteBulkMessages(this.deleteSelected,viewType).subscribe(
+  this.senddelete = false;
+  this.messagesService.deleteBulkMessages(this.sendselectedContacts,viewType).subscribe(
      (deleteMessage) => {
        this.showToaster(deleteMessage.result);
    this.sent();
@@ -117,7 +133,7 @@ sentlogDeleteStudents(viewType){
   {
     this.deleteSelected = [];
     this.senddelete = false;
-  	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     this.messagesService.inbox(this.inbox).subscribe(
      (inbox) => {

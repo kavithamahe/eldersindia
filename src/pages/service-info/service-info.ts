@@ -51,6 +51,12 @@ website:any;
 lead_time:any='00:00';
 @ViewChild('ghbslides') slider: Slides;
 vendor:any;
+service_cost:any;
+recurring:any;
+one_time:any;
+dependentLists:any;
+serviceids:any;
+package_amount:any;
 // @ViewChild('ghbslides') ghbslides: any;
 
 
@@ -58,9 +64,17 @@ vendor:any;
    
       this.subCategoryId = navParams.get("subCategoryId");
       this.locationId = navParams.get("location_id");
+      this.one_time = navParams.get("one_time");
+      this.recurring = navParams.get("recurring");
       this.vendor_id = navParams.get("vendor").id;    
       this.vendor_name = navParams.get("vendor").name; 
       this.vendor=navParams.get("vendor");
+      this.service_cost = navParams.get("vendor").service_cost;
+      this.package_amount = navParams.get("package_amount");
+      if(navParams.get("status") == "1"){
+         this.one_time = navParams.get("vendor").one_time;
+      this.recurring = navParams.get("vendor").recurring;
+      }
       this.showDetails = false;
       this.showRequestService = false;
       this.sub_category = false ;
@@ -107,7 +121,9 @@ vendor:any;
                    this.vendorList = data.result.info;
                    this.packageinfo = this.vendorList.packages;
                    this.serviceData = data.result.info.requestServices;
+                   this.serviceids = this.serviceData.service_id;
                    this.website = this.vendorList.vendorDetails.website;
+                   this.dependentLists = data.result.info.dependentLists;
                    if(data.result.info.serviceOffered[0] != undefined){
                        this.lead_time=data.result.info.serviceOffered[0].category_lists[0].service_sub_category_lists[0].lead_time;
                     }
@@ -140,10 +156,10 @@ modal(){
     loading.present();
      let requestServiceData = {"category":this.serviceData.category,"service":this.serviceData.service,
     "category_id":this.serviceData.category_id,"location_id":this.locationId,"vendor_id":this.vendor_id,
-     "sub_category_id":this.serviceData.sub_category_id,
+     "sub_category_id":this.serviceData.sub_category_id,"discountCost":data.discountCost,"actualCost":"",
       "service_id":this.serviceData.service_id, "problem":data.problem,
      "datetime":data.datetime,"preferred_time":data.preferred_time, "dependentid":data.dependentId,
-      "mobile":data.mobile_no,"lead_time":this.lead_time,
+      "mobile":data.mobile_no,"lead_time":this.lead_time,"datCount":data.datCount,
       "subcategory":this.serviceData.subcategory, "durations":data.durations,
        "exclude_days":data.exclude_days,"from_date":data.from_date,"from_time":data.from_time,"quantity":"",
        "selected_dates":data.selected_dates,"serviceType":data.serviceType,"time_slot":data.time_slot,"to_date":data.to_date,"to_time":data.to_time,
@@ -188,7 +204,7 @@ pressContact(){
         this.showToast("No Packages Available")
       }
       else{
-      let modal = this.modalCtrl.create(ServiceModalPage,{service:"packages",vendorList:this.vendorList});    
+      let modal = this.modalCtrl.create(ServiceModalPage,{service:"packages",vendorList:this.vendorList,location_id:this.locationId});    
     modal.present();
   }
     }
@@ -210,8 +226,9 @@ pressContact(){
         this.showToast("There is no dependent. You can not apply job!");      
       
       }else{
-        console.log(this.vendorList.vendorDetails);
-     let service_modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor:this.vendor});    
+        console.log(this.recurring);
+     let service_modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor:this.vendorList.vendorDetails,vendorservice_cost:this.service_cost,one_time:this.one_time,recurring:this.recurring,status:"1",vendor_id:this.vendor_id,dependentLists:this.dependentLists,
+      serviceids:this.serviceids,locationId:this.locationId,package_amount:this.package_amount});    
     service_modal.present();
     service_modal.onDidDismiss(data =>{
       if(data == "dismiss"){

@@ -6,11 +6,7 @@
 -->
 <ion-header>
 <ion-navbar color="primary">
-<ion-buttons left>
-      <button ion-button icon-only (click)="dismiss()">
-         <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>
+
 <ion-buttons center>
     <ion-title text-center>
       Services For Package
@@ -40,24 +36,24 @@
 	  <ion-row>
   <ion-col col-12 text-wrap>
 	
-    <b>Total Quantity</b><p>{{package?.quantity}} Hours</p>
+    <b>Total Quantity</b><p>{{package?.quantity}} {{package?.common_type}}</p>
 	</ion-col>
 	</ion-row>
 	
 		  <ion-row>
   <ion-col col-12 text-wrap>
 	
-    <b>Used Quantity</b><p>{{package?.available_package_service}} Hours</p>	
+    <b>Used Quantity</b><p>{{package?.available_package_service}} {{package?.common_type}}</p>	
 	</ion-col>
 	</ion-row>
-			  <ion-row>
-  <ion-col col-12 text-wrap>
-    <b>Balance Quantity</b><p>{{package?.quantity}}- {{package?.available_package_service}} Hours </p>
-</ion-col>
+	<ion-row>
+    <ion-col col-12 text-wrap>
+      <b>Balance Quantity</b><p>{{package?.balance_quantity}} {{package?.common_type}} </p>
+    </ion-col>
 	</ion-row>
-	 <ion-row>
+	 <ion-row *ngIf="package?.balance_quantity != 0">
   <ion-col>
-    <ion-badge *ngIf="packageStatus == 1" (click)="getServicedetails(package?.id,package?.vendor_id)" class="act"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Avail</ion-badge> 	
+    <ion-badge *ngIf="packageStatus == 1" (click)="getServicedetails(package?.id,package?.vendor_id,package?.one_time,package?.recurring,package?.package_amount)" class="act"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Avail</ion-badge> 	
   </ion-col>
 </ion-row>
 

@@ -45,7 +45,7 @@
   </ion-row>
 
 <!-- <ion-list [hidden]="showComment">   -->
-<ion-list>
+<ion-list *ngIf="allow_comment == '1'">
 <div id="commentsView">
    <form [formGroup]="commentForm">
   <ion-item style="padding-left:0px;">
@@ -105,18 +105,18 @@
 
        <ion-list *ngFor="let reply of viewComments.comment_reply; let j=index">
         <ion-row>
-          <ion-col offset-10 (click)="CommunityUserWall(reply?.uid_from)">
+          <ion-col offset-10>
             <ion-item item-text-wrap class="reply-reply">
-              <ion-avatar item-left>
+              <ion-avatar item-left (click)="CommunityUserWall(reply?.uid_from)">
                 <img src="{{imageUrl+reply?.profile_image}}" [hidden]="!reply?.profile_image">
               </ion-avatar>
-              <h2>{{reply.name_from}}-{{reply.name_to}}</h2>
+              <h2 (click)="CommunityUserWall(reply?.uid_from)">{{reply.name_from}}-{{reply.name_to}}</h2>
               <p item-text-wrap>{{reply.comments_replay}}</p>
 			  <br/>
 			  <div class="reply-btt">
 			   <button  (click)="replyblogPost(j)" clear><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply</button>
               <button icon-right clear end *ngIf="user_id==reply?.uid_to" 
-              (click)="deleteComment(reply?.comments_replay_id)">
+              (click)="deleteReplyComment(reply?.comments_replay_id)">
               <i class="fa fa-trash" _ngcontent-uuk-81="" aria-hidden="true"></i>&nbsp;Delete</button>
 			 
 			  </div>

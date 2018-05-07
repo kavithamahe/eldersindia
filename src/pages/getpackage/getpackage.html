@@ -32,9 +32,10 @@
         </ion-select>  
         </ion-item>
      </ion-row>
-               
+    <button *ngIf="user_type =='elder'" ion-button round full (click)="getPackageelder()" class="btn-blue">Get Package
+    </button>            
            
-  <button ion-button round full (click)="getPackage()" class="btn-blue">Get Package
+  <button *ngIf="user_type !='elder'" ion-button round full (click)="getPackage()" class="btn-blue">Get Package
   </button>
 </ion-grid>
 </div>

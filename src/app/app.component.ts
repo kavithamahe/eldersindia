@@ -23,6 +23,8 @@ import { ExternallinksPage } from '../pages/externallinks/externallinks';
 import { LogoutPage } from '../pages/logout/logout';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 import { RecurringPagePage } from '../pages/recurring/recurring';
+import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
+
 
 
 // kavitha
@@ -133,6 +135,7 @@ export class MyApp {
          this.storage.set('user_type', loginuser['details']['user_type']);
          this.storage.set('user_type_id', loginuser['details']['user_type_id']);
          this.storage.set('avatar', loginuser['details']['avatar']);
+         this.storage.set('sponsor_avatar', loginuser['details']['sponsor_avatar']);
          if(loginuser['details']['user_type']=='elder' && (loginuser.details.emergency_contacts.length>0))
          {
          if(loginuser.details.emergency_contacts[0].call_sponsor!='undefined')
@@ -233,6 +236,7 @@ export class MyApp {
                   { myIcon:'fa fa-address-book-o', title: 'Profile', component: MyProfilePage },
                   { myIcon:'fa fa-unlock-alt', title: 'Change Password', component: ChangePasswordPage },
                   { myIcon:'fa fa-cog', title: 'Privacy Settings', component: SettingsPage },
+                  { myIcon:'fa fa-camera', title: 'CCTV Settings', component: RemotemonitorPagePage },
                   { myIcon:'fa fa-sign-out', title: 'Logout', component: LogoutPage },
 
                       );
@@ -368,8 +372,9 @@ initializePreview() {
       android: {
         senderID: "604025131571",
         icon:"icon",
-        iconColor:"blue"
-
+        iconColor:"blue",
+         topics: ["appAndroid"],
+          clearNotifications: "true"
       },
       ios: {
         alert: "true",

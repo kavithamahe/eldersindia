@@ -42,10 +42,7 @@
 		 	 </h3>
 		 	 <b><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{service_list.service_cost - service_list.percentage_cost}} <span *ngIf="service_list.discount_rate != 0">/&nbsp;<i class="fa fa-inr" aria-hidden="true"></i><strong>{{service_list.service_cost}}</strong> {{service_list.service_type}}</span></b>
 		    <br/>
-			
-
-		
-				 <p *ngIf="service_list.lead_time != '00:00'" 
+			  <p *ngIf="service_list.lead_time != '00:00'" 
 				 [hidden]="!service_list?.lead_time">Minimum {{service_list.lead_time}} hour to serve you</p>   
 				<p><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;{{service_list.location}}</p>
 			</ion-col>
@@ -56,9 +53,6 @@
 
 		 </ion-col>
 		 <br/>
-		 <ion-row>
-		 
-		 </ion-row>
 	
 	
 	</ion-item>

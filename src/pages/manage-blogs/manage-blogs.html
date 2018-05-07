@@ -25,18 +25,6 @@
 <ion-content class="content-intop">
           <ion-card class="sel-packages">
 
-       <!--   <ion-list>
-            <ion-item>
-              <ion-label>Bulk Action</ion-label>
-                <ion-select [(ngModel)]="bulkstatus">
-                  <ion-option value="archives">Move to archives
-                  </ion-option>
-                  <ion-option value="trash">Move to trash
-                  </ion-option>
-                </ion-select>
-            </ion-item>
-          </ion-list> -->
-          
 
             <ion-item>
               <ion-label>select category</ion-label>
@@ -58,18 +46,12 @@
             </ion-item>
 
           </ion-card>
-
-         
-   <!--  <ion-searchbar [(ngModel)]="searchText" (input)="inputSearch($event)"></ion-searchbar> -->
    <ion-row>
 <ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
   <ion-col width-20><button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
 </ion-row>
 <ion-card *ngFor="let manageBlog of manageblogsLists; let i=index;"  class="job-detailsview">
-  <!--<ion-card-content style=" padding:0px;">
-  <ion-grid>
-   <ion-row>   
-    <ion-col width-80>-->
+
 	<ion-row>
 	<ion-col>
 		<h1 item-text-wrap class="service-req" text-capitalize>{{manageBlog?.title}}</h1>

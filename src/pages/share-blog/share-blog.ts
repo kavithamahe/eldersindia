@@ -69,6 +69,7 @@ community:boolean=false;
      this.community=!searchValues;
    }
  shareBlogToFriends(){ 
+  console.log(this.selectedCommunity);
  if(this.selectedConnections != undefined || this.selectedCommunity != undefined){
  this.friendsId={};
  for (var i = 0; i < this.selectedConnections.length; i++) {

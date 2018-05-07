@@ -45,6 +45,8 @@ description:any='';
 user_id:any=0;
 user_type:any='';
 actionUrl:any='addBlog';
+featuredImages:any;
+bannerImages:any;
   constructor(public formBuilder: FormBuilder,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -52,12 +54,12 @@ actionUrl:any='addBlog';
       storage.get('user_type').then((user_type) => { this.user_type=user_type;});
       storage.get('token').then((token) => { this.token=token; 
        this.blogId=navParams.get("blogId");
-       this.action=navParams.get("action");     
-       if(this.blogId>0 && this.action=='edit')
-       {
-         this.blogTitle="Edit Blog";
-         this.getEditBlog(this.blogId);
-       }
+       this.action=navParams.get("action");  
+       // if(this.blogId>0 && this.action=='edit')
+       // {
+       //   this.blogTitle="Edit Blog";
+       //   this.getEditBlog(this.blogId);
+       // }
      // this.getBlogCategories();      
       })
     });
@@ -94,10 +96,14 @@ ionViewDidEnter() {
     loader.present();
     this.blogListService.getEditBlog(blogId).subscribe(
      (getEditBlog) => {
-      this.title=getEditBlog.result.title; 
+         this.title=getEditBlog.result.title; 
       this.category =getEditBlog.result.category;   
       this.highlights= getEditBlog.result.highlights; 
+        this.highlights = this.highlights;
+      this.highlights = this.highlights.replace(/<{1}[^<>]{1,}>{1}/g," ")
       this.description= getEditBlog.result.description;
+        this.description = this.description;
+      this.description = this.description.replace(/<{1}[^<>]{1,}>{1}/g," ")
       if(getEditBlog.result.featured_image!='')
       {     
       this.featuredImage= this.imageUrl+getEditBlog.result.featured_image;  
@@ -183,18 +189,18 @@ ionViewDidEnter() {
      destinationType: Camera.DestinationType.DATA_URL
     }).then((imageData) => {
       if(type == 'banner'){
-      this.bannerImage = 'data:image/jpeg;base64,'+imageData;  
+        this.bannerImage = 'data:image/jpeg;base64,'+imageData;  
+      this.bannerImages = 'data:image/jpeg;base64,'+imageData;  
     }else{
       this.featuredImage = 'data:image/jpeg;base64,'+imageData;
+      this.featuredImages = 'data:image/jpeg;base64,'+imageData;
     }
       
      }, (err) => {
       console.log(err);
     });
   }
-pressevent(){
-  this.createBlog();
-}
+
 
   public createBlog()
   { 
@@ -216,19 +222,18 @@ pressevent(){
     }
    
     this.blogObject={ "category":this.blogForm.value.category,"allow_comment":this.allowComments,"title":this.blogForm.value.title,"highlights":this.highlights,
-        "description":this.blogForm.value.description,"featured_image":this.featuredImage,"banner_image":this.bannerImage,"tags":tagsObj,"app":''
+        "description":this.blogForm.value.description,"featured_image":this.featuredImages,"banner_image":this.bannerImages,"tags":tagsObj,"app":''
     };
     if(this.action=='edit') 
     {
       this.actionUrl='editBlog/'+this.blogId;
-     this.blogObject.id=this.blogId;
+     this.blogObject.id=this.blogId; 
      this.blogObject.author=this.user_id;
      this.blogObject.author_type=this.user_type;
     }
     
     this.blogListService.createBlog(this.blogObject,this.actionUrl).subscribe(
      (createBlog) => {
-      this.navCtrl.push(ManageBlogsPage);
       this.showToaster(createBlog.result);
       this.category = "";
       this.allowComments = "";
@@ -237,6 +242,7 @@ pressevent(){
       this.description = "";
       this.featuredImage = "";
       this.bannerImage = "";
+      this.navCtrl.setRoot(ManageBlogsPage);
       loader.dismiss();
     },
     (err) => { 
@@ -249,8 +255,7 @@ pressevent(){
           this.showToaster("Try again later");
         }
         loader.dismiss();
-      }
-    );
+      });
     
    }
   }

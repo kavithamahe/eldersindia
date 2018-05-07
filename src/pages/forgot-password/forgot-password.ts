@@ -57,22 +57,8 @@ submit() {
 					        }
 					        loader.dismiss();
 	                              })
-				// this.modalData = {"emailId": this.mailId};	
-				// let submitData = {"modalType":this.modalType , modalData:this.modalData};
-				// this.viewCtrl.dismiss(submitData);	
 			}		
 	}
-	// else if(this.resetCode != this.passwordCode){
-	// 	this.service.showToast("Invaild code.!")
-	// 	}else if(this.newPassword == '' || this.newPassword == null){
-	// 		this.service.showToast("Enter the Pass word to proceed.!")
-	// 		}else if(this.newPassword != this.reEnterPassword){
-	// 			this.service.showToast("Entered Password does not match.")
-	// 			}else{
-	// 				this.modalData ={"resetCode": this.resetCode, "newPassword":this.newPassword};	
-	// 				let submitData = {"modalType":this.modalType , modalData:this.modalData};
-	// 				this.viewCtrl.dismiss(submitData);
-	// 		}
   }
 
   dismiss(){

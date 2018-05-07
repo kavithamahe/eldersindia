@@ -46,6 +46,9 @@ elderId:any;
     this.content.scrollToBottom();
   }
   getPackageRequests(){
+     if(this.packstatus == "All"){
+      this.packstatus = "";
+    }
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
     // this.providerService.loadServiceOffered()
@@ -78,6 +81,7 @@ doInfinite(infiniteScroll) {
   }
   packagescroll()
   {
+
      this.blogListService.eventscrolls(this.nextPageURL,this.searchText,this.packstatus).subscribe(
      (eventsscroll) => {
       this.eventScrollLists=eventsscroll.result.data;
@@ -113,8 +117,15 @@ doInfinite(infiniteScroll) {
    this.getPackageRequests();
   }
   onSelectChange(selectedValue: any) {
-    this.packstatus = selectedValue;
+   if(this.packstatus == "All"){
+    this.packstatus = "";
     this.getPackageRequests();
+   }
+   else{
+      this.packstatus = selectedValue;
+    this.getPackageRequests();
+   }
+  
   }
   pressview(packageId){
     this.getPackageRequestBy(packageId);
@@ -127,8 +138,9 @@ doInfinite(infiniteScroll) {
   this.getServicesForByElders(id,locationId,elderId,status);
   }
   getServicesForByElders(id,locationId,elderId,status){
-  	 let modal1 = this.modalCtrl.create(ElderservicePagePage,{pack_id: id, elder: elderId, location_id: locationId,packbstatus:status});
-    modal1.present();
+    this.navCtrl.push(ElderservicePagePage,{pack_id: id, elder: elderId, location_id: locationId,packbstatus:status});
+  	 // let modal1 = this.modalCtrl.create(ElderservicePagePage,{pack_id: id, elder: elderId, location_id: locationId,packbstatus:status});
+    // modal1.present();
   }
 public dashboardPage()
   {

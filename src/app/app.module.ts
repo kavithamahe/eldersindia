@@ -7,7 +7,13 @@ import { MyApp } from './app.component';
 import { TruncateModule } from 'ng2-truncate';
 import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
+<<<<<<< HEAD
 // import { Ng2SearchPipeModule } from 'ng2-search-filter';
+=======
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DatePipe } from '@angular/common';
+
+>>>>>>> 245a2b8db1899c26d54106bb97f4814cad63138d
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 
@@ -25,8 +31,6 @@ import { FilePath } from '@ionic-native/file-path';
 import { Transfer } from '@ionic-native/transfer';
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
 
-
-
 import { LoginPage } from '../pages/login/login';
 import { AppConfig } from '../providers/app-config';
 import { LoginUser } from '../providers/login-user';
@@ -38,9 +42,13 @@ import { AppliedJobsPage } from '../pages/applied-jobs/applied-jobs';
 import { MessagesPage } from '../pages/messages/messages';
 import { CreateMessagePage } from '../pages/create-message/create-message';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
-import { FirsttimeloginPagePage } from '../pages/firsttimelogin/firsttimelogin';
 import { ViewpackagePagePage } from '../pages/viewpackage/viewpackage';
 import { ElderservicePagePage } from '../pages/elderservice/elderservice';
+<<<<<<< HEAD
+=======
+import { PaymentPage } from '../pages/payment/payment';
+import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
+>>>>>>> 245a2b8db1899c26d54106bb97f4814cad63138d
 
 //packages related pages
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
@@ -78,7 +86,6 @@ import { CommunitycommentsPage } from '../pages/communitycomments/communitycomme
 import { MyprofilesettingPage } from '../pages/myprofilesetting/myprofilesetting';
 import { CommunitymembersPage } from '../pages/communitymembers/communitymembers';
 import { PopoverPage } from '../pages/connections/connections';
-import { BlogtabsPage } from '../pages/blogtabs/blogtabs';
 
 import { ManagePage } from '../pages/manage/manage';
 
@@ -146,12 +153,10 @@ import { ServiceProvider } from '../providers/service-provider';
     ViewServiceRequestPage,
     BlogsPage,
     SingleblogPage,
-    FirsttimeloginPagePage,
     CreateBlogPage,
     LogoutPage,
     JobDependentPage,
     ManageBlogsPage,
-    BlogtabsPage,
     SubCategoryPage,
     SubCategoryServicePage,
     SubcategoryListPage,
@@ -170,7 +175,8 @@ import { ServiceProvider } from '../providers/service-provider';
     ChangePasswordPage,
     SettingsPage,
     ServiceModalPage,
-    TermsModalPage
+    TermsModalPage,
+    RemotemonitorPagePage
   ],
   imports: [
 
@@ -204,7 +210,6 @@ import { ServiceProvider } from '../providers/service-provider';
     PopoverPage,
     ShareBlogPagePage,
     GetpackagePagePage,
-    BlogtabsPage, 
     CommunityPage,
     CommunityPopoverPage,
     ElderservicePagePage,
@@ -226,7 +231,6 @@ import { ServiceProvider } from '../providers/service-provider';
     ViewServiceRequestPage,
     BlogsPage,
     SingleblogPage,
-    FirsttimeloginPagePage,
     CreateBlogPage,
     LogoutPage,
     JobDependentPage,
@@ -249,10 +253,15 @@ import { ServiceProvider } from '../providers/service-provider';
     ChangePasswordPage,
     SettingsPage,
     ServiceModalPage,
-    TermsModalPage
+    TermsModalPage,
+    RemotemonitorPagePage
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
+<<<<<<< HEAD
      providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
+=======
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,InAppBrowser,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,DatePipe,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
+>>>>>>> 245a2b8db1899c26d54106bb97f4814cad63138d
 })
 export class AppModule {}

@@ -56,6 +56,7 @@ searchText:any="";
 searchrec:any="";
 searchsend:any="";
 searchadd:any="";
+error:any;
    constructor(private popoverCtrl: PopoverController,public platform: Platform,public navCtrl: NavController, public actionsheetCtrl: ActionSheetController,public navParams: NavParams,public storage:Storage,public connectionsService:ConnectionsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.getconnections="myConnections";
     this.connectionsaction ="all";
@@ -74,10 +75,11 @@ searchadd:any="";
 
       storage.get('token').then((token) => { this.token=token; 
       this.onInit();
+
       })
     });
   }
-scrollToTop() {
+  scrollToTop() {
     this.content.scrollToTop();
   }
   scrollToBottom(){
@@ -85,19 +87,22 @@ scrollToTop() {
   }
   public onInit()
   {
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+
+   let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.connectionsService.allConnections().subscribe(
+     this.connectionsService.allConnections().subscribe(
      (allConnections) => {
-      this.allConnectionsInfo=allConnections.result.info.list.data;  
+     // setInterval(()=> {
+        this.allConnectionsInfo=allConnections.result.info.list.data;  
       this.orgAllConnectionsInfo=allConnections.result.info.list.data;
       this.nextPageURL1=allConnections.result.info.list.next_page_url; 
-      loader.dismiss();       
+       //},5000); 
+     loader.dismiss();       
     },
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
@@ -115,10 +120,11 @@ scrollToTop() {
      (receivedRquest) => {
       this.receivedRquestInfo=receivedRquest.result.info.list.data;
       this.orgReceivedRquestInfo=receivedRquest.result.info.list.data; 
-       this.nextPageURL2=receivedRquest.result.info.list.next_page_url;  
+      this.nextPageURL2=receivedRquest.result.info.list.next_page_url;  
        loader.dismiss();   
     },
     (err) => { 
+      this.error = JSON.parse(err._body).error;
         if(err.status===401)
         {
           this.showToaster(JSON.parse(err._body).error);
@@ -167,6 +173,7 @@ scrollToTop() {
     (err) => { 
         if(err.status===401)
         {
+          this.error = JSON.parse(err._body).error;
           this.showToaster(JSON.parse(err._body).error);
         }
         else
@@ -190,6 +197,7 @@ scrollToTop() {
     (err) => { 
         if(err.status===401)
         {
+        this.error = JSON.parse(err._body).error;
         this.showToaster(JSON.parse(err._body).error);
         this.receivedRquest(); 
         }
@@ -302,10 +310,10 @@ scrollToTop() {
       }
       );
   }
- public connectMember(connect_id,connect_name){
+ public connectMember(connect_id,connect_name,last_name){
    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.connectionsService.sendConnectionRequest(connect_id,connect_name).subscribe(
+    this.connectionsService.sendConnectionRequest(connect_id,connect_name,last_name).subscribe(
      (connectionMember) => {
        this.showToaster(connectionMember.result.info);
        this.addConnectionsList();
@@ -398,7 +406,6 @@ scrollToTop() {
       
       for (let i = 0; i < Object.keys(this.allConnectionScrollLists).length; i++) {
         this.allConnectionsInfo.push(this.allConnectionScrollLists[i]);
-        // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
         }
       
        this.nextPageURL1=allConnectionScroll.result.info.list.next_page_url;   
@@ -436,7 +443,6 @@ scrollToTop() {
  
       for (let i = 0; i < Object.keys(this.allConnectionScrollLists).length; i++) {
         this.addConnectionInfo.push(this.allConnectionScrollLists[i]);
-        // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
         }
       
        this.nextPageURL3=addConnectionScroll.result.info.next_page_url;   
@@ -474,7 +480,6 @@ scrollToTop() {
   
       for (let i = 0; i < Object.keys(this.allConnectionScrollLists).length; i++) {
         this.sentRquestInfo.push(this.allConnectionScrollLists[i]);
-        // this.orgAllConnectionsInfo.push(this.allConnectionScrollLists[i]);
         }
       
        this.nextPageURL4=sentRequestScroll.result.info.list.next_page_url;   

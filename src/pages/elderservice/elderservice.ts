@@ -23,6 +23,7 @@ packageData:any;
 rootUrl:any;
 packageStatus:any;
 vendorId:any;
+balance_service:any;
   constructor(public navCtrl: NavController,public viewCtrl: ViewController,public storage:Storage,public toastCtrl: ToastController,public loadingCtrl: LoadingController, public navParams: NavParams,public blogListService:BlogListService) {
   	 this.storage.ready().then(() => {      
     	storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
@@ -34,12 +35,22 @@ vendorId:any;
       });     
    });
  }
-getServicesForByElder(){
-	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+ getServicesForByElder(){
+  let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();    
     this.blogListService.getServicesForByElders(this.rootUrl,this.packageId,this.elder,this.location_id)
       .subscribe(data =>{
-        this.packageData = data.result;    
+        var dataList = data.result; 
+        // this.packageData = data.result; 
+        for(let data of dataList) {
+          data.balance_quantity = data.quantity - data.available_package_service;
+           data.common_type=data.common_type;
+         var str = data.common_type;
+         data.common_type = str.replace("Per" ,"");
+         console.log(data.common_type);
+
+        }
+       this.packageData = dataList; 
         loading.dismiss();
     },
     err =>{
@@ -47,9 +58,10 @@ getServicesForByElder(){
       loading.dismiss();
     }) 
 }
-getServicedetails(serviceId,vendor){
+
+getServicedetails(serviceId,vendor,one_time,recurring,package_amount){
   this.vendorId={"id":vendor}
-  let servieListData = {"vendor": this.vendorId, "subCategoryId": serviceId, "flag": "1", "location_id": this.location_id};
+  let servieListData = {"vendor": this.vendorId, "subCategoryId": serviceId, "flag": "1", "location_id": this.location_id,"one_time":one_time,"recurring":recurring,"package_amount":package_amount};
   this.navCtrl.push(ServiceInfoPage,servieListData);
 }
   ionViewDidLoad() {

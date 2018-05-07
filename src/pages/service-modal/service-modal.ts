@@ -22,7 +22,8 @@ showServiceOffered = false;
 showPackagesDetails = false;
  dependentId:any;
 title:any;
-user_type
+user_type;
+location_id:any;
   constructor(public storage:Storage,public modalCtrl: ModalController, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams) {
    console.log("this is service modal page");
   	this.vendorList = navParams.get("vendorList");
@@ -33,6 +34,7 @@ user_type
     else if(navParams.get("service") == "packages"){
       this.showPackagesDetails = true; 
       this.title = this.vendorList.vendorDetails.name+" - Best Packages"; 
+      this.location_id = navParams.get("location_id");
     }
     else{
   		this.showServiceOffered = true;
@@ -54,14 +56,13 @@ user_type
     }
 
  }
- openRequestPackage(id){
+  openRequestPackage(id){
   if(this.vendorList.dependentLists.length == 1){
       this.dependentId = this.vendorList.dependentLists[0].id;
     }
-    let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id,dependents:this.vendorList.dependentLists});
-    modal.present();
+   this.navCtrl.push(GetpackagePagePage,{packID:id,dependents:this.vendorList.dependentLists,location_id:this.location_id});
  }
- goToService(sub_service){
+  goToService(sub_service){
    let service = {id:sub_service.service_id, name:sub_service.service};
     let location_id = this.locationId;
     this.navCtrl.push(SubcategoryListPage,{location_id,service});

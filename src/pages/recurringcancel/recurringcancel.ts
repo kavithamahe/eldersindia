@@ -3,6 +3,7 @@ import { NavController, NavParams,LoadingController,ViewController } from 'ionic
 import { Storage } from '@ionic/storage';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { RecurringPagePage } from '../../pages/recurring/recurring';
 import { BlogListService } from '../../providers/blog-list-service';
 
 
@@ -58,7 +59,7 @@ recurringlist:any;
     this.blogListService.deleterecurringrequest(this.rootUrl,this.recurring_request_id)
       .subscribe(data =>{ 
       	this.blogListService.showToast(data.result);
-      	this.navCtrl.pop();
+      	this.navCtrl.setRoot(RecurringPagePage);
         loading.dismiss();
     },
     err =>{

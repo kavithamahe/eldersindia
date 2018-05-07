@@ -30,9 +30,8 @@
 </ion-fab>
 <div class="profile-edit">
 
-    <span class="profile-img"><img alt="logo" [src]="base64Image" *ngIf="base64Image"/> </span>
-  <!--  <span *ngIf="user_type =='sponsor' " class="profile-img"><img alt="profile" class="mar-top" [src]="imageURL+profileData?.avatar"/> </span> -->
-
+    <span class="profile-img"><img alt="logo" [src]="base64Image" *ngIf="base64Image"/>
+     </span>
 		<p text-capitalize>{{profileData?.name}} {{profileData?.last_name}}</p>
 	</div>
 	<div class="edit-profile">
@@ -56,7 +55,6 @@
 		   <p><i class="fa fa-map-marker"></i>&nbsp;{{profileData?.locationName}}</p>
             <p><i class="fa fa-birthday-cake" aria-hidden="true"></i>&nbsp;{{user_dob}}
             </p>
-			<!-- <p *ngIf="user_type =='elder' "><i class="fa fa-user userioc"></i>&nbsp;{{gender}}</p> -->
            <p><i class="fa fa-envelope-o"></i>&nbsp;{{profileData?.email}}</p>
             <p *ngIf="user_type !='sponsor' "><i class="fa fa-map-marker"></i>&nbsp;{{profileData?.address}}</p>
 			<p><i class="fa fa-calendar"></i>&nbsp;{{profileData?.updated_at}}</p>
@@ -64,29 +62,6 @@
   </div>
 </div>
 </ion-content>
-<!-- <ion-footer> -->
-<!-- <ion-navbar color="primary"> -->
-  <!-- <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" --> 
-    <!-- <ion-buttons> -->
-      <!-- <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()"> -->
-        <!-- <!-- <i class="fa fa-reply" aria-hidden="true"></i> --> 
-        <!-- <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon> -->
-        <!-- <div style="padding-left: 10px !important;"> -->
-          <!-- Back -->
-        <!-- </div> -->
-      <!-- </button> -->
-      <!-- <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()"> -->
-        <!-- <!-- <i class="fa fa-reply" aria-hidden="true"></i> --> 
-        <!-- <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon> -->
-        <!-- <div style="padding-left: 10px !important;"> -->
-          <!-- Back -->
-        <!-- </div> -->
-      <!-- </button> -->
-    <!-- </ion-buttons> -->
-   
-  <!-- </ion-toolbar> -->
-  <!-- </ion-navbar> -->
-<!-- </ion-footer> -->
 <style>
 .text-input-md{ margin:0px;}
 .item-block{ border-bottom:none !important;}

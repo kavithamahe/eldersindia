@@ -1,367 +1,258 @@
-import { Component,ViewChild } from '@angular/core';
-import { Content } from 'ionic-angular';
-import { NavController, NavParams, LoadingController,ToastController,AlertController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
-import { CallNumber } from 'ionic-native';
-import { ServiceRequestService } from '../../providers/service-request-service';
-import { ViewServiceRequestPage } from '../../pages/view-service-request/view-service-request';
-import { DashboardPage } from '../../pages/dashboard/dashboard';
-/*
-  Generated class for the Servicerequest page.
+import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
-@Component({
-  selector: 'page-servicerequest',
-  templateUrl: 'servicerequest.html',
-  providers:[ServiceRequestService]
+
+import { Storage } from '@ionic/storage';
+import { MyApp } from './app.component';
+import { TruncateModule } from 'ng2-truncate';
+import {RlTagInputModule} from 'angular2-tag-input';
+import { Ng2CompleterModule } from "ng2-completer";
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DatePipe } from '@angular/common';
+
+// import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+
+import {BrowserModule} from '@angular/platform-browser';
+import { Ng2EmojiModule } from 'ng2-emoji';
+import { NativeAudio } from '@ionic-native/native-audio';
+
+import { Geolocation } from 'ionic-native';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { Diagnostic } from 'ionic-native';
+import { CameraPreview } from 'ionic-native';
+import {MomentModule} from 'angular2-moment';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { FilePath } from '@ionic-native/file-path';
+import { Transfer } from '@ionic-native/transfer';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+import { LoginPage } from '../pages/login/login';
+import { AppConfig } from '../providers/app-config';
+import { LoginUser } from '../providers/login-user';
+import { DashboardPage } from '../pages/dashboard/dashboard';
+import { ConnectionsPage } from '../pages/connections/connections';
+import { JobboardPage } from '../pages/jobboard/jobboard';
+import { SinglejobPage } from '../pages/singlejob/singlejob';
+import { AppliedJobsPage } from '../pages/applied-jobs/applied-jobs';
+import { MessagesPage } from '../pages/messages/messages';
+import { CreateMessagePage } from '../pages/create-message/create-message';
+import { ViewMessagesPage } from '../pages/view-messages/view-messages';
+import { ViewpackagePagePage } from '../pages/viewpackage/viewpackage';
+import { ElderservicePagePage } from '../pages/elderservice/elderservice';
+import { PaymentPage } from '../pages/payment/payment';
+import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
+
+//packages related pages
+import {PackageRequestPagePage } from '../pages/package-request/package-request';
+import {PackageDetailPagePage } from '../pages/package-detail/package-detail'; 
+
+import { ServiceprovidersPage } from '../pages/serviceproviders/serviceproviders';
+import { ServicerequestPage } from '../pages/servicerequest/servicerequest';
+import { ViewServiceRequestPage } from '../pages/view-service-request/view-service-request';
+import { BlogsPage } from '../pages/blogs/blogs';
+import { SingleblogPage } from '../pages/singleblog/singleblog';
+import { ShareBlogPagePage } from '../pages/share-blog/share-blog';
+import { CreateBlogPage } from '../pages/create-blog/create-blog';
+import { NewsPage } from '../pages/news/news';
+import { ViewNewsPage } from '../pages/view-news/view-news';
+import { EventsPage } from '../pages/events/events';
+import { ViewEventsPage } from '../pages/view-events/view-events';
+import { ExternallinksPage } from '../pages/externallinks/externallinks';
+import { LogoutPage } from '../pages/logout/logout';
+import { JobDependentPage } from '../pages/job-dependent/job-dependent';
+import { ManageBlogsPage } from '../pages/manage-blogs/manage-blogs';
+import { EmojiPickerPage } from '../pages/emoji-picker/emoji-picker';
+import { RecurringPagePage } from '../pages/recurring/recurring';
+import { RecurringviewPagePage } from '../pages/recurringview/recurringview';
+import { RecurringcancelPagePage } from '../pages/recurringcancel/recurringcancel';
+
+// Kavitha
+import { CommunitylistPage } from '../pages/communitylist/communitylist';
+import { CommunityPage } from '../pages/community/community';
+
+import { CommunityPopoverPage } from '../pages/community/community';
+import { CommunityprofilePage } from '../pages/communityprofile/communityprofile';
+import { CommunitymessagePage } from '../pages/communitymessage/communitymessage';
+import { CommunitycommentsPage } from '../pages/communitycomments/communitycomments';
+
+import { MyprofilesettingPage } from '../pages/myprofilesetting/myprofilesetting';
+import { CommunitymembersPage } from '../pages/communitymembers/communitymembers';
+import { PopoverPage } from '../pages/connections/connections';
+
+import { ManagePage } from '../pages/manage/manage';
+
+import { EldersPage } from '../pages/elders/elders';
+import { CommunityServices } from '../providers/community-services';
+
+//Sam
+import { SubCategoryPage } from '../pages/sub-category/sub-category';
+import { SubcategoryListPage } from '../pages/subcategory-list/subcategory-list';
+import { InstantRequestModalPage } from '../pages/subcategory-list/subcategory-list';
+import { ServiceInfoPage } from '../pages/service-info/service-info';
+import { ServiceModalPage } from '../pages/service-modal/service-modal';
+import { ModalContentPage } from '../pages/modal-page/modal-page';
+import { Modelpage1PagePage } from '../pages/modelpage1/modelpage1';
+import { ChangePasswordPage } from '../pages/change-password/change-password';
+import { MyProfilePage } from '../pages/my-profile/my-profile';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
+import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
+import { SettingsPage } from '../pages/settings/settings';
+import { SubCategoryServicePage } from '../pages/sub-category-service/sub-category-service';
+import { TermsModalPage } from '../pages/terms-modal/terms-modal';
+import { GetpackagePagePage } from '../pages/getpackage/getpackage';
+import { Ionic2RatingModule } from 'ionic2-rating';
+import { ServiceProvider } from '../providers/service-provider';
+
+// import { Externallinks } from '../providers/externallinks';
+
+
+
+@NgModule({
+  declarations: [
+    MyApp,
+    LoginPage,
+    DashboardPage,
+    ConnectionsPage,
+    CommunitylistPage,
+    CommunityPage,
+    CommunityPopoverPage,
+    CommunityprofilePage,
+    CommunitymessagePage,
+    CommunitycommentsPage,
+    MyprofilesettingPage,
+    EmojiPickerPage,
+    CommunitymembersPage,
+    PopoverPage,
+    ShareBlogPagePage,
+    GetpackagePagePage,
+    ViewpackagePagePage,
+    ElderservicePagePage,
+    PaymentPage,
+    ManagePage,
+    EldersPage,
+    JobboardPage,
+    SinglejobPage,
+    AppliedJobsPage,
+    MessagesPage,
+    CreateMessagePage,
+    ViewMessagesPage,
+    ServiceprovidersPage,
+    PackageRequestPagePage,
+    PackageDetailPagePage,
+    RecurringPagePage,
+    RecurringviewPagePage,
+    RecurringcancelPagePage,
+    ServicerequestPage,
+    ViewServiceRequestPage,
+    BlogsPage,
+    SingleblogPage,
+    CreateBlogPage,
+    LogoutPage,
+    JobDependentPage,
+    ManageBlogsPage,
+    SubCategoryPage,
+    SubCategoryServicePage,
+    SubcategoryListPage,
+    ServiceInfoPage,
+    ModalContentPage,
+    Modelpage1PagePage,
+    InstantRequestModalPage,
+    NewsPage,
+    ViewNewsPage,
+    EventsPage,
+    ExternallinksPage,
+    ViewEventsPage,
+    ForgotPasswordPage,
+    MyProfilePage,
+    EditProfilePage,
+    ChangePasswordPage,
+    SettingsPage,
+    ServiceModalPage,
+    TermsModalPage,
+    RemotemonitorPagePage
+  ],
+  imports: [
+
+    IonicModule.forRoot(MyApp,AppConfig,{
+       tabsHideOnSubPages:true
+    }),
+
+    TruncateModule,
+    RlTagInputModule,
+    Ionic2RatingModule,
+    Ng2CompleterModule,
+    Ng2SearchPipeModule,
+    BrowserModule,
+    Ng2EmojiModule,
+    MomentModule
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    LoginPage,
+    DashboardPage,
+    ConnectionsPage,
+    CommunitylistPage,
+    CommunityprofilePage,
+    CommunitymessagePage,
+    CommunitycommentsPage,
+    MyprofilesettingPage,
+    EmojiPickerPage,
+    CommunitymembersPage,
+    ViewpackagePagePage,
+    PopoverPage,
+    ShareBlogPagePage,
+    GetpackagePagePage,
+    CommunityPage,
+    CommunityPopoverPage,
+    ElderservicePagePage,
+    PaymentPage,
+    ManagePage,
+    EldersPage,
+    JobboardPage,
+    SinglejobPage,
+    AppliedJobsPage,
+    MessagesPage,
+    CreateMessagePage,
+    ViewMessagesPage,
+    ServiceprovidersPage,
+    PackageRequestPagePage,
+    PackageDetailPagePage,
+    RecurringPagePage,
+    RecurringviewPagePage,
+    RecurringcancelPagePage,
+    ServicerequestPage,
+    ViewServiceRequestPage,
+    BlogsPage,
+    SingleblogPage,
+    CreateBlogPage,
+    LogoutPage,
+    JobDependentPage,
+    ManageBlogsPage,
+    SubCategoryPage,
+    SubCategoryServicePage,
+    SubcategoryListPage,
+    ServiceInfoPage,
+    ModalContentPage,
+    Modelpage1PagePage,
+    InstantRequestModalPage,
+    NewsPage,
+    ViewNewsPage,
+    EventsPage,
+    ExternallinksPage,
+    ViewEventsPage,
+    ForgotPasswordPage,
+    MyProfilePage,
+    EditProfilePage,
+    ChangePasswordPage,
+    SettingsPage,
+    ServiceModalPage,
+    TermsModalPage,
+    RemotemonitorPagePage
+  ],
+
+    //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,InAppBrowser,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,DatePipe,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
 })
-export class ServicerequestPage {
-    @ViewChild(Content) content: Content;
-imageUrl:any;
-token:any;
-status:any="";
-serviceRequestInfo:any=[];
-showRemark:any=null;
-rating:number=0;
-remarks:string='';
-nextPageURL:any='';
-getRemarksList:any=[];
-serviceRequestScrollLists:any=[];
-vendorStatus:any=[];
-servicestatus:any=[];
-sr_token:any;
-searchEvent:any="";
-sortby:any="";
-other:any;
-  constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
-  	this.storage.ready().then(() => {
-  	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      storage.get('token').then((token) => { this.token=token; 
-      this.sr_token=navParams.get("sr_token");
-      if(navParams.get("sr_token")){
-        this.onInits();
-      }
-      else{
-       this.onInit(); 
-      }
-  		
-      this.getRemarks();
-      })
-  	});
-  }
-    scrollToTop() {
-    this.content.scrollToTop();
-  }
-  scrollToBottom(){
-    this.content.scrollToBottom();
-  }
-  onInitstatus(){
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-    //this.serviceRequestInfo =[];
-    this.serviceRequest.serviceRequestStatus(this.searchEvent,this.status).subscribe(
-     (serviceRequest) => {
-      this.serviceRequestInfo=serviceRequest.result.info.list.data; 
-      this.vendorStatus=serviceRequest.result.info.status;
-       this.servicestatus=serviceRequest.result.info.status;
-      this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
-      loader.dismiss();    
-    },
-    (err) => { 
-      this.serviceRequestInfo =[];
-        if(err.status===401)
-        {
-        this.showToaster(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-        }
-        loader.dismiss();
-      }
-    ); 
-  }
-  public onInit()
-  {
-  	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-    //this.serviceRequestInfo =[];
-    this.serviceRequest.serviceRequestList(this.searchEvent,this.status,this.sortby).subscribe(
-     (serviceRequest) => {
-      this.serviceRequestInfo=serviceRequest.result.info.list.data; 
-      this.vendorStatus=serviceRequest.result.info.status;
-       this.servicestatus=serviceRequest.result.info.status;
-      this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
-      loader.dismiss();    
-    },
-    (err) => { 
-      this.serviceRequestInfo =[];
-        if(err.status===401)
-        {
-        this.showToaster(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-        }
-        loader.dismiss();
-      }
-    );    
-  }
-  public onInits()
-  {
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-    this.serviceRequestInfo =[];
-    this.serviceRequest.serviceRequestLists(this.sr_token,this.searchEvent,this.status,this.sortby).subscribe(
-     (serviceRequest) => {
-      this.serviceRequestInfo=serviceRequest.result.info.list.data; 
-      this.vendorStatus=serviceRequest.result.info.status;
-       this.servicestatus=serviceRequest.result.info.status;
-      this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
-      loader.dismiss();    
-    },
-    (err) => { 
-      this.serviceRequestInfo =[];
-        if(err.status===401)
-        {
-        this.showToaster(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-        }
-        loader.dismiss();
-      }
-    );    
-  }
-  public getItems(searchEvent) {
-    this.searchEvent = searchEvent;
-    this.onInit();
-      // this.serviceRequest.searchConnection(term).subscribe(searchConnection => {
-      //   this.serviceRequestInfo= searchConnection.result.info.list.data;
-      // });
-  }
-  public getRemarks()
-  {
-    this.serviceRequest.getRemarks().subscribe(
-     (getRemarks) => {
-      this.getRemarksList=getRemarks.result.info.remark.data;       
-    },
-    (err) => { 
-        if(err.status===401)
-        {
-        this.showToaster(JSON.parse(err._body).error);
-        }
-        
-      }
-    );
-  }
-    showConfirm(serviceId){
-    let prompt = this.alertCtrl.create({
-      title: 'Cancel Service Request',
-     // message: "All reports are strictly confidential. Please describe the reason",
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Comments'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            //console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Submit',
-          handler: data => {
-            
-            //console.log(data.title);
-            if(data.title == ""){
-              this.showToaster("Please enter the reason");
-               return false;
-            }
-            else{
-            this.cancelRequest(data.title,serviceId);
-          }
-          }
-        }
-      ]
-    });
-    prompt.present();
-  }
-  // showConfirm(serviceId){
-  //    let confirm = this.alertCtrl.create({
-  //    subTitle: 'This request will be deleted',
-  //      buttons: [
-  //       {
-  //         text: 'Cancel',
-  //        },
-  //       {
-  //         text: 'Ok',
-  //         handler: () => {
-  //          this.cancelRequest(serviceId);
-          
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   confirm.present();
-  // }
-  public cancelRequest(title,serviceId)
-  {
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-    this.serviceRequest.cancelRequest(title,serviceId).subscribe(
-     (cancelRequest) => {
-      this.getRemarksList=cancelRequest.result;   
-      this.showToaster(cancelRequest.result); 
-      loader.dismiss(); 
-      this.onInit();   
-    },
-    (err) => { 
-        if(err.status===401)
-        {
-        this.showToaster(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-        }
-        loader.dismiss();
-      });
-  }
-  
-  public viewRequest(serviceRequestId)
-  {
-     this.navCtrl.push(ViewServiceRequestPage, {serviceRequestId});
-  }
-  public showToaster(message)
-  {
-   let toast = this.toastCtrl.create({
-        message: message,
-        duration: 3000,
-        position: 'top'
-        });
-   toast.present();
-  }
-  public dashboardPage()
-  {
-    this.navCtrl.setRoot(DashboardPage);
-  }
-  enableRemark(eventId)
-  {
-    this.remarks='';
-    this.rating=0;
-   if(this.showRemark==eventId)
-   {
-     this.showRemark=null;
-   }
-   else
-   {
-     this.showRemark=eventId;
-   }
-  }
-  submitRemark(serviceId)
-  {
-    if(this.rating==0 && this.remarks=='')
-    {
-    this.showAlert('Please enter rating and remarks');
-    }
-    else if(this.rating==0)
-    {
-    this.showAlert('Please enter rating');
-    }
-    else if(this.remarks=='')
-    {
-    this.showAlert('Please enter remarks');
-    }
-    else
-    {
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-    this.serviceRequest.submitRemark(serviceId,this.rating,this.remarks,this.other).subscribe(
-     (submitRemark) => {      
-      this.showToaster(submitRemark.result);  
-      this.remarks='';
-      this.rating=0;   
-      this.showRemark=null;  
-      this.onInit(); 
-      loader.dismiss(); 
-    },
-    (err) => { 
-        if(err.status===401)
-        {
-        this.showToaster(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-        }
-        loader.dismiss();
-      }
-    );    
-  }
-  }
-  showAlert(errorMsg) {
-    let alert = this.alertCtrl.create({
-      title: 'Error Message',
-      subTitle:errorMsg,
-      buttons: ['OK']
-    });
-    alert.present();
-  }
-  doInfinite(infiniteScroll) {
-    setTimeout(() => {      
-      if(this.nextPageURL!=null && this.nextPageURL!='')
-      {
-       this.serviceRequestScroll();
-      }
-      else{
-        infiniteScroll.enable(false);
-      }
-      infiniteScroll.complete();
-    }, 500);
-  }
-  serviceRequestScroll()
-  {
-    this.serviceRequest.serviceRequestScroll(this.nextPageURL,this.searchEvent,this.status,this.sortby).subscribe(
-     (serviceRequestScroll) => {
-      this.serviceRequestScrollLists=serviceRequestScroll.result.info.list.data; 
-       for (let i = 0; i < Object.keys(this.serviceRequestScrollLists).length; i++) {
-        this.serviceRequestInfo.push(this.serviceRequestScrollLists[i]);
-        }
-      
-       this.nextPageURL=serviceRequestScroll.result.info.list.next_page_url;     
-    },
-    (err) => { 
-        if(err.status===401)
-        {
-          this.showToaster(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-        }
-      }
-    );
-     
-  }
-  public makeCall(number)
-  {
-    if(number)
-    {
-    CallNumber.callNumber(number, true)
-  .then(() => console.log('Launched dialer!'))
-  .catch(() => console.log('Error launching dialer'));
-   }
-   else
-   {
-    this.showToaster("There is no contact number");
-   }
-  }
-}
+export class AppModule {}

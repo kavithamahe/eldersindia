@@ -20,14 +20,6 @@
 	<form [formGroup]="edit_profile_Form">
 <div class="edit-profile-view">
 
-		
-		<!-- <ion-label class="liste-edit" *ngIf="user_type =='elder' ">Name</ion-label>
-		<ion-label class="liste-edit" *ngIf="user_type =='sponsor' ">Sponsor name
-		</ion-label>
-		<ion-item>
-	    <ion-input type="text" formControlName="name" placeholder="Sponsor name"></ion-input>
-	    </ion-item>
-         -->
       	 <ion-label class="liste-edit">Employee id</ion-label>
 		<ion-item>
 	    <ion-input type="text" formControlName="empid" placeholder="Employee id"></ion-input>
@@ -62,11 +54,10 @@
 	
 
 		<ion-label class="liste-edit required">Date of birth</ion-label>
-		<ion-item>
-		<ion-datetime class="select-brd" style="font-size:17px;" type="date" displayFormat="DD-MM-YYYY" [(ngModel)]="user_dob" formControlName="user_dob" placeholder="Date of birth" 
+		<ion-item> 
+		<ion-datetime class="select-brd" style="font-size:17px;" [(ngModel)]="user_dob" formControlName="user_dob" placeholder="Date of birth" displayFormat="MMM DD, YYYY"
 		[class.invalid]="!edit_profile_Form.controls.user_dob.valid && 
-	                (edit_profile_Form.controls.user_dob.dirty)">
-	            <button class="button button-block button-positive"> {{ currentDate | date:'dd - MMMM - yyyy' }}    </button>   
+	                (edit_profile_Form.controls.user_dob.dirty)">  
 		    </ion-datetime>
 	  	</ion-item>
 
