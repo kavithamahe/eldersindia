@@ -49,9 +49,15 @@ export class DashboardPage {
   long:any;
   street:any;
   city:any;
+  sponsor_name:any;
+  elder_name:any;
+  elder_lastname:any;
+  doctor:any;
+  hospital:any;
+  urls:any;
+  emergency_url:any;
   constructor(private nativeAudio: NativeAudio,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation, private nativeGeocoder: NativeGeocoder,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
-  	storage.get('Cctv_camera').then((Cctv_camera) => { this.Cctv_camera=Cctv_camera; 
-   console.log("fdgdfg" +this.Cctv_camera); })
+  	storage.get('Cctv_camera').then((Cctv_camera) => { this.Cctv_camera=Cctv_camera; })
      this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.url=imageurl;});
@@ -61,41 +67,62 @@ export class DashboardPage {
       this.headers.append('Authorization', 'Bearer ' + this.token);
       this.head = new RequestOptions({ headers: this.headers });
     this.fetchLocation();
-    this.map1();
+    this.map();
   })
       storage.get('user_type').then((user_type) => { this.user_type=user_type; 
       console.log(this.user_type); })
+       this.storage.get('name').then((name) => { this.elder_name=name;})
+       this.storage.get('lastname').then((lastname) => { this.elder_lastname=lastname;})
       storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor;  })
        this.storage.get('sponsor_avatar').then((sponsor_avatar) => { this.sponsor_avatar=sponsor_avatar; })
+       this.storage.get('sponsor_name').then((sponsor_name) => { this.sponsor_name=sponsor_name; })
       storage.get('ambulance').then((ambulance) => { this.ambulance=ambulance; })
       storage.get('police').then((police) => { this.police=police;  })
+      storage.get('doctor').then((doctor) => { this.doctor=doctor;  })
+      storage.get('hospital').then((hospital) => { this.hospital=hospital;  })
   });
     
   }
-    map1()
-  {
+
+   ionViewWillEnter() {
+     this.storage.get('name').then((name) => { this.elder_name=name; })
+     this.storage.get('lastname').then((lastname) => { this.elder_lastname=lastname;})
+     this.storage.get('sponsor_avatar').then((sponsor_avatar) => { this.sponsor_avatar=sponsor_avatar; })
+     this.storage.get('sponsor_name').then((sponsor_name) => { this.sponsor_name=sponsor_name; })
+    this.tabBarElement.style.display = 'none';
+  }
+  map(){
+        console.log("fsdf");
       Geolocation.getCurrentPosition().then((position) => {
       this.lat=position.coords.latitude;
       this.long=position.coords.longitude;
-         this.nativeGeocoder.reverseGeocode(this.lat, this.long)
-  .then(
-    (result: NativeGeocoderReverseResult) => {
-     this.street =  result.street;
-     this.city = result.city;
-    console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
-   var url = 'https://www.google.com/maps/place/' + this.street + ',' + this.city + '/@' + this.lat + ',' + this.long;
-      console.log("URL"+url);
- })
-   
-      });
 
+  //     console.log(this.long);
+  //        this.nativeGeocoder.reverseGeocode(this.lat, this.long)
+  // .then(
+  //   (result: NativeGeocoderReverseResult) => {
+     // this.street =  result.street;
+     // this.city = result.city;
+     // console.log("fsdf"+this.street);
+    // console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
+   // this.urls = 'https://www.google.com/maps/place/'+this.street+','+this.city+'/@'+this.lat+ ',' + this.long;
+   
+ // })
+    this.urls = 'https://www.google.com/maps/place/'+this.lat+ ',' + this.long;
+
+
+    });
   }
-   ionViewWillEnter() {
-     this.storage.get('sponsor_avatar').then((sponsor_avatar) => { this.sponsor_avatar=sponsor_avatar; })
-     
-    this.tabBarElement.style.display = 'none';
+     shareLocation()
+  {
+ this.providerService.elderEmergencySms(this.urls,this.call_sponsor,this.sponsor_name,this.elder_name,this.elder_lastname)
+      .subscribe(data =>{
+      this.providerService.showToast(data.result);
+    },
+    err =>{
+      this.providerService.showErrorToast(err);
+      })
   }
- 
   ionViewWillLeave() {
     this.tabBarElement.style.display = 'flex';
   }
@@ -125,23 +152,23 @@ export class DashboardPage {
 }
 
   getLocation(d1,d2){
-    console.log(this.head);
+    console.log("fgdfgdg" +d1,d2);
     this.nativeGeocoder.reverseGeocode(d1, d2)
   .then(
     (result: NativeGeocoderReverseResult) => {
-     
-    console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
-    this.providerService.chechLocationID(result.city,this.head)
-      .subscribe(data =>{
-      this.serviceLocation=data.result.id;
-       this.storage.ready().then(() => {
-      this.storage.set('service_location',this.serviceLocation);
-    });
-    },
-    err =>{
-      this.providerService.showErrorToast(err);
+      console.log(JSON.stringify(result));
+    // console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
+    // this.providerService.chechLocationID(result.city,this.head)
+    //   .subscribe(data =>{
+    //   this.serviceLocation=data.result.id;
+    //    this.storage.ready().then(() => {
+    //   this.storage.set('service_location',this.serviceLocation);
+    // });
+    // },
+    // err =>{
+    //   this.providerService.showErrorToast(err);
       
-    })
+    // })
 
     })
     

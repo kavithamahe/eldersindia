@@ -40,10 +40,6 @@
         <ion-col width-50>
         <ion-segment-button class="listed-rec">Received Requests</ion-segment-button>
         </ion-col>
-           <ion-col width-50>
-           <ion-segment-button class="listed-rec"><i class="fa fa-blind"></i>-Elder
-           </ion-segment-button>
-           </ion-col>
           </ion-row>
          <ion-row>
             <ion-col width-80><ion-searchbar [(ngModel)]="searchrec"></ion-searchbar>
@@ -61,7 +57,8 @@
                 </ion-avatar>
               </ion-col>
               <ion-col width-67>
-              <p><span><h6 class="name-conne" (click)="CommunityUserWall(request?.id)"><i class="fa fa-blind" *ngIf="request?.user_type == 'elder' "></i>  {{request?.connections?.name}} {{request?.connections?.last_name}}</h6>
+              <p><span><h6 class="name-conne" style="color: #ff688f" *ngIf="request?.user_type == 'sponsor'" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}</h6>
+              <h6 class="name-conne" style="color: #00a1ad" *ngIf="request?.user_type == 'elder'" (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}</h6>
               </span></p>
               <p [hidden]="!request?.connections?.location"><i class="fa fa-map-marker">
               </i> <span>{{request?.connections?.location}}</span></p>
@@ -86,10 +83,6 @@
             <ion-col width-50>
           <ion-segment-button class="listed-rec">Sent Requests</ion-segment-button>
           </ion-col>
-           <ion-col width-50>
-           <ion-segment-button class="listed-rec"><i class="fa fa-blind"></i>-Elder
-           </ion-segment-button>
-           </ion-col>
           </ion-row>
          <!--   <ion-searchbar (input)="sendsearch($event)">
             </ion-searchbar>  --> 
@@ -110,9 +103,15 @@
                     </ion-avatar>
                   </ion-col>
                   <ion-col width-67>
-                   <p> <span>
-                    <h6 class="name-conne" [hidden]="!request?.connections?.name" 
-                    (click)="CommunityUserWall(request?.id)"><i class="fa fa-blind" *ngIf="request?.user_type == 'elder' "></i> {{request?.connections?.name}} {{request?.connections?.last_name}}
+                   <p><span>
+                    <h6 class="name-conne" style="color: #ff688f;" *ngIf="request?.user_type == 'sponsor'" 
+                    [hidden]="!request?.connections?.name" 
+                    (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}
+                    </h6></span></p>
+                    <p><span>
+                    <h6 class="name-conne" style="color: #00a1ad;" *ngIf="request?.user_type == 'elder'" 
+                    [hidden]="!request?.connections?.name" 
+                    (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}
                     </h6></span></p>
                     <p [hidden]="!request?.connections?.location"><i class="fa fa-map-marker"></i><span> {{request?.connections?.location}}</span>   
                     </p>
@@ -134,10 +133,6 @@
           <ion-col width-50>
           <ion-segment-button class="listed-rec">All Connections</ion-segment-button>
           </ion-col>
-           <ion-col width-50>
-           <ion-segment-button class="listed-rec"><i class="fa fa-blind"></i>-Elder
-           </ion-segment-button>
-           </ion-col>
           </ion-row>
             <ion-row>
             <ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
@@ -160,7 +155,8 @@
                 <ion-col width-67>
                 <p>
                 <span>
-                  <h6 class="name-conne" (click)="CommunityUserWall(all?.id)"><i class="fa fa-blind" *ngIf="all?.user_type == 'elder' "></i>  {{all?.connections?.name}} {{all?.connections?.last_name}}</h6>
+                  <h6 class="name-conne" style="color: #ff688f;" *ngIf="all?.user_type == 'sponsor'" (click)="CommunityUserWall(all?.id)">{{all?.connections?.name}} {{all?.connections?.last_name}}</h6>
+                    <h6 class="name-conne" style="color: #00a1ad;" *ngIf="all?.user_type == 'elder'"  (click)="CommunityUserWall(all?.id)">{{all?.connections?.name}} {{all?.connections?.last_name}}</h6>
                 </span></p>
                   <p [hidden]="!all?.connections?.location"><i class="fa fa-map-marker"></i><span> {{all?.connections?.location}}</span></p>
                 </ion-col>
@@ -185,8 +181,7 @@
               <ion-col width-20><button (click)="search1(searchadd)" ion-button small 
               class="go-btn">Go</button> </ion-col>
             </ion-row>
-        
-            <ion-list *ngFor="let request of addConnectionInfo">
+          <ion-list *ngFor="let request of addConnectionInfo">
               <ion-item class="inbox-sends" *ngIf="error != 'No records found'">
                 <ion-row>
                   <ion-col width-20>
@@ -195,7 +190,9 @@
                     </ion-avatar>
                   </ion-col>
                   <ion-col width-80 text-wrap>
-                    <h6 class="name-conne" text-wrap (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}
+                    <h6 class="name-conne" style="color: #ff688f;"*ngIf="request?.user_type == 'sponsor'" text-wrap (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}
+                    </h6>
+                      <h6 class="name-conne" style="color: #00a1ad;" *ngIf="request?.user_type == 'elder'" text-wrap (click)="CommunityUserWall(request?.id)">{{request?.connections?.name}} {{request?.connections?.last_name}}
                     </h6>
                     <p [hidden]="!request?.connections?.location">
                     <i class="fa fa-map-marker"></i> <span>{{request?.connections?.location}}</span> </p>

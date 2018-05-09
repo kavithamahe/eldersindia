@@ -53,6 +53,12 @@ sendotp(){
     return this.http.post(this.rootUrl+'sendOtp',_request,this.head)
       .map(res => res.json());
 }
+elderEmergencySms(url,call_sponsor,sponsor_name,elder_name,elder_lastname){
+  console.log(this.head);
+  let _request= {"url":url,"sponsor_number":call_sponsor,"sponsor_name":sponsor_name,"elder_name":elder_name,"elder_lastname":elder_lastname};
+    return this.http.post(this.rootUrl+'elderEmergencySms',_request,this.head)
+      .map(res => res.json());
+}
 verifyotp(otp){
   let _request= {"otpcode":otp};
     return this.http.post(this.rootUrl+'verifyOtp',_request,this.head)

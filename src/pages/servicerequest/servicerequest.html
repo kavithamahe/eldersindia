@@ -85,20 +85,20 @@
 
 </ion-row> -->
  <ion-row *ngIf="service?.preferred_date != '0000-00-00'">
-
-  <p class="service-conts" *ngIf="service?.vendor_status == 0"><span class="token-primaryss">Preferred date & time:</span>{{service?.preferred_date}} {{service?.preferred_time}}</p>
-
-</ion-row>
+  <p class="service-conts" *ngIf="service?.vendor_status == 0"><span class="token-primaryss">Preferred date & time:</span>{{service?.preferred_date}} {{service?.preferred_time}}
+  </p>
+ </ion-row>
  <ion-row *ngIf="(service?.scheduled_date != null)">
-
-  <p class="service-conts"><span class="token-primaryss" *ngIf="service?.vendor_status == 4">Scheduled date:</span><span class="token-primaryss" *ngIf="service?.vendor_status == 5">Delivered date:</span> <span class="token-primaryss" *ngIf="service?.vendor_status == 2">Completed date:</span> {{service?.scheduled_date}}</p>
-
+ <p class="service-conts"><span class="token-primaryss" *ngIf="service?.vendor_status == 4">Scheduled date:</span><span class="token-primaryss" *ngIf="service?.vendor_status == 5">Delivered date:</span> <span class="token-primaryss" *ngIf="service?.vendor_status == 2">Completed date:</span> {{service?.scheduled_date}}</p>
 </ion-row>
 <ion-row *ngIf="service.service_type=='One time'">
 <p class="tocken-no">Service Cost: <i class="fa fa-rupee"></i>{{service.service_cost}}</p>
 </ion-row>
 <ion-row *ngIf="service.service_type=='One time'">
 <p class="tocken-no">Additional Service Cost: <i class="fa fa-rupee"></i>{{service.additional_service_cost}}</p>
+</ion-row>
+<ion-row *ngIf="service.helpline_mobile!='null'">
+<p class="service-conts" (click)="makeCall(service?.helpline_mobile)">In case of any query/complaint,please feel free to contact: {{service.helpline_mobile}}</p>
 </ion-row>
 	<ion-row>
 	<ion-col width-50 style="padding-left:0px;">
