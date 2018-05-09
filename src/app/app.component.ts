@@ -197,7 +197,7 @@ export class MyApp {
       this.pages2 = [];
       
       this.pages.push(
-                  { myIcon:'fa fa-th-large', title: 'Dashboard', component: DashboardPage },
+                  { myIcon:'fa fa-tachometer', title: 'Dashboard', component: DashboardPage },
                   { myIcon:'fa fa-snowflake-o', title: 'Services', component: ServiceprovidersPage },
                   { myIcon:'fa fa-cogs', title: 'My Service Requests', component: ServicerequestPage },
                   { myIcon:'fa fa-gift', title: 'Package Requests', component: PackageRequestPagePage },
@@ -218,9 +218,9 @@ export class MyApp {
 
                       );
       this.pages2.push(
-                  { myIcon:'fa fa-th-large', title: 'Dashboard', component: DashboardPage },
+                  { myIcon:'fa fa-tachometer', title: 'Dashboard', component: DashboardPage },
                   { myIcon:'fa fa-users', title: 'Manage Dependents', component: ManagePage },
-                  { myIcon:'fa fa-snowflake-o', title: 'Services', component: ServiceprovidersPage },
+                  { myIcon:'fa fa-cog', title: 'Services', component: ServiceprovidersPage },
                   { myIcon:'fa fa-cogs', title: 'My Service Requests', component: ServicerequestPage },
                   { myIcon:'fa fa-gift', title: 'Package Requests', component: PackageRequestPagePage },
                   { myIcon:'fa fa-gift', title: 'Recurring Requests', component: RecurringPagePage },

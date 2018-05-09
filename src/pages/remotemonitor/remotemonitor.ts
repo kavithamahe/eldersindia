@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+// import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
 
 
@@ -26,7 +26,7 @@ url:any;
 Cctv_camera:any;
 usernames:any;
 passwords:any;
-  constructor(private iab: InAppBrowser,public storage:Storage,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public storage:Storage,public navCtrl: NavController, public navParams: NavParams) {
    this.storage.ready().then(() => {
     storage.get('usernames').then((usernames) => { this.usernames=usernames; })
     storage.get('passwords').then((passwords) => { this.passwords=passwords;  })
