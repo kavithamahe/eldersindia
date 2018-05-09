@@ -276,6 +276,10 @@ public emergencies =  [
            {
             "name": "Hospital",
             "val" : "3"
+          },
+           {
+            "name": "Doctor",
+            "val" : "4"
           }
             
 

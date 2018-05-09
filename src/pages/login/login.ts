@@ -38,6 +38,8 @@ export class LoginPage {
   callSponsor:any=0;
   ambulance:any=0;
   police:any=0;
+  hospital:any=0;
+  doctor:any=0;
   constructor(public menuCtrl: MenuController,public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
   this.storage.ready().then(() => { 
      storage.get('id').then((id) => { this.id=id; 
@@ -86,12 +88,14 @@ export class LoginPage {
          this.storage.clear();
          this.storage.set('id', loginuser['details']['id']);
          this.storage.set('name', loginuser['details']['name']);
+         this.storage.set('lastname', loginuser['details']['lastname']);
          this.storage.set('email', loginuser['details']['email']);
-          this.storage.set('password',this.registerCredentials.password);
+         this.storage.set('password',this.registerCredentials.password);
          this.storage.set('user_type', loginuser['details']['user_type']);
          this.storage.set('user_type_id', loginuser['details']['user_type_id']);
          this.storage.set('avatar', loginuser['details']['avatar']);
          this.storage.set('sponsor_avatar', loginuser['details']['sponsor_avatar']);
+         this.storage.set('sponsor_name', loginuser['details']['sponsor_name']);
          if(loginuser['details']['user_type']=='elder' && (loginuser.details.emergency_contacts.length>0))
          {
          if(loginuser.details.emergency_contacts[0].call_sponsor!='undefined')
@@ -107,15 +111,23 @@ export class LoginPage {
          {
            this.police=loginuser.details.emergency_contacts[0].police;
          }
+         if(loginuser.details.emergency_contacts[0].doctor!='undefined')
+         {
+           this.doctor=loginuser.details.emergency_contacts[0].doctor;
+         }
+           if(loginuser.details.emergency_contacts[0].hospital!='undefined')
+         {
+           this.hospital=loginuser.details.emergency_contacts[0].hospital;
+         }
          this.storage.set('call_sponsor', this.callSponsor);
          this.storage.set('ambulance', this.ambulance);
          this.storage.set('police', this.police);
+         this.storage.set('doctor', this.doctor);
+         this.storage.set('hospital', this.hospital);
          }
          this.storage.set('token', loginuser['token']);
-         console.log(loginuser.token);
          this.storage.set('imageurl',this.appConfig.setImageurl());
          this.storage.set('rooturl',this.appConfig.setrooturl());
-         // this.storage.set('service_location','');
          this.storage.set('islogin',1);
          this.enableUserTypeMenu(loginuser['details']['user_type']);
          if(loginuser['details']['user_type'] != 'vendor' && loginuser['details']['user_type'] != 'admin'){
