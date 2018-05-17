@@ -92,7 +92,6 @@ export class DashboardPage {
     this.tabBarElement.style.display = 'none';
   }
   map(){
-        console.log("fsdf");
       Geolocation.getCurrentPosition().then((position) => {
       this.lat=position.coords.latitude;
       this.long=position.coords.longitude;
@@ -152,27 +151,27 @@ export class DashboardPage {
 }
 
   getLocation(d1,d2){
-    console.log("fgdfgdg" +d1,d2);
-    this.nativeGeocoder.reverseGeocode(d1, d2)
-  .then(
-    (result: NativeGeocoderReverseResult) => {
-      console.log(JSON.stringify(result));
-    // console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
-    // this.providerService.chechLocationID(result.city,this.head)
-    //   .subscribe(data =>{
-    //   this.serviceLocation=data.result.id;
-    //    this.storage.ready().then(() => {
-    //   this.storage.set('service_location',this.serviceLocation);
-    // });
-    // },
-    // err =>{
-    //   this.providerService.showErrorToast(err);
-      
-    // })
 
-    })
+  //   this.nativeGeocoder.reverseGeocode(d1,d2)
+  // .then(
+  //   (result: NativeGeocoderReverseResult) => {
+  //     console.log(result);
+  //   // console.log('The address is ' + results.street + ' in ' + results.city+ 'result is : ' + results.district)
+  //   // this.providerService.chechLocationID(result.city,this.head)
+  //   //   .subscribe(data =>{
+  //   //   this.serviceLocation=data.result.id;
+  //   //    this.storage.ready().then(() => {
+  //   //   this.storage.set('service_location',this.serviceLocation);
+  //   // });
+  //   // },
+  //   // err =>{
+  //   //   this.providerService.showErrorToast(err);
+      
+  //   // })
+
+  //   })
     
-  .catch((error: any) => console.log(error));
+  // .catch((error: any) => console.log(error));
   }
 
   ionViewDidLoad() {
@@ -184,7 +183,6 @@ export class DashboardPage {
   // if(this.Cctv_camera == undefined){
   //   this.navCtrl.push(RemotemonitorPagePage);
   // }else{
-    // com.google.android.youtube
     startApp.set({
       "action": "ACTION_SEND",
       "package": "com.dlink.mydlinkunified",
@@ -238,7 +236,7 @@ export class DashboardPage {
    }
    else
    {
-    this.showToaster("There is no contact number");
+    this.showToaster("Number is not configured");
    }
   }
   public hooter(hooterOn)

@@ -6,6 +6,7 @@ import { Platform, MenuController, Nav, AlertController,ToastController,LoadingC
 //import { Diagnostic } from 'ionic-native';
 import { CameraPreview, CameraPreviewRect, Diagnostic,StatusBar, Splashscreen, Push } from 'ionic-native';
 //import { Geolocation } from '@ionic-native/geolocation';
+import { Network } from '@ionic-native/network';
 
 
 // import the Menu's pages
@@ -48,7 +49,7 @@ import { ServiceProvider } from '../providers/service-provider';
 import { CommunityServices } from '../providers/community-services';
 
 import { Storage } from '@ionic/storage';
-
+declare var Connection: any;
 
 @Component({//selector:'my-theme',
   templateUrl: 'app.html'
@@ -94,8 +95,31 @@ export class MyApp {
     public service:ServiceProvider,
     public loadingCtrl: LoadingController,
     public community_service:CommunityServices,
-    public storage:Storage
+    public storage:Storage,
+    private network: Network
   ) {
+    let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+      this.alert = this.alertCtrl.create({
+        title: 'No Internet Connection',
+        // message: 'Do you want to exit the app?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              this.alert =null;
+            }
+          },
+          {
+            text: 'Exit',
+            handler: () => {
+              this.platform.exitApp();
+            }
+          }
+        ]
+      });
+      this.alert.present();
+    });
 
     this.storage.ready().then(() => {
     storage.get('user_type').then((userType)=>{

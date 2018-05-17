@@ -206,8 +206,8 @@ mytype:string ="password";
          experience_list: this. formBuilder.array([
                 this.experienceAddress(),
             ]),
-          area_of_interest: ['', Validators.compose([Validators.required])],
-           elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
+        area_of_interest: ['', Validators.compose([Validators.required])],
+        elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
         elder_password:['', Validators.compose([Validators.required])],
         elder_service: ['', Validators.compose([Validators.required])],
         job_type: ['', Validators.compose([Validators.required])],
@@ -223,9 +223,9 @@ mytype:string ="password";
          experience_list: this. formBuilder.array([
                 this.experienceAddress(),
             ]),
-          area_of_interest: ['', Validators.compose([Validators.required])],
+        area_of_interest: ['', Validators.compose([Validators.required])],
         job_type: ['', Validators.compose([Validators.required])],
-         elder_service: ['', Validators.compose([Validators.required])],
+        elder_service: ['', Validators.compose([Validators.required])],
         skill_set: ['', Validators.compose([Validators.required])]
    })
  }
@@ -281,9 +281,7 @@ public emergencies =  [
             "name": "Doctor",
             "val" : "4"
           }
-            
-
-        ];
+         ];
 
         onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;

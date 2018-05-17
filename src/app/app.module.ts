@@ -7,8 +7,10 @@ import { MyApp } from './app.component';
 import { TruncateModule } from 'ng2-truncate';
 import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
-// import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
+import { Network } from '@ionic-native/network';
+
 
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -43,9 +45,10 @@ import { ElderservicePagePage } from '../pages/elderservice/elderservice';
 import { PaymentPage } from '../pages/payment/payment';
 import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
 
+
 //packages related pages
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
-import {PackageDetailPagePage } from '../pages/package-detail/package-detail'; 
+import {PackageDetailPagePage } from '../pages/package-detail/package-detail';
 
 import { ServiceprovidersPage } from '../pages/serviceproviders/serviceproviders';
 import { ServicerequestPage } from '../pages/servicerequest/servicerequest';
@@ -182,7 +185,7 @@ import { ServiceProvider } from '../providers/service-provider';
     RlTagInputModule,
     Ionic2RatingModule,
     Ng2CompleterModule,
-    // Ng2SearchPipeModule,
+    Ng2SearchPipeModule,
     BrowserModule,
     Ng2EmojiModule,
     MomentModule
@@ -249,10 +252,11 @@ import { ServiceProvider } from '../providers/service-provider';
     SettingsPage,
     ServiceModalPage,
     TermsModalPage,
-    RemotemonitorPagePage
+    RemotemonitorPagePage,
+
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,DatePipe,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,DatePipe,Network,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
 })
 export class AppModule {}

@@ -23,6 +23,8 @@ selectedConnections:any;
 dependentLists:any=[];
 location_id:any;
 dependent_id:any;
+service_quantity:any;
+status:any;
   constructor(public navParams: NavParams,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
 
   	this.storage.ready().then(() => { 
@@ -32,6 +34,7 @@ dependent_id:any;
         storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
         this.location_id = navParams.get("location_id");
         this.packId = navParams.get("packID");
+        this.service_quantity = navParams.get("service_quantity");
         this.dependentLists = navParams.get("dependents");
         this.dependent_id = this.dependentLists[0].id;
          });
@@ -40,7 +43,18 @@ dependent_id:any;
   dismiss(){
   	this.navCtrl.pop();
   }
-getPackageelder(){
+  packageavailAlert(){
+         this.blogListService.packageAvailAlert(this.selectedConnections,this.packId,this.service_quantity).subscribe(connections => {
+        this.connectionInfo=connections.result;
+         this.status = connections.status;
+        this.blogListService.showToast(this.connectionInfo);
+     },
+   err =>{
+      this.blogListService.showErrorToast(err);
+  })
+
+  }
+ getPackageelder(){
  let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();    
       this.blogListService.getPackage(this.dependent_id,this.packId,this.location_id).subscribe(connections => {

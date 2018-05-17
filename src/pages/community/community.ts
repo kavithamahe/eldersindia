@@ -16,8 +16,6 @@ import { CommunitymembersPage } from '../../pages/communitymembers/communitymemb
 import { DomSanitizer } from '@angular/platform-browser/';
 import { InAppBrowser } from 'ionic-native';
 
-
-
 @Component({
   selector: 'page-community',
   templateUrl: 'community.html',

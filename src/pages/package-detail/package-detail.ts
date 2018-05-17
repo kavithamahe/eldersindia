@@ -70,11 +70,11 @@ vendorLogo:any;
       loading.dismiss();
     })
   }
-  openRequestPackage(id){
+  openRequestPackage(id,service_quantity){
     if(this.dependents.length == 1){
       this.dependentId = this.dependents[0].id;
     }
-    this.navCtrl.push(GetpackagePagePage,{packID:id,dependents:this.dependents,location_id:this.location_id});
+    this.navCtrl.push(GetpackagePagePage,{packID:id,dependents:this.dependents,location_id:this.location_id,service_quantity:service_quantity});
   
   }
   dashboardPage(){

@@ -56,7 +56,7 @@
               </ion-option>
             </ion-select>
               </ion-item>
-          <div *ngIf="data != '0'">
+          <div *ngIf="data != '0' && userType == 'elder'">
               <ion-item *ngIf="status == '1' || userType == 'elder' || data == '1'" class="one-timereq">
               <ion-label>Select Package</ion-label>
               <!-- <ion-label>Select Package</ion-label> -->
