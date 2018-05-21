@@ -35,7 +35,7 @@
   </ion-item>
   <h1 class="package-list-show">Packages</h1>
   <ion-card *ngFor="let pack of packages; let i=index" text-wrap class="packagelist">
-    <ion-item>
+    <ion-item text-wrap>
       <ion-col>
         <h3>{{pack.package_name}}</h3>
         <ion-list class="price-bt" *ngIf="pack.discount_rate_package == NULL"><span><i class="fa fa-inr"></i>{{pack.package_amount}}/- </span></ion-list>
@@ -45,12 +45,14 @@
         </ion-list>
          <ion-list *ngIf="dependents.length != 1">
           <div *ngIf="pack.package_available == 0 || user_type=='sponsor' || pack.package_available[0].status == 2 || pack.package_available[0].status == 4 || pack.package_available[0].status == 3" class="get-pack">
-            <button ion-button (click)="openRequestPackage(pack.id,pack.service_quantity.service_quantity,pack.package_amount,pack.package_validity)">Get Package</button>
+           <strong class="purch-already" (click)="openRequestPackage(pack.id,pack.service_quantity.service_quantity,pack.package_amount,pack.package_validity)">Get Package
+           </strong>
           </div>
         </ion-list>
         <ion-list *ngIf="dependents.length == 1">
           <div *ngIf="pack.package_available.length == 0 || user_type=='sponsor' || pack.package_available[0].status == 2 || pack.package_available[0].status == 4 || pack.package_available[0].status == 3" class="get-pack">
-            <button ion-button (click)="openRequestPackage(pack.id,pack.service_quantity.service_quantity,pack.package_amount,pack.package_validity)">Get Package</button>
+           <strong class="purch-already" (click)="openRequestPackage(pack.id,pack.service_quantity.service_quantity,pack.package_amount,pack.package_validity)">Get Package
+           </strong>
           </div>
         </ion-list>
         <div *ngIf="user_type == 'elder'">

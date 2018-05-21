@@ -4,7 +4,9 @@ import { Platform, MenuController, Nav, AlertController,ToastController,LoadingC
 
 //import { StatusBar, Splashscreen, Push } from 'ionic-native';
 //import { Diagnostic } from 'ionic-native';
-import { CameraPreview, CameraPreviewRect, Diagnostic,StatusBar, Splashscreen, Push } from 'ionic-native';
+import { CameraPreview, CameraPreviewRect, Diagnostic,StatusBar, Splashscreen } from 'ionic-native';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
+
 //import { Geolocation } from '@ionic-native/geolocation';
 import { Network } from '@ionic-native/network';
 
@@ -96,7 +98,8 @@ export class MyApp {
     public loadingCtrl: LoadingController,
     public community_service:CommunityServices,
     public storage:Storage,
-    private network: Network
+    private network: Network,
+    private push: Push
   ) {
     let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
       this.alert = this.alertCtrl.create({
@@ -398,21 +401,21 @@ initializePreview() {
       height: window.innerHeight
     };
 }
-  
+
   initPushNotification()
   {
+    this.platform.ready().then(() => {
     if (!this.platform.is('cordova')) {
       console.warn("Push notifications not initialized. Cordova is not available - Run in physical device");
       return;
     }
     
-    let push = Push.init({
+     let push = this.push.init({
       android: {
         senderID: "604025131571",
         icon:"icon",
-        iconColor:"blue",
-         topics: ["appAndroid"],
-          clearNotifications: "true"
+        iconColor:"blue"
+
       },
       ios: {
         alert: "true",
@@ -422,69 +425,34 @@ initializePreview() {
       windows: {}
     });
 
-    push.on('registration', (data) => {
-      console.log("device Reg ID ->", data.registrationId);
-      this.reg_id = data.registrationId ;
-      this.userLogin.setDeviceID(this.reg_id);
-      //TODO - send device token to server
-    });
-    push.on('notification', (data) => {
-      console.log('message', data.message);
-      console.log('data',data);
-      //console.log("count" + data.count);
-      push.getApplicationIconBadgeNumber(function(n) {
-          console.log('success', n);
-        }, function() {
-          console.log('error');
-        });
-
-  push.setApplicationIconBadgeNumber(function() {
-  console.log('success');
-}, function() {
-  console.log('error');
-}, 2);
-      
-       if (data.additionalData.foreground) {
+push.on('registration').subscribe((data: any) => {
+  this.reg_id = data.registrationId ;
+   this.userLogin.setDeviceID(this.reg_id);
+  // console.log(this.reg_id);
+  // console.log('Received a registration', data)
+});
+push.on('notification').subscribe((data: any) =>{
+  console.log('Received a notification', data)
+    // console.log('message', data.message);
+    //   console.log('data',data);
+   if (data.additionalData.foreground == true) {
          this.showToaster(data.message);
-
-      //       let confirm = this.alertCtrl.create({
-      //       title: 'Elder India Notification',
-      //       subTitle: data.message,
-      //       buttons: [
-      //         {
-      //           text: 'Disagree',          
-      //           role: 'cancel'
-                
-      //         },
-      //         {
-      //           text: 'View',
-      //           handler: () => {
-      //             this.getPage(data);
-      //             console.log('Notification View clicked');
-      //           }
-      //         }
-      //       ]
-      //     });
-      //     confirm.present();
-
+        
        } else {
-        //if user NOT using app and push notification comes
-        //TODO: Your logic on click of push notification directly
+   
         this.getPage(data);
-        push.finish(function() {
-        console.log('success');
-          }, function() {
-          console.log('error');
-          }, 'push-1');
         console.log("Push notification clicked");
 }
       
-    });
-    push.on('error', (e) => {
-      console.log(e.message);
-    });
+  
+    // pushObject.on('error', (e) => {
+    //   console.log(e.message);
+    // });
+ console.log('Device registered', data)
+});
 
-
+push.on('error').subscribe(error => console.error('Error with Push plugin', error));
+  });    
   }
 
   getPage(data){

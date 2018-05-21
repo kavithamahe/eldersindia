@@ -8,6 +8,7 @@ import { LocalNotifications, Geolocation } from 'ionic-native';
 import { NativeAudio } from '@ionic-native/native-audio';
 
 import { ServiceProvider } from '../../providers/service-provider';
+import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
 import { ServiceprovidersPage } from '../../pages/serviceproviders/serviceproviders';
 import { JobboardPage } from '../../pages/jobboard/jobboard';
 import { CommunitylistPage } from '../../pages/communitylist/communitylist';
@@ -200,6 +201,9 @@ export class DashboardPage {
   // }
   
     
+  }
+  public serviceRequests(){
+    this.navCtrl.setRoot(ServicerequestPage);
   }
   public servicesPage()
   {

@@ -43,6 +43,9 @@ status:any;
   dismiss(){
   	this.navCtrl.pop();
   }
+  cancel(){
+    this.navCtrl.pop();
+  }
   packageavailAlert(){
          this.blogListService.packageAvailAlert(this.selectedConnections,this.packId,this.service_quantity).subscribe(connections => {
         this.connectionInfo=connections.result;
@@ -69,10 +72,13 @@ status:any;
   })
 }
     getPackage(){
-    
-  let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    if(this.selectedConnections == undefined){
+      this.blogListService.showToast("Please select the dependent");
+    }
+    else{
+        let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();    
-      this.blogListService.getPackage(this.selectedConnections,this.packId,this.location_id).subscribe(connections => {
+        this.blogListService.getPackage(this.selectedConnections,this.packId,this.location_id).subscribe(connections => {
         this.connectionInfo=connections.result;
         this.blogListService.showToast(this.connectionInfo);
         loader.dismiss();
@@ -82,6 +88,8 @@ status:any;
     loader.dismiss();
       this.blogListService.showErrorToast(err);
   })
+    }
+
  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad GetpackagePagePage');

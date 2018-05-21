@@ -260,6 +260,7 @@ user_type:any;
   {
     this.remarks='';
     this.rating=0;
+    this.other = '';
    if(this.showRemark==eventId)
    {
      this.showRemark=null;
@@ -291,7 +292,8 @@ user_type:any;
      (submitRemark) => {      
       this.showToaster(submitRemark.result);  
       this.remarks='';
-      this.rating=0;   
+      this.rating=0;  
+      this.other = '';
       this.showRemark=null;  
       this.onInit(); 
       loader.dismiss(); 

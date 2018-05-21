@@ -32,6 +32,7 @@
     "@ionic-native/native-audio": "^4.4.2",
     "@ionic-native/native-geocoder": "^4.7.0",
     "@ionic-native/network": "^4.7.0",
+    "@ionic-native/push": "^4.7.0",
     "@ionic-native/transfer": "^3.12.1",
     "@ionic-native/vibration": "^3.12.1",
     "@ionic-native/video-player": "^3.12.1",
@@ -46,8 +47,8 @@
     "com.lampa.startapp": "git+https://github.com/lampaa/com.lampa.startapp.git",
     "com.razorpay.cordova": "git+https://github.com/razorpay/razorpay-cordova.git",
     "com.recaisinekli.rtspPlayer": "git+https://github.com/recaisinekli/rtspPlayer.git",
-    "cordova-android": "^6.2.3",
     "cordova-browser": "~5.0.3",
+    "cordova-ios": "~4.5.4",
     "cordova-plugin-add-swift-support": "^1.6.0",
     "cordova-plugin-calendar": "^4.6.0",
     "cordova-plugin-console": "1.0.5",
@@ -151,7 +152,6 @@
       "cordova-plugin-network-information": {}
     },
     "platforms": [
-      "android",
       "browser",
       "ios"
     ]

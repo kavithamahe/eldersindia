@@ -20,6 +20,9 @@
 <ion-content padding>
 <form>
 <div class="register-form">
+<ion-item *ngIf="user_type =='elder'" text-wrap>
+  <strong>Are you sure you want to avail this package?</strong>
+</ion-item>
 <ion-grid>
           <ion-row *ngIf="user_type !='elder'">
           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">To</ion-label>
@@ -32,11 +35,20 @@
         </ion-select>  
         </ion-item>
      </ion-row>
-    <button *ngIf="user_type =='elder'" ion-button round full (click)="getPackageelder()" class="btn-blue">Get Package
-    </button>            
-           
+ <!--    <button *ngIf="user_type =='elder'" ion-button round full (click)="getPackageelder()" class="btn-blue">Get Package
+    </button>  -->  
+     <ion-row>
+      <ion-col>
+      <button class="btn-warnings" color="primary" (click)="cancel()">No</button>
+      <button class="instant-bt" *ngIf="user_type =='elder'" (click)="getPackageelder()">Yes
+      </button>
+      <button class="instant-bt" *ngIf="user_type !='elder'" [disabled]="status == 1" (click)="getPackage()">Yes
+      </button>
+    </ion-col>
+    </ion-row>         
+  <!--          
   <button *ngIf="user_type !='elder'" [disabled]="status == 1" ion-button round full (click)="getPackage()" class="btn-blue">Get Package
-  </button>
+  </button> -->
 </ion-grid>
 </div>
 </form>

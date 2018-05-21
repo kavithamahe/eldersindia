@@ -7,11 +7,6 @@
       </button>
     </ion-buttons>
     <ion-title text-center>Dashboard</ion-title>
-    <ion-buttons right *ngIf="user_type=='elder'" >
-      <button ion-button icon-only (click)="shareLocation()">
-        <ion-icon name="locate"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content class="dashboard">
@@ -51,6 +46,18 @@
                 <img [src]="url+sponsor_avatar" style="width:50px; height:50px;"  />
           </ion-avatar> -->
           <p style="text-transform: uppercase;">{{sponsor_name}}</p>
+          </span> </ion-col>
+      </ion-row>
+    </ion-grid>
+      <ion-grid class="dashboard">
+      <ion-row>
+        <ion-col width-50 class="ambulance" text-center (click)="shareLocation()"> 
+        <span class="dashboard-listed"> <i class="fa fa-map-marker fa-5x"></i>
+          <p>SHARE LOCATION</p>
+          </span> </ion-col>
+          <ion-col width-50 class="ambulance" text-center  (click)="serviceRequests()"> 
+        <span class="dashboard-listed"> <i class="fa fa-cog fa-5x"></i>
+          <p>SERVICE REQUESTS</p>
           </span> </ion-col>
       </ion-row>
     </ion-grid>

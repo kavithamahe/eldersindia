@@ -58,11 +58,11 @@ location_id:any;
     }
 
  }
-  openRequestPackage(id){
+  openRequestPackage(id,service_quantity){
   if(this.vendorList.dependentLists.length == 1){
       this.dependentId = this.vendorList.dependentLists[0].id;
     }
-   this.navCtrl.push(GetpackagePagePage,{packID:id,dependents:this.vendorList.dependentLists,location_id:this.location_id});
+   this.navCtrl.push(GetpackagePagePage,{packID:id,dependents:this.vendorList.dependentLists,location_id:this.location_id,service_quantity:service_quantity});
  }
   goToService(sub_service){
    let service = {id:sub_service.service_id, name:sub_service.service};
