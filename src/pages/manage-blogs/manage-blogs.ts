@@ -33,23 +33,23 @@ searchstatus:any="";
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
-        // this.manageblogs();
-        // this.getCategory();
-    })
-
-  });
-  
-  }
-  ionViewDidEnter() {
-      this.storage.ready().then(() => {
-    this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      this.storage.get('token').then((token) => { this.token=token; 
         this.manageblogs();
         this.getCategory();
     })
 
   });
+  
   }
+  // ionViewDidEnter() {
+  //     this.storage.ready().then(() => {
+  //   this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+  //     this.storage.get('token').then((token) => { this.token=token; 
+  //       this.manageblogs();
+  //       this.getCategory();
+  //   })
+
+  // });
+  // }
   //  inputSearch(searchEvent){
   //  this.searchText = searchEvent.target.value;
   //  this.manageblogs();

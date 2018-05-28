@@ -150,8 +150,9 @@ discountcost:any;
      
   }
   deleteviewrecurring(recurring){
-    let modal = this.modalCtrl.create(RecurringcancelPagePage,{recurringview:recurring});
-    modal.present();
+    this.navCtrl.push(RecurringcancelPagePage,{recurringview:recurring});
+    // let modal = this.modalCtrl.create(RecurringcancelPagePage,{recurringview:recurring});
+    // modal.present();
     }
   viewrecurring(recurring){
     this.navCtrl.push(RecurringviewPagePage,{recurringview:recurring});

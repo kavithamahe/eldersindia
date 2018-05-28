@@ -155,9 +155,9 @@ doInfinite(infiniteScroll) {
   {
     this.navCtrl.setRoot(DashboardPage);
   }
-  public viewBlog(blogId)
+  public viewBlog(blogId,allow_comment)
   {
-   this.navCtrl.push(SingleblogPage, {blogId});
+   this.navCtrl.push(SingleblogPage, {blogId,allow_comment});
   }
    public createBlog()
   {

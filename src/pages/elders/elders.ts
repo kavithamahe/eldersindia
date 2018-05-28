@@ -28,6 +28,7 @@ submitAttempt:any;
   //---------------add functionality start-----------------------//
 
 functionalArea:any;
+Emergency_contact:any;
 educations:any=[];
 specializations:any=[];
 locations:any=[];
@@ -188,10 +189,11 @@ mytype:string ="password";
         elder_address: ['', Validators.compose([Validators.required])],
         elder_dob : ['', Validators.compose([Validators.required])],
         elder_location: ['', Validators.compose([Validators.required])],
-    
+        
          emergency_list: this. formBuilder.array([
                 this.emergencyAddress(),
             ]),
+
               });
   }
     if(navParams.get("fuctionality")!= "edit" && navParams.get("fuctionality") !="profileEdit")
@@ -205,8 +207,8 @@ mytype:string ="password";
          experience_list: this. formBuilder.array([
                 this.experienceAddress(),
             ]),
-          area_of_interest: ['', Validators.compose([Validators.required])],
-           elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
+        area_of_interest: ['', Validators.compose([Validators.required])],
+        elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
         elder_password:['', Validators.compose([Validators.required])],
         elder_service: ['', Validators.compose([Validators.required])],
         job_type: ['', Validators.compose([Validators.required])],
@@ -222,9 +224,9 @@ mytype:string ="password";
          experience_list: this. formBuilder.array([
                 this.experienceAddress(),
             ]),
-          area_of_interest: ['', Validators.compose([Validators.required])],
+        area_of_interest: ['', Validators.compose([Validators.required])],
         job_type: ['', Validators.compose([Validators.required])],
-         elder_service: ['', Validators.compose([Validators.required])],
+        elder_service: ['', Validators.compose([Validators.required])],
         skill_set: ['', Validators.compose([Validators.required])]
    })
  }
@@ -263,30 +265,32 @@ mytype:string ="password";
  }
  
 imageURL:any;
-public emergencies =  [
-        {
-            "name": "Police",
-            "val" : "1"
-          },
-           {
-            "name": "Ambulance",
-            "val" : "2"
-          },
-           {
-            "name": "Hospital",
-            "val" : "3"
-          }
-            
-
-        ];
+// public emergencies =  [
+//         {
+//             "name": "Police",
+//             "val" : "1"
+//           },
+//            {
+//             "name": "Ambulance",
+//             "val" : "2"
+//           },
+//            {
+//             "name": "Hospital",
+//             "val" : "3"
+//           },
+//            {
+//             "name": "Doctor",
+//             "val" : "4"
+//           }
+//          ];
 
         onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-}
+   }
  loadForm(data){
               // this.manageDependentData = data[0] ;
               this.manageDependentData = data;
-          this.storage.ready().then(() => {
+              this.storage.ready().then(() => {
             this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;
             this.base64Image = this.imageURL+this.manageDependentData.avatar;
          
@@ -347,19 +351,15 @@ public emergencies =  [
 
           if(emergencies != undefined){
           if(emergencies.length != 0 ){
-           //this.emergency_list.pop();
-
-               this.emergency_name =[];
+          this.emergency_list.pop(); this.emergency_name =[];
                this.emergency_no =[];
             for(let i = 0; i < emergencies.length;i++)
             {
               this.emergency_name.push(emergencies[i].person);
               this.emergency_no.push(emergencies[i].mobile);
               this.emergency_list.push({emergency:[i]});
-              console.log("i am here");
-              console.log(this.emergency_list.length);
               }
-              if(emergencies.length > 1 ){
+              for( let i=1; i< emergencies.length;i++){
                 this.addEmergency();
               }
            
@@ -390,15 +390,8 @@ public emergencies =  [
                 this.experience_years.push(experiences[i].year);
                 this.experience_duration.push(experiences[i].duration);
                 this.experience_list.push({experience:[i]});
-                // if(experiences.length > 1){
-                  //this.addExperience();
-                  //}
-                
               }  
-             // if(experiences.length>1){
-             //   this.removeExperience(experiences.length-1);
-             // }
-              if(experiences.length > 1){
+               for( let i=1; i< experiences.length;i++){
                 this.addExperience();
               }
             
@@ -428,7 +421,7 @@ public emergencies =  [
                 //this.addEducation();
                // console.log(i);
               }  
-              if(educations.length > 1){
+              for( let i=1; i< educations.length;i++){
                 this.addEducation();
               }
               
@@ -471,6 +464,7 @@ public emergencies =  [
                       this.skills.push(skillset[i].skill)
                     }
                     this.relations=masterData.result.Relations;
+                    this.Emergency_contact=masterData.result.Emergency_contact;
                     this.in_service=masterData.result.InService;
 
                     loader.dismiss();
@@ -497,7 +491,7 @@ public emergencies =  [
     
     const control = <FormArray>this.authForm.controls['emergency_list'];
         control.push(this.emergencyAddress());
-        
+
   }
   removeEmergency(index){
      const control = <FormArray>this.authForm.controls['emergency_list'];
@@ -708,11 +702,9 @@ getareaof_interest(){
     this.education_data = this.elder_education;
     this.getblog_category();
     this.blog_data=this.blog_categoryinterest;
-    console.log(this.blog_data);
 
     this.getareaof_interest();
      this.area_of_interest_data=this.areaofinterestdata;
-     console.log(this.area_of_interest_data);
  }
         let profileEditData = {
         "id":this.elder_id,
@@ -874,7 +866,6 @@ getareaof_interest(){
 
               this.getblog_category();
     this.blog_data=this.blog_categoryinterest;
-    console.log(this.blog_data);
 
       this.getservicecategory();
     this.servicecategoryinterest_data=this.serviceCategory_interests;
@@ -949,20 +940,25 @@ getareaof_interest(){
             }
          
           }else{
+              if(!this.authForm.valid){
+            this.submitAttempt = true; 
+           }
+          else
+          {
             let loader = this.loadingCtrl.create({ content: "Please wait..." });     
             loader.present();
               this.providerService.webServiceCall(`myaccountEdit`,profileEditData)
                   .subscribe(data=>{
                     this.providerService.showToast(data.result);
-                    console.log(data);
                     loader.dismiss();
+                    this.nav.pop();
                   },
                   err=>{
                     this.providerService.showErrorToast(err);
                     console.log(err);
                     loader.dismiss();
                   })
-                   
+                }   
        
           }
         
@@ -1120,10 +1116,10 @@ getareaof_interest(){
 
   }
     
-    if(this.functionality =="profileEdit")
-      {
-        this.nav.pop();
-      }
+    // if(this.functionality =="profileEdit")
+    //   {
+    //     this.nav.pop();
+    //   }
     
 
 }

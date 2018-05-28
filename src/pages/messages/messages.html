@@ -88,7 +88,7 @@
 
                 <ion-item width-60 style="padding: 0px !important" text-wrap 
                 [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
-                  <small>{{inbox?.author_name}}</small>
+                  <p style="font-size: 1.8rem;">{{inbox?.author_name}}</p>
                 </ion-item>
                 <ion-col *ngIf = "inbox.attachemts != null">
                 <ion-icon name="attach"></ion-icon>
@@ -156,7 +156,7 @@
             <ion-col width-80 class="send-box-content" style="padding: 0px !important">
               <ion-row>
                 <ion-item width-70 style="padding: 0px !important" text-wrap>
-                <small>{{sent?.name}}</small>
+                <p style="font-size: 1.8rem;">{{sent?.name}}</p>
                 </ion-item>
                 <ion-col *ngIf = "sent.attachments != null">
                 <ion-icon name="attach"></ion-icon>

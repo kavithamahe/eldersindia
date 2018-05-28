@@ -256,7 +256,7 @@ myprofile(id){
 
 
   addUserPosts(id,image,videoUrl,posts,links){
-     this.posts = { "user_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links,"app":'' }
+     this.posts = { "user_id":id, "image":image,"videourl":videoUrl,"message":posts,"metalink":links,"app":'',"avatar":"" }
 
 
      return this.http.post(`${this.getCommunityPostsUrl }addUserPost`,this.posts,this.options)
@@ -343,14 +343,14 @@ myprofile(id){
     .map(res =>res.json());
 }
   getElderMasterDetails(options){
-   this.body = {"get":["FunctionalArea","Educational","Specialization","Locations","AreaofInterest","Skills","Relations","InService","serviceCategory","BlogCategory","ServiceOffered"]};
+   this.body = {"get":["FunctionalArea","Educational","Specialization","Locations","AreaofInterest","Skills","Relations","InService","serviceCategory","BlogCategory","ServiceOffered","Emergency_contact"]};
      return this.http.post(`${this.getCommunityPostsUrl }getElderMasterDetails`,this.body,options)
     .map(res =>res.json());
   }
 
-  deleteDetail(id){
+  deleteDetail(id,options){
     this.manage={"info":{"id":id}}
-    return this.http.post(`${this.getCommunityPostsUrl }elderDelete`,this.manage,this.options)
+    return this.http.post(`${this.getCommunityPostsUrl }elderDelete`,this.manage,options)
     .map(res =>res.json());
   }
 

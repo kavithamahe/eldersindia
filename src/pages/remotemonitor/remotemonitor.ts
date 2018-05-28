@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+// import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Storage } from '@ionic/storage';
+
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 
 declare var startApp;
-
+ 
 
 /*
   Generated class for the RemotemonitorPage page.
@@ -21,7 +23,18 @@ export class RemotemonitorPagePage {
 username:any;
 password:any;
 url:any;
-  constructor(private iab: InAppBrowser,public navCtrl: NavController, public navParams: NavParams) {}
+Cctv_camera:any;
+usernames:any;
+passwords:any;
+  constructor(public storage:Storage,public navCtrl: NavController, public navParams: NavParams) {
+   this.storage.ready().then(() => {
+    storage.get('usernames').then((usernames) => { this.usernames=usernames; })
+    storage.get('passwords').then((passwords) => { this.passwords=passwords;  })
+    storage.get('Cctv_camera').then((Cctv_camera) => { this.Cctv_camera=Cctv_camera; 
+   console.log("fdgdfg" +this.Cctv_camera); })
+  });
+
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RemotemonitorPagePage');
@@ -30,26 +43,19 @@ url:any;
     this.navCtrl.setRoot(DashboardPage);
   }
   submit(){
-    // var videoUrl = "http://eldercam1.dlinkddns.com:8033/mjpeg.cgi?user=[remoteview]&password=[elder!@#]";
-
-    // http://eldercam1.dlinkddns.com:8033/mjpeg.cgi?
-  	var usernames = this.username;
-  	var passwords = this.password;
+   
+      var usernames = this.username;
+    var passwords = this.password;
+    
     var remoteurl = this.url;
-  	  // const browser = this.iab.create(""+remoteurl+"user="+usernames+"&password="+passwords+" ");
-     startApp.set({
-      "action": "ACTION_SEND",
-      "package": "com.claritaz.ipplayer",
-      "type": "text/plain",
-      "uri": "+918958312000"
-      }, {
-        // "extraKey2":""+remoteurl+"user="+usernames+"&password="+passwords+" ",
-                "extraKey2":"http://192.168.1.46:8033/mjpeg.cgi?",
-                "username":"admin",
-                "password":"ctl",
-
-      "EXTRA_TEXT":"Text...by vkm ",
-      "chat": true
-      }).start();
-        }
+     this.storage.ready().then(() => {
+       this.storage.set('usernames',usernames);
+       this.storage.set('passwords',passwords);
+      this.storage.set('Cctv_camera',"http://"+usernames+":"+passwords+"@"+remoteurl+"" );
+    });
+     this.navCtrl.setRoot(DashboardPage);
+    
+  	
+  	 
   }
+}

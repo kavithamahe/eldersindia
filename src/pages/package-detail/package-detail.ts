@@ -76,6 +76,12 @@ vendorLogo:any;
     }
     let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id,dependents:this.dependents,location_id:this.location_id,package_amount:package_amount,vendor_id:this.vendor_id,package_validity:package_validity});
     modal.present();
+  // openRequestPackage(id,service_quantity){
+  //   if(this.dependents.length == 1){
+  //     this.dependentId = this.dependents[0].id;
+  //   }
+  //   this.navCtrl.push(GetpackagePagePage,{packID:id,dependents:this.dependents,location_id:this.location_id,service_quantity:service_quantity});
+
   }
   dashboardPage(){
     this.navCtrl.setRoot(DashboardPage);

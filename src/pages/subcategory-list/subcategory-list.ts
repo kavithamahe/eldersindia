@@ -93,7 +93,7 @@ loadSubcategoryList(subCategory_id,location_id){
             }
 
   serviceInfo(vendor){
-    let servieListData = {"vendor": vendor, "subCategoryId": this.service_id, "flag": "1", "location_id": this.location_id};
+    let servieListData = {"vendor": vendor, "subCategoryId": this.service_id,status:"1" ,"flag": "1", "location_id": this.location_id};
     this.navCtrl.push(ServiceInfoPage,servieListData);
   }
 pressinstant(vendorData){
@@ -118,7 +118,9 @@ pressinstant(vendorData){
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
 
     let serviceRequestData = {"problem": this.serviceTitle, "datetime": lead_time, "dependentId": this.elderId, "mobile_no": "","serviceType":"One time",
+
     "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":"","base_cost":vendorData.service_cost,"service_cost":this.service_cost};
+
     
             this.serviceRequestCall(serviceRequestData,vendorData.id,);
     }else{
@@ -133,6 +135,7 @@ pressevent(modalPage,vendorData){
       this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,lead_time:this.lead_time,service:this.serviceTitle,vendor:vendorData});
     }else{
       this.navCtrl.push(ModalContentPage,{dependentList:this.dependentLists,lead_time:this.lead_time,vendor:vendorData,location_id:this.location_id,serviceData:this.serviceData,serviceTitle:this.serviceTitle});
+
     }
     this.scheduleModal=modalPage;
     // this.modal.onDidDismiss(data =>{
@@ -170,6 +173,7 @@ pressevent(modalPage,vendorData){
        "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
        "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
      "package_id":service_request_data.package_id,"instant":service_request_data.instant}
+
 
     this.providerService.webServiceCall(`serviceRequestSubmitbeforePayLater`,requestServiceData)
        .subscribe( 
@@ -370,7 +374,9 @@ export class InstantRequestModalPage {
         let getHours=(minutess + minutes)/60;
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
     let serviceRequestData = {"problem": this.service, "datetime": lead_time, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile,"serviceType":"One time",
+
     "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":"","base_cost":this.base_cost,"service_cost":this.service_cost};
+
     this.viewCtrl.dismiss(serviceRequestData);
   }else{
     this.showToaster("Please select the dependent");

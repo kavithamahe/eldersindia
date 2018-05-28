@@ -7,7 +7,7 @@
       </button>
     </ion-buttons>
 	  <ion-title text-center>Blogs</ion-title>
-   
+
     <ion-buttons right>
     <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
@@ -18,7 +18,6 @@
           <i class="fa fa-search" aria-hidden="true"></i>
       </button>
     </ion-buttons>
-  
   </ion-navbar>
 </ion-header>
 
@@ -28,7 +27,7 @@
             <ion-label>select category</ion-label>
               <ion-select [(ngModel)]="searchCategory1" (ionChange)="onSelectChange($event)">
                <!-- <ion-option value="All">All</ion-option> -->
-                <ion-option  *ngFor="let category of categoryLists" 
+                <ion-option  *ngFor="let category of categoryLists"
                  value={{category.id}}>{{category.name}}
                 </ion-option>
               </ion-select>
@@ -37,10 +36,10 @@
     <ion-row *ngIf(searchButton)>
       <ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
       </ion-col>
-      <ion-col width-20><button (click)="getItems(searchText)" ion-button small 
+      <ion-col width-20><button (click)="getItems(searchText)" ion-button small
         class="go-btn">Go</button> </ion-col>
     </ion-row>
-    <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id)" class="community-img">
+    <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id,blogs.allow_comment)" class="community-img">
       <ion-row>
         <ion-col class="blogs-tittle">
           <ion-item text-wrap>
@@ -56,16 +55,15 @@
         {{imageUrl.blogs?.featured_image}}
       </ion-card-content>
       <img src="{{imageUrl+blogs?.featured_image}}" [hidden]="!blogs?.featured_image" />
-      <!-- <img src="assets/img/services-img.png" [hidden]="!blogs?.featured_image" /> -->
       <span [hidden]="!blogs.category_name"> 
         <label class="labels-bdss"> {{blogs.category_name}}</label>
       </span>
-      <span *ngIf="blogs.allow_featured == 1"> 
+      <span *ngIf="blogs.allow_featured == 1">
         <label class="labels-bdss-featured_image">Featured</label>
       </span>
      </div>
- 
- </ion-card> 
+
+ </ion-card>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
@@ -79,3 +77,5 @@
     </ion-fab-list>
   </ion-fab>
 </ion-content>
+
+

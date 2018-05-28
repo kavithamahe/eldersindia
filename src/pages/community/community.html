@@ -11,9 +11,7 @@
 	        <ion-icon name="home"></ion-icon>
 	    </button>
     </ion-buttons>
-   
-    
-  </ion-navbar>
+   </ion-navbar>
 </ion-header>
   
 <ion-content padding class="login-bgimg">
@@ -23,7 +21,7 @@
 			[hidden]="!communityDetailData?.logo" />
             <strong class="wel-comemem">Welcome to {{communityDetailData?.community_name}}
             </strong>
-			<em  style="" *ngIf(!show_description)>{{communityDetailData?.description | words : 50 : '...'}}</em>
+			<em style="" *ngIf(!show_description)>{{communityDetailData?.description | words : 50 : '...'}}</em>
         </p>
 		<div class="decoration hide-if-responsive"></div>
 	</div>
@@ -39,7 +37,8 @@
 			</ion-row>
 			<ion-item class="mem-title">
       			<h1> &nbsp;Members ({{show_member}})</h1> 
-				<button ion-button icon-only medium (click)="presentPopover($event,communityDetailData?.id)" class="postedimgvideos">
+				<button ion-button icon-only medium 
+				(click)="presentPopover($event,communityDetailData?.id)" class="postedimgvideos">
 				<i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Invite Your Contacts
 			   </button>
 			</ion-item>
@@ -70,7 +69,8 @@
 	<div *ngIf="communityDetailData?.isJoined" class="mem-name-update">
 		<h2 class="wel-comemem">Update Status</h2>
 			<div style="padding:0px !important;">
-				<ion-textarea style="-webkit-user-select:all !important;" [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
+				<ion-textarea style="-webkit-user-select:all !important;" 
+				[(ngModel)]="post" type="text" placeholder="Whats in your mind?">
 				</ion-textarea>
 			</div>
 

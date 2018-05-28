@@ -65,6 +65,8 @@ results:any;
     }
     this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+       storage.get('user_type').then((user_type) => { this.user_type=user_type; 
+      console.log(this.user_type); })
       storage.get('token').then((token) => { this.token=token; 
       this.sr_token=navParams.get("sr_token");
       if(navParams.get("sr_token")){
@@ -130,7 +132,7 @@ results:any;
      (serviceRequest) => {
       this.serviceRequestInfo=serviceRequest.result.info.list.data; 
       this.vendorStatus=serviceRequest.result.info.status;
-       this.servicestatus=serviceRequest.result.info.status;
+      this.servicestatus=serviceRequest.result.info.status;
       this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
       loader.dismiss();    
     },
@@ -543,6 +545,7 @@ results:any;
   {
     this.remarks='';
     this.rating=0;
+    this.other = '';
    if(this.showRemark==eventId)
    {
      this.showRemark=null;
@@ -574,7 +577,8 @@ results:any;
      (submitRemark) => {      
       this.showToaster(submitRemark.result);  
       this.remarks='';
-      this.rating=0;   
+      this.rating=0;  
+      this.other = '';
       this.showRemark=null;  
       this.onInit(); 
       loader.dismiss(); 

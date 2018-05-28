@@ -113,7 +113,7 @@
             <!-- <ion-slides slidesPerView= ""> -->
           
                  <!-- <ion-slide class="slide-border"> -->
-                  <ion-item style="padding-left:0px;" >
+                  <ion-item style="padding-left:0px;" text-wrap>
                     <ion-col> 
                       <!--<div class="plan featured orangeColor">-->
                       <h3>{{pack.package_name}}</h3> 
@@ -123,22 +123,27 @@
                       <ion-list class="price-list" *ngIf="pack.discount_rate_package != NULL">     
                       <small><i class="fa fa-rupee"></i>{{pack.package_amount}} </small>
                       <span>  {{pack.discount_rate_package}} % off <b> For {{pack.package_validity}}</b> </span>
-					  <p>{{pack.package_description}}</p>
+					           <p>{{pack.package_description}}</p>
                       <!-- <span >{{service_type}}</span> -->
                       </ion-list>
-					     
-						               
-                       <ion-list *ngIf="vendorList.dependentLists.length != 1">
-                        <!-- <div *ngIf="pack.package_available == 0"> -->
-                        <a (click)="openRequestPackage(pack.id,pack.vendor_id,pack.package_validity,pack.package_amount)" class="lan-select">Get Package</a>
-                        <!-- </div> -->
+					     <ion-list *ngIf="vendorList.dependentLists.length != 1">
+                        <div *ngIf="pack.package_available == 0 || user_type=='sponsor' || pack.package_available[0].status == 2 || pack.package_available[0].status == 4 || pack.package_available[0].status == 3">
+                        <strong class="purch-already" (click)="openRequestPackage(pack.id,pack.service_quantity.service_quantity)">Get Package</strong>
+                        </div>
                       </ion-list>   
-
-                        <ion-list *ngIf="pack.package_available == 0" text-center>
-                        <a (click)="openRequestPackage(pack.id,pack.vendor_id,pack.package_validity,pack.package_amount)" class="lan-select">Get Package</a>                      
-                        </ion-list>   
-                      <strong class="purch-already" *ngIf="pack.package_available > 0">You've already purchased this
+                     <ion-list *ngIf="vendorList.dependentLists.length == 1" text-center>
+                          <div *ngIf="pack.package_available.length == 0 || user_type=='sponsor' || pack.package_available[0].status == 2 || pack.package_available[0].status == 4 || pack.package_available[0].status == 3">
+                        <strong class="purch-already" (click)="openRequestPackage(pack.id,pack.service_quantity.service_quantity)">Get Package</strong>
+                        </div>                     
+                        </ion-list>
+                        <div *ngIf="user_type =='elder'">
+                      <strong class="purch-already" *ngIf="pack.package_available.length > 0 && (pack.package_available[0].status == 1 || pack.package_available[0].status == 6)">You've already purchased this Package
                      </strong>
+                     </div>
+                     <div *ngIf="user_type =='elder'">
+                     <strong class="purch-already" *ngIf="pack.package_available.length > 0 && pack.package_available[0].status == 0">Your request sent to the service provider
+                      </strong>
+                      </div>
 					 <ion-list *ngFor="let pack_serve of pack.packages_service; let i=index" class="listed-descr">
 							{{pack_serve.name}} {{pack_serve.quantity}}  {{pack_serve.common_type.replace('Per', '')}}</ion-list>
                                      

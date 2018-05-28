@@ -121,10 +121,11 @@ check:any;
      (receivedRquest) => {
       this.receivedRquestInfo=receivedRquest.result.info.list.data;
       this.orgReceivedRquestInfo=receivedRquest.result.info.list.data; 
-       this.nextPageURL2=receivedRquest.result.info.list.next_page_url;  
+      this.nextPageURL2=receivedRquest.result.info.list.next_page_url;  
        loader.dismiss();   
     },
     (err) => { 
+      this.error = JSON.parse(err._body).error;
         if(err.status===401)
         {
           this.check = JSON.parse(err._body).error;

@@ -32,7 +32,6 @@ package_amount:any;
 location_id:any;
   constructor(public navParams: NavParams,public modalCtrl: ModalController,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
 
-  // constructor(public navParams: NavParams,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
 
 
   	this.storage.ready().then(() => { 
@@ -40,11 +39,6 @@ location_id:any;
         this.user_type=user_type;
       });    
         storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
-          //this.getConnections(this.rootUrl);
-      });
-
-      
-      
         this.location_id = navParams.get("location_id");
         this.packId = navParams.get("packID");
         this.vendor_id = navParams.get("vendor_id");
@@ -52,10 +46,15 @@ location_id:any;
         this.package_amount = navParams.get("package_amount");
        console.log(this.package_amount);
         this.dependentLists = navParams.get("dependents");
+        this.dependent_id = this.dependentLists[0].id;
+         });
    });
   }
   dismiss(){
-  	this.viewCtrl.dismiss();
+  	this.navCtrl.pop();
+  }
+  cancel(){
+    this.navCtrl.pop();
   }
   getPackageselder(){
     if(this.paymenttype == undefined){
@@ -85,7 +84,31 @@ location_id:any;
     }
   }
   }
+  // packageavailAlert(){
+  //        this.blogListService.packageAvailAlert(this.selectedConnections,this.packId,this.service_quantity).subscribe(connections => {
+  //       this.connectionInfo=connections.result;
+  //        this.status = connections.status;
+  //       this.blogListService.showToast(this.connectionInfo);
+  //    },
+  //  err =>{
+  //     this.blogListService.showErrorToast(err);
+  // })
 
+  }
+ getPackageelder(){
+ let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();    
+      this.blogListService.getPackage(this.dependent_id,this.packId,this.location_id).subscribe(connections => {
+        this.connectionInfo=connections.result;
+        this.blogListService.showToast(this.connectionInfo);
+        loader.dismiss();
+        this.navCtrl.setRoot(PackageRequestPagePage);
+     },
+   err =>{
+    loader.dismiss();
+      this.blogListService.showErrorToast(err);
+  })
+}
     getPackage(){
       if(this.selectedConnections == undefined || this.paymenttype == undefined){
         this.blogListService.showToast("Please select above details");
@@ -94,13 +117,11 @@ location_id:any;
         if(this.paymenttype == "Offline Payment"){
   let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();    
-      this.blogListService.getPackage(this.selectedConnections,this.packId,this.location_id).subscribe(connections => {
+        this.blogListService.getPackage(this.selectedConnections,this.packId,this.location_id).subscribe(connections => {
         this.connectionInfo=connections.result;
         this.blogListService.showToast(this.connectionInfo);
-
-        this.dismiss();
         loader.dismiss();
-        this.navCtrl.push(PackageRequestPagePage);
+        this.navCtrl.setRoot(PackageRequestPagePage);
      },
    err =>{
     loader.dismiss();

@@ -55,7 +55,7 @@ logo:any;
   {
     if(this.appliedjobs){  
        let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
+       loader.present();
     this.jobBoardService.myjobrequest(this.jobId).subscribe(
      (myjobrequest) => {
       this.myjobrequestinfo=myjobrequest.result.info;

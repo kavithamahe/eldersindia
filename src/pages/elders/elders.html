@@ -95,7 +95,7 @@
       </ion-item>
          
           <ion-label class="label-tittle required">Address</ion-label>
-        <ion-item>  
+          <ion-item>  
               <ion-input type="text" formControlName="elder_address" placeholder="Address"
                 [class.invalid]="!authForm.controls.elder_address.valid && (authForm.controls.elder_address.dirty)" [(ngModel)]= "elder_address" value={{elder_address}}>
               </ion-input>
@@ -124,27 +124,21 @@
               <div class="personal-d"><p>Emergency contacts</p></div>
             </ion-col>
           </ion-row>
- 
-      <div formArrayName="emergency_list">{{emergency_list.length}}
-      <div *ngFor="let item of emergency_list; let i=index; "></div>
-
-      <div  *ngFor="let item of authForm.controls.emergency_list.controls; let i=index; " >{{i}}
+      <div formArrayName="emergency_list">
+      <div *ngFor="let item of authForm.controls.emergency_list.controls; let i=index">
            <div *ngIf="authForm.controls.emergency_list.controls.length > 1">
-              <button class="rem-btn" (click)="removeEmergency(i)" ion-button icon-left clear>
+            <button class="rem-btn" (click)="removeEmergency(i)" ion-button icon-left clear>
                 <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
               </button>
             </div> 
-          <ion-label class="label-tittle required">Person </ion-label>
-          <div  [formGroupName]="i">
+          <ion-label class="label-tittle required">Person</ion-label>
+          <div [formGroupName]="i">
             <ion-item>
             <ion-label class="sel-label">Emergency</ion-label>
               <ion-select class="select-brd" formControlName="emergency_name"  
               [(ngModel)]="emergency_name[i]" placeholder="Person">
-                     <ion-option  *ngFor="let person of emergencies" value={{person.name}}>{{person.name}}
+                     <ion-option  *ngFor="let person of Emergency_contact" value={{person.id}}>{{person.contact}}
                      </ion-option>
-                     <!-- <ion-option value="police">Police</ion-option>
-                     <ion-option value="ambulance">Ambulance</ion-option>
-                     <ion-option value="hospital">Hospital</ion-option> -->
               </ion-select>
             </ion-item>
              <small *ngIf="!authForm.controls.emergency_list.
@@ -154,7 +148,7 @@
             </small> 
             <ion-label class="label-tittle required">Number</ion-label>
            <ion-item>
-              <ion-input type="text" [(ngModel)]="emergency_no[i]" placeholder="Number"
+              <ion-input type="number" [(ngModel)]="emergency_no[i]" placeholder="Number"
               formControlName="emergency_no"           
               [class.invalid]="!authForm.controls.emergency_list.
                 controls[i].controls.emergency_no.valid && (authForm.controls.emergency_list.
@@ -298,7 +292,7 @@
 
 
  <div formArrayName="experience_list">
- <div  *ngFor="let item of myForm.controls.experience_list.controls; let i=index">
+ <div  *ngFor="let item of myForm.controls.experience_list.controls; let i=index ">
   <div *ngIf="myForm.controls.experience_list.controls.length > 1">
           <button class="rem-btn" (click)="removeExperience(i)" ion-button icon-left clear>
             <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
@@ -372,7 +366,7 @@
     <br/>
 
         <div formArrayName="education_list">
-          <div  *ngFor="let item of myForm.controls.education_list.controls; let i=index">
+          <div  *ngFor="let item of myForm.controls.education_list.controls; let i=index ">
            <div *ngIf="myForm.controls.education_list.controls.length > 1">
           <button class="rem-btn" (click)="removeEducation(i)" button-right ion-button icon-left clear>
             <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
@@ -470,9 +464,7 @@
               <div class="personal-d"><p>Login details</p></div>
             </ion-col>
           </ion-row>
- 
-   
-            <ion-label class="label-tittle required">Email address</ion-label>
+        <ion-label class="label-tittle required">Email address</ion-label>
         <ion-item>
                 <ion-input [(ngModel)]="elder_email" formControlName="elder_email"
                 [class.invalid]="!myForm.controls.elder_email.valid && (myForm.controls.elder_email.dirty)" placeholder="Email address" value={{elder_email}}>
@@ -528,12 +520,12 @@
 <ion-footer>
   <ion-toolbar color="primary"> 
     
-    <ion-buttons>
+   <!--  <ion-buttons>
     <button ion-button color="royal" large icon-left showWhen="ios" (click)="cancel()">
         <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
     <button ion-button color="light" large icon-left hideWhen="ios" (click)="cancel()">
           <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
-    </ion-buttons>
+    </ion-buttons> -->
 
     <ion-buttons end>
       <button ion-button color="royal" large icon-right showWhen="ios" (click)="addDependent()">&nbsp;Submit<ion-icon ios="md-send" md="md-send"></ion-icon>

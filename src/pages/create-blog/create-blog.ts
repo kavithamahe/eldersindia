@@ -96,7 +96,7 @@ bannerImages:any;
     loader.present();
     this.blogListService.getEditBlog(blogId).subscribe(
      (getEditBlog) => {
-      this.title=getEditBlog.result.title; 
+         this.title=getEditBlog.result.title; 
       this.category =getEditBlog.result.category;   
       this.highlights= getEditBlog.result.highlights; 
         this.highlights = this.highlights;
@@ -200,9 +200,7 @@ bannerImages:any;
       console.log(err);
     });
   }
-pressevent(){
-  this.createBlog();
-}
+
 
   public createBlog()
   { 
@@ -236,8 +234,7 @@ pressevent(){
     
     this.blogListService.createBlog(this.blogObject,this.actionUrl).subscribe(
      (createBlog) => {
-      this.navCtrl.setRoot(ManageBlogsPage);
-      this.showToaster("New blog has been posted");
+      this.showToaster(createBlog.result);
       this.category = "";
       this.allowComments = "";
       this.title = "";
@@ -245,6 +242,7 @@ pressevent(){
       this.description = "";
       this.featuredImage = "";
       this.bannerImage = "";
+      this.navCtrl.setRoot(ManageBlogsPage);
       loader.dismiss();
     },
     (err) => { 
@@ -257,8 +255,7 @@ pressevent(){
           this.showToaster("Try again later");
         }
         loader.dismiss();
-      }
-    );
+      });
     
    }
   }

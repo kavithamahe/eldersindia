@@ -46,6 +46,7 @@ commontype:any;
         var dataList = data.result; 
         // this.packageData = data.result; 
         for(let data of dataList) {
+          data.balance_quantity = data.quantity - data.available_package_service;
            data.common_type=data.common_type;
          var str = data.common_type;
          data.common_type = str.replace("Per" ,"");
@@ -61,9 +62,9 @@ commontype:any;
     }) 
 }
 
-getServicedetails(serviceId,vendor){
+getServicedetails(serviceId,vendor,one_time,recurring,package_amount){
   this.vendorId={"id":vendor}
-  let servieListData = {"vendor": this.vendorId, "subCategoryId": serviceId, "flag": "1", "location_id": this.location_id};
+  let servieListData = {"vendor": this.vendorId, "subCategoryId": serviceId, "flag": "1", "location_id": this.location_id,"one_time":one_time,"recurring":recurring,"package_amount":package_amount};
   this.navCtrl.push(ServiceInfoPage,servieListData);
 }
   ionViewDidLoad() {

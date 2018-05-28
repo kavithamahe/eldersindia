@@ -257,14 +257,18 @@ getPackageRequestById(rootUrl,packageId){
     let _request={"friends":{"addType":"Communities","comm_id":selectedCommunity,"description":description},"shareurl":this.rootUrl+'/#/blog/details/'+BlogId}  
     return this.http.post(this.rootUrl+'shareblog',_request,this.options)
       .map(res => res.json()); 
- }
- else{
+     }
+     else{
       let _request= {'friends':{"addType":"Friends",'user_id':friendsID,'description':description},'shareurl':this.rootUrl+'/#/blog/details/'+BlogId};
        return this.http.post(this.rootUrl+'shareblog',_request,this.options)
       .map(res => res.json()); 
      }
       }
-
+  packageAvailAlert(selectedConnections,packId,service_quantity){
+     let _request= {"packId": packId, "elderId": selectedConnections,"service_quantity":service_quantity};
+    return this.http.post(this.rootUrl+'packageAvailAlert',_request,this.options)
+      .map(res => res.json()); 
+      }
    getPackage(selectedConnections,packId,location_id){
     let _request= {"pack_id": packId, "dependent_id": selectedConnections,"location_id":location_id};
     return this.http.post(this.rootUrl+'availPackage',_request,this.options)

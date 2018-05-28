@@ -9,6 +9,9 @@ import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
+import { Network } from '@ionic-native/network';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
+
 
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -44,9 +47,10 @@ import { PaymentPage } from '../pages/payment/payment';
 import { PackagepaymentPagePage } from '../pages/packagepayment/packagepayment';
 import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
 
+
 //packages related pages
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
-import {PackageDetailPagePage } from '../pages/package-detail/package-detail'; 
+import {PackageDetailPagePage } from '../pages/package-detail/package-detail';
 
 import { ServiceprovidersPage } from '../pages/serviceproviders/serviceproviders';
 import { ServicerequestPage } from '../pages/servicerequest/servicerequest';
@@ -257,8 +261,6 @@ import { ServiceProvider } from '../providers/service-provider';
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
      providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage,DatePipe] // Add GithubUsers provider
-
- 
 
 })
 export class AppModule {}

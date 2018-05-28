@@ -22,11 +22,13 @@ showServiceOffered = false;
 showPackagesDetails = false;
  dependentId:any;
 title:any;
-user_type;
+user_type:any;;
 location_id:any;
   constructor(public storage:Storage,public modalCtrl: ModalController, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams) {
    console.log("this is service modal page");
-  	this.vendorList = navParams.get("vendorList");
+    this.vendorList = navParams.get("vendorList");
+    storage.get('user_type').then((user_type) => { this.user_type=user_type; 
+      console.log(this.user_type); })
   	if(navParams.get("service") == "contact"){
   		this.showContactDetails = true;	
   		this.title = this.vendorList.vendorDetails.name+" - Contact Details";
@@ -64,7 +66,7 @@ location_id:any;
 
     modal.present();
  }
- goToService(sub_service){
+  goToService(sub_service){
    let service = {id:sub_service.service_id, name:sub_service.service};
     let location_id = this.locationId;
     this.navCtrl.push(SubcategoryListPage,{location_id,service});
