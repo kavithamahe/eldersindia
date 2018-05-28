@@ -99,28 +99,28 @@ export class DashboardPage {
 }
 
   getLocation(d1,d2){
-    this.nativeGeocoder.reverseGeocode(d1, d2)
-  .then(
-    (result: NativeGeocoderReverseResult) => {
+  //   this.nativeGeocoder.reverseGeocode(d1, d2)
+  // .then(
+  //   (result: NativeGeocoderReverseResult) => {
      
-    console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
-    this.providerService.chechLocationID(result.city,this.head)
-      .subscribe(data =>{
-      this.serviceLocation=data.result.id;
-      console.log(this.serviceLocation);
-       this.storage.ready().then(() => {
-        console.log(this.serviceLocation);
-      this.storage.set('service_location',this.serviceLocation);
-    });
-    },
-    err =>{
-      this.providerService.showErrorToast(err);
+  //   console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
+  //   this.providerService.chechLocationID(result.city,this.head)
+  //     .subscribe(data =>{
+  //     this.serviceLocation=data.result.id;
+  //     console.log(this.serviceLocation);
+  //      this.storage.ready().then(() => {
+  //       console.log(this.serviceLocation);
+  //     this.storage.set('service_location',this.serviceLocation);
+  //   });
+  //   },
+  //   err =>{
+  //     this.providerService.showErrorToast(err);
       
-    })
+  //   })
 
-    })
+  //   })
     
-  .catch((error: any) => console.log(error));
+  // .catch((error: any) => console.log(error));
   }
 
   ionViewDidLoad() {
