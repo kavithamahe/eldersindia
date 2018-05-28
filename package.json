@@ -35,7 +35,6 @@
     "@ionic-native/push": "^4.7.0",
     "@ionic-native/transfer": "^3.12.1",
     "@ionic-native/vibration": "^3.12.1",
-    "@ionic-native/video-player": "^3.12.1",
     "@ionic-native/youtube-video-player": "^3.12.1",
     "@ionic/cloud-angular": "^0.12.0",
     "@ionic/storage": "^1.1.6",
@@ -48,7 +47,7 @@
     "com.razorpay.cordova": "git+https://github.com/razorpay/razorpay-cordova.git",
     "com.recaisinekli.rtspPlayer": "git+https://github.com/recaisinekli/rtspPlayer.git",
     "cordova-browser": "~5.0.3",
-    "cordova-ios": "~4.5.4",
+    "cordova-ios": "^4.5.4",
     "cordova-plugin-add-swift-support": "^1.6.0",
     "cordova-plugin-calendar": "^4.6.0",
     "cordova-plugin-console": "1.0.5",
@@ -89,7 +88,7 @@
     "node-sass": "^2.0.1",
     "nodejs": "0.0.0",
     "nodejs-latest": "^1.1.0",
-    "phonegap-plugin-push": "1.10.2",
+    "phonegap-plugin-push": "^2.2.3",
     "rxjs": "5.0.0-beta.12",
     "summernote": "^0.8.4",
     "sw-toolbox": "3.4.0",
@@ -122,9 +121,6 @@
       "cordova-plugin-whitelist": {},
       "cordova-sqlite-storage": {},
       "ionic-plugin-keyboard": {},
-      "phonegap-plugin-push": {
-        "SENDER_ID": "604025131571"
-      },
       "cordova-plugin-calendar": {},
       "com.recaisinekli.rtspPlayer": {},
       "cordova-plugin-nativeaudio": {},
@@ -149,7 +145,8 @@
       },
       "com.razorpay.cordova": {},
       "com.lampa.startapp": {},
-      "cordova-plugin-network-information": {}
+      "cordova-plugin-network-information": {},
+      "phonegap-plugin-push": {}
     },
     "platforms": [
       "browser",

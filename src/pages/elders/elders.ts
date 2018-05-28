@@ -28,6 +28,7 @@ submitAttempt:any;
   //---------------add functionality start-----------------------//
 
 functionalArea:any;
+Emergency_contact:any;
 educations:any=[];
 specializations:any=[];
 locations:any=[];
@@ -264,32 +265,32 @@ mytype:string ="password";
  }
  
 imageURL:any;
-public emergencies =  [
-        {
-            "name": "Police",
-            "val" : "1"
-          },
-           {
-            "name": "Ambulance",
-            "val" : "2"
-          },
-           {
-            "name": "Hospital",
-            "val" : "3"
-          },
-           {
-            "name": "Doctor",
-            "val" : "4"
-          }
-         ];
+// public emergencies =  [
+//         {
+//             "name": "Police",
+//             "val" : "1"
+//           },
+//            {
+//             "name": "Ambulance",
+//             "val" : "2"
+//           },
+//            {
+//             "name": "Hospital",
+//             "val" : "3"
+//           },
+//            {
+//             "name": "Doctor",
+//             "val" : "4"
+//           }
+//          ];
 
         onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-}
+   }
  loadForm(data){
               // this.manageDependentData = data[0] ;
               this.manageDependentData = data;
-          this.storage.ready().then(() => {
+              this.storage.ready().then(() => {
             this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;
             this.base64Image = this.imageURL+this.manageDependentData.avatar;
          
@@ -465,6 +466,7 @@ public emergencies =  [
                       this.skills.push(skillset[i].skill)
                     }
                     this.relations=masterData.result.Relations;
+                    this.Emergency_contact=masterData.result.Emergency_contact;
                     this.in_service=masterData.result.InService;
 
                     loader.dismiss();

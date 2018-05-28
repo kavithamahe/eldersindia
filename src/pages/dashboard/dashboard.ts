@@ -6,6 +6,8 @@ import { CallNumber, Vibration} from 'ionic-native';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { LocalNotifications, Geolocation } from 'ionic-native';
 import { NativeAudio } from '@ionic-native/native-audio';
+import { InAppBrowser } from 'ionic-native';
+
 
 import { ServiceProvider } from '../../providers/service-provider';
 import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
@@ -179,25 +181,35 @@ export class DashboardPage {
     this.nativeAudio.preloadSimple('uniqueId1', 'assets/sound/Siren 21.mp3').then(this.onSuccess, this.onError);
   }
   remote(){
+     this.storage.get('Cctv_camera').then((Cctv_camera) => { this.Cctv_camera=Cctv_camera; 
+   console.log("fdgdfg" +this.Cctv_camera); })
+  if(this.Cctv_camera == undefined){
+    this.navCtrl.push(RemotemonitorPagePage);
+  }else{
+     this.platform.ready().then(() => {
+            let browser = new InAppBrowser(this.Cctv_camera,'_blank','toolbar=no');
+
+        });
+   }
   // this.storage.get('Cctv_camera').then((Cctv_camera) => { this.Cctv_camera=Cctv_camera; 
   //  console.log("fdgdfg" +this.Cctv_camera); })
   // if(this.Cctv_camera == undefined){
   //   this.navCtrl.push(RemotemonitorPagePage);
   // }else{
-    startApp.set({
-      "action": "ACTION_SEND",
-      "package": "com.dlink.mydlinkunified",
-      "type": "text/plain",
-      "uri": "+918958312000"
-      }, {
-         "extraKey2":"",
-                // "extraKey2":"http://192.168.1.46:8033/mjpeg.cgi?",
-                // "username":"admin",
-                // "password":"ctl",
+  //   startApp.set({
+  //     "action": "ACTION_SEND",
+  //     "package": "com.dlink.mydlinkunified",
+  //     "type": "text/plain",
+  //     "uri": "+918958312000"
+  //     }, {
+  //        "extraKey2":"",
+  //               // "extraKey2":"http://192.168.1.46:8033/mjpeg.cgi?",
+  //               // "username":"admin",
+  //               // "password":"ctl",
 
-      "EXTRA_TEXT":"",
-      "chat": true
-      }).start();
+  //     "EXTRA_TEXT":"",
+  //     "chat": true
+  //     }).start();
   // }
   
     
