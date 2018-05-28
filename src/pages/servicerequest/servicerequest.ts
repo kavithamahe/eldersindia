@@ -56,6 +56,7 @@ new_service_amount:any;
 final_payable_amount:any;
 paystatus:any;
 results:any;
+user_type:any;
   constructor(public alertCtrl: AlertController,public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.paystatus = navParams.get("status");
     this.results = navParams.get("result");

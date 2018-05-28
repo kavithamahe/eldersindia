@@ -94,7 +94,7 @@ location_id:any;
   //     this.blogListService.showErrorToast(err);
   // })
 
-  }
+
  getPackageelder(){
  let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();    
