@@ -74,7 +74,7 @@
   </ion-row>
    <ion-row>
   <ion-col col-12>  
-    <b>Total Service cost: </b><p>{{recurring.totalServicecost}}</p>  
+    <b>Total Service cost: </b><p><i class="fa fa-rupee">{{recurring.totalServicecost}}</i></p>  
     </ion-col>
   </ion-row>
    <ion-row>
@@ -100,7 +100,7 @@
     <b>Balance amount </b><p><i class="fa fa-rupee">{{recurring.remainingamount}}</i></p>  
     </ion-col>
       <ion-col col-12>  
-    <button ion-button clear  *ngIf="recurring.payUmny_payment_status=='captured'  && recurring.remaining_amount!='0'" (click)="paynow(recurring.remainingamount,recurring.service_id,recurring.recurring_request_id)">Pay Now</button> 
+    <button ion-button clear  *ngIf="recurring.payUmny_payment_status=='captured'  && recurring.remaining_amount!=0" (click)="paynow(recurring.remainingamount,recurring.service_id,recurring.recurring_request_id)">Pay Now</button> 
     <button ion-button clear *ngIf="recurring.payUmny_payment_status=='captured'  && recurring.payment_method =='full_payment' && recurring.remaining_amount=='0'">Paid
      </button>
     </ion-col>

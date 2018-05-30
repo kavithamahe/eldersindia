@@ -101,12 +101,7 @@
 <ion-row *ngIf="service.service_type=='One time'">
 <p class="tocken-no">Additional Service Cost: <i class="fa fa-rupee"></i>{{service.additional_service_cost}}</p>
 </ion-row>
-<ion-row *ngIf="service.service_type=='One time'">
-<p class="tocken-no">Service Cost: <i class="fa fa-rupee"></i>{{service.service_cost}}</p>
-</ion-row>
-<ion-row *ngIf="service.service_type=='One time'">
-<p class="tocken-no">Additional Service Cost: <i class="fa fa-rupee"></i>{{service.additional_service_cost}}</p>
-</ion-row>
+
 <ion-row *ngIf="service.helpline_mobile!='null'">
   <p class="service-conts" (click)="makeCall(service?.helpline_mobile)"><span class="token-primaryss">Helpline Number:</span>{{service?.helpline_mobile}}
   </p>
@@ -130,10 +125,10 @@
     <p *ngIf="service.service_type =='Recurring'" (click)="viewRecurring()"><ion-badge>View Recurring Requests</ion-badge></p>
     <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost!='0'&& service.additional_service_cost_status=='0' && service.status=='5'"><ion-badge (click)="paynow(service.sr_token,service.service_cost,service?.id,service?.additional_service_cost)">Pay Now</ion-badge>
    </p>
-   <p *ngIf="service.Paymentstatus!='captured' && service.status !='3' && service.payment_method==''"><ion-badge (click)="paynow(service.sr_token,service.service_cost,service?.id,service?.additional_service_cost)">Pay Now</ion-badge>
+   <p *ngIf="service.Paymentstatus!='captured' && service.status !='3' && service.payment_method==''  && service.service_type=='One time' && service.package_id==''"><ion-badge (click)="paynow(service.sr_token,service.service_cost,service?.id,service?.additional_service_cost)">Pay Now</ion-badge>
    </p>
-   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost=='0'"><ion-badge>Paid</ion-badge></p>
-   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost_status=='success'"><ion-badge>Paid</ion-badge></p>
+   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost=='0' && service.additional_service_cost==0 || service.additional_service_cost_status == 'success' && service.service_type=='One time'"><ion-badge>Paid</ion-badge></p>
+<!--    <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost_status=='success'"><ion-badge>Paid</ion-badge></p> -->
   </span>
      
   </ion-col>

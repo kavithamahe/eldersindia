@@ -81,7 +81,7 @@ discountcost:any;
     this.recurringRequest = [];
     this.blogListService.getrecurringRequest(this.rootUrl,this.searchText)
       .subscribe(data =>{ 
-        var dataList=data.result.data;
+        var dataList=data.result.info.data;
         for(let data of dataList) {
       data.discountcost = parseFloat(data.servicediscountcost_one_service) + parseFloat(data.final_service_cost);
       data.totalServicecost = data.service_cost * data.req_count;
@@ -117,7 +117,7 @@ discountcost:any;
   {
     this.blogListService.recurringRequestScroll(this.nextPageURL,this.searchText).subscribe(
      (serviceRequestScroll) => {
-       var dataList=serviceRequestScroll.result.data;
+       var dataList=serviceRequestScroll.result.info.data;
         for(let data of dataList) {
       data.discountcost = parseFloat(data.servicediscountcost_one_service) + parseFloat(data.final_service_cost);
       data.totalServicecost = data.service_cost * data.req_count;
