@@ -86,12 +86,23 @@ base_cost:any;
 payableamount:any;
 servicediscost:any;
 payableamounts:any;
+getCustomerBalanceAmount:any;
+get_custome_amount:any;
+get_custome_deliever_amount:any;
+get_custome_service_cancel_amount:any;
+total_cost:any;
+total_service_cost:any;
   constructor(public platform:Platform,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public navCtrl: NavController,private http: Http) {
   
-this.serviceData=navParams.get("serviceData");
     this.serviceData=navParams.get("serviceData");
     console.log(this.serviceData);
     this.serviceTitle=this.serviceData.serviceTitle;
+    this.getCustomerBalanceAmount = this.serviceData.getCustomerBalanceAmount;
+    this.get_custome_amount = this.serviceData.get_custome_amount;
+    this.get_custome_deliever_amount = this.serviceData.get_custome_deliever_amount;
+    this.get_custome_service_cancel_amount = this.serviceData.get_custome_service_cancel_amount;
+    this.total_cost = this.serviceData.total_cost;
+    this.total_service_cost = this.serviceData.total_service_cost;
     this.base_cost=this.serviceData.base_cost
     this.datCount=navParams.get("datCount");
     this.datetime=this.serviceData.datetime;
@@ -183,7 +194,8 @@ console.log("recurring time");
      this.to_date,this.to_time,this.package_id,this.preferred_time,this.quantity,
      this.location_id,this.lead_time,this.vendor_id,this.datCount,this.service_costs,this.servicediscountcosts,
      this.paymenttype,paymentflag,this.discounts,this.totalservice_costss,this.paidPayment,this.afterdiscount_one_service,this.servicediscountcost_one_service,
-     this.discountpartial,this.base_cost,this.servicediscost).subscribe(     
+     this.discountpartial,this.base_cost,this.servicediscost,this.getCustomerBalanceAmount,this.get_custome_amount,this.get_custome_deliever_amount,
+     this.get_custome_service_cancel_amount,this.total_cost,this.total_service_cost).subscribe(     
       (loginuser) => {
         this.udf3= loginuser.result.serviceType;
         this.udf2 = loginuser.result.service_request_id;
@@ -202,7 +214,8 @@ console.log("recurring time");
      this.subcategory,this.datetime,this.dependentId,this.durations,this.exclude_days,
      this.from_date,this.from_time,this.serviceType,this.selected_dates,this.time_slot,
      this.to_date,this.to_time,this.package_id,this.preferred_time,this.quantity,
-     this.location_id,this.lead_time,this.vendor_id,paymentflag,this.base_cost).subscribe(     
+     this.location_id,this.lead_time,this.vendor_id,paymentflag,this.base_cost,this.getCustomerBalanceAmount,this.get_custome_amount,this.get_custome_deliever_amount,
+     this.get_custome_service_cancel_amount,this.total_cost,this.total_service_cost).subscribe(     
       (loginuser) => {
         this.udf3= loginuser.result.serviceType;
         this.udf2 = loginuser.result.service_request_id;

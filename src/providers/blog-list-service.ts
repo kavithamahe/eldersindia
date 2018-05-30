@@ -66,7 +66,8 @@ Url:any;
     from_date,from_time,serviceType,selected_dates,time_slot,
      to_date,to_time,package_id,preferred_time,quantity,
      location_id,lead_time,vendor_id,datCount,service_costs,servicediscountcost,paymenttype,paymentflag,discounts,totalservice_costss,paidPayment,
-     afterdiscount_one_service,servicediscountcost_one_service,discountpartial,base_cost,servicediscost){
+     afterdiscount_one_service,servicediscountcost_one_service,discountpartial,base_cost,servicediscost,getCustomerBalanceAmount,get_custome_amount,get_custome_deliever_amount,
+     get_custome_service_cancel_amount,total_cost,total_service_cost){
     let _request= {"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
 dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
 from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
@@ -75,7 +76,9 @@ serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id
 ,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id,"datCount":datCount,"servicecost":service_costs,"servicediscountcost":servicediscountcost,"servicediscost":servicediscost,
 "problem":"","pay_method":paymenttype,"mobile":"","paymentflag":paymentflag,"afterdiscount":totalservice_costss,
 "discount":discounts,"discountcost":paidPayment,"payment_type":paymenttype,"afterdiscount_one_service":afterdiscount_one_service,"servicediscountcost_one_service":servicediscountcost_one_service,
-"discountpartial":discountpartial,"base_cost":base_cost};
+"discountpartial":discountpartial,"base_cost":base_cost,"getCustomerBalanceAmount":getCustomerBalanceAmount,
+"get_custome_amount":get_custome_amount,"get_custome_deliever_amount":get_custome_deliever_amount,"get_custome_service_cancel_amount":get_custome_service_cancel_amount,"total_cost":total_cost,
+"total_service_cost":total_service_cost};
     return this.http.post(rootUrl+'serviceRequestSubmitbeforePayment',_request,this.options)
       .map(res => res.json());
   }
@@ -84,13 +87,16 @@ serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id
      subcategory,datetime,dependentId,durations,exclude_days,
     from_date,from_time,serviceType,selected_dates,time_slot,
      to_date,to_time,package_id,preferred_time,quantity,
-     location_id,lead_time,vendor_id,paymentflag,base_cost){
+     location_id,lead_time,vendor_id,paymentflag,base_cost,getCustomerBalanceAmount,get_custome_amount,get_custome_deliever_amount,
+     get_custome_service_cancel_amount,total_cost,total_service_cost){
     let _request= {"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
 dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
 from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
 "quantity":quantity,"selected_dates":selected_dates,"service":service,"serviceType":
 serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
-,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id,"paymentflag":paymentflag,"base_cost":base_cost};
+,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id,"paymentflag":paymentflag,"base_cost":base_cost,"getCustomerBalanceAmount":getCustomerBalanceAmount,
+"get_custome_amount":get_custome_amount,"get_custome_deliever_amount":get_custome_deliever_amount,"get_custome_service_cancel_amount":get_custome_service_cancel_amount,
+"total_cost":total_cost,"total_service_cost":total_service_cost,};
     return this.http.post(rootUrl+'serviceRequestSubmitbeforePayment',_request,this.options)
       .map(res => res.json());
   }

@@ -30,6 +30,7 @@ vendor_id:any;
 package_validity:any;
 package_amount:any;
 location_id:any;
+dependent_id:any;
   constructor(public navParams: NavParams,public modalCtrl: ModalController,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
 
 

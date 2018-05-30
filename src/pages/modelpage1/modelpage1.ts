@@ -57,9 +57,21 @@ export class Modelpage1PagePage {
   afterdiscount_one_service:any;
   servicediscountcost_one_service:any;
   paymenttype:any;
+  getCustomerBalanceAmount:any;
+  get_custome_amount:any;
+  get_custome_deliever_amount:any;
+  get_custome_service_cancel_amount:any;
+  total_cost:any;
+  total_service_cost:any;
   constructor(public modalCtrl: ModalController,public nav: NavController,public navParams: NavParams, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
-   {  
+   {
     this.serviceDatas =  navParams.get("serviceDatas");
+    this.getCustomerBalanceAmount = this.serviceDatas.getCustomerBalanceAmount;
+    this.get_custome_amount = this.serviceDatas.get_custome_amount;
+    this.get_custome_deliever_amount = this.serviceDatas.get_custome_deliever_amount;
+    this.get_custome_service_cancel_amount = this.serviceDatas.get_custome_service_cancel_amount;
+    this.total_cost = this.serviceDatas.total_cost;
+    this.total_service_cost = this.serviceDatas.total_service_cost;
     this.serviceType = this.serviceDatas.serviceType;
     this.datetime = this.serviceDatas.datetime;
     this.preferred_time = this.serviceDatas.preferred_time;

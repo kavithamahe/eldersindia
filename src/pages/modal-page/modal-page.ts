@@ -338,7 +338,7 @@ onlyNumberKey(event) {
     this.patialdiscount= (this.servicecosts/this.datCount) * this.getpaidPayment / 100;
     this.discountpartial = (this.servicecosts/this.datCount) - this.patialdiscount;
     this.totalservice_costss = this.paidPayment * this.discount / 100;
-   this.servicediscountcost = this.paidPayment -this.totalservice_costss;
+    this.servicediscountcost = this.paidPayment -this.totalservice_costss;
     this.afterdiscount_one_service = this.totalservice_costss / this.datCount;
     this.servicediscountcost_one_service = this.servicediscountcost / this.datCount;
     this.finalcost =this.servicecosts - (this.servicecosts * this.discount / 100);
@@ -536,7 +536,8 @@ var date2 = new Date(objToDate);
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,"base_cost":this.service_cost,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
-       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0],"getCustomerBalanceAmount":"","get_custome_amount":"","get_custome_deliever_amount":"",
+       "get_custome_service_cancel_amount":"","total_cost":"","total_service_cost":""};
     
          let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata});
       serviceModal.present();
@@ -600,7 +601,8 @@ var date2 = new Date(objToDate);
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,"base_cost":this.service_cost,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
-       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0],"getCustomerBalanceAmount":"","get_custome_amount":"","get_custome_deliever_amount":"",
+       "get_custome_service_cancel_amount":"","total_cost":"","total_service_cost":""};
     
          let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata});
       serviceModal.present();
@@ -669,7 +671,8 @@ else{
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,"base_cost":this.service_cost,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
-       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0],"getCustomerBalanceAmount":"","get_custome_amount":"","get_custome_deliever_amount":"",
+       "get_custome_service_cancel_amount":"","total_cost":"","total_service_cost":""};
     
          let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata});
       serviceModal.present();
@@ -728,7 +731,8 @@ else{
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,"base_cost":this.service_cost,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
-       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
+       "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0],"getCustomerBalanceAmount":"","get_custome_amount":"","get_custome_deliever_amount":"",
+       "get_custome_service_cancel_amount":"","total_cost":"","total_service_cost":""};
     
          let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata});
       serviceModal.present();
