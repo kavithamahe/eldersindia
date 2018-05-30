@@ -70,19 +70,19 @@ export class DashboardPage {
       this.headers.append('Content-Type', 'application/json');
       this.headers.append('Authorization', 'Bearer ' + this.token);
       this.head = new RequestOptions({ headers: this.headers });
-    this.fetchLocation();
-    this.map();
+      this.fetchLocation();
+      this.map();
   })
       storage.get('user_type').then((user_type) => { this.user_type=user_type; 
       console.log(this.user_type); })
        this.storage.get('name').then((name) => { this.elder_name=name;})
        this.storage.get('lastname').then((lastname) => { this.elder_lastname=lastname;})
-      storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor;  })
+       storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor;  })
        this.storage.get('sponsor_avatar').then((sponsor_avatar) => { this.sponsor_avatar=sponsor_avatar; })
        this.storage.get('sponsor_name').then((sponsor_name) => { this.sponsor_name=sponsor_name; })
       storage.get('ambulance').then((ambulance) => { this.ambulance=ambulance; })
       storage.get('police').then((police) => { this.police=police;  })
-     storage.get('phone').then((phone) => { this.phone=phone; })
+      storage.get('phone').then((phone) => { this.phone=phone; })
       storage.get('doctor').then((doctor) => { this.doctor=doctor;  })
       storage.get('hospital').then((hospital) => { this.hospital=hospital;  })
   });
