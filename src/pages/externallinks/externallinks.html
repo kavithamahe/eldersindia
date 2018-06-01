@@ -13,7 +13,7 @@
     </ion-buttons>
 	<ion-title text-center>Useful External Links</ion-title>
     <ion-buttons right>
-    <button ion-button icon-only (click)="dashboardPage()">
+    <button ion-button icon-only (click)="dashboardPage()"> 
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
@@ -41,7 +41,7 @@
 							<p>{{useful.description | words : 15 : '...'}}</p>
 
 						    <small class="time-datem"><i class="fa fa-clock-o"></i>
-			          		{{useful.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
+			          		{{useful.created_at}}
 			          		</small>
 					    </ion-col>
 					</ion-row>

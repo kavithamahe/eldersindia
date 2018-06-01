@@ -61,7 +61,6 @@
             			   <ion-item text-wrap style="text-align:left !important;"  
                      (click)="getPost(community.id)"><p>{{community.community_name | words :3: '....'}}</p></ion-item>
         			   </div>
-
                 <span [hidden]="!community.category_name"> 
                   <label class="labels-bds"> {{community.category_name}}</label>
                 </span>

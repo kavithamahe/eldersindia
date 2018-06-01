@@ -42,7 +42,7 @@
 				<i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Invite Your Contacts
 			   </button>
 			</ion-item>
-			<ion-slides slidesPerView= "3">
+			<ion-slides slidesPerView= "4">
 			
 				<div *ngFor="let member of members; let i=index" text-wrap>
 					<ion-slide [hidden]="!member?.avatar">
@@ -50,7 +50,7 @@
 							<ion-col [hidden]="!member?.avatar">
 							<ion-avatar>
 								<img (click)="membersProfile(member.uid)" 
-								[src]="imageUrl+member?.avatar" style="width:100px; height:80px;"  />
+								[src]="imageUrl+member?.avatar"   />
 								</ion-avatar>
 								
 								<small class="mem-name" (click)="membersProfile(member.uid)">{{member.name | words :5 : '....'}}

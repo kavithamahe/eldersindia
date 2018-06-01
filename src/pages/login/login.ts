@@ -3,6 +3,7 @@ import { Platform,NavController, NavParams,AlertController, LoadingController, M
 import { Storage } from '@ionic/storage';
 import { LocalNotifications } from 'ionic-native';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 
 import { Login } from '../../models/login';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -34,13 +35,15 @@ export class LoginPage {
   id:any='';
   loginForm: FormGroup;
   submitAttempt: boolean = false;
-  registerCredentials = {email: '', password: ''};
+  registerCredentials = {email: '', password: '',device_type:'',device_token:''};
   callSponsor:any=0;
   ambulance:any=0;
   police:any=0;
   hospital:any=0;
   doctor:any=0;
-  constructor(public menuCtrl: MenuController,public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
+  device_uuid:any;
+  constructor(public menuCtrl: MenuController,private uniqueDeviceID: UniqueDeviceID,public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
+  this.device_uuids();
   this.storage.ready().then(() => { 
      storage.get('id').then((id) => { this.id=id; 
      });
@@ -55,6 +58,16 @@ export class LoginPage {
     // this.initializePreview();
 
   }
+  device_uuids(){
+     this.uniqueDeviceID.get()
+
+  .then((uuid: any) =>{ console.log(uuid);
+    this.device_uuid = uuid;
+  })
+  .catch((error: any) => console.log(error));
+  
+  }
+ 
   pressevent(){
     this.forgotPassword();
   }
@@ -62,6 +75,14 @@ export class LoginPage {
     this.login();
   }
    public login() {  
+    this.registerCredentials.device_token = this.device_uuid;
+    console.log(this.registerCredentials.device_token);
+    if (this.platform.is('ios')) {
+      this.registerCredentials.device_type = "1";
+    }
+    if (this.platform.is('android')) {
+      this.registerCredentials.device_type = "0";
+     }
     if(!this.loginForm.valid){
       this.submitAttempt = true;
     }else{

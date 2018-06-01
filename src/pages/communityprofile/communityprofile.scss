@@ -8,6 +8,12 @@ page-communityprofile {
     height: 40px;
     width: 40px;
 }
+.mess-accept p .button-ios {
+    background:#025FA9;
+    border-radius: 35px;
+    height: 40px;
+    width: 40px;
+}
 .mess-accept p{ float:left;}
 .cont-conn{ background:#fff; padding:5px !important;}
 .name-conne p{     color: #007994 !important;
@@ -90,6 +96,15 @@ page-communityprofile {
     font-family: 'Muli', sans-serif;letter-spacing:0.2px;
   
 }
+
+.listed-comments .item-ios .item-inner .input-wrapper .label-ios h2 {
+    font-size:19px;
+    color:#007994 !important;
+    font-weight:400;
+    font-family: 'Muli', sans-serif;letter-spacing:0.2px;
+  
+}
+
 .video-updates iframe {
     border: 1px solid #ccc;
     width: 100%;

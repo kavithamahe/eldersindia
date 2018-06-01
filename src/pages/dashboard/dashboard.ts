@@ -187,10 +187,11 @@ export class DashboardPage {
     this.navCtrl.push(RemotemonitorPagePage);
   }else{
      this.platform.ready().then(() => {
-            let browser = new InAppBrowser(this.Cctv_camera,'_blank','toolbar=no');
+            let browser = new InAppBrowser(this.Cctv_camera,'_blank');
 
         });
    }
+ 
   // this.storage.get('Cctv_camera').then((Cctv_camera) => { this.Cctv_camera=Cctv_camera; 
   //  console.log("fdgdfg" +this.Cctv_camera); })
   // if(this.Cctv_camera == undefined){

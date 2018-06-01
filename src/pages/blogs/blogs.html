@@ -7,7 +7,6 @@
       </button>
     </ion-buttons>
 	  <ion-title text-center>Blogs</ion-title>
-
     <ion-buttons right>
     <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
@@ -23,15 +22,14 @@
 
 <ion-content class="content-intop">
     <ion-card class="sel-packages" *ngIf(searchButton)>
-        <ion-item>
+      <!--   <ion-item>
             <ion-label>select category</ion-label>
               <ion-select [(ngModel)]="searchCategory1" (ionChange)="onSelectChange($event)">
-               <!-- <ion-option value="All">All</ion-option> -->
                 <ion-option  *ngFor="let category of categoryLists"
                  value={{category.id}}>{{category.name}}
                 </ion-option>
               </ion-select>
-          </ion-item>
+          </ion-item> -->
     </ion-card>
     <ion-row *ngIf(searchButton)>
       <ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
@@ -45,7 +43,7 @@
           <ion-item text-wrap>
             <h2 class="pro-info" text-capitalize>{{blogs.title}}</h2>
             <p class="timedate" text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{blogs.author_name }} | <i class="fa fa-calendar" aria-hidden="true">
-            </i> {{blogs.created_at | date :"MMM dd y"}}
+            </i> {{blogs.created_at}}
             </p>
           </ion-item>
         </ion-col>
@@ -68,7 +66,7 @@
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
-     <p class="error-clr" *ngIf="bloglists?.length==0">{{emptyRecord}}</p>
+     <!-- <p class="error-clr" *ngIf="bloglists?.length==0">{{emptyRecord}}</p> -->
      <ion-fab bottom right>
     <button ion-fab class="top-bttn1"><i class="fa fa-arrow-up"></i></button>
     <ion-fab-list side="top">

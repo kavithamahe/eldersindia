@@ -29,11 +29,11 @@
  <img src="{{imageUrl+news?.featured_image}}" [hidden]="!news?.featured_image">
   <ion-item text-wrap class="events-shows">   
     <h2 text-capitalize>{{news?.title}}</h2>
-    <p class="timedate" text-capitalize><ion-icon ios="ios-person" md="md-person"></ion-icon> {{news?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{news?.post_date | date :"MMM dd y"}}</p>
+    <p class="timedate" text-capitalize><ion-icon ios="ios-person" md="md-person"></ion-icon> {{news?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{news?.post_date}}</p>
   </ion-item>
   </div>
 </ion-card>
-<ion-fab bottom right edge *ngIf="newsLists.length != 0" class="scroll">
+<ion-fab bottom right edge class="scroll">
     <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
     </ion-icon></button>
   </ion-fab>

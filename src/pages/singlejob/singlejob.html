@@ -24,7 +24,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-<ion-card *ngIf(!appliedjobs) class="job-detailsvie">
+<div *ngIf(!appliedjobs) class="job-detailsvie">
 
 <div *ngFor="let singleJob of singleJobInfo">
 <ion-row>
@@ -94,9 +94,9 @@
 
 <br/>
 </div>
-</ion-card>
+</div>
 
-<ion-card class="job-detailsvie" *ngIf(appliedjobs)>
+<div class="job-detailsvie" *ngIf(appliedjobs)>
 
 <div *ngFor="let applyjob of myjobrequestinfo">
 <ion-row>
@@ -160,7 +160,7 @@
 <br/>
  </div>
 
-</ion-card>
+</div>
  
  </ion-content>
 

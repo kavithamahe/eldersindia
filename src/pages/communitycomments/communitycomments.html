@@ -106,8 +106,9 @@
 					</ion-item>
 			
 			</ion-list>
-				  <div *ngIf="i==replyBlock">
+				  <div *ngIf="i==replyBlock" class="rply-com">
 					<ion-row>
+					<br/>
 						<ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important; -webkit-user-select:all !important;" placeholder="write a reply..">
 						</ion-textarea>
 					<p style="margin:5px;" class="message-container" 
@@ -115,18 +116,19 @@
 					(click)="emojiPicker2($event,reply.uid_to,reply.com_post_cmt_id)">
 					</p>
 					</ion-row>
-					<div class="send-req">
+					<div class="send-reqs">
 						<button (click)="sendReply(reply.uid_to,reply.com_post_cmt_id)" ion-button class="secon-sdms"> <ion-icon ios="ios-send" md="md-send"></ion-icon> Send </button>
 					</div>
 			   	</div>
 		</div>
-		<div *ngIf="j==Reply">
+		<div *ngIf="j==Reply" class="rply-com">
 			<ion-row>
+			<br/>
 				<ion-textarea [(ngModel)]="reply_comment" style=" margin:0px !important;-webkit-user-select:all !important;" placeholder="write a reply..">
 				</ion-textarea>
 				<p style="margin:5px;" class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker2($event,comment.uid_from,comment.comments_id)"></p>
 			</ion-row>
-			<div class="send-req">
+			<div class="send-reqs">
 				<button (click)="sendReply(comment.uid_from,comment.comments_id)" ion-button class="secon-sdms"><ion-icon ios="ios-send" md="md-send">
 	
 				</ion-icon> Send

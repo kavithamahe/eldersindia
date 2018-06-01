@@ -93,14 +93,14 @@
     </ion-row>
 
      <div *ngIf="i==showReply">
-     <ion-row>
-        <ion-item>
-        <ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important;" placeholder="write a reply.." autofocus></ion-textarea>
-        </ion-item>
-		
-        <button ion-button class="orange-reply" (click)="postReply(viewComments.id,viewComments?.user_id)"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-        </button>
-      </ion-row>
+	 
+	 <ion-grid>
+    <ion-row>
+      <ion-col width-80><ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important;" placeholder="write a reply.." autofocus></ion-textarea></ion-col>
+      <ion-col width-20><button ion-button class="orange-reply" (click)="postReply(viewComments.id,viewComments?.user_id)"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+        </button></ion-col>
+    </ion-row>
+  </ion-grid>
       </div>
 
        <ion-list *ngFor="let reply of viewComments.comment_reply; let j=index">
@@ -125,10 +125,10 @@
 	 	 
               <div *ngIf="j==replyPost">
                 <ion-row>
-                  <ion-item>
+                  <ion-item width-80>
                       <ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important;" placeholder="write a reply.."></ion-textarea>
                   </ion-item>
-				       <ion-item>
+				       <ion-item width-20>
                   <button (click)="postReply(viewComments.id,user_id)" class="orange-reply">
                   <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
                   </button>
