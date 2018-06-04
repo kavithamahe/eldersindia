@@ -2,9 +2,8 @@ import { Component, ViewChild} from '@angular/core';
 
 import { Platform, MenuController, Nav, AlertController,ToastController,LoadingController } from 'ionic-angular';
 
-//import { StatusBar, Splashscreen, Push } from 'ionic-native';
 //import { Diagnostic } from 'ionic-native';
-import { CameraPreview, CameraPreviewRect, Diagnostic,StatusBar, Splashscreen } from 'ionic-native';
+import { CameraPreview, CameraPreviewRect, Diagnostic,StatusBar, Splashscreen} from 'ionic-native';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 //import { Geolocation } from '@ionic-native/geolocation';
@@ -401,7 +400,6 @@ initializePreview() {
       height: window.innerHeight
     };
 }
-
   initPushNotification()
   {
     this.platform.ready().then(() => {
@@ -409,7 +407,7 @@ initializePreview() {
       console.warn("Push notifications not initialized. Cordova is not available - Run in physical device");
       return;
     }
-    
+    // 85075801930
      let push = this.push.init({
       android: {
         senderID: "604025131571",
@@ -426,15 +424,18 @@ initializePreview() {
     });
 
 push.on('registration').subscribe((data: any) => {
-  this.reg_id = data.registrationId ;
-   this.userLogin.setDeviceID(this.reg_id);
-  // console.log(this.reg_id);
-  // console.log('Received a registration', data)
+   console.log("device Reg ID ->", data.registrationId);
+      this.reg_id = data.registrationId ;
+       console.log('device token', this.reg_id)
+      this.userLogin.setDeviceID(this.reg_id);
+      //TODO - send device token to server
+  console.log('Received a registration', data)
 });
+
 push.on('notification').subscribe((data: any) =>{
   console.log('Received a notification', data)
-    // console.log('message', data.message);
-    //   console.log('data',data);
+    console.log('message', data.message);
+      console.log('data',data);
    if (data.additionalData.foreground == true) {
          this.showToaster(data.message);
         

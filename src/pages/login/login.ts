@@ -35,7 +35,7 @@ export class LoginPage {
   id:any='';
   loginForm: FormGroup;
   submitAttempt: boolean = false;
-  registerCredentials = {email: '', password: '',device_type:'',device_token:''};
+  registerCredentials = {email: '', password: '',device_type:''};
   callSponsor:any=0;
   ambulance:any=0;
   police:any=0;
@@ -75,8 +75,8 @@ export class LoginPage {
     this.login();
   }
    public login() {  
-    this.registerCredentials.device_token = this.device_uuid;
-    console.log(this.registerCredentials.device_token);
+    // this.registerCredentials.device_token = this.device_uuid;
+    // console.log(this.registerCredentials.device_token);
     if (this.platform.is('ios')) {
       this.registerCredentials.device_type = "1";
     }
