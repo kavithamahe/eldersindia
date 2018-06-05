@@ -75,13 +75,7 @@
 			  	
 			<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?" style="margin:0px; -webkit-user-select:all !important;">
            </ion-textarea>
-				    	
-		    		
-						
-						
-						
-						
-						<div  class="mem-name-update">
+			<div  class="mem-name-update">
 		    	<ion-row>
 					<ion-col>
 <button ion-button icon-only class="video-c" (click)="accessGallery()"><i class="fa fa-picture-o"></i>&nbsp; Add photos</button>
@@ -133,8 +127,11 @@
 	        				<ion-col width-60 *ngIf = "community?.community_logo != null">
 		        		
 			          		<h2 text-wrap (click)="goBackToCommunity(community.com_id)">{{community.community_name}}</h2>
-			          			<p class="time-datem"><i class="fa fa-clock-o"></i>
+			          		<!-- 	<p class="time-datem"><i class="fa fa-clock-o"></i>
 			          		{{community.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
+			          		</p> -->
+			          			<p class="time-datem"><i class="fa fa-clock-o"></i>
+			          		{{community.created_at}}
 			          		</p>
 			          	
 						</ion-col>

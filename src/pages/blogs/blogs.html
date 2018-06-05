@@ -22,14 +22,14 @@
 
 <ion-content class="content-intop">
     <ion-card class="sel-packages" *ngIf(searchButton)>
-      <!--   <ion-item>
+        <ion-item>
             <ion-label>select category</ion-label>
               <ion-select [(ngModel)]="searchCategory1" (ionChange)="onSelectChange($event)">
                 <ion-option  *ngFor="let category of categoryLists"
                  value={{category.id}}>{{category.name}}
                 </ion-option>
               </ion-select>
-          </ion-item> -->
+          </ion-item>
     </ion-card>
     <ion-row *ngIf(searchButton)>
       <ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar>

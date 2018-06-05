@@ -76,13 +76,11 @@
    <p>{{viewServiceRequestInfo?.location_name}}</p>
    </ion-col>
   </ion-row>
-
-  
-
-  <ion-row>   
+ <ion-row>   
     <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.updated_at!='0000-00-00 00:00:00')">
 	<span>Service requested Date</span>
-   <p>{{viewServiceRequestInfo?.updated_at | date:'dd/M/yyyy h:m a'}}</p>
+  <!--  <p>{{viewServiceRequestInfo?.updated_at | date:'dd/M/yyyy h:m a'}}</p> -->
+   <p>{{viewServiceRequestInfo?.updated_at}}</p>
    </ion-col>
   </ion-row>
   <ion-row *ngIf="(viewServiceRequestInfo?.enquiry_date!='0000-00-00')">  

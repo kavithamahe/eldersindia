@@ -91,7 +91,8 @@
                 </ion-col>
                 <ion-col width-40 style="text-align-last: end;">
 
-                <p class="time-small"><i class="fa fa-clock-o"></i>&nbsp;{{inbox?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p>
+               <!--  <p class="time-small"><i class="fa fa-clock-o"></i>&nbsp;{{inbox?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p> -->
+               <p class="time-small"><i class="fa fa-clock-o"></i>&nbsp;{{inbox?.created_at}}</p>
                 </ion-col>
               </ion-row>
               <ion-row *ngIf="inbox.subject">
@@ -158,7 +159,8 @@
                 <ion-icon name="attach"></ion-icon>
                 </ion-col>
                 <ion-col width-30 style="text-align-last: end;">
-                <p><i class="fa fa-clock-o"></i>&nbsp;{{sent?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p>
+                <p><i class="fa fa-clock-o"></i>&nbsp;{{sent?.created_at}}</p>
+                  <!-- <p><i class="fa fa-clock-o"></i>&nbsp;{{sent?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p> -->
                 </ion-col>
               </ion-row>
               <ion-row *ngIf="sent.subject">

@@ -124,8 +124,11 @@
 	        		<ion-col width-70>
 			          	<h2 (click)="communityProfile(user.uid)">{{user.name}} {{user.last_name}}</h2>
 			          		<p class="time-datem"><i class="fa fa-clock-o"></i>
-			          		{{user.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
+			          		{{user.created_at}}
 			          		</p>
+			          		<!-- <p class="time-datem"><i class="fa fa-clock-o"></i>
+			          		{{user.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
+			          		</p> -->
 			        </ion-col>
 					<ion-col width-10 class="bt-s">
 						<button *ngIf="user.uid == user_id" ion-button  clear (click)="showConfirm(user.id)">
