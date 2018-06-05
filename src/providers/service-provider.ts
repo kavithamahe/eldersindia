@@ -48,6 +48,26 @@ serviceInit(token){
     console.log("token intialized",token);
     console.log("root url: ",this.rootUrl);   
 }
+getCustomerserviceamount(){
+   let _request= {};
+    return this.http.post(this.rootUrl+'getCustomerserviceamount',_request,this.head)
+      .map(res => res.json());
+}
+getCustomerDeliverStatusAmount(){
+   let _request= {};
+    return this.http.post(this.rootUrl+'getCustomerDeliverStatusAmount',_request,this.head)
+      .map(res => res.json());
+}
+getServicecancelamount(){
+   let _request= {};
+    return this.http.post(this.rootUrl+'getServicecancelamount',_request,this.head)
+      .map(res => res.json());
+}
+getCustomerBalanceAmount(){
+   let _request= {};
+    return this.http.post(this.rootUrl+'getCustomerBalanceAmount',_request,this.head)
+      .map(res => res.json());
+}
 sendotp(){
    let _request= {};
     return this.http.post(this.rootUrl+'sendOtp',_request,this.head)

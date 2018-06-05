@@ -78,10 +78,17 @@
       <!-- <p>------------------------One Time----------------------------</p> -->
 
        <div *ngIf(searchButton)>
-         <ion-item>
+              <ion-item>
               <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecost}}
               </ion-label>
-
+              </ion-item>
+               <ion-item text-wrap>
+              <ion-label>Previous service due amount: <i class="fa fa-rupee"></i>{{get_custome_deliever_amount}}
+              </ion-label>
+              </ion-item>
+               <ion-item>
+              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamount}}
+              </ion-label>
               </ion-item>
            <ion-label stacked class="label-lb required">Preferred date</ion-label>
      
