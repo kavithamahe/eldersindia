@@ -11,7 +11,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import { Network } from '@ionic-native/network';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
-import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 
 
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -259,6 +258,6 @@ import { ServiceProvider } from '../providers/service-provider';
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,DatePipe,Network,ServiceProvider,AppConfig,Storage,UniqueDeviceID,Push] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,DatePipe,Network,ServiceProvider,AppConfig,Storage,Push] // Add GithubUsers provider
 })
 export class AppModule {}

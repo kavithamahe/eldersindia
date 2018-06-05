@@ -28,7 +28,7 @@
   <ion-col class="blogs-tittle">
   <ion-item text-wrap>
     <h2 text-capitalize>{{singleBlogInfo?.details?.title}}</h2>
-    <p text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{singleBlogInfo?.details?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i>  {{singleBlogInfo?.details?.created_at | date :"MMM dd y"}} | <i class="fa fa-share-alt" aria-hidden="true" (click)="shareblog(singleBlogInfo?.details?.id)"></i> Share</p>
+    <p text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{singleBlogInfo?.details?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i>  {{singleBlogInfo?.details?.created_at}} | <i class="fa fa-share-alt" aria-hidden="true" (click)="shareblog(singleBlogInfo?.details?.id)"></i> Share</p>
   </ion-item></ion-col></ion-row>
 
   <img src="{{imageUrl+singleBlogInfo?.details?.banner_image}}" [hidden]="!singleBlogInfo?.details?.banner_image">
@@ -73,7 +73,7 @@
     </h2>
 
    
-    <small class="timedate">{{viewComments?.created_at | date :"MMM dd y h:mm a"}}</small>
+    <small class="timedate">{{viewComments?.created_at}}</small>
     <strong item-text-wrap class="page-down">{{viewComments?.comment}}</strong>
 
      

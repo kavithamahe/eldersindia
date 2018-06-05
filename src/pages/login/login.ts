@@ -3,7 +3,6 @@ import { Platform,NavController, NavParams,AlertController, LoadingController, M
 import { Storage } from '@ionic/storage';
 import { LocalNotifications } from 'ionic-native';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 
 import { Login } from '../../models/login';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -42,8 +41,8 @@ export class LoginPage {
   hospital:any=0;
   doctor:any=0;
   device_uuid:any;
-  constructor(public menuCtrl: MenuController,private uniqueDeviceID: UniqueDeviceID,public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
-  this.device_uuids();
+  constructor(public menuCtrl: MenuController,public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
+ 
   this.storage.ready().then(() => { 
      storage.get('id').then((id) => { this.id=id; 
      });
@@ -58,15 +57,7 @@ export class LoginPage {
     // this.initializePreview();
 
   }
-  device_uuids(){
-     this.uniqueDeviceID.get()
-
-  .then((uuid: any) =>{ console.log(uuid);
-    this.device_uuid = uuid;
-  })
-  .catch((error: any) => console.log(error));
-  
-  }
+ 
  
   pressevent(){
     this.forgotPassword();

@@ -65,13 +65,13 @@
 				</ion-col>
 				  </ion-row>
 				    <ion-row>
- 	<ion-col col-12><b>Requested Date</b><p>{{package?.service_avail_date | date: 'dd/MM/yyyy'}}</p>
+ 	<ion-col col-12><b>Requested Date</b><p>{{package?.service_avail_date}}</p>
   </ion-col>
 	  </ion-row>
     <ion-row *ngIf="package?.expired_date != null">
       <ion-col col-12>
       <b>Expiry Date</b>
-         <p>{{package?.expired_date | date: 'dd/MM/yyyy'}}</p>
+         <p>{{package?.expired_date}}</p>
         </ion-col>
           </ion-row>
     
