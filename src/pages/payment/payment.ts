@@ -100,6 +100,7 @@ total_service_cost:any;
     this.getCustomerBalanceAmount = this.serviceData.getCustomerBalanceAmount;
     this.get_custome_amount = this.serviceData.get_custome_amount;
     this.get_custome_deliever_amount = this.serviceData.get_custome_deliever_amount;
+    localStorage.setItem('get_custome_deliever_amount', this.get_custome_deliever_amount);
     this.get_custome_service_cancel_amount = this.serviceData.get_custome_service_cancel_amount;
     this.total_cost = this.serviceData.total_cost;
     this.total_service_cost = this.serviceData.total_service_cost;
@@ -166,6 +167,10 @@ localStorage.setItem('key', this.token);
      storage.get('email').then((email) => { this.email=email; })
      storage.get('phone').then((phone) => { this.phone=phone; })
    });
+     if(this.get_custome_deliever_amount != 0 || this.getCustomerBalanceAmount != 0){
+      this.service_costss=(this.total_service_cost * 100).toFixed(0);
+     }
+     else{
      if(this.datCount != undefined){
       if(this.paymenttype == "partial_payment"){
         this.service_costss=this.payableamounts;
@@ -178,6 +183,7 @@ localStorage.setItem('key', this.token);
      else{
         this.service_costss=this.service_cost;
      }
+   }
      localStorage.setItem('service_costss', this.service_costss);
 }
  serviceRequestSubmitbeforePayment(){
@@ -290,7 +296,7 @@ xmlhttp.open("POST", url,true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
-xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"service_cost":  localStorage.getItem("service_costss")}));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
 
 xmlhttp.onload = function () {
   var users = JSON.parse(xmlhttp.responseText);

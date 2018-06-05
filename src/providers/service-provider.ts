@@ -68,6 +68,11 @@ getCustomerBalanceAmount(){
     return this.http.post(this.rootUrl+'getCustomerBalanceAmount',_request,this.head)
       .map(res => res.json());
 }
+getServicedependentlist(vendor_id){
+   let _request= {"vendor_id":vendor_id};
+    return this.http.post(this.rootUrl+'getServicedependentlist',_request,this.head)
+      .map(res => res.json());
+}
 sendotp(){
    let _request= {};
     return this.http.post(this.rootUrl+'sendOtp',_request,this.head)
