@@ -56,7 +56,7 @@ Url:any;
       .map(res => res.json());
   }
   getrecurringRequest(rootUrl,searchText){
-    let _request= {"search": searchText};
+    let _request= {"search": searchText,"sort":""};
     return this.http.post(rootUrl+'getRecurringServiceList',_request,this.options)
       .map(res => res.json());
   }
@@ -297,8 +297,7 @@ getPackageRequestById(rootUrl,packageId){
     let toast = this.toastCtrl.create({
         message: messageData,
         position:"top",
-        duration: 5000,
-        cssClass: "toast-success"
+        duration: 5000
       });
       toast.present();
    }
@@ -306,8 +305,7 @@ getPackageRequestById(rootUrl,packageId){
     let toast = this.toastCtrl.create({
         message: messageData,
         position:"top",
-        duration: 5000,
-        cssClass: "toast-cancel"
+        duration: 5000
       });
       toast.present();
    }
