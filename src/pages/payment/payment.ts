@@ -92,6 +92,8 @@ get_custome_deliever_amount:any;
 get_custome_service_cancel_amount:any;
 total_cost:any;
 total_service_cost:any;
+servicediscountcostss:any;
+discountcost:any;
   constructor(public platform:Platform,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public navCtrl: NavController,private http: Http) {
   
     this.serviceData=navParams.get("serviceData");
@@ -104,6 +106,8 @@ total_service_cost:any;
     this.get_custome_service_cancel_amount = this.serviceData.get_custome_service_cancel_amount;
     this.total_cost = this.serviceData.total_cost;
     this.total_service_cost = this.serviceData.total_service_cost;
+    this.servicediscountcostss = this.serviceData.servicediscountcost;
+    this.discountcost = this.serviceData.discountcost;
     this.base_cost=this.serviceData.base_cost
     this.datCount=navParams.get("datCount");
     this.datetime=this.serviceData.datetime;
@@ -172,13 +176,13 @@ localStorage.setItem('key', this.token);
      }
      else{
      if(this.datCount != undefined){
-      if(this.paymenttype == "partial_payment"){
-        this.service_costss=this.payableamounts;
-      }
-      else{
-        this.service_costss=this.servicediscountcost;
-      }
-
+      // if(this.paymenttype == "partial_payment"){
+      //   this.service_costss=this.payableamounts;
+      // }
+      // else{
+      //   this.service_costss=this.servicediscountcost;
+      // }
+      this.service_costss=(this.servicediscountcostss * 100).toFixed(0);;
      }
      else{
         this.service_costss=this.service_cost;
@@ -198,8 +202,8 @@ console.log("recurring time");
      this.subcategory,this.datetime,this.dependentId,this.durations,this.exclude_days,
      this.from_date,this.from_time,this.serviceType,this.selected_dates,this.time_slot,
      this.to_date,this.to_time,this.package_id,this.preferred_time,this.quantity,
-     this.location_id,this.lead_time,this.vendor_id,this.datCount,this.service_costs,this.servicediscountcosts,
-     this.paymenttype,paymentflag,this.discounts,this.totalservice_costss,this.paidPayment,this.afterdiscount_one_service,this.servicediscountcost_one_service,
+     this.location_id,this.lead_time,this.vendor_id,this.datCount,this.service_costs,this.servicediscountcostss,
+     this.paymenttype,paymentflag,this.discounts,this.totalservice_costss,this.discountcost,this.afterdiscount_one_service,this.servicediscountcost_one_service,
      this.discountpartial,this.base_cost,this.servicediscost,this.getCustomerBalanceAmount,this.get_custome_amount,this.get_custome_deliever_amount,
      this.get_custome_service_cancel_amount,this.total_cost,this.total_service_cost).subscribe(     
       (loginuser) => {

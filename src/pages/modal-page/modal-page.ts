@@ -121,6 +121,8 @@ export class ModalContentPage {
   getCustomerBalanceAmount:any;
   totalpayableamount:any;
   get_Servicedependentlist:any;
+  discount_100:any;
+  discountcost:any;
   constructor(platform: Platform,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {   
      this.date = new Date().toISOString();
@@ -314,6 +316,10 @@ export class ModalContentPage {
      this.providerService.getRecurringDiscount(datCount)
       .subscribe(data =>{ 
           this.getpaymentDiscount = data.result;
+          this.discount_100 = this.getpaymentDiscount.discount_100;
+          this.discountcost = this.servicecosts * this.discount_100 / 100
+          this.servicecost = this.servicecosts - (this.servicecosts * this.discount_100 / 100);
+          this.finalcost = this.servicecosts - (this.servicecosts * this.discount_100 / 100);
     },
 
     (err) => { 
@@ -508,11 +514,7 @@ export class ModalContentPage {
           this.providerService.showToast("Try again later");
         }
          loading.dismiss();
-      });
-  
-
-    
-    
+      });  
   }
    next(){
     if(this.get_Servicedependentlist !=  0){
@@ -587,7 +589,7 @@ var date2 = new Date(objToDate);
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0],"getCustomerBalanceAmount":this.getCustomerBalanceAmount,"get_custome_amount":"","get_custome_deliever_amount":this.get_custome_deliever_amount,
-       "get_custome_service_cancel_amount":"","total_cost":this.servicecost,"total_service_cost":this.totalpayableamount};
+       "get_custome_service_cancel_amount":"","total_cost":this.servicecost,"total_service_cost":this.totalpayableamount,"servicediscountcost":this.servicecost,"discountcost":this.discountcost};
     
          let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata});
       serviceModal.present();
@@ -652,7 +654,7 @@ var date2 = new Date(objToDate);
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0],"getCustomerBalanceAmount":this.getCustomerBalanceAmount,"get_custome_amount":"","get_custome_deliever_amount":this.get_custome_deliever_amount,
-       "get_custome_service_cancel_amount":"","total_cost":this.servicecost,"total_service_cost":this.totalpayableamount};
+       "get_custome_service_cancel_amount":"","total_cost":this.servicecost,"total_service_cost":this.totalpayableamount,"servicediscountcost":this.servicecost,"discountcost":this.discountcost};
     
          let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata});
       serviceModal.present();
@@ -722,7 +724,7 @@ else{
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0],"getCustomerBalanceAmount":this.getCustomerBalanceAmount,"get_custome_amount":"","get_custome_deliever_amount":this.get_custome_deliever_amount,
-       "get_custome_service_cancel_amount":"","total_cost":this.servicecost,"total_service_cost":this.totalpayableamount};
+       "get_custome_service_cancel_amount":"","total_cost":this.servicecost,"total_service_cost":this.totalpayableamount,"servicediscountcost":this.servicecost,"discountcost":this.discountcost};
     
          let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata});
       serviceModal.present();
@@ -782,7 +784,7 @@ else{
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0],"getCustomerBalanceAmount":this.getCustomerBalanceAmount,"get_custome_amount":"","get_custome_deliever_amount":this.get_custome_deliever_amount,
-       "get_custome_service_cancel_amount":"","total_cost":this.servicecost,"total_service_cost":this.totalpayableamount};
+       "get_custome_service_cancel_amount":"","total_cost":this.servicecost,"total_service_cost":this.totalpayableamount,"servicediscountcost":this.servicecost,"discountcost":this.discountcost};
     
          let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata});
       serviceModal.present();

@@ -160,11 +160,7 @@
        <ion-item>
       <p>{{datCount}} Frequency</p>
        </ion-item><br/>
-         <ion-item *ngIf="servicecosts != undefined">
-              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecosts}}
-              </ion-label>
-
-              </ion-item>
+     
       <ion-list radio-group>
        <ion-item>
         <ion-label>Fixed hours</ion-label>
@@ -240,8 +236,18 @@
           <ion-option [value] = "6" >Saturday</ion-option>
         </ion-select>
       </ion-item>
-           <!-- <ion-list radio-group *ngIf ="datCount >= 10">  -->
-                      <ion-list radio-group> 
+          <ion-item *ngIf="servicecosts != undefined">
+              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecosts}}
+              </ion-label>
+
+              </ion-item>
+                <ion-item>
+              <ion-label>Price After Discount: <i class="fa fa-rupee"></i>{{servicecost}}
+              </ion-label>
+
+              </ion-item>
+       
+              <!--         <ion-list radio-group> 
 
                   <ion-label>Payment Type</ion-label>
                  <ion-item>
@@ -255,15 +261,15 @@
 
                       </ion-radio>
                   </ion-item>
-            </ion-list>
-            <ion-list *ngIf(fullpays)>
+            </ion-list> -->
+         <!--    <ion-list *ngIf(fullpays)>
             <div>
              <ion-item>
              <ion-label></ion-label>
              <ion-select (ionChange)="fullpaymentinfo()" [(ngModel)]="fullgetpaidPayment"  
              [ngModelOptions]="{standalone: true}">
              <ng-container>
-        <!--   <ion-option value={{payment.paidPayment}} *ngIf="payment.paidPayment >= 100">{{payment.paidPayment}}</ion-option> -->
+     
           
            <ion-option value="100">100%</ion-option>
           </ng-container>
@@ -272,11 +278,7 @@
               <ion-item>
             <p>Discount : {{discount}} %</p>
             <p>Price after discount : <i class="fa fa-rupee"></i>{{finalcost}}</p>
-            </ion-item>
-           <!--  <ion-item *ngFor="let payment of fullpayDiscount">
-            <p *ngIf="payment.paidPayment >= 100">Discount : {{payment.paymentDiscount}} %</p>
-            <p *ngIf="payment.paidPayment >= 100">Price after discount : {{finalcost}}</p>
-            </ion-item> -->
+         
             </div>
             </ion-list>
             <ion-list *ngIf(partialpays)>
@@ -285,7 +287,6 @@
              <ion-select (ionChange)="paymentinfo()" [(ngModel)]="getpaidPayment"  
              [ngModelOptions]="{standalone: true}">
              <ng-container>
-          <!-- <ion-option value={{payment.paidPayment}} *ngIf="payment.paidPayment < 100">{{payment.paidPayment}}</ion-option> -->
          <ion-option value="25">25%</ion-option>
           <ion-option value="50">50%</ion-option>
           <ion-option value="75">75%</ion-option>
@@ -297,16 +298,13 @@
             <p>Price after discount : <i class="fa fa-rupee"></i>{{finalcost}}</p>
             <p>Payable amount : <i class="fa fa-rupee"></i>{{payableamount}}</p>
             </ion-item>
-           <!--  <ion-item *ngFor="let getpaidPayment of getpaidPaymentinfo"> 
-            <p>Discount : {{totalservice_cost}}%</p>
-            <p>Price after discount : {{finalcost}}</p>
-            </ion-item> -->
-            </ion-list>
+            </ion-list> -->
     </div>    
 
       </form>
              <ion-item class="check-bx" class="one-timereq">
-             <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox> 
+             <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()">
+             </ion-checkbox> 
              <ion-label (click)="openTerms()" style="margin:0px;">I agree to</ion-label>        
             </ion-item>
        <ion-item class="terms-con one-timereq">
