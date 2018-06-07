@@ -47,6 +47,7 @@ recurring_request_id:any;
   		localStorage.setItem('service_costss', this.service_costss);
   		this.service_id = navParams.get("service_id");
       this.recurring_request_id = navParams.get("recurring_request_id");
+      localStorage.setItem('recurring_request_id', this.recurring_request_id);
       console.log(this.service_id);
   	}
   	if(navParams.get("sr_token") != undefined){
@@ -150,7 +151,7 @@ xmlhttp.open("POST", url,true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
-xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("service_costss")}));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("service_costss"),"recurring_request_id":  localStorage.getItem("recurring_request_id")}));
 
 
 console.log(xmlhttp.responseText);

@@ -55,8 +55,8 @@ Url:any;
     return this.http.post(this.rootUrl+'getBlogCategories',_request,this.options)
       .map(res => res.json());
   }
-  getrecurringRequest(rootUrl,searchText){
-    let _request= {"search": searchText,"sort":""};
+  getrecurringRequest(rootUrl,searchText,sort){
+    let _request= {"search": searchText,"sort":sort};
     return this.http.post(rootUrl+'getRecurringServiceList',_request,this.options)
       .map(res => res.json());
   }
@@ -116,8 +116,8 @@ serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id
     return this.http.post(rootUrl+'checkpayUmoneyforSRMbl',_request,this.options)
       .map(res => res.json());
   }
-  recurringRequestScroll(nextPageURL,searchText){
-     let _request= {"search": searchText};
+  recurringRequestScroll(nextPageURL,searchText,sort){
+     let _request= {"search": searchText,"sort":sort};
      return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json());
   }

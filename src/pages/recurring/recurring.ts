@@ -32,6 +32,7 @@ searchText:any="";
 nextPageURL:any='';
 serviceRequestScrollLists:any=[];
 discountcost:any;
+sortby:any="";
   constructor(public navCtrl: NavController,public modalCtrl: ModalController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
   	this.storage.ready().then(() => {  
   		storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
@@ -79,7 +80,7 @@ discountcost:any;
   	// let loading = this.loadingCtrl.create({content: 'Please wait...!'});
    //  loading.present();
     this.recurringRequest = [];
-    this.blogListService.getrecurringRequest(this.rootUrl,this.searchText)
+    this.blogListService.getrecurringRequest(this.rootUrl,this.searchText,this.sortby)
       .subscribe(data =>{ 
         var dataList=data.result.info.data;
         for(let data of dataList) {
@@ -115,7 +116,7 @@ discountcost:any;
   }
   recurringRequestScroll()
   {
-    this.blogListService.recurringRequestScroll(this.nextPageURL,this.searchText).subscribe(
+    this.blogListService.recurringRequestScroll(this.nextPageURL,this.searchText,this.sortby).subscribe(
      (serviceRequestScroll) => {
        var dataList=serviceRequestScroll.result.info.data;
         for(let data of dataList) {

@@ -9,7 +9,7 @@
     <ion-buttons right>
     <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
-      </button>
+      </button> 
     </ion-buttons>
     
   </ion-navbar>
@@ -24,6 +24,17 @@
 <ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
   <ion-col width-20><button (click)="inputSearch(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
 </ion-row>
+ <ion-card class="sel-packages">
+ <ion-item>
+    <ion-label>Sort By</ion-label>
+    <ion-select [(ngModel)]="sortby" (ionChange)="getrecurringRequest()">
+      <ion-option value="preferred_asc">Preferred Date-Asc</ion-option>   
+      <ion-option value="preferred_desc">Preferred Date-Des</ion-option>  
+      <ion-option value="enquiry_asc">Enquiry Date-Asc</ion-option>  
+      <ion-option value="enquiry_desc">Enquiry Date-Des</ion-option>      
+    </ion-select>
+  </ion-item>
+ </ion-card>
 <ion-card  *ngFor="let recurring of recurringRequest" class="job-detailsview">
 <ion-grid class="package-needs">
   <ion-row>
@@ -99,8 +110,9 @@
   <ion-col col-12>  
     <b>Balance amount </b><p><i class="fa fa-rupee">{{recurring.remainingamount}}</i></p>  
     </ion-col>
-      <ion-col col-12>  
-    <button ion-button clear  *ngIf="recurring.payUmny_payment_status=='captured'  && recurring.remaining_amount!=0" (click)="paynow(recurring.remainingamount,recurring.service_id,recurring.recurring_request_id)">Pay Now</button> 
+      <ion-col col-12> 
+    <button ion-button clear *ngIf="recurring.payUmny_payment_status=='captured'  && recurring.remaining_amount!=0" (click)="paynow(recurring.remainingamount,recurring.service_id,recurring.recurring_request_id)">Pay Now</button>
+    <button ion-button clear *ngIf="recurring.payUmny_payment_status!='captured'" (click)="paynow(recurring.remainingamount,recurring.service_id,recurring.recurring_request_id)">Pay Now</button> 
     <button ion-button clear *ngIf="recurring.payUmny_payment_status=='captured'  && recurring.payment_method =='full_payment' && recurring.remaining_amount=='0'">Paid
      </button>
     </ion-col>
