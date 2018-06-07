@@ -78,6 +78,11 @@ getpackagesbasedServices(location_id,vendorid,dependents_id,service_ids){
     return this.http.post(this.rootUrl+'getpackagesbasedServices',_request,this.head)
       .map(res => res.json());
 }
+checkRiseAvailable(onetimes,date,selectedDates,service_ids,dependents,vendor_id){
+  let _request= {"id": dependents, "recurring_date": selectedDates, "schedule_date": date, "serviceType": onetimes,"service_id":service_ids,"vendor_id":vendor_id};
+    return this.http.post(this.rootUrl+'checkRiseAvailable',_request,this.head)
+      .map(res => res.json());
+}
 firsttimelogin(serviceName,bodyData){
       this.headers = new Headers();
       this.headers.append('Content-Type', 'application/json');

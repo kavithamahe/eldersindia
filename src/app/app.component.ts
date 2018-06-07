@@ -100,28 +100,28 @@ export class MyApp {
     private network: Network,
     private push: Push
   ) {
-    let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-      this.alert = this.alertCtrl.create({
-        title: 'No Internet Connection',
-        // message: 'Do you want to exit the app?',
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              this.alert =null;
-            }
-          },
-          {
-            text: 'Exit',
-            handler: () => {
-              this.platform.exitApp();
-            }
-          }
-        ]
-      });
-      this.alert.present();
-    });
+    // let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+    //   this.alert = this.alertCtrl.create({
+    //     title: 'No Internet Connection',
+    //     // message: 'Do you want to exit the app?',
+    //     buttons: [
+    //       {
+    //         text: 'Cancel',
+    //         role: 'cancel',
+    //         handler: () => {
+    //           this.alert =null;
+    //         }
+    //       },
+    //       {
+    //         text: 'Exit',
+    //         handler: () => {
+    //           this.platform.exitApp();
+    //         }
+    //       }
+    //     ]
+    //   });
+    //   this.alert.present();
+    // });
 
     this.storage.ready().then(() => {
     storage.get('user_type').then((userType)=>{

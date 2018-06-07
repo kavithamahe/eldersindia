@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, ViewController,LoadingController,ModalController,NavController} from 'ionic-angular';
+import { NavParams, ViewController,LoadingController,ModalController,NavController,AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //import {DatePicker} from 'ionic-native';
 import {Platform} from 'ionic-angular';
@@ -97,7 +97,8 @@ export class ModalContentPage {
   serviceids:any;
   data:any;
   package:any;
-  constructor(platform: Platform,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
+  checkRise_status:any;
+  constructor(platform: Platform,public alertCtrl: AlertController,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {    
     this.storage.ready().then(() => {
              storage.get('user_type').then((user_type) => { this.userType=user_type; 
@@ -280,6 +281,41 @@ export class ModalContentPage {
            // this.starDate = moment(this.starDate).format("YYYY-MM-DD");
           }        
       this.dayCalculation();
+       if(this.searchButton == true){
+        this.onetimes = "One time";
+      }else{
+        this.onetimes = "Recurring";
+      }
+          if(this.userType != 'sponsor'){
+      this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.authForm.value.dependents;
+    }
+         this.providerService.checkRiseAvailable(this.onetimes,this.modalForm.value.date,this.selectedDates,this.service_ids,this.dependent,this.vendor_id)
+      .subscribe(data =>{ 
+        this.checkRise_status=data.result;   
+         if(this.checkRise_status != 0){
+   let alert = this.alertCtrl.create({
+        title: 'Avail Services',
+        message: "You have already booked a service for "+this.serviceTitle+" on this specified date.Do you want to still proceed?",
+        buttons: [
+          {
+            text: 'Change Date',
+            role: 'cancel',
+            handler: () => {
+              alert =null;
+            }
+          },
+          {
+            text: 'Next',
+            handler: () => {
+            }
+          }
+        ]
+      });
+      alert.present();
+      }
+    })
                                                                                               
   }
   dayCalculation(){
@@ -357,8 +393,46 @@ export class ModalContentPage {
     })
 
    }
+
+   onetimeChange(){
+      if(this.searchButton == true){
+        this.onetimes = "One time";
+      }else{
+        this.onetimes = "Recurring";
+      }
+          if(this.userType != 'sponsor'){
+      this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.authForm.value.dependents;
+    }
+         this.providerService.checkRiseAvailable(this.onetimes,this.modalForm.value.date,this.selectedDates,this.service_ids,this.dependent,this.vendor_id)
+      .subscribe(data =>{ 
+        this.checkRise_status=data.result;   
+         if(this.checkRise_status != 0){
+   let alert = this.alertCtrl.create({
+        title: 'Avail Services',
+        message: "You have already booked a service for "+this.serviceTitle+" on this specified date.Do you want to still proceed?",
+        buttons: [
+          {
+            text: 'Change Date',
+            role: 'cancel',
+            handler: () => {
+              alert =null;
+            }
+          },
+          {
+            text: 'Next',
+            handler: () => {
+            }
+          }
+        ]
+      });
+      alert.present();
+      }
+    })
+
+   }
    next(){
-    console.log(this.package);
      this.modalForm.value.date= moment(this.modalForm.value.date).format("YYYY-MM-DD");
       var objFromDate = this.modalForm.value.startdate;
       var objToDate = this.modalForm.value.enddate;
@@ -395,9 +469,9 @@ export class ModalContentPage {
     }else{
       this.dependent = this.authForm.value.dependents;
     }
+    
     if(this.modalForm.value.date != "" && this.modalForm.value.time !=""){
 
-    
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
@@ -413,6 +487,7 @@ export class ModalContentPage {
         this.providerService.showToast(JSON.parse(err._body).error);
         }
        else{
+  
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
@@ -430,8 +505,7 @@ export class ModalContentPage {
        }
       }
     ); 
-     
-   
+  
     }
     else{
       this.providerService.showToast("Please Select Preferred date and time");
