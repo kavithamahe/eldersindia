@@ -144,14 +144,14 @@ export class DashboardPage {
             this.getLocation(data.coords.latitude,data.coords.longitude);
         },
         (err) =>{
-          let confirmAlert = this.alertCtrl.create({
-          subTitle: 'switch-ON GPS to get current Location.',
-          buttons: [{
-            text: 'OK',
-            role: 'cancel',
-          }]
-        });
-        confirmAlert.present();
+        //   let confirmAlert = this.alertCtrl.create({
+        //   subTitle: 'switch-ON GPS to get current Location.',
+        //   buttons: [{
+        //     text: 'OK',
+        //     role: 'cancel',
+        //   }]
+        // });
+        // confirmAlert.present();
             console.log("error in fetching Geo Location: ",err);
         });
   });

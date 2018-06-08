@@ -235,9 +235,7 @@ console.log("recurring time");
         console.log(err);
         
     },
-  )
-
-  }
+  )}
 
   }
   payno(){
@@ -290,11 +288,12 @@ console.log("recurring time");
 
 //   }
 // }
+let navCtrl = this.navCtrl;
 let nav = this.blogListService;
  var successCallback = function(payment_id) {
       // ajaxCallCheck(payment_id);
 
-  var url  = "http://beta.eldersindia.com/api/razorPaymentResponse";
+  var url  = "http://192.168.1.187:8056/api/razorPaymentResponse";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -306,6 +305,7 @@ xmlhttp.onload = function () {
   var users = JSON.parse(xmlhttp.responseText);
  var result=users.result;
  // alert(result);
+  // navCtrl.setRoot(ServicerequestPage,{"status":"1","result":result});
   nav.showToast(result);
 
   }
