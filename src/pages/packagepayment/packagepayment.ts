@@ -39,6 +39,8 @@ service_type:any;
 service_costss:any;
 payment_status:any;
 recurring_request_id:any;
+userType:any;
+elderId:any;
   constructor(public navCtrl: NavController,public viewCtrl: ViewController,public storage:Storage, public navParams: NavParams) {
   	if(navParams.get("service_type") != undefined){
   		this.service_type = navParams.get("service_type");
@@ -63,9 +65,17 @@ recurring_request_id:any;
   	this.vendor_id=navParams.get("vendor_id");
   	this.package_validity=navParams.get("package_validity");
   	this.selectedConnections=navParams.get("selectedConnections");
+     storage.get('user_type').then((user_type) => { this.userType=user_type;});
+     if(this.userType != 'sponsor'){
+        
+        storage.get('id').then((id) => { this.elderId=id;});
+      }
+      else{
+        this.elderId = this.selectedConnections;
+      }
+    localStorage.setItem('elderId', this.elderId);
   	this.package_amount = navParams.get("package_amount");
   	this.package_amounts = this.package_amount * 100;
-    console.log(this.package_amounts);
   	localStorage.setItem('package_amounts', this.package_amounts);
 }
   	this.storage.ready().then(() => {
@@ -173,7 +183,7 @@ RazorpayCheckout.on('payment.cancel', cancelCallback);
     RazorpayCheckout.open(recurringOption, successCallback, cancelCallback);
 }
    pay() {
-console.log(this.service_costs);
+console.log(this.elderId);
 
    	if(this.sr_token == undefined){
       console.log(this.package_amounts);
@@ -192,7 +202,7 @@ console.log(this.service_costs);
       
        notes: {
        "package_id":this.packId,
-		"elder_id":this.selectedConnections,
+		"elder_id":this.elderId,
 		"vendor_id":this.vendor_id,
 		"validity":this.package_validity,
 		"user_type_id":this.user_type_id,
@@ -239,7 +249,7 @@ xmlhttp.open("POST", url,true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
-xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("package_amounts")}));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("package_amounts"),"elderId":  localStorage.getItem("elderId")}));
 
 
 console.log(xmlhttp.responseText);

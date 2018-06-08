@@ -32,10 +32,7 @@ package_amount:any;
 location_id:any;
 dependent_id:any;
   constructor(public navParams: NavParams,public modalCtrl: ModalController,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
-
-
-
-  	this.storage.ready().then(() => { 
+    this.storage.ready().then(() => { 
     storage.get('user_type').then((user_type) => { 
         this.user_type=user_type;
       });    
@@ -85,15 +82,16 @@ dependent_id:any;
     }
   }
   }
-  // packageavailAlert(){
-  //        this.blogListService.packageAvailAlert(this.selectedConnections,this.packId,this.service_quantity).subscribe(connections => {
-  //       this.connectionInfo=connections.result;
-  //        this.status = connections.status;
-  //       this.blogListService.showToast(this.connectionInfo);
-  //    },
-  //  err =>{
-  //     this.blogListService.showErrorToast(err);
-  // })
+  packageavailAlert(){
+         this.blogListService.packageAvailAlert(this.selectedConnections,this.packId,this.service_quantity).subscribe(connections => {
+        this.connectionInfo=connections.result;
+         this.status = connections.status;
+        this.blogListService.showToast(this.connectionInfo);
+     },
+   err =>{
+      this.blogListService.showErrorToast(err);
+  })
+       }
 
 
  getPackageelder(){
