@@ -20,16 +20,13 @@
 <ion-content padding>
 <form>
 <div class="register-form">
-<ion-item *ngIf="user_type =='elder'" text-wrap>
-  <strong>Are you sure you want to avail this package?</strong>
-</ion-item>
 <ion-grid>
           <ion-row *ngIf="user_type !='elder'">
           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">To</ion-label>
           <ion-item class="sel-label">
           <ion-label>To</ion-label>
              <ion-select  style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="selectedConnections" 
-             [ngModelOptions]="{standalone: true}" (ionChange)="packageavailAlert()">
+             [ngModelOptions]="{standalone: true}">
           <ion-option *ngFor="let name of dependentLists" [value] = "name.id">{{name.name}}
           </ion-option>
         </ion-select>  

@@ -66,14 +66,16 @@ elderId:any;
   	this.package_validity=navParams.get("package_validity");
   	this.selectedConnections=navParams.get("selectedConnections");
      storage.get('user_type').then((user_type) => { this.userType=user_type;});
+      storage.get('id').then((id) => { this.user_id=id;
      if(this.userType != 'sponsor'){
         
-        storage.get('id').then((id) => { this.elderId=id;});
+        this.elderId=this.user_id;
       }
       else{
         this.elderId = this.selectedConnections;
       }
     localStorage.setItem('elderId', this.elderId);
+     })
   	this.package_amount = navParams.get("package_amount");
   	this.package_amounts = this.package_amount * 100;
   	localStorage.setItem('package_amounts', this.package_amounts);
@@ -184,7 +186,7 @@ RazorpayCheckout.on('payment.cancel', cancelCallback);
 }
    pay() {
 console.log(this.elderId);
-
+console.log(localStorage.getItem("elderId"));
    	if(this.sr_token == undefined){
       console.log(this.package_amounts);
     var options = {
