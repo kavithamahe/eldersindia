@@ -112,7 +112,7 @@
 						</ion-row>
 					</ion-item>
 			
-			</ion-list>
+			
 				  <div *ngIf="i==replyBlock" class="rply-com">
 					<ion-row>
 					<br/>
@@ -127,6 +127,7 @@
 						<button (click)="sendReply(reply.uid_to,reply.com_post_cmt_id)" ion-button class="secon-sdms"> <ion-icon ios="ios-send" md="md-send"></ion-icon> Send </button>
 					</div>
 			   	</div>
+			   	</ion-list>
 		</div>
 		<div *ngIf="j==Reply" class="rply-com">
 			<ion-row>

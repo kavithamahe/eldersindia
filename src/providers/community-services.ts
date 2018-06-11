@@ -298,9 +298,6 @@ myprofile(id){
      return this.http.post(`${this.getCommunityPostsUrl }sendReply`,this.post,this.options)
       .map(res =>res.json());
   }
-
-
-
  deleteComment(id){
    this.delete={"info": {"comment_id": id}}
    return this.http.post(`${this.getCommunityPostsUrl }removeFeedComment`,this.delete,this.options)
