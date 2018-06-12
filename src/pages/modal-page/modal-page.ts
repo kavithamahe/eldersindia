@@ -150,6 +150,7 @@ export class ModalContentPage {
       this.percentage_cost = this.params.get("vendor").percentage_cost;
       this.servicecost = this.service_cost - this.percentage_cost;
       this.vendor_id = this.params.get("vendor").vendor_id;
+      console.log(this.vendor_id);
       this.recurringType = this.params.get("vendor").recurring;
       this.onetimetype = this.params.get("vendor").one_time;
       this.name = this.params.get("vendor").name;
@@ -480,7 +481,7 @@ export class ModalContentPage {
    //   }
 
    // }
-    serviceRequestCall(service_request_data){
+    serviceRequestCall(service_request_data){ 
       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
 
