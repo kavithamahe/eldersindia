@@ -183,7 +183,7 @@ export class ModalContentPage {
       this.getServicecancelamounts();
       this.getCustomerBalanceAmounts();
       this.getServicedependentlists();
-
+  this.getpackageInfo();
    }
    
     getCustomerserviceamounts(){
@@ -405,7 +405,19 @@ export class ModalContentPage {
   
 
    }
+   getpackageInfo(){
+    this.providerService.packageListsInfo(this.location_id,this.service_id,this.authForm.value.dependents,this.vendor_id)
+      .subscribe(data =>{                                                                             
+        this.packageLists=data.result.info.lists;
+        this.flag = "1";
 
+    },
+    err =>{
+         this.flag = "0";
+      this.providerService.showErrorToast(err); 
+    }) 
+    
+   }
    packageinfo(){
     
     this.providerService.packageListsInfo(this.location_id,this.service_id,this.authForm.value.dependents,this.vendor_id)
