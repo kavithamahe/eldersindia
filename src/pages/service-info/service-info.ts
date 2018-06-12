@@ -226,7 +226,7 @@ pressContact(){
         this.showToast("There is no dependent. You can not apply job!");      
       
       }else{
-  this.navCtrl.push(ModalContentPage,{dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor:this.vendorList.vendorDetails,vendorservice_cost:this.service_cost,one_time:this.one_time,recurring:this.recurring,status:"1",vendor_id:this.vendor_id,dependentLists:this.dependentLists,
+  this.navCtrl.push(ModalContentPage,{serviceData:this.serviceData,dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor:this.vendorList.vendorDetails,vendorservice_cost:this.service_cost,one_time:this.one_time,recurring:this.recurring,status:"1",vendor_id:this.vendor_id,dependentLists:this.dependentLists,
       serviceids:this.serviceids,locationId:this.locationId,package_amount:this.package_amount});    
     // service_modal.present();
     // service_modal.onDidDismiss(data =>{

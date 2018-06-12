@@ -100,7 +100,7 @@
 
 <ion-footer>
   <ion-toolbar color="primary"> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
-    <ion-buttons>
+    <ion-buttons *ngIf="packageListsvalue == undefined">
       <button ion-button color="royal" large icon-right showWhen="ios" (click)="paylater()">
      Pay Cash
     <ion-icon ios="md-send" md="md-send"></ion-icon></button>
@@ -108,11 +108,19 @@
     Pay Cash<ion-icon ios="md-send" md="md-send"></ion-icon></button>
     </ion-buttons>
     
-    <ion-buttons end >
+    <ion-buttons end *ngIf="packageListsvalue == undefined">
       <button ion-button color="royal" large icon-right showWhen="ios" (click)="submit()">&nbsp;Pay Now
        <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
       <button ion-button color="light" large icon-right hideWhen="ios" (click)="submit()">&nbsp;Pay Now
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end *ngIf="packageListsvalue != undefined">
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="paylater()">&nbsp;Submit Request
+       <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="paylater()">&nbsp;Submit Request
         <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>

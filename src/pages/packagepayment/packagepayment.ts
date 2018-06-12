@@ -157,7 +157,7 @@ let nav = this.navCtrl;
      console.log(localStorage.getItem("service_costss"));
   
 
-  var url  = "http://192.168.1.187:8056/api/razorPaymentResponseforPartialPayment";
+  var url  = "http://beta.eldersindia.com/api/razorPaymentResponseforPartialPayment";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -245,7 +245,7 @@ let nav = this.navCtrl;
  var successCallback = function(payment_id) {
     
 
-  var url  = "http://192.168.1.187:8056/api/razorPaymentResponseforPackage";
+  var url  = "http://beta.eldersindia.com/api/razorPaymentResponseforPackage";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -326,7 +326,7 @@ let nav = this.navCtrl;
  var successCallback = function(payment_id) {
      // ajaxCallCheck(payment_id);
 
-  var url  = "http://192.168.1.187:8056/api/razorPaymentResponsependingPayment";
+  var url  = "http://beta.eldersindia.com/api/razorPaymentResponsependingPayment";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 

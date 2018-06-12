@@ -57,7 +57,7 @@
             <ion-item *ngIf="flag ==1" class="one-timereq">
               <ion-label>Select Package</ion-label>
               <!-- <ion-label>Select Package</ion-label> -->
-              <ion-select class="select-brds" placeholder="Select Package">
+              <ion-select class="select-brds" placeholder="Select Package" [(ngModel)]="packageListsvalue" [ngModelOptions]="{standalone: true}">
               <ion-option *ngFor = "let package of packageLists" value={{package.package_validity.package_info}}>{{package.package_validity.package_info}}
               </ion-option>
             </ion-select>

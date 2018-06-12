@@ -65,6 +65,7 @@ export class Modelpage1PagePage {
   total_service_cost:any;
   servicediscountcost:any;
   discountcost:any;
+  packageListsvalue:any;
   constructor(public modalCtrl: ModalController,public nav: NavController,public navParams: NavParams, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {
     this.serviceDatas =  navParams.get("serviceDatas");
@@ -84,7 +85,7 @@ export class Modelpage1PagePage {
     this.fromtime = this.serviceDatas.from_time;
     this.totime = this.serviceDatas.to_time;
     this.timeslot = this.serviceDatas.time_slot;
-
+    this.packageListsvalue = navParams.get("packageListsvalue");
     this.paydata = navParams.get("paydata");
     console.log(this.paydata);
     this.fullpays = this.paydata.fullpays;
