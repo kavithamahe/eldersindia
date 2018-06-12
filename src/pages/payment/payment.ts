@@ -152,6 +152,7 @@ discountcost:any;
   this.service_ids=navParams.get("service_ids");
 
   this.sub_category_id=navParams.get("sub_category_id");
+  console.log(this.sub_category_id);
 
   this.subcategory=navParams.get("subcategory");
 this.storage.ready().then(() => {

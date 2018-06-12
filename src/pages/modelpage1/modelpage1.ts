@@ -86,6 +86,7 @@ export class Modelpage1PagePage {
     this.timeslot = this.serviceDatas.time_slot;
 
     this.paydata = navParams.get("paydata");
+    console.log(this.paydata);
     this.fullpays = this.paydata.fullpays;
     this.finalcost = this.paydata.finalcost;
     this.datCount = this.paydata.datCount;
