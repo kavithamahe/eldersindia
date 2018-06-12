@@ -150,9 +150,11 @@ export class ModalContentPage {
       this.percentage_cost = this.params.get("vendor").percentage_cost;
       this.servicecost = this.service_cost - this.percentage_cost;
       this.vendor_id = this.params.get("vendor").vendor_id;
-      console.log(this.vendor_id);
+      this.vendor_id = this.params.get("vendor_id");
       this.recurringType = this.params.get("vendor").recurring;
-      this.onetimetype = this.params.get("vendor").one_time;
+      this.recurringType = this.params.get("vendor").recurring;
+      this.onetimetype = this.params.get("recurring");
+      this.onetimetype = this.params.get("one_time");
       this.name = this.params.get("vendor").name;
     }
     this.modalForm = formBuilder.group({
