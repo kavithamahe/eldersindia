@@ -2,14 +2,14 @@ page-messages {
 .toolbar-title-md{ text-align:center !important;}
 .toolbar-title-ios{ text-align:center;}
 .inbox-sends {
-    border-bottom: 1px solid hsl(220, 23%, 95%);
-    padding: 5px;    font-family: "Muli",sans-serif;
+    border-bottom:1px solid hsl(220, 23%, 95%);
+    font-family: "Muli",sans-serif;
 }
 .inbox-sends .item-md .item-inner .input-wrapper .label-md ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-md small {
     color:#007994 !important;    font-family: "Muli",sans-serif;
     font-size: 17px; font-weight:400;
 }
-.go-btn{width:50px;height:35px;margin-top:10px;}
+.go-btn{width:50px;height:35px;}
 .subject-details .item-inner .input-wrapper .label-md b {
     float: left;
     font-size:14px;
@@ -19,6 +19,9 @@ page-messages {
 .send-box-content ion-row > ion-col > p {
     font-size: 10px;
 }
+.inbox-sends p{color:#333 !important;}
+.list-ios{margin:0px !important;}
+.label-ios{margin:0px !important;}
 .inbox-sends .item-md .item-inner .input-wrapper .label-md ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-md {
     font-size: 13px;
     margin-left: 3px;    font-family: "Muli",sans-serif;
@@ -48,10 +51,18 @@ page-messages {
 
 .subject-details .item-inner .input-wrapper .label-ios b {
     float: left;
-    font-size: 13px;
-    font-weight: 400;
+    font-size:15px;
+    font-weight:400;
+    padding-right: 5px; color:#999 !important;    font-family: "Muli",sans-serif;
+}
+
+.subject-details .item-inner .input-wrapper .label-ios span {
+    float: left;
+    font-size:15px;
+    font-weight:400;
     padding-right: 5px;    font-family: "Muli",sans-serif;
 }
+.searchbar-md{padding:0px !important ;}
 .send-box-content ion-row > ion-col > p {
     font-size: 10px;
 }

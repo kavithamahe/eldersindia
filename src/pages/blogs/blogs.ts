@@ -30,11 +30,11 @@ searchButton:boolean=false;
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
-        let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-        loader.present();
-        // this.blog();
-        // this.getCategory();
-        loader.dismiss(); 
+        // let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+        // loader.present();
+        this.blog();
+        this.getCategory();
+        // loader.dismiss(); 
     })
 
   });
@@ -73,10 +73,10 @@ searchButton:boolean=false;
      (blogsList) => {
       
       this.bloglists=blogsList.result.data;
-      if(this.bloglists.length<=0)
-      {
-        this.emptyRecord="No record found";
-      }
+      // if(this.bloglists.length<=0)
+      // {
+      //   this.emptyRecord="No record found";
+      // }
       this.nextPageURL=blogsList.result.next_page_url; 
          
     },

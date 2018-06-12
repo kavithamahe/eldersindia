@@ -34,13 +34,15 @@ export class LoginPage {
   id:any='';
   loginForm: FormGroup;
   submitAttempt: boolean = false;
-  registerCredentials = {email: '', password: ''};
+  registerCredentials = {email: '', password: '',device_type:''};
   callSponsor:any=0;
   ambulance:any=0;
   police:any=0;
   hospital:any=0;
   doctor:any=0;
+  device_uuid:any;
   constructor(public menuCtrl: MenuController,public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
+ 
   this.storage.ready().then(() => { 
      storage.get('id').then((id) => { this.id=id; 
      });
@@ -55,6 +57,8 @@ export class LoginPage {
     // this.initializePreview();
 
   }
+ 
+ 
   pressevent(){
     this.forgotPassword();
   }
@@ -62,6 +66,14 @@ export class LoginPage {
     this.login();
   }
    public login() {  
+    // this.registerCredentials.device_token = this.device_uuid;
+    // console.log(this.registerCredentials.device_token);
+    if (this.platform.is('ios')) {
+      this.registerCredentials.device_type = "1";
+    }
+    if (this.platform.is('android')) {
+      this.registerCredentials.device_type = "0";
+     }
     if(!this.loginForm.valid){
       this.submitAttempt = true;
     }else{

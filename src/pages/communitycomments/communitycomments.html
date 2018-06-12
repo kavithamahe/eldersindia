@@ -28,8 +28,11 @@
 				<ion-col width-60>
 			    	<h2 class="cmmpost" (click)="profileImage(comment.uid_from)">{{comment.name_from}} {{comment.last_name}}
 			    	</h2>
-					<p class="time-datem" [hidden]="!comment?.created_at"><i class="fa fa-clock-o"></i>
+					    <!--    <p class="time-datem" [hidden]="!comment?.created_at"><i class="fa fa-clock-o"></i>
 			          		{{comment.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
+			          		</p> -->
+			          		   <p class="time-datem" [hidden]="!comment?.created_at"><i class="fa fa-clock-o"></i>
+			          		{{comment.created_at}}
 			          		</p>
 				</ion-col>
 				<ion-col offset-20>
@@ -78,9 +81,13 @@
 						</ion-col>
 						<ion-col width-60 class="texts-lefts">
 						<h5>{{reply.name_from}} {{reply.last_from}}-{{reply.name_to}} {{reply.last_to}}</h5>
-					  	<p class="time-datem" [hidden]="!reply?.created_at"><i class="fa fa-clock-o">
+					  	<!-- <p class="time-datem" [hidden]="!reply?.created_at"><i class="fa fa-clock-o">
 					  	</i>
 			          		{{reply.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
+			          		</p> -->
+			          		<p class="time-datem" [hidden]="!reply?.created_at"><i class="fa fa-clock-o">
+					  	</i>
+			          		{{reply.created_at}}
 			          		</p>
 						<small text-wrap [innerHTML]="reply.comments_replay | emojis"></small>
 						</ion-col>
@@ -105,9 +112,10 @@
 						</ion-row>
 					</ion-item>
 			
-			</ion-list>
-				  <div *ngIf="i==replyBlock">
+			
+				  <div *ngIf="i==replyBlock" class="rply-com">
 					<ion-row>
+					<br/>
 						<ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important; -webkit-user-select:all !important;" placeholder="write a reply..">
 						</ion-textarea>
 					<p style="margin:5px;" class="message-container" 
@@ -115,18 +123,20 @@
 					(click)="emojiPicker2($event,reply.uid_to,reply.com_post_cmt_id)">
 					</p>
 					</ion-row>
-					<div class="send-req">
+					<div class="send-reqs">
 						<button (click)="sendReply(reply.uid_to,reply.com_post_cmt_id)" ion-button class="secon-sdms"> <ion-icon ios="ios-send" md="md-send"></ion-icon> Send </button>
 					</div>
 			   	</div>
+			   	</ion-list>
 		</div>
-		<div *ngIf="j==Reply">
+		<div *ngIf="j==Reply" class="rply-com">
 			<ion-row>
+			<br/>
 				<ion-textarea [(ngModel)]="reply_comment" style=" margin:0px !important;-webkit-user-select:all !important;" placeholder="write a reply..">
 				</ion-textarea>
 				<p style="margin:5px;" class="message-container" [innerHTML]="':smile:' | emojis"  (click)="emojiPicker2($event,comment.uid_from,comment.comments_id)"></p>
 			</ion-row>
-			<div class="send-req">
+			<div class="send-reqs">
 				<button (click)="sendReply(comment.uid_from,comment.comments_id)" ion-button class="secon-sdms"><ion-icon ios="ios-send" md="md-send">
 	
 				</ion-icon> Send

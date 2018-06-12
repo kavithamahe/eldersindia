@@ -44,7 +44,9 @@
       				<small (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" 
               *ngIf ="viewType == 'sent'">{{veiwMessagesInfo?.receiver_name}}</small>
       				<b><i class="fa fa-calendar-o"></i> 
-              {{veiwMessagesInfo?.created_at | date :'MM/dd/yy'}}</b>
+              {{veiwMessagesInfo?.created_at}}</b>
+      <!--         <b><i class="fa fa-calendar-o"></i> 
+              {{veiwMessagesInfo?.created_at | date :'MM/dd/yy'}}</b> -->
   				    <span>{{veiwMessagesInfo?.subject}}</span>
   				  </ion-item>
             <ion-item *ngIf ="viewType != 'inbox'" class="view-messname">
@@ -52,8 +54,10 @@
               *ngIf ="viewType == 'inbox'">{{veiwMessagesInfo?.sender_name}}</small>
               <small (click)="CommunityUserWall(veiwMessagesInfo?.receiver_id)" 
               *ngIf ="viewType == 'sent'">{{veiwMessagesInfo?.receiver_name}}</small>
+              <!-- <b><i class="fa fa-calendar-o"></i> 
+              {{veiwMessagesInfo?.created_at | date :'MM/dd/yy'}}</b> -->
               <b><i class="fa fa-calendar-o"></i> 
-              {{veiwMessagesInfo?.created_at | date :'MM/dd/yy'}}</b>
+              {{veiwMessagesInfo?.created_at}}</b>
               <span>{{veiwMessagesInfo?.subject}}</span>
             </ion-item>
           </ion-row>

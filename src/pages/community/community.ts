@@ -184,13 +184,13 @@ files:any;
   })
  }
 
-  presentPopover(ev,id) {
+  presentPopover(ev,id) { 
     
     if(this.connectionInfo.length == 0){
       this.communityServices.showToast("No Contacts")
     }
     else{
-    let popover = this.popoverCtrl.create(CommunityPopoverPage, {"communityID":id
+    let popover = this.popoverCtrl.create(CommunityPopoverPage, {"communityID":id,"user_id":this.user_id
     });
     popover.present({
       ev: ev
@@ -576,14 +576,16 @@ export class CommunityPopoverPage {
   imageUrl:any;
   token:any;
   user_id:any;
-  constructor(public viewCtrl: ViewController,public toastCtrl: ToastController,public communityServices: CommunityServices,public loadingCtrl: LoadingController,public storage:Storage) {  
+  user_ids:any;
+  constructor(public viewCtrl: ViewController,public navParams: NavParams,public toastCtrl: ToastController,public communityServices: CommunityServices,public loadingCtrl: LoadingController,public storage:Storage) {  
     
      this.storage.ready().then(() => {
       this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       this.storage.get('token').then((token) => { this.token=token; 
      // this.getConnections();
       });
-      this.storage.get('id').then((id) => { this.user_id=id; 
+      this.storage.get('id').then((id) => { this.user_ids=id; 
+      this.user_id=this.navParams.get("user_id");
       this.getConnections();
     })
     });

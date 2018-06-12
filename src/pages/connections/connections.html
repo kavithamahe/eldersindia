@@ -40,7 +40,7 @@
         <ion-col width-50>
         <ion-segment-button class="listed-rec">Received Requests</ion-segment-button>
         </ion-col>
-         <ion-col width-50>
+         <ion-col width-50 class="sp-el">
             <button ion-button small clear style="background-color: #00a1ad; width:0px; height:20px; padding-top: 10px;"></button><span>Elder</span>
             <button ion-button small clear style="background-color: #ff688f; width:0px; height:20px;"></button><span>Sponsor</span>
             </ion-col>
@@ -86,7 +86,7 @@
             <ion-col width-50>
           <ion-segment-button class="listed-rec">Sent Requests</ion-segment-button>
           </ion-col>
-           <ion-col width-50>
+           <ion-col width-50 class="sp-el">
             <button ion-button small clear style="background-color: #00a1ad; width:0px; height:20px; padding-top: 10px;"></button><span>Elder</span>
             <button ion-button small clear style="background-color: #ff688f; width:0px; height:20px;"></button><span>Sponsor</span>
             </ion-col>
@@ -143,7 +143,7 @@
           <ion-col width-50>
           <ion-segment-button class="listed-rec">All Connections</ion-segment-button>
           </ion-col>
-          <ion-col width-50>
+          <ion-col width-50 class="sp-el">
             <button ion-button small clear style="background-color: #00a1ad; width:0px; height:20px; padding-top: 10px;"></button><span>Elder</span>
             <button ion-button small clear style="background-color: #ff688f; width:0px; height:20px;"></button><span>Sponsor</span>
             </ion-col>
@@ -188,12 +188,11 @@
          
         <ion-list *ngSwitchCase="'addConnections'"> 
        <ion-row>
-            <ion-col width-50>
+            <ion-col width-50 class="sp-el">
           <button ion-button small clear style="background-color: #00a1ad; width:0px; height:20px; padding-top: 10px;"></button><span>Elder</span>
+		   <button ion-button small clear style="background-color: #ff688f; width:0px; height:20px;"></button><span>Sponsor</span>
           </ion-col>
-           <ion-col width-50>
-            <button ion-button small clear style="background-color: #ff688f; width:0px; height:20px;"></button><span>Sponsor</span>
-            </ion-col>
+         
           </ion-row>
        <!--    <ion-searchbar *ngIf="addConnectionInfo.length != 0" (input)="search1($event)"></ion-searchbar> -->
            <!-- <ion-searchbar (input)="search1($event)"></ion-searchbar> -->

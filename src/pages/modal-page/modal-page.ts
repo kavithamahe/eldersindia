@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, ViewController,LoadingController,ModalController,NavController} from 'ionic-angular';
+import { NavParams, ViewController,LoadingController,ModalController,NavController,AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //import {DatePicker} from 'ionic-native';
 import {Platform} from 'ionic-angular';
@@ -294,6 +294,41 @@ export class ModalContentPage {
             this.starDate= moment(this.starDate).add(1, 'days');   
           }        
       this.dayCalculation();
+       if(this.searchButton == true){
+        this.onetimes = "One time";
+      }else{
+        this.onetimes = "Recurring";
+      }
+          if(this.userType != 'sponsor'){
+      this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.authForm.value.dependents;
+    }
+         this.providerService.checkRiseAvailable(this.onetimes,this.modalForm.value.date,this.selectedDates,this.service_ids,this.dependent,this.vendor_id)
+      .subscribe(data =>{ 
+        this.checkRise_status=data.result;   
+         if(this.checkRise_status != 0){
+   let alert = this.alertCtrl.create({
+        title: 'Avail Services',
+        message: "You have already booked a service for "+this.serviceTitle+" on this specified date.Do you want to still proceed?",
+        buttons: [
+          {
+            text: 'Change Date',
+            role: 'cancel',
+            handler: () => {
+              alert =null;
+            }
+          },
+          {
+            text: 'Next',
+            handler: () => {
+            }
+          }
+        ]
+      });
+      alert.present();
+      }
+    })
                                                                                               
   }
   dayCalculation(){
@@ -437,7 +472,6 @@ export class ModalContentPage {
     this.next();
    }
    // paynow(){
-
    //   if(this.fullpays == true){
    //      this.paymenttype = "full_payment";
    //    }
@@ -544,6 +578,48 @@ export class ModalContentPage {
       "location_id":this.location_id,"lead_time":this.lead_time,"vendor_id":this.vendor_id,"service_costs":this.servicecosts,
       "servicediscountcost":this.finalcost,"payableamount":this.payableamount,"discounts":this.discounts,"totalservice_costss":this.totalservice_costss,"afterdiscount_one_service":this.afterdiscount_one_service,
       "paidPayment":this.paidPayment,"servicediscountcost_one_service":this.servicediscountcost_one_service,"discountpartial":this.discountpartial};
+
+   }
+
+   onetimeChange(){
+      if(this.searchButton == true){
+        this.onetimes = "One time";
+      }else{
+        this.onetimes = "Recurring";
+      }
+          if(this.userType != 'sponsor'){
+      this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.authForm.value.dependents;
+    }
+         this.providerService.checkRiseAvailable(this.onetimes,this.modalForm.value.date,this.selectedDates,this.service_ids,this.dependent,this.vendor_id)
+      .subscribe(data =>{ 
+        this.checkRise_status=data.result;   
+         if(this.checkRise_status != 0){
+   let alert = this.alertCtrl.create({
+        title: 'Avail Services',
+        message: "You have already booked a service for "+this.serviceTitle+" on this specified date.Do you want to still proceed?",
+        buttons: [
+          {
+            text: 'Change Date',
+            role: 'cancel',
+            handler: () => {
+              alert =null;
+            }
+          },
+          {
+            text: 'Next',
+            handler: () => {
+            }
+          }
+        ]
+      });
+      alert.present();
+      }
+    })
+
+   }
+   next(){
      this.modalForm.value.date= moment(this.modalForm.value.date).format("YYYY-MM-DD");
      this.modalForm.value.startdate= moment(this.modalForm.value.startdate).format("YYYY-MM-DD");
      this.modalForm.value.enddate= moment(this.modalForm.value.enddate).format("YYYY-MM-DD");
@@ -582,9 +658,9 @@ var date2 = new Date(objToDate);
     }else{
       this.dependent = this.authForm.value.dependents;
     }
+    
     if(this.modalForm.value.date != "" && this.modalForm.value.time !=""){
 
-    
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
@@ -602,6 +678,7 @@ var date2 = new Date(objToDate);
        else{
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,"base_cost":this.service_cost,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
+
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0],"getCustomerBalanceAmount":this.getCustomerBalanceAmount,"get_custome_amount":"","get_custome_deliever_amount":this.get_custome_deliever_amount,
        "get_custome_service_cancel_amount":"","total_cost":this.servicecost,"total_service_cost":this.totalpayableamount,"servicediscountcost":this.servicecost,"discountcost":this.discountcost};
@@ -621,8 +698,7 @@ var date2 = new Date(objToDate);
        }
       }
     ); 
-     
-   
+  
     }
     else{
       this.providerService.showToast("Please Select Preferred date and time");

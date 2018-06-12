@@ -54,8 +54,5 @@ passwords:any;
       this.storage.set('Cctv_camera',"http://"+usernames+":"+passwords+"@"+remoteurl+"" );
     });
      this.navCtrl.setRoot(DashboardPage);
-    
-  	
-  	 
-  }
+   }
 }

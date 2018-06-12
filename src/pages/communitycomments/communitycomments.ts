@@ -310,7 +310,7 @@ sendComment(postID){
     // let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     // loader.present();
      this.communityServices.sendReply(uid_from,this.post_id,comments_id,this.reply_comment).subscribe(datas =>{
-    // this.showToast(datas.result.info.message);
+    this.showToast(datas.result.info.message);
      this.reply_comment="";
      for(let i=0; i<this.post_comments.length;i++){
      	if(this.post_comments[i].comments_id == comments_id){

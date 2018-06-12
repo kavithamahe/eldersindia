@@ -18,12 +18,13 @@ page-view-news {
     padding-bottom:3px;
     margin: 0;
 }
-
+.card-content-md{padding:0px;}
+.card-content-ios{padding:0px;}
 .view-news { padding:8px;}
 .view-news .item-inner .input-wrapper .label-md{ margin:0px;}
 .card-content-md p{ color:#7b8da0 !important;
     font-family: "Muli",sans-serif;
-    font-size:14px !important;
+    font-size:16px !important;
     padding-bottom: 8px;
     margin: 0;}
 	
@@ -47,7 +48,7 @@ page-view-news {
 .view-news .item-inner .input-wrapper .label-ios{ margin:0px;}
 .card-content-ios p{ color:#7b8da0 !important;
     font-family: "Muli",sans-serif;
-    font-size:14px !important;
+    font-size:16px !important;
     padding-bottom: 8px;
     margin: 0;}
 }

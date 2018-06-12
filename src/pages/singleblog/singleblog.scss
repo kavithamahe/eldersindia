@@ -49,10 +49,11 @@ page-singleblog {
 .card-content-ios p {
        color: #666 !important;
     font-family: "Muli",sans-serif;
-    font-size: 14px !important;
+    font-size:17px !important;
     padding-bottom: 8px;
     margin: 0;
 }
+.reply-dx{border:1px solid red; width:100%; float:left;}
 .timedate{
     color: #7b8da0 !important;
     font-family: "Muli",sans-serif;
@@ -61,6 +62,7 @@ page-singleblog {
     margin: 0;}
 .item-md.item-block .item-inner{ padding-right:0px;}
 .text-input-md{ border:1px solid #ccc;    font-family: 'Muli', sans-serif;padding:5px; font-weight:400; font-size:15px;}
+.text-input-ios{ border:1px solid #ccc;    font-family: 'Muli', sans-serif;padding:5px; font-weight:400; font-size:15px; margin-left:8px;}
  .oranges {
     border-radius: 2px;
     background: #FE5722;
@@ -87,8 +89,8 @@ page-singleblog {
     font-family: "Muli",sans-serif;
     font-size:12px !important; font-weight:600;}
 .reply-deletd .item-inner .label-ios button .button-inner{ color: #7b8da0 !important;text-transform: capitalize;
-    font-family: "Muli",sans-serif;
-    font-size:11px !important;}
+    font-family: "Muli",sans-serif; font-weight:600;
+    font-size:12px !important;}
 	
 .blogs-tittle .item-md .item-inner .input-wrapper .label-md strong {
     color:#666 !important;
