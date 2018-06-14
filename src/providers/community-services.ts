@@ -178,8 +178,8 @@ joinCommunity(id){
 
 }
 //------ need to update----------//
-connectMember(id,name){
-   this.connect ={"connect_id":id,"connect_name":name}
+connectMember(id,name,last_name){
+   this.connect ={"connect_id":id,"connect_name":name,"last_name":last_name}
    return this.http.post(`${this.getCommunityPostsUrl }sendConnectionRequest`,this.connect,this.options)
       .map(res =>res.json());
 }

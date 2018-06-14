@@ -343,7 +343,7 @@ goBackToProfile(profile_id){
   connectMember(user){
         let loader = this.loadingCtrl.create({ content: "Please wait..." });     
         loader.present();
-        this.communityServices.connectMember(user.id,user.name).subscribe(users => {
+        this.communityServices.connectMember(user.id,user.name,user.last_name).subscribe(users => {
         this.showToast(users.result.info);
         this.memberProfile(user.id);
        this.request_sent = true;

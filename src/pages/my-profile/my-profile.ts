@@ -118,7 +118,18 @@ base64Image:any;
                return false;
             }
             else{
-            this.verifyotp(data.title);
+
+            // this.verifyotp(data.title);
+               this.providerService.verifyotp(data.title).subscribe(otp => {
+        this.providerService.showToast(otp.result);
+        this.loadMyProfile();
+     },
+     error =>{
+          if(error.status===401){
+      this.providerService.showToast(JSON.parse(error._body).error);
+      }
+  })
+                // return false;
           }
           }
         }
@@ -126,15 +137,17 @@ base64Image:any;
     });
     prompt.present();
   }
-  verifyotp(otp){
-     this.providerService.verifyotp(otp).subscribe(otp => {
-        this.providerService.showToast(otp.result);
-        this.loadMyProfile();
-     },
-   err =>{
-      this.providerService.showErrorToast(err);
-  })
-  }
+  // verifyotp(otp){
+  //    this.providerService.verifyotp(otp).subscribe(otp => {
+  //       this.providerService.showToast(otp.result);
+  //       this.loadMyProfile();
+  //    },
+  //    error =>{
+  //         if(error.status===401){
+  //     this.providerService.showToast(JSON.parse(error._body).error);
+  //     }
+  // })
+  // }
   ionViewWillEnter(){
     this.storage.ready().then(() => {
       this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;});
