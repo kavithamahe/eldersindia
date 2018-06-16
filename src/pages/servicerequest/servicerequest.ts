@@ -311,7 +311,7 @@ user_type:any;
       if(paid_amount>utilized_service_cost && service_remaing_cost > cancelCharges){
        let prompt = this.alertCtrl.create({
       title: 'Cancel Service Request',
-      message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of the utlizing SRs : <i class='fa fa-rupee'></i>"+utilized_service_cost+" and Cancellation Charges : <i class='fa fa-rupee'></i>"+cancelCharges+" and Refund on Cancellation : <i class='fa fa-rupee'></i>"+dedaction_service_cost+" ",
+      message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+paid_amount+" and Amount paid : <i class='fa fa-rupee'></i>"+utilized_service_cost+" and Refund on cancellation : <i class='fa fa-rupee'></i>"+cancelCharges+" and Refund on Cancellation : <i class='fa fa-rupee'></i>"+dedaction_service_cost+" ",
       inputs: [
         {
           name: 'title',
@@ -347,7 +347,7 @@ user_type:any;
       else if(paid_amount<utilized_service_cost){
         let prompt = this.alertCtrl.create({
       title: 'Cancel Service Request',
-      message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of the utlizing SRs : <i class='fa fa-rupee'></i>"+utilized_service_cost+" and Cancellation Charges : <i class='fa fa-rupee'></i>"+cancelCharges+" and New service cost : <i class='fa fa-rupee'></i>"+final_payable_amount+" ",
+      message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+service_remaing_cost+" and Refund on Cancellation : <i class='fa fa-rupee'></i>"+paid_amount+" ",
       inputs: [
         {
           name: 'title',

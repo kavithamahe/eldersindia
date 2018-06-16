@@ -34,7 +34,7 @@ export class LoginPage {
   id:any='';
   loginForm: FormGroup;
   submitAttempt: boolean = false;
-  registerCredentials = {email: '', password: '',device_type:''};
+  registerCredentials = {email: '', password: ''};
   callSponsor:any=0;
   ambulance:any=0;
   police:any=0;
@@ -68,12 +68,12 @@ export class LoginPage {
    public login() {  
     // this.registerCredentials.device_token = this.device_uuid;
     // console.log(this.registerCredentials.device_token);
-    if (this.platform.is('ios')) {
-      this.registerCredentials.device_type = "1";
-    }
-    if (this.platform.is('android')) {
-      this.registerCredentials.device_type = "0";
-     }
+    // if (this.platform.is('ios')) {
+    //   this.registerCredentials.device_type = "1";
+    // }
+    // if (this.platform.is('android')) {
+    //   this.registerCredentials.device_type = "0";
+    //  }
     if(!this.loginForm.valid){
       this.submitAttempt = true;
     }else{
