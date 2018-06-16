@@ -6,6 +6,7 @@ import { EditProfilePage } from '../edit-profile/edit-profile';
 import { EldersPage } from '../../pages/elders/elders'
 import { ServiceProvider } from '../../providers/service-provider';
 import { Storage } from '@ionic/storage';
+import { VerifyotpPagePage } from '../../pages/verifyotp/verifyotp';
 
 /*
   Generated class for the MyProfile page.
@@ -90,52 +91,53 @@ base64Image:any;
   }
   
   showPrompt() {
-    this.sendotp();
-    let prompt = this.alertCtrl.create({
-      title: 'Mobile number verification',
-      //message: "All reports are strictly confidential. Please describe the reason",
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Enter one time password'
-        },
-      ],
+    this.navCtrl.push(VerifyotpPagePage);
+  //   this.sendotp();
+  //   let prompt = this.alertCtrl.create({
+  //     title: 'Mobile number verification',
+  //     //message: "All reports are strictly confidential. Please describe the reason",
+  //     inputs: [
+  //       {
+  //         name: 'title',
+  //         placeholder: 'Enter one time password'
+  //       },
+  //     ],
     
-      buttons: [
-       {
-          text: 'Resend OTP',
-          handler: data => {
-            this.sendotp();
-            return false;
-            // prompt.present();
-          }
-        },
-        {
-          text: 'Submit',
-          handler: data => {
-              if(data.title == ""){
-              this.providerService.showToast("Enter one time password");
-               return false;
-            }
-            else{
+  //     buttons: [
+  //      {
+  //         text: 'Resend OTP',
+  //         handler: data => {
+  //           this.sendotp();
+  //           return false;
+  //           // prompt.present();
+  //         }
+  //       },
+  //       {
+  //         text: 'Submit',
+  //         handler: data => {
+  //             if(data.title == ""){
+  //             this.providerService.showToast("Enter one time password");
+  //              return false;
+  //           }
+  //           else{
 
-            // this.verifyotp(data.title);
-               this.providerService.verifyotp(data.title).subscribe(otp => {
-        this.providerService.showToast(otp.result);
-        this.loadMyProfile();
-     },
-     error =>{
-          if(error.status===401){
-      this.providerService.showToast(JSON.parse(error._body).error);
-      }
-  })
-                // return false;
-          }
-          }
-        }
-      ]
-    });
-    prompt.present();
+  //           // this.verifyotp(data.title);
+  //              this.providerService.verifyotp(data.title).subscribe(otp => {
+  //       this.providerService.showToast(otp.result);
+  //       this.loadMyProfile();
+  //    },
+  //    error =>{
+  //         if(error.status===401){
+  //     this.providerService.showToast(JSON.parse(error._body).error);
+  //     }
+  // })
+  //               // return false;
+  //         }
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   prompt.present();
   }
   // verifyotp(otp){
   //    this.providerService.verifyotp(otp).subscribe(otp => {

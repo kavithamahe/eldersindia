@@ -45,7 +45,7 @@ import { ViewpackagePagePage } from '../pages/viewpackage/viewpackage';
 import { ElderservicePagePage } from '../pages/elderservice/elderservice';
 import { PaymentPage } from '../pages/payment/payment';
 import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
-
+import { VerifyotpPagePage } from '../pages/verifyotp/verifyotp';
 
 //packages related pages
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
@@ -174,7 +174,8 @@ import { ServiceProvider } from '../providers/service-provider';
     SettingsPage,
     ServiceModalPage,
     TermsModalPage,
-    RemotemonitorPagePage
+    RemotemonitorPagePage,
+    VerifyotpPagePage
   ],
   imports: [
 
@@ -254,6 +255,7 @@ import { ServiceProvider } from '../providers/service-provider';
     ServiceModalPage,
     TermsModalPage,
     RemotemonitorPagePage,
+    VerifyotpPagePage
 
   ],
 
