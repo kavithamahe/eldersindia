@@ -93,7 +93,7 @@ sortby:any="";
       data.remainingamount = parseFloat(data.remaining_amount).toFixed(2);
     }
         this.recurringRequest = dataList;
-        this.nextPageURL=data.result.next_page_url;  
+        this.nextPageURL=data.result.info.next_page_url;  
         // loading.dismiss();
     },
     err =>{
@@ -103,6 +103,7 @@ sortby:any="";
     })
   }
   doInfinite(infiniteScroll) {
+    console.log(this.nextPageURL);
     setTimeout(() => {      
       if(this.nextPageURL!=null && this.nextPageURL!='')
       {
@@ -116,6 +117,7 @@ sortby:any="";
   }
   recurringRequestScroll()
   {
+    console.log("scroll");
     this.blogListService.recurringRequestScroll(this.nextPageURL,this.searchText,this.sortby).subscribe(
      (serviceRequestScroll) => {
        var dataList=serviceRequestScroll.result.info.data;

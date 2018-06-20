@@ -245,13 +245,13 @@ let nav = this.navCtrl;
  var successCallback = function(payment_id) {
     
 
-  var url  = "http://beta.eldersindia.com/api/razorPaymentResponseforPackage";
+  var url  = "http://192.168.1.187:8056/api/razorPaymentResponseforPackage";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
-xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("package_amounts"),"elderId":  localStorage.getItem("elderId")}));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("package_amounts")}));
 
 
 console.log(xmlhttp.responseText);

@@ -208,11 +208,12 @@ user_type:any;
       this.result = cancelRequest.result;
       this.percentage = this.result.percentage;
       this.paid_amount = this.result.paid_amount;
+      console.log(this.paid_amount);
       this.service_remaing_cost = this.result.service_remaing_cost;
       this.utilized_service_cost = this.result.utilized_service_cost;
        if(this.paid_amount > this.utilized_service_cost){
           this.cancelCharges = service_cost * (this.percentage/100);
-          
+          console.log(this.cancelCharges);
           if(this.service_remaing_cost > this.cancelCharges){
            this.dedaction_service_cost = this.service_remaing_cost - this.cancelCharges;
            console.log(this.dedaction_service_cost);
@@ -235,7 +236,7 @@ user_type:any;
       // this.dedaction_service_cost = servicediscountcost_one_service - this.deduction_amount;
       // var number = parseFloat(this.dedaction_service_cost).toFixed(2);
 
-      this.showConfirms(serviceId,this.result,service_type,status,txnid,this.percentage,this.totalcostofrecurring,req_count,this.paid_amount,this.utilized_service_cost,recurring_request_id,this.cancelCharges,this.dedaction_service_cost,this.service_remaing_cost,this.final_payable_amount); 
+      this.showConfirms(serviceId,service_cost,this.result,service_type,status,txnid,this.percentage,this.totalcostofrecurring,req_count,this.paid_amount,this.utilized_service_cost,recurring_request_id,this.cancelCharges,this.dedaction_service_cost,this.service_remaing_cost,this.final_payable_amount); 
     },
     (err) => { 
         if(err.status===401)
@@ -256,7 +257,7 @@ user_type:any;
       this.payment_status = this.result.payment_status;
       this.deductionamount = service_cost * this.percentage/100;
       this.servicecancelamount = service_cost - this.deductionamount;
-      this.showOnetime(serviceId,this.result,service_type,status,txnid,this.percentage,this.payment_status,this.deductionamount,this.servicecancelamount); 
+      this.showOnetime(serviceId,service_cost,this.result,service_type,status,txnid,this.percentage,this.payment_status,this.deductionamount,this.servicecancelamount); 
     },
     (err) => { 
         if(err.status===401)
@@ -271,47 +272,16 @@ user_type:any;
   }
     
   }
-  showConfirms(serviceId,result,service_type,status,txnid,percentage,totalcostofrecurring,req_count,paid_amount,utilized_service_cost,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,final_payable_amount){
-    //   if(percentage == "hours expired"){
-    //   let prompt = this.alertCtrl.create({
-    //   title: 'Cancel Service Request',
-    //   message: "Your service date and time was expired,If you cancelled the service request service amount could not be refunded.",
-    //   inputs: [
-    //     {
-    //       name: 'title',
-    //       placeholder: 'Comments'
-    //     },
-    //   ],
-    //   buttons: [
-    //     {
-    //       text: 'Cancel',
-    //       handler: data => {
-    //         //console.log('Cancel clicked');
-    //       }
-    //     },
-    //     {
-    //       text: 'Confirm',
-    //       handler: data => {
-            
-    //         //console.log(data.title);
-    //         if(data.title == ""){
-    //           this.showToaster("Please enter the reason");
-    //            return false;
-    //         }
-    //         else{
-    //          this.cancelRequest(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost);
-    //       }
-    //       }
-    //     }
-    //   ]
-    // });
-    // prompt.present();
-    //  }
-    //  else{
-      if(paid_amount>utilized_service_cost && service_remaing_cost > cancelCharges){
+  showConfirms(serviceId,service_cost,result,service_type,status,txnid,percentage,totalcostofrecurring,req_count,paid_amount,utilized_service_cost,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,final_payable_amount){
+console.log("jhgjg");
+console.log(cancelCharges);
+      // if(paid_amount>utilized_service_cost && service_remaing_cost > cancelCharges){
+      console.log("test");
        let prompt = this.alertCtrl.create({
       title: 'Cancel Service Request',
-      message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+paid_amount+" and Amount paid : <i class='fa fa-rupee'></i>"+utilized_service_cost+" and Refund on cancellation : <i class='fa fa-rupee'></i>"+cancelCharges+" and Refund on Cancellation : <i class='fa fa-rupee'></i>"+dedaction_service_cost+" ",
+      // message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+paid_amount+" and Amount paid : <i class='fa fa-rupee'></i>"+utilized_service_cost+" and Refund on cancellation : <i class='fa fa-rupee'></i>"+cancelCharges+" and Refund on Cancellation : <i class='fa fa-rupee'></i>"+dedaction_service_cost+" ",
+      message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+utilized_service_cost+"",
+
       inputs: [
         {
           name: 'title',
@@ -343,51 +313,12 @@ user_type:any;
     });
     prompt.present();
      
-      }
-      else if(paid_amount<utilized_service_cost){
-        let prompt = this.alertCtrl.create({
-      title: 'Cancel Service Request',
-      message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+service_remaing_cost+" and Refund on Cancellation : <i class='fa fa-rupee'></i>"+paid_amount+" ",
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Comments'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            //console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Confirm',
-          handler: data => {
-            
-            //console.log(data.title);
-            if(data.title == ""){
-              this.showToaster("Please enter the reason");
-               return false;
-            }
-            else{
-            this.cancelRequests(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,service_remaing_cost,final_payable_amount);
-          }
-          }
-        }
-      ]
-    });
-    prompt.present();
-    
-      }
-    
-  // }
-  }
-  showOnetime(serviceId,result,service_type,status,txnid,percentage,payment_status,deductionamount,servicecancelamount){
-    //  if(percentage == "hours expired"){
-    //   let prompt = this.alertCtrl.create({
+     // }
+    //   else if(paid_amount<utilized_service_cost){
+    //       console.log("test");
+    //     let prompt = this.alertCtrl.create({
     //   title: 'Cancel Service Request',
-    //   message: "Your service date and time was expired,If you cancelled the service request service amount could not be refunded.",
+    //   message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+service_remaing_cost+" and Refund on Cancellation : <i class='fa fa-rupee'></i>"+paid_amount+" ",
     //   inputs: [
     //     {
     //       name: 'title',
@@ -411,18 +342,27 @@ user_type:any;
     //            return false;
     //         }
     //         else{
-    //         this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount);
+    //         this.cancelRequests(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,service_remaing_cost,final_payable_amount);
     //       }
     //       }
     //     }
     //   ]
     // });
     // prompt.present();
-    //  }
-     // else{
+    
+    //   }
+    
+  }
+  showOnetime(serviceId,service_cost,result,service_type,status,txnid,percentage,payment_status,deductionamount,servicecancelamount){
+   if(percentage == "hours expired"){
+      percentage = "0";
+      deductionamount = "0";
+      servicecancelamount = service_cost;
+   }
+  
       let prompt = this.alertCtrl.create({
       title: 'Cancel Service Request',
-      message: "Service cancellation percentage :"+ percentage +" % and Service cancellation amount : <i class='fa fa-rupee'></i>"+ deductionamount+" and Service refund amount : <i class='fa fa-rupee'></i>"+ servicecancelamount+" ",
+      message: "Service cost :  <i class='fa fa-rupee'></i>"+ service_cost +"and Service cancellation percentage :"+ percentage +" % and Service cancellation deduction : <i class='fa fa-rupee'></i>"+ deductionamount+" and Service refund amount : <i class='fa fa-rupee'></i>"+ servicecancelamount+" ",
       inputs: [
         {
           name: 'title',
