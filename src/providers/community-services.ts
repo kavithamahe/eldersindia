@@ -314,10 +314,10 @@ myprofile(id){
     return this.http.post(`${this.getCommunityPostsUrl }getElderListBySponser`,this.lists,options)
     .map(res =>res.json());
   }
-  loginDetail(id){
+  loginDetail(id,options){ 
      this.lists={"id":id}
       
-    return this.http.post(`${this.getCommunityPostsUrl }SendElderVerificationMail`,this.lists,this.options)
+    return this.http.post(`${this.getCommunityPostsUrl }SendElderVerificationMail`,this.lists,options)
     .map(res =>res.json());
   }
    searchManageLists(data){

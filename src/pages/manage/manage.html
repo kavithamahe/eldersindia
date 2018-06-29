@@ -43,7 +43,7 @@
          <i class="fa fa-user name-person" (click)="toggleDetails(manage)"></i><p name="person" class="name-elder" (click)="toggleDetails(manage)">{{manage.relation}}</p>&nbsp;<i class="fa fa-angle-down" (click)="toggleDetails(manage)"></i>
          <i class="fa fa-trash" (click)="showConfirm(manage)"></i>
          <i (click)="editElder(manage)" class="fa fa-pencil"></i>
-          <i (click)="mailSender(manage)" class="fa fa-envelope-o"></i>
+          <i (click)="mailSender(manage.id)" class="fa fa-envelope-o"></i>
           </button>
           </ion-col>
           </ion-row>
