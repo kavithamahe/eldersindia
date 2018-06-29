@@ -426,7 +426,44 @@ export class ModalContentPage {
   
 
    }
+ onetimeChange(){
+      if(this.searchButton == true){
+        this.onetimes = "One time";
+      }else{
+        this.onetimes = "Recurring";
+      }
+          if(this.userType != 'sponsor'){
+      this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.authForm.value.dependents;
+    }
+         this.providerService.checkRiseAvailable(this.onetimes,this.modalForm.value.date,this.selectedDates,this.service_ids,this.dependent,this.vendor_id)
+      .subscribe(data =>{ 
+        this.checkRise_status=data.result;   
+         if(this.checkRise_status != 0){
+   let alert = this.alertCtrl.create({
+        title: 'Avail Services',
+        message: "You have already booked a service for "+this.serviceTitle+" on this specified date.Do you want to still proceed?",
+        buttons: [
+          {
+            text: 'Change Date',
+            role: 'cancel',
+            handler: () => {
+              alert =null;
+            }
+          },
+          {
+            text: 'Next',
+            handler: () => {
+            }
+          }
+        ]
+      });
+      alert.present();
+      }
+    })
 
+   }
    packageinfo(){
     
     this.providerService.packageListsInfo(this.location_id,this.service_id,this.authForm.value.dependents,this.vendor_id)
