@@ -123,14 +123,25 @@
   <ion-col width-50 style="padding-left:0px;">
    <span>
     <p *ngIf="service.service_type =='Recurring'" (click)="viewRecurring()"><ion-badge>View Recurring Requests</ion-badge></p>
-    <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost!='0'&& service.additional_service_cost_status=='0' && service.status=='5'"><ion-badge (click)="paynow(service.sr_token,service.service_cost,service?.id,service?.additional_service_cost)">Pay Now</ion-badge>
+    <p *ngIf="service?.Paymentstatus=='captured' && service?.payment_method=='' && service?.additional_service_cost!='0'&& service?.additional_service_cost_status=='0' && service?.status=='5' && service?.package_id==''"><ion-badge (click)="payOptionforAdditionalServiceCost(service.sr_token,service.id,service?.additional_service_cost,service?.payment_status,service?.service_type)">Pay Now
+    {{service?.additional_service_cost}}</ion-badge>
    </p>
-   <p *ngIf="service.Paymentstatus!='captured' && service.status !='3' && service.payment_method==''  && service.service_type=='One time' && service.package_id==''"><ion-badge (click)="paynow(service.sr_token,service.service_cost,service?.id,service?.additional_service_cost)">Pay Now</ion-badge>
+   <p *ngIf="service?.Paymentstatus!='captured' && service?.status !='3' && service?.payment_method==''  && service?.service_type=='One time' && service?.package_id==''"><ion-badge (click)="payOptionforpendingPayment(service.sr_token,service.pending_service_amount,service?.id,service?.additional_service_cost,service?.payment_status,service?.prev_service_amount_balance)">Pay Now</ion-badge>
    </p>
+
+ <!--   <span ng-if="srList.Paymentstatus=='captured' && srList.payment_method=='' && srList.additional_service_cost!='0'&& srList.additional_service_cost_status=='0' && srList.status=='5' && srList.package_id==''"><button type="button" class="btn btn-sm btn-danger " data-toggle="modal"    ng-click="payOptionforAdditionalServiceCost(srList.additional_service_cost,srList.service_name,srList.id,srList.service_type,srList.sponsor_email)">Pay <i class="fa fa-rupee">{{srList.additional_service_cost}}</i></button>
+          </span>
+
+
+          <span ng-if="srList.Paymentstatus!='captured' && srList.status !='3' && srList.payment_method==''  && srList.service_type=='One time' && srList.package_id==''"><button type="button" class="btn btn-sm btn-danger " data-toggle="modal"    ng-click="payOptionforpendingPayment(srList.pending_service_amount,srList.service_name,srList.id,srList.additional_service_cost,srList.payment_status,srList.sponsor_email,srList.prev_service_amount_balance)">Pay 
+          <i class="fa fa-rupee">{{parseFloat(srList.pending_service_amount) + parseFloat(srList.additional_service_cost) - parseFloat(srList.prev_service_amount_balance) | number:2}}</i> </button></span>
+ -->
+ <div *ngIf="service.service_type !='Recurring'">
    <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost=='0' && service.additional_service_cost==0 || service.additional_service_cost_status == 'success' && service.service_type=='One time'"><ion-badge>Paid</ion-badge></p>
-<!--    <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost_status=='success'"><ion-badge>Paid</ion-badge></p> -->
-  </span>
-     
+
+   <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost!='0' && service.additional_service_cost==0 && service.service_type=='One time'"><ion-badge>Paid</ion-badge></p>
+   </div>
+  </span> 
   </ion-col>
   </ion-row>  
 	</ion-col>	

@@ -79,22 +79,55 @@
       <!-- <p>------------------------One Time----------------------------</p> -->
 
        <div *ngIf(searchButton)>
+      
               <ion-item>
-              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecost}}
+              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{initialservicecost}}
               </ion-label>
               </ion-item>
-               <ion-item text-wrap *ngIf = "get_custome_deliever_amount !='0'">
+              <div *ngIf = "get_custome_amount!=0">
+               <ion-item text-wrap>
+              <ion-label>Previous service due amount: <i class="fa fa-rupee"></i>{{get_custome_amount}}
+              </ion-label>
+              </ion-item>
+               <ion-item>
+              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamountservice}}
+              </ion-label>
+              </ion-item>
+              </div>
+
+              <div *ngIf = "get_custome_deliever_amount!=0">
+               <ion-item text-wrap>
               <ion-label>Previous service due amount: <i class="fa fa-rupee"></i>{{get_custome_deliever_amount}}
-              </ion-label>
-              </ion-item>
-               <ion-item text-wrap *ngIf = "getCustomerBalanceAmount !='0'">
-              <ion-label>Previous refund amount: <i class="fa fa-rupee"></i>{{getCustomerBalanceAmount}}
               </ion-label>
               </ion-item>
                <ion-item>
               <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamount}}
               </ion-label>
               </ion-item>
+              </div>
+
+               <div *ngIf = "getCustomerBalanceAmount!=0">
+               <ion-item text-wrap>
+              <ion-label>Previous refund amount: <i class="fa fa-rupee"></i>{{getCustomerBalanceAmount}}
+              </ion-label>
+              </ion-item>
+               <ion-item>
+              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamountbalance}}
+              </ion-label>
+              </ion-item>
+              </div>
+                <div *ngIf = "get_custome_service_cancel_amount!=0">
+               <ion-item text-wrap>
+              <ion-label>Previous service cancel amount:: <i class="fa fa-rupee"></i>{{get_custome_service_cancel_amount}}
+              </ion-label>
+              </ion-item>
+               <ion-item>
+              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamountcancel}}
+              </ion-label>
+              </ion-item>
+              </div>
+            
+
            <ion-label stacked class="label-lb required">Preferred date</ion-label>
      
          <ion-item>
@@ -253,58 +286,7 @@
 
               </ion-item>
        
-              <!--         <ion-list radio-group> 
-
-                  <ion-label>Payment Type</ion-label>
-                 <ion-item>
-                    <ion-label>Partial Payment</ion-label>
-                    <ion-radio value="partialpay" (click)="partialpay(partialpays)"></ion-radio>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Full Payment</ion-label>
-                      <ion-radio value="fullpay" (click)="fullpay(fullpays)" (ionChange)="getdiscountrecurringvalues">
-
-
-                      </ion-radio>
-                  </ion-item>
-            </ion-list> -->
-         <!--    <ion-list *ngIf(fullpays)>
-            <div>
-             <ion-item>
-             <ion-label></ion-label>
-             <ion-select (ionChange)="fullpaymentinfo()" [(ngModel)]="fullgetpaidPayment"  
-             [ngModelOptions]="{standalone: true}">
-             <ng-container>
-     
-          
-           <ion-option value="100">100%</ion-option>
-          </ng-container>
-        </ion-select>
-            </ion-item>
-              <ion-item>
-            <p>Discount : {{discount}} %</p>
-            <p>Price after discount : <i class="fa fa-rupee"></i>{{finalcost}}</p>
-         
-            </div>
-            </ion-list>
-            <ion-list *ngIf(partialpays)>
-            <ion-item>
-             <ion-label></ion-label>
-             <ion-select (ionChange)="paymentinfo()" [(ngModel)]="getpaidPayment"  
-             [ngModelOptions]="{standalone: true}">
-             <ng-container>
-         <ion-option value="25">25%</ion-option>
-          <ion-option value="50">50%</ion-option>
-          <ion-option value="75">75%</ion-option>
-          </ng-container>
-        </ion-select>
-            </ion-item>
-             <ion-item> 
-            <p>Discount : {{discount}}%</p>
-            <p>Price after discount : <i class="fa fa-rupee"></i>{{finalcost}}</p>
-            <p>Payable amount : <i class="fa fa-rupee"></i>{{payableamount}}</p>
-            </ion-item>
-            </ion-list> -->
+            
     </div>    
 
       </form>

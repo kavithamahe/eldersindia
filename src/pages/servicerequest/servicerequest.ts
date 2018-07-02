@@ -113,17 +113,28 @@ user_type:any;
       }
     ); 
   }
-  paynow(sr_token,service_cost,service_id,additional_service_cost,payment_status){
-    if(additional_service_cost == "0"){
-      this.servicecost = service_cost;
-    }
-    else{
-      this.servicecost = additional_service_cost;
-    }
-    // let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":service_id,"payment_status":payment_status});
-    //   serviceModal.present();
-    this.navCtrl.push(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":service_id,"payment_status":payment_status});
+  payOptionforAdditionalServiceCost(sr_token,id,additional_service_cost,payment_status,service_type){
+     this.navCtrl.push(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":additional_service_cost,"service_id":id,"payment_status":payment_status,"status":"1"});
   }
+  payOptionforpendingPayment(sr_token,pending_service_amount,id,additional_service_cost,payment_status,prev_service_amount_balance){
+      if(payment_status == 'payment_success'){
+   this.servicecost = pending_service_amount;
+  }else{
+    this.servicecost = parseInt(pending_service_amount) + parseInt(additional_service_cost) - parseInt(prev_service_amount_balance);
+  }
+     this.navCtrl.push(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":id,"payment_status":payment_status,"pending_service_amount":pending_service_amount,"prev_service_amount_balance":prev_service_amount_balance,"additional_service_cost":additional_service_cost});
+  }
+  // paynow(sr_token,service_cost,service_id,additional_service_cost,payment_status){
+  //   if(additional_service_cost == "0"){
+  //     this.servicecost = service_cost;
+  //   }
+  //   else{
+  //     this.servicecost = additional_service_cost;
+  //   }
+  //   // let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":service_id,"payment_status":payment_status});
+  //   //   serviceModal.present();
+  //   this.navCtrl.push(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":service_id,"payment_status":payment_status});
+  // }
   public onInit()
   {
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     

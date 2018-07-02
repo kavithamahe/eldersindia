@@ -95,7 +95,7 @@ total_service_cost:any;
 servicediscountcostss:any;
 discountcost:any;
   constructor(public platform:Platform,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public navCtrl: NavController,private http: Http) {
-  
+    
     this.serviceData=navParams.get("serviceData");
     console.log(this.serviceData);
     this.serviceTitle=this.serviceData.serviceTitle;
@@ -254,8 +254,8 @@ console.log("recurring time");
       name: "EldersIndia",
       prefill: {
         email: this.email,
-        contact: "82203780131",
-        name: 'My Name'
+        contact: this.phone,
+        name: ''
       },
       
        notes: {
@@ -294,7 +294,7 @@ let nav = this.blogListService;
  var successCallback = function(payment_id) {
       // ajaxCallCheck(payment_id);
 
-  var url  = "http://192.168.1.187:8056/api/razorPaymentResponse";
+  var url  = "http://192.168.1.21:8000/api/razorPaymentResponse";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -305,8 +305,7 @@ xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount
 xmlhttp.onload = function () {
   var users = JSON.parse(xmlhttp.responseText);
  var result=users.result;
- // alert(result);
-  // navCtrl.setRoot(ServicerequestPage,{"status":"1","result":result});
+  // navCtrl.setRoot(ServicerequestPage);
    nav.showToast(result);
 
   }

@@ -126,6 +126,8 @@ export class Modelpage1PagePage {
     console.log('ionViewDidLoad Modelpage1PagePage');
   }
   submit() {
+    let paydismiss = "paydismiss";
+    this.viewCtrl.dismiss(paydismiss);
     if(this.fullpays == true){
         this.paymenttype = "full_payment";
       }
@@ -151,7 +153,6 @@ export class Modelpage1PagePage {
       location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id});
    
      }
-
 }
 edit(){ 
   let seviceCheck = "0";

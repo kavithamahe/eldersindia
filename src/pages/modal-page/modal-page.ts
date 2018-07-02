@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, ViewController,LoadingController,ModalController,NavController} from 'ionic-angular';
+import { NavParams, ViewController,LoadingController,ModalController,NavController,AlertController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //import {DatePicker} from 'ionic-native';
 import {Platform} from 'ionic-angular';
@@ -125,7 +125,12 @@ export class ModalContentPage {
   discountcost:any;
   dependents_id:any;
   package:any;
-  constructor(platform: Platform,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
+  checkRise_status:any;
+  initialservicecost:any;
+  totalpayableamountservice:any;
+  totalpayableamountbalance:any;
+  totalpayableamountcancel:any;
+  constructor(platform: Platform,public alertCtrl: AlertController,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {   
      this.date = new Date().toISOString();
      this.startDate = new Date().toISOString();
@@ -152,7 +157,8 @@ export class ModalContentPage {
       this.vendor = this.params.get("vendor").name;
       this.service_cost = this.params.get("vendor").service_cost;
       this.percentage_cost = this.params.get("vendor").percentage_cost;
-      this.servicecost = this.service_cost - this.percentage_cost;
+      this.initialservicecost = this.service_cost - this.percentage_cost;
+      this.servicecost=this.initialservicecost;
       this.vendor_id = this.params.get("vendor").vendor_id;
       this.recurringType = this.params.get("vendor").recurring;
       this.onetimetype = this.params.get("vendor").one_time;
@@ -197,6 +203,7 @@ export class ModalContentPage {
         this.providerService.getCustomerserviceamount()
       .subscribe(data =>{ 
           this.get_custome_amount = data.result;
+          this.totalpayableamountservice = parseInt(this.initialservicecost) + parseInt(this.get_custome_amount);
     })
     }
      getCustomerDeliverStatusAmounts(){
@@ -204,20 +211,22 @@ export class ModalContentPage {
       .subscribe(data =>{ 
         this.get_custome_deliever_amount = data.result;
         console.log(this.get_custome_deliever_amount);
-        this.totalpayableamount = parseInt(this.servicecost) + parseInt(this.get_custome_deliever_amount); 
+        this.totalpayableamount = parseInt(this.initialservicecost) + parseInt(this.get_custome_deliever_amount); 
+        console.log(this.totalpayableamount);
     })
     }
      getServicecancelamounts(){
         this.providerService.getServicecancelamount()
       .subscribe(data =>{ 
         this.get_custome_service_cancel_amount = data.result;
+        this.totalpayableamountcancel = parseInt(this.initialservicecost) + parseInt(this.get_custome_service_cancel_amount);
     })
     }
      getCustomerBalanceAmounts(){
         this.providerService.getCustomerBalanceAmount()
       .subscribe(data =>{ 
         this.getCustomerBalanceAmount = data.result;
-        this.totalpayableamount = parseInt(this.servicecost) - parseInt(this.getCustomerBalanceAmount);
+        this.totalpayableamountbalance = parseInt(this.initialservicecost) - parseInt(this.getCustomerBalanceAmount);
 
     })
     }
@@ -288,7 +297,8 @@ export class ModalContentPage {
     this.excludeDays=[];
     this.to_date="";
   }
-  calculateDays(sDate,eDate){
+
+   calculateDays(sDate,eDate){
   this.starDate = moment(sDate).format("YYYY-MM-DD");
   this.enDate = moment(eDate).format("YYYY-MM-DD");  
   this.selectedDates=[];
@@ -299,8 +309,45 @@ export class ModalContentPage {
             this.starDate = moment(this.starDate);
             this.selectedDates.push(this.starDate);
             this.starDate= moment(this.starDate).add(1, 'days');   
+                   
+           // this.starDate = moment(this.starDate).format("YYYY-MM-DD");
           }        
       this.dayCalculation();
+       if(this.searchButton == true){
+        this.onetimes = "One time";
+      }else{
+        this.onetimes = "Recurring";
+      }
+          if(this.userType != 'sponsor'){
+      this.dependent = this.elderId ;
+    }else{
+      this.dependent = this.authForm.value.dependents;
+    }
+         this.providerService.checkRiseAvailable(this.onetimes,this.modalForm.value.date,this.selectedDates,this.service_ids,this.dependent,this.vendor_id)
+      .subscribe(data =>{ 
+        this.checkRise_status=data.result;   
+         if(this.checkRise_status != 0){
+   let alert = this.alertCtrl.create({
+        title: 'Avail Services',
+        message: "You have already booked a service for "+this.serviceTitle+" on this specified date.Do you want to still proceed?",
+        buttons: [
+          {
+            text: 'Change Date',
+            role: 'cancel',
+            handler: () => {
+              alert =null;
+            }
+          },
+          {
+            text: 'Next',
+            handler: () => {
+            }
+          }
+        ]
+      });
+      alert.present();
+      }
+    })
                                                                                               
   }
   dayCalculation(){
@@ -319,7 +366,10 @@ export class ModalContentPage {
              }  
        }
      this.datCount = this.count;
-     this.servicecosts=this.servicecost*this.count;
+     console.log(this.datCount);
+     console.log(this.initialservicecost);
+     this.servicecosts=this.initialservicecost*this.count;
+     console.log(this.servicecosts);
      this.getRecurringDiscount(this.datCount);
   }
     getpackageInfo(){
@@ -465,7 +515,7 @@ export class ModalContentPage {
 
    }
    packageinfo(){
-    
+    this.getCustomerBalanceAmountsSponsor();
     this.providerService.packageListsInfo(this.location_id,this.service_id,this.authForm.value.dependents,this.vendor_id)
       .subscribe(data =>{ 
         this.packageLists=data.result.info.lists;
@@ -479,6 +529,17 @@ export class ModalContentPage {
         this.flag="0";
     },)
    }
+
+
+    getCustomerBalanceAmountsSponsor(){
+        this.providerService.getCustomerBalanceAmountsSponsor(this.authForm.value.dependents)
+      .subscribe(data =>{ 
+        this.getCustomerBalanceAmount = data.result;
+        this.totalpayableamount = parseInt(this.initialservicecost) - parseInt(this.getCustomerBalanceAmount);
+
+    })
+    }
+
    pressnext(){
     this.next();
    }
@@ -542,8 +603,8 @@ export class ModalContentPage {
 
    // }
     serviceRequestCall(service_request_data){
-      let loading = this.loadingCtrl.create({content: 'Please wait...!'});
-    loading.present();
+    //   let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    // loading.present();
 
     let requestServiceData = {"category":this.category,"service":this.service,
     "category_id":this.category_id,"location_id":this.location_id,"vendor_id":this.vendor_id,
@@ -563,7 +624,7 @@ export class ModalContentPage {
                 
                  this.navCtrl.setRoot(ServicerequestPage);
               
-               loading.dismiss();
+               // loading.dismiss();
                 },
          (err) => { 
         if(err.status===400)
@@ -574,7 +635,7 @@ export class ModalContentPage {
         {
           this.providerService.showToast("Try again later");
         }
-         loading.dismiss();
+         // loading.dismiss();
       });  
   }
    next(){
@@ -661,7 +722,10 @@ var date2 = new Date(objToDate);
         console.log(" schedule request modal dismissed..!");
       }else{
         console.log(data);
-       if(data != 0){
+        if(data == "paydismiss"){
+          this.navCtrl.pop();
+        }
+       if(data != 0 && data != "paydismiss"){
           this.serviceRequestCall(data);
         }
       }
@@ -726,15 +790,17 @@ var date2 = new Date(objToDate);
         console.log(" schedule request modal dismissed..!");
       }else{
         console.log(data);
-       if(data != 0){
+        if(data == "paydismiss"){
+          this.navCtrl.pop();
+        }
+       if(data != 0 && data != "paydismiss"){
           this.serviceRequestCall(data);
         }
       }
     })
 
        }
-      }
-    ); 
+      }); 
     }
     else{
       if(this.onetimes == undefined){
@@ -796,7 +862,10 @@ else{
         console.log(" schedule request modal dismissed..!");
       }else{
         console.log(data);
-       if(data != 0){
+        if(data == "paydismiss"){
+          this.navCtrl.pop();
+        }
+       if(data != 0 && data != "paydismiss"){
           this.serviceRequestCall(data);
         }
       }
@@ -856,7 +925,10 @@ else{
         console.log(" schedule request modal dismissed..!");
       }else{
         console.log(data);
-        if(data != 0){
+        if(data == "paydismiss"){
+          this.navCtrl.pop();
+        }
+        if(data != 0 && data != "paydismiss"){
           this.serviceRequestCall(data);
         }
        
@@ -1044,6 +1116,6 @@ if(this.userType != 'sponsor'){
       // this.viewCtrl.dismiss(serviceData);
 }
   dismiss(){
-      // this.viewCtrl.dismiss("dismiss");
+      this.navCtrl.pop();
   }
 }
