@@ -35,7 +35,7 @@
 
             <ion-item *ngIf = "userType =='sponsor'" class="select-brds">
               <ion-label>Select dependent</ion-label>
-              <ion-select formControlName="dependents"  placeholder="Select dependent" (ionChange)="packageinfo()" >
+              <ion-select formControlName="dependents" (ionChange)="packageinfo()" >
               <ion-option *ngFor = "let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}} {{dependent.last_name}}
               </ion-option>
             </ion-select>
