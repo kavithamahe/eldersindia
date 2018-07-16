@@ -122,7 +122,7 @@
   <ion-row>
   <ion-col width-50 style="padding-left:0px;">
    <span>
-    <p *ngIf="service.service_type =='Recurring'" (click)="viewRecurring()"><ion-badge>View Recurring Requests</ion-badge></p>
+    <p *ngIf="service.service_type =='Recurring'" (click)="viewRecurring(service?.sr_token)"><ion-badge>View Recurring Requests</ion-badge></p>
     <p *ngIf="service?.Paymentstatus=='captured' && service?.payment_method=='' && service?.additional_service_cost!='0'&& service?.additional_service_cost_status=='0' && service?.status=='5' && service?.package_id==''"><ion-badge (click)="payOptionforAdditionalServiceCost(service.sr_token,service.id,service?.additional_service_cost,service?.payment_status,service?.service_type)">Pay Now
     {{service?.additional_service_cost}}</ion-badge>
    </p>

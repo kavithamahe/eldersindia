@@ -33,8 +33,12 @@ nextPageURL:any='';
 serviceRequestScrollLists:any=[];
 discountcost:any;
 sortby:any="";
+sr_token:any;
   constructor(public navCtrl: NavController,public modalCtrl: ModalController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
-  	this.storage.ready().then(() => {  
+  
+      this.sr_token =this.navParams.get("sr_token");
+   
+    this.storage.ready().then(() => {  
   		storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
 	    
 	  	this.getrecurringRequest();

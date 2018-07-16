@@ -606,7 +606,8 @@ console.log(cancelCharges);
     this.showToaster("There is no contact number");
    }
   }
-  viewRecurring(){
-    this.navCtrl.push(RecurringPagePage);
+  viewRecurring(sr_token){
+    console.log(sr_token);
+    this.navCtrl.push(RecurringPagePage,{"sr_token":sr_token});
   }
 }

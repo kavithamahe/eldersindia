@@ -294,7 +294,7 @@ let nav = this.blogListService;
  var successCallback = function(payment_id) {
       // ajaxCallCheck(payment_id);
 
-  var url  = "http://192.168.1.21:8000/api/razorPaymentResponse";
+  var url  = "http://beta.eldersindia.com/api/razorPaymentResponse";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
