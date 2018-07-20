@@ -31,6 +31,7 @@ export class ServiceprovidersPage {
    serviceLocation:any;
    selectserviceLocation:any;
   constructor(public alertCtrl: AlertController, public modalCtrl:ModalController,public loadingCtrl: LoadingController, public platform: Platform, public navCtrl: NavController, public providerService: ServiceProvider, public storage:Storage) {
+
     console.log("this is service provider page");
    this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});

@@ -35,9 +35,11 @@ discountcost:any;
 sortby:any="";
 sr_token:any;
   constructor(public navCtrl: NavController,public modalCtrl: ModalController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
-  
-      this.sr_token =this.navParams.get("sr_token");
+  if(this.navParams.get("sr_token")){
+      this.searchText =this.navParams.get("sr_token");
    
+  }
+    
     this.storage.ready().then(() => {  
   		storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
 	    
@@ -77,7 +79,7 @@ sr_token:any;
   }
    paynow(service_cost,service_id,recurring_request_id){
     let service_type = "Recurring";
-    let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"service_type":service_type,"service_cost":service_cost,"service_id":service_id,"recurring_request_id":recurring_request_id});
+    let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"service_type":service_type,"service_cost":service_cost,"service_id":service_id,"recurring_request_id":recurring_request_id,"reqstatus":"2"});
       serviceModal.present();
   }
   getrecurringRequest(){
@@ -109,7 +111,7 @@ sr_token:any;
   doInfinite(infiniteScroll) {
     console.log(this.nextPageURL);
     setTimeout(() => {      
-      if(this.nextPageURL!=null && this.nextPageURL!='')
+      if(this.nextPageURL!=null || this.nextPageURL!='')
       {
        this.recurringRequestScroll();
       }
@@ -141,7 +143,7 @@ sr_token:any;
         this.recurringRequest.push(dataList[i]);
         }
         // this.recurringRequest = dataList;
-       this.nextPageURL=serviceRequestScroll.result.next_page_url;     
+       this.nextPageURL=serviceRequestScroll.result.info.next_page_url;     
     },
     (err) => { 
         if(err.status===401)

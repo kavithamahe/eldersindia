@@ -164,15 +164,10 @@
               </ion-select>
             </ion-item>
           </ion-list>
-           <!--  <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" placeholder="Scheduled time" formControlName ="time" class="select-brd"></ion-datetime>
-            </ion-item> -->
+  
        <p class="err-reds shake" *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">Please select the preferred time</p>
   
     </div>
-
-  <!-- <p>--------------------------one time end----------------------------</p> -->
-
-  <!-- <p>--------------------------recurring time start--------------------------</p> -->
 
     <div *ngIf(recurring)>
           

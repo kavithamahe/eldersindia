@@ -220,14 +220,13 @@ pressContact(){
     this.toggleRequestService();
    }
   toggleRequestService(){
-     
      if((this.vendorList.dependentLists.length<=0) && this.userType == 'sponsor')
       {
         this.showToast("There is no dependent. You can not apply job!");      
       
       }else{
   this.navCtrl.push(ModalContentPage,{serviceData:this.serviceData,dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor:this.vendorList.vendorDetails,vendorservice_cost:this.service_cost,one_time:this.one_time,recurring:this.recurring,status:"1",vendor_id:this.vendor_id,dependentLists:this.dependentLists,
-      serviceids:this.serviceids,location_id:this.locationId,package_amount:this.package_amount});    
+      serviceids:this.serviceids,location_id:this.locationId,package_amount:this.package_amount,servicetypestatus:"2"});    
     // service_modal.present();
     // service_modal.onDidDismiss(data =>{
     //   if(data == "dismiss"){

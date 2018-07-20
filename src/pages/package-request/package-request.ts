@@ -32,7 +32,15 @@ locationId:any;
 elderId:any;
 searchemail:any="";
 searchid:any="";
+paystatus:any;
+results:any;
   constructor(public navCtrl: NavController,public modalCtrl: ModalController,public toastCtrl: ToastController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams, public blogListService:BlogListService) {
+      this.paystatus = navParams.get("status");
+       this.results = navParams.get("result");
+    console.log(this.results);
+    if(this.paystatus == "1"){
+      this.blogListService.showToaster(this.results);
+    }
   	 this.storage.ready().then(() => {      
     	storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
      

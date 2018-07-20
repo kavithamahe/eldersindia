@@ -6,6 +6,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { BlogListService } from '../../providers/blog-list-service';
 import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
+import {PackageRequestPagePage } from '../../pages/package-request/package-request';
 
 
 import 'rxjs/add/operator/map';
@@ -46,14 +47,18 @@ pending_service_amount:any;
 prev_service_amount_balance:any;
 service_costadd:any;
 additional_service_cost:any;
+reqstatus:any;
+
   constructor(public navCtrl: NavController,public viewCtrl: ViewController,public storage:Storage, public navParams: NavParams) {
-  	if(navParams.get("service_type") != undefined){
+  	 
+    if(navParams.get("service_type") != undefined){
   		this.service_type = navParams.get("service_type");
   		this.service_cost=navParams.get("service_cost");
   		this.service_costss = this.service_cost * 100;
   		localStorage.setItem('service_costss', this.service_costss);
   		this.service_id = navParams.get("service_id");
       this.recurring_request_id = navParams.get("recurring_request_id");
+      this.reqstatus = navParams.get("reqstatus");
       localStorage.setItem('recurring_request_id', this.recurring_request_id);
       console.log(this.service_id);
   	}
@@ -121,6 +126,7 @@ additional_service_cost:any;
     console.log('ionViewDidLoad PackagepaymentPagePage');
   }
   payadditional(){
+    console.log(this.service_type);
      var optionss = {
       description: "Payment made for "+this.sr_token+"",
       image: 'http://qa.eldersindia.com/assets/img/Elderlogo.png',
@@ -177,7 +183,8 @@ xmlhttp.onload = function () {
     }
 
 var cancelCallback = function(error) {
-  alert(error.description + ' (Error '+error.code+')')
+   nav.setRoot(ServicerequestPage);
+  // alert(error.description + ' (Error '+error.code+')')
 }
 
 RazorpayCheckout.on('payment.success', successCallback);
@@ -259,7 +266,8 @@ xmlhttp.onload = function () {
     }
 
 var cancelCallback = function(error) {
-  alert(error.description + ' (Error '+error.code+')')
+  nav.setRoot(ServicerequestPage);
+  // alert(error.description + ' (Error '+error.code+')')
 }
 
 RazorpayCheckout.on('payment.success', successCallback);
@@ -340,12 +348,13 @@ console.log(xmlhttp.responseText);
 xmlhttp.onload = function () {
   var users = JSON.parse(xmlhttp.responseText);
  var result=users.result;
-  nav.push(ServicerequestPage,{"status":"1","result":result});
-  }
+  nav.push(PackageRequestPagePage,{"status":"1","result":result});
+  } 
     }
 
 var cancelCallback = function(error) {
-  alert(error.description + ' (Error '+error.code+')')
+  nav.push(PackageRequestPagePage);
+  // alert(error.description + ' (Error '+error.code+')')
 }
 
 RazorpayCheckout.on('payment.success', successCallback);
@@ -430,7 +439,8 @@ xmlhttp.onload = function () {
     }
 
 var cancelCallback = function(error) {
-  alert(error.description + ' (Error '+error.code+')')
+  nav.setRoot(ServicerequestPage);
+  // alert(error.description + ' (Error '+error.code+')')
 }
 
 RazorpayCheckout.on('payment.success', successCallback);

@@ -114,7 +114,7 @@ user_type:any;
     ); 
   }
   payOptionforAdditionalServiceCost(sr_token,id,additional_service_cost,payment_status,service_type){
-     this.navCtrl.push(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":additional_service_cost,"service_id":id,"payment_status":payment_status,"status":"1"});
+     this.navCtrl.push(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":additional_service_cost,"service_id":id,"payment_status":payment_status,"status":"1","service_type":service_type});
   }
   payOptionforpendingPayment(sr_token,pending_service_amount,id,additional_service_cost,payment_status,prev_service_amount_balance){
       if(payment_status == 'payment_success'){

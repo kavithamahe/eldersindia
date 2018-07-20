@@ -127,12 +127,13 @@ serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id
       .map(res => res.json());
   }
   getrecurringRequestdelete(rootUrl,recurring,hours,paid_cost,reamining_cost,service_cost,status,total_service_cost){
-     let _request= {"data":{"id": recurring,"hours":hours,"paid_cost":paid_cost,"reamining_cost":reamining_cost,"service_cost":service_cost,"status":status,"total_service_cost":total_service_cost}};
+     let _request= {"id": recurring,"hours":hours,"paid_cost":paid_cost,"reamining_cost":reamining_cost,"service_cost":service_cost,"status":status,"total_service_cost":total_service_cost};
     return this.http.post(rootUrl+'getBulkRecurringService',_request,this.options)
       .map(res => res.json());
   }
-  deleterecurringrequest(rootUrl,recurring,dedction_amount,refund_amount,remaining_amount){
-    let _request= {"data":{"id":recurring,"dedction_amount":dedction_amount,"refund_amount":refund_amount,"remaining_amount":remaining_amount}};
+  deleterecurringrequest(rootUrl,recurring,dedction_amount,refund_amount,remaining_amount,paid_amount,balance_amount,total_amount){
+    let _request= {"id":recurring,"dedction_amount":dedction_amount,"refund_amount":refund_amount,"remaining_amount":remaining_amount,
+    "total_amount":total_amount,"balance_amount":balance_amount,"paid_amount":paid_amount};
 
     return this.http.post(rootUrl+'deleteBulkRecurringService',_request,this.options)
       .map(res => res.json());

@@ -130,6 +130,7 @@ export class ModalContentPage {
   totalpayableamountservice:any;
   totalpayableamountbalance:any;
   totalpayableamountcancel:any;
+  servicetypestatus:any;
   constructor(platform: Platform,public alertCtrl: AlertController,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {   
      this.date = new Date().toISOString();
@@ -139,7 +140,7 @@ export class ModalContentPage {
      this.lead_time = params.get("lead_time"); 
      this.serviceTitle = params.get("serviceTitle");
      this.location_id = params.get("location_id");
-    
+
      if(params.get("serviceData") != undefined){
      this.service_id = this.params.get("serviceData").service_id;
       this.requestService=params.get("serviceData");
@@ -152,7 +153,20 @@ export class ModalContentPage {
      this.subcategory = this.requestService.subcategory;
      this.vendor_id = this.params.get("vendor_id");
      }
+
      if(params.get("vendor") != undefined){
+      if(this.params.get("one_time")){
+        this.onetimetype = this.params.get("one_time");
+      }
+      else{
+        this.onetimetype = this.params.get("vendor").one_time;
+      }
+       if(this.params.get("recurring")){
+        this.recurringType = this.params.get("recurring");
+      }
+      else{
+        this.recurringType = this.params.get("vendor").recurring;
+      }
       this.vendorr = this.params.get("vendor");
       this.vendor = this.params.get("vendor").name;
       this.service_cost = this.params.get("vendor").service_cost;
@@ -160,8 +174,8 @@ export class ModalContentPage {
       this.initialservicecost = this.service_cost - this.percentage_cost;
       this.servicecost=this.initialservicecost;
       this.vendor_id = this.params.get("vendor").vendor_id;
-      this.recurringType = this.params.get("vendor").recurring;
-      this.onetimetype = this.params.get("vendor").one_time;
+      // this.recurringType = this.params.get("vendor").recurring;
+      // this.onetimetype = this.params.get("vendor").one_time;
       this.name = this.params.get("vendor").name;
     }
     this.modalForm = formBuilder.group({

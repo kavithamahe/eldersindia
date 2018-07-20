@@ -147,8 +147,18 @@
 	</ion-col>	
   </ion-row>
   <ion-row>
+  <ion-col *ngIf="service.pack_id!=''">
+  <button class="make-rate" *ngIf="service.vendor_status == 5 && service.additional_service_cost==0" (click)="enableRemark(i)">
+       Mark as Complete
+  </button>
+  </ion-col>
   <ion-col *ngIf="service.Paymentstatus=='captured' && service.pack_id==''">
-  <button class="make-rate" *ngIf="service.vendor_status == 5" (click)="enableRemark(i)">
+  <button class="make-rate" *ngIf="service.vendor_status == 5 && (service.additional_service_cost==0 || service.additional_service_cost_status=='success')" (click)="enableRemark(i)">
+       Mark as Complete
+  </button>
+  </ion-col>
+  <ion-col *ngIf="service.pack_id!=''">
+  <button class="make-rate" *ngIf="service.vendor_status == 5 && (service.additional_service_cost!=0 && service.additional_service_cost_status=='success')" (click)="enableRemark(i)">
        Mark as Complete
   </button>
   </ion-col>

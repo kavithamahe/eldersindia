@@ -34,6 +34,10 @@ reamining_cost:any;
 service_cost:any;
 status:any;
 total_service_cost:any;
+service_costs:any;
+paid_amount:any;
+balance_amount:any;
+total_amount:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,public blogListService: BlogListService,public loadingCtrl: LoadingController,public storage:Storage,) {
   		this.storage.ready().then(() => {
   		storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
@@ -61,6 +65,10 @@ total_service_cost:any;
         this.refund_amount = this.dedction_amounts.refund_amount;
         this.dedction_amount= this.dedction_amounts.dedction_amount;
         this.remaining_amount = this.dedction_amounts.remaining_amount;
+        this.balance_amount = this.dedction_amounts.balance_amount;
+        this.paid_amount = this.dedction_amounts.paid_amount;
+        this.service_costs = this.dedction_amounts.service_cost;
+        this.total_amount = this.dedction_amounts.total_amount;
         loading.dismiss();
     },
     err =>{
@@ -78,7 +86,7 @@ total_service_cost:any;
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
     this.blogListService.deleterecurringrequest(this.rootUrl,this.recurring_request_id,this.dedction_amount,this.refund_amount,
-      this.remaining_amount)
+      this.remaining_amount,this.paid_amount,this.balance_amount,this.total_amount)
       .subscribe(data =>{ 
       	this.blogListService.showToast(data.result);
       	this.navCtrl.setRoot(RecurringPagePage);

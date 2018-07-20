@@ -18,8 +18,8 @@
     <button ion-button  class="services-view" (click)="payno()">No</button>
     <button ion-button class="services" (click)="pay()" *ngIf="service_type == undefind && status != '1'">Yes
     </button>
-    <button ion-button class="services" (click)="payadditional()" *ngIf="service_type == undefind && status == '1'">Yes
+    <button ion-button class="services" (click)="payadditional()" *ngIf="service_type != undefind && status == '1'">Yes
     </button>
-    <button ion-button class="services" (click)="paypartial()" *ngIf="service_type != undefind">Yes</button>
+    <button ion-button class="services" (click)="paypartial()" *ngIf="service_type != undefind && reqstatus == '2'">Yes</button>
     </ion-card>
 </ion-content>

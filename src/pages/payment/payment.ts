@@ -229,6 +229,7 @@ console.log("recurring time");
      this.get_custome_service_cancel_amount,this.total_cost,this.total_service_cost).subscribe(     
       (loginuser) => {
         this.udf3= loginuser.result.serviceType;
+        console.log(this.udf3);
         this.udf2 = loginuser.result.service_request_id;
     },
 
