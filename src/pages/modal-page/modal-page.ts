@@ -161,7 +161,7 @@ export class ModalContentPage {
       else{
         this.onetimetype = this.params.get("vendor").one_time;
       }
-       if(this.params.get("recurring")){
+      if(this.params.get("recurring")){
         this.recurringType = this.params.get("recurring");
       }
       else{
