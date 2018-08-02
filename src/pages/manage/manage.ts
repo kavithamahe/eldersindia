@@ -71,7 +71,7 @@ show_option:boolean =false;
     confirm.present();
   }
  mailSender(manage) {
-  let mailId = manage.id;
+  let mailId = manage;
     let prompt = this.alertCtrl.create({
       title: 'Confirm Mail',
       message: "Do you want to send login information?",
@@ -95,7 +95,7 @@ show_option:boolean =false;
   sendMail(mailId){
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.communityServices.loginDetail(mailId).subscribe(datas =>{
+    this.communityServices.loginDetail(mailId,this.options).subscribe(datas =>{
      this.showToast(datas.result);
      loader.dismiss();
      },

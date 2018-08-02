@@ -178,8 +178,8 @@ joinCommunity(id){
 
 }
 //------ need to update----------//
-connectMember(id,name){
-   this.connect ={"connect_id":id,"connect_name":name}
+connectMember(id,name,last_name){
+   this.connect ={"connect_id":id,"connect_name":name,"last_name":last_name}
    return this.http.post(`${this.getCommunityPostsUrl }sendConnectionRequest`,this.connect,this.options)
       .map(res =>res.json());
 }
@@ -314,10 +314,10 @@ myprofile(id){
     return this.http.post(`${this.getCommunityPostsUrl }getElderListBySponser`,this.lists,options)
     .map(res =>res.json());
   }
-  loginDetail(id){
+  loginDetail(id,options){ 
      this.lists={"id":id}
       
-    return this.http.post(`${this.getCommunityPostsUrl }SendElderVerificationMail`,this.lists,this.options)
+    return this.http.post(`${this.getCommunityPostsUrl }SendElderVerificationMail`,this.lists,options)
     .map(res =>res.json());
   }
    searchManageLists(data){

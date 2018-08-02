@@ -1048,7 +1048,7 @@ else{
       // this.viewCtrl.dismiss(serviceData);
     }
     else{
-      this.providerService.showToast("Please Select Frequency");
+      this.providerService.showToast("Please Select Service Type");
     }
     }
     else{
@@ -1111,7 +1111,7 @@ else{
        // this.viewCtrl.dismiss(serviceData);
         }
     else{
-      this.providerService.showToast("Please Select Frequency");
+      this.providerService.showToast("Please Select Service Type");
     }
     }
     else{

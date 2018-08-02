@@ -318,7 +318,10 @@ export class MyApp {
     this.platform.ready().then(() => {
 
       StatusBar.styleDefault();
-      Splashscreen.hide();
+       setTimeout(() => {
+        Splashscreen.hide();
+      }, 100);
+      
    this.platform.registerBackButtonAction(() => {
 
                 if(this.nav.canGoBack()){

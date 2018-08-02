@@ -276,8 +276,8 @@ pressevent(modalPage,vendorData){
    <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Select dependent</ion-label>
       <ion-item class="sel-label">
            <ion-label>Select dependent</ion-label>
-              <ion-select style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="dependentData" placeholder="Select dependent">
-                <ion-option *ngFor = "let dependent of dependentLists" [value]="dependent">{{dependent.name}} {{dependent.last_name}}
+              <ion-select style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="dependentData">
+                <ion-option *ngFor = "let dependent of dependentLists" [value]="dependent">{{dependent.name}}
                 </ion-option>
               </ion-select>
           </ion-item>

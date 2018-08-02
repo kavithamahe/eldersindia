@@ -46,7 +46,7 @@ import { ElderservicePagePage } from '../pages/elderservice/elderservice';
 import { PaymentPage } from '../pages/payment/payment';
 import { PackagepaymentPagePage } from '../pages/packagepayment/packagepayment';
 import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
-
+import { VerifyotpPagePage } from '../pages/verifyotp/verifyotp';
 
 //packages related pages
 import {PackageRequestPagePage } from '../pages/package-request/package-request';

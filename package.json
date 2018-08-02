@@ -97,7 +97,7 @@
     "summernote": "^0.8.4",
     "sw-toolbox": "3.4.0",
     "zone.js": "0.6.26",
-    "cordova-android": "~6.2.3"
+    "cordova-android": "~6.3.0"
   },
   "devDependencies": {
     "@ionic/app-scripts": "^1.3.7",

@@ -220,7 +220,7 @@ bannerImages:any;
         tagsObj.push({"name":this.tagsModel[j]})
       }
     }
-   
+   console.log(this.tagsModel);
     this.blogObject={ "category":this.blogForm.value.category,"allow_comment":this.allowComments,"title":this.blogForm.value.title,"highlights":this.highlights,
         "description":this.blogForm.value.description,"featured_image":this.featuredImages,"banner_image":this.bannerImages,"tags":tagsObj,"app":''
     };
