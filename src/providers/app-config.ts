@@ -18,7 +18,7 @@ export class AppConfig {
   }
   public setImageurl()
   {
-  	return this.imageUrl; 
+   	return this.imageUrl; 
   }
   public setrooturl()
   {
