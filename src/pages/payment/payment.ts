@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController,NavParams,Platform,ViewController } from 'ionic-angular';
+import { NavController,NavParams,Platform,ViewController,LoadingController} from 'ionic-angular';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { BlogListService } from '../../providers/blog-list-service';
+import { ServiceProvider } from '../../providers/service-provider'
 import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
 
 
@@ -19,6 +20,9 @@ declare var RazorpayCheckout: any;
 
 })
 export class PaymentPage {
+  service_name: any;
+  Recreation_service: any;
+  paymentData: any;
  headers;
 token:string;
 options:any;
@@ -94,8 +98,35 @@ total_cost:any;
 total_service_cost:any;
 servicediscountcostss:any;
 discountcost:any;
-  constructor(public platform:Platform,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public navCtrl: NavController,private http: Http) {
-    
+  constructor(public platform:Platform,public loadingCtrl: LoadingController,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,
+    public blogListService:BlogListService,public _provider:ServiceProvider,public navCtrl: NavController,private http: Http) {
+   this.Recreation_service = navParams.get("service");
+   if(navParams.get("service") == "Recreation"){
+    this.paymentData = navParams.get("paymentData");
+    this.service_name = this.paymentData.service_name;
+    this.service_cost = this.paymentData.service_cost * 100;
+    this.service_costs = this.service_cost;
+    console.log(this.service_costs);
+    localStorage.setItem('service_costss', this.service_costs);
+    this.storage.ready().then(() => {
+      storage.get('token').then((token) => { this.token=token;
+     
+  localStorage.setItem('key', this.token);
+      this.headers = new Headers();
+      this.headers.append('Content-Type', 'application/json');
+      this.headers.append('Authorization', 'Bearer ' + this.token);
+      this.options = new RequestOptions({ headers: this.headers });
+         })    
+      storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
+   this.recreationRequestSubmitbeforePayment();
+            });
+       storage.get('id').then((id) => { this.user_id=id; })
+       storage.get('name').then((name) => { this.name=name; })
+       storage.get('email').then((email) => { this.email=email; })
+       storage.get('phone').then((phone) => { this.phone=phone; })
+     });
+   }
+   else{
     this.serviceData=navParams.get("serviceData");
     console.log(this.serviceData);
     this.serviceTitle=this.serviceData.serviceTitle;
@@ -190,14 +221,44 @@ localStorage.setItem('key', this.token);
      }
    }
      localStorage.setItem('service_costss', this.service_costss);
+   } 
+    
+   
 }
+recreationRequestSubmitbeforePayment(){
+    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  let payment_data =this.paymentData;
+  this._provider.webServiceCall(`serviceRequestSubmitbeforePayment`,payment_data)
+  .subscribe(
+      data =>{
+        this.udf3= data.result.serviceType;
+        this.udf2 = data.result.service_request_id;
+        loading.dismiss();
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this._provider.showToast(JSON.parse(err._body).error);
+      }
+      else
+      {
+        this._provider.showToast("Try again later");
+      }
+            })
+}
+
  serviceRequestSubmitbeforePayment(){
+
   if(this.paymenttype == "partial_payment"){
     this.servicediscountcosts = this.payableamount;
   }
-  let paymentflag="1";
+  let paymentflag=1;
   if(this.datCount != undefined){
 console.log("recurring time");
+ let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
     this.blogListService.serviceRequestSubmitbeforePayment(this.rootUrl,this.servicecost,
       this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,
      this.subcategory,this.datetime,this.dependentId,this.durations,this.exclude_days,
@@ -210,9 +271,11 @@ console.log("recurring time");
       (loginuser) => {
         this.udf3= loginuser.result.serviceType;
         this.udf2 = loginuser.result.service_request_id;
+        loading.dismiss();
     },
 
     (err) => { 
+      loading.dismiss();
         console.log(err);
         
     },
@@ -220,6 +283,8 @@ console.log("recurring time");
   }
   else{
     console.log("one time");
+    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
     this.blogListService.serviceRequestSubmitbeforePayments(this.rootUrl,this.servicecost,
       this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,
      this.subcategory,this.datetime,this.dependentId,this.durations,this.exclude_days,
@@ -229,11 +294,12 @@ console.log("recurring time");
      this.get_custome_service_cancel_amount,this.total_cost,this.total_service_cost).subscribe(     
       (loginuser) => {
         this.udf3= loginuser.result.serviceType;
-        console.log(this.udf3);
         this.udf2 = loginuser.result.service_request_id;
+        loading.dismiss();
     },
 
     (err) => { 
+      loading.dismiss();
         console.log(err);
         
     },
@@ -243,7 +309,72 @@ console.log("recurring time");
   payno(){
     this.dismiss();
   }
+  payRecreation(){
+    console.log(this.udf2);
+    console.log(this.udf3);
+    console.log(this.Recreation_service);
+    console.log(this.service_name);
+    var options = {
+      description: this.serviceTitle,
+      image: "assets/img/elders-logo.png",
+      currency: 'INR',
+      key: 'rzp_test_53tdpMxkK8bFKw',
+      amount: this.service_cost,
+      name: "EldersIndia",
+      prefill: {
+        email: this.email,
+        contact: this.phone,
+        name: this.name
+      },
+      
+       "notes": {
+        "service_id":this.udf2,
+        "service_type":this.udf3,
+        "email": this.email,
+        "pre_balance_amount":this.get_custome_deliever_amount,
+        "category_name":this.Recreation_service,
+        "service_name":this.service_name
+      },
+      theme: {
+        color: '#208ad6'
+      },
 
+    };
+
+
+let navCtrl = this.navCtrl;
+let nav = this.blogListService;
+ var successCallback = function(payment_id) {
+      // ajaxCallCheck(payment_id);
+
+  var url  = "http://beta.eldersindia.com/api/razorPaymentResponse";
+   var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
+
+xmlhttp.onload = function () {
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+  navCtrl.setRoot(ServicerequestPage);
+   nav.showToast(result);
+
+  }
+      
+     
+    }
+
+var cancelCallback = function(error) {
+  nav.showToaster(error.description);
+}
+
+
+RazorpayCheckout.on('payment.success', successCallback,this.dismiss());
+RazorpayCheckout.on('payment.cancel', cancelCallback);
+RazorpayCheckout.open(options, successCallback, cancelCallback);
+  }
   pay() {
     console.log(this.service_costss);
     var options = {
@@ -260,9 +391,12 @@ console.log("recurring time");
       },
       
        notes: {
-        service_id:this.udf2,
-        service_type:this.udf3,
-        email: this.email,
+        "service_id":this.udf2,
+        "service_type":this.udf3,
+        "email": this.email,
+        "pre_balance_amount":this.get_custome_deliever_amount,
+        "category_name":this.category,
+        "service_name":this.service
       },
       theme: {
         color: '#208ad6'
@@ -295,7 +429,7 @@ let nav = this.blogListService;
  var successCallback = function(payment_id) {
       // ajaxCallCheck(payment_id);
 
-  var url  = "http://192.168.1.21:8000/api/razorPaymentResponse";
+  var url  = "http://beta.eldersindia.com/api/razorPaymentResponse";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -306,7 +440,7 @@ xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount
 xmlhttp.onload = function () {
   var users = JSON.parse(xmlhttp.responseText);
  var result=users.result;
-  // navCtrl.setRoot(ServicerequestPage);
+  navCtrl.setRoot(ServicerequestPage);
    nav.showToast(result);
 
   }

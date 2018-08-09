@@ -26,12 +26,13 @@
 	<ion-item text-wrap class="subcategory-list">
 	
 		<ion-row>
-		<ion-col width-33 (click)="serviceInfo(service_list)">
+		<ion-col width-33 (click)="serviceInfomore(service_list)">
 		    <ion-thumbnail item-left>
 		      <img [src]= "logoUrl+service_list?.logo">
 		    </ion-thumbnail>
 
 		<span class="off-price" *ngIf="service_list.discount_rate != 0"><p>{{service_list.discount_rate}}% <br/>Off</p></span>
+
 		</ion-col>
 			
 		<ion-col width-67 class="text-alg">			
@@ -43,12 +44,13 @@
 		 	 <b><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{service_list.service_cost - service_list.percentage_cost}} <span *ngIf="service_list.discount_rate != 0">/&nbsp;<i class="fa fa-inr" aria-hidden="true"></i><strong>{{service_list.service_cost}}</strong> {{service_list.service_type}}</span></b>
 		    <br/>
 			  <p *ngIf="service_list.lead_time != '00:00'" 
-				 [hidden]="!service_list?.lead_time">Minimum {{service_list.lead_time}} hour to serve you</p>   
+				 [hidden]="!service_list?.lead_time">Minimum {{service_list.lead_time}} hour(s) to serve you</p>   
 				<p><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;{{service_list.location}}</p>
 			</ion-col>
 			</ion-row>
 		 <ion-col>
-		<button class="btn-warnings"  *ngIf="dependentLen" (click)="openModal('scheduleModal',service_list)" (press)="pressevent('scheduleModal',service_list)">Schedule</button>
+		<button class="btn-warnings"  *ngIf="dependentLen && serviceOffered != 'Recreation'" (click)="openModal('scheduleModal',service_list)" (press)="pressevent('scheduleModal',service_list)">Schedule</button>
+		<button class="btn-warnings"  *ngIf="dependentLen && serviceOffered == 'Recreation'" (click)="bookNow(service_list.service_cost - service_list.percentage_cost,service_list.service_cost)">Book Now</button>
 		<button class="instant-bt" *ngIf="dependentLen" (click)="instantRequest(service_list)" (press)="pressinstant(service_list)">Instant</button>
 
 		 </ion-col>

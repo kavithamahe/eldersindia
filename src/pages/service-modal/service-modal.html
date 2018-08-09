@@ -20,7 +20,190 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="content-intop" >
+  <div *ngIf(showScheduleDetails) class="offered-servicelist">
+      <ion-card class="contact-list">
+          <ion-item text-wrap>
+              <ion-row>
+                  <p class="service-conts"><span class="token-primaryss">Schedule : </span>{{vendorList?.requestServices.start_date}} to {{vendorList?.requestServices.end_date}}
+                  </p>
+                 </ion-row>
+                 <ion-row class="textlg">
+                    <p class="service-conts"><span class="token-primaryss">Cost : </span><b><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{schedule_cost}} <span *ngIf="service_cost != 0">/&nbsp;
+                        <i class="fa fa-inr" aria-hidden="true"></i><strong>{{service_cost}}</strong></span></b></p>
+              
+                   </ion-row>
+       
+          </ion-item>
+          <br>
+          <ion-item>
+              <button class="instant-bt" *ngIf="package_active_status == '1'" (click)="bookNow()">Book Now</button>
+              <button class="btn-warnings" *ngIf="package_active_status == '0'">Booking Closed</button>
+            <button  class="instant-btn" (click)="contactNow()">Contact Now</button>
+            </ion-item>
+            <div *ngIf="booknow">
+                <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Name</ion-label>
+            <ion-item class="sel-label">
+                <ion-input type="text" value="{{name}}" disabled></ion-input>
+            </ion-item>
+            <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Email</ion-label>
+            <ion-item class="sel-label">
+                <ion-input type="text" value="{{email}}" disabled></ion-input>
+            </ion-item>
+            <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Mobile</ion-label>
+            <ion-item class="sel-label">
+              <ion-input type="text" value="{{phone}}" disabled></ion-input>
+          </ion-item>
+          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">No of People</ion-label>
+          <ion-item class="sel-label">
+            <ion-label>No of People</ion-label>
+            <ion-select [(ngModel)]="noofpeople" (ionChange)="selectPeople(noofpeople)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+                <ion-option value="1">1</ion-option>
+                <ion-option value="2">2</ion-option>
+                <ion-option value="3">3</ion-option>
+                <ion-option value="4">4</ion-option>
+                <ion-option value="5">5</ion-option>
+            </ion-select>
+        </ion-item>
+        <br/>
+        <ion-row>
+        <ion-col>
+    <button class="btn-warnings" color="primary" (click)="cancel()">Cancel</button>
 
+  <button class="instant-bt" (click)="bookDetails()">Next</button>
+  </ion-col>
+  </ion-row>
+            </div>
+            <div *ngIf="booknownext">
+              <ion-list *ngIf="user_type == 'sponsor'">
+                  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
+                  <ion-item class="sel-label">
+                      <ion-label>Dependent</ion-label>
+                      <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+                        <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name
+                          }}</ion-option>
+                      </ion-select>
+                  </ion-item>
+              </ion-list>
+                  
+                  <ion-list *ngIf="user_type == 'sponsor' && eldershow">
+                    <ion-row>
+                        <ion-col width-60>
+                            <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Name</ion-label>
+                            <ion-item class="sel-label">
+                                <ion-input type="text" value="{{elderDetails.name}} {{elderDetails.last_name}}"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col width-40>
+                            <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Age</ion-label>
+                            <ion-item class="sel-label">
+                              <ion-input type="text" value="{{elderDetails.age}}"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                   
+                  </ion-list>
+                  <ion-list *ngIf="user_type == 'elder'">
+                      <ion-row>
+                          <ion-col width-60>
+                              <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Name</ion-label>
+                              <ion-item class="sel-label">
+                                  <ion-input type="text" value="{{name}} {{lastname}}"></ion-input>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col width-40>
+                              <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Age</ion-label>
+                              <ion-item class="sel-label">
+                                  <ion-input type="text" value="{{elderage}}"></ion-input>
+                              </ion-item>
+                          </ion-col>
+                      </ion-row>
+                     
+                    </ion-list>
+                     <ion-list *ngFor="let people of total_peoples;let i=index">
+                    <ion-row>
+                      <ion-col width-60>
+                          <ion-item class="sel-label">
+                              <ion-input type="text" [(ngModel)]="elder_name[i]"></ion-input>
+                          </ion-item>
+                      </ion-col>
+                      <ion-col width-40>
+                          <ion-item class="sel-label">
+                              <ion-input type="text" [(ngModel)]="elder_age[i]"></ion-input>
+                          </ion-item>
+                      </ion-col>
+                    </ion-row>
+                 
+              </ion-list>
+              <br/>
+              <ion-row>
+              <ion-col>
+          <button class="btn-warnings" color="primary" (click)="cancelconfirmation()">Cancel</button>
+      
+        <button class="instant-bt" (click)="confirmationDetails()">Next</button>
+        </ion-col>
+        </ion-row>
+            </div>
+
+            <div *ngIf="confirmationDetail">
+               <ion-row>
+                  <p class="service-conts"><span class="token-primaryss">Schedule Date : </span>{{vendorList?.requestServices.start_date}}
+                  </p>
+                 </ion-row>
+                  <ion-row>
+                  <p class="service-conts"><span class="token-primaryss">Participants : </span>{{peoplecount}}
+                  </p>
+                 </ion-row>
+                  <ion-row>
+                  <p class="service-conts"><span class="token-primaryss">Actual Cost : </span><i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{schedule_cost}}
+                  </p>
+                 </ion-row>
+                 <ion-row>
+                  <p class="service-conts"><span class="token-primaryss">Total Cost : </span><i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{schedule_cost * noofpeople}}
+                  </p>
+                 </ion-row>
+              
+        <ion-item *ngFor="let pack of vendorList.serviceOffered">
+            <br/>
+              <ion-row>
+              <ion-col>
+          <button class="btn-warnings" color="primary" (click)="cancelpay()">Cancel</button>
+      
+        <button class="instant-bt" (click)="payNow(vendorList?.requestServices.category_id,
+        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,pack.vendor_id)">Pay Now</button>
+        </ion-col>
+        </ion-row>
+     </ion-item>
+            </div>
+
+            <div *ngIf="contact">
+                <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Name</ion-label>
+              <ion-item class="sel-label">
+                <ion-input type="text" value="{{name}}"></ion-input>
+            </ion-item>
+            <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Mobile</ion-label>
+            <ion-item class="sel-label">
+              <ion-input type="text" value="{{phone}}"></ion-input>
+          </ion-item>
+          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Enter Your Query</ion-label>
+          <ion-item class="sel-label">
+            <ion-input type="text" placeholder="Type Your Query Here..." [(ngModel)]="queries"></ion-input>
+        </ion-item>
+        <ion-item *ngFor="let pack of vendorList.serviceOffered">
+            <br/>
+              <ion-row>
+              <ion-col>
+        <button class="btn-warnings" color="primary" (click)="cancelcontact()">Cancel</button>
+      
+        <button class="instant-bt" (click)="sendContactDetails(vendorList?.requestServices.category_id,
+          vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,pack.vendor_id)">Send</button>
+        </ion-col>
+        </ion-row>
+
+      </ion-item>
+            </div>
+            
+           </ion-card>
+  </div>
         <div *ngIf(showServiceOffered) class="offered-servicelist">
           <ion-item *ngFor = "let service of vendorList.serviceOffered">
             <ion-card *ngFor = "let category_list of service.category_lists; let i=index">
@@ -88,27 +271,31 @@
 			
 			</ion-item>
 			
-			
-			
-		
-	      	</ion-card>
+			</ion-card>
 
 		   	<ion-card *ngIf(!vendorList?.vendorDetails?.address)>
 				<ion-item style="color:red; font-size:15px;color:red;">"No Address Deatails To Display"</ion-item>		  
 	      	</ion-card>
       	</div>
+        <div *ngIf(showRecreationDetails) class="add-detalis">
+         <ion-card class="packagelist" *ngFor="let pack of vendorList.vendorRecreationDetails; let i=index" text-wrap>
+        <img [src]="url+pack?.banners" class="slide-image" width="100" height="150"/>
+         <ion-item style="padding-left:0px;" class="textlg">
+                    <ion-col> 
+                      <!--<div class="plan featured orangeColor">-->
+                      <h3>{{pack.name}}</h3> 
+                      </ion-col>
+                      <p class="service-conts"><span class="token-primaryss">Cost : </span><b><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{pack.service_cost - pack.percentage_cost}} <span *ngIf="pack.service_cost != 0">/&nbsp;
+                        <i class="fa fa-inr" aria-hidden="true"></i><strong>{{pack.service_cost}}</strong></span></b></p>
+
+                        <p class="service-conts"><span class="token-primaryss">Date : </span>{{pack?.start_date}} to {{pack?.end_date}}
+                        </p>
+                        <button class="instant-bt" (click)="viewDetails(pack.service_cost - pack.percentage_cost,pack.service_cost,location_id,availability,balanceRecreationService,pack.vendor_id,pack?.id,vendorList?.requestServices.category)">View Details</button>
+                      </ion-item>
+
+         </ion-card>
+        </div>
        <div *ngIf(showPackagesDetails) class="add-detalis">
-          <!-- <div *ngFor = "let packages of vendorList.packages"> -->
-         <!-- 
-        <ion-item text-wrap>
-        <p text-capitalize>Packeage Name:{{packages.package_name}}</p>
-        </ion-item>
-        <ion-item text-wrap>
-        <p>Packeage Cost:{{packages.package_cost}}</p>
-        </ion-item>
-        <ion-item text-wrap>
-        <p>{{packages.package_description}}</p>
-        </ion-item>-->
         <ion-card class="packagelist" *ngFor="let pack of vendorList.packages; let i=index" text-wrap>
             <!-- <ion-slides slidesPerView= ""> -->
           

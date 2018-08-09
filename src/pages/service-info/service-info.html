@@ -21,9 +21,9 @@
 </ion-header>
 
 <ion-content class="marg-info">
-  <div *ngIf="vendorList?.banners">
+  <div *ngIf="vendorList?.vendor_banners">
   <ion-slides class="slide_height" initialSlide="0" loop="true" pager="true" autoplay="3000">
-      <ion-slide *ngFor="let slide of vendorList.banners" style="height:200px;">
+      <ion-slide *ngFor="let slide of vendorList.vendor_banners" style="height:200px;">
         <img [src]="url+slide?.banner" class="slide-image" width="100" height="150"/>
       </ion-slide>  
   </ion-slides>  
@@ -31,16 +31,77 @@
 
 
 <ion-card class="message-boxs">
+  
+ <h2> Welcome to {{vendorList?.vendorDetails?.name}}</h2>
 
-         <h2> Welcome to {{vendorList?.vendorDetails?.name}}</h2>
+ <p *ngIf="serviceoffered != 'Recreation' && vendormoreinfo != 1" [innerHTML]="vendorList?.vendorDetails?.description"></p>
+  <ion-row *ngIf="serviceoffered == 'Recreation' && vendormoreinfo == 1">
+    <ion-col width-33>
+        <ion-thumbnail item-left>
+          <img [src]= "url+vendorList?.vendorDetails?.logo">
+        </ion-thumbnail>
+        </ion-col>
+      <ion-col width-67>
+     <p [innerHTML]="vendorList?.vendorDetails?.vendor_description"></p>
+     </ion-col>
+  </ion-row>
 
 
-   <p> {{vendorList?.vendorDetails?.description}} </p>
+ <p *ngIf="serviceoffered == 'Recreation' && vendormoreinfo != 1" [innerHTML]="vendorList?.vendorDetails?.itenary"></p>
+ <p *ngIf="serviceoffered == 'Recreation' && vendormoreinfo != 1" [innerHTML]="vendorList?.vendorDetails?.others"></p>
+ <p *ngIf="serviceoffered == 'Recreation' && vendormoreinfo != 1">{{vendorList?.vendorDetails?.extralabel1}}</p>
+ <p *ngIf="serviceoffered == 'Recreation' && vendormoreinfo != 1" [innerHTML]="vendorList?.vendorDetails?.extratext1"></p>
+ <p *ngIf="serviceoffered == 'Recreation' && vendormoreinfo != 1">{{vendorList?.vendorDetails?.extralabel2}}</p>
+ <p *ngIf="serviceoffered == 'Recreation' && vendormoreinfo != 1" [innerHTML]="vendorList?.vendorDetails?.extratext2"></p>
 
 </ion-card>
+<ion-fab bottom right *ngIf="serviceoffered == 'Recreation' && vendormoreinfo != 1">
+  <button ion-fab (click)="toggleSchedule()">Schedule</button>
+</ion-fab>
+  <div class="view-storedet" *ngIf="serviceoffered == 'Recreation' && vendormoreinfo == 1">
+  <ion-row>
+    <ion-col class="brder-cor">
+      <button ion-button item-left full class="btn-default-ser" (click)="modal()" 
+      (press)="pressmodel()">        
+        <b>Services Offered</b><!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
+      </button>
+                                     
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="brder-cor">
 
+      <button class="btn-default-ser" ion-button item-left full 
+      (click)="recreationServices()">
+        
+        <b>Recreation Services</b>
+      </button>
+     </ion-col>
+  </ion-row>
+<!--     <ion-row>
+    <ion-col class="brder-cor">
 
-  	<div class="view-storedet">
+      <button class="btn-default-ser" ion-button item-left full (click)="toggleContact()" (press)="pressContact()">
+        
+        <b>Contact Details</b>
+      </button>
+   
+     </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="brder-cor">
+
+      <button class="btn-default-ser" ion-button item-left full 
+      (click)="togglePackages()" (press)="pressPackages()">
+        
+        <b>Best Packages</b>
+      </button>
+    <br/>
+     </ion-col>
+  </ion-row> -->
+  </div>
+
+  	<div class="view-storedet" *ngIf="serviceoffered != 'Recreation'">
     <ion-row>
     <ion-col class="brder-cor">
       <button ion-button full class="btn-default-ser" (press)="pressRequestService()" 

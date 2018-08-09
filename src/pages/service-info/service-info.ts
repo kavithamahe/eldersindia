@@ -22,6 +22,10 @@ import { InAppBrowser } from 'ionic-native';
   providers:[ServiceModalPage]
 })
 export class ServiceInfoPage {
+  schedule_cost: number;
+  percentage_cost: any;
+  serviceoffered: any;
+  flagId: any;
 terms:any;
 
 showDetails : boolean;
@@ -57,6 +61,9 @@ one_time:any;
 dependentLists:any;
 serviceids:any;
 package_amount:any;
+balanceRecreationService:any;
+availability:any;
+vendormoreinfo:any;
 // @ViewChild('ghbslides') ghbslides: any;
 
 
@@ -68,13 +75,21 @@ package_amount:any;
       this.recurring = navParams.get("recurring");
       this.vendor_id = navParams.get("vendor").id;    
       this.vendor_name = navParams.get("vendor").name; 
+      this.availability = navParams.get("vendor").availability;
+      this.balanceRecreationService = navParams.get("vendor").balanceRecreationService;  
       this.vendor=navParams.get("vendor");
       this.service_cost = navParams.get("vendor").service_cost;
+      this.percentage_cost = navParams.get("vendor").percentage_cost;
+      this.schedule_cost = this.service_cost - this.percentage_cost;
+      console.log(this.schedule_cost);
       this.package_amount = navParams.get("package_amount");
       if(navParams.get("status") == "1"){
-         this.one_time = navParams.get("vendor").one_time;
+      this.flagId = navParams.get("flag");  
+      this.serviceoffered = navParams.get("serviceOffered");
+      this.one_time = navParams.get("vendor").one_time;
       this.recurring = navParams.get("vendor").recurring;
       }
+      this.vendormoreinfo = navParams.get("moreinfovendor");
       this.showDetails = false;
       this.showRequestService = false;
       this.sub_category = false ;
@@ -98,7 +113,7 @@ package_amount:any;
         storage.get('id').then((id) => { this.elderId=id;});
       }
       storage.get('token').then((token) => { this.token=token; 
-      let servieListData = {"vendor_id": this.vendor_id, "subCategoryId": this.subCategoryId, "flag": "1", "location_id": this.locationId};
+      let servieListData = {"vendor_id": this.vendor_id, "subCategoryId": this.subCategoryId, "flag": this.flagId, "location_id": this.locationId,"category_name":this.serviceoffered};
       this.loadServiceInformation(servieListData);
       })
     });
@@ -142,6 +157,10 @@ pressmodel(){
 modal(){
 
     let modal = this.modalCtrl.create(ServiceModalPage,{service:"service_offered",vendorList:this.vendorList});    
+    modal.present();
+}
+recreationServices(){
+     let modal = this.modalCtrl.create(ServiceModalPage,{service:"recreation_service",vendorList:this.vendorList,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService});    
     modal.present();
 }
 
@@ -188,10 +207,13 @@ modal(){
               })
 
   }
-   
-pressContact(){
-  this.toggleContact();
-}
+  toggleSchedule(){
+    let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService});    
+    modal.present();
+  }
+  pressContact(){
+    this.toggleContact();
+  }
   toggleContact(){
     let modal = this.modalCtrl.create(ServiceModalPage,{service:"contact",vendorList:this.vendorList});    
     modal.present();

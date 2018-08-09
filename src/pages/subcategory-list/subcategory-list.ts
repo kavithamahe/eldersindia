@@ -7,6 +7,7 @@ import { ModalContentPage } from '../modal-page/modal-page';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ServiceProvider } from '../../providers/service-provider';
 import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
+import { ServiceModalPage } from '../service-modal/service-modal';
 /*
   Generated class for the SubcategoryList page.
 
@@ -20,6 +21,10 @@ import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
 })
 export class SubcategoryListPage {
 
+  subcategory_id: any;
+  vendor_id: any;
+  flagId: any;
+  serviceOffered: any;
 	sublists:any= [];
   logoUrl: any;
   location_id:any;
@@ -39,6 +44,9 @@ export class SubcategoryListPage {
   lead_time:any='00:00';
   service_cost:any;
   paystatus:any;
+  vendorList:any=[];
+  availability:any;
+  balanceRecreationService:any;
   constructor( public loadingCtrl: LoadingController, public providerService: ServiceProvider, public navCtrl: NavController, public altCtrl:AlertController, public navParams: NavParams,public toastCtrl: ToastController,public modalCtrl: ModalController, public mp:ModalContentPage, public storage:Storage) {
     this.date = new Date().toISOString();
     this.paystatus = navParams.get("status");
@@ -49,7 +57,14 @@ export class SubcategoryListPage {
     else{
       this.location_id = navParams.get("location_id");
       this.service_id = navParams.get("service").id;
-      this.serviceTitle = navParams.get("service").name;   
+      this.serviceTitle = navParams.get("service").name;
+      this.serviceOffered =  navParams.get("serviceOffereds"); 
+      if(this.serviceOffered == "Recreation"){
+        this.flagId = "3";
+      }
+      else{
+        this.flagId = "1";
+      }
     }
     
       // this.userType = "elder";
@@ -67,18 +82,42 @@ export class SubcategoryListPage {
     });
 
     }
+    getVendorDetails(vendor_id,subcategory_id){
+       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+      let servieListData = {"vendor_id": vendor_id, "subCategoryId": this.service_id, "flag": this.flagId, "location_id": this.location_id,"category_name":this.serviceOffered};
+      this.providerService.webServiceCall(`getVendorDetails`,servieListData)
+      .subscribe(
+        data =>{
+                 this.vendorList = data.result.info;
+                 loading.dismiss();
+        },
+        err =>{
+          loading.dismiss();
+                 this.providerService.showErrorToast(err);
+              })
+      
+    }
      
 loadSubcategoryList(subCategory_id,location_id){
+ 
       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
-      this.subCategorydata = {subCategoryId : subCategory_id, flag:"1", locationId : location_id};
+      this.subCategorydata = {subCategoryId : subCategory_id, flag:this.flagId, locationId : location_id};
       // this.providerService.loadServiceProviderList(this.subCategorydata)
       this.providerService.webServiceCall(`getServiceProviderlist`,this.subCategorydata)
           .subscribe(data =>{
                             this.sublists = data.result.info;
                             this.dependentLists = data.result.info.dependentLists;
                             this.serviceData = data.result.info.requestServices;
+                            this.subcategory_id = this.serviceData.sub_category_id;
                             this.lead_time =data.result.info.lists[0].lead_time;
+                            this.vendor_id = data.result.info.lists[0].id;
+                            this.availability = data.result.info.lists[0].availability;
+                            this.balanceRecreationService = data.result.info.lists[0].balanceRecreationService;
+                            
+                            this.getVendorDetails(this.vendor_id,this.subcategory_id);
+
                             if((Object.keys(this.dependentLists).length<=0) && this.userType == 'sponsor')
                             {
                              this.showToaster("There is no dependent. You can not apply job!.");
@@ -91,9 +130,16 @@ loadSubcategoryList(subCategory_id,location_id){
                             loading.dismiss();
                             });
             }
-
+bookNow(schedule_cost,service_cost){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService});    
+ 
+}
+serviceInfomore(vendor){
+   let servieListData = {"vendor": vendor, "subCategoryId": this.service_id,status:"1" ,"flag":this.flagId, "location_id": this.location_id,"serviceOffered":this.serviceOffered,"moreinfovendor":"1"};
+    this.navCtrl.push(ServiceInfoPage,servieListData);
+}
   serviceInfo(vendor){
-    let servieListData = {"vendor": vendor, "subCategoryId": this.service_id,status:"1" ,"flag": "1", "location_id": this.location_id};
+    let servieListData = {"vendor": vendor, "subCategoryId": this.service_id,status:"1" ,"flag":this.flagId, "location_id": this.location_id,"serviceOffered":this.serviceOffered};
     this.navCtrl.push(ServiceInfoPage,servieListData);
   }
 pressinstant(vendorData){

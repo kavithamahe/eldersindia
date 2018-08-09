@@ -68,7 +68,7 @@ Url:any;
      location_id,lead_time,vendor_id,datCount,service_costs,servicediscountcostss,paymenttype,paymentflag,discounts,totalservice_costss,discountcost,
      afterdiscount_one_service,servicediscountcost_one_service,discountpartial,base_cost,servicediscost,getCustomerBalanceAmount,get_custome_amount,get_custome_deliever_amount,
      get_custome_service_cancel_amount,total_cost,total_service_cost){
-    let _request= {"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
+    let _request= {"Category_name":category,"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
 dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
 from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
 "quantity":quantity,"selected_dates":selected_dates,"service":service,"serviceType":
@@ -89,7 +89,7 @@ serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id
      to_date,to_time,package_id,preferred_time,quantity,
      location_id,lead_time,vendor_id,paymentflag,base_cost,getCustomerBalanceAmount,get_custome_amount,get_custome_deliever_amount,
      get_custome_service_cancel_amount,total_cost,total_service_cost){
-    let _request= {"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
+    let _request= {"Category_name":category,"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
 dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
 from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
 "quantity":quantity,"selected_dates":selected_dates,"service":service,"serviceType":

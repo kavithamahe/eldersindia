@@ -1,6 +1,28 @@
 page-service-modal {
 .offered-servicelist{ padding-left:0px;}
 .offered-servicelist .item-md{padding-left:0px;}
+.sel-label{border:1px solid #a8aaad;
+    border-radius:20px; margin-right:5px !important;}
+    .sel-labelcol{border:1px solid #a8aaad;
+        border-radius:20px; margin-right:5px !important;}
+.btn-warnings{background:#FE5722 !important; height:35px;  font-size:15px; color:#fff; border-radius:20px; width:40%;
+    font-weight:600;
+    float: left;margin-bottom:10px;
+    text-transform: capitalize;
+    font-family: 'Muli', sans-serif;}
+    .instant-bt{ float:right;height:35px; margin-bottom:10px;   background:#025FA9 !important;width:40%;font-size:15px;color:#fff;border-radius:20px;font-weight:600;text-transform:capitalize;font-family: 'Muli', sans-serif;}
+.instant-btn{background:#025FA9 !important; height:35px;  font-size:15px; color:#fff; border-radius:20px; width:40%;
+    font-weight:600;
+    float: left;margin-bottom:10px;
+    text-transform: capitalize;
+    font-family: 'Muli', sans-serif;}
+    .service-conts {
+        font-size:16px !important;
+        font-weight:400;
+        width: 100%; color:#666;font-family: 'Muli', sans-serif;letter-spacing:0.2px;
+    }
+    .service-conts i{margin-right:7px; font-size:15px; color:#333;}
+ 
 .offered-servicelist .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
 .offered-servicelist .item-md .item-inner .input-wrapper .label-md .card-md{box-shadow:none;}
 .offered-servicelist .item-md .item-inner .input-wrapper .label-md .card-md .sub .item-inner .input-wrapper .label-md{background:#025FA9; height:38px;  }
@@ -47,7 +69,7 @@ page-service-modal {
 .item-md.item-block .item-inner{padding-right:0px;}
 .service-lefttext{}
 .offered-servicelist-two{ width:100%; margin:0px;}
-
+.textlg strong{text-decoration: line-through;} 
 
 .contact-list{ padding:3px;background: -moz-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(245,254,255,1) 100%); /* ff3.6+ */
 background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(245,254,255,1))); /* safari4+,chrome */

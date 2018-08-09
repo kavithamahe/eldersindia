@@ -66,8 +66,10 @@ export class Modelpage1PagePage {
   servicediscountcost:any;
   discountcost:any;
   packageListsvalue:any;
+  requestService:any;
   constructor(public modalCtrl: ModalController,public nav: NavController,public navParams: NavParams, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {
+    this.requestService = navParams.get("requestService");
     this.serviceDatas =  navParams.get("serviceDatas");
     this.getCustomerBalanceAmount = this.serviceDatas.getCustomerBalanceAmount;
     this.get_custome_amount = this.serviceDatas.get_custome_amount;
@@ -143,14 +145,14 @@ export class Modelpage1PagePage {
       category:this.category,category_id:this.category_id,service:this.service,service_ids:this.service_ids,
       sub_category_id:this.sub_category_id,subcategory:this.subcategory,datCount:this.datCount,paymenttype:this.paymenttype,
       location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id,discounts:this.discounts,totalservice_costss:this.totalservice_costss,afterdiscount_one_service:this.afterdiscount_one_service,
-      paidPayment:this.paidPayment,servicediscountcost_one_service:this.servicediscountcost_one_service,discountpartial:this.discountpartial});
+      paidPayment:this.paidPayment,servicediscountcost_one_service:this.servicediscountcost_one_service,discountpartial:this.discountpartial,requestService:this.requestService});
     
      }
      else{
     this.nav.push(PaymentPage,{serviceData:this.serviceData,servicecost:this.servicecost,
       category:this.category,category_id:this.category_id,service:this.service,service_ids:this.service_ids,
       sub_category_id:this.sub_category_id,subcategory:this.subcategory,
-      location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id});
+      location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id,requestService:this.requestService});
    
      }
 }

@@ -18,6 +18,7 @@
     <p>Are You Sure Want To Continue This Payment.This Page Will Redirect To Razorpay Payment Gateway.</p>
 
 <button class="services-view" (click)="payno()">No</button>
-<button class="services" (click)="pay()">Yes</button>
+<button class="services" (click)="pay()" *ngIf="Recreation_service != 'Recreation'">Yes</button>
+<button class="services" *ngIf="Recreation_service == 'Recreation'" (click)="payRecreation()">Yes</button>
   </ion-card>
 </ion-content>

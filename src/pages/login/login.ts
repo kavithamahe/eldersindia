@@ -110,6 +110,7 @@ export class LoginPage {
          this.storage.set('id', loginuser['details']['id']);
          this.storage.set('name', loginuser['details']['name']);
          this.storage.set('lastname', loginuser['details']['lastname']);
+         this.storage.set('elder_age', loginuser['details']['elder_age']);
          this.storage.set('email', loginuser['details']['email']);
          this.storage.set('phone', loginuser['details']['phone']);
           this.storage.set('password',this.registerCredentials.password);

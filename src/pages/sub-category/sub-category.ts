@@ -19,6 +19,7 @@ import { PackageDetailPagePage } from '../../pages/package-detail/package-detail
 })
 export class SubCategoryPage {
 
+  serviceOffered: any;
 serviceLocation : any ="";
 subcategories:any =[];
 locations:any;
@@ -108,7 +109,8 @@ loadSubCategory(location){
   let loading = this.loadingCtrl.create({content: 'Please wait...!'});
   loading.present();
   this.subCategoryId = this.navPara.get("subcategory").id;
-  let serviceOfferedData = {"serviceOfferedId":this.subCategoryId,"locationId": location};
+  this.serviceOffered = this.navPara.get("subcategory").service;
+  let serviceOfferedData = {"serviceOfferedId":this.subCategoryId,"locationId": location,"serviceOffered":this.serviceOffered,"searchVal":""};
           
 	this.providerService.webServiceCall(`getVendorServiceSubCategory`,serviceOfferedData)
 	// this.providerService.loadVendorServiceSubCategory(serviceListId)
@@ -141,12 +143,13 @@ locationChanged(){
   }
 
 openSelected(sub_category_Data){
+  let serviceOfferedtype = this.navPara.get("subcategory").service;
 let location_id = this.serviceLocation;
     let sub_service = sub_category_Data;
     if(this.serviceLocation==""){
       this.providerService.showToast("Please select the location!");
     }else{
-    this.navCtrl.push(SubCategoryServicePage,{location_id,sub_service});  
+    this.navCtrl.push(SubCategoryServicePage,{location_id,sub_service,serviceOfferedtype});  
     }
   }
 
