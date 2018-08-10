@@ -57,6 +57,7 @@ final_payable_amount:any;
 paystatus:any;
 results:any;
 user_type:any;
+get_participants:any=[];
   constructor(public alertCtrl: AlertController,public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.paystatus = navParams.get("status");
     this.results = navParams.get("result");
@@ -86,6 +87,31 @@ user_type:any;
   }
   scrollToBottom(){
     this.content.scrollToBottom();
+  }
+  getparticipants(service){
+        this.serviceRequest.travelServiceMemberList(service.id).subscribe(
+     (serviceRequest) => {
+      this.get_participants=serviceRequest.result;
+      this.toggleDetails(service);
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+          this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Try again later");
+        }
+      }
+    ); 
+  }
+toggleDetails(service) {
+    if (service.showDetails) {
+        service.showDetails = false;
+    } else {
+        service.showDetails = true;
+    }
   }
   onInitstatus(){
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -124,17 +150,7 @@ user_type:any;
   }
      this.navCtrl.push(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":id,"payment_status":payment_status,"pending_service_amount":pending_service_amount,"prev_service_amount_balance":prev_service_amount_balance,"additional_service_cost":additional_service_cost});
   }
-  // paynow(sr_token,service_cost,service_id,additional_service_cost,payment_status){
-  //   if(additional_service_cost == "0"){
-  //     this.servicecost = service_cost;
-  //   }
-  //   else{
-  //     this.servicecost = additional_service_cost;
-  //   }
-  //   // let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":service_id,"payment_status":payment_status});
-  //   //   serviceModal.present();
-  //   this.navCtrl.push(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":service_id,"payment_status":payment_status});
-  // }
+
   public onInit()
   {
   	let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -284,10 +300,7 @@ user_type:any;
     
   }
   showConfirms(serviceId,service_cost,result,service_type,status,txnid,percentage,totalcostofrecurring,req_count,paid_amount,utilized_service_cost,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,final_payable_amount){
-console.log("jhgjg");
-console.log(cancelCharges);
-      // if(paid_amount>utilized_service_cost && service_remaing_cost > cancelCharges){
-      console.log("test");
+
        let prompt = this.alertCtrl.create({
       title: 'Cancel Service Request',
       // message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+paid_amount+" and Amount paid : <i class='fa fa-rupee'></i>"+utilized_service_cost+" and Refund on cancellation : <i class='fa fa-rupee'></i>"+cancelCharges+" and Refund on Cancellation : <i class='fa fa-rupee'></i>"+dedaction_service_cost+" ",
@@ -323,45 +336,7 @@ console.log(cancelCharges);
       ]
     });
     prompt.present();
-     
-     // }
-    //   else if(paid_amount<utilized_service_cost){
-    //       console.log("test");
-    //     let prompt = this.alertCtrl.create({
-    //   title: 'Cancel Service Request',
-    //   message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+service_remaing_cost+" and Refund on Cancellation : <i class='fa fa-rupee'></i>"+paid_amount+" ",
-    //   inputs: [
-    //     {
-    //       name: 'title',
-    //       placeholder: 'Comments'
-    //     },
-    //   ],
-    //   buttons: [
-    //     {
-    //       text: 'Cancel',
-    //       handler: data => {
-    //         //console.log('Cancel clicked');
-    //       }
-    //     },
-    //     {
-    //       text: 'Confirm',
-    //       handler: data => {
-            
-    //         //console.log(data.title);
-    //         if(data.title == ""){
-    //           this.showToaster("Please enter the reason");
-    //            return false;
-    //         }
-    //         else{
-    //         this.cancelRequests(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,service_remaing_cost,final_payable_amount);
-    //       }
-    //       }
-    //     }
-    //   ]
-    // });
-    // prompt.present();
-    
-    //   }
+
     
   }
   showOnetime(serviceId,service_cost,result,service_type,status,txnid,percentage,payment_status,deductionamount,servicecancelamount){

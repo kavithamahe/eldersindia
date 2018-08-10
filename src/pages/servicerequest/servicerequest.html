@@ -56,9 +56,6 @@
 	  <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="showConfirm(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid,service?.id,service?.service_cost,service?.recurring_request_id,service?.req_count)">
   <i class="fa fa-times" aria-hidden="true"></i>
   </a>
-  <!-- <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5) && service?.payment_method == 'full_payment' || (service?.payment_method == '' && service?.Paymentstatus=='captured'))" (click)="showConfirm(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid)">
-  <i class="fa fa-times" aria-hidden="true"></i>
-  </a> -->
  
 	</ion-col>
 
@@ -119,7 +116,9 @@
 	<p class="tocken-no"><i class="fa fa-id-card-o"></i> {{service?.sr_token}}</p>
 	</ion-col>
 	</ion-row>	
+
   <ion-row>
+
   <ion-col width-50 style="padding-left:0px;">
    <span>
     <p *ngIf="service.service_type =='Recurring'" (click)="viewRecurring(service?.sr_token)"><ion-badge>View Recurring Requests</ion-badge></p>
@@ -129,23 +128,40 @@
    <p *ngIf="service?.Paymentstatus!='captured' && service?.status !='3' && service?.payment_method==''  && service?.service_type=='One time' && service?.package_id==''"><ion-badge (click)="payOptionforpendingPayment(service.sr_token,service.pending_service_amount,service?.id,service?.additional_service_cost,service?.payment_status,service?.prev_service_amount_balance)">Pay Now</ion-badge>
    </p>
 
- <!--   <span ng-if="srList.Paymentstatus=='captured' && srList.payment_method=='' && srList.additional_service_cost!='0'&& srList.additional_service_cost_status=='0' && srList.status=='5' && srList.package_id==''"><button type="button" class="btn btn-sm btn-danger " data-toggle="modal"    ng-click="payOptionforAdditionalServiceCost(srList.additional_service_cost,srList.service_name,srList.id,srList.service_type,srList.sponsor_email)">Pay <i class="fa fa-rupee">{{srList.additional_service_cost}}</i></button>
-          </span>
-
-
-          <span ng-if="srList.Paymentstatus!='captured' && srList.status !='3' && srList.payment_method==''  && srList.service_type=='One time' && srList.package_id==''"><button type="button" class="btn btn-sm btn-danger " data-toggle="modal"    ng-click="payOptionforpendingPayment(srList.pending_service_amount,srList.service_name,srList.id,srList.additional_service_cost,srList.payment_status,srList.sponsor_email,srList.prev_service_amount_balance)">Pay 
-          <i class="fa fa-rupee">{{parseFloat(srList.pending_service_amount) + parseFloat(srList.additional_service_cost) - parseFloat(srList.prev_service_amount_balance) | number:2}}</i> </button></span>
- -->
  <div *ngIf="service.service_type !='Recurring'">
    <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost=='0' && service.additional_service_cost==0 || service.additional_service_cost_status == 'success' && service.service_type=='One time'"><ion-badge>Paid</ion-badge></p>
 
    <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost!='0' && service.additional_service_cost==0 && service.service_type=='One time'"><ion-badge>Paid</ion-badge></p>
+    <p *ngIf="service.sr_token[0]=='T'" (click)="getparticipants(service)"><ion-badge>Participants</ion-badge></p>
+    
+  
    </div>
   </span> 
   </ion-col>
   </ion-row>  
 	</ion-col>	
   </ion-row>
+  <ion-card *ngIf="service.showDetails">
+        <ion-row>
+        <ion-col width-50>
+        <ion-label>Name</ion-label>
+        </ion-col>
+        <ion-col width-50>
+         <ion-label>Age</ion-label>
+        </ion-col>
+        </ion-row>
+       <div *ngFor="let participants of get_participants">
+       <ion-row>
+           <ion-col width-50>
+          <p>{{participants.traveller_name}}</p>
+          </ion-col>
+           <ion-col width-50>
+          <p>{{participants.traveller_age}}</p>
+        </ion-col>
+        </ion-row>
+    </div>
+</ion-card>
+
   <ion-row>
   <ion-col *ngIf="service.pack_id!=''">
   <button class="make-rate" *ngIf="service.vendor_status == 5 && service.additional_service_cost==0" (click)="enableRemark(i)">

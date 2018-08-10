@@ -37,7 +37,7 @@
           <br>
           <ion-item>
               <button class="instant-bt" *ngIf="package_active_status == '1'" (click)="bookNow()">Book Now</button>
-              <button class="btn-warnings" *ngIf="package_active_status == '0'">Booking Closed</button>
+              <button class="instant-bt" *ngIf="package_active_status == '0'">Booking Closed</button>
             <button  class="instant-btn" (click)="contactNow()">Contact Now</button>
             </ion-item>
             <div *ngIf="booknow">
@@ -90,13 +90,13 @@
                         <ion-col width-60>
                             <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Name</ion-label>
                             <ion-item class="sel-label">
-                                <ion-input type="text" value="{{elderDetails.name}} {{elderDetails.last_name}}"></ion-input>
+                                <ion-input type="text" value="{{elderDetails.name}} {{elderDetails.last_name}}" disabled></ion-input>
                             </ion-item>
                         </ion-col>
                         <ion-col width-40>
                             <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Age</ion-label>
                             <ion-item class="sel-label">
-                              <ion-input type="text" value="{{elderDetails.age}}"></ion-input>
+                              <ion-input type="text" value="{{elderDetails.age}}" disabled></ion-input>
                             </ion-item>
                         </ion-col>
                     </ion-row>
@@ -107,13 +107,13 @@
                           <ion-col width-60>
                               <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Name</ion-label>
                               <ion-item class="sel-label">
-                                  <ion-input type="text" value="{{name}} {{lastname}}"></ion-input>
+                                  <ion-input type="text" value="{{name}} {{lastname}}" disabled></ion-input>
                               </ion-item>
                           </ion-col>
                           <ion-col width-40>
                               <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Age</ion-label>
                               <ion-item class="sel-label">
-                                  <ion-input type="text" value="{{elderage}}"></ion-input>
+                                  <ion-input type="text" value="{{elderage}}" disabled></ion-input>
                               </ion-item>
                           </ion-col>
                       </ion-row>
@@ -232,7 +232,7 @@
                           <ion-card *ngFor="let services of subcategory_list.services" >
 							<ion-row>
 								<ion-col width-80 ion-item (click)= "goToService(services)" text-wrap class="service-lefttext">
-								 <p> {{services.service}}</p> 
+								 <p>{{services.service}}</p> 
 								</ion-col>
 								<ion-col width-20 class="service-rightprice">
 								<small><i class="fa fa-inr" aria-hidden="true">{{services.service_cost}}</i></small>

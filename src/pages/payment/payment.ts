@@ -310,10 +310,6 @@ console.log("recurring time");
     this.dismiss();
   }
   payRecreation(){
-    console.log(this.udf2);
-    console.log(this.udf3);
-    console.log(this.Recreation_service);
-    console.log(this.service_name);
     var options = {
       description: this.serviceTitle,
       image: "assets/img/elders-logo.png",
@@ -340,11 +336,12 @@ console.log("recurring time");
       },
 
     };
-
+ let loading = this.loadingCtrl.create({content: 'Please wait...!'});
 
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
  var successCallback = function(payment_id) {
+  loading.present();
       // ajaxCallCheck(payment_id);
 
   var url  = "http://beta.eldersindia.com/api/razorPaymentResponse";
@@ -356,9 +353,10 @@ xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key")
 xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
 
 xmlhttp.onload = function () {
+  loading.dismiss();
   var users = JSON.parse(xmlhttp.responseText);
  var result=users.result;
-  navCtrl.setRoot(ServicerequestPage);
+  // navCtrl.setRoot(ServicerequestPage);
    nav.showToast(result);
 
   }
@@ -376,8 +374,7 @@ RazorpayCheckout.on('payment.cancel', cancelCallback);
 RazorpayCheckout.open(options, successCallback, cancelCallback);
   }
   pay() {
-    console.log(this.service_costss);
-    var options = {
+    var options = { 
       description: this.serviceTitle,
       image: "assets/img/elders-logo.png",
       currency: 'INR',
@@ -403,31 +400,13 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       },
 
     };
+ let loading = this.loadingCtrl.create({content: 'Please wait...!'});
 
-
-// var ajaxCallCheck = function(payment_id){
-
-  
-
-//   var url  = "http://beta.eldersindia.com/api/razorPaymentResponse";
-//    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-// xmlhttp.open("POST", url,true);
-
-// xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-// xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
-// xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"service_cost":  localStorage.getItem("service_costss")}));
-
-// xmlhttp.onload = function () {
-//   var users = JSON.parse(xmlhttp.responseText);
-//  var result=users.result;
-//  alert(result);
-
-//   }
-// }
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
  var successCallback = function(payment_id) {
-      // ajaxCallCheck(payment_id);
+
+  loading.present();
 
   var url  = "http://beta.eldersindia.com/api/razorPaymentResponse";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
@@ -438,9 +417,10 @@ xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key")
 xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
 
 xmlhttp.onload = function () {
+  loading.dismiss();
   var users = JSON.parse(xmlhttp.responseText);
  var result=users.result;
-  navCtrl.setRoot(ServicerequestPage);
+  // navCtrl.setRoot(ServicerequestPage);
    nav.showToast(result);
 
   }

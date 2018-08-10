@@ -182,8 +182,6 @@ vendorLists:any=[];
     this.contact = false;
   }
   bookDetails(){
-    console.log(this.noofpeople);
-    console.log(this.balanceRecreationService);
     if(this.noofpeople == undefined){
       this._provider.showToast("Please select the number of peoples");
    }

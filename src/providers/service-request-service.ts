@@ -50,6 +50,11 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
   }
+  travelServiceMemberList(id){
+    let _request = {};
+    return this.http.post(this.rootUrl+'travelServiceMemberList/' + id,_request,this.options)
+      .map(res => res.json());
+  }
 
    serviceRequestLists(sr_token,searchText,status,sort) 
   

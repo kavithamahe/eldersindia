@@ -18,6 +18,7 @@ button																			{font-family: 'Muli', sans-serif; }
 
 
 .list-md .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus)		{border-bottom-color:none !important;box-shadow:none  !important;}
+.text-input[disabled]{ opacity: 4;}
 .list-md .item-input.input-has-focus:last-child									{border-bottom-color:none !important;box-shadow:none  !important;}
 .list-md .item-input.input-has-focus:last-child									{border-bottom-color:#ffffff !important;box-shadow:none;}
 .list-md .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus)		{border-bottom-color:#ffffff !important;box-shadow:0 -1px 0 0 #ffffff inset !important;}
