@@ -22,20 +22,20 @@
 <ion-content class="content-intop" >
   <div *ngIf(showScheduleDetails) class="offered-servicelist">
       <ion-card class="contact-list">
-          <ion-item text-wrap>
+          <ion-item text-wrap *ngIf = "schedule">
               <ion-row>
                   <p class="service-conts"><span class="token-primaryss">Schedule : </span>{{vendorList?.requestServices.start_date}} to {{vendorList?.requestServices.end_date}}
                   </p>
                  </ion-row>
                  <ion-row class="textlg">
-                    <p class="service-conts"><span class="token-primaryss">Cost : </span><b><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{schedule_cost}} <span *ngIf="service_cost != 0">/&nbsp;
+                    <p class="service-conts"><span class="token-primaryss">Cost : </span><b><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{schedule_cost}} <span *ngIf="service_cost != schedule_cost">/&nbsp;
                         <i class="fa fa-inr" aria-hidden="true"></i><strong>{{service_cost}}</strong></span></b></p>
               
                    </ion-row>
        
           </ion-item>
           <br>
-          <ion-item>
+          <ion-item *ngIf = "schedule">
               <button class="instant-bt" *ngIf="package_active_status == '1'" (click)="bookNow()">Book Now</button>
               <button class="instant-bt" *ngIf="package_active_status == '0'">Booking Closed</button>
             <button  class="instant-btn" (click)="contactNow()">Contact Now</button>
@@ -169,7 +169,7 @@
           <button class="btn-warnings" color="primary" (click)="cancelpay()">Cancel</button>
       
         <button class="instant-bt" (click)="payNow(vendorList?.requestServices.category_id,
-        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,pack.vendor_id)">Pay Now</button>
+        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,pack.vendor_id,vendorList?.requestServices.start_date)">Pay Now</button>
         </ion-col>
         </ion-row>
      </ion-item>

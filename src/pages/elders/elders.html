@@ -137,8 +137,10 @@
             <ion-label class="sel-label">Emergency</ion-label>
               <ion-select class="select-brd" formControlName="emergency_name"  
               [(ngModel)]="emergency_name[i]" placeholder="Person">
-                     <ion-option  *ngFor="let person of Emergency_contact" value={{person.id}}>{{person.contact}}
+              <ion-option  *ngFor="let person of emergencies" value={{person.val}}>{{person.name}}
                      </ion-option>
+                 <!--     <ion-option  *ngFor="let person of Emergency_contact" value={{person.id}}>{{person.contact}}
+                     </ion-option> -->
               </ion-select>
             </ion-item>
              <small *ngIf="!authForm.controls.emergency_list.

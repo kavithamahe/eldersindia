@@ -265,24 +265,22 @@ mytype:string ="password";
  }
  
 imageURL:any;
-// public emergencies =  [
-//         {
-//             "name": "Police",
-//             "val" : "1"
-//           },
-//            {
-//             "name": "Ambulance",
-//             "val" : "2"
-//           },
-//            {
-//             "name": "Hospital",
-//             "val" : "3"
-//           },
-//            {
-//             "name": "Doctor",
-//             "val" : "4"
-//           }
-//          ];
+public emergencies =  [
+        {
+            "name": "Police",
+            "val" : "1"
+          },
+           {
+            "name": "Ambulance",
+            "val" : "2"
+          },
+           {
+            "name": "Hospital",
+            "val" : "3"
+          }
+            
+
+        ];
 
         onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;

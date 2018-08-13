@@ -146,6 +146,7 @@ pressinstant(vendorData){
   this.instantRequest(vendorData);
 }
   instantRequest(vendorData) {
+    console.log("instant");
     if(this.userType != "sponsor"){ 
       this.service_cost = vendorData.service_cost - vendorData.percentage_cost;
       let d = new Date();

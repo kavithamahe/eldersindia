@@ -71,8 +71,8 @@ rootUrl:any;
   viewServiceRequest(serviceRequestId) 
   {
   
-   let _request= {"id":serviceRequestId};
-    return this.http.post(this.rootUrl+'serviceRequestListById',_request,this.options)
+   let _request= {};
+    return this.http.post(this.rootUrl+'userServiceRquestDetails/' + serviceRequestId,_request,this.options)
       .map(res => res.json()); 
   }
   

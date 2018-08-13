@@ -38,6 +38,7 @@ export class ServiceModalPage {
   name: any;
   contact: boolean = false;
   booknow: boolean = false;
+  schedule: boolean = true;
   service_cost: string;
   schedule_cost: any;
   total_peoples:any=[];
@@ -160,9 +161,10 @@ vendorLists:any=[];
   }
   cancel(){
     this.booknow = false;
+    this.schedule = true;
   }
   cancelconfirmation(){
-    
+    this.elderDetails = "";
     this.booknownext = false;
     this.booknow = true;
   }
@@ -172,14 +174,17 @@ vendorLists:any=[];
   }
   cancelcontact(){
     this.contact = false;
+    this.schedule = true;
   }
   contactNow(){
     this.contact = true;
     this.booknow = false;
+    this.schedule = false;
   }
   bookNow(){
     this.booknow = true;
     this.contact = false;
+    this.schedule = false;
   }
   bookDetails(){
     if(this.noofpeople == undefined){
@@ -222,12 +227,40 @@ vendorLists:any=[];
 
   confirmationDetails(){
     let no_people = this.noofpeople;
-    //     if(this.elder_id == undefined || this.elder_name.length == 0 || this.elder_age == 0){
-    //   this._provider.showToast("Please Enter the above Details");
-    // else{
+    console.log(this.noofpeople);
+    if(this.noofpeople == 1 && this.user_type == 'sponsor'){
+        if(this.elder_id == undefined){
+      this._provider.showToast("Please Enter the above Details");
+    }
+    else{
         this.booknownext = false;
     this.confirmationDetail = true;
     this.total_cost = (this.schedule_cost) * this.noofpeople;
+    }
+    }
+    else if(this.noofpeople == 1 && this.user_type == 'elder'){
+        this.booknownext = false;
+    this.confirmationDetail = true;
+    this.total_cost = (this.schedule_cost) * this.noofpeople;
+
+ }
+    else{
+           if(this.elder_name.length == 0 || this.elder_age == 0){
+      this._provider.showToast("Please Enter the above Details");
+    }
+    else{
+        this.booknownext = false;
+    this.confirmationDetail = true;
+    this.total_cost = (this.schedule_cost) * this.noofpeople;
+    }
+    }
+    //     if(this.elder_id == undefined || this.elder_name.length == 0 || this.elder_age == 0){
+    //   this._provider.showToast("Please Enter the above Details");
+    // }
+    // else{
+    //     this.booknownext = false;
+    // this.confirmationDetail = true;
+    // this.total_cost = (this.schedule_cost) * this.noofpeople;
     // }
    }
   getelderDetails(elderid){
@@ -259,7 +292,7 @@ vendorLists:any=[];
     }
 
  }
- payNow(category_id,service_id,sub_category_id,category,service,subcategory,vendor_id){
+ payNow(category_id,service_id,sub_category_id,category,service,subcategory,vendor_id,start_date){
 
  let people = [];
  for(let i=0;i<this.total_peoples.length;i++) {
@@ -272,11 +305,11 @@ vendorLists:any=[];
    "paymentflag":1,"base_cost":this.service_cost,"vendor_id":vendor_id,"location_id":this.location_id,"category_id":category_id,
    "sub_category_id":sub_category_id,"service_id":service_id,"get_custome_amount":"0","total_cost":this.schedule_cost,
    "get_custome_service_cancel_amount":"0","get_custome_deliever_amount":"0","total_service_cost":this.schedule_cost,
-   "service_name":service,"dependentid":this.elder_id,"getCustomerBalanceAmount":"0","lead_time":"",
+   "service_name":service,"dependentid":this.elder_id,"getCustomerBalanceAmount":"0","lead_time":"02:00",
    "exclude_days":[],"Category_name":category,"category":category,
    "book":{"name":this.name,"mobile":this.phone,"mail":this.email,"book_peoples":this.peoplecount,
    people},
-   "datetime":"","preferred_time":"","paymentservice_id":1606,
+   "datetime":start_date,"preferred_time":"01:00 AM - 02:00 AM","paymentservice_id":1606,
    "paymentcost":this.total_cost};
    this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Recreation"});
    this.dismiss();

@@ -65,7 +65,7 @@ additional_service_cost:any;
     loader.present();
     this.serviceRequest.viewServiceRequest(this.serviceRequestId).subscribe(
      (viewServiceRequest) => {
-      this.viewServiceRequestInfo=viewServiceRequest;
+      this.viewServiceRequestInfo=viewServiceRequest.result;
       this.preffer= viewServiceRequest.enquiry_date;
       loader.dismiss();   
     },
