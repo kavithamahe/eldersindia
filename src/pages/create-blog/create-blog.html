@@ -68,7 +68,7 @@
   </ion-item>
  
 	 <ion-label stacked class="upimag">Tags</ion-label>
-   <ion-item class="featured-bro">
+   <ion-item class="featured-bro" text-wrap>
        <rl-tag-input class="rd-tags" [(ngModel)]="tagsModel" [addOnBlur]="false" [addOnEnter]="true"  [autocompleteItems]="tags" [autocomplete]="true" placeholder="Tags" (keyup)="getTagsList($event)" [ngModelOptions]="{standalone: true}">
         </rl-tag-input>
     </ion-item>

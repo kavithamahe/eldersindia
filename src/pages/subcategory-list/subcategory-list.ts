@@ -47,6 +47,8 @@ export class SubcategoryListPage {
   vendorList:any=[];
   availability:any;
   balanceRecreationService:any;
+  booking_status:any;
+  totalServicecost:any;
   constructor( public loadingCtrl: LoadingController, public providerService: ServiceProvider, public navCtrl: NavController, public altCtrl:AlertController, public navParams: NavParams,public toastCtrl: ToastController,public modalCtrl: ModalController, public mp:ModalContentPage, public storage:Storage) {
     this.date = new Date().toISOString();
     this.paystatus = navParams.get("status");
@@ -59,7 +61,7 @@ export class SubcategoryListPage {
       this.service_id = navParams.get("service").id;
       this.serviceTitle = navParams.get("service").name;
       this.serviceOffered =  navParams.get("serviceOffereds"); 
-      if(this.serviceOffered == "Recreation"){
+      if(this.serviceOffered == "Recreation" || this.serviceOffered == "Safety and security"){
         this.flagId = "3";
       }
       else{
@@ -90,6 +92,8 @@ export class SubcategoryListPage {
       .subscribe(
         data =>{
                  this.vendorList = data.result.info;
+                 this.booking_status=this.vendorList.requestServices.booking_status;
+                 console.log(this.booking_status);
                  loading.dismiss();
         },
         err =>{
@@ -108,6 +112,10 @@ loadSubcategoryList(subCategory_id,location_id){
       this.providerService.webServiceCall(`getServiceProviderlist`,this.subCategorydata)
           .subscribe(data =>{
                             this.sublists = data.result.info;
+                            var dataList=data.result.info.lists;
+        for(let data of dataList) {
+      this.totalServicecost = (data.service_cost - data.percentage_cost).toFixed(2);
+    }
                             this.dependentLists = data.result.info.dependentLists;
                             this.serviceData = data.result.info.requestServices;
                             this.subcategory_id = this.serviceData.sub_category_id;
@@ -130,9 +138,23 @@ loadSubcategoryList(subCategory_id,location_id){
                             loading.dismiss();
                             });
             }
-bookNow(schedule_cost,service_cost){
-  this.navCtrl.push(ServiceModalPage,{service:"Schedule",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService});    
- 
+bookNow(schedule_cost,service_cost,id){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNow":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id});    
+}
+emergencybook(schedule_cost,service_cost,id){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","emergencybook":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id});    
+}
+transportationdriver(schedule_cost,service_cost,id){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","transportationdriver":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id});    
+}
+transportationcab(schedule_cost,service_cost,id){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","transportationcab":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id});    
+}
+homemodify(schedule_cost,service_cost,id){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","homemodify":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id});    
+}
+preBook(schedule_cost,service_cost,id){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","preBook":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"1","booking_status":this.booking_status,"vendor_id":id});
 }
 serviceInfomore(vendor){
    let servieListData = {"vendor": vendor, "subCategoryId": this.service_id,status:"1" ,"flag":this.flagId, "location_id": this.location_id,"serviceOffered":this.serviceOffered,"moreinfovendor":"1"};
@@ -180,21 +202,21 @@ pressevent(modalPage,vendorData){
   openModal(modalPage,vendorData){
     if(modalPage == "instant"){
       this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,lead_time:this.lead_time,service:this.serviceTitle,vendor:vendorData});
+      this.modal.onDidDismiss(data =>{
+      if(data == "dismiss"){
+        console.log(" schedule request modal dismissed..!");
+      }else{
+       this.serviceRequestCall(data,vendorData.id);
+      }
+    })
+    
+    this.modal.present();
     }else{
       this.navCtrl.push(ModalContentPage,{dependentList:this.dependentLists,lead_time:this.lead_time,vendor:vendorData,location_id:this.location_id,serviceData:this.serviceData,serviceTitle:this.serviceTitle});
 
     }
     this.scheduleModal=modalPage;
-    // this.modal.onDidDismiss(data =>{
-    //   if(data == "dismiss"){
-    //     console.log(" schedule request modal dismissed..!");
-    //   }else{
-    //     console.log(data);
-    //    this.serviceRequestCall(data,vendorData.id);
-    //   }
-    // })
-    
-    // this.modal.present();
+
     if(modalPage != "instant"){
       //console.log("test venkatesh");
      // this.navCtrl.setRoot(ServicerequestPage);
@@ -219,7 +241,7 @@ pressevent(modalPage,vendorData){
       "subcategory":this.serviceData.subcategory, "durations":service_request_data.durations,"service_cost":service_request_data.service_cost,
        "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
        "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
-     "package_id":service_request_data.package_id,"instant":service_request_data.instant}
+     "package_id":service_request_data.package_id,"instant":service_request_data.instant,"paymentflag":1}
 
 
     this.providerService.webServiceCall(`serviceRequestSubmitbeforePayLater`,requestServiceData)
@@ -254,9 +276,9 @@ pressevent(modalPage,vendorData){
       "subcategory":this.serviceData.subcategory, "durations":service_request_data.durations,
        "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
        "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
-     "package_id":service_request_data.package_id,"instant":service_request_data.instant}
+     "package_id":service_request_data.package_id,"instant":service_request_data.instant,"paymentflag":1}
      
-    this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
+    this.providerService.webServiceCall(`serviceRequestSubmitbeforePayLater`,requestServiceData)
        .subscribe(
         data =>{
                  this.providerService.showToast(data.result);
@@ -402,7 +424,6 @@ export class InstantRequestModalPage {
    toast.present();
   }
   submit(){
-    console.log(this.dependentData);
     if(this.dependentData != ""){
     let dependent_model = this.dependentData;
     let d = new Date();

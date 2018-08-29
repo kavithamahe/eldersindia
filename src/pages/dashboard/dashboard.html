@@ -21,6 +21,16 @@
 <ion-content class="dashboard">
   <!--*ngIf="user_type=='elder'" -->
   <div *ngIf="user_type=='elder'">
+    <ion-grid class="dashboard">
+      <ion-row>
+        <ion-col width-50 class="jobs" text-center (click)="safeMe()" > <span class="dashboard-listed"> <i class="fa fa-ambulance fa-5x"></i>
+          <p>SAFE ME</p>
+          </span> </ion-col>
+        <ion-col width-50 class="police" text-center (click)="helpMe()"> <span class="dashboard-listed"> <i class="fa fa-users fa-5x"></i>
+          <p>HELP ME</p>
+          </span> </ion-col>
+      </ion-row>
+    </ion-grid>
      <ion-grid class="dashboard">
       <ion-row>
          <ion-col width-50 class="hooter" text-center (click)="hooter(hooterOn)"> <span class="dashboard-listed"> <i class="fa fa-bell-o fa-5x"></i>
@@ -28,6 +38,11 @@
           </span> </ion-col>
         <ion-col width-50 class="police" text-center (click)="makeCall(doctor)"> <span class="dashboard-listed"> <i class="fa fa-user-md fa-5x"></i>
           <p>FAMILY DOCTOR</p>
+          </span> </ion-col>
+           <ion-col width-50 class="call-sponsor" text-center (click)="makeCall(call_sponsor)"> <span class="dashboard-listed"> 
+        <img *ngIf = "sponsor_avatar == null" src="assets/img/download.jpg" style="width:50px; height:50px;"  />
+          <img *ngIf = "sponsor_avatar != null" [src]="url+sponsor_avatar" style="width:50px; height:50px;"  />
+          <p style="text-transform: uppercase;">{{sponsor_name}}</p>
           </span> </ion-col>
       </ion-row>
     </ion-grid>
@@ -49,11 +64,8 @@
           </span> </ion-col>
            <ion-col width-50 class="call-sponsor" text-center (click)="makeCall(call_sponsor)"> 
         <span class="dashboard-listed"> 
-          <img [src]="url+sponsor_avatar" style="width:50px; height:50px;"  />
-        <!-- <i class="fa fa-phone-square fa-5x"></i> -->
-      <!--    <ion-avatar>
-                <img [src]="url+sponsor_avatar" style="width:50px; height:50px;"  />
-          </ion-avatar> -->
+        <img *ngIf = "sponsor_avatar == null" src="assets/img/download.jpg" style="width:50px; height:50px;"  />
+          <img *ngIf = "sponsor_avatar != null" [src]="url+sponsor_avatar" style="width:50px; height:50px;"  />
           <p style="text-transform: uppercase;">{{sponsor_name}}</p>
           </span> </ion-col>
       </ion-row>

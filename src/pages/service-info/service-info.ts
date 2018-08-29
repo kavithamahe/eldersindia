@@ -64,6 +64,19 @@ package_amount:any;
 balanceRecreationService:any;
 availability:any;
 vendormoreinfo:any;
+booking_status:any;
+subcategory:any;
+category:any;
+package_active_status:any;
+businessFromDayName:any;
+businessToDayName:any;
+businessFromTime:any;
+businessToTime:any;
+businessLeadTime:any;
+package_validity:any;
+end_date:any;
+start_date:any;
+businessHoursOption:any;
 // @ViewChild('ghbslides') ghbslides: any;
 
 
@@ -81,11 +94,11 @@ vendormoreinfo:any;
       this.service_cost = navParams.get("vendor").service_cost;
       this.percentage_cost = navParams.get("vendor").percentage_cost;
       this.schedule_cost = this.service_cost - this.percentage_cost;
-      console.log(this.schedule_cost);
       this.package_amount = navParams.get("package_amount");
       if(navParams.get("status") == "1"){
       this.flagId = navParams.get("flag");  
       this.serviceoffered = navParams.get("serviceOffered");
+      console.log(this.serviceoffered);
       this.one_time = navParams.get("vendor").one_time;
       this.recurring = navParams.get("vendor").recurring;
       }
@@ -134,12 +147,25 @@ vendormoreinfo:any;
         .subscribe(
           data =>{
                    this.vendorList = data.result.info;
+                   this.booking_status=this.vendorList.requestServices.booking_status;
+                   this.package_active_status = this.vendorList.vendorDetails.package_active_status;
+                   this.businessFromDayName = this.vendorList.vendorDetails.businessFromDayName;
+                   this.businessToDayName = this.vendorList.vendorDetails.businessToDayName;
+                   this.businessFromTime = this.vendorList.vendorDetails.businessFromTime;
+                   this.businessToTime = this.vendorList.vendorDetails.businessToTime;
+                   this.businessLeadTime = this.vendorList.vendorDetails.businessLeadTime;
+                   this.businessHoursOption = this.vendorList.vendorDetails.businessHoursOption;
+                   this.package_validity = this.vendorList.vendorDetails.package_validity;
+                   this.subcategory = data.result.info.requestServices.subcategory;
+                   this.category = data.result.info.requestServices.category;
+                   this.start_date = data.result.info.requestServices.start_date;
+                   this.end_date = data.result.info.requestServices.end_date;
                    this.packageinfo = this.vendorList.packages;
                    this.serviceData = data.result.info.requestServices;
                    this.serviceids = this.serviceData.service_id;
                    this.website = this.vendorList.vendorDetails.website;
                    this.dependentLists = data.result.info.dependentLists;
-                   if(data.result.info.serviceOffered[0] != undefined){
+                   if(data.result.info.serviceOffered[0] != undefined && data.result.info.serviceOffered[0].category_lists[0] != undefined){
                        this.lead_time=data.result.info.serviceOffered[0].category_lists[0].service_sub_category_lists[0].lead_time;
                     }
                    loading.dismiss();
@@ -150,10 +176,38 @@ vendormoreinfo:any;
                 })
         
   }
-
+contactNow(){
+  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","contact":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+}
+bookNow(){
+  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","bookNow":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+}
+preBook(){
+   let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","preBook":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+}
+emergencybook(){
+  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","emergencybook":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+}
+transportationdriver(){
+   let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","transportationdriver":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+}
+transportationcab(){
+  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","transportationcab":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+}
+homemodify(){
+  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","homemodify":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+}
 pressmodel(){
   this.modal();
 }
+
 modal(){
 
     let modal = this.modalCtrl.create(ServiceModalPage,{service:"service_offered",vendorList:this.vendorList});    
@@ -208,7 +262,7 @@ recreationServices(){
 
   }
   toggleSchedule(){
-    let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService});    
+    let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
     modal.present();
   }
   pressContact(){

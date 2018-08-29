@@ -57,6 +57,7 @@ location_id:any;
   dismiss(){
     this.viewCtrl.dismiss();
   }
+ 
   getPackageselder(){
     if(this.paymenttype == undefined){
         this.blogListService.showToast("Please select above details");
@@ -79,9 +80,9 @@ location_id:any;
   })
     }
       else{
-     let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
+     this.navCtrl.push(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
       "package_amount":this.package_amount});
-      serviceModal.present();
+      this.dismiss();
     }
   }
   }

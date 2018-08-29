@@ -53,6 +53,18 @@ getCustomerserviceamount(){
     return this.http.post(this.rootUrl+'getCustomerserviceamount',_request,this.head)
       .map(res => res.json());
 }
+viewenquiryList(enquiry_id){
+   let _request= {};
+    return this.http.post(this.rootUrl+'useEnquiryRquestDetails/' + enquiry_id,_request,this.head)
+      .map(res => res.json());
+}
+ 
+ enquiryRequestScroll(nextPageURL,searchText,vendor,category)
+   {
+     let _request= {"info":{"list":true,"search":searchText,"status":"","vendor_id":vendor,"category_id":category}};
+    return this.http.post(nextPageURL,_request,this.head)
+      .map(res => res.json()); 
+   }
 getCustomerDeliverStatusAmount(){
    let _request= {};
     return this.http.post(this.rootUrl+'getCustomerDeliverStatusAmount',_request,this.head)
@@ -74,6 +86,7 @@ getCustomerBalanceAmountsSponsor(elder_id){
       .map(res => res.json());
 }
 getServicedependentlist(vendor_id){
+   console.log(this.head);
    let _request= {"vendor_id":vendor_id};
     return this.http.post(this.rootUrl+'getServicedependentlist',_request,this.head)
       .map(res => res.json());
@@ -104,7 +117,18 @@ getdiscountrecurringvalues(getpaidPayment){
     return this.http.post(this.rootUrl+'getdiscountrecurringvalues',_request,this.head)
       .map(res => res.json());
 }
-
+safemeUser(phone,lat,long,user_type_id,vendor_id,sponsor_id,uuid,head){
+ let _request= {"requestName":"SafeMe","mobileNumber":phone,"imei":uuid,"latitude":lat,"longitude":long,
+    "sponsor_id":sponsor_id, "elder_id":user_type_id,"vendor_id":vendor_id};
+    return this.http.post(this.rootUrl+'getHelpMeApiIntegration',_request,head)
+      .map(res => res.json());
+}
+helpmeUser(phone,lat,long,user_type_id,vendor_id,sponsor_id,uuid,head){
+ let _request= {"requestName":"HelpMe","mobileNumber":phone,"imei":uuid,"latitude":lat,"longitude":long,
+    "sponsor_id":sponsor_id, "elder_id":user_type_id,"vendor_id":vendor_id};
+    return this.http.post(this.rootUrl+'getHelpMeApiIntegration',_request,head)
+      .map(res => res.json());
+}
 webServiceCall(serviceName,bodyData){
       this.headers = new Headers();
       this.headers.append('Content-Type', 'application/json');

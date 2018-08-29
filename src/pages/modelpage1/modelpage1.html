@@ -85,7 +85,7 @@
    <p><i class="fa fa-rupee"></i>{{servicecost}}</p>
    </ion-col>
   </ion-row>
-  <p *ngIf="serviceType == 'One time'">This is a chronic requirement, do you want to avail it as a recurring service</p>
+  <p *ngIf="serviceType == 'One time' && recurringType == '1'">This is a chronic requirement, do you want to avail it as a recurring service</p>
 	  </ion-card>
 	  <ion-fab bottom right>
   <button ion-fab mini icon-only (click)="edit()" class="edit-bd">Edit</button>

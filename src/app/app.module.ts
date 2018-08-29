@@ -11,6 +11,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import { Network } from '@ionic-native/network';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { Device } from "@ionic-native/device";
 
 
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -71,6 +72,9 @@ import { EmojiPickerPage } from '../pages/emoji-picker/emoji-picker';
 import { RecurringPagePage } from '../pages/recurring/recurring';
 import { RecurringviewPagePage } from '../pages/recurringview/recurringview';
 import { RecurringcancelPagePage } from '../pages/recurringcancel/recurringcancel';
+import { EnquiriesPagePage } from '../pages/enquiries/enquiries';
+import { ViewenquiryPagePage } from '../pages/viewenquiry/viewenquiry';
+import { SafemePagePage } from '../pages/safeme/safeme';
 
 // Kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
@@ -176,7 +180,11 @@ import { ServiceProvider } from '../providers/service-provider';
     ServiceModalPage,
     TermsModalPage,
     PackagepaymentPagePage,
-    RemotemonitorPagePage
+    RemotemonitorPagePage,
+    EnquiriesPagePage,
+    ViewenquiryPagePage,
+    SafemePagePage,
+    VerifyotpPagePage
   ],
   imports: [
 
@@ -256,11 +264,15 @@ import { ServiceProvider } from '../providers/service-provider';
     ServiceModalPage,
     TermsModalPage,
     PackagepaymentPagePage,
-    RemotemonitorPagePage
+    RemotemonitorPagePage,
+    EnquiriesPagePage,
+    ViewenquiryPagePage,
+    SafemePagePage,
+    VerifyotpPagePage
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage,DatePipe] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage,DatePipe,Device] // Add GithubUsers provider
 
 })
 export class AppModule {}

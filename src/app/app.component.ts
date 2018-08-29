@@ -26,8 +26,8 @@ import { LogoutPage } from '../pages/logout/logout';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 import { RecurringPagePage } from '../pages/recurring/recurring';
 import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
-
-
+import { EnquiriesPagePage } from '../pages/enquiries/enquiries';
+import { SafemePagePage } from '../pages/safeme/safeme';
 
 // kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
@@ -59,6 +59,8 @@ declare var Connection: any;
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
+  sponsor_name:any;
+  sponsor_id:any;
   user_id:any='';
   reg_id:any;
   token:any='';
@@ -168,6 +170,9 @@ export class MyApp {
          this.storage.set('avatar', loginuser['details']['avatar']);
          this.storage.set('sponsor_avatar', loginuser['details']['sponsor_avatar']);
          this.storage.set('sponsor_name', loginuser['details']['sponsor_name']);
+         this.storage.set('safeme_status', loginuser['details']['safeme_status']);
+         this.storage.set('helpme_status', loginuser['details']['helpme_status']);
+         this.storage.set('vendor_id', loginuser['details']['vendor_id']);
          if(loginuser['details']['user_type']=='elder' && (loginuser.details.emergency_contacts.length>0))
          {
          if(loginuser.details.emergency_contacts[0].call_sponsor!='undefined')
@@ -192,6 +197,16 @@ export class MyApp {
          {
            this.hospital=loginuser.details.emergency_contacts[0].hospital;
          }
+          if(loginuser.details.emergency_contacts[0].sponsor_name!='undefined')
+         {
+           this.sponsor_name=loginuser.details.emergency_contacts[0].sponsor_name;
+         }
+          if(loginuser.details.emergency_contacts[0].sponsor_id!='undefined')
+         {
+           this.sponsor_id=loginuser.details.emergency_contacts[0].sponsor_id;
+         }
+         this.storage.set('sponsor_id', this.sponsor_id);
+         this.storage.set('sponsor_name', this.sponsor_name);
          this.storage.set('call_sponsor', this.callSponsor);
          this.storage.set('ambulance', this.ambulance);
          this.storage.set('police', this.police);
@@ -240,7 +255,9 @@ export class MyApp {
       
       this.pages.push(
                   { myIcon:'fa fa-tachometer', title: 'Dashboard', component: DashboardPage },
+                  { myIcon:'fa fa-th-list', title: 'ApiLog', component: SafemePagePage },
                   { myIcon:'fa fa-snowflake-o', title: 'Services', component: ServiceprovidersPage },
+                  { myIcon:'fa fa-file-text', title: 'Enquiries', component: EnquiriesPagePage },
                   { myIcon:'fa fa-cogs', title: 'My Service Requests', component: ServicerequestPage },
                   { myIcon:'fa fa-gift', title: 'Package Requests', component: PackageRequestPagePage },
                   { myIcon:'fa fa-gift', title: 'Recurring Requests', component: RecurringPagePage },
@@ -263,6 +280,7 @@ export class MyApp {
                   { myIcon:'fa fa-tachometer', title: 'Dashboard', component: DashboardPage },
                   { myIcon:'fa fa-users', title: 'Manage Dependents', component: ManagePage },
                   { myIcon:'fa fa-cog', title: 'Services', component: ServiceprovidersPage },
+                  { myIcon:'fa fa-file-text', title: 'Enquiries', component: EnquiriesPagePage },
                   { myIcon:'fa fa-cogs', title: 'My Service Requests', component: ServicerequestPage },
                   { myIcon:'fa fa-gift', title: 'Package Requests', component: PackageRequestPagePage },
                   { myIcon:'fa fa-gift', title: 'Recurring Requests', component: RecurringPagePage },

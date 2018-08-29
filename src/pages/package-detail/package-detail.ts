@@ -47,6 +47,19 @@ vendorLogo:any;
       });     
    });    
   }
+   ionViewWillEnter(){
+    console.log("kavi");
+       this.storage.ready().then(() => {     
+      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      this.storage.get('user_type').then((user_type) => { this.user_type=user_type;
+        console.log(this.imageUrl);}); 
+      this.storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
+      this.vendor_id = this.navParams.get("vendor_id");
+      this.location_id = this.navParams.get("location_id");
+      this.getVendorpackageDetail();
+      });     
+   }); 
+  }
   getVendorpackageDetail(){
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
@@ -74,8 +87,8 @@ vendorLogo:any;
     if(this.dependents.length == 1){
       this.dependentId = this.dependents[0].id;
     }
-    let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id,dependents:this.dependents,location_id:this.location_id,package_amount:package_amount,vendor_id:this.vendor_id,package_validity:package_validity});
-    modal.present();
+    this.navCtrl.push(GetpackagePagePage,{packID:id,dependents:this.dependents,location_id:this.location_id,package_amount:package_amount,vendor_id:this.vendor_id,package_validity:package_validity});
+  
   // openRequestPackage(id,service_quantity){
   //   if(this.dependents.length == 1){
   //     this.dependentId = this.dependents[0].id;

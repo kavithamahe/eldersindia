@@ -87,63 +87,53 @@
   <ion-row>   
     <ion-col width-100 class="child_menu">
   <span>Service cost</span>
-   <p>{{viewServiceRequestInfo?.service_cost}}</p>
+   <p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.service_cost}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>   
+   <ion-row *ngIf = "viewServiceRequestInfo?.paid_amount != null">   
     <ion-col width-100 class="child_menu">
-  <span>Additional service cost</span>
-   <p>{{viewServiceRequestInfo?.additional_service_cost}}</p>
+  <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.paid_amount}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>   
-    <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.payUmny_payment_status!='captured')">
-  <span>Payment Status</span>
-   <p>Not Paid</p>
-   </ion-col>
-  </ion-row>
-  <ion-row>   
-    <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.payUmny_payment_status =='captured')">
-  <span>Payment Status</span>
-   <p>Paid</p>
-   </ion-col>
-  </ion-row>
-  <ion-row *ngIf="(viewServiceRequestInfo?.enquiry_date!='0000-00-00')">  
+  <ion-row *ngIf = "viewServiceRequestInfo?.sub_category_name == 'Wearables'">   
     <ion-col width-100 class="child_menu">
-  <span>Preferred date</span>
-   <p>{{viewServiceRequestInfo?.enquiry_date}}</p>
+  <span>Pre-book Cost</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.paid_amount}}</p>
    </ion-col>
   </ion-row>
-  <ion-row *ngIf="(viewServiceRequestInfo?.preferred_time!= '')">   
+  <ion-row *ngIf = "viewServiceRequestInfo?.additional_service_cost != null">   
     <ion-col width-100 class="child_menu">
-  <span>Preferred time</span>
-   <p>{{viewServiceRequestInfo?.preferred_time}}</p>
+  <span>Additional service cost</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.additional_service_cost}}</p>
    </ion-col>
   </ion-row>
+ 
   <ion-row *ngIf="viewServiceRequestInfo?.comments != null ">   
     <ion-col width-100 class="child_menu">
   <span>Comments</span>
    <p>{{viewServiceRequestInfo?.comments}}</p>
    </ion-col>
   </ion-row>
-  <!--  <ion-row>   
-    <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.preferred_time!='0000-00-00 00:00:00')">
-  <span>Preferred time</span>
-   <p>{{viewServiceRequestInfo?.preferred_time}}</p>
+  <div *ngIf="viewServiceRequestInfo?.sub_category_name == 'Emergency Medical and Non-medical' ">
+   <ion-row>
+   <ion-col width-100 class="child_menu">
+  <span>Emergency Contact Details</span>
+  
    </ion-col>
-  </ion-row> -->
-  <!-- <ion-row> 
-    <ion-col width-100 class="child_menu">
-	<span>Remarks</span>
-   <p>{{viewServiceRequestInfo?.remarks}}</p>
+</ion-row>
+<ion-row>
+      <ion-col width-50 class="child_menu">
+  <span>Person</span><p></p>
+   </ion-col>
+   <ion-col width-50 class="child_menu">
+  <span>Number</span><p></p>
+   </ion-col>
+    </ion-row>
+    <ion-row *ngFor = "let contact of emergencyContact"> 
+    <ion-col width-50><p>{{contact.Name}}</p>
+   </ion-col>
+     <ion-col width-50><p>{{contact.Mobile}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>
-   
-    <ion-col width-100 class="child_menu">
-	<span>Service Provider Comments</span>
-   <p>{{viewServiceRequestInfo?.comments}}</p>
-   </ion-col>
-  </ion-row> -->
+  </div>
+
 </ion-card>
 </ion-content>

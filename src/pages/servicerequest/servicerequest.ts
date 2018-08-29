@@ -227,23 +227,21 @@ toggleDetails(service) {
       }
     );
   }
-    showConfirm(serviceId,hours,service_id,sub_category_id,status,servicediscountcost_one_service,service_type,txnid,id,service_cost,recurring_request_id,req_count){
+    showConfirm(serviceId,hours,service_id,sub_category_id,status,servicediscountcost_one_service,service_type,txnid,id,service_cost,recurring_request_id,req_count,package_id,Paymentstatus,paid_amount,sr_token){
       if(service_type == "Recurring"){
         this.totalcostofrecurring = service_cost * req_count;
+        // this.totalcostofrecurring = paid_amount;
     this.serviceRequest.getcancelRecurringPolicyConfig(hours,service_id,sub_category_id,status,service_type,recurring_request_id,req_count,id).subscribe(
      (cancelRequest) => {
       this.result = cancelRequest.result;
       this.percentage = this.result.percentage;
       this.paid_amount = this.result.paid_amount;
-      console.log(this.paid_amount);
       this.service_remaing_cost = this.result.service_remaing_cost;
       this.utilized_service_cost = this.result.utilized_service_cost;
        if(this.paid_amount > this.utilized_service_cost){
           this.cancelCharges = service_cost * (this.percentage/100);
-          console.log(this.cancelCharges);
           if(this.service_remaing_cost > this.cancelCharges){
            this.dedaction_service_cost = this.service_remaing_cost - this.cancelCharges;
-           console.log(this.dedaction_service_cost);
           }else{
             
           }
@@ -263,7 +261,7 @@ toggleDetails(service) {
       // this.dedaction_service_cost = servicediscountcost_one_service - this.deduction_amount;
       // var number = parseFloat(this.dedaction_service_cost).toFixed(2);
 
-      this.showConfirms(serviceId,service_cost,this.result,service_type,status,txnid,this.percentage,this.totalcostofrecurring,req_count,this.paid_amount,this.utilized_service_cost,recurring_request_id,this.cancelCharges,this.dedaction_service_cost,this.service_remaing_cost,this.final_payable_amount); 
+      this.showConfirms(serviceId,service_cost,this.result,service_type,status,txnid,this.percentage,this.totalcostofrecurring,req_count,this.paid_amount,this.utilized_service_cost,recurring_request_id,this.cancelCharges,this.dedaction_service_cost,this.service_remaing_cost,this.final_payable_amount,package_id,sr_token); 
     },
     (err) => { 
         if(err.status===401)
@@ -282,9 +280,9 @@ toggleDetails(service) {
       this.result = cancelRequest.result;  
       this.percentage = this.result.percentage;
       this.payment_status = this.result.payment_status;
-      this.deductionamount = service_cost * this.percentage/100;
-      this.servicecancelamount = service_cost - this.deductionamount;
-      this.showOnetime(serviceId,service_cost,this.result,service_type,status,txnid,this.percentage,this.payment_status,this.deductionamount,this.servicecancelamount); 
+      this.deductionamount = paid_amount * this.percentage/100;
+      this.servicecancelamount = paid_amount - this.deductionamount;
+      this.showOnetime(serviceId,service_cost,this.result,service_type,status,txnid,this.percentage,this.payment_status,this.deductionamount,this.servicecancelamount,package_id,Paymentstatus,paid_amount,sr_token); 
     },
     (err) => { 
         if(err.status===401)
@@ -299,12 +297,12 @@ toggleDetails(service) {
   }
     
   }
-  showConfirms(serviceId,service_cost,result,service_type,status,txnid,percentage,totalcostofrecurring,req_count,paid_amount,utilized_service_cost,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,final_payable_amount){
+  showConfirms(serviceId,service_cost,result,service_type,status,txnid,percentage,totalcostofrecurring,req_count,paid_amount,utilized_service_cost,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,final_payable_amount,package_id,sr_token){
 
        let prompt = this.alertCtrl.create({
-      title: 'Cancel Service Request',
+      title: sr_token,
       // message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+paid_amount+" and Amount paid : <i class='fa fa-rupee'></i>"+utilized_service_cost+" and Refund on cancellation : <i class='fa fa-rupee'></i>"+cancelCharges+" and Refund on Cancellation : <i class='fa fa-rupee'></i>"+dedaction_service_cost+" ",
-      message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+utilized_service_cost+"",
+      message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+utilized_service_cost+" and service cancellation percentage : "+ percentage + "% ",
 
       inputs: [
         {
@@ -329,7 +327,7 @@ toggleDetails(service) {
                return false;
             }
             else{
-           this.cancelRequest(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost);
+           this.cancelRequest(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id);
           }
           }
         }
@@ -339,16 +337,16 @@ toggleDetails(service) {
 
     
   }
-  showOnetime(serviceId,service_cost,result,service_type,status,txnid,percentage,payment_status,deductionamount,servicecancelamount){
+  showOnetime(serviceId,service_cost,result,service_type,status,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id,Paymentstatus,paid_amount,sr_token){
    if(percentage == "hours expired"){
       percentage = "0";
       deductionamount = "0";
       servicecancelamount = service_cost;
    }
-  
-      let prompt = this.alertCtrl.create({
-      title: 'Cancel Service Request',
-      message: "Service cost :  <i class='fa fa-rupee'></i>"+ service_cost +"and Service cancellation percentage :"+ percentage +" % and Service cancellation deduction : <i class='fa fa-rupee'></i>"+ deductionamount+" and Service refund amount : <i class='fa fa-rupee'></i>"+ servicecancelamount+" ",
+  if(Paymentstatus == null){
+        let prompt = this.alertCtrl.create({
+      title: sr_token,
+      message: "Service cost :  <i class='fa fa-rupee'></i>"+ service_cost +"<br> and Service cancellation percentage :"+ percentage +" % ",
       inputs: [
         {
           name: 'title',
@@ -372,13 +370,50 @@ toggleDetails(service) {
                return false;
             }
             else{
-            this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount);
+            this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id);
           }
           }
         }
       ]
     });
     prompt.present();
+  }
+  else{
+      let prompt = this.alertCtrl.create({
+      title: sr_token,
+      message: "Service cost :  <i class='fa fa-rupee'></i>"+ paid_amount +"<br> and Service cancellation percentage :"+ percentage +" % and Service cancellation deduction : <i class='fa fa-rupee'></i>"+ deductionamount+" and Service refund amount : <i class='fa fa-rupee'></i>"+ servicecancelamount+" ",
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Comments'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            //console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Confirm',
+          handler: data => {
+            
+            //console.log(data.title);
+            if(data.title == ""){
+              this.showToaster("Please enter the reason");
+               return false;
+            }
+            else{
+            this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id);
+          }
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+    
      // }
      
   }
@@ -404,11 +439,11 @@ toggleDetails(service) {
         loader.dismiss();
       });
  }
-  public cancelRequest(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost)
+  public cancelRequest(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id)
   {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.serviceRequest.cancelRequest(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost).subscribe(
+    this.serviceRequest.cancelRequest(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id).subscribe(
      (cancelRequest) => {
       this.getRemarksList=cancelRequest.result;   
       this.showToaster(cancelRequest.result); 
@@ -427,11 +462,11 @@ toggleDetails(service) {
         loader.dismiss();
       });
   }
-  public razorPaymentResponseforCancel(title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount)
+  public razorPaymentResponseforCancel(title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id)
   {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.serviceRequest.razorPaymentResponseforCancel(title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount).subscribe(
+    this.serviceRequest.razorPaymentResponseforCancel(title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id).subscribe(
      (cancelRequest) => {
       this.getRemarksList=cancelRequest.result;   
       this.showToaster(cancelRequest.result); 

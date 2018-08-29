@@ -1,9 +1,18 @@
 import { Component  } from '@angular/core';
-import { NavController,ViewController, NavParams, ModalController,AlertController  } from 'ionic-angular';
+import { NavController,ViewController, NavParams, ModalController,AlertController,LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import {
+  FormBuilder,
+  Validators,
+  FormGroup,
+  FormControl,
+  FormArray
+} from "@angular/forms";
+import moment from 'moment';
+import { TermsModalPage } from '../../pages/terms-modal/terms-modal';
 import { GetpackagePagePage } from  '../../pages/getpackage/getpackage';
 import { SubcategoryListPage } from '../subcategory-list/subcategory-list';
-import { ServiceProvider } from '../../providers/service-provider'
+import { ServiceProvider } from '../../providers/service-provider';
 import { PaymentPage } from '../payment/payment';
 
 /*
@@ -17,17 +26,20 @@ import { PaymentPage } from '../payment/payment';
   templateUrl: 'service-modal.html'
 })
 export class ServiceModalPage {
+  form: FormGroup;
+  emergency: any = [];
   noofpeople: number;
   lastname: any;
   elderage: any;
   elder_age :any=[];
   elder_name: any=[];
   elder_id: any;
-  total_cost: number;
+  total_cost: any;
   peoplecount: any;
-  confirmationDetail: boolean;
+  confirmationDetail: boolean= false;
   elderDetails: any =[];
   booknownext: boolean = false;
+  safeandsecurity:boolean = false;
   eldershow: boolean = false;
   label: any[];
   email: any;
@@ -38,6 +50,7 @@ export class ServiceModalPage {
   name: any;
   contact: boolean = false;
   booknow: boolean = false;
+  safeConfirm:boolean = false;
   schedule: boolean = true;
   service_cost: string;
   schedule_cost: any;
@@ -60,48 +73,150 @@ availability:any;
 balanceRecreationService:any;
 url:any;
 vendorLists:any=[];
-  constructor(public storage:Storage,public alertCtrl: AlertController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams) {
-   
+pre_book_percentage:any;
+booking_status:any;
+call_sponsor:any;
+sponsor_name:any;
+emergencyhelp:boolean = false;
+emergencyConfirm:boolean = false;
+homeschedule:boolean = false;
+user_id:any;
+emergency_name:any=[];
+emergency_mobile:any=[];
+date:any;
+confirmhomemodify:boolean = false;
+automation_time:any;
+transportdriver:boolean = false;
+confirmdriver:boolean = false;
+hours:any;
+pickup:any;
+transportcab:boolean = false;
+confirmcab:any;
+typeofservice:any;
+weelchair:any;
+drop:any;
+totalcosts:any;
+terms:any;
+checkTerms:any= false;
+  constructor(public storage:Storage,public alertCtrl: AlertController,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
+    public formBuilder: FormBuilder) {
+    this.date = new Date().toISOString();
+   this.form = this.formBuilder.group({
+    emergency: this.formBuilder.array([this.createUser()]),
+   })
     this.vendorList = navParams.get("vendorList");
     storage.get('name').then((name) => { this.name=name; })
     storage.get('lastname').then((lastname) => { this.lastname=lastname; })
     storage.get('elder_age').then((elder_age) => { this.elderage=elder_age; })
     storage.get('phone').then((phone) => { this.phone=phone; })
     storage.get('email').then((email) => { this.email=email; })
-    storage.get('user_type').then((user_type) => { this.user_type=user_type; 
-      console.log(this.user_type); })
+    storage.get('sponsor_name').then((sponsor_name) => { this.sponsor_name=sponsor_name; })
+    storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor; })
+    storage.get('user_type').then((user_type) => { this.user_type=user_type; })
+    storage.get('user_type_id').then((user_type_id) => { this.user_id=user_type_id;})
      storage.get('imageurl').then((imageurl) => { this.url=imageurl;});
  
   	if(navParams.get("service") == "contact"){
   		this.showContactDetails = true;	
-  		this.title = this.vendorList.vendorDetails.name+" - Contact Details";
+  		this.title = this.vendorList.vendorDetails.service+" - Contact Details";
   	}
     else if(navParams.get("service") == "packages"){
       this.showPackagesDetails = true; 
-      this.title = this.vendorList.vendorDetails.name+" - Best Packages"; 
+      this.title = this.vendorList.vendorDetails.service+" - Best Packages"; 
       this.location_id = navParams.get("location_id");
     }
     else if(navParams.get("service") == "Schedule"){
+      if(navParams.get("contact") == "1"){
+        // this.showScheduleDetails = false;
+        this.contact = true;
+        this.booknow = false;
+        this.schedule = false;
+      }
+      if(navParams.get("preBook") == "1"){
+         this.showScheduleDetails = false;
+         storage.get('user_type').then((user_type) => { this.user_type=user_type; 
+     if(this.user_type == 'sponsor'){
+           this.safeandsecurity = true;
+           this.schedule = false;
+           this.showScheduleDetails = false;
+        }
+       else{
+        this.safeConfirm = true;
+        this.schedule = false;
+        this.showScheduleDetails = false;
+       }
+     })
+      }
+       if(navParams.get("emergencybook") == "1"){
+          this.emergencyhelp = true;
+          this.contact = false;
+          this.schedule = false;
+       }
+         if(navParams.get("transportationdriver") == "1"){
+          this.transportdriver = true;
+          this.contact = false;
+          this.schedule = false;
+       }
+        if(navParams.get("transportationcab") == "1"){
+          this.transportcab = true;
+          this.contact = false;
+          this.schedule = false;
+       }
+      if(navParams.get("homemodify") == "1"){
+          this.homeschedule = true;
+            this.contact = false;
+            this.schedule = false;
+       }
+       if(navParams.get("bookNow") == "1"){
+         this.booknow = true;
+          this.contact = false;
+          this.schedule = false;
+       }
+
       this.showScheduleDetails = true;	
       this.schedule_cost = navParams.get("schedule_cost");
       this.service_cost = navParams.get("service_cost");
       this.location_id = navParams.get("location_id");
       this.availability = navParams.get("availability");
       this.balanceRecreationService = navParams.get("balanceRecreationService");
-      this.title = this.vendorList.vendorDetails.name+" - Schedule";
+      this.title = this.vendorList.vendorDetails.service;
       this.package_active_status = this.vendorList.vendorDetails.package_active_status;
-      console.log(this.package_active_status);
+      this.pre_book_percentage = this.vendorList.requestServices.pre_book_percentage;
+      this.vendor_id=navParams.get("vendor_id");
+      this.booking_status = navParams.get("booking_status");
+      if(navParams.get("safecategory") == "1"){
+        this.showScheduleDetails = false;
+         storage.get('user_type').then((user_type) => { this.user_type=user_type; 
+       if(this.user_type == 'sponsor'){
+           this.safeandsecurity = true;
+        }
+       else{
+        this.safeConfirm = true;
+       }
+        })
+       
+      }
+      //  if(navParams.get("safecategory") == "2"){
+      //   this.showScheduleDetails = false;
+      //    storage.get('user_type').then((user_type) => { this.user_type=user_type; 
+      //  if(this.user_type == 'sponsor'){
+      //      this.emergencyhelp = true;
+      //   }
+      //   })
+       
+      // }
+       
     }
     else if(navParams.get("service") == "recreation_service"){
         this.showRecreationDetails = true; 
-      this.title = this.vendorList.vendorDetails.name+" - Recreation Services"; 
+      this.title = this.vendorList.vendorDetails.service+" - Recreation Services"; 
       this.location_id = navParams.get("location_id");
       this.availability = navParams.get("availability");
       this.balanceRecreationService = navParams.get("balanceRecreationService");
     }
     else{
   		this.showServiceOffered = true;
-  		this.title = this.vendorList.vendorDetails.name+" - Service Offered";
+  		this.title = this.vendorList.vendorDetails.service+" - Service Offered";
   	}
     
   	
@@ -112,13 +227,18 @@ vendorLists:any=[];
       this._provider.showToast("Please Enter the queries");
     }
     else{
+       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
              let service_data = {"data":{"category_id":category_id,"mobile":this.phone,"name":this.name,"query":this.queries,"service_id":service_id,"sub_category_id":sub_category_id,"vendor_id":vendor_id}};
     this._provider.webServiceCall(`packageContactNow`,service_data)
     .subscribe(
         data =>{
                  this._provider.showToast(data.result);
+                 this.navCtrl.pop();
+                 loading.dismiss();
                 },
         err =>{
+          loading.dismiss();
           if(err.status===400)
         {
           this._provider.showToast(JSON.parse(err._body).error);
@@ -144,9 +264,7 @@ vendorLists:any=[];
           err =>{
                    this._provider.showErrorToast(err);
                 })
-         
- 
-
+    
   }
   selectPeople(people){
     this.peoplecount = people;
@@ -156,12 +274,214 @@ vendorLists:any=[];
   }
   this.total_peoples =this.label;
   }
+
+  addUser(): void {
+    this.emergency = this.form.get("emergency") as FormArray;
+    this.emergency.push(this.createUser());
+  }
+    createUser(): FormGroup {
+    return this.formBuilder.group({
+      name: "",
+      mobile: ""
+    });
+  }
+    removeUser(index: number) {
+        const control = <FormArray>this.form.controls['emergency'];
+        control.removeAt(index);
+         this.emergency_name.splice(index,1);
+         this.emergency_mobile.splice(index,1);
+  }
+  preBook(){
+    this.showScheduleDetails = false;
+     if(this.user_type == 'sponsor'){
+           this.safeandsecurity = true;
+        }
+       else{
+        this.safeConfirm = true;
+       }
+  }
+  backcancel(){
+      if(this.user_type == 'sponsor'){
+     this.safeandsecurity = true;
+     this.safeConfirm = false;
+    }
+    else{
+    this.navCtrl.pop();
+  }
+  }
+  emergencybook(){
+    this.emergencyhelp = true;
+    this.contact = false;
+    this.schedule = false;
+  }
+  backemergency(){
+    this.emergencyhelp = true;
+    this.emergencyConfirm = false;
+
+  }
+  cancelemergency(){
+    this.navCtrl.pop();
+  }
+  emergencyDetails(){
+     if(this.user_type == 'sponsor' && this.elder_id == undefined){
+      this._provider.showToast("Please select the dependent");
+    }
+    else{
+      let emergencyDetailsname = this.emergency_name.filter(item => item == undefined);
+      let emergencyDetailsmobile = this.emergency_mobile.filter(item => item == undefined);
+      if(emergencyDetailsname.length > 1 || emergencyDetailsmobile.length > 1){
+        this._provider.showToast("Please enter all the details");
+      }
+      else{
+         this.emergencyConfirm = true;
+        this.emergencyhelp = false;
+      }
+        
+  }
+  }
+  cancelsafe(){
+    this.navCtrl.pop();
+  }
+  sendsafe(){
+     if(this.user_type == 'sponsor' && this.elder_id == undefined){
+      this._provider.showToast("Please select the dependent");
+    }
+    else{
+     this.safeConfirm = true;
+     this.safeandsecurity = false;
+   }
+  }
+  homemodify(){
+    this.homeschedule = true;
+    this.contact = false;
+    this.schedule = false;
+  }
+  cancelhomemodify(){
+    this.navCtrl.pop();
+  }
+  homemodifynext(){
+    console.log(this.checkTerms);
+    if(this.user_type == 'sponsor'){
+      if(this.elder_id != undefined && this.date != undefined && this.automation_time != undefined && this.checkTerms == false){
+        this.confirmhomemodify = true;
+        this.homeschedule = false;
+      }
+      else{
+       this._provider.showToast("Please Enter the above Details");
+      }
+    }
+    else{
+      if(this.date != undefined && this.automation_time != undefined && this.checkTerms == false){
+        this.confirmhomemodify = true;
+        this.homeschedule = false;
+      }
+      else{
+        this._provider.showToast("Please Enter the above Details");
+      }
+    }
+    
+  }
+  backconfirmhome(){
+    this.homeschedule = true;
+    this.confirmhomemodify = false;
+  }
+  transportationdriver(){
+    this.transportdriver = true;
+    this.contact = false;
+    this.schedule = false;
+  }
+  canceldriver(){
+    this.navCtrl.pop();
+  }
+  drivernext(){
+     if(this.user_type == 'sponsor'){
+      if(this.elder_id != undefined && this.date != undefined && this.automation_time != undefined 
+        && this.hours != undefined && this.pickup != undefined){
+        this.confirmdriver = true;
+        this.transportdriver = false;
+      }
+      else{
+       this._provider.showToast("Please Enter the above Details");
+      }
+    }
+    else{
+      if(this.date != undefined && this.automation_time != undefined && this.hours != undefined && this.pickup != undefined){
+        this.confirmdriver = true;
+        this.transportdriver = false;
+      }
+      else{
+        this._provider.showToast("Please Enter the above Details");
+      }
+    }
+  }
+  backconfirmdriver(){
+    this.confirmdriver = false;
+    this.transportdriver = true;
+  }
+  transportationcab(){
+    this.transportcab = true;
+    this.contact = false;
+    this.schedule = false;
+  }
+  cancelcab(){
+    this.navCtrl.pop();
+  }
+  cabnext(){
+    if(this.user_type == 'sponsor'){
+      if(this.vendorList.vendorDetails.transport_type == '2'){
+         if(this.elder_id != undefined && this.date != undefined && this.automation_time != undefined 
+        && this.typeofservice != undefined && this.weelchair != undefined && this.pickup != undefined && this.drop != undefined){
+        this.confirmcab = true;
+        this.transportcab = false;
+      }
+      else{
+       this._provider.showToast("Please Enter the above Details");
+      }
+      }
+      else{
+         if(this.elder_id != undefined && this.date != undefined && this.automation_time != undefined 
+        && this.typeofservice != undefined && this.pickup != undefined && this.drop != undefined){
+        this.confirmcab = true;
+        this.transportcab = false;
+      }
+      else{
+       this._provider.showToast("Please Enter the above Details");
+      }
+      }
+     
+    }
+    else{
+      if(this.vendorList.vendorDetails.transport_type == '2'){
+         if(this.date != undefined && this.automation_time != undefined && this.typeofservice != undefined && 
+        this.weelchair != undefined && this.pickup != undefined && this.drop != undefined){
+        this.confirmcab = true;
+        this.transportcab = false;
+      }
+      else{
+        this._provider.showToast("Please Enter the above Details");
+      }
+      }
+      else{
+         if(this.date != undefined && this.automation_time != undefined && this.typeofservice != undefined && this.pickup != undefined && this.drop != undefined){
+        this.confirmcab = true;
+        this.transportcab = false;
+      }
+      else{
+        this._provider.showToast("Please Enter the above Details");
+      }
+      }
+     
+    }
+  }
+  backconfirmcab(){
+    this.confirmcab = false;
+    this.transportcab = true;
+  }
   dismiss(){
 	this.viewCtrl.dismiss();
   }
   cancel(){
-    this.booknow = false;
-    this.schedule = true;
+   this.navCtrl.pop();
   }
   cancelconfirmation(){
     this.elderDetails = "";
@@ -173,8 +493,7 @@ vendorLists:any=[];
     this.booknownext = true;
   }
   cancelcontact(){
-    this.contact = false;
-    this.schedule = true;
+    this.navCtrl.pop();
   }
   contactNow(){
     this.contact = true;
@@ -201,6 +520,24 @@ vendorLists:any=[];
     }
    
   }
+    termsChanged(){
+     if(this.terms == true){
+       this.checkTerms = false;
+     }else{
+       this.checkTerms = true;
+     }
+   }
+  openTerms(){
+     let termsModal = this.modalCtrl.create(TermsModalPage);
+     termsModal.present();
+     termsModal.onDidDismiss(data=>{
+       if(data == "dismiss"){
+        console.log(" Terms modal dismissed..!");
+      }else{
+       this.terms = JSON.parse(data);
+      }
+     })
+   }
    showConfirm() {
     const confirm = this.alertCtrl.create({
       title: this.title,
@@ -227,7 +564,7 @@ vendorLists:any=[];
 
   confirmationDetails(){
     let no_people = this.noofpeople;
-    console.log(this.noofpeople);
+    console.log(this.total_peoples);
     if(this.noofpeople == 1 && this.user_type == 'sponsor'){
         if(this.elder_id == undefined){
       this._provider.showToast("Please Enter the above Details");
@@ -235,34 +572,47 @@ vendorLists:any=[];
     else{
         this.booknownext = false;
     this.confirmationDetail = true;
+    this.totalcosts = ((this.schedule_cost) * this.noofpeople).toFixed(2);
     this.total_cost = (this.schedule_cost) * this.noofpeople;
     }
     }
     else if(this.noofpeople == 1 && this.user_type == 'elder'){
         this.booknownext = false;
     this.confirmationDetail = true;
+    this.totalcosts = ((this.schedule_cost) * this.noofpeople).toFixed(2);
     this.total_cost = (this.schedule_cost) * this.noofpeople;
 
  }
     else{
-           if(this.elder_name.length == 0 || this.elder_age == 0){
-      this._provider.showToast("Please Enter the above Details");
+      if(this.user_type == 'sponsor'){
+            if(this.elder_id != undefined && this.elder_name.length == this.total_peoples.length && this.elder_age.length == this.total_peoples.length){
+    this.booknownext = false;
+    this.confirmationDetail = true;
+    this.totalcosts = ((this.schedule_cost) * this.noofpeople).toFixed(2);
+    this.total_cost = (this.schedule_cost) * this.noofpeople;
+      
     }
     else{
-        this.booknownext = false;
+       this._provider.showToast("Please Enter the above Details");
+    }
+      }
+      else{
+          if(this.elder_name.length == this.total_peoples.length && this.elder_age.length == this.total_peoples.length){
+    this.booknownext = false;
     this.confirmationDetail = true;
+    this.totalcosts = ((this.schedule_cost) * this.noofpeople).toFixed(2);
     this.total_cost = (this.schedule_cost) * this.noofpeople;
+      
     }
+    else{
+       this._provider.showToast("Please Enter the above Details");
     }
-    //     if(this.elder_id == undefined || this.elder_name.length == 0 || this.elder_age == 0){
-    //   this._provider.showToast("Please Enter the above Details");
-    // }
-    // else{
-    //     this.booknownext = false;
-    // this.confirmationDetail = true;
-    // this.total_cost = (this.schedule_cost) * this.noofpeople;
-    // }
+      }
+   
+       
+    }
    }
+
   getelderDetails(elderid){
     this.eldershow =true;
     let service_data = {"elder_id":elderid};
@@ -292,8 +642,208 @@ vendorLists:any=[];
     }
 
  }
- payNow(category_id,service_id,sub_category_id,category,service,subcategory,vendor_id,start_date){
+ cabpaynow(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
+   this.date= moment(this.date).format("DD-MM-YYYY");
+    if(this.user_type == 'sponsor')
+  {
+    this.elder_id = this.elder_id;
+  }
+  else{
+    this.elder_id = this.user_id;
+  }
+  let paymentData = {"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
+  "start_date":start_date,"subcategory":subcategory,"service_id":service_id,
+  "location_id":this.location_id,"discount":"","pay_method":"","paymentflag":1,"service_cost":0,
+  "service_cost_travel":0,"base_cost":0,"from_date":"","problem":"",
+  "datetime":this.date,"mobile":"","preferred_time":this.automation_time,
+  "service_name":"Own Time Cab","get_custome_service_cancel_amount":0,
+  "total_cost":0,"get_custome_amount":0,"get_custome_deliever_amount":0,
+  "total_service_cost":0,"package_id":"","quantity":"","dependentid":this.elder_id,
+  "getCustomerBalanceAmount":0,"automation_date":this.date,
+  "automation_time":this.automation_time,"transportReqType":this.typeofservice,"weelchairType":this.weelchair,
+  "transportation_from":this.pickup,"transportation_to":this.drop,"vendor_id":this.vendor_id,
+  "lead_time":"00:00","selected_dates":[],"exclude_days":[],"serviceType":"One time"}
+   let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this._provider.webServiceCall(`serviceRequestSubmitbeforePayLater`,paymentData)
+  .subscribe(
+      data =>{
+        this._provider.showToast(data.result);
+        this.dismiss();
+        loading.dismiss();
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this._provider.showToast(JSON.parse(err._body).error);
+        this.navCtrl.pop();
+      }
+      else if(err.status === 401){
+        this._provider.showToast(JSON.parse(err._body).error);
+        // this.navCtrl.pop();
+      }
+      else
+      {
+        this._provider.showToast("Try again later");
+        this.navCtrl.pop();
+      }
+            })
+ }
+ driverpaynow(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
+   this.date= moment(this.date).format("DD-MM-YYYY");
+    if(this.user_type == 'sponsor')
+  {
+    this.elder_id = this.elder_id;
+  }
+  else{
+    this.elder_id = this.user_id;
+  }
+  let payment_cost = this.schedule_cost * this.hours;
+  let paymentData = {"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
+  "start_date":start_date,"subcategory":subcategory,"service_id":service_id,
+  "location_id":this.location_id,"discount":"","pay_method":"","paymentflag":1,"service_cost":this.schedule_cost,
+  "service_cost_travel":this.schedule_cost,"base_cost":this.service_cost,"from_date":"","problem":"","datetime":this.date,
+  "mobile":"","preferred_time":this.automation_time,"service_name":service,
+  "get_custome_service_cancel_amount":0,"total_cost":this.schedule_cost,"get_custome_amount":0,
+  "get_custome_deliever_amount":0,"total_service_cost":this.schedule_cost,"package_id":"","quantity":"",
+  "dependentid":this.elder_id,"getCustomerBalanceAmount":0,"automation_date":this.date,
+  "automation_time":this.automation_time,"driver_time_slot":this.hours,
+  "transportation_from":this.pickup,"service_cost_cab":payment_cost,"vendor_id":this.vendor_id,
+  "lead_time":"00:00","selected_dates":[],"exclude_days":[],
+  "Category_name":category,"serviceType":"One time",
+  "book":{"name":this.name +" "+this.lastname,"mobile":this.phone,"mail":this.email},
+  "emergency":[{"name":this.name,"mobile":this.phone}],
+  "paymentcost":payment_cost}
+   let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this._provider.webServiceCall(`serviceRequestSubmitbeforePayLater`,paymentData)
+  .subscribe(
+      data =>{
+        this._provider.showToast(data.result);
+        this.dismiss();
+        loading.dismiss();
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this._provider.showToast(JSON.parse(err._body).error);
+        this.navCtrl.pop();
+      }
+      else if(err.status === 401){
+        this._provider.showToast(JSON.parse(err._body).error);
+        // this.navCtrl.pop();
+      }
+      else
+      {
+        this._provider.showToast("Try again later");
+        this.navCtrl.pop();
+      }
+            })
+  // this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Safety and security"});
+  //  this.dismiss();
+ }
+ homeautomationpaynow(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
+   this.date= moment(this.date).format("DD-MM-YYYY");
+    if(this.user_type == 'sponsor')
+  {
+    this.elder_id = this.elder_id;
+  }
+  else{
+    this.elder_id = this.user_id;
+  }
+let paymentData = {"package_id":"","serviceType":"One time","service_cost":this.schedule_cost,
+"service_cost_travel":this.schedule_cost,"paymentflag":"1","base_cost":this.service_cost,"vendor_id":this.vendor_id,
+"location_id":this.location_id,"category_id":category_id,"sub_category_id":sub_category_id,"service_id":service_id,
+"get_custome_service_cancel_amount":0,"total_cost":this.schedule_cost,"get_custome_deliever_amount":0,
+"total_service_cost":this.schedule_cost,"get_custome_amount":0,"service_name":service,"businessHoursOption":this.vendorList.vendorDetails.businessHoursOption,
+"businessFromDay":this.vendorList.vendorDetails.businessFromDay,"businessToDay":this.vendorList.vendorDetails.businessToDay,
+"businessFromTime":this.vendorList.vendorDetails.businessFromTime,"businessToTime":this.vendorList.vendorDetails.businessToTime,
+"subcategory":subcategory,"dependentid":this.elder_id,"getCustomerBalanceAmount":0,
+"automation_date":this.date,"automation_time":this.automation_time,"lead_time":this.vendorList.vendorDetails.businessLeadTime,
+"exclude_days":[],"Category_name":category,"category":category,
+"prebook_status":this.vendorList.requestServices.booking_status,"book":{"name":this.name +" "+this.lastname,"mobile":this.phone,"mail":this.email},
+"datetime":this.date,"preferred_time":this.automation_time}
+ this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Safety and security"});
+   this.dismiss();
 
+}
+ emergencypaynow(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
+  if(this.user_type == 'sponsor')
+  {
+    this.elder_id = this.elder_id;
+  }
+  else{
+    this.elder_id = this.user_id;
+  }
+   let emergency = [];
+   if(this.user_type == 'sponsor'){
+    this.emergency_name[0] = this.name + this.lastname;
+  this.emergency_mobile[0] = this.phone;
+  var obj = {"name":this.emergency_name[0],"mobile":this.emergency_mobile[0]}
+  emergency.push(obj);
+   }
+   else{
+     this.emergency_name[0] = this.sponsor_name;
+  this.emergency_mobile[0] = this.call_sponsor;
+  var obj = {"name":this.emergency_name[0],"mobile":this.emergency_mobile[0]}
+  emergency.push(obj);
+   }
+  
+  for(var i=1; i< this.emergency_name.length;i++){
+  var obj = {"name":this.emergency_name[i],"mobile":this.emergency_mobile[i]}
+  emergency.push(obj);
+}
+   let paymentData =   {"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
+ "start_date":start_date,"subcategory":subcategory,"service_id":service_id,"location_id":this.location_id,
+ "paymentflag":1,"service_cost":this.schedule_cost,"service_cost_travel":this.schedule_cost,"base_cost":this.service_cost,
+ "from_date":"","problem":"","datetime":"","mobile":"","preferred_time":"",
+ "prebook_status":this.vendorList.requestServices.booking_status,"service_cost_prebook":this.schedule_cost,"service_cost_total":this.schedule_cost,
+ "prebook_percentage":this.pre_book_percentage,"service_name":service,"vendor_id":this.vendor_id,
+ "get_custome_service_cancel_amount":0,"total_cost":this.schedule_cost,"get_custome_deliever_amount":0,
+ "total_service_cost":this.schedule_cost,"get_custome_amount":0,"package_id":"","quantity":"",
+ "dependentid":this.elder_id,"getCustomerBalanceAmount":0,"lead_time":"00:00","selected_dates":[],
+ "exclude_days":[],"Category_name":category,"serviceType":"One time",
+ "book":{"name":this.name,"mobile":this.phone,"mail":this.email},
+ emergency,
+ "paymentcost":this.schedule_cost};
+   this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Safety and security"});
+   this.dismiss();
+}
+
+wearablespaynow(prebook_cost,category_id,service_id,sub_category_id,category,service,subcategory,start_date){
+    if(this.user_type == 'sponsor')
+  {
+    this.elder_id = this.elder_id;
+  }
+  else{
+    this.elder_id = this.user_id;
+  }
+   let paymentData =   {"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
+ "start_date":start_date,"subcategory":subcategory,"service_id":service_id,"location_id":this.location_id,
+ "paymentflag":1,"service_cost":prebook_cost,"service_cost_travel":this.schedule_cost,"base_cost":this.service_cost,
+ "from_date":"","problem":"","datetime":"","mobile":"","preferred_time":"",
+ "prebook_status":this.vendorList.requestServices.booking_status,"service_cost_prebook":prebook_cost,"service_cost_total":this.schedule_cost,
+ "prebook_percentage":this.pre_book_percentage,"service_name":service,"vendor_id":this.vendor_id,
+ "get_custome_service_cancel_amount":0,"total_cost":prebook_cost,"get_custome_deliever_amount":0,
+ "total_service_cost":prebook_cost,"get_custome_amount":0,"package_id":"","quantity":"",
+ "dependentid":this.elder_id,"getCustomerBalanceAmount":0,"lead_time":"00:00","selected_dates":[],
+ "exclude_days":[],"Category_name":category,"serviceType":"One time",
+ "book":{"name":this.name,"mobile":this.phone,"mail":this.email},
+ "emergency":[{"name":this.name,"mobile":this.phone}],
+ "paymentcost":prebook_cost};
+   this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Safety and security"});
+   this.dismiss();
+}
+ payNow(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
+  if(this.user_type == 'sponsor')
+  {
+    this.elder_id = this.elder_id;
+  }
+  else{
+    this.elder_id = this.user_id;
+  }
  let people = [];
  for(let i=0;i<this.total_peoples.length;i++) {
   
@@ -302,14 +852,14 @@ vendorLists:any=[];
  }
  
    let paymentData =  {"package_id":"","serviceType":"One time","service_cost":this.total_cost,"service_cost_travel":this.schedule_cost,
-   "paymentflag":1,"base_cost":this.service_cost,"vendor_id":vendor_id,"location_id":this.location_id,"category_id":category_id,
-   "sub_category_id":sub_category_id,"service_id":service_id,"get_custome_amount":"0","total_cost":this.schedule_cost,
+   "paymentflag":1,"base_cost":this.service_cost,"vendor_id":this.vendor_id,"location_id":this.location_id,"category_id":category_id,
+   "sub_category_id":sub_category_id,"subcategory":subcategory,"service_id":service_id,"get_custome_amount":"0","total_cost":this.schedule_cost,
    "get_custome_service_cancel_amount":"0","get_custome_deliever_amount":"0","total_service_cost":this.schedule_cost,
    "service_name":service,"dependentid":this.elder_id,"getCustomerBalanceAmount":"0","lead_time":"02:00",
    "exclude_days":[],"Category_name":category,"category":category,
    "book":{"name":this.name,"mobile":this.phone,"mail":this.email,"book_peoples":this.peoplecount,
    people},
-   "datetime":start_date,"preferred_time":"01:00 AM - 02:00 AM","paymentservice_id":1606,
+   "datetime":start_date,"preferred_time":"01:00 AM - 02:00 AM",
    "paymentcost":this.total_cost};
    this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Recreation"});
    this.dismiss();

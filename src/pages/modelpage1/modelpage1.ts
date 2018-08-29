@@ -67,8 +67,11 @@ export class Modelpage1PagePage {
   discountcost:any;
   packageListsvalue:any;
   requestService:any;
+  recurringType:any;
   constructor(public modalCtrl: ModalController,public nav: NavController,public navParams: NavParams, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {
+    this.recurringType = navParams.get("recurringType");
+    console.log(this.recurringType);
     this.requestService = navParams.get("requestService");
     this.serviceDatas =  navParams.get("serviceDatas");
     this.getCustomerBalanceAmount = this.serviceDatas.getCustomerBalanceAmount;
@@ -89,7 +92,6 @@ export class Modelpage1PagePage {
     this.timeslot = this.serviceDatas.time_slot;
     this.packageListsvalue = navParams.get("packageListsvalue");
     this.paydata = navParams.get("paydata");
-    console.log(this.paydata);
     this.fullpays = this.paydata.fullpays;
     this.finalcost = this.paydata.finalcost;
     this.datCount = this.paydata.datCount;

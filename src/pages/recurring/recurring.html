@@ -111,9 +111,9 @@
     <b>Balance amount </b><p *ngIf="recurring.remainingamount != null"><i class="fa fa-rupee">{{recurring.remainingamount}}</i></p>  
     </ion-col>
       <ion-col col-12>
-    <button ion-button clear *ngIf="recurring.payUmny_payment_status=='captured'  && recurring.remaining_amount!=0 && recurring.package_id ==''" (click)="paynow(recurring.remainingamount,recurring.service_id,recurring.recurring_request_id)">Pay Now</button>
+    <button ion-button clear *ngIf="recurring.payUmny_payment_status=='captured'  && recurring.remaining_amount!=0 && recurring.package_id ==''" (click)="paynow(recurring.remainingamount,recurring.recurring_request_id,recurring.recurring_request_id)">Pay Now</button>
 
-    <button ion-button clear *ngIf="recurring.payUmny_payment_status!='captured' && recurring.package_id==''" (click)="paynow(recurring.remainingamount,recurring.service_id,recurring.recurring_request_id)">Pay Now</button> 
+    <button ion-button clear *ngIf="recurring.payUmny_payment_status!='captured' && recurring.package_id==''" (click)="paynow(recurring.remainingamount,recurring.recurring_request_id,recurring.recurring_request_id)">Pay Now</button> 
 
     <button ion-button clear *ngIf="(recurring.payUmny_payment_status=='captured' && recurring.payment_method=='full_payment' && recurring.remaining_amount==0) || recurring.package_id !=''">Paid
      </button>

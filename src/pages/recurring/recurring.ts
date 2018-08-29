@@ -109,9 +109,8 @@ sr_token:any;
     })
   }
   doInfinite(infiniteScroll) {
-    console.log(this.nextPageURL);
     setTimeout(() => {      
-      if(this.nextPageURL!=null || this.nextPageURL!='')
+      if(this.nextPageURL!=null && this.nextPageURL!='')
       {
        this.recurringRequestScroll();
       }

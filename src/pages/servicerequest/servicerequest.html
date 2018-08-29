@@ -53,7 +53,8 @@
     <ion-col width-20 class="left-service">
 	<img src="{{imageUrl}}{{service?.logo}}" width="100"  height="50"/>
 	<a class="token-primarys" *ngIf="service?.vendor_status == 4 || service?.vendor_status == 5 || service?.vendor_status == 2" (click)="makeCall(service?.servicer_contact_no)"><i class="fa fa-phone"></i></a>
-	  <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3)&& (service?.vendor_status!=5))" (click)="showConfirm(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid,service?.id,service?.service_cost,service?.recurring_request_id,service?.req_count)">
+	<a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3) && (service?.vendor_status!=5))" (click)="showConfirm(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid,service?.id,service?.service_cost,service?.recurring_request_id,service?.req_count,service?.package_id,service?.Paymentstatus,service?.paid_amount,
+  service?.sr_token)">
   <i class="fa fa-times" aria-hidden="true"></i>
   </a>
  
@@ -72,19 +73,25 @@
  
   <p *ngIf="user_type!='elder'" class="service-conts"><i class="fa fa-user" aria-hidden="true"></i>{{service?.dependent_name}} {{service?.dependent_lastname}}</p>
   </ion-row>
-    <ion-row (click)="viewRequest(service?.id,service)">
+ <!--    <ion-row (click)="viewRequest(service?.id,service)">
    <p class="service-conts"><i class="fa fa-cogs" aria-hidden="true"></i>{{service?.service_name}}</p>
-  </ion-row>
+  </ion-row> -->
 <!--  <ion-row (click)="viewRequest(service?.id,service)">
 
  <p *ngIf="(service?.enquiry_date!='0000-00-00 00:00:00')" class="service-conts"><span class="token-primaryss">Enquery Date:</span>{{service?.enquiry_date | date :'MMM dd y h:mm a'}}</p> 
 
 
 </ion-row> -->
- <ion-row *ngIf="service?.preferred_date != '0000-00-00'" (click)="viewRequest(service?.id,service)">
+ <ion-row *ngIf="service?.preferred_date != '0000-00-00' && service.sr_token[0] !='T'" (click)="viewRequest(service?.id,service)">
   <p class="service-conts" *ngIf="service?.vendor_status == 0"><span class="token-primaryss">Preferred date & time:</span>{{service?.preferred_date}} {{service?.preferred_time}}
   </p>
  </ion-row>
+
+ <ion-row *ngIf="service?.preferred_date != '0000-00-00' && service?.sr_token[0]=='T'" (click)="viewRequest(service?.id,service)">
+  <p class="service-conts" *ngIf="service?.vendor_status == 0"><span class="token-primaryss">Preferred date & time:</span>{{service?.preferred_date}}
+  </p>
+ </ion-row>
+
  <ion-row *ngIf="service?.vendor_status == 4 || service?.vendor_status == 5 || service?.vendor_status == 2" (click)="viewRequest(service?.id,service)">
   <p class="service-conts"><span class="token-primaryss">Servicer Name:</span>{{service?.servicer_name}}
   </p>
@@ -124,7 +131,10 @@
     <p *ngIf="service.service_type =='Recurring'" (click)="viewRecurring(service?.sr_token)"><ion-badge>View Recurring Requests</ion-badge></p>
     <p *ngIf="service?.Paymentstatus=='captured' && service?.payment_method=='' && service?.additional_service_cost!='0'&& service?.additional_service_cost_status=='0' && service?.status=='5' && service?.package_id==''"><ion-badge (click)="payOptionforAdditionalServiceCost(service.sr_token,service.id,service?.additional_service_cost,service?.payment_status,service?.service_type)">Pay Now
     {{service?.additional_service_cost}}</ion-badge>
-   </p>
+  </p>
+   <p *ngIf="service?.Paymentstatus=='captured' && service?.payment_method=='' && service?.additional_service_cost!='0'&& service?.additional_service_cost_status=='0' && service?.sub_category_name =='Wearables' && service?.package_id==''"><ion-badge (click)="payOptionforAdditionalServiceCost(service.sr_token,service.id,service?.additional_service_cost,service?.payment_status,service?.service_type)">Pay Now
+    {{service?.additional_service_cost}}</ion-badge>
+  </p>
    <p *ngIf="service?.Paymentstatus!='captured' && service?.status !='3' && service?.payment_method==''  && service?.service_type=='One time' && service?.package_id==''"><ion-badge (click)="payOptionforpendingPayment(service.sr_token,service.pending_service_amount,service?.id,service?.additional_service_cost,service?.payment_status,service?.prev_service_amount_balance)">Pay Now</ion-badge>
    </p>
 

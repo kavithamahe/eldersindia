@@ -31,6 +31,7 @@ packages:any=[];
 imageUrl:any;
 selectserviceLocation:any;
 servicelocationid:any;
+term:any = "";
 		// subcategories: Array<{title: string, lists: any, color: string}>;
 
   constructor(public platform: Platform,public storage:Storage, public loadingCtrl: LoadingController, public navCtrl: NavController, public navPara: NavParams,public providerService: ServiceProvider) {
@@ -91,20 +92,51 @@ servicelocationid:any;
    viewPackage(vendor_id){
     this.navCtrl.push(PackageDetailPagePage,{"vendor_id":vendor_id,'location_id':this.serviceLocation});
   }
-    getItems(ev) {
-    // Reset items back to all of the items
-    // this.loadSubCategory("");
+     public getItems(term){
 
-    // set val to the value of the ev target
-    var val = ev.target.value;
-
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.subcategories = this.subcategories.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    }
+    this.term = term;
+    this.loadsSubCategory(this.term);
   }
+  //   getItems(ev) {
+  //   // Reset items back to all of the items
+  //   // this.loadSubCategory("");
+
+  //   // set val to the value of the ev target
+  //   var val = ev.target.value;
+
+  //   // if the value is an empty string don't filter the items
+  //   if (val && val.trim() != '') {
+  //     this.subcategories = this.subcategories.filter((item) => {
+  //       return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+  //     })
+  //   }
+  // }
+  loadsSubCategory(term){
+  let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+  loading.present();
+  this.subCategoryId = this.navPara.get("subcategory").id;
+  this.serviceOffered = this.navPara.get("subcategory").service;
+  let serviceOfferedData = {"serviceOfferedId":this.subCategoryId,"locationId": this.serviceLocation,"serviceOffered":this.serviceOffered,"searchVal":term};
+          
+  this.providerService.webServiceCall(`getVendorServiceSubCategory`,serviceOfferedData)
+  // this.providerService.loadVendorServiceSubCategory(serviceListId)
+    .subscribe(data =>{
+      this.subcategories = data.result;
+      loading.dismiss();
+    },
+    err =>{
+      if(err.status===401){
+         this.subcategories = [];
+      if(this.serviceLocation != ""){
+      this.emptyRecord = "We are in the process of identifying partners in this category for this location!"
+      }}
+      else{
+       this.providerService.showToast("Please try again later..!");  
+        
+      }
+      loading.dismiss();
+    })
+}
 loadSubCategory(location){
   let loading = this.loadingCtrl.create({content: 'Please wait...!'});
   loading.present();

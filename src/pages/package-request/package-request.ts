@@ -78,6 +78,7 @@ results:any;
     console.log('ionViewDidLoad PackageRequestPagePage');
   }
 doInfinite(infiniteScroll) {
+  console.log(this.nextPageURL);
     setTimeout(() => {      
       if(this.nextPageURL!=null && this.nextPageURL!='')
       {

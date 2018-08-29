@@ -28,6 +28,7 @@ paidamount:any;
 balanceamount:any;
 Paymentstatus:any;
 additional_service_cost:any;
+emergencyContact:any=[];
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -66,6 +67,7 @@ additional_service_cost:any;
     this.serviceRequest.viewServiceRequest(this.serviceRequestId).subscribe(
      (viewServiceRequest) => {
       this.viewServiceRequestInfo=viewServiceRequest.result;
+      this.emergencyContact = this.viewServiceRequestInfo.emergencyContact;
       this.preffer= viewServiceRequest.enquiry_date;
       loader.dismiss();   
     },

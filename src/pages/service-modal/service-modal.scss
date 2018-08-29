@@ -21,6 +21,16 @@ page-service-modal {
         font-weight:400;
         width: 100%; color:#666;font-family: 'Muli', sans-serif;letter-spacing:0.2px;
     }
+    .service-name {
+    color: #117864;
+    font-size: 18px;
+    font-weight: 400;
+}
+.discountCost {
+    color: #E91E63;
+}
+.one-timereq.item-md                                                                {border:none !important;}
+.one-timereq.item-ios                                                               {border:none !important;}
     .service-conts i{margin-right:7px; font-size:15px; color:#333;}
  
 .offered-servicelist .item-md .item-inner .input-wrapper .label-md{ margin:0px;}
@@ -104,6 +114,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F5FEFF', end
     padding-bottom: 3px;letter-spacing:0.2px;
     width: 100%;
 }
+.view-serv .services-del{background:#DCDCDC;color:#333; height:35px; margin-top:20px;margin-bottom:10px; width:45%; float:right; margin-right:3px;font-family: 'Muli', sans-serif; font-size:15px;font-weight:600; border-radius:20px; line-height:28px;box-shadow: 0 2px 2px 0 hsla(0, 0%, 0%, 0.14), 0 3px 1px -2px hsla(0, 0%, 0%, 0.2), 0 1px 5px 0 hsla(0, 0%, 0%, 0.12);}
 .contact-list .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col p i {
     font-size: 12px !important;
     font-weight: 600;

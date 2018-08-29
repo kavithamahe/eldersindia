@@ -83,6 +83,10 @@ total_amount:any;
   	this.dismiss();
   }
   delete(){
+    console.log(this.balance_amount);
+    if(this.balance_amount == undefined){
+      this.balance_amount = null;
+    }
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
     this.blogListService.deleterecurringrequest(this.rootUrl,this.recurring_request_id,this.dedction_amount,this.refund_amount,

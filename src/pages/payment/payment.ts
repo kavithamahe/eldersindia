@@ -106,12 +106,11 @@ discountcost:any;
     this.service_name = this.paymentData.service_name;
     this.service_cost = this.paymentData.service_cost * 100;
     this.service_costs = this.service_cost;
-    console.log(this.service_costs);
-    localStorage.setItem('service_costss', this.service_costs);
+    this.service_costss=(this.paymentData.service_cost * 100).toFixed(0);
+    localStorage.setItem('service_costss', this.service_costss);
     this.storage.ready().then(() => {
       storage.get('token').then((token) => { this.token=token;
-     
-  localStorage.setItem('key', this.token);
+      localStorage.setItem('key', this.token);
       this.headers = new Headers();
       this.headers.append('Content-Type', 'application/json');
       this.headers.append('Authorization', 'Bearer ' + this.token);
@@ -126,9 +125,34 @@ discountcost:any;
        storage.get('phone').then((phone) => { this.phone=phone; })
      });
    }
+   else if(navParams.get("service") == "Safety and security"){
+        this.paymentData = navParams.get("paymentData");
+    this.service_name = this.paymentData.service_name;
+    this.service_cost = this.paymentData.service_cost * 100;
+    this.service_costs = this.service_cost;
+    this.service_costss=(this.paymentData.service_cost * 100).toFixed(0);
+    localStorage.setItem('service_costss', this.service_costss);
+
+    this.storage.ready().then(() => {
+      storage.get('token').then((token) => { this.token=token;
+     
+  localStorage.setItem('key', this.token);
+      this.headers = new Headers();
+      this.headers.append('Content-Type', 'application/json');
+      this.headers.append('Authorization', 'Bearer ' + this.token);
+      this.options = new RequestOptions({ headers: this.headers });
+         })    
+      storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
+   this.safetyRequestSubmitbeforePayment();
+            });
+       storage.get('id').then((id) => { this.user_id=id; })
+       storage.get('name').then((name) => { this.name=name; })
+       storage.get('email').then((email) => { this.email=email; })
+       storage.get('phone').then((phone) => { this.phone=phone; })
+     });
+   }
    else{
     this.serviceData=navParams.get("serviceData");
-    console.log(this.serviceData);
     this.serviceTitle=this.serviceData.serviceTitle;
     this.getCustomerBalanceAmount = this.serviceData.getCustomerBalanceAmount;
     this.get_custome_amount = this.serviceData.get_custome_amount;
@@ -208,12 +232,6 @@ localStorage.setItem('key', this.token);
      }
      else{
      if(this.datCount != undefined){
-      // if(this.paymenttype == "partial_payment"){
-      //   this.service_costss=this.payableamounts;
-      // }
-      // else{
-      //   this.service_costss=this.servicediscountcost;
-      // }
       this.service_costss=(this.servicediscountcostss * 100).toFixed(0);;
      }
      else{
@@ -224,6 +242,35 @@ localStorage.setItem('key', this.token);
    } 
     
    
+}
+safetyRequestSubmitbeforePayment(){
+    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  let payment_data =this.paymentData;
+  this._provider.webServiceCall(`serviceRequestSubmitbeforePayment`,payment_data)
+  .subscribe(
+      data =>{
+        this.udf3= data.result.serviceType;
+        this.udf2 = data.result.service_request_id;
+        loading.dismiss();
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this._provider.showToast(JSON.parse(err._body).error);
+        this.navCtrl.pop();
+      }
+      else if(err.status === 401){
+        this._provider.showToast(JSON.parse(err._body).error);
+        this.navCtrl.pop();
+      }
+      else
+      {
+        this._provider.showToast("Try again later");
+        this.navCtrl.pop();
+      }
+            })
 }
 recreationRequestSubmitbeforePayment(){
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
@@ -241,10 +288,12 @@ recreationRequestSubmitbeforePayment(){
         if(err.status===400)
       {
         this._provider.showToast(JSON.parse(err._body).error);
+        this.navCtrl.pop();
       }
       else
       {
         this._provider.showToast("Try again later");
+        this.navCtrl.pop();
       }
             })
 }
@@ -256,7 +305,6 @@ recreationRequestSubmitbeforePayment(){
   }
   let paymentflag=1;
   if(this.datCount != undefined){
-console.log("recurring time");
  let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
     this.blogListService.serviceRequestSubmitbeforePayment(this.rootUrl,this.servicecost,
@@ -312,10 +360,10 @@ console.log("recurring time");
   payRecreation(){
     var options = {
       description: this.serviceTitle,
-      image: "assets/img/elders-logo.png",
+      image: "https://i.imgur.com/3g7nmJC.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
-      amount: this.service_cost,
+      amount: this.service_costss,
       name: "EldersIndia",
       prefill: {
         email: this.email,
@@ -329,7 +377,9 @@ console.log("recurring time");
         "email": this.email,
         "pre_balance_amount":this.get_custome_deliever_amount,
         "category_name":this.Recreation_service,
-        "service_name":this.service_name
+        "service_name":this.service_name,
+        "service_cost":this.paymentData.service_cost,
+        "pre_book":this.paymentData.service_cost
       },
       theme: {
         color: '#208ad6'
@@ -374,9 +424,10 @@ RazorpayCheckout.on('payment.cancel', cancelCallback);
 RazorpayCheckout.open(options, successCallback, cancelCallback);
   }
   pay() {
+    console.log(this.service_costss);
     var options = { 
       description: this.serviceTitle,
-      image: "assets/img/elders-logo.png",
+      image: "https://i.imgur.com/3g7nmJC.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costss,

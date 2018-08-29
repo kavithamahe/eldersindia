@@ -41,6 +41,9 @@ export class LoginPage {
   hospital:any=0;
   doctor:any=0;
   device_uuid:any;
+  sponsor_name:any;
+  sponsor_id:any;
+  
   constructor(public menuCtrl: MenuController,public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
  
   this.storage.ready().then(() => { 
@@ -119,6 +122,9 @@ export class LoginPage {
          this.storage.set('avatar', loginuser['details']['avatar']);
          this.storage.set('sponsor_avatar', loginuser['details']['sponsor_avatar']);
          this.storage.set('sponsor_name', loginuser['details']['sponsor_name']);
+         this.storage.set('safeme_status', loginuser['details']['safeme_status']);
+         this.storage.set('helpme_status', loginuser['details']['helpme_status']);
+         this.storage.set('vendor_id', loginuser['details']['vendor_id']);
          if(loginuser['details']['user_type']=='elder' && (loginuser.details.emergency_contacts.length>0))
          {
          if(loginuser.details.emergency_contacts[0].call_sponsor!='undefined')
@@ -142,6 +148,16 @@ export class LoginPage {
          {
            this.hospital=loginuser.details.emergency_contacts[0].hospital;
          }
+            if(loginuser.details.emergency_contacts[0].sponsor_name!='undefined')
+         {
+           this.sponsor_name=loginuser.details.emergency_contacts[0].sponsor_name;
+         }
+            if(loginuser.details.emergency_contacts[0].sponsor_id!='undefined')
+         {
+           this.sponsor_id=loginuser.details.emergency_contacts[0].sponsor_id;
+         }
+         this.storage.set('sponsor_id', this.sponsor_id);
+         this.storage.set('sponsor_name', this.sponsor_name);
          this.storage.set('call_sponsor', this.callSponsor);
          this.storage.set('ambulance', this.ambulance);
          this.storage.set('police', this.police);

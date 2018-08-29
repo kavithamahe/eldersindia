@@ -57,6 +57,7 @@ reqstatus:any;
   		this.service_costss = this.service_cost * 100;
   		localStorage.setItem('service_costss', this.service_costss);
   		this.service_id = navParams.get("service_id");
+      console.log(this.service_id);
       this.recurring_request_id = navParams.get("recurring_request_id");
       this.reqstatus = navParams.get("reqstatus");
       localStorage.setItem('recurring_request_id', this.recurring_request_id);
@@ -89,7 +90,7 @@ reqstatus:any;
   	this.package_validity=navParams.get("package_validity");
   	this.selectedConnections=navParams.get("selectedConnections");
      storage.get('user_type').then((user_type) => { this.userType=user_type;});
-      storage.get('id').then((id) => { this.user_id=id;
+      storage.get('user_type_id').then((user_type_id) => { this.user_id=user_type_id;
      if(this.userType != 'sponsor'){
         
         this.elderId=this.user_id;
@@ -193,6 +194,7 @@ RazorpayCheckout.on('payment.cancel', cancelCallback);
     RazorpayCheckout.open(optionss, successCallback, cancelCallback);
   }
 paypartial(){
+  console.log(this.service_id);
 	 var recurringOption = {
       description: "Payment made for SR"+this.recurring_request_id+"",
       image: 'http://qa.eldersindia.com/assets/img/Elderlogo.png',
@@ -208,8 +210,8 @@ paypartial(){
       
        notes: {
        "service_id":this.service_id,
-		   //"service_type":this.service_type,
-        "email": this.email,
+		   "amount": this.service_costss,
+       "email": this.email,
       },
       theme: {
         color: '#208ad6'
@@ -254,6 +256,7 @@ RazorpayCheckout.on('payment.cancel', cancelCallback);
     RazorpayCheckout.open(recurringOption, successCallback, cancelCallback);
 }
    pay() {
+    console.log(this.elderId);
    	if(this.sr_token == undefined){
     var options = {
       description: 'Razorpay',
@@ -269,12 +272,13 @@ RazorpayCheckout.on('payment.cancel', cancelCallback);
       },
       
        notes: {
-       "package_id":this.packId,
-		"elder_id":this.elderId,
-		"vendor_id":this.vendor_id,
-		"validity":this.package_validity,
-		"user_type_id":this.user_type_id,
-        email: this.email,
+        "package_id":this.packId,
+    		"elder_id":this.elderId,
+    		"vendor_id":this.vendor_id,
+    		"validity":this.package_validity,
+        "payment_id":2,
+    		"user_type_id":this.user_type_id,
+        "email": this.email,
       },
       theme: {
         color: '#208ad6'
