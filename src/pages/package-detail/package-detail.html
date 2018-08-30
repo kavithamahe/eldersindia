@@ -35,7 +35,7 @@
   </ion-item>
   <h1 class="package-list-show">Packages</h1>
   <ion-card *ngFor="let pack of packages; let i=index" text-wrap class="packagelist">
-    <ion-item>
+    <ion-item text-wrap>
       <ion-col>
         <h3>{{pack.package_name}}</h3>
         <ion-list class="price-bt" *ngIf="pack.discount_rate_package == NULL"><span><i class="fa fa-inr"></i>{{pack.package_amount}}/- </span></ion-list>
@@ -43,7 +43,7 @@
         <ion-list *ngIf="pack.discount_rate_package != NULL" class="price-list"> <small><i class="fa fa-rupee"></i>{{pack.package_amount}} </small> <span> {{pack.discount_rate_package}} % off <b> For {{pack.package_validity}}</b> </span>
           <p>{{pack.package_description}}</p>
         </ion-list>
-         <ion-list *ngIf="dependents.length != 1">
+          <ion-list *ngIf="dependents.length != 1">
           <div *ngIf="pack.package_available == 0 || user_type=='sponsor'" class="get-pack">
             <button ion-button (click)="openRequestPackage(pack.id,pack.package_amount,pack.package_validity)">Get Package</button>
           </div>

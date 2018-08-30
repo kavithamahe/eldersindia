@@ -20,7 +20,631 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="content-intop" >
+  <div *ngIf(showScheduleDetails) class="offered-servicelist">
+      <ion-card class="contact-list">
+          <!-- <ion-item text-wrap *ngIf = "schedule">
+              <ion-row>
+                  <p *ngIf = "vendorList?.requestServices.category != 'Safety and security'" class="service-conts"><span class="token-primaryss">Schedule : </span>{{vendorList?.requestServices.start_date}} to {{vendorList?.requestServices.end_date}}
+                  </p>
+                 </ion-row>
+                 <ion-row class="textlg" *ngIf = "schedule_cost != 0 && vendorList?.requestServices.subcategory != 'Transportation Driver Service'">
+              <p class="service-conts"><span class="token-primaryss">Cost : </span><b><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{schedule_cost}} <span *ngIf="service_cost != schedule_cost">/&nbsp;
+                <i class="fa fa-inr" aria-hidden="true"></i><strong>{{service_cost}}</strong></span> </b></p>
+                
+                   </ion-row>
+                   <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory
+                     != 'Home modification' && vendorList?.requestServices.subcategory
+                     != 'Home Modification' && vendorList?.requestServices.subcategory
+                     != 'Home automation' && vendorList?.requestServices.subcategory
+                     != 'Home Automation' && vendorList?.requestServices.subcategory
+                     != 'Home Automation' && vendorList?.requestServices.subcategory
+                     != 'Transportation Driver Service' && vendorList?.requestServices.subcategory != 'Transportation Cab'">
+                    <p class="service-conts"><span class="token-primaryss">Valid For {{vendorList?.vendorDetails.package_validity}}</span></p>
+                   </ion-row>
+                     <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'">
+                    <p class="service-conts"><span class="token-primaryss">Working Days : {{vendorList?.vendorDetails.businessFromDayName}} - {{vendorList?.vendorDetails.businessToDayName}}</span></p>
+                   </ion-row>
+                    <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'">
+                    <p class="service-conts"><span class="token-primaryss">Working Time : {{vendorList?.vendorDetails.businessFromTime}} - {{vendorList?.vendorDetails.businessToTime}}</span></p>
+                   </ion-row>
+                    <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'">
+                    <p class="service-conts"><span class="token-primaryss">{{vendorList?.vendorDetails.businessLeadTime}} hour(s)</span></p>
+                   </ion-row>
+       
+          </ion-item>
+          <br>
+          <ion-item *ngIf = "schedule" text-wrap>
+              <button class="instant-bt" *ngIf="package_active_status == '1' && vendorList?.requestServices.category == 'Recreation'" (click)="bookNow()">Book Now</button>
+              <button class="instant-bt" *ngIf="package_active_status == '0' && vendorList?.requestServices.category == 'Recreation'">Booking Closed
+              </button>
+                  <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '2' && vendorList?.requestServices.category == 'Safety and security'" (click)="preBook()">Pre Book</button>
+                  <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '1' && vendorList?.requestServices.category == 'Safety and security'" (click)="preBook()">Book Now</button>
+                  <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory != 'Home modification' && vendorList?.requestServices.subcategory
+                     != 'Home Modification' && vendorList?.requestServices.subcategory
+                     != 'Home automation' && vendorList?.requestServices.subcategory
+                     != 'Home Automation' && vendorList?.requestServices.subcategory
+                      != 'Home Automation' && vendorList?.requestServices.subcategory != 'Transportation Driver Service' && vendorList?.requestServices.subcategory != 'Transportation Cab'" (click)="emergencybook()">Book Now</button>
+                      <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Transportation Driver Service'" (click)="transportationdriver()">Book Now</button>
+                      <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Transportation Cab'" (click)="transportationcab()">Book Now</button>
+                      <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'" (click)="homemodify()">Schedule Assessment</button>
+            <button  class="instant-btn" (click)="contactNow()">Contact Now</button>
+            </ion-item> -->
+            <div *ngIf="booknow && vendorList?.requestServices.category == 'Recreation'">
+                <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Name</ion-label>
+            <ion-item class="sel-label">
+                <ion-input type="text" value="{{name}}" disabled></ion-input>
+            </ion-item>
+            <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Email</ion-label>
+            <ion-item class="sel-label">
+                <ion-input type="text" value="{{email}}" disabled></ion-input>
+            </ion-item>
+            <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Mobile</ion-label>
+            <ion-item class="sel-label">
+              <ion-input type="text" value="{{phone}}" disabled></ion-input>
+          </ion-item>
+          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">No of People</ion-label>
+          <ion-item class="sel-label">
+            <ion-label>No of People</ion-label>
+            <ion-select [(ngModel)]="noofpeople" (ionChange)="selectPeople(noofpeople)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+                <ion-option value="1">1</ion-option>
+                <ion-option value="2">2</ion-option>
+                <ion-option value="3">3</ion-option>
+                <ion-option value="4">4</ion-option>
+                <ion-option value="5">5</ion-option>
+            </ion-select>
+        </ion-item>
+        <br/>
+        <ion-row>
+        <ion-col>
+    <button class="btn-warnings" color="primary" (click)="cancel()">Cancel</button>
 
+  <button class="instant-bt" (click)="bookDetails()">Next</button>
+  </ion-col>
+  </ion-row>
+            </div>
+        <!-- ...........emergency.............. -->
+            <div *ngIf="vendorList?.requestServices.booking_status == '0' && emergencyhelp">
+              <ion-list *ngIf="user_type == 'sponsor'">
+                  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
+                  <ion-item class="sel-label">
+                      <ion-label>Dependent</ion-label>
+                      <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+                        <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
+                      </ion-select>
+                  </ion-item>
+              </ion-list>
+                <ion-list>
+                    <ion-row>
+                        <ion-col width-60>
+                            <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Name</ion-label>
+                        </ion-col>
+                        <ion-col width-40>
+                            <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Mobile</ion-label>
+                        </ion-col>
+                    </ion-row>
+                   
+                  </ion-list>
+                   <form [formGroup]="form">
+                   <ion-list formArrayName="emergency" *ngFor="let item of form.get('emergency').controls; let i = index;">
+                    <ion-row [formGroupName]="i">
+                        <ion-col width-60>
+                             <ion-item class="sel-label" *ngIf="user_type != 'sponsor'">
+                                <ion-input type="text" [value]="sponsor_name" formControlName="name" *ngIf = "i == 0"></ion-input>
+                                 <ion-input type="text" formControlName="name" [(ngModel)]="emergency_name[i]"></ion-input>
+                            </ion-item>
+
+                            <ion-item class="sel-label" *ngIf="user_type == 'sponsor'">
+                                <ion-input type="text" value="{{name}} {{lastname}}" *ngIf = "i == 0" formControlName="name" ></ion-input>
+                                 <ion-input type="text" formControlName="name" [(ngModel)] = "emergency_name[i]"></ion-input>
+                                
+                            </ion-item>
+                        </ion-col>
+                        <ion-col width-40>
+                           <ion-item class="sel-label" *ngIf="user_type != 'sponsor'">
+                                <ion-input type="text" [value]="call_sponsor" formControlName="mobile" *ngIf = "i == 0"></ion-input>
+                                 <ion-input type="text" formControlName="mobile" [(ngModel)]="emergency_mobile[i]"></ion-input>
+                            </ion-item>
+                            <ion-item class="sel-label" *ngIf="user_type == 'sponsor'">
+                                <ion-input type="text" [value]="phone" formControlName="mobile" *ngIf = "i == 0"></ion-input>
+                                <ion-input type="text" formControlName="mobile" [(ngModel)]="emergency_mobile[i]"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                   
+                  </ion-list>
+                  </form>
+                  <br>
+                  <ion-row>
+                  <ion-col col-6 class="view-serv" *ngIf="form.controls.emergency.controls.length > 1">
+                <ion-badge (click)="removeUser(i)" class="services"><i class="fa fa-plus-square" aria-hidden="true"></i>Remove</ion-badge>
+                </ion-col>
+                  <ion-col col-6 class="view-serv">
+                <ion-badge (click)="addUser()" class="services"><i class="fa fa-plus-square" aria-hidden="true"></i>Add More</ion-badge>
+                </ion-col>
+                </ion-row>
+                  <br/>
+              <ion-row>
+              <ion-col>
+          <button class="btn-warnings" color="primary" (click)="cancelemergency()">Cancel</button>
+      
+        <button class="instant-bt" (click)="emergencyDetails()">Next</button>
+        </ion-col>
+        </ion-row>
+        
+              </div>
+              <ion-card class="contact-list" *ngIf="emergencyConfirm">
+               <div class="offered-servicelist">
+              <ion-list>
+              <ion-item text-wrap>
+                  <p *ngIf="user_type == 'sponsor'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">You are availing <strong class="service-name">{{vendorList.requestServices.service}}</strong> service from <strong class="service-name">{{vendorList.vendorDetails.name}}</strong> for <strong class="service-name">{{elderDetails.name}} {{elderDetails.last_name}}</strong></p>
+                   <p *ngIf="user_type != 'sponsor'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">You are availing <strong class="service-name">{{vendorList.requestServices.service}}</strong> service from <strong class="service-name">{{vendorList.vendorDetails.name}}</strong></p>
+                  </ion-item>
+                  <h5 *ngIf="user_type != 'sponsor'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Service Cost : <span class="discountCost">
+                  <i class="fa fa-inr" aria-hidden="true"></i>{{schedule_cost}}</span></h5>
+                   <h5 *ngIf = "booking_status != '1' && vendorList?.requestServices.booking_status != '0'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Pre book percentage : 
+                   <span class="discountCost">{{pre_book_percentage}} %</span></h5>
+                    <h5 *ngIf = "booking_status != '1' && vendorList?.requestServices.booking_status != '0'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Pre book cost : <span class="discountCost"><i class="fa fa-inr" aria-hidden="true"></i>{{schedule_cost * (pre_book_percentage /100)}}</span></h5>
+            <br/>
+              <ion-row>
+              <ion-col>
+
+        <button class="btn-warnings" color="primary" (click)="backemergency()">Cancel</button>
+      
+        <button class="instant-bt" (click)="emergencypaynow(vendorList?.requestServices.category_id,
+        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)">Pay Now</button>
+        </ion-col>
+        </ion-row>
+             </ion-list>
+             
+              </div>
+              </ion-card>
+              <!-- ....................emergency end................. -->
+
+              <!-- ..........................home automation................... -->
+              <div *ngIf="homeschedule">
+              <ion-list *ngIf="user_type == 'sponsor'">
+                  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
+                  <ion-item class="sel-label">
+                      <ion-label>Dependent</ion-label>
+                      <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+                        <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
+                      </ion-select>
+                  </ion-item>
+              </ion-list>
+            <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Preferred date</ion-label>
+             <ion-item class="sel-label">
+                <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" [(ngModel)]="date"></ion-datetime>
+              </ion-item>
+                 <ion-list>
+           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Preferred Time</ion-label>
+            <ion-item class="sel-label">
+              <ion-label class="prefe">Preferred Time</ion-label>
+              <ion-select class="select-brds" [(ngModel)] ="automation_time">
+                <ion-option value="12.00 AM - 01.00 AM">12.00 AM - 01.00 AM</ion-option>
+                <ion-option value="01.00 AM - 02.00 AM">01.00 AM - 02.00 AM</ion-option>
+                <ion-option value="02.00 AM - 03.00 AM">02.00 AM - 03.00 AM</ion-option>
+                <ion-option value="03.00 AM - 04.00 AM">03.00 AM - 04.00 AM</ion-option>
+                <ion-option value="04.00 AM - 05.00 AM">04.00 AM - 05.00 AM</ion-option>
+                <ion-option value="05.00 AM - 06.00 AM">05.00 AM - 06.00 AM</ion-option>
+                <ion-option value="06.00 AM - 07.00 AM">06.00 AM - 07.00 AM</ion-option>
+                <ion-option value="07.00 AM - 08.00 AM">07.00 AM - 08.00 AM</ion-option>
+                <ion-option value="08.00 AM - 09.00 AM">08.00 AM - 09.00 AM</ion-option>
+                <ion-option value="09.00 AM - 10.00 AM">09.00 AM - 10.00 AM</ion-option>
+                <ion-option value="10.00 AM - 11.00 AM">10.00 AM - 11.00 AM</ion-option>
+                <ion-option value="11.00 AM - 12.00 PM">11.00 AM - 12.00 PM</ion-option>
+                <ion-option value="12.00 PM - 01.00 PM">12.00 PM - 01.00 PM</ion-option>
+                <ion-option value="01.00 PM - 02.00 PM">01.00 PM - 02.00 PM</ion-option>
+                <ion-option value="02.00 PM - 03.00 PM">02.00 PM - 03.00 PM</ion-option>
+                <ion-option value="03.00 PM - 04.00 PM">03.00 PM - 04.00 PM</ion-option>
+                <ion-option value="04.00 PM - 05.00 PM">04.00 PM - 05.00 PM</ion-option>
+                <ion-option value="05.00 PM - 06.00 PM">05.00 PM - 06.00 PM</ion-option>
+                <ion-option value="06.00 PM - 07.00 PM">06.00 PM - 07.00 PM</ion-option>
+                <ion-option value="07.00 PM - 08.00 PM">07.00 PM - 08.00 PM</ion-option>
+                <ion-option value="08.00 PM - 09.00 PM">08.00 PM - 09.00 PM</ion-option>
+                <ion-option value="09.00 PM - 10.00 PM">09.00 PM - 10.00 PM</ion-option>
+                <ion-option value="10.00 PM - 11.00 PM">10.00 PM - 11.00 PM</ion-option>
+                <ion-option value="11.00 PM - 12.00 AM">11.00 PM - 12.00 AM</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+            <ion-item class="check-bx" class="one-timereq">
+             <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()">
+             </ion-checkbox> 
+             </ion-item>
+             <ion-label (click)="openTerms()" style="margin:0px;"><a>I agree with the terms and conditions</a></ion-label>        
+            
+           <!--  <ion-item class="terms-con one-timereq">
+      <ion-col><i class="fa fa-file-text" aria-hidden="true"></i> &nbsp;<small style="text-decoration:underline;" class="required" (click)="openTerms()"s>I agree with the terms and conditions </small></ion-col>
+     </ion-item> -->
+            <small *ngIf="checkTerms">
+                <p class="err-reds shake">Kindly agree to the terms and conditions</p>
+            </small>
+               <br/>
+              <ion-row>
+              <ion-col>
+          <button class="btn-warnings" color="primary" (click)="cancelhomemodify()">Cancel
+          </button>
+        <button class="instant-bt" (click)="homemodifynext()">Next</button>
+        </ion-col>
+        </ion-row>
+              </div>
+              <ion-card class="contact-list" *ngIf="confirmhomemodify">
+              <div  class="offered-servicelist">
+              <ion-list>
+              <ion-item text-wrap>
+                  <p *ngIf="user_type == 'sponsor'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">You are availing <strong class="service-name">{{vendorList.requestServices.service}}</strong> service from <strong class="service-name">{{vendorList.vendorDetails.name}}</strong> for <strong class="service-name">{{elderDetails.name}} {{elderDetails.last_name}}</strong></p>
+                   <p *ngIf="user_type != 'sponsor'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">You are availing <strong class="service-name">{{vendorList.requestServices.service}}</strong> service from <strong class="service-name">{{vendorList.vendorDetails.name}}</strong></p>
+                  </ion-item>
+                   <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Service Cost : <span class="discountCost"><i class="fa fa-inr" aria-hidden="true"></i>{{schedule_cost}}</span></h5>
+                 <br/>
+              <ion-row>
+              <ion-col>
+
+        <button class="btn-warnings" color="primary" (click)="backconfirmhome()">Cancel
+        </button>
+      
+        <button class="instant-bt" (click)="homeautomationpaynow(vendorList?.requestServices.category_id,
+        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)">Pay Now</button>
+        </ion-col>
+        </ion-row>
+             </ion-list>
+             
+              </div>
+              </ion-card>
+              <!-- ...............................home automation end................... -->
+
+              <!-- ................................transportation services................. -->
+          <div *ngIf="transportdriver">
+              <ion-list *ngIf="user_type == 'sponsor'">
+                  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
+                  <ion-item class="sel-label">
+                      <ion-label>Dependent</ion-label>
+                      <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+                        <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
+                      </ion-select>
+                  </ion-item>
+              </ion-list>
+            <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Preferred date</ion-label>
+             <ion-item class="sel-label">
+                <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" [(ngModel)]="date"></ion-datetime>
+              </ion-item>
+                 <ion-list>
+           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Preferred Time</ion-label>
+            <ion-item class="sel-label">
+              <ion-label class="prefe">Preferred Time</ion-label>
+              <ion-datetime class="select-brd" displayFormat="HH:mm" placeholder="Scheduled date" [(ngModel)]="automation_time"></ion-datetime>
+           </ion-item>
+          </ion-list>
+          <ion-list>
+           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Hours/Days</ion-label>
+            <ion-item class="sel-label">
+              <ion-label class="prefe">Hours/Days</ion-label>
+              <ion-select class="select-brds" [(ngModel)] ="hours"
+              *ngIf = "vendorList?.vendorDetails.driver_time_slots == '2'">
+                <ion-option value="1">1 day</ion-option>
+                <ion-option value="2">2 days</ion-option>
+                <ion-option value="3">3 days</ion-option>
+                <ion-option value="4">4 days</ion-option>
+              </ion-select>
+              <ion-select class="select-brds" [(ngModel)] ="hours" 
+              *ngIf = "vendorList?.vendorDetails.driver_time_slots == '1'">
+                <ion-option value="4">4 Hours</ion-option>
+                <ion-option value="8">8 Hours</ion-option>
+                <ion-option value="12">12 Hours</ion-option>
+                <ion-option value="16">16 Hours</ion-option>
+                <ion-option value="20">20 Hours</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-list>
+           <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Pickup</ion-label>
+                <ion-item class="sel-label">
+                  <ion-input type="text" value="" placeholder="Pickup" [(ngModel)] ="pickup"></ion-input>
+                </ion-item>
+          </ion-list>
+               <br/>
+              <ion-row>
+              <ion-col>
+          <button class="btn-warnings" color="primary" (click)="canceldriver()">Cancel
+          </button>
+        <button class="instant-bt" (click)="drivernext()">Next</button>
+        </ion-col>
+        </ion-row>
+              </div>
+              <ion-card class="contact-list" *ngIf="confirmdriver">
+              <div  class="offered-servicelist">
+              <ion-list>
+              <ion-item text-wrap>
+                  <p *ngIf="user_type == 'sponsor'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">You are availing <strong class="service-name">{{vendorList.requestServices.service}}</strong> service from <strong class="service-name">{{vendorList.vendorDetails.name}}</strong> for <strong class="service-name">{{elderDetails.name}} {{elderDetails.last_name}}</strong></p>
+                   <p *ngIf="user_type != 'sponsor'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">You are availing <strong class="service-name">{{vendorList.requestServices.service}}</strong> service from <strong class="service-name">{{vendorList.vendorDetails.name}}</strong></p>
+                  </ion-item>
+                  <!--  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Service Cost : <i class="fa fa-inr" aria-hidden="true"></i>{{schedule_cost * hours}}</ion-label> -->
+                 <br/>
+              <ion-row>
+              <ion-col>
+
+        <button class="btn-warnings" color="primary" (click)="backconfirmdriver()">Cancel
+        </button>
+      
+        <button class="instant-bt" (click)="driverpaynow(vendorList?.requestServices.category_id,
+        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)">Pay Cash</button>
+        </ion-col>
+        </ion-row>
+             </ion-list>
+             
+              </div>
+              </ion-card>
+
+              <!-- .................transportation services end .................. -->
+
+              <!-- ........................trans cab........................ -->
+
+               <div *ngIf="transportcab">
+              <ion-list *ngIf="user_type == 'sponsor'">
+                  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
+                  <ion-item class="sel-label">
+                      <ion-label>Dependent</ion-label>
+                      <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+                        <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
+                      </ion-select>
+                  </ion-item>
+              </ion-list>
+            <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Preferred date</ion-label>
+             <ion-item class="sel-label">
+                <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" [(ngModel)]="date"></ion-datetime>
+              </ion-item>
+                 <ion-list>
+           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Preferred Time</ion-label>
+            <ion-item class="sel-label">
+              <ion-label class="prefe">Preferred Time</ion-label>
+              <ion-datetime class="select-brd" displayFormat="HH:mm" placeholder="Scheduled date" [(ngModel)]="automation_time"></ion-datetime>
+           </ion-item>
+          </ion-list>
+          <ion-list>
+           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Type of Service</ion-label>
+            <ion-item class="sel-label">
+              <ion-label class="prefe">Type of Service</ion-label>
+              <ion-select class="select-brds" [(ngModel)] ="typeofservice">
+                <ion-option value="Single">Single</ion-option>
+                <ion-option value="Return">Return</ion-option>
+                <ion-option value="Day">Day Booking</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-list *ngIf = "vendorList.vendorDetails.transport_type == '2'">
+           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">WeelChair Type</ion-label>
+            <ion-item class="sel-label">
+              <ion-label class="prefe">WeelChair Type</ion-label>
+              <ion-select class="select-brds" [(ngModel)] ="weelchair">
+                <ion-option value="Swivel wheelchair">Swival wheelchair</ion-option>
+                <ion-option value="Ramp Wheelchair">Ramp whellchair</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-list>
+           <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Pickup</ion-label>
+                <ion-item class="sel-label">
+                  <ion-input type="text" value="" placeholder="Pickup" [(ngModel)] ="pickup"></ion-input>
+                </ion-item>
+          </ion-list>
+           <ion-list>
+           <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Drop</ion-label>
+                <ion-item class="sel-label">
+                  <ion-input type="text" value="" placeholder="Drop" [(ngModel)] ="drop"></ion-input>
+                </ion-item>
+          </ion-list>
+               <br/>
+              <ion-row>
+              <ion-col>
+          <button class="btn-warnings" color="primary" (click)="cancelcab()">Cancel
+          </button>
+        <button class="instant-bt" (click)="cabnext()">Next</button>
+        </ion-col>
+        </ion-row>
+              </div>
+              <ion-card class="contact-list" *ngIf="confirmcab">
+              <div  class="offered-servicelist">
+              <ion-list>
+              <ion-item text-wrap>
+                  <p *ngIf="user_type == 'sponsor'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">You are availing <strong class="service-name">{{vendorList.requestServices.service}}</strong> service from <strong class="service-name">{{vendorList.vendorDetails.name}}</strong> for <strong class="service-name">{{elderDetails.name}} {{elderDetails.last_name}}</strong></p>
+                   <p *ngIf="user_type != 'sponsor'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">You are availing <strong class="service-name">{{vendorList.requestServices.service}}</strong> service from <strong class="service-name">{{vendorList.vendorDetails.name}}</strong></p>
+                  </ion-item>
+                   <!-- <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Service Cost : <i class="fa fa-inr" aria-hidden="true"></i>{{schedule_cost * hours}}</ion-label> -->
+                 <br/>
+              <ion-row>
+              <ion-col>
+
+        <button class="btn-warnings" color="primary" (click)="backconfirmcab()">Cancel
+        </button>
+      
+        <button class="instant-bt" (click)="cabpaynow(vendorList?.requestServices.category_id,
+        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)">Pay Cash</button>
+        </ion-col>
+        </ion-row>
+             </ion-list>
+             
+              </div>
+              </ion-card>
+              <!-- ............................transcab end.......................... -->
+
+              <!-- .............................recreation..................... -->
+            <div *ngIf="booknownext">
+              <ion-list *ngIf="user_type == 'sponsor'">
+                  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
+                  <ion-item class="sel-label">
+                      <ion-label>Dependent</ion-label>
+                      <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+                        <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name
+                          }}</ion-option>
+                      </ion-select>
+                  </ion-item>
+              </ion-list>
+                  
+                  <ion-list *ngIf="user_type == 'sponsor' && eldershow">
+                    <ion-row>
+                        <ion-col width-60>
+                            <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Name</ion-label>
+                            <ion-item class="sel-label">
+                                <ion-input type="text" value="{{elderDetails.name}} {{elderDetails.last_name}}" disabled></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col width-40>
+                            <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Age</ion-label>
+                            <ion-item class="sel-label">
+                              <ion-input type="text" value="{{elderDetails.age}}" disabled></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                   
+                  </ion-list>
+                  <ion-list *ngIf="user_type == 'elder'">
+                      <ion-row>
+                          <ion-col width-60>
+                              <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Name</ion-label>
+                              <ion-item class="sel-label">
+                                  <ion-input type="text" value="{{name}} {{lastname}}" disabled></ion-input>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col width-40>
+                              <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Age</ion-label>
+                              <ion-item class="sel-label">
+                                  <ion-input type="text" value="{{elderage}}" disabled></ion-input>
+                              </ion-item>
+                          </ion-col>
+                      </ion-row>
+                     
+                    </ion-list>
+                     <ion-list *ngFor="let people of total_peoples;let i=index">
+                    <ion-row>
+                      <ion-col width-60>
+                          <ion-item class="sel-label">
+                              <ion-input type="text" [(ngModel)]="elder_name[i]"></ion-input>
+                          </ion-item>
+                      </ion-col>
+                      <ion-col width-40>
+                          <ion-item class="sel-label">
+                              <ion-input type="text" [(ngModel)]="elder_age[i]" type="number"></ion-input>
+                          </ion-item>
+                      </ion-col>
+                    </ion-row>
+                 
+              </ion-list>
+              <br/>
+              <ion-row>
+              <ion-col>
+          <button class="btn-warnings" color="primary" (click)="cancelconfirmation()">Cancel</button>
+      
+        <button class="instant-bt" (click)="confirmationDetails()">Next</button>
+        </ion-col>
+        </ion-row>
+            </div>
+
+            <div *ngIf="confirmationDetail">
+               <ion-row>
+                  <p class="service-conts"><span class="token-primaryss">Schedule Date : </span>{{vendorList?.requestServices.start_date}}
+                  </p>
+                 </ion-row>
+                  <ion-row>
+                  <p class="service-conts"><span class="token-primaryss">Participants : </span>{{peoplecount}}
+                  </p>
+                 </ion-row>
+                  <ion-row>
+                  <p class="service-conts"><span class="token-primaryss">Actual Cost : </span><i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{schedule_cost}}
+                  </p>
+                 </ion-row>
+                 <ion-row>
+                  <p class="service-conts"><span class="token-primaryss">Total Cost : </span><i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{totalcosts}}
+                  </p>
+                 </ion-row>
+              
+            <br/>
+              <ion-row>
+              <ion-col>
+          <button class="btn-warnings" color="primary" (click)="cancelpay()">Cancel</button>
+      
+        <button class="instant-bt" (click)="payNow(vendorList?.requestServices.category_id,
+        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)">Pay Now</button>
+        </ion-col>
+        </ion-row>
+            </div>
+            <!-- ..........................recreation end..................... -->
+            <div *ngIf="contact">
+                <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Name</ion-label>
+              <ion-item class="sel-label">
+                <ion-input type="text" value="{{name}}" disabled></ion-input>
+            </ion-item>
+            <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Mobile</ion-label>
+            <ion-item class="sel-label">
+              <ion-input type="text" value="{{phone}}" disabled></ion-input>
+          </ion-item>
+          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Enter Your Query</ion-label>
+          <ion-item class="sel-label">
+            <ion-input type="text" placeholder="Type Your Query Here..." [(ngModel)]="queries"></ion-input>
+        </ion-item>
+            <br/>
+              <ion-row>
+              <ion-col>
+        <button class="btn-warnings" color="primary" (click)="cancelcontact()">Cancel</button>
+      
+        <button class="instant-bt" (click)="sendContactDetails(vendorList?.requestServices.category_id,
+          vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendor_id)">Send</button>
+        </ion-col>
+        </ion-row>
+            </div>
+            
+           </ion-card>
+  </div>
+        <div *ngIf="safeandsecurity" class="offered-servicelist">
+              <ion-list *ngIf="user_type == 'sponsor'">
+                  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
+                  <ion-item class="sel-label">
+                      <ion-label>Dependent</ion-label>
+                      <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+                        <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name
+                          }}</ion-option>
+                      </ion-select>
+                  </ion-item>
+                    <br/>
+              <ion-row>
+              <ion-col>
+        <button class="btn-warnings" color="primary" (click)="cancelsafe()">Cancel</button>
+      
+        <button class="instant-bt" (click)="sendsafe()">Next</button>
+        </ion-col>
+        </ion-row>
+              </ion-list>
+             
+              </div>
+              <ion-card class="contact-list" *ngIf="safeConfirm">
+              <div  class="offered-servicelist">
+              <ion-list>
+              <ion-item text-wrap>
+                  <p *ngIf="user_type == 'sponsor'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">You are availing {{vendorList.requestServices.service}} service from <strong class="service-name">{{vendorList.vendorDetails.name}}</strong> for <strong class="service-name">{{elderDetails.name}} {{elderDetails.last_name}}</strong></p>
+                   <p *ngIf="user_type != 'sponsor'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">You are availing <strong class="service-name">{{vendorList.requestServices.service}}</strong> service from <strong class="service-name">{{vendorList.vendorDetails.name}}</strong></p>
+                  </ion-item>
+                   <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Service Cost : <span class="discountCost"><i class="fa fa-inr" aria-hidden="true"></i>{{schedule_cost}}</span></h5>
+                   <h5 *ngIf = "booking_status != '1' && vendorList?.requestServices.booking_status != '0'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Pre book percentage : 
+                   <span class="discountCost">{{pre_book_percentage}} %</span></h5>
+                    <h5 *ngIf = "booking_status != '1' && vendorList?.requestServices.booking_status != '0'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Pre book cost : <span class="discountCost"><i class="fa fa-inr" aria-hidden="true"></i>{{schedule_cost * (pre_book_percentage /100)}}</span></h5>
+                     <ion-label *ngIf = "booking_status != '1' && vendorList?.requestServices.booking_status != '0'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Are you sure you want to prebook?</ion-label>
+                
+            <br/>
+              <ion-row>
+              <ion-col>
+
+        <button class="btn-warnings" color="primary" (click)="backcancel()">Cancel</button>
+      
+        <button *ngIf = "booking_status != '1'" class="instant-bt" (click)="wearablespaynow(schedule_cost * (pre_book_percentage /100),vendorList?.requestServices.category_id,
+        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)">Pay Now</button>
+        <button *ngIf = "booking_status == '1'" class="instant-bt" (click)="wearablespaynow(schedule_cost,vendorList?.requestServices.category_id,
+        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)">Pay Now</button>
+        </ion-col>
+        </ion-row>
+        <!-- </ion-item> -->
+             </ion-list>
+             
+              </div>
+              </ion-card>
         <div *ngIf(showServiceOffered) class="offered-servicelist">
           <ion-item *ngFor = "let service of vendorList.serviceOffered">
             <ion-card *ngFor = "let category_list of service.category_lists; let i=index">
@@ -49,7 +673,7 @@
                           <ion-card *ngFor="let services of subcategory_list.services" >
 							<ion-row>
 								<ion-col width-80 ion-item (click)= "goToService(services)" text-wrap class="service-lefttext">
-								 <p> {{services.service}}</p> 
+								 <p>{{services.service}}</p> 
 								</ion-col>
 								<ion-col width-20 class="service-rightprice">
 								<small><i class="fa fa-inr" aria-hidden="true">{{services.service_cost}}</i></small>
@@ -88,27 +712,32 @@
 			
 			</ion-item>
 			
-			
-			
-		
-	      	</ion-card>
+			</ion-card>
 
 		   	<ion-card *ngIf(!vendorList?.vendorDetails?.address)>
 				<ion-item style="color:red; font-size:15px;color:red;">"No Address Deatails To Display"</ion-item>		  
 	      	</ion-card>
       	</div>
-         <div *ngIf(showPackagesDetails) class="add-detalis">
-          <!-- <div *ngFor = "let packages of vendorList.packages"> -->
-         <!-- 
-        <ion-item text-wrap>
-        <p text-capitalize>Packeage Name:{{packages.package_name}}</p>
-        </ion-item>
-        <ion-item text-wrap>
-        <p>Packeage Cost:{{packages.package_cost}}</p>
-        </ion-item>
-        <ion-item text-wrap>
-        <p>{{packages.package_description}}</p>
-        </ion-item>-->
+        <div *ngIf(showRecreationDetails) class="add-detalis">
+         <ion-card class="packagelist" *ngFor="let pack of vendorList.vendorRecreationDetails; let i=index" text-wrap>
+        <img [src]="url+pack?.banners" class="slide-image" width="100" height="150"/>
+         <ion-item style="padding-left:0px;" class="textlg">
+                    <ion-col> 
+                      <!--<div class="plan featured orangeColor">-->
+                      <h3>{{pack.name}}</h3> 
+                      </ion-col>
+                      <p class="service-conts"><span class="token-primaryss">Cost : </span><b>
+                      <i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{pack.service_cost - pack.percentage_cost}} <span *ngIf="pack.service_cost != 0">/&nbsp;
+                        <i class="fa fa-inr" aria-hidden="true"></i><strong>{{pack.service_cost}}</strong></span></b></p>
+
+                        <p class="service-conts"><span class="token-primaryss">Date : </span>{{pack?.start_date}} to {{pack?.end_date}}
+                        </p>
+                        <button class="instant-bt" (click)="viewDetails(pack.service_cost - pack.percentage_cost,pack.service_cost,location_id,availability,balanceRecreationService,pack.vendor_id,pack?.id,vendorList?.requestServices.category)">View Details</button>
+                      </ion-item>
+
+         </ion-card>
+        </div>
+       <div *ngIf(showPackagesDetails) class="add-detalis">
         <ion-card class="packagelist" *ngFor="let pack of vendorList.packages; let i=index" text-wrap>
             <!-- <ion-slides slidesPerView= ""> -->
           
@@ -117,30 +746,30 @@
                     <ion-col> 
                       <!--<div class="plan featured orangeColor">-->
                       <h3>{{pack.package_name}}</h3> 
-				  
+          
                       <ion-list class="price-bt" *ngIf="pack.discount_rate_package == NULL"><span><i class="fa fa-inr"></i> {{pack.package_amount}}/-</span></ion-list>
                       <ion-list class="price-bt" *ngIf="pack.discount_rate_package != NULL"><span><i class="fa fa-inr"></i>{{pack.package_amount - pack.package_amount*pack.discount_rate_package/100}}/-</span></ion-list>
                       <ion-list class="price-list" *ngIf="pack.discount_rate_package != NULL">     
                       <small><i class="fa fa-rupee"></i>{{pack.package_amount}} </small>
                       <span>  {{pack.discount_rate_package}} % off <b> For {{pack.package_validity}}</b> </span>
-					  <p>{{pack.package_description}}</p>
+            <p>{{pack.package_description}}</p>
                       <!-- <span >{{service_type}}</span> -->
                       </ion-list>
-					     
-						               
+               
+                           
                        <ion-list *ngIf="vendorList.dependentLists.length != 1">
                         <!-- <div *ngIf="pack.package_available == 0"> -->
-                        <a (click)="openRequestPackage(pack.id)" class="lan-select">Get Package</a>
+                        <a (click)="openRequestPackage(pack.id,pack.vendor_id,pack.package_validity,pack.package_amount)" class="lan-select">Get Package</a>
                         <!-- </div> -->
                       </ion-list>   
 
                         <ion-list *ngIf="pack.package_available == 0" text-center>
-                        <a (click)="openRequestPackage(pack.id)" class="lan-select">Get Package</a>                      
+                        <a (click)="openRequestPackage(pack.id,pack.vendor_id,pack.package_validity,pack.package_amount)" class="lan-select">Get Package</a>                      
                         </ion-list>   
                       <strong class="purch-already" *ngIf="pack.package_available > 0">You've already purchased this
                      </strong>
-					 <ion-list *ngFor="let pack_serve of pack.packages_service; let i=index" class="listed-descr">
-							{{pack_serve.name}} {{pack_serve.quantity}}  {{pack_serve.common_type.replace('Per', '')}}</ion-list>
+           <ion-list *ngFor="let pack_serve of pack.packages_service; let i=index" class="listed-descr">
+              {{pack_serve.name}} {{pack_serve.quantity}}  {{pack_serve.common_type.replace('Per', '')}}</ion-list>
                                      
                          <ion-list class="listed-descr" *ngFor="let pack_serve of pack.packages_service; let i=index" >{{pack_serve.name}} {{pack_serve.quantity}}  {{pack_serve.common_type.replace('Per', '')}}</ion-list>
                     

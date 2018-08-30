@@ -1,9 +1,10 @@
 {
   "name": "ElderIndia",
-  "app_id": "3199117e",
-  "typscript": true,
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "typscript": true,
+  "type": "ionic-angular",
+  "pro_id": "3199117e",
+  "app_id": ""
 }

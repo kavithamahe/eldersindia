@@ -1,41 +1,25 @@
-
 <ion-header>
-  <ion-navbar color="primary">
-    <ion-buttons left>
-      <button ion-button icon-only menuToggle>
-        <ion-icon name="menu"></ion-icon>
+  <ion-toolbar class="hei-head" color="primary">
+    <ion-title color="primary" class="tittles-md" text-capitalize>
+     Online Payment
+    </ion-title>
+    <ion-buttons start item-right class="close-iconss">
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios"></span>
+        <ion-icon ios="ios-close-circle-outline" md="md-close-circle" ></ion-icon>
       </button>
     </ion-buttons>
-	<ion-title text-center text-capitalize>payment</ion-title>
-   
-    
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
+<ion-content>
+  <ion-card class="payment-details">
 
-<ion-content padding>
+     <h1>Confirm Your Payment</h1>
+    <p>Are You Sure Want To Continue This Payment.This Page Will Redirect To Razorpay Payment Gateway.</p>
 
-  <form name="sendParam" id="sendParam" method="post" action="https://test.payu.in/_payment">
-		      
-		      <input type="hidden" name="hash" id="hash" [value]="hash"/>
-		      <input type="hidden" name="key" id="key" [value]="key"/>
-		      <input type="hidden" name="txnid" id="txnid" [value]="txnid"/>
-		      <input  type="hidden" name="firstname" id="firstname" [value]="firstname"/>
-		      <input  type="hidden" name="email" id="email" [value]="email">
-		      <input name="phone"  type="hidden" id="phone" [value]="phone"/>
+<button class="services-view" (click)="payno()">No</button>
+<button class="services" (click)="pay()" *ngIf="Recreation_service != 'Recreation' && Recreation_service != 'Safety and security'">Yes</button>
+<button class="services" *ngIf="Recreation_service == 'Recreation' || Recreation_service == 'Safety and security'" (click)="payRecreation()">Yes</button>
 
-		      <input  type="hidden" name="amount" id="amount" [value]="amount"/>
-
-		      <input type="hidden" name="productinfo" id="productinfo" [value]="productinfo" />
-		      <input  type="hidden" name="service_provider" id="service_provider" [value]="service_provider" size="64"/>
-		      <input  type="hidden" name="surl" id="surl" [value]="surl" size="64"/>
-		      <input  type="hidden" name="furl" id="furl" [value]="furl" size="64"/>
-		      
-		      <input type="hidden" name="udf1" [value]="udf1" id="udf1"> 
-		      <input type="hidden" name="udf2" [value]="udf2" id="udf2"> 
-		      <input type="hidden" name="udf3" [value]="udf3" id="udf3"> 
-						
-		 <input type="submit" (click)="submitForm(sendParam)" value="Click Here To Pay"/>
-	</form > 
-  <button ion-button (click)="pay()" >Open Web</button>
-
+  </ion-card>
 </ion-content>

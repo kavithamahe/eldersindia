@@ -14,14 +14,31 @@
 <ion-content class="login-pages">
 <ion-card class="liste-view">
 	<ion-item text-wrap>
-	   <h1>You can cancel the follow services ?</h1>
+	   <h1>You can cancel the following services?</h1>
 	   <div *ngFor="let recurring of recurringRequest">
 	   			<ion-badge>{{recurring.sr_token}}</ion-badge>
 	   	</div>
 	   <h2>Are you sure you want to delete this recurring service !</h2>
 	</ion-item>
-		<button ion-button small (click)="delete()" class="yes-btn">Yes</button>
-	<button ion-button small (click)="cancel()" class="no-btn">No</button>
+	<ion-item>
+	<h1>Total service amount:<i class="fa fa-rupee"></i>{{service_costs}}</h1>
+	<h1>Paid amount:<i class="fa fa-rupee"></i>{{paid_amount}}</h1>
+	<h1>Cancellation fee:<i class="fa fa-rupee"></i>{{dedction_amount}}</h1>
+	<h1 *ngIf="paid_amount > total_amount">Refundable Amount:<i class="fa fa-rupee"></i>{{refund_amount}}</h1>
+	<h1 *ngIf="total_amount > paid_amount">Balance Amount:<i class="fa fa-rupee"></i>{{balance_amount}}</h1>
+	</ion-item>
+	<ion-item>
+	<ion-input type="text" placeholder="comments...." [(ngModel)]="comments">
+	</ion-input>
+	</ion-item>
+	  <ion-row>
+  <ion-col class="view-serv">
+<ion-badge (click)="cancel()" class="services-del">No</ion-badge>
+<ion-badge class="dele" (click)="delete()" class="services">Yes</ion-badge>
+	</ion-col>
+   </ion-row>
 
 	</ion-card>
+	
+
 </ion-content>

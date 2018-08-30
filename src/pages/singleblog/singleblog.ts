@@ -134,7 +134,7 @@ allow_comment:any;
       }
     );   
   }
-   public deleteReplyComment(commentId)
+  public deletereplyComment(commentId)
   {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();

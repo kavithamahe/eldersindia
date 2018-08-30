@@ -18,46 +18,38 @@
             <ion-icon name="home"></ion-icon>
         </button>
     </ion-buttons>
-    
-  
-
   </ion-navbar>
 </ion-header>
 
 <ion-content  class="change-log">
-<ion-fab>
-  <button ion-fab mini icon-only (click)="editProfile()" class="edit-profiles"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-</ion-fab>
-<div class="profile-edit">
-
-    <span class="profile-img"><img alt="logo" [src]="base64Image" *ngIf="base64Image"/>
-     </span>
-		<p text-capitalize>{{profileData?.name}} {{profileData?.last_name}}</p>
+  <ion-fab>
+    <button ion-fab mini icon-only (click)="editProfile()" class="edit-profiles"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+  </ion-fab>
+  <div class="profile-edit">
+   <span class="profile-img"><img alt="logo" [src]="base64Image" *ngIf="base64Image"/></span>
+	 <p text-capitalize>{{profileData?.name}} {{profileData?.last_name}}</p>
 	</div>
-	<div class="edit-profile">
-       
-    
-  
-  </div>
-	
-
-<div class="edit-profile-view">
-<div class="listed-profiles" color="mistyrose">
+	<div class="edit-profile"></div>
+	<div class="edit-profile-view">
+    <div class="listed-profiles" color="mistyrose">
 	         <p *ngIf="user_type =='elder' "><i class="fa fa-building-o"></i>&nbsp;{{profileData?.relation}}</p>
-           <p *ngIf="user_type =='elder' "><i class="fa fa-user"></i>&nbsp;{{profileData?.user_type}}</p>
+           <!-- <p *ngIf="user_type =='elder' "><i class="fa fa-user"></i>&nbsp;{{profileData?.user_type}}</p> -->
             <p *ngIf="user_type =='sponsor' "><i class="fa fa-building-o"></i>&nbsp;{{profileData?.company_name}}</p>
             <p *ngIf="user_type =='sponsor' "><i class="fa fa-user-secret"></i>&nbsp;{{profileData?.designation}}</p>
             <p *ngIf="user_type !='elder' "><i class="fa fa-suitcase"></i>&nbsp;{{profileData?.employee_id}}</p>
-            <p><i class="fa fa-phone"></i>&nbsp;{{profileData?.mobile}} <button ion-button clear (click)="showPrompt()" *ngIf="profileData?.mobile_verified == 0"><i class="fa fa-share-square" aria-hidden="true"></i>verify</button>
-            <button ion-button clear *ngIf="profileData?.mobile_verified == 1"><i class="fa fa-share-square" aria-hidden="true"></i>verified</button></p>			
+            <p><i class="fa fa-phone"></i>&nbsp;{{profileData?.mobile}} 
+			<button ion-button clear (click)="showPrompt()" *ngIf="profileData?.mobile_verified == 0" class="verified-s"><i class="fa fa-check" aria-hidden="true"></i>
+verify</button>
+            <button ion-button clear *ngIf="profileData?.mobile_verified == 1" class="verified-d"><i class="fa fa-check" aria-hidden="true"></i>
+verified</button></p>			
            <p *ngIf="user_type =='sponsor' "><i class="fa fa-envelope-o"></i>&nbsp;{{profileData?.personal_email}}</p>
-           <p><i class="fa fa-user"></i>&nbsp;{{profileData?.user_type}}</p>
+           <!-- <p><i class="fa fa-user"></i>&nbsp;{{profileData?.user_type}}</p> -->
 		   <p><i class="fa fa-map-marker"></i>&nbsp;{{profileData?.locationName}}</p>
             <p><i class="fa fa-birthday-cake" aria-hidden="true"></i>&nbsp;{{user_dob}}
             </p>
            <p><i class="fa fa-envelope-o"></i>&nbsp;{{profileData?.email}}</p>
             <p *ngIf="user_type !='sponsor' "><i class="fa fa-map-marker"></i>&nbsp;{{profileData?.address}}</p>
-			<p><i class="fa fa-calendar"></i>&nbsp;{{profileData?.updated_at}}</p>
+			<!-- <p><i class="fa fa-calendar"></i>&nbsp;{{profileData?.updated_at}}</p> -->
 		
   </div>
 </div>

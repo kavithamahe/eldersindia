@@ -4,18 +4,22 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-<ion-navbar color="primary">
 
-<ion-buttons center>
-    <ion-title text-center>
-      Services For Package
-    </ion-title>
- </ion-buttons>  
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center text-capitalize>Services For Package</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="dashboardPage()">
+      <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
-
-
 
 <ion-content class="content-intop">
 <ion-card *ngFor="let package of packageData">
@@ -36,14 +40,15 @@
 	  <ion-row>
   <ion-col col-12 text-wrap>
 	
-    <b>Total Quantity</b><p>{{package?.quantity}} {{package?.common_type}}</p>
+    <b>Total Quantity</b><p>{{package?.quantity}} {{package.common_type}}</p>
 	</ion-col>
 	</ion-row>
 	
 		  <ion-row>
   <ion-col col-12 text-wrap>
 	
-    <b>Used Quantity</b><p>{{package?.available_package_service}} {{package?.common_type}}</p>	
+    <b>Used Quantity</b><p>{{package?.available_package_service}} {{package.common_type}}</p>	
+
 	</ion-col>
 	</ion-row>
 	<ion-row>

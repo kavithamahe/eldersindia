@@ -14,9 +14,9 @@ page-job-dependent {
     background-color: red;
 }
 .inputfile + label {
-	cursor: pointer; /* "hand" cursor */
+    cursor: pointer; /* "hand" cursor */
 }
-/*.content-intop										{background-image: url('../assets/img/jobs.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}*/
+/*.content-intop                                        {background-image: url('../assets/img/jobs.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}*/
 .btn-cars{border-radius:0px; box-shadow:none; }
 .sele-file{border-radius:0px; box-shadow:none; }
 .sele-file ion-label{font-family:"Muli",sans-serif; font-size:17px; font-weight:400; color: hsl(0, 0%, 47%);}
@@ -36,7 +36,7 @@ page-job-dependent {
     margin-left: 5px;
     text-transform: capitalize;
     width:95%;}
-	
+    
 .submit-btns-can{ background: hsl(14, 99%, 56%) none repeat scroll 0 0 !important;
     border-radius: 20px;
     color: hsl(0, 0%, 100%);

@@ -7,8 +7,12 @@ import { MyApp } from './app.component';
 import { TruncateModule } from 'ng2-truncate';
 import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
-// import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
+import { Network } from '@ionic-native/network';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { Device } from "@ionic-native/device";
+
 
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -41,11 +45,13 @@ import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 import { ViewpackagePagePage } from '../pages/viewpackage/viewpackage';
 import { ElderservicePagePage } from '../pages/elderservice/elderservice';
 import { PaymentPage } from '../pages/payment/payment';
+import { PackagepaymentPagePage } from '../pages/packagepayment/packagepayment';
 import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
+import { VerifyotpPagePage } from '../pages/verifyotp/verifyotp';
 
 //packages related pages
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
-import {PackageDetailPagePage } from '../pages/package-detail/package-detail'; 
+import {PackageDetailPagePage } from '../pages/package-detail/package-detail';
 
 import { ServiceprovidersPage } from '../pages/serviceproviders/serviceproviders';
 import { ServicerequestPage } from '../pages/servicerequest/servicerequest';
@@ -66,6 +72,9 @@ import { EmojiPickerPage } from '../pages/emoji-picker/emoji-picker';
 import { RecurringPagePage } from '../pages/recurring/recurring';
 import { RecurringviewPagePage } from '../pages/recurringview/recurringview';
 import { RecurringcancelPagePage } from '../pages/recurringcancel/recurringcancel';
+import { EnquiriesPagePage } from '../pages/enquiries/enquiries';
+import { ViewenquiryPagePage } from '../pages/viewenquiry/viewenquiry';
+import { SafemePagePage } from '../pages/safeme/safeme';
 
 // Kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
@@ -107,7 +116,7 @@ import { ServiceProvider } from '../providers/service-provider';
 // import { Externallinks } from '../providers/externallinks';
 
 
-
+ 
 @NgModule({
   declarations: [
     MyApp,
@@ -170,7 +179,12 @@ import { ServiceProvider } from '../providers/service-provider';
     SettingsPage,
     ServiceModalPage,
     TermsModalPage,
-    RemotemonitorPagePage
+    PackagepaymentPagePage,
+    RemotemonitorPagePage,
+    EnquiriesPagePage,
+    ViewenquiryPagePage,
+    SafemePagePage,
+    VerifyotpPagePage
   ],
   imports: [
 
@@ -249,10 +263,16 @@ import { ServiceProvider } from '../providers/service-provider';
     SettingsPage,
     ServiceModalPage,
     TermsModalPage,
-    RemotemonitorPagePage
+    PackagepaymentPagePage,
+    RemotemonitorPagePage,
+    EnquiriesPagePage,
+    ViewenquiryPagePage,
+    SafemePagePage,
+    VerifyotpPagePage
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,LoginUser,CommunityServices,DatePipe,ServiceProvider,AppConfig,Storage] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage,DatePipe,Device] // Add GithubUsers provider
+
 })
 export class AppModule {}

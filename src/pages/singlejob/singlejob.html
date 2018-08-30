@@ -24,7 +24,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-<ion-card *ngIf(!appliedjobs) class="job-detailsvie">
+<div *ngIf(!appliedjobs) class="job-detailsvie">
 
 <div *ngFor="let singleJob of singleJobInfo">
 <ion-row>
@@ -74,12 +74,11 @@
 </ion-row> -->
 <ion-row>
 <ion-col>
+    <button ion-button  class="oranges" full *ngIf="user_type == 'elder' && singleJob.is_applied == 1"><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
   <button ion-button  class="oranges" full *ngIf="singleJob.is_applied == 0" (click)="applyJob(singleJob?.id)" (press)="pressevent(singleJob?.id)"><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button>
-   <button ion-button  class="oranges" *ngIf="singleJob.is_applied == 1" full><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
   </ion-col>
 </ion-row>
 <hr/>
-
 
 <ion-row>
 <ion-col class="single-jobscotact">
@@ -95,9 +94,9 @@
 
 <br/>
 </div>
-</ion-card>
+</div>
 
-<ion-card class="job-detailsvie" *ngIf(appliedjobs)>
+<div class="job-detailsvie" *ngIf(appliedjobs)>
 
 <div *ngFor="let applyjob of myjobrequestinfo">
 <ion-row>
@@ -111,9 +110,9 @@
 
 </ion-row>
 <p><i class="fa fa-building-o"></i><span>{{applyjob?.company_name}}</span></p>
-<p><i class="fa fa-calendar-o"> </i><span *ngIf="applyjob?.created_at">{{applyjob?.created_at |  date :'MMM dd y'}}</span></p>
+<p><i class="fa fa-calendar-o"> </i><span *ngIf="applyjob?.created_at">{{applyjob?.created_at}}</span></p>
 <p><i class="fa fa-map-marker" aria-hidden="true" style="padding-left:3px;"></i><span *ngFor="let locations of applyjob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
- <p><i class="fa fa-calendar-o"> </i><span *ngIf="applyjob?.created_at">Posted On: {{applyjob?.created_at |  date :'MMM dd y'}}</span></p>
+ <p><i class="fa fa-calendar-o"> </i><span *ngIf="applyjob?.created_at">Posted On: {{applyjob?.created_at}}</span></p>
  <p><i class="fa fa-calendar-o"> </i><span *ngIf="applyjob?.job_expiry">Valid Upto: {{applyjob?.job_expiry}}</span></p>
 
 <hr/>
@@ -139,8 +138,8 @@
 </ion-row>
 <ion-row>
 <ion-col>
-  <button *ngIf="user_type == 'sponsor'" (click)="applyJob(applyjob?.id)" ion-button class="oranges" full ><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button>
-  <button *ngIf="user_type == 'elder'" ion-button class="oranges" full ><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
+  <!-- <button *ngIf="user_type == 'sponsor'" (click)="applyJob(applyjob?.id)" ion-button class="oranges" full ><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button> -->
+  <button ion-button class="oranges" full ><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
   </ion-col>
 </ion-row>
 <hr/>
@@ -161,7 +160,7 @@
 <br/>
  </div>
 
-</ion-card>
+</div>
  
  </ion-content>
 

@@ -3,7 +3,7 @@ page-connections {
 .toolbar-title-ios{ text-align:center;}
 .conn-seg{box-shadow:none !important; background:none !important;}
 
-.inbox-sends ion-row ion-col h6{    color: #007994 !important;
+.inbox-sends ion-row ion-col h6{
     font-family: "Muli",sans-serif;
     font-size:19px !important;
     padding-bottom:0px; font-weight:400;
@@ -45,27 +45,27 @@ page-connections {
 .inbox-sends .item-inner .input-wrapper .label-md ion-row { border-bottom:3px solid #ccc !important;  border-width: 3px;
     border-style: solid;
     -webkit-border-image: 
-      -webkit-gradient(linear, 0 0, 0 100%, from(#ED8023), to(rgba(0, 0, 0, 0))) 1 100%;
+      -webkit-gradient(linear, 0 0, 0 100%, from(#A1CCE0), to(rgba(0, 0, 0, 0))) 1 100%;
     -webkit-border-image: 
-      -webkit-linear-gradient(#ED8023, rgba(0, 0, 0, 0)) 1 100%;
+      -webkit-linear-gradient(#A1CCE0, rgba(0, 0, 0, 0)) 1 100%;
     -moz-border-image:
-      -moz-linear-gradient(#ED8023, rgba(0, 0, 0, 0)) 1 100%;    
+      -moz-linear-gradient(#A1CCE0, rgba(0, 0, 0, 0)) 1 100%;    
     -o-border-image:
-      -o-linear-gradient(#ED8023, rgba(0, 0, 0, 0)) 1 100%;
+      -o-linear-gradient(#A1CCE0, rgba(0, 0, 0, 0)) 1 100%;
     border-image:
-      linear-gradient(to bottom, #ED8023, rgba(0, 0, 0, 0)) 1 100%;}
+      linear-gradient(to bottom, #A1CCE0, rgba(0, 0, 0, 0)) 1 100%;}
 .inbox-sends .item-inner .input-wrapper .label-ios ion-row {border-bottom:3px solid #ccc !important;  border-width: 3px;
     border-style: solid;
     -webkit-border-image: 
-      -webkit-gradient(linear, 0 0, 0 100%, from(#ED8023), to(rgba(0, 0, 0, 0))) 1 100%;
+      -webkit-gradient(linear, 0 0, 0 100%, from(#A1CCE0), to(rgba(0, 0, 0, 0))) 1 100%;
     -webkit-border-image: 
-      -webkit-linear-gradient(#ED8023, rgba(0, 0, 0, 0)) 1 100%;
+      -webkit-linear-gradient(#A1CCE0, rgba(0, 0, 0, 0)) 1 100%;
     -moz-border-image:
-      -moz-linear-gradient(#ED8023, rgba(0, 0, 0, 0)) 1 100%;    
+      -moz-linear-gradient(#A1CCE0, rgba(0, 0, 0, 0)) 1 100%;    
     -o-border-image:
-      -o-linear-gradient(#ED8023, rgba(0, 0, 0, 0)) 1 100%;
+      -o-linear-gradient(#A1CCE0, rgba(0, 0, 0, 0)) 1 100%;
     border-image:
-      linear-gradient(to bottom, #ED8023, rgba(0, 0, 0, 0)) 1 100%;}
+      linear-gradient(to bottom, #A1CCE0, rgba(0, 0, 0, 0)) 1 100%;}
 .inbox-sends .item-inner .input-wrapper .label-md ion-row ion-col p i.fa-blind{color:#ED8023 !important; font-size:18px !important;}
 .inbox-sends .item-inner{padding-right:0px !important;}
 
@@ -93,5 +93,6 @@ page-connections {
     text-transform: capitalize;
     width: 48%;}
 
-
+.sp-el{margin-top:10px; }
+.sp-el span{line-height:30px;}
 }

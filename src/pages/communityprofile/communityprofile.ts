@@ -96,18 +96,18 @@ export class CommunityprofilePage {
   scrollToBottom(){
     this.content.scrollToBottom();
   }
-  ionViewDidEnter(){
-      this.storage.ready().then(() => {
-      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-      this.storage.get('id').then((id) => { this.my_id=id; });
-      this.storage.get('token').then((token) => { this.token=token;
-       this.profileCommunity(this.profile_uid);
-      this.memberProfile(this.profile_uid);
-      this.getPrivacy(this.profile_uid);
-    })
+  // ionViewDidEnter(){
+  //     this.storage.ready().then(() => {
+  //     this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+  //     this.storage.get('id').then((id) => { this.my_id=id; });
+  //     this.storage.get('token').then((token) => { this.token=token;
+  //      this.profileCommunity(this.profile_uid);
+  //     this.memberProfile(this.profile_uid);
+  //     this.getPrivacy(this.profile_uid);
+  //   })
       
-    });
-  }
+  //   });
+  // }
     ionViewWillEnter() {
     this.tabBarElement.style.display = 'none';
   }
@@ -343,7 +343,7 @@ goBackToProfile(profile_id){
   connectMember(user){
         let loader = this.loadingCtrl.create({ content: "Please wait..." });     
         loader.present();
-        this.communityServices.connectMember(user.id,user.name).subscribe(users => {
+        this.communityServices.connectMember(user.id,user.name,user.last_name).subscribe(users => {
         this.showToast(users.result.info);
         this.memberProfile(user.id);
        this.request_sent = true;

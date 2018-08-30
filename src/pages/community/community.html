@@ -42,7 +42,7 @@
 				<i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Invite Your Contacts
 			   </button>
 			</ion-item>
-			<ion-slides slidesPerView= "3">
+			<ion-slides slidesPerView= "4">
 			
 				<div *ngFor="let member of members; let i=index" text-wrap>
 					<ion-slide [hidden]="!member?.avatar">
@@ -50,7 +50,7 @@
 							<ion-col [hidden]="!member?.avatar">
 							<ion-avatar>
 								<img (click)="membersProfile(member.uid)" 
-								[src]="imageUrl+member?.avatar" style="width:100px; height:80px;"  />
+								[src]="imageUrl+member?.avatar"   />
 								</ion-avatar>
 								
 								<small class="mem-name" (click)="membersProfile(member.uid)">{{member.name | words :5 : '....'}}
@@ -69,9 +69,12 @@
 	<div *ngIf="communityDetailData?.isJoined" class="mem-name-update">
 		<h2 class="wel-comemem">Update Status</h2>
 			<div style="padding:0px !important;">
-				<ion-textarea style="-webkit-user-select:all !important;" [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
-				</ion-textarea>
+			    <ion-item>
+				<ion-input [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
+				</ion-input>
+				</ion-item>
 			</div>
+
 			<div class="posted-video-img">
 		    	<ion-row>
 					<ion-col>
@@ -82,12 +85,7 @@
 							<button ion-button (click)="addVideos()" icon-only medium class="video">
 							<i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp; Add videos
 						</button>
-							<button ion-button icon-only medium (press)="pressevent(communityDetailData?.id)" (click)="postCommunity(communityDetailData?.id)" class="postedimgvideos">
-								<i class="fa fa-paper-plane-o" aria-hidden="true"></i>&nbsp; Post
-							</button>
-					</ion-col>
-				</ion-row> 
-				<div *ngIf(addVideo) class="post-urls">
+						<div *ngIf(addVideo) class="post-urls">
 					<form [formGroup]="authForm">
 						<ion-row>
 							<ion-col>
@@ -98,7 +96,6 @@
 								</ion-item>
 									<small>(Youtube,Dailymotion,Vimeo,Wine)
 									</small>
-								
 							</ion-col>
 						</ion-row>
 						<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
@@ -106,6 +103,12 @@
            				</div>
 					</form>
 				</div>
+							<button ion-button icon-only medium (press)="pressevent(communityDetailData?.id)" (click)="postCommunity(communityDetailData?.id)" class="postedimgvideos">
+								<i class="fa fa-paper-plane-o" aria-hidden="true"></i>&nbsp; Post
+							</button>
+					</ion-col>
+				</ion-row> 
+				
 				<br/>
 		   	</div>
 	</div>
@@ -123,8 +126,11 @@
 	        		<ion-col width-70>
 			          	<h2 (click)="communityProfile(user.uid)">{{user.name}} {{user.last_name}}</h2>
 			          		<p class="time-datem"><i class="fa fa-clock-o"></i>
-			          		{{user.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
+			          		{{user.created_at}}
 			          		</p>
+			          		<!-- <p class="time-datem"><i class="fa fa-clock-o"></i>
+			          		{{user.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
+			          		</p> -->
 			        </ion-col>
 					<ion-col width-10 class="bt-s">
 						<button *ngIf="user.uid == user_id" ion-button  clear (click)="showConfirm(user.id)">

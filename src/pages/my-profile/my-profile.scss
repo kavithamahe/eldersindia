@@ -10,11 +10,12 @@ page-my-profile {
 .listed-profiles p{ font-size:18px; font-weight:400; color:#333 !important; padding-left:15px; border-bottom:1px solid #D3D3D3;white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; width:100%;  margin:0px;padding:6px; font-family: 'Muli', sans-serif;}
-.listed-profiles p i{ width:22px; font-size:15px; color:#333; border-right:1px solid #ccc; }
-.edit-profiles{ background:#fff; color:#039ECB; font-size:15px;}
+.listed-profiles p i{ width:22px; font-size:15px; color:#333;  }
+.edit-profiles{ background:#fff; color:#039ECB; font-size:15px; padding:3px; margin-right:20px !important;}
 .toolbar-title-md{ text-align:center;}
 .toolbar-title-ios{ text-align:center;}
-
+.verified-s{background:#00bfff; height:20px; font-size:15px; color:#fff; padding:3px;}
+.verified-d{background:#04B404; height:20px; font-size:15px; color:#fff; padding:3px;}
 .profile-edit {
  height:185px;
     position: relative;  text-align:center;

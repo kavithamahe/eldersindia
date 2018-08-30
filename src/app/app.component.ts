@@ -2,10 +2,12 @@ import { Component, ViewChild} from '@angular/core';
 
 import { Platform, MenuController, Nav, AlertController,ToastController,LoadingController } from 'ionic-angular';
 
-//import { StatusBar, Splashscreen, Push } from 'ionic-native';
 //import { Diagnostic } from 'ionic-native';
-import { CameraPreview, CameraPreviewRect, Diagnostic,StatusBar, Splashscreen, Push } from 'ionic-native';
+import { CameraPreview, CameraPreviewRect, Diagnostic,StatusBar, Splashscreen} from 'ionic-native';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
+
 //import { Geolocation } from '@ionic-native/geolocation';
+import { Network } from '@ionic-native/network';
 
 
 // import the Menu's pages
@@ -24,8 +26,8 @@ import { LogoutPage } from '../pages/logout/logout';
 import { ViewMessagesPage } from '../pages/view-messages/view-messages';
 import { RecurringPagePage } from '../pages/recurring/recurring';
 import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
-
-
+import { EnquiriesPagePage } from '../pages/enquiries/enquiries';
+import { SafemePagePage } from '../pages/safeme/safeme';
 
 // kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
@@ -48,7 +50,7 @@ import { ServiceProvider } from '../providers/service-provider';
 import { CommunityServices } from '../providers/community-services';
 
 import { Storage } from '@ionic/storage';
-
+declare var Connection: any;
 
 @Component({//selector:'my-theme',
   templateUrl: 'app.html'
@@ -57,6 +59,8 @@ import { Storage } from '@ionic/storage';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
+  sponsor_name:any;
+  sponsor_id:any;
   user_id:any='';
   reg_id:any;
   token:any='';
@@ -64,6 +68,8 @@ export class MyApp {
   callSponsor:any=0;
   ambulance:any=0;
   police:any=0;
+  doctor:any=0;
+  hospital:any=0;
   emailId:any='';
   password:any='';
    alert:any;
@@ -92,8 +98,32 @@ export class MyApp {
     public service:ServiceProvider,
     public loadingCtrl: LoadingController,
     public community_service:CommunityServices,
-    public storage:Storage
+    public storage:Storage,
+    private network: Network,
+    private push: Push
   ) {
+    // let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+    //   this.alert = this.alertCtrl.create({
+    //     title: 'No Internet Connection',
+    //     // message: 'Do you want to exit the app?',
+    //     buttons: [
+    //       {
+    //         text: 'Cancel',
+    //         role: 'cancel',
+    //         handler: () => {
+    //           this.alert =null;
+    //         }
+    //       },
+    //       {
+    //         text: 'Exit',
+    //         handler: () => {
+    //           this.platform.exitApp();
+    //         }
+    //       }
+    //     ]
+    //   });
+    //   this.alert.present();
+    // });
 
     this.storage.ready().then(() => {
     storage.get('user_type').then((userType)=>{
@@ -130,12 +160,19 @@ export class MyApp {
          //  this.storage.clear();
          this.storage.set('id', loginuser['details']['id']);
          this.storage.set('name', loginuser['details']['name']);
+         this.storage.set('lastname', loginuser['details']['lastname']);
+         this.storage.set('elder_age', loginuser['details']['elder_age']);
          this.storage.set('email',loginuser['details']['email']);
+         this.storage.set('phone',loginuser['details']['phone']);
          this.storage.set('password',this.registerCredentials.password);
          this.storage.set('user_type', loginuser['details']['user_type']);
          this.storage.set('user_type_id', loginuser['details']['user_type_id']);
          this.storage.set('avatar', loginuser['details']['avatar']);
          this.storage.set('sponsor_avatar', loginuser['details']['sponsor_avatar']);
+         this.storage.set('sponsor_name', loginuser['details']['sponsor_name']);
+         this.storage.set('safeme_status', loginuser['details']['safeme_status']);
+         this.storage.set('helpme_status', loginuser['details']['helpme_status']);
+         this.storage.set('vendor_id', loginuser['details']['vendor_id']);
          if(loginuser['details']['user_type']=='elder' && (loginuser.details.emergency_contacts.length>0))
          {
          if(loginuser.details.emergency_contacts[0].call_sponsor!='undefined')
@@ -152,9 +189,29 @@ export class MyApp {
          {
            this.police=loginuser.details.emergency_contacts[0].police;
          }
+          if(loginuser.details.emergency_contacts[0].doctor!='undefined')
+         {
+           this.doctor=loginuser.details.emergency_contacts[0].doctor;
+         }
+          if(loginuser.details.emergency_contacts[0].hospital!='undefined')
+         {
+           this.hospital=loginuser.details.emergency_contacts[0].hospital;
+         }
+          if(loginuser.details.emergency_contacts[0].sponsor_name!='undefined')
+         {
+           this.sponsor_name=loginuser.details.emergency_contacts[0].sponsor_name;
+         }
+          if(loginuser.details.emergency_contacts[0].sponsor_id!='undefined')
+         {
+           this.sponsor_id=loginuser.details.emergency_contacts[0].sponsor_id;
+         }
+         this.storage.set('sponsor_id', this.sponsor_id);
+         this.storage.set('sponsor_name', this.sponsor_name);
          this.storage.set('call_sponsor', this.callSponsor);
          this.storage.set('ambulance', this.ambulance);
          this.storage.set('police', this.police);
+         this.storage.set('doctor', this.doctor);
+         this.storage.set('hospital', this.hospital);
          }
          this.storage.set('token', loginuser['token']);
          this.storage.set('imageurl',this.appConfig.setImageurl());
@@ -198,7 +255,9 @@ export class MyApp {
       
       this.pages.push(
                   { myIcon:'fa fa-tachometer', title: 'Dashboard', component: DashboardPage },
+                  { myIcon:'fa fa-th-list', title: 'ApiLog', component: SafemePagePage },
                   { myIcon:'fa fa-snowflake-o', title: 'Services', component: ServiceprovidersPage },
+                  { myIcon:'fa fa-file-text', title: 'Enquiries', component: EnquiriesPagePage },
                   { myIcon:'fa fa-cogs', title: 'My Service Requests', component: ServicerequestPage },
                   { myIcon:'fa fa-gift', title: 'Package Requests', component: PackageRequestPagePage },
                   { myIcon:'fa fa-gift', title: 'Recurring Requests', component: RecurringPagePage },
@@ -221,6 +280,7 @@ export class MyApp {
                   { myIcon:'fa fa-tachometer', title: 'Dashboard', component: DashboardPage },
                   { myIcon:'fa fa-users', title: 'Manage Dependents', component: ManagePage },
                   { myIcon:'fa fa-cog', title: 'Services', component: ServiceprovidersPage },
+                  { myIcon:'fa fa-file-text', title: 'Enquiries', component: EnquiriesPagePage },
                   { myIcon:'fa fa-cogs', title: 'My Service Requests', component: ServicerequestPage },
                   { myIcon:'fa fa-gift', title: 'Package Requests', component: PackageRequestPagePage },
                   { myIcon:'fa fa-gift', title: 'Recurring Requests', component: RecurringPagePage },
@@ -277,7 +337,10 @@ export class MyApp {
     this.platform.ready().then(() => {
 
       StatusBar.styleDefault();
-      Splashscreen.hide();
+       setTimeout(() => {
+        Splashscreen.hide();
+      }, 100);
+      
    this.platform.registerBackButtonAction(() => {
 
                 if(this.nav.canGoBack()){
@@ -360,21 +423,20 @@ initializePreview() {
       height: window.innerHeight
     };
 }
-  
   initPushNotification()
   {
+    this.platform.ready().then(() => {
     if (!this.platform.is('cordova')) {
       console.warn("Push notifications not initialized. Cordova is not available - Run in physical device");
       return;
     }
-    
-    let push = Push.init({
+    // 85075801930
+     let push = this.push.init({
       android: {
         senderID: "604025131571",
         icon:"icon",
-        iconColor:"blue",
-         topics: ["appAndroid"],
-          clearNotifications: "true"
+        iconColor:"blue"
+
       },
       ios: {
         alert: "true",
@@ -384,69 +446,37 @@ initializePreview() {
       windows: {}
     });
 
-    push.on('registration', (data) => {
-      console.log("device Reg ID ->", data.registrationId);
+push.on('registration').subscribe((data: any) => {
+   console.log("device Reg ID ->", data.registrationId);
       this.reg_id = data.registrationId ;
+       console.log('device token', this.reg_id)
       this.userLogin.setDeviceID(this.reg_id);
       //TODO - send device token to server
-    });
-    push.on('notification', (data) => {
-      console.log('message', data.message);
+  console.log('Received a registration', data)
+});
+
+push.on('notification').subscribe((data: any) =>{
+  console.log('Received a notification', data)
+    console.log('message', data.message);
       console.log('data',data);
-      //console.log("count" + data.count);
-      push.getApplicationIconBadgeNumber(function(n) {
-          console.log('success', n);
-        }, function() {
-          console.log('error');
-        });
-
-  push.setApplicationIconBadgeNumber(function() {
-  console.log('success');
-}, function() {
-  console.log('error');
-}, 2);
-      
-       if (data.additionalData.foreground) {
+   if (data.additionalData.foreground == true) {
          this.showToaster(data.message);
-
-      //       let confirm = this.alertCtrl.create({
-      //       title: 'Elder India Notification',
-      //       subTitle: data.message,
-      //       buttons: [
-      //         {
-      //           text: 'Disagree',          
-      //           role: 'cancel'
-                
-      //         },
-      //         {
-      //           text: 'View',
-      //           handler: () => {
-      //             this.getPage(data);
-      //             console.log('Notification View clicked');
-      //           }
-      //         }
-      //       ]
-      //     });
-      //     confirm.present();
-
+        
        } else {
-        //if user NOT using app and push notification comes
-        //TODO: Your logic on click of push notification directly
+   
         this.getPage(data);
-        push.finish(function() {
-        console.log('success');
-          }, function() {
-          console.log('error');
-          }, 'push-1');
         console.log("Push notification clicked");
 }
       
-    });
-    push.on('error', (e) => {
-      console.log(e.message);
-    });
+  
+    // pushObject.on('error', (e) => {
+    //   console.log(e.message);
+    // });
+ console.log('Device registered', data)
+});
 
-
+push.on('error').subscribe(error => console.error('Error with Push plugin', error));
+  });    
   }
 
   getPage(data){

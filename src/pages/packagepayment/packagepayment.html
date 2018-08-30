@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar class="hei-head" color="primary">
+    <ion-title color="primary" class="tittles-md" text-capitalize>
+      Payment
+    </ion-title>
+    <ion-buttons start item-right class="close-iconss">
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios"></span>
+        <ion-icon ios="ios-close-circle-outline" md="md-close-circle" ></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card class="payment-details">
+     <h1>Confirm Your Payment</h1>
+     <p>Are You Sure Want To Continue This Payment.This Page Will Redirect To Razorpay Payment Gateway.</p>
+    <button ion-button  class="services-view" (click)="payno()">No</button>
+    <button ion-button class="services" (click)="pay()" *ngIf="service_type == undefind && status != '1'">Yes
+    </button>
+    <button ion-button class="services" (click)="payadditional()" *ngIf="service_type != undefind && status == '1'">Yes
+    </button>
+    <button ion-button class="services" (click)="paypartial()" *ngIf="service_type != undefind && reqstatus == '2'">Yes</button>
+    </ion-card>
+</ion-content>

@@ -7,6 +7,7 @@ import { ModalContentPage } from '../modal-page/modal-page';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ServiceProvider } from '../../providers/service-provider';
 import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
+import { ServiceModalPage } from '../service-modal/service-modal';
 /*
   Generated class for the SubcategoryList page.
 
@@ -20,6 +21,10 @@ import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
 })
 export class SubcategoryListPage {
 
+  subcategory_id: any;
+  vendor_id: any;
+  flagId: any;
+  serviceOffered: any;
 	sublists:any= [];
   logoUrl: any;
   location_id:any;
@@ -37,11 +42,33 @@ export class SubcategoryListPage {
   dependentLen:any=true;
   scheduleModal:any='';
   lead_time:any='00:00';
+  service_cost:any;
+  paystatus:any;
+  vendorList:any=[];
+  availability:any;
+  balanceRecreationService:any;
+  booking_status:any;
+  totalServicecost:any;
   constructor( public loadingCtrl: LoadingController, public providerService: ServiceProvider, public navCtrl: NavController, public altCtrl:AlertController, public navParams: NavParams,public toastCtrl: ToastController,public modalCtrl: ModalController, public mp:ModalContentPage, public storage:Storage) {
     this.date = new Date().toISOString();
+    this.paystatus = navParams.get("status");
+    if(this.paystatus == "1"){
+      this.location_id = navParams.get("location_id");
+      this.service_id = navParams.get("service_id");
+    }
+    else{
       this.location_id = navParams.get("location_id");
       this.service_id = navParams.get("service").id;
-      this.serviceTitle = navParams.get("service").name;   
+      this.serviceTitle = navParams.get("service").name;
+      this.serviceOffered =  navParams.get("serviceOffereds"); 
+      if(this.serviceOffered == "Recreation" || this.serviceOffered == "Safety and security"){
+        this.flagId = "3";
+      }
+      else{
+        this.flagId = "1";
+      }
+    }
+    
       // this.userType = "elder";
       
       this.storage.ready().then(() => {
@@ -57,18 +84,48 @@ export class SubcategoryListPage {
     });
 
     }
+    getVendorDetails(vendor_id,subcategory_id){
+       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+      let servieListData = {"vendor_id": vendor_id, "subCategoryId": this.service_id, "flag": this.flagId, "location_id": this.location_id,"category_name":this.serviceOffered};
+      this.providerService.webServiceCall(`getVendorDetails`,servieListData)
+      .subscribe(
+        data =>{
+                 this.vendorList = data.result.info;
+                 this.booking_status=this.vendorList.requestServices.booking_status;
+                 console.log(this.booking_status);
+                 loading.dismiss();
+        },
+        err =>{
+          loading.dismiss();
+                 this.providerService.showErrorToast(err);
+              })
+      
+    }
      
 loadSubcategoryList(subCategory_id,location_id){
+ 
       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
-      this.subCategorydata = {subCategoryId : subCategory_id, flag:"1", locationId : location_id};
+      this.subCategorydata = {subCategoryId : subCategory_id, flag:this.flagId, locationId : location_id};
       // this.providerService.loadServiceProviderList(this.subCategorydata)
       this.providerService.webServiceCall(`getServiceProviderlist`,this.subCategorydata)
           .subscribe(data =>{
                             this.sublists = data.result.info;
+                            var dataList=data.result.info.lists;
+        for(let data of dataList) {
+      this.totalServicecost = (data.service_cost - data.percentage_cost).toFixed(2);
+    }
                             this.dependentLists = data.result.info.dependentLists;
                             this.serviceData = data.result.info.requestServices;
+                            this.subcategory_id = this.serviceData.sub_category_id;
                             this.lead_time =data.result.info.lists[0].lead_time;
+                            this.vendor_id = data.result.info.lists[0].id;
+                            this.availability = data.result.info.lists[0].availability;
+                            this.balanceRecreationService = data.result.info.lists[0].balanceRecreationService;
+                            
+                            this.getVendorDetails(this.vendor_id,this.subcategory_id);
+
                             if((Object.keys(this.dependentLists).length<=0) && this.userType == 'sponsor')
                             {
                              this.showToaster("There is no dependent. You can not apply job!.");
@@ -81,16 +138,39 @@ loadSubcategoryList(subCategory_id,location_id){
                             loading.dismiss();
                             });
             }
-
+bookNow(schedule_cost,service_cost,id){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNow":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id});    
+}
+emergencybook(schedule_cost,service_cost,id){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","emergencybook":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id});    
+}
+transportationdriver(schedule_cost,service_cost,id){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","transportationdriver":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id});    
+}
+transportationcab(schedule_cost,service_cost,id){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","transportationcab":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id});    
+}
+homemodify(schedule_cost,service_cost,id){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","homemodify":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id});    
+}
+preBook(schedule_cost,service_cost,id){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","preBook":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"1","booking_status":this.booking_status,"vendor_id":id});
+}
+serviceInfomore(vendor){
+   let servieListData = {"vendor": vendor, "subCategoryId": this.service_id,status:"1" ,"flag":this.flagId, "location_id": this.location_id,"serviceOffered":this.serviceOffered,"moreinfovendor":"1"};
+    this.navCtrl.push(ServiceInfoPage,servieListData);
+}
   serviceInfo(vendor){
-    let servieListData = {"vendor": vendor, "subCategoryId": this.service_id,status:"1" ,"flag": "1", "location_id": this.location_id};
+    let servieListData = {"vendor": vendor, "subCategoryId": this.service_id,status:"1" ,"flag":this.flagId, "location_id": this.location_id,"serviceOffered":this.serviceOffered};
     this.navCtrl.push(ServiceInfoPage,servieListData);
   }
 pressinstant(vendorData){
   this.instantRequest(vendorData);
 }
   instantRequest(vendorData) {
+    console.log("instant");
     if(this.userType != "sponsor"){ 
+      this.service_cost = vendorData.service_cost - vendorData.percentage_cost;
       let d = new Date();
     let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
     d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
@@ -107,9 +187,11 @@ pressinstant(vendorData){
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
 
     let serviceRequestData = {"problem": this.serviceTitle, "datetime": lead_time, "dependentId": this.elderId, "mobile_no": "","serviceType":"One time",
-    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":"","discountCost":"","actualCost":""};
+
+    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":"","base_cost":vendorData.service_cost,"service_cost":this.service_cost};
+
     
-            this.serviceRequestCall(serviceRequestData,vendorData.id);
+            this.serviceRequestCall(serviceRequestData,vendorData.id,);
     }else{
       this.openModal("instant",vendorData); 
     }
@@ -120,11 +202,7 @@ pressevent(modalPage,vendorData){
   openModal(modalPage,vendorData){
     if(modalPage == "instant"){
       this.modal = this.modalCtrl.create(InstantRequestModalPage,{dependentList:this.dependentLists,lead_time:this.lead_time,service:this.serviceTitle,vendor:vendorData});
-    }else{
-      this.modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.dependentLists,lead_time:this.lead_time,vendor:vendorData,location_id:this.location_id,serviceData:this.serviceData,serviceTitle:this.serviceTitle,data:"1",statuss:"1"});
-    }
-    this.scheduleModal=modalPage;
-    this.modal.onDidDismiss(data =>{
+      this.modal.onDidDismiss(data =>{
       if(data == "dismiss"){
         console.log(" schedule request modal dismissed..!");
       }else{
@@ -133,6 +211,12 @@ pressevent(modalPage,vendorData){
     })
     
     this.modal.present();
+    }else{
+      this.navCtrl.push(ModalContentPage,{dependentList:this.dependentLists,lead_time:this.lead_time,vendor:vendorData,location_id:this.location_id,serviceData:this.serviceData,serviceTitle:this.serviceTitle});
+
+    }
+    this.scheduleModal=modalPage;
+
     if(modalPage != "instant"){
       //console.log("test venkatesh");
      // this.navCtrl.setRoot(ServicerequestPage);
@@ -143,27 +227,29 @@ pressevent(modalPage,vendorData){
     this.navCtrl.setRoot(DashboardPage);
   }
   serviceRequestCall(service_request_data,vendorId){
-    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    if(service_request_data != "1"){
+      let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
    if(this.scheduleModal != "instant"){
 
     let requestServiceData = {"category":this.serviceData.category,"service":this.serviceData.service,
     "category_id":this.serviceData.category_id,"location_id":this.location_id,"vendor_id":vendorId,
-    "sub_category_id":this.serviceData.sub_category_id,"datCount":service_request_data.datCount,
-    "service_id":this.serviceData.service_id, "problem":service_request_data.problem,
-    "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
-    "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,"discountCost":service_request_data.discountCost,"actualCost":service_request_data.actualCost,
-    "subcategory":this.serviceData.subcategory, "durations":service_request_data.durations,
-    "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
-    "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
-    "package_id":service_request_data.package_id,"instant":service_request_data.instant}
+     "sub_category_id":this.serviceData.sub_category_id,"datCount":service_request_data.datCount,
+      "service_id":this.serviceData.service_id, "problem":service_request_data.problem,
+     "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
+      "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,"base_cost":service_request_data.base_cost,
+      "subcategory":this.serviceData.subcategory, "durations":service_request_data.durations,"service_cost":service_request_data.service_cost,
+       "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
+       "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
+     "package_id":service_request_data.package_id,"instant":service_request_data.instant,"paymentflag":1}
 
-    this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
-       .subscribe(
+
+    this.providerService.webServiceCall(`serviceRequestSubmitbeforePayLater`,requestServiceData)
+       .subscribe( 
         data =>{
                  this.providerService.showToast(data.result);
                   if(this.scheduleModal != "instant"){
-                 this.navCtrl.setRoot(ServicerequestPage);
+                 this.navCtrl.push(ServicerequestPage);
                }
                loading.dismiss();
                 },
@@ -183,21 +269,21 @@ pressevent(modalPage,vendorData){
 
     let requestServiceData = {"category":this.serviceData.category,"service":this.serviceData.service,
     "category_id":this.serviceData.category_id,"location_id":this.location_id,"vendor_id":vendorId,
-     "sub_category_id":this.serviceData.sub_category_id,"discountCost":service_request_data.discountCost,"actualCost":service_request_data.actualCost,
+     "sub_category_id":this.serviceData.sub_category_id,"base_cost":service_request_data.base_cost,"service_cost":service_request_data.service_cost,
       "service_id":this.serviceData.service_id, "problem":service_request_data.problem,
      "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
       "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,
       "subcategory":this.serviceData.subcategory, "durations":service_request_data.durations,
        "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
        "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
-     "package_id":service_request_data.package_id,"instant":service_request_data.instant}
+     "package_id":service_request_data.package_id,"instant":service_request_data.instant,"paymentflag":1}
      
-    this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
+    this.providerService.webServiceCall(`serviceRequestSubmitbeforePayLater`,requestServiceData)
        .subscribe(
         data =>{
                  this.providerService.showToast(data.result);
                   if(this.scheduleModal != "instant"){
-                 this.navCtrl.setRoot(ServicerequestPage);
+                 this.navCtrl.push(ServicerequestPage);
                }
                loading.dismiss();
                 },
@@ -214,6 +300,8 @@ pressevent(modalPage,vendorData){
       });
    }
 
+    }
+    
   }
   public showToaster(message)
   {
@@ -257,7 +345,7 @@ pressevent(modalPage,vendorData){
    <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Select dependent</ion-label>
       <ion-item class="sel-label">
            <ion-label>Select dependent</ion-label>
-              <ion-select style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="dependentData" placeholder="Select dependent">
+              <ion-select style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="dependentData">
                 <ion-option *ngFor = "let dependent of dependentLists" [value]="dependent">{{dependent.name}}
                 </ion-option>
               </ion-select>
@@ -295,6 +383,8 @@ export class InstantRequestModalPage {
   lead_time:any;
   selected:boolean=false;
   vendor:any="";
+  base_cost:any="";
+  service_cost:any="";
   constructor(
     public params: NavParams,
     public viewCtrl: ViewController,
@@ -306,6 +396,8 @@ export class InstantRequestModalPage {
     this.service = this.params.get('service');
     if(params.get("vendor") != undefined){
       this.vendor = this.params.get("vendor").name;
+      this.base_cost = this.params.get("vendor").service_cost;
+      this.service_cost = (this.params.get("vendor").service_cost) - (this.params.get("vendor").percentage_cost);
     }
     
   }
@@ -332,7 +424,6 @@ export class InstantRequestModalPage {
    toast.present();
   }
   submit(){
-    console.log(this.dependentData);
     if(this.dependentData != ""){
     let dependent_model = this.dependentData;
     let d = new Date();
@@ -351,7 +442,9 @@ export class InstantRequestModalPage {
         let getHours=(minutess + minutes)/60;
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
     let serviceRequestData = {"problem": this.service, "datetime": lead_time, "dependentId": dependent_model.id, "mobile_no": dependent_model.mobile,"serviceType":"One time",
-    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":"","discountCost":"","actualCost":""};
+
+    "time_slot":"","from_date":"","from_time":"","preferred_time":"","to_date":"","to_time":"","instant":"","base_cost":this.base_cost,"service_cost":this.service_cost};
+
     this.viewCtrl.dismiss(serviceRequestData);
   }else{
     this.showToaster("Please select the dependent");

@@ -1,4 +1,18 @@
 page-dashboard {
+ion-header button, .back-button {
+  position: absolute !important;
+  z-index: 5;
+}
+
+ion-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 90px 1px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
 .dashboard 											{display:block;padding:35px 0px;color:#fff;text-decoration:none;background:#F0FFFF;}
 .dash-icon											{font-size: 5.2em !important; padding-bottom:10px;}
 .dashboard ion-row ion-col span						{background: rgba(0, 0, 0, 0) radial-gradient(ellipse at center center , white 0%, #dbefff 100%) repeat scroll 0 0;}

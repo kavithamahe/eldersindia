@@ -22,6 +22,10 @@ import { InAppBrowser } from 'ionic-native';
   providers:[ServiceModalPage]
 })
 export class ServiceInfoPage {
+  schedule_cost: number;
+  percentage_cost: any;
+  serviceoffered: any;
+  flagId: any;
 terms:any;
 
 showDetails : boolean;
@@ -57,6 +61,22 @@ one_time:any;
 dependentLists:any;
 serviceids:any;
 package_amount:any;
+balanceRecreationService:any;
+availability:any;
+vendormoreinfo:any;
+booking_status:any;
+subcategory:any;
+category:any;
+package_active_status:any;
+businessFromDayName:any;
+businessToDayName:any;
+businessFromTime:any;
+businessToTime:any;
+businessLeadTime:any;
+package_validity:any;
+end_date:any;
+start_date:any;
+businessHoursOption:any;
 // @ViewChild('ghbslides') ghbslides: any;
 
 
@@ -68,13 +88,21 @@ package_amount:any;
       this.recurring = navParams.get("recurring");
       this.vendor_id = navParams.get("vendor").id;    
       this.vendor_name = navParams.get("vendor").name; 
+      this.availability = navParams.get("vendor").availability;
+      this.balanceRecreationService = navParams.get("vendor").balanceRecreationService;  
       this.vendor=navParams.get("vendor");
       this.service_cost = navParams.get("vendor").service_cost;
+      this.percentage_cost = navParams.get("vendor").percentage_cost;
+      this.schedule_cost = this.service_cost - this.percentage_cost;
       this.package_amount = navParams.get("package_amount");
       if(navParams.get("status") == "1"){
-         this.one_time = navParams.get("vendor").one_time;
+      this.flagId = navParams.get("flag");  
+      this.serviceoffered = navParams.get("serviceOffered");
+      console.log(this.serviceoffered);
+      this.one_time = navParams.get("vendor").one_time;
       this.recurring = navParams.get("vendor").recurring;
       }
+      this.vendormoreinfo = navParams.get("moreinfovendor");
       this.showDetails = false;
       this.showRequestService = false;
       this.sub_category = false ;
@@ -98,7 +126,7 @@ package_amount:any;
         storage.get('id').then((id) => { this.elderId=id;});
       }
       storage.get('token').then((token) => { this.token=token; 
-      let servieListData = {"vendor_id": this.vendor_id, "subCategoryId": this.subCategoryId, "flag": "1", "location_id": this.locationId};
+      let servieListData = {"vendor_id": this.vendor_id, "subCategoryId": this.subCategoryId, "flag": this.flagId, "location_id": this.locationId,"category_name":this.serviceoffered};
       this.loadServiceInformation(servieListData);
       })
     });
@@ -119,12 +147,25 @@ package_amount:any;
         .subscribe(
           data =>{
                    this.vendorList = data.result.info;
+                   this.booking_status=this.vendorList.requestServices.booking_status;
+                   this.package_active_status = this.vendorList.vendorDetails.package_active_status;
+                   this.businessFromDayName = this.vendorList.vendorDetails.businessFromDayName;
+                   this.businessToDayName = this.vendorList.vendorDetails.businessToDayName;
+                   this.businessFromTime = this.vendorList.vendorDetails.businessFromTime;
+                   this.businessToTime = this.vendorList.vendorDetails.businessToTime;
+                   this.businessLeadTime = this.vendorList.vendorDetails.businessLeadTime;
+                   this.businessHoursOption = this.vendorList.vendorDetails.businessHoursOption;
+                   this.package_validity = this.vendorList.vendorDetails.package_validity;
+                   this.subcategory = data.result.info.requestServices.subcategory;
+                   this.category = data.result.info.requestServices.category;
+                   this.start_date = data.result.info.requestServices.start_date;
+                   this.end_date = data.result.info.requestServices.end_date;
                    this.packageinfo = this.vendorList.packages;
                    this.serviceData = data.result.info.requestServices;
                    this.serviceids = this.serviceData.service_id;
                    this.website = this.vendorList.vendorDetails.website;
                    this.dependentLists = data.result.info.dependentLists;
-                   if(data.result.info.serviceOffered[0] != undefined){
+                   if(data.result.info.serviceOffered[0] != undefined && data.result.info.serviceOffered[0].category_lists[0] != undefined){
                        this.lead_time=data.result.info.serviceOffered[0].category_lists[0].service_sub_category_lists[0].lead_time;
                     }
                    loading.dismiss();
@@ -135,13 +176,45 @@ package_amount:any;
                 })
         
   }
-
+contactNow(){
+  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","contact":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+}
+bookNow(){
+  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","bookNow":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+}
+preBook(){
+   let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","preBook":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+}
+emergencybook(){
+  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","emergencybook":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+}
+transportationdriver(){
+   let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","transportationdriver":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+}
+transportationcab(){
+  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","transportationcab":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+}
+homemodify(){
+  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","homemodify":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+}
 pressmodel(){
   this.modal();
 }
+
 modal(){
 
     let modal = this.modalCtrl.create(ServiceModalPage,{service:"service_offered",vendorList:this.vendorList});    
+    modal.present();
+}
+recreationServices(){
+     let modal = this.modalCtrl.create(ServiceModalPage,{service:"recreation_service",vendorList:this.vendorList,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService});    
     modal.present();
 }
 
@@ -188,10 +261,13 @@ modal(){
               })
 
   }
-   
-pressContact(){
-  this.toggleContact();
-}
+  toggleSchedule(){
+    let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
+    modal.present();
+  }
+  pressContact(){
+    this.toggleContact();
+  }
   toggleContact(){
     let modal = this.modalCtrl.create(ServiceModalPage,{service:"contact",vendorList:this.vendorList});    
     modal.present();
@@ -220,22 +296,21 @@ pressContact(){
     this.toggleRequestService();
    }
   toggleRequestService(){
-     
      if((this.vendorList.dependentLists.length<=0) && this.userType == 'sponsor')
       {
         this.showToast("There is no dependent. You can not apply job!");      
       
       }else{
-        console.log(this.recurring);
-     let service_modal = this.modalCtrl.create(ModalContentPage,{dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor:this.vendorList.vendorDetails,vendorservice_cost:this.service_cost,one_time:this.one_time,recurring:this.recurring,status:"1",vendor_id:this.vendor_id,dependentLists:this.dependentLists,
-      serviceids:this.serviceids,locationId:this.locationId,package_amount:this.package_amount});    
-    service_modal.present();
-    service_modal.onDidDismiss(data =>{
-      if(data == "dismiss"){
-      }else{
-       this.sendRequestService(data);
-      }
-    })
+  this.navCtrl.push(ModalContentPage,{serviceData:this.serviceData,dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor:this.vendorList.vendorDetails,vendorservice_cost:this.service_cost,one_time:this.one_time,recurring:this.recurring,status:"1",vendor_id:this.vendor_id,dependentLists:this.dependentLists,
+      serviceids:this.serviceids,location_id:this.locationId,package_amount:this.package_amount,servicetypestatus:"2"});    
+    // service_modal.present();
+    // service_modal.onDidDismiss(data =>{
+    //   if(data == "dismiss"){
+    //   }else{
+    //     console.log(data);
+    //    this.sendRequestService(data);
+    //   }
+    // })
     }
   }
 

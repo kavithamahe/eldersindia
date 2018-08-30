@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+  <ion-title text-center>Enquiries</ion-title>
+    <ion-buttons right>
+    <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button> 
+    </ion-buttons>
+    
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="content-intop">
+ <ion-row>
+<ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
+  <ion-col width-20><button (click)="inputSearch(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
+</ion-row>
+ <ion-card class="sel-packages">
+ <ion-item>
+    <ion-label>Category</ion-label>
+    <ion-select [(ngModel)]="category" (ionChange)="getenquiryList()">
+       <ion-option *ngFor="let category of category_details" value="{{category.id}}">{{category.service}}</ion-option>     
+    </ion-select>
+  </ion-item>
+ </ion-card>
+  <ion-card class="sel-packages">
+ <ion-item>
+    <ion-label>Vendor</ion-label>
+    <ion-select [(ngModel)]="vendor" (ionChange)="getenquiryList()">
+      <ion-option *ngFor="let vendor of vendor_details" value="{{vendor.id}}">{{vendor.name}}</ion-option>      
+    </ion-select>
+  </ion-item>
+ </ion-card>
+ <ion-card class="job-detailsview" *ngFor="let enquiries of enquiriesList">
+<ion-grid class="package-needs">
+   <ion-row>
+  <ion-col col-12 text-wrap>
+	<b>Enquiry Date </b><p>{{enquiries.preferred_datetime}}</p>
+	  </ion-col>
+  </ion-row>
+   <ion-row>
+  <ion-col col-12 text-wrap>
+	<b>Name </b><p>{{enquiries.name}}</p>
+	  </ion-col>
+  </ion-row>
+   <ion-row>
+  <ion-col col-12 text-wrap>
+	<b>Contact Number </b><p>{{enquiries.contact_number}}</p>
+	  </ion-col>
+  </ion-row>
+   <ion-row>
+  <ion-col col-12 text-wrap>
+	<b>Queries </b><p>{{enquiries.queries}}</p>
+	  </ion-col>
+  </ion-row>
+   <ion-row>
+  <ion-col col-12 text-wrap>
+	<b>Category </b><p>{{enquiries.category_name}}</p>
+	  </ion-col>
+  </ion-row>
+  <ion-row>
+   <ion-col col-12 text-wrap>
+	<b>Service </b><p>{{enquiries.service_name}}</p>
+	  </ion-col>
+  </ion-row>
+  <ion-row>
+   <ion-col col-12 text-wrap>
+	<b>Vendor </b><p>{{enquiries.vendor_name}}</p>
+	  </ion-col>
+  </ion-row>
+    <ion-row>
+  <ion-col class="view-serv">
+<ion-badge (click)="viewenquiry(enquiries)" class="services"><i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
+</ion-col>
+</ion-row>
+</ion-grid>
+</ion-card>
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+</ion-content>

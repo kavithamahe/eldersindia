@@ -55,14 +55,17 @@ pressevent(){
 
 
   submit() {
-
-    if(this.change_password_Form.valid){
-
+     if(this.change_password_Form.value.currentPassword == this.change_password_Form.value.newPassword){
+        this.service.showToast("Current pasword and new password to be different");
+      }
+      else{
+        if(this.change_password_Form.valid){
+     
     if(this.change_password_Form.value.newPassword != this.change_password_Form.value.re_enterPassword){
       this.password_submit = true;
       this.submitAttempt = false;
     }else{
-    	this.submitAttempt = false;
+      this.submitAttempt = false;
       this.password_submit = false; 
         if(this.change_password_Form.value.newPassword.length < 6){
       this.service.showToast("Please enter minimum 6 characters");
@@ -75,27 +78,29 @@ pressevent(){
       loader.present();     
       let change_password_data = {"current_password": this.change_password_Form.value.currentPassword, "new_password": this.change_password_Form.value.newPassword, "confirm_password": this.change_password_Form.value.re_enterPassword};
       this.service.webServiceCall(`changePassword`,change_password_data)
-      .subscribe(data =>{      	
-      		this.service.showToast(data.result);
-      		this.change_password_Form.reset();
+      .subscribe(data =>{       
+          this.service.showToast(data.result);
+          this.change_password_Form.reset();
           this.dismiss();
           loader.dismiss(); 
-	    },
-		    error =>{
+      },
+        error =>{
           if(error.status===401){
       this.service.showToast(JSON.parse(error._body).error);  
       }
       else{
        this.service.showToast("Please try again later..!");   
       }
-		   loader.dismiss();    
-	    })
+       loader.dismiss();    
+      })
     }
     } 
   }
   }else{
     this.submitAttempt = true;
   }
+      }
+    
 
 }
   dismiss(){

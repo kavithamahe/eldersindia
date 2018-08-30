@@ -38,7 +38,14 @@ export class LoginPage {
   callSponsor:any=0;
   ambulance:any=0;
   police:any=0;
+  hospital:any=0;
+  doctor:any=0;
+  device_uuid:any;
+  sponsor_name:any;
+  sponsor_id:any;
+  
   constructor(public menuCtrl: MenuController,public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
+ 
   this.storage.ready().then(() => { 
      storage.get('id').then((id) => { this.id=id; 
      });
@@ -53,6 +60,8 @@ export class LoginPage {
     // this.initializePreview();
 
   }
+ 
+ 
   pressevent(){
     this.forgotPassword();
   }
@@ -60,6 +69,14 @@ export class LoginPage {
     this.login();
   }
    public login() {  
+    // this.registerCredentials.device_token = this.device_uuid;
+    // console.log(this.registerCredentials.device_token);
+    // if (this.platform.is('ios')) {
+    //   this.registerCredentials.device_type = "1";
+    // }
+    // if (this.platform.is('android')) {
+    //   this.registerCredentials.device_type = "0";
+    //  }
     if(!this.loginForm.valid){
       this.submitAttempt = true;
     }else{
@@ -74,6 +91,15 @@ export class LoginPage {
 
    	this.loginUser.loginload(this.registerCredentials).subscribe(     
       (loginuser) => {
+          if(loginuser['details']['user_type'] != 'vendor' && loginuser['details']['user_type'] != 'admin'){
+             // if(loginuser.details.first_login == 1)
+             // {
+              this.navCtrl.setRoot(DashboardPage);
+             // }
+             // else{
+             //   this.navCtrl.setRoot(FirsttimeloginPagePage);
+             // }
+        
           this.service.serviceInit(loginuser['token']);
           this.community_service.initialize();
 
@@ -83,15 +109,22 @@ export class LoginPage {
            this.loginUser.currentUser("sponsor");
          }
          this.storage.ready().then(() => {
-         this.storage.clear();
+         // this.storage.clear();
          this.storage.set('id', loginuser['details']['id']);
          this.storage.set('name', loginuser['details']['name']);
+         this.storage.set('lastname', loginuser['details']['lastname']);
+         this.storage.set('elder_age', loginuser['details']['elder_age']);
          this.storage.set('email', loginuser['details']['email']);
+         this.storage.set('phone', loginuser['details']['phone']);
           this.storage.set('password',this.registerCredentials.password);
          this.storage.set('user_type', loginuser['details']['user_type']);
          this.storage.set('user_type_id', loginuser['details']['user_type_id']);
          this.storage.set('avatar', loginuser['details']['avatar']);
          this.storage.set('sponsor_avatar', loginuser['details']['sponsor_avatar']);
+         this.storage.set('sponsor_name', loginuser['details']['sponsor_name']);
+         this.storage.set('safeme_status', loginuser['details']['safeme_status']);
+         this.storage.set('helpme_status', loginuser['details']['helpme_status']);
+         this.storage.set('vendor_id', loginuser['details']['vendor_id']);
          if(loginuser['details']['user_type']=='elder' && (loginuser.details.emergency_contacts.length>0))
          {
          if(loginuser.details.emergency_contacts[0].call_sponsor!='undefined')
@@ -107,33 +140,46 @@ export class LoginPage {
          {
            this.police=loginuser.details.emergency_contacts[0].police;
          }
+         if(loginuser.details.emergency_contacts[0].doctor!='undefined')
+         {
+           this.doctor=loginuser.details.emergency_contacts[0].doctor;
+         }
+           if(loginuser.details.emergency_contacts[0].hospital!='undefined')
+         {
+           this.hospital=loginuser.details.emergency_contacts[0].hospital;
+         }
+            if(loginuser.details.emergency_contacts[0].sponsor_name!='undefined')
+         {
+           this.sponsor_name=loginuser.details.emergency_contacts[0].sponsor_name;
+         }
+            if(loginuser.details.emergency_contacts[0].sponsor_id!='undefined')
+         {
+           this.sponsor_id=loginuser.details.emergency_contacts[0].sponsor_id;
+         }
+         this.storage.set('sponsor_id', this.sponsor_id);
+         this.storage.set('sponsor_name', this.sponsor_name);
          this.storage.set('call_sponsor', this.callSponsor);
          this.storage.set('ambulance', this.ambulance);
          this.storage.set('police', this.police);
+         this.storage.set('doctor', this.doctor);
+         this.storage.set('hospital', this.hospital);
          }
          this.storage.set('token', loginuser['token']);
-         console.log(loginuser.token);
          this.storage.set('imageurl',this.appConfig.setImageurl());
          this.storage.set('rooturl',this.appConfig.setrooturl());
-         // this.storage.set('service_location','');
          this.storage.set('islogin',1);
          this.enableUserTypeMenu(loginuser['details']['user_type']);
-         if(loginuser['details']['user_type'] != 'vendor' && loginuser['details']['user_type'] != 'admin'){
-             // if(loginuser.details.first_login == 1)
-             // {
-              this.navCtrl.setRoot(DashboardPage);
-             // }
-             // else{
-             //   this.navCtrl.setRoot(FirsttimeloginPagePage);
-             // }
-          }else{
-
-             this.showToaster("Try with different credentials");
-          }
+       
           
        })
         // alert(loginuser['token']);
         loader.dismiss();
+      }
+      else{
+         loader.dismiss();
+             this.showToaster("Try with different credentials");
+          
+      }
     },
 
     (err) => { 

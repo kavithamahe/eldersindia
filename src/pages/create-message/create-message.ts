@@ -74,7 +74,6 @@ filename:any;
   this.subject=navParams.get("subject");
   this.message=navParams.get("message");
   this.filename=navParams.get("filename");
-  console.log(this.filename);
   this.msgType=navParams.get("msgType");
   console.log(this.msgType);
   if(this.msgType=='reply'){
@@ -161,7 +160,10 @@ filename:any;
        this.subject='';
        this.message='';
        this.msgType='';
-       this.navCtrl.setRoot(MessagesPage);
+       if(this.msgType=='reply'){
+        this.navCtrl.setRoot(MessagesPage);
+       }
+       this.navCtrl.setRoot(MessagesPage,{"messages":"sent"});
       this.showToaster(sendMessage.result.info); 
       loader.dismiss();
     },

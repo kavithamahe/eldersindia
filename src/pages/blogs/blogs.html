@@ -7,7 +7,6 @@
       </button>
     </ion-buttons>
 	  <ion-title text-center>Blogs</ion-title>
-   
     <ion-buttons right>
     <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
@@ -18,7 +17,6 @@
           <i class="fa fa-search" aria-hidden="true"></i>
       </button>
     </ion-buttons>
-  
   </ion-navbar>
 </ion-header>
 
@@ -27,8 +25,7 @@
         <ion-item>
             <ion-label>select category</ion-label>
               <ion-select [(ngModel)]="searchCategory1" (ionChange)="onSelectChange($event)">
-               <!-- <ion-option value="All">All</ion-option> -->
-                <ion-option  *ngFor="let category of categoryLists" 
+                <ion-option  *ngFor="let category of categoryLists"
                  value={{category.id}}>{{category.name}}
                 </ion-option>
               </ion-select>
@@ -37,7 +34,7 @@
     <ion-row *ngIf(searchButton)>
       <ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
       </ion-col>
-      <ion-col width-20><button (click)="getItems(searchText)" ion-button small 
+      <ion-col width-20><button (click)="getItems(searchText)" ion-button small
         class="go-btn">Go</button> </ion-col>
     </ion-row>
     <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id,blogs.allow_comment)" class="community-img">
@@ -46,7 +43,7 @@
           <ion-item text-wrap>
             <h2 class="pro-info" text-capitalize>{{blogs.title}}</h2>
             <p class="timedate" text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{blogs.author_name }} | <i class="fa fa-calendar" aria-hidden="true">
-            </i> {{blogs.created_at | date :"MMM dd y"}}
+            </i> {{blogs.created_at}}
             </p>
           </ion-item>
         </ion-col>
@@ -59,17 +56,17 @@
       <span [hidden]="!blogs.category_name"> 
         <label class="labels-bdss"> {{blogs.category_name}}</label>
       </span>
-      <span *ngIf="blogs.allow_featured == 1"> 
+      <span *ngIf="blogs.allow_featured == 1">
         <label class="labels-bdss-featured_image">Featured</label>
       </span>
      </div>
- 
- </ion-card> 
+
+ </ion-card>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
-     <p class="error-clr" *ngIf="bloglists?.length==0">{{emptyRecord}}</p>
+     <!-- <p class="error-clr" *ngIf="bloglists?.length==0">{{emptyRecord}}</p> -->
      <ion-fab bottom right>
     <button ion-fab class="top-bttn1"><i class="fa fa-arrow-up"></i></button>
     <ion-fab-list side="top">
@@ -78,3 +75,5 @@
     </ion-fab-list>
   </ion-fab>
 </ion-content>
+
+

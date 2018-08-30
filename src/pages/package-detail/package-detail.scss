@@ -3,6 +3,7 @@ page-package-detail {
 .price-bt:before 															{content: "";width:42px;height:0;position:absolute;top:0;left:0;border-bottom: 29px solid #FE5420;border-left:29px solid #fff;border-right:29px solid #fff;}
 .price-bt:after 															{content: "";width:42px;height:0;position:absolute;bottom:0;left:0;border-top:29px solid #FE5420;border-left:29px solid #fff;border-right:29px solid #fff;} 
 .price-bt span  															{float:left;color:#fff;font-weight:600;font-size:18px;line-height:100px;text-align:center;font-family: "Muli",sans-serif;width:100%;}
+.purch-already{font-size:17px; font-weight:600;letter-spacing:0.2px;width:100%; float:left; padding-top:10px;   font-family: "Muli",sans-serif; text-align:center; color:#FE5722;}
 .price-list																	{float:left;width:100%; margin-top:20px;text-align:center;font-family: "Muli",sans-serif;}
 .price-list p																{float:left;width:100%;color:#018DB2;margin-top:20px;text-align:center; margin:0px;font-family: "Muli",sans-serif;letter-spacing:0.2px;padding-top:5px;font-size:17px; font-weight:400; } 
 .price-list small															{font-size:17px;font-family: "Muli",sans-serif;text-align:center;color:red;text-decoration: line-through;letter-spacing:0.2px;}

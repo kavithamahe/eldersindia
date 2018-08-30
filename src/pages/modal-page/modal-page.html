@@ -1,16 +1,19 @@
 
 <ion-header>
-  <ion-toolbar class="hei-head" color="primary">
-    <ion-title color="primary" class="tittles-md" text-capitalize>
-      {{vendor}} - Avail Services
-    </ion-title>
-    <ion-buttons start item-right class="close-iconss">
-      <button ion-button (click)="dismiss()">
-        <span ion-text color="primary" showWhen="ios"></span>
-        <ion-icon ios="ios-close-circle-outline" md="md-close-circle" ></ion-icon>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-  </ion-toolbar>
+    <ion-title text-center>{{vendor}} - Avail Services</ion-title>    
+    <ion-buttons right>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+  
+  </ion-navbar>
 </ion-header>
 
 <ion-content>
@@ -19,7 +22,7 @@
 
   
         <ion-label stacked class="label-lb">Describe the need</ion-label>
-		<ion-item>
+    <ion-item>
           <ion-input type="text" formControlName="problem" ></ion-input>
          </ion-item>     
         <ion-label stacked class="label-lb">Alternate contact number</ion-label>
@@ -30,52 +33,38 @@
          </p>
         <form [formGroup]="authForm">
        
-         <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb required">Select dependent
-         </ion-label>
+       <!--   <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb required">Select dependent
+         </ion-label> -->
 
             <ion-item *ngIf = "userType =='sponsor'" class="select-brds">
               <ion-label>Select dependent</ion-label>
-              <ion-select formControlName="dependents"  placeholder="Select dependent" (ionChange)="packageinfo()" >
+              <ion-select formControlName="dependents" (ionChange)="packageinfo()" >
               <ion-option *ngFor = "let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}} {{dependent.last_name}}
               </ion-option>
             </ion-select>
-			<br/>
+      <br/>
               </ion-item>
                  <small *ngIf="!authForm.controls.dependents.valid  && (authForm.controls.dependents.dirty || submitAttempt)"><p *ngIf = "userType =='sponsor'" class="err-reds">Please select the dependents</p></small>
 
       </form>
       <!-- <ion-item >
         -->
+           <ion-item>
+              <ion-label>Lead Time:{{lead_time}} hour(s)
+              </ion-label>
 
+              </ion-item>
             <ion-item *ngIf="flag ==1" class="one-timereq">
               <ion-label>Select Package</ion-label>
               <!-- <ion-label>Select Package</ion-label> -->
-              <ion-select class="select-brds" placeholder="Select Package" 
+               <ion-select class="select-brds" placeholder="Select Package" 
               [(ngModel)]="package" [ngModelOptions]="{standalone: true}">
               <ion-option *ngFor = "let package of packageLists" [value]='package'>{{package.package_validity.package_info}}
               </ion-option>
             </ion-select>
               </ion-item>
-          <div *ngIf="data != '0'">
-              <ion-item *ngIf="status == '1' || userType == 'elder' || data == '1'" class="one-timereq">
-              <ion-label>Select Package</ion-label>
-              <!-- <ion-label>Select Package</ion-label> -->
-              <ion-select class="select-brds" placeholder="Select Package" 
-              [(ngModel)]="package" [ngModelOptions]="{standalone: true}">
-              <ion-option *ngFor = "let package of packageLists" [value]='package'>{{package.package_validity.package_info}}
-              </ion-option>
-              </ion-select>
-              </ion-item>
-              </div>
-
-              <!-- </ion-item> -->
-             <!--  <ion-item>
-              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecost}}
-              </ion-label>
-
-              </ion-item> -->
-          <ion-list radio-group>
-                <ion-label>Service Type</ion-label>
+             <ion-list radio-group>
+                  <ion-label>Service Type</ion-label>
                  <ion-item *ngIf="onetimetype == 1">
                     <ion-label>One time</ion-label>
                     <ion-radio value="goe" (click)="onetime(searchButton)"></ion-radio>
@@ -86,20 +75,69 @@
                       </ion-radio>
                   </ion-item>
             </ion-list>
-        
+             
       <!-- <p>------------------------One Time----------------------------</p> -->
 
        <div *ngIf(searchButton)>
+      
+              <ion-item>
+              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{initialservicecost}}
+              </ion-label>
+              </ion-item>
+              <div *ngIf = "get_custome_amount!=0">
+               <ion-item text-wrap>
+              <ion-label>Previous service due amount: <i class="fa fa-rupee"></i>{{get_custome_amount}}
+              </ion-label>
+              </ion-item>
+               <ion-item>
+              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamountservice}}
+              </ion-label>
+              </ion-item>
+              </div>
+
+              <div *ngIf = "get_custome_deliever_amount!=0">
+               <ion-item text-wrap>
+              <ion-label>Previous service due amount: <i class="fa fa-rupee"></i>{{get_custome_deliever_amount}}
+              </ion-label>
+              </ion-item>
+               <ion-item>
+              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamount}}
+              </ion-label>
+              </ion-item>
+              </div>
+
+               <div *ngIf = "getCustomerBalanceAmount!=0">
+               <ion-item text-wrap>
+              <ion-label>Previous refund amount: <i class="fa fa-rupee"></i>{{getCustomerBalanceAmount}}
+              </ion-label>
+              </ion-item>
+               <ion-item>
+              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamountbalance}}
+              </ion-label>
+              </ion-item>
+              </div>
+                <div *ngIf = "get_custome_service_cancel_amount!=0">
+               <ion-item text-wrap>
+              <ion-label>Previous service cancel amount:: <i class="fa fa-rupee"></i>{{get_custome_service_cancel_amount}}
+              </ion-label>
+              </ion-item>
+               <ion-item>
+              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamountcancel}}
+              </ion-label>
+              </ion-item>
+              </div>
+            
+
            <ion-label stacked class="label-lb required">Preferred date</ion-label>
      
-		    <ion-item>
-           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" [(ngModel)]="date" formControlName ="date"></ion-datetime>
+         <ion-item>
+           <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" [(ngModel)]="date" formControlName ="date" (ionChange)="onetimeChange()"></ion-datetime>
         </ion-item>
-		
+    
          <p class="err-reds shake" *ngIf="!modalForm.controls.date.valid  && (modalForm.controls.date.touched || submitAttempt)">Please select the preferred date
          </p>
        <ion-list>
-	     <ion-label stacked class="label-lb required">Preferred Time</ion-label>
+       <ion-label stacked class="label-lb required">Preferred Time</ion-label>
             <ion-item>
               <ion-label class="prefe">Preferred Time</ion-label>
               <ion-select formControlName ="time" class="select-brds">
@@ -110,7 +148,9 @@
                 <ion-option value="04.00 AM - 05.00 AM">04.00 AM - 05.00 AM</ion-option>
                 <ion-option value="05.00 AM - 06.00 AM">05.00 AM - 06.00 AM</ion-option>
                 <ion-option value="06.00 AM - 07.00 AM">06.00 AM - 07.00 AM</ion-option>
+                <ion-option value="07.00 AM - 08.00 AM">07.00 AM - 08.00 AM</ion-option>
                 <ion-option value="08.00 AM - 09.00 AM">08.00 AM - 09.00 AM</ion-option>
+                <ion-option value="09.00 AM - 10.00 AM">09.00 AM - 10.00 AM</ion-option>
                 <ion-option value="10.00 AM - 11.00 AM">10.00 AM - 11.00 AM</ion-option>
                 <ion-option value="11.00 AM - 12.00 PM">11.00 AM - 12.00 PM</ion-option>
                 <ion-option value="12.00 PM - 01.00 PM">12.00 PM - 01.00 PM</ion-option>
@@ -120,29 +160,28 @@
                 <ion-option value="04.00 PM - 05.00 PM">04.00 PM - 05.00 PM</ion-option>
                 <ion-option value="05.00 PM - 06.00 PM">05.00 PM - 06.00 PM</ion-option>
                 <ion-option value="06.00 PM - 07.00 PM">06.00 PM - 07.00 PM</ion-option>
+                <ion-option value="07.00 PM - 08.00 PM">07.00 PM - 08.00 PM</ion-option>
                 <ion-option value="08.00 PM - 09.00 PM">08.00 PM - 09.00 PM</ion-option>
+                <ion-option value="09.00 PM - 10.00 PM">09.00 PM - 10.00 PM</ion-option>
                 <ion-option value="10.00 PM - 11.00 PM">10.00 PM - 11.00 PM</ion-option>
                 <ion-option value="11.00 PM - 12.00 AM">11.00 PM - 12.00 AM</ion-option>
               </ion-select>
             </ion-item>
           </ion-list>
-           <!--  <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" placeholder="Scheduled time" formControlName ="time" class="select-brd"></ion-datetime>
-            </ion-item> -->
-		   <p class="err-reds shake" *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">Please select the preferred time</p>
-	
-		</div>
-
-  <!-- <p>--------------------------one time end----------------------------</p> -->
-
-  <!-- <p>--------------------------recurring time start--------------------------</p> -->
+  
+       <p class="err-reds shake" *ngIf="!modalForm.controls.time.valid  && (modalForm.controls.time.dirty || submitAttempt)">Please select the preferred time</p>
+  
+    </div>
 
     <div *ngIf(recurring)>
-           <ion-label stacked class="label-lb required">Start date</ion-label> 
+          
+           <ion-label stacked class="label-lb required">Start date</ion-label>
      
         <ion-item>
-           <ion-datetime class="select-brd" [(ngModel)]="startDate" displayFormat="DD-MM-YYYY" pickerFormat="DD MMMM YYYY" placeholder="Start date" min={{this.date}} (ionChange)="fromDateChange()" formControlName ="startdate"></ion-datetime>
+          <ion-datetime class="select-brd" [(ngModel)]="startDate" displayFormat="DD-MM-YYYY" pickerFormat="DD MMMM YYYY" placeholder="Start date" min={{date}} (ionChange)="fromDateChange()" formControlName ="startdate"></ion-datetime>
         </ion-item>
-          <p class="err-reds shake" *ngIf="!modalForm.controls.startdate.valid  && (modalForm.controls.startdate.dirty || submitAttempt)">Please enter the start date</p>
+          <p class="err-reds shake" *ngIf="!modalForm.controls.startdate.valid  && (modalForm.controls.startdate.dirty || submitAttempt)">Please enter the start date
+          </p>
             <ion-label stacked class="label-lb required">End date</ion-label>
      
         <ion-item>
@@ -151,25 +190,26 @@
           <p class="err-reds shake" *ngIf="!modalForm.controls.enddate.valid  && (modalForm.controls.enddate.dirty || submitAttempt)">Please enter the end date</p>
       
            <ion-label>Number of days</ion-label>    
-		   <ion-item>
+       <ion-item>
       <p>{{datCount}} Frequency</p>
-	     </ion-item><br/>
+       </ion-item><br/>
+     
       <ion-list radio-group>
        <ion-item>
         <ion-label>Fixed hours</ion-label>
         <ion-radio value="fixedhours" (click)="fixed(fixedd)"></ion-radio>
       </ion-item>
-	  <br/>
+    <br/>
        <ion-item>
         <ion-label>Full Day</ion-label>
         <ion-radio value="fullday" (click)="fullday(fulldays)"></ion-radio>
       </ion-item>
-	  <br/>
+    <br/>
       <ion-item>
         <ion-label>Time slot</ion-label>
         <ion-radio value="timeslot" (click)="timeslot(timeslots)"></ion-radio>
       </ion-item>
-	  <br/>
+    <br/>
 </ion-list>
    <div *ngIf(fixedd)>
            <ion-label stacked class="label-lb required">From time</ion-label>
@@ -187,7 +227,7 @@
         </div>
          <div *ngIf(timeslots)>
          <ion-list>
-		  <ion-label>Preferred Time</ion-label>
+      <ion-label>Preferred Time</ion-label>
             <ion-item>
               <ion-label stacked class="label-lb required">Preferred Time</ion-label>
               <ion-select formControlName ="preferredtime" class="select-brds">
@@ -229,17 +269,34 @@
           <ion-option [value] = "6" >Saturday</ion-option>
         </ion-select>
       </ion-item>
- 
+          <ion-item *ngIf="servicecosts != undefined">
+              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecosts}}
+              </ion-label>
+
+              </ion-item>
+                <ion-item>
+              <ion-label>Price After Discount: <i class="fa fa-rupee"></i>{{servicecost}}
+              </ion-label>
+
+              </ion-item>
+              <ion-item>
+              <ion-label>Discount Percentage: {{discount_100}}%
+              </ion-label>
+
+              </ion-item>
+       
+            
     </div>    
 
-    	</form>
+      </form>
              <ion-item class="check-bx" class="one-timereq">
-             <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>	
-             <ion-label (click)="openTerms()" style="margin:0px;">I agree with the</ion-label>			  
+             <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()">
+             </ion-checkbox> 
+             <ion-label (click)="openTerms()" style="margin:0px;">I agree to</ion-label>        
             </ion-item>
-			 <ion-item class="terms-con one-timereq">
-			<ion-col><i class="fa fa-file-text" aria-hidden="true"></i> &nbsp;<small style="text-decoration:underline;" class="required" (click)="openTerms()"s>terms and conditions </small></ion-col>
-		 </ion-item>
+       <ion-item class="terms-con one-timereq">
+      <ion-col><i class="fa fa-file-text" aria-hidden="true"></i> &nbsp;<small style="text-decoration:underline;" class="required" (click)="openTerms()"s>terms and conditions </small></ion-col>
+     </ion-item>
             <small *ngIf="checkTerms">
                 <p class="err-reds shake">Kindly agree to the terms and conditions</p>
             </small>
@@ -250,7 +307,7 @@
 
 <ion-footer>
   <ion-toolbar color="primary"> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
-    <ion-buttons>
+    <ion-buttons *ngIf="seviceCheck == 0">
       <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
    <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
@@ -258,27 +315,39 @@
         <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
      <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
     </ion-buttons>
-    <ion-buttons end *ngIf="seviceCheck == 0">
-      <button ion-button color="royal" large icon-right showWhen="ios" (click)="next()">&nbsp;Next
+     <ion-buttons end *ngIf="seviceCheck == 1">
+      <button *ngIf="seviceCheck == 1" ion-button color="royal" large icon-right showWhen="ios" (click)="paynow()">&nbsp;Pay Now
        <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button ion-button color="light" large icon-right hideWhen="ios" (click)="next()">&nbsp;Next
+      <button *ngIf="seviceCheck == 1" ion-button color="light" large icon-right hideWhen="ios" (click)="paynow()">&nbsp;Pay Now
         <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end *ngIf="seviceCheck == 1">
-      <button *ngIf="seviceCheck == 1" ion-button color="royal" large icon-right showWhen="ios" (click)="submit()">&nbsp;Submit
+    <ion-buttons end *ngIf="seviceCheck == 0">
+      <button ion-button color="royal" large icon-right showWhen="ios" 
+      (press)="pressnext(recurringType)" (click)="next(recurringType)">&nbsp;Book Now
        <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button *ngIf="seviceCheck == 1" ion-button color="light" large icon-right hideWhen="ios" (click)="submit()">&nbsp;Submit
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="next(recurringType)"
+      (press)="pressnext(recurringType)">&nbsp;Book Now
         <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
+    </ion-buttons>
+    
+    <ion-buttons *ngIf="seviceCheck == 1">
+      <button *ngIf="seviceCheck == 1" ion-button color="light" large icon-right hideWhen="ios" (click)="submit()" (press)="presssubmit()">&nbsp;Pay Later
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+      <button *ngIf="seviceCheck == 1" ion-button color="royal" large icon-right showWhen="ios" (click)="submit()" (press)="presssubmit()">&nbsp;Pay Later
+       <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+  
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
 
 <style>
-.item-md													{background:none !important;}
+.item-md                          {background:none !important;}
 ion-content{ background:none !important;}
 .scroll-content{overflow-y:hidden !important;}
 

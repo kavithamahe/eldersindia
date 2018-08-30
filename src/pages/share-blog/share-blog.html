@@ -16,18 +16,19 @@
     <ion-grid>
        <ion-list radio-group>
                   <ion-label class="required">To</ion-label>
-                  <ion-item>
+                  <ion-item class="sel-label">
                     <ion-label>Friends</ion-label>
                     <ion-radio value="frnds" (click)="friendslist(friends)" >
                     </ion-radio>
                   </ion-item>
-                  <ion-item>
+                  <br>
+                  <ion-item class="sel-label">
                     <ion-label>Communities</ion-label>
                       <ion-radio value="communitiess" (click)="communitylistsss(community)">
                       </ion-radio>
                   </ion-item>
             </ion-list>
-        <ion-item *ngIf(friends)>
+        <ion-item *ngIf(friends) class="sel-label">
           <ion-label>Friends</ion-label>
             <ion-select multiple="true" [(ngModel)]="selectedConnections" 
             [ngModelOptions]="{standalone: true}">
@@ -35,7 +36,7 @@
               </ion-option>
             </ion-select> 
           </ion-item>
-           <ion-item *ngIf(community)>
+           <ion-item *ngIf(community) class="sel-label">
           <ion-label>Communities</ion-label>
             <ion-select multiple="true" [(ngModel)]="selectedCommunity" 
             [ngModelOptions]="{standalone: true}">
@@ -44,7 +45,7 @@
             </ion-select> 
           </ion-item>
        <ion-label class="required">Description</ion-label>
-        <ion-item>
+        <ion-item class="sel-label">
          
           <ion-input type="text" placeholder="Description" [(ngModel)]="description" formControlName="description">
           </ion-input>

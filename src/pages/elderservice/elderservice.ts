@@ -3,6 +3,8 @@ import { Storage } from '@ionic/storage';
 import { ViewController,NavController, NavParams,LoadingController,ToastController } from 'ionic-angular';
 import { BlogListService } from '../../providers/blog-list-service';
 import { ServiceInfoPage } from '../../pages/service-info/service-info';
+import { DashboardPage } from '../../pages/dashboard/dashboard';
+
 /*
   Generated class for the ElderservicePage page.
 
@@ -23,7 +25,8 @@ packageData:any;
 rootUrl:any;
 packageStatus:any;
 vendorId:any;
-balance_service:any;
+common_type:any="";
+commontype:any;
   constructor(public navCtrl: NavController,public viewCtrl: ViewController,public storage:Storage,public toastCtrl: ToastController,public loadingCtrl: LoadingController, public navParams: NavParams,public blogListService:BlogListService) {
   	 this.storage.ready().then(() => {      
     	storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
@@ -67,9 +70,9 @@ getServicedetails(serviceId,vendor,one_time,recurring,package_amount){
   ionViewDidLoad() {
     console.log('ionViewDidLoad ElderservicePagePage');
   }
-
-  dismiss(){
-  	this.viewCtrl.dismiss();
+  dashboardPage(){
+    this.navCtrl.setRoot(DashboardPage);
   }
+ 
 
 }

@@ -34,16 +34,31 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
   }
+  getcancelRecurringPolicyConfig(hours,service_id,sub_category_id,status,service_type,recurring_request_id,req_count,id){
+    let _request= {"hour":hours,"service_id":service_id,"service_type":service_type,"status":status,"sub_category_id":sub_category_id,
+    "cancelId":id,"recurring_req_id":recurring_request_id,"req_count":req_count};
+    return this.http.post(this.rootUrl+'getcancelRecurringPolicyConfig',_request,this.options)
+      .map(res => res.json()); 
+  }
+  getcancelPolicyConfig(hours,service_id,sub_category_id,status,id,service_type){
+    let _request= {"hour":hours,"service_id":service_id,"status":status,"sub_category_id":sub_category_id,"cancel_id":id,"service_type":service_type};
+    return this.http.post(this.rootUrl+'getcancelPolicyConfig',_request,this.options)
+      .map(res => res.json()); 
+  }
   serviceRequestStatus(searchText,status){
      let _request= {"info":{"list":true,"sort":"","searchValue":searchText,"status":status,"token":""}};
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
   }
+  travelServiceMemberList(id){
+    let _request = {};
+    return this.http.post(this.rootUrl+'travelServiceMemberList/' + id,_request,this.options)
+      .map(res => res.json());
+  }
 
    serviceRequestLists(sr_token,searchText,status,sort) 
   
   {
-  
    let _request= {"info":{"list":true,"sort":sort,"searchValue":searchText,"status":status,"token":sr_token}};
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
@@ -56,8 +71,8 @@ rootUrl:any;
   viewServiceRequest(serviceRequestId) 
   {
   
-   let _request= {"id":serviceRequestId};
-    return this.http.post(this.rootUrl+'serviceRequestListById',_request,this.options)
+   let _request= {};
+    return this.http.post(this.rootUrl+'userServiceRquestDetails/' + serviceRequestId,_request,this.options)
       .map(res => res.json()); 
   }
   
@@ -81,18 +96,31 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'getRemarks',_request,this.options)
       .map(res => res.json()); 
   }
-  // cancelRequest(serviceId) 
-  // {
-  
-  //  let _request= {"sr_id":serviceId};
-  //   return this.http.post(this.rootUrl+'cancelServiceRequest',_request,this.options)
-  //     .map(res => res.json()); 
-  // }
-    cancelRequest(title,serviceId) 
+ 
+    cancelRequests(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,service_remaing_cost,final_payable_amount) 
   {
   
-   let _request= {"info":{"status":3,"id":serviceId,"comments":title,"cancel_time":"","scheduled_date":""}}
-    return this.http.post(this.rootUrl+'updateServiceReceiveStatus',_request,this.options)
+   let _request= {"status":3,"id":serviceId,"comments":title,"razorpay_payment_id":txnid,"service_type":service_type,
+   "dedaction_amount":cancelCharges,"paid_amount":paid_amount,"utilized_service_cost":utilized_service_cost,"recurring_req_id":recurring_request_id,"reduction_percentage":percentage,
+   "payable_amount":final_payable_amount,"service_remaing_cost":service_remaing_cost};
+    return this.http.post(this.rootUrl+'razorPaymentResponseforCancel',_request,this.options)
       .map(res => res.json()); 
+  }
+    cancelRequest(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id) 
+  {
+  
+   let _request= {"status":3,"id":serviceId,"comments":title,"razorpay_payment_id":txnid,"service_type":service_type,
+   "dedaction_amount":cancelCharges,"paid_amount":paid_amount,"utilized_service_cost":utilized_service_cost,"recurring_req_id":recurring_request_id,"reduction_percentage":percentage,
+   "service_cancel_amount":dedaction_service_cost,"service_remaing_cost":service_remaing_cost,"balanceamount_to_pay":service_remaing_cost,
+   "cancel_services":req_count,"package_id":package_id,"payable_amount":service_remaing_cost };
+    return this.http.post(this.rootUrl+'razorPaymentResponseforCancel',_request,this.options)
+      .map(res => res.json()); 
+  }
+  razorPaymentResponseforCancel(title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id){
+    let _request= {"status":3,"id":serviceId,"comments":title,"razorpay_payment_id":txnid,"service_type":service_type,
+    "dedaction_amount":deductionamount,"payment_status":payment_status,"recurring_req_id":"","reduction_percentage":percentage,"service_cancel_amount":servicecancelamount,
+  "package_id":package_id};
+    return this.http.post(this.rootUrl+'razorPaymentResponseforCancel',_request,this.options)
+      .map(res => res.json());
   }
 }

@@ -33,9 +33,9 @@
 	<p>{{packageData?.elder_mobile}}</p>
 	<b>Location </b>
 	<p>{{packageData?.location}}</p>
-	<b>Package</b>
+	<b>Package Name</b>
 	<p>{{packageData?.package_name}}</p>
-	<b>Cost</b>
+	<b>Amount</b>
 	<p><i class="fa fa-inr" aria-hidden="true"></i>{{packageData?.package_amount}}</p>
 	<b>Package Status</b>
 	<p *ngIf="packageData?.req_status == 0" class="pen"> Pending</p>
@@ -45,19 +45,15 @@
    <p>{{packageData?.package_validity}}</p>
   </ion-col>
 </ion-row>
-<ion-row *ngIf="packageData?.payment_remark != '' ">
+
+<ion-row>
   <ion-col>
+  <b>Payment date</b>
+  <p>{{packageData?.createt_at}}</p>
   <b>Payment Status</b>
-  <p *ngIf="packageData?.payment_type == 1">Cash payment</p>
-  <p *ngIf="packageData?.payment_type == 2">Cheque payment</p>
-  <p *ngIf="packageData?.payment_type == 3">Online payment</p>
+  <p *ngIf="packageData?.paumenry_payment_status=='captured'">Paid</p>
   </ion-col>
-
 </ion-row>
-
-
-
-
 </ion-item>
 </ion-card>
 </ion-content>

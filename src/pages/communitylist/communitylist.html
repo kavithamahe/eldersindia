@@ -37,15 +37,13 @@
         <div *ngIf(searchButton) class="select-cat">
           <ion-list>
             <ion-item>
-	
-              <ion-label>select category</ion-label>
+	           <ion-label>select category</ion-label>
                 <ion-select  (ionChange)='getCategory($event)' >
                   <ion-option *ngFor="let category of categoryLists" 
                   value={{category.id}}>{{category.name}}
                   </ion-option>
                 </ion-select>
-			
-            </ion-item>
+			     </ion-item>
           </ion-list>
         </div>
         <div *ngIf(searchButton)>

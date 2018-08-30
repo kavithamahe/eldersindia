@@ -33,11 +33,11 @@
   </ion-row>
   <ion-row>
   <ion-col width-100 class="child_menu">
-  <span>Service Name</span>
+  <span>Service Provider</span>
    <p>{{name}}</p>
    </ion-col>
   </ion-row>
-   <ion-row  *ngIf="datetime != '' ">
+   <ion-row  *ngIf="datetime != '' && serviceType == 'One time'">
   <ion-col width-100 class="child_menu">
   <span>Preferred date</span>
    <p>{{datetime}}</p>
@@ -49,13 +49,13 @@
    <p>{{preferred_time}}</p>
    </ion-col>
   </ion-row>
-     <ion-row *ngIf="fromdate != '' ">
+     <ion-row *ngIf="fromdate != '' && serviceType != 'One time'">
   <ion-col width-100 class="child_menu">
   <span>From date</span>
    <p>{{fromdate}}</p>
    </ion-col>
   </ion-row>
-    <ion-row *ngIf="fromdate != '' ">
+    <ion-row *ngIf="fromdate != '' && serviceType != 'One time'">
   <ion-col width-100 class="child_menu">
   <span>To date</span>
    <p>{{todate}}</p>
@@ -79,6 +79,13 @@
    <p>{{timeslot}}</p>
    </ion-col>
   </ion-row>
+  <ion-row>
+  <ion-col width-100 class="child_menu">
+  <span>Service Cost</span>
+   <p><i class="fa fa-rupee"></i>{{servicecost}}</p>
+   </ion-col>
+  </ion-row>
+  <p *ngIf="serviceType == 'One time' && recurringType == '1'">This is a chronic requirement, do you want to avail it as a recurring service</p>
 	  </ion-card>
 	  <ion-fab bottom right>
   <button ion-fab mini icon-only (click)="edit()" class="edit-bd">Edit</button>
@@ -93,20 +100,27 @@
 
 <ion-footer>
   <ion-toolbar color="primary"> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
-    <ion-buttons>
-      <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
-        <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
-   <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
-      <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()">
-        <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
-     <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
+    <ion-buttons *ngIf="packageListsvalue == undefined">
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="paylater()">
+     Pay Cash
+    <ion-icon ios="md-send" md="md-send"></ion-icon></button>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="paylater()">
+    Pay Cash<ion-icon ios="md-send" md="md-send"></ion-icon></button>
     </ion-buttons>
     
-    <ion-buttons end >
-      <button ion-button color="royal" large icon-right showWhen="ios" (click)="submit()">&nbsp;Next
+    <ion-buttons end *ngIf="packageListsvalue == undefined">
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="submit()">&nbsp;Pay Now
        <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button ion-button color="light" large icon-right hideWhen="ios" (click)="submit()">&nbsp;Next
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="submit()">&nbsp;Pay Now
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end *ngIf="packageListsvalue != undefined">
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="paylater()">&nbsp;Submit Request
+       <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="paylater()">&nbsp;Submit Request
         <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>

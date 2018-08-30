@@ -8,6 +8,7 @@ import { CallNumber } from 'ionic-native';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { RecurringviewPagePage } from '../../pages/recurringview/recurringview';
 import { RecurringcancelPagePage } from '../../pages/recurringcancel/recurringcancel';
+import { PackagepaymentPagePage } from '../../pages/packagepayment/packagepayment';
 
 import { BlogListService } from '../../providers/blog-list-service';
 
@@ -30,8 +31,16 @@ rootUrl:any;
 searchText:any="";
 nextPageURL:any='';
 serviceRequestScrollLists:any=[];
+discountcost:any;
+sortby:any="";
+sr_token:any;
   constructor(public navCtrl: NavController,public modalCtrl: ModalController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
-  	this.storage.ready().then(() => {  
+  if(this.navParams.get("sr_token")){
+      this.searchText =this.navParams.get("sr_token");
+   
+  }
+    
+    this.storage.ready().then(() => {  
   		storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
 	    
 	  	this.getrecurringRequest();
@@ -39,7 +48,10 @@ serviceRequestScrollLists:any=[];
   	
   });
   }
-
+    // parseFloat(value)
+    // {
+    //     return parseFloat(value);
+    // }
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecurringPagePage');
   } 
@@ -65,20 +77,35 @@ serviceRequestScrollLists:any=[];
         });
    toast.present();
   }
+   paynow(service_cost,service_id,recurring_request_id){
+    let service_type = "Recurring";
+    let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"service_type":service_type,"service_cost":service_cost,"service_id":service_id,"recurring_request_id":recurring_request_id,"reqstatus":"2"});
+      serviceModal.present();
+  }
   getrecurringRequest(){
-  	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
-    loading.present();
+  	// let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+   //  loading.present();
     this.recurringRequest = [];
-    this.blogListService.getrecurringRequest(this.rootUrl,this.searchText)
+    this.blogListService.getrecurringRequest(this.rootUrl,this.searchText,this.sortby)
       .subscribe(data =>{ 
-      	this.recurringRequest = data.result.data;
-        this.nextPageURL=data.result.next_page_url;  
-        loading.dismiss();
+        var dataList=data.result.info.data;
+        for(let data of dataList) {
+      data.discountcost = parseFloat(data.servicediscountcost_one_service) + parseFloat(data.final_service_cost);
+      data.totalServicecost = data.service_cost * data.req_count;
+      data.balanceamount = data.total_service_cost - data.paid_amount;
+      data.sr_token = data.sr_token
+      var str = data.sr_token;
+         data.sr_tokenend = str.replace("-1" ,"");
+      data.remainingamount = parseFloat(data.remaining_amount).toFixed(2);
+    }
+        this.recurringRequest = dataList;
+        this.nextPageURL=data.result.info.next_page_url;  
+        // loading.dismiss();
     },
     err =>{
       this.recurringRequest = [];
       this.blogListService.showErrorToast(err);     
-      loading.dismiss();
+      // loading.dismiss();
     })
   }
   doInfinite(infiniteScroll) {
@@ -95,19 +122,32 @@ serviceRequestScrollLists:any=[];
   }
   recurringRequestScroll()
   {
-    this.blogListService.recurringRequestScroll(this.nextPageURL,this.searchText).subscribe(
+    console.log("scroll");
+    this.blogListService.recurringRequestScroll(this.nextPageURL,this.searchText,this.sortby).subscribe(
      (serviceRequestScroll) => {
-      this.serviceRequestScrollLists=serviceRequestScroll.result.data; 
-       for (let i = 0; i < Object.keys(this.serviceRequestScrollLists).length; i++) {
-        this.recurringRequest.push(this.serviceRequestScrollLists[i]);
-        }
+       var dataList=serviceRequestScroll.result.info.data;
+        for(let data of dataList) {
+      data.discountcost = parseFloat(data.servicediscountcost_one_service) + parseFloat(data.final_service_cost);
+      data.totalServicecost = data.service_cost * data.req_count;
+      data.balanceamount = data.total_service_cost - data.paid_amount;
+      data.sr_token = data.sr_token
+      var str = data.sr_token;
+         data.sr_tokenend = str.replace("-1" ,"");
+      data.remainingamount = parseFloat(data.remaining_amount).toFixed(2);
+
+    }
       
-       this.nextPageURL=serviceRequestScroll.result.next_page_url;     
+      //this.serviceRequestScrollLists=serviceRequestScroll.result.data; 
+       for (let i = 0; i < Object.keys(dataList).length; i++) {
+        this.recurringRequest.push(dataList[i]);
+        }
+        // this.recurringRequest = dataList;
+       this.nextPageURL=serviceRequestScroll.result.info.next_page_url;     
     },
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {

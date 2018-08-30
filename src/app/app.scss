@@ -16,7 +16,9 @@
 @import url('https://fonts.googleapis.com/css?family=Exo+2');
 button																			{font-family: 'Muli', sans-serif; }
 
+
 .list-md .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus)		{border-bottom-color:none !important;box-shadow:none  !important;}
+.text-input[disabled]{ opacity: 4;}
 .list-md .item-input.input-has-focus:last-child									{border-bottom-color:none !important;box-shadow:none  !important;}
 .list-md .item-input.input-has-focus:last-child									{border-bottom-color:#ffffff !important;box-shadow:none;}
 .list-md .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus)		{border-bottom-color:#ffffff !important;box-shadow:0 -1px 0 0 #ffffff inset !important;}
@@ -42,7 +44,7 @@ button																			{font-family: 'Muli', sans-serif; }
 .hed-new .toolbar-ios 															{height:160px;}
 .modal-wrapper																	{background:#fff;}
 .img-log .toolbar-background-md 												{background:#fff;background-image: url("../assets/img/top-logbg.png") !important;background-repeat:no-repeat;background-size:cover;}
-.center-image																	{background:#fff; padding:5px; width:80%;}
+.center-image																	{padding:5px; width:80%;}
 .item-md																		{padding-left:0px;}
 .item-ios																		{padding-left:0px;}
 .hed-new .toolbar-md .toolbar-content-md p 										{color:#fff;font-size:30px;font-weight:400;margin:0;text-align:center;font-family: 'Exo 2', sans-serif;}
@@ -52,7 +54,7 @@ button																			{font-family: 'Muli', sans-serif; }
 .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner	{border-bottom-color:#fff !important;box-shadow:none !important;}
 .item-ios																		{padding-left:0px;}
 .hed-new .toolbar-ios .toolbar-content-ios p 									{color:#fff;font-size:30px;font-weight:400;margin:0;text-align:center;font-family: 'Exo 2', sans-serif;}
-.list-md .item-input:last-child													{border:none !important;}
+
 .list-ios .item-input:last-child												{border:none !important;}
 .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{border:none;}
 /********************************menu scss end********************************/
@@ -98,6 +100,16 @@ send-req 																		{background: hsla(0, 0%, 0%, 0) linear-gradient(45deg
 .sle .item-inner .input-wrapper .label-md										{padding-left:5px;}
 .req-ti .toolbar-title															{font-size:15px; text-align:left;padding-top:10px;text-align:left !important;font-family: "Muli",sans-serif;}
 .btn-blue																		{margin-top:10px;background:#FE5420;font-family: "Muli",sans-serif;}
+.toast-success {
+  > div{
+       background-color:green!important;
+   }
+}
+toast-cancel{
+   > div{
+       background-color:red!important;
+   }
+}
 .header-ios .toolbar-background-ios, .footer-ios .toolbar-background-ios		{border:none;}
 .err-reds																		{float:right;padding-left:3px;padding-right:3px; font-weight:600;margin-right:17px !important;   position: relative; background:#FFDCE0; color:red !important;font-size:12px !important;font-family: "Muli",sans-serif; -webkit-animation-duration:5s; animation-duration:5s; 
 																				 -webkit-animation-fill-mode: both; animation-fill-mode: both;}

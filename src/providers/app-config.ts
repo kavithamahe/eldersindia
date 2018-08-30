@@ -11,14 +11,14 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AppConfig {
-  imageUrl="http://uat.eldersindia.com/"; 
+  imageUrl="http://beta.eldersindia.com/";
   rooturl=this.imageUrl+"api/";
 
   constructor(public http: Http) {
   }
   public setImageurl()
   {
-  	return this.imageUrl; 
+   	return this.imageUrl; 
   }
   public setrooturl()
   {

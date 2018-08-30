@@ -30,7 +30,17 @@ packageId:any;
 id:any;
 locationId:any;
 elderId:any;
+searchemail:any="";
+searchid:any="";
+paystatus:any;
+results:any;
   constructor(public navCtrl: NavController,public modalCtrl: ModalController,public toastCtrl: ToastController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams, public blogListService:BlogListService) {
+      this.paystatus = navParams.get("status");
+       this.results = navParams.get("result");
+    console.log(this.results);
+    if(this.paystatus == "1"){
+      this.blogListService.showToaster(this.results);
+    }
   	 this.storage.ready().then(() => {      
     	storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
      
@@ -52,7 +62,7 @@ elderId:any;
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
     // this.providerService.loadServiceOffered()
-    this.blogListService.getPackageRequest(this.rootUrl,this.searchText,this.packstatus)
+    this.blogListService.getPackageRequest(this.rootUrl,this.searchText,this.searchemail,this.searchid,this.packstatus)
       .subscribe(data =>{
         this.packageRequest = data.result.data;
         this.nextPageURL = data.result.next_page_url;
@@ -68,6 +78,7 @@ elderId:any;
     console.log('ionViewDidLoad PackageRequestPagePage');
   }
 doInfinite(infiniteScroll) {
+  console.log(this.nextPageURL);
     setTimeout(() => {      
       if(this.nextPageURL!=null && this.nextPageURL!='')
       {
@@ -82,7 +93,7 @@ doInfinite(infiniteScroll) {
   packagescroll()
   {
 
-     this.blogListService.eventscrolls(this.nextPageURL,this.searchText,this.packstatus).subscribe(
+     this.blogListService.eventscrolls(this.nextPageURL,this.searchText,this.searchemail,this.searchid,this.packstatus).subscribe(
      (eventsscroll) => {
       this.eventScrollLists=eventsscroll.result.data;
       for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
@@ -116,6 +127,14 @@ doInfinite(infiniteScroll) {
    this.searchText = searchEvent;
    this.getPackageRequests();
   }
+    searchemails(searchEvent){
+   this.searchemail = searchEvent;
+   this.getPackageRequests();
+  }
+    searchids(searchEvent){
+   this.searchid = searchEvent;
+   this.getPackageRequests();
+  }
   onSelectChange(selectedValue: any) {
    if(this.packstatus == "All"){
     this.packstatus = "";
@@ -138,9 +157,10 @@ doInfinite(infiniteScroll) {
   this.getServicesForByElders(id,locationId,elderId,status);
   }
   getServicesForByElders(id,locationId,elderId,status){
-    this.navCtrl.push(ElderservicePagePage,{pack_id: id, elder: elderId, location_id: locationId,packbstatus:status});
   	 // let modal1 = this.modalCtrl.create(ElderservicePagePage,{pack_id: id, elder: elderId, location_id: locationId,packbstatus:status});
     // modal1.present();
+     this.navCtrl.push(ElderservicePagePage,{pack_id: id, elder: elderId, location_id: locationId,packbstatus:status});
+
   }
 public dashboardPage()
   {

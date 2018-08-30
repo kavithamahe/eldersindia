@@ -21,11 +21,41 @@ token:any;
 viewServiceRequestInfo:any;
 serviceRequestId:number;
 preffer:any;
+service:any;
+payment_method:any;
+discountservicecost:any;
+paidamount:any;
+balanceamount:any;
+Paymentstatus:any;
+additional_service_cost:any;
+emergencyContact:any=[];
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
         this.serviceRequestId=navParams.get("serviceRequestId");
+        this.service = navParams.get("service");
+        this.payment_method= this.service.payment_method;
+        this.Paymentstatus = this.service.Paymentstatus;
+        this.additional_service_cost = this.service.additional_service_cost;
+        if(this.payment_method == "partial_payment"){
+          this.discountservicecost = parseFloat(this.service.servicediscountcost_one_service)+parseFloat(this.service.final_service_cost);
+          this.paidamount = this.service.servicediscountcost_one_service;
+          this.balanceamount = this.service.final_service_cost;
+        }
+        if(this.payment_method == "full_payment"){
+          this.discountservicecost = parseFloat(this.service.servicediscountcost_one_service)+parseFloat(this.service.final_service_cost);
+          this.paidamount = parseFloat(this.service.servicediscountcost_one_service) + parseFloat(this.service.final_service_cost);
+          this.balanceamount = "0";
+
+
+        }
+        if(this.payment_method == ""){
+          this.discountservicecost = "0";
+          this.paidamount = "0";
+          this.balanceamount = "0";
+        }
+
   		this.onInit(this.serviceRequestId);
       })
   	});
@@ -36,7 +66,8 @@ preffer:any;
     loader.present();
     this.serviceRequest.viewServiceRequest(this.serviceRequestId).subscribe(
      (viewServiceRequest) => {
-      this.viewServiceRequestInfo=viewServiceRequest;
+      this.viewServiceRequestInfo=viewServiceRequest.result;
+      this.emergencyContact = this.viewServiceRequestInfo.emergencyContact;
       this.preffer= viewServiceRequest.enquiry_date;
       loader.dismiss();   
     },

@@ -21,8 +21,8 @@
     <ion-select [(ngModel)]="dependent" (ionChange)="checkDependent()" class="select-brddd"  formControlName="elder_dependent" 
     [class.invalid]="!authForm.controls.elder_dependent.valid && (authForm.controls.elder_dependent.dirty)">
       <ion-option *ngFor="let dependent of getDependentList" value={{dependent?.id}}>{{dependent?.name}}</ion-option>    
-	  </ion-select>
-	      <small *ngIf="!authForm.controls.elder_dependent.valid  && (authForm.controls.elder_dependent.dirty || submitAttempt)">
+    </ion-select>
+        <small *ngIf="!authForm.controls.elder_dependent.valid  && (authForm.controls.elder_dependent.dirty || submitAttempt)">
               <p class="valid err-reds">Please select the dependent.</p>
         </small> 
 </ion-item>

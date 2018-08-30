@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+	 <ion-title text-center text-capitalize>Enquiry Detail</ion-title>    
+    <ion-buttons right>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+   
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="content-intop">
+<ion-card>
+<ion-grid class="package-needs">
+	<ion-row>
+  <ion-col col-12 text-wrap>
+    <b>Enquiry Raised by:</b><p>{{enquiriesList?.name}}</p>
+	</ion-col>
+	</ion-row>
+		<ion-row>
+  <ion-col col-12 text-wrap>
+    <b>Service provider name:</b><p>{{enquiriesList?.vendor_name}}</p>
+	</ion-col>
+	</ion-row>
+		<ion-row>
+  <ion-col col-12 text-wrap>
+    <b>Query:</b><p>{{enquiriesList?.queries}}</p>
+	</ion-col>
+	</ion-row>
+		<ion-row>
+  <ion-col col-12 text-wrap>
+    <b>Category:</b><p>{{enquiriesList?.category_name}}</p>
+	</ion-col>
+	</ion-row>
+		<ion-row>
+  <ion-col col-12 text-wrap>
+    <b>Sub category:</b><p>{{enquiriesList?.sub_cat_name}}</p>
+	</ion-col>
+	</ion-row>
+		<ion-row>
+  <ion-col col-12 text-wrap>
+    <b>About:</b><p>{{enquiriesList?.service_name}}</p>
+	</ion-col>
+	</ion-row>
+		<ion-row>
+  <ion-col col-12 text-wrap>
+    <b>Package scheduled:</b><p>{{enquiriesList?.start_date}} to {{enquiriesList?.end_date}}</p>
+	</ion-col>
+	</ion-row>
+		<ion-row>
+  <ion-col col-12 text-wrap>
+    <b>Enquiry date:</b><p>{{enquiriesList?.preferred_datetime}}</p>
+	</ion-col>
+	</ion-row>
+	</ion-grid>
+	</ion-card>
+
+</ion-content>

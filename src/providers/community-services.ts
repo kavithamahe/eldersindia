@@ -178,8 +178,8 @@ joinCommunity(id){
 
 }
 //------ need to update----------//
-connectMember(id,name){
-   this.connect ={"connect_id":id,"connect_name":name}
+connectMember(id,name,last_name){
+   this.connect ={"connect_id":id,"connect_name":name,"last_name":last_name}
    return this.http.post(`${this.getCommunityPostsUrl }sendConnectionRequest`,this.connect,this.options)
       .map(res =>res.json());
 }
@@ -298,9 +298,6 @@ myprofile(id){
      return this.http.post(`${this.getCommunityPostsUrl }sendReply`,this.post,this.options)
       .map(res =>res.json());
   }
-
-
-
  deleteComment(id){
    this.delete={"info": {"comment_id": id}}
    return this.http.post(`${this.getCommunityPostsUrl }removeFeedComment`,this.delete,this.options)
@@ -317,10 +314,10 @@ myprofile(id){
     return this.http.post(`${this.getCommunityPostsUrl }getElderListBySponser`,this.lists,options)
     .map(res =>res.json());
   }
-  loginDetail(id){
+  loginDetail(id,options){ 
      this.lists={"id":id}
       
-    return this.http.post(`${this.getCommunityPostsUrl }SendElderVerificationMail`,this.lists,this.options)
+    return this.http.post(`${this.getCommunityPostsUrl }SendElderVerificationMail`,this.lists,options)
     .map(res =>res.json());
   }
    searchManageLists(data){
@@ -343,7 +340,7 @@ myprofile(id){
     .map(res =>res.json());
 }
   getElderMasterDetails(options){
-   this.body = {"get":["FunctionalArea","Educational","Specialization","Locations","AreaofInterest","Skills","Relations","InService","serviceCategory","BlogCategory","ServiceOffered"]};
+   this.body = {"get":["FunctionalArea","Educational","Specialization","Locations","AreaofInterest","Skills","Relations","InService","serviceCategory","BlogCategory","ServiceOffered","Emergency_contact"]};
      return this.http.post(`${this.getCommunityPostsUrl }getElderMasterDetails`,this.body,options)
     .map(res =>res.json());
   }

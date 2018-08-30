@@ -1,4 +1,3 @@
-<!------------------ header start ------------------>
 
 <ion-header>
   <ion-navbar color="primary">
@@ -15,8 +14,6 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<!------------------ header end ------------------>
-<!------------------ content start ------------------>
 <ion-content class="content-intop">
   <ion-card class="sel-packages">
     <ion-item>
@@ -32,9 +29,14 @@
 </ion-card>
  <!-- <ion-searchbar ></ion-searchbar> -->
 <ion-card class="shs">
- <ion-input type="text" class="search" [(ngModel)]="term" placeholder="search">
+ <ion-row>
+<ion-col width-80><ion-searchbar [(ngModel)]="term"></ion-searchbar></ion-col>
+  <ion-col width-20><button (click)="getItems(term)" ion-button small class="go-btn">Go
+  </button> </ion-col>
+</ion-row>
+<!--  <ion-input type="text" class="search" [(ngModel)]="term" placeholder="search" (click)="getItems(term)"> -->
    
- </ion-input>
+ <!-- </ion-input> -->
 </ion-card>
 <ion-card class="pack-listed">
 <ion-item *ngFor = "let subcategory of subcategories.info" 
@@ -46,7 +48,7 @@
 <hr/>
  <ion-card class="slider-card">
  <h1 class="package-list-show">Packages (<span>{{packageCount}}</span>) </h1> 
-    <ion-slides *ngIf="packages && packages.length" autoplay="2000" loop="true" speed="500" class="slides" class="slideroption">
+    <ion-slides *ngIf="packages && packages.length" autoplay="2000" loop="true" speed="300" class="slides" class="slideroption">
         <!-- <div text-wrap> -->
       
            <ion-slide  *ngFor="let package of packages; let i=index" (click)="viewPackage(package.vendor_id)" class="slide-border">

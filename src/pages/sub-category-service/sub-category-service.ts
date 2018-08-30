@@ -16,19 +16,22 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
   templateUrl: 'sub-category-service.html'
 })
 export class SubCategoryServicePage {
+  serviceOffered: any;
 	subcategory:any;
 	locationId:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     console.log("this is sub category service page");
   	this.subcategory = navParams.get("sub_service");
-  	this.locationId = navParams.get("location_id");
+    this.locationId = navParams.get("location_id");
+    this.serviceOffered = navParams.get("serviceOfferedtype");
 
   }
 
   itemSelected(serviceData) {
     let service = serviceData;
     let location_id = this.locationId;
-    this.navCtrl.push(SubcategoryListPage,{location_id,service});
+    let serviceOffereds = this.serviceOffered;
+    this.navCtrl.push(SubcategoryListPage,{location_id,service,serviceOffereds});
   }
 
    public dashboardPage()

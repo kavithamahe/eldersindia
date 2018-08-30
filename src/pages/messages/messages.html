@@ -55,7 +55,7 @@
 
 <div [ngSwitch]="messages">
   <ion-list *ngSwitchCase="'inbox'">
-  <ion-item padding *ngIf="!inboxInfo">
+  <ion-item *ngIf="!inboxInfo">
      <p class="error-clr">{{emptyRecord}}</p>
    </ion-item>
   <div>
@@ -67,35 +67,32 @@
    <!--  <ion-searchbar [(ngModel)]="inbox" (ionInput)="getItems(inbox)">
     </ion-searchbar> -->
   </div>
-  <hr/>
+  
     <div>
       <ion-list *ngFor="let inbox of inboxInfo">
-
-
-      <ion-item-sliding  class="inbox-sends">
+     <ion-item-sliding  class="inbox-sends">
    <!--      <ion-item (click)="viewMessages(inbox?.id,'inbox')" 
         [ngClass]="inbox.read_status?'readmsg':'unreadmsg'" > -->
          <ion-item (press)="clickedAvatar(inbox.id)" [class]="isInArray(inbox.id) ? 'selected' : 'not-selected'" (click)="viewMessages(inbox?.id,'inbox')" >
           <ion-row>
-            <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
+            <ion-col style="max-width: 15%;" width-20>
             <ion-avatar item-left>
-              <img src="{{imageUrl+inbox?.avatar}}">
+              <img src="{{imageUrl+inbox?.avatar}}" style="padding-top:8px;">
             </ion-avatar>
             </ion-col>
-            <ion-col width-80  style="padding: 0px !important" class="send-box-content">
+            <ion-col width-80  style="" class="send-box-content">
               <ion-row>
-             
-
-                <ion-item width-60 style="padding: 0px !important" text-wrap 
+                <ion-item width-60  text-wrap 
                 [ngClass]="inbox.read_status?'readmsg':'unreadmsg'">
                   <p style="font-size: 1.8rem;">{{inbox?.author_name}}</p>
                 </ion-item>
                 <ion-col *ngIf = "inbox.attachemts != null">
                 <ion-icon name="attach"></ion-icon>
                 </ion-col>
-                <ion-col width-30 style="text-align-last: end; padding: 0px !important">
+                <ion-col width-40 style="text-align-last: end;">
 
-                <p class="time-small"><i class="fa fa-clock-o"></i>&nbsp;{{inbox?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p>
+               <!--  <p class="time-small"><i class="fa fa-clock-o"></i>&nbsp;{{inbox?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p> -->
+               <p class="time-small"><i class="fa fa-clock-o"></i>&nbsp;{{inbox?.created_at}}</p>
                 </ion-col>
               </ion-row>
               <ion-row *ngIf="inbox.subject">
@@ -119,7 +116,7 @@
     </ion-list>
     </div>
     <ion-row>
-    <ion-col offset-33>
+    <ion-col offset-50>
       <button *ngIf="nextPageURL1!=null && nextPageURL1!=''" ion-button color="dark" clear (click)="doInfinite1($event)"><i class="fa fa-angle-down"></i></button>
     </ion-col>
     </ion-row>
@@ -147,22 +144,23 @@
       <ion-item-sliding class="inbox-sends">
         <ion-item (click)="viewMessages(sent?.id,'sent')" (press)="deletesendMultipel(sent.id)" [class]="isInArraySend(sent.id) ? 'selected' : 'not-selected'">
           <ion-row>
-            <ion-col style="padding: 0px !important; max-width: 15%;" width-20>
+            <ion-col style="max-width: 15%;" width-20>
             <ion-avatar item-left>
               <img src="{{imageUrl+sent?.avatar}}">
             </ion-avatar>
             </ion-col>
           
-            <ion-col width-80 class="send-box-content" style="padding: 0px !important">
+            <ion-col width-80 class="send-box-content" style="">
               <ion-row>
-                <ion-item width-70 style="padding: 0px !important" text-wrap>
+                <ion-item width-70 style="" text-wrap>
                 <p style="font-size: 1.8rem;">{{sent?.name}}</p>
                 </ion-item>
                 <ion-col *ngIf = "sent.attachments != null">
                 <ion-icon name="attach"></ion-icon>
                 </ion-col>
-                <ion-col width-30 style="text-align-last: end; padding: 0px !important">
-                <p><i class="fa fa-clock-o"></i>&nbsp;{{sent?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p>
+                <ion-col width-30 style="text-align-last: end;">
+                <p><i class="fa fa-clock-o"></i>&nbsp;{{sent?.created_at}}</p>
+                  <!-- <p><i class="fa fa-clock-o"></i>&nbsp;{{sent?.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}</p> -->
                 </ion-col>
               </ion-row>
               <ion-row *ngIf="sent.subject">
@@ -182,7 +180,7 @@
       </ion-item-sliding>
     </ion-list>
     <ion-row>
-    <ion-col offset-33>
+    <ion-col offset-45>
      <button *ngIf="nextPageURL2!=null && nextPageURL2!=''" ion-button color="dark" clear (click)="doInfinite2($event)"><i class="fa fa-angle-down"></i></button>
    </ion-col>
    </ion-row>

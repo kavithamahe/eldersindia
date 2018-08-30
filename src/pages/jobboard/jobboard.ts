@@ -53,12 +53,12 @@ searchText:any="";
   }
   onSelectChange(selectedValue: any) {
    // if(this.functionalArea == "All"){
-   //  this.functionalArea = "";
+   //  this.functionalArea = null;
    //  this.onInit();
    // }
    // else{
       this.functionalArea = selectedValue;
-    this.onInit();
+this.onInit();
   // }
   
   }
@@ -183,7 +183,6 @@ getItems(searchEvent){
   }
   jobBoardscroll()
   {
-
      this.jobBoardService.JobBoardscroll(this.nextPageURL,this.searchText,this.functionalArea,this.location).subscribe(
      (JobBoardscroll) => {
       this.jobBoardScrollLists=JobBoardscroll.result.info.data;

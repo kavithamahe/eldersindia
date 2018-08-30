@@ -55,8 +55,8 @@ Url:any;
     return this.http.post(this.rootUrl+'getBlogCategories',_request,this.options)
       .map(res => res.json());
   }
-  getrecurringRequest(rootUrl,searchText){
-    let _request= {"search": searchText};
+  getrecurringRequest(rootUrl,searchText,sort){
+    let _request= {"search": searchText,"sort":sort};
     return this.http.post(rootUrl+'getRecurringServiceList',_request,this.options)
       .map(res => res.json());
   }
@@ -65,25 +65,59 @@ Url:any;
      subcategory,datetime,dependentId,durations,exclude_days,
     from_date,from_time,serviceType,selected_dates,time_slot,
      to_date,to_time,package_id,preferred_time,quantity,
-     location_id,lead_time,vendor_id){
-    let _request= {"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
+     location_id,lead_time,vendor_id,datCount,service_costs,servicediscountcostss,paymenttype,paymentflag,discounts,totalservice_costss,discountcost,
+     afterdiscount_one_service,servicediscountcost_one_service,discountpartial,base_cost,servicediscost,getCustomerBalanceAmount,get_custome_amount,get_custome_deliever_amount,
+     get_custome_service_cancel_amount,total_cost,total_service_cost){
+    let _request= {"Category_name":category,"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
 dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
 from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
 "quantity":quantity,"selected_dates":selected_dates,"service":service,"serviceType":
 serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
-,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id};
+,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id,"datCount":datCount,"servicecost":service_costs,"servicediscountcost":servicediscountcostss,"servicediscost":servicediscost,
+"problem":"","pay_method":paymenttype,"mobile":"","paymentflag":paymentflag,"afterdiscount":totalservice_costss,
+"discount":discounts,"discountcost":discountcost,"payment_type":paymenttype,"afterdiscount_one_service":afterdiscount_one_service,"servicediscountcost_one_service":servicediscountcost_one_service,
+"discountpartial":discountpartial,"base_cost":base_cost,"getCustomerBalanceAmount":getCustomerBalanceAmount,
+"get_custome_amount":get_custome_amount,"get_custome_deliever_amount":get_custome_deliever_amount,"get_custome_service_cancel_amount":get_custome_service_cancel_amount,"total_cost":total_cost,
+"total_service_cost":total_service_cost};
     return this.http.post(rootUrl+'serviceRequestSubmitbeforePayment',_request,this.options)
+      .map(res => res.json());
+  }
+   serviceRequestSubmitbeforePayments(rootUrl,servicecost,
+      category,category_id,service,service_ids,sub_category_id,
+     subcategory,datetime,dependentId,durations,exclude_days,
+    from_date,from_time,serviceType,selected_dates,time_slot,
+     to_date,to_time,package_id,preferred_time,quantity,
+     location_id,lead_time,vendor_id,paymentflag,base_cost,getCustomerBalanceAmount,get_custome_amount,get_custome_deliever_amount,
+     get_custome_service_cancel_amount,total_cost,total_service_cost){
+    let _request= {"Category_name":category,"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
+dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
+from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
+"quantity":quantity,"selected_dates":selected_dates,"service":service,"serviceType":
+serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
+,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id,"paymentflag":paymentflag,"base_cost":base_cost,"getCustomerBalanceAmount":getCustomerBalanceAmount,
+"get_custome_amount":get_custome_amount,"get_custome_deliever_amount":get_custome_deliever_amount,"get_custome_service_cancel_amount":get_custome_service_cancel_amount,
+"total_cost":total_cost,"total_service_cost":total_service_cost,};
+    return this.http.post(rootUrl+'serviceRequestSubmitbeforePayment',_request,this.options)
+      .map(res => res.json());
+  }
+  razorPaymentResponses(rootUrl,payment_id){
+    let _request= {"razorpay_payment_id": payment_id};
+    console.log(_request);
+     return this.http.post(rootUrl+'razorPaymentResponse',_request,this.options)
       .map(res => res.json());
   }
   paymentTran(rootUrl,key,productinfo,txnid,amount,firstname,email,
       phone,surl,service_provider,udf1,udf2,udf3){
+
      let _request= {"key":key,"amount":amount,"txnid":txnid,"phone":phone,"firstname":firstname,
-     "email":email,"productinfo":productinfo,"surl":surl,"udf1":udf1,"service_provider":service_provider,"udf2":udf2,"udf3":udf3};
+
+     "email":email,"productinfo":productinfo,"surl":surl,"udf1":udf1,"service_provider":service_provider,"udf3":"serviceType",
+     "udf2":"service_request_id"};
     return this.http.post(rootUrl+'checkpayUmoneyforSRMbl',_request,this.options)
       .map(res => res.json());
   }
-  recurringRequestScroll(nextPageURL,searchText){
-     let _request= {"search": searchText};
+  recurringRequestScroll(nextPageURL,searchText,sort){
+     let _request= {"search": searchText,"sort":sort};
      return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json());
   }
@@ -92,13 +126,15 @@ serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id
     return this.http.post(rootUrl+'getRecurringServiceById',_request,this.options)
       .map(res => res.json());
   }
-  getrecurringRequestdelete(rootUrl,recurring){
-     let _request= {"id": recurring}
+  getrecurringRequestdelete(rootUrl,recurring,hours,paid_cost,reamining_cost,service_cost,status,total_service_cost){
+     let _request= {"id": recurring,"hours":hours,"paid_cost":paid_cost,"reamining_cost":reamining_cost,"service_cost":service_cost,"status":status,"total_service_cost":total_service_cost};
     return this.http.post(rootUrl+'getBulkRecurringService',_request,this.options)
       .map(res => res.json());
   }
-  deleterecurringrequest(rootUrl,recurring){
-    let _request= {"id":recurring};
+  deleterecurringrequest(rootUrl,recurring,dedction_amount,refund_amount,remaining_amount,paid_amount,balance_amount,total_amount){
+    let _request= {"id":recurring,"dedction_amount":dedction_amount,"refund_amount":refund_amount,"remaining_amount":remaining_amount,
+    "total_amount":total_amount,"balance_amount":balance_amount,"paid_amount":paid_amount};
+
     return this.http.post(rootUrl+'deleteBulkRecurringService',_request,this.options)
       .map(res => res.json());
   }
@@ -120,14 +156,14 @@ viewrecurring(sr_token)
     return this.http.post(this.rootUrl+'getBlogDetails/'+blogId,_request,this.options)
       .map(res => res.json()); 
   }
-getPackageRequest(Url,searchText,packstatus){
-       let _request= {info: {"list": true, "search": searchText, "status": packstatus,"token": null}};
+getPackageRequest(Url,searchText,searchemail,searchid,packstatus){
+       let _request= {info: {"list": true, "search": "","elder_name":searchText,"elder_email":searchemail,"txnid":searchid, "status": packstatus,"paymentStatus":"","reqType":"","token": null}};
     return this.http.post(Url+`getPackageRequest`,_request,this.options)
       .map(res => res.json()); 
 }
-eventscrolls(nextPageURL,searchText,packstatus) 
+eventscrolls(nextPageURL,searchText,searchemail,searchid,packstatus) 
    {  
-   let _request= {info: {"list": true, "search": searchText, "status": packstatus, "token": null}};
+   let _request= {info: {"list": true, "search": "","elder_name":searchText,"elder_email":searchemail,"txnid":searchid,"status": packstatus, "token": null}};
 
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
@@ -166,7 +202,7 @@ getPackageRequestById(rootUrl,packageId){
     return this.http.post(this.rootUrl+'deleteComment',_request,this.options)
       .map(res => res.json()); 
   }
-    deleteReplyComment(commentId) {  
+  deleteReplyComment(commentId) {  
    let _request= {"id":commentId};
     return this.http.post(this.rootUrl+'deleteReplyComment',_request,this.options)
       .map(res => res.json()); 
@@ -228,15 +264,25 @@ getPackageRequestById(rootUrl,packageId){
     let _request={"friends":{"addType":"Communities","comm_id":selectedCommunity,"description":description},"shareurl":this.rootUrl+'/#/blog/details/'+BlogId}  
     return this.http.post(this.rootUrl+'shareblog',_request,this.options)
       .map(res => res.json()); 
- }
- else{
+     }
+     else{
       let _request= {'friends':{"addType":"Friends",'user_id':friendsID,'description':description},'shareurl':this.rootUrl+'/#/blog/details/'+BlogId};
        return this.http.post(this.rootUrl+'shareblog',_request,this.options)
       .map(res => res.json()); 
      }
       }
+  packageAvailAlert(selectedConnections,packId,service_quantity){
+     let _request= {"packId": packId, "elderId": selectedConnections,"service_quantity":service_quantity};
+    return this.http.post(this.rootUrl+'packageAvailAlert',_request,this.options)
+      .map(res => res.json()); 
+      }
    getPackage(selectedConnections,packId,location_id){
     let _request= {"pack_id": packId, "dependent_id": selectedConnections,"location_id":location_id};
+    return this.http.post(this.rootUrl+'availPackage',_request,this.options)
+      .map(res => res.json()); 
+   }
+   getPackageselder(packId,location_id){
+    let _request= {"pack_id": packId,"location_id":location_id};
     return this.http.post(this.rootUrl+'availPackage',_request,this.options)
       .map(res => res.json()); 
    }
@@ -252,8 +298,15 @@ getPackageRequestById(rootUrl,packageId){
     let toast = this.toastCtrl.create({
         message: messageData,
         position:"top",
-        duration: 1000,
-        cssClass: "invalidvalue",
+        duration: 5000
+      });
+      toast.present();
+   }
+   showToaster(messageData){
+    let toast = this.toastCtrl.create({
+        message: messageData,
+        position:"top",
+        duration: 5000
       });
       toast.present();
    }

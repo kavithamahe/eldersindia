@@ -28,6 +28,7 @@ submitAttempt:any;
   //---------------add functionality start-----------------------//
 
 functionalArea:any;
+Emergency_contact:any;
 educations:any=[];
 specializations:any=[];
 locations:any=[];
@@ -53,7 +54,7 @@ sponser_id:any;
   functional_duration:any ="";
   sponsor_id:any;
   mobile:any="";
-  elder_email:any="";
+  elder_email:any;
   elder_password:any="";
   elder_id:any="";
   elder_relation:any="";
@@ -147,7 +148,7 @@ mytype:string ="password";
           this.loadForm(navParams.get('profileData'));
         }else{
           this.title = "Elder Onboarding";
-          this.elder_dob = new Date().toISOString();
+          // this.elder_dob = new Date().toISOString();
         }
       })
       
@@ -206,8 +207,8 @@ mytype:string ="password";
          experience_list: this. formBuilder.array([
                 this.experienceAddress(),
             ]),
-          area_of_interest: ['', Validators.compose([Validators.required])],
-           elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
+        area_of_interest: ['', Validators.compose([Validators.required])],
+        elder_email: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
         elder_password:['', Validators.compose([Validators.required])],
         elder_service: ['', Validators.compose([Validators.required])],
         job_type: ['', Validators.compose([Validators.required])],
@@ -223,9 +224,9 @@ mytype:string ="password";
          experience_list: this. formBuilder.array([
                 this.experienceAddress(),
             ]),
-          area_of_interest: ['', Validators.compose([Validators.required])],
+        area_of_interest: ['', Validators.compose([Validators.required])],
         job_type: ['', Validators.compose([Validators.required])],
-         elder_service: ['', Validators.compose([Validators.required])],
+        elder_service: ['', Validators.compose([Validators.required])],
         skill_set: ['', Validators.compose([Validators.required])]
    })
  }
@@ -283,11 +284,11 @@ public emergencies =  [
 
         onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-}
+   }
  loadForm(data){
               // this.manageDependentData = data[0] ;
               this.manageDependentData = data;
-          this.storage.ready().then(() => {
+              this.storage.ready().then(() => {
             this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;
             this.base64Image = this.imageURL+this.manageDependentData.avatar;
          
@@ -304,7 +305,8 @@ public emergencies =  [
           this.elder_number= this.manageDependentData.mobile;
           this.file_name=this.manageDependentData.docs_name;
           // this.elder_dob =moment(this.manageDependentData.dob,"DD-MM-YYYY").toISOString();//.toISOString();
-          this.elder_dob =moment(this.manageDependentData.dob,"DD-MM-YYYY").add(1, 'days').toISOString();
+          // this.elder_dob =moment(this.manageDependentData.dob,"YYYY-MM-DD").add(1, 'days').toISOString();
+           this.elder_dob =moment(this.manageDependentData.dob,"DD-MM-YYYY").add(1, 'days').toISOString();
           console.log(this.elder_dob);
           this.elder_email= this.manageDependentData.email;
           //this.elder_password= this.manageDependentData.password;
@@ -347,16 +349,13 @@ public emergencies =  [
 
           if(emergencies != undefined){
           if(emergencies.length != 0 ){
-          this.emergency_list.pop();
-
-               this.emergency_name =[];
+          this.emergency_list.pop(); this.emergency_name =[];
                this.emergency_no =[];
             for(let i = 0; i < emergencies.length;i++)
             {
               this.emergency_name.push(emergencies[i].person);
               this.emergency_no.push(emergencies[i].mobile);
               this.emergency_list.push({emergency:[i]});
-
               }
               for( let i=1; i< emergencies.length;i++){
                 this.addEmergency();
@@ -463,6 +462,7 @@ public emergencies =  [
                       this.skills.push(skillset[i].skill)
                     }
                     this.relations=masterData.result.Relations;
+                    this.Emergency_contact=masterData.result.Emergency_contact;
                     this.in_service=masterData.result.InService;
 
                     loader.dismiss();
@@ -665,7 +665,7 @@ getareaof_interest(){
     }
 }
  addDependent(){
-  this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
+   this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
     //---------------------------------edited-------------------------------//
   if(this.avatar1 != ""){
     this.avatar = this.avatar1;
