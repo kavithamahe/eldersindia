@@ -93,7 +93,6 @@ export class SubcategoryListPage {
         data =>{
                  this.vendorList = data.result.info;
                  this.booking_status=this.vendorList.requestServices.booking_status;
-                 console.log(this.booking_status);
                  loading.dismiss();
         },
         err =>{
