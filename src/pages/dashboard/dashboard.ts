@@ -100,6 +100,10 @@ export class DashboardPage {
       storage.get('safeme_status').then((safeme_status) => { this.safeme_status=safeme_status;  })
       storage.get('helpme_status').then((helpme_status) => { this.helpme_status=helpme_status;  })
       storage.get('vendor_id').then((vendor_id) => { this.vendor_id=vendor_id;  })
+      // storage.get('lat').then((lat) => { this.lat=lat; 
+      // console.log(this.lat); })
+      //  storage.get('long').then((long) => { this.long=long; 
+      // console.log(this.long); })
   });
     
   }
@@ -117,14 +121,16 @@ export class DashboardPage {
      this.storage.get('safeme_status').then((safeme_status) => { this.safeme_status=safeme_status;  })
      this.storage.get('helpme_status').then((helpme_status) => { this.helpme_status=helpme_status;  })
      this.storage.get('vendor_id').then((vendor_id) => { this.vendor_id=vendor_id;  })
+      // this.storage.get('lat').then((lat) => { this.lat=lat; 
+      // console.log(this.lat); })
+      //  this.storage.get('long').then((long) => { this.long=long; 
+      // console.log(this.long); })
     // this.tabBarElement.style.display = 'none';
   }
   map(){
       Geolocation.getCurrentPosition().then((position) => {
       this.lat=position.coords.latitude;
       this.long=position.coords.longitude;
-      this.storage.set('lat', this.lat);
-      this.storage.set('long', this.long);
 
       console.log(this.long);
   //        this.nativeGeocoder.reverseGeocode(this.lat, this.long)
@@ -224,6 +230,9 @@ export class DashboardPage {
     this.navCtrl.setRoot(SafemePagePage,{"apiData":this.apiData});
   }
   safeMe(){
+       Geolocation.getCurrentPosition().then((position) => {
+      this.lat=position.coords.latitude;
+      this.long=position.coords.longitude;
     if(this.safeme_status != '1'){
       this.providerService.showToast("Service not availed");
     }
@@ -248,9 +257,14 @@ export class DashboardPage {
       this.providerService.showErrorToast(err);
       })
     }
+  })
   
     }
   helpMe(){
+      Geolocation.getCurrentPosition().then((position) => {
+      this.lat=position.coords.latitude;
+      this.long=position.coords.longitude;
+
     if(this.helpme_status != '1'){
       this.providerService.showToast("Service not availed");
     }
@@ -259,29 +273,24 @@ export class DashboardPage {
       loading.present();
           this.providerService.helpmeUser(this.phone,this.lat,this.long,this.user_type_id,this.vendor_id,this.sponsor_id,this.device.uuid,this.head)
       .subscribe(data =>{
-      if(data.result.Data){
+         if(data.result){
           this.apiData = data.result.Data;
-          if(data.result.success_msg){
-            this.providerService.showToast(data.result.success_msg);
-          }
-          else{
-          this.providerService.showToast(data.result.error_msg);
-
-          }
+          this.providerService.showToast(data.result.success_msg);
           loading.dismiss();
         }
         else{
           this.apiData=[];
+          this.providerService.showToast(data.error);
           loading.dismiss();
         }
     },
     err =>{
-      this.providerService.showErrorToast(err);
       loading.dismiss();
+      this.providerService.showErrorToast(err);
       })
     }
- 
-  }
+  })
+    }
   public serviceRequests(){
     this.navCtrl.setRoot(ServicerequestPage);
   }

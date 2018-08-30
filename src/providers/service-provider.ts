@@ -124,7 +124,7 @@ safemeUser(phone,lat,long,user_type_id,vendor_id,sponsor_id,uuid,head){
       .map(res => res.json());
 }
 helpmeUser(phone,lat,long,user_type_id,vendor_id,sponsor_id,uuid,head){
- let _request= {"requestName":"HelpMe","mobileNumber":phone,"imei":uuid,"latitude":lat,"longitude":long,
+ let _request= {"requestName":"HelpME","mobileNumber":phone,"imei":uuid,"latitude":lat,"longitude":long,
     "sponsor_id":sponsor_id, "elder_id":user_type_id,"vendor_id":vendor_id};
     return this.http.post(this.rootUrl+'getHelpMeApiIntegration',_request,head)
       .map(res => res.json());

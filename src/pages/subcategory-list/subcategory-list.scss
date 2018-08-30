@@ -25,10 +25,10 @@ page-subcategory-list {
 .rating-clr ul.rating																	{float:left;margin-left:-40px;margin-top:1px;width:100%;}
 .rating-clr ul.rating li .ion-ios-star													{color:#FFB700; font-size:19px;}
 .rating-clr ul.rating li .ion-ios-star-outline											{color:#FFB700;font-size:19px;}
-.text-alg b																				{color:red!important; float:left; font-family: "Muli",sans-serif;font-size:16px !important; font-weight:600; padding-left:3px; padding-top:1px;}
+.text-alg b																				{color:red!important; float:left; font-size:20px !important; font-weight:600; padding:10px 0px; }
 .text-alg small																			{color:#444 !important;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
 .text-alg span																			{color:#444!important; font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
-.text-alg p																				{color:#444!important; float:left; width:100%;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
+.text-alg p																				{color:#777!important; float:left; width:100%;font-family: "Muli",sans-serif;font-size:15px !important; font-weight:400;padding-bottom:6px;}
 .text-alg strong																		{color:#777 !important;font-family: "Muli",sans-serif;font-size:15px !important; font-weight:400; text-decoration: line-through;}
 .text-alg p i.fa-map-marker																{color:#025FA9;}
 .off-price																				{width:50px; height:50px;   margin-left: 15px; background:red; color:#fff !important; float:left; text-align:center; line-height:50px; border-radius:50%;}
@@ -39,4 +39,11 @@ page-subcategory-list {
 .modal-wrapper																			{background:none !important;}
 ul.rating[_ngcontent-ydl-43]   li[_ngcontent-ydl-43]									{padding:0px !important;}
 .btn-warnings																			{background:red;}
+
+.text-bolder{
+	font-weight:600 !important;
+}
+.color-777{
+	color:#777 !important;
+}
 }

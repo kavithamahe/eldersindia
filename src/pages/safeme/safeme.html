@@ -19,11 +19,6 @@
 <ion-content class="content-intop">
  <ion-card *ngFor="let apilog of apilog_list">
 <ion-grid class="package-needs">
-   <ion-row>
-  <ion-col col-12 text-wrap>
-  <b>Name </b><p>{{apilog.api_name}}</p>
-    </ion-col>
-  </ion-row>
   <ion-row>
   <ion-col col-12 text-wrap>
   <b>Elder Name </b><p>{{apilog.elder_name}}</p>
@@ -31,7 +26,7 @@
   </ion-row>
   <ion-row>
   <ion-col col-12 text-wrap>
-  <b>Mobile Number </b><p>{{apilog.mobile_number}}</p>
+  <b>Mobile </b><p>{{apilog.mobile_number}}</p>
     </ion-col>
   </ion-row>
    <ion-row>
@@ -41,7 +36,7 @@
   </ion-row>
    <ion-row>
   <ion-col col-12 text-wrap>
-  <b>Status </b><p>{{apilog.apiStatus}}</p>
+  <b>Status </b><p>{{apilog.api_name}} {{apilog.apiStatus}}</p>
     </ion-col>
   </ion-row>
    <ion-row>
@@ -51,7 +46,7 @@
   </ion-row>
   </ion-grid>
   <ion-item>
-   <ion-badge item-end *ngIf = "apilog.api_status == '1'" (click)="close(apilog.call_id,apilog.api_name)">Close</ion-badge>
+  <button class="instant-bt" *ngIf = "apilog.api_status == '1'" (click)="close(apilog.call_id,apilog.api_name)">Close</button>
    </ion-item>
   </ion-card>
 

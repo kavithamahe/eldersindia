@@ -16,6 +16,11 @@ page-service-info {
 .discountCost {
     color: #E91E63;
 }
+.btn-warnings{background:#FE5722 !important; height:35px;  font-size:15px; color:#fff; border-radius:20px; width:40%;
+    font-weight:600;
+    float: left;margin-bottom:10px;
+    text-transform: capitalize;
+    font-family: 'Muli', sans-serif;}
   .offered-servicelist{ padding-left:0px;}
 .offered-servicelist .item-md{padding-left:0px;}
 .sel-label{border:1px solid #a8aaad;
@@ -199,4 +204,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F5FEFF', end
 .packagelist .item-md .item-inner .input-wrapper .label-md{margin:5px 8px 13px 0px;}
 .packagelist .item-md .item-inner .input-wrapper .label-md ion-col h3{color:#007994 !important;font-family: "Muli",sans-serif;font-size:19px !important;margin:0; text-align:center; padding-bottom:20px; font-weight:600;}
 .item-md.item-block .item-inner{ border-bottom:none;}
+}
+
+.service-info-costDetails{
+    padding:10px 15px;
+    .text-bolder{
+    font-weight:600 !important;
+    }
+    .color-777{
+    color:#777 !important;
+    }
+    .discountCost{
+    font-size:18px;
+    font-weight:600;
+        i{
+        color:#E91E63;
+        }
+    }
 }

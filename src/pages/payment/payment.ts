@@ -357,10 +357,11 @@ recreationRequestSubmitbeforePayment(){
   payno(){
     this.dismiss();
   }
+  // https://i.imgur.com/3g7nmJC.png
   payRecreation(){
     var options = {
       description: this.serviceTitle,
-      image: "https://i.imgur.com/3g7nmJC.png",
+      image: "http://qa.eldersindia.com/assets/img/Elderlogo.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costss,
@@ -427,7 +428,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     console.log(this.service_costss);
     var options = { 
       description: this.serviceTitle,
-      image: "https://i.imgur.com/3g7nmJC.png",
+      image: "http://qa.eldersindia.com/assets/img/Elderlogo.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costss,

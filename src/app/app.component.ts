@@ -61,6 +61,7 @@ export class MyApp {
 
   sponsor_name:any;
   sponsor_id:any;
+  sponsor_last:any;
   user_id:any='';
   reg_id:any;
   token:any='';
@@ -201,12 +202,17 @@ export class MyApp {
          {
            this.sponsor_name=loginuser.details.emergency_contacts[0].sponsor_name;
          }
+          if(loginuser.details.emergency_contacts[0].sponsor_name!='undefined')
+         {
+           this.sponsor_last=loginuser.details.emergency_contacts[0].sponsor_last;
+         }
           if(loginuser.details.emergency_contacts[0].sponsor_id!='undefined')
          {
            this.sponsor_id=loginuser.details.emergency_contacts[0].sponsor_id;
          }
          this.storage.set('sponsor_id', this.sponsor_id);
          this.storage.set('sponsor_name', this.sponsor_name);
+         this.storage.set('sponsor_last', this.sponsor_last);
          this.storage.set('call_sponsor', this.callSponsor);
          this.storage.set('ambulance', this.ambulance);
          this.storage.set('police', this.police);

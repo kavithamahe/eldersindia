@@ -98,9 +98,13 @@ drop:any;
 totalcosts:any;
 terms:any;
 checkTerms:any= false;
+sponsor_last:any;
+time:any;
+altercontact:any;
   constructor(public storage:Storage,public alertCtrl: AlertController,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder) {
     this.date = new Date().toISOString();
+    this.time = new Date().toISOString();
    this.form = this.formBuilder.group({
     emergency: this.formBuilder.array([this.createUser()]),
    })
@@ -111,6 +115,7 @@ checkTerms:any= false;
     storage.get('phone').then((phone) => { this.phone=phone; })
     storage.get('email').then((email) => { this.email=email; })
     storage.get('sponsor_name').then((sponsor_name) => { this.sponsor_name=sponsor_name; })
+    storage.get('sponsor_last').then((sponsor_last) => { this.sponsor_last=sponsor_last; })
     storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor; })
     storage.get('user_type').then((user_type) => { this.user_type=user_type; })
     storage.get('user_type_id').then((user_type_id) => { this.user_id=user_type_id;})
@@ -367,7 +372,7 @@ checkTerms:any= false;
         this.homeschedule = false;
       }
       else{
-       this._provider.showToast("Please Enter the above Details");
+       this._provider.showToast("Please Enter all the Details");
       }
     }
     else{
@@ -376,7 +381,7 @@ checkTerms:any= false;
         this.homeschedule = false;
       }
       else{
-        this._provider.showToast("Please Enter the above Details");
+        this._provider.showToast("Please Enter all the Details");
       }
     }
     
@@ -395,22 +400,22 @@ checkTerms:any= false;
   }
   drivernext(){
      if(this.user_type == 'sponsor'){
-      if(this.elder_id != undefined && this.date != undefined && this.automation_time != undefined 
+      if(this.elder_id != undefined && this.date != undefined && this.time != undefined 
         && this.hours != undefined && this.pickup != undefined){
         this.confirmdriver = true;
         this.transportdriver = false;
       }
       else{
-       this._provider.showToast("Please Enter the above Details");
+       this._provider.showToast("Please Enter all the Details");
       }
     }
     else{
-      if(this.date != undefined && this.automation_time != undefined && this.hours != undefined && this.pickup != undefined){
+      if(this.date != undefined && this.time != undefined && this.hours != undefined && this.pickup != undefined){
         this.confirmdriver = true;
         this.transportdriver = false;
       }
       else{
-        this._provider.showToast("Please Enter the above Details");
+        this._provider.showToast("Please Enter all the Details");
       }
     }
   }
@@ -429,45 +434,45 @@ checkTerms:any= false;
   cabnext(){
     if(this.user_type == 'sponsor'){
       if(this.vendorList.vendorDetails.transport_type == '2'){
-         if(this.elder_id != undefined && this.date != undefined && this.automation_time != undefined 
+         if(this.elder_id != undefined && this.date != undefined && this.time != undefined 
         && this.typeofservice != undefined && this.weelchair != undefined && this.pickup != undefined && this.drop != undefined){
         this.confirmcab = true;
         this.transportcab = false;
       }
       else{
-       this._provider.showToast("Please Enter the above Details");
+       this._provider.showToast("Please Enter all the Details");
       }
       }
       else{
-         if(this.elder_id != undefined && this.date != undefined && this.automation_time != undefined 
+         if(this.elder_id != undefined && this.date != undefined && this.time != undefined 
         && this.typeofservice != undefined && this.pickup != undefined && this.drop != undefined){
         this.confirmcab = true;
         this.transportcab = false;
       }
       else{
-       this._provider.showToast("Please Enter the above Details");
+       this._provider.showToast("Please Enter all the Details");
       }
       }
      
     }
     else{
       if(this.vendorList.vendorDetails.transport_type == '2'){
-         if(this.date != undefined && this.automation_time != undefined && this.typeofservice != undefined && 
+         if(this.date != undefined && this.time != undefined && this.typeofservice != undefined && 
         this.weelchair != undefined && this.pickup != undefined && this.drop != undefined){
         this.confirmcab = true;
         this.transportcab = false;
       }
       else{
-        this._provider.showToast("Please Enter the above Details");
+        this._provider.showToast("Please Enter all the Details");
       }
       }
       else{
-         if(this.date != undefined && this.automation_time != undefined && this.typeofservice != undefined && this.pickup != undefined && this.drop != undefined){
+         if(this.date != undefined && this.time != undefined && this.typeofservice != undefined && this.pickup != undefined && this.drop != undefined){
         this.confirmcab = true;
         this.transportcab = false;
       }
       else{
-        this._provider.showToast("Please Enter the above Details");
+        this._provider.showToast("Please Enter all the Details");
       }
       }
      
@@ -567,7 +572,7 @@ checkTerms:any= false;
     console.log(this.total_peoples);
     if(this.noofpeople == 1 && this.user_type == 'sponsor'){
         if(this.elder_id == undefined){
-      this._provider.showToast("Please Enter the above Details");
+      this._provider.showToast("Please Enter all the Details");
     }
     else{
         this.booknownext = false;
@@ -593,7 +598,7 @@ checkTerms:any= false;
       
     }
     else{
-       this._provider.showToast("Please Enter the above Details");
+       this._provider.showToast("Please Enter all the Details");
     }
       }
       else{
@@ -605,7 +610,7 @@ checkTerms:any= false;
       
     }
     else{
-       this._provider.showToast("Please Enter the above Details");
+       this._provider.showToast("Please Enter all the Details");
     }
       }
    
@@ -655,12 +660,12 @@ checkTerms:any= false;
   "start_date":start_date,"subcategory":subcategory,"service_id":service_id,
   "location_id":this.location_id,"discount":"","pay_method":"","paymentflag":1,"service_cost":0,
   "service_cost_travel":0,"base_cost":0,"from_date":"","problem":"",
-  "datetime":this.date,"mobile":"","preferred_time":this.automation_time,
+  "datetime":this.date,"mobile":this.altercontact,"preferred_time":this.time,
   "service_name":"Own Time Cab","get_custome_service_cancel_amount":0,
   "total_cost":0,"get_custome_amount":0,"get_custome_deliever_amount":0,
   "total_service_cost":0,"package_id":"","quantity":"","dependentid":this.elder_id,
   "getCustomerBalanceAmount":0,"automation_date":this.date,
-  "automation_time":this.automation_time,"transportReqType":this.typeofservice,"weelchairType":this.weelchair,
+  "automation_time":this.time,"transportReqType":this.typeofservice,"weelchairType":this.weelchair,
   "transportation_from":this.pickup,"transportation_to":this.drop,"vendor_id":this.vendor_id,
   "lead_time":"00:00","selected_dates":[],"exclude_days":[],"serviceType":"One time"}
    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
@@ -704,11 +709,11 @@ checkTerms:any= false;
   "start_date":start_date,"subcategory":subcategory,"service_id":service_id,
   "location_id":this.location_id,"discount":"","pay_method":"","paymentflag":1,"service_cost":this.schedule_cost,
   "service_cost_travel":this.schedule_cost,"base_cost":this.service_cost,"from_date":"","problem":"","datetime":this.date,
-  "mobile":"","preferred_time":this.automation_time,"service_name":service,
+  "mobile":this.altercontact,"preferred_time":this.time,"service_name":service,
   "get_custome_service_cancel_amount":0,"total_cost":this.schedule_cost,"get_custome_amount":0,
   "get_custome_deliever_amount":0,"total_service_cost":this.schedule_cost,"package_id":"","quantity":"",
   "dependentid":this.elder_id,"getCustomerBalanceAmount":0,"automation_date":this.date,
-  "automation_time":this.automation_time,"driver_time_slot":this.hours,
+  "automation_time":this.time,"driver_time_slot":this.hours,
   "transportation_from":this.pickup,"service_cost_cab":payment_cost,"vendor_id":this.vendor_id,
   "lead_time":"00:00","selected_dates":[],"exclude_days":[],
   "Category_name":category,"serviceType":"One time",
@@ -798,7 +803,7 @@ let paymentData = {"package_id":"","serviceType":"One time","service_cost":this.
    let paymentData =   {"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
  "start_date":start_date,"subcategory":subcategory,"service_id":service_id,"location_id":this.location_id,
  "paymentflag":1,"service_cost":this.schedule_cost,"service_cost_travel":this.schedule_cost,"base_cost":this.service_cost,
- "from_date":"","problem":"","datetime":"","mobile":"","preferred_time":"",
+ "from_date":"","problem":"","datetime":"","mobile":this.altercontact,"preferred_time":"",
  "prebook_status":this.vendorList.requestServices.booking_status,"service_cost_prebook":this.schedule_cost,"service_cost_total":this.schedule_cost,
  "prebook_percentage":this.pre_book_percentage,"service_name":service,"vendor_id":this.vendor_id,
  "get_custome_service_cancel_amount":0,"total_cost":this.schedule_cost,"get_custome_deliever_amount":0,

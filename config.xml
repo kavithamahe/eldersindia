@@ -125,7 +125,6 @@
         <variable name="DEEPLINK_5_SCHEME" value=" " />
         <variable name="DEEPLINK_5_HOST" value=" " />
     </plugin>
-    <plugin name="com.razorpay.cordova" spec="git+https://github.com/razorpay/razorpay-cordova.git" />
     <plugin name="cordova-plugin-toaster" spec="0.0.2" />
     <plugin name="com.lampa.startapp" spec="git+https://github.com/lampaa/com.lampa.startapp.git" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
@@ -134,4 +133,5 @@
         <variable name="SENDER_ID" value="85075801930" />
     </plugin>
     <plugin name="cordova-plugin-compat" spec="^1.2.0" />
+    <plugin name="com.razorpay.cordova" spec="git+https://github.com/razorpay/razorpay-cordova.git" />
 </widget>
