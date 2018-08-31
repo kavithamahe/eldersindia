@@ -127,7 +127,7 @@
   </ion-row>
   <ion-row *ngIf = "viewServiceRequestInfo?.sub_category_name == 'Wearables'">   
     <ion-col width-100 class="child_menu">
-  <span>Pre-book Cost</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.paid_amount | number : '1.2-2'}}</p>
+  <span>Pre-book Cost</span><p><i class="fa fa-rupee"></i>{{(viewServiceRequestInfo?.service_cost - viewServiceRequestInfo?.additional_service_cost) | number : '1.2-2'}}</p>
    </ion-col>
   </ion-row>
   
