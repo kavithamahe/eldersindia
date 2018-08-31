@@ -20,29 +20,30 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="marg-info service-info-details">  
-    <div *ngIf="vendorList?.vendor_banners && serviceoffered != 'Recreation' && serviceoffered != 'Safety and security'">
-      <ion-slides class="slide_height" initialSlide="0" loop="true" pager="true" autoplay="3000">
-        <ion-slide *ngFor="let slide of vendorList.vendor_banners" style="height:200px;">
-          <img [src]="url+slide?.banner" class="slide-image" width="100" height="150" />
-        </ion-slide>
-      </ion-slides>
-    </div>
-    <div *ngIf="vendorList?.banners && vendorList?.banners.length && serviceoffered == 'Recreation' || serviceoffered == 'Safety and security'">
-      <ion-slides *ngIf="vendorList?.banners && vendorList?.banners.length" class="slide_height" initialSlide="0" loop="true" pager="true"
-        autoplay="3000">
-        <ion-slide *ngFor="let slide of vendorList.banners" style="height:200px;">
-          <img [src]="url+slide" class="slide-image" width="100" height="150" />
-        </ion-slide>
-      </ion-slides>
-    </div> 
+<ion-content class="marg-info service-info-details">
+  <div *ngIf="vendorList?.vendor_banners && serviceoffered != 'Recreation' && serviceoffered != 'Safety and security'">
+    <ion-slides class="slide_height" initialSlide="0" loop="true" pager="true" autoplay="3000">
+      <ion-slide *ngFor="let slide of vendorList.vendor_banners" style="height:200px;">
+        <img [src]="url+slide?.banner" class="slide-image" width="100" height="150" />
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <div *ngIf="vendorList?.banners && vendorList?.banners.length && serviceoffered == 'Recreation' || serviceoffered == 'Safety and security'">
+    <ion-slides *ngIf="vendorList?.banners && vendorList?.banners.length" class="slide_height" initialSlide="0" loop="true" pager="true"
+      autoplay="3000">
+      <ion-slide *ngFor="let slide of vendorList.banners" style="height:200px;">
+        <img [src]="url+slide" class="slide-image" width="100" height="150" />
+      </ion-slide>
+    </ion-slides>
+  </div>
 
 
   <ion-card class="message-boxs">
     <h2> Welcome to {{vendorList?.vendorDetails?.name}}</h2>
     <p *ngIf="serviceoffered != 'Recreation' && serviceoffered != 'Safety and security' && vendormoreinfo != 1" [innerHTML]="vendorList?.vendorDetails?.description"></p>
+
     <ion-row *ngIf="serviceoffered == 'Recreation' || serviceoffered == 'Safety and security'">
-      <ion-col width-33>
+      <ion-col>
         <ion-thumbnail item-left>
           <img [src]="url+vendorList?.vendorDetails?.logo">
         </ion-thumbnail>
@@ -64,17 +65,19 @@
 </ion-fab> -->
 
   <ion-item class="service-info-costDetails" text-wrap>
-    <ion-row>
-      <p *ngIf="category != 'Safety and security'" class="service-conts">
-        <span class="token-primaryss">Schedule : </span>
-        <span class="discountCost">{{start_date}}</span> to
-        <span class="discountCost">{{end_date}}</span>
-      </p>
-    </ion-row>
+    <div class="scheduler-price">
+      <ion-row>
+        <p *ngIf="category != 'Safety and security'" class="service-conts">
+          <span class="token-primaryss">Schedule : </span>
+          <span class="text-bolder cost-value">
+            {{start_date}}&nbsp;to&nbsp;{{end_date}}
+          </span>
+        </p>
+      </ion-row>
     <ion-row class="textlg" *ngIf="schedule_cost != 0 && subcategory != 'Transportation Driver Service'">
       <p class="service-conts">
-        <span class="token-primaryss text-bolder">Cost :</span>
-        <b>
+        <span class="token-primaryss">Cost :</span>
+        <b class="cost-value price-red">
           <i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{schedule_cost | number : '1.2-2'}}
           <span *ngIf="service_cost != schedule_cost">
             <strong>
@@ -83,7 +86,7 @@
         </b>
       </p>
 
-    </ion-row>
+    </ion-row>  
     <ion-row *ngIf="booking_status == '0' && category == 'Safety and security' && subcategory
                      != 'Home modification' && subcategory
                      != 'Home Modification' && subcategory
@@ -92,36 +95,39 @@
                      != 'Home Automation' && subcategory
                      != 'Transportation Driver Service' && subcategory != 'Transportation Cab'">
       <p class="service-conts">
-        <span class="token-primaryss">Valid For {{package_validity}}</span>
+        <span class="token-primaryss">Valid For
+          <b class="cost-value">{{package_validity}}</b>
+        </span>
       </p>
     </ion-row>
     <ion-row *ngIf="booking_status == '0' && category == 'Safety and security' && subcategory == 'Home modification' || subcategory == 'Home Modification' || subcategory == 'Home automation' || subcategory == 'Home Automation' || subcategory == 'Home Automation'">
       <p class="service-conts">
-        <span class="token-primaryss text-bolder">Working Days : </span>
-        <span class="token-primaryss">{{businessFromDayName}} - {{businessToDayName}}</span>
+        <span class="token-primaryss">Working Days : </span>
+        <span class="token-primaryss cost-value text-bolder">{{businessFromDayName}} - {{businessToDayName}}</span>
       </p>
     </ion-row>
     <ion-row *ngIf="booking_status == '0' && category == 'Safety and security' && businessHoursOption == '1' && subcategory == 'Home modification' || subcategory == 'Home Modification' || subcategory == 'Home automation' || subcategory == 'Home Automation' || subcategory == 'Home Automation'">
       <p class="service-conts">
-        <span class="token-primaryss text-bolder">Working Time :</span>
-        <span class="token-primaryss"> 24 hours</span>
+        <span class="token-primaryss">Working Time :</span>
+        <span class="token-primaryss cost-value text-bolder"> 24 hours</span>
       </p>
     </ion-row>
     <ion-row *ngIf="booking_status == '0' && category == 'Safety and security' && businessHoursOption != '1' && subcategory == 'Home modification' || subcategory == 'Home Modification' || subcategory == 'Home automation' || subcategory == 'Home Automation' || subcategory == 'Home Automation'">
       <p class="service-conts">
-        <span class="token-primaryss text-bolder">Working Time :</span>
-        <span class="token-primaryss"> {{businessFromTime}} - {{businessToTime}}</span>
+        <span class="token-primaryss">Working Time :</span>
+        <span class="token-primaryss cost-value text-bolder"> {{businessFromTime}} - {{businessToTime}}</span>
       </p>
     </ion-row>
     <ion-row *ngIf="booking_status == '0' && category == 'Safety and security' && subcategory == 'Home modification' || subcategory == 'Home Modification' || subcategory == 'Home automation' || subcategory == 'Home Automation' || subcategory == 'Home Automation'">
       <p class="service-conts">
-        <span class="token-primaryss">{{businessLeadTime}} hour(s) to serve you</span>
+        <span class="token-primaryss">
+          <b>{{businessLeadTime}}</b> hour(s) to serve you</span>
       </p>
     </ion-row>
-
+    </div>
   </ion-item>
   <div class="view-storedet" *ngIf="serviceoffered == 'Recreation' || serviceoffered == 'Safety and security'">
-    <ion-item class="service-info-costDetails">
+    <ion-item class="service-info-costDetails-btn">
       <button class="instant-bt" *ngIf="package_active_status == '1' && category == 'Recreation'" (click)="bookNow()">Book Now</button>
       <button class="instant-bt" *ngIf="package_active_status == '0' && category == 'Recreation'">Booking Closed
       </button>
