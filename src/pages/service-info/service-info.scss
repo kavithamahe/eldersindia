@@ -11,19 +11,7 @@ page-service-info {
     .discountCost {
         color: #E91E63;
     }
-    .btn-warnings {
-        background: #ef7f1b !important;
-        height: 35px;
-        font-size: 15px;
-        color: #fff;
-        border-radius: 20px;
-        width: 40%;
-        font-weight: 600;
-        float: left;
-        margin-bottom: 10px;
-        text-transform: capitalize;
-        font-family: 'Muli', sans-serif;
-    }
+    
     .offered-servicelist {
         padding-left: 0px;
     }
@@ -39,20 +27,7 @@ page-service-info {
         border: 1px solid #a8aaad;
         border-radius: 20px;
         margin-right: 5px !important;
-    }   
-    .instant-bt {
-        float: right;
-        height: 35px;
-        margin-bottom: 10px;
-        background: #025FA9 !important;
-        width: 40%;
-        font-size: 15px;
-        color: #fff;
-        border-radius: 20px;
-        font-weight: 600;
-        text-transform: capitalize;
-        font-family: 'Muli', sans-serif;
-    }
+    }    
     .instant-btn {
         background: #025FA9 !important;
         height: 35px;
@@ -573,13 +548,23 @@ page-service-info {
                     margin: 0;
                 }
             }
-            .service-conts{
-                
+            .service-conts{                
                     padding-bottom: 6px;
                     margin: 0;
                     b{
                          color: #ff0000;
                          font-size: 17px;
+                         span{
+                             strong{
+                                 color:#666 !important;
+                                 font-size: 14px;
+                                 font-weight: 400;
+                                 i{
+                                    color:#999 !important;   
+                                    font-size: 14px; 
+                                 }
+                             }
+                         }
                      }
                 
             }
@@ -599,6 +584,31 @@ page-service-info {
             i {
                 color: #E91E63;
             }
+        }
+        .instant-bt{
+            float: right;
+            height: 36px;
+            margin-bottom: 0px; 
+            background: #025FA9 !important;
+            width: 45%;
+            font-size: 16px;
+            color: #fff;
+            border-radius: 20px;    
+            text-transform: capitalize;
+            font-family: 'Muli', sans-serif
+        }
+        .btn-warnings {
+            background: #ef7f1b !important;
+            height: 36px;
+            font-size: 16px;
+            color: #fff;
+            border-radius: 20px;
+            width: 45%;
+            font-weight: 400;
+            float: left;
+            margin-bottom: 0px;
+            text-transform: capitalize;
+            font-family: 'Muli', sans-serif;
         }
     }
 }
