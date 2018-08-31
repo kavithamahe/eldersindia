@@ -261,7 +261,7 @@ export class MyApp {
       
       this.pages.push(
                   { myIcon:'fa fa-tachometer', title: 'Dashboard', component: DashboardPage },
-                  { myIcon:'fa fa-th-list', title: 'ApiLog', component: SafemePagePage },
+                  { myIcon:'fa fa-ambulance', title: 'Emergency Call Log', component: SafemePagePage },
                   { myIcon:'fa fa-snowflake-o', title: 'Services', component: ServiceprovidersPage },
                   { myIcon:'fa fa-file-text', title: 'Enquiries', component: EnquiriesPagePage },
                   { myIcon:'fa fa-cogs', title: 'My Service Requests', component: ServicerequestPage },

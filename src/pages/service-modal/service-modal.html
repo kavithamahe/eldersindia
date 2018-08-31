@@ -503,7 +503,8 @@
           <ion-list>
            <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Alternative Contact Number</ion-label>
                 <ion-item class="sel-label">
-                  <ion-input type="text" value="" placeholder="Alternative Contact Number" [(ngModel)] ="altercontact"></ion-input>
+                  <ion-input type="text" value="" placeholder="Alternative Contact Number" 
+                  [(ngModel)] ="altercontact"></ion-input>
                 </ion-item>
           </ion-list>
                <br/>
@@ -687,6 +688,21 @@
                           }}</ion-option>
                       </ion-select>
                   </ion-item>
+                    <ion-list>
+           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Alternative Contact Number</ion-label>
+                <ion-item class="sel-label">
+                  <ion-input type="text" value="" placeholder="Alternative Contact Number" [(ngModel)] ="altercontact"></ion-input>
+                </ion-item>
+          </ion-list>
+        <br/>
+         <ion-item class="check-bx" class="one-timereq">
+             <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()">
+             </ion-checkbox> 
+             </ion-item>
+             <ion-label (click)="openTerms()" style="margin:0px;"><a>I agree with the terms and conditions</a></ion-label>        
+            <small *ngIf="checkTerms">
+                <p class="err-reds shake">Kindly agree to the terms and conditions</p>
+            </small>
                     <br/>
               <ion-row>
               <ion-col>
