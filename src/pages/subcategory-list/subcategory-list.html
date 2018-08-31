@@ -11,71 +11,86 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-	  <ion-title text-center>{{serviceTitle}}</ion-title>    
+    <ion-title text-center>{{serviceTitle}}</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-  
+
   </ion-navbar>
 </ion-header>
 
 <ion-content class="content-intop">
-<ion-card  *ngFor="let service_list of sublists.lists">
-	<ion-item text-wrap class="subcategory-list">
-	
-		<ion-row>
-		<ion-col width-33 (click)="serviceInfomore(service_list)">
-		    <ion-thumbnail item-left>
-		      <img [src]= "logoUrl+service_list?.logo">
-		    </ion-thumbnail>
+  <ion-card *ngFor="let service_list of sublists.lists">
+    <ion-item text-wrap class="subcategory-list">
+      <ion-row>
+        <ion-col width-33 (click)="serviceInfomore(service_list)">
+          <ion-thumbnail item-center class="img-center">
+            <img [src]="logoUrl+service_list?.logo">
+					</ion-thumbnail>
+					
+          <span class="off-price" *ngIf="service_list.discount_rate != 0 && serviceData.subcategory != 'Transportation Cab'">
+            <p>{{service_list.discount_rate}}%
+              <br/>Off</p>
+          </span>
+        </ion-col>
 
-		<span class="off-price" *ngIf="service_list.discount_rate != 0 && serviceData.subcategory != 'Transportation Cab'"><p>{{service_list.discount_rate}}% <br/>Off</p></span>
-
-		</ion-col>
-			
-		<ion-col width-67 class="text-alg">			
-		<h2 (click)="serviceInfo(service_list)">{{service_list.name}}</h2>
-		<p>{{service_list.vendor_name}}</p>
-			 <!-- <h3 class="rating-clr">
+        <ion-col width-67 class="text-alg">
+          <h2 (click)="serviceInfo(service_list)">{{service_list.name}}</h2>
+          <p>{{service_list.vendor_name}}</p>
+          <!-- <h3 class="rating-clr">
 			 <rating readOnly="true" [(ngModel)]="service_list.rating" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"> 
 			  </rating>
 		 	 </h3> -->
-		 	 <b *ngIf="service_list.service_cost != 0"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{totalServicecost}} <span *ngIf="service_list.discount_rate != 0">/&nbsp;<i class="fa fa-inr" aria-hidden="true"></i><strong *ngIf = "service_cost != service_list.service_cost - service_list.percentage_cost">{{service_list.service_cost | number : '1.2-2'}}</strong> {{service_list.service_type}}</span> <span *ngIf = "service_list.driver_time_slots == '2'">per day</span><span *ngIf = "service_list.driver_time_slots == '1'">per hour</span></b>
-		    
-			  <p *ngIf="service_list.lead_time != '00:00'" 
-				 [hidden]="!service_list?.lead_time">Minimum {{service_list.lead_time}} hour(s) to serve you</p>   
-			<p *ngIf="service_list?.category_name == 'Recreation' && service_list?.balanceRecreationService <= 5 && service_list?.balanceRecreationService >= 1" >Almost full. Only {{service_list?.balanceRecreationService}} available!!!</p>
-			<p *ngIf="service_list.category_name == 'Recreation' && service_list.balanceRecreationService <= 0" >Sold out!!!</p>
-			
-			<p *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '0' && service_list.sub_category_name == 'Home modification' || service_list.sub_category_name == 'Home Modification' || service_list.sub_category_name == 'Home automation' || service_list.sub_category_name == 'Home Automation' || service_list.sub_category_name == 'Home Automation'"><span class="text-bolder color-777">Working Days : </span>{{service_list.businessFromDayName}} - {{service_list.businessToDayName}}</p>
-				<p *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '0' && service_list.businessHoursOption != '1' && service_list.sub_category_name == 'Home modification' || service_list.sub_category_name == 'Home Modification' || service_list.sub_category_name == 'Home automation' || service_list.sub_category_name == 'Home Automation' || service_list.sub_category_name == 'Home Automation'"><span class="text-bolder color-777">Working Time :</span> {{service_list.businessFromTime}} - {{service_list.businessToTime}}</p>
-				<p *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '0' && service_list.businessHoursOption == '1' && service_list.sub_category_name == 'Home modification' || service_list.sub_category_name == 'Home Modification' || service_list.sub_category_name == 'Home automation' || service_list.sub_category_name == 'Home Automation' || service_list.sub_category_name == 'Home Automation'"><span class="text-bolder color-777">Working Time :</span> 24 hours</p>
-				<p *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '0' && service_list.sub_category_name == 'Home modification' || service_list.sub_category_name == 'Home Modification' || service_list.sub_category_name == 'Home automation' || service_list.sub_category_name == 'Home Automation' || service_list.sub_category_name == 'Home Automation'"><span class="text-bolder color-777">Required {{service_list.businessLeadTime.split(':')[0]}} hour(s) &
-				 {{service_list.businessLeadTime.split(':')[1]}}   minute(s) to  serve you</span></p>
-			 
 
-			</ion-col>
-			</ion-row>
-		 <ion-col>
-		<button class="btn-warnings"  *ngIf="dependentLen && serviceOffered != 'Recreation' && serviceOffered != 'Safety and security'" (click)="openModal('scheduleModal',service_list)" (press)="pressevent('scheduleModal',service_list)">Schedule</button>
-		<button class="btn-warnings"  *ngIf="dependentLen && serviceOffered == 'Recreation' && service_list.package_active_status == '1'" (click)="bookNow(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Book Now</button>
-		<button class="btn-warnings"  *ngIf="dependentLen && serviceOffered == 'Recreation' && service_list.package_active_status == '0'">Booking Closed</button>
-		<button class="btn-warnings"  *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '2'" (click)="preBook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Pre Book</button>
-		<button class="btn-warnings"  *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '1'" (click)="preBook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Book Now</button>
-		<button class="btn-warnings" *ngIf="booking_status == '0' && serviceOffered == 'Safety and security' && service_list.sub_category_name== 'Transportation Driver Service'" (click)="transportationdriver(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Book Now</button>
-                      <button class="btn-warnings" *ngIf="booking_status == '0' && serviceOffered == 'Safety and security' && service_list.sub_category_name == 'Transportation Cab'" (click)="transportationcab(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Book Now</button>
-		<button class="btn-warnings"  *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '0' && service_list.sub_category_name != 'Transportation Driver Service'  && service_list.sub_category_name != 'Transportation Cab' && service_list.sub_category_name != 'Home modification' && service_list.sub_category_name != 'Home Modification' && service_list.sub_category_name != 'Home automation' && service_list.sub_category_name != 'Home Automation' && service_list.sub_category_name != 'Home Automation'" (click)="emergencybook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Book Now</button>
-		<button class="btn-warnings"  *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '0' && service_list.sub_category_name == 'Home modification' || service_list.sub_category_name == 'Home Modification' || service_list.sub_category_name == 'Home automation' || service_list.sub_category_name == 'Home Automation' || service_list.sub_category_name == 'Home Automation'" (click)="homemodify(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Schedule Assessment</button>
-		
+          <b *ngIf="service_list.service_cost != 0">
+            <i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{totalServicecost}}
+            <span *ngIf="service_list.discount_rate != 0">/&nbsp;
+              <i class="fa fa-inr" aria-hidden="true"></i>
+              <strong *ngIf="service_cost != service_list.service_cost - service_list.percentage_cost">{{service_list.service_cost}}</strong> {{service_list.service_type}}</span>
+            <span *ngIf="service_list.driver_time_slots == '2'">per day</span>
+            <span *ngIf="service_list.driver_time_slots == '1'">per hour</span>
+          </b>
 
-		<!-- <button class="instant-bt" *ngIf="dependentLen && serviceOffered != 'Recreation'" (click)="instantRequest(service_list)" (press)="pressinstant(service_list)">Instant</button> -->
-		<button class="instant-btn" (click)="serviceInfomore(service_list)">More Info</button>
-		 </ion-col>
-		 <br/>
-	
-	</ion-item>
-</ion-card>	
+          <p *ngIf="service_list.lead_time != '00:00'" [hidden]="!service_list?.lead_time">Minimum {{service_list.lead_time}} hour(s) to serve you</p>
+          <p *ngIf="service_list?.category_name == 'Recreation' && service_list?.balanceRecreationService <= 5 && service_list?.balanceRecreationService >= 1">Almost full. Only {{service_list?.balanceRecreationService}} available!!!</p>
+          <p *ngIf="service_list.category_name == 'Recreation' && service_list.balanceRecreationService <= 0">Sold out!!!</p>
+
+          <p *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '0' && service_list.sub_category_name == 'Home modification' || service_list.sub_category_name == 'Home Modification' || service_list.sub_category_name == 'Home automation' || service_list.sub_category_name == 'Home Automation' || service_list.sub_category_name == 'Home Automation'">
+            <span class="text-bolder color-777">Working Days : </span>{{service_list.businessFromDayName}} - {{service_list.businessToDayName}}</p>
+          <p *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '0' && service_list.businessHoursOption != '1' && service_list.sub_category_name == 'Home modification' || service_list.sub_category_name == 'Home Modification' || service_list.sub_category_name == 'Home automation' || service_list.sub_category_name == 'Home Automation' || service_list.sub_category_name == 'Home Automation'">
+            <span class="text-bolder color-777">Working Time :</span> {{service_list.businessFromTime}} - {{service_list.businessToTime}}</p>
+          <p *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '0' && service_list.businessHoursOption == '1' && service_list.sub_category_name == 'Home modification' || service_list.sub_category_name == 'Home Modification' || service_list.sub_category_name == 'Home automation' || service_list.sub_category_name == 'Home Automation' || service_list.sub_category_name == 'Home Automation'">
+            <span class="text-bolder color-777">Working Time :</span> 24 hours</p>
+          <p *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '0' && service_list.sub_category_name == 'Home modification' || service_list.sub_category_name == 'Home Modification' || service_list.sub_category_name == 'Home automation' || service_list.sub_category_name == 'Home Automation' || service_list.sub_category_name == 'Home Automation'">
+            <span class="text-bolder color-777">Required {{service_list.businessLeadTime.split(':')[0]}} hour(s) &
+         {{service_list.businessLeadTime.split(':')[1]}}   minute(s) to  serve you</span></p>
+
+
+        </ion-col>
+      </ion-row>
+      <ion-col class="btn-padd">
+        <button class="btn-warnings" *ngIf="dependentLen && serviceOffered != 'Recreation' && serviceOffered != 'Safety and security'"
+          (click)="openModal('scheduleModal',service_list)" (press)="pressevent('scheduleModal',service_list)">Schedule</button>
+        <button class="btn-warnings" *ngIf="dependentLen && serviceOffered == 'Recreation' && service_list.package_active_status == '1'"
+          (click)="bookNow(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Book Now</button>
+        <button class="btn-warnings" *ngIf="dependentLen && serviceOffered == 'Recreation' && service_list.package_active_status == '0'">Booking Closed</button>
+        <button class="btn-warnings" *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '2'" (click)="preBook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Pre Book</button>
+        <button class="btn-warnings" *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '1'" (click)="preBook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Book Now</button>
+        <button class="btn-warnings" *ngIf="booking_status == '0' && serviceOffered == 'Safety and security' && service_list.sub_category_name== 'Transportation Driver Service'"
+          (click)="transportationdriver(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Book Now</button>
+        <button class="btn-warnings" *ngIf="booking_status == '0' && serviceOffered == 'Safety and security' && service_list.sub_category_name == 'Transportation Cab'"
+          (click)="transportationcab(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Book Now</button>
+        <button class="btn-warnings" *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '0' && service_list.sub_category_name != 'Transportation Driver Service'  && service_list.sub_category_name != 'Transportation Cab' && service_list.sub_category_name != 'Home modification' && service_list.sub_category_name != 'Home Modification' && service_list.sub_category_name != 'Home automation' && service_list.sub_category_name != 'Home Automation' && service_list.sub_category_name != 'Home Automation'"
+          (click)="emergencybook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Book Now</button>
+        <button class="btn-warnings" *ngIf="dependentLen && serviceOffered == 'Safety and security' && booking_status == '0' && service_list.sub_category_name == 'Home modification' || service_list.sub_category_name == 'Home Modification' || service_list.sub_category_name == 'Home automation' || service_list.sub_category_name == 'Home Automation' || service_list.sub_category_name == 'Home Automation'"
+          (click)="homemodify(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Schedule Assessment</button>
+
+
+        <!-- <button class="instant-bt" *ngIf="dependentLen && serviceOffered != 'Recreation'" (click)="instantRequest(service_list)" (press)="pressinstant(service_list)">Instant</button> -->
+        <button class="instant-bt" (click)="serviceInfomore(service_list)">More Info</button>
+      </ion-col>      
+    </ion-item>
+  </ion-card>
 </ion-content>
-
