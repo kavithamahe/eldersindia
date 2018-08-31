@@ -5,7 +5,7 @@ page-subcategory-list {
 .item-md.item-block .item-inner															{padding-right:0px;}
 .subcategory-list .item-inner .input-wrapper .label-md									{margin:0px;}
 .subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col img				{border:1px solid hsl(210, 55%, 96%);}
-.subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col h2				{color:#007994 !important;font-family: "Muli",sans-serif;font-size:19px !important; font-weight:600;margin: 0; padding-bottom:0px; padding-top:9px;}
+.subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col h2				{color:#025fa9 !important;font-family: "Muli",sans-serif;font-size:19px !important; font-weight:600;margin: 0; padding-bottom:10px; padding-top:0px;}
 .rating-clr ul.rating li																{float:left; list-style-type: none; margin-right:3px; padding:0px !important; margin-bottom:5px;height:6px;}
 .rating-clr ul.rating																	{float:left;margin-left:-40px;margin-top:1px;width:100%;}
 .rating-clr ul.rating li .ion-md-star													{color:#FFB700; font-size:22px;}
@@ -25,20 +25,64 @@ page-subcategory-list {
 .rating-clr ul.rating																	{float:left;margin-left:-40px;margin-top:1px;width:100%;}
 .rating-clr ul.rating li .ion-ios-star													{color:#FFB700; font-size:19px;}
 .rating-clr ul.rating li .ion-ios-star-outline											{color:#FFB700;font-size:19px;}
-.text-alg b																				{color:red!important; float:left; font-size:20px !important; font-weight:600; padding:10px 0px; }
+.text-alg b																				{color:red!important; float:left; font-size:20px !important; font-weight:600; padding:8px 0px; }
 .text-alg small																			{color:#444 !important;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
-.text-alg span																			{color:#444!important; font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
-.text-alg p																				{color:#777!important; float:left; width:100%;font-family: "Muli",sans-serif;font-size:15px !important; font-weight:400;padding-bottom:6px;}
+.text-alg span																			{color:#444!important; font-family: "Muli",sans-serif;font-size:14px !important; font-weight:400;}
+.text-alg p																				{color:#999!important; float:left; width:100%;font-family: "Muli",sans-serif;font-size:15px !important; font-weight:600;padding-bottom:0px;}
 .text-alg strong																		{color:#777 !important;font-family: "Muli",sans-serif;font-size:15px !important; font-weight:400; text-decoration: line-through;}
 .text-alg p i.fa-map-marker																{color:#025FA9;}
-.off-price																				{width:50px; height:50px;   margin-left: 15px; background:red; color:#fff !important; float:left; text-align:center; line-height:50px; border-radius:50%;}
+
 .off-price p																			{color: hsl(0, 0%, 100%);font-size:13px;font-weight:600;line-height:17px;padding-top:14px;}
-.btn-warnings																			{background:#025FA9!important;height:35px;font-size:15px;color:#fff;border-radius:20px;width:45%;font-weight:600;float:left;margin-bottom:10px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
-.instant-bt																				{float:right;height:35px; margin-bottom:10px;   background:#FE5722 !important;width:45%;font-size:15px;color:#fff;border-radius:20px;font-weight:600;margin-left:5px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
-.instant-btn																			{float:right;height:35px; margin-bottom:10px;   background:#025FA9 !important;width:45%;font-size:15px;color:#fff;border-radius:20px;font-weight:600;margin-left:5px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
+.btn-warnings																			{background:#025FA9!important;height:35px;font-size:15px;color:#fff;border-radius:30px;width:45%;font-weight:600;float:left;text-transform:capitalize;font-family: 'Muli', sans-serif;}
+.instant-bt																				{float:right;height:35px; background:#ef7f1b !important;width:45%;font-size:15px;color:#fff;border-radius:30px;font-weight:600;margin-left:5px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
+.instant-btn																			{float:right;height:35px; background:#025FA9 !important;width:45%;font-size:15px;color:#fff;border-radius:20px;font-weight:600;margin-left:5px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
 .modal-wrapper																			{background:none !important;}
 ul.rating[_ngcontent-ydl-43]   li[_ngcontent-ydl-43]									{padding:0px !important;}
 .btn-warnings																			{background:red;}
+
+/*============ 
+Kiran changes
+=============*/
+.content-intop{
+	.card-md{
+		padding: 10px 0px 15px 0;
+		border-radius: 5px !important;
+		box-shadow: 0 5px 20px rgba(0,0,0,0.12) !important;
+		.img-center{
+			text-align: center;
+			img{
+				margin: 0 auto;
+			}
+		}
+		.off-price{
+		width: 50px;
+		height: 50px;
+		margin: 10px 20px;
+		background: red;
+		color: #fff !important;
+		float: left;
+		text-align: center;
+		line-height: 20px;
+		border-radius: 50%;
+		p {
+			color: white;
+			font-size: 13px;
+			font-weight: 500;
+			line-height: 15px;
+			padding-top: 12px;
+			text-align: center;
+		}
+		}
+		.text-alg{
+			p{
+				padding-bottom: 0 !important;
+			}
+		}
+		.btn-padd{
+			padding: 0px 10px;
+		}
+	}
+}
 
 .text-bolder{
 	font-weight:600 !important;
