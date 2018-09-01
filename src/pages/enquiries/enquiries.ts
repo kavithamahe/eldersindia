@@ -28,6 +28,8 @@ searchText:any="";
 
   constructor(public navCtrl: NavController,public toastCtrl: ToastController, public loadingCtrl: LoadingController,public navParams: NavParams,public _provider:ServiceProvider) {
   	this.getenquiryList();
+    this.getcategoryList();
+    this.getvendorList();
   }
 
   ionViewDidLoad() {
@@ -37,6 +39,26 @@ searchText:any="";
   {
     this.navCtrl.setRoot(DashboardPage);
   }
+      getcategoryList(){
+    let service_data = {};
+   this._provider.webServiceCall(`get_category_details`,service_data)
+      .subscribe(data =>{ 
+    this.category_details = data.category_details;
+    },
+    err =>{
+      this._provider.showErrorToast(err);     
+    })
+  }
+   getvendorList(){
+    let service_data = {};
+   this._provider.webServiceCall(`get_vendor_details`,service_data)
+      .subscribe(data =>{ 
+   this.vendor_details = data.vendor_details;
+    },
+    err =>{
+      this._provider.showErrorToast(err);     
+    })
+  }
     getenquiryList(){
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
@@ -45,8 +67,6 @@ searchText:any="";
    this._provider.webServiceCall(`getEnquiryList`,service_data)
       .subscribe(data =>{ 
 		this.enquiriesList = data.result.info.data;
-		this.category_details = data.category_details;
-		this.vendor_details = data.vendor_details;
         this.nextPageURL=data.result.info.next_page_url;  
         loading.dismiss();
     },

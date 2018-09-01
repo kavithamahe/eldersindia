@@ -104,7 +104,8 @@ altercontact:any;
   constructor(public storage:Storage,public alertCtrl: AlertController,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder) {
     this.date = new Date().toISOString();
-    this.time = new Date().toISOString();
+    // this.time = new Date().toISOString();
+    console.log(this.time);
    this.form = this.formBuilder.group({
     emergency: this.formBuilder.array([this.createUser()]),
    })
@@ -338,8 +339,14 @@ altercontact:any;
         this._provider.showToast("Please enter all the details");
       }
       else{
-         this.emergencyConfirm = true;
+         if(this.terms != undefined){
+          this.emergencyConfirm = true;
         this.emergencyhelp = false;
+      }
+      else{
+        this._provider.showToast("Please check the terms and conditions");
+      }
+ 
       }
         
   }
@@ -352,8 +359,13 @@ altercontact:any;
       this._provider.showToast("Please select the dependent");
     }
     else{
-     this.safeConfirm = true;
+      if(this.terms != undefined){
+        this.safeConfirm = true;
      this.safeandsecurity = false;
+      }
+     else{
+      this._provider.showToast("Please check the terms and conditions");
+     }
    }
   }
   homemodify(){
@@ -365,9 +377,8 @@ altercontact:any;
     this.navCtrl.pop();
   }
   homemodifynext(){
-    console.log(this.checkTerms);
     if(this.user_type == 'sponsor'){
-      if(this.elder_id != undefined && this.date != undefined && this.automation_time != undefined && this.checkTerms == false){
+      if(this.elder_id != undefined && this.date != undefined && this.automation_time != undefined && this.terms != undefined){
         this.confirmhomemodify = true;
         this.homeschedule = false;
       }
@@ -376,7 +387,7 @@ altercontact:any;
       }
     }
     else{
-      if(this.date != undefined && this.automation_time != undefined && this.checkTerms == false){
+      if(this.date != undefined && this.automation_time != undefined && this.terms != undefined){
         this.confirmhomemodify = true;
         this.homeschedule = false;
       }
@@ -402,8 +413,13 @@ altercontact:any;
      if(this.user_type == 'sponsor'){
       if(this.elder_id != undefined && this.date != undefined && this.time != undefined 
         && this.hours != undefined && this.pickup != undefined){
+        if(this.terms != undefined){
         this.confirmdriver = true;
         this.transportdriver = false;
+      }
+      else{
+        this._provider.showToast("Please check the terms and conditions");
+      }
       }
       else{
        this._provider.showToast("Please Enter all the Details");
@@ -411,8 +427,13 @@ altercontact:any;
     }
     else{
       if(this.date != undefined && this.time != undefined && this.hours != undefined && this.pickup != undefined){
+         if(this.terms != undefined){
         this.confirmdriver = true;
         this.transportdriver = false;
+      }
+      else{
+        this._provider.showToast("Please check the terms and conditions");
+      }
       }
       else{
         this._provider.showToast("Please Enter all the Details");
@@ -436,8 +457,14 @@ altercontact:any;
       if(this.vendorList.vendorDetails.transport_type == '2'){
          if(this.elder_id != undefined && this.date != undefined && this.time != undefined 
         && this.typeofservice != undefined && this.weelchair != undefined && this.pickup != undefined && this.drop != undefined){
-        this.confirmcab = true;
-        this.transportcab = false;
+          if(this.terms != undefined){
+             this.confirmcab = true;
+            this.transportcab = false;
+          }
+          else{
+             this._provider.showToast("Please check the terms and conditions");
+          }
+       
       }
       else{
        this._provider.showToast("Please Enter all the Details");
@@ -446,8 +473,13 @@ altercontact:any;
       else{
          if(this.elder_id != undefined && this.date != undefined && this.time != undefined 
         && this.typeofservice != undefined && this.pickup != undefined && this.drop != undefined){
+        if(this.terms != undefined){
         this.confirmcab = true;
         this.transportcab = false;
+      }
+       else{
+             this._provider.showToast("Please check the terms and conditions");
+          }
       }
       else{
        this._provider.showToast("Please Enter all the Details");
@@ -459,8 +491,13 @@ altercontact:any;
       if(this.vendorList.vendorDetails.transport_type == '2'){
          if(this.date != undefined && this.time != undefined && this.typeofservice != undefined && 
         this.weelchair != undefined && this.pickup != undefined && this.drop != undefined){
+        if(this.terms != undefined){
         this.confirmcab = true;
         this.transportcab = false;
+      }
+         else{
+             this._provider.showToast("Please check the terms and conditions");
+          }
       }
       else{
         this._provider.showToast("Please Enter all the Details");
@@ -468,8 +505,13 @@ altercontact:any;
       }
       else{
          if(this.date != undefined && this.time != undefined && this.typeofservice != undefined && this.pickup != undefined && this.drop != undefined){
+       if(this.terms != undefined){
         this.confirmcab = true;
         this.transportcab = false;
+      }
+       else{
+             this._provider.showToast("Please check the terms and conditions");
+          }
       }
       else{
         this._provider.showToast("Please Enter all the Details");
@@ -515,13 +557,20 @@ altercontact:any;
       this._provider.showToast("Please select the number of peoples");
    }
     else{
+       if(this.terms != undefined){
          if(this.balanceRecreationService == 0 || this.balanceRecreationService < this.noofpeople){
         this.showConfirm();
       }
       else{
-        this.booknow = false;
+       
+          this.booknow = false;
         this.booknownext = true;
+        }
       }
+        else{
+          this._provider.showToast("Please check the terms and conditions");
+        }
+     
     }
    
   }
@@ -647,8 +696,11 @@ altercontact:any;
     }
 
  }
+
  cabpaynow(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
+
    this.date= moment(this.date).format("DD-MM-YYYY");
+   // this.time = moment(this.time).format("HH:mm");
     if(this.user_type == 'sponsor')
   {
     this.elder_id = this.elder_id;

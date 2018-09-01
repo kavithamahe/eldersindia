@@ -144,16 +144,17 @@
                     <ion-row [formGroupName]="i">
                         <ion-col width-60>
                              <ion-item class="sel-label" *ngIf="user_type != 'sponsor' && i == '0'">
-                                <ion-input type="text" value="{{sponsor_name}} {{sponsor_last}}" formControlName="name"></ion-input>
+                              <ion-input type="text" value="{{sponsor_name}} {{sponsor_last}}" ></ion-input>
                                 </ion-item>
                                 <br>
                                 <ion-item class="sel-label" *ngIf="user_type != 'sponsor'">
-                                 <ion-input type="text" formControlName="name" [(ngModel)]="emergency_name[i]"></ion-input>
+                                 <ion-input type="text" formControlName="name" 
+                                 [(ngModel)]="emergency_name[i]"></ion-input>
                                  <br>
                             </ion-item>
 
                             <ion-item class="sel-label" *ngIf="user_type == 'sponsor' && i == '0'">
-                            <ion-input type="text" value="{{name}} {{lastname}}" formControlName="name"></ion-input>
+                            <ion-input type="text" value="{{name}} {{lastname}}"></ion-input>
                             </ion-item>
                                 <br>
                                 <ion-item class="sel-label" *ngIf="user_type == 'sponsor'">

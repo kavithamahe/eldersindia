@@ -43,7 +43,6 @@ vendor_name:any;
 sub_category:any;
 show_service:any = null;
 submitAttempt:any;
-requestForm: FormGroup;
 sliderOptions: any;
 packageinfo:any;
 
@@ -109,14 +108,6 @@ businessHoursOption:any;
       // this.show_service = null;
       this.showServiceOffered = false;
 
-      this.requestForm = formBuilder.group({
-        problem: ['',Validators.compose([Validators.minLength(5), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-        date: ['',Validators.compose([Validators.required])],
-        time: ['',Validators.compose([Validators.required])],
-        contact: ['',Validators.compose([Validators.minLength(10), Validators.pattern('[0-9]*'), Validators.required])],
-        dependents: ['',Validators.compose([Validators.required])]
-        
-    });
 
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.url=imageurl;});
@@ -223,44 +214,7 @@ recreationServices(){
     this.navCtrl.setRoot(DashboardPage);
   }
 
-  sendRequestService(data){
-   
-    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
-    loading.present();
-     let requestServiceData = {"category":this.serviceData.category,"service":this.serviceData.service,
-    "category_id":this.serviceData.category_id,"location_id":this.locationId,"vendor_id":this.vendor_id,
-     "sub_category_id":this.serviceData.sub_category_id,"discountCost":data.discountCost,"actualCost":"",
-      "service_id":this.serviceData.service_id, "problem":data.problem,
-     "datetime":data.datetime,"preferred_time":data.preferred_time, "dependentid":data.dependentId,
-      "mobile":data.mobile_no,"lead_time":this.lead_time,"datCount":data.datCount,
-      "subcategory":this.serviceData.subcategory, "durations":data.durations,
-       "exclude_days":data.exclude_days,"from_date":data.from_date,"from_time":data.from_time,"quantity":"",
-       "selected_dates":data.selected_dates,"serviceType":data.serviceType,"time_slot":data.time_slot,"to_date":data.to_date,"to_time":data.to_time,
-     "package_id":data.package_id}
-    // let requestServiceData = {"location_id":this.locationId,"vendor_id":this.vendor_id,
-    //  "category_id":this.serviceData.category_id, "sub_category_id":this.serviceData.sub_category_id,
-    //   "service_id":this.serviceData.service_id, "problem":data.problem, 
-    //   "datetime":data.datetime, "dependentid":data.dependentId, 
-    //   "mobile":data.mobile_no,"lead_time":this.lead_time}    
-    this.providerService.webServiceCall(`serviceRequest`,requestServiceData)
-    .subscribe(
-        data =>{
-                 this.providerService.showToast(data.result);
-                 loading.dismiss();
-                },
-        err =>{
-          if(err.status===400)
-        {
-          this.showToast(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToast("Try again later");
-        }
-                  loading.dismiss();
-              })
-
-  }
+ 
   toggleSchedule(){
     let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
     modal.present();
@@ -270,6 +224,10 @@ recreationServices(){
   }
   toggleContact(){
     let modal = this.modalCtrl.create(ServiceModalPage,{service:"contact",vendorList:this.vendorList});    
+    modal.present();
+    }
+    contactNowothers(){
+      let modal = this.modalCtrl.create(ServiceModalPage,{service:"contact",vendorList:this.vendorList});    
     modal.present();
     }
     pressPackages(){
