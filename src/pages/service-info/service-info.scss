@@ -7,11 +7,10 @@ page-service-info {
     }
     .message-boxs {
         box-shadow: none;
-    }       
+    }
     .discountCost {
         color: #E91E63;
     }
-    
     .offered-servicelist {
         padding-left: 0px;
     }
@@ -27,7 +26,7 @@ page-service-info {
         border: 1px solid #a8aaad;
         border-radius: 20px;
         margin-right: 5px !important;
-    }    
+    }
     .instant-btn {
         background: #025FA9 !important;
         height: 35px;
@@ -113,7 +112,7 @@ page-service-info {
         width: 100%;
         border-bottom: 1px solid #fff;
         border-radius: 0px;
-    }    
+    }
     .offered-servicelist-tree .card-md ion-row .service-lefttext {
         background: #ededed !important;
     }
@@ -195,13 +194,13 @@ page-service-info {
         font-size: 15px;
         color: #fff;
         line-height: 40px;
-    }   
+    }
     .offered-servicelist-tree .card-ios {
         margin: 0px;
         width: 100%;
         border-bottom: 1px solid #fff;
         border-radius: 0px;
-    }    
+    }
     .offered-servicelist-tree .card-ios ion-row .service-lefttext {
         background: #ededed !important;
     }
@@ -225,7 +224,7 @@ page-service-info {
     }
     .item-md.item-block .item-inner {
         padding-right: 0px;
-    }    
+    }
     .offered-servicelist-two {
         width: 100%;
         margin: 0px;
@@ -520,14 +519,13 @@ page-service-info {
     .item-md.item-block .item-inner {
         border-bottom: none;
     }
-
     /*============
     Kiran changes
     =============*/
-    .service-info-details{
-        .scroll-content{
+    .service-info-details {
+        .scroll-content {
             padding: 0px 0;
-            .message-boxs{
+            .message-boxs {
                 h2 {
                     color: #025fa9 !important;
                     font-family: "Muli", sans-serif;
@@ -547,31 +545,35 @@ page-service-info {
                     letter-spacing: 0.2px;
                     margin: 0;
                 }
+                img{
+                    width: 200px;
+                    margin: 0 auto;
+                }
             }
-            .service-conts{                
-                    padding-bottom: 6px;
-                    margin: 0;
-                    b{
-                         color: #ff0000;
-                         font-size: 17px;
-                         span{
-                             strong{
-                                 color:#666 !important;
-                                 font-size: 14px;
-                                 font-weight: 400;
-                                 i{
-                                    color:#999 !important;   
-                                    font-size: 14px; 
-                                 }
-                             }
-                         }
-                     }
-                
+            .service-conts {
+                padding-bottom: 6px;
+                margin: 0;
+                b {
+                    font-size: 17px;
+                    &.price-red {
+                        color: #ff0000;
+                        span {
+                            strong {
+                                color: #666 !important;
+                                font-size: 14px;
+                                font-weight: 400;
+                                i {
+                                    color: #999 !important;
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
-    .service-info-costDetails {
-        padding: 10px 15px;
+    .service-info-costDetails {       
         .text-bolder {
             font-weight: 600 !important;
         }
@@ -584,16 +586,39 @@ page-service-info {
             i {
                 color: #E91E63;
             }
+        }        
+        .input-wrapper {
+            .label-md {
+                margin: 0 auto;
+            }
+            .scheduler-price {
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+                margin: 10px;
+                border-radius: 5px;
+                overflow: hidden;
+                p {
+                    background-color: #ffffff;
+                    padding: 8px 10px;
+                    border-bottom: 1px solid #eee;
+                    .cost-value {
+                        text-align: right;
+                        float: right;
+                    }
+                }
+            }
         }
-        .instant-bt{
+    }
+    .service-info-costDetails-btn{
+        padding: 10px 15px;
+        .instant-bt {
             float: right;
             height: 36px;
-            margin-bottom: 0px; 
+            margin-bottom: 0px;
             background: #025FA9 !important;
             width: 45%;
             font-size: 16px;
             color: #fff;
-            border-radius: 20px;    
+            border-radius: 20px;
             text-transform: capitalize;
             font-family: 'Muli', sans-serif
         }
@@ -612,4 +637,3 @@ page-service-info {
         }
     }
 }
-

@@ -27,7 +27,7 @@
     <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
   </ion-fab> -->
  <ion-row>
-<ion-col width-80><ion-searchbar [(ngModel)]="searchText" placeholder="Name"></ion-searchbar></ion-col>
+<ion-col width-80><ion-searchbar [(ngModel)]="searchText" placeholder="Name" (keyup.enter)="inputSearch(searchText)"></ion-searchbar></ion-col>
   <ion-col width-20 class="btn-go"><button (click)="inputSearch(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
 </ion-row>
 <ion-row>
@@ -72,7 +72,7 @@
 				</ion-col>
 				  </ion-row>
 				    <ion-row>
- 	<ion-col col-12><b>Requested Date</b><p>{{package?.service_avail_date}}</p>
+ 	<ion-col col-12><b>Requested Date</b><p>{{service_avail_date}}</p>
   </ion-col>
 	  </ion-row>
     <ion-row *ngIf="package?.expired_date != null">

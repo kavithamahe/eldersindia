@@ -6,6 +6,8 @@ import { ViewenquiryPagePage } from '../../pages/viewenquiry/viewenquiry';
 
 import { ServiceProvider } from '../../providers/service-provider';
 
+import moment from 'moment';
+
 /*
   Generated class for the EnquiriesPage page.
 
@@ -25,6 +27,7 @@ vendor_details:any=[];
 category:any="";
 vendor:any="";
 searchText:any="";
+enquiry_date:any;
 
   constructor(public navCtrl: NavController,public toastCtrl: ToastController, public loadingCtrl: LoadingController,public navParams: NavParams,public _provider:ServiceProvider) {
   	this.getenquiryList();
@@ -67,6 +70,10 @@ searchText:any="";
    this._provider.webServiceCall(`getEnquiryList`,service_data)
       .subscribe(data =>{ 
 		this.enquiriesList = data.result.info.data;
+    var dataList=data.result.info.data;
+        for(let data of dataList) {
+          this.enquiry_date = moment(data.preferred_datetime).format("DD-MM-YYYY");
+        }
         this.nextPageURL=data.result.info.next_page_url;  
         loading.dismiss();
     },
@@ -100,7 +107,11 @@ searchText:any="";
     this._provider.enquiryRequestScroll(this.nextPageURL,this.searchText,this.vendor,this.category).subscribe(
      (serviceRequestScroll) => {
    
-      this.serviceRequestScrollLists=serviceRequestScroll.result.info.data; 
+      this.serviceRequestScrollLists=serviceRequestScroll.result.info.data;
+       var dataList=serviceRequestScroll.result.info.data;
+        for(let data of dataList) {
+          this.enquiry_date = moment(data.preferred_datetime).format("DD-MM-YYYY");
+        } 
        for (let i = 0; i < Object.keys(this.serviceRequestScrollLists).length; i++) {
         this.enquiriesList.push(this.serviceRequestScrollLists[i]);
         }

@@ -9,6 +9,8 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
  import { PackagepaymentPagePage } from '../../pages/packagepayment/packagepayment';
  import { RecurringPagePage } from '../../pages/recurring/recurring';
 
+ import moment from 'moment';
+
 
 /*
   Generated class for the Servicerequest page.
@@ -58,6 +60,7 @@ paystatus:any;
 results:any;
 user_type:any;
 get_participants:any=[];
+preferred_date:any;
   constructor(public alertCtrl: AlertController,public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.paystatus = navParams.get("status");
     this.results = navParams.get("result");
@@ -120,6 +123,10 @@ toggleDetails(service) {
     this.serviceRequest.serviceRequestStatus(this.searchEvent,this.status).subscribe(
      (serviceRequest) => {
       this.serviceRequestInfo=serviceRequest.result.info.list.data; 
+       var dataList=serviceRequest.result.info.list.data;
+        for(let data of dataList) {
+          this.preferred_date = moment(data.preferred_date).format("DD-MM-YYYY");
+        }
       this.vendorStatus=serviceRequest.result.info.status;
        this.servicestatus=serviceRequest.result.info.status;
       this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
@@ -159,6 +166,10 @@ toggleDetails(service) {
     this.serviceRequest.serviceRequestList(this.searchEvent,this.status,this.sortby).subscribe(
      (serviceRequest) => {
       this.serviceRequestInfo=serviceRequest.result.info.list.data; 
+       var dataList=serviceRequest.result.info.list.data;
+        for(let data of dataList) {
+          this.preferred_date = moment(data.preferred_date).format("DD-MM-YYYY");
+        }
       this.vendorStatus=serviceRequest.result.info.status;
       this.servicestatus=serviceRequest.result.info.status;
       this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
@@ -186,6 +197,10 @@ toggleDetails(service) {
     this.serviceRequest.serviceRequestLists(this.sr_token,this.searchEvent,this.status,this.sortby).subscribe(
      (serviceRequest) => {
       this.serviceRequestInfo=serviceRequest.result.info.list.data; 
+       var dataList=serviceRequest.result.info.list.data;
+        for(let data of dataList) {
+          this.preferred_date = moment(data.preferred_date).format("DD-MM-YYYY");
+        }
       this.vendorStatus=serviceRequest.result.info.status;
        this.servicestatus=serviceRequest.result.info.status;
       this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
@@ -584,6 +599,10 @@ toggleDetails(service) {
     this.serviceRequest.serviceRequestScroll(this.nextPageURL,this.searchEvent,this.status,this.sortby).subscribe(
      (serviceRequestScroll) => {
       this.serviceRequestScrollLists=serviceRequestScroll.result.info.list.data; 
+       var dataList=serviceRequestScroll.result.info.list.data;
+        for(let data of dataList) {
+          this.preferred_date = moment(data.preferred_date).format("DD-MM-YYYY");
+        }
        for (let i = 0; i < Object.keys(this.serviceRequestScrollLists).length; i++) {
         this.serviceRequestInfo.push(this.serviceRequestScrollLists[i]);
         }

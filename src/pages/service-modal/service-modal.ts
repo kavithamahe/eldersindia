@@ -26,7 +26,7 @@ import { PaymentPage } from '../payment/payment';
   templateUrl: 'service-modal.html'
 })
 export class ServiceModalPage {
-  form: FormGroup;
+  // form: FormGroup;
   emergency: any = [];
   noofpeople: number;
   lastname: any;
@@ -106,22 +106,25 @@ altercontact:any;
     this.date = new Date().toISOString();
     // this.time = new Date().toISOString();
     console.log(this.time);
-   this.form = this.formBuilder.group({
-    emergency: this.formBuilder.array([this.createUser()]),
-   })
+  
     this.vendorList = navParams.get("vendorList");
     storage.get('name').then((name) => { this.name=name; })
     storage.get('lastname').then((lastname) => { this.lastname=lastname; })
     storage.get('elder_age').then((elder_age) => { this.elderage=elder_age; })
     storage.get('phone').then((phone) => { this.phone=phone; })
     storage.get('email').then((email) => { this.email=email; })
-    storage.get('sponsor_name').then((sponsor_name) => { this.sponsor_name=sponsor_name; })
+    storage.get('sponsor_name').then((sponsor_name) => { this.sponsor_name=sponsor_name;
+    console.log(this.sponsor_name); })
     storage.get('sponsor_last').then((sponsor_last) => { this.sponsor_last=sponsor_last; })
     storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor; })
     storage.get('user_type').then((user_type) => { this.user_type=user_type; })
     storage.get('user_type_id').then((user_type_id) => { this.user_id=user_type_id;})
      storage.get('imageurl').then((imageurl) => { this.url=imageurl;});
- 
+   //   let _arr=this.createUser();
+   //   console.log(_arr);
+   // this.form = this.formBuilder.group({
+   //  emergency: this.formBuilder.array([_arr])
+   // });
   	if(navParams.get("service") == "contact"){
   		this.showContactDetails = true;	
   		this.title = this.vendorList.vendorDetails.service+" - Contact Details";
@@ -282,20 +285,50 @@ altercontact:any;
   }
 
   addUser(): void {
-    this.emergency = this.form.get("emergency") as FormArray;
-    this.emergency.push(this.createUser());
-  }
-    createUser(): FormGroup {
-    return this.formBuilder.group({
-      name: "",
-      mobile: ""
-    });
-  }
+    console.log(this.emergency.length);
+      var newItemNo = this.emergency.length+1;
+        this.emergency.push(newItemNo);
+     }
+  //   console.log(this.emergency.length);
+  //     this.emergency = [];
+  //   for(var i=1;i<=this.emergency.length;i++) {          
+  //    this.emergency.push(i);
+  // }
+    // this.emergency = this.form.get("emergency") as FormArray;
+    // this.emergency.push(this.createUser());
+  // }
+//     createUser(): FormGroup {
+//       console.log(this.emergency.length);
+//       if(this.emergency.length > 0)
+//       {
+//       return this.formBuilder.group({
+//       name: "",
+//       mobile: ""
+//     });
+//       }
+//       else
+//       {
+//         return this.formBuilder.group({
+//       name: "Ramanathan",
+//       mobile: "9943283065"
+//     });
+//     //     console.log(this.emergency.length);
+//     //     this.storage.get('sponsor_name').then((sponsor_name) => { this.sponsor_name=sponsor_name; 
+//     //      console.log(this.sponsor_name);
+//     // return this.formBuilder.group({
+
+//     //   name:this.user_type=='sponsor'?this.sponsor_name+" "+this.sponsor_last:this.name+" "+this.lastname,
+//     //   mobile: "chumma"
+//     // });
+//   // })
+// }    
+//   }
     removeUser(index: number) {
-        const control = <FormArray>this.form.controls['emergency'];
-        control.removeAt(index);
-         this.emergency_name.splice(index,1);
-         this.emergency_mobile.splice(index,1);
+     this.emergency.splice(index,1);
+        // const control = <FormArray>this.form.controls['emergency'];
+        // control.removeAt(index);
+         // this.emergency_name.splice(index,1);
+         // this.emergency_mobile.splice(index,1);
   }
   preBook(){
     this.showScheduleDetails = false;
@@ -319,6 +352,9 @@ altercontact:any;
     this.emergencyhelp = true;
     this.contact = false;
     this.schedule = false;
+    if(this.emergency[0]){
+
+    }
   }
   backemergency(){
     this.emergencyhelp = true;
@@ -329,6 +365,7 @@ altercontact:any;
     this.navCtrl.pop();
   }
   emergencyDetails(){
+    console.log(this.emergency_name);
      if(this.user_type == 'sponsor' && this.elder_id == undefined){
       this._provider.showToast("Please select the dependent");
     }
@@ -836,7 +873,7 @@ let paymentData = {"package_id":"","serviceType":"One time","service_cost":this.
   }
    let emergency = [];
    if(this.user_type == 'sponsor'){
-    this.emergency_name[0] = this.name + this.lastname;
+    this.emergency_name[0] = this.name +" "+ this.lastname;
   this.emergency_mobile[0] = this.phone;
   var obj = {"name":this.emergency_name[0],"mobile":this.emergency_mobile[0]}
   emergency.push(obj);
