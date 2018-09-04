@@ -519,6 +519,32 @@ page-service-info {
     .item-md.item-block .item-inner {
         border-bottom: none;
     }
+
+    .instant-bt {
+        float: right;
+        height: 36px;
+        margin: 0px 5px 0px 5px;
+        background: #025FA9 !important;
+        width: 45%;
+        font-size: 16px;
+        color: #fff;
+        border-radius: 20px;
+        text-transform: capitalize;
+        font-family: 'Muli', sans-serif
+    }
+    .btn-warnings {
+        background: #ef7f1b !important;
+        height: 36px;
+        font-size: 16px;
+        color: #fff;
+        border-radius: 20px;
+        width: 45%;
+        font-weight: 400;
+        float: left;
+        margin: 0px 5px 0px 5px;
+        text-transform: capitalize;
+        font-family: 'Muli', sans-serif;
+    }
     /*============
     Kiran changes
     =============*/
@@ -620,7 +646,8 @@ page-service-info {
             color: #fff;
             border-radius: 20px;
             text-transform: capitalize;
-            font-family: 'Muli', sans-serif
+            font-family: 'Muli', sans-serif;
+            margin:0px 5px 0px 5px;
         }
         .btn-warnings {
             background: #ef7f1b !important;
@@ -630,6 +657,7 @@ page-service-info {
             border-radius: 20px;
             width: 45%;
             font-weight: 400;
+            margin:0px 5px 0px 5px;
             float: left;
             margin-bottom: 0px;
             text-transform: capitalize;
