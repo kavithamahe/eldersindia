@@ -113,12 +113,15 @@
           </ion-col>
         </ion-row>
       </div>
+
+
       <!-- ...........emergency.............. -->
+
       <div *ngIf="vendorList?.requestServices.booking_status == '0' && emergencyhelp">
         <ion-list *ngIf="user_type == 'sponsor'">
-          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
+          <ion-label style=" font-size:17px;  line-height:20px; float:left;" class="required">Dependent</ion-label>
           <ion-item class="sel-label">
-            <ion-label>Select Dependent</ion-label>
+            <ion-label class="selectDepent">Select Dependent</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
             </ion-select>
@@ -127,74 +130,92 @@
         <ion-list>
           <ion-row>
             <ion-col width-60>
-              <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Name</ion-label>
+              <ion-label style=" font-size:17px;   line-height:20px; float:left;" class="required">Name</ion-label>
             </ion-col>
             <ion-col width-40>
-              <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Mobile</ion-label>
+              <ion-label style=" font-size:17px;   line-height:20px; float:left;" class="required">Mobile</ion-label>
             </ion-col>
           </ion-row>
         </ion-list>
         <ion-list>
-         <ion-row >
-              <ion-col width-60>
-               
-                <ion-item class="sel-label"  *ngIf="user_type != 'sponsor'">
-                  <ion-input type="text" value="{{sponsor_name}} {{sponsor_last}}"></ion-input>
-                </ion-item>
-                <ion-item class="sel-label"  *ngIf="user_type == 'sponsor'">
-                  <ion-input type="text" value="{{name}} {{lastname}}"></ion-input>
-                </ion-item>
+          <ion-row>
+            <ion-col width-60>
 
-              </ion-col>
-              <ion-col width-40>
-                <ion-item class="sel-label" *ngIf="user_type != 'sponsor'">
-                  <ion-input type="text"  value="{{call_sponsor}}"></ion-input>
-                </ion-item>
-                <ion-item class="sel-label" *ngIf="user_type == 'sponsor'">
-                  <ion-input type="text"  value="{{phone}}"></ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
+              <ion-item class="sel-label" *ngIf="user_type != 'sponsor'">
+                <ion-input type="text" value="{{sponsor_name}} {{sponsor_last}}"></ion-input>
+              </ion-item>
+              <ion-item class="sel-label" *ngIf="user_type == 'sponsor'">
+                <ion-input type="text" value="{{name}} {{lastname}}"></ion-input>
+              </ion-item>
+
+            </ion-col>
+            <ion-col width-40>
+              <ion-item class="sel-label" *ngIf="user_type != 'sponsor'">
+                <ion-input type="text" value="{{call_sponsor}}"></ion-input>
+              </ion-item>
+              <ion-item class="sel-label" *ngIf="user_type == 'sponsor'">
+                <ion-input type="text" value="{{phone}}"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
         </ion-list>
-          <ion-list *ngFor ="let emer of emergency; let i=index;">
-            <ion-row>
-              <ion-col width-60>
-                <ion-item class="sel-label">
-                  <ion-input type="text" [(ngModel)]="emergency_name[i+1]"></ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col width-40>
-                <ion-item class="sel-label">
-                  <ion-input type="text" [(ngModel)]="emergency_mobile[i+1]"></ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
+        <ion-list *ngFor="let emer of emergency; let i=index;">
+          <ion-row>
+            <ion-col width-60>
+              <ion-item class="sel-label">
+                <ion-input type="text" [(ngModel)]="emergency_name[i+1]"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col width-40>
+              <ion-item class="sel-label">
+                <ion-input type="text" [(ngModel)]="emergency_mobile[i+1]"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
         </ion-list>
         <ion-row>
           <ion-col col-6 class="view-serv">
-            <ion-badge (click)="removeUser(i)" class="services">
-              <i class="fa fa-plus-square" aria-hidden="true"></i>Remove</ion-badge>
+              <ion-chip (click)="removeUser(i)" class="services remove-btn">
+                <ion-icon name="remove" class="text-center" color="danger"></ion-icon>
+                <ion-label>Remove</ion-label>
+              </ion-chip>
+            <!-- <ion-badge (click)="removeUser(i)" class="services">
+                <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+              Remove</ion-badge> -->
           </ion-col>
           <ion-col col-6 class="view-serv">
-            <ion-badge (click)="addUser()" class="services">
-              <i class="fa fa-plus-square" aria-hidden="true"></i>Add More</ion-badge>
+              <ion-chip (click)="addUser()" class="services add-btn">
+                  <ion-icon name="add" class="text-center" ></ion-icon>
+                  <ion-label class="add-label">Add More</ion-label>
+                </ion-chip>
+            <!-- <ion-badge (click)="addUser()" class="services">
+              <i class="fa fa-plus-square" aria-hidden="true"></i>Add More</ion-badge> -->
           </ion-col>
-        </ion-row>
-        <br/>
+        </ion-row>        
         <ion-list>
-          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Alternative Contact Number</ion-label>
+          <ion-label style=" font-size:17px;line-height:20px; float:left;">Alternative Contact Number</ion-label>
           <ion-item class="sel-label">
-            <ion-input type="text" value="" placeholder="Alternative Contact Number" 
-            [(ngModel)]="altercontact"></ion-input>
+            <ion-input type="text" value="" placeholder="Alternative Contact Number" [(ngModel)]="altercontact"></ion-input>
           </ion-item>
         </ion-list>
-        <ion-item class="check-bx" class="one-timereq">
-          <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()">
-          </ion-checkbox>
-        </ion-item>
-        <ion-label (click)="openTerms()" style="margin:0px;">
-          <a>I agree with the terms and conditions</a>
-        </ion-label>
+        <br />
+        <ion-grid>
+          <ion-row>
+            <ion-col col-2  class="check-bx" class="one-timereq">
+                <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>
+            </ion-col>
+            <ion-col col-10 (click)="openTerms()" style="margin:0px;">
+                <ion-label class="margin_0">
+                    <a>I agree with the terms and conditions</a>
+                  </ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <!-- <ion-item>
+         
+          
+        </ion-item> -->
+       
         <small *ngIf="checkTerms">
           <p class="err-reds shake">Kindly agree to the terms and conditions</p>
         </small>
@@ -203,11 +224,13 @@
           <ion-col>
             <button class="btn-warnings" color="primary" (click)="cancelemergency()">Cancel
             </button>
-          <button class="instant-bt" (click)="emergencyDetails()">Next</button>
+            <button class="instant-bt" (click)="emergencyDetails()">Next</button>
           </ion-col>
         </ion-row>
 
       </div>
+
+
       <!-- <ion-card class="contact-list" > -->
       <div class="offered-servicelist" *ngIf="emergencyConfirm">
         <ion-list>
