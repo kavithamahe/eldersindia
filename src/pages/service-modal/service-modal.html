@@ -156,21 +156,20 @@
               </ion-col>
             </ion-row>
         </ion-list>
-          <ion-list *ngFor = "let emer of emergency;let i=index">
-            <ion-row >
+          <ion-list *ngFor ="let emer of emergency; let i=index;">
+            <ion-row>
               <ion-col width-60>
-                <ion-item class="sel-label" >
-                  <ion-input type="text" [(ngModel)]="emergency_name[i]" ></ion-input>
+                <ion-item class="sel-label">
+                  <ion-input type="text" [(ngModel)]="emergency_name[i+1]"></ion-input>
                 </ion-item>
               </ion-col>
               <ion-col width-40>
                 <ion-item class="sel-label">
-                  <ion-input type="text" [(ngModel)]="emergency_mobile[i]"></ion-input>
+                  <ion-input type="text" [(ngModel)]="emergency_mobile[i+1]"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
         </ion-list>
-
         <ion-row>
           <ion-col col-6 class="view-serv">
             <ion-badge (click)="removeUser(i)" class="services">
@@ -185,7 +184,8 @@
         <ion-list>
           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Alternative Contact Number</ion-label>
           <ion-item class="sel-label">
-            <ion-input type="text" value="" placeholder="Alternative Contact Number" [(ngModel)]="altercontact"></ion-input>
+            <ion-input type="text" value="" placeholder="Alternative Contact Number" 
+            [(ngModel)]="altercontact"></ion-input>
           </ion-item>
         </ion-list>
         <ion-item class="check-bx" class="one-timereq">
@@ -201,10 +201,9 @@
         <br/>
         <ion-row>
           <ion-col>
-            <button class="btn-warnings" color="primary" (click)="cancelemergency()">Cancel</button>
-
-
-            <button class="instant-bt" (click)="emergencyDetails()">Next</button>
+            <button class="btn-warnings" color="primary" (click)="cancelemergency()">Cancel
+            </button>
+          <button class="instant-bt" (click)="emergencyDetails()">Next</button>
           </ion-col>
         </ion-row>
 

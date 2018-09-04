@@ -48,7 +48,8 @@
             <i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{totalServicecost}}
             <span *ngIf="service_list.discount_rate != 0">/&nbsp;
               <i class="fa fa-inr" aria-hidden="true"></i>
-              <strong *ngIf="service_cost != service_list.service_cost - service_list.percentage_cost">{{service_list.service_cost | number : '1.2-2'}}</strong> {{service_list.service_type}}</span>
+              <strong *ngIf="service_cost != service_list.service_cost - service_list.percentage_cost">{{service_list.service_cost | number : '1.2-2'}}
+              </strong> {{service_list.service_type}}</span>
             <span *ngIf="service_list.driver_time_slots == '2'">per day</span>
             <span *ngIf="service_list.driver_time_slots == '1'">per hour</span>
           </b>

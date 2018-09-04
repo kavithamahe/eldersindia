@@ -26,7 +26,6 @@ import { PaymentPage } from '../payment/payment';
   templateUrl: 'service-modal.html'
 })
 export class ServiceModalPage {
-  // form: FormGroup;
   emergency: any = [];
   noofpeople: number;
   lastname: any;
@@ -101,11 +100,11 @@ checkTerms:any= false;
 sponsor_last:any;
 time:any;
 altercontact:any;
+form:boolean = false;
   constructor(public storage:Storage,public alertCtrl: AlertController,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder) {
     this.date = new Date().toISOString();
-    // this.time = new Date().toISOString();
-    console.log(this.time);
+   
   
     this.vendorList = navParams.get("vendorList");
     storage.get('name').then((name) => { this.name=name; })
@@ -120,11 +119,7 @@ altercontact:any;
     storage.get('user_type').then((user_type) => { this.user_type=user_type; })
     storage.get('user_type_id').then((user_type_id) => { this.user_id=user_type_id;})
      storage.get('imageurl').then((imageurl) => { this.url=imageurl;});
-   //   let _arr=this.createUser();
-   //   console.log(_arr);
-   // this.form = this.formBuilder.group({
-   //  emergency: this.formBuilder.array([_arr])
-   // });
+
   	if(navParams.get("service") == "contact"){
   		this.showContactDetails = true;	
   		this.title = this.vendorList.vendorDetails.service+" - Contact Details";
@@ -230,6 +225,7 @@ altercontact:any;
     
   	
   }
+
   sendContactDetails(category_id,service_id,sub_category_id,vendor_id){
     if(this.queries == undefined){
 
@@ -289,46 +285,10 @@ altercontact:any;
       var newItemNo = this.emergency.length+1;
         this.emergency.push(newItemNo);
      }
-  //   console.log(this.emergency.length);
-  //     this.emergency = [];
-  //   for(var i=1;i<=this.emergency.length;i++) {          
-  //    this.emergency.push(i);
-  // }
-    // this.emergency = this.form.get("emergency") as FormArray;
-    // this.emergency.push(this.createUser());
-  // }
-//     createUser(): FormGroup {
-//       console.log(this.emergency.length);
-//       if(this.emergency.length > 0)
-//       {
-//       return this.formBuilder.group({
-//       name: "",
-//       mobile: ""
-//     });
-//       }
-//       else
-//       {
-//         return this.formBuilder.group({
-//       name: "Ramanathan",
-//       mobile: "9943283065"
-//     });
-//     //     console.log(this.emergency.length);
-//     //     this.storage.get('sponsor_name').then((sponsor_name) => { this.sponsor_name=sponsor_name; 
-//     //      console.log(this.sponsor_name);
-//     // return this.formBuilder.group({
+        
 
-//     //   name:this.user_type=='sponsor'?this.sponsor_name+" "+this.sponsor_last:this.name+" "+this.lastname,
-//     //   mobile: "chumma"
-//     // });
-//   // })
-// }    
-//   }
     removeUser(index: number) {
      this.emergency.splice(index,1);
-        // const control = <FormArray>this.form.controls['emergency'];
-        // control.removeAt(index);
-         // this.emergency_name.splice(index,1);
-         // this.emergency_mobile.splice(index,1);
   }
   preBook(){
     this.showScheduleDetails = false;
@@ -365,17 +325,17 @@ altercontact:any;
     this.navCtrl.pop();
   }
   emergencyDetails(){
-    console.log(this.emergency_name);
      if(this.user_type == 'sponsor' && this.elder_id == undefined){
       this._provider.showToast("Please select the dependent");
     }
     else{
-      let emergencyDetailsname = this.emergency_name.filter(item => item == undefined);
+        let emergencyDetailsname = this.emergency_name.filter(item => item == undefined);
+        console.log(emergencyDetailsname.length);
       let emergencyDetailsmobile = this.emergency_mobile.filter(item => item == undefined);
-      if(emergencyDetailsname.length > 1 || emergencyDetailsmobile.length > 1){
+      if(emergencyDetailsname.length > 1 && emergencyDetailsmobile.length > 1){
         this._provider.showToast("Please enter all the details");
       }
-      else{
+         else{
          if(this.terms != undefined){
           this.emergencyConfirm = true;
         this.emergencyhelp = false;
@@ -385,8 +345,13 @@ altercontact:any;
       }
  
       }
+        }
+     
+     
+     
+    
         
-  }
+  
   }
   cancelsafe(){
     this.navCtrl.pop();
@@ -655,7 +620,6 @@ altercontact:any;
 
   confirmationDetails(){
     let no_people = this.noofpeople;
-    console.log(this.total_peoples);
     if(this.noofpeople == 1 && this.user_type == 'sponsor'){
         if(this.elder_id == undefined){
       this._provider.showToast("Please Enter all the Details");
@@ -699,8 +663,7 @@ altercontact:any;
        this._provider.showToast("Please Enter all the Details");
     }
       }
-   
-       
+     
     }
    }
 
