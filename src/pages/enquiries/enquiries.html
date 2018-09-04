@@ -25,7 +25,7 @@
  <ion-item>
     <ion-label>Category</ion-label>
     <ion-select [(ngModel)]="category" (ionChange)="getenquiryList()">
-       <ion-option *ngFor="let category of category_details" value="{{category.id}}">{{category.service}}</ion-option>     
+       <ion-option *ngFor="let category of category_details" value="{{category.id}}">{{category.name}}</ion-option>     
     </ion-select>
   </ion-item>
  </ion-card>
@@ -41,7 +41,7 @@
 <ion-grid class="package-needs">
    <ion-row>
   <ion-col col-12 text-wrap>
-	<b>Enquiry Date </b><p>{{enquiries.preferred_datetime}}</p>
+	<b>Enquiry Date </b><p>{{enquiry_date}}</p>
 	  </ion-col>
   </ion-row>
    <ion-row>

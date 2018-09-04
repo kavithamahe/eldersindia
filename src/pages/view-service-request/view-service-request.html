@@ -90,34 +90,36 @@
    <p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.service_cost | number : '1.2-2'}}</p>
    </ion-col>
   </ion-row>
-   <ion-row *ngIf = "viewServiceRequestInfo?.payment_status=='payment_success' && viewServiceRequestInfo?.additional_service_cost_status == 'success'  && viewServiceRequestInfo?.pay_by_cash == 0 && viewServiceRequestInfo?.sub_category_name != 'Wearables'">   
+   <ion-row *ngIf = "viewServiceRequestInfo?.additional_service_cost != 0 && viewServiceRequestInfo?.sub_category_name == 'Wearables' && viewServiceRequestInfo?.additional_service_cost_status == 'success'">   
+    <ion-col width-100 class="child_menu">
+  <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.service_cost | number : '1.2-2'}}</p>
+   </ion-col>
+  </ion-row>
+   <ion-row *ngIf = "viewServiceRequestInfo?.additional_service_cost != 0 && viewServiceRequestInfo?.sub_category_name == 'Wearables' && viewServiceRequestInfo?.additional_service_cost_status == 0">   
+    <ion-col width-100 class="child_menu">
+  <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{(viewServiceRequestInfo?.service_cost - viewServiceRequestInfo?.additional_service_cost) | number : '1.2-2'}}</p>
+   </ion-col>
+  </ion-row>
+    <ion-row *ngIf = "viewServiceRequestInfo?.payment_status=='payment_success' && viewServiceRequestInfo?.additional_service_cost_status == 'success'  && viewServiceRequestInfo?.pay_by_cash == 0 && viewServiceRequestInfo?.sub_category_name != 'Wearables'">   
     <ion-col width-100 class="child_menu">
   <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{(viewServiceRequestInfo?.service_cost + viewServiceRequestInfo?.additional_service_cost) | number : '1.2-2'}}</p>
    </ion-col>
   </ion-row>
-   <ion-row *ngIf = "viewServiceRequestInfo?.payment_status=='payment_success' && viewServiceRequestInfo?.additional_service_cost_status == 0 && viewServiceRequestInfo?.pay_by_cash == 0 && viewServiceRequestInfo?.sub_category_name != 'Wearables'">   
+
+    <ion-row *ngIf = "viewServiceRequestInfo?.prev_service_amount_balance > 0 &&viewServiceRequestInfo?.payment_status=='payment_success' && viewServiceRequestInfo?.additional_service_cost_status == 0 && viewServiceRequestInfo?.pay_by_cash == 0 && viewServiceRequestInfo?.sub_category_name != 'Wearables'">   
     <ion-col width-100 class="child_menu">
-  <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.paid_amount | number : '1.2-2'}}</p>
+  <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{(viewServiceRequestInfo?.paid_amount) | number: '1.2-2'}}</p>
    </ion-col>
   </ion-row>
-    <ion-row *ngIf = "viewServiceRequestInfo?.prev_service_amount_balance > 0 && viewServiceRequestInfo?.payment_status=='payment_success' && viewServiceRequestInfo?.additional_service_cost_status == 0 && viewServiceRequestInfo?.pay_by_cash == 0 && viewServiceRequestInfo?.sub_category_name != 'Wearables'">   
-    <ion-col width-100 class="child_menu">
-  <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.paid_amount | number : '1.2-2'}}</p>
-   </ion-col>
-  </ion-row>
+
     <ion-row *ngIf = "viewServiceRequestInfo?.prev_service_amount_balance == 0 && viewServiceRequestInfo?.payment_status=='payment_success' && viewServiceRequestInfo?.additional_service_cost_status == 0 && viewServiceRequestInfo?.pay_by_cash == 0 && viewServiceRequestInfo?.sub_category_name != 'Wearables'">   
     <ion-col width-100 class="child_menu">
-  <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.paid_amount | number : '1.2-2'}}</p>
+  <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{(viewServiceRequestInfo?.paid_amount) |number: '1.2-2'}}</p>
    </ion-col>
   </ion-row>
-    <ion-row *ngIf = "viewServiceRequestInfo?.payment_status=='payment_success' && viewServiceRequestInfo?.pay_by_cash == 1">   
+     <ion-row *ngIf = "viewServiceRequestInfo?.payment_status=='payment_success' && viewServiceRequestInfo?.pay_by_cash == 1">   
     <ion-col width-100 class="child_menu">
-  <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{(viewServiceRequestInfo?.service_cost - parseFloat(viewServiceRequestInfo?.service_balance_amount)) |number:2}}</p>
-   </ion-col>
-  </ion-row>
-     <ion-row *ngIf = "viewServiceRequestInfo?.additional_service_cost != 0 && viewServiceRequestInfo?.sub_category_name == 'Wearables' && viewServiceRequestInfo?.additional_service_cost_status == 'success'">   
-    <ion-col width-100 class="child_menu">
-  <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.service_cost}}</p>
+  <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{(viewServiceRequestInfo?.service_cost - parseFloat(viewServiceRequestInfo?.service_balance_amount)) |number: '1.2-2'}}</p>
    </ion-col>
   </ion-row>
    <ion-row *ngIf = "viewServiceRequestInfo?.additional_service_cost != 0 && viewServiceRequestInfo?.sub_category_name == 'Wearables' && viewServiceRequestInfo?.additional_service_cost_status == 0">   

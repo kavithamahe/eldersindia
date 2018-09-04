@@ -26,7 +26,6 @@ import { PaymentPage } from '../payment/payment';
   templateUrl: 'service-modal.html'
 })
 export class ServiceModalPage {
-  form: FormGroup;
   emergency: any = [];
   noofpeople: number;
   lastname: any;
@@ -101,26 +100,26 @@ checkTerms:any= false;
 sponsor_last:any;
 time:any;
 altercontact:any;
+form:boolean = false;
   constructor(public storage:Storage,public alertCtrl: AlertController,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder) {
     this.date = new Date().toISOString();
-    this.time = new Date().toISOString();
-   this.form = this.formBuilder.group({
-    emergency: this.formBuilder.array([this.createUser()]),
-   })
+   
+  
     this.vendorList = navParams.get("vendorList");
     storage.get('name').then((name) => { this.name=name; })
     storage.get('lastname').then((lastname) => { this.lastname=lastname; })
     storage.get('elder_age').then((elder_age) => { this.elderage=elder_age; })
     storage.get('phone').then((phone) => { this.phone=phone; })
     storage.get('email').then((email) => { this.email=email; })
-    storage.get('sponsor_name').then((sponsor_name) => { this.sponsor_name=sponsor_name; })
+    storage.get('sponsor_name').then((sponsor_name) => { this.sponsor_name=sponsor_name;
+    console.log(this.sponsor_name); })
     storage.get('sponsor_last').then((sponsor_last) => { this.sponsor_last=sponsor_last; })
     storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor; })
     storage.get('user_type').then((user_type) => { this.user_type=user_type; })
     storage.get('user_type_id').then((user_type_id) => { this.user_id=user_type_id;})
      storage.get('imageurl').then((imageurl) => { this.url=imageurl;});
- 
+
   	if(navParams.get("service") == "contact"){
   		this.showContactDetails = true;	
   		this.title = this.vendorList.vendorDetails.service+" - Contact Details";
@@ -226,6 +225,7 @@ altercontact:any;
     
   	
   }
+
   sendContactDetails(category_id,service_id,sub_category_id,vendor_id){
     if(this.queries == undefined){
 
@@ -281,20 +281,14 @@ altercontact:any;
   }
 
   addUser(): void {
-    this.emergency = this.form.get("emergency") as FormArray;
-    this.emergency.push(this.createUser());
-  }
-    createUser(): FormGroup {
-    return this.formBuilder.group({
-      name: "",
-      mobile: ""
-    });
-  }
+    console.log(this.emergency.length);
+      var newItemNo = this.emergency.length+1;
+        this.emergency.push(newItemNo);
+     }
+        
+
     removeUser(index: number) {
-        const control = <FormArray>this.form.controls['emergency'];
-        control.removeAt(index);
-         this.emergency_name.splice(index,1);
-         this.emergency_mobile.splice(index,1);
+     this.emergency.splice(index,1);
   }
   preBook(){
     this.showScheduleDetails = false;
@@ -318,6 +312,9 @@ altercontact:any;
     this.emergencyhelp = true;
     this.contact = false;
     this.schedule = false;
+    if(this.emergency[0]){
+
+    }
   }
   backemergency(){
     this.emergencyhelp = true;
@@ -332,17 +329,29 @@ altercontact:any;
       this._provider.showToast("Please select the dependent");
     }
     else{
-      let emergencyDetailsname = this.emergency_name.filter(item => item == undefined);
+        let emergencyDetailsname = this.emergency_name.filter(item => item == undefined);
+        console.log(emergencyDetailsname.length);
       let emergencyDetailsmobile = this.emergency_mobile.filter(item => item == undefined);
       if(emergencyDetailsname.length > 1 || emergencyDetailsmobile.length > 1){
         this._provider.showToast("Please enter all the details");
       }
-      else{
-         this.emergencyConfirm = true;
+         else{
+         if(this.terms != undefined){
+          this.emergencyConfirm = true;
         this.emergencyhelp = false;
       }
+      else{
+        this._provider.showToast("Please check the terms and conditions");
+      }
+ 
+      }
+        }
+     
+     
+     
+    
         
-  }
+  
   }
   cancelsafe(){
     this.navCtrl.pop();
@@ -352,8 +361,13 @@ altercontact:any;
       this._provider.showToast("Please select the dependent");
     }
     else{
-     this.safeConfirm = true;
+      if(this.terms != undefined){
+        this.safeConfirm = true;
      this.safeandsecurity = false;
+      }
+     else{
+      this._provider.showToast("Please check the terms and conditions");
+     }
    }
   }
   homemodify(){
@@ -365,9 +379,8 @@ altercontact:any;
     this.navCtrl.pop();
   }
   homemodifynext(){
-    console.log(this.checkTerms);
     if(this.user_type == 'sponsor'){
-      if(this.elder_id != undefined && this.date != undefined && this.automation_time != undefined && this.checkTerms == false){
+      if(this.elder_id != undefined && this.date != undefined && this.automation_time != undefined && this.terms != undefined){
         this.confirmhomemodify = true;
         this.homeschedule = false;
       }
@@ -376,7 +389,7 @@ altercontact:any;
       }
     }
     else{
-      if(this.date != undefined && this.automation_time != undefined && this.checkTerms == false){
+      if(this.date != undefined && this.automation_time != undefined && this.terms != undefined){
         this.confirmhomemodify = true;
         this.homeschedule = false;
       }
@@ -402,8 +415,13 @@ altercontact:any;
      if(this.user_type == 'sponsor'){
       if(this.elder_id != undefined && this.date != undefined && this.time != undefined 
         && this.hours != undefined && this.pickup != undefined){
+        if(this.terms != undefined){
         this.confirmdriver = true;
         this.transportdriver = false;
+      }
+      else{
+        this._provider.showToast("Please check the terms and conditions");
+      }
       }
       else{
        this._provider.showToast("Please Enter all the Details");
@@ -411,8 +429,13 @@ altercontact:any;
     }
     else{
       if(this.date != undefined && this.time != undefined && this.hours != undefined && this.pickup != undefined){
+         if(this.terms != undefined){
         this.confirmdriver = true;
         this.transportdriver = false;
+      }
+      else{
+        this._provider.showToast("Please check the terms and conditions");
+      }
       }
       else{
         this._provider.showToast("Please Enter all the Details");
@@ -436,8 +459,14 @@ altercontact:any;
       if(this.vendorList.vendorDetails.transport_type == '2'){
          if(this.elder_id != undefined && this.date != undefined && this.time != undefined 
         && this.typeofservice != undefined && this.weelchair != undefined && this.pickup != undefined && this.drop != undefined){
-        this.confirmcab = true;
-        this.transportcab = false;
+          if(this.terms != undefined){
+             this.confirmcab = true;
+            this.transportcab = false;
+          }
+          else{
+             this._provider.showToast("Please check the terms and conditions");
+          }
+       
       }
       else{
        this._provider.showToast("Please Enter all the Details");
@@ -446,8 +475,13 @@ altercontact:any;
       else{
          if(this.elder_id != undefined && this.date != undefined && this.time != undefined 
         && this.typeofservice != undefined && this.pickup != undefined && this.drop != undefined){
+        if(this.terms != undefined){
         this.confirmcab = true;
         this.transportcab = false;
+      }
+       else{
+             this._provider.showToast("Please check the terms and conditions");
+          }
       }
       else{
        this._provider.showToast("Please Enter all the Details");
@@ -459,8 +493,13 @@ altercontact:any;
       if(this.vendorList.vendorDetails.transport_type == '2'){
          if(this.date != undefined && this.time != undefined && this.typeofservice != undefined && 
         this.weelchair != undefined && this.pickup != undefined && this.drop != undefined){
+        if(this.terms != undefined){
         this.confirmcab = true;
         this.transportcab = false;
+      }
+         else{
+             this._provider.showToast("Please check the terms and conditions");
+          }
       }
       else{
         this._provider.showToast("Please Enter all the Details");
@@ -468,8 +507,13 @@ altercontact:any;
       }
       else{
          if(this.date != undefined && this.time != undefined && this.typeofservice != undefined && this.pickup != undefined && this.drop != undefined){
+       if(this.terms != undefined){
         this.confirmcab = true;
         this.transportcab = false;
+      }
+       else{
+             this._provider.showToast("Please check the terms and conditions");
+          }
       }
       else{
         this._provider.showToast("Please Enter all the Details");
@@ -515,13 +559,20 @@ altercontact:any;
       this._provider.showToast("Please select the number of peoples");
    }
     else{
+       if(this.terms != undefined){
          if(this.balanceRecreationService == 0 || this.balanceRecreationService < this.noofpeople){
         this.showConfirm();
       }
       else{
-        this.booknow = false;
+       
+          this.booknow = false;
         this.booknownext = true;
+        }
       }
+        else{
+          this._provider.showToast("Please check the terms and conditions");
+        }
+     
     }
    
   }
@@ -569,7 +620,6 @@ altercontact:any;
 
   confirmationDetails(){
     let no_people = this.noofpeople;
-    console.log(this.total_peoples);
     if(this.noofpeople == 1 && this.user_type == 'sponsor'){
         if(this.elder_id == undefined){
       this._provider.showToast("Please Enter all the Details");
@@ -613,8 +663,7 @@ altercontact:any;
        this._provider.showToast("Please Enter all the Details");
     }
       }
-   
-       
+     
     }
    }
 
@@ -647,8 +696,11 @@ altercontact:any;
     }
 
  }
+
  cabpaynow(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
+
    this.date= moment(this.date).format("DD-MM-YYYY");
+   // this.time = moment(this.time).format("HH:mm");
     if(this.user_type == 'sponsor')
   {
     this.elder_id = this.elder_id;
@@ -784,7 +836,7 @@ let paymentData = {"package_id":"","serviceType":"One time","service_cost":this.
   }
    let emergency = [];
    if(this.user_type == 'sponsor'){
-    this.emergency_name[0] = this.name + this.lastname;
+    this.emergency_name[0] = this.name +" "+ this.lastname;
   this.emergency_mobile[0] = this.phone;
   var obj = {"name":this.emergency_name[0],"mobile":this.emergency_mobile[0]}
   emergency.push(obj);

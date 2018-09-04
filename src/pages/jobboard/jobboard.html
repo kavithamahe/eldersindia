@@ -27,7 +27,7 @@
   </ion-fab> -->
 <ion-item  style="border:none;">
 <ion-row>
-<ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
+<ion-col width-80><ion-searchbar [(ngModel)]="searchText" (keyup.enter)="getItems(searchText)"></ion-searchbar></ion-col>
   <ion-col width-20><button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
 </ion-row>
 </ion-item>

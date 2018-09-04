@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { ViewpackagePagePage } from '../../pages/viewpackage/viewpackage';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import {ElderservicePagePage } from '../../pages/elderservice/elderservice';
+import moment from 'moment';
 /*
   Generated class for the PackageRequestPage page.
 
@@ -34,10 +35,10 @@ searchemail:any="";
 searchid:any="";
 paystatus:any;
 results:any;
+service_avail_date:any;
   constructor(public navCtrl: NavController,public modalCtrl: ModalController,public toastCtrl: ToastController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams, public blogListService:BlogListService) {
       this.paystatus = navParams.get("status");
        this.results = navParams.get("result");
-    console.log(this.results);
     if(this.paystatus == "1"){
       this.blogListService.showToaster(this.results);
     }
@@ -65,6 +66,10 @@ results:any;
     this.blogListService.getPackageRequest(this.rootUrl,this.searchText,this.searchemail,this.searchid,this.packstatus)
       .subscribe(data =>{
         this.packageRequest = data.result.data;
+         var dataList=data.result.data;
+        for(let data of dataList) {
+          this.service_avail_date = moment(data.service_avail_date).format("DD-MM-YYYY HH:mm:ss");
+        }
         this.nextPageURL = data.result.next_page_url;
        loading.dismiss();
     },
@@ -78,7 +83,6 @@ results:any;
     console.log('ionViewDidLoad PackageRequestPagePage');
   }
 doInfinite(infiniteScroll) {
-  console.log(this.nextPageURL);
     setTimeout(() => {      
       if(this.nextPageURL!=null && this.nextPageURL!='')
       {
@@ -96,6 +100,10 @@ doInfinite(infiniteScroll) {
      this.blogListService.eventscrolls(this.nextPageURL,this.searchText,this.searchemail,this.searchid,this.packstatus).subscribe(
      (eventsscroll) => {
       this.eventScrollLists=eventsscroll.result.data;
+        var dataList=eventsscroll.result.data;
+        for(let data of dataList) {
+          this.service_avail_date = moment(data.service_avail_date).format("DD-MM-YYYY HH:mm:ss");
+        }
       for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
         this.packageRequest.push(this.eventScrollLists[i]);
         }

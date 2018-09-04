@@ -11,6 +11,7 @@ import { RecurringcancelPagePage } from '../../pages/recurringcancel/recurringca
 import { PackagepaymentPagePage } from '../../pages/packagepayment/packagepayment';
 
 import { BlogListService } from '../../providers/blog-list-service';
+import moment from 'moment';
 
 /*
   Generated class for the RecurringPage page.
@@ -34,6 +35,7 @@ serviceRequestScrollLists:any=[];
 discountcost:any;
 sortby:any="";
 sr_token:any;
+updated_at:any;
   constructor(public navCtrl: NavController,public modalCtrl: ModalController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
   if(this.navParams.get("sr_token")){
       this.searchText =this.navParams.get("sr_token");
@@ -97,6 +99,7 @@ sr_token:any;
       var str = data.sr_token;
          data.sr_tokenend = str.replace("-1" ,"");
       data.remainingamount = parseFloat(data.remaining_amount).toFixed(2);
+      this.updated_at = moment(data.updated_at).format("DD-MM-YYYY HH:mm:ss");
     }
         this.recurringRequest = dataList;
         this.nextPageURL=data.result.info.next_page_url;  
@@ -133,8 +136,8 @@ sr_token:any;
       data.sr_token = data.sr_token
       var str = data.sr_token;
          data.sr_tokenend = str.replace("-1" ,"");
-      data.remainingamount = parseFloat(data.remaining_amount).toFixed(2);
-
+        data.remainingamount = parseFloat(data.remaining_amount).toFixed(2);
+         this.updated_at = moment(data.updated_at).format("DD-MM-YYYY HH:mm:ss");
     }
       
       //this.serviceRequestScrollLists=serviceRequestScroll.result.data; 
