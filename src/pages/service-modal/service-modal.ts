@@ -332,7 +332,7 @@ form:boolean = false;
         let emergencyDetailsname = this.emergency_name.filter(item => item == undefined);
         console.log(emergencyDetailsname.length);
       let emergencyDetailsmobile = this.emergency_mobile.filter(item => item == undefined);
-      if(emergencyDetailsname.length > 1 && emergencyDetailsmobile.length > 1){
+      if(emergencyDetailsname.length > 1 || emergencyDetailsmobile.length > 1){
         this._provider.showToast("Please enter all the details");
       }
          else{
