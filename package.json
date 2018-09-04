@@ -48,7 +48,7 @@
     "com.lampa.startapp": "git+https://github.com/lampaa/com.lampa.startapp.git",
     "com.razorpay.cordova": "git+https://github.com/razorpay/razorpay-cordova.git",
     "com.recaisinekli.rtspPlayer": "git+https://github.com/recaisinekli/rtspPlayer.git",
-    "cordova-browser": "~5.0.3",
+    "cordova-android": "~6.3.0",
     "cordova-ios": "^4.5.4",
     "cordova-plugin-add-swift-support": "^1.6.0",
     "cordova-plugin-calendar": "^4.6.0",
@@ -98,7 +98,7 @@
     "summernote": "^0.8.4",
     "sw-toolbox": "3.4.0",
     "zone.js": "0.6.26",
-    "cordova-android": "~6.3.0"
+    "cordova-browser": "~5.0.4"
   },
   "devDependencies": {
     "@ionic/app-scripts": "^1.3.7",
@@ -160,9 +160,9 @@
       "com.razorpay.cordova": {}
     },
     "platforms": [
-      "browser",
       "ios",
-      "android"
+      "android",
+      "browser"
     ]
   }
 }

@@ -20,10 +20,16 @@
 <!--   <ion-fab top right edge>
     <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
   </ion-fab> -->
- <ion-row>
-<ion-col width-80><ion-searchbar [(ngModel)]="searchText" (keyup.enter)="inputSearch(searchText)"></ion-searchbar></ion-col>
-  <ion-col width-20><button (click)="inputSearch(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
-</ion-row>
+   <div class="ion-searchbar">
+    <ion-row>
+      <ion-col width-80>
+        <ion-searchbar [(ngModel)]="searchText" (keyup.enter)="inputSearch(searchText)"></ion-searchbar>
+      </ion-col>
+      <ion-col width-20 class="btn-go">
+        <button (click)="inputSearch(searchText)" ion-button small class="go-btn">Go</button>
+      </ion-col>
+    </ion-row>
+  </div>
  <ion-card class="sel-packages">
  <ion-item>
     <ion-label>Sort By</ion-label>

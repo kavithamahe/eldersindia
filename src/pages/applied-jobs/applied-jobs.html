@@ -22,11 +22,16 @@
 </ion-header>
 <ion-content class="content-intop">
   <ion-card class="search-quk" style="border:none;">
+     <div class="ion-searchbar">
     <ion-row>
-      <ion-col width-80><ion-searchbar [(ngModel)]="searchText" (keyup.enter)="getItems(searchText)"></ion-searchbar>
+      <ion-col width-80>
+        <ion-searchbar [(ngModel)]="searchText" (keyup.enter)="getItems(searchText)"></ion-searchbar>
       </ion-col>
-      <ion-col width-20><button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
+      <ion-col width-20 class="btn-go">
+        <button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button>
+      </ion-col>
     </ion-row>
+  </div>
   </ion-card>
   <ion-card class="sel-packages">
     <ion-item class="select-loca">

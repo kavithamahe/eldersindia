@@ -26,10 +26,16 @@
   <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
   </ion-fab> -->
 <ion-item  style="border:none;">
-<ion-row>
-<ion-col width-80><ion-searchbar [(ngModel)]="searchText" (keyup.enter)="getItems(searchText)"></ion-searchbar></ion-col>
-  <ion-col width-20><button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
-</ion-row>
+  <div class="ion-searchbar">
+    <ion-row>
+      <ion-col width-80>
+        <ion-searchbar [(ngModel)]="searchText" (keyup.enter)="getItems(searchText)"></ion-searchbar>
+      </ion-col>
+      <ion-col width-20 class="btn-go">
+        <button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button>
+      </ion-col>
+    </ion-row>
+  </div>
 </ion-item>
 
 <ion-card class="sel-packages">

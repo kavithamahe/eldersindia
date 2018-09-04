@@ -27,17 +27,17 @@
 
 </ion-item>
 </ion-card>
- <!-- <ion-searchbar ></ion-searchbar> -->
-<ion-card class="shs">
- <ion-row>
-<ion-col width-80><ion-searchbar [(ngModel)]="term"></ion-searchbar></ion-col>
-  <ion-col width-20><button (click)="getItems(term)" ion-button small class="go-btn">Go
-  </button> </ion-col>
-</ion-row>
-<!--  <ion-input type="text" class="search" [(ngModel)]="term" placeholder="search" (click)="getItems(term)"> -->
-   
- <!-- </ion-input> -->
-</ion-card>
+  <div class="ion-searchbar">
+    <ion-row>
+      <ion-col width-80>
+        <ion-searchbar [(ngModel)]="term" (keyup.enter)="getItems(term)"></ion-searchbar>
+      </ion-col>
+      <ion-col width-20 class="btn-go">
+        <button (click)="getItems(term)" ion-button small class="go-btn">Go</button>
+      </ion-col>
+    </ion-row>
+  </div>
+
 <ion-card class="pack-listed">
 <ion-item *ngFor = "let subcategory of subcategories.info" 
 [color]="subcategory.color" class="sub-cat-listed">
