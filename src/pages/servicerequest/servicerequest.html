@@ -54,205 +54,219 @@
   <ion-card *ngFor="let service of serviceRequestInfo; let i=index;" class="service-cards">
     <ion-grid>
       <ion-row>
-        <ion-col width-20 class="left-service">
+        <ion-col width-20>
           <img src="{{imageUrl}}{{service?.logo}}" width="100" height="50" />
-          <a class="token-primarys" *ngIf="service?.vendor_status == 4 || service?.vendor_status == 5 || service?.vendor_status == 2"
-            (click)="makeCall(service?.servicer_contact_no)">
-            <i class="fa fa-phone"></i>
-          </a>
-          <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3) && (service?.vendor_status!=5))" (click)="showConfirm(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid,service?.id,service?.service_cost,service?.recurring_request_id,service?.req_count,service?.package_id,service?.Paymentstatus,service?.paid_amount,
-  service?.sr_token)">
-            <i class="fa fa-times" aria-hidden="true"></i>
-          </a>
         </ion-col>
-
         <ion-col width-80>
-          <ion-row (click)="viewRequest(service?.id,service)">
+          <span (click)="viewRequest(service?.id,service)">
             <h2 item-text-wrap class="service-req">{{service?.vendor_name}}</h2>
-          </ion-row>
-
-          <ion-row (click)="viewRequest(service?.id,service)">
-            <p item-text-wrap class="service-cont">{{service?.enquiry_about | words : 10}}</p>
-          </ion-row>
-
-          <ion-row (click)="viewRequest(service?.id,service)">
-
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <div (click)="viewRequest(service?.id,service)">
+            <p item-text-wrap class="service-cont"><strong>{{service?.enquiry_about | words : 10}}</strong></p>
+          </div>
+          <div (click)="viewRequest(service?.id,service)">
             <p *ngIf="user_type!='elder'" class="service-conts">
-              <i class="fa fa-user" aria-hidden="true"></i>{{service?.dependent_name}} {{service?.dependent_lastname}}</p>
-          </ion-row>
-          <!--    <ion-row (click)="viewRequest(service?.id,service)">
-   <p class="service-conts"><i class="fa fa-cogs" aria-hidden="true"></i>{{service?.service_name}}</p>
-  </ion-row> -->
-          <!--  <ion-row (click)="viewRequest(service?.id,service)">
-
- <p *ngIf="(service?.enquiry_date!='0000-00-00 00:00:00')" class="service-conts"><span class="token-primaryss">Enquery Date:</span>{{service?.enquiry_date | date :'MMM dd y h:mm a'}}</p> 
-
-
-</ion-row> -->
-          <ion-row *ngIf="service?.preferred_date != '0000-00-00' && service.sr_token[0] !='T'" (click)="viewRequest(service?.id,service)">
-            <p class="service-conts" *ngIf="service?.vendor_status == 0">
-              <span class="token-primaryss">Preferred date & time:</span><b>{{preferred_date}} {{service?.preferred_time}}</b>
-            </p>
-          </ion-row>
-
-          <ion-row *ngIf="service?.preferred_date != '0000-00-00' && service?.sr_token[0]=='T'" (click)="viewRequest(service?.id,service)">
-            <p class="service-conts" *ngIf="service?.vendor_status == 0">
-              <span class="token-primaryss">Preferred date & time:</span><b>{{preferred_date}}</b>
-            </p>
-          </ion-row>
-
-          <ion-row *ngIf="service?.vendor_status == 4 || service?.vendor_status == 5 || service?.vendor_status == 2" (click)="viewRequest(service?.id,service)">
+             <strong> <i class="fa fa-user" aria-hidden="true"></i>{{service?.dependent_name}} {{service?.dependent_lastname}}</strong></p>
+          </div>
+          <div (click)="viewRequest(service?.id,service)">
             <p class="service-conts">
-              <span class="token-primaryss">Servicer Name:</span><b>{{service?.servicer_name}}</b>
+              <span>Token id :</span>
+              <b class="tocken-no">
+                {{service?.sr_token}}</b>
             </p>
-          </ion-row>
-          <ion-row *ngIf="(service?.scheduled_date != null)" (click)="viewRequest(service?.id,service)">
+          </div>
+          <div *ngIf="service?.preferred_date != '0000-00-00' && service.sr_token[0] !='T'" (click)="viewRequest(service?.id,service)">
+            <p class="service-conts" *ngIf="service?.vendor_status == 0">
+              <span class="token-primaryss">Preferred date & time:</span>
+              <b>{{service?.preferred_date}} {{service?.preferred_time}}</b>
+
+            </p>
+          </div>
+
+          <div *ngIf="service?.preferred_date != '0000-00-00' && service?.sr_token[0]=='T'" (click)="viewRequest(service?.id,service)">
+            <p class="service-conts" *ngIf="service?.vendor_status == 0">
+              <span class="token-primaryss">Preferred date & time:</span>
+              <b>{{service?.preferred_date}}</b>
+            </p>
+          </div>
+
+          <div *ngIf="service?.vendor_status == 4 || service?.vendor_status == 5 || service?.vendor_status == 2" (click)="viewRequest(service?.id,service)">
+            <p class="service-conts">
+              <span class="token-primaryss">Servicer Name:</span>
+              <b>{{service?.servicer_name}}</b>
+            </p>
+          </div>
+          <div *ngIf="(service?.scheduled_date != null)" (click)="viewRequest(service?.id,service)">
             <p class="service-conts">
               <span class="token-primaryss" *ngIf="service?.vendor_status == 4">Scheduled date:</span>
               <span class="token-primaryss" *ngIf="service?.vendor_status == 5">Delivered date:</span>
-              <span class="token-primaryss" *ngIf="service?.vendor_status == 2">Completed date:</span> <b>{{service?.scheduled_date}}</b></p>
-          </ion-row>
-          <ion-row *ngIf="service.service_type=='One time'">
-            <p class="service-conts"><span class="token-primaryss">Service Cost:</span>
-              <b class="cost-redPrice"><i class="fa fa-rupee"></i>{{service.service_cost | number : '1.2-2'}}</b></p>
-          </ion-row>
-          <ion-row *ngIf="service.service_type=='One time'">
-            <p class="service-conts"><span class="token-primaryss">Additional Service Cost:</span>
-              <b class="cost-redPrice"><i class="fa fa-rupee"></i>{{service.additional_service_cost | number : '1.2-2'}}</b></p>
-          </ion-row>
-
-          <ion-row *ngIf="service.helpline_mobile!='null'">
-            <p class="service-conts" (click)="makeCall(service?.helpline_mobile)">
-              <span class="token-primaryss">Helpline Number:</span> <b>{{service?.helpline_mobile}}</b>
+              <span class="token-primaryss" *ngIf="service?.vendor_status == 2">Completed date:</span>
+              <b>{{service?.scheduled_date}}</b>
             </p>
-          </ion-row>
-          <hr />
-          <ion-row>
-            <ion-col width-50 style="padding-left:0px;">
-              <span *ngFor="let venStatus of vendorStatus">
-                <p *ngIf="venStatus.id==service?.vendor_status">
-                  <ion-badge class="{{venStatus.label}}"> {{venStatus.label}}</ion-badge>
-                </p>
-              </span>
-            </ion-col>
-            <ion-col width-30 (click)="viewRequest(service?.id,service)">
-              <p class="tocken-no">
-                <i class="fa fa-id-card-o"></i> {{service?.sr_token}}</p>
-            </ion-col>
-          </ion-row>
+          </div>
+          <div *ngIf="service.service_type=='One time'">
+            <p class="service-conts">
+              <span class="token-primaryss">Service Cost:</span>
+              <b class="cost-redPrice">
+                <i class="fa fa-rupee"></i>{{service.service_cost | number : '1.2-2'}}</b>
+            </p>
+          </div>
+          <div *ngIf="service.service_type=='One time'">
+            <p class="service-conts">
+              <span class="token-primaryss">Additional Service Cost:</span>
+              <b class="cost-redPrice">
+                <i class="fa fa-rupee"></i>{{service.additional_service_cost | number : '1.2-2'}}</b>
+            </p>
+          </div>
 
-          <ion-row>
-
-            <ion-col col-9 style="padding-left:0px;" *ngIf="service?.sub_category_name != 'Transportation Driver Service' && service?.sub_category_name != 'Transportation Cab'">
-              <span>
-                <p *ngIf="service.service_type =='Recurring'" (click)="viewRecurring(service?.sr_token)">
-                  <ion-badge>View Recurring Requests</ion-badge>
-                </p>
-                <p *ngIf="service?.Paymentstatus=='captured' && service?.payment_method=='' && service?.additional_service_cost!='0'&& service?.additional_service_cost_status=='0' && service?.status=='5' && service?.package_id==''">
-                  <ion-badge (click)="payOptionforAdditionalServiceCost(service.sr_token,service.id,service?.additional_service_cost,service?.payment_status,service?.service_type)">Pay Now {{service?.additional_service_cost}}
-                  </ion-badge>
-                </p>
-                <p *ngIf="service?.Paymentstatus=='captured' && service?.payment_method=='' && service?.additional_service_cost!='0'&& service?.additional_service_cost_status=='0' && service?.sub_category_name =='Wearables' && service?.package_id==''">
-                  <ion-badge (click)="payOptionforAdditionalServiceCost(service.sr_token,service.id,service?.additional_service_cost,service?.payment_status,service?.service_type)">Pay Now {{service?.additional_service_cost}}
-                  </ion-badge>
-                </p>
-                <p *ngIf="service?.Paymentstatus!='captured' && service?.status !='3' && service?.payment_method==''  && service?.service_type=='One time' && service?.package_id==''">
-                  <ion-badge (click)="payOptionforpendingPayment(service.sr_token,service.pending_service_amount,service?.id,service?.additional_service_cost,service?.payment_status,service?.prev_service_amount_balance)">Pay Now</ion-badge>
-                </p>
-
-                <div *ngIf="service.service_type !='Recurring'">
-                  <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost=='0' && service.additional_service_cost==0 || service.additional_service_cost_status == 'success' && service.service_type=='One time'">
-                    <ion-badge>Paid</ion-badge>
-                  </p>
-
-                  <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost!='0' && service.additional_service_cost==0 && service.service_type=='One time'">
-                    <ion-badge>Paid</ion-badge>
-                  </p>
-
-                </div>
-              </span>
-            </ion-col>
-            <ion-col col-3>
-                <p *ngIf="service.sr_token[0]=='T'" (click)="getparticipants(service)">
-                    <ion-badge class="btn-participants"><i class="fa fa-users"></i></ion-badge>
-                  </p>
-            </ion-col>
-          </ion-row>
+          <div *ngIf="service.helpline_mobile!='null'">
+            <p class="service-conts" (click)="makeCall(service?.helpline_mobile)">
+              <span class="token-primaryss">Helpline Number:</span>
+              <b>{{service?.helpline_mobile}}</b>
+            </p>
+          </div>
         </ion-col>
       </ion-row>
+      <ion-row class="tp-bor tp-5">
+        <ion-col width-50 style="padding-left:0px;">
+          <div *ngFor="let venStatus of vendorStatus">
+            <p *ngIf="venStatus.id==service?.vendor_status">
+              <ion-badge class="{{venStatus.label}}"> {{venStatus.label}}</ion-badge>
+            </p>
+          </div>
+          <div style="height:5px"></div>
+          <div *ngIf="service?.sub_category_name != 'Transportation Driver Service' && service?.sub_category_name != 'Transportation Cab'">
+            <p *ngIf="service.service_type =='Recurring'" (click)="viewRecurring(service?.sr_token)">
+              <ion-badge>View Recurring Requests</ion-badge>
+            </p>
+            <p *ngIf="service?.Paymentstatus=='captured' && service?.payment_method=='' && service?.additional_service_cost!='0'&& service?.additional_service_cost_status=='0' && service?.status=='5' && service?.package_id==''">
+              <ion-badge (click)="payOptionforAdditionalServiceCost(service.sr_token,service.id,service?.additional_service_cost,service?.payment_status,service?.service_type)">Pay Now {{service?.additional_service_cost}}
+              </ion-badge>
+            </p>
+            <p *ngIf="service?.Paymentstatus=='captured' && service?.payment_method=='' && service?.additional_service_cost!='0'&& service?.additional_service_cost_status=='0' && service?.sub_category_name =='Wearables' && service?.package_id==''">
+              <ion-badge (click)="payOptionforAdditionalServiceCost(service.sr_token,service.id,service?.additional_service_cost,service?.payment_status,service?.service_type)">Pay Now {{service?.additional_service_cost}}
+              </ion-badge>
+            </p>
+            <p *ngIf="service?.Paymentstatus!='captured' && service?.status !='3' && service?.payment_method==''  && service?.service_type=='One time' && service?.package_id==''">
+              <ion-badge (click)="payOptionforpendingPayment(service.sr_token,service.pending_service_amount,service?.id,service?.additional_service_cost,service?.payment_status,service?.prev_service_amount_balance)">Pay Now</ion-badge>
+            </p>
+
+            <div *ngIf="service.service_type !='Recurring'">
+              <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost=='0' && service.additional_service_cost==0 || service.additional_service_cost_status == 'success' && service.service_type=='One time'">
+                <ion-badge>Paid</ion-badge>
+              </p>
+
+              <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost!='0' && service.additional_service_cost==0 && service.service_type=='One time'">
+                <ion-badge>Paid</ion-badge>
+              </p>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col width-50>
+          <div>
+            <a *ngIf="service?.vendor_status == 4 || service?.vendor_status == 5 || service?.vendor_status == 2" (click)="makeCall(service?.servicer_contact_no)">
+              <ion-chip class="call-btn">
+                <ion-icon name="call" class="text-center" color="primary"></ion-icon>
+                <ion-label>Call Now</ion-label>
+              </ion-chip>
+            </a>
+            <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3) && (service?.vendor_status!=5))" (click)="showConfirm(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid,service?.id,service?.service_cost,service?.recurring_request_id,service?.req_count,service?.package_id,service?.Paymentstatus,service?.paid_amount,
+              service?.sr_token)">
+              Cancel
+            </a>
+          </div>
+          <div *ngIf="service.sr_token[0]=='T'">
+            <p (click)="getparticipants(service)">
+              <ion-badge class="btn-participants">
+                Participants
+              </ion-badge>
+            </p>
+          </div>
+          <!-- <div> -->
+            <ion-col *ngIf="service.pack_id!='' && service.vendor_status == 5 && service.additional_service_cost==0">
+              <button class="make-rate" *ngIf="service.vendor_status == 5 && service.additional_service_cost==0" (click)="enableRemark(i)">
+                Mark as Complete
+              </button>
+            </ion-col>
+            <ion-col *ngIf="service.Paymentstatus=='captured' && service.pack_id=='' && service.vendor_status == 5 && (service.additional_service_cost==0 || service.additional_service_cost_status=='success')">
+              <button class="make-rate" *ngIf="service.vendor_status == 5 && (service.additional_service_cost==0 || service.additional_service_cost_status=='success')"
+                (click)="enableRemark(i)">
+                Mark as Complete
+              </button>
+            </ion-col>
+            <ion-col *ngIf="service.pack_id!='' && service.vendor_status == 5 && (service.additional_service_cost!=0 && service.additional_service_cost_status=='success')">
+              <button class="make-rate" *ngIf="service.vendor_status == 5 && (service.additional_service_cost!=0 && service.additional_service_cost_status=='success')"
+                (click)="enableRemark(i)">
+                Mark as Complete
+              </button>
+            </ion-col>
+          <!-- </div> -->
+        </ion-col>
+      </ion-row>
+
       <ion-card *ngIf="service.showDetails" class="padd-both-15">
-        <ion-row>
-          <ion-col col-8>
-            <ion-label class="table-header">Name</ion-label>
-          </ion-col>
-          <ion-col col-4 class="text-center">
-            <ion-label class="table-header">Age</ion-label>
-          </ion-col>
-        </ion-row>
-        <div *ngFor="let participants of get_participants">
+        <ion-grid>
           <ion-row>
             <ion-col col-8>
-              <p>{{participants.traveller_name}}</p>
+              <ion-label class="table-header">Name</ion-label>
             </ion-col>
             <ion-col col-4 class="text-center">
-              <p>{{participants.traveller_age}}</p>
+              <ion-label class="table-header">Age</ion-label>
             </ion-col>
           </ion-row>
-        </div>
+          <div *ngFor="let participants of get_participants">
+            <ion-row>
+              <ion-col col-8>
+                <p>{{participants.traveller_name}}</p>
+              </ion-col>
+              <ion-col col-4 class="text-center">
+                <p>{{participants.traveller_age}}</p>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-grid>
       </ion-card>
-
-      <ion-row>
-        <ion-col *ngIf="service.pack_id!=''">
-          <button class="make-rate" *ngIf="service.vendor_status == 5 && service.additional_service_cost==0" (click)="enableRemark(i)">
-            Mark as Complete
-          </button>
-        </ion-col>
-        <ion-col *ngIf="service.Paymentstatus=='captured' && service.pack_id==''">
-          <button class="make-rate" *ngIf="service.vendor_status == 5 && (service.additional_service_cost==0 || service.additional_service_cost_status=='success')"
-            (click)="enableRemark(i)">
-            Mark as Complete
-          </button>
-        </ion-col>
-        <ion-col *ngIf="service.pack_id!=''">
-          <button class="make-rate" *ngIf="service.vendor_status == 5 && (service.additional_service_cost!=0 && service.additional_service_cost_status=='success')"
-            (click)="enableRemark(i)">
-            Mark as Complete
-          </button>
-        </ion-col>
-      </ion-row>
     </ion-grid>
-    <ion-row>
-      <ion-col width-20></ion-col>
-      <ion-col width-80>
-
-        <button ion-button class="remarks-btns" *ngIf="(service?.vendor_status==2 &&(!service?.vendor_remarks))" (click)="enableRemark(i)">
+    <ion-row *ngIf="(service?.vendor_status==2 &&(!service?.vendor_remarks))">
+      <ion-col width-100>
+        <button ion-button class="remarks-btns" (click)="enableRemark(i)">
           <i class="fa fa-comments"></i>
         </button>
       </ion-col>
     </ion-row>
-    <ion-list *ngIf="(i==showRemark)" class="show-hiden">
-
-      <h2>Rating</h2>
-      <h3 class="rating-clr paa-ff">
-        <rating [(ngModel)]="rating" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"
-          nullable="false"></rating>
-      </h3>
-      <ion-card class="sel-packages pack-select">
-        <ion-item text-wrap>
-          <ion-label>Remarks</ion-label>
-          <ion-select [(ngModel)]="remarks">
-            <ion-option *ngFor="let remarkList of getRemarksList" value="{{remarkList.id}}">{{remarkList.remarks}}</ion-option>
-          </ion-select>
+    <ion-card *ngIf="(i==showRemark)">
+      <ion-list class="show-hiden">
+        <div class="rating-left">
+          <h2>Rating</h2>
+        </div>
+        <div class="rating-left">
+          <h3 class="rating-clr paa-ff">
+            <rating [(ngModel)]="rating" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"
+              nullable="false"></rating>
+          </h3>
+        </div>
+        <ion-card class="pack-select">
+          <ion-item text-wrap>
+            <ion-label>Remarks</ion-label>
+            <ion-select [(ngModel)]="remarks">
+              <ion-option *ngFor="let remarkList of getRemarksList" value="{{remarkList.id}}">{{remarkList.remarks}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-card>
+        <ion-item>
+          <ion-textarea class="pack-select" autosize placeholder="say something about your service experience.." [(ngModel)]="other"
+            class="remarks-listed">
+          </ion-textarea>
         </ion-item>
-      </ion-card>
-      <ion-item>
-        <ion-textarea autosize placeholder="say something about your service experience.." [(ngModel)]="other" class="remarks-listed">
-        </ion-textarea>
-      </ion-item>
 
-      <button (click)="submitRemark(service?.id)" class="remarks-sb">Submit</button>
+        <button (click)="submitRemark(service?.id)" class="remarks-sb">Submit</button>
 
-    </ion-list>
+      </ion-list>
+    </ion-card>
 
   </ion-card>
   <ion-fab right bottom *ngIf="serviceRequestInfo.length != 0">
