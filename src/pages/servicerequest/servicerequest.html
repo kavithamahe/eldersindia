@@ -14,11 +14,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="content-intop">
-  <!-- <ion-fab top right edge *ngIf="serviceRequestInfo.length != 0">
-    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown">
-    </ion-icon></button>
-  </ion-fab> -->
+<ion-content class="content-intop">  
   <div class="ion-searchbar">
     <ion-row>
       <ion-col width-80>
@@ -73,22 +69,21 @@
              <strong> <i class="fa fa-user" aria-hidden="true"></i>{{service?.dependent_name}} {{service?.dependent_lastname}}</strong></p>
           </div>
           <div (click)="viewRequest(service?.id,service)">
-            <p class="service-conts">
+            <p class="service-conts clearfix">
               <span>Token id :</span>
               <b class="tocken-no">
                 {{service?.sr_token}}</b>
             </p>
           </div>
           <div *ngIf="service?.preferred_date != '0000-00-00' && service.sr_token[0] !='T'" (click)="viewRequest(service?.id,service)">
-            <p class="service-conts" *ngIf="service?.vendor_status == 0">
-              <span class="token-primaryss">Preferred date & time:</span>
+            <p class="service-conts clearfix" *ngIf="service?.vendor_status == 0">
+              <span class="token-primaryss ">Preferred date & time:</span>
               <b>{{service?.preferred_date}} {{service?.preferred_time}}</b>
-
             </p>
           </div>
 
           <div *ngIf="service?.preferred_date != '0000-00-00' && service?.sr_token[0]=='T'" (click)="viewRequest(service?.id,service)">
-            <p class="service-conts" *ngIf="service?.vendor_status == 0">
+            <p class="service-conts clearfix" *ngIf="service?.vendor_status == 0">
               <span class="token-primaryss">Preferred date & time:</span>
               <b>{{service?.preferred_date}}</b>
             </p>
@@ -96,12 +91,13 @@
 
           <div *ngIf="service?.vendor_status == 4 || service?.vendor_status == 5 || service?.vendor_status == 2" (click)="viewRequest(service?.id,service)">
             <p class="service-conts">
-              <span class="token-primaryss">Servicer Name:</span>
+              <span class="token-primaryss clearfix">Servicer Name:</span>
               <b>{{service?.servicer_name}}</b>
             </p>
           </div>
+          
           <div *ngIf="(service?.scheduled_date != null)" (click)="viewRequest(service?.id,service)">
-            <p class="service-conts">
+            <p class="service-conts clearfix">
               <span class="token-primaryss" *ngIf="service?.vendor_status == 4">Scheduled date:</span>
               <span class="token-primaryss" *ngIf="service?.vendor_status == 5">Delivered date:</span>
               <span class="token-primaryss" *ngIf="service?.vendor_status == 2">Completed date:</span>
@@ -109,22 +105,21 @@
             </p>
           </div>
           <div *ngIf="service.service_type=='One time'">
-            <p class="service-conts">
+            <p class="service-conts clearfix">
               <span class="token-primaryss">Service Cost:</span>
               <b class="cost-redPrice">
                 <i class="fa fa-rupee"></i>{{service.service_cost | number : '1.2-2'}}</b>
             </p>
           </div>
           <div *ngIf="service.service_type=='One time'">
-            <p class="service-conts">
+            <p class="service-conts clearfix">
               <span class="token-primaryss">Additional Service Cost:</span>
               <b class="cost-redPrice">
                 <i class="fa fa-rupee"></i>{{service.additional_service_cost | number : '1.2-2'}}</b>
             </p>
           </div>
-
           <div *ngIf="service.helpline_mobile!='null'">
-            <p class="service-conts" (click)="makeCall(service?.helpline_mobile)">
+            <p class="service-conts clearfix" (click)="makeCall(service?.helpline_mobile)">
               <span class="token-primaryss">Helpline Number:</span>
               <b>{{service?.helpline_mobile}}</b>
             </p>

@@ -206,4 +206,11 @@ Alert box
     }
 }
 
+/*========== clearfix ===========*/
+.clearfix:after {
+      display: block;
+      clear: both;
+      content: "";
+    }
+    
 
