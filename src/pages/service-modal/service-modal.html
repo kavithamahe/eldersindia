@@ -13,56 +13,12 @@
     </ion-toolbar>
   </ion-navbar>
 </ion-header>
+
+
 <ion-content class="content-intop">
+
   <div *ngIf(showScheduleDetails) class="offered-servicelist">
     <ion-card class="contact-list">
-      <!-- <ion-item text-wrap *ngIf = "schedule">
-              <ion-row>
-                  <p *ngIf = "vendorList?.requestServices.category != 'Safety and security'" class="service-conts"><span class="token-primaryss">Schedule : </span>{{vendorList?.requestServices.start_date}} to {{vendorList?.requestServices.end_date}}
-                  </p>
-                 </ion-row>
-                 <ion-row class="textlg" *ngIf = "schedule_cost != 0 && vendorList?.requestServices.subcategory != 'Transportation Driver Service'">
-              <p class="service-conts"><span class="token-primaryss">Cost : </span><b><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{schedule_cost}} <span *ngIf="service_cost != schedule_cost">/&nbsp;
-                <i class="fa fa-inr" aria-hidden="true"></i><strong>{{service_cost}}</strong></span> </b></p>
-                
-                   </ion-row>
-                   <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory
-                     != 'Home modification' && vendorList?.requestServices.subcategory
-                     != 'Home Modification' && vendorList?.requestServices.subcategory
-                     != 'Home automation' && vendorList?.requestServices.subcategory
-                     != 'Home Automation' && vendorList?.requestServices.subcategory
-                     != 'Home Automation' && vendorList?.requestServices.subcategory
-                     != 'Transportation Driver Service' && vendorList?.requestServices.subcategory != 'Transportation Cab'">
-                    <p class="service-conts"><span class="token-primaryss">Valid For {{vendorList?.vendorDetails.package_validity}}</span></p>
-                   </ion-row>
-                     <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'">
-                    <p class="service-conts"><span class="token-primaryss">Working Days : {{vendorList?.vendorDetails.businessFromDayName}} - {{vendorList?.vendorDetails.businessToDayName}}</span></p>
-                   </ion-row>
-                    <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'">
-                    <p class="service-conts"><span class="token-primaryss">Working Time : {{vendorList?.vendorDetails.businessFromTime}} - {{vendorList?.vendorDetails.businessToTime}}</span></p>
-                   </ion-row>
-                    <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'">
-                    <p class="service-conts"><span class="token-primaryss">{{vendorList?.vendorDetails.businessLeadTime}} hour(s)</span></p>
-                   </ion-row>
-       
-          </ion-item>
-          <br>
-          <ion-item *ngIf = "schedule" text-wrap>
-              <button class="instant-bt" *ngIf="package_active_status == '1' && vendorList?.requestServices.category == 'Recreation'" (click)="bookNow()">Book Now</button>
-              <button class="instant-bt" *ngIf="package_active_status == '0' && vendorList?.requestServices.category == 'Recreation'">Booking Closed
-              </button>
-                  <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '2' && vendorList?.requestServices.category == 'Safety and security'" (click)="preBook()">Pre Book</button>
-                  <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '1' && vendorList?.requestServices.category == 'Safety and security'" (click)="preBook()">Book Now</button>
-                  <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory != 'Home modification' && vendorList?.requestServices.subcategory
-                     != 'Home Modification' && vendorList?.requestServices.subcategory
-                     != 'Home automation' && vendorList?.requestServices.subcategory
-                     != 'Home Automation' && vendorList?.requestServices.subcategory
-                      != 'Home Automation' && vendorList?.requestServices.subcategory != 'Transportation Driver Service' && vendorList?.requestServices.subcategory != 'Transportation Cab'" (click)="emergencybook()">Book Now</button>
-                      <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Transportation Driver Service'" (click)="transportationdriver()">Book Now</button>
-                      <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Transportation Cab'" (click)="transportationcab()">Book Now</button>
-                      <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'" (click)="homemodify()">Schedule Assessment</button>
-            <button  class="instant-btn" (click)="contactNow()">Contact Now</button>
-            </ion-item> -->
       <div *ngIf="booknow && vendorList?.requestServices.category == 'Recreation'">
         <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Name</ion-label>
         <ion-item class="sel-label">
@@ -175,23 +131,18 @@
         </ion-list>
         <ion-row>
           <ion-col col-6 class="view-serv">
-              <ion-chip (click)="removeUser(i)" class="services remove-btn">
-                <ion-icon name="remove" class="text-center" color="danger"></ion-icon>
-                <ion-label>Remove</ion-label>
-              </ion-chip>
-            <!-- <ion-badge (click)="removeUser(i)" class="services">
-                <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-              Remove</ion-badge> -->
+            <ion-chip (click)="removeUser(i)" class="services remove-btn">
+              <ion-icon name="remove" class="text-center" color="danger"></ion-icon>
+              <ion-label>Remove</ion-label>
+            </ion-chip>
           </ion-col>
           <ion-col col-6 class="view-serv">
-              <ion-chip (click)="addUser()" class="services add-btn">
-                  <ion-icon name="add" class="text-center" ></ion-icon>
-                  <ion-label class="add-label">Add More</ion-label>
-                </ion-chip>
-            <!-- <ion-badge (click)="addUser()" class="services">
-              <i class="fa fa-plus-square" aria-hidden="true"></i>Add More</ion-badge> -->
+            <ion-chip (click)="addUser()" class="services add-btn">
+              <ion-icon name="add" class="text-center"></ion-icon>
+              <ion-label class="add-label">Add More</ion-label>
+            </ion-chip>
           </ion-col>
-        </ion-row>        
+        </ion-row>
         <ion-list>
           <ion-label style=" font-size:17px;line-height:20px; float:left;">Alternative Contact Number</ion-label>
           <ion-item class="sel-label">
@@ -201,21 +152,17 @@
         <br />
         <ion-grid>
           <ion-row>
-            <ion-col col-2  class="check-bx" class="one-timereq">
-                <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>
+            <ion-col col-1 class="check-bx" class="one-timereq">
+              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>
             </ion-col>
-            <ion-col col-10 (click)="openTerms()" style="margin:0px;">
-                <ion-label class="margin_0">
-                    <a>I agree with the terms and conditions</a>
-                  </ion-label>
+            <ion-col col-11 (click)="openTerms()" style="margin:0px;">
+              <ion-label class="margin_0">
+                <a>I agree with the terms and conditions</a>
+              </ion-label>
             </ion-col>
           </ion-row>
-        </ion-grid>
-        <!-- <ion-item>
-         
-          
-        </ion-item> -->
-       
+        </ion-grid>       
+
         <small *ngIf="checkTerms">
           <p class="err-reds shake">Kindly agree to the terms and conditions</p>
         </small>
@@ -710,6 +657,11 @@
         </ion-row>
       </div>
       <!-- ..........................recreation end..................... -->
+
+      <!-- =================
+        Contact page
+        ================= -->
+
       <div *ngIf="contact">
         <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Name</ion-label>
         <ion-item class="sel-label">
@@ -733,48 +685,48 @@
           </ion-col>
         </ion-row>
       </div>
-
     </ion-card>
   </div>
-  <!-- ..........................wearables.................. -->
 
-  <div *ngIf="safeandsecurity">
-    <ion-list *ngIf="user_type == 'sponsor'">
-      <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
-      <ion-item class="sel-label">
-        <ion-label>Select Dependent</ion-label>
-        <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
-          <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name }}
-          </ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-list>
-        <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Alternative Contact Number</ion-label>
+
+  <div *ngIf="safeandsecurity" class="offered-servicelist">
+    <ion-card class="contact-list">
+      <ion-list *ngIf="user_type == 'sponsor'">
+        <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
         <ion-item class="sel-label">
-          <ion-input type="text" value="" placeholder="Alternative Contact Number" [(ngModel)]="altercontact"></ion-input>
+          <ion-label class="selectDepent">Select Dependent</ion-label>
+          <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+            <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name }}
+            </ion-option>
+          </ion-select>
         </ion-item>
+        <ion-list>
+          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Alternative Contact Number</ion-label>
+          <ion-item class="sel-label">
+            <ion-input type="text" value="" placeholder="Alternative Contact Number" [(ngModel)]="altercontact"></ion-input>
+          </ion-item>
+        </ion-list>
+        <br/>
+        <ion-item class="check-bx" class="one-timereq">
+          <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()">
+          </ion-checkbox>
+        </ion-item>
+        <ion-label (click)="openTerms()" style="margin:0px;">
+          <a>I agree with the terms and conditions</a>
+        </ion-label>
+        <small *ngIf="checkTerms">
+          <p class="err-reds shake">Kindly agree to the terms and conditions</p>
+        </small>
+        <br/>
+        <ion-row>
+          <ion-col>
+            <button class="btn-warnings" color="primary" (click)="cancelsafe()">Cancel</button>
+
+            <button class="instant-bt" (click)="sendsafe()">Next</button>
+          </ion-col>
+        </ion-row>
       </ion-list>
-      <br/>
-      <ion-item class="check-bx" class="one-timereq">
-        <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()">
-        </ion-checkbox>
-      </ion-item>
-      <ion-label (click)="openTerms()" style="margin:0px;">
-        <a>I agree with the terms and conditions</a>
-      </ion-label>
-      <small *ngIf="checkTerms">
-        <p class="err-reds shake">Kindly agree to the terms and conditions</p>
-      </small>
-      <br/>
-      <ion-row>
-        <ion-col>
-          <button class="btn-warnings" color="primary" (click)="cancelsafe()">Cancel</button>
-
-          <button class="instant-bt" (click)="sendsafe()">Next</button>
-        </ion-col>
-      </ion-row>
-    </ion-list>
-
+    </ion-card>
   </div>
   <ion-card class="contact-list" *ngIf="safeConfirm">
     <div class="offered-servicelist">
@@ -982,17 +934,7 @@
   </div>
 
 </ion-content>
-<!-- <ion-footer> -->
-<!-- <ion-toolbar color="primary"> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
-<!-- <ion-buttons> -->
-<!-- <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()"> -->
-<!-- <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back -->
-<!-- </button> -->
-<!-- <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()"> -->
-<!-- <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button> -->
-<!-- </ion-buttons> -->
-<!-- </ion-toolbar> -->
-<!-- </ion-footer> -->
+
 <style>
   .item-md {
     background: none !important;
@@ -1017,3 +959,52 @@
   }
 
 </style>
+<!--
+    ============= moved on line number 19 t0 962 ===========
+  <ion-item text-wrap *ngIf = "schedule">
+              <ion-row>
+                  <p *ngIf = "vendorList?.requestServices.category != 'Safety and security'" class="service-conts"><span class="token-primaryss">Schedule : </span>{{vendorList?.requestServices.start_date}} to {{vendorList?.requestServices.end_date}}
+                  </p>
+                 </ion-row>
+                 <ion-row class="textlg" *ngIf = "schedule_cost != 0 && vendorList?.requestServices.subcategory != 'Transportation Driver Service'">
+              <p class="service-conts"><span class="token-primaryss">Cost : </span><b><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{schedule_cost}} <span *ngIf="service_cost != schedule_cost">/&nbsp;
+                <i class="fa fa-inr" aria-hidden="true"></i><strong>{{service_cost}}</strong></span> </b></p>
+                
+                   </ion-row>
+                   <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory
+                     != 'Home modification' && vendorList?.requestServices.subcategory
+                     != 'Home Modification' && vendorList?.requestServices.subcategory
+                     != 'Home automation' && vendorList?.requestServices.subcategory
+                     != 'Home Automation' && vendorList?.requestServices.subcategory
+                     != 'Home Automation' && vendorList?.requestServices.subcategory
+                     != 'Transportation Driver Service' && vendorList?.requestServices.subcategory != 'Transportation Cab'">
+                    <p class="service-conts"><span class="token-primaryss">Valid For {{vendorList?.vendorDetails.package_validity}}</span></p>
+                   </ion-row>
+                     <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'">
+                    <p class="service-conts"><span class="token-primaryss">Working Days : {{vendorList?.vendorDetails.businessFromDayName}} - {{vendorList?.vendorDetails.businessToDayName}}</span></p>
+                   </ion-row>
+                    <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'">
+                    <p class="service-conts"><span class="token-primaryss">Working Time : {{vendorList?.vendorDetails.businessFromTime}} - {{vendorList?.vendorDetails.businessToTime}}</span></p>
+                   </ion-row>
+                    <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'">
+                    <p class="service-conts"><span class="token-primaryss">{{vendorList?.vendorDetails.businessLeadTime}} hour(s)</span></p>
+                   </ion-row>
+       
+          </ion-item>
+          <br>
+          <ion-item *ngIf = "schedule" text-wrap>
+              <button class="instant-bt" *ngIf="package_active_status == '1' && vendorList?.requestServices.category == 'Recreation'" (click)="bookNow()">Book Now</button>
+              <button class="instant-bt" *ngIf="package_active_status == '0' && vendorList?.requestServices.category == 'Recreation'">Booking Closed
+              </button>
+                  <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '2' && vendorList?.requestServices.category == 'Safety and security'" (click)="preBook()">Pre Book</button>
+                  <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '1' && vendorList?.requestServices.category == 'Safety and security'" (click)="preBook()">Book Now</button>
+                  <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory != 'Home modification' && vendorList?.requestServices.subcategory
+                     != 'Home Modification' && vendorList?.requestServices.subcategory
+                     != 'Home automation' && vendorList?.requestServices.subcategory
+                     != 'Home Automation' && vendorList?.requestServices.subcategory
+                      != 'Home Automation' && vendorList?.requestServices.subcategory != 'Transportation Driver Service' && vendorList?.requestServices.subcategory != 'Transportation Cab'" (click)="emergencybook()">Book Now</button>
+                      <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Transportation Driver Service'" (click)="transportationdriver()">Book Now</button>
+                      <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Transportation Cab'" (click)="transportationcab()">Book Now</button>
+                      <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'" (click)="homemodify()">Schedule Assessment</button>
+            <button  class="instant-btn" (click)="contactNow()">Contact Now</button>
+            </ion-item> -->
