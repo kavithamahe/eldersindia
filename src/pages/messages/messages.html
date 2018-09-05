@@ -58,14 +58,15 @@
   <ion-item *ngIf="!inboxInfo">
      <p class="error-clr">{{emptyRecord}}</p>
    </ion-item>
-  <div>
-  <ion-row>
-<ion-col width-80><ion-searchbar [(ngModel)]="inbox"></ion-searchbar></ion-col>
-  <ion-col width-20><button (click)="getItems(inbox)" ion-button small class="go-btn">Go
-  </button> </ion-col>
-</ion-row>
-   <!--  <ion-searchbar [(ngModel)]="inbox" (ionInput)="getItems(inbox)">
-    </ion-searchbar> -->
+   <div class="ion-searchbar">
+    <ion-row>
+      <ion-col width-80>
+        <ion-searchbar [(ngModel)]="inbox" (keyup.enter)="getItems(inbox)"></ion-searchbar>
+      </ion-col>
+      <ion-col width-20 class="btn-go">
+        <button (click)="getItems(inbox)" ion-button small class="go-btn">Go</button>
+      </ion-col>
+    </ion-row>
   </div>
   
     <div>
@@ -130,14 +131,15 @@
  <ion-item padding *ngIf="!sentInfo">
      <p class="error-clr">{{emptyRecord}}</p>
    </ion-item>
-   <div>
-   <ion-row>
-<ion-col width-80><ion-searchbar [(ngModel)]="outbox"></ion-searchbar></ion-col>
-  <ion-col width-20><button (click)="setItems(outbox)" ion-button small class="go-btn">Go</button> </ion-col>
-</ion-row>
- <!--    <ion-searchbar [(ngModel)]="outbox" (ionInput)="setItems(outbox)">
-    </ion-searchbar> -->
-  
+      <div class="ion-searchbar">
+    <ion-row>
+      <ion-col width-80>
+        <ion-searchbar [(ngModel)]="outbox" (keyup.enter)="setItems(outbox)"></ion-searchbar>
+      </ion-col>
+      <ion-col width-20 class="btn-go">
+        <button (click)="setItems(outbox)" ion-button small class="go-btn">Go</button>
+      </ion-col>
+    </ion-row>
   </div>
   <hr/>
   <ion-list *ngFor="let sent of sentInfo">
