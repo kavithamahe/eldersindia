@@ -91,9 +91,6 @@
         <resource-file src="GoogleService-Info.plist" target="resources/GoogleService-Info.plist" />
     </platform>
     <allow-navigation href="http://192.168.1.27:8100" />
-    <engine name="ios" spec="^4.5.4" />
-    <engine name="android" spec="~6.3.0" />
-    <engine name="browser" spec="~5.0.4" />
     <plugin name="cordova-plugin-console" spec="1.0.5" />
     <plugin name="cordova-plugin-device" spec="1.1.4" />
     <plugin name="cordova-plugin-geolocation" spec="~2.4.3" />
@@ -134,4 +131,7 @@
     </plugin>
     <plugin name="cordova-plugin-compat" spec="^1.2.0" />
     <plugin name="com.razorpay.cordova" spec="git+https://github.com/razorpay/razorpay-cordova.git" />
+    <engine name="ios" spec="^4.5.4" />
+    <engine name="android" spec="~6.3.0" />
+    <engine name="browser" spec="~5.0.4" />
 </widget>
