@@ -28,6 +28,7 @@ category:any="";
 vendor:any="";
 searchText:any="";
 enquiry_date:any;
+error:any;
 
   constructor(public navCtrl: NavController,public toastCtrl: ToastController, public loadingCtrl: LoadingController,public navParams: NavParams,public _provider:ServiceProvider) {
   	this.getenquiryList();
@@ -78,6 +79,11 @@ enquiry_date:any;
         loading.dismiss();
     },
     err =>{
+       if(err.status==401)
+      {
+        this.error = JSON.parse(err._body).error;
+        this._provider.showToast(JSON.parse(err._body).error);
+      }
       this.enquiriesList = [];
       this._provider.showErrorToast(err);     
       loading.dismiss();

@@ -75,9 +75,9 @@
 
       <div *ngIf="vendorList?.requestServices.booking_status == '0' && emergencyhelp">
         <ion-list *ngIf="user_type == 'sponsor'">
-          <ion-label style=" font-size:17px;  line-height:20px; float:left;" class="required">Dependent</ion-label>
+         <!--  <ion-label style=" font-size:17px;  line-height:20px; float:left;" class="required">Dependent</ion-label> -->
           <ion-item class="sel-label">
-            <ion-label class="selectDepent">Select Dependent</ion-label>
+            <ion-label style="font-size:17px;  line-height:20px; float:left;" class="selectDepent" floating class="required">Select Dependent</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
             </ion-select>
@@ -97,10 +97,10 @@
           <ion-row>
             <ion-col width-60>
 
-              <ion-item class="sel-label" *ngIf="user_type != 'sponsor'">
+              <ion-item class="sel-label" *ngIf="user_type != 'sponsor'" text-wrap>
                 <ion-input type="text" value="{{sponsor_name}} {{sponsor_last}}"></ion-input>
               </ion-item>
-              <ion-item class="sel-label" *ngIf="user_type == 'sponsor'">
+              <ion-item class="sel-label" *ngIf="user_type == 'sponsor'" text-wrap>
                 <ion-input type="text" value="{{name}} {{lastname}}"></ion-input>
               </ion-item>
 
@@ -115,17 +115,20 @@
             </ion-col>
           </ion-row>
         </ion-list>
+       
         <ion-list *ngFor="let emer of emergency; let i=index;">
           <ion-row>
             <ion-col width-60>
               <ion-item class="sel-label">
                 <ion-input type="text" [(ngModel)]="emergency_name[i+1]"></ion-input>
               </ion-item>
+               
             </ion-col>
             <ion-col width-40>
               <ion-item class="sel-label">
                 <ion-input type="text" [(ngModel)]="emergency_mobile[i+1]"></ion-input>
               </ion-item>
+            
             </ion-col>
           </ion-row>
         </ion-list>
@@ -222,9 +225,9 @@
       <!-- ..........................home automation................... -->
       <div *ngIf="homeschedule">
         <ion-list *ngIf="user_type == 'sponsor'">
-          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
+         <!--  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label> -->
           <ion-item class="sel-label">
-            <ion-label>Select Dependent</ion-label>
+            <ion-label style="font-size:17px;  line-height:20px; float:left;" class="selectDepent" floating class="required">Select Dependent</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
             </ion-select>
@@ -330,9 +333,9 @@
       <!-- ................................transportation services................. -->
       <div *ngIf="transportdriver">
         <ion-list *ngIf="user_type == 'sponsor'">
-          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
+         <!--  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label> -->
           <ion-item class="sel-label">
-            <ion-label>Select Dependent</ion-label>
+            <ion-label style="font-size:17px;  line-height:20px; float:left;" class="selectDepent" floating class="required">Select Dependent</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
             </ion-select>
@@ -439,9 +442,9 @@
 
       <div *ngIf="transportcab">
         <ion-list *ngIf="user_type == 'sponsor'">
-          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
+         <!--  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label> -->
           <ion-item class="sel-label">
-            <ion-label>Select Dependent</ion-label>
+            <ion-label style="font-size:17px;  line-height:20px; float:left;" class="selectDepent" floating class="required">Select Dependent</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
             </ion-select>
@@ -553,9 +556,9 @@
       <!-- .............................recreation..................... -->
       <div *ngIf="booknownext">
         <ion-list *ngIf="user_type == 'sponsor'">
-          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
+        <!--   <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label> -->
           <ion-item class="sel-label">
-            <ion-label>Select Dependent</ion-label>
+            <ion-label style="font-size:17px;  line-height:20px; float:left;" class="selectDepent" floating class="required">Select Dependent</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name }}
               </ion-option>
@@ -692,9 +695,9 @@
   <div *ngIf="safeandsecurity" class="offered-servicelist">
     <ion-card class="contact-list">
       <ion-list *ngIf="user_type == 'sponsor'">
-        <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label>
+        <!-- <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label> -->
         <ion-item class="sel-label">
-          <ion-label class="selectDepent">Select Dependent</ion-label>
+          <ion-label class="selectDepent" floating class="required">Select Dependent</ion-label>
           <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
             <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name }}
             </ion-option>
@@ -758,7 +761,7 @@
         <ion-row>
           <ion-col>
 
-            <button class="btn-warnings" color="primary" (click)="backcancel()">Cancel</button>
+          <button class="btn-warnings" color="primary" (click)="backcancel()">Cancel</button>
 
             <button *ngIf="booking_status != '1'" class="instant-bt" (click)="wearablespaynow(schedule_cost * (pre_book_percentage /100),vendorList?.requestServices.category_id,
         vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)">Pay Now</button>
