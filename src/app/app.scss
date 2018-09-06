@@ -74,9 +74,9 @@ ion-segment																		{background:#C0C0C0; border-radius:50px; height:40p
 // .alert-md .alert-button-group													{padding:0px; background: hsla(0, 0%, 0%, 0) linear-gradient(89deg, hsl(0, 0%, 50%) 0%, hsl(0, 0%, 100%) 100%) repeat scroll 0 0;}
 .alert-md .alert-head 															{padding:10px 10px;}
 .alert-ios .alert-head 															{padding:10px 10px;}
-.alert-radio-label																{font-family:'Muli', sans-serif; font-size:17px; font-weight:400; color:hsl(191, 100%, 29%) !important;}
-.alert-md .alert-radio-label 													{flex: 1 1 0;overflow:hidden;padding:8px 0 8px 25px;}
-.alert-ios .alert-radio-label 													{flex: 1 1 0;overflow:hidden;padding: 8px 0 8px 25px;}
+
+.alert-md .alert-radio-label 													{flex: 1 1 0;overflow:hidden;padding:8px 0 8px 25px; white-space: normal!important;}
+.alert-ios .alert-radio-label 													{flex: 1 1 0;overflow:hidden;padding: 8px 0 8px 25px; white-space: normal!important;}
 .alert-md .alert-checkbox-label													{font-family:'Muli', sans-serif; font-size:15px; font-weight:600;}
 .alert-ios .alert-checkbox-label												{font-family:'Muli', sans-serif; font-size:15px;font-weight:600;}
 .toolbar-md-primary .toolbar-background-md										{background: #025fa9}
@@ -178,6 +178,7 @@ Alert box
                 }
                 .alert-radio-label{
                     color:#333 !important;
+                    white-space: normal!important;
                 }
             }
         }

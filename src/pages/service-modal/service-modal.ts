@@ -96,14 +96,16 @@ weelchair:any;
 drop:any;
 totalcosts:any;
 terms:any;
-checkTerms:any= false;
+checkTerms:any= false; 
 sponsor_last:any;
 time:any;
 altercontact:any;
 recreation:any;
+// emergency_list=[];
   constructor(public storage:Storage,public alertCtrl: AlertController,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder) {
     this.date = new Date().toISOString();
+     
     this.vendorList = navParams.get("vendorList");
     console.log(this.vendorList);
     storage.get('name').then((name) => { this.name=name; })
@@ -223,7 +225,7 @@ recreation:any;
     
   	
   }
-
+ 
   sendContactDetails(category_id,service_id,sub_category_id,vendor_id){
     if(this.vendorList.requestServices.category == 'Safety and security' || this.vendorList.requestServices.category == 'Recreation'){
       this.recreation = 1;
@@ -333,9 +335,11 @@ recreation:any;
       this._provider.showToast("Please select the dependent");
     }
     else{
-        let emergencyDetailsname = this.emergency_name.filter(item => item == undefined);
+     console.log(this.emergency_name);
+        let emergencyDetailsname = this.emergency_name.filter(item => item == "");
+        console.log(emergencyDetailsname.length);
       let emergencyDetailsmobile = this.emergency_mobile.filter(item => item == undefined);
-      if(emergencyDetailsname.length > 1 || emergencyDetailsmobile.length > 1){
+      if(emergencyDetailsname.length > 0 || emergencyDetailsmobile.length > 0){
         this._provider.showToast("Please enter all the details");
       }
          else{
@@ -350,11 +354,6 @@ recreation:any;
       }
         }
      
-     
-     
-    
-        
-  
   }
   cancelsafe(){
     this.navCtrl.pop();
