@@ -112,6 +112,14 @@ Android
                                 text-transform: capitalize;
                             }
                         }
+                        &.button-ios{
+                            span{
+                                height: auto;
+                                p{
+                                    padding: 10px 5px !important;
+                                }
+                            }
+                        }
                     }
                 }
             }
