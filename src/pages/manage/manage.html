@@ -5,80 +5,106 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-  <ion-title text-center>Manage Dependents</ion-title>
+    <ion-title text-center>Manage Dependents</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    
+
   </ion-navbar>
 </ion-header>
 
 
 <ion-content (tap)="closeOption()" class="manage-depen">
-  <ion-item class="sel-packages" style="border:none;">
-<ion-row>
-<ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar></ion-col>
-  <ion-col width-20><button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button> </ion-col>
-</ion-row>
-</ion-item>
- <div *ngIf="allowedElderFlag">
-  <ion-fab  right bottom>
-    <button class="add-depends" ion-fab mini (click)="addElder()" end><ion-icon name="md-person-add"></ion-icon></button>
+  <div class="ion-searchbar">
+    <ion-row>
+      <ion-col width-80>
+          <ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
+      </ion-col>
+      <ion-col width-20 class="btn-go">
+        <button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button>
+      </ion-col>
+    </ion-row>
+  </div>
+  <!-- <ion-item class="sel-packages" style="border:none;">
+    <ion-row>
+      <ion-col width-80>
+        <ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
+      </ion-col>
+      <ion-col width-20>
+        <button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button>
+      </ion-col>
+    </ion-row>
+  </ion-item> -->
+  <br />
+  <div *ngIf="allowedElderFlag">
+    <ion-fab right bottom>
+      <button class="add-depends" ion-fab mini (click)="addElder()" end>
+        <ion-icon name="md-person-add"></ion-icon>
+      </button>
     </ion-fab>
-  </div>
-   <!--  <div>
-     <button style="color:red;" ion-button icon-only round end (click)="addElder()">
-      <ion-icon name="ios-person-add"></ion-icon> 
-    </button>
-    </div> -->
-<div *ngIf="manages.length>0">
-  <div *ngFor="let manage of manages">
-   
-        <ion-card class="des-card">
+  </div> 
+  <div *ngIf="manages.length>0">
+    <div *ngFor="let manage of manages">
+      <ion-card class="des-card">
         <ion-row>
-        <ion-col width-100 class="depende-elder">
-         <button ion-button color="dark" clear style="margin:0px!important; padding:4px; width:100%;">
-         <i class="fa fa-user name-person" (click)="toggleDetails(manage)"></i><p name="person" class="name-elder" (click)="toggleDetails(manage)">{{manage.relation}}</p>&nbsp;<i class="fa fa-angle-down" (click)="toggleDetails(manage)"></i>
-         <i class="fa fa-trash" (click)="showConfirm(manage)"></i>
-         <i (click)="editElder(manage)" class="fa fa-pencil"></i>
-          <i (click)="mailSender(manage.id)" class="fa fa-envelope-o"></i>
-          </button>
+          <ion-col width-100 class="depende-elder">
+            <button ion-button color="dark" clear style="margin:0px!important; width:100%;">
+              <i class="fa fa-user name-person" (click)="toggleDetails(manage)"></i>
+              <p name="person" class="name-elder" (click)="toggleDetails(manage)">{{manage.relation}}</p>&nbsp;
+              <!-- <i class="fa fa-angle-down" (click)="toggleDetails(manage)"></i> -->
+              <i class="fa fa-trash" (click)="showConfirm(manage)"></i>
+              <i (click)="editElder(manage)" class="fa fa-pencil"></i>
+              <i (click)="mailSender(manage.id)" class="fa fa-envelope-o"></i>
+            </button>
           </ion-col>
-          </ion-row>
-        </ion-card>
-      
-        <ion-card  *ngIf="manage.showDetails" style="padding:7px;">
-			
-          <div class="listed-det">
-	
-            <span><i class="fa fa-user"></i><p>{{manage.name}} {{manage.last_name}}</p>
-            </span>
-            <span> <i class="fa fa-phone"></i><p>{{manage.mobile}}</p></span>
-            <span><i class="fa fa-building"></i> <p>{{manage.address}}</p></span>
-            <span><i class="fa fa-map-marker"></i> <p>{{manage.location}}</p></span>
-            <span><i class="fa fa-suitcase"></i><p>{{manage.service}}</p></span>
-		
-          </div>
-		
-        </ion-card>
-   
- 
-       </div>
+        </ion-row>
+      </ion-card>
+      <ion-card *ngIf="manage.showDetails" style="padding:7px;">
+        <div class="listed-det">
+          <span>
+            <i class="fa fa-user"></i>
+            <p>{{manage.name}} {{manage.last_name}}</p>
+          </span>
+          <span>
+            <i class="fa fa-phone"></i>
+            <p>{{manage.mobile}}</p>
+          </span>
+          <span>
+            <i class="fa fa-building"></i>
+            <p>{{manage.address}}</p>
+          </span>
+          <span>
+            <i class="fa fa-map-marker"></i>
+            <p>{{manage.location}}</p>
+          </span>
+          <span>
+            <i class="fa fa-suitcase"></i>
+            <p>{{manage.service}}</p>
+          </span>
+        </div>
+      </ion-card>
+    </div>
   </div>
-     
-  </ion-content>
-  <ion-footer *ngIf(show_option) class="footer-defent">
-	<ion-item>
-          <button ion-fab mini item-right (click)="editElder()" clear style="padding:2px;"><i class="fa fa-pencil-square-o edit-eld" name="create"></i></button>
+</ion-content>
 
-        <button ion-fab mini item-left (click)="showConfirm()" clear style="padding:2px;"><i class="fa fa-trash-o trash-del" name="trash"></i></button>
-      </ion-item>
-          
+<ion-footer *ngIf(show_option) class="footer-defent">
+  <ion-item>
+    <button ion-fab mini item-right (click)="editElder()" clear style="padding:2px;">
+      <i class="fa fa-pencil-square-o edit-eld" name="create"></i>
+    </button>
 
-  </ion-footer>
-  <style>
-.button-ios{margin:0px !important;}
-  
-  </style>
+    <button ion-fab mini item-left (click)="showConfirm()" clear style="padding:2px;">
+      <i class="fa fa-trash-o trash-del" name="trash"></i>
+    </button>
+  </ion-item>
+
+
+</ion-footer>
+<style>
+  .button-ios {
+    margin: 0px !important;
+  }
+
+</style>
