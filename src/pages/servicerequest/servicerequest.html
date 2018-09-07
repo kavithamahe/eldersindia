@@ -264,7 +264,7 @@
     </ion-card>
 
   </ion-card>
-  <ion-fab right bottom *ngIf="serviceRequestInfo.length != 0">
+  <ion-fab right bottom *ngIf="serviceRequestInfo.length != 0 && scrollTop">
     <button ion-fab mini (click)="scrollToTop()">
       <ion-icon name="arrow-dropup"></ion-icon>
     </button>

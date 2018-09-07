@@ -61,6 +61,7 @@ results:any;
 user_type:any;
 get_participants:any=[];
 preferred_date:any;
+scrollTop:boolean = false;
   constructor(public alertCtrl: AlertController,public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.paystatus = navParams.get("status");
     this.results = navParams.get("result");
@@ -596,6 +597,7 @@ toggleDetails(service) {
   }
   serviceRequestScroll()
   {
+    this.scrollTop = true;
     this.serviceRequest.serviceRequestScroll(this.nextPageURL,this.searchEvent,this.status,this.sortby).subscribe(
      (serviceRequestScroll) => {
       this.serviceRequestScrollLists=serviceRequestScroll.result.info.list.data; 

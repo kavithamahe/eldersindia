@@ -344,7 +344,7 @@ recreation:any;
       }
          else{
          if(this.terms != undefined){
-          this.emergencyConfirm = true;
+        this.emergencyConfirm = true;
         this.emergencyhelp = false;
       }
       else{
