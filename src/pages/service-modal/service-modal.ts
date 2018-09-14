@@ -335,8 +335,8 @@ recreation:any;
       this._provider.showToast("Please select the dependent");
     }
     else{
-     console.log(this.emergency_name);
-        let emergencyDetailsname = this.emergency_name.filter(item => item == "");
+     console.log("dfdf" +this.emergency_name);
+        let emergencyDetailsname = this.emergency_name.filter(item => item == undefined);
         console.log(emergencyDetailsname.length);
       let emergencyDetailsmobile = this.emergency_mobile.filter(item => item == undefined);
       if(emergencyDetailsname.length > 0 || emergencyDetailsmobile.length > 0){
@@ -344,7 +344,7 @@ recreation:any;
       }
          else{
          if(this.terms != undefined){
-          this.emergencyConfirm = true;
+        this.emergencyConfirm = true;
         this.emergencyhelp = false;
       }
       else{
