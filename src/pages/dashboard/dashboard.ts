@@ -52,6 +52,7 @@ export class DashboardPage {
   sponsor_avatar:any;
   url:any;
   Cctv_camera:any;
+  elder_mobile_imei:any;
   lat:any;
   long:any;
   street:any;
@@ -71,8 +72,9 @@ export class DashboardPage {
   sponsor_id:any;
   constructor(private nativeAudio: NativeAudio,private device: Device,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
     console.log("Device UUID is: " + this.device.uuid);
-  	storage.get('Cctv_camera').then((Cctv_camera) => { this.Cctv_camera=Cctv_camera; })
-     // this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+    storage.get('Cctv_camera').then((Cctv_camera) => { this.Cctv_camera=Cctv_camera; })
+  	storage.get('elder_mobile_imei').then((elder_mobile_imei) => { this.elder_mobile_imei=elder_mobile_imei; })
+    
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.url=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
@@ -83,6 +85,7 @@ export class DashboardPage {
       this.fetchLocation();
       this.map();
   })
+      console.log("imei"+this.token);
       storage.get('user_type').then((user_type) => { this.user_type=user_type; })
        this.storage.get('name').then((name) => { this.elder_name=name;})
        this.storage.get('lastname').then((lastname) => { this.elder_lastname=lastname;})
@@ -131,6 +134,8 @@ export class DashboardPage {
       Geolocation.getCurrentPosition().then((position) => {
       this.lat=position.coords.latitude;
       this.long=position.coords.longitude;
+      this.storage.set('lat', this.lat);
+      this.storage.set('long', this.long);
 
       console.log(this.long);
   //        this.nativeGeocoder.reverseGeocode(this.lat, this.long)

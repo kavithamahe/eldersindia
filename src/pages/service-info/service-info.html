@@ -147,10 +147,10 @@
   <div class="view-storedet" *ngIf="serviceoffered != 'Recreation' && serviceoffered != 'Safety and security'">
   <ion-row>
       <ion-col class="brder-cor">
-   <button ion-button full class="btn-warnings" (click)="contactNowothers()">Contact Now</button>
+   <button ion-button full class="btn-warnings" (click)="contactNow()">Contact Now</button>
    </ion-col>
    </ion-row>
-   <!--  <ion-row>
+    <ion-row>
       <ion-col class="brder-cor">
         <button ion-button full class="btn-default-ser" (press)="pressRequestService()" (click)="toggleRequestService()">
           <b>Request Services </b>
@@ -158,7 +158,7 @@
      
       </ion-col>
     </ion-row>
- -->
+
     <ion-row>
       <ion-col class="brder-cor">
         <button ion-button item-left full class="btn-default-ser" (click)="modal()" (press)="pressmodel()">
@@ -168,17 +168,16 @@
 
       </ion-col>
     </ion-row>
-    <ion-row>
+  <!--   <ion-row>
       <ion-col class="brder-cor">
 
         <button class="btn-default-ser" ion-button item-left full (click)="toggleContact()" (press)="pressContact()">
 
           <b>Contact Details</b>
-          <!-- <i class="fa fa-angle-down detalisview-arr"></i> -->
         </button>
 
       </ion-col>
-    </ion-row>
+    </ion-row> -->
     <ion-row>
       <ion-col class="brder-cor">
 

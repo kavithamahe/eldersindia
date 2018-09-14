@@ -3,6 +3,7 @@ import { NavController,NavParams,Platform,ViewController,LoadingController} from
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Device } from "@ionic-native/device";
 
 import { BlogListService } from '../../providers/blog-list-service';
 import { ServiceProvider } from '../../providers/service-provider'
@@ -98,8 +99,12 @@ total_cost:any;
 total_service_cost:any;
 servicediscountcostss:any;
 discountcost:any;
-  constructor(public platform:Platform,public loadingCtrl: LoadingController,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,
+long:any;
+lat:any;
+  constructor(public platform:Platform,public loadingCtrl: LoadingController,private device: Device,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,
     public blogListService:BlogListService,public _provider:ServiceProvider,public navCtrl: NavController,private http: Http) {
+  console.log("Device UUID is: " + this.device.uuid);
+  localStorage.setItem('uuid', this.device.uuid);
    this.Recreation_service = navParams.get("service");
    if(navParams.get("service") == "Recreation"){
     this.paymentData = navParams.get("paymentData");
@@ -127,6 +132,7 @@ discountcost:any;
    }
    else if(navParams.get("service") == "Safety and security"){
         this.paymentData = navParams.get("paymentData");
+        this.subcategory = this.paymentData.subcategory;
     this.service_name = this.paymentData.service_name;
     this.service_cost = this.paymentData.service_cost * 100;
     this.service_costs = this.service_cost;
@@ -149,6 +155,14 @@ discountcost:any;
        storage.get('name').then((name) => { this.name=name; })
        storage.get('email').then((email) => { this.email=email; })
        storage.get('phone').then((phone) => { this.phone=phone; })
+       storage.get('lat').then((lat) => { this.lat=lat;
+       localStorage.setItem('lat', this.lat);
+        })
+       storage.get('long').then((long) => { this.long=long;
+       localStorage.setItem('long', this.long);
+        })
+       
+       
      });
    }
    else{
@@ -359,6 +373,8 @@ recreationRequestSubmitbeforePayment(){
   }
   // https://i.imgur.com/3g7nmJC.png
   payRecreation(){
+    if(this.subcategory == "Emergency Medical and Non-medical"){
+       console.log(localStorage.getItem("lat"));
     var options = {
       description: this.serviceTitle,
       image: "http://qa.eldersindia.com/assets/img/Elderlogo.png",
@@ -395,13 +411,14 @@ let nav = this.blogListService;
   loading.present();
       // ajaxCallCheck(payment_id);
 
-  var url  = "http://beta.eldersindia.com/api/razorPaymentResponse";
+  var url  = "http://qa.eldersindia.com/api/razorPaymentResponse";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
-xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss"),
+"latitude":localStorage.getItem("lat"),"longitude":localStorage.getItem("long"),"imei_number":"4b2a7a2cf63d35ee"}));
 
 xmlhttp.onload = function () {
   loading.dismiss();
@@ -423,6 +440,72 @@ var cancelCallback = function(error) {
 RazorpayCheckout.on('payment.success', successCallback,this.dismiss());
 RazorpayCheckout.on('payment.cancel', cancelCallback);
 RazorpayCheckout.open(options, successCallback, cancelCallback);
+    }
+   else{
+     console.log(localStorage.getItem("lat"));
+    var options = {
+      description: this.serviceTitle,
+      image: "http://qa.eldersindia.com/assets/img/Elderlogo.png",
+      currency: 'INR',
+      key: 'rzp_test_53tdpMxkK8bFKw',
+      amount: this.service_costss,
+      name: "EldersIndia",
+      prefill: {
+        email: this.email,
+        contact: this.phone,
+        name: this.name
+      },
+      
+       "notes": {
+        "service_id":this.udf2,
+        "service_type":this.udf3,
+        "email": this.email,
+        "pre_balance_amount":this.get_custome_deliever_amount,
+        "category_name":this.Recreation_service,
+        "service_name":this.service_name,
+        "service_cost":this.paymentData.service_cost,
+        "pre_book":this.paymentData.service_cost
+      },
+      theme: {
+        color: '#208ad6'
+      },
+
+    };
+ let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+
+let navCtrl = this.navCtrl;
+let nav = this.blogListService;
+ var successCallback = function(payment_id) {
+  loading.present();
+      // ajaxCallCheck(payment_id);
+
+  var url  = "http://qa.eldersindia.com/api/razorPaymentResponse";
+   var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
+
+xmlhttp.onload = function () {
+  loading.dismiss();
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+  // navCtrl.setRoot(ServicerequestPage);
+   nav.showToast(result);
+
+  }
+    }
+
+var cancelCallback = function(error) {
+  nav.showToaster(error.description);
+}
+
+
+RazorpayCheckout.on('payment.success', successCallback,this.dismiss());
+RazorpayCheckout.on('payment.cancel', cancelCallback);
+RazorpayCheckout.open(options, successCallback, cancelCallback);
+   }
   }
   pay() {
     console.log(this.service_costss);
@@ -460,7 +543,7 @@ let nav = this.blogListService;
 
   loading.present();
 
-  var url  = "http://beta.eldersindia.com/api/razorPaymentResponse";
+  var url  = "http://qa.eldersindia.com/api/razorPaymentResponse";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 

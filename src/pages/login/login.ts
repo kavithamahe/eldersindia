@@ -67,6 +67,7 @@ export class LoginPage {
     this.forgotPassword();
   }
   pressLogin(){
+    console.log("pavan");
     this.login();
   }
    public login() {  
@@ -79,6 +80,7 @@ export class LoginPage {
     //   this.registerCredentials.device_type = "0";
     //  }
     if(!this.loginForm.valid){
+
       this.submitAttempt = true;
     }else{
       this.submitAttempt = false;
@@ -95,6 +97,7 @@ export class LoginPage {
           if(loginuser['details']['user_type'] != 'vendor' && loginuser['details']['user_type'] != 'admin'){
              // if(loginuser.details.first_login == 1)
              // {
+
               this.navCtrl.setRoot(DashboardPage);
              // }
              // else{
@@ -111,13 +114,14 @@ export class LoginPage {
          }
          this.storage.ready().then(() => {
          // this.storage.clear();
+         console.log(loginuser['details']);
          this.storage.set('id', loginuser['details']['id']);
          this.storage.set('name', loginuser['details']['name']);
          this.storage.set('lastname', loginuser['details']['lastname']);
          this.storage.set('elder_age', loginuser['details']['elder_age']);
          this.storage.set('email', loginuser['details']['email']);
          this.storage.set('phone', loginuser['details']['phone']);
-          this.storage.set('password',this.registerCredentials.password);
+         this.storage.set('password',this.registerCredentials.password);
          this.storage.set('user_type', loginuser['details']['user_type']);
          this.storage.set('user_type_id', loginuser['details']['user_type_id']);
          this.storage.set('avatar', loginuser['details']['avatar']);
@@ -126,6 +130,11 @@ export class LoginPage {
          this.storage.set('safeme_status', loginuser['details']['safeme_status']);
          this.storage.set('helpme_status', loginuser['details']['helpme_status']);
          this.storage.set('vendor_id', loginuser['details']['vendor_id']);
+         
+         if(loginuser['details']['user_type']=='elder')
+         {
+          this.storage.set('elder_mobile_imei', loginuser['details']['elder_mobile_imei']);
+         }
          if(loginuser['details']['user_type']=='elder' && (loginuser.details.emergency_contacts.length>0))
          {
          if(loginuser.details.emergency_contacts[0].call_sponsor!='undefined')
@@ -178,7 +187,7 @@ export class LoginPage {
        
           
        })
-        // alert(loginuser['token']);
+      
         loader.dismiss();
       }
       else{

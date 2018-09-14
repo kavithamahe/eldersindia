@@ -127,7 +127,7 @@ recreation:any;
   	}
     else if(navParams.get("service") == "packages"){
       this.showPackagesDetails = true; 
-      this.title = this.vendorList.vendorDetails.service+" - Best Packages"; 
+      this.title = this.vendorList.vendorDetails.name+" - Best Packages"; 
       this.location_id = navParams.get("location_id");
     }
     else if(navParams.get("service") == "Schedule"){
@@ -184,6 +184,7 @@ recreation:any;
       this.availability = navParams.get("availability");
       this.balanceRecreationService = navParams.get("balanceRecreationService");
       this.title = this.vendorList.vendorDetails.service;
+      console.log("this.title" + this.title);
       this.package_active_status = this.vendorList.vendorDetails.package_active_status;
       this.pre_book_percentage = this.vendorList.requestServices.pre_book_percentage;
       this.vendor_id=navParams.get("vendor_id");
@@ -213,14 +214,14 @@ recreation:any;
     }
     else if(navParams.get("service") == "recreation_service"){
         this.showRecreationDetails = true; 
-      this.title = this.vendorList.vendorDetails.service+" - Recreation Services"; 
+      this.title = this.vendorList.vendorDetails.name+" - Recreation Services"; 
       this.location_id = navParams.get("location_id");
       this.availability = navParams.get("availability");
       this.balanceRecreationService = navParams.get("balanceRecreationService");
     }
     else{
   		this.showServiceOffered = true;
-  		this.title = this.vendorList.vendorDetails.service+" - Service Offered";
+  		this.title = this.vendorList.vendorDetails.name+" - Service Offered";
   	}
     
   	
@@ -287,6 +288,7 @@ recreation:any;
   }
 
   addUser(): void {
+    console.log(this.emergency_name);
     console.log(this.emergency.length);
       var newItemNo = this.emergency.length+1;
         this.emergency.push(newItemNo);
@@ -335,7 +337,8 @@ recreation:any;
       this._provider.showToast("Please select the dependent");
     }
     else{
-     console.log("dfdf" +this.emergency_name);
+     console.log("dfdf" + this.emergency);
+
         let emergencyDetailsname = this.emergency_name.filter(item => item == undefined);
         console.log(emergencyDetailsname.length);
       let emergencyDetailsmobile = this.emergency_mobile.filter(item => item == undefined);

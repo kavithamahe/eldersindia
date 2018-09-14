@@ -936,13 +936,14 @@
 
 
           <ion-list *ngIf="vendorList.dependentLists.length != 1">
-            <!-- <div *ngIf="pack.package_available == 0"> -->
+            <div *ngIf="pack.package_available == 0 || user_type=='sponsor'">
             <a (click)="openRequestPackage(pack.id,pack.vendor_id,pack.package_validity,pack.package_amount)" class="lan-select">Get Package</a>
-            <!-- </div> -->
+            </div>
           </ion-list>
-
-          <ion-list *ngIf="pack.package_available == 0" text-center>
+          <ion-list *ngIf="vendorList.dependentLists.length == 1">
+          <ion-list *ngIf="pack.package_available == 0 || user_type=='sponsor'" text-center>
             <a (click)="openRequestPackage(pack.id,pack.vendor_id,pack.package_validity,pack.package_amount)" class="lan-select">Get Package</a>
+          </ion-list>
           </ion-list>
           <strong class="purch-already" *ngIf="pack.package_available > 0">You've already purchased this
           </strong>

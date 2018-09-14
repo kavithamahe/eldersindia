@@ -58,9 +58,11 @@ sponser_id:any;
   elder_password:any="";
   elder_id:any="";
   elder_relation:any="";
+  gender:any="";
   elder_name:any="";
   last_name:any="";
   hobbies:any="";
+  mobile_imei:any="";
   allergic:any="";
   elder_service:any="";
   elder_number:any="";
@@ -160,6 +162,7 @@ mytype:string ="password";
     
         this.authForm = formBuilder.group({
         elder_relation : ['', Validators.compose([Validators.required])],
+        gender : ['', Validators.compose([Validators.required])],
         elder_name : ['', Validators.compose([ Validators.maxLength(30), 
               ,Validators.required])],
         last_name: ['', Validators.compose([ Validators.maxLength(30), 
@@ -181,6 +184,7 @@ mytype:string ="password";
   {
         this.authForm = formBuilder.group({
         elder_relation : ['', Validators.compose([])],
+        gender : ['', Validators.compose([])],
         elder_name : ['', Validators.compose([ Validators.maxLength(30), 
               Validators.required])],
         last_name: ['', Validators.compose([ Validators.maxLength(30), 
@@ -285,6 +289,7 @@ imageURL:any;
           this.elder_name= this.manageDependentData.name;
           this.last_name =this.manageDependentData.last_name;
           this.hobbies=this.manageDependentData.hobbies;
+          this.mobile_imei=this.manageDependentData.mobile_imei;
           this.allergic=this.manageDependentData.allergic;
           this.elder_service = this.manageDependentData.in_service;
           this.elder_number= this.manageDependentData.mobile;
@@ -297,6 +302,7 @@ imageURL:any;
           //this.elder_password= this.manageDependentData.password;
           this.elder_location = this.manageDependentData.location;        
           this.elder_relation = this.manageDependentData.relation;
+          this.gender = this.manageDependentData.gender;
           this.elder_address= this.manageDependentData.address; 
           let bloginterests = this.manageDependentData.blog_interest;
 
@@ -702,10 +708,11 @@ getareaof_interest(){
         "docs":this.manageDependentData.docs,
         "avatar":this.avatar,
         "relation":this.elder_relation,
-        "gender":this.manageDependentData.gender,
+        "gender":this.gender,
         "dob":this.elder_dob,
         "allergic":this.allergic,
         "hobbies":this.hobbies,
+        "mobile_imei":this.mobile_imei,
         "mobile":this.elder_number,
         "mobile_verified":this.manageDependentData.mobile_verified, 
        "email":this.elder_email,
@@ -780,10 +787,12 @@ getareaof_interest(){
         "last_name":this.last_name,
         "avatar":this.manageDependentData.avatar,
         "relation":this.elder_relation,
-        "gender":this.manageDependentData.gender,
+        
+        "gender":this.gender,
         "dob":this.elder_dob,
         "allergic":this.allergic,
         "hobbies":this.hobbies,
+        "mobile_imei":this.mobile_imei,
         "mobile":this.elder_number,
         "mobile_verified":this.manageDependentData.mobile_verified,
         "email":this.elder_email,
@@ -866,10 +875,11 @@ getareaof_interest(){
         "last_name":this.last_name,
         "avatar":this.manageDependentData.avatar,
         "relation":this.elder_relation,
-        "gender":this.manageDependentData.gender,
+        "gender":this.gender,
         "dob":this.elder_dob,
         "allergic":this.allergic,
         "hobbies":this.hobbies,
+        "mobile_imei":this.mobile_imei,
         "mobile":this.elder_number,
         "mobile_verified":this.manageDependentData.mobile_verified,
         "email":this.elder_email,
@@ -982,6 +992,7 @@ getareaof_interest(){
        this.communityServices.addSubmit({"info":
                           [{"email":this.elder_email,
                           "relation":this.elder_relation,
+                          "gender":this.gender,
                           "password":this.elder_password,
                           "name":this.authForm.value.elder_name,
                           "last_name":this.last_name,
@@ -992,6 +1003,7 @@ getareaof_interest(){
                           "location":this.elder_location,
                           "allergic":this.allergic,
                           "hobbies":this.hobbies,
+                          "mobile_imei":this.mobile_imei,
                           "area_interest":this.area_of_interest_data,
                           "blog_interest":this.blog_data,
                           "service_interest":this.servicecategory,
@@ -1049,6 +1061,7 @@ getareaof_interest(){
        this.communityServices.addSubmit({"info":
                           [{"email":this.elder_email,
                           "relation":this.elder_relation,
+                          "gender":this.gender,
                           "password":this.elder_password,
                           "name":this.authForm.value.elder_name,
                           "last_name":this.last_name,
@@ -1059,6 +1072,7 @@ getareaof_interest(){
                           "location":this.elder_location,
                           "allergic":this.allergic,
                           "hobbies":this.hobbies,
+                          "mobile_imei":this.mobile_imei,
                           "emergency":this.emergency_data,
                           "blog_interest":this.blog_data,
                           "service_interest":this.servicecategory,

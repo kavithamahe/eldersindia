@@ -33,7 +33,7 @@
          </p>
         <form [formGroup]="authForm">
        
-         <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb required">Dependant
+         <ion-label *ngIf = "userType =='sponsor'" stacked class="label-lb required">Dependent
          </ion-label>
 
             <ion-item *ngIf = "userType =='sponsor'" class="select-brds">
@@ -86,43 +86,43 @@
               </ion-item>
               <div *ngIf = "get_custome_amount!=0">
                <ion-item text-wrap>
-              <ion-label>Previous service due amount: <i class="fa fa-rupee"></i>{{get_custome_amount}}
+              <ion-label>Previous service due amount: <i class="fa fa-rupee"></i>{{get_custome_amount | number : '1.2-2'}}
               </ion-label>
               </ion-item>
                <ion-item>
-              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamountservice}}
+              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamountservice | number : '1.2-2'}}
               </ion-label>
               </ion-item>
               </div>
 
               <div *ngIf = "get_custome_deliever_amount!=0">
                <ion-item text-wrap>
-              <ion-label>Previous service due amount: <i class="fa fa-rupee"></i>{{get_custome_deliever_amount}}
+              <ion-label>Previous service due amount: <i class="fa fa-rupee"></i>{{get_custome_deliever_amount | number : '1.2-2'}}
               </ion-label>
               </ion-item>
                <ion-item>
-              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamount}}
+              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamount | number : '1.2-2'}}
               </ion-label>
               </ion-item>
               </div>
 
                <div *ngIf = "getCustomerBalanceAmount!=0">
                <ion-item text-wrap>
-              <ion-label>Previous refund amount: <i class="fa fa-rupee"></i>{{getCustomerBalanceAmount}}
+              <ion-label>Previous refund amount: <i class="fa fa-rupee"></i>{{getCustomerBalanceAmount | number : '1.2-2'}}
               </ion-label>
               </ion-item>
                <ion-item>
-              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamountbalance}}
+              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamountbalance | number : '1.2-2'}}
               </ion-label>
               </ion-item>
               </div>
                 <div *ngIf = "get_custome_service_cancel_amount!=0">
                <ion-item text-wrap>
-              <ion-label>Previous service cancel amount:: <i class="fa fa-rupee"></i>{{get_custome_service_cancel_amount}}
+              <ion-label>Previous service cancel amount:: <i class="fa fa-rupee"></i>{{get_custome_service_cancel_amount | number : '1.2-2'}}
               </ion-label>
               </ion-item>
                <ion-item>
-              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamountcancel}}
+              <ion-label>Total amount payable: <i class="fa fa-rupee"></i>{{totalpayableamountcancel | number : '1.2-2'}}
               </ion-label>
               </ion-item>
               </div>
@@ -270,12 +270,12 @@
         </ion-select>
       </ion-item>
           <ion-item *ngIf="servicecosts != undefined">
-              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecosts}}
+              <ion-label>Service Cost: <i class="fa fa-rupee"></i>{{servicecosts | number : '1.2-2'}}
               </ion-label>
 
               </ion-item>
                 <ion-item>
-              <ion-label>Price After Discount: <i class="fa fa-rupee"></i>{{servicecost}}
+              <ion-label>Price After Discount: <i class="fa fa-rupee"></i>{{servicecost | number : '1.2-2'}}
               </ion-label>
 
               </ion-item>

@@ -18,7 +18,8 @@
   <div class="ion-searchbar">
     <ion-row>
       <ion-col width-80>
-        <ion-searchbar [(ngModel)]="searchEvent" (keyup.enter)="getItems(searchEvent)"></ion-searchbar>
+        <ion-searchbar [(ngModel)]="searchEvent" (keyup.enter)="getItems(searchEvent)">
+        </ion-searchbar>
       </ion-col>
       <ion-col width-20 class="btn-go">
         <button (click)="getItems(searchEvent)" ion-button small class="go-btn">Go</button>

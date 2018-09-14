@@ -73,7 +73,7 @@
       </ion-row>
       <ion-col class="btn-padd">
         <button class="btn-warnings" *ngIf="dependentLen && serviceOffered != 'Recreation' && serviceOffered != 'Safety and security'"
-          (click)="openModal('scheduleModal',service_list)" (press)="pressevent('scheduleModal',service_list)">Schedule</button>
+          (click)="openModal('scheduleModal',service_list)" (press)="pressevent('scheduleModal',service_list)">Avail Services</button>
         <button class="btn-warnings" *ngIf="dependentLen && serviceOffered == 'Recreation' && service_list.package_active_status == '1'"
           (click)="bookNow(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Book Now</button>
         <button class="btn-warnings" *ngIf="dependentLen && serviceOffered == 'Recreation' && service_list.package_active_status == '0'">Booking Closed</button>

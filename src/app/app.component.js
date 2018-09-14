@@ -91,6 +91,7 @@ var MyApp = (function () {
                         _this.service.serviceInit(loginuser['token']);
                         _this.community_service.initialize();
                         if (loginuser['details']['user_type'] == 'elder') {
+                            _this.storage.set('elder_mobile_imei', loginuser['details']['id']);
                             _this.userLogin.currentUser("elder");
                         }
                         else {

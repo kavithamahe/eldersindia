@@ -59,7 +59,22 @@
           <small *ngIf="!authForm.controls.last_name.valid  && (authForm.controls.last_name.dirty || submitAttempt)">
                   <p class="valid err-reds shake">Please enter the last name</p>
           </small> 
-        <ion-label class="label-tittle required">Contact number</ion-label>
+          
+        <ion-label class="label-tittle required">Gender</ion-label>
+
+      <ion-item>      
+       <ion-label class="sel-label">Gender</ion-label>      
+            <ion-select class="select-brd"  [(ngModel)]="gender" 
+            placeholder="Gender" formControlName="gender" 
+            [class.invalid]="!authForm.controls.gender.valid && (authForm.controls.gender.dirty)">
+              <ion-option value="1"> Male</ion-option>
+              <ion-option value="0"> Female</ion-option>
+            </ion-select>
+      </ion-item>
+         <small *ngIf="!authForm.controls.gender.valid  && (authForm.controls.gender.dirty || submitAttempt)">
+              <p class="valid err-reds shake">Please select the Gender</p>
+          </small> 
+          <ion-label class="label-tittle required">Contact number</ion-label>
             <ion-item>
               <ion-input type="number" formControlName="elder_number" 
               [(ngModel)]="elder_number" value={{elder_number}}
@@ -71,7 +86,14 @@
               <small  *ngIf="!authForm.controls.elder_number.valid  && (authForm.controls.elder_number.dirty || submitAttempt)">
                 <p class="valid err-reds shake">Please enter valid mobile number</p>
               </small> 
-          <ion-label class="label-tittle required">Date of birth</ion-label>   
+            <ion-label class="label-tittle">Mobile IMEI number</ion-label>
+               <ion-item>
+      
+            <ion-input  type="text"  placeholder="Mobile IMEI number" [(ngModel)]="mobile_imei" 
+            [ngModelOptions]="{standalone: true}" value={{mobile_imei}}>
+            </ion-input>
+      </ion-item>
+       <ion-label class="label-tittle required">Date of birth</ion-label>   
        
           <ion-item>
              <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" [(ngModel)]="elder_dob" formControlName="elder_dob" placeholder="Date of birth" [class.invalid]="!authForm.controls.elder_dob.valid && (authForm.controls.elder_dob.dirty)"></ion-datetime>

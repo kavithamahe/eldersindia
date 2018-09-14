@@ -153,7 +153,7 @@ export class ModalContentPage {
      this.subcategory = this.requestService.subcategory;
      this.vendor_id = this.params.get("vendor_id");
      }
-
+     console.log(params.get("vendor"));
      if(params.get("vendor") != undefined){
       if(this.params.get("one_time")){
         this.onetimetype = this.params.get("one_time");
@@ -172,6 +172,7 @@ export class ModalContentPage {
       this.service_cost = this.params.get("vendor").service_cost;
       this.percentage_cost = this.params.get("vendor").percentage_cost;
       this.initialservicecost = this.service_cost - this.percentage_cost;
+      console.log(this.initialservicecost);
       this.servicecost=this.initialservicecost;
       this.vendor_id = this.params.get("vendor").vendor_id;
       // this.recurringType = this.params.get("vendor").recurring;
