@@ -1,163 +1,609 @@
 // http://ionicframework.com/docs/v2/theming/
 // App Global Sass
-// --------------------------------------------------
-// Put style rules here that you want to apply globally. These
-// styles are for the entire app and not just one component.
-// Additionally, this file can be also used as an entry point
-// to import other Sass files to be included in the output CSS.
-//
-// Shared Sass variables, which can be used to adjust Ionic's
-// default Sass variables, belong in "theme/variables.scss".
-//
-// To declare rules for a specific mode, create a child rule
-// for the .md, .ios, or .wp mode classes. The mode class is
-// automatically applied to the <body> element in the app.
 @import url('https://fonts.googleapis.com/css?family=Muli');
 @import url('https://fonts.googleapis.com/css?family=Exo+2');
-button																			{font-family: 'Muli', sans-serif; }
 
+button {
+    font-family: 'Muli', sans-serif;
+}
 
-.list-md .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus)		{border-bottom-color:none !important;box-shadow:none  !important;}
-.text-input[disabled]{ opacity: 4;}
-.list-md .item-input.input-has-focus:last-child									{border-bottom-color:none !important;box-shadow:none  !important;}
-.list-md .item-input.input-has-focus:last-child									{border-bottom-color:#ffffff !important;box-shadow:none;}
-.list-md .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus)		{border-bottom-color:#ffffff !important;box-shadow:0 -1px 0 0 #ffffff inset !important;}
-.list-md .item-input.ng-valid.input-has-value:last-child:not(.input-has-focus)	{border-bottom-color:#ffffff !important;box-shadow:0 -1px 0 0 #ffffff inset !important;}
-.toolbar-title 																	{text-align:center !important;font-family: 'Muli', sans-serif; font-weight:600;}
-.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner		{border-bottom-color:none !important;box-shadow:none !important;}
-.ios page-community p, .md page-community p										{color:#444;padding:5px;font-family: "Muli",sans-serif;font-size:17px !important;}
-.ios page-community p, .ios page-community p									{color:#444;padding:5px;font-family: "Muli",sans-serif;font-size:17px !important;}
+.list-md .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus) {
+    border-bottom-color: none !important;
+    box-shadow: none !important;
+}
+
+.text-input[disabled] {
+    opacity: 4;
+}
+
+.list-md .item-input.input-has-focus:last-child {
+    border-bottom-color: none !important;
+    box-shadow: none !important;
+}
+
+.list-md .item-input.input-has-focus:last-child {
+    border-bottom-color: #ffffff !important;
+    box-shadow: none;
+}
+
+.list-md .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus) {
+    border-bottom-color: #ffffff !important;
+    box-shadow: 0 -1px 0 0 #ffffff inset !important;
+}
+
+.list-md .item-input.ng-valid.input-has-value:last-child:not(.input-has-focus) {
+    border-bottom-color: #ffffff !important;
+    box-shadow: 0 -1px 0 0 #ffffff inset !important;
+}
+
+.toolbar-title {
+    text-align: center !important;
+    font-family: 'Muli', sans-serif;
+    font-weight: 600;
+}
+
+.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
+    border-bottom-color: none !important;
+    box-shadow: none !important;
+}
+
+.ios page-community p,
+.md page-community p {
+    color: #444;
+    padding: 5px;
+    font-family: "Muli", sans-serif;
+    font-size: 17px !important;
+}
+
+.ios page-community p,
+.ios page-community p {
+    color: #444;
+    padding: 5px;
+    font-family: "Muli", sans-serif;
+    font-size: 17px !important;
+}
 
 /********************************menu scss********************************/
-.left-menus																		{background:#007A95;}
-.left-menus .list-md .item-md 													{background: rgba(0, 0, 0, 0) none repeat scroll 0 0; margin:0; padding-left: 0 !important;}
-.left-menus .list-md .item-block .item-inner 									{border-bottom: 1px solid rgba(255, 255, 255, 0.15);}
-.left-menus .list-md .item-md .item-inner .input-wrapper .label-md 				{color:#fff;font-weight:600;font-family: 'Muli', sans-serif !important;font-size:17px;margin:0;padding-left:10px;}
-.left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios 			{color: #fff; font-weight:600;font-family: 'Muli', sans-serif !important;font-size:17px;margin:0;padding-left:10px;}
-.left-menus .list-md .item-md .item-inner .input-wrapper .label-md i			{margin-right:5px;}
-.left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios i			{margin-right:5px;}
-.hed-new .toolbar-md 															{height:160px;}
-.required:after                                        							{content:" *";color:red;}
-.left-menus .list-ios .item-ios 												{background: rgba(0, 0, 0, 0) none repeat scroll 0 0;margin:0; padding-left:0 !important;}
-.left-menus .list-ios .item-block .item-inner									{border-bottom:1px solid rgba(255, 255, 255, 0.15);}
-.left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios i			{margin-right:5px;}
-.hed-new .toolbar-ios 															{height:160px;}
-.modal-wrapper																	{background:#fff;}
-.img-log .toolbar-background-md 												{background:#fff;background-image: url("../assets/img/top-logbg.png") !important;background-repeat:no-repeat;background-size:cover;}
-.center-image																	{padding:5px; width:80%;}
-.item-md																		{padding-left:0px;}
-.item-ios																		{padding-left:0px;}
-.hed-new .toolbar-md .toolbar-content-md p 										{color:#fff;font-size:30px;font-weight:400;margin:0;text-align:center;font-family: 'Exo 2', sans-serif;}
-.img-log .toolbar-background-ios 												{background:#fff;background-image: url("../assets/img/top-logbg.png") !important;background-repeat: no-repeat;background-size: cover;}
-.item-md.item-input.input-has-focus .item-inner									{border-bottom-color:#fff !important;box-shadow:none!important;}
-.item-ios.item-input.input-has-focus .item-inner								{border-bottom-color:#fff !important;box-shadow:none!important;}
-.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner	{border-bottom-color:#fff !important;box-shadow:none !important;}
-.item-ios																		{padding-left:0px;}
-.hed-new .toolbar-ios .toolbar-content-ios p 									{color:#fff;font-size:30px;font-weight:400;margin:0;text-align:center;font-family: 'Exo 2', sans-serif;}
 
-.list-ios .item-input:last-child												{border:none !important;}
-.list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{border:none;}
+.left-menus {
+    background: #2c4e86;
+}
+
+.left-menus .list-md .item-md {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    margin: 0;
+    padding-left: 0 !important;
+}
+
+.left-menus .list-md .item-block .item-inner {
+    border-bottom: 1px solid #2c4e86;
+    padding: 15px 0;
+}
+
+.left-menus .list-md .item-md .item-inner .input-wrapper .label-md {
+    color: #fff;
+    font-weight: 500;
+    font-family: 'Muli', sans-serif !important;
+    font-size: 17px;
+    margin: 0;
+    padding-left: 10px;
+}
+
+.left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios {
+    color: #fff;
+    font-weight: 600;
+    font-family: 'Muli', sans-serif !important;
+    font-size: 17px;
+    margin: 0;
+    padding-left: 10px;
+}
+
+.left-menus .list-md .item-md .item-inner .input-wrapper .label-md i {
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+.left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios i {
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+.hed-new .toolbar-md {
+    height: 150px;
+}
+
+.required:after {
+    content: " *";
+    color: red;
+}
+
+.left-menus .list-ios .item-ios {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    margin: 0;
+    padding-left: 0 !important;
+}
+
+.left-menus .list-ios .item-block .item-inner {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.left-menus .list-ios .item-ios .item-inner .input-wrapper .label-ios i {
+    margin-right: 5px;
+}
+
+.hed-new .toolbar-ios {
+    height: 160px;
+}
+
+.modal-wrapper {
+    background: #fff;
+}
+
+.img-log .toolbar-background-md {
+    background: #fff;
+    background-image: url("../assets/img/top-logbg.png") !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.center-image {
+    padding: 5px;
+    width: 80%;
+}
+
+.item-md {
+    padding-left: 0px;
+}
+
+.item-ios {
+    padding-left: 0px;
+}
+
+.hed-new .toolbar-md .toolbar-content-md p {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 400;
+    margin: 0;
+    text-align: center;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.img-log .toolbar-background-ios {
+    background: #fff;
+    background-image: url("../assets/img/top-logbg.png") !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.item-md.item-input.input-has-focus .item-inner {
+    border-bottom-color: #fff !important;
+    box-shadow: none !important;
+}
+
+.item-ios.item-input.input-has-focus .item-inner {
+    border-bottom-color: #fff !important;
+    box-shadow: none !important;
+}
+
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+    border-bottom-color: #fff !important;
+    box-shadow: none !important;
+}
+
+.item-ios {
+    padding-left: 0px;
+}
+
+.hed-new .toolbar-ios .toolbar-content-ios p {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 400;
+    margin: 0;
+    text-align: center;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.list-ios .item-input:last-child {
+    border: none !important;
+}
+
+.list-ios>.item-block:last-child,
+.list-ios>.item-wrapper:last-child .item-block {
+    border: none;
+}
+
 /********************************menu scss end********************************/
 
 /********************************segment scss********************************/
-ion-segment																		{background:#C0C0C0; border-radius:50px; height:40px; line-height:40px;font-family:'Muli', sans-serif;}
-.segment-md .segment-button														{border-radius:50px; height:40px;line-height:40px;margin-left:3px;margin-right:3px;font-family:'Muli', sans-serif;  font-size:14px !important; font-weight:600;text-transform:capitalize; color:#333; border:none;}
-.segment-md .segment-button.activated, .segment-md .segment-button.segment-activated{border-bottom:none !important;line-height:34px !important; font-size:14px !important; font-weight:600; background:#fff; color:#333; height:34px; font-family:'Muli', sans-serif;}
-ion-segment																		{background:#C0C0C0; border-radius:50px; height:40px; line-height:40px;font-family:'Muli', sans-serif;}
-.segment-ios .segment-button													{border-radius:50px; height:40px;line-height:40px;margin-left:3px; padding:0px 7px;margin-right:3px;font-size:14px !important; font-weight:600;font-family:'Muli', sans-serif; text-transform:capitalize; color:#333; border:none;}
-.segment-ios .segment-button.activated, .segment-ios .segment-button.segment-activated{border-bottom:none !important;line-height:34px;font-size:14px !important; font-weight:600; background:#fff; color:#333; height:34px; font-family:'Muli', sans-serif;}
-.segment-ios .segment-button:first-of-type										{border-radius:50px !important;}
-.segment-ios .segment-button:last-of-type										{border-radius:50px !important;}
-/********************************segment scss end********************************/
-.ios page-community ion-content, .md page-community ion-content					{background-color:#fff !important;}
-.alert-message																	{overflow-y:auto;}
-// .alert-md .alert-button-group													{padding:0px; background: hsla(0, 0%, 0%, 0) linear-gradient(89deg, hsl(0, 0%, 50%) 0%, hsl(0, 0%, 100%) 100%) repeat scroll 0 0;}
-.alert-md .alert-head 															{padding:10px 10px;}
-.alert-ios .alert-head 															{padding:10px 10px;}
 
-.alert-md .alert-radio-label 													{flex: 1 1 0;overflow:hidden;padding:8px 0 8px 25px; white-space: normal!important;}
-.alert-ios .alert-radio-label 													{flex: 1 1 0;overflow:hidden;padding: 8px 0 8px 25px; white-space: normal!important;}
-.alert-md .alert-checkbox-label													{font-family:'Muli', sans-serif; font-size:15px; font-weight:600;}
-.alert-ios .alert-checkbox-label												{font-family:'Muli', sans-serif; font-size:15px;font-weight:600;}
-.toolbar-md-primary .toolbar-background-md										{background: #025fa9}
+ion-segment {
+    background: #C0C0C0;
+    border-radius: 50px;
+    height: 40px;
+    line-height: 40px;
+    font-family: 'Muli', sans-serif;
+}
+
+.segment-md .segment-button {
+    border-radius: 50px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 3px;
+    margin-right: 3px;
+    font-family: 'Muli', sans-serif;
+    font-size: 14px !important;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #333;
+    border: none;
+}
+
+.segment-md .segment-button.activated,
+.segment-md .segment-button.segment-activated {
+    border-bottom: none !important;
+    line-height: 34px !important;
+    font-size: 14px !important;
+    font-weight: 600;
+    background: #fff;
+    color: #333;
+    height: 34px;
+    font-family: 'Muli', sans-serif;
+}
+
+ion-segment {
+    background: #C0C0C0;
+    border-radius: 50px;
+    height: 40px;
+    line-height: 40px;
+    font-family: 'Muli', sans-serif;
+}
+
+.segment-ios .segment-button {
+    border-radius: 50px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 3px;
+    padding: 0px 7px;
+    margin-right: 3px;
+    font-size: 14px !important;
+    font-weight: 600;
+    font-family: 'Muli', sans-serif;
+    text-transform: capitalize;
+    color: #333;
+    border: none;
+}
+
+.segment-ios .segment-button.activated,
+.segment-ios .segment-button.segment-activated {
+    border-bottom: none !important;
+    line-height: 34px;
+    font-size: 14px !important;
+    font-weight: 600;
+    background: #fff;
+    color: #333;
+    height: 34px;
+    font-family: 'Muli', sans-serif;
+}
+
+.segment-ios .segment-button:first-of-type {
+    border-radius: 50px !important;
+}
+
+.segment-ios .segment-button:last-of-type {
+    border-radius: 50px !important;
+}
+
+/********************************segment scss end********************************/
+
+.ios page-community ion-content,
+.md page-community ion-content {
+    background-color: #fff !important;
+}
+
+.alert-message {
+    overflow-y: auto;
+}
+
+// .alert-md .alert-button-group													{padding:0px; background: hsla(0, 0%, 0%, 0) linear-gradient(89deg, hsl(0, 0%, 50%) 0%, hsl(0, 0%, 100%) 100%) repeat scroll 0 0;}
+.alert-md .alert-head {
+    padding: 10px 10px;
+}
+
+.alert-ios .alert-head {
+    padding: 10px 10px;
+}
+
+.alert-md .alert-radio-label {
+    flex: 1 1 0;
+    overflow: hidden;
+    padding: 8px 0 8px 25px;
+    white-space: normal !important;
+}
+
+.alert-ios .alert-radio-label {
+    flex: 1 1 0;
+    overflow: hidden;
+    padding: 8px 0 8px 25px;
+    white-space: normal !important;
+}
+
+.alert-md .alert-checkbox-label {
+    font-family: 'Muli', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.alert-ios .alert-checkbox-label {
+    font-family: 'Muli', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.toolbar-md-primary .toolbar-background-md {
+    background: #2c4e86;
+}
+
 // .toolbar-ios-primary .toolbar-background-ios									{background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(191, 100%, 29%) 0%, hsl(195, 100%, 51%) 50%, hsl(191, 100%, 29%) 100%) repeat scroll 0 0;}
-.toolbar-ios-primary .toolbar-background-ios									{background: #025fa9;}
-// .searchbar-md .searchbar-search-icon 											{background-image:url("../assets/img/search.png");height:21px;left:16px;top:11px;width:21px;}
-// .searchbar-ios .searchbar-search-icon 											{background-image:url("../assets/img/search.png");height:21px;left:16px;top:11px;width:21px;}
-// .searchbar-md .searchbar-input													{border:1px solid #0074bd;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px; }
-//  .searchbar-ios .searchbar-input													{border:1px solid #0074bd; height:40px;box-shadow:none;font-family: 'Muli', sans-serif; border-radius:50px;  }
-// .searchbar-ios																	{background:none !important; border:none !important;}
-.send-req.list-md 																{margin:0px 0px 0px 0px !important; }
-.send-req 																		{background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100%) 0%, hsl(196, 100%, 95%) 100%) repeat scroll 0 0;}
-.send-req .item-md																{background:none;}
-.send-req .item-md .item-inner .input-wrapper .label-md							{font-family: "Muli",sans-serif; padding-bottom:0px; padding-left:15px;font-size:15px !important;font-weight:400;}
-send-req 																		{background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100%) 0%, hsl(196, 100%, 95%) 100%) repeat scroll 0 0;}
-.send-req .item-ios																{background:none;}
-.send-req .item-ios .item-inner .input-wrapper .label-ios						{font-family: "Muli",sans-serif; padding-bottom:0px; padding-left:15px;font-size:15px !important;font-weight:400;}
-.sle .item-inner .input-wrapper													{border:1px solid #ccc;}
-.sle.item-md.item-block .item-inner												{border:none; padding-right:0px;}
-.register-form																	{padding:10px;}
-.sle .item-inner .input-wrapper .label-md										{padding-left:5px;}
-.req-ti .toolbar-title															{font-size:15px; text-align:left;padding-top:10px;text-align:left !important;font-family: "Muli",sans-serif;}
-.btn-blue																		{margin-top:10px;background:#FE5420;font-family: "Muli",sans-serif;}
+.toolbar-ios-primary .toolbar-background-ios {
+    background: #2c4e86;
+}
+
+.send-req.list-md {
+    margin: 0px 0px 0px 0px !important;
+}
+
+.send-req {
+    background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100%) 0%, hsl(196, 100%, 95%) 100%) repeat scroll 0 0;
+}
+
+.send-req .item-md {
+    background: none;
+}
+
+.send-req .item-md .item-inner .input-wrapper .label-md {
+    font-family: "Muli", sans-serif;
+    padding-bottom: 0px;
+    padding-left: 15px;
+    font-size: 15px !important;
+    font-weight: 400;
+}
+
+send-req {
+    background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100%) 0%, hsl(196, 100%, 95%) 100%) repeat scroll 0 0;
+}
+
+.send-req .item-ios {
+    background: none;
+}
+
+.send-req .item-ios .item-inner .input-wrapper .label-ios {
+    font-family: "Muli", sans-serif;
+    padding-bottom: 0px;
+    padding-left: 15px;
+    font-size: 15px !important;
+    font-weight: 400;
+}
+
+.sle .item-inner .input-wrapper {
+    border: 1px solid #ccc;
+}
+
+.sle.item-md.item-block .item-inner {
+    border: none;
+    padding-right: 0px;
+}
+
+.register-form {
+    padding: 10px;
+}
+
+.sle .item-inner .input-wrapper .label-md {
+    padding-left: 5px;
+}
+
+.req-ti .toolbar-title {
+    font-size: 15px;
+    text-align: left;
+    padding-top: 10px;
+    text-align: left !important;
+    font-family: "Muli", sans-serif;
+}
+
+.btn-blue {
+    margin-top: 10px;
+    background: #FE5420;
+    font-family: "Muli", sans-serif;
+}
+
 .toast-success {
-  > div{
-       background-color:green!important;
-   }
+    >div {
+        background-color: green !important;
+    }
 }
-toast-cancel{
-   > div{
-       background-color:red!important;
-   }
+
+toast-cancel {
+    >div {
+        background-color: red !important;
+    }
 }
-.header-ios .toolbar-background-ios, .footer-ios .toolbar-background-ios		{border:none;}
-.err-reds																		{float:right;padding-left:3px;padding-right:3px; font-weight:600;margin-right:17px !important;   position: relative; background:#FFDCE0; color:red !important;font-size:12px !important;font-family: "Muli",sans-serif; -webkit-animation-duration:5s; animation-duration:5s; 
-																				 -webkit-animation-fill-mode: both; animation-fill-mode: both;}
-.ion-md-close-circle															{font-size:21px;}
-.ion-ios-close-circle															{font-size:21px;}
-.sel-packages ion-row ion-col .go-btn.button-md									{margin-top:10px; font-weight:600; font-size:15px; width:50px; height:36px;}
-.sel-packages ion-row ion-col .go-btn.button-ios								{margin-top:4px;font-weight:600; font-size:15px;width:50px; height:36px;}
-ul.rating[_ngcontent-dgd-43]   li[_ngcontent-dgd-43]{padding:0px !important;}
-.badge-md																		{margin-right:5px;}
-.badge-ios																		{margin-right:5px;}
-.toolbar-md-primary .bar-button-light-md, .toolbar-md-primary .bar-button-clear-md-light, .toolbar-md-primary .bar-button-md-light{font-weight:600; font-size:17px;}
-.toolbar-ios-primary .bar-button-light-ios, .toolbar-ios-primary .bar-button-clear-ios-light, .toolbar-ios-primary .bar-button-ios-light{font-weight:600; font-size:17px;}
-.alert-md .alert-button .button-inner											{font-size:15px; font-weight:600;}
-.alert-ios .alert-button .button-inner											{font-size:15px; font-weight:600;}
-.alert-md .alert-message														{font-size:18px;font-weight:400; padding-top:10px; color:#333;}
-.alert-ios .alert-message														{font-size:18px;font-weight:400; padding-top:10px; color:#333;}
-.err-reds:before 																{content: "\f0de";font-family: FontAwesome;text-decoration: inherit;color:#FFDCE0;border-bottom-color: hsl(352, 32%, 72%);font-size: 18px !important;
-																				 padding-right:0.5em;position:absolute;top:-12px;right:-4px;}
-ion-fab[bottom][edge]															{bottom:0px !important;}
- @-webkit-keyframes shake {
-            0%, 100% {-webkit-transform: translateX(0);} 
-            10%, 30%, 50%, 70%, 90% {-webkit-transform: translateX(-5px);} 
-            20%, 40%, 60%, 80% {-webkit-transform: translateX(5px);} 
-  }
-         
-         @keyframes shake { 
-            0%, 100% {transform: translateX(0);} 
-            10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);} 
-            20%, 40%, 60%, 80% {transform: translateX(5px);} 
-         }
-         
-         .shake { 
-            -webkit-animation-name: shake; 
-            animation-name: shake; 
-         }
+
+.header-ios .toolbar-background-ios,
+.footer-ios .toolbar-background-ios {
+    border: none;
+}
+
+
+.ion-md-close-circle {
+    font-size: 21px;
+}
+
+.ion-ios-close-circle {
+    font-size: 21px;
+}
+
+.sel-packages ion-row ion-col .go-btn.button-md {
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    width: 50px;
+    height: 36px;
+}
+
+.sel-packages ion-row ion-col .go-btn.button-ios {
+    margin-top: 4px;
+    font-weight: 600;
+    font-size: 15px;
+    width: 50px;
+    height: 36px;
+}
+
+ul.rating[_ngcontent-dgd-43] li[_ngcontent-dgd-43] {
+    padding: 0px !important;
+}
+
+.badge-md {
+    margin-right: 5px;
+}
+
+.badge-ios {
+    margin-right: 5px;
+}
+
+.toolbar-md-primary .bar-button-light-md,
+.toolbar-md-primary .bar-button-clear-md-light,
+.toolbar-md-primary .bar-button-md-light {
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.toolbar-ios-primary .bar-button-light-ios,
+.toolbar-ios-primary .bar-button-clear-ios-light,
+.toolbar-ios-primary .bar-button-ios-light {
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.alert-md .alert-button .button-inner {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.alert-ios .alert-button .button-inner {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.alert-md .alert-message {
+    font-size: 18px;
+    font-weight: 400;
+    padding-top: 10px;
+    color: #333;
+}
+
+.alert-ios .alert-message {
+    font-size: 18px;
+    font-weight: 400;
+    padding-top: 10px;
+    color: #333;
+}
+
+// .err-reds:before 																{content: "\f0de";font-family: FontAwesome;text-decoration: inherit;color:#FFDCE0;border-bottom-color: hsl(352, 32%, 72%);font-size: 18px !important;
+//  padding-right:0.5em;position:absolute;top:-12px;right:-4px;}
+.err-reds {
+    float: right;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-weight: 400;
+    margin-right: 17px !important;
+    position: relative;
+    background: #ff001d;
+    color: #fff !important;
+    font-size: 12px !important;
+    font-family: "Muli", sans-serif;
+    -webkit-animation-duration: 5s;
+    animation-duration: 5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 3px;
+}
+
+.err-reds:before {
+    content: "\f0de";
+    font-family: FontAwesome;
+    text-decoration: inherit;
+    color: #f5001c;
+    border-bottom-color: #cea1a7;
+    font-size: 18px !important;
+    padding-right: 0.5em;
+    position: absolute;
+    top: -7px;
+    right: -4px;
+}
+
+ion-fab[bottom][edge] {
+    bottom: 0px !important;
+}
+
+@-webkit-keyframes shake {
+    0%,
+    100% {
+        -webkit-transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        -webkit-transform: translateX(-5px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+        -webkit-transform: translateX(5px);
+    }
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-5px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(5px);
+    }
+}
+
+.shake {
+    -webkit-animation-name: shake;
+    animation-name: shake;
+}
 
 /*=============
 Alert box
 ==============*/
-.alert-wrapper{
+
+.alert-wrapper {
     border-radius: 4px;
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
-    .alert-head{
+    .alert-head {
         background: #003e8e;
-        color:#fff;
+        color: #fff;
         box-shadow: 6px 5px 20px rgba(0, 0, 0, 0.09);
         z-index: 10;
-        .alert-title{
+        .alert-title {
             font-size: 19px;
             font-weight: 500;
             color: #fff;
@@ -165,73 +611,71 @@ Alert box
             letter-spacing: 0.3;
         }
     }
-    .alert-radio-group{
+    .alert-radio-group {
         border: none !important;
         max-height: 265px !important;
         background-color: #f1f1f1;
-        .alert-tappable{
-            .button-inner{
-                .alert-radio-icon{
+        .alert-tappable {
+            .button-inner {
+                .alert-radio-icon {
                     width: 15px !important;
                     height: 15px !important;
                     border-color: #999 !important;
                 }
-                .alert-radio-label{
-                    color:#333 !important;
-                    white-space: normal!important;
+                .alert-radio-label {
+                    color: #333 !important;
+                    white-space: normal !important;
                 }
             }
         }
     }
-    .alert-button-group{
+    .alert-button-group {
         background: #fff !important;
         padding: 0px 0px 0px 0px !important;
-        .alert-button{
+        .alert-button {
             // color: #fff !important;
             width: 50% !important;
-            margin:0 !important;
-            padding:10 !important;
-            &:nth-child(1){
+            margin: 0 !important;
+            padding: 10 !important;
+            &:nth-child(1) {
                 color: #ff0000;
             }
-            &:nth-child(2){
+            &:nth-child(2) {
                 color: #003e8e;
             }
-            .button-inner{
+            .button-inner {
                 display: block !important;
                 font-size: 14px !important;
-                text-align: center !important; 
+                text-align: center !important;
                 height: auto !important;
             }
         }
     }
-    
 }
 
-
 /*========== clearfix ===========*/
+
 .clearfix:after {
-      display: block;
-      clear: both;
-      content: "";
-    }
-    
+    display: block;
+    clear: both;
+    content: "";
+}
 
 /*============ search bar css======= */
 
-    .ion-searchbar {
-        background-color: #fff;
-        margin: 10px;
-        border-radius: 30px;
-        box-shadow: 0px 5px 20px rgba(0,0,0,0.05);
-        ion-col{
-            padding: 0;
+.ion-searchbar {
+    background-color: #fff;
+    margin: 10px;
+    border-radius: 30px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+    ion-col {
+        padding: 0;
         .searchbar-md {
             padding: 4px 0px 4px 4px;
             background: inherit;
             .searchbar-input {
-                border: 1px solid #fff;
-                letter-spacing: 0.4px;                   
+                border: none;
+                letter-spacing: 0.4px;
             }
         }
         &.btn-go {
@@ -240,9 +684,18 @@ Alert box
                 height: 40px !important;
                 border-radius: 30px !important;
                 width: 90% !important;
-                background-color: #025fa9 !important;                   
+                background-color: #4978a9 !important;
             }
         }
     }
-    }
-
+}
+.searchbar-md .searchbar-input {
+     padding: 6px 55px;
+    height: auto;
+    border-radius: 2px;
+    font-size: 1.6rem;
+    font-weight: 400;   
+    background-color: transparent;
+    
+    box-shadow:none;
+}

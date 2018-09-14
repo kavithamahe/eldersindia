@@ -1,26 +1,178 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow');
-page-login{
-.lgoin-logo												{height:200px;background-image: url('../assets/img/met-design.jpg');width:100%;background-repeat: no-repeat; background-size: cover; }
-.lgoin-logo p											{width:100%; text-align:center; font-size:30px; padding-top:90px; font-weight:600; color:#fff;font-family: 'Exo 2', sans-serif;}
-.logsimg												{border-radius:50%;left: 0;right:0;height:0;text-align:center;}
-.logsimg img											{margin-top:45px;   padding:10px;  width:70%;}
-.item-md												{padding-left:0px !important;}	
-.item-ios												{padding-left:6px !important;}	
-.login-pages											{background:#ffffff;}
-/*.login-pages											{background-image: url('../assets/img/bgss.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}*/
-.login-detalis 											{margin-top:-30px;  padding:5px; position:relative; background:#fff;}
-.login-detalis h1 									    {text-align:center !important; font-family: 'PT Sans Narrow', sans-serif;color:#025FA9 !important; font-weight:600; font-size:23px; }
-.text-input-md											{padding:10px; border:1px solid #ccc;border-radius:20px; font-family: "Muli",sans-serif;}
-.text-input-ios											{padding:10px; border:1px solid #ccc;border-radius:20px; font-family: "Muli",sans-serif;}
-.logoin-btn												{font-size:18px;font-weight:600;color:#fff;font-family: 'Muli', sans-serif;background: rgba(0, 0, 0, 0) linear-gradient(45deg, #fe5722 0%, #fe5722 30%, #ff906b 50%, #fe5722 71%, #fe5722 100%) repeat scroll 0 0;width:96%;height:40px; border-radius:20px; margin-left:10px;}
-.item-md												{background:none !important;}
-.item-ios												{background:none !important;}
-.list-ios > .item-block:first-child						{border:none!important;}
-.forgot-pass											{background:none; box-shadow: none;}
-.forgot-pass p											{text-align:center;color:#444 !important; font-weight:600;font-family: 'PT Sans Narrow', sans-serif;font-size:18px !important; line-height:100px;}
-.item-md.item-block .item-inner							{padding-right:0px;}
-.item-ios.item-block .item-inner						{padding-right:0px;}
-.login-detalis.card-ios p.err-reds:before 				{top:-8px !important;right:-4px;}
-.err-reds												{font-weight:600;}
-
+page-login {
+    // .lgoin-logo												{height:200px;background-image: url('../assets/img/met-design.jpg');width:100%;background-repeat: no-repeat; background-size: cover; }
+    // .lgoin-logo p {
+    //     width: 100%;
+    //     text-align: center;
+    //     font-size: 30px;
+    //     padding-top: 90px;
+    //     font-weight: 600;
+    //     color: #fff;
+    //     font-family: 'Exo 2', sans-serif;
+    // }
+    // .logsimg {
+    //     border-radius: 50%;
+    //     left: 0;
+    //     right: 0;
+    //     height: 0;
+    //     text-align: center;
+    // }
+    // .logsimg img {
+    //     margin-top: 45px;
+    //     padding: 10px;
+    //     width: 70%;
+    // }
+    // .item-md {
+    //     padding-left: 0px !important;
+    // }
+    // .item-ios {
+    //     padding-left: 6px !important;
+    // }
+    // .login-pages {
+    //     background: #ffffff;
+    // }
+    // /*.login-pages											{background-image: url('../assets/img/bgss.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}*/
+    // .login-detalis {
+    //     margin-top: -30px;
+    //     padding: 5px;
+    //     position: relative;
+    //     background: #fff;
+    // }
+    // .login-detalis h1 {
+    //     text-align: center !important;
+    //     font-family: 'PT Sans Narrow', sans-serif;
+    //     color: #025FA9 !important;
+    //     font-weight: 600;
+    //     font-size: 23px;
+    // }
+    // .text-input-md {
+    //     padding: 10px;
+    //     border: 1px solid #ccc;
+    //     border-radius: 20px;
+    //     font-family: "Muli", sans-serif;
+    // }
+    // .text-input-ios {
+    //     padding: 10px;
+    //     border: 1px solid #ccc;
+    //     border-radius: 20px;
+    //     font-family: "Muli", sans-serif;
+    // }
+    // // .logoin-btn												{font-size:18px;font-weight:600;color:#fff;font-family: 'Muli', sans-serif;background: rgba(0, 0, 0, 0) linear-gradient(45deg, #fe5722 0%, #fe5722 30%, #ff906b 50%, #fe5722 71%, #fe5722 100%) repeat scroll 0 0;width:96%;height:40px; border-radius:20px; margin-left:10px;}
+    // .item-md {
+    //     background: none !important;
+    // }
+    // .item-ios {
+    //     background: none !important;
+    // }
+    // .list-ios>.item-block:first-child {
+    //     border: none !important;
+    // }
+    // .forgot-pass {
+    //     background: none;
+    //     box-shadow: none;
+    // }
+    // .forgot-pass p {
+    //     text-align: center;
+    //     color: #444 !important;
+    //     font-weight: 600;
+    //     font-family: 'PT Sans Narrow', sans-serif;
+    //     font-size: 18px !important;
+    //     line-height: 100px;
+    // }
+    // .item-md.item-block .item-inner {
+    //     padding-right: 0px;
+    // }
+    // .item-ios.item-block .item-inner {
+    //     padding-right: 0px;
+    // }
+    // .login-detalis.card-ios p.err-reds:before {
+    //     top: -8px !important;
+    //     right: -4px;
+    // }
+    // .err-reds {
+    //     font-weight: 600;
+    // }
+    /*===============
+Android
+================*/
+    .login-pages {
+        background-image: url(../assets/img/login.png);
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        .login-logo {
+            height: 200px;
+            .logsimg{
+                text-align: center;
+                position: absolute;
+                width: 100%;
+                top: 10%;
+                img{
+                    height: 70px;
+                    margin: 0 auto;
+                }
+            }
+        }
+        .login-details {
+            ion-item {
+                width: calc(100% - 40px);
+                margin: 10px auto 0px auto;
+                background: #fff !important;
+                display: flex;
+                align-items: center;
+                .input-wrapper {
+                    ion-label {
+                        padding: 0px 5px 0px 20px;
+                        margin: 0;
+                        ion-icon {
+                            color: #333;
+                        }
+                    }
+                    ion-input {
+                        input {
+                            margin: 0px 0px 0px 8px;
+                            width: calc(100% - 8px - 0px);
+                            border: none;
+                            height: 65px;
+                            font-size: 15px;
+                        }
+                    }
+                }
+            }
+        }
+        ion-item {
+            background: transparent;
+            .item-inner{
+                padding-right: 0 !important;
+                border-bottom: none !important;
+                ion-label{
+                    margin: 25px 0px !important;
+                    .logoin-btn {
+                        font-size: 15px;
+                        font-weight: 600;
+                        color: #fff;
+                        font-family: 'Muli', sans-serif;
+                        background: linear-gradient(to bottom, #0699da, #17538e);
+                        // background: linear-gradient(to bottom, #7083f1, #3851e0);
+                        width: calc(100% - 40px);
+                        height: 60px;
+                        border-radius: 0px;
+                        margin: 0 auto !important;
+                        letter-spacing: 0.2px;
+                        display: block;
+                    }
+                }               
+            }            
+        }
+        .forget-pwd{
+            color: #000000;            
+            bottom: 10px;            
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+    }
 }

@@ -1,29 +1,33 @@
 <ion-content class="login-pages">
-<div class="lgoin-logo">
-<div class="logsimg"><img src="assets/img/elder-logo-313.png"/></div>
-<!-- <p>EldersIndia</p> -->
-</div>
-<form (ngSubmit)="login()" [formGroup]="loginForm">
-<ion-card class="login-detalis">
-  <h1>Login</h1>
-  <ion-list>
-    <ion-item>
-      <ion-input class="mails-left" name="email" type="text"  autocorrect="off" autocapitalize="none" formControlName="email"  placeholder="Email" ></ion-input>
+  <div class="login-logo">
+    <div class="logsimg">
+      <img src="assets/img/elder-logo-313.png" />
+    </div>
+    <!-- <p>EldersIndia</p> -->
+  </div>
+  <form (ngSubmit)="login()" [formGroup]="loginForm">
+    <ion-list class="login-details">
+      <ion-item>
+        <ion-label>
+            <ion-icon ios="ios-person" md="md-person"></ion-icon>
+        </ion-label>
+        <ion-input class="mails-left" name="email" type="text" autocorrect="off" autocapitalize="none" formControlName="email" placeholder="Email"></ion-input>
+      </ion-item>
+      <p *ngIf="!loginForm.controls.email.valid && (loginForm.controls.email.dirty || submitAttempt)" class="err-reds shake">Please enter email.</p>
+      <ion-item>
+        <ion-label>
+            <ion-icon ios="ios-key" md="md-key"></ion-icon>
+        </ion-label>
+        <ion-input name="password" class="mails-left" type="password" formControlName="password" placeholder="Password"></ion-input>
+      </ion-item>
+      <p *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)" class="err-reds shake">Please enter password.</p>
+    </ion-list>
+    <ion-item >
+      <button class="logoin-btn" full (press)="pressLogin()">GET STARTED</button>
     </ion-item>
-  </ion-list>
-  <p *ngIf="!loginForm.controls.email.valid && (loginForm.controls.email.dirty || submitAttempt)" class="err-reds shake">Please enter email.</p>
-  <ion-list>
-    <ion-item>
-      <ion-input name="password" class="mails-left" type="password" formControlName="password" placeholder="Password"></ion-input>
-    </ion-item>
-  </ion-list>
-  <p *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)" class="err-reds shake">Please enter password.</p>
-  <ion-item>
-    <button class="logoin-btn" full (press)="pressLogin()">Submit</button>
-  </ion-item>
-</ion-card>
-</form>
-<ion-card class="forgot-pass">
-<p (click)="forgotPassword()" (press)="pressevent()">Forgot Password?</p>
-</ion-card>
+
+  </form>
+ 
+  <p class="forget-pwd" (click)="forgotPassword()" (press)="pressevent()">Forgot Password?</p>
+  
 </ion-content>
