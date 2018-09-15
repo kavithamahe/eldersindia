@@ -45,15 +45,15 @@
         </ion-list>
           <ion-list *ngIf="dependents.length != 1">
           <div *ngIf="pack.package_available == 0 || user_type=='sponsor'" class="get-pack">
-            <button ion-button (click)="openRequestPackage(pack.id,pack.package_amount,pack.package_validity)">Get Package</button>
+            <button ion-button (click)="openRequestPackage(pack.id,pack.package_amount,pack.package_validity,pack.service_quantity)">Get Package</button>
           </div>
         </ion-list>
         <ion-list *ngIf="dependents.length == 1">
           <div *ngIf="pack.package_available == 0 || user_type=='sponsor'" class="get-pack">
-            <button ion-button (click)="openRequestPackage(pack.id,pack.package_amount,pack.package_validity)">Get Package</button>
+            <button ion-button (click)="openRequestPackage(pack.id,pack.package_amount,pack.package_validity,pack.service_quantity)">Get Package</button>
           </div>
         </ion-list>
-        <strong class="purch-already" *ngIf="pack.package_available > 0">You've already purchased this</strong>
+        <strong class="purch-already" *ngIf="user_type !='sponsor' && pack.package_available.length > 0 && (pack.package_available[0].status == 1 || pack.package_available[0].status == 6)">You've already purchased this</strong>
         <ion-list *ngFor="let pack_serve of pack.packages_service; let i=index" class="listed-descr"> {{pack_serve.name}} {{pack_serve.quantity}}  {{pack_serve.common_type.replace('Per', '')}}</ion-list>
       </ion-col>
     </ion-item>

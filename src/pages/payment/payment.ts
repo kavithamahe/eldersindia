@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,NavParams,Platform,ViewController,LoadingController} from 'ionic-angular';
+import { NavController,NavParams,Platform,ViewController,LoadingController,AlertController} from 'ionic-angular';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -101,7 +101,8 @@ servicediscountcostss:any;
 discountcost:any;
 long:any;
 lat:any;
-  constructor(public platform:Platform,public loadingCtrl: LoadingController,private device: Device,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,
+imei_number:any;
+  constructor(public platform:Platform,private alertCtrl: AlertController,public loadingCtrl: LoadingController,private device: Device,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,
     public blogListService:BlogListService,public _provider:ServiceProvider,public navCtrl: NavController,private http: Http) {
   console.log("Device UUID is: " + this.device.uuid);
   localStorage.setItem('uuid', this.device.uuid);
@@ -132,6 +133,8 @@ lat:any;
    }
    else if(navParams.get("service") == "Safety and security"){
         this.paymentData = navParams.get("paymentData");
+        this.imei_number = this.paymentData.mobile_imei;
+        localStorage.setItem('imei_number', this.imei_number);
         this.subcategory = this.paymentData.subcategory;
     this.service_name = this.paymentData.service_name;
     this.service_cost = this.paymentData.service_cost * 100;
@@ -371,10 +374,10 @@ recreationRequestSubmitbeforePayment(){
   payno(){
     this.dismiss();
   }
+
   // https://i.imgur.com/3g7nmJC.png
   payRecreation(){
     if(this.subcategory == "Emergency Medical and Non-medical"){
-       console.log(localStorage.getItem("lat"));
     var options = {
       description: this.serviceTitle,
       image: "http://qa.eldersindia.com/assets/img/Elderlogo.png",
@@ -418,14 +421,15 @@ xmlhttp.open("POST", url,true);
 xmlhttp.setRequestHeader("Content-Type", "application/json");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
 xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss"),
-"latitude":localStorage.getItem("lat"),"longitude":localStorage.getItem("long"),"imei_number":"4b2a7a2cf63d35ee"}));
+"imei":localStorage.getItem("imei_number")}));
 
 xmlhttp.onload = function () {
   loading.dismiss();
   var users = JSON.parse(xmlhttp.responseText);
  var result=users.result;
   // navCtrl.setRoot(ServicerequestPage);
-   nav.showToast(result);
+
+  nav.presentConfirm(result);
 
   }
       
@@ -492,7 +496,8 @@ xmlhttp.onload = function () {
   var users = JSON.parse(xmlhttp.responseText);
  var result=users.result;
   // navCtrl.setRoot(ServicerequestPage);
-   nav.showToast(result);
+   
+  nav.presentConfirm(result);
 
   }
     }
@@ -555,8 +560,9 @@ xmlhttp.onload = function () {
   loading.dismiss();
   var users = JSON.parse(xmlhttp.responseText);
  var result=users.result;
+
   // navCtrl.setRoot(ServicerequestPage);
-   nav.showToast(result);
+ nav.presentConfirm(result);
 
   }
       

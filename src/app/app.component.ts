@@ -174,6 +174,7 @@ export class MyApp {
          this.storage.set('safeme_status', loginuser['details']['safeme_status']);
          this.storage.set('helpme_status', loginuser['details']['helpme_status']);
          this.storage.set('vendor_id', loginuser['details']['vendor_id']);
+         this.storage.set('elder_mobile_imei', loginuser['details']['elder_mobile_imei']);
          if(loginuser['details']['user_type']=='elder' && (loginuser.details.emergency_contacts.length>0))
          {
          if(loginuser.details.emergency_contacts[0].call_sponsor!='undefined')

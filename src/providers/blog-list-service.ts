@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
-import { ToastController } from 'ionic-angular';
+import { ToastController ,AlertController} from 'ionic-angular';
 import 'rxjs/add/operator/map';
 /*
   Generated class for the BlogListService provider.
@@ -19,7 +19,7 @@ user_id:any;
 BlogId:any;
 friendsID:any;
 Url:any;
-  constructor(public http: Http, public storage:Storage,public toastCtrl: ToastController) {
+  constructor(public http: Http, public storage:Storage,public toastCtrl: ToastController,private alertCtrl: AlertController) {
     this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();
@@ -300,6 +300,7 @@ getPackageRequestById(rootUrl,packageId){
         position:"top",
         duration: 5000
       });
+
       toast.present();
    }
    showToaster(messageData){
@@ -310,4 +311,20 @@ getPackageRequestById(rootUrl,packageId){
       });
       toast.present();
    }
+   presentConfirm(messageData) {
+  let alert = this.alertCtrl.create({
+    title: 'Response',
+    message: messageData,
+    buttons: [
+    
+      {
+        text: 'Ok',
+        handler: () => {
+          console.log('Buy clicked');
+        }
+      }
+    ]
+  });
+  alert.present();
+}
 }

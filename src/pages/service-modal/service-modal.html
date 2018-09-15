@@ -88,6 +88,26 @@
             </ion-select>
           </ion-item>
         </ion-list>
+        <ion-list *ngIf="user_type == 'sponsor'">
+          <ion-row>
+            <ion-col>
+              <ion-label style=" font-size:17px;   line-height:20px; float:left;" class="required">Mobile IMEI Number</ion-label>
+              <ion-item class="sel-label" text-wrap>
+                <ion-input type="text" [(ngModel)]="mobile_imei" value="{{mobile_imei}}"></ion-input>
+              </ion-item>
+            </ion-col>
+            </ion-row>
+            </ion-list>
+            <ion-list *ngIf="user_type != 'sponsor'">
+          <ion-row>
+            <ion-col>
+              <ion-label style=" font-size:17px;   line-height:20px; float:left;" class="required">Mobile IMEI Number</ion-label>
+              <ion-item class="sel-label" text-wrap>
+                <ion-input type="text" [(ngModel)]="mobile_imei" value="{{mobile_imei}}"></ion-input>
+              </ion-item>
+            </ion-col>
+            </ion-row>
+            </ion-list>
         <ion-list>
           <ion-row>
             <ion-col width-60>
@@ -937,16 +957,18 @@
 
           <ion-list *ngIf="vendorList.dependentLists.length != 1">
             <div *ngIf="pack.package_available == 0 || user_type=='sponsor'">
-            <a (click)="openRequestPackage(pack.id,pack.vendor_id,pack.package_validity,pack.package_amount)" class="lan-select">Get Package</a>
+            <a (click)="openRequestPackage(pack.id,pack.vendor_id,pack.package_validity,pack.package_amount,pack.service_quantity)" class="lan-select">Get Package</a>
             </div>
           </ion-list>
           <ion-list *ngIf="vendorList.dependentLists.length == 1">
           <ion-list *ngIf="pack.package_available == 0 || user_type=='sponsor'" text-center>
-            <a (click)="openRequestPackage(pack.id,pack.vendor_id,pack.package_validity,pack.package_amount)" class="lan-select">Get Package</a>
+            <a (click)="openRequestPackage(pack.id,pack.vendor_id,pack.package_validity,pack.package_amount,pack.service_quantity)" class="lan-select">Get Package</a>
           </ion-list>
           </ion-list>
-          <strong class="purch-already" *ngIf="pack.package_available > 0">You've already purchased this
+          <ion-list>
+          <strong class="purch-already" *ngIf="user_type !='sponsor' && pack.package_available > 0 && (pack.package_available[0].status == 1 || pack.package_available[0].status == 6)">You've already purchased this
           </strong>
+          </ion-list>
           <ion-list *ngFor="let pack_serve of pack.packages_service; let i=index" class="listed-descr">
             {{pack_serve.name}} {{pack_serve.quantity}} {{pack_serve.common_type.replace('Per', '')}}</ion-list>
 

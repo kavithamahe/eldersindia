@@ -101,6 +101,7 @@ sponsor_last:any;
 time:any;
 altercontact:any;
 recreation:any;
+mobile_imei:any;
 // emergency_list=[];
   constructor(public storage:Storage,public alertCtrl: AlertController,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder) {
@@ -113,6 +114,7 @@ recreation:any;
     storage.get('elder_age').then((elder_age) => { this.elderage=elder_age; })
     storage.get('phone').then((phone) => { this.phone=phone; })
     storage.get('email').then((email) => { this.email=email; })
+    storage.get('elder_mobile_imei').then((elder_mobile_imei) => { this.mobile_imei=elder_mobile_imei; })
     storage.get('sponsor_name').then((sponsor_name) => { this.sponsor_name=sponsor_name;
     console.log(this.sponsor_name); })
     storage.get('sponsor_last').then((sponsor_last) => { this.sponsor_last=sponsor_last; })
@@ -333,11 +335,14 @@ recreation:any;
     this.navCtrl.pop();
   }
   emergencyDetails(){
+    console.log(this.mobile_imei);
      if(this.user_type == 'sponsor' && this.elder_id == undefined){
       this._provider.showToast("Please select the dependent");
     }
+
+
     else{
-     console.log("dfdf" + this.emergency);
+    
 
         let emergencyDetailsname = this.emergency_name.filter(item => item == undefined);
         console.log(emergencyDetailsname.length);
@@ -346,14 +351,14 @@ recreation:any;
         this._provider.showToast("Please enter all the details");
       }
          else{
-         if(this.terms != undefined){
+         if(this.terms != undefined && this.mobile_imei != undefined){
         this.emergencyConfirm = true;
         this.emergencyhelp = false;
       }
       else{
-        this._provider.showToast("Please check the terms and conditions");
+        this._provider.showToast("Please enter all the details");
       }
- 
+  
       }
         }
      
@@ -679,6 +684,7 @@ recreation:any;
     .subscribe(
         data =>{
                  this.elderDetails = data.result;
+                 this.mobile_imei = this.elderDetails.mobile_imei;
                 },
         err =>{
           if(err.status===400)
@@ -866,7 +872,7 @@ let paymentData = {"package_id":"","serviceType":"One time","service_cost":this.
  "get_custome_service_cancel_amount":0,"total_cost":this.schedule_cost,"get_custome_deliever_amount":0,
  "total_service_cost":this.schedule_cost,"get_custome_amount":0,"package_id":"","quantity":"",
  "dependentid":this.elder_id,"getCustomerBalanceAmount":0,"lead_time":"00:00","selected_dates":[],
- "exclude_days":[],"Category_name":category,"serviceType":"One time",
+ "exclude_days":[],"Category_name":category,"serviceType":"One time","mobile_imei":this.mobile_imei,
  "book":{"name":this.name,"mobile":this.phone,"mail":this.email},
  emergency,
  "paymentcost":this.schedule_cost};
@@ -926,11 +932,11 @@ wearablespaynow(prebook_cost,category_id,service_id,sub_category_id,category,ser
    this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Recreation"});
    this.dismiss();
  }
- openRequestPackage(id,vendor_id,package_validity,package_amount){
+ openRequestPackage(id,vendor_id,package_validity,package_amount,service_quantity){
   if(this.vendorList.dependentLists.length == 1){
       this.dependentId = this.vendorList.dependentLists[0].id;
     }
-    let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id,vendor_id:vendor_id,package_validity:package_validity,package_amount:package_amount,dependents:this.vendorList.dependentLists});
+    let modal = this.modalCtrl.create(GetpackagePagePage,{packID:id,vendor_id:vendor_id,package_validity:package_validity,package_amount:package_amount,dependents:this.vendorList.dependentLists,"service_quantity":service_quantity});
 
     modal.present();
  }

@@ -30,6 +30,9 @@ vendor_id:any;
 package_validity:any;
 package_amount:any;
 location_id:any;
+service_quantity:any;
+packageAvailstatus:any;
+packageAvailresult:any;
   constructor(public navParams: NavParams,public modalCtrl: ModalController,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
 
   // constructor(public navParams: NavParams,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
@@ -44,21 +47,29 @@ location_id:any;
       });
 
       
-      
+        this.service_quantity = navParams.get("service_quantity").service_quantity;
         this.location_id = navParams.get("location_id");
         this.packId = navParams.get("packID");
         this.vendor_id = navParams.get("vendor_id");
         this.package_validity = navParams.get("package_validity");
         this.package_amount = navParams.get("package_amount");
-       console.log(this.package_amount);
         this.dependentLists = navParams.get("dependents");
    });
   }
   dismiss(){
     this.viewCtrl.dismiss();
   }
- 
+ packageAvail(){
+         this.blogListService.packageAvailAlert(this.selectedConnections,this.packId,this.service_quantity).subscribe(connections => {
+        this.packageAvailstatus=connections.status;
+        this.packageAvailresult = connections.result;
+     },
+   err =>{
+      this.blogListService.showErrorToast(err);
+  })
+ }
   getPackageselder(){
+  
     if(this.paymenttype == undefined){
         this.blogListService.showToast("Please select above details");
       }
@@ -88,6 +99,14 @@ location_id:any;
   }
 
     getPackage(){
+       this.blogListService.packageAvailAlert(this.selectedConnections,this.packId,this.service_quantity).subscribe(connections => {
+        this.packageAvailstatus=connections.status;
+        this.packageAvailresult = connections.result;
+     },
+   err =>{
+      this.blogListService.showErrorToast(err);
+  })
+
       if(this.selectedConnections == undefined || this.paymenttype == undefined){
         this.blogListService.showToast("Please select above details");
       }
@@ -109,10 +128,14 @@ location_id:any;
   })
     }
     else{
-      console.log(this.package_amount);
-     let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
+      if(this.packageAvailstatus == 0){
+         let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
       "package_amount":this.package_amount});
       serviceModal.present();
+      }
+    else{
+      this.blogListService.showToast(this.packageAvailresult);
+    }
     }
     }
  }

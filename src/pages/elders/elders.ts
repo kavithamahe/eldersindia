@@ -657,6 +657,7 @@ getareaof_interest(){
 }
  addDependent(){
    this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
+   console.log(this.elder_dob);
     //---------------------------------edited-------------------------------//
   if(this.avatar1 != ""){
     this.avatar = this.avatar1;
@@ -745,6 +746,7 @@ getareaof_interest(){
 
 
           if(this.functionality == "edit"){
+            console.log(this.elder_dob);
             if(this.job_interest != false){
                if(!this.authForm.valid || !this.myForm.valid){
             this.submitAttempt = true; 

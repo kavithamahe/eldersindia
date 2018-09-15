@@ -26,7 +26,7 @@
           <ion-item class="sel-label">
           <ion-label>To</ion-label>
              <ion-select  style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="selectedConnections" 
-             [ngModelOptions]="{standalone: true}">
+             [ngModelOptions]="{standalone: true}" (ionChange)="packageAvail()">
           <ion-option *ngFor="let name of dependentLists" [value] = "name.id">{{name.name}}
           </ion-option>
         </ion-select>  

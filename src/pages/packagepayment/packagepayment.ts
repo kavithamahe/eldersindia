@@ -164,7 +164,7 @@ let loading = this.loadingCtrl.create({content: 'Please wait...!'});
  var successCallback = function(payment_id) {
      loading.present();
 
-  var url  = "http://beta.eldersindia.com/api/razorPaymentResponseAdditionalServiceCost";
+  var url  = "http://qa.eldersindia.com/api/razorPaymentResponseAdditionalServiceCost";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -228,7 +228,7 @@ let loading = this.loadingCtrl.create({content: 'Please wait...!'});
  var successCallback = function(payment_id) {
      loading.present();
 
-  var url  = "http://beta.eldersindia.com/api/razorPaymentResponseforPartialPayment";
+  var url  = "http://qa.eldersindia.com/api/razorPaymentResponseforPartialPayment";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -295,7 +295,7 @@ let loading = this.loadingCtrl.create({content: 'Please wait...!'});
  var successCallback = function(payment_id) {
     
 loading.present();
-  var url  = "http://beta.eldersindia.com/api/razorPaymentResponseforPackage";
+  var url  = "http://qa.eldersindia.com/api/razorPaymentResponseforPackage";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -359,7 +359,7 @@ let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
      // ajaxCallCheck(payment_id);
 
-  var url  = "http://beta.eldersindia.com/api/razorPaymentResponsependingPayment";
+  var url  = "http://qa.eldersindia.com/api/razorPaymentResponsependingPayment";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
