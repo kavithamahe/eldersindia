@@ -8,125 +8,114 @@
 </ion-header>
 
 <ion-content class="main-Dashboard">
-  
-  <div *ngIf="user_type=='elder'">
-    <ion-grid class="dashboard">
+    <!-- ====== Elders login ====== -->  
+
+    <ion-grid class="dashboard2" *ngIf="user_type=='elder'">
       <ion-row>
         <ion-col *ngIf="safeme_status != '1'" width-50 class="connection dashboard-item" text-center (click)="shareLocation()">
-          <span class="dashboard-listed">
+          <div class="dashboard-listed">
             <i class="fa fa-map-marker fa-5x"></i>
-            <p>SHARE LOCATION</p>
-          </span>
+            <p>share Location</p>
+          </div>
         </ion-col>
         <ion-col *ngIf="helpme_status != '1'" width-50 class="call-sponsor dashboard-item" text-center (click)="makeCall(call_sponsor)">
-          <span class="dashboard-listed">
+          <div class="dashboard-listed">
             <img *ngIf="sponsor_avatar == null" src="assets/img/download.jpg" style="width:50px; height:50px;" />
             <img *ngIf="sponsor_avatar != null" [src]="url+sponsor_avatar" style="width:50px; height:50px;" />
-            <p style="text-transform: uppercase;">{{sponsor_name}}</p>
-          </span>
+            <p style="text-transform: capitalize;">{{sponsor_name}}</p>
+          </div>
         </ion-col>
         <ion-col *ngIf="safeme_status == '1'" width-50 class="jobs dashboard-item" text-center (click)="safeMe()">
-          <span class="dashboard-listed">
+          <div class="dashboard-listed">
             <i class="fa fa-ambulance fa-5x">
             </i>
-            <p>SAFE ME</p>
-          </span>
+            <p>Safe Me</p>
+          </div>
         </ion-col>
         <ion-col *ngIf="helpme_status == '1'" width-50 class="police dashboard-item" text-center (click)="helpMe()">
-          <span class="dashboard-listed">
+          <div class="dashboard-listed">
             <i class="fa fa-users fa-5x"></i>
-            <p>HELP ME</p>
-          </span>
+            <p>Help Me</p>
+          </div>
         </ion-col>
       </ion-row>
-    </ion-grid>
-    
-    <ion-grid class="dashboard">
       <ion-row>
-        <ion-col width-50 class="hooter" text-center (click)="hooter(hooterOn)">
-          <span class="dashboard-listed">
+        <ion-col width-50 class="hooter dashboard-item" text-center (click)="hooter(hooterOn)">
+          <div class="dashboard-listed">
             <i class="fa fa-bell-o fa-5x"></i>
-            <p> HOOTER</p>
-          </span>
+            <p>Hooter</p>
+          </div>
         </ion-col>
-        <ion-col width-50 class="police" text-center (click)="makeCall(doctor)">
-          <span class="dashboard-listed">
+        <ion-col width-50 class="police dashboard-item" text-center (click)="makeCall(doctor)">
+          <div class="dashboard-listed">
             <i class="fa fa-user-md fa-5x"></i>
-            <p>FAMILY DOCTOR</p>
-          </span>
+            <p>Family Doctor</p>
+          </div>
         </ion-col>
-        <ion-col width-50 class="call-sponsor" text-center (click)="makeCall(call_sponsor)">
-          <span class="dashboard-listed">
+        <ion-col width-50 class="call-sponsor dashboard-item" text-center (click)="makeCall(call_sponsor)">
+          <div class="dashboard-listed">
             <img *ngIf="sponsor_avatar == null" src="assets/img/download.jpg" style="width:50px; height:50px;" />
             <img *ngIf="sponsor_avatar != null" [src]="url+sponsor_avatar" style="width:50px; height:50px;" />
-            <p style="text-transform: uppercase;">{{sponsor_name}}</p>
-          </span>
+            <p style="text-transform: capitalize;">{{sponsor_name}}</p>
+          </div>
         </ion-col>
       </ion-row>
-    </ion-grid>
-    <ion-grid class="dashboard">
       <ion-row>
-        <ion-col width-50 class="jobs" text-center (click)="makeCall(ambulance)">
-          <span class="dashboard-listed">
+        <ion-col width-50 class="jobs dashboard-item" text-center (click)="makeCall(ambulance)">
+          <div class="dashboard-listed">
             <i class="fa fa-ambulance fa-5x"></i>
-            <p>AMBULANCE</p>
-          </span>
+            <p>Ambulance</p>
+          </div>
         </ion-col>
-        <ion-col width-50 class="police" text-center (click)="makeCall(police)">
-          <span class="dashboard-listed">
+        <ion-col width-50 class="police dashboard-item" text-center (click)="makeCall(police)">
+          <div class="dashboard-listed">
             <i class="fa fa-users fa-5x"></i>
-            <p>POLICE</p>
-          </span>
+            <p>Police</p>
+          </div>
         </ion-col>
       </ion-row>
-    </ion-grid>
-    <ion-grid class="dashboard">
       <ion-row>
-        <ion-col width-50 class="community" text-center (click)="makeCall(hospital)">
-          <span class="dashboard-listed">
+        <ion-col width-50 class="community dashboard-item" text-center (click)="makeCall(hospital)">
+          <div class="dashboard-listed">
             <i class="fa fa-hospital-o fa-5x"></i>
-            <p>HOSPITAL</p>
-          </span>
+            <p>Hospital</p>
+          </div>
         </ion-col>
-        <ion-col *ngIf="safeme_status == '1' && helpme_status == '1'" width-50 class="call-sponsor" text-center (click)="makeCall(call_sponsor)">
-          <span class="dashboard-listed">
+        <ion-col *ngIf="safeme_status == '1' && helpme_status == '1'" width-50 class="call-sponsor dashboard-item" text-center (click)="makeCall(call_sponsor)">
+          <div class="dashboard-listed">
             <img *ngIf="sponsor_avatar == null" src="assets/img/download.jpg" style="width:50px; height:50px;" />
             <img *ngIf="sponsor_avatar != null" [src]="url+sponsor_avatar" style="width:50px; height:50px;" />
-            <p style="text-transform: uppercase;">{{sponsor_name}}</p>
-          </span>
+            <p style="text-transform: capitalize;">{{sponsor_name}}</p>
+          </div>
         </ion-col>
-        <ion-col *ngIf="safeme_status != '1' || helpme_status != '1'" width-50 class="messagess" text-center (click)="serviceRequests()">
-          <span class="dashboard-listed">
+        <ion-col *ngIf="safeme_status != '1' || helpme_status != '1'" width-50 class="messagess dashboard-item" text-center (click)="serviceRequests()">
+          <div class="dashboard-listed">
             <i class="fa fa-cog fa-5x"></i>
-            <p>SERVICE REQUESTS</p>
-          </span>
+            <p>Service Request</p>
+          </div>
         </ion-col>
-
       </ion-row>
-    </ion-grid>
-    <ion-grid class="dashboard" *ngIf="safeme_status == '1' && helpme_status == '1'">
-      <ion-row>
-        <ion-col width-50 class="connection" text-center (click)="shareLocation()">
-          <span class="dashboard-listed">
+      <ion-row *ngIf="safeme_status == '1' && helpme_status == '1'">
+        <ion-col width-50 class="connection dashboard-item" text-center (click)="shareLocation()">
+          <div class="dashboard-listed">
             <i class="fa fa-map-marker fa-5x"></i>
-            <p>SHARE LOCATION</p>
-          </span>
+            <p>Share Location</p>
+          </div>
         </ion-col>
-        <ion-col width-50 class="messagess" text-center (click)="serviceRequests()">
-          <span class="dashboard-listed">
+        <ion-col width-50 class="messagess dashboard-item" text-center (click)="serviceRequests()">
+          <div class="dashboard-listed">
             <i class="fa fa-cog fa-5x"></i>
-            <p>SERVICE REQUESTS</p>
-          </span>
+            <p>Service Request</p>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>
-  </div>
 
+  <!-- ====== Sporson login ====== -->
 
-
-  <ion-grid class="dashboard">
+  <ion-grid class="dashboard1">
     <ion-row>
-      <ion-col width-50 class="services" text-center (click)="servicesPage()">
+      <ion-col width-50 class="services dashboard-item" text-center (click)="servicesPage()">
         <div class="dashboard-listed ">
           <i class="fa fa-cog fa-5x"></i>
           <p>Services</p>
@@ -154,8 +143,8 @@
         </div>
       </ion-col>
     </ion-row>
-  
-  
+
+
     <ion-row>
       <ion-col width-50 class="connection dashboard-item" text-center (click)="connectionsPage()">
         <div class="dashboard-listed">
@@ -170,8 +159,8 @@
         </div>
       </ion-col>
     </ion-row>
-  
-  
+
+
     <ion-row *ngIf="user_type!='elder'">
       <ion-col width-50 class="connection dashboard-item" text-center (click)="remote()">
         <div class="dashboard-listed">

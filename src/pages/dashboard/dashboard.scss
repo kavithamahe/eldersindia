@@ -21,7 +21,12 @@ page-dashboard {
 // .hooter span.dashboard-listed > i					{color:#DEB887 !important;}
 // .hooter span.dashboard-listed > i					{color:#DEB887 !important;}
 // .call-sponsor span.dashboard-listed> i 				{color:#9370DB !important;}
-
+.dashboard1{
+  padding-top:0 !important;
+}
+.dashboard2{
+  padding-bottom:0 !important;
+}
 .main-Dashboard{
   background-color: #f1f2f6;
   .dashboard-listed {
@@ -40,6 +45,9 @@ page-dashboard {
         color: #333;
         font-size: 16px;
         font-weight: 500;
+      }
+      img{
+        margin: 15px 0px 5px 0px;
       }
   }
 }

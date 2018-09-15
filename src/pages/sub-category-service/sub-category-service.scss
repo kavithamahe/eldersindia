@@ -1,23 +1,55 @@
 page-sub-category-service {
-.toolbar-title-md{ text-align:center !important;}
-.toolbar-title-ios{ text-align:center;}
+// .toolbar-title-md{ text-align:center !important;}
+// .toolbar-title-ios{ text-align:center;}
 
-.item-md.item-block .item-inner{padding-right:0px;}
-.sub-cat-listed.item-md{background:none;}
-.sub-cat-listed .item-inner .input-wrapper .label-md		{margin:0px !important; padding-left:12px;    font-family: "Muli",sans-serif; }
-.sub-cat-listed .item-inner .input-wrapper .label-md p		{font-size:19px !important; color:hsl(191, 100%, 29%) !important; font-weight:400;letter-spacing:0.2px; float:left; width:95%;     font-family: "Muli",sans-serif; }
-.sub-cat-listed .item-inner .input-wrapper                  { border-bottom:1px solid #ccc;}
-.sub-cat-listed .item-inner{border-bottom:1px solid #ccc;}
-.sub-cat-listed .item-inner .input-wrapper .label-md i{ font-size:12px;}
-.pack-listed{background:rgba(255,255,255, 0.6);}
-.content-intop										{background-image: url('../assets/img/donor-dsd.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
+// .item-md.item-block .item-inner{padding-right:0px;}
+// .sub-cat-listed.item-md{background:none;}
+// .sub-cat-listed .item-inner .input-wrapper .label-md		{margin:0px !important; padding-left:12px;    font-family: "Muli",sans-serif; }
+// .sub-cat-listed .item-inner .input-wrapper .label-md p		{font-size:19px !important; color:hsl(191, 100%, 29%) !important; font-weight:400;letter-spacing:0.2px; float:left; width:95%;     font-family: "Muli",sans-serif; }
+// .sub-cat-listed .item-inner .input-wrapper                  { border-bottom:1px solid #ccc;}
+// .sub-cat-listed .item-inner{border-bottom:1px solid #ccc;}
+// .sub-cat-listed .item-inner .input-wrapper .label-md i{ font-size:12px;}
+// .pack-listed{background:rgba(255,255,255, 0.6);}
+// .content-intop										{background-image: url('../assets/img/donor-dsd.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
 
-.item-ios.item-block .item-inner{padding-right:0px;}
-.sub-cat-listed.item-ios{background:none;}
-.sub-cat-listed .item-inner .input-wrapper .label-ios		{margin:0px !important; padding-left:12px;    font-family: "Muli",sans-serif; }
-.sub-cat-listed .item-inner .input-wrapper .label-ios p		{font-size:19px !important; color:hsl(191, 100%, 29%) !important; font-weight:400;letter-spacing:0.2px; float:left; width:95%;     font-family: "Muli",sans-serif;}
-.sub-cat-listed .item-inner .input-wrapper                  { border-bottom:1px solid #ccc;}
-.sub-cat-listed .item-inner{border-bottom:1px solid #ccc;}
-.sub-cat-listed .item-inner .input-wrapper .label-ios i{ font-size:12px;}
-.pack-listed{background:rgba(255,255,255, 0.6);}
+// .item-ios.item-block .item-inner{padding-right:0px;}
+// .sub-cat-listed.item-ios{background:none;}
+// .sub-cat-listed .item-inner .input-wrapper .label-ios		{margin:0px !important; padding-left:12px;    font-family: "Muli",sans-serif; }
+// .sub-cat-listed .item-inner .input-wrapper .label-ios p		{font-size:19px !important; color:hsl(191, 100%, 29%) !important; font-weight:400;letter-spacing:0.2px; float:left; width:95%;     font-family: "Muli",sans-serif;}
+// .sub-cat-listed .item-inner .input-wrapper                  { border-bottom:1px solid #ccc;}
+// .sub-cat-listed .item-inner{border-bottom:1px solid #ccc;}
+// .sub-cat-listed .item-inner .input-wrapper .label-ios i{ font-size:12px;}
+// .pack-listed{background:rgba(255,255,255, 0.6);}
+
+.subCategoryServices{
+    background: url(../assets/img/bg.jpg);
+    background-position: center;
+    background-size: cover;
+    .pack-listed{
+        box-shadow: 0px 5px 20px rgba(0,0,0,0.08);
+        border-radius: 4px;
+        ion-item{
+            padding: 5px 5px 5px 10px;
+            border-bottom: 1px solid #f2f3f6;
+            .item-inner{
+                margin: 0;
+                padding: 0;
+                .input-wrapper{
+                    ion-label{
+                        width: 100%;
+                        p{
+                            width:95%;
+                            float: left;
+                            color: #333;
+                            font-size: 17px;
+                        }
+                        i{
+                            float: right;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 }
