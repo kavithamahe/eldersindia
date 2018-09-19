@@ -1,27 +1,108 @@
 page-modal-page {
-.popup-mds .scroll-content form .select-brds 										{width:100%;text-align:left;margin-right:11px !important;}
-.text-input-ios[_ngcontent-kdy-81]													{margin-left:14px !important;}
-.label-ios[_ngcontent-jnr-81] + ion-input[_ngcontent-jnr-81] .text-input[_ngcontent-jnr-81], .label-ios[_ngcontent-jnr-81] + ion-textarea[_ngcontent-jnr-81] .text-input[_ngcontent-jnr-81], .label-ios[_ngcontent-jnr-81] + .input[_ngcontent-jnr-81] + .cloned-input[_ngcontent-jnr-81]{margin-left:none !important;}
-.popup-mds .text-input-ios 															{margin-bottom:10px!important;margin-top:0;width:92% !important; margin-left:14px !important;}
-.popup-mds																			{padding:10px;}
-.popup-mds .label-md																{color:#333;margin:0px;float:left;font-size:19px;font-weight:400;font-family: 'Muli', sans-serif; padding-bottom:12px;letter-spacing:0.5px; padding-top:8px;}
-.popup-mds .item-md 																{border:1px solid #ccc;margin-top:5px;padding-left:3px;}
-.err-reds::before																	{top:-12px;}
-.popup-mds .item-ios 																{border:1px solid #ccc; margin-top:5px;padding-left:3px;}
-.err-reds 																			{animation-duration: 5s; animation-fill-mode: both; background:hsl(353, 100%, 93%) none repeat scroll 0 0; color: hsl(0, 100%, 50%) !important;float:right;font-family: "Muli",sans-serif;font-size:11px !important;
-																					 font-weight: 600 !important;margin-right:1px !important;margin-top:8px !important;padding-left:3px;padding-right:3px;position:relative;}
-.popup-mds .label-md p																{font-size:18px !important;font-weight:400;font-family: 'Muli', sans-serif;}
-.popup-mds .label-ios																{color:#777; margin:0px;float:left;font-size:19px;font-weight:400;font-family: 'Muli', sans-serif; padding-bottom:8px; padding-top:8px;}
-#lbl-71																				{padding-left:5px;}
-.one-timereq.item-md																{border:none !important;}
-.one-timereq.item-ios																{border:none !important;}
-.prefe																				{padding-left:5px !important;}
-.terms-con .item-inner .input-wrapper .label-md										{letter-spacing:0.5px;font-size:23px !important;font-weight:400;font-family: 'Muli', sans-serif;color:hsl(191, 100%, 29%) !important;}
-.terms-con .item-inner .input-wrapper .label-ios{    font-size:19px !important;
-    font-weight:600;    font-family: 'Muli', sans-serif;color:hsl(191, 100%, 29%) !important;}
-.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:none;box-shadow:none;}
-.item-md.item-input.input-has-focus .item-inner{border-bottom-color:none;box-shadow:none;}
-.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{border-bottom-color:none;box-shadow:none;}
-.modal-wrapper{background:#fff;}
+    .sheduleBooking{
+        background: url("../assets/img/bg.jpg");
+        background-size: cover;
+        background-position: center;
+        .sheduleCard{
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.08);     
+            padding: 10px;   
+            form{
+                ion-label{
+                    font-size: 17px;
+                    color:#000;
+                    font-weight: 500;
+                    padding: 20px 10px 5px;
+                    margin: 0;
+                }
+                ion-item{
+                    .item-inner{
+                        padding: 0;
+                        .input-wrapper{
+                            input{
+                                &.text-input{
+                                    border-bottom:1px solid #ccc;
+                                    color: #666;
+                                font-size: 18px;
+                                }
+                            }
+                            ion-select{
+                                .select-text{
+                                    color: #666;
+                                font-size: 18px;
+                                }
+                                .item-cover{
+                                    border-bottom: 1px solid #ccc;
+                                    margin: 0px 10px;
+                                    width: 95%;
+                                }
+                            }
+                            ion-datetime{
+                                width: 95%;
+                                border-bottom: 1px solid #ccc;
+                                color: #666;
+                                font-size: 18px;
+                                margin: 0 auto;
+                                padding:10px 0px 5px; 
+                            }
+                            p{
+                                color: #666;
+                                font-size: 18px;
+                                border-bottom: 1px solid #ccc;
+                            }
+                        }
+                    }
+                }
+            }
+            .serviceType{
+                background-color: #fff4ea;
+                margin: 10px 0;
+                padding: 0px 5px 10px;
+                border-radius: 5px;
+                ion-item{
+                    background: transparent;
+                }
+            }
+            .discountCost {
+                background: #f1f1f1;
+                margin-top: 19px;
+                border-radius: 5px;
+                padding: 0px 5px 10px;
+                box-shadow: none;
+                ion-item{
+                    background: transparent;
+                    .item-inner{
+                        .input-wrapper{
+                            ion-label{
+                                b{
+                                    display: inline-block;
+                                    width: 165px;
+                                }
+                                span{
+                                    color: #ff0000;
+                                    font-weight: 600;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .one-timereq{
+                .item-inner{
+                    .input-wrapper{
+                        ion-label{
+                           small{
+                            font-size: 15px;
+                            text-transform: capitalize;
+                            color: #2c4e86;
+                            font-weight: 600;
+                           }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 }
