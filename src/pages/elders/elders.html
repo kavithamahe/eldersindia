@@ -5,546 +5,505 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-	 <ion-title text-center text-capitalize>{{title}}</ion-title>
+    <ion-title text-center text-capitalize>{{title}}</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-   
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-<div class="add-depentsform">
- <form [formGroup]="authForm">
-          <ion-row>
-            <ion-col class="title-depen">
-              <div class="personal-d"><p>Personal Details</p></div>
-            </ion-col>
-          </ion-row>
-
-<div *ngIf="functionality != 'profileEdit'">
-    <ion-label class="label-tittle required">Relationship</ion-label>
-
-      <ion-item>      
-       <ion-label class="sel-label">Relationship</ion-label>  		
-            <ion-select class="select-brd"  [(ngModel)]="elder_relation" 
-            placeholder="Relationship" formControlName="elder_relation" 
-            [class.invalid]="!authForm.controls.elder_relation.valid && (authForm.controls.elder_relation.dirty)">
-              <ion-option  *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
-            </ion-select>
-      </ion-item>
-         <small *ngIf="!authForm.controls.elder_relation.valid  && (authForm.controls.elder_relation.dirty || submitAttempt)">
-              <p class="valid err-reds shake">Please select the relation</p>
-          </small> 
- </div>
+<ion-content padding class="EldersForm">
+  <div class="add-depentsform">
+    <form [formGroup]="authForm">
+      <ion-row>
+        <ion-col class="title-depen">
+          <div class="EldersTitle">
+            <h3>Personal Details</h3>
+          </div>
+        </ion-col>
+      </ion-row>
+      <div *ngIf="functionality != 'profileEdit'">
+        <ion-label class="label-tittle required">Relationship</ion-label>
+        <ion-item>
+          <ion-label class="sel-label">Relationship</ion-label>
+          <ion-select class="select-brd" [(ngModel)]="elder_relation" placeholder="Relationship" formControlName="elder_relation" [class.invalid]="!authForm.controls.elder_relation.valid && (authForm.controls.elder_relation.dirty)">
+            <ion-option *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <small *ngIf="!authForm.controls.elder_relation.valid  && (authForm.controls.elder_relation.dirty || submitAttempt)">
+          <p class="valid err-reds shake">Please select the relation</p>
+        </small>
+      </div>
       <ion-label class="label-tittle required">First Name</ion-label>
       <ion-item>
-      
-          <ion-input  type="text" formControlName="elder_name" 
-            [class.invalid]="!authForm.controls.elder_name.valid && (authForm.controls.elder_name.dirty)" [(ngModel)]="elder_name" value={{elder_name}}>
-            </ion-input>
+        <ion-input type="text" formControlName="elder_name" [class.invalid]="!authForm.controls.elder_name.valid && (authForm.controls.elder_name.dirty)"
+          [(ngModel)]="elder_name" value={{elder_name}}>
+        </ion-input>
       </ion-item>
-          <small *ngIf="!authForm.controls.elder_name.valid  && (authForm.controls.elder_name.dirty || submitAttempt)">
-                  <p class="valid err-reds shake">Please enter the name</p>
-          </small> 
-          <ion-label class="label-tittle required">Last Name</ion-label>
-               <ion-item>
-      
-            <ion-input  type="text" formControlName="last_name"
-            [class.invalid]="!authForm.controls.last_name.valid && (authForm.controls.last_name.dirty)" [(ngModel)]="last_name" value={{last_name}}>
-            </ion-input>
+      <small *ngIf="!authForm.controls.elder_name.valid  && (authForm.controls.elder_name.dirty || submitAttempt)">
+        <p class="valid err-reds shake">Please enter the name</p>
+      </small>
+      <ion-label class="label-tittle required">Last Name</ion-label>
+      <ion-item>
+        <ion-input type="text" formControlName="last_name" [class.invalid]="!authForm.controls.last_name.valid && (authForm.controls.last_name.dirty)"
+          [(ngModel)]="last_name" value={{last_name}}>
+        </ion-input>
       </ion-item>
-          <small *ngIf="!authForm.controls.last_name.valid  && (authForm.controls.last_name.dirty || submitAttempt)">
-                  <p class="valid err-reds shake">Please enter the last name</p>
-          </small> 
-        <ion-label class="label-tittle required">Contact number</ion-label>
-            <ion-item>
-              <ion-input type="number" formControlName="elder_number" 
-              [(ngModel)]="elder_number" value={{elder_number}}
-              placeholder="Contact number" (keypress)="onlyNumberKey($event)" maxlength="12" 
-              [class.invalid]="!authForm.controls.elder_number.valid && 
+      <small *ngIf="!authForm.controls.last_name.valid  && (authForm.controls.last_name.dirty || submitAttempt)">
+        <p class="valid err-reds shake">Please enter the last name</p>
+      </small>
+      <ion-label class="label-tittle required">Contact number</ion-label>
+      <ion-item>
+        <ion-input type="number" formControlName="elder_number" [(ngModel)]="elder_number" value={{elder_number}} placeholder="Contact number"
+          (keypress)="onlyNumberKey($event)" maxlength="12" [class.invalid]="!authForm.controls.elder_number.valid && 
                 (authForm.controls.elder_number.dirty)">
-              </ion-input>
-           </ion-item>
-              <small  *ngIf="!authForm.controls.elder_number.valid  && (authForm.controls.elder_number.dirty || submitAttempt)">
-                <p class="valid err-reds shake">Please enter valid mobile number</p>
-              </small> 
-          <ion-label class="label-tittle required">Date of birth</ion-label>   
-       
-          <ion-item>
-             <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" [(ngModel)]="elder_dob" formControlName="elder_dob" placeholder="Date of birth" [class.invalid]="!authForm.controls.elder_dob.valid && (authForm.controls.elder_dob.dirty)"></ion-datetime>
-          </ion-item>
-          <small *ngIf="!authForm.controls.elder_dob.valid  && (authForm.controls.elder_dob.dirty || submitAttempt)">
-                <p class="valid err-reds shake">Please select the date of birth</p>
-              </small>   
-               <ion-label class="label-tittle">Hobbies</ion-label>
-               <ion-item>
-      
-            <ion-input  type="text"  placeholder="Hobbies" [(ngModel)]="hobbies" 
-            [ngModelOptions]="{standalone: true}" value={{hobbies}}>
-            </ion-input>
+        </ion-input>
       </ion-item>
-         
-           <ion-label class="label-tittle">Allergic to</ion-label>
-               <ion-item>
-      
-            <ion-input  type="text" placeholder="Allergic to" [ngModelOptions]="{standalone: true}" [(ngModel)]="allergic" value={{allergic}}>
-            </ion-input>
+      <small *ngIf="!authForm.controls.elder_number.valid  && (authForm.controls.elder_number.dirty || submitAttempt)">
+        <p class="valid err-reds shake">Please enter valid mobile number</p>
+      </small>
+      <ion-label class="label-tittle required">Date of birth</ion-label>
+      <ion-item>
+        <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" [(ngModel)]="elder_dob" formControlName="elder_dob"
+          placeholder="Date of birth" [class.invalid]="!authForm.controls.elder_dob.valid && (authForm.controls.elder_dob.dirty)"></ion-datetime>
       </ion-item>
-         
-          <ion-label class="label-tittle required">Address</ion-label>
-          <ion-item>  
-              <ion-input type="text" formControlName="elder_address" placeholder="Address"
-                [class.invalid]="!authForm.controls.elder_address.valid && (authForm.controls.elder_address.dirty)" [(ngModel)]= "elder_address" value={{elder_address}}>
-              </ion-input>
-          </ion-item>  
-          <small *ngIf="!authForm.controls.elder_address.valid  && (authForm.controls.elder_address.dirty || submitAttempt)">
-                <p class="valid err-reds shake">Please enter the address</p>
-          </small>
-       <ion-label class="label-tittle required">Location</ion-label>
-          <ion-item>
-            <ion-label class="sel-label">Location</ion-label>
-              <ion-select  class="select-brd" [(ngModel)]="elder_location"  
-              formControlName="elder_location"  placeholder="Location"
-                [class.invalid]="!authForm.controls.elder_location.valid && (authForm.controls.elder_location.dirty)">
-                <ion-option  *ngFor="let location of locations"  value={{location.id}} >
-                  {{location.location}}
-                </ion-option>
-            </ion-select>
-          </ion-item>
-          <small *ngIf="!authForm.controls.elder_location.valid  && (authForm.controls.elder_location.dirty || submitAttempt)">
-                <p class="valid err-reds shake">Please select the location</p>
-          </small>
- 
-    <div>
-          <ion-row>
-            <ion-col class="title-depen">
-              <div class="personal-d"><p>Emergency contacts</p></div>
-            </ion-col>
-          </ion-row>
-      <div formArrayName="emergency_list">
-      <div *ngFor="let item of authForm.controls.emergency_list.controls; let i=index">
-           <div *ngIf="authForm.controls.emergency_list.controls.length > 1">
-            <button class="rem-btn" (click)="removeEmergency(i)" ion-button icon-left clear>
-                <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
-              </button>
-            </div> 
-          <ion-label class="label-tittle required">Person</ion-label>
-          <div [formGroupName]="i">
-            <ion-item>
-            <ion-label class="sel-label">Emergency</ion-label>
-              <ion-select class="select-brd" formControlName="emergency_name"  
-              [(ngModel)]="emergency_name[i]" placeholder="Person">
-                     <ion-option  *ngFor="let person of Emergency_contact" value={{person.id}}>{{person.contact}}
-                     </ion-option>
-              </ion-select>
-            </ion-item>
-             <small *ngIf="!authForm.controls.emergency_list.
-                controls[i].controls.emergency_name.valid && (authForm.controls.emergency_list.
-                controls[i].controls.emergency_name.dirty || submitAttempt)">
-                  <p class="valid err-reds shake">This field is required.</p>
-            </small> 
-            <ion-label class="label-tittle required">Number</ion-label>
-           <ion-item>
-              <ion-input type="number" [(ngModel)]="emergency_no[i]" placeholder="Number"
-              formControlName="emergency_no"           
-              [class.invalid]="!authForm.controls.emergency_list.
-                controls[i].controls.emergency_no.valid && (authForm.controls.emergency_list.
-                controls[i].controls.emergency_no.dirty)"></ion-input>
-           </ion-item>
-            <small *ngIf="!authForm.controls.emergency_list.
-                controls[i].controls.emergency_no.valid && (authForm.controls.emergency_list.
-                controls[i].controls.emergency_no.dirty || submitAttempt)">
-                  <p class="valid err-reds shake">This field is required.</p>
-            </small> 
-           </div>  
-           </div>
-          </div>
-     
-              <button class="add-btn" (click)="addEmergency()" ion-button icon-left clear>
-                <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
-                 Add More
-              </button>
-         
-          
-          </div>
-     <div *ngIf="functionality != 'profileEdit'">
-          <ion-row>
-            <ion-col class="title-depen">
-              <div class="personal-d"><p>Interest</p></div>
-            </ion-col>
-          </ion-row>
-
-       
-          <div>
-          
-            
-              <ion-label class="label-tittle">Blog category</ion-label>
-              <div>
-            <ion-item>
-                 <ion-label class="sel-label">Blog category</ion-label>
-                <ion-select multiple="true" [(ngModel)]="blog_interest" 
-                [ngModelOptions]="{standalone: true}" class="select-brd" placeholder="Blog category">
-                  <ion-option *ngFor="let blogcategory of blog_category" value={{blogcategory.id}} [selected]="blogcategory.id == blog_interest">{{blogcategory.name}}
+      <small *ngIf="!authForm.controls.elder_dob.valid  && (authForm.controls.elder_dob.dirty || submitAttempt)">
+        <p class="valid err-reds shake">Please select the date of birth</p>
+      </small>
+      <ion-label class="label-tittle">Hobbies</ion-label>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="hobbies" [ngModelOptions]="{standalone: true}" value={{hobbies}}>
+        </ion-input>
+      </ion-item>
+      <ion-label class="label-tittle">Allergic to</ion-label>
+      <ion-item>
+        <ion-input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="allergic" value={{allergic}}>
+        </ion-input>
+      </ion-item>
+      <ion-label class="label-tittle required">Address</ion-label>
+      <ion-item>
+        <ion-input type="text" formControlName="elder_address" placeholder="Address" [class.invalid]="!authForm.controls.elder_address.valid && (authForm.controls.elder_address.dirty)"
+          [(ngModel)]="elder_address" value={{elder_address}}>
+        </ion-input>
+      </ion-item>
+      <small *ngIf="!authForm.controls.elder_address.valid  && (authForm.controls.elder_address.dirty || submitAttempt)">
+        <p class="valid err-reds shake">Please enter the address</p>
+      </small>
+      <ion-label class="label-tittle required">Location</ion-label>
+      <ion-item>
+        <ion-label class="sel-label">Location</ion-label>
+        <ion-select class="select-brd" [(ngModel)]="elder_location" formControlName="elder_location" placeholder="Location" [class.invalid]="!authForm.controls.elder_location.valid && (authForm.controls.elder_location.dirty)">
+          <ion-option *ngFor="let location of locations" value={{location.id}}>
+            {{location.location}}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <small *ngIf="!authForm.controls.elder_location.valid  && (authForm.controls.elder_location.dirty || submitAttempt)">
+        <p class="valid err-reds shake">Please select the location</p>
+      </small>
+      <br />
+      <div>
+        <ion-row>
+          <ion-col class="title-depen">
+            <div class="EldersTitle">
+              <h3>Emergency contacts</h3>
+            </div>
+          </ion-col>
+        </ion-row>
+        <div formArrayName="emergency_list">
+          <div *ngFor="let item of authForm.controls.emergency_list.controls; let i=index" class="emergency-card">
+            <ion-label class="label-tittle required">Person</ion-label>
+            <div [formGroupName]="i">
+              <ion-item>
+                <ion-label class="sel-label">Emergency</ion-label>
+                <ion-select class="select-brd" formControlName="emergency_name" [(ngModel)]="emergency_name[i]" placeholder="Person">
+                  <ion-option *ngFor="let person of Emergency_contact" value={{person.id}}>{{person.contact}}
                   </ion-option>
                 </ion-select>
+              </ion-item>
+              <small *ngIf="!authForm.controls.emergency_list.
+                controls[i].controls.emergency_name.valid && (authForm.controls.emergency_list.
+                controls[i].controls.emergency_name.dirty || submitAttempt)">
+                <p class="valid err-reds shake">This field is required.</p>
+              </small>
+              <ion-label class="label-tittle required">Number</ion-label>
+              <ion-item>
+                <ion-input type="number" [(ngModel)]="emergency_no[i]" placeholder="Number" formControlName="emergency_no" [class.invalid]="!authForm.controls.emergency_list.
+                controls[i].controls.emergency_no.valid && (authForm.controls.emergency_list.
+                controls[i].controls.emergency_no.dirty)"></ion-input>
+              </ion-item>
+              <small *ngIf="!authForm.controls.emergency_list.
+                controls[i].controls.emergency_no.valid && (authForm.controls.emergency_list.
+                controls[i].controls.emergency_no.dirty || submitAttempt)">
+                <p class="valid err-reds shake">This field is required.</p>
+              </small>
+            </div>
+            <div *ngIf="authForm.controls.emergency_list.controls.length > 1" class="removeMore-outer">
+              <button class="remove-btn" (click)="removeEmergency(i)" ion-button icon-left clear>
+                <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="addMore-outer">
+          <button class="add-btn" (click)="addEmergency()" ion-button icon-left clear>
+            <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+            Add More
+          </button>
+        </div>
+      </div>
+      <br />
+      <div *ngIf="functionality != 'profileEdit'">
+        <ion-row>
+          <ion-col class="title-depen">
+            <div class="EldersTitle">
+              <h3>Interest</h3>
+            </div>
+          </ion-col>
+        </ion-row>
+        <div>
+          <ion-label class="label-tittle">Blog category</ion-label>
+          <div>
+            <ion-item>
+              <ion-label class="sel-label">Blog category</ion-label>
+              <ion-select multiple="true" [(ngModel)]="blog_interest" [ngModelOptions]="{standalone: true}" class="select-brd" placeholder="Blog category">
+                <ion-option *ngFor="let blogcategory of blog_category" value={{blogcategory.id}} [selected]="blogcategory.id == blog_interest">{{blogcategory.name}}
+                </ion-option>
+              </ion-select>
             </ion-item>
-           
-         <ion-label class="label-tittle">Service Category</ion-label>
+            <ion-label class="label-tittle">Service Category</ion-label>
             <ion-item>
               <ion-label class="sel-label">Service Category</ion-label>
-              <ion-select class="select-brd" multiple="true" 
-              [(ngModel)]="servicecategory" [ngModelOptions]="{standalone: true}" placeholder="Service Category" (ngModelChange)="selectsubcategory(servicecategory)">
+              <ion-select class="select-brd" multiple="true" [(ngModel)]="servicecategory" [ngModelOptions]="{standalone: true}" placeholder="Service Category"
+                (ngModelChange)="selectsubcategory(servicecategory)">
                 <ion-option *ngFor="let servicecategory of service_category" value={{servicecategory.id}} [selected]="servicecategory.id == servicecategory">{{servicecategory.service}}
                 </ion-option>
               </ion-select>
             </ion-item>
             <ion-label class="label-tittle">Service Sub Category</ion-label>
-              <ion-item>
+            <ion-item>
               <ion-label class="sel-label">Service Sub Category</ion-label>
-              <ion-select class="select-brd" placeholder="Service Sub Category" 
-              [(ngModel)]="servicesubcategorylist" [ngModelOptions]="{standalone: true}" multiple="true">
+              <ion-select class="select-brd" placeholder="Service Sub Category" [(ngModel)]="servicesubcategorylist" [ngModelOptions]="{standalone: true}"
+                multiple="true">
                 <ion-option *ngFor="let subcategory of servicesubcategory" value={{subcategory.id}} [selected]="subcategory.id == servicesubcategorylist">{{subcategory.name}}
                 </ion-option>
               </ion-select>
             </ion-item>
-            
-            </div> 
-           </div>
+          </div>
+        </div>
       </div>
 
-    <ion-item class="checked-empyt">
-   <ion-label style="text-align:left !important;">Interested in elder job opportunities?
-   </ion-label>
-    <ion-checkbox [(ngModel)]="job_interest" [ngModelOptions]="{standalone: true}"> 
-    </ion-checkbox>
-    </ion-item>
+      <ion-item class="interstedJob">
+        <ion-label class="interstedJobLabel">Interested in elder job opportunities?
+        </ion-label>
+        <ion-checkbox [(ngModel)]="job_interest" [ngModelOptions]="{standalone: true}">
+        </ion-checkbox>
+      </ion-item>
 
- <form [formGroup]="myForm">
-  <div *ngIf="job_interest">
-     <ion-label class="label-tittle required">Area of interest</ion-label>
-        <ion-item>
-          <ion-label class="sel-label">Interest</ion-label>
+      <form [formGroup]="myForm">
+        <div *ngIf="job_interest">
+          <ion-label class="label-tittle required">Area of interest</ion-label>
+          <ion-item>
+            <ion-label class="sel-label">Interest</ion-label>
             <ion-select class="select-brd" multiple="true" [(ngModel)]="area_of_interest" placeholder="Area of interest" formControlName="area_of_interest"
-                [class.invalid]="!myForm.controls.area_of_interest.valid && (myForm.controls.area_of_interest.dirty)">
-                <ion-option *ngFor="let industry of functionalArea" selected="item?.select" value={{industry.id}} [selected]="industry.id == area_of_interest">{{industry.name}}
+              [class.invalid]="!myForm.controls.area_of_interest.valid && (myForm.controls.area_of_interest.dirty)">
+              <ion-option *ngFor="let industry of functionalArea" selected="item?.select" value={{industry.id}} [selected]="industry.id == area_of_interest">{{industry.name}}
               </ion-option>
             </ion-select>
-        </ion-item>
-        <small *ngIf="!myForm.controls.area_of_interest.valid  && (myForm.controls.area_of_interest.dirty || submitAttempt)">
-                <p class="valid err-reds shake">This field is required.</p>
-          </small>
-    <ion-label class="label-tittle required">Job type</ion-label>
-        <ion-item>
-        <ion-label class="sel-label">Job type</ion-label>
-          <ion-select class="select-brd" [(ngModel)]="job_type" placeholder="Job type"  formControlName="job_type"
-                [class.invalid]="!myForm.controls.job_type.valid && (myForm.controls.job_type.dirty)">
-              <ion-option  value="full time">Full Time</ion-option>
-              <ion-option  value="part time">Part Time</ion-option>
-            </ion-select>
-        </ion-item>
-         <small *ngIf="!myForm.controls.job_type.valid  && (myForm.controls.job_type.dirty || submitAttempt)">
-                <p class="valid err-reds shake">This field is required.</p>
-          </small>
-             <ion-label class="label-tittle required">In Service?</ion-label>
-          <ion-item>
-              <ion-label class="sel-label">Services</ion-label>
-                <ion-select class="select-brd" [(ngModel)]="elder_service"  placeholder="Services"
-                formControlName="elder_service"  
-                [class.invalid]="!myForm.controls.elder_service.valid && 
-                (myForm.controls.elder_service.dirty)">
-                    <ion-option *ngFor="let service of in_service" value={{service.value}}>{{service.label}}</ion-option>
-                </ion-select>
           </ion-item>
-           <small *ngIf="!myForm.controls.elder_service.valid  && (myForm.controls.elder_service.dirty || submitAttempt)">
-                  <p class="valid err-reds">Please select the services</p>
-          </small> 
-          <ion-label class="label-tittle required">Attach Resume</ion-label> 
-<p>{{file_name}}</p>
-  <div>
-   <input type="file" (change)="fileChange($event)" placeholder="Upload file" >
-  </div>
-<ion-label class="label-tittle required">Skills</ion-label>
-        <div class="tag-skill_set">
-      
-      <rl-tag-input 
-      [(ngModel)]="skill_set" 
-      [addOnBlur]="false" 
-      [addOnEnter]="true"  
-      [autocompleteItems]="skills" 
-      [autocomplete]="true" 
-      formControlName="skill_set" 
-                [class.invalid]="!myForm.controls.skill_set.valid && (myForm.controls.skill_set.dirty)"
-      placeholder="Enter your skills..">
-      </rl-tag-input>
-        </div>
-         <small *ngIf="!myForm.controls.skill_set.valid  && (myForm.controls.skill_set.dirty || submitAttempt)">
-                <p class="valid err-reds shake">This field is required.</p>
+          <small *ngIf="!myForm.controls.area_of_interest.valid  && (myForm.controls.area_of_interest.dirty || submitAttempt)">
+            <p class="valid err-reds shake">This field is required.</p>
           </small>
-  <div>
-    <ion-row>
-      <ion-col class="title-depen">
-        <div class="personal-d"><p>Experience details</div>
-      </ion-col>
-    </ion-row>
+          <ion-label class="label-tittle required">Job type</ion-label>
+          <ion-item>
+            <ion-label class="sel-label">Job type</ion-label>
+            <ion-select class="select-brd" [(ngModel)]="job_type" placeholder="Job type" formControlName="job_type" [class.invalid]="!myForm.controls.job_type.valid && (myForm.controls.job_type.dirty)">
+              <ion-option value="full time">Full Time</ion-option>
+              <ion-option value="part time">Part Time</ion-option>
+            </ion-select>
+          </ion-item>
+          <small *ngIf="!myForm.controls.job_type.valid  && (myForm.controls.job_type.dirty || submitAttempt)">
+            <p class="valid err-reds shake">This field is required.</p>
+          </small>
+          <ion-label class="label-tittle required">In Service?</ion-label>
+          <ion-item>
+            <ion-label class="sel-label">Services</ion-label>
+            <ion-select class="select-brd" [(ngModel)]="elder_service" placeholder="Services" formControlName="elder_service" [class.invalid]="!myForm.controls.elder_service.valid && 
+                (myForm.controls.elder_service.dirty)">
+              <ion-option *ngFor="let service of in_service" value={{service.value}}>{{service.label}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <small *ngIf="!myForm.controls.elder_service.valid  && (myForm.controls.elder_service.dirty || submitAttempt)">
+            <p class="valid err-reds">Please select the services</p>
+          </small>
+          <ion-label class="label-tittle required">Attach Resume</ion-label>
+          <!-- <p>{{file_name}}</p> -->
+          <div class="attachFile">
+            <input type="file" (change)="fileChange($event)" placeholder="Upload file">
+          </div>
+
+          <ion-label class="label-tittle required">Skills</ion-label>
+          <div class="tag-skill_set">
+            <rl-tag-input [(ngModel)]="skill_set" [addOnBlur]="false" [addOnEnter]="true" [autocompleteItems]="skills" [autocomplete]="true"
+              formControlName="skill_set" [class.invalid]="!myForm.controls.skill_set.valid && (myForm.controls.skill_set.dirty)"
+              placeholder="Enter your skills..">
+            </rl-tag-input>
+          </div>
+          <small *ngIf="!myForm.controls.skill_set.valid  && (myForm.controls.skill_set.dirty || submitAttempt)">
+            <p class="valid err-reds shake">This field is required.</p>
+          </small>
+          <br />
+          <div>
+            <ion-row>
+              <ion-col class="title-depen">
+                <div class="EldersTitle">
+                  <h3>Experience details</h3>
+                </div>
+              </ion-col>
+            </ion-row>
 
 
- <div formArrayName="experience_list">
- <div  *ngFor="let item of myForm.controls.experience_list.controls; let i=index ">
-  <div *ngIf="myForm.controls.experience_list.controls.length > 1">
-          <button class="rem-btn" (click)="removeExperience(i)" ion-button icon-left clear>
-            <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
-          </button>
-        </div>
-    <ion-label class="label-tittle required">Industry</ion-label>
-     <div [formGroupName]="i">
-      <ion-item>
-         <ion-label class="sel-label">Industry</ion-label>
-            <ion-select class="select-brd" [(ngModel)]="experience_industry[i]" placeholder="Industry" formControlName="experience_industry" 
-                [class.invalid]="!myForm.controls.experience_list.
+            <div formArrayName="experience_list">
+              <div *ngFor="let item of myForm.controls.experience_list.controls; let i=index " class="emergency-card">
+                
+                <ion-label class="label-tittle required">Industry</ion-label>
+                <div [formGroupName]="i">
+                  <ion-item>
+                    <ion-label class="sel-label">Industry</ion-label>
+                    <ion-select class="select-brd" [(ngModel)]="experience_industry[i]" placeholder="Industry" formControlName="experience_industry"
+                      [class.invalid]="!myForm.controls.experience_list.
                 controls[i].controls.experience_industry.valid && (myForm.controls.experience_list.
                 controls[i].controls.experience_industry.dirty)">
-              <ion-option *ngFor="let industry of functionalArea"  selected="item?.select" value={{industry.id}}>{{industry.name}}
-              </ion-option>
-            </ion-select>
-       
-        </ion-item>
-            <small *ngIf="!myForm.controls.experience_list.
+                      <ion-option *ngFor="let industry of functionalArea" selected="item?.select" value={{industry.id}}>{{industry.name}}
+                      </ion-option>
+                    </ion-select>
+
+                  </ion-item>
+                  <small *ngIf="!myForm.controls.experience_list.
                 controls[i].controls.experience_industry.valid && (myForm.controls.experience_list.
                 controls[i].controls.experience_industry.dirty || submitAttempt)">
-                  <p class="valid err-reds shake">This field is required.</p>
-            </small> 
-         <ion-label class="label-tittle required">Total years</ion-label>
-          <ion-item>
-              <ion-input [(ngModel)]="experience_years[i]" placeholder="Total years"
-                formControlName="experience_years" 
-                [class.invalid]="!myForm.controls.experience_list.
+                    <p class="valid err-reds shake">This field is required.</p>
+                  </small>
+                  <ion-label class="label-tittle required">Total years</ion-label>
+                  <ion-item>
+                    <ion-input [(ngModel)]="experience_years[i]" placeholder="Total years" formControlName="experience_years" [class.invalid]="!myForm.controls.experience_list.
                 controls[i].controls.experience_years.valid && (myForm.controls.experience_list.
                 controls[i].controls.experience_years.dirty)" type="text">
-              </ion-input>
-          </ion-item>
-            <small *ngIf="!myForm.controls.experience_list.
+                    </ion-input>
+                  </ion-item>
+                  <small *ngIf="!myForm.controls.experience_list.
                 controls[i].controls.experience_years.valid && (myForm.controls.experience_list.
                 controls[i].controls.experience_years.dirty || submitAttempt)">
-                  <p class="valid err-reds shake">This field is required.</p>
-            </small> 
-          <ion-label class="label-tittle required">Duration</ion-label>
-            <ion-item>
-              <ion-input [(ngModel)]="experience_duration[i]"  formControlName="experience_duration" 
-                [class.invalid]="!myForm.controls.experience_list.
+                    <p class="valid err-reds shake">This field is required.</p>
+                  </small>
+                  <ion-label class="label-tittle required">Duration</ion-label>
+                  <ion-item>
+                    <ion-input [(ngModel)]="experience_duration[i]" formControlName="experience_duration" [class.invalid]="!myForm.controls.experience_list.
                 controls[i].controls.experience_duration.valid && (myForm.controls.experience_list.
                 controls[i].controls.experience_duration.dirty)" type="text" placeholder="Eg:April 2007-2011">
-              </ion-input>
-              </ion-item>
-               <small *ngIf="!myForm.controls.experience_list.
+                    </ion-input>
+                  </ion-item>
+                  <small *ngIf="!myForm.controls.experience_list.
                 controls[i].controls.experience_duration.valid && (myForm.controls.experience_list.
                 controls[i].controls.experience_duration.dirty || submitAttempt)">
-                  <p class="valid err-reds shake">This field is required.</p>
-            </small> 
-        </div>
-         </div>
-      </div>
-   
-          <button class="add-btn" (click)="addExperience()" ion-button icon-left clear>
-            <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>Add more
-          </button>
-  
-     
-</div>
+                    <p class="valid err-reds shake">This field is required.</p>
+                  </small>
+                </div>
+                <div *ngIf="myForm.controls.experience_list.controls.length > 1" class="removeMore-outer">
+                  <button class="remove-btn" (click)="removeExperience(i)" ion-button icon-left clear>
+                    <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="addMore-outer">
+            <button class="add-btn" (click)="addExperience()" ion-button icon-left clear>
+              <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>Add more
+            </button>
+          </div>
+          </div>
+          <br />
+          <div>
+            <ion-row>
+              <ion-col class="title-depen">
+                <div class="EldersTitle">
+                  <h3>Educational details</h3>
+                </div>
+              </ion-col>
+            </ion-row>
 
- 
-
-      <div>
-
-          <ion-row>
-            <ion-col class="title-depen">
-              <div class="personal-d"><p>Educational details</p></div>
-            </ion-col>
-          </ion-row>
-    <br/>
-
-        <div formArrayName="education_list">
-          <div  *ngFor="let item of myForm.controls.education_list.controls; let i=index ">
-           <div *ngIf="myForm.controls.education_list.controls.length > 1">
-          <button class="rem-btn" (click)="removeEducation(i)" button-right ion-button icon-left clear>
-            <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
-          </button>
-        </div>
-            
-              <ion-label class="label-tittle required">Graduation</ion-label>
-              <div  [formGroupName]="i">
-            <ion-item>
-                 <ion-label class="sel-label">Graduation</ion-label>
-                <ion-select class="select-brd" [(ngModel)]="education_graduation[i]" placeholder="Graduation" formControlName="education_graduation" 
-                [class.invalid]="!myForm.controls.education_list.
+            <div formArrayName="education_list">
+              <div *ngFor="let item of myForm.controls.education_list.controls; let i=index " class="emergency-card">
+                <ion-label class="label-tittle required">Graduation</ion-label>
+                <div [formGroupName]="i">
+                  <ion-item>
+                    <ion-label class="sel-label">Graduation</ion-label>
+                    <ion-select class="select-brd" [(ngModel)]="education_graduation[i]" placeholder="Graduation" formControlName="education_graduation"
+                      [class.invalid]="!myForm.controls.education_list.
                 controls[i].controls.education_graduation.valid && (myForm.controls.education_list.
                 controls[i].controls.education_graduation.dirty)">
-                  <ion-option *ngFor="let education of educations" value={{education.label}}>{{education.label}}
-                  </ion-option>
-                </ion-select>
-            </ion-item>
-            <small *ngIf="!myForm.controls.education_list.
+                      <ion-option *ngFor="let education of educations" value={{education.label}}>{{education.label}}
+                      </ion-option>
+                    </ion-select>
+                  </ion-item>
+                  <small *ngIf="!myForm.controls.education_list.
                 controls[i].controls.education_graduation.valid && (myForm.controls.education_list.
                 controls[i].controls.education_graduation.dirty || submitAttempt)">
-                  <p class="valid err-reds shake">This field is required.</p>
-            </small> 
-             <ion-item *ngIf="education_graduation[i] == other">
-              <ion-input type="text" [(ngModel)]="graduationOther[i]" 
-              [ngModelOptions]="{standalone: true}">
-              </ion-input>
-              </ion-item>
-         <ion-label class="label-tittle required">Specialization</ion-label>
-            <ion-item>
-              <ion-label class="sel-label">Specialization</ion-label>
-              <ion-select class="select-brd" [(ngModel)]="education_specialization[i]" placeholder="Specialization"  formControlName="education_specialization" 
-                [class.invalid]="!myForm.controls.education_list.
+                    <p class="valid err-reds shake">This field is required.</p>
+                  </small>
+                  <ion-item *ngIf="education_graduation[i] == other">
+                    <ion-input type="text" [(ngModel)]="graduationOther[i]" [ngModelOptions]="{standalone: true}">
+                    </ion-input>
+                  </ion-item>
+                  <ion-label class="label-tittle required">Specialization</ion-label>
+                  <ion-item>
+                    <ion-label class="sel-label">Specialization</ion-label>
+                    <ion-select class="select-brd" [(ngModel)]="education_specialization[i]" placeholder="Specialization" formControlName="education_specialization"
+                      [class.invalid]="!myForm.controls.education_list.
                 controls[i].controls.education_specialization.valid && (myForm.controls.education_list.
                 controls[i].controls.education_specialization.dirty)">
-                <ion-option *ngFor="let specialization of specializations" value={{specialization.value}}>{{specialization.label}}
-                </ion-option>
-              </ion-select>
-            </ion-item>
-           <small *ngIf="!myForm.controls.education_list.
+                      <ion-option *ngFor="let specialization of specializations" value={{specialization.value}}>{{specialization.label}}
+                      </ion-option>
+                    </ion-select>
+                  </ion-item>
+                  <small *ngIf="!myForm.controls.education_list.
                 controls[i].controls.education_specialization.valid && (myForm.controls.education_list.
                 controls[i].controls.education_specialization.dirty || submitAttempt)">
-                  <p class="valid err-reds shake">This field is required.</p>
-            </small> 
-             <ion-item *ngIf="education_specialization[i] == specializationsOther">
-              <ion-input type="text" [(ngModel)]="specialization_other[i]" 
-              [ngModelOptions]="{standalone: true}">
-              </ion-input>
-              </ion-item> 
-            <ion-label class="label-tittle required">College/University</ion-label>
-            <ion-item>
-                <ion-input [(ngModel)]="education_college[i]"  formControlName="education_college" 
-                [class.invalid]="!myForm.controls.education_list.
+                    <p class="valid err-reds shake">This field is required.</p>
+                  </small>
+                  <ion-item *ngIf="education_specialization[i] == specializationsOther">
+                    <ion-input type="text" [(ngModel)]="specialization_other[i]" [ngModelOptions]="{standalone: true}">
+                    </ion-input>
+                  </ion-item>
+                  <ion-label class="label-tittle required">College/University</ion-label>
+                  <ion-item>
+                    <ion-input [(ngModel)]="education_college[i]" formControlName="education_college" [class.invalid]="!myForm.controls.education_list.
                 controls[i].controls.education_college.valid && (myForm.controls.education_list.
-                controls[i].controls.education_college.dirty)"
-                 type="text" placeholder="College / University">
-                </ion-input>
-            </ion-item>
-            <small *ngIf="!myForm.controls.education_list.
+                controls[i].controls.education_college.dirty)" type="text" placeholder="College / University">
+                    </ion-input>
+                  </ion-item>
+                  <small *ngIf="!myForm.controls.education_list.
                 controls[i].controls.education_college.valid && (myForm.controls.education_list.
                 controls[i].controls.education_college.dirty || submitAttempt)">
-                  <p class="valid err-reds shake">This field is required.</p>
-            </small> 
-            </div> 
-           </div>
-      </div>
-  
-              <button class="add-btn" (click)="addEducation()" ion-button icon-left clear >
-                <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon> &nbsp;Add more
+                    <p class="valid err-reds shake">This field is required.</p>
+                  </small>
+                </div>
+                <div *ngIf="myForm.controls.education_list.controls.length > 1" class="removeMore-outer">
+                  <button class="remove-btn" (click)="removeEducation(i)" button-right ion-button icon-left clear>
+                    <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>&nbsp;Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="addMore-outer">
+              <button class="add-btn" (click)="addEducation()" ion-button icon-left clear>
+                <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>&nbsp;Add more
               </button>
-     
- 
-     
-      </div> 
-<br/>	 
+            </div>
+          </div>
+          <br/>
+        </div>
 
-
-    </div>
-    
-   <div *ngIf="functionality == 'profileEdit'">
-  <ion-row>
-    <ion-col>
-      <button ion-button class="uploadimg" color="primary" (click)="accessGallery()"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Browse...</button>
-        </ion-col>
-        <ion-col>
-         <img [src]="base64Image" *ngIf="base64Image" width="90" height="90" />
-            </ion-col>
-    </ion-row>
-   </div>
-
-    <div *ngIf="functionality == 'add'">
-     
+        <div *ngIf="functionality == 'profileEdit'">
           <ion-row>
-            <ion-col class="title-depen">
-              <div class="personal-d"><p>Login details</p></div>
+            <ion-col>
+              <button ion-button class="uploadimg" color="primary" (click)="accessGallery()">
+                <i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Browse...</button>
+            </ion-col>
+            <ion-col>
+              <img [src]="base64Image" *ngIf="base64Image" width="90" height="90" />
             </ion-col>
           </ion-row>
-        <ion-label class="label-tittle required">Email address</ion-label>
-        <ion-item>
-                <ion-input [(ngModel)]="elder_email" formControlName="elder_email"
-                [class.invalid]="!myForm.controls.elder_email.valid && (myForm.controls.elder_email.dirty)" placeholder="Email address" value={{elder_email}}>
-                </ion-input>
-        </ion-item>
-        <small *ngIf="!myForm.controls.elder_email.valid  && (myForm.controls.elder_email.dirty || submitAttempt)">
-                <p class="valid err-reds shake">This field is required.</p>
-          </small>
-            <ion-label class="label-tittle required">Password</ion-label>
-      <ion-item>
-         <ion-input [(ngModel)]="elder_password" formControlName="elder_password"
-                [class.invalid]="!myForm.controls.elder_password.valid && (myForm.controls.elder_password.dirty)" type="{{mytype}}" placeholder="Password">
-              </ion-input>
-        </ion-item>
-        <small *ngIf="!myForm.controls.elder_password.valid  && (myForm.controls.elder_password.dirty || submitAttempt)">
-                <p class="valid err-reds shake">This field is required.</p>
-          </small>
-          </div>  
-           </form>
-
-    <div *ngIf="functionality == 'edit'">
-     
+        </div>
+        <br />
+        <div *ngIf="functionality == 'add'">
           <ion-row>
             <ion-col class="title-depen">
-              <div class="personal-d"><p>Login details</p></div>
+              <div class="EldersTitle">
+                <h3>Login details</h3>
+              </div>
             </ion-col>
           </ion-row>
-     <br/>
-   
-            <ion-label class="label-tittle">Email address</ion-label>
-        <ion-item>
-                <ion-input [readonly]="true" [(ngModel)]="elder_email" [ngModelOptions]="{standalone: true}" placeholder="Email address" value={{elder_email}}>
-                </ion-input>
-        </ion-item>
-      
-            <ion-label class="label-tittle">Password</ion-label>
-      <ion-item>
-            <ion-input [(ngModel)]="elder_password" [ngModelOptions]="{standalone: true}" type="{{mytype}}" placeholder="Password">
-              </ion-input>
-        </ion-item>
-       
-          </div> 
-      <br/>
+          <ion-label class="label-tittle required">Email address</ion-label>
+          <ion-item>
+            <ion-input [(ngModel)]="elder_email" formControlName="elder_email" [class.invalid]="!myForm.controls.elder_email.valid && (myForm.controls.elder_email.dirty)"
+              placeholder="Email address" value={{elder_email}}>
+            </ion-input>
+          </ion-item>
+          <small *ngIf="!myForm.controls.elder_email.valid  && (myForm.controls.elder_email.dirty || submitAttempt)">
+            <p class="valid err-reds shake">This field is required.</p>
+          </small>
+          <ion-label class="label-tittle required">Password</ion-label>
+          <ion-item>
+            <ion-input [(ngModel)]="elder_password" formControlName="elder_password" [class.invalid]="!myForm.controls.elder_password.valid && (myForm.controls.elder_password.dirty)"
+              type="{{mytype}}" placeholder="Password">
+            </ion-input>
+          </ion-item>
+          <small *ngIf="!myForm.controls.elder_password.valid  && (myForm.controls.elder_password.dirty || submitAttempt)">
+            <p class="valid err-reds shake">This field is required.</p>
+          </small>
+        </div>
       </form>
-	  
-	   <!-- <button class="logoin-btn"> Submit </button> -->
-      <!-- <br/> -->
-</div>
+      <br />
+      <div *ngIf="functionality == 'edit'">
+
+        <ion-row>
+          <ion-col class="title-depen">
+            <div class="EldersTitle">
+              <h3>Login details</h3>
+            </div>
+          </ion-col>
+        </ion-row>
+        <br/>
+
+        <ion-label class="label-tittle">Email address</ion-label>
+        <ion-item>
+          <ion-input [readonly]="true" [(ngModel)]="elder_email" [ngModelOptions]="{standalone: true}" placeholder="Email address"
+            value={{elder_email}}>
+          </ion-input>
+        </ion-item>
+
+        <ion-label class="label-tittle">Password</ion-label>
+        <ion-item>
+          <ion-input [(ngModel)]="elder_password" [ngModelOptions]="{standalone: true}" type="{{mytype}}" placeholder="Password">
+          </ion-input>
+        </ion-item>
+
+      </div>
+      <br/>
+    </form>
+  </div>
 
 
 
 </ion-content>
 <ion-footer>
-  <ion-toolbar color="primary"> 
-    
-   <!--  <ion-buttons>
-    <button ion-button color="royal" large icon-left showWhen="ios" (click)="cancel()">
-        <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
-    <button ion-button color="light" large icon-left hideWhen="ios" (click)="cancel()">
-          <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;Back</button>
-    </ion-buttons> -->
-
+  <ion-toolbar color="primary">
     <ion-buttons end>
-      <button ion-button color="royal" large icon-right showWhen="ios" (click)="addDependent()">&nbsp;Submit<ion-icon ios="md-send" md="md-send"></ion-icon>
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="addDependent()">&nbsp;Submit
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button ion-button color="light" large icon-right hideWhen="ios" (click)="addDependent()">&nbsp;Submit<ion-icon ios="md-send" md="md-send"></ion-icon>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="addDependent()">&nbsp;Submit
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
-<style>
-[_nghost-ung-41]{box-shadow:0 0;}
-.gly-rotate-180 {
-  filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.5);
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  transform: rotate(180deg);
-  display: inline-block;
-}
 
+<style>
+  [_nghost-ung-41] {
+    box-shadow: 0 0;
+  }
+
+  .gly-rotate-180 {
+    filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.5);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+    display: inline-block;
+  }
 </style>

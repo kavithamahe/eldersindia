@@ -5,18 +5,10 @@ page-service-modal {
     .offered-servicelist .item-md {
         padding-left: 0px;
     }
-    .sel-label {
-        border: 1px solid #a8aaad;
-        border-radius: 20px;
-        margin-right: 5px !important;
-    }
-    .sel-labelcol {
-        border: 1px solid #a8aaad;
-        border-radius: 20px;
-        margin-right: 5px !important;
-    }
+    
+    
     .btn-warnings {
-        background: #FE5722 !important;
+        background: #ef7f16 !important;
         height: 35px;
         font-size: 15px;
         color: #fff;
@@ -32,7 +24,7 @@ page-service-modal {
         float: right;
         height: 35px;
         margin-bottom: 10px;
-        background: #025FA9 !important;
+        background: #42436a !important;
         width: 40%;
         font-size: 15px;
         color: #fff;
@@ -42,7 +34,7 @@ page-service-modal {
         font-family: 'Muli', sans-serif;
     }
     .instant-btn {
-        background: #025FA9 !important;
+        background: #42436a !important;
         height: 35px;
         font-size: 15px;
         color: #fff;
@@ -252,7 +244,7 @@ page-service-modal {
     .item-md.item-block .item-inner {
         padding-right: 0px;
     }
-    .service-lefttext {}
+    
     .offered-servicelist-two {
         width: 100%;
         margin: 0px;
@@ -260,19 +252,8 @@ page-service-modal {
     .textlg strong {
         text-decoration: line-through;
     }
-    .contact-list {        
-        // background: -moz-linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(245, 254, 255, 1) 100%);
-        // /* ff3.6+ */
-        // background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(245, 254, 255, 1)));
-        // /* safari4+,chrome */
-        // background: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(245, 254, 255, 1) 100%);
-        // /* safari5.1+,chrome10+ */
-        // background: -o-linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(245, 254, 255, 1) 100%);
-        // /* opera 11.10+ */
-        // background: -ms-linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(245, 254, 255, 1) 100%);
-        // /* ie10+ */
-        // background: linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(245, 254, 255, 1) 100%);
-        /* w3c */
+    .contact-list {       
+       
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F5FEFF', endColorstr='#ffffff', GradientType=1);
         /* ie6-9 */
     }
@@ -550,30 +531,67 @@ page-service-modal {
     /*=====================
     Kiran changes
     =====================*/
-    .ion-content{
-        background: #f5fbff !important;
-        
+    .content-intop{
+        background: url(../assets/img/bg.jpg) !important;
+        background-position: center;
+        background-size: cover;        
     }
     .text-center{
         text-align: center;
-    }
-    // .input-has-focus , .input-cover {   
-    //     display: block !important;  
-    //      &.activated{
-    //         box-shadow: 0px 5px 20px rgba(0,0,0,0.12) !important;      
-    //        border-radius: 30px !important;
-    //     //    border: 1px solid #025fa9;
-    //      }        
-    //  }
+    }    
      .list-md .item-input.ng-valid.input-has-value:last-child:not(.input-has-focus){
         box-shadow: 0px 5px 20px rgba(0,0,0,0.12) !important;  
      }
-     .list-md .item-input.ng-valid.input-has-value, .list-md .item-input.ng-valid.input-has-focus {
-        box-shadow: 0px 5px 20px rgba(0,0,0,0.12) !important;   
-     }
+    //  .list-md .item-input.ng-valid.input-has-value, .list-md .item-input.ng-valid.input-has-focus {
+        
+    //  }
+    ion-datetime{
+        border-bottom: 1px solid #ccc !important;
+        width: 100%;
+    }
      .margin_0{
          margin:0 !important;
      }
+     .contactNowPage{
+        .contactLabel{
+            font-size: 17px;
+            color:#000;
+            font-weight: 500;
+            letter-spacing: 0.2px !important;
+            padding: 0px 10px;
+         }
+         .sel-label{
+            border: none !important;
+            border-radius: 0px !important;
+            margin-right: 0px !important;
+            padding: 0px 0px !important;                    
+            .item-inner {
+                border: 0 !important;
+                padding: 0px 10px !important;
+                .input-wrapper{ 
+                    display: block; 
+                    input{                                
+                        &.text-input{
+                            padding: 10px 0px 10px !important;
+                            border-bottom: 1px solid #ccc;
+                            margin: 0;
+                            width: 100%;   
+                            color:#666;                             
+                        }
+                    } 
+                    textarea{                                
+                        &.text-input{
+                            padding: 10px 0px 10px !important;
+                            border-bottom: 1px solid #ccc;
+                            margin: 0;
+                            width: 100%;                                
+                        }
+                    } 
+                }
+            }
+        }
+     }
+
     .offered-servicelist{
         .contact-list{
             padding: 0px 10px !important;
@@ -589,28 +607,103 @@ page-service-modal {
                 }
                 .sel-label{
                     border: none !important;
-                    border-radius: 30px !important;
+                    border-radius: 0px !important;
                     margin-right: 0px !important;
-                    padding: 0px 0px !important;
-                    box-shadow: 0px 5px 20px rgba(0,0,0,.12) !important;
+                    padding: 0px 0px !important;                    
                     .item-inner {
                         border: 0 !important;
                         padding: 0px 10px !important;
-                        .input-wrapper{                            
+                        .input-wrapper{ 
+                            display: block; 
+                            ion-label{
+                                display: block;
+                                width: 100%;
+                                -webkit-flex: none;
+                                -ms-flex: none;
+                                flex: none;
+                                margin-left: 0 !important;
+                                color: #000 !important;
+                                font-weight: 500 !important;
+                                letter-spacing: 0.2px !important;
+                                font-size: 17px;
+                            }                          
                             .selectDepent{
                             margin: 0px 0px 0px 10px !important;
                             color:#666 !important;
                             letter-spacing: 0.1px !important;
-                            font-weight:400 !important;
+                            font-weight:400 !important;                            
                             }                            
                             .select-md{
-                                padding: 8px 4px 8px 8px !important;
+                                padding: 15px 4px 15px 8px !important;
+                                width: 100% !important;
+                                display: block;
+                                max-width: 100%;
+                                border-bottom: 1px solid #ccc;
+                                position: relative;
+                                .select-icon {
+                                    position: initial;
+                                    width: auto;
+                                    height: auto;
+                                    .select-icon-inner{
+                                        left: auto;
+                                        right: 15px;
+                                        top: 60%;
+                                    }
+                                }
                             }
-                            input{
-                                padding: 0 !important;
-                            }
+                            input{                                
+                                &.text-input{
+                                    padding: 10px 0px 10px !important;
+                                    border-bottom: 1px solid #ccc;
+                                    margin: 0;
+                                    width: 100%;                                
+                                }
+                            }                          
                         }
                     }                        
+                }
+                ion-grid{
+                    ion-row{
+                        ion-col{
+                            ion-label{
+                                margin: 0 !important;
+                            }                           
+                        }
+                    }
+                }
+                &.payBook{
+                    ion-item{
+                      .item-inner{
+                          .input-wrapper{
+                              ion-label{
+                                  p{
+                                      color: #666;
+                                      font-size: 18px;
+                                      line-height: 25px;
+                                      b{
+                                          color: #ef7f16;
+                                          font-weight: 600;
+                                          font-size: 19px;
+                                      }
+                                      strong{
+                                        color: #019746;
+                                        font-weight: 600;
+                                        font-size: 19px;
+                                    }
+                                  }                                 
+                              }
+                          }
+                      }  
+                    }
+                    h5{
+                        font-size: 18px;
+                        font-weight: 500;
+                        padding: 10px 10px;
+                        span{
+                          font-size: 19px;
+                          font-weight: 600;
+                        }
+                    }
                 }
 
             }
@@ -660,6 +753,14 @@ page-service-modal {
                     }
                 }
             }
+        }
+    }
+    .add-detalis{
+        ion-card{
+            padding: 0px 10px !important;
+            background: #fff !important;
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.12) !important;
+            border-radius: 5px !important;
         }
     }
 
