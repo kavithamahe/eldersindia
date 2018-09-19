@@ -128,6 +128,14 @@ export class DashboardPage {
       this.storage.get('police').then((police) => { this.police=police;  })
       this.storage.get('doctor').then((doctor) => { this.doctor=doctor;  })
       this.storage.get('hospital').then((hospital) => { this.hospital=hospital;  })
+           this.storage.get('token').then((token) => { this.token=token; 
+       this.headers = new Headers();
+      this.headers.append('Content-Type', 'application/json');
+      this.headers.append('Authorization', 'Bearer ' + this.token);
+      this.head = new RequestOptions({ headers: this.headers });
+      this.fetchLocation();
+      this.map();
+  })
       // this.storage.get('lat').then((lat) => { this.lat=lat; 
       // console.log(this.lat); })
       //  this.storage.get('long').then((long) => { this.long=long; 
