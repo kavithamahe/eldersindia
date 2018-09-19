@@ -46,8 +46,8 @@
   <hr />
   <ion-card class="slider-card">
     <h1 class="package-list-show">Packages (<span>{{packageCount}}</span>) </h1>
-    <ion-slides *ngIf="packages && packages.length" autoplay="2000" loop="true" speed="300" class="slides" class="slideroption">
-      <ion-slide *ngFor="let package of packages; let i=index" (click)="viewPackage(package.vendor_id)" class="slide-border">
+    <ion-slides *ngIf="packages && packages.length" autoplay="5000" loop="true" pager="true" speed="300" class="slides" class="slideroption">
+      <ion-slide *ngFor="let package of packages" (click)="viewPackage(package.vendor_id)" class="slide-border">
         <ion-grid>          
           <ion-row>
             <ion-col class="width-30">

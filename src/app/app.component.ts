@@ -5,6 +5,7 @@ import { Platform, MenuController, Nav, AlertController,ToastController,LoadingC
 //import { Diagnostic } from 'ionic-native';
 import { CameraPreview, CameraPreviewRect, Diagnostic,StatusBar, Splashscreen} from 'ionic-native';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 //import { Geolocation } from '@ionic-native/geolocation';
 import { Network } from '@ionic-native/network';
@@ -101,7 +102,8 @@ export class MyApp {
     public community_service:CommunityServices,
     public storage:Storage,
     private network: Network,
-    private push: Push
+    private push: Push,
+    private ga: GoogleAnalytics
   ) {
     // let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
     //   this.alert = this.alertCtrl.create({
@@ -125,6 +127,16 @@ export class MyApp {
     //   });
     //   this.alert.present();
     // });
+    this.ga.startTrackerWithId('UA-123161000-5')
+   .then(() => {
+     console.log('Google analytics is ready now');
+        this.ga.trackView('test');
+        this.ga.debugMode();
+          this.ga.setAllowIDFACollection(true);
+     // Tracker is ready
+     // You can now track pages or set additional information such as AppVersion or UserId
+   })
+   .catch(e => console.log('Error starting GoogleAnalytics', e));
 
     this.storage.ready().then(() => {
     storage.get('user_type').then((userType)=>{
@@ -357,34 +369,34 @@ export class MyApp {
                     this.alert.dismiss();
                     this.alert =null;     
                   }else{
-                    this.showAlert();
+                    //this.showAlert();
                    }
                 }
               });
     });
   }
-    showAlert() {
-          this.alert = this.alertCtrl.create({
-            title: 'Do you want to exit the app?',
-            //message: 'Do you want to exit the app?',
-            buttons: [
-              {
-                text: 'Cancel',
-                role: 'cancel',
-                handler: () => {
-                  this.alert =null;
-                }
-              },
-              {
-                text: 'Exit',
-                handler: () => {
-                  this.platform.exitApp();
-                }
-              }
-            ]
-          });
-          this.alert.present();
-        }
+    // showAlert() {
+    //       this.alert = this.alertCtrl.create({
+    //         title: 'Do you want to exit the app?',
+    //         //message: 'Do you want to exit the app?',
+    //         buttons: [
+    //           {
+    //             text: 'Cancel',
+    //             role: 'cancel',
+    //             handler: () => {
+    //               this.alert =null;
+    //             }
+    //           },
+    //           {
+    //             text: 'Exit',
+    //             handler: () => {
+    //               this.platform.exitApp();
+    //             }
+    //           }
+    //         ]
+    //       });
+    //       this.alert.present();
+    //     }
 
           showToast() {
             let toast = this.toastCtrl.create({

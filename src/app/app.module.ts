@@ -12,8 +12,7 @@ import { DatePipe } from '@angular/common';
 import { Network } from '@ionic-native/network';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Device } from "@ionic-native/device";
-
-
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 
@@ -112,6 +111,7 @@ import { TermsModalPage } from '../pages/terms-modal/terms-modal';
 import { GetpackagePagePage } from '../pages/getpackage/getpackage';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service-provider';
+import { BlogListService } from '../providers/blog-list-service';
 
 // import { Externallinks } from '../providers/externallinks';
 
@@ -272,7 +272,7 @@ import { ServiceProvider } from '../providers/service-provider';
   ],
 
     //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,AppConfig,Storage,DatePipe,Device] // Add GithubUsers provider
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,Storage,DatePipe,Device,GoogleAnalytics] // Add GithubUsers provider
 
 })
 export class AppModule {}

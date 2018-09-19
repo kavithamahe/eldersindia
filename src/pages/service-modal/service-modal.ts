@@ -13,6 +13,7 @@ import { TermsModalPage } from '../../pages/terms-modal/terms-modal';
 import { GetpackagePagePage } from  '../../pages/getpackage/getpackage';
 import { SubcategoryListPage } from '../subcategory-list/subcategory-list';
 import { ServiceProvider } from '../../providers/service-provider';
+import { BlogListService } from '../../providers/blog-list-service';
 import { PaymentPage } from '../payment/payment';
 
 /*
@@ -104,7 +105,7 @@ recreation:any;
 mobile_imei:any;
 // emergency_list=[];
   constructor(public storage:Storage,public alertCtrl: AlertController,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
-    public formBuilder: FormBuilder) {
+    public formBuilder: FormBuilder,public blogListService:BlogListService) {
     this.date = new Date().toISOString();
      
     this.vendorList = navParams.get("vendorList");
@@ -736,7 +737,7 @@ mobile_imei:any;
   this._provider.webServiceCall(`serviceRequestSubmitbeforePayLater`,paymentData)
   .subscribe(
       data =>{
-        this._provider.showToast(data.result);
+        this.blogListService.presentConfirm(data.result);
         this.dismiss();
         loading.dismiss();
               },
@@ -788,7 +789,7 @@ mobile_imei:any;
   this._provider.webServiceCall(`serviceRequestSubmitbeforePayLater`,paymentData)
   .subscribe(
       data =>{
-        this._provider.showToast(data.result);
+        this.blogListService.presentConfirm(data.result);
         this.dismiss();
         loading.dismiss();
               },

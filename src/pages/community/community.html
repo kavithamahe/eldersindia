@@ -195,7 +195,7 @@
 			</div>
 		</ion-card>    		
 	</ion-list>
-	<ion-fab bottom right>
+	<ion-fab bottom right *ngIf = "scrollTop">
     <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
     </ion-icon></button>
   </ion-fab>

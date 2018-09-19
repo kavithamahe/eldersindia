@@ -3,7 +3,6 @@ import { NavController, NavParams,ToastController,LoadingController,ViewControll
 import { Storage } from '@ionic/storage';
 import { PackageRequestPagePage }  from '../../pages/package-request/package-request';
 import { BlogListService } from '../../providers/blog-list-service';
- import { PaymentPage } from '../../pages/payment/payment';
  import { PackagepaymentPagePage } from '../../pages/packagepayment/packagepayment';
 
 
@@ -129,9 +128,9 @@ packageAvailresult:any;
     }
     else{
       if(this.packageAvailstatus == 0){
-         let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
+          this.navCtrl.push(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
       "package_amount":this.package_amount});
-      serviceModal.present();
+     this.dismiss();
       }
     else{
       this.blogListService.showToast(this.packageAvailresult);

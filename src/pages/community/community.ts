@@ -57,6 +57,7 @@ export class CommunityPage {
     message:any='';
     connectionInfo:any=[];
      alert:any;
+     scrollTop:boolean = false;
   constructor(public platform: Platform,public popoverCtrl: PopoverController, public actionsheetCtrl: ActionSheetController,public modal: ModalController, public formBuilder: FormBuilder,public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices) {
     this.nav=nav;
 
@@ -532,6 +533,7 @@ doInfinite(infiniteScroll) {
   }
    communityscroll(id)
   {
+    this.scrollTop = true;
      this.communityServices.communityscroll(this.nextPageURL,id).subscribe(
      (eventsscroll) => {
       this.eventScrollLists=eventsscroll.result.info.lists.data;

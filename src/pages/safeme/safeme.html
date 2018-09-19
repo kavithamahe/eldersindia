@@ -47,6 +47,7 @@
   </ion-grid>
   <ion-item>
   <button class="instant-bt" *ngIf = "apilog.api_status == '1'" (click)="close(apilog.call_id,apilog.api_name)">Close</button>
+   <button class="instant-bt" *ngIf = "apilog.api_status == '0'">Closed</button>
    </ion-item>
   </ion-card>
 

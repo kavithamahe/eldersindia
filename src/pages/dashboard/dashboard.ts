@@ -85,7 +85,6 @@ export class DashboardPage {
       this.fetchLocation();
       this.map();
   })
-      console.log("imei"+this.token);
       storage.get('user_type').then((user_type) => { this.user_type=user_type; })
        this.storage.get('name').then((name) => { this.elder_name=name;})
        this.storage.get('lastname').then((lastname) => { this.elder_lastname=lastname;})
@@ -112,6 +111,8 @@ export class DashboardPage {
   }
 
    ionViewWillEnter() {
+    this.storage.get('imageurl').then((imageurl) => { this.url=imageurl;});
+    this.storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor;})
      this.storage.get('user_type').then((user_type) => { this.user_type=user_type; })
      this.storage.get('name').then((name) => { this.elder_name=name; })
      this.storage.get('lastname').then((lastname) => { this.elder_lastname=lastname;})
@@ -124,6 +125,9 @@ export class DashboardPage {
      this.storage.get('safeme_status').then((safeme_status) => { this.safeme_status=safeme_status;  })
      this.storage.get('helpme_status').then((helpme_status) => { this.helpme_status=helpme_status;  })
      this.storage.get('vendor_id').then((vendor_id) => { this.vendor_id=vendor_id;  })
+      this.storage.get('police').then((police) => { this.police=police;  })
+      this.storage.get('doctor').then((doctor) => { this.doctor=doctor;  })
+      this.storage.get('hospital').then((hospital) => { this.hospital=hospital;  })
       // this.storage.get('lat').then((lat) => { this.lat=lat; 
       // console.log(this.lat); })
       //  this.storage.get('long').then((long) => { this.long=long; 

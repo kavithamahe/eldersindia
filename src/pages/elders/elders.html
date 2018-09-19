@@ -148,11 +148,7 @@
           </ion-row>
       <div formArrayName="emergency_list">
       <div *ngFor="let item of authForm.controls.emergency_list.controls; let i=index">
-           <div *ngIf="authForm.controls.emergency_list.controls.length > 1">
-            <button class="rem-btn" (click)="removeEmergency(i)" ion-button icon-left clear>
-                <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
-              </button>
-            </div> 
+         
           <ion-label class="label-tittle required">Person</ion-label>
           <div [formGroupName]="i">
             <ion-item>
@@ -182,6 +178,11 @@
                   <p class="valid err-reds shake">This field is required.</p>
             </small> 
            </div>  
+             <div *ngIf="authForm.controls.emergency_list.controls.length > 1">
+            <button class="rem-btn" (click)="removeEmergency(i)" ion-button icon-left clear>
+                <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>Remove
+              </button>
+            </div> 
            </div>
           </div>
      

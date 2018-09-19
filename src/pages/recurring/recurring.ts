@@ -36,6 +36,7 @@ discountcost:any;
 sortby:any="";
 sr_token:any;
 updated_at:any;
+scrollTop:boolean = false;
   constructor(public navCtrl: NavController,public modalCtrl: ModalController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
   if(this.navParams.get("sr_token")){
       this.searchText =this.navParams.get("sr_token");
@@ -81,8 +82,8 @@ updated_at:any;
   }
    paynow(service_cost,service_id,recurring_request_id){
     let service_type = "Recurring";
-    let serviceModal = this.modalCtrl.create(PackagepaymentPagePage,{"service_type":service_type,"service_cost":service_cost,"service_id":service_id,"recurring_request_id":recurring_request_id,"reqstatus":"2"});
-      serviceModal.present();
+    this.navCtrl.push(PackagepaymentPagePage,{"service_type":service_type,"service_cost":service_cost,"service_id":service_id,"recurring_request_id":recurring_request_id,"reqstatus":"2"});
+     
   }
   getrecurringRequest(){
   	// let loading = this.loadingCtrl.create({content: 'Please wait...!'});
@@ -99,7 +100,8 @@ updated_at:any;
       var str = data.sr_token;
          data.sr_tokenend = str.replace("-1" ,"");
       data.remainingamount = parseFloat(data.remaining_amount).toFixed(2);
-      this.updated_at = moment(data.updated_at).format("DD-MM-YYYY HH:mm:ss");
+      console.log(data.updated_at);
+      data.updated_at = moment(data.updated_at).format("DD-MM-YYYY HH:mm:ss");
     }
         this.recurringRequest = dataList;
         this.nextPageURL=data.result.info.next_page_url;  
@@ -125,6 +127,7 @@ updated_at:any;
   }
   recurringRequestScroll()
   {
+    this.scrollTop = true;
     console.log("scroll");
     this.blogListService.recurringRequestScroll(this.nextPageURL,this.searchText,this.sortby).subscribe(
      (serviceRequestScroll) => {
@@ -137,7 +140,7 @@ updated_at:any;
       var str = data.sr_token;
          data.sr_tokenend = str.replace("-1" ,"");
         data.remainingamount = parseFloat(data.remaining_amount).toFixed(2);
-         this.updated_at = moment(data.updated_at).format("DD-MM-YYYY HH:mm:ss");
+        data.updated_at = moment(data.updated_at).format("DD-MM-YYYY HH:mm:ss");
     }
       
       //this.serviceRequestScrollLists=serviceRequestScroll.result.data; 

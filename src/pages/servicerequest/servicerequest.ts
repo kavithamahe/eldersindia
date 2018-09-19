@@ -318,7 +318,7 @@ toggleDetails(service) {
        let prompt = this.alertCtrl.create({
       title: sr_token,
       // message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+paid_amount+" and Amount paid : <i class='fa fa-rupee'></i>"+utilized_service_cost+" and Refund on cancellation : <i class='fa fa-rupee'></i>"+cancelCharges+" and Refund on Cancellation : <i class='fa fa-rupee'></i>"+dedaction_service_cost+" ",
-      message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+utilized_service_cost+" and service cancellation percentage : "+ percentage + "% ",
+      message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ totalcostofrecurring.toFixed(2)+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+paid_amount.toFixed(2)+" and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+utilized_service_cost.toFixed(2)+" and service cancellation percentage : "+ percentage + "% ",
 
       inputs: [
         {
@@ -362,7 +362,7 @@ toggleDetails(service) {
   if(Paymentstatus == null){
         let prompt = this.alertCtrl.create({
       title: sr_token,
-      message: "Service cost :  <i class='fa fa-rupee'></i>"+ service_cost +"<br> and Service cancellation percentage :"+ percentage +" % ",
+      message: "Service cost :  <i class='fa fa-rupee'></i>"+ service_cost.toFixed(2) +"<br> and Service cancellation percentage :"+ percentage +" % ",
       inputs: [
         {
           name: 'title',
@@ -397,7 +397,7 @@ toggleDetails(service) {
   else{
       let prompt = this.alertCtrl.create({
       title: sr_token,
-      message: "Service cost :  <i class='fa fa-rupee'></i>"+ paid_amount +"<br> and Service cancellation percentage :"+ percentage +" % and Service cancellation deduction : <i class='fa fa-rupee'></i>"+ deductionamount+" and Service refund amount : <i class='fa fa-rupee'></i>"+ servicecancelamount+" ",
+      message: "Service cost :  <i class='fa fa-rupee'></i>"+ paid_amount.toFixed(2) +"<br> and Service cancellation percentage :"+ percentage +" % and Service cancellation deduction : <i class='fa fa-rupee'></i>"+ deductionamount.toFixed(2)+" and Service refund amount : <i class='fa fa-rupee'></i>"+ servicecancelamount.toFixed(2)+" ",
       inputs: [
         {
           name: 'title',
@@ -445,7 +445,7 @@ toggleDetails(service) {
     },
     (err) => { 
         if(err.status===401)
-        {
+        { 
          this.showToaster(JSON.parse(err._body).error);
         }
         else

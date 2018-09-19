@@ -79,14 +79,16 @@ filename:any;
   if(this.msgType=='reply'){
   this.messageForm = formBuilder.group({
        message: ['', Validators.compose([Validators.required])],
-        toAddress: ['', Validators.compose([Validators.required])],
+       toAddress: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
+        // toAddress: ['', Validators.compose([Validators.required])],
         subject: ['', Validators.compose([Validators.required])],
        
          });
   this.customTo=true;
     }else{  
    this.messageForm = formBuilder.group({
-        toAddress: ['', Validators.compose([Validators.required])],
+       toAddress: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
+        //toAddress: ['', Validators.compose([Validators.required])],
         subject: ['', Validators.compose([Validators.required])],
         message: ['', Validators.compose([Validators.required])]
          });

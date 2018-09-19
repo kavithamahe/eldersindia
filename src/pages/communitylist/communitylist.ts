@@ -35,6 +35,7 @@ export class CommunitylistPage {
   searchValue:any;
   searchTextBox:any='';
   prev_index:any = 0;
+    scrollTop:boolean = false;
   constructor(public nav: NavController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams,platform: Platform,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
      this.isAndroid = platform.is('android');
      // this.searchData = "";
@@ -159,6 +160,7 @@ export class CommunitylistPage {
   }
   communityscroll()
   {
+    this.scrollTop = true;
      this.communityServices.eventsscroll(this.nextPageURL).subscribe(
      (eventsscroll) => {
       this.eventScrollLists=eventsscroll.result.info.data;

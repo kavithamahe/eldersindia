@@ -7,7 +7,10 @@ import { Storage } from '@ionic/storage';
 // import { Calendar } from '@ionic-native/calendar';
 
 import moment from 'moment';
+
 import { ServiceProvider } from '../../providers/service-provider';
+import { BlogListService } from '../../providers/blog-list-service';
+
 import { TermsModalPage } from '../../pages/terms-modal/terms-modal';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
  import { Modelpage1PagePage } from '../../pages/modelpage1/modelpage1';
@@ -131,7 +134,7 @@ export class ModalContentPage {
   totalpayableamountbalance:any;
   totalpayableamountcancel:any;
   servicetypestatus:any;
-  constructor(platform: Platform,public alertCtrl: AlertController,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
+  constructor(platform: Platform,public blogListService:BlogListService,public alertCtrl: AlertController,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {   
      this.date = new Date().toISOString();
      this.startDate = new Date().toISOString();
@@ -555,65 +558,7 @@ export class ModalContentPage {
    pressnext(recurringType){
     this.next(recurringType);
    }
-   // paynow(){
-
-   //   if(this.fullpays == true){
-   //      this.paymenttype = "full_payment";
-   //    }
-   //    else if(this.finalcost == undefined){
-   //      this.paymenttype = "CommonRate";
-   //    }
-   //    else{
-   //      this.paymenttype = "partial_payment";
-   //    }
-   //  if(this.datCount != undefined){
-   //    console.log(this.payableamount);
-   //   let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-   //     "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"datCount":this.datCount,"payment":this.paymenttype,"serviceTitle":this.serviceTitle, 
-   //     "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,"base_cost":this.service_cost,
-   //     "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
-    
-   //  // this.navCtrl.setRoot(PaymentPage);
-   //   this.navCtrl.push(PaymentPage,{serviceData:serviceData,servicecost:this.servicecost,service_costs:this.servicecosts,servicediscountcost:this.finalcost,payableamount:this.payableamount,
-   //    category:this.category,category_id:this.category_id,service:this.service,service_ids:this.service_ids,
-   //    sub_category_id:this.sub_category_id,subcategory:this.subcategory,
-   //    location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id,discounts:this.discounts,totalservice_costss:this.totalservice_costss,afterdiscount_one_service:this.afterdiscount_one_service,
-   //    paidPayment:this.paidPayment,servicediscountcost_one_service:this.servicediscountcost_one_service,discountpartial:this.discountpartial});
-   //    // serviceModal.present();
-   //    //   let serviceDataPay = "1";
-   //    // this.viewCtrl.dismiss(serviceDataPay);
-   //  //    serviceModal.onDidDismiss(data =>{
-   //  //   if(data == "dismiss"){
-   //  //     console.log(" schedule request modal dismissed..!");
-   //  //   }else{
-   //  //    this.seviceCheck = data;
-   //  //   }
-   //  // })
-   //   }
-   //   else{
-   //       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
-   //     "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"serviceTitle":this.serviceTitle,"base_cost":this.service_cost,
-   //     "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
-   //     "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.packageLists[0]};
  
-   //  // this.navCtrl.setRoot(PaymentPage);
-   //  this.navCtrl.push(PaymentPage,{serviceData:serviceData,servicecost:this.servicecost,
-   //    category:this.category,category_id:this.category_id,service:this.service,service_ids:this.service_ids,
-   //    sub_category_id:this.sub_category_id,subcategory:this.subcategory,
-   //    location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id});
-   //    // serviceModal.present();
-   //    // let serviceDataPay = "1";
-   //    // this.viewCtrl.dismiss(serviceDataPay);
-   //  //    serviceModal.onDidDismiss(data =>{
-   //  //   if(data == "dismiss"){
-   //  //     console.log(" schedule request modal dismissed..!");
-   //  //   }else{
-   //  //    this.seviceCheck = data;
-   //  //   }
-   //  // })
-   //   }
-
-   // }
     serviceRequestCall(service_request_data){
       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
@@ -634,7 +579,7 @@ export class ModalContentPage {
     this.providerService.webServiceCall(`serviceRequestSubmitbeforePayLater`,requestServiceData)
        .subscribe( 
         data =>{
-                 this.providerService.showToast(data.result);
+                 this.blogListService.presentConfirm(data.result);
                 
                  this.navCtrl.setRoot(ServicerequestPage);
               

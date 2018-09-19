@@ -91,7 +91,7 @@
 				</ion-col>
 				  </ion-row>
 				    <ion-row>
- 	<ion-col col-12><b>Requested Date</b><p>{{service_avail_date}}</p>
+ 	<ion-col col-12><b>Requested Date</b><p>{{package.service_avail_date}}</p>
   </ion-col>
 	  </ion-row>
     <ion-row *ngIf="package?.expired_date != null">
@@ -126,7 +126,7 @@
   </ion-row>
 </ion-grid>
 </ion-card>
-<ion-fab bottom right>
+<ion-fab bottom right *ngIf="scrollTop">
     <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"></ion-icon></button>
   </ion-fab>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

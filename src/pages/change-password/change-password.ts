@@ -24,7 +24,12 @@ nav:any;
 change_password_Form: FormGroup;
 mytype:string ="password";
 show_password:boolean = false;
-
+allow:any;
+stage1:any;
+stage2:any;
+strongRegex:any;
+mediumRegex:any;
+newPassword:any;
 
   constructor(public formBuilder:FormBuilder,public loadingCtrl: LoadingController,public service:ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
   	this.password_submit = false;
@@ -36,6 +41,8 @@ show_password:boolean = false;
         re_enterPassword: ['',Validators.compose([Validators.required])]
         
     });
+      this.strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+      this.mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
 
    }
    reEnter(){
@@ -51,7 +58,41 @@ pressevent(){
        this.mytype = "text";
      }
    }
+ validationInputPwdText() {
+    if(this.newPassword!=undefined)
+    {
+      if (this.newPassword.length >= 8) {
 
+        if (this.strongRegex.test(this.newPassword)) {
+         this.allow = 1;
+          this.stage1 = 0;
+          this.stage2 = 0;
+
+
+        } else if (this.mediumRegex.test(this.newPassword)) {
+          this.allow = 1;
+          this.stage1 = 0;
+          this.stage2 = 0;
+
+
+        } else {
+          this.allow = 0;
+          this.stage2 = 1;
+          this.stage1 = 0;
+          // this.valid_style = 1;
+
+        }
+      }else{
+
+       this.stage1 = 1;
+        this.stage2 = 0;
+        // this.valid_style = 1;
+
+
+        } 
+  }
+      
+      }
 
 
   submit() {
@@ -67,12 +108,12 @@ pressevent(){
     }else{
       this.submitAttempt = false;
       this.password_submit = false; 
-        if(this.change_password_Form.value.newPassword.length < 6){
-      this.service.showToast("Please enter minimum 6 characters");
+        if(this.stage2 == 1 || this.stage1 == 1){
+      this.service.showToast("Please enter correct password");
     }else{
-      if(this.change_password_Form.value.newPassword.length > 12){
-      this.service.showToast("Please enter maximum 12 characters");
-    }else{
+    //   if(this.change_password_Form.value.newPassword.length > 12){
+    //   this.service.showToast("Please enter maximum 12 characters");
+    // }else{
 
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
       loader.present();     
@@ -93,7 +134,7 @@ pressevent(){
       }
        loader.dismiss();    
       })
-    }
+   // }
     } 
   }
   }else{

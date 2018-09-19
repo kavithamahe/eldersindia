@@ -36,6 +36,7 @@ searchid:any="";
 paystatus:any;
 results:any;
 service_avail_date:any;
+scrollTop:boolean = false;
   constructor(public navCtrl: NavController,public modalCtrl: ModalController,public toastCtrl: ToastController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams, public blogListService:BlogListService) {
       this.paystatus = navParams.get("status");
        this.results = navParams.get("result");
@@ -68,8 +69,9 @@ service_avail_date:any;
         this.packageRequest = data.result.data;
          var dataList=data.result.data;
         for(let data of dataList) {
-          this.service_avail_date = moment(data.service_avail_date).format("DD-MM-YYYY HH:mm:ss");
+          data.service_avail_date = moment(data.service_avail_date).format("DD-MM-YYYY HH:mm:ss");
         }
+        this.packageRequest=dataList;
         this.nextPageURL = data.result.next_page_url;
        loading.dismiss();
     },
@@ -96,16 +98,16 @@ doInfinite(infiniteScroll) {
   }
   packagescroll()
   {
-
+    this.scrollTop = true;
      this.blogListService.eventscrolls(this.nextPageURL,this.searchText,this.searchemail,this.searchid,this.packstatus).subscribe(
      (eventsscroll) => {
       this.eventScrollLists=eventsscroll.result.data;
         var dataList=eventsscroll.result.data;
         for(let data of dataList) {
-          this.service_avail_date = moment(data.service_avail_date).format("DD-MM-YYYY HH:mm:ss");
+          data.service_avail_date = moment(data.service_avail_date).format("DD-MM-YYYY HH:mm:ss");
         }
       for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
-        this.packageRequest.push(this.eventScrollLists[i]);
+        this.packageRequest.push(dataList[i]);
         }
       
        this.nextPageURL=eventsscroll.result.next_page_url;     

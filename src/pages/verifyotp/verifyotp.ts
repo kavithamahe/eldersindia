@@ -37,7 +37,7 @@ otp:any;
   }
 	submit(){
 		if(this.otp == undefined){
-			this.providerService.showToast("Please enter the ome time password");
+			this.providerService.showToast("Please enter the one time password");
 		}
 		else{
 			  this.providerService.verifyotp(this.otp).subscribe(otpon => {
