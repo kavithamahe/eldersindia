@@ -1,10 +1,3 @@
-<!--
-  Generated template for the AppliedJobs page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
@@ -14,70 +7,104 @@
     </ion-buttons>
     <ion-title text-center>Applied Jobs</ion-title>
     <ion-buttons right>
-    <button ion-button icon-only (click)="dashboardPage()">
+      <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content class="content-intop">
-  <ion-card class="search-quk" style="border:none;">
-     <div class="ion-searchbar">
+
+<ion-content class="content-intop jobListview">
+
+  <div class="ion-searchbar">
     <ion-row>
-      <ion-col width-80>
-        <ion-searchbar [(ngModel)]="searchText" (keyup.enter)="getItems(searchText)"></ion-searchbar>
+      <ion-col col-10>
+        <ion-searchbar placeholder="search company/job" [(ngModel)]="searchText" (keyup.enter)="getItems(searchText)"></ion-searchbar>
       </ion-col>
-      <ion-col width-20 class="btn-go">
+      <ion-col col-2 class="btn-go">
         <button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button>
       </ion-col>
     </ion-row>
   </div>
-  </ion-card>
-  <ion-card class="sel-packages">
-    <ion-item class="select-loca">
+
+  <ion-card class="select-packages">
+    <ion-item >
       <ion-label>Functional Area</ion-label>
       <ion-select [(ngModel)]="functionalArea" (ionChange)="onSelectChange($event)">
-      <!-- <ion-option value="All">All
+        <!-- <ion-option value="All">All
      </ion-option> -->
-        <ion-option *ngFor="let functional of functionalAreaList" value="{{functional?.id}}">{{functional?.name}}</ion-option>      
+        <ion-option *ngFor="let functional of functionalAreaList" value="{{functional?.id}}">{{functional?.name}}</ion-option>
       </ion-select>
     </ion-item>
   </ion-card>
-  <ion-card class="sel-packages">
+  <ion-card class="select-packages">
     <ion-item class="select-loca">
       <ion-label>Location</ion-label>
-      <ion-select [(ngModel)]="location" (ionChange)="onInit()"  multiple="true">
+      <ion-select [(ngModel)]="location" (ionChange)="onInit()" multiple="true">
         <ion-option *ngFor="let locations of locationList" value="{{locations?.id}}">{{locations?.location}}</ion-option>
       </ion-select>
     </ion-item>
   </ion-card>
-  <ion-card *ngFor="let appliedJobs of appliedJobsList" class="job-detailsview">
-    <ion-row text-wrap class="appliedjob" (click)="viewJob(appliedJobs?.id)">
-      <ion-col width-90 text-wrap>
-        <h2 text-capitalize>{{appliedJobs?.title | words :3: '....'}}</h2>
-	      <P style="color:#333;"><i class="fa fa-university" aria-hidden="true"></i><span>{{appliedJobs?.company_name}} </span></P>
-        <p><i class="fa fa-briefcase" aria-hidden="true"> </i><span>{{appliedJobs?.min_experience}} - {{appliedJobs?.max_experience}} years</span>
-        </p> 
-        <P><i class="fa fa-bookmark" aria-hidden="true"></i><span>{{appliedJobs?.job_type}}
-        </span></P>
-        <P><i class="fa fa-inr" aria-hidden="true"></i><span>{{appliedJobs?.salary}}
-        </span></P>
-        <p *ngIf="(appliedJobs?.requested_date!='0000-00-00 00:00:00')"><i class="fa fa-calendar-o" aria-hidden="true"></i><span>{{appliedJobs?.requested_date}}</span></p>
-      </ion-col>
-      <ion-col width-10>
-        <i class="fa fa-arrow-right" aria-hidden="true"></i>
-      </ion-col>
-    </ion-row>
+  <br />
+  <ion-card *ngFor="let appliedJobs of appliedJobsList" class="joblistcard">
+    <ion-grid>
+      <ion-row text-wrap class="appliedjob" (click)="viewJob(appliedJobs?.id)">
+        <ion-col width-100 text-wrap>
+          <h2 text-capitalize>{{appliedJobs?.title | words :3: '....'}}</h2>
+          <h4>{{appliedJobs?.company_name}}</h4>
+          <ion-grid class="jobStatus">
+            <ion-row>
+              <ion-col width-50>
+                  <p><i class="fa fa-certificate" aria-hidden="true"></i>&nbsp;{{appliedJobs?.min_experience}} - {{appliedJobs?.max_experience}} years</p>
+              </ion-col>
+              <ion-col width-50>
+                <p><i class="fa fa-certificate" aria-hidden="true"></i>&nbsp;{{appliedJobs?.location}}</p>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-50>
+                    <p><i class="fa fa-certificate" aria-hidden="true"></i>&nbsp;{{appliedJobs?.job_type}}</p>
+                </ion-col>
+                <ion-col width-50>
+                    <p *ngIf="(appliedJobs?.requested_date!='00-00-0000 00:00:00')"><i class="fa fa-certificate" aria-hidden="true"></i>&nbsp;{{appliedJobs?.requested_date}}</p>
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+        <!--  <p>
+            <i class="fa fa-briefcase" aria-hidden="true"> </i>
+            <span>{{appliedJobs?.min_experience}} - {{appliedJobs?.max_experience}} years</span>
+          </p>
+          <P>
+            <i class="fa fa-bookmark" aria-hidden="true"></i>
+            <span>{{appliedJobs?.job_type}}
+            </span>
+          </P>
+          <P>
+            <i class="fa fa-inr" aria-hidden="true"></i>
+            <span>{{appliedJobs?.salary}}
+            </span>
+          </P>
+          <p *ngIf="(appliedJobs?.requested_date!='0000-00-00 00:00:00')">
+            <i class="fa fa-calendar-o" aria-hidden="true"></i>
+            <span>{{appliedJobs?.requested_date}}</span>
+          </p> -->
+        </ion-col>
+        <!-- <ion-col width-10>
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </ion-col> -->
+      </ion-row>
+    </ion-grid>
   </ion-card>
-  <ion-fab bottom right edge class="scroll">
-    <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
-      
-    </ion-icon></button>
+  <ion-fab bottom right edge class="scroll" *ngIf="scrollTop">
+    <button ion-fab mini (click)="scrollToTop()">
+      <ion-icon name="arrow-dropup">
+      </ion-icon>
+    </button>
   </ion-fab>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
   <ion-item padding *ngIf="!appliedJobsList">
-      <p class="error-clr">{{emptyRecord}}</p>
+    <p class="error-clr">{{emptyRecord}}</p>
   </ion-item>
 </ion-content>

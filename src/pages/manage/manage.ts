@@ -11,7 +11,8 @@ import { CommunityServices } from '../../providers/community-services';
 @Component({
  
   selector: 'page-manage',
-  templateUrl: 'manage.html'
+  templateUrl: 'manage.html',
+  providers : [CommunityServices]
   
 })
 export class ManagePage {

@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ServiceRequestService } from '../../providers/service-request-service';
+import moment from 'moment';
 /*
   Generated class for the ViewServiceRequest page.
 
@@ -29,6 +30,12 @@ balanceamount:any;
 Paymentstatus:any;
 additional_service_cost:any;
 emergencyContact:any=[];
+paidamount1:any;
+paidamount2:any;
+paidamount3:any;
+paidamount4:any;
+prebookcost:any;
+updated_at:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -67,7 +74,14 @@ emergencyContact:any=[];
     this.serviceRequest.viewServiceRequest(this.serviceRequestId).subscribe(
      (viewServiceRequest) => {
       this.viewServiceRequestInfo=viewServiceRequest.result;
+      this.updated_at = moment(viewServiceRequest.result.updated_at).format("DD-MM-YYYY HH:mm:ss");
+      this.paidamount1 = (parseFloat(this.viewServiceRequestInfo.service_cost) - parseFloat(this.viewServiceRequestInfo.additional_service_cost));
+      this.paidamount2 = (parseFloat(this.viewServiceRequestInfo.service_cost) + parseFloat(this.viewServiceRequestInfo.additional_service_cost));
+      this.paidamount3 = (parseFloat(this.viewServiceRequestInfo.service_cost) - parseFloat(this.viewServiceRequestInfo.service_balance_amount));
+      this.paidamount4 = (parseFloat(this.viewServiceRequestInfo.service_cost) - parseFloat(this.viewServiceRequestInfo.additional_service_cost));
+      this.prebookcost = (parseFloat(this.viewServiceRequestInfo.service_cost) - parseFloat(this.viewServiceRequestInfo.additional_service_cost));
       this.emergencyContact = this.viewServiceRequestInfo.emergencyContact;
+      console.log(this.emergencyContact);
       this.preffer= viewServiceRequest.enquiry_date;
       loader.dismiss();   
     },

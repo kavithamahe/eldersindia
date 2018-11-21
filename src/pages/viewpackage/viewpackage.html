@@ -1,59 +1,100 @@
-<!--
-  Generated template for the ViewpackagePage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-<ion-navbar color="primary">
-<ion-buttons left>
-      <button ion-button icon-only (click)="dismiss()">
-         <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+  <ion-navbar color="primary">
+  <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-<ion-buttons center>
-    <ion-title text-center>
-      Package Request Detail
-    </ion-title>
- </ion-buttons>  
+      <ion-title text-center>Package Request</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content class="login-pages">
-<ion-card class="liste-view">
-<ion-item>
-<ion-row>
-  <ion-col>
-  	<b>Elder Name</b>
-	<p>{{packageData?.name}} {{packageData?.last_name}}</p>
-	<b>Email</b>
-	<p>{{packageData?.elder_email}}</p>
-	<b>Mobile number</b>
-	<p>{{packageData?.elder_mobile}}</p>
-	<b>Location </b>
-	<p>{{packageData?.location}}</p>
-	<b>Package Name</b>
-	<p>{{packageData?.package_name}}</p>
-	<b>Amount</b>
-	<p><i class="fa fa-inr" aria-hidden="true"></i>{{packageData?.package_amount}}</p>
-	<b>Package Status</b>
-	<p *ngIf="packageData?.req_status == 0" class="pen"> Pending</p>
-  <p *ngIf="packageData?.req_status == 1" class="act"> Active</p>
-   <p *ngIf="packageData?.req_status == 2" class="rej"> Rejected</p>
-   <b>Package validity</b>
-   <p>{{packageData?.package_validity}}</p>
-  </ion-col>
-</ion-row>
-
-<ion-row>
-  <ion-col>
-  <b>Payment date</b>
-  <p>{{packageData?.createt_at}}</p>
-  <b>Payment Status</b>
-  <p *ngIf="packageData?.paumenry_payment_status=='captured'">Paid</p>
-  </ion-col>
-</ion-row>
-</ion-item>
-</ion-card>
+<ion-content class="PackageRequest">
+  <ion-card class="job-detailsview">
+    <ion-grid class="package-needs">
+      <ion-row>
+        <ion-col col-12>
+          <b>
+            <ion-icon ios="ios-person" md="md-person"></ion-icon>Elder Name</b>
+          <p>{{packageData?.name}} {{packageData?.last_name}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <b>
+            <ion-icon ios="ios-mail" md="md-mail"></ion-icon>Email</b>
+          <p>{{packageData?.elder_email}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <b>
+            <ion-icon ios="ios-call" md="md-call"></ion-icon>Mobile number</b>
+          <p>{{packageData?.elder_mobile}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <b>
+            <ion-icon ios="ios-locate" md="md-locate"></ion-icon>Location </b>
+          <p>{{packageData?.location}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <b>
+            <ion-icon ios="ios-basket" md="md-basket"></ion-icon>Package Name</b>
+          <p>{{packageData?.package_name}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <b>
+            <ion-icon ios="ios-cash" md="md-cash"></ion-icon>Amount</b>
+          <p>
+            <i class="fa fa-inr" aria-hidden="true"></i>{{packageData?.package_amount}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="statusBar" col-12>
+          <b class="statusTitle">
+            <ion-icon ios="ios-analytics" md="md-analytics"></ion-icon>Package Status</b>
+          <span class="statusColor">
+            <ion-badge *ngIf="packageData?.req_status == 0" class="pending">Pending</ion-badge>
+            <ion-badge *ngIf="packageData?.req_status == 1" class="active">Active</ion-badge>
+            <ion-badge *ngIf="packageData?.req_status == 2" class="reject">Rejected</ion-badge>
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <b>
+            <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>Package validity</b>
+          <p>{{packageData?.package_validity}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <b>
+            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>Payment date</b>
+          <p>{{createt_at}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="statusBar" col-12>
+          <b class="statusTitle">
+            <ion-icon ios="ios-help-buoy" md="md-help-buoy"></ion-icon>Payment Status</b>
+          <span class="statusColor">
+            <ion-badge *ngIf="packageData?.paumenry_payment_status=='captured'" class="active">Paid</ion-badge>
+          </span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 </ion-content>

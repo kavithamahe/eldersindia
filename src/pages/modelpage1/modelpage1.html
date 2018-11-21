@@ -2,7 +2,7 @@
 <ion-header>
   <ion-toolbar class="hei-head" color="primary">
     <ion-title color="primary" class="tittles-md" text-capitalize>
-      {{vendor}} - Avail Services
+      Avail Services
     </ion-title>
     <ion-buttons start item-right class="close-iconss">
       <button ion-button (click)="dismiss()">
@@ -14,8 +14,89 @@
 </ion-header>
 
 <ion-content class="content-intop">
-<ion-label style="font-size:18px;">Thank You! Please confirm your request...</ion-label>
-<ion-card class="req-viewlist">
+<!-- <ion-label style="font-size:18px;">Thank You! Please confirm your request...</ion-label> -->
+      <ion-card>
+        <ion-list *ngIf="serviceType == 'One time'">
+          <ion-item text-wrap>
+            <p style=" font-size:20px;  padding-top:10px; line-height:20px; text-align: center;">You are availing<br>
+              <strong class="service-name">{{serviceTitle}} ({{serviceType}})</strong><br> service from
+              <strong class="service-name">{{name}}</strong> On<br>
+              <strong class="service-name">{{datetime}} {{preferred_time}}</strong>
+            </p>
+          </ion-item>
+            <ion-item text-wrap *ngIf="serviceType == 'One time'">
+          <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; text-align: center;">Service Cost :
+            <span class="discountCost">
+              <i class="fa fa-inr" aria-hidden="true"></i>{{servicecost | number : '1.2-2'}}</span>
+          </h5>
+          <h5 *ngIf = "coupandiscount == '1'" style=" font-size:17px;  padding-top:10px; line-height:20px; text-align: center;">Coupon discounted amount :
+            <span class="discountCost">
+              <i class="fa fa-inr" aria-hidden="true"></i>{{discounted_cost | number : '1.2-2'}}</span>
+          </h5>
+          <h5 *ngIf = "coupandiscount == '1'" style=" font-size:17px;  padding-top:10px; line-height:20px; text-align: center;">Final Payable amount :
+            <span class="discountCost">
+              <i class="fa fa-inr" aria-hidden="true"></i>{{final_service_cost | number : '1.2-2'}}</span>
+          </h5>
+          </ion-item>
+          <div class="ion-searchbar" *ngIf = "packageListsvalue == undefined && servicecost != '0'">
+          <ion-row>
+            <ion-col col-10>
+             <ion-item>
+              <ion-input type="text" text-uppercase placeholder="Coupon Code" [(ngModel)] = "coupan_code">
+             </ion-input>
+             </ion-item>
+            </ion-col>
+            <ion-col col-2 class="btn-go">
+              <button (click) = "applyCoupan(serviceType)" ion-button small class="go-btn">Apply</button>
+            </ion-col>
+          </ion-row>
+          </div>
+          <p style=" font-size:18px;  padding-top:10px; line-height:20px; text-align: center;"  *ngIf="serviceType == 'One time' && recurringType == '1'">You also have the option of making this a recurring service request. Do you still wish to avail it as a single service? </p>
+          <ion-item class="btn-go" style="text-align: center;">
+          <button (click)="edit()"  style="background-color: #4978a9 !important;" ion-button round class="go-btn">Click here to edit</button>
+          </ion-item>
+        </ion-list>
+
+          <ion-list *ngIf="serviceType != 'One time'">
+          <ion-item text-wrap>
+            <p style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">You are availing
+              <strong class="service-name">{{serviceTitle}} ({{serviceType}})</strong> service from
+              <strong class="service-name">{{name}}</strong> On
+              <strong class="service-name">{{fromdate}} to {{todate}}</strong>
+              <strong class="service-name" *ngIf="fromtime != '' ">{{fromtime}} to {{totime}}</strong>
+              <strong class="service-name" *ngIf="timeslot != '' ">{{timeslot}}</strong>
+            </p>
+          </ion-item>
+           <ion-item text-wrap *ngIf="serviceType != 'One time'">
+          <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; text-align: center;">Service Cost :
+            <span class="discountCost">
+              <i class="fa fa-inr" aria-hidden="true"></i>{{recurring_cost | number : '1.2-2'}}</span>
+          </h5>
+          <h5 *ngIf = "coupandiscount == '1'" style=" font-size:17px;  padding-top:10px; line-height:20px; text-align: center;">Coupon discounted amount :
+            <span class="discountCost">
+              <i class="fa fa-inr" aria-hidden="true"></i>{{discounted_cost | number : '1.2-2'}}</span>
+          </h5>
+          <h5 *ngIf = "coupandiscount == '1'" style=" font-size:17px;  padding-top:10px; line-height:20px; text-align: center;">Final Payable amount :
+            <span class="discountCost">
+              <i class="fa fa-inr" aria-hidden="true"></i>{{final_service_cost | number : '1.2-2'}}</span>
+          </h5>
+          </ion-item>
+          <div class="ion-searchbar" *ngIf = "packageListsvalue == undefined && recurring_cost != '0'">
+          <ion-row>
+            <ion-col col-10>
+             <ion-item>
+              <ion-input type="text" text-uppercase placeholder="Coupon code" [(ngModel)] = "coupan_code">
+             </ion-input>
+             </ion-item>
+            </ion-col>
+            <ion-col col-2 class="btn-go">
+              <button (click) = "applyCoupan(serviceType)" ion-button small class="go-btn">Apply</button>
+            </ion-col>
+          </ion-row>
+          </div>
+        </ion-list>
+        </ion-card>
+<!-- <ion-card class="req-viewlist">
 
      <ion-row>
   
@@ -80,16 +161,18 @@
    </ion-col>
   </ion-row>
   <ion-row>
-  <ion-col width-100 class="child_menu">
+  <ion-col width-100 class="child_menu" *ngIf="serviceType == 'One time'">
   <span>Service Cost</span>
-   <p><i class="fa fa-rupee"></i>{{servicecost}}</p>
+   <p><i class="fa fa-rupee"></i>{{servicecost | number : '1.2-2'}}</p>
+   </ion-col>
+    <ion-col width-100 class="child_menu" *ngIf="serviceType != 'One time'">
+  <span>Service Cost</span>
+   <p><i class="fa fa-rupee"></i>{{recurring_cost | number : '1.2-2'}}</p>
    </ion-col>
   </ion-row>
-  <p *ngIf="serviceType == 'One time' && recurringType == '1'">This is a chronic requirement, do you want to avail it as a recurring service</p>
-	  </ion-card>
-	  <ion-fab bottom right>
-  <button ion-fab mini icon-only (click)="edit()" class="edit-bd">Edit</button>
-</ion-fab>
+  <p *ngIf="serviceType == 'One time' && recurringType == '1'">You also have the option of making this a recurring service request. Do you still wish to avail it as a single service? </p>
+	  <!-- </ion-card> -->
+	 
 
 
 </ion-content>
@@ -99,8 +182,8 @@
 
 
 <ion-footer>
-  <ion-toolbar color="primary"> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
-    <ion-buttons *ngIf="packageListsvalue == undefined">
+  <ion-toolbar color="primary"> 
+    <ion-buttons *ngIf="packageListsvalue == undefined && final_service_cost != '0' && servicecost != '0' && recurring_cost != '0'">
       <button ion-button color="royal" large icon-right showWhen="ios" (click)="paylater()">
      Pay Cash
     <ion-icon ios="md-send" md="md-send"></ion-icon></button>
@@ -108,22 +191,30 @@
     Pay Cash<ion-icon ios="md-send" md="md-send"></ion-icon></button>
     </ion-buttons>
     
-    <ion-buttons end *ngIf="packageListsvalue == undefined">
+    <ion-buttons end *ngIf="packageListsvalue == undefined && final_service_cost != '0' && servicecost != '0' && recurring_cost != '0'">
       <button ion-button color="royal" large icon-right showWhen="ios" (click)="submit()">&nbsp;Pay Now
        <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button ion-button color="light" large icon-right hideWhen="ios" (click)="submit()">&nbsp;Pay Now
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="submit()">&nbsp;Pay Now 
         <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end *ngIf="packageListsvalue != undefined">
-      <button ion-button color="royal" large icon-right showWhen="ios" (click)="paylater()">&nbsp;Submit Request
+    <ion-buttons end *ngIf="packageListsvalue != undefined || final_service_cost == '0' || servicecost == '0' || recurring_cost == '0'">
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="submitRequest()">&nbsp;Submit Request
        <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button ion-button color="light" large icon-right hideWhen="ios" (click)="paylater()">&nbsp;Submit Request
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="submitRequest()">&nbsp;Submit Request
         <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>
+   <!--  <ion-buttons end *ngIf="packageListsvalue != undefined">
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="submitRequest()">&nbsp;Submit Request
+       <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="submitRequest()">&nbsp;Submit Request
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-footer>
 

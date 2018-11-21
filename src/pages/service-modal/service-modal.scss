@@ -6,7 +6,18 @@ page-service-modal {
         padding-left: 0px;
     }
     
-    
+    .btn-warningspay {
+        background: #ef7f16 !important;
+        height: 35px;
+        font-size: 15px;
+        color: #fff;
+        border-radius: 20px;
+        font-weight: 600;
+        float: left;
+        margin-bottom: 10px;
+        text-transform: capitalize;
+        font-family: 'Muli', sans-serif;
+    }
     .btn-warnings {
         background: #ef7f16 !important;
         height: 35px;
@@ -26,6 +37,18 @@ page-service-modal {
         margin-bottom: 10px;
         background: #42436a !important;
         width: 40%;
+        font-size: 15px;
+        color: #fff;
+        border-radius: 20px;
+        font-weight: 600;
+        text-transform: capitalize;
+        font-family: 'Muli', sans-serif;
+    }
+    .instant-btpay {
+        float: right;
+        height: 35px;
+        margin-bottom: 10px;
+        background: #42436a !important;
         font-size: 15px;
         color: #fff;
         border-radius: 20px;
@@ -313,90 +336,7 @@ page-service-modal {
         font-weight: 600;
         width: 20px;
     }
-    .price-bt {
-        width: 100px;
-        height: 100px;
-        background: #FE5722;
-        position: relative;
-        margin: 0px auto;
-    }
-    .price-bt:before {
-        content: "";
-        width: 42px;
-        height: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        border-bottom: 29px solid #FE5722;
-        border-left: 29px solid #fff;
-        border-right: 29px solid #fff;
-    }
-    .price-bt:after {
-        content: "";
-        width: 42px;
-        height: 0;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        border-top: 29px solid #FE5722;
-        border-left: 29px solid #fff;
-        border-right: 29px solid #fff;
-    }
-    .price-bt span {
-        float: left;
-        color: #fff;
-        font-weight: 600;
-        font-size: 15px;
-        line-height: 100px;
-        text-align: center;
-        font-family: "Muli", sans-serif;
-        width: 100%;
-    }
-    .price-list {
-        float: left;
-        width: 100%;
-        margin-top: 20px;
-        text-align: center;
-        font-family: "Muli", sans-serif;
-    }
-    .price-list p {
-        float: left;
-        color: #0184A5;
-        width: 100%;
-        font-size: 17px;
-        font-weight: 400;
-        letter-spacing: 0.2px;
-        margin-top: 20px;
-        text-align: center;
-        margin: 0px;
-        font-family: "Muli", sans-serif;
-        padding-top: 5px;
-    }
-    .price-list small {
-        font-size: 17px;
-        font-weight: 400;
-        letter-spacing: 0.2px;
-        font-family: "Muli", sans-serif;
-        text-align: center;
-        color: red;
-        text-decoration: line-through;
-        letter-spacing: 0.2px;
-    }
-    .price-list span {
-        color: green;
-        font-family: "Muli", sans-serif;
-        font-size: 17px;
-        font-weight: 400;
-        letter-spacing: 0.2px;
-    }
-    .price-list b {
-        font-size: 17px;
-        font-weight: 400;
-        letter-spacing: 0.2px;
-        font-family: "Muli", sans-serif;
-        text-align: center;
-        color: #444;
-    }
+  
     .purch-already {
         font-size: 17px;
         font-weight: 600;
@@ -449,81 +389,8 @@ page-service-modal {
     .item-md.item-block .item-inner {
         padding-right: 0px;
     }
-    .orangeColor {
-        font-family: 'Raleway', Arial, sans-serif;
-        text-align: center;
-        font-size: 16px;
-        width: 100%;
-    }
-    .orangeColor .lan-select {
-        background-color: #e54922;
-        cursor: pointer;
-        width: 86%;
-        margin: 0 auto;
-        border-radius: 4px;
-    }
-    .packagelist {
-        border: 1px solid #eee;
-    }
-    .packges-det {
-        margin-top: 5px;
-    }
-    .packges-det .item-inner .input-wrapper .label-md {
-        margin: 0px;
-    }
-    .packges-det .item-inner .input-wrapper .label-md ion-row ion-col img {
-        border: 1px solid #EFF5FB;
-    }
-    .packges-det .item-inner .input-wrapper .label-md ion-row ion-col h1 {
-        color: #007994 !important;
-        font-family: "Muli", sans-serif;
-        font-size: 17px !important;
-        margin: 0;
-        padding-bottom: 5px;
-    }
-    .packges-det .item-inner .input-wrapper .label-md ion-row ion-col p {
-        color: #777 !important;
-        font-family: "Muli", sans-serif;
-        font-size: 14px !important;
-        margin: 0;
-    }
-    .packges-det .item-inner .input-wrapper .label-md ion-row ion-col small {
-        color: #777 !important;
-        font-family: "Muli", sans-serif;
-        font-size: 12px !important;
-        margin: 0;
-    }
-    .packges-det .item-inner .input-wrapper .label-md ion-row ion-col small i {
-        width: 20px;
-        text-align: center;
-        color: #ff9f1a;
-    }
-    .email-loca {
-        background: #EFF5FB;
-    }
-    .package-list-show {
-        color: #444 !important;
-        font-weight: 600;
-        font-family: "Muli", sans-serif;
-        font-size: 17px !important;
-        padding-bottom: 5px;
-        padding-top: 10px;
-        text-align: left;
-        margin: 0;
-        padding-left: 10px;
-    }
-    .packagelist .item-md .item-inner .input-wrapper .label-md {
-        margin: 5px 8px 13px 0px;
-    }
-    .packagelist .item-md .item-inner .input-wrapper .label-md ion-col h3 {
-        color: #007994 !important;
-        font-family: "Muli", sans-serif;
-        font-size: 19px !important;
-        margin: 0;
-        text-align: center;
-        padding-bottom: 20px;
-        font-weight: 600;
-    }
+ 
+  
     .item-md.item-block .item-inner {
         border-bottom: none;
     }
@@ -763,5 +630,92 @@ page-service-modal {
             border-radius: 5px !important;
         }
     }
+    ion-card{
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.12);
+            text-align: center;
+            padding: 10px;
+            ion-item{
+                .item-inner{
+                    padding-right: 0 !important;
+                    .input-wrapper{
+                        ion-label{
+                            margin: 0;
+                            ion-col{
+                                h3{
+                                    color: #ef7f16;
+                                    font-size: 20px;
+                                    font-weight: 600;
+                                    padding: 10px 10px 5px; 
+                                    text-align: center;
+                                }
+                                ion-list{
+                                    &.listed-descr{
+                                        color:#666;
+                                        text-align: center;
+                                        padding: 10px 0;
+                                        border-top: 1px dotted #ccc;
+                                        border-bottom: 1px dotted #ccc;
+                                    }
+                                    .get-pack{
+                                        text-align: center;
+                                        margin: 0px 0px 25px;
+                                        button{
+                                            background: #ef7f16;
+                                            color:#fff;
+                                            border-radius: 30px;
+                                            box-shadow: 0px 5px 20px rgba(0,0,0,0.12);
+                                        }
+                                    }
+                                    &.price-bt{
+                                        width: 100px;
+                                        height: 100px;
+                                        margin: 0 auto;
+                                        background: #019746;
+                                        display: flex;
+                                        align-items: center;
+                                        border-radius: 50%;
+                                        text-align:center; 
+                                        span{                                           
+                                            color:#fff;
+                                            text-align:center;
+                                            font-size: 16px;
+                                            margin: 0 auto;
+                                        }
+                                    }
+                                    &.price-list{
+                                        text-align: center;
+                                        padding: 10px 0;
+                                        small{
+                                            color: #ff0000;
+                                            font-size: 20px;
+                                            font-weight: 600;
+                                            text-align: center;
+                                        }
+                                        span{
+                                            color:#019746;
+                                            font-weight: 500;
+                                            font-size: 18px;
+                                            b{
+                                                color:#333;
+                                            }
+                                        }
+                                        p{
+                                            color:#999;
+                                            font-size: 15px;
+                                            padding: 5px 0px 20px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
+}
+.ios{
+    page-service-modal {
+         top: 8px !important;
+    }   
 }

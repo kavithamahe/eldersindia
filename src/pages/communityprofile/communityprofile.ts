@@ -18,6 +18,8 @@ import { CommunityPage } from '../community/community';
 
 import { CommunityServices } from '../../providers/community-services';
 
+import moment from 'moment';
+
 
 @Component({
   selector: 'page-communityprofile',
@@ -96,25 +98,6 @@ export class CommunityprofilePage {
   scrollToBottom(){
     this.content.scrollToBottom();
   }
-  // ionViewDidEnter(){
-  //     this.storage.ready().then(() => {
-  //     this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
-  //     this.storage.get('id').then((id) => { this.my_id=id; });
-  //     this.storage.get('token').then((token) => { this.token=token;
-  //      this.profileCommunity(this.profile_uid);
-  //     this.memberProfile(this.profile_uid);
-  //     this.getPrivacy(this.profile_uid);
-  //   })
-      
-  //   });
-  // }
-    ionViewWillEnter() {
-    this.tabBarElement.style.display = 'none';
-  }
- 
-  ionViewWillLeave() {
-    this.tabBarElement.style.display = 'flex';
-  }
 
   loadThisPage(id){
     this.allConnections=[];
@@ -185,8 +168,6 @@ showConfirm(id){
   }
   showComment(post){
     this.nav.push(CommunitycommentsPage, { posts: post });
-   //  let commentModal = this.modalCtrl.create(CommunitycommentsPage, { posts: post });
-   // commentModal.present();
   }
   messageModel(member) {
 
@@ -277,6 +258,12 @@ goBackToProfile(profile_id){
       this.communityProfile=[];
       this.communityServices.userProfile(id).subscribe(users => {
       this.communityProfile = users.result.info.lists.data;
+      var dataList=users.result.info.lists.data;
+        for(let data of dataList) {
+          data.created_at = moment(data.created_at).format("DD MMM YYYY HH:mm:ss");
+           }
+        this.communityProfile = dataList;
+
       this.nextPageURL=users.result.info.lists.next_page_url;
 
   },
@@ -564,6 +551,11 @@ pressevent(id){
      this.communityServices.userpostsscroll(this.nextPageURL,id).subscribe(
      (eventsscroll) => {
       this.eventScrollLists=eventsscroll.result.info.lists.data;
+        var dataList=eventsscroll.result.info.lists.data;
+        for(let data of dataList) {
+          data.created_at = moment(data.created_at).format("DD MMM YYYY HH:mm:ss");
+           }
+        this.eventScrollLists = dataList;
       for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
         this.communityProfile.push(this.eventScrollLists[i]);
         }

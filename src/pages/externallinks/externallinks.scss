@@ -1,41 +1,61 @@
 page-externallinks {
-.toolbar-title-md{ text-align:center !important;}
-.toolbar-title-ios{ text-align:center;}
-.content-intop										{background-image: url('../assets/img/extralinks.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
-.external-listed											{ background:rgba(255,255,255, 0.0); box-shadow:none; border:1px solid #E6E6FA; padding:4px;}
+    .usefulLink{
+        background-image: url('../assets/img/bg.jpg');
+        background-position: center;
+        background-size: cover;
+        ion-list{
+            .external-listed{
+                border-radius: 5px;
+                box-shadow: 0px 5px 20px rgba(0,0,0,0.08);
+                ion-item{
+                    .item-inner{
+                        .input-wrapper{
+                            ion-label{
+                                ion-row{
+                                    ion-col{
+                                        ion-avatar{
+                                            width: 100%;
+                                            text-align: center;
+                                            img{
+                                                width: 100%;
+                                                height: auto;
+                                            }
+                                        }
+                                        h1{
+                                            color: #2c4286;
+                                            font-size: 19px;
+                                            font-weight: 500;
+                                            line-height: 25px;
+                                        }
+                                        p{
+                                            color: #9ea8b2;
+                                            font-size: 16px;
+                                            padding: 6px 10px;
+                                            text-align: left;
+                                            line-height: 24px;
+                                        }
+                                        .time-datem{
+                                            font-size: 15px;
+                                            color:#333;
+                                            padding: 0px 10px;
+                                        }
+                                    }
+                                    &.heading-link{
+                                        border-bottom:1px dotted #ccc;
+                                        width: 100%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-.external-listed .item-md{ background:none;}
-
-.external-listed .item-md .item-inner .input-wrapper .label-md ion-row ion-col h1{    color: #007994 !important;
-    font-family: "Muli",sans-serif;
-    font-size:19px !important;letter-spacing: 0.2px; font-weight:400;
-
-    margin: 0;}
-.external-listed .item-md .item-inner .input-wrapper .label-md ion-row ion-col p{ color:#7b8da0 !important;
-    font-family: "Muli",sans-serif;
-    font-size:17px !important; font-weight:400;letter-spacing: 0.2px;
-    padding-bottom: 8px;
-    margin: 0;}
-	
-.external-listed .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col p{ color:#7b8da0 !important;
-    font-family: "Muli",sans-serif;
-    font-size:17px !important; font-weight:400;letter-spacing: 0.2px;
-    padding-bottom: 8px;
-    margin: 0;}
-	
-.external-listed .item-md .item-inner .input-wrapper .label-md ion-row ion-col small{    font-size:14px !important;
-    color: #909090 !important;
-    font-family: 'Muli', sans-serif;}
-.external-listed .item-md .item-inner .input-wrapper .label-md {margin:0px;}
-.external-listed .item-ios{ background:none;}
-
-.external-listed .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col h1{    color: #007994 !important;
-    font-family: "Muli",sans-serif;
-    font-size: 17px !important;
-
-    margin: 0;}
-.external-listed .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col small{    font-size: 11px !important;
-    color: #909090 !important;
-    font-family: 'Muli', sans-serif;}
-.external-listed .item-ios .item-inner .input-wrapper .label-ios {margin:0px;}
+}
+.ios{
+    page-externallinks {
+         top: 8px !important;
+    }   
 }

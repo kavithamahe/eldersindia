@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Device } from "@ionic-native/device";
 
@@ -29,7 +29,7 @@ export class SafemePagePage {
   vendor_id:any;
 
 
-  constructor(public navCtrl: NavController, private device: Device,public navParams: NavParams,public storage:Storage,public providerService: ServiceProvider) {
+  constructor(public navCtrl: NavController, private device: Device,public loadingCtrl: LoadingController,public navParams: NavParams,public storage:Storage,public providerService: ServiceProvider) {
           console.log("Device UUID is: " + this.device.uuid);
           storage.get('user_type_id').then((user_type_id) => { this.user_type_id=user_type_id; 
           storage.get('user_type').then((user_type) => { this.user_type=user_type; 
@@ -69,14 +69,21 @@ apiLogList(user_type_id){
                 })
 }
 close(call_id,api_name){
+   let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
   let servieListData = {"call_id":call_id,"vendor_id":this.vendor_id,"sponsor_id":50,"elder_id":this.user_type_id,"imei":"4b2a7a2cf63d35ee","requestName":api_name};
       this.providerService.webServiceCall(`getApiIntegrationCancel`,servieListData)
         .subscribe(
           data =>{
                 this.apiLogList(this.user_type_id);
-
+                if(data.success_msg != ""){
+                  this.providerService.showToast(data.success_msg);
+                }
+                this.providerService.showToast(data.error_msg);
+                loading.dismiss();
                   },
           err =>{
+            loading.dismiss();
                    this.providerService.showErrorToast(err);
                 })
 }

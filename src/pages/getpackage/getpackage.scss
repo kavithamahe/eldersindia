@@ -1,11 +1,46 @@
 page-getpackage {
-.sel-label{border:1px solid #a8aaad;
-    border-radius:20px; margin-right:5px !important;}
-    .btn-warnings{background:#025FA9 !important; height:35px;  font-size:15px; color:#fff; border-radius:20px; width:40%;
-    font-weight:600;
-    float: left;margin-bottom:10px;
-    text-transform: capitalize;
-    font-family: 'Muli', sans-serif;}
-    .instant-bt{ float:right;height:35px; margin-bottom:10px;   background:#FE5722 !important;width:40%;font-size:15px;color:#fff;border-radius:20px;font-weight:600;text-transform:capitalize;font-family: 'Muli', sans-serif;}
+    .getPackage{
+        form{
+            .register-form{
+                ion-grid{
+                    ion-row{
+                        ion-label{
+                            color: #333;
+                            font-size: 17px;
+                            font-weight: 600;
+                            padding-top: 10px;
+                            margin: 15px 0px 2px 0;
+                        }
+                        ion-item{
+                            .item-inner{
+                                padding-right:0;
+                                .input-wrapper{
+                                    ion-label{
+                                        color: #999 !important;
+                                        font-weight: 400 !important;
+                                        margin: 8px 0px;
+                                        font-size: 18px;
+                                    }
+                                    ion-select{
 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .btn-blue{
+                        background: #ef7f16;
+                    }
+                }
+            }
+        }
+    }
+     .discountCost {
+        color: #E91E63;
+    }
+}
+.ios{
+    page-getpackage {
+         top: 8px !important;
+    }   
 }

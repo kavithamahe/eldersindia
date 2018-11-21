@@ -5,60 +5,68 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-	 <ion-title text-center text-capitalize>Enquiry Detail</ion-title>    
+    <ion-title text-center text-capitalize>Enquiry Detail</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-   
+
   </ion-navbar>
 </ion-header>
 
-<ion-content class="content-intop">
-<ion-card>
-<ion-grid class="package-needs">
-	<ion-row>
-  <ion-col col-12 text-wrap>
-    <b>Enquiry Raised by:</b><p>{{enquiriesList?.name}}</p>
-	</ion-col>
-	</ion-row>
-		<ion-row>
-  <ion-col col-12 text-wrap>
-    <b>Service provider name:</b><p>{{enquiriesList?.vendor_name}}</p>
-	</ion-col>
-	</ion-row>
-		<ion-row>
-  <ion-col col-12 text-wrap>
-    <b>Query:</b><p>{{enquiriesList?.queries}}</p>
-	</ion-col>
-	</ion-row>
-		<ion-row>
-  <ion-col col-12 text-wrap>
-    <b>Category:</b><p>{{enquiriesList?.category_name}}</p>
-	</ion-col>
-	</ion-row>
-		<ion-row>
-  <ion-col col-12 text-wrap>
-    <b>Sub category:</b><p>{{enquiriesList?.sub_cat_name}}</p>
-	</ion-col>
-	</ion-row>
-		<ion-row>
-  <ion-col col-12 text-wrap>
-    <b>About:</b><p>{{enquiriesList?.service_name}}</p>
-	</ion-col>
-	</ion-row>
-		<ion-row>
-  <ion-col col-12 text-wrap>
-    <b>Package scheduled:</b><p>{{enquiriesList?.start_date}} to {{enquiriesList?.end_date}}</p>
-	</ion-col>
-	</ion-row>
-		<ion-row>
-  <ion-col col-12 text-wrap>
-    <b>Enquiry date:</b><p>{{enquiriesList?.preferred_datetime}}</p>
-	</ion-col>
-	</ion-row>
-	</ion-grid>
-	</ion-card>
+<ion-content class="enquireySection">
+  <ion-card class="job-detailsview">
+    <ion-grid class="package-needs">
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b><ion-icon ios="ios-person" md="md-person"></ion-icon>Enquiry Raised by:</b>
+          <p>{{enquiriesList?.name}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b><ion-icon ios="ios-cafe" md="md-cafe"></ion-icon>Service Provider Name:</b>
+          <p>{{enquiriesList?.vendor_name}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b><ion-icon ios="ios-clipboard" md="md-clipboard"></ion-icon> Query:</b>
+          <p>{{enquiriesList?.queries}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b><ion-icon ios="ios-copy" md="md-copy"></ion-icon>Category:</b>
+          <p>{{enquiriesList?.category_name}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b><ion-icon ios="ios-filing" md="md-filing"></ion-icon>Sub Category:</b>
+          <p>{{enquiriesList?.sub_cat_name}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b><ion-icon ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon> About:</b>
+          <p>{{enquiriesList?.service_name}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b><ion-icon ios="ios-cart" md="md-cart"></ion-icon>Package scheduled:</b>
+          <p>{{start_date}} to {{end_date}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>Enquiry Date:</b>
+          <p>{{preferred_datetime}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 
 </ion-content>

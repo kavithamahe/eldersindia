@@ -1,63 +1,97 @@
-page-job-dependent {
-.toolbar-title-md																	{text-align:center !important;}
-.toolbar-title-ios																	{text-align:center !important;}
-.sel-packages																		{border:1px solid hsl(0, 0%, 66%); border-radius:0px; box-shadow:none; }
-.sel-packages .item-md .item-inner .label-md										{font-family:"Muli",sans-serif; font-size:15px; padding-left:10px;font-weight:600;}
-.sel-packages .item-ios .item-inner .label-ios										{font-family:"Muli",sans-serif; font-size:15px; padding-left:10px;font-weight:600;}
-.sel-packages                                               {border:1px solid hsl(0, 0%, 66%);border-radius:0;box-shadow:none;}
-.sel-packages .item-md .item-inner .label-md                {font-family: "Muli",sans-serif;font-size:17px;padding-left:10px;}
-.inputfile 																			{width:0.1px;height:0.1px;opacity:0;overflow:hidden;position:absolute;z-index: -1;}
-.inputfile + label 																	{font-size:1.25em;font-weight:700;color:#fff;background-color:black;display:inline-block;}
-
-.inputfile:focus + label,
-.inputfile + label:hover {
-    background-color: red;
+page-job-dependent {    
+    .selectDependentjob {
+        ion-list {
+            form {
+                ion-label {
+                    color: #333;
+                    font-size: 17px;
+                    font-weight: 600;
+                    padding-top: 10px;
+                    margin: 15px 0px 2px 0;
+                }
+                ion-item {
+                    .item-inner {
+                        .input-wrapper {
+                            ion-label {
+                                color: #999;
+                                font-weight: 400;
+                                margin: 8px 0px;
+                                font-size: 18px;
+                            }
+                            ion-select {
+                                .select-text {
+                                    color: #666;
+                                    font-size: 18px;
+                                }
+                            }
+                            .err-reds{
+                                color:#ff0000;
+                            }
+                        }
+                    }
+                }
+            }           
+        }
+        ion-row{
+            ion-col{
+                .btn-warnings {
+                    background: #025FA9 !important;
+                    height: 35px;
+                    font-size: 15px;
+                    color: #fff;
+                    border-radius: 20px;
+                    width: 45%;
+                    font-weight: 600;
+                    float: left;
+                    margin-bottom: 10px;
+                    text-transform: capitalize;
+                    font-family: 'Muli', sans-serif;
+                }
+                .instant-bt {
+                    float: right;
+                    height: 35px;
+                    margin-bottom: 10px;
+                    background: #FE5722 !important;
+                    width: 45%;
+                    font-size: 15px;
+                    color: #fff;
+                    border-radius: 20px;
+                    font-weight: 600;
+                    margin-left: 5px;
+                    text-transform: capitalize;
+                    font-family: 'Muli', sans-serif;
+                }
+                &.sele-file{
+                    ion-label {
+                        color: #333;
+                        font-size: 17px;
+                        font-weight: 600;
+                        padding-top: 10px;
+                        margin: 15px 0px 2px 0;
+                    }
+                    .custom-file-input {
+                        border: 1px solid #ececec;
+                        width: 99%;
+                        padding: 5px 5px;
+                    }
+                    p {
+                        font-family: "Muli", sans-serif;
+                        font-size: 17px;
+                        font-weight: 400;
+                        color: #787878;
+                        margin-top: 10px;
+                        b {
+                            color: #1976D2;
+                        }
+                    }
+                    
+                }
+            }
+        }       
+    }
 }
-.inputfile + label {
-    cursor: pointer; /* "hand" cursor */
-}
-/*.content-intop                                        {background-image: url('../assets/img/jobs.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}*/
-.btn-cars{border-radius:0px; box-shadow:none; }
-.sele-file{border-radius:0px; box-shadow:none; }
-.sele-file ion-label{font-family:"Muli",sans-serif; font-size:17px; font-weight:400; color: hsl(0, 0%, 47%);}
-.sele-file p{font-family:"Muli",sans-serif; font-size:17px; font-weight:400; color: hsl(0, 0%, 47%); margin-top:10px;}
-
-.sele-file p b{color:#1976D2;}
-.custom-file-input{border:1px solid #ccc; width:99%;  }
-.submit-btns{ background:#025FA9;
-    border-radius: 20px;
-    color: hsl(0, 0%, 100%);
-   
-    font-family: "Muli",sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    height: 35px;
-    margin-bottom: 10px;
-    margin-left: 5px;
-    text-transform: capitalize;
-    width:95%;}
-    
-.submit-btns-can{ background: hsl(14, 99%, 56%) none repeat scroll 0 0 !important;
-    border-radius: 20px;
-    color: hsl(0, 0%, 100%);
-   
-    font-family: "Muli",sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    height: 35px;
-    margin-bottom: 10px;
-    margin-left: 5px;
-    text-transform: capitalize;
-    width:95%;}
-    .sel-packages .item-ios .item-inner .label-ios              {font-family: "Muli",sans-serif;font-size:15px;padding-left:10px;}
-	.instant-bt                                                                                {float:right;height:35px; margin-bottom:10px;   background:#FE5722 !important;width:45%;font-size:15px;color:#fff;border-radius:20px;font-weight:600;margin-left:5px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
-    .btn-warnings                                                                           {background:red;}
-    .btn-warnings                                                                           {background:#025FA9!important;height:35px;font-size:15px;color:#fff;border-radius:20px;width:45%;font-weight:600;float:left;margin-bottom:10px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
-.createblog-form .label-md{  color: hsl(0, 0%, 47%);
-    font-family: "Muli",sans-serif;
-    font-size: 17px;
-    font-weight: 400;
-    margin: 0;
-    padding-bottom: 8px;
-    padding-top: 10px; padding-left:10px;}
+.ios{
+    page-job-dependent {
+         top: 8px !important;
+    }   
 }

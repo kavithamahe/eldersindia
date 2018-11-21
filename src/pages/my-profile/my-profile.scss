@@ -1,34 +1,96 @@
 page-my-profile {
-.profile-edit{
-	 background-image: url('../assets/img/profile.png');
-  -webkit-background-image: url('../assets/img/profile.jpg');
+    .Myprofile {
+        background: url('../assets/img/bg.jpg');
+        background-position: center;
+        background-size: cover;
+        .profile-edit {
+            background-image: url('../assets/img/su.png');
+            background-position: center;
+            background-size: cover;
+            text-align: center;
+            .profile-img{
+              display: block;
+              width: 100%;
+              text-align: center;
+              padding: 40px 0px 10px;
+              img{
+                height: 130px;
+                width: 130px;
+                margin: 0 auto;
+                border:3px solid #9ea8b2;
+                border-radius: 50%;
+              }
+            }
+            p{
+              color: #fff;
+              margin: 0;
+              padding: 5px 0px 10px;
+              font-size: 20px;
+            }
+            .desigination{
+              font-size: 15px;
+              color: #e7f0fd;
+              text-transform: capitalize;
+              font-weight: 500;
+              letter-spacing: 0.5px;
+              padding: 0px 0px 10px;
+              display: block;
+            }
+            .edit-profile-btn{
+              color: #fff;
+              background: #ef7f16;
+              padding: 10px 18px;
+              font-size: 16px;
+              border-radius: 5px;
+              margin: 15px 0px 25px;
+              box-shadow: 0px 5px 20px rgba(0,0,0,0.4);
+            }
+        }
+        .profile-view{
+          background: #fff;
+          margin-top: 0px;
+          height: 100%;
+          padding: 5px 15px 10px;
+          .listed-profiles{
+            p{
+              color: #42436a;
+              font-size: 17px;
+              border-bottom: 1px dotted #ccc;
+              padding: 5px 5px 15px;
+              font-weight: 500;
+              i{
+                padding: 0px 10px 0px 0px;
+                color:#9ea8b2;
+                width:30px;
+                text-align: center;
+              }
+              .verified-s{
+                background-color: #ef7f16;
+                color: #fff;
+                border-radius: 30px;
+                float: right;
+                margin-top: -12px;
+                ion-icon{
+                  padding-right: 5px;
+                }
+              }
+              .verified-d{
+                background-color: #019746;
+                color: #fff;
+                border-radius: 30px;
+                float: right;
+                margin-top: -12px;
+                ion-icon{
+                  padding-right: 5px;
+                }
+              }
+            }
+          }
+        }
+    }    
 }
-.edit-profile-view{width:96%;}
-.change-log											{background-image: url('../assets/img/pr-b.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
-.toolbar-title-md{ text-align:center !important;}
-.listed-profiles{  margin:5px !important; float:left;width:100%;  background:rgba(243, 240, 242, 0.67);border-left:4px solid #D3D3D3;}
-.listed-profiles p{ font-size:18px; font-weight:400; color:#333 !important; padding-left:15px; border-bottom:1px solid #D3D3D3;white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; width:100%;  margin:0px;padding:6px; font-family: 'Muli', sans-serif;}
-.listed-profiles p i{ width:22px; font-size:15px; color:#333;  }
-.edit-profiles{ background:#fff; color:#039ECB; font-size:15px; padding:3px; margin-right:20px !important;}
-.toolbar-title-md{ text-align:center;}
-.toolbar-title-ios{ text-align:center;}
-.verified-s{background:#00bfff; height:20px; font-size:15px; color:#fff; padding:3px;}
-.verified-d{background:#04B404; height:20px; font-size:15px; color:#fff; padding:3px;}
-.profile-edit {
- height:185px;
-    position: relative;  text-align:center;
-	background-image: url('../assets/img/su.png');width:100%;background-repeat: no-repeat; background-size: cover; border-bottom:4px solid #52BE8E;
-}
-.profile-edit p {
-    color:hsl(191, 100%, 29%) !important; font-family: 'Muli', sans-serif;
-    float: left;
-    font-size: 19px;
-    font-weight: 600;
-  margin:0px;
-    text-align: center;
-    width: 100%;
-}
-.profile-img img{border-radius:50%; width:100px; height:100px; border:3px solid #fff; margin-top:20px; box-shadow: 0 8px 6px -6px black;}
+.ios{
+    page-my-profile {
+         top: 8px !important;
+    }   
 }

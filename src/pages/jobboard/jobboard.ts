@@ -35,6 +35,7 @@ functionalArea:any='';
 location:any='';
 file_name:any;
 searchText:any="";
+scrollTop:boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public jobBoardService:JobBoardService,public modalCtrl: ModalController) {
     this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -183,6 +184,7 @@ getItems(searchEvent){
   }
   jobBoardscroll()
   {
+    this.scrollTop = true;
      this.jobBoardService.JobBoardscroll(this.nextPageURL,this.searchText,this.functionalArea,this.location).subscribe(
      (JobBoardscroll) => {
       this.jobBoardScrollLists=JobBoardscroll.result.info.data;

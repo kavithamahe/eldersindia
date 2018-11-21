@@ -1,9 +1,3 @@
-<!--
-  Generated template for the Blogs page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
@@ -11,156 +5,203 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-	<ion-title text-center text-capitalize><span *ngFor="let title of singleJobInfo">{{title?.title}} 
-    </span></ion-title>
-    <ion-title *ngIf="appliedjobs" text-center text-capitalize><span *ngFor="let title of myjobrequestinfo">{{title?.title}} 
-    </span></ion-title>
+    <!-- <ion-title text-center text-capitalize>
+      <span *ngFor="let title of singleJobInfo">{{title?.title}}
+      </span>
+    </ion-title>
+    <ion-title *ngIf="appliedjobs" text-center text-capitalize>
+      <span *ngFor="let title of myjobrequestinfo">{{title?.title}}
+      </span>
+    </ion-title> -->
     <ion-buttons right>
       <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    
   </ion-navbar>
 </ion-header>
-<ion-content>
-<div *ngIf(!appliedjobs) class="job-detailsvie">
 
-<div *ngFor="let singleJob of singleJobInfo">
-<ion-row>
- <ion-col width-20>
+<ion-content class="DetailsJob">
+  <div *ngIf="!appliedjobs" class="job-detailsvie">
+    <div *ngFor="let singleJob of singleJobInfo">
+      <div class="jobDetailtitle">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3>
+              <div class="jobDetailLogo">
+                <img [src]="imageUrl+logo" [hidden]="!logo" />
+              </div>
+            </ion-col>
+            <ion-col col-9>
+              <h2>{{singleJob?.title}}</h2>
+              <h4>{{singleJob?.company_name}}</h4>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col text-right>
+              <button ion-button class="green-btn" *ngIf="user_type == 'elder' && singleJob.is_applied == 1">
+                <i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
+              <button ion-button class="Orange-btn" *ngIf="singleJob.is_applied == 0" (click)="applyJob(singleJob?.id)" (press)="pressevent(singleJob?.id)">
+                <i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
+        <div class="postDateCard">
+          <p *ngIf="singleJob?.created_at">
+            <b>Posted On</b>:&nbsp; {{singleJob?.created_at}}
+          </p>
+          <p *ngIf="singleJob?.job_expiry">
+            <b>Valid Upto</b>:&nbsp;{{singleJob?.job_expiry}}</p>
+          <p>
+            <b>Experience</b>:&nbsp;{{singleJob?.min_experience}} - {{singleJob?.max_experience}} years</p>
+          <p *ngIf="singleJob?.salary">
+            <b>Salary</b>:&nbsp;{{singleJob?.salary}}</p>          
+        </div>
+      </div>
+      <div class="postDetailCard">
+      <b>Location</b>:&nbsp;
+          <p *ngFor="let locations of singleJob?.location; let isLast1=last">
+              {{locations?.location}}{{isLast1 ? '' : ', '}}</p>
+              <b>Job Type</b>:&nbsp;
+        <p *ngFor="let jobType of singleJob?.job_type; let isLast2=last">
+          {{jobType?.name}}{{isLast2 ? '' : ', '}}
+        </p>
+        <p>
+          <b>Functional area</b>:&nbsp;{{singleJob?.name}}
+        </p>
+        <p *ngFor="let funArea of functional_area">
+          <b>Functional area</b>:&nbsp;{{funArea?.name}}
+        </p>
+        <p *ngIf="singleJob?.skills">
+          <b>Skills</b>:&nbsp;
+          <span>
+            <ion-badge *ngFor="let skills of singleJob?.skills">{{skills?.skills}}</ion-badge>
+          </span>
+        </p>
+      </div>
+      <div class="postDetailCard">
+        <p>
+          <b>Job Description</b>:</p>
+        <p [innerHtml]="singleJob?.description"></p>
+      </div>
 
- <img [src]="imageUrl+logo" [hidden]="!logo" width="80" height="40"/>
-  
-
-</ion-col>
-<ion-col width-80>
- <h2>{{singleJob?.title}}</h2>
- </ion-col>
-
-</ion-row>
-
-<p><i class="fa fa-map-marker" aria-hidden="true" style="padding-left:3px;"></i><span *ngFor="let locations of singleJob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
-<p><i class="fa fa-building-o"></i><span>{{singleJob?.company_name}}</span></p>
- <p><i class="fa fa-calendar-o"> </i><span *ngIf="singleJob?.created_at">Posted On: {{singleJob?.created_at}}</span></p>
- <p><i class="fa fa-calendar-o"> </i><span *ngIf="singleJob?.job_expiry">Valid Upto: {{singleJob?.job_expiry}}</span></p>
-
-<ion-row>
-
-<ion-col class="single-jobs">
-<b>Job Type</b>
-<span *ngFor="let jobType of singleJob?.job_type; let isLast2=last">{{jobType?.name}}{{isLast2 ? '' : ', '}}</span>
-<b>Functional area</b>
- <span>{{singleJob?.name}}</span>
-<b>Salary</b>
-<span *ngIf="singleJob?.salary"><i class="fa fa-inr"> </i>{{singleJob?.salary}} </span> 
- <span *ngFor="let funArea of functional_area">{{funArea?.name}}</span> 
-   
-<b>Experience</b><span>{{singleJob?.min_experience}} - {{singleJob?.max_experience}} years</span> 
-    
-     <b>Skills</b><span *ngIf="singleJob?.skills"><ion-badge *ngFor="let skills of singleJob?.skills">{{skills?.skills}}</ion-badge> </span>
-
-      <b>Job Description</b>
-     <span [innerHtml]="singleJob?.description" style="margin:0px !important;"></span>
-</ion-col>
-
-</ion-row>
-<!-- <ion-row>
-<ion-col>
-  <button ion-button  class="oranges" full *ngIf="user_type == 'sponsor'" (click)="applyJob(singleJob?.id)"><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button>
-   <button ion-button  class="oranges" *ngIf="user_type == 'elder'" full><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
-  </ion-col>
-</ion-row> -->
-<ion-row>
-<ion-col>
-    <button ion-button  class="oranges" full *ngIf="user_type == 'elder' && singleJob.is_applied == 1"><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
-  <button ion-button  class="oranges" full *ngIf="singleJob.is_applied == 0" (click)="applyJob(singleJob?.id)" (press)="pressevent(singleJob?.id)"><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button>
-  </ion-col>
-</ion-row>
-<hr/>
-
-<ion-row>
-<ion-col class="single-jobscotact">
-<h2>Contact Details</h2>
-<span text-capitalize><i class="fa fa-user-o" aria-hidden="true"></i> {{singleJob?.contact_name}}</span> 
-<span><i class="fa fa-phone" aria-hidden="true" (click)="makeCall(singleJob?.contact_mobile)"></i> {{singleJob?.contact_mobile}}</span> 
-<span (click)="openUrlemail(singleJob?.contact_email)" style="color: #007994 !important;"><i class="fa fa-envelope" aria-hidden="true"></i>{{singleJob?.contact_email}}
-</span> 
- <span (click)="openUrl(singleJob?.user?.website)" style="color: #007994 !important;"><i class="fa fa-internet-explorer" aria-hidden="true"></i>{{singleJob?.user?.website}}</span>
-</ion-col>
-
-</ion-row>
-
-<br/>
-</div>
-</div>
-
-<div class="job-detailsvie" *ngIf(appliedjobs)>
-
-<div *ngFor="let applyjob of myjobrequestinfo">
-<ion-row>
- <ion-col width-20>
- <img [src]="imageUrl+logo" [hidden]="!logo" width="80" height="40"/>
-      
-</ion-col>
-<ion-col width-80>
- <h2 text-capitalize>{{applyjob?.title}}</h2>
-  </ion-col>
-
-</ion-row>
-<p><i class="fa fa-building-o"></i><span>{{applyjob?.company_name}}</span></p>
-<p><i class="fa fa-calendar-o"> </i><span *ngIf="applyjob?.created_at">{{applyjob?.created_at}}</span></p>
-<p><i class="fa fa-map-marker" aria-hidden="true" style="padding-left:3px;"></i><span *ngFor="let locations of applyjob?.location; let isLast1=last" >{{locations?.location}}{{isLast1 ? '' : ', '}}</span></p>  
- <p><i class="fa fa-calendar-o"> </i><span *ngIf="applyjob?.created_at">Posted On: {{applyjob?.created_at}}</span></p>
- <p><i class="fa fa-calendar-o"> </i><span *ngIf="applyjob?.job_expiry">Valid Upto: {{applyjob?.job_expiry}}</span></p>
-
-<hr/>
-  
-<ion-row>
-
-<ion-col class="single-jobs">
-<b>Job Type</b>
-    <span *ngFor="let jobType of applyjob?.job_type; let isLast2=last">{{jobType?.name}}{{isLast2 ? '' : ', '}}</span>
- <b>Functional area</b>
- <span>{{applyjob?.name}}</span>  
-<b>Salary</b><span *ngIf="applyjob?.salary"><i class="fa fa-inr"> </i>{{applyjob?.salary}} </span> 
- <span *ngFor="let funArea of functional_area">{{funArea?.name}}</span> 
-   
-  <b>Experience</b><span>{{applyjob?.min_experience}} - {{applyjob?.max_experience}} years</span> 
-    
-     <b>Skills</b><span *ngIf="applyjob?.skills"><ion-badge *ngFor="let skills of applyjob?.skills">{{skills?.skills}}</ion-badge> </span>
-
-      <b>Job Description</b>
-     <span [innerHtml]="applyjob?.description" style="margin:0px !important;"></span>
-</ion-col>
-
-</ion-row>
-<ion-row>
-<ion-col>
-  <!-- <button *ngIf="user_type == 'sponsor'" (click)="applyJob(applyjob?.id)" ion-button class="oranges" full ><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Apply</button> -->
-  <button ion-button class="oranges" full ><i class="fa fa-check" aria-hidden="true"></i> &nbsp;Applied</button>
-  </ion-col>
-</ion-row>
-<hr/>
+      <div class="postDetailCard">
+        <p>
+          <strong>Contact Details</strong>:</p>
+        <p>
+          <span text-capitalize>
+            <i class="fa fa-user-o" aria-hidden="true"></i> {{singleJob?.contact_name}}</span>
+        </p>
+        <p>
+          <span>
+            <i class="fa fa-phone" aria-hidden="true" (click)="makeCall(singleJob?.contact_mobile)"></i> {{singleJob?.contact_mobile}}</span>
+        </p>
+        <p>
+          <span (click)="openUrlemail(singleJob?.contact_email)" style="color: #007994 !important;">
+            <i class="fa fa-envelope" aria-hidden="true"></i>{{singleJob?.contact_email}}
+          </span>
+        </p>
+        <p>
+          <span (click)="openUrl(singleJob?.user?.website)" style="color: #007994 !important;">
+            <i class="fa fa-internet-explorer" aria-hidden="true"></i>{{singleJob?.user?.website}}</span>
+        </p>
+      </div>
+      <br />
+    </div>
+  </div>
 
 
-<ion-row>
-<ion-col class="single-jobscotact">
-<h2>Contact Details</h2>
-<span text-capitalize><i class="fa fa-user-o" aria-hidden="true"></i> {{applyjob?.contact_name}}</span> <br/>
-<span><i class="fa fa-phone" aria-hidden="true" (click)="makeCall(applyjob?.contact_mobile)"></i> {{applyjob?.contact_mobile}}</span> <br/>
-<span (click)="openUrlemail(applyjob?.contact_email)" style="color: #007994 !important;"><i class="fa fa-envelope" aria-hidden="true"></i>{{applyjob?.contact_email}}</span> <br/>
-<span (click)="openUrl(applyjob?.user?.website)" style="color: #007994 !important;"><i class="fa fa-internet-explorer" aria-hidden="true"></i> {{applyjob?.user?.website}}
-</span>
-</ion-col>
 
-</ion-row>
 
-<br/>
- </div>
 
-</div>
- 
- </ion-content>
 
+  <div class="job-detailsvie" *ngIf="appliedjobs">
+    <div *ngFor="let applyjob of myjobrequestinfo">
+      <div class="jobDetailtitle">
+        <ion-grid>
+          <ion-row>
+            <ion-col width-20>
+              <div class="jobDetailLogo">
+                <img [src]="imageUrl+logo" [hidden]="!logo" />
+              </div>
+            </ion-col>
+            <ion-col width-80>
+              <h2>{{applyjob?.title}}</h2>
+              <h4>{{applyjob?.company_name}}</h4>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col text-right>
+              <button ion-button class="green-btn">
+                <ion-icon ios="ios-done-all" md="md-done-all"></ion-icon> &nbsp;Applied</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <div class="postDateCard">
+          <p *ngIf="applyjob?.created_at">
+            <b>Posted On</b>:&nbsp; {{applyjob?.created_at}}
+          </p>
+          <p *ngIf="applyjob?.job_expiry">
+            <b>Valid Upto</b>:&nbsp;{{applyjob?.job_expiry}}</p>
+          <p>
+            <b>Experience</b>:&nbsp;{{applyjob?.min_experience}} - {{applyjob?.max_experience}} years</p>
+          <p *ngIf="applyjob?.salary">
+            <b>Salary</b>:&nbsp;{{applyjob?.salary}}</p>         
+        </div>
+      </div>
+      <div class="postDetailCard">
+      <b>location</b>:&nbsp;
+          <p *ngFor="let locations of applyjob?.location; let isLast1=last">
+              {{locations?.location}}{{isLast1 ? '' : ', '}}</p>
+              <b>Job Type</b>:&nbsp;
+        <p *ngFor="let jobType of applyjob?.job_type; let isLast2=last">
+          {{jobType?.name}}{{isLast2 ? '' : ', '}}
+        </p>
+        <p>
+          <b>Functional area</b>:&nbsp;{{applyjob?.name}}
+        </p>
+        <p *ngFor="let funArea of functional_area">
+          <b>Functional area</b>:&nbsp;{{funArea?.name}}
+        </p>
+        <p *ngIf="applyjob?.skills">
+          <b>Skills</b>:&nbsp;
+          <span>
+            <ion-badge *ngFor="let skills of applyjob?.skills">{{skills?.skills}}</ion-badge>
+          </span>
+        </p>
+      </div>
+      <div class="postDetailCard">
+        <p>
+          <b>Job Description</b>:</p>
+        <p [innerHtml]="applyjob?.description"></p>
+      </div>
+      <div class="postDetailCard">
+        <p>
+          <strong>Contact Details</strong>:</p>
+        <p>
+          <span text-capitalize>
+            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;{{applyjob?.contact_name}}</span>
+        </p>
+        <p>
+          <span>
+            <i class="fa fa-phone" aria-hidden="true" (click)="makeCall(applyjob?.contact_mobile)"></i>&nbsp;{{applyjob?.contact_mobile}}</span>
+        </p>
+        <p>
+          <span (click)="openUrlemail(applyjob?.contact_email)" style="color: #42436a !important;">
+            <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;{{applyjob?.contact_email}}
+          </span>
+        </p>
+        <p>
+          <span (click)="openUrl(applyjob?.user?.website)" style="color: #42436a !important;">
+            <i class="fa fa-internet-explorer" aria-hidden="true"></i>&nbsp;{{applyjob?.user?.website}}</span>
+        </p>
+      </div>
+      <br />
+
+
+    </div>
+
+  </div>
+</ion-content>

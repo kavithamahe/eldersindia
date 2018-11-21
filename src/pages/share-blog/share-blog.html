@@ -1,60 +1,55 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title text-center text-capitalize>Share Blog</ion-title> 
+    <ion-title text-center text-capitalize>Share Blog</ion-title>
     <ion-buttons end>
-    <button ion-button icon-only (click)="dismiss()">
+      <button ion-button icon-only (click)="dismiss()">
         <ion-icon item-right name="ios-close-outline"></ion-icon>
-    </button>
-  </ion-buttons>  
+      </button>
+    </ion-buttons>
   </ion-navbar>
-  
 </ion-header>
 
 <ion-content padding class="register-log">
-<form [formGroup]="shareForm">
-<div class="register-form">
-    <ion-grid>
-       <ion-list radio-group>
-                  <ion-label class="required">To</ion-label>
-                  <ion-item class="sel-label">
-                    <ion-label>Friends</ion-label>
-                    <ion-radio value="frnds" (click)="friendslist(friends)" >
-                    </ion-radio>
-                  </ion-item>
-                  <br>
-                  <ion-item class="sel-label">
-                    <ion-label>Communities</ion-label>
-                      <ion-radio value="communitiess" (click)="communitylistsss(community)">
-                      </ion-radio>
-                  </ion-item>
-            </ion-list>
-        <ion-item *ngIf(friends) class="sel-label">
+  <form [formGroup]="shareForm">
+    <div class="register-form">
+      <ion-grid>
+        <ion-list radio-group>
+          <ion-label class="required">To</ion-label>
+          <ion-item class="sel-label">
+            <ion-label>Friends</ion-label>
+            <ion-radio value="frnds" (click)="friendslist(friends)">
+            </ion-radio>
+          </ion-item>          
+          <ion-item class="sel-label">
+            <ion-label>Communities</ion-label>
+            <ion-radio value="communitiess" (click)="communitylistsss(community)">
+            </ion-radio>
+          </ion-item>
+        </ion-list>
+
+        <ion-item *ngIf="friends" class="sel-label">
           <ion-label>Friends</ion-label>
-            <ion-select multiple="true" [(ngModel)]="selectedConnections" 
-            [ngModelOptions]="{standalone: true}">
-              <ion-option *ngFor="let name of connectionInfo" [value] = "name.id">{{name.friend_name}}
-              </ion-option>
-            </ion-select> 
-          </ion-item>
-           <ion-item *ngIf(community) class="sel-label">
+          <ion-select multiple="true" [(ngModel)]="selectedConnections" [ngModelOptions]="{standalone: true}">
+            <ion-option *ngFor="let name of connectionInfo" [value]="name.id">{{name.friend_name}}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="community" class="sel-label">
           <ion-label>Communities</ion-label>
-            <ion-select multiple="true" [(ngModel)]="selectedCommunity" 
-            [ngModelOptions]="{standalone: true}">
-              <ion-option *ngFor="let name of communitylists" [value] ="name">{{name.community_name}}
-              </ion-option>
-            </ion-select> 
-          </ion-item>
-       <ion-label class="required">Description</ion-label>
+          <ion-select multiple="true" [(ngModel)]="selectedCommunity" [ngModelOptions]="{standalone: true}">
+            <ion-option *ngFor="let name of communitylists" [value]="name">{{name.community_name}}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-label class="required">Description</ion-label>
         <ion-item class="sel-label">
-         
           <ion-input type="text" placeholder="Description" [(ngModel)]="description" formControlName="description">
           </ion-input>
         </ion-item>
         <p *ngIf="!shareForm.controls.description.valid && (shareForm.controls.description.dirty || submitAttempt)" class="err-reds shake">Please enter the description</p>
-          
-           
-  <button ion-button round full (click)="shareBlogToFriends()" class="btn-blue">Share</button>
-</ion-grid>
-</div>
-</form>
+        <br />
+        <button ion-button round full (click)="shareBlogToFriends()" class="btn-blue">Share</button>
+      </ion-grid>
+    </div>
+  </form>
 </ion-content>

@@ -26,7 +26,7 @@
       </ion-row>
       <div *ngIf="functionality != 'profileEdit'">
         <ion-label class="label-tittle required">Relationship</ion-label>
-        <ion-item>
+        <ion-item >
           <ion-label class="sel-label">Relationship</ion-label>
           <ion-select class="select-brd" [(ngModel)]="elder_relation" placeholder="Relationship" formControlName="elder_relation" [class.invalid]="!authForm.controls.elder_relation.valid && (authForm.controls.elder_relation.dirty)">
             <ion-option *ngFor="let relation of relations" value={{relation.value}}>{{relation.label}}</ion-option>
@@ -39,7 +39,7 @@
       <ion-label class="label-tittle required">First Name</ion-label>
       <ion-item>
         <ion-input type="text" formControlName="elder_name" [class.invalid]="!authForm.controls.elder_name.valid && (authForm.controls.elder_name.dirty)"
-          [(ngModel)]="elder_name" value={{elder_name}}>
+          [(ngModel)]="elder_name" value={{elder_name}} placeholder="First Name">
         </ion-input>
       </ion-item>
       <small *ngIf="!authForm.controls.elder_name.valid  && (authForm.controls.elder_name.dirty || submitAttempt)">
@@ -48,18 +48,16 @@
       <ion-label class="label-tittle required">Last Name</ion-label>
       <ion-item>
         <ion-input type="text" formControlName="last_name" [class.invalid]="!authForm.controls.last_name.valid && (authForm.controls.last_name.dirty)"
-          [(ngModel)]="last_name" value={{last_name}}>
+          [(ngModel)]="last_name" value={{last_name}} placeholder="Last Name">
         </ion-input>
       </ion-item>
 
       <small *ngIf="!authForm.controls.last_name.valid  && (authForm.controls.last_name.dirty || submitAttempt)">
         <p class="valid err-reds shake">Please enter the last name</p>
       </small>
-
-        <ion-label class="label-tittle required">Gender</ion-label>
-
+      <ion-label class="label-tittle required">Gender</ion-label>
       <ion-item>      
-       <ion-label class="sel-label">Gender</ion-label>      
+      <ion-label class="sel-label">Gender</ion-label>
             <ion-select class="select-brd"  [(ngModel)]="gender" 
             placeholder="Gender" formControlName="gender" 
             [class.invalid]="!authForm.controls.gender.valid && (authForm.controls.gender.dirty)">
@@ -98,12 +96,12 @@
       </small>
       <ion-label class="label-tittle">Hobbies</ion-label>
       <ion-item>
-        <ion-input type="text" [(ngModel)]="hobbies" [ngModelOptions]="{standalone: true}" value={{hobbies}}>
+        <ion-input type="text" [(ngModel)]="hobbies" [ngModelOptions]="{standalone: true}" value={{hobbies}} placeholder="Hobbies">
         </ion-input>
       </ion-item>
       <ion-label class="label-tittle">Allergic to</ion-label>
       <ion-item>
-        <ion-input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="allergic" value={{allergic}}>
+        <ion-input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="allergic" value={{allergic}} placeholder="Allergic to">
         </ion-input>
       </ion-item>
       <ion-label class="label-tittle required">Address</ion-label>
@@ -172,12 +170,12 @@
             </div>
           </div>
         </div>
-        <div class="addMore-outer">
+        <ion-col class="addMore-outer">
           <button class="add-btn" (click)="addEmergency()" ion-button icon-left clear>
             <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
             Add More
           </button>
-        </div>
+        </ion-col>
       </div>
       <br />
       <div *ngIf="functionality != 'profileEdit'">
@@ -264,21 +262,19 @@
             <p class="valid err-reds">Please select the services</p>
           </small>
           <ion-label class="label-tittle required">Attach Resume</ion-label>
-          <!-- <p>{{file_name}}</p> -->
+          <p>{{file_name}}</p>
           <div class="attachFile">
             <input type="file" (change)="fileChange($event)" placeholder="Upload file">
           </div>
 
           <ion-label class="label-tittle required">Skills</ion-label>
           <div class="tag-skill_set">
-            <rl-tag-input [(ngModel)]="skill_set" [addOnBlur]="false" [addOnEnter]="true" [autocompleteItems]="skills" [autocomplete]="true"
-              formControlName="skill_set" [class.invalid]="!myForm.controls.skill_set.valid && (myForm.controls.skill_set.dirty)"
-              placeholder="Enter your skills..">
-            </rl-tag-input>
+            <ion-tags-input [(ngModel)]="skill_set" placeholder="Enter skills.."  formControlName="skill_set"></ion-tags-input>
+        
           </div>
-          <small *ngIf="!myForm.controls.skill_set.valid  && (myForm.controls.skill_set.dirty || submitAttempt)">
+        <!--   <small *ngIf="!myForm.controls.skill_set.valid  && (myForm.controls.skill_set.dirty || submitAttempt)">
             <p class="valid err-reds shake">This field is required.</p>
-          </small>
+          </small> -->
           <br />
           <div>
             <ion-row>

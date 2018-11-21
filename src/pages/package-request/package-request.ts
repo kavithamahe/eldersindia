@@ -1,6 +1,6 @@
 import { Component,ViewChild } from '@angular/core';
 import { Content } from 'ionic-angular';
-import { NavController, NavParams,ModalController,LoadingController,ToastController } from 'ionic-angular';
+import { NavController, NavParams,ModalController,LoadingController,ToastController,PopoverController,ViewController } from 'ionic-angular';
 import { BlogListService } from '../../providers/blog-list-service';
 import { Storage } from '@ionic/storage';
 import { ViewpackagePagePage } from '../../pages/viewpackage/viewpackage';
@@ -37,7 +37,11 @@ paystatus:any;
 results:any;
 service_avail_date:any;
 scrollTop:boolean = false;
-  constructor(public navCtrl: NavController,public modalCtrl: ModalController,public toastCtrl: ToastController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams, public blogListService:BlogListService) {
+searchaction:any;
+packageName:boolean = false;
+packageEmail:boolean = false;
+packagetransId:boolean = false;
+  constructor(public navCtrl: NavController,private popoverCtrl: PopoverController,public modalCtrl: ModalController,public toastCtrl: ToastController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams, public blogListService:BlogListService) {
       this.paystatus = navParams.get("status");
        this.results = navParams.get("result");
     if(this.paystatus == "1"){
@@ -63,7 +67,6 @@ scrollTop:boolean = false;
     }
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
-    // this.providerService.loadServiceOffered()
     this.blogListService.getPackageRequest(this.rootUrl,this.searchText,this.searchemail,this.searchid,this.packstatus)
       .subscribe(data =>{
         this.packageRequest = data.result.data;
@@ -83,6 +86,14 @@ scrollTop:boolean = false;
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PackageRequestPagePage');
+  }
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
   }
 doInfinite(infiniteScroll) {
     setTimeout(() => {      
@@ -160,8 +171,7 @@ doInfinite(infiniteScroll) {
     this.getPackageRequestBy(packageId);
   }
   getPackageRequestBy(packageId){
-  	 let modal = this.modalCtrl.create(ViewpackagePagePage,{packageId:packageId});
-    modal.present();
+  	 this.navCtrl.push(ViewpackagePagePage,{packageId:packageId});
   }
   pressservices(id,locationId,elderId,status){
   this.getServicesForByElders(id,locationId,elderId,status);
@@ -176,4 +186,60 @@ public dashboardPage()
   {
     this.navCtrl.setRoot(DashboardPage);
   }
+    presentPopover(ev) {
+      console.log("PackagePopoverPage");
+    let popover = this.popoverCtrl.create(PackagePopoverPage, {
+    });
+    popover.present({
+      ev: ev
+    });
+    popover.onDidDismiss((popoverData) => {
+      console.log(popoverData);
+      this.searchaction = popoverData;
+      if(this.searchaction == "name"){
+        this.packageName = true;
+        this.packageEmail = false;
+        this.packagetransId = false;
+      }
+     if(this.searchaction == "email"){
+      this.packageEmail = true;
+      this.packageName = false;
+      this.packagetransId = false;
+     }
+     if(this.searchaction == "id"){
+      this.packagetransId = true;
+      this.packageName = false;
+      this.packageEmail = false;
+     }
+
+    })
+  }
+}
+
+
+
+@Component({
+  template: `<ion-list class='send-req'>
+  <ion-item style="color:blue !important">
+Search By
+</ion-item>
+<ion-item (click)="requests('name')">
+Service Provider Name
+</ion-item>
+<ion-item (click)="requests('email')">
+Email
+</ion-item>
+<ion-item (click)="requests('id')">
+Transaction Id
+</ion-item>
+</ion-list>
+  `
+})
+export class PackagePopoverPage {
+  constructor(private viewCtrl: ViewController) {
+   }
+ requests(data){
+   this.viewCtrl.dismiss(data);
+ }
+ 
 }

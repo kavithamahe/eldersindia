@@ -7,6 +7,7 @@ import { MessagesService } from '../../providers/messages-service';
 import { ViewMessagesPage } from '../../pages/view-messages/view-messages';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CreateMessagePage } from '../../pages/create-message/create-message';
+import moment from 'moment';
 
 /*
   Generated class for the Messages page.
@@ -145,6 +146,11 @@ sentlogDeleteStudents(viewType){
     this.messagesService.inbox(this.inbox).subscribe(
      (inbox) => {
       this.inboxInfo=inbox.result.data;
+      var dataList=inbox.result.data;
+      for(let data of dataList) {
+          data.created_at = moment(data.created_at).format("DD MMM YY HH:mm");
+           }
+        this.inboxInfo = dataList;
       this.status=this.inboxInfo.read_status;
       this.nextPageURL1=inbox.result.next_page_url;  
       loader.dismiss();    
@@ -189,7 +195,12 @@ sentlogDeleteStudents(viewType){
     loader.present();
     this.messagesService.sent(this.outbox).subscribe(
      (sent) => {
-      this.sentInfo=sent.result.data;  
+      this.sentInfo=sent.result.data; 
+        var dataList=sent.result.data; 
+      for(let data of dataList) {
+          data.created_at = moment(data.created_at).format("DD MMM YY HH:mm");
+           }
+        this.sentInfo = dataList; 
       this.nextPageURL2=sent.result.next_page_url; 
       loader.dismiss();        
     },
@@ -252,6 +263,11 @@ sentlogDeleteStudents(viewType){
      this.messagesService.inboxScroll(this.nextPageURL1).subscribe(
      (inboxScroll) => {
       this.inboxScrollLists=inboxScroll.result.data;
+        var dataList=inboxScroll.result.data;
+      for(let data of dataList) {
+          data.created_at = moment(data.created_at).format("DD MMM YY HH:mm");
+           }
+        this.inboxScrollLists = dataList;
       for (let i = 0; i < Object.keys(this.inboxScrollLists).length; i++) {
         this.inboxInfo.push(this.inboxScrollLists[i]);
         }      
@@ -286,6 +302,11 @@ sentlogDeleteStudents(viewType){
      this.messagesService.sentScroll(this.nextPageURL2).subscribe(
      (sentScroll) => {
       this.sentScrolllLists=sentScroll.result.data;
+       var dataList=sentScroll.result.data; 
+      for(let data of dataList) {
+          data.created_at = moment(data.created_at).format("DD MMM YY HH:mm");
+           }
+        this.sentScrolllLists = dataList; 
       for (let i = 0; i < Object.keys(this.sentScrolllLists).length; i++) {
         this.sentInfo.push(this.sentScrolllLists[i]);
         }      

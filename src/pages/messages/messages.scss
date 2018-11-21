@@ -1,78 +1,103 @@
 page-messages {
-.toolbar-title-md{ text-align:center !important;}
-.toolbar-title-ios{ text-align:center;}
-.inbox-sends {
-    border-bottom:1px solid hsl(220, 23%, 95%);
-    font-family: "Muli",sans-serif;
+    .MessageSection{
+        background: #fff;
+        .Messagesegment{
+            margin: 20px 10px;
+            ion-segment{
+                background: #fff;
+                color:#000;
+                box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+                padding: 5px 5px;
+                height: 50px;
+                ion-segment-button{
+                    color: #000;
+                    font-size: 16px !important;
+                    &.segment-activated{
+                        background: #ef7f16;
+                        color:#fff;
+                        font-size: 16px !important;
+                        height: 35px;
+                    }
+                }
+            }
+        }
+        .search-background{
+            background: #ececec;
+            padding: 5px 0px;
+        }
+        .message-list{
+            ion-list{
+                ion-item-sliding{
+                    background: #fff;
+                    height: 100%;
+                    ion-item{
+                        .item-inner{
+                            padding: 0;
+                            .input-wrapper{
+                                ion-label{
+                                    margin:0px;
+                                    border-bottom: 1px dotted #ccc;
+                                    ion-card{
+                                        box-shadow: none;
+                                        border-radius: 0px;
+                                        ion-row{
+                                            ion-col{
+                                                ion-avatar{
+                                                    img{
+                                                        border-radius: 5px;
+                                                        border:3px dashed #019746;
+                                                    }                                                   
+                                                }
+                                                &.send-box-content{
+                                                    width: 60%;
+                                                    padding: 0;
+                                                    ion-row{
+                                                        ion-col{                      
+                                                            
+                                                            &.width-75{
+                                                                flex: 0 0 60%;
+                                                                max-width:60%;
+                                                                p{
+                                                                    font-size: 15px;
+                                                                    font-weight: 600;
+                                                                    color: #000;
+                                                                    padding-top: 0;
+                                                                    margin: 0;
+                                                                }
+                                                            }
+                                                            &.width-25{
+                                                                flex: 0 0 40%;
+                                                                max-width: 40%;
+                                                                padding:0;
+                                                                p{
+                                                                    color: #999;
+                                                                    padding-top: 5px;
+                                                                }
+                                                            }
+                                                            &.messageSubject{
+                                                                padding: 0px 5px;
+                                                                span{
+                                                                    font-size: 15px;
+                                                                    color:#666;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
-.inbox-sends .item-md .item-inner .input-wrapper .label-md ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-md small {
-    color:#007994 !important;    font-family: "Muli",sans-serif;
-    font-size: 17px; font-weight:400;
-}
-.go-btn{width:50px;height:35px;}
-.subject-details .item-inner .input-wrapper .label-md b {
-    float: left;
-    font-size:14px;
-    font-weight: 400;
-    padding-right: 5px;    font-family: "Muli",sans-serif;
-}
-.send-box-content ion-row > ion-col > p {
-    font-size: 10px;
-}
-.inbox-sends p{color:#333 !important;}
-.list-ios{margin:0px !important;}
-.label-ios{margin:0px !important;}
-.inbox-sends .item-md .item-inner .input-wrapper .label-md ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-md {
-    font-size: 13px;
-    margin-left: 3px;    font-family: "Muli",sans-serif;
-    text-indent: 0;
-}
-
-.inbox-sends .item-block {
-    min-height: 0;
-}
-.inbox-sends .item-md {
-    padding-left: 0;
-}
-.inbox-sends .item-md .item-inner .input-wrapper .label-md {
-    margin: 0;
-    padding-left: 5px !important;
-}
-.inbox-sends .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-ios small {
-    color:#007994 !important;    font-family: "Muli",sans-serif;
-    font-size: 17px;
-}
-.subject-details .item-inner .input-wrapper .label-ios b {
-    float: left;
-    font-size:15px;
-    font-weight:400;
-    padding-right: 5px; color:#999 !important;    font-family: "Muli",sans-serif;
-}
-.subject-details .item-inner .input-wrapper .label-ios span {
-    float: left;
-    font-size:15px;
-    font-weight:400;
-    padding-right: 5px;    font-family: "Muli",sans-serif;
-}
-.searchbar-md{padding:0px !important ;}
-.send-box-content ion-row > ion-col > p {
-    font-size: 10px;
-}
-.inbox-sends .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col.send-box-content ion-row ion-item .item-inner .input-wrapper .label-ios {
-    font-size: 13px;
-    margin-left: 3px;    font-family: "Muli",sans-serif;
-    text-indent: 0;
-}
-.inbox-sends .item-block {
-    min-height: 0;
-}
-.inbox-sends .item-ios {
-    padding-left: 0;
-}
-.inbox-sends .item-ios .item-inner .input-wrapper .label-ios {
-    margin: 0;
-    padding-left: 5px !important;
-}
-.item-md.item-block .item-inner{padding-right:0px;}
-.item-ios.item-block .item-inner{padding-right:0px;}
+.ios{
+    page-messages {
+         top: 8px !important;
+    }   
 }

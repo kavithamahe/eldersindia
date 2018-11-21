@@ -8,7 +8,6 @@ import {FormBuilder,FormGroup,Validators,FormArray} from '@angular/forms';
 
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 
 
 /*
@@ -37,7 +36,7 @@ user_type:any;
 submitAttempt:any;
 jobId:any;
 dependentstatus:any=0;
-  constructor(public formBuilder: FormBuilder,private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
+  constructor(public formBuilder: FormBuilder,private filePath: FilePath,private fileChooser: FileChooser,public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.jobId=navParams.get("jobId");
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});

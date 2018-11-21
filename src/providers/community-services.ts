@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 import { AppConfig } from '../providers/app-config';
 import { FilePath } from '@ionic-native/file-path';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 
 
@@ -34,7 +34,7 @@ export class CommunityServices {
   //id:number;
   user_id:number = 0;
   getCommunityPostsUrl:any;
-   constructor(public appConfig:AppConfig,public http: Http,private transfer: Transfer,private filePath: FilePath,public storage:Storage,public toastCtrl: ToastController) {
+   constructor(public appConfig:AppConfig,public http: Http,private transfer: FileTransfer,private filePath: FilePath,public storage:Storage,public toastCtrl: ToastController) {
      this.getCommunityPostsUrl = appConfig.setrooturl();
     this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
@@ -363,7 +363,7 @@ myprofile(id){
        // imageData is either a base64 encoded string or a file URI
        // If it's base64:
 
-     const fileTransfer: TransferObject = this.transfer.create();
+     const fileTransfer: FileTransferObject = this.transfer.create();
 
     this.filePath.resolveNativePath(imageData)
      .then(filePath => {

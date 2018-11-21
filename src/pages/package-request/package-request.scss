@@ -1,34 +1,97 @@
 page-package-request {
-
-.content-intop {
-    background: hsl(218, 100%, 98%) none repeat scroll 0 0 !important;
+	.PackageRequest{
+		background: url(../assets/img/bg.jpg);
+        background-position: center;
+		background-size: cover;
+		.job-detailsview{
+            border-radius: 4px;
+			box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+			.package-needs{
+                ion-row{
+                    ion-col{
+						h2{
+							color: #2c4e86;
+							font-size: 19px;
+							font-weight: 600;
+							text-transform: capitalize;
+							padding: 7px 0px 15px 10px;
+							border-bottom: 1px dotted #ccc;
+							letter-spacing: 0.2px;
+						}
+                        b{
+                            color: #9ea8b2;
+							font-size: 17px;
+							padding: 8px 10px 6px;
+							display: block;
+							font-weight: 500;
+							letter-spacing: 0.2px;
+                            ion-icon{
+                                color: #9ea8b2;
+                                font-size: 20px;
+                                padding: 0px 5px 0px 0px;
+							}
+							&.statusTitle{
+								display: inline;
+							}
+                        }
+                        p{
+                            color: #42436a;
+							font-size: 17px;
+							padding: 0px 0px 0px 35px;
+							font-weight: 500;
+						}
+						.statusColor{
+							text-align: right;
+							float: right;
+							ion-badge {
+								font-size: 15px;
+								font-weight: 400;
+								padding: 5px 15px;
+							}
+							.active,.completed{
+								background: #019746;
+							}
+							.expired,.reject{
+								background: #ff0000;
+							}
+							.pending{
+								background: #ef7f16;
+							}
+						}
+                        &.view-serv{
+                            text-align: right;
+                            .services{
+                                background: #ef7f16;
+                                padding: 9px 25px 9px 25px;
+                                font-weight: 500;
+                                font-size: 16px;
+                                margin: 9px 5px 8px 0px;
+                                border-radius: 30px;
+                                box-shadow: 0px 5px 20px rgba(44, 78, 134,0.2)
+							}
+							.services-view{
+								background: #42436a;
+                                padding: 9px 25px 9px 25px;
+                                font-weight: 500;
+                                font-size: 16px;
+                                margin: 9px 5px 8px 0px;
+                                border-radius: 30px;
+                                box-shadow: 0px 5px 20px rgba(44, 78, 134,0.2)
+							}
+						}
+						&.statusBar{
+							padding: 15px 5px;
+							background-color: #f7f9fb;
+    						border-radius: 4px;
+						}
+                    }                    
+                }
+            }
+		}
+	}
 }
-.sel-packages{border:1px solid #A9A9A9;box-shadow:none; border-radius:0px;}
-.sel-packages .item-md .item-inner .label-md{font-family: 'Muli', sans-serif; font-size:15px; padding-left:10px;}
-.package-needs ion-row ion-col h2{font-family: 'Muli', sans-serif; font-size:19px; font-weight:600; color:#025FA9 !important; background:#fff; padding:5px;  padding-bottom:10px; margin-bottom:10px; background:#F8F8FF; box-shadow: 0 2px 2px 0 hsla(0, 0%, 0%, 0.14), 0 3px 1px -2px hsla(0, 0%, 0%, 0.2), 0 1px 5px 0 hsla(0, 0%, 0%, 0.12);}
-.package-needs ion-row ion-col b{font-family: 'Muli', sans-serif; font-size:19px; color:hsl(192, 99%, 34%); font-weight:400; width:100%; float:left;}
-.package-needs ion-row ion-col p{font-family: 'Muli', sans-serif; font-size:17px; color:#333; }
-.package-needs{ position: relative;background: hsla(0, 0%, 0%, 0) linear-gradient(45deg, hsl(0, 0%, 100%) 0%, hsl(0, 0%, 100%) 75%, hsl(81, 44%, 87%) 99%, hsl(81, 44%, 87%) 100%) repeat scroll 0 0; }
-.content-intop										{background-image: url('../assets/img/jobs.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
-.package-needs:after {
-    content: "";
-	position: absolute;
-	left: -40px;
-	top:0px;
-	width: 0;
-	height: 0;
-	border:35px solid transparent;
-	border-top-color:#4169E1;
-}
-.act{ background:#008000;font-family: 'Muli', sans-serif; font-size:13px; font-weight:600; margin-top:3px;}
-.pen{ background:#FF8C00;font-family: 'Muli', sans-serif; font-size:13px;font-weight:600; margin-top:3px;}
-.exp{ background:#dd4b39;font-family: 'Muli', sans-serif; font-size:13px;font-weight:600; margin-top:3px;}
-.rej{ background:red;font-family: 'Muli', sans-serif; font-size:13px;font-weight:600; margin-top:3px;}
-.com{ background:green;font-family: 'Muli', sans-serif; font-size:13px;font-weight:600; margin-top:3px;}
-.view-serv .services{background:#025FA9; height:35px; margin-top:20px;margin-bottom:10px; width:45%; float:right; margin-right:3px;font-family: 'Muli', sans-serif; font-size:15px;font-weight:600; border-radius:20px; line-height:28px;box-shadow: 0 2px 2px 0 hsla(0, 0%, 0%, 0.14), 0 3px 1px -2px hsla(0, 0%, 0%, 0.2), 0 1px 5px 0 hsla(0, 0%, 0%, 0.12);}
-.view-serv .services-view{background:#FE5722; height:35px;margin-top:20px;margin-bottom:10px; width:45%; float:left; margin-right:3px;font-family: 'Muli', sans-serif; font-size:15px;font-weight:600; border-radius:20px; line-height:28px;box-shadow: 0 2px 2px 0 hsla(0, 0%, 0%, 0.14), 0 3px 1px -2px hsla(0, 0%, 0%, 0.2), 0 1px 5px 0 hsla(0, 0%, 0%, 0.12);}
-.btn-go .go-btn.button-md{ margin-top:10px; font-weight:600; width:50px; height:35px;}
-.btn-go .go-btn.button-ios{ margin-top:5px; font-weight:600;width:50px; height:35px;}
-
-.package-needs ion-row ion-col{ padding:0px 5px 0px 5px;}
+.ios{
+    page-package-request {
+         top: 8px !important;
+    }   
 }

@@ -4,6 +4,8 @@ import { Storage } from '@ionic/storage';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { NewsService } from '../../providers/news-service';
+import moment from 'moment';
+
 /*
   Generated class for the ViewNews page.
 
@@ -20,6 +22,7 @@ token:string;
 imageUrl:string;
 NewsInfo:any;
 newsId:number;
+post_date:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public newsService:NewsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.newsId=navParams.get("newsId");
     this.storage.ready().then(() => {
@@ -39,6 +42,7 @@ newsId:number;
    this.newsService.viewNews(newsId).subscribe(
      (viewNews) => {
       this.NewsInfo=viewNews.result; 
+      this.post_date = moment(viewNews.result.post_date).format("DD MMM YYYY HH:mm:ss");
       loader.dismiss();    
     },
     (err) => { 

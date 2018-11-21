@@ -34,6 +34,7 @@ location:any='';
 emptyRecordSet:any='';
 searchText:any="";
 usermenu:any;
+scrollTop:boolean = false;
    constructor(public navCtrl: NavController, public navParams: NavParams,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     
   this.storage.ready().then(() => {
@@ -141,7 +142,7 @@ scrollToTop() {
   }
   appliedJobscroll()
   {
-
+    this.scrollTop = true;
      this.jobBoardService.appliedJobscroll(this.nextPageURL,this.searchText,this.functionalArea,this.location).subscribe(
      (appliedJobscroll) => {
       this.appliedJobScrollLists=appliedJobscroll.result.info.data;
@@ -164,10 +165,4 @@ scrollToTop() {
       }
     );
   }
-  
- 
-  ionViewDidLoad()
-  {
-    this.loader.dismiss();
   }
-}

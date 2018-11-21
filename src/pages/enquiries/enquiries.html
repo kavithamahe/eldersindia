@@ -5,87 +5,105 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-  <ion-title text-center>Enquiries</ion-title>
-    <ion-buttons right>
-    <button ion-button icon-only (click)="dashboardPage()">
-        <ion-icon name="home"></ion-icon>
-      </button> 
+    <ion-title text-center>Enquiries</ion-title>
+     <ion-buttons right>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="search"></ion-icon>
+      </button>
     </ion-buttons>
-    
+    <ion-buttons right>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content class="content-intop">
-  <div class="ion-searchbar">
+<ion-content class="content-intop enquireySection">
+  <div class="ion-searchbar" *ngIf = "packageName">
     <ion-row>
-      <ion-col width-80>
+      <ion-col col-10>
         <ion-searchbar [(ngModel)]="searchText" (keyup.enter)="inputSearch(searchText)"></ion-searchbar>
       </ion-col>
-      <ion-col width-20 class="btn-go">
+      <ion-col col-2 class="btn-go">
         <button (click)="inputSearch(searchText)" ion-button small class="go-btn">Go</button>
       </ion-col>
     </ion-row>
   </div>
- <ion-card class="sel-packages">
- <ion-item>
-    <ion-label>Category</ion-label>
-    <ion-select [(ngModel)]="category" (ionChange)="getenquiryList()">
-       <ion-option *ngFor="let category of category_details" value="{{category.id}}">{{category.name}}</ion-option>     
-    </ion-select>
-  </ion-item>
- </ion-card>
-  <ion-card class="sel-packages">
- <ion-item>
-    <ion-label>Vendor</ion-label>
-    <ion-select [(ngModel)]="vendor" (ionChange)="getenquiryList()">
-      <ion-option *ngFor="let vendor of vendor_details" value="{{vendor.id}}">{{vendor.name}}</ion-option>      
-    </ion-select>
-  </ion-item>
- </ion-card>
- <ion-card class="job-detailsview" *ngFor="let enquiries of enquiriesList">
-<ion-grid class="package-needs">
-   <ion-row>
-  <ion-col col-12 text-wrap>
-	<b>Enquiry Date </b><p>{{enquiry_date}}</p>
-	  </ion-col>
-  </ion-row>
-   <ion-row>
-  <ion-col col-12 text-wrap>
-	<b>Name </b><p>{{enquiries.name}}</p>
-	  </ion-col>
-  </ion-row>
-   <ion-row>
-  <ion-col col-12 text-wrap>
-	<b>Contact Number </b><p>{{enquiries.contact_number}}</p>
-	  </ion-col>
-  </ion-row>
-   <ion-row>
-  <ion-col col-12 text-wrap>
-	<b>Category </b><p>{{enquiries.category_name}}</p>
-	  </ion-col>
-  </ion-row>
-  <ion-row>
-   <ion-col col-12 text-wrap>
-	<b>Service </b><p>{{enquiries.service_name}}</p>
-	  </ion-col>
-  </ion-row>
-  <ion-row>
-   <ion-col col-12 text-wrap>
-	<b>Vendor </b><p>{{enquiries.vendor_name}}</p>
-	  </ion-col>
-  </ion-row>
-    <ion-row>
-  <ion-col class="view-serv">
-<ion-badge (click)="viewenquiry(enquiries)" class="services"><i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
-</ion-col>
-</ion-row>
-</ion-grid>
-</ion-card>
-  <div *ngIf = "error">
+
+  <ion-card class="sel-packages" *ngIf = "packageEmail">
+    <ion-item>
+      <ion-label>Category</ion-label>
+      <ion-select [(ngModel)]="category" (ionChange)="getenquiryList()">
+        <ion-option *ngFor="let category of category_details" value="{{category.id}}">{{category.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+  <ion-card class="sel-packages" *ngIf = "packagetransId">
+    <ion-item>
+      <ion-label>Vendor</ion-label>
+      <ion-select [(ngModel)]="vendor" (ionChange)="getenquiryList()">
+        <ion-option *ngFor="let vendor of vendor_details" value="{{vendor.id}}">{{vendor.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+  <br />
+  <ion-card class="job-detailsview" *ngFor="let enquiries of enquiriesList">
+    <ion-grid class="package-needs">
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> Enquiry Date </b>
+          <p>{{enquiries.preferred_datetime}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b><ion-icon ios="ios-person" md="md-person"></ion-icon> Name</b>
+          <p>{{enquiries.name}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b><ion-icon ios="ios-call" md="md-call"></ion-icon> Contact Number </b>
+          <p>{{enquiries.contact_number}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b><ion-icon ios="ios-filing" md="md-filing"></ion-icon> Category </b>
+          <p>{{enquiries.category_name}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b><ion-icon ios="ios-cog" md="md-cog"></ion-icon> Service </b>
+          <p>{{enquiries.service_name}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b><ion-icon ios="ios-people" md="md-people"></ion-icon> Vendor</b>
+          <p>{{enquiries.vendor_name}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="view-serv" col-6>
+          <ion-badge (click)="viewenquiry(enquiries)" class="services">
+            <i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
+        </ion-col>
+        <ion-col class="view-servs" col-6>
+          <ion-badge (click)="deletepresentConfirm(enquiries.id)" class="services">
+            <i class="fa fa-eye" aria-hidden="true"></i> Delete</ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <div *ngIf="error">
     <p style="text-align: center;">{{error}}</p>
   </div>
-<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

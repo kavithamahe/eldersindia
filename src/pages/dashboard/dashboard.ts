@@ -3,7 +3,7 @@ import { Http,Headers,RequestOptions } from '@angular/http';
 import { Platform,NavController, NavParams,AlertController,ToastController,LoadingController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CallNumber, Vibration} from 'ionic-native';
-// import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { LocalNotifications, Geolocation } from 'ionic-native';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { InAppBrowser } from 'ionic-native';
@@ -70,7 +70,9 @@ export class DashboardPage {
   vendor_id:any;
   apiData:any = [];
   sponsor_id:any;
-  constructor(private nativeAudio: NativeAudio,private device: Device,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
+  id:any;
+  safehelpdetails:any=[];
+  constructor(private nativeAudio: NativeAudio,public nativeGeocoder:NativeGeocoder,private device: Device,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
     console.log("Device UUID is: " + this.device.uuid);
     storage.get('Cctv_camera').then((Cctv_camera) => { this.Cctv_camera=Cctv_camera; })
   	storage.get('elder_mobile_imei').then((elder_mobile_imei) => { this.elder_mobile_imei=elder_mobile_imei; })
@@ -99,8 +101,11 @@ export class DashboardPage {
       storage.get('doctor').then((doctor) => { this.doctor=doctor;  })
       storage.get('hospital').then((hospital) => { this.hospital=hospital;  })
       storage.get('user_type_id').then((user_type_id) => { this.user_type_id=user_type_id;  })
-      storage.get('safeme_status').then((safeme_status) => { this.safeme_status=safeme_status;  })
-      storage.get('helpme_status').then((helpme_status) => { this.helpme_status=helpme_status;  })
+      storage.get('id').then((id) => { this.id=id; 
+      this.checksafehelpStatus(this.id);
+       })
+      // storage.get('safeme_status').then((safeme_status) => { this.safeme_status=safeme_status;  })
+      // storage.get('helpme_status').then((helpme_status) => { this.helpme_status=helpme_status;  })
       storage.get('vendor_id').then((vendor_id) => { this.vendor_id=vendor_id;  })
       // storage.get('lat').then((lat) => { this.lat=lat; 
       // console.log(this.lat); })
@@ -122,11 +127,14 @@ export class DashboardPage {
      this.storage.get('sponsor_name').then((sponsor_name) => { this.sponsor_name=sponsor_name;})
      this.storage.get('sponsor_id').then((sponsor_id) => { this.sponsor_id=sponsor_id;})
      this.storage.get('user_type_id').then((user_type_id) => { this.user_type_id=user_type_id;  })
-     this.storage.get('safeme_status').then((safeme_status) => { this.safeme_status=safeme_status;  })
-     this.storage.get('helpme_status').then((helpme_status) => { this.helpme_status=helpme_status;  })
+     // this.storage.get('safeme_status').then((safeme_status) => { this.safeme_status=safeme_status;  })
+     // this.storage.get('helpme_status').then((helpme_status) => { this.helpme_status=helpme_status;  })
      this.storage.get('vendor_id').then((vendor_id) => { this.vendor_id=vendor_id;  })
       this.storage.get('police').then((police) => { this.police=police;  })
       this.storage.get('doctor').then((doctor) => { this.doctor=doctor;  })
+      this.storage.get('id').then((id) => { this.id=id;
+        this.checksafehelpStatus(this.id);
+        })
       this.storage.get('hospital').then((hospital) => { this.hospital=hospital;  })
            this.storage.get('token').then((token) => { this.token=token; 
        this.headers = new Headers();
@@ -136,12 +144,19 @@ export class DashboardPage {
       this.fetchLocation();
       this.map();
   })
-      // this.storage.get('lat').then((lat) => { this.lat=lat; 
-      // console.log(this.lat); })
-      //  this.storage.get('long').then((long) => { this.long=long; 
-      // console.log(this.long); })
-    // this.tabBarElement.style.display = 'none';
   }
+  checksafehelpStatus(id){
+         this.providerService.checksafeHelpStatus(id,this.head)
+      .subscribe(data =>{
+        this.safehelpdetails = data.details;
+        this.safeme_status = this.safehelpdetails.safeme_status;
+        this.helpme_status = this.safehelpdetails.helpme_status;
+    },
+    err =>{
+      this.providerService.showErrorToast(err);
+      })
+    }
+  
   map(){
       Geolocation.getCurrentPosition().then((position) => {
       this.lat=position.coords.latitude;
@@ -149,17 +164,6 @@ export class DashboardPage {
       this.storage.set('lat', this.lat);
       this.storage.set('long', this.long);
 
-      console.log(this.long);
-  //        this.nativeGeocoder.reverseGeocode(this.lat, this.long)
-  // .then(
-  //   (result: NativeGeocoderReverseResult) => {
-     // this.street =  result.street;
-     // this.city = result.city;
-     // console.log("fsdf"+this.street);
-    // console.log('The address is ' + result.street + ' in ' + result.city+ 'result is : ' + result.district)
-   // this.urls = 'https://www.google.com/maps/place/'+this.street+','+this.city+'/@'+this.lat+ ',' + this.long;
-   
- // })
     this.urls = 'https://www.google.com/maps/place/'+this.lat+ ',' + this.long;
 
 
@@ -167,17 +171,31 @@ export class DashboardPage {
   }
      shareLocation()
   {
- this.providerService.elderEmergencySms(this.urls,this.call_sponsor,this.sponsor_name,this.elder_name,this.elder_lastname)
+      Geolocation.getCurrentPosition().then((position) => {
+      this.lat=position.coords.latitude;
+      this.long=position.coords.longitude;
+      this.storage.set('lat', this.lat);
+      this.storage.set('long', this.long);
+
+    this.urls = 'https://www.google.com/maps/place/'+this.lat+ ',' + this.long;
+      let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+   this.providerService.elderEmergencySms(this.urls,this.call_sponsor,this.sponsor_name,this.elder_name,this.elder_lastname)
       .subscribe(data =>{
       this.providerService.showToast(data.result);
+      loading.dismiss();
     },
     err =>{
+      loading.dismiss();
       this.providerService.showErrorToast(err);
       })
+
+    });
+
   }
-  ionViewWillLeave() {
-    this.tabBarElement.style.display = 'flex';
-  }
+  // ionViewWillLeave() {
+  //   this.tabBarElement.style.display = 'flex';
+  // }
    fetchLocation(){
     if (!this.platform.is('cordova')) {
       console.warn("Location not initialized. Cordova is not available - Run in physical device");
@@ -204,27 +222,23 @@ export class DashboardPage {
 }
 
   getLocation(d1,d2){
-
-  //   this.nativeGeocoder.reverseGeocode(d1,d2)
-  // .then(
-  //   (result: NativeGeocoderReverseResult) => {
-  //     console.log(result);
-  //   // console.log('The address is ' + results.street + ' in ' + results.city+ 'result is : ' + results.district)
-  //   // this.providerService.chechLocationID(result.city,this.head)
-  //   //   .subscribe(data =>{
-  //   //   this.serviceLocation=data.result.id;
-  //   //    this.storage.ready().then(() => {
-  //   //   this.storage.set('service_location',this.serviceLocation);
-  //   // });
-  //   // },
-  //   // err =>{
-  //   //   this.providerService.showErrorToast(err);
+    this.nativeGeocoder.reverseGeocode(d1,d2)
+  .then((result: NativeGeocoderReverseResult[]) => {console.log(JSON.stringify(result[0].locality))
+     this.providerService.chechLocationID(JSON.stringify(result[0].locality),this.head)
+      .subscribe(data =>{
+      this.serviceLocation=data.result.id;
+      console.log("this.serviceLocation" +this.serviceLocation);
+       this.storage.ready().then(() => {
+      this.storage.set('service_location',this.serviceLocation);
+    });
+    },
+    err =>{
+      this.providerService.showErrorToast(err);
       
-  //   // })
+    })
+    })
+  .catch((error: any) => console.log(error));
 
-  //   })
-    
-  // .catch((error: any) => console.log(error));
   }
 
   ionViewDidLoad() {
@@ -261,6 +275,7 @@ export class DashboardPage {
         if(data.result){
           this.apiData = data.result.Data;
           this.providerService.showToast(data.result.success_msg);
+          this.providerService.showToast(data.result.error_msg);
           loading.dismiss();
         }
         else{
@@ -293,6 +308,7 @@ export class DashboardPage {
          if(data.result){
           this.apiData = data.result.Data;
           this.providerService.showToast(data.result.success_msg);
+          this.providerService.showToast(data.result.error_msg);
           loading.dismiss();
         }
         else{

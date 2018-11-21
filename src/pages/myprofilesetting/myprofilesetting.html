@@ -1,12 +1,14 @@
 <ion-content>
-<ion-item *ngIf="profile == 'true'" class="user-details">
+<ion-item *ngIf="profile == 'true'" class="user-details" text-wrap>
 <ion-row>
 <ion-col>
 <b>{{myProfile.name}}</b>
 <p *ngIf="birthday=='true'"><i class="fa fa-birthday-cake" aria-hidden="true"></i>{{myProfile.birthday}}</p>
-<p *ngIf="email=='true'"><i class="fa fa-envelope" aria-hidden="true"></i>{{myProfile.email}}</p>
+<p *ngIf="email=='true'"><span><i class="fa fa-envelope" aria-hidden="true"></i>{{myProfile.email}}</span>
+</p>
 <p *ngIf = "location=='true'"><i class="fa fa-map-marker" aria-hidden="true"></i>{{myProfile.location}}</p>
-<p *ngIf = "mobile=='true'"><i class="fa fa-phone" aria-hidden="true"></i>{{myProfile.mobile}}</p>
+<p *ngIf = "mobile=='true'"><i class="fa fa-phone" aria-hidden="true"></i>{{myProfile.mobile}}
+</p>
 </ion-col>
 </ion-row>
 </ion-item>

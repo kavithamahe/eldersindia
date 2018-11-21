@@ -1,73 +1,119 @@
 page-edit-profile {
-.profile-edit{
-		 background-image: url('../assets/img/Background-4.jpg');
-  -webkit-background-image: url('../assets/img/Background-4.jpg'); height:175px;
-}
-.profile-img img {
-    border: 3px solid hsl(0, 0%, 100%);
-    border-radius: 50%;
-    box-shadow: 0 8px 6px -6px hsl(0, 0%, 0%);
-    height: 100px;
-    margin-top: 20px;
-    width: 100px;
-}
-.profile-edit p {
-    color: hsl(0, 0%, 100%);
-    float: left;
-    font-family: "Muli",sans-serif;
-    font-size: 19px;
-    font-weight: 600;
-    margin: 0;
-    text-align: center;
-    width: 100%;
-}
-.profile-edit{text-align:center;}
-.toolbar-title-md{ text-align:center !important;}
-.toolbar-title-ios{ text-align:center;}
-.edit-profile-view{margin:10px;}
-.edit-profile-view .item-md{ background:none;border: 1px solid #ccc;}
-
-.edit-profile-view .label-md {padding-left:0px; float:left; padding-bottom:5px;
-    color: #777;
-    font-size: 16px;
-    font-weight: 400;
-    font-family: 'Muli', sans-serif; margin-bottom:5px;
-}
-
-
-.edit-profile-view .item-ios{ background:none;border: 1px solid #ccc;}
-
-.edit-profile-view .label-ios {padding-left:0px; float:left; padding-bottom:5px;
-    color: #777;
-    font-size: 16px; margin-bottom:5px;
-    font-weight: 400;
-    font-family: 'Muli', sans-serif;
-}
-/*.item-md.item-block .item-inner{border-bottom:none;}*/
-.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{border-bottom-color:#ccc !important;box-shadow:none;}
-.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:#ccc !important;box-shadow:none;}
-
-.text-input-ios{margin: 11px 8px 11px 10px !important;}
-.text-input-md{margin: 11px 8px 11px 10px !important;}
-/*.item-ios.item-block .item-inner{border-bottom:none;}*/
-.item-ios.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner{border-bottom-color:#ccc !important;box-shadow:none;}
-.item-ios.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:#ccc !important;box-shadow:none;}
-.button-md{ background: hsl(207, 98%, 34%) none repeat scroll 0 0;
-    border-radius: 30px;
-    float: left;
-    font-family: "Muli",sans-serif;
-    font-size: 15px;
-    font-weight: 400;
-    height: 35px;
-    text-transform: capitalize;
+    .Myprofile {
+        background: url('../assets/img/bg.jpg');
+        background-position: center;
+        background-size: cover;
+        .profile-edit {
+            background-image: url('../assets/img/su.png');
+            background-position: center;
+            background-size: cover;
+            text-align: center;
+            padding: 40px 0px 10px;
+            .profile-img {
+                display: block;
+                width: 140px;
+                text-align: center;
+                margin: 0 auto;
+                position: relative;
+                img {
+                    height: 130px;
+                    width: 130px;
+                    margin: 0 auto;
+                    border: 3px solid #9ea8b2;
+                    border-radius: 50%;
+                }
+                .EditIcon {
+                    width: 140px;
+                    top: 0;
+                    bottom: 0;
+                    position: absolute;
+                    
+                    height: 140px;
+                    left: 0;
+                    background: transparent;
+                    i {
+                        background-color: #ffb413;
+                        font-size: 21px;
+                        bottom: 10px;
+                        position: absolute;
+                        right: 17px;
+                        color: #4a3200;
+                        z-index: 1029;
+                        padding: 8px 10px;
+                        border-radius: 50%;
+                        border: 2px solid #ffb413;
+                    }
+                }
+            }
+            p {
+                color: #fff;
+                margin: 0;
+                padding: 5px 0px 10px;
+                font-size: 20px;
+            }
+            .desigination {
+                font-size: 15px;
+                color: #e7f0fd;
+                text-transform: capitalize;
+                font-weight: 500;
+                letter-spacing: 0.5px;
+                padding: 0px 0px 10px;
+                display: block;
+            }
+            .edit-profile-btn {
+                color: #fff;
+                background: #ef7f16;
+                padding: 10px 18px;
+                font-size: 16px;
+                border-radius: 5px;
+                margin: 15px 0px 25px;
+                box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.4);
+            }
+        }
+        Form {
+            .edit-profile-view {
+                background: #fff;
+                height: 100%;
+                .package-needs {
+                    padding: 0px 15px;
+                    ion-row {
+                        ion-col {
+                            ion-label {
+                                color: #9ea8b2;
+                                font-size: 17px;
+                                padding: 8px 0px 6px;
+                                display: block;
+                                font-weight: 500;
+                                letter-spacing: 0.2px;
+                                margin: 5px 0;
+                            }
+                            ion-item {
+                                .item-inner {
+                                    .input-wrapper {
+                                        ion-input {
+                                            color: #42436a;
+                                            font-size: 17px;
+                                            font-weight: 600;
+                                        }
+                                        ion-datetime {
+                                            color: #42436a;
+                                            font-size: 17px;
+                                            font-weight: 600;
+                                            margin: 0;
+                                            padding: 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-	.button-ios{ background: hsl(207, 98%, 34%) none repeat scroll 0 0;
-    border-radius: 30px;
-    float: left;
-    font-family: "Muli",sans-serif;
-    font-size: 15px;
-    font-weight: 400;
-    height: 35px;
-    text-transform: capitalize;
-    }
+}
+.ios{
+    page-edit-profile {
+         top: 8px !important;
+    }   
 }

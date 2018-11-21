@@ -8,6 +8,8 @@ import { Externallinks } from '../../providers/externallinks';
 
 import { InAppBrowser } from 'ionic-native';
 
+import moment from 'moment';
+
 /*
   Generated class for the Externallinks page.
 
@@ -50,6 +52,11 @@ export class ExternallinksPage {
     loader.present();
      this.externallinks.externalLinksList().subscribe (users => {
        this.externalLinks=users.result.data;
+       var dataList=users.result.data;
+        for(let data of dataList) {
+            data.created_at = moment(data.created_at).format("DD MMM YYYY HH:mm:ss");
+          } 
+          this.externalLinks = dataList;
       this.nextPageURL=users.result.next_page_url;
       loader.dismiss();
       },
@@ -123,8 +130,13 @@ export class ExternallinksPage {
      this.externallinks.linksscroll(this.nextPageURL).subscribe(
      (eventsscroll) => {
       this.eventScrollLists=eventsscroll.result.data;
+      var dataList=eventsscroll.result.data; 
+        for(let data of dataList) {
+           data.created_at = moment(data.created_at).format("DD MMM YYYY HH:mm:ss");
+          } 
+          this.eventScrollLists = dataList; 
       for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
-        this.externalLinks.push(this.eventScrollLists[i]);
+        this.externalLinks.push(dataList[i]);
         }
       
        this.nextPageURL=eventsscroll.result.next_page_url;     

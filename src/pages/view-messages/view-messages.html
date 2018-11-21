@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ViewMessages page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
@@ -11,92 +5,93 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-	  <ion-title text-center>View Messages</ion-title>
+    <ion-title text-center>View Messages</ion-title>
     <ion-buttons right>
-    <button ion-button icon-only (click)="dashboardPage()">
+      <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-  
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="messageview">
   <ion-list>
     <ion-item text-wrap class="left-img">
-      <ion-row>
-        <ion-col width-20>
-          <ion-avatar item-left *ngIf ="viewType == 'inbox'">
-            <img (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" 
-            src="{{imageUrl+veiwMessagesInfo?.avatar}}">
+      <ion-row *ngIf="viewType == 'inbox'">
+        <ion-col>
+          <h2>{{veiwMessagesInfo?.subject}}</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="viewType != 'inbox'">
+        <ion-col>
+          <h2><span>{{veiwMessagesInfo?.subject}}</span></h2>
+        </ion-col>
+      </ion-row>
+      <ion-row class="senderDetails">
+        <ion-col class="width-20">
+          <ion-avatar item-left *ngIf="viewType == 'inbox'">
+            <img (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" src="{{imageUrl+veiwMessagesInfo?.avatar}}">
           </ion-avatar>
-          <ion-avatar item-left *ngIf ="viewType != 'inbox'">
-            <img (click)="CommunityUserWall(veiwMessagesInfo?.receiver_id)" 
-            src="{{imageUrl+veiwMessagesInfo?.avatar}}">
+          <ion-avatar item-left *ngIf="viewType != 'inbox'">
+            <img (click)="CommunityUserWall(veiwMessagesInfo?.receiver_id)" src="{{imageUrl+veiwMessagesInfo?.avatar}}">
           </ion-avatar>
         </ion-col>
-        <ion-col width-80  style="padding: 0px !important" class="send-box-content">
-  			  <ion-row>
-            <ion-item *ngIf ="viewType == 'inbox'" class="view-messname">
-      				<small (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" 
-              *ngIf ="viewType == 'inbox'">{{veiwMessagesInfo?.sender_name}}</small>
-      				<small (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" 
-              *ngIf ="viewType == 'sent'">{{veiwMessagesInfo?.receiver_name}}</small>
-      				<b><i class="fa fa-calendar-o"></i> 
-              {{veiwMessagesInfo?.created_at}}</b>
-      <!--         <b><i class="fa fa-calendar-o"></i> 
-              {{veiwMessagesInfo?.created_at | date :'MM/dd/yy'}}</b> -->
-  				    <span>{{veiwMessagesInfo?.subject}}</span>
-  				  </ion-item>
-            <ion-item *ngIf ="viewType != 'inbox'" class="view-messname">
-              <small (click)="CommunityUserWall(veiwMessagesInfo?.receiver_id)" 
-              *ngIf ="viewType == 'inbox'">{{veiwMessagesInfo?.sender_name}}</small>
-              <small (click)="CommunityUserWall(veiwMessagesInfo?.receiver_id)" 
-              *ngIf ="viewType == 'sent'">{{veiwMessagesInfo?.receiver_name}}</small>
-              <!-- <b><i class="fa fa-calendar-o"></i> 
-              {{veiwMessagesInfo?.created_at | date :'MM/dd/yy'}}</b> -->
-              <b><i class="fa fa-calendar-o"></i> 
-              {{veiwMessagesInfo?.created_at}}</b>
-              <span>{{veiwMessagesInfo?.subject}}</span>
+        <ion-col  class="send-box-content width-80">
+          <ion-row>
+            <ion-item *ngIf="viewType == 'inbox'" class="view-messname">
+              <h4 (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" *ngIf="viewType == 'inbox'">{{veiwMessagesInfo?.sender_name}}</h4>
+              <h4 (click)="CommunityUserWall(veiwMessagesInfo?.sender_id)" *ngIf="viewType == 'sent'">{{veiwMessagesInfo?.receiver_name}}</h4>
+              <p>
+                <i class="fa fa-calendar-o"></i>
+                {{created_at}}</p>              
+            </ion-item>
+            <ion-item *ngIf="viewType != 'inbox'" class="view-messname">
+              <h4 (click)="CommunityUserWall(veiwMessagesInfo?.receiver_id)" *ngIf="viewType == 'inbox'">{{veiwMessagesInfo?.sender_name}}</h4>
+              <h4 (click)="CommunityUserWall(veiwMessagesInfo?.receiver_id)" *ngIf="viewType == 'sent'">{{veiwMessagesInfo?.receiver_name}}</h4>              
+              <p>
+                <i class="fa fa-calendar-o"></i>
+                {{created_at}}</p>              
             </ion-item>
           </ion-row>
         </ion-col>
       </ion-row>
     </ion-item>
-  <hr>
-      <ion-card-content item-text-wrap class="text-view-mess">
-        <p>{{veiwMessagesInfo?.message}}</p>
-      </ion-card-content>
-      <p *ngIf="attachmentInfo.length != 0"><i class="fa fa-paperclip" aria-hidden="true"></i><span>Attachment</span></p>
-      <div *ngFor="let attachment of attachmentInfo" class="documents">
-
-        <p (click)="downloadFile(attachment.file_path,attachment.file_name)"><i class="fa fa-file-text-o" aria-hidden="true"></i> &nbsp;{{attachment.file_name}}</p>
-        <!-- <span>Download progress : {{downloadProgress}} %</span> --> 
-      </div>
-     <ion-row class="replay-forward">
-        <ion-col *ngIf ="viewType == 'inbox'" (click)="messageReply(veiwMessagesInfo?.sender_name,veiwMessagesInfo?.subject,veiwMessagesInfo?.sender_id)">
-          <button ion-button icon-left clear small>
-            <i class="fa fa-reply"></i>&nbsp;<p>Reply</p>
-          </button>
-        </ion-col>
-        <!--<ion-col *ngIf ="viewType == 'sent'" (click)="messageReply(veiwMessagesInfo?.receiver_name,veiwMessagesInfo?.subject)">
-          <button ion-button icon-left clear small>
-            <i class="fa fa-reply"></i>&nbsp;<p>Reply</p>
-          </button>
-        </ion-col>-->
-	        <ion-col (click)="deleteMessage(veiwMessagesInfo?.id,viewType)">
-            <button ion-button icon-left clear small>
-             <i class="fa fa-trash-o"></i>&nbsp;<p>Delete</p>
-            </button>
-          </ion-col> 
-          <ion-col (click)="messageForward(veiwMessagesInfo?.subject,veiwMessagesInfo?.message)">
-            <button ion-button icon-left clear small>
-              <i class="fa fa-share"></i>&nbsp;<p>Forward</p> 
-            </button>
-          </ion-col>
-        </ion-row>
-        
-      </ion-list>
-   
+    
+    <ion-card-content item-text-wrap class="text-view-mess">
+      <p>{{veiwMessagesInfo?.message}}</p>
+    </ion-card-content>
+    <p *ngIf="attachmentInfo.length != 0">
+      <i class="fa fa-paperclip" aria-hidden="true"></i>
+      <span>Attachment</span>
+    </p>
+    <div *ngFor="let attachment of attachmentInfo" class="documents">
+      <p (click)="downloadFile(attachment.file_path,attachment.file_name)">
+        <i class="fa fa-file-text-o" aria-hidden="true"></i> &nbsp;{{attachment.file_name}}</p>      
+    </div>
+    <ion-row class="replay-forward">
+      <ion-col *ngIf="viewType == 'inbox'" (click)="messageReply(veiwMessagesInfo?.sender_name,veiwMessagesInfo?.subject,veiwMessagesInfo?.sender_id)">
+        <button ion-button icon-left clear small class="orange-btn">
+          <i class="fa fa-reply"></i>&nbsp;
+          <p>Reply</p>
+        </button>
+      </ion-col>      
+      <ion-col (click)="deleteMessage(veiwMessagesInfo?.id,viewType)">
+        <button ion-button icon-left clear small class="red-btn">
+          <i class="fa fa-trash-o"></i>&nbsp;
+          <p>Delete</p>
+        </button>
+      </ion-col>
+      <ion-col (click)="messageForward(veiwMessagesInfo?.subject,veiwMessagesInfo?.message)">
+        <button ion-button icon-left clear small class="blue-btn">
+          <i class="fa fa-share"></i>&nbsp;
+          <p>Forward</p>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+   <!-- <div class="progress-outer">
+          <div class="progress-inner" [style.width]="progress + '%'">
+              {{progress}}%
+          </div>
+      </div> -->
 </ion-content>

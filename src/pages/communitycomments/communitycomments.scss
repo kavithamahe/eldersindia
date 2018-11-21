@@ -1,83 +1,84 @@
-@import url('https://fonts.googleapis.com/css?family=Muli');
 page-communitycomments {
- .toolbar-title-md{ text-align:center;}
-  .toolbar-title-ios{ text-align:center;}
-.listed-comments{ border:1px solid #E6E6FA; margin:0px !important; width:auto !important;}
-.listed-comments .item-md .item-inner .input-wrapper .label-md img {border-radius:0px !important;}
-.listed-comments .item-md .item-inner .input-wrapper .label-md{ margin:0px !important;}
-.listed-comments .item-md .item-inner .input-wrapper .label-md h2{ font-size:19px; color:#007994 !important; font-weight:400; letter-spacing:0.2px;font-family: 'Muli', sans-serif; padding-top:10px;}
-.listed-comments .item-md .item-inner .input-wrapper .label-md p{ font-size:11px !important; color:#909090;font-family: 'Muli', sans-serif; }
-
-.listed-comments .item-ios .item-inner .input-wrapper .label-ios img {border-radius:0px !important;}
-.listed-comments .item-ios .item-inner .input-wrapper .label-ios{ margin:0px !important;}
-.listed-comments .item-ios .item-inner .input-wrapper .label-ios h2{ font-size:17px; color:#007994 !important; font-family: 'Muli', sans-serif; padding-top:10px;}
-.listed-comments .item-ios .item-inner .input-wrapper .label-ios p{ font-size:11px !important; margin:0px; color:#909090;font-family: 'Muli', sans-serif; }
-
-.ios page-community p, .md page-community p {
-    color: hsl(0, 0%, 47%);
-    font-family: "Muli",sans-serif;
-    font-size: 15px !important;
+    .communityComments {
+        .comm-posted{
+            padding: 10px;
+            margin:0;
+            .listed-comments {
+                box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.12);
+                border-radius: 5px;
+                width: 100%;
+                margin: 0;
+                ion-item{
+                    .item-inner{
+                        padding: 0;
+                        border-bottom:1px dotted #ccc;
+                        .input-wrapper{
+                            ion-label{
+                                margin: 0;
+                                ion-col{
+                                    ion-avatar{
+                                        margin: 0;
+                                    }
+                                    button{
+                                        padding: 0;
+                                        font-size: 20px;
+                                        margin: 0;
+                                        text-align:center;
+                                       
+                                    }
+                                    &.replyName{
+                                        h2{
+                                            font-size: 18px;
+                                            font-weight: 500;
+                                            color:#42436a;
+                                        }
+                                        h2{
+                                            font-size: 15px;
+                                            font-weight: 500;
+                                            color:#42436a;
+                                        }
+                                        p{
+                                            color:#999;
+                                            font-size: 14px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                ion-card-content{
+                    padding: 15px;
+                }
+                .comment-liks{
+                    border-top:1px dotted #eee;
+                    ion-row{
+                        ion-col{
+                            button{
+                                color:#999;
+                                text-transform: capitalize;
+                            }
+                        }
+                    }
+                }
+                .rply-com{
+                    background-color: #f2f3f3;
+                    border: 5px solid #fff;
+                    ion-row{
+                        ion-textarea{
+                            width: 100%;
+                            textarea{
+                                margin: 7px 8px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
-.reply-shows {
-    background: hsl(0, 0%, 100%) none repeat scroll 0 0;
-    margin-bottom: 15px;
-    margin-left: 30px;
-    margin-top: 0;
+.ios{
+    page-communitycomments {
+         top: 8px !important;
+    }   
 }
-.item-md.item-block .item-inner{border:none;}
-.item-ios.item-block .item-inner{border:none;}
-.list-md.reply-shows .item-md .item-inner .input-wrapper .label-md h5 { font-weight:400;
-    color:#007994 !important;
-    font-size:17px !important;
-    text-indent: 0 !important; padding-top:9px;font-family: 'Muli', sans-serif;
-}
-.text-bx{border:1px solid #ccc;}
-.em-icon{ font-size:25px; color:#DBA901;margin-top: 30px;}
-.send-icon{ font-size:25px; color:#025FA9;margin-top: 30px;}
-.list-md.reply-shows .item-md .item-inner .input-wrapper .label-md p {
-    float: left;
-    font-size:11px !important;font-family: 'Muli', sans-serif;font-weight:600;
-    text-indent: 0;
-    width: 100%;
-}
- .list-md.reply-shows .item-md .item-inner .input-wrapper .label-md small {
-    color: hsl(0, 0%, 47%); font-weight:400;
-    font-size:15px !important;font-family: 'Muli', sans-serif;
-}
-
-
-
-.list-ios.reply-shows .item-ios .item-inner .input-wrapper .label-ios h5 {
-    color:#007994 !important;
-    font-size:13px !important;
-    text-indent: 0 !important; padding-top:9px;font-family: 'Muli', sans-serif;
-}
-
-.list-ios.reply-shows .item-ios .item-inner .input-wrapper .label-ios p {
-    float: left;
-    font-size: 9px !important;font-family: 'Muli', sans-serif;
-    text-indent: 0;
-    width: 100%;
-}
- .list-ios.reply-shows .item-ios .item-inner .input-wrapper .label-ios small {
-    color: hsl(0, 0%, 47%);
-    font-size:11px !important;font-family: 'Muli', sans-serif;
-}
-.rply-com{margin-top: 10px;
-margin-left: 4px;}
-.list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{border:none;}
-.button-md{ height:auto;}
-.button-ios{ height:auto;}
-.send-req button.secon-sdms .button-inner ion-icon { margin-right:5px; font-size:15px;}
-.send-req button{ width:100%; margin-left:7px;text-transform:capitalize;width:95%; height:35px;font-weight:600; background:#FE5722;font-family: 'Muli', sans-serif !important; font-size:17px;}
-.send-reqs button{text-transform:capitalize;width:82%; height:35px;font-weight:600; background:#FE5722;font-family: 'Muli', sans-serif !important; font-size:17px;}
-.listed-comments ion-textarea{ border:1px solid #ccc; font-weight:400; font-size:17px; margin-bottom:20px;font-family: 'Muli', sans-serif; padding:3px; margin:5px; }
-.feed-post{color:#444; font-size:17px !important;font-family: 'Muli', sans-serif;letter-spacing:0.2px;}
-.listed-comments .card-content-md{ padding:5px;}
-.listed-comments .card-content-ios{ padding:5px;}
-.comment-liks ion-row{ background:#F5F5F5;}
-.comment-liks ion-row ion-col button .button-inner p{color:#777; font-weight:600; font-size:12px !important;font-family: 'Muli', sans-serif;  text-transform: capitalize;}
-.commen-comment{margin:0px; width:auto;}
-.commen-comment ion-textarea{ border:1px solid #ccc; margin-bottom:20px;font-family: 'Muli', sans-serif; padding:3px; margin:5px; }
-}
-

@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ViewNewsPage } from '../../pages/view-news/view-news';
 import { NewsService } from '../../providers/news-service';
+import moment from 'moment';
 
 /*
   Generated class for the News page.
@@ -26,6 +27,7 @@ newsLists:any[]=[];
 nextPageURL:any='';
 newsScrollLists:any;
 emptyRecord:any;
+scrollTop:boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public newsService:NewsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.storage.ready().then(() => {
@@ -49,7 +51,12 @@ emptyRecord:any;
     loader.present();
    this.newsService.newsList().subscribe(
      (newsList) => {
-      this.newsLists=newsList.result.data;  
+      this.newsLists=newsList.result.data;
+      var dataList=newsList.result.data; 
+        for(let data of dataList) {
+            data.post_date = moment(data.post_date).format("DD MMM YYYY");
+          } 
+          this.newsLists = dataList;
       this.nextPageURL=newsList.result.next_page_url;  
       loader.dismiss(); 
     },
@@ -72,6 +79,11 @@ emptyRecord:any;
     let term = searchEvent.target.value;
       this.newsService.searchConnection(term).subscribe(searchConnection => {
         this.newsLists= searchConnection.result.data;
+         var dataList=searchConnection.result.data; 
+        for(let data of dataList) {
+            data.post_date = moment(data.post_date).format("DD MMM YYYY");
+          } 
+          this.newsLists = dataList;
       });
   }
   public dashboardPage()
@@ -106,11 +118,17 @@ emptyRecord:any;
   }
   newsscroll()
   {
+    this.scrollTop = true;
      this.newsService.newsscroll(this.nextPageURL).subscribe(
      (newsscroll) => {
       this.newsScrollLists=newsscroll.result.data;
+       var dataList=newsscroll.result.data; 
+        for(let data of dataList) {
+            data.post_date = moment(data.post_date).format("DD MMM YYYY");
+          } 
+          this.newsScrollLists = dataList;
       for (let i = 0; i < Object.keys(this.newsScrollLists).length; i++) {
-        this.newsLists.push(this.newsScrollLists[i]);
+        this.newsLists.push(dataList[i]);
         }
       
        this.nextPageURL=newsscroll.result.next_page_url;     

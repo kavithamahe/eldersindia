@@ -4,9 +4,10 @@ import { FormBuilder } from '@angular/forms';
 
 import { PaymentPage } from '../../pages/payment/payment';
 import { ServiceProvider } from '../../providers/service-provider';
-
+import moment from 'moment';
 
 import { Storage } from '@ionic/storage';
+ import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
 
 /*
   Generated class for the Modelpage1Page page.
@@ -68,18 +69,27 @@ export class Modelpage1PagePage {
   packageListsvalue:any;
   requestService:any;
   recurringType:any;
+  newtotalcost:any;
+  servicediscost:any;
+  recurring_cost:any;
+  coupan_code:any;
+  final_service_cost:any;
+  coupon_id:any;
+  discounted_cost:any;
+  coupandiscount :any;
   constructor(public modalCtrl: ModalController,public nav: NavController,public navParams: NavParams, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {
     this.recurringType = navParams.get("recurringType");
-    console.log(this.recurringType);
     this.requestService = navParams.get("requestService");
     this.serviceDatas =  navParams.get("serviceDatas");
+    console.log(this.serviceDatas);
     this.getCustomerBalanceAmount = this.serviceDatas.getCustomerBalanceAmount;
     this.get_custome_amount = this.serviceDatas.get_custome_amount;
     this.get_custome_deliever_amount = this.serviceDatas.get_custome_deliever_amount;
     this.get_custome_service_cancel_amount = this.serviceDatas.get_custome_service_cancel_amount;
     this.total_cost = this.serviceDatas.total_cost;
     this.total_service_cost = this.serviceDatas.total_service_cost;
+    this.newtotalcost = this.serviceDatas.total_service_cost;
     this.servicediscountcost = this.serviceDatas.servicediscountcost;
     this.discountcost = this.serviceDatas.discountcost;
     this.serviceType = this.serviceDatas.serviceType;
@@ -96,6 +106,7 @@ export class Modelpage1PagePage {
     this.finalcost = this.paydata.finalcost;
     this.datCount = this.paydata.datCount;
     this.service_cost = this.paydata.servicecost;
+    this.servicediscost = navParams.get("servicediscountcost");
     this.category = this.paydata.category;
     this.category_id = this.paydata.category_id;
     this.service = this.paydata.service;
@@ -114,22 +125,193 @@ export class Modelpage1PagePage {
     this.discountpartial = this.paydata.discountpartial;
     this.servicediscountcost_one_service = this.paydata.servicediscountcost_one_service;
     this.serviceData =  navParams.get("serviceDatas");
+    console.log(this.serviceData);
 
     if(this.serviceType == "One time"){
       this.servicecost =this.serviceDatas.servicecost;
     }else{
+       if(this.get_custome_deliever_amount != 0 || this.getCustomerBalanceAmount != 0 || this.get_custome_service_cancel_amount != 0){
+      this.recurring_cost = this.servicediscost;
+     }
+     else{
+       this.recurring_cost=this.service_cost;
+     }
+
       this.servicecost =this.serviceDatas.servicecosts;
     }
     this.name = navParams.get("name"); 
     this.serviceTitle = navParams.get("serviceTitle"); 
     this.vendor = navParams.get("vendor");
+    this.vendor_id = navParams.get("vendor_id");
+
  
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Modelpage1PagePage');
   }
+   applyCoupan(serviceType){
+    // this.serviceDatas.datetime = moment(this.serviceDatas.datetime).format("DD-MM-YYYY");
+      if(this.serviceDatas.datetime == "Invalid date"){
+      this.serviceDatas.datetime = "";
+    }
+    if(serviceType == "One time"){
+   let payment_data= {"data":{"category_id":this.category_id,"sub_category_id":this.sub_category_id,"service_id":this.service_ids,
+    "category":this.category,"subcategory":this.subcategory,
+    "service":this.service,"location_id":this.location_id,"discount":"",
+    "pay_method":"","serviceType":this.serviceType,"coupon_code_discount_cost":0,
+    "final_service_cost_after_coupon_code_discount":0,"service_name":this.service,
+    "paymentflag":1,"service_cost":this.service_cost,"service_cost_travel":this.service_cost,"base_cost":this.serviceDatas.base_cost,
+    "from_date":this.serviceDatas.from_date,"to_date":this.serviceDatas.to_date,"time_slot":this.serviceDatas.time_slot,
+    "from_time":"","to_time":"","durations":this.serviceDatas.durations,"problem":"",
+    "datetime":this.serviceDatas.datetime,"mobile":"","preferred_time":this.serviceDatas.preferred_time,
+    "package_id":"","quantity":"","getCustomerBalanceAmount":this.serviceDatas.getCustomerBalanceAmount,"get_custome_amount_actual":0,
+    "get_custome_amount":this.serviceDatas.get_custome_amount,"total_cost":this.servicecost,"get_custome_deliever_amount":this.serviceDatas.get_custome_deliever_amount,
+    "total_service_cost":this.serviceDatas.total_service_cost,"get_custome_service_cancel_amount":this.serviceDatas.get_custome_service_cancel_amount,"dependentid":this.serviceDatas.dependentId,
+    "servicecost":this.serviceDatas.servicecosts,"datCount":this.datCount,"payment_type":"full_payment","discountcost12":null,
+    "discountcost2":null,"servicediscost2":null,"servicediscountcost12":"NaN",
+    "servicediscountcost13":"NaN","servicediscountcost14":"NaN","discountcost1":"",
+    "discountcost":this.serviceDatas.discountcost,"servicediscountcost":"","servicediscost":"",
+    "coupen_code":this.coupan_code,"vendor_id":this.vendor_id,"type":"service"}}
+        let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this.providerService.webServiceCall(`checkCoupenCodeValidity`,payment_data)
+  .subscribe(
+      data =>{
+        this.coupon_id = data.result.coupon_id;
+        this.discounted_cost = data.result.discounted_cost;
+        this.final_service_cost = data.result.final_service_cost;
+        this.coupandiscount = "1";
+        loading.dismiss();
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this.coupandiscount = "0";
+        this.providerService.showToast(JSON.parse(err._body).error);
+      }
+      else if(err.status === 401){
+        this.coupandiscount = "0";
+        this.providerService.showToast(JSON.parse(err._body).error);
+      }
+      else
+      {
+        this.coupandiscount = "0";
+        this.providerService.showToast("Try again later");
+      }
+            })
+  }
+  else{
+     let payment_data= {"data":{"category_id":this.category_id,"sub_category_id":this.sub_category_id,"service_id":this.service_ids,
+    "category":this.category,"subcategory":this.subcategory,
+    "service":this.service,"location_id":this.location_id,"discount":"",
+    "pay_method":"","serviceType":this.serviceType,"coupon_code_discount_cost":0,
+    "final_service_cost_after_coupon_code_discount":0,"service_name":this.service,
+    "paymentflag":1,"service_cost":this.serviceDatas.total_service_cost,"service_cost_travel":this.serviceDatas.total_service_cost,"base_cost":this.serviceDatas.base_cost,
+    "from_date":this.serviceDatas.from_date,"to_date":this.serviceDatas.to_date,"time_slot":this.serviceDatas.time_slot,
+    "from_time":this.serviceDatas.from_time,"to_time":this.serviceDatas.to_time,"durations":this.serviceDatas.durations,"problem":"",
+    "datetime":this.serviceDatas.datetime,"mobile":"","preferred_time":this.serviceDatas.preferred_time,
+    "package_id":"","quantity":this.serviceDatas.quantity,"getCustomerBalanceAmount":this.serviceDatas.getCustomerBalanceAmount,"get_custome_amount_actual":0,
+    "get_custome_amount":this.serviceDatas.get_custome_amount,"total_cost":this.serviceDatas.total_cost,"get_custome_deliever_amount":this.serviceDatas.get_custome_deliever_amount,
+    "total_service_cost":this.serviceDatas.total_service_cost,"get_custome_service_cancel_amount":this.serviceDatas.get_custome_service_cancel_amount,"dependentid":this.serviceDatas.dependentId,
+    "servicecost":this.serviceDatas.servicecosts,"datCount":this.datCount,"payment_type":"full_payment","discountcost12":null,
+    "discountcost2":null,"servicediscost2":null,"servicediscountcost12":"NaN",
+    "servicediscountcost13":"NaN","servicediscountcost14":"NaN","discountcost1":"",
+    "discountcost":this.serviceDatas.discountcost,"servicediscountcost":this.serviceDatas.total_cost,"servicediscost":this.serviceDatas.total_cost,
+    "coupen_code":this.coupan_code,"vendor_id":this.vendor_id,"type":"service"}}
+        let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this.providerService.webServiceCall(`checkCoupenCodeValidity`,payment_data)
+  .subscribe(
+      data =>{
+        this.coupon_id = data.result.coupon_id;
+        this.discounted_cost = data.result.discounted_cost;
+        this.final_service_cost = data.result.final_service_cost;
+        this.coupandiscount = "1";
+        loading.dismiss();
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this.coupandiscount = "0";
+        this.providerService.showToast(JSON.parse(err._body).error);
+      }
+      else if(err.status === 401){
+        this.coupandiscount = "0";
+        this.providerService.showToast(JSON.parse(err._body).error);
+      }
+      else
+      {
+        this.coupandiscount = "0";
+        this.providerService.showToast("Try again later");
+      }
+            })
+  }
+    
+  }
+
+submitRequest(){
+  // this.serviceDatas.datetime = moment(this.serviceDatas.datetime).format("DD-MM-YYYY");
+   if(this.serviceDatas.datetime == "Invalid date"){
+      this.serviceDatas.datetime = "";
+    }
+    if(this.serviceDatas.from_date == "Invalid date"){
+      this.serviceDatas.from_date = "";
+    }
+    if(this.serviceDatas.to_date == "Invalid date"){
+      this.serviceDatas.to_date = "";
+    }
+  let data={"category_id":this.category_id,"sub_category_id":this.sub_category_id,"service_id":this.service_ids,
+  "category":this.category,"subcategory":this.subcategory,
+  "service":this.service,"location_id":this.location_id,"discount":"","pay_method":"",
+  "serviceType":this.serviceType,"coupon_code_discount_cost":this.discounted_cost,
+  "final_service_cost_after_coupon_code_discount":this.final_service_cost,"service_name":this.service,
+  "paymentflag":1,"service_cost":this.serviceDatas.total_service_cost,"service_cost_travel":this.serviceDatas.total_service_cost,"base_cost":this.serviceDatas.base_cost,
+  "from_date":this.serviceDatas.from_date,"to_date":this.serviceDatas.to_date,"time_slot":this.serviceDatas.time_slot,"from_time":this.serviceDatas.from_time,"to_time":this.serviceDatas.to_time,
+  "durations":this.serviceDatas.durations,"problem":"","datetime":this.serviceDatas.datetime,"mobile":"",
+  "preferred_time":this.serviceDatas.preferred_time,"package_id":this.serviceDatas.package_id,"quantity":this.serviceDatas.quantity,
+  "getCustomerBalanceAmount":this.serviceDatas.getCustomerBalanceAmount,"get_custome_amount_actual":0,"get_custome_amount":this.serviceDatas.get_custome_amount,
+  "total_cost":this.serviceDatas.total_cost,"get_custome_deliever_amount":this.serviceDatas.get_custome_deliever_amount,"total_service_cost":this.serviceDatas.total_service_cost,
+  "get_custome_service_cancel_amount":this.serviceDatas.get_custome_service_cancel_amount,"dependentid":this.serviceDatas.dependentId,"servicecost":this.serviceDatas.servicecosts,
+  "coupen_code":this.coupan_code,"vendor_id":this.vendor_id,"type":"service","coupon_id":this.coupon_id,
+  "lead_time":this.lead_time,"selected_dates":this.serviceDatas.selected_dates,"exclude_days":this.serviceDatas.exclude_days}
+       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this.providerService.webServiceCall(`serviceRequest`,data)
+  .subscribe(
+      data =>{
+        this.providerService.showToast(data.result);
+        let paydismiss = "paydismiss";
+        this.viewCtrl.dismiss(paydismiss);
+        loading.dismiss();
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this.providerService.showToast(JSON.parse(err._body).error);
+      }
+      else if(err.status === 401){
+        this.providerService.showToast(JSON.parse(err._body).error);
+      }
+      else
+      {
+        this.providerService.showToast("Try again later");
+      }
+            })
+}
   submit() {
+    // if(this.coupandiscount == "1"){
+    //   this.servicecost = this.final_service_cost;
+    //   this.service_cost = this.final_service_cost;
+    // }
+    // else{
+    //   this.servicecost = this.servicecost;
+    //   this.service_cost = this.service_cost;
+    // }
+    console.log(this.serviceData);
     let paydismiss = "paydismiss";
     this.viewCtrl.dismiss(paydismiss);
     if(this.fullpays == true){
@@ -141,32 +323,39 @@ export class Modelpage1PagePage {
       else{
         this.paymenttype = "partial_payment";
       }
-    if(this.datCount != undefined){
-      console.log(this.payableamount);
+    if(this.datCount != undefined && this.datCount != ""){
      this.nav.push(PaymentPage,{serviceData:this.serviceData,servicecost:this.service_cost,service_costs:this.servicecosts,servicediscountcost:this.finalcost,payableamount:this.payableamount,
       category:this.category,category_id:this.category_id,service:this.service,service_ids:this.service_ids,
       sub_category_id:this.sub_category_id,subcategory:this.subcategory,datCount:this.datCount,paymenttype:this.paymenttype,
       location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id,discounts:this.discounts,totalservice_costss:this.totalservice_costss,afterdiscount_one_service:this.afterdiscount_one_service,
-      paidPayment:this.paidPayment,servicediscountcost_one_service:this.servicediscountcost_one_service,discountpartial:this.discountpartial,requestService:this.requestService});
+      paidPayment:this.paidPayment,servicediscountcost_one_service:this.servicediscountcost_one_service,discountpartial:this.discountpartial,requestService:this.requestService,coupan_id:this.coupon_id,
+      coupan_code:this.coupan_code,discounted_cost:this.discounted_cost,final_service_cost:this.final_service_cost});
     
      }
      else{
     this.nav.push(PaymentPage,{serviceData:this.serviceData,servicecost:this.servicecost,
       category:this.category,category_id:this.category_id,service:this.service,service_ids:this.service_ids,
       sub_category_id:this.sub_category_id,subcategory:this.subcategory,
-      location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id,requestService:this.requestService});
+      location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id,requestService:this.requestService,coupan_id:this.coupon_id,
+      coupan_code:this.coupan_code,discounted_cost:this.discounted_cost,final_service_cost:this.final_service_cost});
    
      }
 }
+
 edit(){ 
   let seviceCheck = "0";
   this.viewCtrl.dismiss(seviceCheck);
 }
  paylater(){
-      this.viewCtrl.dismiss(this.serviceDatas);
+  let coupanDetails= {"coupon_id":this.coupon_id,"coupan_code":this.coupan_code,"discounted_cost":this.discounted_cost,"final_service_cost":this.final_service_cost}
+      var obj = Object.assign(this.serviceDatas, coupanDetails);
+      this.viewCtrl.dismiss(obj);
   }
   dismiss(){
     let seviceCheck = "0";
     this.viewCtrl.dismiss(seviceCheck);
   }
+
+ 
+
 }

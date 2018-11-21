@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { EventsService } from '../../providers/events-service';
+import moment from 'moment';
 /*
   Generated class for the ViewEvents page.
 
@@ -20,6 +21,8 @@ token:string;
 imageUrl:string;
 eventsInfo:any;
 eventsId:number;
+post_date:any;
+end_date:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public eventsService:EventsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.eventsId=navParams.get("eventsId");
   this.storage.ready().then(() => {
@@ -38,6 +41,8 @@ eventsId:number;
    this.eventsService.viewEvents(eventsId).subscribe(
      (viewEvents) => {
       this.eventsInfo=viewEvents.result;
+      this.post_date = moment(viewEvents.result.post_date).format("DD MMM YYYY HH:mm:ss");
+      this.end_date = moment(viewEvents.result.end_date).format("DD MMM YYYY HH:mm:ss");
       loader.dismiss();
      },
     (err) => { 

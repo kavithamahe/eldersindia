@@ -24,6 +24,9 @@ page-modelpage1 {
     float: left;
     font-family: 'Muli', sans-serif;
 }
+  .discountCost {
+        color: #E91E63;
+    }
 .edit-bd{ background:#025FA9;}
 .req-viewlist ion-row ion-col.child_menu:before {
   
@@ -39,6 +42,11 @@ page-modelpage1 {
     z-index: 1; font-size:18px;
     color:#c2c2c2;
 }
+.service-name {
+        color: #117864;
+        font-size: 18px;
+        font-weight: 400;
+    }
 .content-intop{background-image: url('../assets/img/bgss.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
 .req-viewlist{position:relative;background:rgba(255,255,255, 0.9);}
 .req-viewlist span {
@@ -62,4 +70,9 @@ page-modelpage1 {
     position: absolute;
     top: 0;
 }
+}
+.ios{
+    page-modelpage1 {
+         top: 8px !important;
+    }   
 }

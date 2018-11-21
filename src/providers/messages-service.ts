@@ -5,7 +5,7 @@ import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 import { FilePath } from '@ionic-native/file-path';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 /*
   Generated class for the MessagesService provider.
 
@@ -19,7 +19,7 @@ token:string;
 options:any;
 rootUrl:any;
 
-  constructor(public http: Http, public storage:Storage,private transfer: Transfer,private filePath: FilePath,public toastCtrl: ToastController) {
+  constructor(public http: Http, public storage:Storage,private transfer: FileTransfer,private filePath: FilePath,public toastCtrl: ToastController) {
     this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();

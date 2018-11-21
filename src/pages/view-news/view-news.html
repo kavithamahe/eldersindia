@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ViewNews page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
@@ -11,28 +5,27 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-	 <ion-title text-center>View News</ion-title>
+    <ion-title text-center>View News</ion-title>
     <ion-buttons right>
-    <button ion-button icon-only (click)="dashboardPage()">
+      <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-   
   </ion-navbar>
 </ion-header>
 
 
-<ion-content class="content-intop">
-<ion-card>
-
-  <ion-item text-wrap class="view-news">   
-    <h2 class="primary-color pro-info" text-capitalize>{{NewsInfo?.title}}</h2>
-    <p class="timedate" text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{NewsInfo?.author_name }} | <i class="fa fa-calendar" aria-hidden="true"></i> {{NewsInfo?.post_date}}</p>
-  </ion-item>
-<img src="{{imageUrl+NewsInfo?.featured_image}}" [hidden]="!NewsInfo?.featured_image">
-  <ion-card-content style=" margin:10px;">
-     <p [innerHTML]="NewsInfo?.description"></p>
-  </ion-card-content>
-
-</ion-card>
+<ion-content class="content-intop NewsviewDetail">
+  <ion-card class="newscard">
+    <div class="newsimage">
+        <img src="{{imageUrl+NewsInfo?.featured_image}}" [hidden]="!NewsInfo?.featured_image">
+    </div>
+    <ion-item text-wrap class="view-news">
+      <h2 class="primary-color pro-info" text-capitalize>{{NewsInfo?.title}}</h2>
+      <p><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{post_date}}</p>
+      <p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;{{NewsInfo?.author_name }}</p>
+        <p class="description" [innerHTML]="NewsInfo?.description"></p>
+    </ion-item>
+    
+  </ion-card>
 </ion-content>

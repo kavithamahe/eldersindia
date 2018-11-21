@@ -14,6 +14,10 @@
           <i style="padding-right:0px; width:20px" class={{p.myIcon}} aria-hidden="true"></i>
           {{p.title}}
         </button>
+          <button class="side-item-md my-list-item fant-size" ion-item>
+          <i class="fa fa-code-fork" aria-hidden="true" style="padding-right:0px; width:20px"></i>
+          App Version 1.0.0
+        </button>
       </ion-list>
       <br/>
       <br/>
@@ -23,11 +27,8 @@
   <ion-menu id="sponsor" [content]="content">
     <ion-header class="hed-new">
       <ion-toolbar class="img-log">
-
-
         <div text-center>
           <img class="center-image" src="assets/img/Elderlogo.png" style="align-items:center;" />
-
         </div>
       </ion-toolbar>
     </ion-header>
@@ -36,6 +37,10 @@
         <button class="side-item-md my-list-item fant-size" ion-item *ngFor="let p2 of pages2" (click)="openPage(p2)">
           <i style="padding-right:0px; width:20px" class={{p2.myIcon}} aria-hidden="true"></i>
           {{p2.title}}
+        </button>
+         <button class="side-item-md my-list-item fant-size" ion-item>
+          <i class="fa fa-code-fork" aria-hidden="true" style="padding-right:0px; width:20px"></i>
+          App Version 1.0.0
         </button>
       </ion-list>
       <br/>

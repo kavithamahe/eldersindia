@@ -5,6 +5,8 @@ import { Storage } from '@ionic/storage';
 import { CommunityprofilePage } from '../communityprofile/communityprofile';
 import { CommunityServices } from '../../providers/community-services';
 import { EmojiPickerPage } from '../../pages/emoji-picker/emoji-picker';
+
+import moment from 'moment';
 /*
   Generated class for the Communitycomments page.
 
@@ -35,13 +37,15 @@ senddata:any;
 post_likes:any;
 send_post_comment:any='';
 community_id:any;
+created_at:any;
   constructor(public platform: Platform,public loadingCtrl: LoadingController,public actionsheetCtrl: ActionSheetController, public viewCtrl: ViewController, public storage: Storage, public toastCtrl: ToastController, public alertCtrl:AlertController, public communityServices: CommunityServices, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
   	this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
       this.posts = navParams.get("posts");
-
-        this.post_comments = this.posts.comments;
+      this.post_comments = this.posts.comments;
+      console.log(this.post_comments);
+        // this.created_at = moment(this.post_comments.created_at).format("DD MMM YYYY HH:mm:ss");
         this.post_likes = this.posts.comments.likes;
         this.post_id = this.posts.id;
         this.post_profile_id = this.posts.profile_id;
@@ -377,7 +381,7 @@ sendComment(postID){
       if(data!=null)
       {
       this.reply_comment=this.reply_comment+' '+data.emojiImage;
-      //this.sendReply(commendId,postProfileId);
+      this.sendReply(commendId,postProfileId);
       }
      })
    }  

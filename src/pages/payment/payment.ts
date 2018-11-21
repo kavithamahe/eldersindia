@@ -6,8 +6,9 @@ import { Storage } from '@ionic/storage';
 import { Device } from "@ionic-native/device";
 
 import { BlogListService } from '../../providers/blog-list-service';
-import { ServiceProvider } from '../../providers/service-provider'
+import { ServiceProvider } from '../../providers/service-provider';
 import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
+import moment from 'moment';
 
 
 import 'rxjs/add/operator/map';
@@ -102,12 +103,18 @@ discountcost:any;
 long:any;
 lat:any;
 imei_number:any;
+template_id:any;
+coupon_id:any;
+final_service_cost:any;
+discounted_cost:any;
+coupan_code:any;
+imageUrl:any;
   constructor(public platform:Platform,private alertCtrl: AlertController,public loadingCtrl: LoadingController,private device: Device,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,
     public blogListService:BlogListService,public _provider:ServiceProvider,public navCtrl: NavController,private http: Http) {
-  console.log("Device UUID is: " + this.device.uuid);
-  localStorage.setItem('uuid', this.device.uuid);
+  
    this.Recreation_service = navParams.get("service");
-   if(navParams.get("service") == "Recreation"){
+   this.template_id = navParams.get("template_id");
+   if(this.template_id == "2"){
     this.paymentData = navParams.get("paymentData");
     this.service_name = this.paymentData.service_name;
     this.service_cost = this.paymentData.service_cost * 100;
@@ -115,6 +122,9 @@ imei_number:any;
     this.service_costss=(this.paymentData.service_cost * 100).toFixed(0);
     localStorage.setItem('service_costss', this.service_costss);
     this.storage.ready().then(() => {
+       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+       storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
+       localStorage.setItem('rootUrl', this.rootUrl);});
       storage.get('token').then((token) => { this.token=token;
       localStorage.setItem('key', this.token);
       this.headers = new Headers();
@@ -125,13 +135,15 @@ imei_number:any;
       storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
    this.recreationRequestSubmitbeforePayment();
             });
+      storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
        storage.get('id').then((id) => { this.user_id=id; })
        storage.get('name').then((name) => { this.name=name; })
        storage.get('email').then((email) => { this.email=email; })
        storage.get('phone').then((phone) => { this.phone=phone; })
      });
    }
-   else if(navParams.get("service") == "Safety and security"){
+   else if(this.template_id == "3" || this.template_id == "4" || this.template_id == "5" ||this.template_id == "6" || this.template_id == "7"){
+  
         this.paymentData = navParams.get("paymentData");
         this.imei_number = this.paymentData.mobile_imei;
         localStorage.setItem('imei_number', this.imei_number);
@@ -143,6 +155,9 @@ imei_number:any;
     localStorage.setItem('service_costss', this.service_costss);
 
     this.storage.ready().then(() => {
+      storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+       storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
+       localStorage.setItem('rootUrl', this.rootUrl);});
       storage.get('token').then((token) => { this.token=token;
      
   localStorage.setItem('key', this.token);
@@ -154,6 +169,7 @@ imei_number:any;
       storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
    this.safetyRequestSubmitbeforePayment();
             });
+      storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
        storage.get('id').then((id) => { this.user_id=id; })
        storage.get('name').then((name) => { this.name=name; })
        storage.get('email').then((email) => { this.email=email; })
@@ -209,6 +225,12 @@ imei_number:any;
 
   this.servicecost=navParams.get("servicecost");
   this.service_cost=this.servicecost*100;
+  this.coupon_id=navParams.get("coupan_id");
+  localStorage.setItem('coupon_id', this.coupon_id);
+  this.coupan_code = navParams.get("coupan_code");
+  this.discounted_cost = navParams.get("discounted_cost");
+  localStorage.setItem('coupon_offer', this.discounted_cost);
+  this.final_service_cost = navParams.get("final_service_cost");
   this.service_costs=navParams.get("service_costs");
   this.servicediscountcosts=navParams.get("servicediscountcost");
   this.servicediscost = navParams.get("servicediscountcost");
@@ -224,10 +246,12 @@ imei_number:any;
   this.service_ids=navParams.get("service_ids");
 
   this.sub_category_id=navParams.get("sub_category_id");
-  console.log(this.sub_category_id);
 
   this.subcategory=navParams.get("subcategory");
 this.storage.ready().then(() => {
+  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+       storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
+       localStorage.setItem('rootUrl', this.rootUrl);});
     storage.get('token').then((token) => { this.token=token;
    
 localStorage.setItem('key', this.token);
@@ -239,26 +263,66 @@ localStorage.setItem('key', this.token);
     storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
  this.serviceRequestSubmitbeforePayment();
           });
+    storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
      storage.get('id').then((id) => { this.user_id=id; })
      storage.get('name').then((name) => { this.name=name; })
      storage.get('email').then((email) => { this.email=email; })
      storage.get('phone').then((phone) => { this.phone=phone; })
    });
-     if(this.get_custome_deliever_amount != 0 || this.getCustomerBalanceAmount != 0){
-      this.service_costss=(this.total_service_cost * 100).toFixed(0);
-     }
-     else{
-     if(this.datCount != undefined){
-      this.service_costss=(this.servicediscountcostss * 100).toFixed(0);;
-     }
-     else{
-        this.service_costss=this.service_cost;
-     }
-   }
-     localStorage.setItem('service_costss', this.service_costss);
+  if(this.datCount == undefined || this.datCount == ""){
+           if(this.get_custome_deliever_amount != 0 || this.getCustomerBalanceAmount != 0 || this.get_custome_service_cancel_amount != 0){
+            if(this.coupon_id != undefined){
+              this.service_costss=(this.final_service_cost* 100).toFixed(0);
+              console.log("1"+this.service_costss);
+             localStorage.setItem('service_costss', this.service_costss);
+            }
+            else{
+               this.service_costss=(this.servicediscountcostss * 100).toFixed(0);
+               console.log(this.service_costss);
+            localStorage.setItem('service_costss', this.service_costss);
+            }
+           
+           }
+           else{
+        if(this.coupon_id != undefined){
+              this.service_costss=(this.final_service_cost* 100).toFixed(0);
+              console.log(this.service_costss);
+             localStorage.setItem('service_costss', this.service_costss);
+           }
+           else{
+              this.service_costss=this.service_cost;
+              console.log(this.service_costss);
+              localStorage.setItem('service_costss', this.service_costss);
+           }
+         }
+   }  
+   else{
+           if(this.get_custome_deliever_amount != 0 || this.getCustomerBalanceAmount != 0 || this.get_custome_service_cancel_amount != 0){
+            if(this.coupon_id != undefined){
+              this.service_costss=(this.final_service_cost* 100).toFixed(0);
+             localStorage.setItem('service_costss', this.service_costss);
+            }
+            else{
+              this.service_costss=(this.servicediscost * 100).toFixed(0);
+            console.log(this.service_costss);
+            localStorage.setItem('service_costss', this.service_costss);
+            }
+            
+           }
+           else{
+             if(this.coupon_id != undefined){
+              this.service_costss=(this.final_service_cost* 100).toFixed(0);
+             localStorage.setItem('service_costss', this.service_costss);
+           }
+           else{
+            this.service_costss=this.service_cost;
+             console.log(this.service_costss);
+             localStorage.setItem('service_costss', this.service_costss);
+           }
+             
+           }
    } 
-    
-   
+   }
 }
 safetyRequestSubmitbeforePayment(){
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
@@ -316,12 +380,18 @@ recreationRequestSubmitbeforePayment(){
 }
 
  serviceRequestSubmitbeforePayment(){
+  // this.datetime = moment(this.datetime).format("DD-MM-YYYY");
+  console.log("kavi");
+  console.log(this.datetime);
 
   if(this.paymenttype == "partial_payment"){
     this.servicediscountcosts = this.payableamount;
   }
   let paymentflag=1;
   if(this.datCount != undefined){
+    if(this.datetime == "Invalid date"){
+      this.datetime = "";
+    }
  let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
     this.blogListService.serviceRequestSubmitbeforePayment(this.rootUrl,this.servicecost,
@@ -332,19 +402,27 @@ recreationRequestSubmitbeforePayment(){
      this.location_id,this.lead_time,this.vendor_id,this.datCount,this.service_costs,this.servicediscountcostss,
      this.paymenttype,paymentflag,this.discounts,this.totalservice_costss,this.discountcost,this.afterdiscount_one_service,this.servicediscountcost_one_service,
      this.discountpartial,this.base_cost,this.servicediscost,this.getCustomerBalanceAmount,this.get_custome_amount,this.get_custome_deliever_amount,
-     this.get_custome_service_cancel_amount,this.total_cost,this.total_service_cost).subscribe(     
+     this.get_custome_service_cancel_amount,this.total_cost,this.total_service_cost,this.coupon_id,this.coupan_code,
+     this.discounted_cost,this.final_service_cost).subscribe(     
       (loginuser) => {
         this.udf3= loginuser.result.serviceType;
         this.udf2 = loginuser.result.service_request_id;
         loading.dismiss();
     },
 
-    (err) => { 
-      loading.dismiss();
-        console.log(err);
-        
-    },
-  )
+    err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this._provider.showToast(JSON.parse(err._body).error);
+        this.navCtrl.pop();
+      }
+      else
+      {
+        this._provider.showToast("Try again later");
+        this.navCtrl.pop();
+      }
+            })
   }
   else{
     console.log("one time");
@@ -356,31 +434,39 @@ recreationRequestSubmitbeforePayment(){
      this.from_date,this.from_time,this.serviceType,this.selected_dates,this.time_slot,
      this.to_date,this.to_time,this.package_id,this.preferred_time,this.quantity,
      this.location_id,this.lead_time,this.vendor_id,paymentflag,this.base_cost,this.getCustomerBalanceAmount,this.get_custome_amount,this.get_custome_deliever_amount,
-     this.get_custome_service_cancel_amount,this.total_cost,this.total_service_cost).subscribe(     
+     this.get_custome_service_cancel_amount,this.total_cost,this.total_service_cost,this.coupon_id,this.coupan_code,
+     this.discounted_cost,this.final_service_cost).subscribe(     
       (loginuser) => {
         this.udf3= loginuser.result.serviceType;
         this.udf2 = loginuser.result.service_request_id;
         loading.dismiss();
     },
 
-    (err) => { 
-      loading.dismiss();
-        console.log(err);
-        
-    },
-  )}
+   err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this._provider.showToast(JSON.parse(err._body).error);
+        this.navCtrl.pop();
+      }
+      else
+      {
+        this._provider.showToast("Try again later");
+        this.navCtrl.pop();
+      }
+            })
+   }
 
   }
   payno(){
     this.dismiss();
   }
 
-  // https://i.imgur.com/3g7nmJC.png
   payRecreation(){
     if(this.subcategory == "Emergency Medical and Non-medical"){
     var options = {
       description: this.serviceTitle,
-      image: "http://qa.eldersindia.com/assets/img/Elderlogo.png",
+      image: this.imageUrl + "assets/img/Elderlogo.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costss,
@@ -414,14 +500,14 @@ let nav = this.blogListService;
   loading.present();
       // ajaxCallCheck(payment_id);
 
-  var url  = "http://qa.eldersindia.com/api/razorPaymentResponse";
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
 xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss"),
-"imei":localStorage.getItem("imei_number")}));
+"coupon_id":localStorage.getItem("coupon_id"),"coupon_offer":localStorage.getItem("coupon_offer")}));
 
 xmlhttp.onload = function () {
   loading.dismiss();
@@ -446,10 +532,9 @@ RazorpayCheckout.on('payment.cancel', cancelCallback);
 RazorpayCheckout.open(options, successCallback, cancelCallback);
     }
    else{
-     console.log(localStorage.getItem("lat"));
     var options = {
       description: this.serviceTitle,
-      image: "http://qa.eldersindia.com/assets/img/Elderlogo.png",
+      image: this.imageUrl + "assets/img/Elderlogo.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costss,
@@ -483,13 +568,14 @@ let nav = this.blogListService;
   loading.present();
       // ajaxCallCheck(payment_id);
 
-  var url  = "http://qa.eldersindia.com/api/razorPaymentResponse";
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
-xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss"),
+"coupon_id":localStorage.getItem("coupon_id"),"coupon_offer":localStorage.getItem("coupon_offer")}));
 
 xmlhttp.onload = function () {
   loading.dismiss();
@@ -516,7 +602,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     console.log(this.service_costss);
     var options = { 
       description: this.serviceTitle,
-      image: "http://qa.eldersindia.com/assets/img/Elderlogo.png",
+      image: this.imageUrl + "assets/img/Elderlogo.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costss,
@@ -548,13 +634,14 @@ let nav = this.blogListService;
 
   loading.present();
 
-  var url  = "http://qa.eldersindia.com/api/razorPaymentResponse";
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
-xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss"),
+"coupon_id":localStorage.getItem("coupon_id"),"coupon_offer":localStorage.getItem("coupon_offer")}));
 
 xmlhttp.onload = function () {
   loading.dismiss();
@@ -565,8 +652,7 @@ xmlhttp.onload = function () {
  nav.presentConfirm(result);
 
   }
-      
-     
+       
     }
 
 var cancelCallback = function(error) {

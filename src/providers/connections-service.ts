@@ -101,7 +101,7 @@ user_id:any;
   allConnectionScroll(nextPageURL,searchText)
    {
     let _request= {"user_id":this.user_id,"searchValue":searchText};
-    return this.http.post(nextPageURL,_request,this.options)
+    return this.http.post(this.rootUrl+'getAllConnectionList'+nextPageURL,_request,this.options)
       .map(res => res.json()); 
    }
    addConnectionScroll(nextPageURL,searchadd){

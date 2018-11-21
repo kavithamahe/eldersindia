@@ -1,53 +1,71 @@
 page-view-events {
-.toolbar-title-md{ text-align:center !important;}
-.toolbar-title-ios{ text-align:center;}
-.content-intop {
-    background: #F5F9FF;
+    .NewsviewDetail{
+        background: url('../assets/img/bg.jpg');
+        background-position: center;
+        background-size: cover;
+        .newscard{
+            background: #fff;
+            box-shadow: none;
+            border-radius: 0px;
+            padding: 0px 0px;
+            margin: 0;
+            width: 100%;
+            border: none;
+            .newsimage{
+                width: 100%;
+                height: auto;                
+                margin: 0;
+                padding: 0;                
+                img{
+                    height: 100%;                    
+                }
+            }           
+            ion-item{
+                padding: 5px 10px;
+                .item-inner{
+                    padding: 0;
+                    .input-wrapper{
+                        h2{
+                            font-size: 20px;
+                            color: #2c4e86;
+                            font-weight: 600;
+                            font-family: 'Muli', sans-serif;
+                            padding: 0px 5px 10px;
+                            line-height: 25px;
+                            letter-spacing: 0.2px;
+                        }
+                        p{
+                            color: #9ea8b2;
+                            padding: 5px 5px 3px 5px;
+                            font-size: 17px;
+                            margin: 0;
+                            &.description{
+                                p{
+                                    color: #999;
+                                    font-weight: 500;
+                                    padding: 5px 0;
+                                    line-height: 23px;
+                                    text-align: justify;
+                                }     
+                                ul{
+                                    li{
+                                        color: #999;
+                                        font-weight: 500;
+                                        padding: 5px 0;
+                                        line-height: 23px;
+                                        text-align: justify;
+                                    }
+                                }                            
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
-.view-news .item-inner .input-wrapper .label-md h2 {
-    color: #007994 !important;
-    font-family: "Muli",sans-serif;
-    font-size:19px !important;
-    padding-bottom: 8px;font-weight:400;  letter-spacing: 0.2px;
-    margin: 0;
-}
-.view-news .item-inner .input-wrapper .label-md p {
-    color: #7b8da0 !important;
-    font-family: "Muli",sans-serif;
-    font-size:14px !important;
-    padding-bottom:3px; font-weight:400;  letter-spacing: 0.2px;
-    margin: 0;
-}
-
-.view-news { padding:8px;}
-.view-news .item-inner .input-wrapper .label-md{ margin:0px;}
-.card-content-md p{ color:#7b8da0 !important;
-    font-family: "Muli",sans-serif;
-    font-size:17px !important; font-weight:400;letter-spacing: 0.2px;
-    padding-bottom: 8px;
-    margin: 0;}
-	
-	
-	.view-news .item-inner .input-wrapper .label-ios h2 {
-    color: #007994 !important;
-    font-family: "Muli",sans-serif;
-    font-size: 17px !important;
-    padding-bottom: 8px;
-    margin: 0;
-}
-.view-news .item-inner .input-wrapper .label-ios p {
-    color: #7b8da0 !important;
-    font-family: "Muli",sans-serif;
-    font-size:13px !important;
-    padding-bottom:3px;
-    margin: 0;
-}
-
-.view-news { padding:8px;}
-.view-news .item-inner .input-wrapper .label-ios{ margin:0px;}
-.card-content-ios p{ color:#7b8da0 !important;
-    font-family: "Muli",sans-serif;
-    font-size:14px !important;
-    padding-bottom: 8px;
-    margin: 0;}
+.ios{
+    page-view-events {
+         top: 8px !important;
+    }   
 }

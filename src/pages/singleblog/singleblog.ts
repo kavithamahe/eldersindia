@@ -8,6 +8,7 @@ import { BlogListService } from '../../providers/blog-list-service';
 import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
 import { ShareBlogPagePage } from '../../pages/share-blog/share-blog';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+import moment from 'moment';
 /*
   Generated class for the Singleblog page.
 
@@ -39,6 +40,7 @@ commentForm: FormGroup;
 submitAttempt: boolean = false;
 communitylist:any=[];
 allow_comment:any;
+created_at:any;
  
   constructor(public formBuilder: FormBuilder,public modalCtrl: ModalController, public navCtrl: NavController,public platform: Platform,public actionsheetCtrl: ActionSheetController, public navParams: NavParams,public blogListService:BlogListService,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.storage.ready().then(() => {
@@ -47,6 +49,7 @@ allow_comment:any;
       storage.get('token').then((token) => { this.token=token; 
        this.blogId=navParams.get("blogId");
        this.allow_comment = navParams.get("allow_comment");
+       this.created_at = moment(navParams.get("created_at")).format("DD MMM YYYY HH:mm:ss");
   		this.onInit(this.blogId);
       this.viewComments(this.blogId);
       })
@@ -59,9 +62,14 @@ allow_comment:any;
 
   }
   public leaveComment()
-  { if(this.showComment)
+  {
+    console.log(document.getElementById('commentsView'));
+   if(this.showComment)
     {
-     document.getElementById('commentsView').scrollIntoView();
+      if(document.getElementById('commentsView') != null){
+        document.getElementById('commentsView').scrollIntoView();
+      }
+     
      }
     this.showComment=!this.showComment;
   }
@@ -72,7 +80,7 @@ allow_comment:any;
     loader.present();
     this.blogListService.singleBlog(blogId).subscribe(
      (singleBlog) => {
-      this.singleBlogInfo=singleBlog.result;  
+      this.singleBlogInfo=singleBlog.result.details;  
       this.communitylist=singleBlog.result.community_list;
       loader.dismiss();   
     },

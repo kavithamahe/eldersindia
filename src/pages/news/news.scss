@@ -1,27 +1,59 @@
 page-news {
-.toolbar-title-md{ text-align:center !important;}
-.toolbar-title-ios{ text-align:center;}
-.content-intop										{background:#F5F9FF;}
-.events-shows .item-inner .input-wrapper .label-md h2{    color: #007994 !important;
-    font-family: "Muli",sans-serif;
-    font-size: 17px !important;
-    padding-bottom: 8px;
-    margin: 0;}
-.events-shows .item-inner .input-wrapper .label-md p{    color:#7b8da0 !important;
-    font-family: "Muli",sans-serif;
-    font-size:13px !important;
-    padding-bottom: 8px;
-    margin: 0;}
-	
-	.events-shows .item-inner .input-wrapper .label-ios h2{    color: #007994 !important;
-    font-family: "Muli",sans-serif;
-    font-size: 17px !important;
-    padding-bottom: 8px;
-    margin: 0;}
-.events-shows .item-inner .input-wrapper .label-ios p{    color:#7b8da0 !important;
-    font-family: "Muli",sans-serif;
-    font-size:13px !important;
-    padding-bottom: 8px;
-    margin: 0;}
-.events-shows{ padding:8px;}
+    .NewsListview{
+        background: url('../assets/img/bg.jpg');
+        background-position: center;
+        background-size: cover;
+        .newscard{
+            background: #fff;
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 0px 0px;
+            .newsimage{
+                width: 100%;
+                height: 160px;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                img{
+                    height: 100%;                    
+                }
+            }           
+            ion-item{
+                padding: 5px 10px;
+                .item-inner{
+                    .input-wrapper{
+                        h2{
+                            font-size: 19px;
+                            color: #2c4e86;
+                            font-weight: 600;
+                            font-family: 'Muli', sans-serif;
+                            padding: 0px 5px 10px;
+                            line-height: 25px;
+                            letter-spacing: 0.2px;
+                        }
+                        p{
+                            color: #9ea8b2;
+                            padding: 5px 5px 3px 5px;
+                            font-size: 15px;
+                            margin: 0;
+                            &.description{
+                                p{
+                                    color: #666;
+                                    font-weight: 500;
+                                    padding: 5px 0;
+                                    line-height: 23px;
+                                    text-align: justify;
+                                }                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.ios{
+    page-news {
+         top: 8px !important;
+    }   
 }

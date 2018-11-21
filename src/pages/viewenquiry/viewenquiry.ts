@@ -4,6 +4,8 @@ import { NavController, NavParams,LoadingController } from 'ionic-angular';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ServiceProvider } from '../../providers/service-provider';
 
+import moment from 'moment';
+
 /*
   Generated class for the ViewenquiryPage page.
 
@@ -18,7 +20,9 @@ export class ViewenquiryPagePage {
 	enquiriesList:any;
 	enquirydatas:any;
 	enquiry_id:any;
-
+  start_date:any;
+  preferred_datetime:any;
+  end_date:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,public _provider:ServiceProvider) {
   	this.enquirydatas=navParams.get("enquiries");
   	this.enquiry_id = this.enquirydatas.enquiry_id;
@@ -38,7 +42,10 @@ export class ViewenquiryPagePage {
    this._provider.viewenquiryList(enquiry_id)
       .subscribe(data =>{ 
 		this.enquiriesList = data.result;
-		console.log(this.enquiriesList);
+    this.start_date = moment(this.enquiriesList.start_date).format("DD-MM-YYYY");
+     this.end_date = moment(this.enquiriesList.end_date).format("DD-MM-YYYY");
+     this.preferred_datetime = moment(this.enquiriesList.preferred_datetime).format("DD-MM-YYYY");
+
         loading.dismiss();
     },
     err =>{

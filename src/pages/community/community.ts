@@ -16,6 +16,8 @@ import { CommunitymembersPage } from '../../pages/communitymembers/communitymemb
 import { DomSanitizer } from '@angular/platform-browser/';
 import { InAppBrowser } from 'ionic-native';
 
+import moment from 'moment';
+
 @Component({
   selector: 'page-community',
   templateUrl: 'community.html',
@@ -82,6 +84,26 @@ export class CommunityPage {
   }
   scrollToBottom(){
     this.content.scrollToBottom();
+  }
+    doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.storage.ready().then(() => {
+      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      this.storage.get('token').then((token) => { this.token=token; 
+        this.community_id=this.navParams.get("community_id");
+        this.communityList(this.community_id);
+        this.communityDetail(this.community_id);
+        this.getConnections();
+        this.addComments=false;
+        this.itemComments=false;
+        this.userType="sponsor";
+      });
+      this.storage.get('id').then((id) => { this.user_id=id; })
+    });
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
   }
   ionViewDidEnter(){
       this.storage.ready().then(() => {
@@ -350,6 +372,11 @@ toggleContent(){
  communityList(id){
      this.communityServices.getCommunityPost(id).subscribe (users => {
       this.users = users.result.info.lists.data;
+      var dataList=users.result.info.lists.data;
+        for(let data of dataList) {
+          data.created_at = moment(data.created_at).format("DD MMM YYYY HH:mm:ss");
+           }
+        this.users = dataList;
        this.nextPageURL=users.result.info.lists.next_page_url;
 
       },
@@ -396,8 +423,8 @@ pressevent(id){
   this.postCommunity(id);
 }
   postCommunity(id){
-     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-     loader.present();
+     // let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+     // loader.present();
      if(!this.authForm.valid){
       this.submitAttempt = true;
     }else{
@@ -419,17 +446,19 @@ pressevent(id){
        this.base64Image="";
        this.addVideo = false;
        this.showblock= null;
-       loader.dismiss();
+       // loader.dismiss();
      },
        err =>{
-      loader.dismiss();
+      // loader.dismiss();
       this.communityServices.showErrorToast(err);
     })
+
      }
      else{
-       loader.dismiss();
+       // loader.dismiss();
      //this.showToast("Enter message and Post");
    }
+   
    }
      
   }
@@ -537,8 +566,13 @@ doInfinite(infiniteScroll) {
      this.communityServices.communityscroll(this.nextPageURL,id).subscribe(
      (eventsscroll) => {
       this.eventScrollLists=eventsscroll.result.info.lists.data;
+       var dataList= eventsscroll.result.info.lists.data;
+        for(let data of dataList) {
+          data.created_at = moment(data.created_at).format("DD MMM YYYY HH:mm:ss");
+           }
+        this.eventScrollLists = dataList;
       for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
-        this.users.push(this.eventScrollLists[i]);
+        this.users.push(dataList[i]);
         }
       
        this.nextPageURL=eventsscroll.result.info.lists.next_page_url;     

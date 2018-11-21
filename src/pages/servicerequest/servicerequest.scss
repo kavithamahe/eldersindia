@@ -1,10 +1,4 @@
 page-servicerequest {
-    .toolbar-title-md {
-        text-align: center !important;
-    }
-    .toolbar-title-ios {
-        text-align: center;
-    }
     .token-primarys {
         width: 35px;
         height: 35px;
@@ -28,7 +22,7 @@ page-servicerequest {
         font-size: 20px;
     }
     .req-cancel {
-        width: 35px; 
+        width: 35px;
         margin-top: 5px;
         display: block;
         border-radius: 5px;
@@ -37,8 +31,8 @@ page-servicerequest {
         padding: 5px 10px;
         width: 65%;
         text-align: center;
-        box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
-    }   
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    }
     .rating-clr ul.rating li {
         float: left;
         list-style-type: none;
@@ -66,34 +60,25 @@ page-servicerequest {
         background: #FE5722;
         padding: 5px 20px;
         font-size: 14px;
-        font-weight: 400 !important;        
+        font-weight: 400 !important;
         border-radius: 30px;
         letter-spacing: 0.2px;
     }
-    // .Pending {
-    //     font-family: 'Muli', sans-serif;
-    //     color: #fff !important;
-    //     padding: 5px;
-    //     font-size: 15px;
-    //     font-weight: 600 !important;
-    //     background: #f8b106;
-    //     border-radius: 3px;
-    // }    
-    .Completed {        
+    .Completed {
         color: #fff;
         background: #228B22;
         padding: 5px 20px;
         font-size: 14px;
-        font-weight: 400 !important;        
+        font-weight: 400 !important;
         border-radius: 30px;
         letter-spacing: 0.2px;
     }
-    .Cancelled {        
+    .Cancelled {
         color: #fff;
-        background: red;        
+        background: red;
         padding: 5px 20px;
         font-size: 14px;
-        font-weight: 400 !important;        
+        font-weight: 400 !important;
         border-radius: 30px;
         letter-spacing: 0.2px;
     }
@@ -110,7 +95,7 @@ page-servicerequest {
         background: #228B22;
         padding: 5px 20px;
         font-size: 14px;
-        font-weight: 400 !important;        
+        font-weight: 400 !important;
         border-radius: 30px;
         letter-spacing: 0.2px;
     }
@@ -147,7 +132,7 @@ page-servicerequest {
         height: 30px;
         float: left;
         font-family: 'Muli', sans-serif;
-        box-shadow: 0px 4px 20px rgba(0,0,0,.2);
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, .2);
     }
     .show-hiden {
         margin: 10px;
@@ -212,14 +197,6 @@ page-servicerequest {
     .service-cards {
         background: hsla(0, 0%, 0%, 0) linear-gradient(313deg, hsl(205, 51%, 80%) 0%, hsl(0, 0%, 100%) 18%, hsl(0, 0%, 100%) 100%) repeat scroll 0 0;
     }
-    // .tocken-no {
-    //     color: #08298A !important;
-    //     font-size: 16px !important;
-    //     font-weight: 600 !important;
-    //     font-family: 'Muli', sans-serif;
-    //     letter-spacing: 0.2px;
-    //     text-align: center;
-    // }
     .left-service img {
         border: 1px solid #ccc;
     }
@@ -280,68 +257,21 @@ page-servicerequest {
         height: 35px;
         width: 50px;
     }
-    // .btn-go .go-btn.button-ios {
-    //     margin-top: 4px;
-    //     font-weight: 600;
-    //     height: 35px;
-    //     width: 50px;
-    // }
-    // .searchbar-md .searchbar-input {
-    //     font-size: 14px;
-    //     font-weight: 600;
-    //     font-family: 'Muli', sans-serif;
-    //     border-radius: 30px;
-    // }
-    // .searchbar-ios .searchbar-input {
-    //     border: 1px solid #87CEFA;
-    //     font-size: 14px;
-    //     font-weight: 600;
-    //     box-shadow: none;
-    //     font-family: 'Muli', sans-serif;
-    //     border-radius: 50px;
-    // }
-
-    .text-center{
+    .text-center {
         text-align: center;
     }
-    .table-header{
-        font-weight: 600;        
+    .table-header {
+        font-weight: 600;
     }
-    .padd-both-15{
+    .padd-both-15 {
         padding: 0px 15px;
     }
     /*============
 Kiran Changes
 ==============*/
     // Android
-    .content-intop {
-        .ion-searchbar {
-            background-color: #fff;
-            margin: 10px;
-            border-radius: 30px;
-            box-shadow: 0px 5px 20px rgba(0,0,0,0.05);
-            ion-col{
-                padding: 0;
-            .searchbar-md {
-                padding: 4px 0px 4px 4px;
-                background: inherit;
-                .searchbar-input {
-                    border: 1px solid #fff;
-                    letter-spacing: 0.4px;                   
-                }
-            }
-            &.btn-go {
-                .go-btn {
-                    margin: 6px 0px 0px 0px !important;
-                    height: 40px !important;
-                    border-radius: 30px !important;
-                    width: 90% !important;
-                    background-color: #025fa9 !important;                   
-                }
-            }
-        }
-        }
-        .card-md {
+    .content-intop {        
+        ion-card {
             margin: 10px 10px 10px 10px;
             width: calc(100% - 20px);
             border-radius: 4px;
@@ -364,8 +294,8 @@ Kiran Changes
                 }
             }
         }
-        .service-cards{
-            h2.service-req{
+        .service-cards {
+            h2.service-req {
                 color: #333 !important;
                 display: inline;
                 font-family: 'Muli', sans-serif;
@@ -376,9 +306,9 @@ Kiran Changes
                 padding: 0 0 4px 0;
                 line-height: 25px;
             }
-            p.service-conts{
-                .token-primaryss{
-                    margin-top: 5px;                   
+            p.service-conts {
+                .token-primaryss {
+                    margin-top: 5px;
                     font-weight: 400;
                     color: #888;
                     line-height: 25px;
@@ -387,18 +317,17 @@ Kiran Changes
                     width: 60%;
                     float: left;
                     padding-right: 10px;
-                   
                 }
-                b{
+                b {
                     float: right;
                     width: 40%;
                     /* text-align: right; */
                     font-size: 15px;
                     padding-top: 6px;
                     color: #888;
-                    &.cost-redPrice{
-                        color:#ff0000;
-                        i{
+                    &.cost-redPrice {
+                        color: #ff0000;
+                        i {
                             color: #ff0000 !important;
                             margin: 0 !important;
                         }
@@ -416,7 +345,7 @@ Kiran Changes
             border-radius: 30px;
             letter-spacing: 0.2px;
         }
-        .Scheduled{
+        .Scheduled {
             color: #fff !important;
             padding: 5px 20px;
             font-size: 14px;
@@ -425,12 +354,12 @@ Kiran Changes
             border-radius: 30px;
             letter-spacing: 0.2px;
         }
-        .tocken-no{
+        .tocken-no {
             color: #333 !important;
             font-size: 15px !important;
             font-weight: 600 !important;
             font-family: 'Muli', sans-serif;
-            letter-spacing: 0.2px;            
+            letter-spacing: 0.2px;
         }
         .badge-md {
             border-radius: 30px;
@@ -439,43 +368,45 @@ Kiran Changes
             padding: 5px 15px;
             font-weight: 400;
         }
-        .btn-participants{
+        .btn-participants {
             background-color: #025fa9;
             border-radius: 5px;
-            margin-top: 8px;            
+            margin-top: 8px;
             padding: 6px 15px;
             box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
         }
-        .tp-bor{
-            border-top:1px solid #eee;
+        .tp-bor {
+            border-top: 1px solid #eee;
         }
-        .tp-5{
+        .tp-5 {
             padding-top: 5px;
             margin-top: 5px;
         }
-        .call-btn{
+        .call-btn {
             background: rgb(2, 95, 169);
             color: #fff;
-            ion-icon{
-                background: rgba(0,0,0,0.2);
+            ion-icon {
+                background: rgba(0, 0, 0, 0.2);
             }
-        }   
-        .rating-left{
+        }
+        .rating-left {
             float: left;
             width: 50%;
-        }    
-        
-        .pack-select{
-            padding:0px 10px;
+        }
+        .pack-select {
+            padding: 0px 10px;
             border-radius: 4px;
             border: 1px solid #ccc;
             margin: 10px 0 0 0;
-            width:100%;
+            width: 100%;
             font-weight: 400;
             font-size: 15px;
             box-shadow: none;
         }
-        
     }
-
+}
+.ios{
+    page-servicerequest {
+         top: 8px !important;
+    }   
 }

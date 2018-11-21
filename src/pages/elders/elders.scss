@@ -32,12 +32,12 @@ page-elders{
                     border-bottom: 1px solid #ccc;
                     .input-wrapper{
                         ion-label{
-                            color: #999;
-                            font-weight: 400;
+                            
                             margin: 8px 0px;
                             font-size: 18px;
                         }
                         ion-select{
+                        max-width:95%;
                             .select-text{
                                 color: #666;
                                 font-size: 18px;
@@ -149,8 +149,8 @@ page-elders{
                     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.09);
                     border-radius: 30px;
                     display: block;
-                    float: right;
-                    margin: 20px 0px 20px;
+                    // float: right;
+                    margin: 15px 0px 5px;
                 }
             }   
             .attachFile{
@@ -179,5 +179,15 @@ page-elders{
         }
     }
 }
+ .selectDepent{
+                margin: 0px 0px 0px 10px !important;
+                            letter-spacing: 0.1px !important;                          
+                            }
+
 }
 
+.ios{
+    page-elders {
+         top: 8px !important;
+    }   
+}

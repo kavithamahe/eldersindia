@@ -128,7 +128,6 @@ scrollTop:boolean = false;
   recurringRequestScroll()
   {
     this.scrollTop = true;
-    console.log("scroll");
     this.blogListService.recurringRequestScroll(this.nextPageURL,this.searchText,this.sortby).subscribe(
      (serviceRequestScroll) => {
        var dataList=serviceRequestScroll.result.info.data;

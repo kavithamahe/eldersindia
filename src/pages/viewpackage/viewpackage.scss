@@ -1,28 +1,97 @@
 page-viewpackage {
-.liste-view{padding:5px;    background: rgba(255, 255, 255, 0.7);}
-.liste-view .item-md .item-inner .input-wrapper .label-md ion-row ion-col b{ float:left;font-family: 'Muli', sans-serif; font-size:17px; color:hsl(191, 100%, 29%);letter-spacing: 0.2px; font-weight:bold; width:100%;margin-bottom:5px;}
-
-.liste-view .item-md .item-inner .input-wrapper .label-md ion-row ion-col p{ float:left;font-family: 'Muli', sans-serif; font-size:17px; color:#444;letter-spacing: 0.2px; }
-.login-pages											{background-image: url('../assets/img/bgs.png');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
-.liste-view .item-md {background:none;}
-.liste-view .item-md .item-inner .input-wrapper .label-md ion-row ion-col p.pen{  background:#FF8C00;
-    border-radius: 2px;
-    color:#fff;
-    font-size: 12px;
-    padding: 3px;}
-.liste-view .item-md .item-inner .input-wrapper .label-md ion-row ion-col p.act{  background:green;
-    border-radius: 2px;
-    color: hsl(0, 0%, 100%);
-    font-size: 12px;
-    padding: 3px;}
-.liste-view .item-md .item-inner .input-wrapper .label-md ion-row ion-col p.rej{  background:red;
-    border-radius: 2px;
-    color: hsl(0, 0%, 100%);
-    font-size: 12px;
-    padding: 3px;}
-
-.liste-view .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col b{ float:left;font-family: 'Muli', sans-serif; font-size:14px; color:#333; font-weight:bold; width:100%;margin-bottom:5px;}
-
-.liste-view .item-ios .item-inner .input-wrapper .label-ios ion-row ion-col p{ float:left;font-family: 'Muli', sans-serif; font-size:16px; color:#444; }
-.liste-view .item-ios {background:none;}
+    .PackageRequest{
+		background: url(../assets/img/bg.jpg);
+        background-position: center;
+		background-size: cover;
+		.job-detailsview{
+            border-radius: 4px;
+			box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+			.package-needs{
+                ion-row{
+                    ion-col{
+						h2{
+							color: #2c4e86;
+							font-size: 19px;
+							font-weight: 600;
+							text-transform: capitalize;
+							padding: 7px 0px 15px 10px;
+							border-bottom: 1px dotted #ccc;
+							letter-spacing: 0.2px;
+						}
+                        b{
+                            color: #9ea8b2;
+							font-size: 17px;
+							padding: 8px 10px 6px;
+							display: block;
+							font-weight: 500;
+							letter-spacing: 0.2px;
+                            ion-icon{
+                                color: #9ea8b2;
+                                font-size: 20px;
+                                padding: 0px 10px 0px 0px;
+							}
+							&.statusTitle{
+								display: inline;
+							}
+                        }
+                        p{
+                            color: #42436a;
+							font-size: 17px;
+							padding: 0px 0px 0px 35px;
+							font-weight: 500;
+						}
+						.statusColor{
+							text-align: right;
+							float: right;
+							ion-badge {
+								font-size: 15px;
+								font-weight: 400;
+								padding: 5px 15px;
+							}
+							.active,.completed{
+								background: #019746;
+							}
+							.expired,.reject{
+								background: #ff0000;
+							}
+							.pending{
+								background: #ef7f16;
+							}
+						}
+                        &.view-serv{
+                            text-align: right;
+                            .services{
+                                background: #ef7f16;
+                                padding: 9px 25px 9px 25px;
+                                font-weight: 500;
+                                font-size: 16px;
+                                margin: 9px 5px 8px 0px;
+                                border-radius: 30px;
+                                box-shadow: 0px 5px 20px rgba(44, 78, 134,0.2)
+							}
+							.services-view{
+								background: #42436a;
+                                padding: 9px 25px 9px 25px;
+                                font-weight: 500;
+                                font-size: 16px;
+                                margin: 9px 5px 8px 0px;
+                                border-radius: 30px;
+                                box-shadow: 0px 5px 20px rgba(44, 78, 134,0.2)
+							}
+						}
+						&.statusBar{
+							padding: 15px 5px;
+							background-color: #f7f9fb;
+    						border-radius: 4px;
+						}
+                    }                    
+                }
+            }
+		}
+	}
+}
+.ios{
+    page-viewpackage {
+         top: 8px !important;
+    }   
 }

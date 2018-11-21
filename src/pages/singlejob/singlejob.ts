@@ -8,6 +8,8 @@ import { JobBoardService } from '../../providers/job-board-service';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { JobDependentPage } from '../../pages/job-dependent/job-dependent';
 import { AppliedJobsPage } from '../../pages/applied-jobs/applied-jobs';
+
+import moment from 'moment';
 /*
   Generated class for the Singlejob page.
 
@@ -59,6 +61,11 @@ logo:any;
     this.jobBoardService.myjobrequest(this.jobId).subscribe(
      (myjobrequest) => {
       this.myjobrequestinfo=myjobrequest.result.info;
+       var dataList=myjobrequest.result.info;
+        for(let data of dataList) {
+         data.created_at = moment(data.created_at).format("DD-MM-YYYY HH:mm:ss"); 
+        }
+        this.myjobrequestinfo = dataList;
       this.user=this.myjobrequestinfo[0].user;
       this.logo=this.user.logo;
       loader.dismiss();
@@ -82,6 +89,11 @@ logo:any;
     this.jobBoardService.singleJob(this.jobId).subscribe(
      (singleJob) => {
       this.singleJobInfo=singleJob.result.info;
+       var dataList=singleJob.result.info;
+        for(let data of dataList) {
+         data.created_at = moment(data.created_at).format("DD-MM-YYYY HH:mm:ss"); 
+        }
+        this.singleJobInfo = dataList;
       this.user=this.singleJobInfo[0].user;
       this.logo=this.user.logo;
       this.functional_area=singleJob.result.info.functional_area;

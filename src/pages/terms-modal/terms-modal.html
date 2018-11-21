@@ -26,10 +26,10 @@
 <h2>Terms of Service</h2>
    <small>Last updated: February 27, 2017</small>
   <hr/>
-     <p *ngIf(!show_description)>{{description | words : 29 : '...'}} 
+     <p *ngIf="!show_description">{{description | words : 29 : '...'}} 
      <button (click)="toggleContent()" class="view-mr"><i class="fa fa-plus" aria-hidden="true"></i> View more</button>
      </p>
-     <p *ngIf(show_description)>{{description}}
+     <p *ngIf="show_description">{{description}}
      <button class="view-ls" (click)="toggleContent()"><i class="fa fa-minus" aria-hidden="true"></i> View less</button>
      </p>
 

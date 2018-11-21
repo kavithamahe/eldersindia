@@ -1,65 +1,125 @@
 page-create-blog {
-[_nghost-jsp-42]{ margin-bottom:10px !important;}
-[_nghost-otx-42] .ng2-tag-input-remove[_ngcontent-otx-42]{ background:red !important; }
-
-.list-md .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus){border-bottom-color:none !important;}
-.list-md .item-input:last-child{ border-bottom:none !important;}
-.toolbar-title-md{ text-align:center !important;}
-.toolbar-title-ios{ text-align:center;}
-
-.createblog-form{ padding:10px;}
-.createblog-form .label-md{ 
-    color: #777;
-    font-size: 16px;
-    font-weight:600;
-    font-family: 'Muli', sans-serif; padding-bottom:8px; margin:0px; padding-top:10px;
+    .createblog-form{
+        background-color: #fff;        
+        .addblog{
+            padding: 20px 15px;
+            form{
+                ion-label{
+                    color: #333;
+                    font-size: 17px;
+                    font-weight: 600;
+                    padding-top: 10px;
+                    margin: 15px 0px 2px 0;
+                }
+                      .sel-label{
+            border: none !important;
+            border-radius: 0px !important;
+            margin-right: 0px !important;
+            padding: 0px 0px !important;                    
+            .item-inner {
+                border: 0 !important;
+                padding: 0px 10px !important;
+                .input-wrapper{ 
+                    display: block; 
+                    input{                                
+                        &.text-input{
+                            padding: 10px 0px 10px !important;
+                            border-bottom: 1px solid #ccc;
+                            margin: 0;
+                            width: 100%;   
+                            color:#666;                             
+                        }
+                    } 
+                    textarea{                                
+                        &.text-input{
+                            padding: 10px 0px 10px !important;
+                            border-bottom: 1px solid #ccc;
+                            margin: 0;
+                            width: 100%;                                
+                        }
+                    } 
+                }
+            }
+        }
+                 .selectDepent{
+                            margin: 0px 0px 0px 10px !important;
+                            letter-spacing: 0.1px !important;
+                            font-size: 18px;                            
+                            } 
+                ion-item{
+                    .item-inner{
+                        .input-wrapper{
+                            ion-label{
+                                margin: 8px 0px;
+                                font-size: 18px;
+                            }
+                            ion-select{
+                            max-width:95%;
+                                .select-text {
+                                    color: #666;
+                                    font-size: 18px;
+                                }
+                            }
+                            ion-input{
+                                .text-input {
+                                    color: #666666;
+                                    font-size: 18px;
+                                }
+                            }
+                        }
+                        
+                    }
+                    &.input-has-focus{
+                        .item-inner{
+                            border-bottom: 1px solid #4978a9 !important; 
+                        }
+                    }
+                }
+            }
+            .WithoutForm{
+                ion-label{
+                    color: #333;
+                    font-size: 17px;
+                    font-weight: 600;
+                    padding-top: 10px;
+                    margin: 15px 0px 2px 0;
+                }
+                ion-item{
+                    .item-inner{
+                        padding-right: 0;
+                        border-bottom: none;
+                        .input-wrapper{
+                            ion-label{
+                                margin: 0px 0px;
+                                padding-top: 5px;
+                            }
+                        }
+                    }
+                }
+                ion-row{
+                    ion-col{
+                        ion-label{
+                            padding-top: 0px;
+                        }
+                    }
+                }
+                .caption{
+                    color: #999;
+                    font-size: 14px;
+                }                
+            }  
+            .logoin-btn{
+                box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+                border-radius: 30px;
+                margin: 25px 0px;
+                padding: 19px 0px;
+                background: #2c4e86;
+            }          
+        }
+    }
 }
-
-.createblog-form .item-md {    border: 1px solid #ccc;}
-
-
-.list-ios .item-input.ng-invalid.ng-touched:last-child:not(.input-has-focus){border-bottom-color:none !important;}
-.list-ios .item-input:last-child{ border-bottom:none !important;}
-.toolbar-title-ios{ text-align:center !important;}
-.toolbar-title-ios{ text-align:center;}
-
-.createblog-form{ padding:10px;}
-.createblog-form .label-ios{ 
-    color: #777;
-    font-size: 16px;
-    font-weight: 400;
-    font-family: 'Muli', sans-serif; padding-bottom:8px; margin:0px; padding-top:10px;
-}
-
-.createblog-form .item-ios {    border: 1px solid #ccc;}
-.createblog-form .item-ios .item-inner{padding-right:0px;}
-
-
-.featured-bro{ border:none !important;}
-.brw-btn{
-    background: #025FA9;
-    font-size:17px !important;
-    font-weight:600;
-    float: left;
- width:48%;
-    height:35px !important;
-    text-transform: capitalize;
-    font-family: 'Muli', sans-serif;
-}
-.logoin-btn{
-    font-size:16px;
-    font-weight:600;
-    color: #fff;
-    font-family: 'Muli', sans-serif;
-    text-transform: capitalize;
-    background: transparent linear-gradient(45deg, #fe5722 0%, #fe5722 30%, #ff906b 50%, #fe5722 71%, #fe5722 100%) repeat scroll 0 0;
-    width:100%;
-    height:40px;
-    border-radius:20px;
-    margin-top:20px;}
-
-.rd-tags{background:#ccc; margin-right:3px; float:letf; margin-bottom:10px;}
-.ng2-tag-input-field {   border: 1px solid #ccc; margin-top:10px; height:45px; width:100%; padding:3px;}
-
-.radio-img .label-md{padding-top:0px !important;}
+.ios{
+    page-create-blog {
+         top: 8px !important;
+    }   
 }

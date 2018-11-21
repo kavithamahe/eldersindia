@@ -1,56 +1,70 @@
-<!--
-  Generated template for the GetpackagePage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title text-center text-capitalize>Avail Package</ion-title> 
+    <ion-title text-center text-capitalize>Avail Package</ion-title>
     <ion-buttons end>
-    <button ion-button icon-only (click)="dismiss()">
+      <button ion-button icon-only (click)="dismiss()">
         <ion-icon item-right name="ios-close-outline"></ion-icon>
-    </button>
-  </ion-buttons>  
+      </button>
+    </ion-buttons>
   </ion-navbar>
-  
 </ion-header>
 
+<ion-content class="getPackage">
+  <form>
+    <div class="register-form">
+      <ion-grid>
+        <ion-row *ngIf="user_type !='elder'">
+          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">To</ion-label>
+          <ion-item class="sel-label">
 
-<ion-content padding>
-<form>
-<div class="register-form">
-<ion-grid>
-          <ion-row *ngIf="user_type !='elder'">
-          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">To</ion-label>
+            <ion-label>To</ion-label>
+            <ion-select style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="selectedConnections"
+              [ngModelOptions]="{standalone: true}" (ionChange)="packageAvail()">
+              <ion-option *ngFor="let name of dependentLists" [value]="name.id">{{name.name}}
+              </ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-row>        
+        <ion-row>
+          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Payment Type</ion-label>
           <ion-item class="sel-label">
-          <ion-label>To</ion-label>
-             <ion-select  style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="selectedConnections" 
-             [ngModelOptions]="{standalone: true}" (ionChange)="packageAvail()">
-          <ion-option *ngFor="let name of dependentLists" [value] = "name.id">{{name.name}}
-          </ion-option>
-        </ion-select>  
-        </ion-item>
-     </ion-row>
-     <br>
-      <ion-row>
-          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">To</ion-label>
-          <ion-item class="sel-label">
-          <ion-label>Payment Type</ion-label>
-             <ion-select  style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="paymenttype" 
-             [ngModelOptions]="{standalone: true}">
-          <!-- <ion-option value="Offline Payment">Offline Payment</ion-option> -->
-          <ion-option value="Online Payment">Online Payment</ion-option>
-        </ion-select>  
-        </ion-item>
-     </ion-row>
-               
-           
-  <button ion-button round full (click)="getPackage()" *ngIf="user_type !='elder'" class="btn-blue">Get Package
-  </button>
-  <button ion-button round full (click)="getPackageselder()" class="btn-blue" *ngIf="user_type =='elder'">Get Package
-  </button>
-</ion-grid>
-</div>
-</form>
+            <ion-label>Payment Type</ion-label>
+            <ion-select style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;" [(ngModel)]="paymenttype"
+              [ngModelOptions]="{standalone: true}">
+              <!-- <ion-option value="Offline Payment">Offline Payment</ion-option> -->
+              <ion-option value="Online Payment">Online Payment</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-row>
+        
+        <div class="ion-searchbar">
+          <ion-row>
+            <ion-col col-10>
+             <ion-item>
+              <ion-input type="text" placeholder="Coupon code" [(ngModel)] = "coupan_code" [ngModelOptions]="{standalone: true}" text-uppercase>
+             </ion-input>
+             </ion-item>
+            </ion-col>
+            <ion-col col-2 class="btn-go">
+              <button (click) = "applyCoupan()" ion-button small class="go-btn">Apply</button>
+            </ion-col>
+          </ion-row>
+          </div>
+           <ion-row>
+          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Package Cost : <span class="discountCost"><i class="fa fa-inr" aria-hidden="true"></i>{{package_amount | number : '1.2-2'}}</span></ion-label>
+        </ion-row>
+        <ion-row *ngIf = "coupandiscount == '1'">
+          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Coupon code discounted amount : <span class="discountCost"><i class="fa fa-inr" aria-hidden="true"></i>{{discounted_cost | number : '1.2-2'}}</span></ion-label>
+        </ion-row>
+         <ion-row *ngIf = "coupandiscount == '1'">
+          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Final payable amount : <span class="discountCost"><i class="fa fa-inr" aria-hidden="true"></i>{{final_service_cost | number : '1.2-2'}}</span></ion-label>
+        </ion-row>
+        <br />
+        <button ion-button round full (click)="getPackage()" *ngIf="user_type !='elder'" class="btn-blue">Get Package
+        </button>
+        <button ion-button round full (click)="getPackageselder()" class="btn-blue" *ngIf="user_type =='elder'">Get Package
+        </button>
+      </ion-grid>
+    </div>
+  </form>
 </ion-content>

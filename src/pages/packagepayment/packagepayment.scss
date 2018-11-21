@@ -16,3 +16,8 @@ page-packagepayment {
 .services-view{background:#FE5722; height:35px; color:#fff;margin-top:20px;margin-bottom:10px; width:45%; float:left; margin-right:3px;font-family: 'Muli', sans-serif; font-size:15px;font-weight:600; border-radius:20px; line-height:28px;box-shadow: 0 2px 2px 0 hsla(0, 0%, 0%, 0.14), 0 3px 1px -2px hsla(0, 0%, 0%, 0.2), 0 1px 5px 0 hsla(0, 0%, 0%, 0.12);}
 
 }
+.ios{
+    page-packagepayment {
+         top: 8px !important;
+    }   
+}

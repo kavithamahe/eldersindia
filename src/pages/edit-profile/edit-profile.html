@@ -1,143 +1,173 @@
-<!--
-  Generated template for the EditProfile page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-<ion-navbar color="primary">
-  
+  <ion-navbar color="primary">
     <ion-title>Edit Profile</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-<ion-content class="edit">
-<div class="profile-edit"><span  *ngIf="user_type =='sponsor' " class="profile-img">
-<img [src]="imageURL+profileData?.avatar" > </span>
-	<p>{{profileData?.name}} {{profileData?.last_name}}</p></div>
+<ion-content class="Myprofile">
+  <div class="profile-edit">
+    <span *ngIf="user_type =='sponsor' " class="profile-img">
+      <img [src]="imageURL+avatar" *ngIf="!base64Image">
+       <img [src]="base64Image" *ngIf="base64Image" width="90" height="90" />
+      <button ion-button class="EditIcon" color="primary" (click)="accessGallery()">
+          <i class="fa fa-pencil" aria-hidden="true"></i></button>      
+    </span>    
+    <p>{{profileData?.name}} {{profileData?.last_name}}</p>
+  </div>
 
-	<form [formGroup]="edit_profile_Form">
-       <div class="edit-profile-view">
-        <ion-label class="liste-edit">Employee id</ion-label>
-		<ion-item>
-	    <ion-input type="text" formControlName="empid" placeholder="Employee id"></ion-input>
-	    </ion-item>
-		<ion-label *ngIf="user_type =='sponsor' " class="liste-edit">Designation</ion-label>
-        <ion-item *ngIf="user_type =='sponsor' ">
-	    <ion-input type="text" formControlName="designation" placeholder="Designation">
-	    </ion-input>
-	    </ion-item>	
-         
-        <ion-label class="liste-edit">Location </ion-label>
-		<ion-item>
-	    <ion-input type="text" formControlName="location" placeholder="Location"></ion-input>
-	    </ion-item>
-   				    
-	    <ion-label class="liste-edit">Official email</ion-label>
-		<ion-item>
-	    <ion-input type="text" formControlName="email"></ion-input>
-	    </ion-item>
-	    <ion-label class="liste-edit">User type</ion-label>
-	    <ion-item>
-	    <ion-input type="text" formControlName="user_type"></ion-input>
-	    </ion-item>
-	   <ion-label class="liste-edit required">Mobile number</ion-label>
-        <ion-item>
-		 <ion-input type="number" formControlName="mobile_number" placeholder="Mobile number"   [class.invalid]="!edit_profile_Form.controls.mobile_number.valid && (edit_profile_Form.controls.mobile_number.dirty)"></ion-input>
-	    </ion-item>
-	    <small  *ngIf="!edit_profile_Form.controls.mobile_number.valid  && (edit_profile_Form.controls.mobile_number.dirty || submitAttempt)">
-            <p class="valid err-reds">Please enter valid mobile number.</p>
-        </small>
-   
-	
+  <form [formGroup]="edit_profile_Form">
+    <div class="edit-profile-view">
+      <ion-grid class="package-needs">
+        <ion-row>
+          <ion-col>
+            <ion-label class="liste-edit">Employee id</ion-label>
+            <ion-item>
+              <ion-input type="text" formControlName="empid" placeholder="Employee id"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-		<ion-label class="liste-edit required">Date of birth</ion-label>
-		<ion-item> 
-		<ion-datetime class="select-brd" style="font-size:17px;" [(ngModel)]="user_dob" formControlName="user_dob" placeholder="Date of birth" displayFormat="MMM DD, YYYY"
-		[class.invalid]="!edit_profile_Form.controls.user_dob.valid && 
-	                (edit_profile_Form.controls.user_dob.dirty)">  
-		    </ion-datetime>
-	  	</ion-item>
-
-		
-	    	<ion-label class="liste-edit required">Personal email</ion-label>
-		<ion-item>
-	    <ion-input type="text" formControlName="personal_email" 
-	    [(ngModel)]="profileData.personal_email" [class.invalid]="!edit_profile_Form.controls.personal_email.valid && (edit_profile_Form.controls.personal_email.dirty)"></ion-input>
-	    </ion-item>
-	     <small  *ngIf="!edit_profile_Form.controls.personal_email.valid  && (edit_profile_Form.controls.personal_email.dirty || submitAttempt)">
-            <p class="valid err-reds">Please enter valid Email.</p>
-         </small>
-
-		
-		<br/>
-	  	<ion-row>
-		<ion-col>
-	    <button ion-button class="uploadimg" color="primary" (click)="accessGallery()">
-	    <i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Browse...</button>
-				</ion-col>
-				<ion-col>
-				 <img [src]="base64Image" *ngIf="base64Image" width="90" height="90" />
-						</ion-col>
-		</ion-row>
-
-	
-</div>
-</form>
-	
+        <ion-row>
+          <ion-col>
+            <ion-label *ngIf="user_type =='sponsor' " class="liste-edit">Designation</ion-label>
+            <ion-item *ngIf="user_type =='sponsor' ">
+              <ion-input type="text" formControlName="designation" placeholder="Designation">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label class="liste-edit">Location </ion-label>
+            <ion-item>
+              <ion-input type="text" formControlName="location" placeholder="Location"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label class="liste-edit">Official email</ion-label>
+            <ion-item>
+              <ion-input type="text" formControlName="email"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label class="liste-edit">User type</ion-label>
+            <ion-item>
+              <ion-input type="text" formControlName="user_type"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label class="liste-edit required">Mobile number</ion-label>
+            <ion-item>
+              <ion-input type="number" formControlName="mobile_number" placeholder="Mobile number" [class.invalid]="!edit_profile_Form.controls.mobile_number.valid && (edit_profile_Form.controls.mobile_number.dirty)"></ion-input>
+            </ion-item>
+            <small *ngIf="!edit_profile_Form.controls.mobile_number.valid  && (edit_profile_Form.controls.mobile_number.dirty || submitAttempt)">
+              <p class="valid err-reds">Please enter valid mobile number.</p>
+            </small>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label class="liste-edit required">Date of birth</ion-label>
+            <ion-item>
+              <ion-datetime class="select-brd" style="font-size:17px;" [(ngModel)]="user_dob" formControlName="user_dob" placeholder="Date of birth"
+                displayFormat="MMM DD, YYYY" [class.invalid]="!edit_profile_Form.controls.user_dob.valid && 
+                                      (edit_profile_Form.controls.user_dob.dirty)">
+              </ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label class="liste-edit required">Personal email</ion-label>
+            <ion-item>
+              <ion-input type="text" formControlName="personal_email" [(ngModel)]="profileData.personal_email" [class.invalid]="!edit_profile_Form.controls.personal_email.valid && (edit_profile_Form.controls.personal_email.dirty)"></ion-input>
+            </ion-item>
+            <small *ngIf="!edit_profile_Form.controls.personal_email.valid  && (edit_profile_Form.controls.personal_email.dirty || submitAttempt)">
+              <p class="valid err-reds">Please enter valid Email.</p>
+            </small>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!--  <ion-row>
+        <ion-col>
+          <button ion-button class="uploadimg" color="primary" (click)="accessGallery()">
+            <i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp; Browse...</button>
+        </ion-col>
+        <ion-col>
+          <img [src]="base64Image" *ngIf="base64Image" width="90" height="90" />
+        </ion-col>
+      </ion-row> -->
+    </div>
+  </form>
 </ion-content>
 <ion-footer>
-<ion-navbar color="primary">
-  <ion-toolbar> <!-- [color]="isAndroid ? 'royal' : 'light'" class="toolbar-buttons-page" -->
-    <ion-buttons>
-      <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
-        <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
-     <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
-        <div style="padding-left: 10px !important;">
-          Cancel
-        </div>
-      </button>
-      <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()">
-        <!-- <i class="fa fa-reply" aria-hidden="true"></i> -->
-  <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
-        <div style="padding-left: 10px !important;">
-          Cancel
-        </div>
-      </button>
-    </ion-buttons>
-    <ion-buttons end>
-      <button ion-button color="royal" large icon-right showWhen="ios" (click)="updateProfile()">
-        Update
-        <ion-icon name="send"></ion-icon>
-      </button>
-      <button ion-button color="light" large icon-right hideWhen="ios" (click)="updateProfile()">
-        Update
-        <ion-icon name="send"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
+  <ion-navbar color="primary">
+    <ion-toolbar>
+      <ion-buttons>
+        <button ion-button color="royal" large icon-left showWhen="ios" (click)="dismiss()">
+          <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+          <div style="padding-left: 10px !important;">
+            Cancel
+          </div>
+        </button>
+        <button ion-button color="light" large icon-left hideWhen="ios" (click)="dismiss()">
+          <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+          <div style="padding-left: 10px !important;">
+            Cancel
+          </div>
+        </button>
+      </ion-buttons>
+      <ion-buttons end>
+        <button ion-button color="royal" large icon-right showWhen="ios" (click)="updateProfile()">
+          Update
+          <ion-icon name="send"></ion-icon>
+        </button>
+        <button ion-button color="light" large icon-right hideWhen="ios" (click)="updateProfile()">
+          Update
+          <ion-icon name="send"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
   </ion-navbar>
 </ion-footer>
 <style>
-.text-input-md{ margin:0px;}
-.item-block{ border-bottom:none !important;}
-.item-inner {
-border-bottom-color: transparent !important;
-box-shadow: none !important;}
-.item-ios.item-block .item-inner{ border-bottom:none !important;}
-.item-ios.item-label-stacked .text-input, .item-ios.item-label-floating .text-input{ font-size:14px !important;margin-left:8px !important;}
+  .text-input-md {
+    margin: 0px;
+  }
+
+  .item-block {
+    border-bottom: none !important;
+  }
+
+  .item-inner {
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .item-ios.item-block .item-inner {
+    border-bottom: none !important;
+  }
+
+  .item-ios.item-label-stacked .text-input,
+  .item-ios.item-label-floating .text-input {
+    font-size: 14px !important;
+    margin-left: 8px !important;
+  }
 
 
-.gly-rotate-180 {
-  filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.5);
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  transform: rotate(180deg);
-  display: inline-block;
-}
+  .gly-rotate-180 {
+    filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.5);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+    display: inline-block;
+  }
 </style>
-
-

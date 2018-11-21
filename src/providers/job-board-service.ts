@@ -3,8 +3,7 @@ import { Http,Headers,RequestOptions } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 import { FilePath } from '@ionic-native/file-path';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 /*
   Generated class for the JobBoardService provider.
 
@@ -20,7 +19,7 @@ rootUrl:any;
 user_id:number;
 functionalSearch:any=[];
 locationSearch:any=[];
-  constructor(public http: Http,private transfer: Transfer,private filePath: FilePath,public storage:Storage) {
+  constructor(public http: Http,private transfer: FileTransfer,private filePath: FilePath,public storage:Storage) {
    this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();

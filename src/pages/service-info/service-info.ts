@@ -76,6 +76,9 @@ package_validity:any;
 end_date:any;
 start_date:any;
 businessHoursOption:any;
+is_recreation_config:any;
+template_id:any;
+package:any;
 // @ViewChild('ghbslides') ghbslides: any;
 
 
@@ -83,6 +86,8 @@ businessHoursOption:any;
    
       this.subCategoryId = navParams.get("subCategoryId");
       this.locationId = navParams.get("location_id");
+      this.template_id = navParams.get("vendor").template_id;
+      this.is_recreation_config = navParams.get("vendor").is_recreation_config;
       this.one_time = navParams.get("one_time");
       this.recurring = navParams.get("recurring");
       this.vendor_id = navParams.get("vendor").id;    
@@ -93,11 +98,15 @@ businessHoursOption:any;
       this.service_cost = navParams.get("vendor").service_cost;
       this.percentage_cost = navParams.get("vendor").percentage_cost;
       this.schedule_cost = this.service_cost - this.percentage_cost;
-      this.package_amount = navParams.get("package_amount");
-      if(navParams.get("status") == "1"){
-      this.flagId = navParams.get("flag");  
+      this.package_amount = navParams.get("package_amount"); 
+      if(this.is_recreation_config == '1'){
+        this.flagId = "3";
+      }
+      else{
+        this.flagId = "1";
+      }
+      if(navParams.get("status") == "1"){ 
       this.serviceoffered = navParams.get("serviceOffered");
-      console.log(this.serviceoffered);
       this.one_time = navParams.get("vendor").one_time;
       this.recurring = navParams.get("vendor").recurring;
       }
@@ -107,8 +116,13 @@ businessHoursOption:any;
       this.sub_category = false ;
       // this.show_service = null;
       this.showServiceOffered = false;
-
-
+      this.package = navParams.get("package");
+      if(navParams.get("package") == "1"){ 
+        this.flagId = "1";
+        this.is_recreation_config = "0";
+        this.template_id = "1";
+        this.getServiceProviderlist(this.flagId);
+      }
       this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.url=imageurl;});
       storage.get('user_type').then((user_type) => { this.userType=user_type;});
@@ -117,7 +131,8 @@ businessHoursOption:any;
         storage.get('id').then((id) => { this.elderId=id;});
       }
       storage.get('token').then((token) => { this.token=token; 
-      let servieListData = {"vendor_id": this.vendor_id, "subCategoryId": this.subCategoryId, "flag": this.flagId, "location_id": this.locationId,"category_name":this.serviceoffered};
+      let servieListData = {"vendor_id": this.vendor_id, "subCategoryId": this.subCategoryId, "flag": this.flagId, "location_id": this.locationId,"category_name":this.serviceoffered,
+      "template_id":this.template_id,"is_recreation_config":this.is_recreation_config};
       this.loadServiceInformation(servieListData);
       })
     });
@@ -129,7 +144,15 @@ businessHoursOption:any;
 
         });
   }
-
+  getServiceProviderlist(flagId){
+    let subcategoryData = {"flag":flagId,"locationId":this.locationId,"subCategoryId":this.subCategoryId}
+    this.providerService.webServiceCall(`getServiceProviderlist`,subcategoryData)
+        .subscribe(
+          data =>{
+            this.vendor = data.result.info.lists[0];
+            console.log(this.vendor);
+          })
+  }
   loadServiceInformation(subcategoryData){
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
@@ -168,32 +191,31 @@ businessHoursOption:any;
         
   }
 contactNow(){
-  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","contact":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
-    modal.present();
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","contact":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
 }
 bookNow(){
-  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","bookNow":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
-    modal.present();
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNow":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
+    "template_id":this.template_id});    
 }
 preBook(){
-   let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","preBook":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
-    modal.present();
+   this.navCtrl.push(ServiceModalPage,{service:"Schedule","preBook":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
+ "template_id":this.template_id});    
 }
 emergencybook(){
-  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","emergencybook":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
-    modal.present();
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","emergencybook":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
+"template_id":this.template_id});    
 }
 transportationdriver(){
-   let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","transportationdriver":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
-    modal.present();
+   this.navCtrl.push(ServiceModalPage,{service:"Schedule","transportationdriver":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
+ "template_id":this.template_id});    
 }
 transportationcab(){
-  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","transportationcab":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
-    modal.present();
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","transportationcab":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
+"template_id":this.template_id});   
 }
 homemodify(){
-  let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule","homemodify":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
-    modal.present();
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","homemodify":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
+"template_id":this.template_id});    
 }
 pressmodel(){
   this.modal();
@@ -201,12 +223,12 @@ pressmodel(){
 
 modal(){
 
-    let modal = this.modalCtrl.create(ServiceModalPage,{service:"service_offered",vendorList:this.vendorList});    
-    modal.present();
+    this.navCtrl.push(ServiceModalPage,{service:"service_offered",vendorList:this.vendorList,"template_id":this.template_id});    
+   
 }
 recreationServices(){
-     let modal = this.modalCtrl.create(ServiceModalPage,{service:"recreation_service",vendorList:this.vendorList,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService});    
-    modal.present();
+     this.navCtrl.push(ServiceModalPage,{service:"recreation_service",vendorList:this.vendorList,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"template_id":this.template_id});    
+
 }
 
   public dashboardPage()
@@ -216,31 +238,37 @@ recreationServices(){
 
  
   toggleSchedule(){
-    let modal = this.modalCtrl.create(ServiceModalPage,{service:"Schedule",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status});    
-    modal.present();
+    this.navCtrl.push(ServiceModalPage,{service:"Schedule",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,"template_id":this.template_id});    
+
   }
   pressContact(){
     this.toggleContact();
   }
   toggleContact(){
-    let modal = this.modalCtrl.create(ServiceModalPage,{service:"contact",vendorList:this.vendorList});    
-    modal.present();
+    this.navCtrl.push(ServiceModalPage,{service:"contact",vendorList:this.vendorList,"template_id":this.template_id});    
+
     }
     contactNowothers(){
-      let modal = this.modalCtrl.create(ServiceModalPage,{service:"contact",vendorList:this.vendorList});    
-    modal.present();
+      this.navCtrl.push(ServiceModalPage,{service:"contact",vendorList:this.vendorList,"template_id":this.template_id});    
+
     }
     pressPackages(){
       this.togglePackages();
     }
     togglePackages(){
-      if(this.packageinfo.length == 0){
-        this.showToast("No Packages Available")
-      }
+  //     if(this.packageinfo.length == 0){
+  //       this.showToast("No Packages Available")
+  //     }
+  //     else{
+  //    this.navCtrl.push(ServiceModalPage,{service:"packages",vendorList:this.vendorList,location_id:this.locationId,"template_id":this.template_id});    
+
+  // }
+    if(this.packageinfo){
+      this.navCtrl.push(ServiceModalPage,{service:"packages",vendorList:this.vendorList,location_id:this.locationId,"template_id":this.template_id});    
+        }
       else{
-      let modal = this.modalCtrl.create(ServiceModalPage,{service:"packages",vendorList:this.vendorList,location_id:this.locationId});    
-    modal.present();
-  }
+     this.showToast("No Packages Available");
+      }
     }
   showToast(messageData){
     let toast = this.toastCtrl.create({
@@ -259,8 +287,8 @@ recreationServices(){
         this.showToast("There is no dependent. You can not apply job!");      
       
       }else{
-        console.log(this.vendor);
-  this.navCtrl.push(ModalContentPage,{serviceData:this.serviceData,dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor:this.vendor,vendorservice_cost:this.service_cost,one_time:this.one_time,recurring:this.recurring,status:"1",vendor_id:this.vendor_id,dependentLists:this.dependentLists,
+      
+  this.navCtrl.push(ModalContentPage,{serviceData:this.serviceData,dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor: this.vendor,vendorservice_cost:this.service_cost,one_time:this.one_time,recurring:this.recurring,status:"1",vendor_id:this.vendor_id,dependentLists:this.dependentLists,
       serviceids:this.serviceids,location_id:this.locationId,package_amount:this.package_amount,servicetypestatus:"2"});    
     // service_modal.present();
     // service_modal.onDidDismiss(data =>{

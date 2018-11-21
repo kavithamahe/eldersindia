@@ -1,9 +1,3 @@
-<!--
-  Generated template for the Jobboard page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
@@ -11,86 +5,112 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-      <ion-title text-center>Jobs</ion-title>
+    <ion-title text-center>Jobs</ion-title>
     <ion-buttons right>
-    <button ion-button icon-only (click)="dashboardPage()">
+      <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content  class="content-intop">
-<br/>
-<!-- <ion-fab top right>
-  <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
-  </ion-fab> -->
-<ion-item  style="border:none;">
+<ion-content class="content-intop jobListview">
   <div class="ion-searchbar">
     <ion-row>
-      <ion-col width-80>
-        <ion-searchbar [(ngModel)]="searchText" (keyup.enter)="getItems(searchText)"></ion-searchbar>
+      <ion-col col-10>
+        <ion-searchbar placeholder="search company/job" [(ngModel)]="searchText" (keyup.enter)="getItems(searchText)"></ion-searchbar>
       </ion-col>
-      <ion-col width-20 class="btn-go">
+      <ion-col col-2 class="btn-go">
         <button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button>
       </ion-col>
     </ion-row>
   </div>
-</ion-item>
-
-<ion-card class="sel-packages">
- <ion-item>
-    <ion-label>Functional Area</ion-label>
-    <ion-select [(ngModel)]="functionalArea" (ionChange)="onSelectChange($event)">
-    <ion-option value="">All
-     </ion-option>
-      <ion-option *ngFor="let functional of functionalAreaList" value="{{functional?.id}}">{{functional?.name}}</ion-option>      
-    </ion-select>
-  </ion-item>
- </ion-card>
- <ion-card class="sel-packages">
-  <ion-item>
-    <ion-label>Location</ion-label>
-    <ion-select [(ngModel)]="location" (ionChange)="onInit()"  multiple="true">
-      <ion-option *ngFor="let locations of locationList" value="{{locations?.id}}">{{locations?.location}}</ion-option>
-    </ion-select>
-  </ion-item>
- </ion-card>
-<!-- <ion-fab top right edge>
+  <ion-card class="select-packages">
+    <ion-item>
+      <ion-label>Functional Area</ion-label>
+      <ion-select [(ngModel)]="functionalArea" (ionChange)="onSelectChange($event)">
+        <ion-option value="">All
+        </ion-option>
+        <ion-option *ngFor="let functional of functionalAreaList" value="{{functional?.id}}">{{functional?.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+  <ion-card class="select-packages">
+    <ion-item>
+      <ion-label>Location</ion-label>
+      <ion-select [(ngModel)]="location" (ionChange)="onInit()" multiple="true">
+        <ion-option *ngFor="let locations of locationList" value="{{locations?.id}}">{{locations?.location}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+  <!-- <ion-fab top right edge>
     <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
   </ion-fab> -->
-<ion-card class="select-locas">
-<p>Current job openings</p>
-</ion-card>
-<ion-card *ngFor="let jobBoard of jobBoardInfo" class="job-detailsview">
-  <ion-row (click)="viewJob(jobBoard?.id,jobBoard?.is_applied)" test-wrap>
-  <ion-col width-90 text-wrap>
-    <h2 text-wrap text-capitalize>{{jobBoard?.title | words :3: '....'}}</h2>
+  <ion-card class="select-location">
+    <p>Current job openings</p>
+  </ion-card>
 
-    <P><i class="fa fa-university" aria-hidden="true" ></i><span>{{jobBoard?.company_name}}</span></P>
- 
-    <P><i class="fa fa-briefcase" aria-hidden="true"></i><span>{{jobBoard?.min_experience}} - {{jobBoard?.max_experience}} years</span></P>
-    <P><i class="fa fa-bookmark" aria-hidden="true"></i><span>{{jobBoard?.job_type}}
-    </span></P>
-    <P><i class="fa fa-inr" aria-hidden="true"></i><span>{{jobBoard?.salary}}
-    </span></P>
-	   <P><i class="fa fa-map-marker" aria-hidden="true"></i><span>{{jobBoard?.location}}
-    </span></P>
-    
-	</ion-col>
-     <ion-col width-10>
-     <i class="fa fa-arrow-right" aria-hidden="true"></i>
-     </ion-col>
-  </ion-row>
+  <ion-card *ngFor="let jobBoard of jobBoardInfo" class="joblistcard">
+    <ion-grid>
+      <ion-row (click)="viewJob(jobBoard?.id,jobBoard?.is_applied)" test-wrap>
+        <ion-col width-100 text-wrap>
+          <h2 text-wrap text-capitalize>{{jobBoard?.title | words :3: '....'}}</h2>
+          <h4>{{jobBoard?.company_name}}</h4>
+          <!-- <P>
+            <i class="fa fa-university" aria-hidden="true"></i>
+            <span></span>
+          </P> -->
+          <ion-grid class="jobStatus">
+            <ion-row>
+              <ion-col width-50>
+                <p><i class="fa fa-certificate" aria-hidden="true"></i>&nbsp;{{jobBoard?.min_experience}} - {{jobBoard?.max_experience}} years</p>
+              </ion-col>
+              <ion-col width-50>
+                <p><i class="fa fa-certificate" aria-hidden="true"></i>&nbsp;{{jobBoard?.location}}</p>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-100>
+                  <p><i class="fa fa-certificate" aria-hidden="true"></i>&nbsp;{{jobBoard?.job_type}}</p>
+                </ion-col>
+                <!-- <ion-col width-50>
+                  <p>{{jobBoard?.salary}}</p>
+                </ion-col> -->
+              </ion-row>
+          </ion-grid>
+    <!--      <P>
+            <i class="fa fa-briefcase" aria-hidden="true"></i>
+            <span>{{jobBoard?.min_experience}} - {{jobBoard?.max_experience}} years</span>
+          </P>
+          <P>
+            <i class="fa fa-bookmark" aria-hidden="true"></i>
+            <span>{{jobBoard?.job_type}}
+            </span>
+          </P>
+          <P>
+            <i class="fa fa-inr" aria-hidden="true"></i>
+            <span>{{jobBoard?.salary}}
+            </span>
+          </P>
+          <P>
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            <span>{{jobBoard?.location}}
+            </span>
+          </P> -->
 
-</ion-card>
-<ion-fab bottom right>
-    <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"></ion-icon></button>
+        </ion-col>        
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ion-fab bottom right *ngIf="scrollTop">
+    <button ion-fab mini (click)="scrollToTop()">
+      <ion-icon name="arrow-dropup"></ion-icon>
+    </button>
   </ion-fab>
-<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
-<ion-item *ngIf="emptyRecordSet">
-<p style=" color:red;">{{emptyRecordSet}}</p>
-</ion-item>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-item *ngIf="emptyRecordSet">
+    <p style=" color:red;">{{emptyRecordSet}}</p>
+  </ion-item>
 </ion-content>

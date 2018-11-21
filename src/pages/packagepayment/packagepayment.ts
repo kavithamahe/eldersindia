@@ -48,7 +48,8 @@ prev_service_amount_balance:any;
 service_costadd:any;
 additional_service_cost:any;
 reqstatus:any;
-
+paymentType:any;
+imageUrl:any;
   constructor(public navCtrl: NavController,public loadingCtrl: LoadingController,public viewCtrl: ViewController,public storage:Storage, public navParams: NavParams) {
   	 
     if(navParams.get("service_type") != undefined){
@@ -57,11 +58,9 @@ reqstatus:any;
   		this.service_costss = (this.service_cost * 100).toFixed(0);
   		localStorage.setItem('service_costss', this.service_costss);
   		this.service_id = navParams.get("service_id");
-      console.log(this.service_id);
       this.recurring_request_id = navParams.get("recurring_request_id");
       this.reqstatus = navParams.get("reqstatus");
       localStorage.setItem('recurring_request_id', this.recurring_request_id);
-      console.log(this.service_id);
   	}
   	if(navParams.get("sr_token") != undefined){
          this.status = navParams.get("status");
@@ -74,6 +73,8 @@ reqstatus:any;
         this.service_id = navParams.get("service_id");
         this.payment_status = navParams.get("payment_status");
       }
+      this.paymentType = navParams.get("paymentType");
+      localStorage.setItem('paymentType', this.paymentType);
       this.pending_service_amount=navParams.get("pending_service_amount");
       this.prev_service_amount_balance=navParams.get("prev_service_amount_balance");
       this.additional_service_cost=navParams.get("additional_service_cost");
@@ -105,6 +106,9 @@ reqstatus:any;
   	localStorage.setItem('package_amounts', this.package_amounts);
 }
   	this.storage.ready().then(() => {
+       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+       storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
+       localStorage.setItem('rootUrl', this.rootUrl);});
     storage.get('token').then((token) => { this.token=token;
    
     localStorage.setItem('key', this.token);
@@ -112,8 +116,6 @@ reqstatus:any;
     this.headers.append('Content-Type', 'application/json');
     this.headers.append('Authorization', 'Bearer ' + this.token);
     this.options = new RequestOptions({ headers: this.headers });
-       })    
-    storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
           });
      storage.get('id').then((id) => { this.user_id=id; })
      storage.get('user_type_id').then((user_type_id) => { this.user_type_id=user_type_id; })
@@ -130,7 +132,7 @@ reqstatus:any;
     console.log(this.service_type);
      var optionss = {
       description: "Payment made for "+this.sr_token+"",
-      image: 'http://qa.eldersindia.com/assets/img/Elderlogo.png',
+      image: this.imageUrl + "assets/img/Elderlogo.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costadd,
@@ -164,7 +166,7 @@ let loading = this.loadingCtrl.create({content: 'Please wait...!'});
  var successCallback = function(payment_id) {
      loading.present();
 
-  var url  = "http://qa.eldersindia.com/api/razorPaymentResponseAdditionalServiceCost";
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponseAdditionalServiceCost";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -172,8 +174,6 @@ xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
 xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("service_costadd")}));
 
-
-console.log(xmlhttp.responseText);
 xmlhttp.onload = function () {
   loading.dismiss();
   var users = JSON.parse(xmlhttp.responseText);
@@ -197,7 +197,7 @@ paypartial(){
   console.log(this.service_id);
 	 var recurringOption = {
       description: "Payment made for SR"+this.recurring_request_id+"",
-      image: 'http://qa.eldersindia.com/assets/img/Elderlogo.png',
+      image: this.imageUrl + "assets/img/Elderlogo.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costss,
@@ -228,7 +228,7 @@ let loading = this.loadingCtrl.create({content: 'Please wait...!'});
  var successCallback = function(payment_id) {
      loading.present();
 
-  var url  = "http://qa.eldersindia.com/api/razorPaymentResponseforPartialPayment";
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponseforPartialPayment";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -253,14 +253,14 @@ var cancelCallback = function(error) {
 
 RazorpayCheckout.on('payment.success', successCallback);
 RazorpayCheckout.on('payment.cancel', cancelCallback);
-    RazorpayCheckout.open(recurringOption, successCallback, cancelCallback);
+RazorpayCheckout.open(recurringOption, successCallback, cancelCallback);
 }
    pay() {
     console.log(this.elderId);
    	if(this.sr_token == undefined){
     var options = {
       description: 'Razorpay',
-      image: 'http://qa.eldersindia.com/assets/img/Elderlogo.png',
+      image: this.imageUrl + "assets/img/Elderlogo.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.package_amounts,
@@ -295,7 +295,7 @@ let loading = this.loadingCtrl.create({content: 'Please wait...!'});
  var successCallback = function(payment_id) {
     
 loading.present();
-  var url  = "http://qa.eldersindia.com/api/razorPaymentResponseforPackage";
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponseforPackage";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
@@ -307,12 +307,12 @@ xmlhttp.onload = function () {
   loading.dismiss();
   var users = JSON.parse(xmlhttp.responseText);
  var result=users.result;
-  nav.push(PackageRequestPagePage,{"status":"1","result":result});
+  nav.setRoot(PackageRequestPagePage,{"status":"1","result":result});
   } 
     }
 
 var cancelCallback = function(error) {
-  nav.push(PackageRequestPagePage);
+  nav.pop();
   // alert(error.description + ' (Error '+error.code+')')
 }
 
@@ -323,7 +323,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
 else{
 	  var optionss = {
       description: "Payment made for "+this.sr_token+"",
-      image: 'http://qa.eldersindia.com/assets/img/Elderlogo.png',
+      image: this.imageUrl + "assets/img/Elderlogo.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costs,
@@ -334,7 +334,7 @@ else{
         name: ''
       },
       "notes": {
-              "service_id":this.service_id,
+        "service_id":this.service_id,
         'email': this.email,
         'amount': this.service_costs,
         'payment_status': this.payment_status,
@@ -359,16 +359,14 @@ let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
      // ajaxCallCheck(payment_id);
 
-  var url  = "http://qa.eldersindia.com/api/razorPaymentResponsependingPayment";
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponsependingPayment";
    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
-xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("service_costs")}));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("service_costs"),"paymentType":localStorage.getItem("paymentType")}));
 
-
-console.log(xmlhttp.responseText);
 xmlhttp.onload = function () {
   loading.dismiss();
   var users = JSON.parse(xmlhttp.responseText);

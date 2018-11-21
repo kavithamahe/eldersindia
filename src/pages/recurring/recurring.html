@@ -5,149 +5,148 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-  <ion-title text-center>Recurring Requests</ion-title>
+    <ion-title text-center>Recurring Requests</ion-title>
     <ion-buttons right>
-    <button ion-button icon-only (click)="dashboardPage()">
+      <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
-      </button> 
+      </button>
     </ion-buttons>
-    
   </ion-navbar>
 </ion-header>
 
 
-<ion-content class="content-intop">
-<!--   <ion-fab top right edge>
+<ion-content class="content-intop PackageRequest">
+  <!--   <ion-fab top right edge>
     <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
   </ion-fab> -->
-   <div class="ion-searchbar">
+  <div class="ion-searchbar">
     <ion-row>
-      <ion-col width-80>
+      <ion-col col-10>
         <ion-searchbar [(ngModel)]="searchText" (keyup.enter)="inputSearch(searchText)"></ion-searchbar>
       </ion-col>
-      <ion-col width-20 class="btn-go">
+      <ion-col col-2 class="btn-go">
         <button (click)="inputSearch(searchText)" ion-button small class="go-btn">Go</button>
       </ion-col>
     </ion-row>
   </div>
- <ion-card class="sel-packages">
- <ion-item>
-    <ion-label>Sort By</ion-label>
-    <ion-select [(ngModel)]="sortby" (ionChange)="getrecurringRequest()">
-      <ion-option value="preferred_asc">Preferred Date-Asc</ion-option>   
-      <ion-option value="preferred_desc">Preferred Date-Des</ion-option>  
-      <ion-option value="enquiry_asc">Enquiry Date-Asc</ion-option>  
-      <ion-option value="enquiry_desc">Enquiry Date-Des</ion-option>      
-    </ion-select>
-  </ion-item>
- </ion-card>
-<ion-card  *ngFor="let recurring of recurringRequest" class="job-detailsview">
-<ion-grid class="package-needs">
-  <ion-row>
-  <ion-col col-12 text-wrap>
-    <!-- <h2 text-wrap text-capitalize>Heading</h2> -->
-	  </ion-col>
-  </ion-row>
-    <ion-row>
-  <ion-col col-12 text-wrap>
-
-    <b>Request Id </b><p>{{recurring.sr_token}} to {{recurring.sr_tokenend}}-{{recurring.req_count}}</p>
-	  </ion-col>
-  </ion-row>
-  
-    <ion-row>
-  <ion-col col-12 text-wrap>
-    <b>Elder</b><p> {{recurring.elder_name}}</p>
-		  </ion-col>
-  </ion-row>
-   <ion-row>
-     <ion-col col-12 text-wrap>
-
-   <p>{{recurring.email}}</p>
-     </ion-col>
-  </ion-row>
-   <ion-row>
-      <ion-col col-12 text-wrap>
-  
-   <p>{{recurring.eo_mobile}}</p>
-    </ion-col>
-  </ion-row>
-    
+  <ion-card class="sel-packages">
+    <ion-item>
+      <ion-label>Sort By</ion-label>
+      <ion-select [(ngModel)]="sortby" (ionChange)="getrecurringRequest()">
+        <ion-option value="preferred_asc">Preferred Date-Asc</ion-option>
+        <ion-option value="preferred_desc">Preferred Date-Des</ion-option>
+        <ion-option value="enquiry_asc">Enquiry Date-Asc</ion-option>
+        <ion-option value="enquiry_desc">Enquiry Date-Des</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+  <ion-card *ngFor="let recurring of recurringRequest" class="job-detailsview">
+    <ion-grid class="package-needs">      
       <ion-row>
-  <ion-col col-12 text-wrap>
-    <b>Service Provider</b><p>{{recurring.vendor_name}}</p>
-    <p (click)="makeCall(recurring?.vendor_contact_number)"> &nbsp;{{recurring.vendor_contact_number}}</p>
-	</ion-col>
-  </ion-row>
-    <ion-row>
-      <ion-col col-12 text-wrap>
-        <b>Service Type</b><p>{{recurring.service_type}}</p>
-      </ion-col>
-  </ion-row>
-   <ion-row>
-  <ion-col col-12 >  
-    <b>Request count</b><p>{{recurring.req_count}}</p>	
-	  </ion-col>
-  </ion-row>
-   <ion-row>
-  <ion-col col-12>  
-    <b>Total Service cost: </b><p><i class="fa fa-rupee">{{recurring.totalServicecost | number : '1.2-2'}}</i></p>  
-    </ion-col>
-  </ion-row>
-   <ion-row>
-  <ion-col col-12>  
-    <b>Discount Service cost: </b>
-    <p *ngIf="recurring.total_service_cost != null"><i class="fa fa-rupee">{{recurring.total_service_cost | number : '1.2-2'}}</i> </p>
-   <!--  <p *ngIf="recurring.payment_method=='partial_payment'"><i class="fa fa-rupee">{{recurring.discountcost}}</i> </p>
-    <p *ngIf="recurring.payment_method==''"><i class="fa fa-rupee">0</i></p>
-    <p *ngIf="recurring.payment_method=='full_payment'"><i class="fa fa-rupee">{{recurring.servicediscountcost_one_service}}</i> </p> -->
-    </ion-col>
-  </ion-row>
-   <ion-row>
-  <ion-col col-12  *ngIf="recurring.paid_amount != null" >  
-    <b>Paid amount</b>
-    <p><i class="fa fa-rupee">{{recurring.paid_amount | number : '1.2-2'}}</i></p>
-    <!-- <p *ngIf="recurring.payment_method=='partial_payment'"><i class="fa fa-rupee">{{recurring.servicediscountcost_one_service}}</i></p>  
-    <p *ngIf="recurring.payment_method==''"><i class="fa fa-rupee">0</i></p> 
-    <p *ngIf="recurring.payment_method=='full_payment'"><i class="fa fa-rupee">{{recurring.servicediscountcost_one_service}}</i></p> --> 
-    </ion-col>
-  </ion-row>
-  <ion-row>
-  <!-- <ion-col col-12>  
-    <b>Balance amount </b><p *ngIf="recurring.remainingamount != null"><i class="fa fa-rupee">{{recurring.remainingamount}}</i></p>  
-    </ion-col> -->
-      <ion-col col-12>
-      <b>Payment Status</b>
-      <p>
-    <button ion-button clear *ngIf="recurring.payUmny_payment_status=='captured'  && recurring.remaining_amount!=0 && recurring.package_id ==''" (click)="paynow(recurring.remainingamount,recurring.recurring_request_id,recurring.recurring_request_id)">Pay Now</button>
+        <ion-col class="column-border" col-12 text-wrap>
+          <b>Request Id </b><span>-</span>
+          <p>{{recurring.sr_token}} to {{recurring.sr_tokenend}}-{{recurring.req_count}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="column-border" col-12 text-wrap>
+          <b>Elder</b><span>-</span>
+          <p>{{recurring.elder_name}}</p>
+          <p>{{recurring.email}}</p>
+          <p>{{recurring.eo_mobile}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="column-border" text-wrap>
+          <b>Service Provider</b><span>-</span>
+          <p>{{recurring.vendor_name}}</p>
+          <p (click)="makeCall(recurring?.vendor_contact_number)">{{recurring.vendor_contact_number}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="column-border" text-wrap>
+          <b>Service Type</b><span>-</span>
+          <p>{{recurring.service_type}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="column-border" col-12>
+          <b>Request count</b><span>-</span>
+          <p>{{recurring.req_count}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="column-border" col-12>
+          <b>Total Service cost</b><span>-</span>
+          <p>
+            <i class="fa fa-rupee"></i>&nbsp;{{recurring.totalServicecost | number : '1.2-2'}}
+          </p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="column-border" col-12>
+          <b>Discount Service cost</b><span>-</span>
+          <p *ngIf="recurring.total_service_cost != null">
+            <i class="fa fa-rupee"></i>&nbsp;{{recurring.total_service_cost | number : '1.2-2'}}
+          </p>
+          <!--  <p *ngIf="recurring.payment_method=='partial_payment'"><i class="fa fa-rupee">{{recurring.discountcost}}</i> </p>
+          <p *ngIf="recurring.payment_method==''"><i class="fa fa-rupee">0</i></p>
+          <p *ngIf="recurring.payment_method=='full_payment'"><i class="fa fa-rupee">{{recurring.servicediscountcost_one_service}}</i> </p> -->
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="column-border" *ngIf="recurring.paid_amount != null">
+          <b>Paid amount</b><span>-</span>
+          <p>
+            <i class="fa fa-rupee"></i>&nbsp;{{recurring.paid_amount | number : '1.2-2'}}
+          </p>
+          <!-- <p *ngIf="recurring.payment_method=='partial_payment'"><i class="fa fa-rupee">{{recurring.servicediscountcost_one_service}}</i></p>  
+          <p *ngIf="recurring.payment_method==''"><i class="fa fa-rupee">0</i></p> 
+          <p *ngIf="recurring.payment_method=='full_payment'"><i class="fa fa-rupee">{{recurring.servicediscountcost_one_service}}</i></p> -->
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <!-- <ion-col col-12>  
+        <b>Balance amount </b><p *ngIf="recurring.remainingamount != null"><i class="fa fa-rupee">{{recurring.remainingamount}}</i></p>  
+        </ion-col> -->
+        <ion-col class="column-border" col-12>
+          <b>Payment Status</b><span>-</span>
+          <p>
+            <button ion-button clear *ngIf="recurring.payUmny_payment_status=='captured'  && recurring.remaining_amount!=0 && recurring.package_id ==''"
+              (click)="paynow(recurring.remainingamount,recurring.recurring_request_id,recurring.recurring_request_id)" class="pay-btn">Pay Now</button>
+            <button ion-button clear *ngIf="recurring.payUmny_payment_status!='captured' && recurring.package_id==''" (click)="paynow(recurring.remainingamount,recurring.recurring_request_id,recurring.recurring_request_id)" class="pay-btn">Pay Now</button>
+            <button ion-button clear *ngIf="(recurring.payUmny_payment_status=='captured' && recurring.payment_method=='full_payment' && recurring.remaining_amount==0) || recurring.package_id !=''" class="paid-btn">Paid
+            </button>
+          </p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <div style="height:5px"></div>
+          <b>Request Date</b><span>-</span>
+          <p>{{recurring.updated_at}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="view-serv" col-6 text-left>
+          <ion-badge (click)="viewrecurring(recurring)" class="services-view">
+            <i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
+            </ion-col>
+          <ion-col class="view-serv" col-6>
+          <ion-badge class="dele" *ngIf="recurring?.cancel_status != 0" (click)="deleteviewrecurring(recurring)" class="services-delete">
+            <i class="fa fa-trash" aria-hidden="true"></i> Delete</ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 
-    <button ion-button clear *ngIf="recurring.payUmny_payment_status!='captured' && recurring.package_id==''" (click)="paynow(recurring.remainingamount,recurring.recurring_request_id,recurring.recurring_request_id)">Pay Now</button> 
-
-    <button ion-button clear *ngIf="(recurring.payUmny_payment_status=='captured' && recurring.payment_method=='full_payment' && recurring.remaining_amount==0) || recurring.package_id !=''">Paid
-     </button>
-     </p>
-    </ion-col>
-  </ion-row>
-     <ion-row>
-  <ion-col col-12 text-wrap> 
-    <b>Request Date</b><p>{{recurring.updated_at}}</p>
-	  </ion-col>
-  </ion-row>
-   <ion-row>
-  <ion-col class="view-serv">
-<ion-badge (click)="viewrecurring(recurring)" class="services"><i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
-<!-- <ion-badge class="dele" *ngIf="recurring?.status == 0 || recurring?.status == 1 || recurring?.status == 4" (click)="deleteviewrecurring(recurring)" class="services-del"><i class="fa fa-trash" aria-hidden="true"></i> Delete</ion-badge> -->
-<ion-badge class="dele" *ngIf="recurring?.cancel_status != 0" (click)="deleteviewrecurring(recurring)" class="services-del"><i class="fa fa-trash" aria-hidden="true"></i> Delete</ion-badge>
-	</ion-col>
-   </ion-row>
-
-  </ion-grid>
-</ion-card>
-<ion-fab bottom right edge class="scroll" *ngIf="scrollTop">
-    <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup"></ion-icon>
+  <ion-fab bottom right edge class="scroll" *ngIf="scrollTop">
+    <button ion-fab mini (click)="scrollToTop()">
+      <ion-icon name="arrow-dropup"></ion-icon>
     </button>
   </ion-fab>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    <ion-infinite-scroll-content loadingSpinner="bubbles"
+        loadingText="Loading more data..."></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

@@ -58,6 +58,7 @@ searchsend:any="";
 searchadd:any="";
 error:any;
 check:any;
+scrollTop:boolean = false;
    constructor(private popoverCtrl: PopoverController,public platform: Platform,public navCtrl: NavController, public actionsheetCtrl: ActionSheetController,public navParams: NavParams,public storage:Storage,public connectionsService:ConnectionsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.getconnections="myConnections";
     this.connectionsaction ="all";
@@ -97,6 +98,7 @@ check:any;
         this.allConnectionsInfo=allConnections.result.info.list.data;  
       this.orgAllConnectionsInfo=allConnections.result.info.list.data;
       this.nextPageURL1=allConnections.result.info.list.next_page_url; 
+      console.log(this.nextPageURL1);
        //},5000); 
      loader.dismiss();       
     },
@@ -349,6 +351,7 @@ check:any;
   }
   receivedConnectionScroll()
   {
+    this.scrollTop = true;
      this.connectionsService.receivedConnectionScroll(this.nextPageURL2,this.searchrec).subscribe(
      (receivedConnectionScroll) => {
       this.receivedConnectionScrollLists=receivedConnectionScroll.result.info.list.data;  
@@ -402,6 +405,7 @@ check:any;
   }
   allConnectionScroll()
   {
+    this.scrollTop = true;
    
      this.connectionsService.allConnectionScroll(this.nextPageURL1,this.searchText).subscribe(
      (allConnectionScroll) => {
@@ -425,43 +429,7 @@ check:any;
       }
     );
   }
-   doInfinite3(infiniteScroll) {
-    setTimeout(() => {      
-      if(this.nextPageURL3!=null && this.nextPageURL3!='')
-      {
-       this.addConnectionScroll();
-      }
-      else{
-        infiniteScroll.enable(false);
-      }
-      infiniteScroll.complete();
-    }, 500);
-  }
-  addConnectionScroll()
-  {
-   
-     this.connectionsService.addConnectionScroll(this.nextPageURL3,this.searchadd).subscribe(
-     (addConnectionScroll) => {
-      this.allConnectionScrollLists=addConnectionScroll.result.info.data;  
  
-      for (let i = 0; i < Object.keys(this.allConnectionScrollLists).length; i++) {
-        this.addConnectionInfo.push(this.allConnectionScrollLists[i]);
-        }
-      
-       this.nextPageURL3=addConnectionScroll.result.info.next_page_url;   
-    },
-    (err) => { 
-        if(err.status===401)
-        {
-        this.showToaster(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-        }
-      }
-    );
-  }
    doInfinite4(infiniteScroll) {
     setTimeout(() => {      
       if(this.nextPageURL4!=null && this.nextPageURL4!='')
@@ -476,7 +444,7 @@ check:any;
   }
   sentRequestScroll()
   {
-   
+   this.scrollTop = true;
      this.connectionsService.sentRequestScroll(this.nextPageURL4,this.searchsend).subscribe(
      (sentRequestScroll) => {
       this.allConnectionScrollLists=sentRequestScroll.result.info.list.data;  

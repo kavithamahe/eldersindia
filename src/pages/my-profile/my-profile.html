@@ -1,10 +1,3 @@
-
-<!--
-  Generated template for the EditProfile page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
@@ -12,55 +5,54 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-  <ion-title text-center>Profile</ion-title>
+    <ion-title text-center>Profile</ion-title>
     <ion-buttons right>
-        <button ion-button icon-only (click)="dashboardPage()">
-            <ion-icon name="home"></ion-icon>
-        </button>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content  class="change-log">
-  <ion-fab>
-    <button ion-fab mini icon-only (click)="editProfile()" class="edit-profiles"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-  </ion-fab>
+<ion-content class="Myprofile"> 
   <div class="profile-edit">
-   <span class="profile-img"><img alt="logo" [src]="base64Image" *ngIf="base64Image"/></span>
-	 <p text-capitalize>{{profileData?.name}} {{profileData?.last_name}}</p>
-	</div>
-	<div class="edit-profile"></div>
-	<div class="edit-profile-view">
+    <span class="profile-img">
+      <img alt="logo" [src]="base64Image" *ngIf="base64Image" />
+    </span>
+    <p text-capitalize>{{profileData?.name}} {{profileData?.last_name}}</p>
+    <span *ngIf="user_type =='sponsor' " class="desigination">{{profileData?.designation}}</span>
+    <button  (click)="editProfile()" class="edit-profile-btn">
+      <i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;Edit Profile
+    </button>
+  </div>  
+  <div class="profile-view">
     <div class="listed-profiles" color="mistyrose">
-	         <p *ngIf="user_type =='elder' "><i class="fa fa-building-o"></i>&nbsp;{{profileData?.relation}}</p>
-           <!-- <p *ngIf="user_type =='elder' "><i class="fa fa-user"></i>&nbsp;{{profileData?.user_type}}</p> -->
-            <p *ngIf="user_type =='sponsor' "><i class="fa fa-building-o"></i>&nbsp;{{profileData?.company_name}}</p>
-            <p *ngIf="user_type =='sponsor' "><i class="fa fa-user-secret"></i>&nbsp;{{profileData?.designation}}</p>
-            <p *ngIf="user_type !='elder' "><i class="fa fa-suitcase"></i>&nbsp;{{profileData?.employee_id}}</p>
-            <p><i class="fa fa-phone"></i>&nbsp;{{profileData?.mobile}} 
-			<button ion-button clear (click)="showPrompt()" *ngIf="profileData?.mobile_verified == 0" class="verified-s"><i class="fa fa-check" aria-hidden="true"></i>
-verify</button>
-            <button ion-button clear *ngIf="profileData?.mobile_verified == 1" class="verified-d"><i class="fa fa-check" aria-hidden="true"></i>
-verified</button></p>			
-           <p *ngIf="user_type =='sponsor' "><i class="fa fa-envelope-o"></i>&nbsp;{{profileData?.personal_email}}</p>
-           <!-- <p><i class="fa fa-user"></i>&nbsp;{{profileData?.user_type}}</p> -->
-		   <p><i class="fa fa-map-marker"></i>&nbsp;{{profileData?.locationName}}</p>
-            <p><i class="fa fa-birthday-cake" aria-hidden="true"></i>&nbsp;{{user_dob}}
-            </p>
-           <p><i class="fa fa-envelope-o"></i>&nbsp;{{profileData?.email}}</p>
-            <p *ngIf="user_type !='sponsor' "><i class="fa fa-map-marker"></i>&nbsp;{{profileData?.address}}</p>
-			<!-- <p><i class="fa fa-calendar"></i>&nbsp;{{profileData?.updated_at}}</p> -->
-		
+      <p *ngIf="user_type =='elder' ">
+        <i class="fa fa-building-o"></i>&nbsp;{{profileData?.relation}}</p>   
+      <p *ngIf="user_type =='sponsor' ">
+        <i class="fa fa-building-o"></i>&nbsp;{{profileData?.company_name}}</p>    
+      <p *ngIf="user_type !='elder' ">
+        <i class="fa fa-suitcase"></i>&nbsp;{{profileData?.employee_id}}</p>
+      <p>
+        <i class="fa fa-phone"></i>&nbsp;{{profileData?.mobile}}
+        <button ion-button clear (click)="showPrompt()" *ngIf="profileData?.mobile_verified == 0" class="verified-s">
+          <ion-icon ios="ios-alert" md="md-alert"></ion-icon>
+          verify</button>
+        <button ion-button clear *ngIf="profileData?.mobile_verified == 1" class="verified-d">
+          <ion-icon ios="ios-done-all" md="md-done-all"></ion-icon>
+          verified</button>
+      </p>
+      <p *ngIf="user_type =='sponsor' ">
+        <i class="fa fa-envelope-o"></i>&nbsp;{{profileData?.personal_email}}</p>      
+      <p>
+        <i class="fa fa-map-marker"></i>&nbsp;{{profileData?.locationName}}</p>
+      <p>
+        <i class="fa fa-birthday-cake" aria-hidden="true"></i>&nbsp;{{user_dob}}
+      </p>
+      <p>
+        <i class="fa fa-envelope-o"></i>&nbsp;{{profileData?.email}}</p>
+      <p *ngIf="user_type !='sponsor' ">
+        <i class="fa fa-map-marker"></i>&nbsp;{{profileData?.address}}</p>
+    </div>
   </div>
-</div>
 </ion-content>
-<style>
-.text-input-md{ margin:0px;}
-.item-block{ border-bottom:none !important;}
-.item-inner {
-border-bottom-color: transparent !important;
-box-shadow: none !important;}
-.item-ios.item-block .item-inner{ border-bottom:none !important;}
-.item-ios.item-label-stacked .text-input, .item-ios.item-label-floating .text-input{ font-size:14px !important;margin-left:8px !important;}
-
-</style>

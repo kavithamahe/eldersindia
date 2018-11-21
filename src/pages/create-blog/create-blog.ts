@@ -3,12 +3,12 @@ import { NavController, NavParams, LoadingController,ToastController } from 'ion
 import { Storage } from '@ionic/storage';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Camera } from 'ionic-native';
+import { TagInputModule } from 'ngx-chips';
 
 
 import { BlogListService } from '../../providers/blog-list-service';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { BlogsPage } from '../../pages/blogs/blogs';
-import { ManageBlogsPage } from '../../pages/manage-blogs/manage-blogs';
 
 /*
   Generated class for the CreateBlog page.
@@ -242,7 +242,7 @@ bannerImages:any;
       this.description = "";
       this.featuredImage = "";
       this.bannerImage = "";
-      this.navCtrl.setRoot(ManageBlogsPage);
+      this.navCtrl.setRoot(BlogsPage,{"create_blog":"1"});
       loader.dismiss();
     },
     (err) => { 

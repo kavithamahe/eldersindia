@@ -1,6 +1,58 @@
 page-share-blog {
-.sel-label{border:1px solid #a8aaad;
-    border-radius:20px; margin-right:5px !important;}
-    .sel-labelcol{border:1px solid #a8aaad;
-        border-radius:20px; margin-right:5px !important;}
+    .register-log{
+        form{
+            .register-form{
+                ion-grid{
+                    ion-list{
+                        ion-label{
+                            color: #333;
+                            font-size: 17px;
+                            font-weight: 600;
+                            padding-top: 10px;
+                            margin: 15px 0px 2px 0;
+                        }
+                        ion-item{
+                            .item-inner{
+                                border-bottom: none;
+                                padding: 0;
+                                .input-wrapper{
+                                    ion-label{
+                                        color: #999 !important;
+                                        font-weight: 400 !important;
+                                        margin: 8px 0px;
+                                        font-size: 18px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    ion-item{
+                        .item-inner{                            
+                            padding: 0;
+                            .input-wrapper{
+                                ion-label{
+                                    color: #999 !important;
+                                    font-weight: 400 !important;
+                                    margin: 8px 0px;
+                                    font-size: 18px;
+                                }
+                            }
+                        }
+                    }
+                    ion-label{
+                        color: #333;
+                        font-size: 17px;
+                        font-weight: 600;
+                        padding-top: 10px;
+                        margin: 15px 0px 2px 0;
+                    }
+                }
+            }
+        }
+    }
+}
+.ios{
+    page-share-blog {
+         top: 8px !important;
+    }   
 }

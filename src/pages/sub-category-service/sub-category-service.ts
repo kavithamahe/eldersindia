@@ -19,11 +19,14 @@ export class SubCategoryServicePage {
   serviceOffered: any;
 	subcategory:any;
 	locationId:any;
+  recreation_config:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     console.log("this is sub category service page");
   	this.subcategory = navParams.get("sub_service");
+    console.log(this.subcategory);
     this.locationId = navParams.get("location_id");
     this.serviceOffered = navParams.get("serviceOfferedtype");
+    this.recreation_config = navParams.get("recreation_config");
 
   }
 
@@ -31,7 +34,7 @@ export class SubCategoryServicePage {
     let service = serviceData;
     let location_id = this.locationId;
     let serviceOffereds = this.serviceOffered;
-    this.navCtrl.push(SubcategoryListPage,{location_id,service,serviceOffereds});
+    this.navCtrl.push(SubcategoryListPage,{location_id,service,serviceOffereds,"recreation_config":this.recreation_config});
   }
 
    public dashboardPage()

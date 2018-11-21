@@ -96,7 +96,7 @@ export class CommunitylistPage {
       subscribe(mycommunity => {
       this.communitylists = mycommunity.result.info.data;
       if(this.communitylists.length == 0){
-        this.communityServices.showToast("No Record Found")
+        this.communityServices.showToast("No record found")
       }
       this.categoryLists = mycommunity.result.get.communityCategory;
       this.nextPageURL=mycommunity.result.info.next_page_url;

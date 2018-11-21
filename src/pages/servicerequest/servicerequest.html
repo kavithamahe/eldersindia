@@ -17,11 +17,11 @@
 <ion-content class="content-intop">  
   <div class="ion-searchbar">
     <ion-row>
-      <ion-col width-80>
+      <ion-col col-10>
         <ion-searchbar [(ngModel)]="searchEvent" (keyup.enter)="getItems(searchEvent)">
         </ion-searchbar>
       </ion-col>
-      <ion-col width-20 class="btn-go">
+      <ion-col col-2 class="btn-go">
         <button (click)="getItems(searchEvent)" ion-button small class="go-btn">Go</button>
       </ion-col>
     </ion-row>
@@ -32,6 +32,7 @@
       <ion-select [(ngModel)]="status" (ionChange)="onInitstatus()">
         <!--   <ion-option>All
      </ion-option>  -->
+     <ion-option value="">Select...</ion-option>
         <ion-option *ngFor="let status of servicestatus" value="{{status?.id}}">{{status?.label}}</ion-option>
       </ion-select>
     </ion-item>
@@ -40,6 +41,7 @@
     <ion-item>
       <ion-label>Sort By</ion-label>
       <ion-select [(ngModel)]="sortby" (ionChange)="onInit()">
+      <ion-option value="">Select...</ion-option>
         <ion-option value="preferred_asc">Preferred Date-Asc</ion-option>
         <ion-option value="preferred_desc">Preferred Date-Des</ion-option>
         <ion-option value="enquiry_asc">Enquiry Date-Asc</ion-option>
@@ -51,10 +53,10 @@
   <ion-card *ngFor="let service of serviceRequestInfo; let i=index;" class="service-cards">
     <ion-grid>
       <ion-row>
-        <ion-col width-20>
+        <ion-col col-2>
           <img src="{{imageUrl}}{{service?.logo}}" width="100" height="50" />
         </ion-col>
-        <ion-col width-80>
+        <ion-col col-10>
           <span (click)="viewRequest(service?.id,service)">
             <h2 item-text-wrap class="service-req">{{service?.vendor_name}}</h2>
           </span>
@@ -76,7 +78,7 @@
                 {{service?.sr_token}}</b>
             </p>
           </div>
-          <div *ngIf="service?.preferred_date != '0000-00-00' && service.sr_token[0] !='T'" (click)="viewRequest(service?.id,service)">
+          <div *ngIf="service?.preferred_date != '00-00-0000' && service.sr_token[0] !='T'" (click)="viewRequest(service?.id,service)">
             <p class="service-conts clearfix" *ngIf="service?.vendor_status == 0">
               <span class="token-primaryss ">Preferred date & time:</span>
               <b>{{service?.preferred_date}} {{service?.preferred_time}}</b>
@@ -97,7 +99,8 @@
             </p>
           </div>
           
-          <div *ngIf="(service?.scheduled_date != null)" (click)="viewRequest(service?.id,service)">
+          <div *ngIf="(service?.scheduled_date != null && 
+          service?.scheduled_date != 'Invalid date')" (click)="viewRequest(service?.id,service)">
             <p class="service-conts clearfix">
               <span class="token-primaryss" *ngIf="service?.vendor_status == 4">Scheduled date:</span>
               <span class="token-primaryss" *ngIf="service?.vendor_status == 5">Delivered date:</span>
@@ -116,53 +119,65 @@
             <p class="service-conts clearfix">
               <span class="token-primaryss">Additional Service Cost:</span>
               <b class="cost-redPrice">
-                <i class="fa fa-rupee"></i>{{service.additional_service_cost | number : '1.2-2'}}</b>
+                <i class="fa fa-rupee"></i>{{service.additional_service_cost}}</b>
             </p>
           </div>
           <div *ngIf="service.helpline_mobile!='null'">
             <p class="service-conts clearfix" (click)="makeCall(service?.helpline_mobile)">
               <span class="token-primaryss">Helpline Number:</span>
-              <b>{{service?.helpline_mobile}}</b>
+              <b><i class="fa fa-phone" aria-hidden="true"></i>{{service?.helpline_mobile}}</b>
             </p>
           </div>
         </ion-col>
       </ion-row>
       <ion-row class="tp-bor tp-5">
-        <ion-col width-50 style="padding-left:0px;">
+        <ion-col col-6 style="padding-left:0px;">
           <div *ngFor="let venStatus of vendorStatus">
             <p *ngIf="venStatus.id==service?.vendor_status">
               <ion-badge class="{{venStatus.label}}"> {{venStatus.label}}</ion-badge>
             </p>
           </div>
           <div style="height:5px"></div>
-          <div *ngIf="service?.sub_category_name != 'Transportation Driver Service' && service?.sub_category_name != 'Transportation Cab'">
+          <!-- <div *ngIf="service?.sub_category_name != 'Transportation Driver Service' && service?.sub_category_name != 'Transportation Cab'"> -->
             <p *ngIf="service.service_type =='Recurring'" (click)="viewRecurring(service?.sr_token)">
               <ion-badge>View Recurring Requests</ion-badge>
             </p>
-            <p *ngIf="service?.Paymentstatus=='captured' && service?.payment_method=='' && service?.additional_service_cost!='0'&& service?.additional_service_cost_status=='0' && service?.status=='5' && service?.package_id==''">
-              <ion-badge (click)="payOptionforAdditionalServiceCost(service.sr_token,service.id,service?.additional_service_cost,service?.payment_status,service?.service_type)">Pay Now {{service?.additional_service_cost}}
+
+            <!-- srList.is_recurring_service != 1 && srList.Paymentstatus!='captured' && srList.status !='3' && srList.payment_method=='' && srList.service_type=='One time' && (srList.package_id=='' || srList.package_id==0) && (parseFloat(srList.pending_service_amount) + parseFloat(srList.additional_service_cost) - parseFloat(srList.prev_service_amount_balance)) > 0  && (srList.service_cost!='0' || srList.service_cost!='0.00') -->
+
+            <p *ngIf="service?.is_recurring_service != 1 && service?.Paymentstatus!='captured' && service?.status !='3' && service?.payment_method==''  && service?.service_type=='One time' && (service?.package_id=='' || service?.package_id==0) && service?.pendingserviceamount + service?.additionalservicecost - service?.prevserviceamountbalance > 0 && service?.service_cost!='0'
+             && service?.service_cost!='0.00'">
+              <ion-badge  (click)="payOptionforpendingPayment(service.sr_token,service.pending_service_amount,service?.id,service?.additional_service_cost,service?.payment_status,service?.prev_service_amount_balance,'payment')">Pay Now <i class="fa fa-rupee"></i> {{service?.pendingserviceamount + service?.additionalservicecost -service?.prevserviceamountbalance}}
               </ion-badge>
             </p>
-            <p *ngIf="service?.Paymentstatus=='captured' && service?.payment_method=='' && service?.additional_service_cost!='0'&& service?.additional_service_cost_status=='0' && service?.sub_category_name =='Wearables' && service?.package_id==''">
-              <ion-badge (click)="payOptionforAdditionalServiceCost(service.sr_token,service.id,service?.additional_service_cost,service?.payment_status,service?.service_type)">Pay Now {{service?.additional_service_cost}}
+
+            <p *ngIf="service?.Paymentstatus=='captured'  && service?.payment_method=='' && service?.additional_service_cost!='0' && service?.additional_service_cost != '0.00' && service?.additional_service_cost_status=='0' && (service?.status=='5' || service?.sub_category_name =='Wearables' ) && service?.package_id==''">
+              <ion-badge (click)="payOptionforAdditionalServiceCost(service.sr_token,service.id,service?.additional_service_cost,service?.payment_status,service?.service_type)">Pay Now <i class="fa fa-rupee"></i> {{service?.additional_service_cost}}
               </ion-badge>
             </p>
-            <p *ngIf="service?.Paymentstatus!='captured' && service?.status !='3' && service?.payment_method==''  && service?.service_type=='One time' && service?.package_id==''">
-              <ion-badge (click)="payOptionforpendingPayment(service.sr_token,service.pending_service_amount,service?.id,service?.additional_service_cost,service?.payment_status,service?.prev_service_amount_balance)">Pay Now</ion-badge>
+
+            <p *ngIf="service?.Paymentstatus!='captured' && service?.service_cost == 0 && service?.payment_status == 'payment_processing' && service?.payment_method=='' && service?.additional_service_cost!='0' && service?.additional_service_cost != '0.00' && service?.additional_service_cost_status=='0' && (service?.status=='3' || service?.status=='5' || service?.sub_category_name =='Wearables' ) && service?.package_id==''">
+              <ion-badge (click)="payOptionforAdditionalServiceCost(service.sr_token,service.id,service?.additional_service_cost,service?.payment_status,service?.service_type)" >Pay Now <i class="fa fa-rupee">{{service?.additional_service_cost }}</i></ion-badge>
             </p>
+
+               <p *ngIf=" service?.is_recurring_service != 1 && service?.Paymentstatus!='captured' && service?.service_cost != 0 && service?.service_cost != 0.00 && service?.payment_status == 'payment_processing' && service?.payment_method==''  && service?.additional_service_cost_status=='0' && (service?.status=='3' || service?.sub_category_name =='Wearables' ) && service?.package_id==''">
+
+              <ion-badge *ngIf="(service?.pending_service_amount) + (service?.additional_service_cost) - (service?.prev_service_amount_balance) != 0" (click)="payOptionforpendingPayment(service.sr_token,service.pending_service_amount,service?.id,service?.additional_service_cost,service?.payment_status,service?.prev_service_amount_balance,'cancel')">Pay Now <i class="fa fa-rupee"></i> {{service?.pendingserviceamount + service?.additionalservicecost -service?.prevserviceamountbalance}}</ion-badge>
+              </p>
 
             <div *ngIf="service.service_type !='Recurring'">
-              <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost=='0' && service.additional_service_cost==0 || service.additional_service_cost_status == 'success' && service.service_type=='One time'">
+
+              <p *ngIf="((service?.Paymentstatus=='captured') && service?.payment_method==''  && (service?.additional_service_cost==0 || service?.additional_service_cost=='0.00' || service?.additional_service_cost_status == 'success') && service?.service_type=='One time') || ((service?.service_cost == 0 || service?.service_cost == 0.00) && service?.service_type=='One time')">
                 <ion-badge>Paid</ion-badge>
               </p>
 
-              <p *ngIf="service.Paymentstatus=='captured' && service.payment_method=='' && service.additional_service_cost!='0' && service.additional_service_cost==0 && service.service_type=='One time'">
+             <!--  <p *ngIf="service?.Paymentstatus=='captured' && service?.payment_method=='' && service?.additional_service_cost!='0' && service?.additional_service_cost==0 && service?.service_type=='One time'">
                 <ion-badge>Paid</ion-badge>
-              </p>
+              </p> -->
             </div>
-          </div>
+          <!-- </div> -->
         </ion-col>
-        <ion-col width-50>
+        <ion-col col-6>
           <div>
             <a *ngIf="service?.vendor_status == 4 || service?.vendor_status == 5 || service?.vendor_status == 2" (click)="makeCall(service?.servicer_contact_no)">
               <ion-chip class="call-btn">
@@ -171,7 +186,7 @@
               </ion-chip>
             </a>
             <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3) && (service?.vendor_status!=5))" (click)="showConfirm(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid,service?.id,service?.service_cost,service?.recurring_request_id,service?.req_count,service?.package_id,service?.Paymentstatus,service?.paid_amount,
-              service?.sr_token)">
+              service?.sr_token,service?.coupon_id,service?.pending_service_amount)">
               Cancel
             </a>
           </div>
@@ -228,7 +243,7 @@
       </ion-card>
     </ion-grid>
     <ion-row *ngIf="(service?.vendor_status==2 &&(!service?.vendor_remarks))">
-      <ion-col width-100>
+      <ion-col col-12>
         <button ion-button class="remarks-btns" (click)="enableRemark(i)">
           <i class="fa fa-comments"></i>
         </button>
@@ -270,7 +285,11 @@
       <ion-icon name="arrow-dropup"></ion-icon>
     </button>
   </ion-fab>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    <ion-infinite-scroll-content loadingSpinner="bubbles"
+        loadingText="Loading more data..."></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

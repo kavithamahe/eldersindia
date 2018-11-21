@@ -32,11 +32,14 @@ imageUrl:any;
 selectserviceLocation:any;
 servicelocationid:any;
 term:any = "";
+recreation_config:any;
+category_id:any;
 		// subcategories: Array<{title: string, lists: any, color: string}>;
 
   constructor(public platform: Platform,public storage:Storage, public loadingCtrl: LoadingController, public navCtrl: NavController, public navPara: NavParams,public providerService: ServiceProvider) {
     // this.loadLocations();
      this.subCategoryTitle = navPara.get("subcategory").service;
+     this.category_id = navPara.get("subcategory").id;
     this.locations= navPara.get("locations");
     
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
@@ -44,11 +47,11 @@ term:any = "";
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       this.storage.get('service_location').then((my_location) => {
-        // console.log("this.serviceLocation1",my_location);
+        console.log("this.serviceLocation1",my_location);
           for(let i=0; i<this.locations.length;i++){
             if(this.locations[i].location == my_location || this.locations[i].id == my_location){
               this.serviceLocation = my_location;
-             // console.log("this.serviceLocation2",this.serviceLocation);
+             console.log("this.serviceLocation2",this.serviceLocation);
             }
             // else{
             //   this.serviceLocation = "";
@@ -57,7 +60,7 @@ term:any = "";
           } 
                    
           this.loadSubCategory(this.serviceLocation);      
-          this.loadPackages(this.serviceLocation);    
+          this.loadPackages(this.serviceLocation,this.category_id);    
       });
     });
   });
@@ -66,7 +69,7 @@ term:any = "";
   }	
 
     loadPackagesByLocationID(locationId){
-    this.providerService.webServiceCall(`getPackage`,{"locationId":locationId})
+    this.providerService.webServiceCall(`getPackage`,{"locationId":locationId,"categoryId":this.category_id})
       .subscribe(data =>{
        this.packages =  data.result;
        this.packageCount = this.packages.length;
@@ -76,8 +79,8 @@ term:any = "";
       
     })
   }
-   loadPackages(location){
-    this.providerService.webServiceCall(`getPackage`,{"locationId":location})
+   loadPackages(location,category_id){
+    this.providerService.webServiceCall(`getPackage`,{"locationId":location,"categoryId":this.category_id})
       .subscribe(data =>{
        this.packages =  data.result;
        this.packageCount = this.packages.length;
@@ -89,28 +92,14 @@ term:any = "";
         
     }) 
   }
-   viewPackage(vendor_id){
-    this.navCtrl.push(PackageDetailPagePage,{"vendor_id":vendor_id,'location_id':this.serviceLocation});
+   viewPackage(vendor_id,pack_id){
+    this.navCtrl.push(PackageDetailPagePage,{"vendor_id":vendor_id,'location_id':this.serviceLocation,"pack_id":pack_id});
   }
      public getItems(term){
 
     this.term = term;
     this.loadsSubCategory(this.term);
   }
-  //   getItems(ev) {
-  //   // Reset items back to all of the items
-  //   // this.loadSubCategory("");
-
-  //   // set val to the value of the ev target
-  //   var val = ev.target.value;
-
-  //   // if the value is an empty string don't filter the items
-  //   if (val && val.trim() != '') {
-  //     this.subcategories = this.subcategories.filter((item) => {
-  //       return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-  //     })
-  //   }
-  // }
   loadsSubCategory(term){
   let loading = this.loadingCtrl.create({content: 'Please wait...!'});
   loading.present();
@@ -122,6 +111,8 @@ term:any = "";
   // this.providerService.loadVendorServiceSubCategory(serviceListId)
     .subscribe(data =>{
       this.subcategories = data.result;
+      this.recreation_config = data.result.recreation_config;
+      console.log(this.recreation_config);
       loading.dismiss();
     },
     err =>{
@@ -148,6 +139,8 @@ loadSubCategory(location){
 	// this.providerService.loadVendorServiceSubCategory(serviceListId)
     .subscribe(data =>{
       this.subcategories = data.result;
+      this.recreation_config = data.result.recreation_config;
+      console.log(this.recreation_config);
       loading.dismiss();
     },
     err =>{
@@ -181,7 +174,7 @@ let location_id = this.serviceLocation;
     if(this.serviceLocation==""){
       this.providerService.showToast("Please select the location!");
     }else{
-    this.navCtrl.push(SubCategoryServicePage,{location_id,sub_service,serviceOfferedtype});  
+    this.navCtrl.push(SubCategoryServicePage,{location_id,sub_service,serviceOfferedtype,"recreation_config":this.recreation_config});  
     }
   }
 

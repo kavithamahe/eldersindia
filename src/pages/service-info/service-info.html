@@ -21,14 +21,14 @@
 </ion-header>
 
 <ion-content class="marg-info service-info-details">
-  <div *ngIf="vendorList?.banners && serviceoffered != 'Recreation' && serviceoffered != 'Safety and security'">
+  <div *ngIf="vendorList?.banners && template_id != '2' && template_id != '3' && template_id != '4' && template_id != '5' && template_id != '6' && template_id != '7'">
     <ion-slides *ngIf="vendorList?.banners && vendorList?.banners.length" class="slide_height" initialSlide="0" loop="true" pager="true" autoplay="3000">
       <ion-slide *ngFor="let slide of vendorList.banners" style="height:200px;">
         <img [src]="url+slide.banner" class="slide-image" width="100" height="150" />
       </ion-slide>
     </ion-slides>
   </div>
-  <div *ngIf="vendorList?.banners && vendorList?.banners.length && serviceoffered == 'Recreation' || serviceoffered == 'Safety and security'">
+  <div *ngIf="vendorList?.banners && vendorList?.banners.length && template_id == '2' || template_id == '4'">
     <ion-slides *ngIf="vendorList?.banners && vendorList?.banners.length" class="slide_height" initialSlide="0" loop="true" pager="true"
       autoplay="3000">
       <ion-slide *ngFor="let slide of vendorList.banners" style="height:200px;">
@@ -47,29 +47,28 @@
         </ion-thumbnail>
       </ion-col>
     </ion-row>
- <p *ngIf="serviceoffered != 'Recreation' && serviceoffered != 'Safety and security'" [innerHTML]="vendorList?.vendorDetails?.description"></p>
-    <p *ngIf="serviceoffered == 'Recreation' || serviceoffered == 'Safety and security'" [innerHTML]="vendorList?.vendorDetails?.description"></p>
-    <p *ngIf="serviceoffered == 'Recreation' || serviceoffered == 'Safety and security'" [innerHTML]="vendorList?.vendorDetails?.itenary"></p>
-    <p *ngIf="serviceoffered == 'Recreation' || serviceoffered == 'Safety and security'" [innerHTML]="vendorList?.vendorDetails?.other_vendor_detail"></p>
-    <p *ngIf="serviceoffered == 'Recreation' || serviceoffered == 'Safety and security'">{{vendorList?.vendorDetails?.extralabel1}}</p>
-    <p *ngIf="serviceoffered == 'Recreation' || serviceoffered == 'Safety and security'" [innerHTML]="vendorList?.vendorDetails?.extratext1"></p>
-    <p *ngIf="serviceoffered == 'Recreation' || serviceoffered == 'Safety and security'">{{vendorList?.vendorDetails?.extralabel2}}</p>
-    <p *ngIf="serviceoffered == 'Recreation' || serviceoffered == 'Safety and security'" [innerHTML]="vendorList?.vendorDetails?.extratext2"></p>
+    <p *ngIf="template_id != '2' && template_id != '3' || template_id != '4' || template_id != '5' || template_id != '6' || template_id != '7'" [innerHTML]="vendorList?.vendorDetails?.description"></p>
+    <p *ngIf="template_id != '2' && template_id != '3' || template_id != '4' || template_id != '5' || template_id != '6' || template_id != '7'" [innerHTML]="vendorList?.vendorDetails?.itenary"></p>
+    <p *ngIf="template_id != '2' && template_id != '3' || template_id != '4' || template_id != '5' || template_id != '6' || template_id != '7'" [innerHTML]="vendorList?.vendorDetails?.other_vendor_detail"></p>
+    <p *ngIf="template_id != '2' && template_id != '3' || template_id != '4' || template_id != '5' || template_id != '6' || template_id != '7'">{{vendorList?.vendorDetails?.extralabel1}}</p>
+    <p *ngIf="template_id != '2' && template_id != '3' || template_id != '4' || template_id != '5' || template_id != '6' || template_id != '7'" [innerHTML]="vendorList?.vendorDetails?.extratext1"></p>
+    <p *ngIf="template_id != '2' && template_id != '3' || template_id != '4' || template_id != '5' || template_id != '6' || template_id != '7'">{{vendorList?.vendorDetails?.extralabel2}}</p>
+    <p *ngIf="template_id != '2' && template_id != '3' || template_id != '4' || template_id != '5' || template_id != '6' || template_id != '7'" [innerHTML]="vendorList?.vendorDetails?.extratext2"></p>
 
   </ion-card>
 
 
-  <ion-item class="service-info-costDetails" text-wrap *ngIf="serviceoffered == 'Recreation' || serviceoffered == 'Safety and security'">
+  <ion-item class="service-info-costDetails" text-wrap *ngIf="template_id != '2' && template_id != '3' || template_id != '4' || template_id != '5' || template_id != '6' || template_id != '7'">
     <div class="scheduler-price">
       <ion-row>
-        <p *ngIf="category != 'Safety and security'" class="service-conts">
+        <p *ngIf="template_id == '2'" class="service-conts">
           <span class="token-primaryss">Schedule : </span>
           <span class="text-bolder cost-value">
             {{start_date}}&nbsp;to&nbsp;{{end_date}}
           </span>
         </p>
       </ion-row>
-    <ion-row class="textlg" *ngIf="schedule_cost != 0 && subcategory != 'Transportation Driver Service'">
+    <ion-row class="textlg" *ngIf="schedule_cost != 0 && template_id != '6' && package != '1'">
       <p class="service-conts">
         <span class="token-primaryss">Cost :</span>
         <b class="cost-value price-red">
@@ -95,56 +94,55 @@
         </span>
       </p>
     </ion-row>
-    <ion-row *ngIf="booking_status == '0' && category == 'Safety and security' && subcategory == 'Home modification' || subcategory == 'Home Modification' || subcategory == 'Home automation' || subcategory == 'Home Automation' || subcategory == 'Home Automation'">
+
+    <ion-row *ngIf="template_id == '7'">
       <p class="service-conts">
         <span class="token-primaryss">Working Days : </span>
         <span class="token-primaryss cost-value text-bolder">{{businessFromDayName}} - {{businessToDayName}}</span>
       </p>
     </ion-row>
-    <ion-row *ngIf="booking_status == '0' && category == 'Safety and security' && businessHoursOption == '1' && subcategory == 'Home modification' || subcategory == 'Home Modification' || subcategory == 'Home automation' || subcategory == 'Home Automation' || subcategory == 'Home Automation'">
+    <ion-row *ngIf="template_id == '7' && businessHoursOption == '1'">
       <p class="service-conts">
         <span class="token-primaryss">Working Time :</span>
         <span class="token-primaryss cost-value text-bolder"> 24 hours</span>
       </p>
     </ion-row>
-    <ion-row *ngIf="booking_status == '0' && category == 'Safety and security' && businessHoursOption != '1' && subcategory == 'Home modification' || subcategory == 'Home Modification' || subcategory == 'Home automation' || subcategory == 'Home Automation' || subcategory == 'Home Automation'">
+    <ion-row *ngIf="template_id == '7' && businessHoursOption != '1'">
       <p class="service-conts">
         <span class="token-primaryss">Working Time :</span>
         <span class="token-primaryss cost-value text-bolder"> {{businessFromTime}} - {{businessToTime}}</span>
       </p>
     </ion-row>
-    <ion-row *ngIf="booking_status == '0' && category == 'Safety and security' && subcategory == 'Home modification' || subcategory == 'Home Modification' || subcategory == 'Home automation' || subcategory == 'Home Automation' || subcategory == 'Home Automation'">
+    <ion-row *ngIf="template_id == '7' && businessLeadTime != 00 && businessLeadTime != ''">
       <p class="service-conts">
-        <span class="token-primaryss">
-          <b>{{businessLeadTime}}</b> hour(s) to serve you</span>
+        <span class="token-primaryss">Lead Time :
+          <b>{{businessLeadTime}}</b> hour(s)</span>
       </p>
     </ion-row>
     </div>
   </ion-item>
-  <div class="view-storedet" *ngIf="serviceoffered == 'Recreation' || serviceoffered == 'Safety and security'">
+  <div class="view-storedet" *ngIf="template_id == '2' || template_id == '3' || template_id == '4' || template_id == '5' || template_id == '6' || template_id == '7'">
     <ion-item class="service-info-costDetails" text-wrap>
-      <button class="instant-bt" *ngIf="package_active_status == '1' && category == 'Recreation'" (click)="bookNow()">Book Now</button>
-      <button class="instant-bt" *ngIf="package_active_status == '0' && category == 'Recreation'">Booking Closed
+      <button class="instant-bt" *ngIf="package_active_status == '1' && template_id == '2'" (click)="bookNow()">Book Now</button>
+      <button class="instant-bt" *ngIf="package_active_status == '0' && template_id == '2'">Booking Closed
       </button>
-      <button class="instant-bt" *ngIf="booking_status == '2' && category == 'Safety and security'" (click)="preBook()">Pre Book</button>
-      <button class="instant-bt" *ngIf="booking_status == '1' && category == 'Safety and security'" (click)="preBook()">Book Now</button>
-      <button class="instant-bt" *ngIf="booking_status == '0' && category == 'Safety and security' && subcategory != 'Home modification' && subcategory
-                     != 'Home Modification' && subcategory
-                     != 'Home automation' && subcategory
-                     != 'Home Automation' && subcategory
-                      != 'Home Automation' && subcategory != 'Transportation Driver Service' && subcategory != 'Transportation Cab'"
+      <button class="instant-bt" *ngIf="booking_status == '2' && template_id == '3'" (click)="preBook()">Pre Book</button>
+      <button class="instant-bt" *ngIf="booking_status == '1' && template_id == '3'" (click)="preBook()">Book Now</button>
+      <button class="btn-warnings" *ngIf="is_recreation_config == 1 && booking_status == 0 && service_list.template_id != 2 && template_id != 7 && template_id == 3 && template_id != '8'"
+           (click)="preBook()">Book Now</button>
+      <button class="instant-bt" *ngIf="booking_status == '0' && template_id == '4'"
         (click)="emergencybook()">Book Now</button>
-      <button class="instant-bt" *ngIf="booking_status == '0' && category == 'Safety and security' && subcategory== 'Transportation Driver Service'"
+      <button class="instant-bt" *ngIf="booking_status == '0' && template_id== '6'"
         (click)="transportationdriver()">Book Now</button>
-      <button class="instant-bt" *ngIf="booking_status == '0' && category == 'Safety and security' && subcategory == 'Transportation Cab'"
+      <button class="instant-bt" *ngIf="booking_status == '0' && template_id == '5'"
         (click)="transportationcab()">Book Now</button>
-      <button class="instant-bt" *ngIf="booking_status == '0' && category == 'Safety and security' && subcategory == 'Home modification' || subcategory == 'Home Modification' || subcategory == 'Home automation' || subcategory == 'Home Automation' || subcategory == 'Home Automation'"
+      <button class="instant-bt" *ngIf="booking_status == '0' && template_id == '7'"
         (click)="homemodify()">Schedule Assessment</button>
       <button class="btn-warnings" (click)="contactNow()">Contact Now</button>
     </ion-item>
   </div>
   <br>
-  <div class="view-storedet" *ngIf="serviceoffered != 'Recreation' && serviceoffered != 'Safety and security'">
+  <div class="view-storedet" *ngIf="template_id != '2' && template_id != '3' && template_id != '4' && template_id != '5' && template_id != '6' && template_id != '7' && template_id != '8'">
   <ion-row>
       <ion-col class="brder-cor">
    <button ion-button full class="btn-warnings" (click)="contactNow()">Contact Now</button>

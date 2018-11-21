@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
@@ -6,74 +5,169 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-	  <ion-title text-center>Blogs</ion-title>
+    <ion-title text-center>Blogs</ion-title>
     <ion-buttons right>
-    <button ion-button icon-only (click)="dashboardPage()">
+      <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
-      </button>
-    </ion-buttons>
-     <ion-buttons right>
-      <button ion-button icon-only (click)="searchCall(searchButton)">
-          <i class="fa fa-search" aria-hidden="true"></i>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content class="content-intop">
-    <ion-card class="sel-packages" *ngIf(searchButton)>
+<ion-content class="content-intop blogListContent">
+  <ion-card class="conn-seg">
+    <ion-segment [(ngModel)]="viewblog" class="segment-top">
+      <ion-segment-button (click)="blog()" value="view_blog">
+        View Blogs
+      </ion-segment-button>
+      <ion-segment-button (click)="manageblogs()" value="manage_blog">
+        Manage Blogs
+      </ion-segment-button>
+    </ion-segment>
+  </ion-card>
+
+  <div [ngSwitch]="viewblog">
+    <ion-list *ngSwitchCase="'view_blog'">
+      <ion-card class="select-packages">
         <ion-item>
-            <ion-label>select category</ion-label>
-              <ion-select [(ngModel)]="searchCategory1" (ionChange)="onSelectChange($event)">
-                <ion-option  *ngFor="let category of categoryLists"
-                 value={{category.id}}>{{category.name}}
-                </ion-option>
-              </ion-select>
-          </ion-item>
-    </ion-card>
-    <ion-row *ngIf(searchButton)>
-      <ion-col width-80><ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
-      </ion-col>
-      <ion-col width-20><button (click)="getItems(searchText)" ion-button small
-        class="go-btn">Go</button> </ion-col>
-    </ion-row>
-    <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id,blogs.allow_comment)" class="community-img">
-      <ion-row>
-        <ion-col class="blogs-tittle">
-          <ion-item text-wrap>
-            <h2 class="pro-info" text-capitalize>{{blogs.title}}</h2>
-            <p class="timedate" text-capitalize><i class="fa fa-user" aria-hidden="true"></i> {{blogs.author_name }} | <i class="fa fa-calendar" aria-hidden="true">
-            </i> {{blogs.created_at}}
-            </p>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    <div>
-      <ion-card-content>
-        {{imageUrl.blogs?.featured_image}}
-      </ion-card-content>
-      <img src="{{imageUrl+blogs?.featured_image}}" [hidden]="!blogs?.featured_image" />
-      <span [hidden]="!blogs.category_name"> 
-        <label class="labels-bdss"> {{blogs.category_name}}</label>
-      </span>
-      <span *ngIf="blogs.allow_featured == 1">
-        <label class="labels-bdss-featured_image">Featured</label>
-      </span>
-     </div>
+          <ion-label>select category</ion-label>
+          <ion-select [(ngModel)]="searchCategory1" (ionChange)="onSelectChange($event)">
+            <ion-option *ngFor="let category of categoryLists" value={{category.id}}>{{category.name}}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-card>
 
- </ion-card>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+      <div class="ion-searchbar">
+        <ion-row>
+          <ion-col class="width-80">
+            <ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
+          </ion-col>
+          <ion-col class="btn-go width-20">
+            <button (click)="getItems(searchText)" ion-button small class="go-btn">Go</button>
+          </ion-col>
+        </ion-row>
+      </div>
 
-     <!-- <p class="error-clr" *ngIf="bloglists?.length==0">{{emptyRecord}}</p> -->
-     <ion-fab bottom right>
-    <button ion-fab class="top-bttn1"><i class="fa fa-arrow-up"></i></button>
-    <ion-fab-list side="top">
-      <button ion-fab class="top-bttn" (click)="createBlog()"><i class="fa fa-plus" aria-hidden="true"></i></button>
-      <button ion-fab class="top-bttn" (click)="manageBlog()"><i class="fa fa-address-card-o" aria-hidden="true"></i></button>
-    </ion-fab-list>
+      <ion-card *ngFor="let blogs of bloglists" (click)="viewBlog(blogs.id,blogs.allow_comment,blogs.created_at)" class="blogListCard">
+        <div class="imageBlog">
+          <img src="{{imageUrl+blogs?.featured_image}}" [hidden]="!blogs?.featured_image" />
+          <ion-card-content>
+            {{imageUrl.blogs?.featured_image}}
+          </ion-card-content>
+          <span [hidden]="!blogs.category_name">
+            <label class="labels-bdss"> {{blogs.category_name}}</label>
+          </span>
+          <span *ngIf="blogs.allow_featured == 1">
+            <label class="labels-bdss-featured_image">
+              <ion-icon ios="ios-bookmark" md="md-bookmark"></ion-icon>&nbsp;Featured</label>
+          </span>
+        </div>
+        <ion-row>
+          <ion-col class="blogs-tittle">
+            <ion-item text-wrap>
+              <h2 class="pro-info" text-wrap text-capitalize>{{blogs.title}}</h2>
+              <p class="timedate" text-capitalize>
+                by
+                <b>{{blogs.author_name }} </b> -
+
+                <span> {{blogs.created_at}}</span>
+              </p>
+              <p [innerHTML]="blogs.details?.description | words : 40 : '...'"></p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+
+
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'manage_blog'">
+      <ion-card class="select-packages">
+        <ion-item>
+          <ion-label>select category</ion-label>
+          <ion-select [(ngModel)]="searchCategory" (ionChange)='manageblogs()'>
+            <ion-option *ngFor="let category of categoryLists" value={{category.id}}>{{category.name}}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-card>
+      <ion-card class="select-packages">
+        <ion-item>
+          <ion-label>select status</ion-label>
+          <ion-select [(ngModel)]="searchstatus" (ionChange)='manageblogs()'>
+            <ion-option *ngFor="let status of blogStatus" value={{status.id}}>{{status.label}}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+
+      </ion-card>
+      <div class="ion-searchbar">
+        <ion-row>
+          <ion-col col-10>
+            <ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
+          </ion-col>
+          <ion-col col-2 class="btn-go">
+            <button (click)="getItemss(searchText)" ion-button small class="go-btn">Go</button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <ion-card *ngFor="let manageBlog of manageblogsLists; let i=index;" class="job-detailsview">
+        <ion-row class="brd-btm">
+          <ion-col col-9>
+            <h1 item-text-wrap class="service-req" text-capitalize>{{manageBlog?.title}}</h1>
+            <h2 item-text-wrap><ion-badge>{{manageBlog?.category_name}}</ion-badge> </h2>
+            <!--   <p *ngIf="(manageBlog?.created_at!='0000-00-00 00:00:00')" class="token-date"><i class="fa fa-calendar"></i> {{manageBlog?.created_at | date :'MMM dd y h:mm a'}}</p> -->
+            <p *ngIf="(manageBlog?.created_at!='0000-00-00 00:00:00')" class="token-date">
+              <i class="fa fa-calendar"></i> {{manageBlog?.created_at}}</p>
+              <div class="blogManageStatus" *ngFor="let status of blogStatus">            
+                  <p item-text-wrap *ngIf="manageBlog?.status==status?.id">
+                    <!-- <ion-badge >{{status?.label}}</ion-badge> -->
+                    <ion-badge class="warning" *ngIf="status?.id == 0">Pending</ion-badge>
+                    <ion-badge class="approved" *ngIf="status?.id == 1">Approved</ion-badge>
+                    <ion-badge class="rejected" *ngIf="status?.id == 2">Rejected</ion-badge>
+                    <ion-badge class="deleted" *ngIf="status?.id == 3">Deleted</ion-badge>
+                    <ion-badge class="archieved" *ngIf="status?.id == 4">Archieved</ion-badge>
+                  </p>
+                </div>                
+          </ion-col>
+          <ion-col col-3 *ngIf="manageBlog?.featured_image != ''">
+            <ion-thumbnail item-right>
+              <img [src]="imageUrl+manageBlog?.featured_image">
+            </ion-thumbnail>
+          </ion-col>
+        </ion-row>       
+        <!-- <ion-item text-wrap> -->
+        <p *ngIf="manageBlog?.description != ''" class="service-cont" innerHTML="{{manageBlog?.description | words:40}}"></p>
+        <!-- </ion-item> -->
+        <ion-row class="edit-blogs">
+          <ion-col>
+            <button (click)="editBlog(manageBlog?.id,'edit')" class="edits">
+              <i class="fa fa-pencil-square-o"></i>&nbsp; Edit
+            </button>
+            <button (click)="deleteBlog(manageBlog?.id)" class="delets">
+              <i class="fa fa-trash-o"></i>&nbsp;Delete
+            </button>
+          </ion-col>
+
+        </ion-row>
+
+      </ion-card>
+      <p *ngIf="!manageblogsLists" class="error-clr">{{emptyRecord}}</p>
+      <ion-infinite-scroll (ionInfinite)="doInfinites($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+  </div>
+
+  <!-- <p class="error-clr" *ngIf="bloglists?.length==0">{{emptyRecord}}</p> -->
+  <ion-fab bottom right>
+    <button ion-fab class="top-bttn" (click)="createBlog()">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
   </ion-fab>
 </ion-content>
-
-

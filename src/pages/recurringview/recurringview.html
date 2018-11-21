@@ -1,10 +1,3 @@
-<!--
-  Generated template for the RecurringviewPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
@@ -12,58 +5,67 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-	 <ion-title text-center text-capitalize> Recurring Services</ion-title>    
+    <ion-title text-center text-capitalize> Recurring Services</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-   
   </ion-navbar>
 </ion-header>
 
-<ion-content class="content-intop">
-<ion-card  *ngFor="let recurring of recurringRequestinfo" class="job-detailsview">
-<ion-grid class="package-needs">
-  <ion-row>
-	  </ion-row>
-	    <ion-row>
-  <ion-col col-12 text-wrap>
-    <b># Token</b><p> {{recurring.sr_token}}</p>
-	</ion-col>
-	  </ion-row>
-	  	    <ion-row>
-  <ion-col col-12 text-wrap>
-    <b>Service provider</b><p> {{recurring.vendor_name}}</p>
-		</ion-col>
-	  </ion-row>
-	  	  	    <ion-row>
-  <ion-col col-12 text-wrap>
-    <b>Preferred date & time </b><p>{{recurring.created_at}} {{recurring.preferred_time}}</p>
-		</ion-col>
-	  </ion-row>
-	 <ion-row *ngIf="recurring.scheduled_at != null">
-  <ion-col col-12 text-wrap>
-    <b>Scheduled date</b><p>{{recurring.scheduled_at}}</p>
-	</ion-col>
-	  </ion-row>
-	   	    <ion-row>
-  <ion-col col-12 text-wrap>
-  <b>Status</b>
-    <p *ngIf="recurring?.status == 0" class="pend"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Pending</p>
-    <p *ngIf="recurring?.status == 4" class="sche"><i class="fa fa-calendar" aria-hidden="true"></i> Scheduled</p>
-    <p *ngIf="recurring?.status == 2" class="devi"><i class="fa fa-check-circle" aria-hidden="true"></i> Completed</p>
-    <p *ngIf="recurring?.status == 5" class="devi"><i class="fa fa-check-circle" aria-hidden="true"></i> Delivered</p>
-    <p *ngIf="recurring?.status == 1" class="cont">Contacted</p>
-    <p *ngIf="recurring?.status == 3" class="canc"><i class="fa fa-times-circle" aria-hidden="true"></i>  Cancelled</p>
-		</ion-col>
-	  </ion-row>
-  <ion-col col-12 class="view-serv">
-	<ion-badge (click)="viewrecurring(recurring.sr_token)" class="services-view"><i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
-
-  </ion-col>
-
- </ion-grid>
-</ion-card>
+<ion-content class="content-intop PackageRequest">
+  <ion-card *ngFor="let recurring of recurringRequestinfo" class="job-detailsview">
+    <ion-grid class="package-needs">
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b>
+            <ion-icon ios="ios-pricetags" md="md-pricetags"></ion-icon>Token ID</b>
+          <p>{{recurring.sr_token}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b>
+            <ion-icon ios="ios-basket" md="md-basket"></ion-icon>Service provider</b>
+          <p>{{recurring.vendor_name}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap>
+          <b>
+            <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>Preferred date & time </b>
+          <p>{{recurring.created_at}} {{recurring.preferred_time}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="recurring.scheduled_at != null">
+        <ion-col col-12 text-wrap>
+          <b>
+            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>Scheduled date</b>
+          <p>{{recurring.scheduled_at}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-wrap class="statusBar">
+          <b class="statusTitle">
+            <ion-icon ios="ios-analytics" md="md-analytics"></ion-icon>Status</b>
+          <span class="statusColor">
+            <ion-badge *ngIf="recurring?.status == 0" class="pending">Pending</ion-badge>
+            <ion-badge *ngIf="recurring?.status == 1" class="contacted">Contacted</ion-badge>
+            <ion-badge *ngIf="recurring?.status == 2" class="completed">Completed</ion-badge>
+            <ion-badge *ngIf="recurring?.status == 3" class="reject">Cancelled</ion-badge>
+            <ion-badge *ngIf="recurring?.status == 4" class="scheduled">Scheduled</ion-badge>
+            <ion-badge *ngIf="recurring?.status == 5" class="deleivered">Delivered</ion-badge>
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="view-serv">
+          <ion-badge (click)="viewrecurring(recurring.sr_token)" class="services-view">
+            <i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 
 </ion-content>

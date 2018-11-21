@@ -2,7 +2,7 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
-      <button ion-button icon-only menuToggle>
+      <button ion-button icon-only menuToggle> 
       <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
@@ -14,7 +14,7 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content class="content-intop">
+<ion-content class="content-intop has-header">
   <ion-card class="pack-listed">
     <button *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full (click)="subCategory(service)" class="myblock service-bg{{i}}">
     <i class="{{service.icon}}" aria-hidden="true"></i> <i *ngIf="!service.icon" class="fa fa-bolt" aria-hidden="true"></i>

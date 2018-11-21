@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-// import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { NavController, NavParams,ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 
-declare var startApp;
  
 
 /*
@@ -26,12 +24,12 @@ url:any;
 Cctv_camera:any;
 usernames:any;
 passwords:any;
-  constructor(public storage:Storage,public navCtrl: NavController, public navParams: NavParams) {
+urls:any;
+  constructor(public storage:Storage,public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController) {
    this.storage.ready().then(() => {
     storage.get('usernames').then((usernames) => { this.usernames=usernames; })
     storage.get('passwords').then((passwords) => { this.passwords=passwords;  })
-    storage.get('Cctv_camera').then((Cctv_camera) => { this.Cctv_camera=Cctv_camera; 
-   console.log("fdgdfg" +this.Cctv_camera); })
+    storage.get('urls').then((urls) => { this.urls=urls; })
   });
 
   }
@@ -43,7 +41,7 @@ passwords:any;
     this.navCtrl.setRoot(DashboardPage);
   }
   submit(){
-   
+   console.log(this.username);
       var usernames = this.username;
     var passwords = this.password;
     
@@ -51,8 +49,23 @@ passwords:any;
      this.storage.ready().then(() => {
        this.storage.set('usernames',usernames);
        this.storage.set('passwords',passwords);
-      this.storage.set('Cctv_camera',"http://"+usernames+":"+passwords+"@"+remoteurl+"" );
+       this.storage.set('urls',remoteurl);
+       this.storage.set('Cctv_camera',"http://"+usernames+":"+passwords+"@"+remoteurl+"" );
     });
-     this.navCtrl.setRoot(DashboardPage);
+     if(this.username != undefined && this.password != undefined && this.url != undefined){
+      this.navCtrl.setRoot(DashboardPage);
+     }
+     else{
+      this.showToaster("Please Enter All The Details");
+     }
    }
+    public showToaster(message)
+  {
+   let toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000,
+        position: 'top'
+        });
+   toast.present();
+  }
 }

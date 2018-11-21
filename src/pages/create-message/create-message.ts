@@ -11,7 +11,6 @@ import { MessagesPage } from '../../pages/messages/messages';
 import { MessagesService } from '../../providers/messages-service';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 
 /*
   Generated class for the CreateMessage page.
@@ -53,7 +52,8 @@ msgType:any='create';
 customTo:any=false;
 sender_id:any;
 filename:any;
- constructor(public http: Http,private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public formBuilder: FormBuilder,private completerService: CompleterService,public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public messagesService:MessagesService) {
+searchFlag : Boolean = true;
+ constructor(public http: Http,private filePath: FilePath,private fileChooser: FileChooser,public formBuilder: FormBuilder,private completerService: CompleterService,public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public messagesService:MessagesService) {
  
   this.storage.ready().then(() => {
      storage.get('user_type').then((user_type) => { this.user_type=user_type;});
@@ -79,7 +79,7 @@ filename:any;
   if(this.msgType=='reply'){
   this.messageForm = formBuilder.group({
        message: ['', Validators.compose([Validators.required])],
-       toAddress: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
+       toAddress: ['', Validators.compose([Validators.required])],
         // toAddress: ['', Validators.compose([Validators.required])],
         subject: ['', Validators.compose([Validators.required])],
        
@@ -87,14 +87,23 @@ filename:any;
   this.customTo=true;
     }else{  
    this.messageForm = formBuilder.group({
-       toAddress: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
-        //toAddress: ['', Validators.compose([Validators.required])],
+       // toAddress: ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i),Validators.required])],
+        toAddress: ['', Validators.compose([Validators.required])],
         subject: ['', Validators.compose([Validators.required])],
         message: ['', Validators.compose([Validators.required])]
          });
  }
   }
-  
+    setFilteredItems() {
+    this.searchFlag = false;
+      this.getFriendsList();
+    }
+     selectedItem(item) {
+    this.searchFlag = true;
+
+    this.toAddress = item.friend_name;
+    this.customErr=false;
+  }
   public getFriendsList()
   { 
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -102,9 +111,11 @@ filename:any;
     this.messagesService.getFriendsList().subscribe(
      (getFriendsList) => {
        this.getFriendsListobj=getFriendsList.result;
+       console.log(this.getFriendsListobj);
       for(let i=0;i<getFriendsList.result.length;i++)
       {
       this.friendsList[i]=getFriendsList.result[i].friend_name; 
+      console.log(this.friendsList[i]);
       }
       loader.dismiss();   
     },
@@ -131,15 +142,18 @@ filename:any;
   }
   public sendMessage()
   { 
+    console.log(this.messageForm.value.toAddress);
     if(!this.messageForm.valid){
+       console.log("this.toId"); 
       this.submitAttempt = true;
     }else{
      let subject= this.messageForm.value.subject;
      let message= this.messageForm.value.message;
-    
+    console.log("this.toId"); 
 
      for(let i=0;i<this.getFriendsListobj.length;i++)
       {
+        console.log("this.toId"); 
       if(this.toAddress==this.getFriendsListobj[i].friend_name)
       {
       this.toId=this.getFriendsListobj[i].id;
@@ -149,11 +163,12 @@ filename:any;
       }
       if(this.toId=='' || this.toId===null || this.toId==undefined)
       {
+
           this.customErr=true;
       }
       else
        {
-    this.messageObj= {"message":{"attachments":[{file_name:this.file_name,file_path:this.file_path}],"to":{"title":this.toAddress,"description":this.toEmail,"image":"","originalObject":{"id":this.toId,"avatar":"","email":this.toEmail,"user_type":this.user_type,"friend_name":""}},"subject":subject,"message":message}};
+    this.messageObj= {"message":{"attachments":[{file_name:this.file_name,file_path:this.file_path}],"to":{"title":this.toAddress,"description":this.toEmail,"image":"","originalObject":{"id":this.toId,"avatar":"","email":this.toEmail,"user_type":this.user_type,"friend_name":this.toAddress}},"subject":subject,"message":message}};
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     this.messagesService.sendMessage(this.messageObj).subscribe(

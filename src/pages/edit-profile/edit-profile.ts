@@ -113,6 +113,7 @@ today
     }).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,'+imageData;
       this.avatar1 = this.base64Image;
+      this.avatar = this.base64Image;
      }, (err) => {
       console.log(err);
     });

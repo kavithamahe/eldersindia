@@ -1,6 +1,9 @@
 import { Component  } from '@angular/core';
 import { NavController,ViewController, NavParams, ModalController,AlertController,LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Device } from "@ionic-native/device";
+
 import {
   FormBuilder,
   Validators,
@@ -16,6 +19,8 @@ import { ServiceProvider } from '../../providers/service-provider';
 import { BlogListService } from '../../providers/blog-list-service';
 import { PaymentPage } from '../payment/payment';
 
+declare var RazorpayCheckout: any;
+
 /*
   Generated class for the ServiceModal page.
 
@@ -27,6 +32,9 @@ import { PaymentPage } from '../payment/payment';
   templateUrl: 'service-modal.html'
 })
 export class ServiceModalPage {
+   headers;
+token:string;
+options:any;
   emergency: any = [];
   noofpeople: number;
   lastname: any;
@@ -102,20 +110,57 @@ sponsor_last:any;
 time:any;
 altercontact:any;
 recreation:any;
-mobile_imei:any;
-// emergency_list=[];
-  constructor(public storage:Storage,public alertCtrl: AlertController,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
+// mobile_imei:any;
+template_id:any;
+  totalpayableamountservice:any;
+  totalpayableamountbalance:any;
+  totalpayableamountcancel:any;
+  totalpayableamounts:any;
+  get_custome_deliever_amount:any;
+  get_custome_amount:any;
+  get_custome_service_cancel_amount:any;
+  getCustomerBalanceAmount:any;
+  totalpayableamount:any;
+  get_Servicedependentlist:any;
+  servicecost:any;
+  package_availability:any;
+  id:any;
+  rootUrl:any;
+  udf3:any;
+  udf2:any;
+  service_costss:any;
+  coupan_code:any;
+  coupon_id:any;
+  discounted_cost:any;
+  final_service_cost:any;
+  coupandiscount:any;
+  gender:any;
+  constructor(public storage:Storage,public alertCtrl: AlertController,private device: Device,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder,public blogListService:BlogListService) {
     this.date = new Date().toISOString();
-     
+     console.log("Device UUID is: " + this.device.uuid); 
     this.vendorList = navParams.get("vendorList");
-    console.log(this.vendorList);
+    this.template_id = navParams.get("template_id");
+    console.log(this.template_id);
+    this.storage.ready().then(() => {
+      storage.get('token').then((token) => { this.token=token;
+      localStorage.setItem('key', this.token);
+      this.headers = new Headers();
+      this.headers.append('Content-Type', 'application/json');
+      this.headers.append('Authorization', 'Bearer ' + this.token);
+      this.options = new RequestOptions({ headers: this.headers });
+         })    
+      storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
+        localStorage.setItem('rootUrl', this.rootUrl);
+            });
+       storage.get('id').then((id) => { this.id=id; })
+     });
     storage.get('name').then((name) => { this.name=name; })
     storage.get('lastname').then((lastname) => { this.lastname=lastname; })
     storage.get('elder_age').then((elder_age) => { this.elderage=elder_age; })
     storage.get('phone').then((phone) => { this.phone=phone; })
     storage.get('email').then((email) => { this.email=email; })
-    storage.get('elder_mobile_imei').then((elder_mobile_imei) => { this.mobile_imei=elder_mobile_imei; })
+    // storage.get('elder_mobile_imei').then((elder_mobile_imei) => { this.mobile_imei=elder_mobile_imei; })
     storage.get('sponsor_name').then((sponsor_name) => { this.sponsor_name=sponsor_name;
     console.log(this.sponsor_name); })
     storage.get('sponsor_last').then((sponsor_last) => { this.sponsor_last=sponsor_last; })
@@ -187,7 +232,6 @@ mobile_imei:any;
       this.availability = navParams.get("availability");
       this.balanceRecreationService = navParams.get("balanceRecreationService");
       this.title = this.vendorList.vendorDetails.service;
-      console.log("this.title" + this.title);
       this.package_active_status = this.vendorList.vendorDetails.package_active_status;
       this.pre_book_percentage = this.vendorList.requestServices.pre_book_percentage;
       this.vendor_id=navParams.get("vendor_id");
@@ -204,15 +248,6 @@ mobile_imei:any;
         })
        
       }
-      //  if(navParams.get("safecategory") == "2"){
-      //   this.showScheduleDetails = false;
-      //    storage.get('user_type').then((user_type) => { this.user_type=user_type; 
-      //  if(this.user_type == 'sponsor'){
-      //      this.emergencyhelp = true;
-      //   }
-      //   })
-       
-      // }
        
     }
     else if(navParams.get("service") == "recreation_service"){
@@ -227,9 +262,227 @@ mobile_imei:any;
   		this.title = this.vendorList.vendorDetails.name+" - Service Offered";
   	}
     
-  	
+  	  this.getCustomerserviceamounts();
+      this.getCustomerDeliverStatusAmounts();
+      this.getServicecancelamounts();
+      this.getCustomerBalanceAmounts();
+      this.getServicedependentlists();
   }
- 
+     getCustomerserviceamounts(){
+        this._provider.getCustomerserviceamount()
+      .subscribe(data =>{ 
+          this.get_custome_amount = parseFloat(data.result);
+          // this.totalpayableamountservice = parseInt(this.initialservicecost) + parseInt(this.get_custome_amount);
+    })
+    }
+     getCustomerDeliverStatusAmounts(){
+        this._provider.getCustomerDeliverStatusAmount()
+      .subscribe(data =>{ 
+        this.get_custome_deliever_amount = parseFloat(data.result);
+        // this.totalpayableamount = parseInt(this.initialservicecost) + parseInt(this.get_custome_deliever_amount); 
+        // console.log(this.totalpayableamount);
+    })
+    }
+     getServicecancelamounts(){
+        this._provider.getServicecancelamount()
+      .subscribe(data =>{ 
+        this.get_custome_service_cancel_amount = parseFloat(data.result);
+        // this.totalpayableamountcancel = parseInt(this.initialservicecost) + parseInt(this.get_custome_service_cancel_amount);
+    })
+    }
+     getCustomerBalanceAmounts(){
+        this._provider.getCustomerBalanceAmount()
+      .subscribe(data =>{ 
+        this.getCustomerBalanceAmount = parseFloat(data.result);
+        // this.totalpayableamountbalance = parseInt(this.initialservicecost) - parseInt(this.getCustomerBalanceAmount);
+     })
+    }
+    getServicedependentlists(){
+      this._provider.getServicedependentlist(this.vendor_id)
+      .subscribe(data =>{ 
+        this.get_Servicedependentlist = data.result;
+    })
+    }
+     applyCoupan(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
+    if(this.user_type == 'sponsor')
+  {
+    this.elder_id = this.elder_id;
+  }
+  else{
+    this.elder_id = this.user_id;
+  }
+   
+   if(this.getCustomerBalanceAmount!=0 && this.get_custome_service_cancel_amount ==0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost - this.getCustomerBalanceAmount);
+        }
+   
+    else if(this.get_custome_deliever_amount!=0 && this.get_custome_service_cancel_amount ==0 && this.getCustomerBalanceAmount ==0){
+      this.servicecost = (this.total_cost + this.get_custome_deliever_amount);
+      }
+  
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost + this.get_custome_service_cancel_amount);
+      }
+  
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = (this.total_cost + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+       }
+   
+  else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost + this.getCustomerBalanceAmount + this.get_custome_service_cancel_amount);
+        }
+  
+    else if(this.get_custome_service_cancel_amount==0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = ((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_deliever_amount);
+        }
+    
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = ((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+       }
+    else{
+      this.servicecost = this.schedule_cost;
+         }
+   let payment_data=  {"data":{"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
+    "start_date":start_date,"subcategory":subcategory,"service_id":service_id,
+    "location_id":this.location_id,"vendor_id":this.vendor_id,"discount":"","pay_method":"",
+    "coupon_code_discount_cost":0,"final_service_cost_after_coupon_code_discount":0,
+    "service_name":service,"paymentflag":1,"service_cost":this.servicecost,
+    "service_cost_travel":this.servicecost,"base_cost":this.service_cost,"from_date":"","to_date":"",
+    "time_slot":"","from_time":"","to_time":"","durations":"","problem":"",
+    "datetime":"","mobile":"","preferred_time":"","package_id":"","quantity":"","prebook_percentage":this.pre_book_percentage,"prebook_status":this.vendorList.requestServices.booking_status,
+    "getCustomerBalanceAmount":0,"get_custome_amount_actual":0,"get_custome_amount":0,
+    "total_cost":this.servicecost,"get_custome_deliever_amount":0,"total_service_cost":this.servicecost,
+    "get_custome_service_cancel_amount":0,"dependentid":this.elder_id,"mobile_imei":"",
+    "gender":this.gender,"coupen_code":this.coupan_code,"type":"service","coupon_id":"",
+    "driver_time_slot":"","transportation_from":"","transportation_to":"",
+    "automation_time":"","automation_date":"","transportReqType":"","weelchairType":""}}
+
+      let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this._provider.webServiceCall(`checkCoupenCodeValidity`,payment_data)
+  .subscribe(
+      data =>{
+        this.coupon_id = data.result.coupon_id;
+        localStorage.setItem('coupon_id', this.coupon_id);
+        this.discounted_cost = data.result.discounted_cost;
+        localStorage.setItem('coupon_offer', this.discounted_cost);
+        this.final_service_cost = data.result.final_service_cost;
+        this.coupandiscount = "1";
+        loading.dismiss();
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this.coupandiscount = "0";
+        this._provider.showToast(JSON.parse(err._body).error);
+      }
+      else if(err.status === 401){
+        this.coupandiscount = "0";
+        this._provider.showToast(JSON.parse(err._body).error);
+      }
+      else
+      {
+        this.coupandiscount = "0";
+        this._provider.showToast("Try again later");
+      }
+            })
+  }
+
+ applyCoupans(prebook_cost,category_id,service_id,sub_category_id,category,service,subcategory,start_date){
+  
+    if(this.user_type == 'sponsor')
+  {
+    this.elder_id = this.elder_id;
+  }
+  else{
+    this.elder_id = this.user_id;
+  }
+    if(this.booking_status != '1' && this.vendorList.requestServices.booking_status != '0'){
+     this.total_cost = prebook_cost;
+  }
+  else{
+     this.total_cost = this.total_cost;
+   }
+   if(this.getCustomerBalanceAmount!=0 && this.get_custome_service_cancel_amount ==0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost - this.getCustomerBalanceAmount);
+        }
+   
+    else if(this.get_custome_deliever_amount!=0 && this.get_custome_service_cancel_amount ==0 && this.getCustomerBalanceAmount ==0){
+      this.servicecost = (this.total_cost + this.get_custome_deliever_amount);
+      }
+  
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost + this.get_custome_service_cancel_amount);
+      }
+  
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = (this.total_cost + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+       }
+   
+  else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost + this.getCustomerBalanceAmount + this.get_custome_service_cancel_amount);
+        }
+  
+    else if(this.get_custome_service_cancel_amount==0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = ((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_deliever_amount);
+        }
+    
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = ((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+       }
+    else{
+      this.servicecost = this.schedule_cost;
+         }
+         
+   let payment_data=  {"data":{"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
+    "start_date":start_date,"subcategory":subcategory,"service_id":service_id,
+    "location_id":this.location_id,"vendor_id":this.vendor_id,"discount":"","pay_method":"",
+    "coupon_code_discount_cost":0,"final_service_cost_after_coupon_code_discount":0,
+    "service_name":service,"paymentflag":1,"service_cost":prebook_cost,
+    "service_cost_travel":this.servicecost,"base_cost":this.service_cost,"from_date":"","to_date":"",
+    "time_slot":"","from_time":"","to_time":"","durations":"","problem":"",
+    "datetime":"","mobile":"","preferred_time":"","package_id":"","quantity":"","prebook_percentage":this.pre_book_percentage,
+    "prebook_status":this.vendorList.requestServices.booking_status,"service_cost_prebook":prebook_cost,
+    "getCustomerBalanceAmount":0,"get_custome_amount_actual":0,"get_custome_amount":0,
+    "total_cost":prebook_cost,"get_custome_deliever_amount":0,"total_service_cost":prebook_cost,
+    "get_custome_service_cancel_amount":0,"dependentid":this.elder_id,"mobile_imei":"",
+    "gender":this.gender,"coupen_code":this.coupan_code,"type":"service","coupon_id":"",
+    "driver_time_slot":"","transportation_from":"","transportation_to":"",
+    "automation_time":"","automation_date":"","transportReqType":"","weelchairType":""}}
+
+      let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this._provider.webServiceCall(`checkCoupenCodeValidity`,payment_data)
+  .subscribe(
+      data =>{
+        this.coupon_id = data.result.coupon_id;
+        localStorage.setItem('coupon_id', this.coupon_id);
+        this.discounted_cost = data.result.discounted_cost;
+        localStorage.setItem('coupon_offer', this.discounted_cost);
+        this.final_service_cost = data.result.final_service_cost;
+        this.coupandiscount = "1";
+        loading.dismiss();
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this.coupandiscount = "0";
+        this._provider.showToast(JSON.parse(err._body).error);
+      }
+      else if(err.status === 401){
+        this.coupandiscount = "0";
+        this._provider.showToast(JSON.parse(err._body).error);
+      }
+      else
+      {
+        this.coupandiscount = "0";
+        this._provider.showToast("Try again later");
+      }
+            })
+  }
+
   sendContactDetails(category_id,service_id,sub_category_id,vendor_id){
     if(this.vendorList.requestServices.category == 'Safety and security' || this.vendorList.requestServices.category == 'Recreation'){
       this.recreation = 1;
@@ -268,7 +521,7 @@ mobile_imei:any;
   }
   viewDetails(schedule_cost,service_cost,location_id,availability,balanceRecreationService,vendor_id,subCategoryId,category){
       let servieListData = {"vendor_id": vendor_id, "subCategoryId": subCategoryId, "flag": 3,
-       "location_id": location_id,"category_name":category};
+       "location_id": location_id,"category_name":category,"template_id":this.vendorList.template_id,"is_recreation_config":this.vendorList.template_id};
       this._provider.webServiceCall(`getVendorDetails`,servieListData)
         .subscribe(
           data =>{
@@ -291,8 +544,6 @@ mobile_imei:any;
   }
 
   addUser(): void {
-    console.log(this.emergency_name);
-    console.log(this.emergency.length);
       var newItemNo = this.emergency.length+1;
         this.emergency.push(newItemNo);
      }
@@ -336,15 +587,12 @@ mobile_imei:any;
     this.navCtrl.pop();
   }
   emergencyDetails(){
-    console.log(this.mobile_imei);
      if(this.user_type == 'sponsor' && this.elder_id == undefined){
       this._provider.showToast("Please select the dependent");
     }
 
 
     else{
-    
-
         let emergencyDetailsname = this.emergency_name.filter(item => item == undefined);
         console.log(emergencyDetailsname.length);
       let emergencyDetailsmobile = this.emergency_mobile.filter(item => item == undefined);
@@ -352,7 +600,7 @@ mobile_imei:any;
         this._provider.showToast("Please enter all the details");
       }
          else{
-         if(this.terms != undefined && this.mobile_imei != undefined){
+         if(this.terms != undefined){
         this.emergencyConfirm = true;
         this.emergencyhelp = false;
       }
@@ -685,7 +933,8 @@ mobile_imei:any;
     .subscribe(
         data =>{
                  this.elderDetails = data.result;
-                 this.mobile_imei = this.elderDetails.mobile_imei;
+                 this.gender = this.elderDetails.gender
+                 // this.mobile_imei = this.elderDetails.mobile_imei;
                 },
         err =>{
           if(err.status===400)
@@ -725,7 +974,7 @@ mobile_imei:any;
   "location_id":this.location_id,"discount":"","pay_method":"","paymentflag":1,"service_cost":0,
   "service_cost_travel":0,"base_cost":0,"from_date":"","problem":"",
   "datetime":this.date,"mobile":this.altercontact,"preferred_time":this.time,
-  "service_name":"Own Time Cab","get_custome_service_cancel_amount":0,
+  "service_name":service,"get_custome_service_cancel_amount":0,
   "total_cost":0,"get_custome_amount":0,"get_custome_deliever_amount":0,
   "total_service_cost":0,"package_id":"","quantity":"","dependentid":this.elder_id,
   "getCustomerBalanceAmount":0,"automation_date":this.date,
@@ -822,6 +1071,100 @@ mobile_imei:any;
   else{
     this.elder_id = this.user_id;
   }
+   if(this.getCustomerBalanceAmount!=0 && this.get_custome_service_cancel_amount ==0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost - this.getCustomerBalanceAmount);
+       if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = ((this.total_cost - this.getCustomerBalanceAmount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+   
+    else if(this.get_custome_deliever_amount!=0 && this.get_custome_service_cancel_amount ==0 && this.getCustomerBalanceAmount ==0){
+      this.servicecost = (this.total_cost + this.get_custome_deliever_amount);
+      if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+      this.service_costss = ((this.total_cost + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+  
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost + this.get_custome_service_cancel_amount);
+      if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+      this.service_costss = ((this.total_cost + this.get_custome_service_cancel_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+  
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = (this.total_cost + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+       if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = ((this.total_cost + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+   
+  else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost + this.getCustomerBalanceAmount + this.get_custome_service_cancel_amount);
+       if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = ((this.total_cost + this.getCustomerBalanceAmount + this.get_custome_service_cancel_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+  
+    else if(this.get_custome_service_cancel_amount==0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = ((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_deliever_amount);
+       if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = (((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+    
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = ((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+       if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+        this.service_costss = (((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+    else{
+      this.servicecost = this.schedule_cost;
+      if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = (this.schedule_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
 let paymentData = {"package_id":"","serviceType":"One time","service_cost":this.schedule_cost,
 "service_cost_travel":this.schedule_cost,"paymentflag":"1","base_cost":this.service_cost,"vendor_id":this.vendor_id,
 "location_id":this.location_id,"category_id":category_id,"sub_category_id":sub_category_id,"service_id":service_id,
@@ -831,12 +1174,152 @@ let paymentData = {"package_id":"","serviceType":"One time","service_cost":this.
 "businessFromTime":this.vendorList.vendorDetails.businessFromTime,"businessToTime":this.vendorList.vendorDetails.businessToTime,
 "subcategory":subcategory,"dependentid":this.elder_id,"getCustomerBalanceAmount":0,
 "automation_date":this.date,"automation_time":this.automation_time,"lead_time":this.vendorList.vendorDetails.businessLeadTime,
-"exclude_days":[],"Category_name":category,"category":category,
+"exclude_days":[],"Category_name":category,"category":category,"coupen_code":this.coupan_code,"coupon_code_discount_cost":this.discounted_cost,"type":"service",
+  "coupon_id":this.coupon_id,"final_service_cost_after_coupon_code_discount":this.final_service_cost,
 "prebook_status":this.vendorList.requestServices.booking_status,"book":{"name":this.name +" "+this.lastname,"mobile":this.phone,"mail":this.email},
 "datetime":this.date,"preferred_time":this.automation_time}
- this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Safety and security"});
+ // this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Safety and security","template_id":this.template_id});
+    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this._provider.webServiceCall(`serviceRequestSubmitbeforePayment`,paymentData)
+  .subscribe(
+      data =>{
+        this.udf3= data.result.serviceType;
+        this.udf2 = data.result.service_request_id;
+        // loading.dismiss();
+        var options = {
+      description: service,
+      image: this.url + "assets/img/Elderlogo.png",
+      currency: 'INR',
+      key: 'rzp_test_53tdpMxkK8bFKw',
+      amount: this.service_costss,
+      name: "EldersIndia",
+      prefill: {
+        email: this.email,
+        contact: this.phone,
+        name: this.name
+      },
+      
+       "notes": {
+        "service_id":this.udf2,
+        "service_type":this.udf3,
+        "email": this.email,
+        "pre_balance_amount":"",
+        "category_name":category,
+        "service_name":service,
+        "service_cost":this.schedule_cost,
+        "pre_book":this.schedule_cost
+      },
+      theme: {
+        color: '#208ad6'
+      },
+
+    };
+let navCtrl = this.navCtrl;
+let nav = this.blogListService;
+ var successCallback = function(payment_id) {
+  loading.present();
+      // ajaxCallCheck(payment_id);
+
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
+  var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss"),
+"coupon_id":localStorage.getItem("coupon_id"),"coupon_offer":localStorage.getItem("coupon_offer")}));
+
+xmlhttp.onload = function () {
+loading.dismiss();
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+  // navCtrl.setRoot(ServicerequestPage);
+
+  nav.presentConfirm(result);
+
+  }
+      
+     
+    }
+
+var cancelCallback = function(error) {
+  nav.showToaster(error.description);
+  loading.dismiss();
+}
+
+
+RazorpayCheckout.on('payment.success', successCallback,this.dismiss());
+RazorpayCheckout.on('payment.cancel', cancelCallback);
+RazorpayCheckout.open(options, successCallback, cancelCallback);
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this._provider.showToast(JSON.parse(err._body).error);
+        // this.navCtrl.pop();
+      }
+      else if(err.status === 401){
+        this._provider.showToast(JSON.parse(err._body).error);
+        // this.navCtrl.pop();
+      }
+      else
+      {
+        this._provider.showToast("Try again later");
+        // this.navCtrl.pop();
+      }
+            })
    this.dismiss();
 
+}
+ submitRequesthomeautomation(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
+  this.date= moment(this.date).format("DD-MM-YYYY");
+    if(this.user_type == 'sponsor')
+  {
+    this.elder_id = this.elder_id;
+  }
+  else{
+    this.elder_id = this.user_id;
+  }
+  let paymentData = {"package_id":"","serviceType":"One time","service_cost":this.schedule_cost,
+"service_cost_travel":this.schedule_cost,"paymentflag":"1","base_cost":this.service_cost,"vendor_id":this.vendor_id,
+"location_id":this.location_id,"category_id":category_id,"sub_category_id":sub_category_id,"service_id":service_id,
+"get_custome_service_cancel_amount":0,"total_cost":this.schedule_cost,"get_custome_deliever_amount":0,
+"total_service_cost":this.schedule_cost,"get_custome_amount":0,"service_name":service,"businessHoursOption":this.vendorList.vendorDetails.businessHoursOption,
+"businessFromDay":this.vendorList.vendorDetails.businessFromDay,"businessToDay":this.vendorList.vendorDetails.businessToDay,
+"businessFromTime":this.vendorList.vendorDetails.businessFromTime,"businessToTime":this.vendorList.vendorDetails.businessToTime,
+"subcategory":subcategory,"dependentid":this.elder_id,"getCustomerBalanceAmount":0,
+"automation_date":this.date,"automation_time":this.automation_time,"lead_time":this.vendorList.vendorDetails.businessLeadTime,
+"exclude_days":[],"Category_name":category,"category":category,"coupen_code":this.coupan_code,"coupon_code_discount_cost":this.discounted_cost,"type":"service",
+  "coupon_id":this.coupon_id,"final_service_cost_after_coupon_code_discount":this.final_service_cost,
+"prebook_status":this.vendorList.requestServices.booking_status,"book":{"name":this.name +" "+this.lastname,"mobile":this.phone,"mail":this.email},
+"datetime":this.date,"preferred_time":this.automation_time}
+
+ 
+       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this._provider.webServiceCall(`serviceRequestSubmitbeforePayLater`,paymentData)
+  .subscribe(
+      data =>{
+        this._provider.showToast(data.result);
+        this.dismiss();
+        loading.dismiss();
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this._provider.showToast(JSON.parse(err._body).error);
+      }
+      else if(err.status === 401){
+        this._provider.showToast(JSON.parse(err._body).error);
+      }
+      else
+      {
+        this._provider.showToast("Try again later");
+      }
+            })
 }
  emergencypaynow(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
   if(this.user_type == 'sponsor')
@@ -864,6 +1347,100 @@ let paymentData = {"package_id":"","serviceType":"One time","service_cost":this.
   var obj = {"name":this.emergency_name[i],"mobile":this.emergency_mobile[i]}
   emergency.push(obj);
 }
+ if(this.getCustomerBalanceAmount!=0 && this.get_custome_service_cancel_amount ==0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost - this.getCustomerBalanceAmount);
+      if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = ((this.total_cost - this.getCustomerBalanceAmount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+   
+    else if(this.get_custome_deliever_amount!=0 && this.get_custome_service_cancel_amount ==0 && this.getCustomerBalanceAmount ==0){
+      this.servicecost = (this.total_cost + this.get_custome_deliever_amount);
+      if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+      this.service_costss = ((this.total_cost + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+  
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost + this.get_custome_service_cancel_amount);
+      if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+      this.service_costss = ((this.total_cost + this.get_custome_service_cancel_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+  
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = (this.total_cost + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+       if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = ((this.total_cost + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+   
+  else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost + this.getCustomerBalanceAmount + this.get_custome_service_cancel_amount);
+      if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = ((this.total_cost + this.getCustomerBalanceAmount + this.get_custome_service_cancel_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+  
+    else if(this.get_custome_service_cancel_amount==0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = ((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_deliever_amount);
+       if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = (((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+    
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = ((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+       if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = (((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+    else{
+      this.servicecost = this.schedule_cost;
+       if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = (this.schedule_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
    let paymentData =   {"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
  "start_date":start_date,"subcategory":subcategory,"service_id":service_id,"location_id":this.location_id,
  "paymentflag":1,"service_cost":this.schedule_cost,"service_cost_travel":this.schedule_cost,"base_cost":this.service_cost,
@@ -872,12 +1449,106 @@ let paymentData = {"package_id":"","serviceType":"One time","service_cost":this.
  "prebook_percentage":this.pre_book_percentage,"service_name":service,"vendor_id":this.vendor_id,
  "get_custome_service_cancel_amount":0,"total_cost":this.schedule_cost,"get_custome_deliever_amount":0,
  "total_service_cost":this.schedule_cost,"get_custome_amount":0,"package_id":"","quantity":"",
+ "coupen_code":this.coupan_code,"coupon_code_discount_cost":this.discounted_cost,"type":"service",
+  "coupon_id":this.coupon_id,"final_service_cost_after_coupon_code_discount":this.final_service_cost,
  "dependentid":this.elder_id,"getCustomerBalanceAmount":0,"lead_time":"00:00","selected_dates":[],
- "exclude_days":[],"Category_name":category,"serviceType":"One time","mobile_imei":this.mobile_imei,
+ "exclude_days":[],"Category_name":category,"serviceType":"One time","mobile_imei":this.device.uuid,
  "book":{"name":this.name,"mobile":this.phone,"mail":this.email},
  emergency,
  "paymentcost":this.schedule_cost};
-   this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Safety and security"});
+   // this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Safety and security","template_id":this.template_id});
+     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this._provider.webServiceCall(`serviceRequestSubmitbeforePayment`,paymentData)
+  .subscribe(
+      data =>{
+        this.udf3= data.result.serviceType;
+        this.udf2 = data.result.service_request_id;
+        // loading.dismiss();
+        var options = {
+      description: service,
+      image: this.url + "assets/img/Elderlogo.png",
+      currency: 'INR',
+      key: 'rzp_test_53tdpMxkK8bFKw',
+      amount: this.service_costss,
+      name: "EldersIndia",
+      prefill: {
+        email: this.email,
+        contact: this.phone,
+        name: this.name
+      },
+      
+       "notes": {
+        "service_id":this.udf2,
+        "service_type":this.udf3,
+        "email": this.email,
+        "pre_balance_amount":"",
+        "category_name":category,
+        "service_name":service,
+        "service_cost":this.schedule_cost,
+        "pre_book":this.schedule_cost
+      },
+      theme: {
+        color: '#208ad6'
+      },
+
+    };
+let navCtrl = this.navCtrl;
+let nav = this.blogListService;
+ var successCallback = function(payment_id) {
+  loading.present();
+      // ajaxCallCheck(payment_id);
+
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
+   var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss"),
+"coupon_id":localStorage.getItem("coupon_id"),"coupon_offer":localStorage.getItem("coupon_offer")}));
+
+xmlhttp.onload = function () {
+  loading.dismiss();
+
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+  // navCtrl.setRoot(ServicerequestPage);
+
+  nav.presentConfirm(result);
+
+  }
+      
+     
+    }
+
+var cancelCallback = function(error) {
+  nav.showToaster(error.description);
+  loading.dismiss();
+}
+
+
+RazorpayCheckout.on('payment.success', successCallback,this.dismiss());
+RazorpayCheckout.on('payment.cancel', cancelCallback);
+RazorpayCheckout.open(options, successCallback, cancelCallback);
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this._provider.showToast(JSON.parse(err._body).error);
+        // this.navCtrl.pop();
+      }
+      else if(err.status === 401){
+        this._provider.showToast(JSON.parse(err._body).error);
+        // this.navCtrl.pop();
+      }
+      else
+      {
+        this._provider.showToast("Try again later");
+        // this.navCtrl.pop();
+      }
+            })
    this.dismiss();
 }
 
@@ -889,6 +1560,118 @@ wearablespaynow(prebook_cost,category_id,service_id,sub_category_id,category,ser
   else{
     this.elder_id = this.user_id;
   }
+   if(this.booking_status != '1' && this.vendorList.requestServices.booking_status != '0'){
+     this.total_cost = prebook_cost;
+  }
+  else{
+     this.total_cost = this.total_cost;
+   }
+
+   if(this.getCustomerBalanceAmount!=0 && this.get_custome_service_cancel_amount ==0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost - this.getCustomerBalanceAmount);
+        if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = ((this.total_cost - this.getCustomerBalanceAmount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+
+    else if(this.get_custome_deliever_amount!=0 && this.get_custome_service_cancel_amount ==0 && this.getCustomerBalanceAmount ==0){
+      this.servicecost = (this.total_cost + this.get_custome_deliever_amount);
+     if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+      this.service_costss = ((this.total_cost + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+  
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost + this.get_custome_service_cancel_amount);
+      if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+        this.service_costss = ((this.total_cost + this.get_custome_service_cancel_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+    
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = (this.total_cost + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+       if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = ((this.total_cost + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+   
+  else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost + this.getCustomerBalanceAmount + this.get_custome_service_cancel_amount);
+       if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = ((this.total_cost + this.getCustomerBalanceAmount + this.get_custome_service_cancel_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+  
+    else if(this.get_custome_service_cancel_amount==0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = ((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_deliever_amount);
+       if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = (((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+  
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = ((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+       if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+        this.service_costss = (((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+    else{
+      this.servicecost = this.schedule_cost;
+
+    if(this.booking_status != '1' && this.vendorList.requestServices.booking_status != '0'){
+      if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+      }
+      else{
+       this.service_costss = (prebook_cost * 100).toFixed(0);
+     }
+    }
+    else{
+      if(this.coupandiscount == "1"){
+        this.service_costss = (this.final_service_cost * 100).toFixed(0);
+      }
+      else{
+       this.service_costss = (this.schedule_cost * 100).toFixed(0);
+     }
+     }
+       localStorage.setItem('service_costss', this.service_costss);
+    }
+
    let paymentData =   {"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
  "start_date":start_date,"subcategory":subcategory,"service_id":service_id,"location_id":this.location_id,
  "paymentflag":1,"service_cost":prebook_cost,"service_cost_travel":this.schedule_cost,"base_cost":this.service_cost,
@@ -898,12 +1681,157 @@ wearablespaynow(prebook_cost,category_id,service_id,sub_category_id,category,ser
  "get_custome_service_cancel_amount":0,"total_cost":prebook_cost,"get_custome_deliever_amount":0,
  "total_service_cost":prebook_cost,"get_custome_amount":0,"package_id":"","quantity":"",
  "dependentid":this.elder_id,"getCustomerBalanceAmount":0,"lead_time":"00:00","selected_dates":[],
- "exclude_days":[],"Category_name":category,"serviceType":"One time",
+ "exclude_days":[],"Category_name":category,"serviceType":"One time","coupen_code":this.coupan_code,"coupon_code_discount_cost":this.discounted_cost,"type":"service",
+  "coupon_id":this.coupon_id,"final_service_cost_after_coupon_code_discount":this.final_service_cost,
  "book":{"name":this.name,"mobile":this.phone,"mail":this.email},
  "emergency":[{"name":this.name,"mobile":this.phone}],
  "paymentcost":prebook_cost};
-   this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Safety and security"});
+   // this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Safety and security","template_id":this.template_id});
+    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this._provider.webServiceCall(`serviceRequestSubmitbeforePayment`,paymentData)
+  .subscribe(
+      data =>{
+        this.udf3= data.result.serviceType;
+        this.udf2 = data.result.service_request_id;
+        // loading.dismiss();
+        console.log(this.service_costss);
+        var options = {
+      description: service,
+      image: this.url + "assets/img/Elderlogo.png",
+      currency: 'INR',
+      key: 'rzp_test_53tdpMxkK8bFKw',
+      amount: this.service_costss,
+      name: "EldersIndia",
+      prefill: {
+        email: this.email,
+        contact: this.phone,
+        name: this.name
+      },
+      
+       "notes": {
+        "service_id":this.udf2,
+        "service_type":this.udf3,
+        "email": this.email,
+        "pre_balance_amount":"",
+        "category_name":category,
+        "service_name":service,
+        "service_cost":this.schedule_cost,
+        "pre_book":prebook_cost
+      },
+      theme: {
+        color: '#208ad6'
+      },
+
+    };
+let navCtrl = this.navCtrl;
+let nav = this.blogListService;
+ var successCallback = function(payment_id) {
+  loading.present();
+      // ajaxCallCheck(payment_id);
+
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
+  var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss"),
+"coupon_id":localStorage.getItem("coupon_id"),"coupon_offer":localStorage.getItem("coupon_offer")}));
+
+xmlhttp.onload = function () {
+loading.dismiss();
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+  // navCtrl.setRoot(ServicerequestPage);
+
+  nav.presentConfirm(result);
+
+  }
+      
+     
+    }
+
+var cancelCallback = function(error) {
+  nav.showToaster(error.description);
+  loading.dismiss();
+}
+
+
+RazorpayCheckout.on('payment.success', successCallback,this.dismiss());
+RazorpayCheckout.on('payment.cancel', cancelCallback);
+RazorpayCheckout.open(options, successCallback, cancelCallback);
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this._provider.showToast(JSON.parse(err._body).error);
+        // this.navCtrl.pop();
+      }
+      else if(err.status === 401){
+        this._provider.showToast(JSON.parse(err._body).error);
+        // this.navCtrl.pop();
+      }
+      else
+      {
+        this._provider.showToast("Try again later");
+        // this.navCtrl.pop();
+      }
+            })
    this.dismiss();
+}
+submitRequestwearable(prebook_cost,category_id,service_id,sub_category_id,category,service,subcategory,start_date){
+   if(this.user_type == 'sponsor')
+  {
+    this.elder_id = this.elder_id;
+  }
+  else{
+    this.elder_id = this.user_id;
+  }
+   if(this.booking_status != '1' && this.vendorList.requestServices.booking_status != '0'){
+     this.total_cost = prebook_cost;
+  }
+  else{
+     this.total_cost = this.total_cost;
+   }
+     let paymentData =   {"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
+ "start_date":start_date,"subcategory":subcategory,"service_id":service_id,"location_id":this.location_id,
+ "paymentflag":1,"service_cost":prebook_cost,"service_cost_travel":this.schedule_cost,"base_cost":this.service_cost,
+ "from_date":"","problem":"","datetime":"","mobile":this.altercontact,"preferred_time":"",
+ "prebook_status":this.vendorList.requestServices.booking_status,"service_cost_prebook":prebook_cost,"service_cost_total":this.schedule_cost,
+ "prebook_percentage":this.pre_book_percentage,"service_name":service,"vendor_id":this.vendor_id,
+ "get_custome_service_cancel_amount":0,"total_cost":prebook_cost,"get_custome_deliever_amount":0,
+ "total_service_cost":prebook_cost,"get_custome_amount":0,"package_id":"","quantity":"",
+ "dependentid":this.elder_id,"getCustomerBalanceAmount":0,"lead_time":"00:00","selected_dates":[],
+ "exclude_days":[],"Category_name":category,"serviceType":"One time","coupen_code":this.coupan_code,"coupon_code_discount_cost":this.discounted_cost,"type":"service",
+  "coupon_id":this.coupon_id,"final_service_cost_after_coupon_code_discount":this.final_service_cost,
+ "book":{"name":this.name,"mobile":this.phone,"mail":this.email},
+ "emergency":[{"name":this.name,"mobile":this.phone}],
+ "paymentcost":prebook_cost};
+    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this._provider.webServiceCall(`serviceRequestSubmitbeforePayLater`,paymentData)
+  .subscribe(
+      data =>{
+        this._provider.showToast(data.result);
+        this.dismiss();
+        loading.dismiss();
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this._provider.showToast(JSON.parse(err._body).error);
+      }
+      else if(err.status === 401){
+        this._provider.showToast(JSON.parse(err._body).error);
+      }
+      else
+      {
+        this._provider.showToast("Try again later");
+      }
+            })
 }
  payNow(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
   if(this.user_type == 'sponsor')
@@ -918,21 +1846,260 @@ wearablespaynow(prebook_cost,category_id,service_id,sub_category_id,category,ser
   
   var obj = {"elder_name":this.elder_name[i],"elder_age":this.elder_age[i]}
   people.push(obj);
- }
- 
+ } 
+    if(this.getCustomerBalanceAmount!=0 && this.get_custome_service_cancel_amount ==0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost - this.getCustomerBalanceAmount);
+      if(this.coupandiscount == "1"){
+        this.service_costss = (((this.schedule_cost * this.peoplecount) - this.getCustomerBalanceAmount + this.get_custome_deliever_amount + this.get_custome_service_cancel_amount - this.discounted_cost) * 100).toFixed(0);
+        // this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+        this.service_costss = ((this.total_cost - this.getCustomerBalanceAmount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+       
+    }
+   
+    else if(this.get_custome_deliever_amount!=0 && this.get_custome_service_cancel_amount ==0 && this.getCustomerBalanceAmount ==0){
+      this.servicecost = (this.total_cost + this.get_custome_deliever_amount);
+       if(this.coupandiscount == "1"){
+      this.service_costss = (((this.schedule_cost * this.peoplecount) - this.getCustomerBalanceAmount + this.get_custome_deliever_amount + this.get_custome_service_cancel_amount - this.discounted_cost) * 100).toFixed(0);
+      // this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+      this.service_costss = ((this.total_cost + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+  
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost + this.get_custome_service_cancel_amount);
+       if(this.coupandiscount == "1"){
+        this.service_costss = (((this.schedule_cost * this.peoplecount) - this.getCustomerBalanceAmount + this.get_custome_deliever_amount + this.get_custome_service_cancel_amount - this.discounted_cost) * 100).toFixed(0);
+        // this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+      this.service_costss = ((this.total_cost + this.get_custome_service_cancel_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+  
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = (this.total_cost + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+        if(this.coupandiscount == "1"){
+          this.service_costss = (((this.schedule_cost * this.peoplecount) - this.getCustomerBalanceAmount + this.get_custome_deliever_amount + this.get_custome_service_cancel_amount - this.discounted_cost) * 100).toFixed(0);
+        // this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = ((this.total_cost + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+   
+  else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.total_cost + this.getCustomerBalanceAmount + this.get_custome_service_cancel_amount);
+        if(this.coupandiscount == "1"){
+          this.service_costss = (((this.schedule_cost * this.peoplecount) - this.getCustomerBalanceAmount + this.get_custome_deliever_amount + this.get_custome_service_cancel_amount - this.discounted_cost) * 100).toFixed(0);
+        // this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = ((this.total_cost + this.getCustomerBalanceAmount + this.get_custome_service_cancel_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+  
+    else if(this.get_custome_service_cancel_amount==0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = ((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_deliever_amount);
+       if(this.coupandiscount == "1"){
+        this.service_costss = (((this.schedule_cost * this.peoplecount) - this.getCustomerBalanceAmount + this.get_custome_deliever_amount + this.get_custome_service_cancel_amount - this.discounted_cost) * 100).toFixed(0);
+        // this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+        this.service_costss = (((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+    
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = ((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+        if(this.coupandiscount == "1"){
+          this.service_costss = (((this.schedule_cost * this.peoplecount) - this.getCustomerBalanceAmount + this.get_custome_deliever_amount + this.get_custome_service_cancel_amount - this.discounted_cost) * 100).toFixed(0);
+        // this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = (((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount) * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+    else{
+      this.servicecost = this.schedule_cost;
+       if(this.coupandiscount == "1"){
+        this.service_costss = (((this.schedule_cost * this.peoplecount) - this.getCustomerBalanceAmount + this.get_custome_deliever_amount + this.get_custome_service_cancel_amount - this.discounted_cost) * 100).toFixed(0);
+        // this.service_costss = (this.final_service_cost * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+      }
+      else{
+       this.service_costss = (this.totalcosts * 100).toFixed(0);
+       localStorage.setItem('service_costss', this.service_costss);
+     }
+    }
+ // this.service_costss = (this.schedule_cost * 100).toFixed(0);
+ // localStorage.setItem('service_costss', this.service_costss);
    let paymentData =  {"package_id":"","serviceType":"One time","service_cost":this.total_cost,"service_cost_travel":this.schedule_cost,
    "paymentflag":1,"base_cost":this.service_cost,"vendor_id":this.vendor_id,"location_id":this.location_id,"category_id":category_id,
    "sub_category_id":sub_category_id,"subcategory":subcategory,"service_id":service_id,"get_custome_amount":"0","total_cost":this.schedule_cost,
-   "get_custome_service_cancel_amount":"0","get_custome_deliever_amount":"0","total_service_cost":this.schedule_cost,
-   "service_name":service,"dependentid":this.elder_id,"getCustomerBalanceAmount":"0","lead_time":"02:00",
-   "exclude_days":[],"Category_name":category,"category":category,
+   "get_custome_service_cancel_amount":"0","get_custome_deliever_amount":"0","total_service_cost":this.servicecost,
+   "service_name":service,"dependentid":this.elder_id,"getCustomerBalanceAmount":"0","lead_time":"02:00","type":"service",
+   "exclude_days":[],"Category_name":category,"category":category,"coupen_code":this.coupan_code,"coupon_code_discount_cost":this.discounted_cost,
+   "coupon_id":this.coupon_id,"final_service_cost_after_coupon_code_discount":this.final_service_cost,
    "book":{"name":this.name,"mobile":this.phone,"mail":this.email,"book_peoples":this.peoplecount,
    people},
    "datetime":start_date,"preferred_time":"01:00 AM - 02:00 AM",
    "paymentcost":this.total_cost};
-   this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Recreation"});
+   // this.navCtrl.push(PaymentPage,{"paymentData":paymentData,"service":"Recreation","template_id":this.template_id});
+       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this._provider.webServiceCall(`serviceRequestSubmitbeforePayment`,paymentData)
+  .subscribe(
+      data =>{
+        this.udf3= data.result.serviceType;
+        this.udf2 = data.result.service_request_id;
+        // loading.dismiss();
+        var options = {
+      description: service,
+      image: this.url + "assets/img/Elderlogo.png",
+      currency: 'INR',
+      key: 'rzp_test_53tdpMxkK8bFKw',
+      amount: this.service_costss,
+      name: "EldersIndia",
+      prefill: {
+        email: this.email,
+        contact: this.phone,
+        name: this.name
+      },
+      
+       "notes": {
+        "service_id":this.udf2,
+        "service_type":this.udf3,
+        "email": this.email,
+        "pre_balance_amount":"",
+        "category_name":category,
+        "service_name":service,
+        "service_cost":this.schedule_cost,
+        "pre_book":this.schedule_cost
+      },
+      theme: {
+        color: '#208ad6'
+      },
+
+    };
+let navCtrl = this.navCtrl;
+let nav = this.blogListService;
+ var successCallback = function(payment_id) {
+  loading.present();
+      // ajaxCallCheck(payment_id);
+
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
+  var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss"),
+  "coupon_id":localStorage.getItem("coupon_id"),"coupon_offer":localStorage.getItem("coupon_offer")}));
+
+xmlhttp.onload = function () {
+loading.dismiss();
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+  // navCtrl.setRoot(ServicerequestPage);
+
+  nav.presentConfirm(result);
+
+  }
+    }
+
+var cancelCallback = function(error) {
+  nav.showToaster(error.description);
+  loading.dismiss();
+}
+RazorpayCheckout.on('payment.success', successCallback,this.dismiss());
+RazorpayCheckout.on('payment.cancel', cancelCallback);
+RazorpayCheckout.open(options, successCallback, cancelCallback);
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this._provider.showToast(JSON.parse(err._body).error);
+        // this.navCtrl.pop();
+      }
+      else if(err.status === 401){
+        this._provider.showToast(JSON.parse(err._body).error);
+        // this.navCtrl.pop();
+      }
+      else
+      {
+        this._provider.showToast("Try again later");
+        // this.navCtrl.pop();
+      }
+            })
    this.dismiss();
  }
+ submitRequest(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
+      if(this.user_type == 'sponsor')
+  {
+    this.elder_id = this.elder_id;
+  }
+  else{
+    this.elder_id = this.user_id;
+  }
+  let data = {"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
+  "start_date":start_date,"subcategory":subcategory,"service_id":service_id,"location_id":this.location_id,
+  "discount":"","pay_method":"","coupon_code_discount_cost":this.discounted_cost,
+  "final_service_cost_after_coupon_code_discount":this.final_service_cost,"service_name":service,
+  "paymentflag":1,"service_cost":this.servicecost,"service_cost_travel":this.servicecost,"base_cost":this.service_cost,
+  "from_date":"","to_date":"","time_slot":"","from_time":"","to_time":"",
+  "durations":"","problem":"","mobile":"","package_id":"","quantity":"",
+  "getCustomerBalanceAmount":0,"get_custome_amount_actual":0,"get_custome_amount":0,
+  "total_cost":this.servicecost,"get_custome_deliever_amount":0,"total_service_cost":this.servicecost,
+  "get_custome_service_cancel_amount":0,"dependentid":this.elder_id,"mobile_imei":"",
+  "gender":this.gender,"coupen_code":this.coupan_code,"vendor_id":this.vendor_id,"type":"service",
+  "coupon_id":this.coupon_id,"lead_time":"00:00","selected_dates":[],"exclude_days":[],
+  "serviceType":"One time"}
+
+ 
+       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this._provider.webServiceCall(`serviceRequestSubmitbeforePayLater`,data)
+  .subscribe(
+      data =>{
+        this._provider.showToast(data.result);
+        this.dismiss();
+        loading.dismiss();
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this._provider.showToast(JSON.parse(err._body).error);
+      }
+      else if(err.status === 401){
+        this._provider.showToast(JSON.parse(err._body).error);
+      }
+      else
+      {
+        this._provider.showToast("Try again later");
+      }
+            })
+}
  openRequestPackage(id,vendor_id,package_validity,package_amount,service_quantity){
   if(this.vendorList.dependentLists.length == 1){
       this.dependentId = this.vendorList.dependentLists[0].id;

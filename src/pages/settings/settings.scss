@@ -1,57 +1,42 @@
 page-settings {
-.toolbar-title-md{ text-align:center !important;}
-.toolbar-title-ios{ text-align:center;}
-.toggle-md .toggle-checked{ background:#fca4eb !important;}
-.toggle-md .toggle-icon{ background:#B0C4DE !important;}
-.toggle-md .toggle-checked .toggle-inner{ background:#6B8E23 !important;}
-.content-intop										{background:#F5F9FF;}
-.seetingslist {
-    background-image: url("../assets/img/prss.png");
+
+.privacySetting{
+    background: url('../assets/img/bg.jpg');
+    background-position: center;
+    background-size: cover;
+    .seetingslist{
+        background: #fff;
+        border-radius: 5px;
+        padding:10px;
+        box-shadow: 0px 5px 20px rgba(0,0,0,0.12);
+        ion-list{
+            ion-item{
+                .item-inner{
+                    padding: 0px;
+                    border-bottom:1px dotted #ccc !important;
+                    &:last-child{
+                        border-bottom: none !important;
+                    }
+                    .input-wrapper{
+                        ion-label{
+                            color:#42436a;
+                            font-size: 18px;
+                            i{
+                                padding-right: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
-  .seetingslist .list-md .item-md {
-    background: hsla(0, 0%, 0%, 0) none repeat scroll 0 0;
-
+.list-ios > .item-block:first-child {
+    border-top: none;
 }
-.seetingslist .list-md .item-md .item-inner .input-wrapper .label-md {
-
-        color: #007994 !important;
-    font-family: "Muli",sans-serif;
-    font-size:19px !important;
-    padding-bottom: 8px; font-weight:400;
-    margin: 0;
-
 }
-
-.seetingslist .list-ios .item-ios .item-inner .input-wrapper .label-ios {
-
-        color: #007994 !important;
-    font-family: "Muli",sans-serif;
-    font-size:19px !important;
-    padding-bottom: 8px; font-weight:400;
-    margin: 0;
-
-}
-.seetingslist .item-md i { text-align:center;
-    color: hsl(120, 1%, 66%);
-    width: 25px;
-}
-
-
-  .seetingslist .list-ios .item-ios {
-    background: hsla(0, 0%, 0%, 0) none repeat scroll 0 0;
-
-}
-.seetingslist .list-ios .item-ios .item-inner .input-wrapper .label-ios {
-
-        color: #007994 !important;
-    font-family: "Muli",sans-serif;
-    font-size: 17px !important;
-    padding-bottom: 8px;
-    margin: 0;
-
-}
-.seetingslist .item-ios i { text-align:center;
-    color: hsl(120, 1%, 66%);
-    width: 25px;
-}
+.ios{
+    page-settings {
+         top: 8px !important;
+    }   
 }

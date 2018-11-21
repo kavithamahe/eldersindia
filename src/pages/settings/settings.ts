@@ -34,7 +34,7 @@ export class SettingsPage {
 
 
   constructor(public storage:Storage,public loadingCtrl: LoadingController,public alertCtrl: AlertController, public serviceProvider:ServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
-  
+  console.log(this.privacy_email);
   }
 
   update(){

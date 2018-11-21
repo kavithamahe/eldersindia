@@ -64,7 +64,7 @@ commontype:any;
 
 getServicedetails(serviceId,vendor,one_time,recurring,package_amount){
   this.vendorId={"id":vendor}
-  let servieListData = {"vendor": this.vendorId, "subCategoryId": serviceId, "flag": "1", "location_id": this.location_id,"one_time":one_time,"recurring":recurring,"package_amount":package_amount};
+  let servieListData = {"vendor": this.vendorId, "subCategoryId": serviceId, "flag": "1", "location_id": this.location_id,"one_time":one_time,"recurring":recurring,"package_amount":package_amount,"package":"1"};
   this.navCtrl.push(ServiceInfoPage,servieListData);
 }
   ionViewDidLoad() {

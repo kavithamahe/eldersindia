@@ -5,10 +5,9 @@ import { Storage } from '@ionic/storage';
 import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 
-
 import { BlogListService } from '../../providers/blog-list-service';
 
-
+import moment from 'moment';
 /*
   Generated class for the RecurringviewPage page.
 
@@ -45,6 +44,11 @@ recurringlist:any;
     this.blogListService.getrecurringRequestdetail(this.rootUrl,this.recurring_request_id)
       .subscribe(data =>{ 
       	this.recurringRequestinfo = data.result;
+        var dataList=data.result;
+        for(let data of dataList) {
+          data.created_at = moment(data.created_at).format("DD-MM-YYYY");
+           }
+        this.recurringRequestinfo = dataList;
         loading.dismiss();
     },
     err =>{

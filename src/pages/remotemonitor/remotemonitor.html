@@ -5,28 +5,29 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-  <ion-title text-center>Remote Monitoring</ion-title>
+    <ion-title text-center>Remote Monitoring</ion-title>
     <ion-buttons right>
-    <button ion-button icon-only (click)="dashboardPage()">
+      <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-    
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-	<ion-label>Username:</ion-label>
-	<ion-item>
-		<ion-input type="text" placeholder="Username" [(ngModel)]="username" value={{usernames}}></ion-input>
-	</ion-item>
-	<ion-label>Password:</ion-label>
-	<ion-item>
-		<ion-input type="text" placeholder="Password" [(ngModel)]="password" value={{passwords}}></ion-input>
-	</ion-item>
-    <ion-label>URL:</ion-label>
+  <ion-label>Username:</ion-label>
   <ion-item>
-    <ion-input type="text" placeholder="URL" [(ngModel)]="url" value={{Cctv_camera}}></ion-input>
+    <ion-input type="text" placeholder="Username" [(ngModel)]="username" value={{usernames}}></ion-input>
   </ion-item>
-	<button ion-button (click)="submit()">Save</button>
+  <ion-label>Password:</ion-label>
+  <ion-item>
+    <ion-input type="text" placeholder="Password" [(ngModel)]="password" value={{passwords}}></ion-input>
+  </ion-item>
+  <ion-label>URL:</ion-label>
+  <ion-item>
+    <ion-textarea type="text" placeholder="URL" [(ngModel)]="url" value={{urls}}></ion-textarea>
+  </ion-item>
+  <ion-col col-12 text-right>
+  <button ion-button class="submit-btn" (click)="submit()">Save</button>
+</ion-col>
 </ion-content>

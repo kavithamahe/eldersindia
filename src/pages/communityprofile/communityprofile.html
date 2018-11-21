@@ -1,268 +1,278 @@
 <ion-header>
-  <ion-navbar color="primary">
-    <ion-buttons left>
-      <button ion-button icon-only menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
-	 <ion-title text-capitalize>{{communityProfileData?.name}} {{communityProfileData?.last_name}} Wall</ion-title>
-    <ion-buttons right>
-    <button ion-button icon-only (click)="dashboardPage()">
-        <ion-icon name="home"></ion-icon>
-      </button>
-    </ion-buttons>
-   
-  </ion-navbar>
+	<ion-navbar color="primary">
+		<ion-buttons left>
+			<button ion-button icon-only menuToggle>
+				<ion-icon name="menu"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title text-capitalize>{{communityProfileData?.name}} {{communityProfileData?.last_name}} Wall</ion-title>
+		<ion-buttons right>
+			<button ion-button icon-only (click)="dashboardPage()">
+				<ion-icon name="home"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
 </ion-header>
 
-<ion-content class="content-intop">
-  <!-- <ion-fab top right edge>
-    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
-  </ion-fab> -->
-	  <div class="cont-conn">
-		  <ion-row >
-			  <ion-col width-20>
-					<ion-avatar (click)="profileSetting(communityProfileData?.id)" item-left class="image-profile" width-30>
-					  	<img [src]="imageUrl+communityProfileData?.avatar"/>
-					  </ion-avatar>	
-			  </ion-col>
-			
-			  <ion-col text-capitalize class="name-conne">
-				  <p *ngIf="communityProfileData?.id != my_id">{{communityProfileData?.name}} {{communityProfileData?.last_name}}</p>
-				  <p *ngIf="communityProfileData?.id == my_id">You</p>
-			  </ion-col>
-		  </ion-row>
-			  
-			    <ion-row>
-			 	  <ion-col class="mess-accept">
-					  <p *ngIf="(status === 3 && (communityProfileData?.id != my_id))"><button ion-button (click)="connectMember(communityProfileData)"><i class="fa fa-plug" aria-hidden="true"></i>
-					  </button></p>
-					  <p *ngIf ="status === 0 && (communityProfileData?.id != my_id)"><button ion-button disabled="true"><i class="fa fa-paper-plane-o"></i></button></p>
-					  <p *ngIf="status === 2 && (communityProfileData?.id != my_id)"><button ion-button disabled="true"><i class="fa fa-paper-plane-o"></i></button></p>
-					  <p *ngIf="status === 1 && (communityProfileData?.id != my_id)"><button ion-button disabled="true"><i class="fa fa-share-alt"></i></button></p>
-					  <p *ngIf="status === 1 && (communityProfileData?.id != my_id)"><button ion-button (click)="messageModel(communityProfileData)"><i class="fa fa-commenting-o"></i>
-					  </button></p>
-				  </ion-col> 
-				
-			</ion-row>
-		
+<ion-content class="content-intop" class="profileWall">
+	<div class="cont-conn">
+		<ion-row>
+			<ion-col col-3>
+				<ion-avatar (click)="profileSetting(communityProfileData?.id)" item-left class="image-profile" width-30>
+					<img [src]="imageUrl+communityProfileData?.avatar" />
+				</ion-avatar>
+			</ion-col>
+
+			<ion-col text-capitalize class="name-conne" col-9>
+				<h2 *ngIf="communityProfileData?.id != my_id">{{communityProfileData?.name}} {{communityProfileData?.last_name}}</h2>
+				<h2 *ngIf="communityProfileData?.id == my_id">You</h2>
+				<p *ngIf="(status === 3 && (communityProfileData?.id != my_id))">
+					<button ion-button (click)="connectMember(communityProfileData)">
+						<i class="fa fa-plug" aria-hidden="true"></i>
+					</button>
+				</p>
+				<p *ngIf="status === 0 && (communityProfileData?.id != my_id)">
+					<button ion-button disabled="true">
+						<i class="fa fa-paper-plane-o"></i>
+					</button>
+				</p>
+				<p *ngIf="status === 2 && (communityProfileData?.id != my_id)">
+					<button ion-button disabled="true">
+						<i class="fa fa-paper-plane-o"></i>
+					</button>
+				</p>
+				<p *ngIf="status === 1 && (communityProfileData?.id != my_id)">
+					<button ion-button disabled="true">
+						<i class="fa fa-share-alt"></i>
+					</button>
+				</p>
+				<p *ngIf="status === 1 && (communityProfileData?.id != my_id)">
+					<button ion-button (click)="messageModel(communityProfileData)">
+						<i class="fa fa-commenting-o"></i>
+					</button>
+				</p>
+			</ion-col>
+		</ion-row>
+		<br/>
+		<ion-card class="conn-seg">
+			<ion-segment [(ngModel)]="community">
+				<ion-segment-button (click)="Activity(communityProfileData?.id)" value="activity">
+					Activity
+				</ion-segment-button>
+				<ion-segment-button (click)="Communities(communityProfileData?.id)" value="communities">
+					Communities
+				</ion-segment-button>
+				<ion-segment-button *ngIf="connection == 'true'" (click)="Connections(communityProfileData?.id,'')" value="connections">
+					Connections
+				</ion-segment-button>
+			</ion-segment>
+		</ion-card>
 
 
-		    <hr/>
-		  
-		<ion-segment [(ngModel)]="community">
-	        <ion-segment-button (click)="Activity(communityProfileData?.id)" value="activity">
-	          Activity
-	        </ion-segment-button>
-	        <ion-segment-button (click)="Communities(communityProfileData?.id)" value="communities">
-	          Communities
-	        </ion-segment-button>
-	        <ion-segment-button *ngIf="connection == 'true'" (click)="Connections(communityProfileData?.id,'')" value="connections">
-	          Connections
-	        </ion-segment-button>
-	    </ion-segment>
-  
-		
-		</div>
-		
-		
-		<div [ngSwitch]="community">
-       		
-		    <ion-list *ngSwitchCase="'activity'">
-			  <div  *ngIf="status === 1" class="updated-staus-btn">
-				 <h2>Update Status</h2>
-			 <ion-item> 	
-				<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
-	            </ion-textarea>
-           	 </ion-item>
-			<div  class="mem-name-update">
-		    	<ion-row>
-					<ion-col>
-				<button ion-button icon-only class="video-c" (click)="accessGallery()"><i class="fa fa-picture-o"></i>&nbsp; Add photos</button>
-				<img [src]="base64Image" *ngIf="base64Image" />
-				<button ion-button (click)="addVideos()" icon-only medium class="video-cv"><i class="fa fa-video-camera"></i>&nbsp; Add Videos</button>
-				<button ion-button medium icon-only (press)="pressevent(communityProfileData?.id)" 
-				(click)="addUserPosts(communityProfileData?.id)" class="postedimgvideos"><i class="fa fa-paper-plane"></i>&nbsp; Send</button>
-					</ion-col>
-				</ion-row> 
-				<div *ngIf(addVideo) class="post-urls">
-							<form [formGroup]="authForm">
-								<ion-row>
-									<ion-col>
-										<ion-item>
-											<ion-input type="url" placeholder="Enter Video Url..."  formControlName="videoUrl"
-		            						[class.invalid]="!authForm.controls.videoUrl.valid && (authForm.controls.videoUrl.dirty )">
-											</ion-input>	
-										</ion-item>
+	</div>
+
+
+	<div [ngSwitch]="community" class="wallcontent">
+		<ion-list *ngSwitchCase="'activity'" class="communityDetails">
+			<div *ngIf="status === 1" class="mem-name-update">
+				<h2>Update Status</h2>
+				<ion-item>
+					<ion-textarea [(ngModel)]="post" type="text" placeholder="Whats in your mind?">
+					</ion-textarea>
+				</ion-item>
+				<div class="posted-video-img">
+					<ion-row class="postVideoImage">
+						<ion-col>
+							<button ion-button icon-only class="img-upload" (click)="accessGallery()">
+								<i class="fa fa-picture-o"></i>&nbsp; Add photos</button>
+							<img [src]="base64Image" *ngIf="base64Image" />
+							<button ion-button (click)="addVideos()" icon-only medium class="video-upload">
+								<i class="fa fa-video-camera"></i>&nbsp; Add Videos</button>
+							<div *ngIf="addVideo" class="post-urls">
+								<form [formGroup]="authForm">
+									<ion-row>
+										<ion-col>
+											<ion-item>
+												<ion-input type="url" placeholder="Enter Video Url..." formControlName="videoUrl" [class.invalid]="!authForm.controls.videoUrl.valid && (authForm.controls.videoUrl.dirty )">
+												</ion-input>
+											</ion-item>
 											<small>( Youtube,Dailymotion,Vimeo,Wine)
-									</small>
-									</ion-col>
+											</small>
+										</ion-col>
 									</ion-row>
-							<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
-	                				<p style="color:red;font-size: 14px;" class="valid">Please enter valid video url</p>
-           							</div>
-							</form>
+									<div *ngIf="!authForm.controls.videoUrl.valid  && (authForm.controls.videoUrl.dirty || submitAttempt)">
+										<p style="color:red;font-size: 14px;" class="valid">Please enter valid video url</p>
+									</div>
+								</form>
 							</div>
-		   	</div>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col text-right>
+							<button ion-button medium icon-only (press)="pressevent(communityProfileData?.id)" (click)="addUserPosts(communityProfileData?.id)"
+							 class="postedimgvideos">
+								Post</button>
+						</ion-col>
+					</ion-row>
 				</div>
-	 		<ion-list *ngFor="let community of communityProfile; let i=index">
+			</div>
 
- 			<ion-card class="listed-comments">
- 				<ion-item text-wrap>
-	      			<ion-row>
-	      				<ion-col width-20 *ngIf = "community?.community_logo != null">
-	        				<ion-avatar item-left class="image-profile">
-		          				<img [src]="imageUrl+community?.community_logo" 
-		          					[hidden]="!community?.community_logo"
-		          					(click)="goBackToCommunity(community.com_id)">
-		        			</ion-avatar>
-	        			</ion-col><br>
-	        			<ion-col width-20 *ngIf = "community?.community_logo == null">
-	        				<ion-avatar item-left class="image-profile">
-		          				<img [src]="imageUrl+community?.avatar" 
-		          					[hidden]="!community?.avatar"
-		          					(click)="goBackToProfile(community.uid)">
-		        			</ion-avatar>
-	        			</ion-col><br>
-	        				<ion-col width-60 *ngIf = "community?.community_logo != null">
-		        		
-			          		<h2 text-wrap (click)="goBackToCommunity(community.com_id)">{{community.community_name}}</h2>
-			          		<!-- 	<p class="time-datem"><i class="fa fa-clock-o"></i>
-			          		{{community.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
-			          		</p> -->
-			          			<p class="time-datem"><i class="fa fa-clock-o"></i>
-			          		{{community.created_at}}
-			          		</p>
-			          	
-						</ion-col>
-	        			<ion-col width-60 *ngIf = "community?.community_logo == null">
-		        		
-			          			<h2 text-wrap (click)="goBackToProfile(community.uid)">{{community.user_name}}</h2>
-			          			<p class="time-datem"><i class="fa fa-clock-o"></i>
-			          		{{community.created_at | amDateFormat: 'YYYY-MM-DD HH:mm' | amTimeAgo}}
-			          		</p>
-			          	
-						</ion-col>
-						<ion-col width-20>
-			  				<button *ngIf="community?.uid == my_id" ion-button color="dark" clear (click)="openMenu(community.id)">
-		          			<i class="fa fa-angle-down"></i>
-		          		</button>
-	          			</ion-col>
-	       			</ion-row>
-	    		</ion-item>
-
-	       	 		<div class="posted-area">
+			<ion-list *ngFor="let community of communityProfile; let i=index">
+				<ion-card class="listed-comments">
+					<ion-item text-wrap>
+						<ion-row>
+							<ion-col col-2 *ngIf="community?.community_logo != null">
+								<ion-avatar item-left class="image-profile">
+									<img [src]="imageUrl+community?.community_logo" [hidden]="!community?.community_logo" (click)="goBackToCommunity(community.com_id)">
+								</ion-avatar>
+							</ion-col>
+							<br>
+							<ion-col col-2 *ngIf="community?.community_logo == null">
+								<ion-avatar item-left class="image-profile">
+									<img [src]="imageUrl+community?.avatar" [hidden]="!community?.avatar" (click)="goBackToProfile(community.uid)">
+								</ion-avatar>
+							</ion-col>
+							<br>
+							<ion-col col-9 *ngIf="community?.community_logo != null">
+								<h2 text-wrap (click)="goBackToCommunity(community.com_id)">{{community.community_name}}</h2>
+								<p class="time-datem">
+									<i class="fa fa-clock-o"></i>
+									{{community.created_at}}
+								</p>
+							</ion-col>
+							<ion-col col-9 *ngIf="community?.community_logo == null">
+								<h2 text-wrap (click)="goBackToProfile(community.uid)">{{community.user_name}}</h2>
+								<p class="time-datem">
+									<i class="fa fa-clock-o"></i>
+									{{community.created_at}}
+								</p>
+							</ion-col>
+							<ion-col col-1>
+								<button *ngIf="community?.uid == my_id" ion-button color="dark" clear (click)="openMenu(community.id)">
+									<i class="fa fa-angle-down"></i>
+								</button>
+							</ion-col>
+						</ion-row>
+					</ion-item>
+					<div class="posted-area">
 						<ion-card-content>
-			          			<p item-text-wrap class="feed-post" 
-			          			[innerHTML]="community.post_message">
-			          			<a href=""></a>{{community.post_message}}</p>
+							<p item-text-wrap class="feed-post" [innerHTML]="community.post_message">
+								<a href=""></a>{{community.post_message}}</p>
 						</ion-card-content>
 						<ion-card-content [hidden]="!community?.post_image">
-							<img  [src]="imageUrl+community?.post_image">
-						</ion-card-content><br/>
-		       			<ion-card-content [hidden]="!community?.post_video" class="video-updates">
+							<img [src]="imageUrl+community?.post_image">
+						</ion-card-content>
+						<br/>
+						<ion-card-content [hidden]="!community?.post_video" class="video-updates">
 							<iframe [src]="cleanURL(community?.post_video)" frameborder="0">
-			         		</iframe>
-		       			</ion-card-content>
-		       			<ion-card-content [hidden]="!community?.metalink_image">
-		          			<img  [src]="community.metalink_image" (click)="openUrl(community.metalink_url)" 
-		          			[hidden]="!community?.metalink_image">
-	       				</ion-card-content>
-	       				<ion-card-content class="video-updates" [hidden]="!community?.metalink_title">
+							</iframe>
+						</ion-card-content>
+						<ion-card-content [hidden]="!community?.metalink_image">
+							<img [src]="community.metalink_image" (click)="openUrl(community.metalink_url)" [hidden]="!community?.metalink_image">
+						</ion-card-content>
+						<ion-card-content class="video-updates" [hidden]="!community?.metalink_title">
 							<p (click)="openUrl(community.metalink_url)">{{community.metalink_title}}
 							</p>
-	         			</ion-card-content>
-	         			<ion-card-content class="video-updates" 
-	         				[hidden]="!community?.metalink_description">
+						</ion-card-content>
+						<ion-card-content class="video-updates" [hidden]="!community?.metalink_description">
 							<p (click)="openUrl(community.metalink_url)">{{community.metalink_description}}</p>
-	         			</ion-card-content>
-	       	 		</div>
-	       	 		<div class="comment-liks">
-	      				<ion-row>
-		        			<ion-col text-left width-30 style="padding:0px !important;">
-			          			<button  *ngIf=(community.likes.emoji)
-			          			[innerHTML]="community.likes.emoji | emojis" (click)="emojiPicker($event,community.id)"></button>
-			          			<button ion-button clear small *ngIf=(!(community.likes.emoji)) ion-button  clear small (click)="emojiPicker($event,community.id)">
-								<p *ngIf="community.likecount != 0"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp; {{community.likecount}}&nbsp;Likes</p>
-								<p *ngIf="community.likecount == 0"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;Like</p>
+						</ion-card-content>
+					</div>
+					<div class="comment-liks">
+						<ion-row>
+							<ion-col text-left style="padding:0px !important;">
+								<button *ngIf=(community.likes.emoji) [innerHTML]="community.likes.emoji | emojis" (click)="emojiPicker($event,community.id)"></button>
+								<button ion-button clear small *ngIf=(!(community.likes.emoji)) ion-button clear small (click)="emojiPicker($event,community.id)">
+									<p *ngIf="community.likecount != 0" class="liks-comments">
+										<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp; {{community.likecount}}&nbsp;Likes</p>
+									<p *ngIf="community.likecount == 0" class="liks-comments">
+										<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;Like</p>
 								</button>
-		        			</ion-col>
-		        	
-		        			<ion-col text-left width-30 style="padding:0px !important;">
-			          			<button ion-button clear small (click)="showComment(community)">
-			          				<p *ngIf="community.comment_count != 0"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{community.comment_count}}&nbsp;Comments</p>
-			          				<p *ngIf="community.comment_count == 0"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;Comment</p>
-			          			</button>
-		          			</ion-col>
-		          		<ion-col text-left width-30 style="padding:0px !important;">
-				    	<button ion-button clear small *ngIf="!community.likecount == 0">
-  							<p>&nbsp;{{community.likecount}}+like it</p>
-				      	</button>
-				    </ion-col>
-	      				</ion-row>
+							</ion-col>
+
+							<ion-col text-left style="padding:0px !important;">
+								<button ion-button clear small (click)="showComment(community)">
+									<p *ngIf="community.comment_count != 0" class="liks-comments">
+										<i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;{{community.comment_count}}&nbsp;Comments</p>
+									<p *ngIf="community.comment_count == 0" class="liks-comments">
+										<i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;Comment</p>
+								</button>
+							</ion-col>
+							<ion-col text-left style="padding:0px !important;">
+								<button ion-button clear small *ngIf="!community.likecount == 0">
+									<p class="liks-comments">&nbsp;{{community.likecount}}+like it</p>
+								</button>
+							</ion-col>
+						</ion-row>
 					</div>
-	      		</ion-card>
-	      	</ion-list>
-				<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-   					<ion-infinite-scroll-content></ion-infinite-scroll-content>
-  				</ion-infinite-scroll>
+				</ion-card>
+			</ion-list>
+			<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+				<ion-infinite-scroll-content></ion-infinite-scroll-content>
+			</ion-infinite-scroll>
 		</ion-list>
-		
-		<ion-list *ngSwitchCase="'communities'">
-		<div class="community-div">
-			<ion-card *ngFor="let community of getCommunityMembers" class="community-layout">
-				<div class="community-img">
-			 		 <img (click)="goBackToCommunity(community.id)" style="width:100%; height:200px;" 
-			 		 [src]="imageUrl+community?.banner" 	 		 
-			 		 [hidden]="!community?.banner" />
-					<div class="label-opc">
-					   <ion-item text-wrap style="text-align:left !important;"  
-					   (click)="goBackToCommunity(community.id)" [hidden]="!community.community_name">
-					   <p>{{community.community_name}}</p>
-					   </ion-item>
-				   	</div>
-		   		</div>
+
+
+		<ion-list *ngSwitchCase="'communities'" class="communityList">
+			<div class="community-div">
+				<ion-card *ngFor="let community of getCommunityMembers" class="community-layout" style="position:relative;">
+					<div class="community-img">
+						<img (click)="goBackToCommunity(community.id)" style="width:100%; height:200px;" [src]="imageUrl+community?.banner" [hidden]="!community?.banner"
+						/>
+						<div class="label-opc">
+							<ion-item text-wrap style="text-align:left !important;" (click)="goBackToCommunity(community.id)" [hidden]="!community.community_name">
+								<p>{{community.community_name}}</p>
+							</ion-item>
+						</div>
+						<span [hidden]="!community.category_name">
+							<label class="labels-bds"> {{community.category_name}}</label>
+						</span>
+					</div>
+				</ion-card>
+			</div>
+			<ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
+				<ion-infinite-scroll-content></ion-infinite-scroll-content>
+			</ion-infinite-scroll>
+		</ion-list>
+
+		<ion-list *ngSwitchCase="'connections'" class="connnectList">
+			<div class="ion-searchbar">
+				<ion-row>
+					<ion-col col-12>
+						<ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
+					</ion-col>					
+				</ion-row>
+			</div>	
+
+			<ion-card *ngFor="let connection of allConnections">
+				<ion-item>
+					<ion-row>
+						<ion-col col-2>
+							<ion-avatar item-left>
+								<img src="{{imageUrl+connection?.avatar}}" [hidden]="!connection?.avatar" (click)="loadThisPage(connection?.id)">
+							</ion-avatar>
+						</ion-col>
+						<ion-col col-10 class="inbox-sends">
+							<h6 (click)="loadThisPage(connection?.id)">{{connection?.connections?.name}}</h6>
+							<h5 style="color: #019746;" *ngIf="connection?.user_type == 'sponsor'">Sponsor</h5>
+                			<h5 style="color: #42436a;" *ngIf="connection?.user_type == 'elder'">Elder</h5>
+							<p>
+								<i class="fa fa-map-marker" [hidden]="!connection?.connections?.location"></i>
+								<span>{{connection?.connections?.location}}</span>
+							</p>
+						</ion-col>
+					</ion-row>
+				</ion-item>
 			</ion-card>
-		</div>
-				<ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
-	   				<ion-infinite-scroll-content></ion-infinite-scroll-content>
-	  			</ion-infinite-scroll>
-		</ion-list>
-	
-		<ion-list *ngSwitchCase="'connections'">
-		<ion-row>
-			  	<ion-col>
-				  	<div>
-						<ion-searchbar (ionInput)="setItems($event)">
-						</ion-searchbar>
-					</div>
-				</ion-col>
-			</ion-row>
-		<ion-card *ngFor="let connection of allConnections">
-			
-			<ion-item>
-	   			<ion-row>
-		    		<ion-col width-20>
-		    			<ion-avatar item-left>
-		    				<img src="{{imageUrl+connection?.avatar}}" [hidden]="!connection?.avatar" 
-		    				(click)="loadThisPage(connection?.id)">
-		    			</ion-avatar>
-		    		</ion-col>
-	    			<ion-col width-80 class="inbox-sends">
-	    				<h1 (click)="loadThisPage(connection?.id)">{{connection?.connections?.name}}</h1>
-		 					<p><i class="fa fa-map-marker" [hidden]="!connection?.connections?.location"></i><span>{{connection?.connections?.location}}</span></p>
-	    			</ion-col>
-	      		</ion-row>  
-</ion-item>				
-	  		</ion-card>
-		  		<ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
-	   				<ion-infinite-scroll-content></ion-infinite-scroll-content>
-	  			</ion-infinite-scroll>
+			<ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
+				<ion-infinite-scroll-content></ion-infinite-scroll-content>
+			</ion-infinite-scroll>
 		</ion-list>
 	</div>
 	<ion-fab bottom right edge class="scroll">
-    <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
-    </ion-icon></button>
-  </ion-fab>
+		<button ion-fab mini (click)="scrollToTop()">
+			<ion-icon name="arrow-dropup">
+			</ion-icon>
+		</button>
+	</ion-fab>
 </ion-content>
-	

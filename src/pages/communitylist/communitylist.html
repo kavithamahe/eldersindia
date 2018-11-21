@@ -5,112 +5,114 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-	 <ion-title text-center>Communities</ion-title>
+    <ion-title text-center>Communities</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="dashboardPage()">
-          <ion-icon name="home"></ion-icon>
+        <ion-icon name="home"></ion-icon>
       </button>
-    </ion-buttons>
-   
-    <ion-buttons right>
-      <button ion-button icon-only (click)="searchCall(searchButton)">
-          <i class="fa fa-search" aria-hidden="true"></i>
-      </button>
-    </ion-buttons>
+    </ion-buttons>   
   </ion-navbar>
 </ion-header>
-<ion-content>
-<ion-card class="segment-card">
-     <ion-segment [(ngModel)]="community" class="segment-top">
-        <ion-segment-button (click)="myCommunity()" value="my_community">
-          My Communities
-        </ion-segment-button>
-        <ion-segment-button (click)="otherCommunity()" value="other_community">
-          Active Communities
-        </ion-segment-button>
-      </ion-segment>
-</ion-card>
-    <div [ngSwitch]="community">
-      <ion-slides (ionSlideWillChange)="slideChanged($event)">
+
+<ion-content class="communityList">
+  <ion-card class="conn-seg">
+    <ion-segment [(ngModel)]="community" class="segment-top">
+      <ion-segment-button (click)="myCommunity()" value="my_community">
+        My Communities
+      </ion-segment-button>
+      <ion-segment-button (click)="otherCommunity()" value="other_community">
+        Active Communities
+      </ion-segment-button>
+    </ion-segment>
+  </ion-card>
+
+  <div [ngSwitch]="community">
+
+    <ion-slides (ionSlideWillChange)="slideChanged($event)">
       <ion-slide>
-      <ion-list>
-        <div *ngIf(searchButton) class="select-cat">
-          <ion-list>
-            <ion-item>
-	           <ion-label>select category</ion-label>
-                <ion-select  (ionChange)='getCategory($event)' >
-                  <ion-option *ngFor="let category of categoryLists" 
-                  value={{category.id}}>{{category.name}}
+        <ion-list>
+          <div class="selectCategory">
+            <ion-list>
+              <ion-item>
+                <ion-label>select category</ion-label>
+                <ion-select (ionChange)='getCategory($event)'>
+                  <ion-option *ngFor="let category of categoryLists" value={{category.id}}>{{category.name}}
                   </ion-option>
                 </ion-select>
-			     </ion-item>
-          </ion-list>
-        </div>
-        <div *ngIf(searchButton)>
-          <ion-searchbar [(ngModel)]="searchTextBox" (ionInput)="getItems($event)">
-          </ion-searchbar>
-        </div>
-	<div class="community-div">
-        <ion-card style="position:relative;" *ngFor="let community of communitylists; let i= index" 
-        (click)="getPost(community.id)">
-          <div class="community-img">
-               <img  [src]="imageUrl+community?.banner" style="width:100%; height:200px;" [hidden]="!community?.banner" /> 
-        			   <div class="label-opc">
-            			   <ion-item text-wrap style="text-align:left !important;"  
-                     (click)="getPost(community.id)"><p>{{community.community_name | words :3: '....'}}</p></ion-item>
-        			   </div>
-
-                <span [hidden]="!community.category_name"> 
+              </ion-item>
+            </ion-list>
+            <div class="Autosearch">
+                <ion-searchbar [(ngModel)]="searchTextBox" (ionInput)="getItems($event)">
+                </ion-searchbar>
+              </div>
+          </div>
+         
+          <div class="community-div">
+            <ion-card style="position:relative;" *ngFor="let community of communitylists; let i= index" (click)="getPost(community.id)">
+              <div class="community-img">
+                <img [src]="imageUrl+community?.banner" style="width:100%; height:200px;" [hidden]="!community?.banner" />
+                <div class="label-opc">
+                  <ion-item text-wrap style="text-align:left !important;" (click)="getPost(community.id)">
+                    <p>{{community.community_name}}</p>
+                  </ion-item>
+                </div>
+                <span [hidden]="!community.category_name">
                   <label class="labels-bds"> {{community.category_name}}</label>
                 </span>
-				  </div>
-        </ion-card>
-</div>
-   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-      </ion-list>
+              </div>
+            </ion-card>
+          </div>
+          <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </ion-list>
       </ion-slide>
+
+
       <ion-slide>
-      <ion-list >
-        <div *ngIf(searchButton) class="select-cat">
-          <ion-list>
-            <ion-item>
+        <ion-list>
+          <div class="select-cat">
+            <ion-list>
+              <ion-item>
                 <ion-label>select category</ion-label>
                 <ion-select (ionChange)='setCategory($event)'>
                   <ion-option *ngFor="let category of categoryLists" value={{category.id}}> {{category.name}}
-									</ion-option>
+                  </ion-option>
                 </ion-select>
-            </ion-item>
-          </ion-list>
-        </div>
-        <div *ngIf(searchButton)>
-          <ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
-        </div>
-		<div class="community-div">
-        <ion-card *ngFor="let community of communitylists" class="community-layout">
-          <div class="community-img">
-            <img  [src]="imageUrl+community?.banner" style="width:100%; height:200px;" (click)="getPost(community.id)" [hidden]="!community?.banner" />
-			  <div class="label-opc">
-			<ion-item text-wrap style="text-align:left !important;" (click)="getPost(community.id)"><p>{{community.community_name | words :2: '...'}}</p></ion-item >
-			 </div>
-              <span [hidden]="!community.category_name"> 
-                <label class="labels-bds"> {{community.category_name}}</label>
-              </span>
+              </ion-item>
+            </ion-list>
           </div>
-         
-        </ion-card>
-		</div>
-        <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-       <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-      </ion-list>
+          <div>
+            <ion-searchbar (ionInput)="setItems($event)"></ion-searchbar>
+          </div>
+          <div class="community-div">
+            <ion-card *ngFor="let community of communitylists" class="community-layout">
+              <div class="community-img">
+                <img [src]="imageUrl+community?.banner" style="width:100%; height:200px;" (click)="getPost(community.id)" [hidden]="!community?.banner"
+                />
+                <div class="label-opc">
+                  <ion-item text-wrap style="text-align:left !important;" (click)="getPost(community.id)">
+                    <p>{{community.community_name}}</p>
+                  </ion-item>
+                </div>
+                <span [hidden]="!community.category_name">
+                  <label class="labels-bds"> {{community.category_name}}</label>
+                </span>
+              </div>
+
+            </ion-card>
+          </div>
+          <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </ion-list>
       </ion-slide>
-      </ion-slides>
-    </div>
-   <ion-fab bottom right *ngIf="scrollTop">
-    <button ion-fab mini (click)="scrollToTop()"><ion-icon name="arrow-dropup">
-    </ion-icon></button>
+    </ion-slides>
+  </div>
+  <ion-fab bottom right *ngIf="scrollTop">
+    <button ion-fab mini (click)="scrollToTop()">
+      <ion-icon name="arrow-dropup">
+      </ion-icon>
+    </button>
   </ion-fab>
 </ion-content>
-  

@@ -1,123 +1,246 @@
 page-community {
- .toolbar-title-md{ text-align:center;}
-  .toolbar-title-ios{ text-align:center;}
-.one-half-responsive{ margin:0px; border-bottom:1px solid #ccc; background:#fff;}
-.image-column-left img {
-    /*border-radius: 0 100px 100px 0; */
-    float: left;
-    height:90px;
-   /* margin-left: -50px;*/     
-    margin-right: 10px;
-    width:115px; border:1px solid #ccc;
+    .CommunityDetails {
+        background: #f7faff;
+        .one-half-responsive {
+            .image-column-left {
+                margin: 0;
+                padding: 0;
+                img {
+                    float: left;
+                    margin: 0px 15px 5px 0px;
+                    border: 2px dashed #949494;
+                }
+                strong {
+                    font-size: 18px;
+                    color: #000;
+                    padding-bottom: 10px;
+                }
+                em {
+                    color: #747b82;
+                    line-height: 25px;
+                }
+            }
+        }
+        .memberareas {
+            ion-item {
+                .item-inner {
+                    padding-right: 0;
+                    border-bottom: none;
+                    .input-wrapper {
+                        ion-label {
+                            margin-right: 0;
+                            ion-row {
+                                ion-col {
+                                    button {
+                                        background: #019746;
+                                        color: #fff;
+                                        border-radius: 30px;
+                                        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.08);
+                                        .button-inner {
+                                            ion-icon {
+                                                padding-right: 8px;
+                                            }
+                                        }
+                                    }
+                                }
+                                &.mem-title {
+                                    padding: 15px 0px 10px;
+                                    border-top: 1px dotted #ccc;
+                                    border-bottom: 1px dashed #eee;
+                                    ion-col {
+                                        h1 {
+                                            color: #000;
+                                            font-size: 18px;
+                                            font-weight: 600;
+                                            margin-top: 8px;
+                                        }
+                                        .Invitebtn {
+                                            background-color: #ef7f16;
+                                            color: #fff;
+                                            padding: 5px 20px;
+                                            float: right;
+                                            margin: 0;
+                                            .button-inner {
+                                                ion-icon {
+                                                    padding: 0;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            ion-slides {
+                                background: #ececec;
+                                padding: 5px 5px;
+                                ion-slide {
+                                    margin: 0px 5px 0px 0px;
+                                    ion-item {
+                                        .item-inner {
+                                            border-bottom: none;
+                                            .input-wrapper {
+                                                ion-label {
+                                                    margin: 20px 0;
+                                                    text-align: center;
+                                                    background-color: #fff;
+                                                    ion-col {
+                                                        padding: 0 !important;
+                                                        ion-avatar {
+                                                            text-align: center;
+                                                            margin: 0px 0px 5px;
+                                                            img {
+                                                                width: 50px;
+                                                                height: 50px;
+                                                                margin: 0 auto;
+                                                            }
+                                                        }
+                                                        small {
+                                                            font-size: 14px;
+                                                            color: #ef7f17;
+                                                            text-align: center;
+                                                            font-weight: 500;
+                                                            padding: 0px 0px;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .mem-name-update {
+            padding: 15px 10px;
+            background: #ffffff;
+            border-radius: 5px;
+            border: 2px dashed #ececec;
+            h2 {
+                color: #2c4286;
+                font-size: 19px;
+                font-weight: 600;
+            }
+            ion-item {
+                .item-inner {
+                    padding-right: 0;
+                    border-bottom: none;
+                    .input-wrapper {
+                        ion-label {
+                            margin-right: 0;
+                            textarea {
+                                width: 100%;
+                                border-right: none;
+                                border-left: none;
+                                border-top: none;
+                                border-bottom: 1px solid #ccc;
+                                min-height: 50px;
+                            }
+                        }
+                    }
+                }
+            }
+            .posted-video-img {
+                ion-row {
+                    ion-col {
+                        .img-upload,
+                        .video-upload {
+                            background: #42436a;
+                            color: #fff;
+                            text-transform: capitalize;
+                            border-radius: 20px;
+                            padding: 5px 20px;
+                        }
+                        .postedimgvideos {
+                            background: #ef7f16;
+                            color: #fff;
+                            text-transform: capitalize;
+                            border-radius: 20px;
+                            padding: 5px 20px;
+                            margin: 10px 0 0;
+                            float: right;
+                        }
+                    }
+                    &.postVideoImage {
+                        padding-bottom: 10px;
+                    }
+                }
+            }
+        }
+        ion-list {
+            padding: 0px 0;
+            .listed-comments {
+                border-radius: 5px;
+                box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.12);
+                margin: 15px 0px 15px 0px;
+                width: 100%;
+                ion-item {
+                    .item-inner {
+                        padding-right: 0;
+                        border-bottom: none;
+                        .input-wrapper {
+                            ion-label {
+                                margin: 10px 0 0 0;
+                                ion-row {
+                                    border-bottom: 1px dotted #ccc;
+                                    ion-col {
+                                        ion-avatar {
+                                            margin: 0px;
+                                            img {
+                                                width: 45px;
+                                                height: 45px;
+                                            }
+                                        }
+                                        h2 {
+                                            color: #42436a;
+                                            font-weight: 500;
+                                            font-size: 16px;
+                                            padding-top: 5px;
+                                        }
+                                        p {
+                                            color: #999;
+                                            font-size: 14px !important;
+                                            padding: 5px 0px;
+                                        }
+                                        button {
+                                            margin: 0;
+                                            padding: 0;
+                                            font-size: 20px;
+                                            color: #333;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .comment-liks {
+                    ion-row {
+                        ion-col {
+                            button {
+                                padding: 0px 5px;
+                                text-transform: capitalize;
+                                width: 100%;
+                                text-align: left;
+                                height: 35px;
+                                .button-inner {
+                                    .liks-comments {
+                                        color: #666;
+                                        font-weight: 400;
+                                        font-size: 16px !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
-
-.image-column-left strong {
-    display: block;
-    font-size:19px !important;
-    font-weight:400 !important;
-    padding-bottom: 5px;font-family: 'Muli', sans-serif; letter-spacing:0.2px;
-    width: 100%;
-}
-.wel-comemem {
-    color:#007994 !important; font-weight:400 !important;
-    font-size:19px !important;letter-spacing:0.2px;
-    margin: 0;
-   font-family: 'Muli', sans-serif; 
-}
-.image-column-left em {
-    color:#444 !important; line-height:25px;
-    display: block;
-    font-size:17px;
-    font-style: normal;letter-spacing:0.2px;
-    font-weight: 400; 
-    font-family: 'Muli', sans-serif; 
-  
-}
-.mem-title h1 {
-    color:#007994 !important;
-    font-size:19px !important;
-    font-weight:400 !important; padding-bottom:10px;
-}
-.memberareas{border-bottom:1px solid #ccc;}
-.memberareas .item-md .item-inner .input-wrapper .label-md{ margin:5px 8px 13px 0px;}
-.memberareas .item-md .item-inner .input-wrapper .label-md button{ background:#FE5420!important;
-    font-size:16px;
-    font-weight:600; height:35px; border-radius:20px;
-    padding: 10px;
-    text-transform: capitalize;}
-.memberareas .item-md .item-inner .input-wrapper .label-md img { border:1px solid #ccc;}
-	
-.memberareas .item-ios .item-inner .input-wrapper .label-ios{ margin:5px 8px 13px 0px;}
-.memberareas .item-ios .item-inner .input-wrapper .label-ios button{ background:#FE5420!important;
-    font-size:16px;
-    font-weight:600; height:35px;border-radius:20px;
-    padding: 10px;
-    text-transform: capitalize;}
-	.item-md.item-block .item-inner{ border-bottom:none;}
-		.item-ios.item-block .item-inner{ border-bottom:none;}
-.mem-name {
-    float: left; 
-    font-size: 12px !important;
-    text-align:center; font-weight:600;
-    overflow: hidden;
-    text-overflow: ellipsis;font-family: 'Muli', sans-serif; 
-    white-space: nowrap;
-    width:45px; color:#025fa9;
-}
-.mem-name-update{ border-bottom:1px solid #ccc;}
-.mem-name-update h2 {
-    color: hsl(234, 39%, 42%); padding-top:15px;
-    font-size:19px !important; font-weight:600;
-    padding-bottom:10px;
-}
-.video-updates iframe{ border:1px solid #ccc; width:100%;}
-.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:#fff !important;box-shadow:0 -1px 0 0 #fff inset!important;}
-.item-md.item-input.input-has-focus .item-inner{border-bottom-color:none !important;box-shadow:none !important;}
-.item-ios.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner{border-bottom-color:none !important;box-shadow:none !important;}
-.item-ios.item-input.input-has-focus .item-inner{border-bottom-color:none !important;box-shadow:none !important;}
-.mem-name-update ion-textarea{ border:1px solid #ccc; margin-bottom:20px;font-family: 'Muli', sans-serif; padding:3px; font-weight:600; }
-.posted-video-img ion-row ion-col button{padding:10px;}
-.posted-video-img ion-row ion-col button.img{ border-radius:30px; background:#025FA9;font-size:15px; font-weight:600; float:left; width:48%;  height:35px;text-transform: capitalize;font-family: 'Muli', sans-serif; }
-.posted-video-img ion-row ion-col button.img i{ font-size:17px; font-weight:400;text-shadow: 1px 1px 1px black; }
-.posted-video-img ion-row ion-col button.video{ background:#025FA9;font-size:15px; border-radius:30px; font-weight:600; width:48%; float:right;  height:35px;text-transform: capitalize;font-family: 'Muli', sans-serif; }
-.posted-video-img ion-row ion-col button.video i{ font-size:17px; font-weight:400;text-shadow: 1px 1px 1px black; }
-.posted-video-img ion-row ion-col button.postedimgvideos{ border-radius:30px; background:#FE5722;font-size:16px; font-weight:600;  text-transform: capitalize; width:99.6%; height:35px; float:left;font-family: 'Muli', sans-serif; }
-.posted-video-img ion-row ion-col button.postedimgvideos i{ font-size:17px; font-weight:400;text-shadow: 1px 1px 1px black; }
-
-.listed-comments{ border:1px solid #E6E6FA; margin:0px !important; width:auto !important;}
-.listed-comments .item-md .item-inner .input-wrapper .label-md img {border-radius:0px !important;}
-.listed-comments .item-md .item-inner .input-wrapper .label-md{ margin:0px !important;}
-.listed-comments .item-md .item-inner .input-wrapper .label-md h2{ font-size:19px; font-weight:400; color:#007994 !important;font-family: 'Muli', sans-serif; padding-top:10px;}
-.listed-comments .item-md .item-inner .input-wrapper .label-md p{ font-size:12px !important;font-weight:600; color:#909090;font-family: 'Muli', sans-serif; }
-
-.listed-comments .item-ios .item-inner .input-wrapper .label-ios img {border-radius:0px !important;}
-.listed-comments .item-ios .item-inner .input-wrapper .label-ios{ margin:0px !important;}
-.listed-comments .item-ios .item-inner .input-wrapper .label-ios h2{ font-size:19px;font-weight:400; color:#007994 !important;font-family: 'Muli', sans-serif; padding-top:10px;}
-.listed-comments .item-ios .item-inner .input-wrapper .label-ios p{ font-size:12px !important;font-weight:600; margin:0px; color:#909090;font-family: 'Muli', sans-serif; }
-.post-urls ion-row ion-col .item-md .item-inner .input-wrapper ion-input.input-md .text-input-md{border:1px solid #ccc; margin-bottom:20px;font-family: 'Muli', sans-serif; width:99%; margin-left:3px; padding:8px;}
-.post-urls ion-row ion-col .item-ios .item-inner .input-wrapper ion-input.input-ios .text-input-ios{border:1px solid #ccc; margin-bottom:20px;font-family: 'Muli', sans-serif; width:99%; margin-left:3px; padding:8px;}
-.posted-video-img ion-row ion-col{padding:10px 0px 0px 0px;}
-.post-urls ion-row ion-col .item-md .item-inner{padding-right:0px;}
-.post-urls small{ font-size:13px; font-weight:400px; color:#666;font-family: 'Muli', sans-serif; text-align:left; width:100%; float:left; }
-p.valid{ color:red; font-size:13px !important;font-family: 'Muli', sans-serif;}
-.feed-post{color:#777; font-size:17px !important;font-family: 'Muli', sans-serif; font-weight:400;}
-.posted-area .card-content-md{ padding:5px;}
-.posted-area .card-content-ios{ padding:5px;}
-
-.comment-liks ion-row{ background:#F5F5F5;}
-.comment-liks ion-row .button-clear-md{ height:35px;}
-.comment-liks ion-row .button-clear-ios{ height:35px;}
-.comment-liks ion-row ion-col button .button-inner p{color:#777; font-weight:600; font-size:13px !important;font-family: 'Muli', sans-serif;  text-transform: capitalize;}
-
-
-.bt-s .button-md{margin:0px; padding:0px;}
-.bt-s .button-md i.fa-times-circle{ font-size:17px; color:red; font-weight:400;}
-.bt-s .button-md i.fa-ellipsis-v{ font-size:17px; color:#1976D2; font-weight:400;}
-
-
-
-.bt-s .button-ios{margin:0px; padding:0px;}
-.bt-s .button-ios i.fa-times-circle{ font-size:17px; color:red; font-weight:400;}
-.bt-s .button-ios i.fa-ellipsis-v{ font-size:17px; color:#1976D2; font-weight:400;}
-
+.ios{
+    page-community {
+         top: 8px !important;
+    }   
 }

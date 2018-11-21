@@ -45,8 +45,8 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'getcancelPolicyConfig',_request,this.options)
       .map(res => res.json()); 
   }
-  serviceRequestStatus(searchText,status){
-     let _request= {"info":{"list":true,"sort":"","searchValue":searchText,"status":status,"token":""}};
+  serviceRequestStatus(searchText,status,sortby){
+     let _request= {"info":{"list":true,"sort":sortby,"searchValue":searchText,"status":status,"token":""}};
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
   }
@@ -121,6 +121,11 @@ rootUrl:any;
     "dedaction_amount":deductionamount,"payment_status":payment_status,"recurring_req_id":"","reduction_percentage":percentage,"service_cancel_amount":servicecancelamount,
   "package_id":package_id};
     return this.http.post(this.rootUrl+'razorPaymentResponseforCancel',_request,this.options)
+      .map(res => res.json());
+  }
+   updateServiceReceiveStatus(title,serviceId,service_type){
+     let _request= {"info":{"status":3,"id":serviceId,"comments":title,"service_type":service_type}};
+    return this.http.post(this.rootUrl+'updateServiceReceiveStatus',_request,this.options)
       .map(res => res.json());
   }
 }

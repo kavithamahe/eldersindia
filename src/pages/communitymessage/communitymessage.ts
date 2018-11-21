@@ -8,7 +8,6 @@ import { CommunityServices } from '../../providers/community-services';
 
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
-import { Transfer } from '@ionic-native/transfer';
 
 
 @Component({
@@ -36,7 +35,7 @@ export class CommunitymessagePage {
    user_type:any;
 
 
-  constructor(public storage:Storage,private transfer: Transfer,private filePath: FilePath,private fileChooser: FileChooser,public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams,public communityServices: CommunityServices, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
+  constructor(public storage:Storage,private filePath: FilePath,private fileChooser: FileChooser,public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams,public communityServices: CommunityServices, public formBuilder: FormBuilder, public viewCtrl: ViewController) {
   	   this.storage.ready().then(() => {
      storage.get('user_type').then((user_type) => { this.user_type=user_type;});
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});

@@ -67,7 +67,7 @@ Url:any;
      to_date,to_time,package_id,preferred_time,quantity,
      location_id,lead_time,vendor_id,datCount,service_costs,servicediscountcostss,paymenttype,paymentflag,discounts,totalservice_costss,discountcost,
      afterdiscount_one_service,servicediscountcost_one_service,discountpartial,base_cost,servicediscost,getCustomerBalanceAmount,get_custome_amount,get_custome_deliever_amount,
-     get_custome_service_cancel_amount,total_cost,total_service_cost){
+     get_custome_service_cancel_amount,total_cost,total_service_cost,coupon_id,coupan_code,discounted_cost,final_service_cost){
     let _request= {"Category_name":category,"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
 dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
 from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
@@ -78,7 +78,7 @@ serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id
 "discount":discounts,"discountcost":discountcost,"payment_type":paymenttype,"afterdiscount_one_service":afterdiscount_one_service,"servicediscountcost_one_service":servicediscountcost_one_service,
 "discountpartial":discountpartial,"base_cost":base_cost,"getCustomerBalanceAmount":getCustomerBalanceAmount,
 "get_custome_amount":get_custome_amount,"get_custome_deliever_amount":get_custome_deliever_amount,"get_custome_service_cancel_amount":get_custome_service_cancel_amount,"total_cost":total_cost,
-"total_service_cost":total_service_cost};
+"total_service_cost":total_service_cost,"coupen_code":coupan_code,"coupon_code_discount_cost":discounted_cost,"coupon_id":coupon_id,"final_service_cost_after_coupon_code_discount":final_service_cost};
     return this.http.post(rootUrl+'serviceRequestSubmitbeforePayment',_request,this.options)
       .map(res => res.json());
   }
@@ -88,7 +88,7 @@ serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id
     from_date,from_time,serviceType,selected_dates,time_slot,
      to_date,to_time,package_id,preferred_time,quantity,
      location_id,lead_time,vendor_id,paymentflag,base_cost,getCustomerBalanceAmount,get_custome_amount,get_custome_deliever_amount,
-     get_custome_service_cancel_amount,total_cost,total_service_cost){
+     get_custome_service_cancel_amount,total_cost,total_service_cost,coupon_id,coupan_code,discounted_cost,final_service_cost){
     let _request= {"Category_name":category,"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
 dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
 from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
@@ -96,7 +96,7 @@ from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_i
 serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
 ,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id,"paymentflag":paymentflag,"base_cost":base_cost,"getCustomerBalanceAmount":getCustomerBalanceAmount,
 "get_custome_amount":get_custome_amount,"get_custome_deliever_amount":get_custome_deliever_amount,"get_custome_service_cancel_amount":get_custome_service_cancel_amount,
-"total_cost":total_cost,"total_service_cost":total_service_cost,};
+"total_cost":total_cost,"total_service_cost":total_service_cost,"coupen_code":coupan_code,"coupon_code_discount_cost":discounted_cost,"coupon_id":coupon_id,"final_service_cost_after_coupon_code_discount":final_service_cost};
     return this.http.post(rootUrl+'serviceRequestSubmitbeforePayment',_request,this.options)
       .map(res => res.json());
   }
@@ -157,7 +157,7 @@ viewrecurring(sr_token)
       .map(res => res.json()); 
   }
 getPackageRequest(Url,searchText,searchemail,searchid,packstatus){
-       let _request= {info: {"list": true, "search": "","elder_name":searchText,"elder_email":searchemail,"txnid":searchid, "status": packstatus,"paymentStatus":"","reqType":"","token": null}};
+       let _request= {info: {"list": true, "search": "","elder_name":"","elder_email":searchemail,"txnid":searchid, "status": packstatus,"paymentStatus":"","reqType":"","token": null,"vendor_name":searchText}};
     return this.http.post(Url+`getPackageRequest`,_request,this.options)
       .map(res => res.json()); 
 }
@@ -178,11 +178,11 @@ getPackageRequestById(rootUrl,packageId){
     return this.http.post(rootUrl+'getServicesForByElders',_request,this.options)
       .map(res => res.json());
   }
-   getVendorpackageDetails(rootUrl,vendor_id,location_id){
+   getVendorpackageDetails(rootUrl,vendor_id,location_id,pack_id){
     if(location_id == undefined || location_id == ''){
       location_id= 'null';
     }
-    let _request= {"vendor_id": vendor_id, "location_id": location_id}
+    let _request= {"vendor_id": vendor_id, "location_id": location_id,"pack_id":pack_id}
     return this.http.post(rootUrl+'getVendorpackageDetails',_request,this.options)
       .map(res => res.json());
    }
@@ -271,8 +271,8 @@ getPackageRequestById(rootUrl,packageId){
       .map(res => res.json()); 
      }
       }
-  packageAvailAlert(selectedConnections,packId,service_quantity){
-     let _request= {"packId": packId, "elderId": selectedConnections,"service_quantity":service_quantity};
+  packageAvailAlert(selectedConnections,packId,service_quantity,location_id){
+     let _request= {"packId": packId, "elderId": selectedConnections,"service_quantity":service_quantity,"locationId":location_id};
     return this.http.post(this.rootUrl+'packageAvailAlert',_request,this.options)
       .map(res => res.json()); 
       }

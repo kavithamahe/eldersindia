@@ -4,6 +4,8 @@ import { Storage } from '@ionic/storage';
 import { PackageRequestPagePage }  from '../../pages/package-request/package-request';
 import { BlogListService } from '../../providers/blog-list-service';
  import { PackagepaymentPagePage } from '../../pages/packagepayment/packagepayment';
+ import { ServiceProvider } from '../../providers/service-provider';
+
 
 
 /*
@@ -32,7 +34,12 @@ location_id:any;
 service_quantity:any;
 packageAvailstatus:any;
 packageAvailresult:any;
-  constructor(public navParams: NavParams,public modalCtrl: ModalController,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
+coupan_code:any;
+coupon_id:any;
+discounted_cost:any;
+final_service_cost:any;
+coupandiscount:any;
+  constructor(public navParams: NavParams,public modalCtrl: ModalController,public providerService: ServiceProvider,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
 
   // constructor(public navParams: NavParams,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
 
@@ -59,7 +66,7 @@ packageAvailresult:any;
     this.viewCtrl.dismiss();
   }
  packageAvail(){
-         this.blogListService.packageAvailAlert(this.selectedConnections,this.packId,this.service_quantity).subscribe(connections => {
+         this.blogListService.packageAvailAlert(this.selectedConnections,this.packId,this.service_quantity,this.location_id).subscribe(connections => {
         this.packageAvailstatus=connections.status;
         this.packageAvailresult = connections.result;
      },
@@ -70,7 +77,7 @@ packageAvailresult:any;
   getPackageselder(){
   
     if(this.paymenttype == undefined){
-        this.blogListService.showToast("Please select above details");
+        this.blogListService.showToast("Please select the details");
       }
       else{
         if(this.paymenttype == "Offline Payment"){
@@ -90,6 +97,12 @@ packageAvailresult:any;
   })
     }
       else{
+           if(this.coupandiscount == "1"){
+        this.package_amount = this.final_service_cost;
+      }
+      else{
+        this.package_amount = this.package_amount;
+      }
      this.navCtrl.push(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
       "package_amount":this.package_amount});
       this.dismiss();
@@ -98,7 +111,7 @@ packageAvailresult:any;
   }
 
     getPackage(){
-       this.blogListService.packageAvailAlert(this.selectedConnections,this.packId,this.service_quantity).subscribe(connections => {
+       this.blogListService.packageAvailAlert(this.selectedConnections,this.packId,this.service_quantity,this.location_id).subscribe(connections => {
         this.packageAvailstatus=connections.status;
         this.packageAvailresult = connections.result;
      },
@@ -107,7 +120,7 @@ packageAvailresult:any;
   })
 
       if(this.selectedConnections == undefined || this.paymenttype == undefined){
-        this.blogListService.showToast("Please select above details");
+        this.blogListService.showToast("Please select the details");
       }
       else{
         if(this.paymenttype == "Offline Payment"){
@@ -127,6 +140,12 @@ packageAvailresult:any;
   })
     }
     else{
+      if(this.coupandiscount == "1"){
+        this.package_amount = this.final_service_cost;
+      }
+      else{
+        this.package_amount = this.package_amount;
+      }
       if(this.packageAvailstatus == 0){
           this.navCtrl.push(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
       "package_amount":this.package_amount});
@@ -140,6 +159,39 @@ packageAvailresult:any;
  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad GetpackagePagePage');
+  }
+  applyCoupan(){
+
+    let payment_data={"data":{"coupon_code_discount_cost":0,
+    "final_service_cost_after_coupon_code_discount":0,"vendor_id":this.vendor_id,
+    "packId":this.packId,"type":"package","amount":this.package_amount,"coupen_code":this.coupan_code,
+    "dependentid":this.selectedConnections}}
+
+        let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this.providerService.webServiceCall(`checkCoupenCodeValidity`,payment_data)
+  .subscribe(
+      data =>{
+        this.coupon_id = data.result.coupon_id;
+        this.discounted_cost = data.result.discounted_cost;
+        this.final_service_cost = data.result.final_service_cost;
+        this.coupandiscount = "1";
+        loading.dismiss();
+              },
+      err =>{
+        loading.dismiss();
+        if(err.status===400)
+      {
+        this.providerService.showToast(JSON.parse(err._body).error);
+      }
+      else if(err.status === 401){
+        this.providerService.showToast(JSON.parse(err._body).error);
+      }
+      else
+      {
+        this.providerService.showToast("Try again later");
+      }
+            })
   }
 
 }

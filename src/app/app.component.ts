@@ -1,14 +1,15 @@
 import { Component, ViewChild} from '@angular/core';
 
-import { Platform, MenuController, Nav, AlertController,ToastController,LoadingController } from 'ionic-angular';
+import { Platform, MenuController, Nav, AlertController,ToastController,LoadingController,Events  } from 'ionic-angular';
 
 //import { Diagnostic } from 'ionic-native';
 import { CameraPreview, CameraPreviewRect, Diagnostic,StatusBar, Splashscreen} from 'ionic-native';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
-//import { Geolocation } from '@ionic-native/geolocation';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Network } from '@ionic-native/network';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { Crashlytics } from '@ionic-native/fabric';
 
 
 // import the Menu's pages
@@ -49,6 +50,8 @@ import { Subscription }   from 'rxjs/Subscription';
 import { AppConfig } from '../providers/app-config';
 import { ServiceProvider } from '../providers/service-provider';
 import { CommunityServices } from '../providers/community-services';
+import { NetworkProvider } from '../providers/network/network';
+
 
 import { Storage } from '@ionic/storage';
 declare var Connection: any;
@@ -103,36 +106,32 @@ export class MyApp {
     public storage:Storage,
     private network: Network,
     private push: Push,
+    public events: Events,
+    public networkProvider: NetworkProvider,
+    private crashlytics: Crashlytics,
     private ga: GoogleAnalytics
   ) {
-    // let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-    //   this.alert = this.alertCtrl.create({
-    //     title: 'No Internet Connection',
-    //     // message: 'Do you want to exit the app?',
-    //     buttons: [
-    //       {
-    //         text: 'Cancel',
-    //         role: 'cancel',
-    //         handler: () => {
-    //           this.alert =null;
-    //         }
-    //       },
-    //       {
-    //         text: 'Exit',
-    //         handler: () => {
-    //           this.platform.exitApp();
-    //         }
-    //       }
-    //     ]
-    //   });
-    //   this.alert.present();
-    // });
-    this.ga.startTrackerWithId('UA-123161000-5')
+
+            this.platform.ready().then(() => {
+
+              this.networkProvider.initializeNetworkEvents();
+
+            // Offline event
+          this.events.subscribe('network:offline', () => {
+              alert("You are in offline,please switch on your network");    
+          });
+
+          // // Online event
+          // this.events.subscribe('network:online', () => {
+          //     alert('network:online ==> '+this.network.type);  
+          //      this.showToaster(this.network.type);      
+          // });
+
+            });
+   this.ga.startTrackerWithId('UA-123161000-5')
    .then(() => {
      console.log('Google analytics is ready now');
-        this.ga.trackView('test');
-        this.ga.debugMode();
-          this.ga.setAllowIDFACollection(true);
+      this.ga.trackView('test');
      // Tracker is ready
      // You can now track pages or set additional information such as AppVersion or UserId
    })
@@ -192,24 +191,23 @@ export class MyApp {
          if(loginuser.details.emergency_contacts[0].call_sponsor!='undefined')
          {
           this.callSponsor= loginuser.details.emergency_contacts[0].call_sponsor;
-          console.log("callSponsor"+this.callSponsor);
          }
          
          if(loginuser.details.emergency_contacts[0].ambulance!='undefined')
          {
-           this.ambulance=loginuser.details.emergency_contacts[0].ambulance;
+           this.ambulance=loginuser.details.emergency_contacts[0].Ambulance;
          }
          if(loginuser.details.emergency_contacts[0].police!='undefined')
          {
-           this.police=loginuser.details.emergency_contacts[0].police;
+           this.police=loginuser.details.emergency_contacts[0].Police;
          }
           if(loginuser.details.emergency_contacts[0].doctor!='undefined')
          {
-           this.doctor=loginuser.details.emergency_contacts[0].doctor;
+           this.doctor=loginuser.details.emergency_contacts[0].Doctor;
          }
           if(loginuser.details.emergency_contacts[0].hospital!='undefined')
          {
-           this.hospital=loginuser.details.emergency_contacts[0].hospital;
+           this.hospital=loginuser.details.emergency_contacts[0].Hospital;
          }
           if(loginuser.details.emergency_contacts[0].sponsor_name!='undefined')
          {
@@ -252,6 +250,7 @@ export class MyApp {
         }
         else
         {
+
           this.showToaster("Try again later");
         }
          
@@ -354,8 +353,16 @@ export class MyApp {
   initializeApp() {
 
     this.platform.ready().then(() => {
-
       StatusBar.styleDefault();
+       if (this.platform.is('android')) {
+                StatusBar.overlaysWebView(false);
+                StatusBar.backgroundColorByHexString('#000000');
+            }
+            if (this.platform.is('ios')) {
+               // StatusBar.overlaysWebView(false);
+               //  StatusBar.styleLightContent();
+               StatusBar.hide();
+            }
        setTimeout(() => {
         Splashscreen.hide();
       }, 100);
@@ -369,34 +376,39 @@ export class MyApp {
                     this.alert.dismiss();
                     this.alert =null;     
                   }else{
-                    //this.showAlert();
+                    if(this.nav.getActive().component === DashboardPage || this.nav.getActive().component === LoginPage){
+                      this.showAlert();
+                    }
+                    else{
+                      this.nav.setRoot(DashboardPage);
+                    }
                    }
                 }
               });
     });
   }
-    // showAlert() {
-    //       this.alert = this.alertCtrl.create({
-    //         title: 'Do you want to exit the app?',
-    //         //message: 'Do you want to exit the app?',
-    //         buttons: [
-    //           {
-    //             text: 'Cancel',
-    //             role: 'cancel',
-    //             handler: () => {
-    //               this.alert =null;
-    //             }
-    //           },
-    //           {
-    //             text: 'Exit',
-    //             handler: () => {
-    //               this.platform.exitApp();
-    //             }
-    //           }
-    //         ]
-    //       });
-    //       this.alert.present();
-    //     }
+    showAlert() {
+          this.alert = this.alertCtrl.create({
+            title: 'Do you want to exit the app?',
+            //message: 'Do you want to exit the app?',
+            buttons: [
+              {
+                text: 'Cancel',
+                role: 'cancel',
+                handler: () => {
+                  this.alert =null;
+                }
+              },
+              {
+                text: 'Exit',
+                handler: () => {
+                  this.platform.exitApp();
+                }
+              }
+            ]
+          });
+          this.alert.present();
+        }
 
           showToast() {
             let toast = this.toastCtrl.create({
@@ -414,6 +426,7 @@ export class MyApp {
     checkPermissions() {
     Diagnostic.isCameraAuthorized().then((authorized) => {
     if(authorized)
+
         this.initializePreview();
     else {
         Diagnostic.requestCameraAuthorization().then((status) => {

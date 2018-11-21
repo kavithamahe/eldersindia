@@ -71,7 +71,7 @@ sponser_id:any;
   elder_address:any="";
   elder_location:any="";
   emergency_numbers:any;
-  job_interest:boolean;
+  job_interest:any;
   area_of_interest:any="";
   job_type:any="";
   skill_set=[];
@@ -123,6 +123,7 @@ mytype:string ="password";
   file_name:any;
   other:any;
   avatar1:any="";
+  docss:any;
   
 //-----------------------END-------------------//
 
@@ -216,7 +217,7 @@ mytype:string ="password";
         elder_password:['', Validators.compose([Validators.required])],
         elder_service: ['', Validators.compose([Validators.required])],
         job_type: ['', Validators.compose([Validators.required])],
-        skill_set: ['', Validators.compose([Validators.required])],
+        skill_set: [''],
    })
  }
  else{
@@ -231,7 +232,7 @@ mytype:string ="password";
         area_of_interest: ['', Validators.compose([Validators.required])],
         job_type: ['', Validators.compose([Validators.required])],
         elder_service: ['', Validators.compose([Validators.required])],
-        skill_set: ['', Validators.compose([Validators.required])]
+        skill_set: ['']
    })
  }
  
@@ -294,6 +295,7 @@ imageURL:any;
           this.elder_service = this.manageDependentData.in_service;
           this.elder_number= this.manageDependentData.mobile;
           this.file_name=this.manageDependentData.docs_name;
+          this.docss=this.manageDependentData.docs;
           // this.elder_dob =moment(this.manageDependentData.dob,"DD-MM-YYYY").toISOString();//.toISOString();
           // this.elder_dob =moment(this.manageDependentData.dob,"YYYY-MM-DD").add(1, 'days').toISOString();
            this.elder_dob =moment(this.manageDependentData.dob,"DD-MM-YYYY").add(1, 'days').toISOString();
@@ -566,7 +568,7 @@ getareaof_interest(){
   getElderSkills(){
      if(this.functionality !="edit" && this.functionality !="profileEdit"){
       for(let i=0;i<this.skill_set.length;i++){
-        //console.log(this.skill_set);
+        console.log(this.skill_set);
         this.elder_skills.push({"skill":this.skill_set[i]})  
       }
     }else{
@@ -656,17 +658,20 @@ getareaof_interest(){
     }
 }
  addDependent(){
-   this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
-   console.log(this.elder_dob);
+  console.log(this.elder_dob);
+  if(this.job_interest == true){
+    this.job_interest = 1;
+  }else{
+    this.job_interest = 0;
+  }
+  
     //---------------------------------edited-------------------------------//
   if(this.avatar1 != ""){
     this.avatar = this.avatar1;
   }else{
     this.avatar = "";
   }
-        
-
-      if(this.functionality=="edit" || this.functionality =="profileEdit")
+   if(this.functionality=="edit" || this.functionality =="profileEdit")
       {
         if(this.authForm.value.elder_name != ""){
             this.elder_name = this.authForm.value.elder_name;
@@ -679,6 +684,9 @@ getareaof_interest(){
         }
         if(this.functionality =="profileEdit")
         {
+           if(this.file_path == undefined){
+              this.file_path = this.docss;
+            }
         this.getElderSkills();
     this.skill_data= this.elder_skills;
 
@@ -706,7 +714,8 @@ getareaof_interest(){
         "name":this.elder_name,
         "password":this.elder_password,
         "last_name":this.manageDependentData.last_name,
-        "docs":this.manageDependentData.docs,
+        "docs":this.file_path,
+        "document_name":this.file_name,
         "avatar":this.avatar,
         "relation":this.elder_relation,
         "gender":this.gender,
@@ -716,7 +725,7 @@ getareaof_interest(){
         "mobile_imei":this.mobile_imei,
         "mobile":this.elder_number,
         "mobile_verified":this.manageDependentData.mobile_verified, 
-       "email":this.elder_email,
+        "email":this.elder_email,
         "email_verified":this.manageDependentData.email_verified,
         "email_sent":this.manageDependentData.email_sent,
         "message_sent":this.manageDependentData.message_sent,
@@ -728,7 +737,7 @@ getareaof_interest(){
         "city":this.manageDependentData.city,
         "state":this.manageDependentData.state,
         "status":this.manageDependentData.status,
-         "direct":this.manageDependentData.direct,
+        "direct":this.manageDependentData.direct,
         "created_at":this.manageDependentData.created_at,
         "updated_at":this.manageDependentData.updated_at,
         "reject_comments":this.manageDependentData.reject_comments,
@@ -746,7 +755,6 @@ getareaof_interest(){
 
 
           if(this.functionality == "edit"){
-            console.log(this.elder_dob);
             if(this.job_interest != false){
                if(!this.authForm.valid || !this.myForm.valid){
             this.submitAttempt = true; 
@@ -754,16 +762,13 @@ getareaof_interest(){
           else
           {
            this.submitAttempt = false;
-
-             this.getblog_category();
+         this.getblog_category();
     this.blog_data=this.blog_categoryinterest;
-    console.log(this.blog_data);
     this.getservicecategory();
     this.servicecategoryinterest_data=this.serviceCategory_interests;
     this.getareaof_interest();
 
      this.area_of_interest_data= this.areaofinterestdata;
-     console.log(this.area_of_interest_data);
 
     this.getElderSkills();
     this.skill_data = this.elder_skills;
@@ -778,6 +783,10 @@ getareaof_interest(){
     this.education_data = this.elder_education;
            let loader = this.loadingCtrl.create({ content: "Please wait..." });     
             loader.present();
+            if(this.file_path == undefined){
+              this.file_path = this.docss;
+            }
+             console.log(this.elder_dob);
             this.communityServices.editSubmit({"info": [{
         "id":this.elder_id,
         "area_interest":this.area_of_interest_data,
@@ -854,7 +863,7 @@ getareaof_interest(){
            }
           else
           {
-           this.submitAttempt = false;
+          this.submitAttempt = false;
             this.getEmergencyNumber();
             this.emergency_data = this.elder_emergency;
 
@@ -866,6 +875,7 @@ getareaof_interest(){
 
            let loader = this.loadingCtrl.create({ content: "Please wait..." });     
             loader.present();
+            console.log(this.elder_dob);
             this.communityServices.editSubmit({"info": [{
         "id":this.elder_id,
         //"area_interest":this.area_of_interest_data,
@@ -970,13 +980,15 @@ getareaof_interest(){
       this.communityServices.showToast("Please Enter The Required Details");
     }
     else{
+      console.log(this.elder_dob);
+      console.log(this.elder_dob);
+       this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
+       console.log(this.elder_dob + "this");
       this.submitAttempt = false;
       this.getElderSkills();
     this.skill_data= this.elder_skills;
-    console.log(this.skill_data);
     this.getblog_category();
     this.blog_data=this.blog_categoryinterest;
-    console.log(this.blog_data);
 
     this.getareaof_interest();
      this.area_of_interest_data=this.areaofinterestdata;
@@ -991,6 +1003,7 @@ getareaof_interest(){
     this.education_data = this.elder_education;
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
+    console.log(this.skill_data);
        this.communityServices.addSubmit({"info":
                           [{"email":this.elder_email,
                           "relation":this.elder_relation,
@@ -1052,6 +1065,7 @@ getareaof_interest(){
       this.communityServices.showToast("Please Enter The Required Details");
     }
     else{
+       this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
       this.submitAttempt = false;
       this.getblog_category();
     this.blog_data=this.blog_categoryinterest;

@@ -1,9 +1,3 @@
-<!--
-  Generated template for the CreateMessage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
@@ -14,52 +8,53 @@
     <ion-title text-center *ngIf="msgType == 'reply' ">Reply Message</ion-title>
     <ion-title text-center *ngIf="msgType == 'forward' ">Forward Message</ion-title>
     <ion-title text-center *ngIf="msgType == undefined ">Compose Message</ion-title>
-      <ion-buttons right>
-        <button ion-button (click)="sendMessage()" icon-only>
-          <ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;
-        </button>
-      </ion-buttons>
+    <ion-buttons right>
+      <button ion-button (click)="sendMessage()" icon-only>
+        <ion-icon ios="ios-send" md="md-send"></ion-icon> &nbsp;
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content>
-<form [formGroup]="messageForm">
-<br>
-<ion-card class="login-detalis">
-<ion-list class="create-message">
-<ion-item>
-            <ng2-completer class="to-sect" disableInput="{{customTo}}" [(ngModel)]="toAddress" formControlName="toAddress" [datasource]="friendsList" placeholder="To *" [minSearchLength]="0" 
-            (focus)="hiddeEorr()">
-			</ng2-completer>
+<ion-content class="createMessage">
+  <form [formGroup]="messageForm">    
+    <ion-card class="login-detalis">
+      <ion-list class="create-message">
+        <ion-item>
+          <ion-searchbar [(ngModel)]="toAddress" formControlName="toAddress" (ionInput)="setFilteredItems()"  placeholder="To * " (focus)="hiddeEorr()"></ion-searchbar>
+           <ion-list *ngIf="!searchFlag" class="animated slideInUp search-location">
+        <ion-item>
+            <button ion-item *ngFor = "let item of getFriendsListobj" (click)="selectedItem(item)"> {{item.friend_name}} </button>
+         </ion-item>
+        </ion-list>
+        </ion-item>
+      <!--   <p *ngIf="!messageForm.controls.toAddress.valid && (messageForm.controls.toAddress.dirty || submitAttempt)" class="err-reds shake">Please enter the to address</p> -->
+        <p *ngIf="customErr" class="err-reds">Please select valid to address</p>
+        <ion-item>
+          <ion-input type="text" class="subject-area" placeholder="Subject *" formControlName="subject" [(ngModel)]="subject"></ion-input>
+        </ion-item>
+        <p *ngIf="!messageForm.controls.subject.valid && (messageForm.controls.subject.dirty || submitAttempt)" class="err-reds shake">Please enter the subject</p>
+        <ion-item>
+          <ion-textarea placeholder="Message *" formControlName="message" [(ngModel)]="message">
+          </ion-textarea>
+        </ion-item>
+        <br />
+        <p *ngIf="!messageForm.controls.message.valid && (messageForm.controls.message.dirty || submitAttempt)" class="err-reds shake">Please enter the message</p>
+        <div *ngFor="let filenames of filename">
+          <ion-item *ngIf="filename != undefined">
+            <div class="documents" *ngIf="filename != undefined">
+              <p>
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> &nbsp;{{filenames.file_name}}</p>
+            </div>
+          </ion-item>
+        </div>
 
+        <div>Attachment</div>
+        <input type="file" (change)="fileChange($event)" placeholder="Upload file">
+      </ion-list>
+    </ion-card>
 
-  </ion-item>
-    <p *ngIf="!messageForm.controls.toAddress.valid && (messageForm.controls.toAddress.dirty || submitAttempt)" class="err-reds shake">Please enter the to address</p>
-  <p *ngIf="customErr" class="err-reds">Please select valid to address</p>
-  <ion-item>
-    <ion-input type="text" class="subject-area" placeholder="Subject *" formControlName="subject" [(ngModel)]="subject"></ion-input>
-  </ion-item>
-  <p *ngIf="!messageForm.controls.subject.valid && (messageForm.controls.subject.dirty || submitAttempt)" class="err-reds shake">Please enter the subject</p>
-  <ion-item>
-     <ion-textarea placeholder="Message *" formControlName="message" [(ngModel)]="message">
-    </ion-textarea>
-  </ion-item>
-
-  <p *ngIf="!messageForm.controls.message.valid && (messageForm.controls.message.dirty || submitAttempt)" class="err-reds shake">Please enter the message</p>
-  <div *ngFor="let filenames of filename">
-  <ion-item *ngIf="filename != undefined">
-    <div class="documents" *ngIf="filename != undefined">
-   <p><i class="fa fa-file-text-o" aria-hidden="true"></i> &nbsp;{{filenames.file_name}}</p>
-   </div>
-  
-  </ion-item>
-  </div>
-  <div>Attachment</div>
-   <input type="file" (change)="fileChange($event)" placeholder="Upload file" >
-</ion-list>
-</ion-card>
-
-</form>
+  </form>
 
 </ion-content>

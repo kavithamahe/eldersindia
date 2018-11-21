@@ -5,7 +5,7 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>{{vendor}} - Avail Services</ion-title>
+    <ion-title text-center>Avail Services</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
@@ -28,11 +28,11 @@
       <p class="err-reds" *ngIf="!modalForm.controls.contact.valid  && (modalForm.controls.contact.touched || submitAttempt)">Please Enter the valid number
       </p>
       <form [formGroup]="authForm">
-        <ion-label *ngIf="userType =='sponsor'" stacked class="label-lb required">Dependant
-        </ion-label>
-        <ion-item *ngIf="userType =='sponsor'" class="select-brds">
-          <ion-label></ion-label>
-          <ion-select formControlName="dependents" (ionChange)="packageinfo()">
+       <!--  <ion-label *ngIf="userType =='sponsor'" stacked class="label-lb required">Dependant
+        </ion-label> -->
+        <ion-item *ngIf="userType =='sponsor'" class="sel-label">
+         <ion-label class="selectDepent" class="required">Dependant</ion-label>
+          <ion-select formControlName="dependents" (ionChange)="packageinfo()" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
             <ion-option *ngFor="let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}} {{dependent.last_name}}
             </ion-option>
           </ion-select>
@@ -46,7 +46,7 @@
       <ion-label>Lead Time:{{lead_time}} hour(s)
       </ion-label>
 
-      <ion-label>Select Package</ion-label>
+      <ion-label *ngIf="flag ==1">Select Package</ion-label>
       <ion-item *ngIf="flag ==1" class="one-timereq" text-wrap>
         <ion-label></ion-label>
         <ion-select class="select-brds" placeholder="Select Package" [(ngModel)]="package" [ngModelOptions]="{standalone: true}">
@@ -70,69 +70,131 @@
 
 
       <!--============== One Time ===================== -->
-      <div *ngIf(searchButton)>
+      <div *ngIf="searchButton">
         <div class="discountCost">
           <ion-item>
             <ion-label><b>Service Cost</b>:&nbsp;
-              <span><i class="fa fa-rupee"></i>{{initialservicecost}}</span>
+              <span><i class="fa fa-rupee"></i>{{initialservicecost | number : '1.2-2'}}</span>
             </ion-label>
           </ion-item>
-          <div *ngIf="get_custome_amount!=0">
-            <ion-item text-wrap>
-              <ion-label><b>Previous service due amount</b>:&nbsp;
-                <span><i class="fa fa-rupee"></i>{{get_custome_amount | number : '1.2-2'}}</span>
+
+          <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
+              <ion-item text-wrap>
+              <ion-label><b>Previous refund amount</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{getCustomerBalanceAmount | number : '1.2-2'}}</span>
               </ion-label>
             </ion-item>
-            <ion-item>
+             <ion-item>
               <ion-label><b>Total amount payable</b>:&nbsp;
-                <span><i class="fa fa-rupee"></i>{{totalpayableamountservice | number : '1.2-2'}}</span>
+                <span><i class="fa fa-rupee"></i>{{(initialservicecost -  getCustomerBalanceAmount) | number : '1.2-2'}}</span>
               </ion-label>
             </ion-item>
-          </div>
-          <div *ngIf="get_custome_deliever_amount!=0">
-            <ion-item text-wrap>
+        </div>
+          <div *ngIf="get_custome_deliever_amount!=0 && get_custome_service_cancel_amount ==0 && getCustomerBalanceAmount ==0 ">
+           <ion-item text-wrap>
               <ion-label><b>Previous service due amount</b>:&nbsp;
                 <span><i class="fa fa-rupee"></i>{{get_custome_deliever_amount | number : '1.2-2'}}</span>
               </ion-label>
             </ion-item>
             <ion-item>
               <ion-label><b>Total amount payable</b>:&nbsp;
-                <span><i class="fa fa-rupee"></i>{{totalpayableamount | number : '1.2-2'}}</span>
+                <span><i class="fa fa-rupee"></i>{{(initialservicecost +  get_custome_deliever_amount) | number : '1.2-2'}}</span>
               </ion-label>
             </ion-item>
-          </div>
+           </div>
 
-          <div *ngIf="getCustomerBalanceAmount!=0">
-            <ion-item text-wrap>
-              <ion-label><b>Previous refund amount</b>:&nbsp;
-                <span><i class="fa fa-rupee"></i>{{getCustomerBalanceAmount | number : '1.2-2'}}</span>
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label><b>Total amount payable</b>:&nbsp;
-                <span><i class="fa fa-rupee"></i>{{totalpayableamountbalance | number : '1.2-2'}}</span>
-              </ion-label>
-            </ion-item>
-          </div>
-
-          <div *ngIf="get_custome_service_cancel_amount!=0">
+            <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount == 0 && get_custome_deliever_amount == 0">
             <ion-item text-wrap>
               <ion-label><b>Previous service cancel amount</b>:&nbsp;
                <span><i class="fa fa-rupee"></i>{{get_custome_service_cancel_amount | number : '1.2-2'}}</span>
               </ion-label>
             </ion-item>
+            <ion-item text-wrap>
+              <ion-label><b>Total amount payable </b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{(initialservicecost +  get_custome_service_cancel_amount) | number : '1.2-2'}}</span>
+                           
+              </ion-label>
+            </ion-item>
+           </div>
+
+              <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount == 0 && get_custome_deliever_amount != 0">
+               <ion-item text-wrap>
+              <ion-label><b>Previous service cancel amount</b>:&nbsp;
+               <span><i class="fa fa-rupee"></i>{{get_custome_service_cancel_amount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+             <ion-item text-wrap>
+              <ion-label><b>Previous service due amount</b>:&nbsp;
+               <span><i class="fa fa-rupee"></i>{{get_custome_deliever_amount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
             <ion-item>
               <ion-label><b>Total amount payable </b>:&nbsp;
-                <span><i class="fa fa-rupee"></i>{{totalpayableamountcancel | number : '1.2-2'}}</span>
+                <span><i class="fa fa-rupee"></i>{{(initialservicecost + get_custome_service_cancel_amount + get_custome_deliever_amount) | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+            </div>
+                <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount == 0">
+                <ion-item text-wrap>
+              <ion-label><b>Previous refund amount</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{getCustomerBalanceAmount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+            <ion-item text-wrap>
+              <ion-label><b>Previous service cancel amount</b>:&nbsp;
+               <span><i class="fa fa-rupee"></i>{{get_custome_service_cancel_amount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+             <ion-item>
+              <ion-label><b>Total amount payable </b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{((initialservicecost - getCustomerBalanceAmount) + get_custome_service_cancel_amount) | number : '1.2-2'}}</span>
               </ion-label>
             </ion-item>
           </div>
-        </div>
-      
+          <div *ngIf="get_custome_service_cancel_amount==0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount != 0">
+             <ion-item text-wrap>
+              <ion-label><b>Previous refund amount</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{getCustomerBalanceAmount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+             <ion-item text-wrap>
+              <ion-label><b>Previous service due amount</b>:&nbsp;
+               <span><i class="fa fa-rupee"></i>{{get_custome_deliever_amount | number : '1.2-2'}}</span>
+              </ion-label>
+              </ion-item>
+               <ion-item>
+              <ion-label><b>Total amount payable </b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{((initialservicecost - getCustomerBalanceAmount) + get_custome_deliever_amount) | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+                </div>
+                  <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount != 0">
+                  <ion-item text-wrap>
+              <ion-label><b>Previous refund amount</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{getCustomerBalanceAmount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+             <ion-item text-wrap>
+              <ion-label><b>Previous service cancel amount</b>:&nbsp;
+               <span><i class="fa fa-rupee"></i>{{get_custome_service_cancel_amount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+             <ion-item text-wrap>
+              <ion-label><b>Previous service due amount</b>:&nbsp;
+               <span><i class="fa fa-rupee"></i>{{get_custome_deliever_amount | number : '1.2-2'}}</span>
+              </ion-label>
+              </ion-item>
+               <ion-item>
+              <ion-label><b>Total amount payable </b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{((initialservicecost - getCustomerBalanceAmount) + get_custome_service_cancel_amount + get_custome_deliever_amount) | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+           </div>
 
+        </div>
         <ion-label stacked class="label-lb required">Preferred date</ion-label>
         <ion-item>
-          <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" [(ngModel)]="date"
+          <ion-datetime max="2050-10-31" class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" [(ngModel)]="date"
             formControlName="date" (ionChange)="onetimeChange()"></ion-datetime>
         </ion-item>
 
@@ -175,18 +237,19 @@
 
       <!-- ======================== Recurring services ============== -->
 
-      <div *ngIf(recurring)>
+      <div *ngIf="recurring">
         <ion-label stacked class="label-lb required">Start date</ion-label>
         <ion-item>
           <ion-datetime class="select-brd" [(ngModel)]="startDate" displayFormat="DD-MM-YYYY" pickerFormat="DD MMMM YYYY" placeholder="Start date"
-            min={{date}} (ionChange)="fromDateChange()" formControlName="startdate"></ion-datetime>
+            min={{date}} (ionChange)="fromDateChange()" formControlName="startdate" max="2050-10-31"></ion-datetime>
         </ion-item>
         <p class="err-reds shake" *ngIf="!modalForm.controls.startdate.valid  && (modalForm.controls.startdate.dirty || submitAttempt)">Please enter the start date
         </p>
         <ion-label stacked class="label-lb required">End date</ion-label>
         <ion-item>
           <ion-datetime class="select-brd" [(ngModel)]="endDate" displayFormat="DD-MM-YYYY" pickerFormat="DD MMMM YYYY" placeholder="End date"
-            min={{this.date}} (ionChange)="calculateDays(startDate,endDate)" formControlName="enddate"></ion-datetime>
+            min={{this.date}} (ionChange)="calculateDays(startDate,endDate)" formControlName="enddate" 
+            max="2050-10-31"></ion-datetime>
         </ion-item>
         <p class="err-reds shake" *ngIf="!modalForm.controls.enddate.valid  && (modalForm.controls.enddate.dirty || submitAttempt)">Please enter the end date</p>
         <ion-label>Number of days</ion-label>
@@ -211,7 +274,7 @@
           </ion-item>
           <br/>
         </ion-list>
-        <div *ngIf(fixedd)>
+        <div *ngIf="fixedd">
           <ion-label stacked class="label-lb required">From time</ion-label>
           <ion-item>
             <ion-datetime displayFormat="hh:mm A" pickerFormat="hh:mm:A" placeholder="Scheduled time" class="select-brd" formControlName="fromtime"></ion-datetime>
@@ -223,7 +286,7 @@
           </ion-item>
           <p class="err-reds shake" *ngIf="!modalForm.controls.totime.valid  && (modalForm.controls.totime.dirty || submitAttempt)">Please enter the totime</p>
         </div>
-        <div *ngIf(timeslots)>
+        <div *ngIf="timeslots">
           <ion-list>
             <ion-item>
               <ion-label stacked class="label-lb required">Preferred Time</ion-label>
@@ -287,20 +350,139 @@
               <span>{{discount_100}}%</span>
             </ion-label>
           </ion-item>
+             <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
+              <ion-item text-wrap>
+              <ion-label><b>Previous refund amount</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{getCustomerBalanceAmount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+             <ion-item>
+              <ion-label><b>Total amount payable</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{(servicecost -  getCustomerBalanceAmount) | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+        </div>
+          <div *ngIf="get_custome_deliever_amount!=0 && get_custome_service_cancel_amount ==0 && getCustomerBalanceAmount ==0 ">
+           <ion-item text-wrap>
+              <ion-label><b>Previous service due amount</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{get_custome_deliever_amount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label><b>Total amount payable</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{(initialservicecost +  get_custome_deliever_amount) | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+           </div>
+
+            <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount == 0 && get_custome_deliever_amount == 0">
+            <ion-item text-wrap>
+              <ion-label><b>Previous service cancel amount</b>:&nbsp;
+               <span><i class="fa fa-rupee"></i>{{get_custome_service_cancel_amount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+            <ion-item text-wrap>
+              <ion-label><b>Total amount payable </b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{(servicecost +  get_custome_service_cancel_amount) | number : '1.2-2'}}</span>
+                           
+              </ion-label>
+            </ion-item>
+           </div>
+
+              <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount == 0 && get_custome_deliever_amount != 0">
+               <ion-item text-wrap>
+              <ion-label><b>Previous service cancel amount</b>:&nbsp;
+               <span><i class="fa fa-rupee"></i>{{get_custome_service_cancel_amount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+             <ion-item text-wrap>
+              <ion-label><b>Previous service due amount</b>:&nbsp;
+               <span><i class="fa fa-rupee"></i>{{get_custome_deliever_amount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label><b>Total amount payable </b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{(servicecost + get_custome_service_cancel_amount + get_custome_deliever_amount) | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+            </div>
+                <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount == 0">
+                <ion-item text-wrap>
+              <ion-label><b>Previous refund amount</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{getCustomerBalanceAmount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+            <ion-item text-wrap>
+              <ion-label><b>Previous service cancel amount</b>:&nbsp;
+               <span><i class="fa fa-rupee"></i>{{get_custome_service_cancel_amount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+             <ion-item>
+              <ion-label><b>Total amount payable </b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{((servicecost - getCustomerBalanceAmount) + get_custome_service_cancel_amount) | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+          </div>
+          <div *ngIf="get_custome_service_cancel_amount==0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount != 0">
+             <ion-item text-wrap>
+              <ion-label><b>Previous refund amount</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{getCustomerBalanceAmount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+             <ion-item text-wrap>
+              <ion-label><b>Previous service due amount</b>:&nbsp;
+               <span><i class="fa fa-rupee"></i>{{get_custome_deliever_amount | number : '1.2-2'}}</span>
+              </ion-label>
+              </ion-item>
+               <ion-item>
+              <ion-label><b>Total amount payable </b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{((servicecost - getCustomerBalanceAmount) + get_custome_deliever_amount) | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+                </div>
+                  <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount != 0">
+                  <ion-item text-wrap>
+              <ion-label><b>Previous refund amount</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{getCustomerBalanceAmount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+             <ion-item text-wrap>
+              <ion-label><b>Previous service cancel amount</b>:&nbsp;
+               <span><i class="fa fa-rupee"></i>{{get_custome_service_cancel_amount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+             <ion-item text-wrap>
+              <ion-label><b>Previous service due amount</b>:&nbsp;
+               <span><i class="fa fa-rupee"></i>{{get_custome_deliever_amount | number : '1.2-2'}}</span>
+              </ion-label>
+              </ion-item>
+               <ion-item>
+              <ion-label><b>Total amount payable </b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{((servicecost - getCustomerBalanceAmount) + get_custome_service_cancel_amount + get_custome_deliever_amount) | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+           </div>
         </div>
       </div>
     </form>
     <br />
-    <ion-item class="check-bx" class="one-timereq">
-      <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()">
-      </ion-checkbox>
-      <ion-label (click)="openTerms()" style="margin:0px;">I agree to
-        <small class="required" (click)="openTerms()">terms and conditions </small>
-      </ion-label>
-    </ion-item>
-    <small *ngIf="checkTerms">
-      <p class="err-reds shake">Kindly agree to the terms and conditions</p>
-    </small>
+       <ion-grid>
+          <ion-row>
+            <ion-col col-1 class="check-bx" class="one-timereq">
+              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>
+            </ion-col>
+            <ion-col col-11 (click)="openTerms()" style="margin:0px;">
+              <ion-label class="margin_0">
+                <a>I agree with the terms and conditions</a>
+              </ion-label>
+            </ion-col>
+        <small *ngIf="checkTerms">
+          <p class="err-reds shake">Kindly agree to the terms and conditions</p>
+        </small>
+
+          </ion-row>
+        </ion-grid>
+   
   </ion-card>
 </ion-content>
 
@@ -315,11 +497,27 @@
         <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end *ngIf="seviceCheck == 0">
-      <button ion-button color="royal" large icon-right showWhen="ios" (press)="pressnext(recurringType)" (click)="next(recurringType)">&nbsp;Book Now
+      <ion-buttons end *ngIf="seviceCheck == 0 && !searchButton && !recurring">
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="next(recurringType,'service_status')">&nbsp;Book Now 
         <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
-      <button ion-button color="light" large icon-right hideWhen="ios" (click)="next(recurringType)" (press)="pressnext(recurringType)">&nbsp;Book Now
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="next(recurringType,'service_status')">&nbsp;Book Now 
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end *ngIf="seviceCheck == 0 && searchButton">
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="next(recurringType,'service_status')">&nbsp;Book Now
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="next(recurringType,'service_status')">&nbsp;Book Now
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end *ngIf="seviceCheck == 0 && recurring">
+      <button ion-button color="royal" large icon-right showWhen="ios" (click)="next(recurringType)">&nbsp;Book Now
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </button>
+      <button ion-button color="light" large icon-right hideWhen="ios" (click)="next(recurringType)">&nbsp;Book Now
         <ion-icon ios="md-send" md="md-send"></ion-icon>
       </button>
     </ion-buttons>

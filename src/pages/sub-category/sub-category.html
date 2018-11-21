@@ -16,61 +16,64 @@
 
 <ion-content class="content-intop subCategory">
   <div class="subCategory-inner">
-  <ion-item class="subCategory-select">
-    <ion-label>
-      Select Location
-    </ion-label>
-    <ion-select [(ngModel)]="serviceLocation" (ionChange)='locationChanged()'>
-      <ion-option  *ngFor="let location of locations" value={{location.id}}>{{location.location}} </ion-option>
-    </ion-select>
-  </ion-item>
-
-  <div class="ion-searchbar">
-    <ion-row>
-      <ion-col width-80>
-        <ion-searchbar [(ngModel)]="term" (keyup.enter)="getItems(term)"></ion-searchbar>
-      </ion-col>
-      <ion-col width-20 class="btn-go">
-        <button (click)="getItems(term)" ion-button small class="go-btn">Go</button>
-      </ion-col>
-    </ion-row>
-  </div>
-
-  <ion-card class="pack-listed">
-    <ion-item *ngFor="let subcategory of subcategories.info" [color]="subcategory.color" class="sub-cat-listed">
-      <p (click)="openSelected(subcategory)"> {{subcategory.name}} </p>
-      <i class="fa fa-chevron-right left-right-side"></i>
+    <ion-item class="subCategory-select">
+      <ion-label>
+        Select Location
+      </ion-label>
+      <ion-select [(ngModel)]="serviceLocation" (ionChange)='locationChanged()'>
+        <ion-option *ngFor="let location of locations" value={{location.id}}>{{location.location}} </ion-option>
+      </ion-select>
     </ion-item>
-  </ion-card>
-  <br />
-  <hr />
-  <ion-card class="slider-card">
-    <h1 class="package-list-show">Packages (<span>{{packageCount}}</span>) </h1>
-    <ion-slides *ngIf="packages && packages.length" autoplay="5000" loop="true" pager="true" speed="300" class="slides" class="slideroption">
-      <ion-slide *ngFor="let package of packages" (click)="viewPackage(package.vendor_id)" class="slide-border">
-        <ion-grid>          
-          <ion-row>
-            <ion-col class="width-30">
-              <img [src]="imageUrl+package?.logo" />
-            </ion-col>
-            <ion-col class="width-70">
-              <ion-item class="item-text-wrap">
-                <h1>{{package.package_name | words :3 : '....'}} </h1>
-                <p>{{package.loc_name}}</p>
-                <small>
-                  <i class="fa fa-inr" aria-hidden="true"></i>{{package.package_amount}}</small>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-slide>
-      <!-- </div> -->
-    </ion-slides>
-  </ion-card>
 
-  <ion-item padding *ngIf="!subcategories?.info" text-wrap>
-    <p>{{emptyRecord}}</p>
-  </ion-item>
+    <div class="ion-searchbar">
+      <ion-row>
+        <ion-col col-10>
+          <ion-searchbar [(ngModel)]="term" (keyup.enter)="getItems(term)"></ion-searchbar>
+        </ion-col>
+        <ion-col col-2 class="btn-go">
+          <button (click)="getItems(term)" ion-button small class="go-btn">Go</button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <ion-card class="pack-listed">
+      <ion-item *ngFor="let subcategory of subcategories.info" [color]="subcategory.color" class="sub-cat-listed">
+        <p (click)="openSelected(subcategory)"> {{subcategory.name}} </p>
+        <i class="fa fa-chevron-right left-right-side"></i>
+      </ion-item>
+    </ion-card>
+    <br />
+    <div padding *ngIf="!subcategories?.info" text-wrap>
+      <p>{{emptyRecord}}</p>
+    </div>
+    <hr />
+
+    <h1 class="package-list-show">Packages (
+      <span>{{packageCount}}</span>) </h1>
+    <ion-card class="slider-card" *ngFor="let package of packages">
+      <div class="slides slideroption">
+        <ion-list (click)="viewPackage(package.vendor_id,package.id)" class="slide-border">
+          <ion-item>
+            <ion-row>
+              <ion-col col-3>
+                <img [src]="imageUrl+package?.logo" width="100" height="50" />
+              </ion-col>
+              <ion-col col-9>
+                <ion-item class="item-text-wrap">
+                  <h1>{{package.package_name | words :3 : '....'}} </h1>
+                  <p>{{package.loc_name}}</p>
+                  <small>
+                    <i class="fa fa-inr" aria-hidden="true"></i>{{package.package_amount}}
+                  </small>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-card>
+
+  
 
   </div>
 </ion-content>

@@ -134,6 +134,7 @@ export class ModalContentPage {
   totalpayableamountbalance:any;
   totalpayableamountcancel:any;
   servicetypestatus:any;
+  totalpayableamounts:any;
   constructor(platform: Platform,public blogListService:BlogListService,public alertCtrl: AlertController,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {   
      this.date = new Date().toISOString();
@@ -147,7 +148,6 @@ export class ModalContentPage {
      if(params.get("serviceData") != undefined){
      this.service_id = this.params.get("serviceData").service_id;
       this.requestService=params.get("serviceData");
-      console.log(this.requestService);
      this.category = this.requestService.category;
      this.category_id = this.requestService.category_id;
      this.service = this.requestService.service;
@@ -156,7 +156,6 @@ export class ModalContentPage {
      this.subcategory = this.requestService.subcategory;
      this.vendor_id = this.params.get("vendor_id");
      }
-     console.log(params.get("vendor"));
      if(params.get("vendor") != undefined){
       if(this.params.get("one_time")){
         this.onetimetype = this.params.get("one_time");
@@ -170,16 +169,18 @@ export class ModalContentPage {
       else{
         this.recurringType = this.params.get("vendor").recurring;
       }
-      this.vendorr = this.params.get("vendor");
+      if(this.params.get("status") == "1"){
+        this.vendorr = this.params.get("vendor").id;
+        this.vendor_id = this.params.get("vendor").id;
+        this.getpackageInfo(this.vendor_id);
+        this.getServicedependentlistsInfo(this.vendor_id);
+      }
       this.vendor = this.params.get("vendor").name;
       this.service_cost = this.params.get("vendor").service_cost;
       this.percentage_cost = this.params.get("vendor").percentage_cost;
       this.initialservicecost = this.service_cost - this.percentage_cost;
-      console.log(this.initialservicecost);
       this.servicecost=this.initialservicecost;
       this.vendor_id = this.params.get("vendor").vendor_id;
-      // this.recurringType = this.params.get("vendor").recurring;
-      // this.onetimetype = this.params.get("vendor").one_time;
       this.name = this.params.get("vendor").name;
     }
     this.modalForm = formBuilder.group({
@@ -208,27 +209,30 @@ export class ModalContentPage {
       else{
         this.dependents_id = this.authForm.value.dependents;
       }
-      this.getpackageInfo();
+       if(this.params.get("status") != "1"){
+      this.getpackageInfoList();
+    }
       this.getCustomerserviceamounts();
       this.getCustomerDeliverStatusAmounts();
       this.getServicecancelamounts();
       this.getCustomerBalanceAmounts();
+      if(this.params.get("status") != "1"){
       this.getServicedependentlists();
+    }
 
    }
    
     getCustomerserviceamounts(){
         this.providerService.getCustomerserviceamount()
       .subscribe(data =>{ 
-          this.get_custome_amount = data.result;
+          this.get_custome_amount = parseFloat(data.result);
           this.totalpayableamountservice = parseInt(this.initialservicecost) + parseInt(this.get_custome_amount);
     })
     }
      getCustomerDeliverStatusAmounts(){
         this.providerService.getCustomerDeliverStatusAmount()
       .subscribe(data =>{ 
-        this.get_custome_deliever_amount = data.result;
-        console.log(this.get_custome_deliever_amount);
+        this.get_custome_deliever_amount = parseFloat(data.result);
         this.totalpayableamount = parseInt(this.initialservicecost) + parseInt(this.get_custome_deliever_amount); 
         console.log(this.totalpayableamount);
     })
@@ -236,16 +240,23 @@ export class ModalContentPage {
      getServicecancelamounts(){
         this.providerService.getServicecancelamount()
       .subscribe(data =>{ 
-        this.get_custome_service_cancel_amount = data.result;
+        this.get_custome_service_cancel_amount =parseFloat(data.result);
         this.totalpayableamountcancel = parseInt(this.initialservicecost) + parseInt(this.get_custome_service_cancel_amount);
     })
     }
      getCustomerBalanceAmounts(){
         this.providerService.getCustomerBalanceAmount()
       .subscribe(data =>{ 
-        this.getCustomerBalanceAmount = data.result;
+        this.getCustomerBalanceAmount = parseFloat(data.result);
         this.totalpayableamountbalance = parseInt(this.initialservicecost) - parseInt(this.getCustomerBalanceAmount);
+     
       
+    })
+    }
+    getServicedependentlistsInfo(vendor_id){
+      this.providerService.getServicedependentlist(vendor_id)
+      .subscribe(data =>{ 
+        this.get_Servicedependentlist = data.result;
     })
     }
     getServicedependentlists(){
@@ -266,12 +277,25 @@ export class ModalContentPage {
 }
 
   onetime(searchValue){
+       if(this.get_Servicedependentlist !=  0){
+      this.providerService.showToast("You have not paid previous availed service,please pay and request new services");
+      this.navCtrl.setRoot(ServicerequestPage);
+    }
+    else{
     this.recurring=false;
      this.searchButton=!searchValue;
+     this.datCount = "";
+   }
    }
    recurringtime(searchValues){
+      if(this.get_Servicedependentlist !=  0){
+      this.providerService.showToast("You have not paid previous availed service,please pay and request new services");
+      this.navCtrl.setRoot(ServicerequestPage);
+    }
+    else{
     this.searchButton=false;
      this.recurring=!searchValues;
+   }
    }
    fullpay(full){
     this.fullpays=!full;
@@ -290,7 +314,6 @@ export class ModalContentPage {
      this.fixedd=!searchValuess;
    }
     timeslot(searchValuesss){
-      console.log(this.modalForm.value.fromtime);
       this.modalForm.value.fromtime = "";
       this.modalForm.value.totime = "";
       this.durations = "";
@@ -312,7 +335,7 @@ export class ModalContentPage {
    fromDateChange(){
     this.selectedDates=[];
     this.excludeDays=[];
-    this.to_date="";
+    this.endDate="";
   }
 
    calculateDays(sDate,eDate){
@@ -327,7 +350,6 @@ export class ModalContentPage {
             this.selectedDates.push(this.starDate);
             this.starDate= moment(this.starDate).add(1, 'days');   
                    
-           // this.starDate = moment(this.starDate).format("YYYY-MM-DD");
           }        
       this.dayCalculation();
        if(this.searchButton == true){
@@ -386,9 +408,9 @@ export class ModalContentPage {
      this.servicecosts=this.initialservicecost*this.count;
      this.getRecurringDiscount(this.datCount);
   }
-    getpackageInfo(){
-
-    this.providerService.packageListsInfo(this.location_id,this.service_ids,this.dependents_id,this.vendor_id)
+    getpackageInfo(vendor_id){
+      console.log(vendor_id);
+    this.providerService.packageListsInfo(this.location_id,this.service_ids,this.dependents_id,vendor_id)
       .subscribe(data =>{                                                                             
         this.packageLists=data.result.info.lists;
         this.flag = "1";
@@ -396,9 +418,19 @@ export class ModalContentPage {
     },
     err =>{
          this.flag = "0";
-     // this.providerService.showErrorToast(err); 
     }) 
     
+   }
+   getpackageInfoList(){
+      this.providerService.packageListsInfo(this.location_id,this.service_ids,this.dependents_id,this.vendor_id)
+      .subscribe(data =>{                                                                             
+        this.packageLists=data.result.info.lists;
+        this.flag = "1";
+
+    },
+    err =>{
+         this.flag = "0";
+    }) 
    }
   getRecurringDiscount(datCount){
      this.providerService.getRecurringDiscount(datCount)
@@ -546,37 +578,44 @@ export class ModalContentPage {
 
 
     getCustomerBalanceAmountsSponsor(){
-      console.log("this.totalpayableamount");
         this.providerService.getCustomerBalanceAmountsSponsor(this.authForm.value.dependents)
       .subscribe(data =>{ 
         this.getCustomerBalanceAmount = data.result;
-        this.totalpayableamount = parseInt(this.initialservicecost) - parseInt(this.getCustomerBalanceAmount);
-        console.log(this.totalpayableamount);
+        this.totalpayableamounts = parseInt(this.initialservicecost) - parseInt(this.getCustomerBalanceAmount);
+        console.log(this.totalpayableamounts);
     })
     }
 
-   pressnext(recurringType){
-    this.next(recurringType);
-   }
+   // pressnext(recurringType){
+   //  this.next(recurringType);
+   // }
  
     serviceRequestCall(service_request_data){
+      service_request_data.datetime = moment(service_request_data.datetime).format("DD-MM-YYYY");
+       if(service_request_data.datetime == "Invalid date"){
+      service_request_data.datetime = "";
+    }
+        if(this.get_Servicedependentlist !=  0){
+      this.providerService.showToast("You have not paid previous availed service,please pay and request new services");
+      this.navCtrl.setRoot(ServicerequestPage);
+    }
+    else{
       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
-
+  if(service_request_data.serviceType == "One time"){
     let requestServiceData = {"category":this.category,"service":this.service,
     "category_id":this.category_id,"location_id":this.location_id,"vendor_id":this.vendor_id,
      "sub_category_id": this.sub_category_id,"datCount":this.datCount,
       "service_id":this.service_id, "problem":service_request_data.problem,
      "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
-      "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,"base_cost":service_request_data.base_cost,
-      "subcategory":this.subcategory, "durations":service_request_data.durations,"service_cost":service_request_data.servicecost,
+      "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,"base_cost":service_request_data.base_cost,"service_name":this.service,"discount":"","pay_method":"",
+      "subcategory":this.subcategory, "durations":service_request_data.durations,"service_cost":this.initialservicecost,"servicecost":service_request_data.servicecost,"servicediscost":service_request_data.servicecost,"servicediscountcost":service_request_data.servicecost,
        "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
        "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
-     "package_id":service_request_data.package_id,"instant":"","paymentflag":1,"total_service_cost":service_request_data.base_cost,"total_cost":service_request_data.base_cost,
-     "servicecost":"","service_cost_travel":service_request_data.base_cost,"getCustomerBalanceAmount":"","get_custome_amount":"","get_custome_deliever_amount":"",
-     "get_custome_service_cancel_amount":""}
-
-    this.providerService.webServiceCall(`serviceRequestSubmitbeforePayLater`,requestServiceData)
+     "package_id":service_request_data.package_id,"instant":"","paymentflag":1,"total_service_cost":this.initialservicecost,"total_cost":service_request_data.servicecost,"service_cost_travel":this.initialservicecost,"getCustomerBalanceAmount":"","get_custome_amount":"","get_custome_deliever_amount":"",
+     "get_custome_service_cancel_amount":"","coupen_code":service_request_data.coupan_code,"coupon_code_discount_cost":service_request_data.discounted_cost,"coupon_id":service_request_data.coupon_id,
+     "final_service_cost_after_coupon_code_discount":service_request_data.final_service_cost}
+      this.providerService.webServiceCall(`serviceRequestSubmitbeforePayLater`,requestServiceData)
        .subscribe( 
         data =>{
                  this.blogListService.presentConfirm(data.result);
@@ -595,15 +634,121 @@ export class ModalContentPage {
           this.providerService.showToast("Try again later");
         }
          loading.dismiss();
-      });  
+      }); 
   }
-   next(recurringType){
+  else{
+    let requestServiceData = {"category":this.category,"service":this.service,
+    "category_id":this.category_id,"location_id":this.location_id,"vendor_id":this.vendor_id,
+     "sub_category_id": this.sub_category_id,"datCount":this.datCount,
+      "service_id":this.service_id, "problem":service_request_data.problem,
+     "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
+      "mobile":service_request_data.mobile_no,"lead_time":this.lead_time,"base_cost":service_request_data.base_cost,"service_name":this.service,"discount":"","pay_method":"",
+      "subcategory":this.subcategory, "durations":service_request_data.durations,"service_cost":this.initialservicecost,"servicecost":service_request_data.servicecosts,"servicediscost":service_request_data.servicecost,"servicediscountcost":service_request_data.servicecost,
+       "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
+       "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
+     "package_id":service_request_data.package_id,"instant":"","paymentflag":1,"total_service_cost":this.initialservicecost,"total_cost":service_request_data.servicecost,"service_cost_travel":this.initialservicecost,"getCustomerBalanceAmount":"","get_custome_amount":"","get_custome_deliever_amount":"",
+     "get_custome_service_cancel_amount":"","coupen_code":service_request_data.coupan_code,"coupon_code_discount_cost":service_request_data.discounted_cost,"coupon_id":service_request_data.coupon_id,
+     "final_service_cost_after_coupon_code_discount":service_request_data.final_service_cost}
+      this.providerService.webServiceCall(`serviceRequestSubmitbeforePayLater`,requestServiceData)
+       .subscribe( 
+        data =>{
+                 this.blogListService.presentConfirm(data.result);
+                
+                 this.navCtrl.setRoot(ServicerequestPage);
+              
+               loading.dismiss();
+                },
+         (err) => { 
+        if(err.status===400)
+        {
+          this.providerService.showToast(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.providerService.showToast("Try again later");
+        }
+         loading.dismiss();
+      }); 
+  }
+    
+    
+     }
+  }
+   next(recurringType,service_status){
+    console.log(service_status);
+    if(service_status){
+      console.log("service_status");
+    if(this.getCustomerBalanceAmount!=0 && this.get_custome_service_cancel_amount ==0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.initialservicecost - this.getCustomerBalanceAmount);
+    }
+   
+    else if(this.get_custome_deliever_amount!=0 && this.get_custome_service_cancel_amount ==0 && this.getCustomerBalanceAmount ==0){
+      this.servicecost = (this.initialservicecost + this.get_custome_deliever_amount);
+    }
+   
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.initialservicecost + this.get_custome_service_cancel_amount);
+    }
+    
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = (this.initialservicecost + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+    }
+    
+  else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount == 0){
+      this.servicecost = (this.initialservicecost + this.getCustomerBalanceAmount + this.get_custome_service_cancel_amount);
+    }
+    
+    else if(this.get_custome_service_cancel_amount==0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = ((this.initialservicecost - this.getCustomerBalanceAmount) + this.get_custome_deliever_amount);
+    }
+    
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.servicecost = ((this.initialservicecost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+    }
+    else{
+      this.servicecost = this.servicecost;
+    }
+  }
+  else{
+    console.log("service_status re");
+      if(this.getCustomerBalanceAmount!=0 && this.get_custome_service_cancel_amount ==0 && this.get_custome_deliever_amount == 0){
+      this.finalcost = (this.finalcost - this.getCustomerBalanceAmount);
+    }
+    
+    else if(this.get_custome_deliever_amount!=0 && this.get_custome_service_cancel_amount ==0 && this.getCustomerBalanceAmount ==0){
+      this.finalcost = (this.finalcost + this.get_custome_deliever_amount);
+    }
+    
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount == 0){
+      this.finalcost = (this.finalcost + this.get_custome_service_cancel_amount);
+      console.log("this.servicecost" + this.finalcost);
+    }
+    
+    else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount != 0){
+      this.finalcost = (this.finalcost + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+    }
+   
+   else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount == 0){
+      this.finalcost = (this.finalcost + this.getCustomerBalanceAmount + this.get_custome_service_cancel_amount);
+    }
+    
+    else if(this.get_custome_service_cancel_amount==0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.finalcost = ((this.finalcost - this.getCustomerBalanceAmount) + this.get_custome_deliever_amount);
+    }
+    
+    else if(this.get_custome_service_cancel_amount !=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
+      this.finalcost = ((this.servicecost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+    }
+    else{
+      this.finalcost = this.finalcost;
+    }
+  }
     if(this.get_Servicedependentlist !=  0){
       this.providerService.showToast("You have not paid previous availed service,please pay and request new services");
       this.navCtrl.setRoot(ServicerequestPage);
     }
     else{
-    console.log(this.recurring);
+    console.log(this.finalcost);
     let paydata = {"fullpays":this.fullpays,"finalcost":this.finalcost,"datCount":this.datCount,
     "servicecost":this.servicecost,"category":this.category,"category_id":this.category_id,"service":this.service,"service_ids":this.service_ids,
       "sub_category_id":this.sub_category_id,"subcategory":this.subcategory,
@@ -614,15 +759,10 @@ export class ModalContentPage {
      this.modalForm.value.startdate= moment(this.modalForm.value.startdate).format("YYYY-MM-DD");
      this.modalForm.value.enddate= moment(this.modalForm.value.enddate).format("YYYY-MM-DD");
       var objFromDate = this.modalForm.value.startdate;
-var objToDate = this.modalForm.value.enddate;
+      var objToDate = this.modalForm.value.enddate;
  
 var date1 = new Date(objFromDate);
 var date2 = new Date(objToDate);
-console.log(date1);
-console.log(date2);
- // var today = new Date();
- // console.log(today);
-
     if(date1 > date2)
     {
         this.providerService.showToast("Start Date should be less than End Date");
@@ -652,7 +792,8 @@ console.log(date2);
       this.dependent = this.authForm.value.dependents;
     }
     if(this.modalForm.value.date != "" && this.modalForm.value.time !=""){
-
+       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
     
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
@@ -661,21 +802,23 @@ console.log(date2);
     
        this.providerService.validateTime(serviceData,this.location_id,this.lead_time,this.vendor_id,this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,this.subcategory).subscribe(
      (viewServiceRequest) => {
-
+      loading.dismiss();
     },
     (err) => { 
         if(err.status===401)
         {
+          loading.dismiss();
         this.providerService.showToast(JSON.parse(err._body).error);
         }
        else{
+        loading.dismiss();
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,"base_cost":this.service_cost,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.package,"getCustomerBalanceAmount":this.getCustomerBalanceAmount,"get_custome_amount":"","get_custome_deliever_amount":this.get_custome_deliever_amount,
-       "get_custome_service_cancel_amount":"","total_cost":this.servicecost,"total_service_cost":this.totalpayableamount,"servicediscountcost":this.servicecost,"discountcost":this.discountcost};
+       "get_custome_service_cancel_amount":this.get_custome_service_cancel_amount,"total_cost":this.servicecost,"total_service_cost":this.totalpayableamount,"servicediscountcost":this.servicecost,"discountcost":this.discountcost};
     
-         let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata,"packageListsvalue":this.package,"requestService":this.requestService,"recurringType":recurringType});
+         let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata,"packageListsvalue":this.package,"requestService":this.requestService,"recurringType":recurringType,"vendor_id":this.vendor_id});
       serviceModal.present();
       serviceModal.onDidDismiss(data =>{
       if(data == "dismiss"){
@@ -686,6 +829,7 @@ console.log(date2);
           this.navCtrl.pop();
         }
        if(data != 0 && data != "paydismiss"){
+        console.log(data);
           this.serviceRequestCall(data);
         }
       }
@@ -717,7 +861,6 @@ console.log(date2);
     }else{
       this.dependent = this.authForm.value.dependents;
     }
-    // console.log(this.modalForm.value.startdate);
     if(this.modalForm.value.startdate != undefined && this.modalForm.value.enddate != undefined){
      
     if(this.durations != undefined){
@@ -726,7 +869,8 @@ console.log(date2);
         return false; 
  }
  else{
-      // if(this.durations == 'Fixed hours'){}
+  let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
       let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
@@ -734,21 +878,24 @@ console.log(date2);
        "payment":"CommonRate"};
        this.providerService.validateTimes(serviceData,this.location_id,this.lead_time,this.vendor_id,this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,this.subcategory,this.datCount).subscribe(
      (viewServiceRequest) => {
+      loading.dismiss();
 
     },
     (err) => { 
         if(err.status===401)
         {
+          loading.dismiss();
    this.providerService.showToast(JSON.parse(err._body).error);
         }
        else{
+        loading.dismiss();
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,"base_cost":this.service_cost,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.package,"getCustomerBalanceAmount":this.getCustomerBalanceAmount,"get_custome_amount":"","get_custome_deliever_amount":this.get_custome_deliever_amount,
-       "get_custome_service_cancel_amount":"","total_cost":this.servicecost,"total_service_cost":this.totalpayableamount,"servicediscountcost":this.servicecost,"discountcost":this.discountcost};
+       "get_custome_service_cancel_amount":this.get_custome_service_cancel_amount,"total_cost":this.servicecost,"total_service_cost":this.totalpayableamount,"servicediscountcost":this.servicecost,"discountcost":this.discountcost};
     
-         let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata,"packageListsvalue":this.package,"requestService":this.requestService,"recurringType":recurringType});
+         let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata,"packageListsvalue":this.package,"requestService":this.requestService,"recurringType":recurringType,"vendor_id":this.vendor_id});
       serviceModal.present();
          serviceModal.onDidDismiss(data =>{
       if(data == "dismiss"){
@@ -801,27 +948,31 @@ else{
       this.dependent = this.authForm.value.dependents;
     }
       if(this.modalForm.value.date != "" && this.modalForm.value.time !=""){
+        let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
        let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.package};
       this.providerService.validateTime(serviceData,this.location_id,this.lead_time,this.vendor_id,this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,this.subcategory).subscribe(
      (viewServiceRequest) => {
-
+      loading.dismiss();
     },
     (err) => { 
         if(err.status===401)
         {
+          loading.dismiss();
         this.providerService.showToast(JSON.parse(err._body).error);
         }
        else{
+        loading.dismiss();
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,"base_cost":this.service_cost,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.package,"getCustomerBalanceAmount":this.getCustomerBalanceAmount,"get_custome_amount":"","get_custome_deliever_amount":this.get_custome_deliever_amount,
-       "get_custome_service_cancel_amount":"","total_cost":this.servicecost,"total_service_cost":this.totalpayableamount,"servicediscountcost":this.servicecost,"discountcost":this.discountcost};
+       "get_custome_service_cancel_amount":this.get_custome_service_cancel_amount,"total_cost":this.servicecost,"total_service_cost":this.totalpayableamount,"servicediscountcost":this.servicecost,"discountcost":this.discountcost};
     
-         let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata,"packageListsvalue":this.package,"requestService":this.requestService,"recurringType":recurringType});
+         let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata,"packageListsvalue":this.package,"requestService":this.requestService,"recurringType":recurringType,"vendor_id":this.vendor_id});
       serviceModal.present();
           serviceModal.onDidDismiss(data =>{
       if(data == "dismiss"){
@@ -863,6 +1014,8 @@ else{
     }
       if(this.modalForm.value.startdate != undefined && this.modalForm.value.enddate != undefined){
         if(this.durations != undefined){
+          let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
        let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
@@ -870,21 +1023,23 @@ else{
        "payment":"CommonRate"};
      this.providerService.validateTimes(serviceData,this.location_id,this.lead_time,this.vendor_id,this.category,this.category_id,this.service,this.service_ids,this.sub_category_id,this.subcategory,this.datCount).subscribe(
      (viewServiceRequest) => {
-
+      loading.dismiss();
     },
     (err) => { 
         if(err.status===401)
         {
+          loading.dismiss();
         this.providerService.showToast(JSON.parse(err._body).error);
         }
        else{
+        loading.dismiss();
          let serviceData = {"problem": this.modalForm.value.problem, "datetime": this.modalForm.value.date,"preferred_time":this.modalForm.value.time,"base_cost":this.service_cost,
        "dependentId": this.dependent, "mobile_no": this.modalForm.value.contact,"durations":this.durations,"servicecost":this.servicecost,"servicecosts":this.servicecosts,
        "exclude_days":this.excludeDays,"from_date":this.modalForm.value.startdate,"from_time":this.modalForm.value.fromtime,"quantity":"","selected_dates":this.selectedDates,
        "serviceType":this.onetimes,"time_slot":this.modalForm.value.preferredtime,"to_date":this.modalForm.value.enddate,"to_time":this.modalForm.value.totime,"package_id":this.package,"getCustomerBalanceAmount":this.getCustomerBalanceAmount,"get_custome_amount":"","get_custome_deliever_amount":this.get_custome_deliever_amount,
-       "get_custome_service_cancel_amount":"","total_cost":this.servicecost,"total_service_cost":this.totalpayableamount,"servicediscountcost":this.servicecost,"discountcost":this.discountcost};
+       "get_custome_service_cancel_amount":this.get_custome_service_cancel_amount,"total_cost":this.servicecost,"total_service_cost":this.totalpayableamount,"servicediscountcost":this.servicecost,"discountcost":this.discountcost};
     
-         let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata,"packageListsvalue":this.package,"requestService":this.requestService,"recurringType":recurringType});
+         let serviceModal = this.modalCtrl.create(Modelpage1PagePage,{"serviceDatas":serviceData,"name":this.name,"serviceTitle":this.serviceTitle,vendor:this.vendor,"paydata":paydata,"packageListsvalue":this.package,"requestService":this.requestService,"recurringType":recurringType,"vendor_id":this.vendor_id});
       serviceModal.present();
          serviceModal.onDidDismiss(data =>{
       if(data == "dismiss"){

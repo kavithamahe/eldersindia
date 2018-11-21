@@ -6,6 +6,8 @@ import { Storage } from '@ionic/storage';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ViewEventsPage } from '../../pages/view-events/view-events';
 import { EventsService } from '../../providers/events-service';
+
+import moment from 'moment';
 /*
   Generated class for the Events page.
 
@@ -25,6 +27,7 @@ eventsLists:any[]=[];
 nextPageURL:any='';
 eventScrollLists:any;
 emptyRecord:any;
+scrollTop:boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public eventsService:EventsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.storage.ready().then(() => {
        
@@ -42,14 +45,17 @@ emptyRecord:any;
     loader.present();
     this.eventsService.eventsList().subscribe(
      (eventsList) => {
-      this.eventsLists=eventsList.result.data;        
+      this.eventsLists=eventsList.result.data;    
+      var dataList=eventsList.result.data; 
+        for(let data of dataList) {
+            data.post_date = moment(data.post_date).format("DD MMM YYYY");
+            data.end_date = moment(data.end_date).format("DD MMM YYYY");
+          } 
+          this.eventsLists = dataList;    
       this.nextPageURL=eventsList.result.next_page_url;
       loader.dismiss(); 
     },
-    (err) => {      
-        console.log(err.status);
-        console.log(err.error); // error message as string
-        console.log(err.headers);   
+    (err) => {       
         if(err.status===401)
         {
         this.emptyRecord = (JSON.parse(err._body).error);
@@ -100,11 +106,18 @@ emptyRecord:any;
   }
   newsscroll()
   {
+    this.scrollTop = true;
      this.eventsService.eventsscroll(this.nextPageURL).subscribe(
      (eventsscroll) => {
       this.eventScrollLists=eventsscroll.result.data;
+      var dataList=eventsscroll.result.data; 
+        for(let data of dataList) {
+            data.post_date = moment(data.post_date).format("DD MMM YYYY");
+            data.end_date = moment(data.end_date).format("DD MMM YYYY");
+          } 
+          this.eventScrollLists = dataList; 
       for (let i = 0; i < Object.keys(this.eventScrollLists).length; i++) {
-        this.eventsLists.push(this.eventScrollLists[i]);
+        this.eventsLists.push(dataList[i]);
         }
       
        this.nextPageURL=eventsscroll.result.next_page_url;     

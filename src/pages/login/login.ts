@@ -144,19 +144,19 @@ export class LoginPage {
          
          if(loginuser.details.emergency_contacts[0].ambulance!='undefined')
          {
-           this.ambulance=loginuser.details.emergency_contacts[0].ambulance;
+           this.ambulance=loginuser.details.emergency_contacts[0].Ambulance;
          }
          if(loginuser.details.emergency_contacts[0].police!='undefined')
          {
-           this.police=loginuser.details.emergency_contacts[0].police;
+           this.police=loginuser.details.emergency_contacts[0].Police;
          }
          if(loginuser.details.emergency_contacts[0].doctor!='undefined')
          {
-           this.doctor=loginuser.details.emergency_contacts[0].doctor;
+           this.doctor=loginuser.details.emergency_contacts[0].Doctor;
          }
            if(loginuser.details.emergency_contacts[0].hospital!='undefined')
          {
-           this.hospital=loginuser.details.emergency_contacts[0].hospital;
+           this.hospital=loginuser.details.emergency_contacts[0].Hospital;
          }
             if(loginuser.details.emergency_contacts[0].sponsor_name!='undefined')
          {
@@ -201,7 +201,11 @@ export class LoginPage {
         console.log(err);
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
+        }
+        else if(err.status===422)
+        {
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {

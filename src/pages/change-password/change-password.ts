@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ServiceProvider } from '../../providers/service-provider';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 
+import { Storage } from '@ionic/storage';
+
 /*
   Generated class for the ChangePassword page.
 
@@ -30,11 +32,15 @@ stage2:any;
 strongRegex:any;
 mediumRegex:any;
 newPassword:any;
+user_type:any;
 
-  constructor(public formBuilder:FormBuilder,public loadingCtrl: LoadingController,public service:ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public formBuilder:FormBuilder,public loadingCtrl: LoadingController,public storage:Storage,public service:ServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
   	this.password_submit = false;
   	this.nav = navCtrl;
-   
+    this.storage.ready().then(() => {
+       storage.get('user_type').then((user_type) => { this.user_type=user_type; 
+      console.log(this.user_type); })
+     })
   	this.change_password_Form = formBuilder.group({
         currentPassword: ['',Validators.compose([Validators.required])],
         newPassword: ['',Validators.compose([Validators.required])],

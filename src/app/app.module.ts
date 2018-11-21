@@ -1,19 +1,21 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { HttpModule } from '@angular/http';
 
-
-import { Storage } from '@ionic/storage';
+import { IonicStorageModule  } from '@ionic/storage';
+import {IonTagsInputModule} from "ionic-tags-input";
 import { MyApp } from './app.component';
 import { TruncateModule } from 'ng2-truncate';
-import {RlTagInputModule} from 'angular2-tag-input';
+// import {RlTagInputModule} from 'angular2-tag-input';
 import { Ng2CompleterModule } from "ng2-completer";
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import { Network } from '@ionic-native/network';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Device } from "@ionic-native/device";
+import { Crashlytics } from '@ionic-native/fabric';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
-// import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+// import { InAppBrowser } from 'ionic-native';
 
 
 import {BrowserModule} from '@angular/platform-browser';
@@ -27,7 +29,7 @@ import { CameraPreview } from 'ionic-native';
 import {MomentModule} from 'angular2-moment';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
-import { Transfer } from '@ionic-native/transfer';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { LoginPage } from '../pages/login/login';
@@ -66,7 +68,6 @@ import { ViewEventsPage } from '../pages/view-events/view-events';
 import { ExternallinksPage } from '../pages/externallinks/externallinks';
 import { LogoutPage } from '../pages/logout/logout';
 import { JobDependentPage } from '../pages/job-dependent/job-dependent';
-import { ManageBlogsPage } from '../pages/manage-blogs/manage-blogs';
 import { EmojiPickerPage } from '../pages/emoji-picker/emoji-picker';
 import { RecurringPagePage } from '../pages/recurring/recurring';
 import { RecurringviewPagePage } from '../pages/recurringview/recurringview';
@@ -87,6 +88,8 @@ import { CommunitycommentsPage } from '../pages/communitycomments/communitycomme
 import { MyprofilesettingPage } from '../pages/myprofilesetting/myprofilesetting';
 import { CommunitymembersPage } from '../pages/communitymembers/communitymembers';
 import { PopoverPage } from '../pages/connections/connections';
+import { PackagePopoverPage } from '../pages/package-request/package-request';
+import { EnquiryPopoverPage } from '../pages/enquiries/enquiries';
 
 import { ManagePage } from '../pages/manage/manage';
 
@@ -112,6 +115,7 @@ import { GetpackagePagePage } from '../pages/getpackage/getpackage';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service-provider';
 import { BlogListService } from '../providers/blog-list-service';
+import { NetworkProvider } from '../providers/network/network';
 
 // import { Externallinks } from '../providers/externallinks';
 
@@ -133,6 +137,8 @@ import { BlogListService } from '../providers/blog-list-service';
     EmojiPickerPage,
     CommunitymembersPage,
     PopoverPage,
+    PackagePopoverPage,
+    EnquiryPopoverPage,
     ShareBlogPagePage,
     GetpackagePagePage,
     ViewpackagePagePage,
@@ -159,7 +165,6 @@ import { BlogListService } from '../providers/blog-list-service';
     CreateBlogPage,
     LogoutPage,
     JobDependentPage,
-    ManageBlogsPage,
     SubCategoryPage,
     SubCategoryServicePage,
     SubcategoryListPage,
@@ -187,16 +192,14 @@ import { BlogListService } from '../providers/blog-list-service';
     VerifyotpPagePage
   ],
   imports: [
-
-    IonicModule.forRoot(MyApp,AppConfig,{
-       tabsHideOnSubPages:true
-    }),
-
+    IonicStorageModule.forRoot({}),
+    IonicModule.forRoot(MyApp,AppConfig),
+    IonTagsInputModule,
+    HttpModule,
     TruncateModule,
-    RlTagInputModule,
+    // RlTagInputModule,
     Ionic2RatingModule,
     Ng2CompleterModule,
-    // Ng2SearchPipeModule,
     BrowserModule,
     Ng2EmojiModule,
     MomentModule
@@ -216,6 +219,8 @@ import { BlogListService } from '../providers/blog-list-service';
     CommunitymembersPage,
     ViewpackagePagePage,
     PopoverPage,
+    PackagePopoverPage,
+    EnquiryPopoverPage,
     ShareBlogPagePage,
     GetpackagePagePage,
     CommunityPage,
@@ -243,7 +248,6 @@ import { BlogListService } from '../providers/blog-list-service';
     CreateBlogPage,
     LogoutPage,
     JobDependentPage,
-    ManageBlogsPage,
     SubCategoryPage,
     SubCategoryServicePage,
     SubcategoryListPage,
@@ -270,9 +274,9 @@ import { BlogListService } from '../providers/blog-list-service';
     SafemePagePage,
     VerifyotpPagePage
   ],
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},FileTransfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics,Crashlytics, 
+    NetworkProvider] // Add GithubUsers provider
 
-    //providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},LoginUser,CommunityServices,ConnectionsService,MessagesService,JobBoardService,BlogListService,NewsService,EventsService,AppConfig,ServiceProvider,ServiceRequestService,Storage] // Add GithubUsers provider
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Transfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,Storage,DatePipe,Device,GoogleAnalytics] // Add GithubUsers provider
 
 })
 export class AppModule {}

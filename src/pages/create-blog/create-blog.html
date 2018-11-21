@@ -1,10 +1,3 @@
-
-<!--
-  Generated template for the CreateBlog page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
@@ -12,102 +5,86 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-	  <ion-title text-center text-capitalize>{{blogTitle}}</ion-title>   
+    <ion-title text-center text-capitalize>{{blogTitle}}</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
-   
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-<ion-card class="createblog-form">
-<form  [formGroup]="blogForm">
-<ion-label stacked class="bloag-label required" >Blog title</ion-label>
-  <ion-item>
-    
-    <ion-input type="text" formControlName="title" placeholder="Blog title" [(ngModel)]="title"></ion-input>
-  </ion-item>
-  <p *ngIf="!blogForm.controls.title.valid && (blogForm.controls.title.dirty || submitAttempt)" class="err-reds">Please enter the blog title</p>
- <ion-label stacked class="bloag-label required"  style="text-align:left; padding-bottom:10px;">Category</ion-label>
-  <ion-item>
-   <ion-label>Category</ion-label>
-    <ion-select class="select-brd" formControlName="category" placeholder="Category" [(ngModel)]="category">
-      <ion-option *ngFor="let categories of categoriesList" [value]="categories.id">{{categories.name}}</ion-option>     
-    </ion-select>
-  </ion-item>
-  <p *ngIf="!blogForm.controls.category.valid && (blogForm.controls.category.dirty || submitAttempt)" class="err-reds">Please enter the category</p>
-	 <ion-label stacked>Highlights</ion-label>
-	<ion-item>
-	   
-	    <ion-textarea  [(ngModel)]="highlights" placeholder="Highlights" [ngModelOptions]="{standalone: true}"></ion-textarea>
-	</ion-item>
-<ion-label stacked class="required">Description</ion-label>
-	<ion-item>
-	    
-	    <ion-textarea  formControlName="description" placeholder="Description" [(ngModel)]="description"></ion-textarea>
-	</ion-item>
-   <small *ngIf="!blogForm.controls.description.valid  && 
+<ion-content class="createblog-form">
+  <div class="addblog">
+    <form [formGroup]="blogForm">
+      <ion-label  class="bloag-label required">Blog title</ion-label>
+      <ion-item>
+        <ion-input type="text" formControlName="title" placeholder="Blog title" [(ngModel)]="title"></ion-input>
+      </ion-item>
+      <p *ngIf="!blogForm.controls.title.valid && (blogForm.controls.title.dirty || submitAttempt)" class="err-reds">Please enter the blog title</p>
+    <!--   <ion-label stacked class="bloag-label required" style="text-align:left; padding-bottom:10px;">Category</ion-label> -->
+      <ion-item class="sel-label">
+       <ion-label stacked class="selectDepent" class="required">Category</ion-label>
+        <ion-select formControlName="category" placeholder="Category" [(ngModel)]="category" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+          <ion-option *ngFor="let categories of categoriesList" [value]="categories.id">{{categories.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <p *ngIf="!blogForm.controls.category.valid && (blogForm.controls.category.dirty || submitAttempt)" class="err-reds">Please enter the category</p>
+      <ion-label stacked>Highlights</ion-label>
+      <ion-item>
+        <ion-textarea [(ngModel)]="highlights" placeholder="Highlights" [ngModelOptions]="{standalone: true}"></ion-textarea>
+      </ion-item>
+      <ion-label stacked class="required">Description</ion-label>
+      <ion-item>
+        <ion-textarea formControlName="description" placeholder="Description" [(ngModel)]="description"></ion-textarea>
+      </ion-item>
+      <small *ngIf="!blogForm.controls.description.valid  && 
    (blogForm.controls.description.dirty || submitAttempt)">
-              <p class="valid err-reds">Please enter description</p>
-          </small> 
-	
-  </form>
-   <ion-label stacked class="upimag">Featured image / Banner image</ion-label>
-  <ion-item class="featured-bro">
+        <p class="valid err-reds">Please enter description</p>
+      </small>
+    </form>
+    <div class="WithoutForm">
+      <ion-label stacked class="upimag">Tags</ion-label>
+      <ion-item class="featured-bro" text-wrap>
+        <ion-tags-input [(ngModel)]="tagsModel" placeholder="Tags" (keyup)="getTagsList($event)" [ngModelOptions]="{standalone: true}"></ion-tags-input>
+      </ion-item>
+      <div radio-group [(ngModel)]="allowComments" [ngModelOptions]="{standalone: true}" style="margin-top:5px;">
+        <ion-label stacked class="upimag">Allow comments</ion-label>
+        <ion-row>
+          <ion-col col-6 class="radio-img">
+            <ion-radio value="1">Yes</ion-radio>
+            <ion-label style=" float:left; margin:0px; font-size:15px; color:#404996;">Yes &nbsp;</ion-label>
+          </ion-col>
+          <ion-col col-6 class="radio-img">
+            <ion-radio value="0"></ion-radio>
+            <ion-label style="float:left;margin:0px;font-size:15px;color:#404996;">No&nbsp;</ion-label>
+          </ion-col>
+        </ion-row>
 
-  
-  	<button ion-button (click)="accessGallery('featured')" class="brw-btn"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Browse</button>
-	<img [src]="featuredImage" *ngIf="featuredImage != ''" />
-	
-	    <button ion-button (click)="accessGallery('banner')" class="brw-btn"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Browse</button>
-    <img [src]="bannerImage" *ngIf="bannerImage != ''" />
+      </div>
 
-  </ion-item>
- 
-	 <ion-label stacked class="upimag">Tags</ion-label>
-   <ion-item class="featured-bro" text-wrap>
-       <rl-tag-input class="rd-tags" [(ngModel)]="tagsModel" [addOnBlur]="false" [addOnEnter]="true"  [autocompleteItems]="tags" [autocomplete]="true" placeholder="Tags" (keyup)="getTagsList($event)" [ngModelOptions]="{standalone: true}">
-        </rl-tag-input>
-    </ion-item>
-    <div radio-group [(ngModel)]="allowComments" [ngModelOptions]="{standalone: true}" style="margin-top:5px;">
- <ion-label stacked class="upimag">Allow comments</ion-label>
-<ion-row>
+      <ion-label stacked class="upimag">Featured image </ion-label>
+      <p class="caption">( Preferable size 170 X 130 )</p>
+      <ion-item class="featured-bro">
+        <button ion-button (click)="accessGallery('featured')" class="brw-btn">
+          <i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Browse</button>
+        <img [src]="featuredImage" *ngIf="featuredImage != ''" />
+      </ion-item>
+      <ion-label>
+        Banner image
+      </ion-label>
+      <p class="caption">( Preferable size 900 X 300 )</p>
+      <ion-item>
+        <button ion-button (click)="accessGallery('banner')" class="brw-btn">
+          <i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;Browse</button>
+        <img [src]="bannerImage" *ngIf="bannerImage != ''" />
+      </ion-item>
+    </div>
+    
 
-<ion-col width-50 class="radio-img">
- <ion-radio value="1">Yes</ion-radio><ion-label style=" float:left; margin:0px; font-size:15px; color:#404996;">Yes &nbsp;</ion-label>
+    <button ion-button class="logoin-btn" icon-left full (click)="createBlog()"> Submit</button>
 
-	</ion-col>
-	  <ion-col width-50 class="radio-img">
+    
 
-    <ion-radio value="0"></ion-radio><ion-label style="float:left;margin:0px;font-size:15px;color:#404996;">No&nbsp;</ion-label>
-	</ion-col>
-  </ion-row>
-
-</div>
-<br/>
-
-<button ion-button class="logoin-btn" icon-left full (click)="createBlog()"> Submit</button>
-
-<br/><br/>
-</ion-card>
+  </div>
 </ion-content>
-
-<style>
-.list-header-md{border-top:0px solid #222;}
-[_nghost-fub-42]{}
-.liste-names{padding-left:0px; color:#404998;}
-.rd-tags{  border: 1px solid #ccc;
-    border-radius: 0;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
-    color: #555;
-    font-size: 18px;
-    font-weight: 400;
-    margin-left:7px;
-    max-height: 300px;
-    min-height: 80px;
-    padding: 7px;
-    width:96%;}
-</style>

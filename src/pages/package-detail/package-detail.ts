@@ -35,6 +35,7 @@ vendorLogo:any;
  user_type:any;
  packages_service:any;
  dependentId:any;
+ pack_id:any;
   constructor(public navCtrl: NavController,public modalCtrl: ModalController, public navParams: NavParams,public storage:Storage,public toastCtrl: ToastController,public loadingCtrl: LoadingController,public blogListService: BlogListService) {
   	 this.storage.ready().then(() => {     
 	  	storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -43,6 +44,7 @@ vendorLogo:any;
 	    storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
 	    this.vendor_id = navParams.get("vendor_id");
 	    this.location_id = navParams.get("location_id");
+      this.pack_id = navParams.get("pack_id");
 	  	this.getVendorpackageDetail();
       });     
    });    
@@ -64,7 +66,7 @@ vendorLogo:any;
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
     // this.providerService.loadServiceOffered()
-    this.blogListService.getVendorpackageDetails(this.rootUrl,this.vendor_id,this.location_id)
+    this.blogListService.getVendorpackageDetails(this.rootUrl,this.vendor_id,this.location_id,this.pack_id)
       .subscribe(data =>{
       	//console.log(data);
         this.packageData = data.result.info.vendorDetails;  

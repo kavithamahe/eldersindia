@@ -1,111 +1,210 @@
 page-blogs {
-.toolbar-title-md{ text-align:center;}
- .toolbar-title-ios{ text-align:center;}
- .content-intop {
-    background: #F5F9FF;
+    .blogListContent {
+        background: url('../assets/img/bg.jpg');
+        background-position: center;
+        background-size: cover;
+        .select-packages {
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.12);
+            border-radius: 4px;
+            padding: 0px 10px;
+        }
+        .conn-seg {
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.12);
+            border-radius: 30px;
+            margin: 20px 10px;
+            ion-segment {
+                background: #ffffff;
+                border-radius: 30px;
+                height: 45px;
+                line-height: 45px;
+                font-size: 15px !important;
+                padding: 0px 3px;
+                ion-segment-button {
+                    &.segment-activated {
+                        border: none !important;
+                        line-height: 35px !important;
+                        font-size: 15px !important;
+                        font-weight: 600;
+                        background: #ef7f16;
+                        color: #fff;
+                        height: 35px;
+                        font-family: 'Muli', sans-serif;
+                    }
+                }
+            }
+        }
+        .blogListCard {
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.12);
+            border-radius: 10px;
+            margin-top: 15px;
+            .imageBlog {
+                position: relative;
+                height: 200px;
+                text-align: center;
+                img {
+                    height: 100%;
+                }
+                span {
+                    .labels-bdss {
+                        position: absolute;
+                        bottom: 0;
+                        background: rgba(0, 0, 0, 0.8);
+                        right: 0;
+                        padding: 5px 10px;
+                        font-size: 15px;
+                        color: #fff;
+                        border-radius: 5px 0px 0px 0px;
+                    }
+                    .labels-bdss-featured_image {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        background: #ef7f16;
+                        color: #fff;
+                        font-size: 15px;
+                        padding: 5px 10px;
+                        border-radius: 5px 0px 5px 0px;
+                        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+                        font-weight: 500;
+                    }
+                }
+            }
+            ion-row {
+                .blogs-tittle {
+                    ion-item {
+                        .item-inner {
+                            padding: 0;
+                            .input-wrapper {
+                                ion-label {
+                                    margin: 0;
+                                    h2 {
+                                        font-weight: 600;
+                                        color: #2c4e86;
+                                        padding: 5px 10px 5px;
+                                        line-height: 25px;
+                                        font-size: 17px;
+                                    }
+                                    p {
+                                        color: #666;
+                                        padding: 0px 10px;
+                                        b {
+                                            color: #019746;
+                                            font-size: 16px;
+                                            padding: 0 4px;
+                                        }
+                                        span {
+                                            text-align: right;
+                                            color: #9ea8b2;
+                                            font-weight: 500;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .job-detailsview {
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.12);
+            border-radius: 10px;
+            margin-top: 15px;
+            padding: 10px;
+            ion-row {
+                ion-col {
+                    .service-req {
+                        font-weight: 500;
+                        color: #42436a;
+                        font-size: 18px;
+                    }
+                    h2 {
+                        ion-badge {
+                            background: #a0a2a1;
+                            color: #fff;
+                            padding: 5px 15px;
+                            margin: 10px 0;
+                            font-size: 15px;
+                            letter-spacing: 0.5px;
+                            font-weight: 500;
+                            border-radius: 20px;
+                        }
+                    }
+                    p {
+                        color: #999;
+                    }
+                    .blogManageStatus {                        
+                        p {
+                            .warning {
+                                background: #ef7f16;
+                                color: #fff;
+                                margin: 10px 0;
+                            }
+                            .approved {
+                                background: #019746;
+                                color: #fff;
+                                margin: 10px 0;
+                            }
+                            .rejected,
+                            .deleted {
+                                background: #ff0000;
+                                color: #fff;
+                                margin: 10px 0;
+                            }
+                            .archieved {
+                                background: #2c4e86;
+                                color: #fff;
+                                margin: 10px 0;
+                            }
+                        }
+                    }
+                    ion-label {
+                        color: #9ea8b2;
+                        font-size: 17px;
+                        padding: 8px 10px 6px;
+                        display: block;
+                        font-weight: 500;
+                        letter-spacing: 0.2px;
+                    }
+                    .edits {
+                        background: #42436a;
+                        color:#fff;
+                        padding: 9px 25px 9px 25px;
+                        font-weight: 500;
+                        font-size: 16px;
+                        margin: 9px 5px 8px 0px;
+                        border-radius: 30px;
+                        -webkit-box-shadow: 0px 5px 20px rgba(44, 78, 134, 0.2);
+                        box-shadow: 0px 5px 20px rgba(44, 78, 134, 0.2);
+                    }
+                    .delets {
+                        background: #ff0000;
+                        color:#fff;
+                        padding: 9px 25px 9px 25px;
+                        font-weight: 500;
+                        font-size: 16px;
+                        margin: 9px 5px 8px 0px;
+                        border-radius: 30px;
+                        -webkit-box-shadow: 0px 5px 20px rgba(44, 78, 134, 0.2);
+                        box-shadow: 0px 5px 20px rgba(44, 78, 134, 0.2);
+                    }
+                }
+                &.brd-btm {
+                    border-bottom: 1px dotted #ccc;
+                }
+            }
+            .service-cont {
+                color: #777;
+                padding: 10px;
+                p {
+                    font-size: 17px;
+                    line-height: 25px;
+                }
+            }
+        }
+    }
 }
-
-.sel-packages {
-    border: 1px solid #A9A9A9;
-    box-shadow: none;
-    border-radius: 0px;
-}
-.top-bttn1{background:#6B8E23 !important;}
-.top-bttn{background:#FA8072 !important;}
-.top-bttn i{font-weight:400; color:#fff;}
-
-.go-btn{margin-top:10px; width:50px; height:35px;}
- .sel-packages .item-md .item-inner .label-md {
-    font-family: 'Muli', sans-serif;
-    font-size:16px; font-weight:600;  letter-spacing: 0.2px;
-    padding-left: 10px;}
-	 .sel-packages .item-ios .item-inner .label-ios {
-    font-family: 'Muli', sans-serif;
-    font-size: 15px;
-    padding-left: 10px;}
-.error-clr{ text-align:center; font-size:15px; color:red; font-family: 'Muli', sans-serif;}
-
-.blogs-tittle .item-inner .input-wrapper .label-md{ margin:0px;}
-.blogs-tittle .item-inner .input-wrapper .label-md h2 {
-    color: #007994 !important; font-weight:400;
-    font-family: "Muli",sans-serif;
-    font-size:19px !important;letter-spacing:0.2px;  letter-spacing: 0.2px;
-    padding-bottom: 8px;
-    margin: 0;
-}
-.blogs-tittle  .item-inner .input-wrapper .label-md p {
-    color: #7b8da0 !important;
-    font-family: "Muli",sans-serif;  letter-spacing: 0.2px;
-    font-size:12px !important;
-    padding-bottom: 8px; font-weight:400;
-    margin: 0;
-}
-.community-img row col img{ border:1px solid #ccc;}
-.hide, [hidden], template {
-    display: block !important;
-}
-
-
-
-.sel-packages .item-ios .item-inner .label-ios {
-    font-family: 'Muli', sans-serif;
-    font-size: 15px;
-    padding-left: 10px;}
-	 .sel-packages .item-ios .item-inner .label-ios {
-    font-family: 'Muli', sans-serif;
-    font-size: 15px;
-    padding-left: 10px;}
-
-
-.blogs-tittle .item-inner .input-wrapper .label-ios{ margin:0px;}
-.blogs-tittle .item-inner .input-wrapper .label-ios h2 {
-    color: #007994 !important;
-    font-family: "Muli",sans-serif;
-    font-size:19px !important;
-    padding-bottom: 8px;
-    margin: 0;
-}
-.blogs-tittle  .item-inner .input-wrapper .label-ios p {
-    color: #7b8da0 !important;
-    font-family: "Muli",sans-serif;
-    font-size:12px !important;
-    padding-bottom: 8px;
-    margin: 0;
-}
-
-
-
-.community-img{position:relative;}
-
-.labels-bdss {
-    background: hsla(240, 2%, 8%, 0.58) none repeat scroll 0 0 !important;
-    border-right: 4px solid hsl(209, 72%, 41%) !important;
-    color: hsl(0, 0%, 100%) !important;
-    float: left;
-    font-family: "Muli",sans-serif;
-    font-size:15px !important;
-    font-weight: 600;
-    padding: 9px;
-    position: absolute;
-    right: -1px;
-    top:150px;
-    width: auto;
-}
-.labels-bdss-featured_image {
-    background: hsla(240, 2%, 8%, 0.58) none repeat scroll 0 0 !important;
-    border-left: 4px solid red;
-    color: hsl(0, 0%, 100%) !important;
-    float: left;
-    font-family: "Muli",sans-serif;
-    font-size:15px !important;
-    font-weight: 600;
-    padding: 9px;
-    position: absolute;
-
-    top:150px;
-    width: auto;
-}
-
-
-
+.ios{
+    page-blogs {
+         top: 8px !important;
+    }   
 }

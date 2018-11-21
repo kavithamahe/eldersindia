@@ -1,3 +1,33 @@
 page-remotemonitor {
-
+    ion-label {
+        color: #333;
+        font-size: 17px;
+        font-weight: 600;
+        padding-top: 10px;
+        margin: 15px 0px 2px 0;
+    }
+    ion-item {
+        .item-inner {
+            .input-wrapper {
+                ion-input {
+                    input {
+                        color: #666666;
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+    }
+    .submit-btn{
+        margin: 40px 0;
+        float: right;
+        background: #2c4e86;
+        border-radius: 30px;
+        padding: 5px 30px;
+    }
+}
+.ios{
+    page-remotemonitor {
+         top: 8px !important;
+    }   
 }

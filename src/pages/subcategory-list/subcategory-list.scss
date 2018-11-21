@@ -1,92 +1,151 @@
 page-subcategory-list {
-.toolbar-title-md																		{text-align:center !important;}
-.toolbar-title-ios																		{text-align:center;}
-.content-intop																			{background-image: url('../assets/img/bg.jpg');width:100%;background-repeat: no-repeat; background-size: cover; height:100%;}
-.item-md.item-block .item-inner															{padding-right:0px;}
-.subcategory-list .item-inner .input-wrapper .label-md									{margin:0px;}
-.subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col img				{border:1px solid hsl(210, 55%, 96%);}
-.subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col h2				{color:#2c4e86;font-family: "Muli",sans-serif;font-size:19px !important; font-weight:600;margin: 0; padding-bottom:10px; padding-top:0px;}
-.rating-clr ul.rating li																{float:left; list-style-type: none; margin-right:3px; padding:0px !important; margin-bottom:5px;height:6px;}
-.rating-clr ul.rating																	{float:left;margin-left:-40px;margin-top:1px;width:100%;}
-.rating-clr ul.rating li .ion-md-star													{color:#FFB700; font-size:22px;}
-.rating-clr ul.rating li .ion-md-star-outline											{color:#FFB700;font-size:22px;}
-.subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col .list-md			{ width:100%; float:left; padding-bottom:5px;}
-.subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col .list-md b		{color:red;float:left; padding-right:6px; font-weight:400;font-size:16px; font-family: "Muli",sans-serif;}
-.subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col .list-md span	{float:left;color:#666;padding-right:6px; font-size:16px; font-weight:400;font-family: "Muli",sans-serif; padding-top:0px;  padding-right:3px; text-decoration: line-through;}
-.subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col .list-md p		{color:#666; font-weight:400; padding-right:6px; font-size:16px;  float:left;font-family: "Muli",sans-serif; padding-top:1px;}
-.subcategory-list .item-inner .input-wrapper .label-md ion-row ion-col .list-md p.offers{font-weight:400;  padding-top:2px;color:green;font-family: "Muli",sans-serif; font-size:16px;}
-.hei-head																				{background:red;}
-.tittles-md																				{background:red;}
-.item-ios.item-block .item-inner														{padding-right:0px;}
-.subcategory-list .item-inner .input-wrapper .label-ios									{margin:0px;}
-.subcategory-list .item-inner .input-wrapper .label-ios ion-row ion-col img				{border:1px solid hsl(210, 55%, 96%);}
-.subcategory-list .item-inner .input-wrapper .label-ios ion-row ion-col h2				{padding-top:9px;color:#007994 !important;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:600;margin: 0; padding-bottom:0px;}
-.rating-clr ul.rating li																{float:left; list-style-type: none; margin-right:3px; height:6px;}
-.rating-clr ul.rating																	{float:left;margin-left:-40px;margin-top:1px;width:100%;}
-.rating-clr ul.rating li .ion-ios-star													{color:#FFB700; font-size:19px;}
-.rating-clr ul.rating li .ion-ios-star-outline											{color:#FFB700;font-size:19px;}
-.text-alg b																				{color:red!important; float:left; font-size:20px !important; font-weight:600; padding:8px 0px; }
-.text-alg small																			{color:#444 !important;font-family: "Muli",sans-serif;font-size:17px !important; font-weight:400;}
-.text-alg span																			{color:#444!important; font-family: "Muli",sans-serif;font-size:14px !important; font-weight:400;}
-.text-alg p																				{color:#999!important; float:left; width:100%;font-family: "Muli",sans-serif;font-size:15px !important; font-weight:600;padding-bottom:0px;}
-.text-alg strong																		{color:#777 !important;font-family: "Muli",sans-serif;font-size:15px !important; font-weight:400; text-decoration: line-through;}
-.text-alg p i.fa-map-marker																{color:#2c4e86;}
-.off-price p																			{color: hsl(0, 0%, 100%);font-size:13px;font-weight:600;line-height:17px;padding-top:14px;}
-.btn-warnings																			{background:#2c4e86 !important;height:35px;font-size:15px;color:#fff;border-radius:30px;width:45%;font-weight:600;float:left;text-transform:capitalize;font-family: 'Muli', sans-serif;}
-.instant-bt																				{float:right;height:35px; background:#ef7f1b !important;width:45%;font-size:15px;color:#fff;border-radius:30px;font-weight:600;margin-left:5px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
-.instant-btn																			{float:right;height:35px; background:#025FA9 !important;width:45%;font-size:15px;color:#fff;border-radius:20px;font-weight:600;margin-left:5px;text-transform:capitalize;font-family: 'Muli', sans-serif;}
-.modal-wrapper																			{background:none !important;}
-ul.rating[_ngcontent-ydl-43]   li[_ngcontent-ydl-43]									{padding:0px !important;}
-.btn-warnings																			{background:red;}
-
-/*============ 
-Kiran changes
-=============*/
-.content-intop{
-	.card-md{
-		padding: 10px 0px 15px 0;
-		border-radius: 5px !important;
-		box-shadow: 0 5px 20px rgba(0,0,0,0.12) !important;
-		.img-center{
-			text-align: center;
-			img{
-				margin: 0 auto;
-			}
-		}
-		.off-price{
-		width: 50px;
-		height: 50px;
-		margin: 10px 20px;
-		background: red;
-		color: #fff !important;
-		float: left;
-		text-align: center;
-		line-height: 20px;
-		border-radius: 50%;
-		p {
-			color: white;
-			font-size: 13px;
-			font-weight: 500;
-			line-height: 15px;
-			padding-top: 12px;
-			text-align: center;
-		}
-		}
-		.text-alg{
-			p{
-				padding-bottom: 0 !important;
-			}
-		}
-		.btn-padd{
-			padding: 0px 10px;
-		}
-	}
+    .content-intop {
+        background-image: url('../assets/img/bg.jpg');
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+        ion-card {
+            padding: 10px 10px 15px 10px;
+            border-radius: 5px !important;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12) !important;
+            ion-item {
+                .item-inner {
+                    border: none;
+                    padding: 0;
+                    .input-wrapper {
+                        ion-label {
+                            ion-row {
+                                ion-col {
+                                    .img-center {
+                                        text-align: center;
+                                        img {
+                                            margin: 0 auto;
+                                            width: 80px;
+                                            height: 80px;
+                                        }
+                                    }
+                                    .off-price {
+                                        width: 50px;
+                                        height: 50px;
+                                        margin: 10px 20px;
+                                        background: red;
+                                        color: #fff !important;
+                                        float: left;
+                                        text-align: center;
+                                        line-height: 20px;
+                                        border-radius: 50%;
+                                        p {
+                                            color: white;
+                                            font-size: 13px;
+                                            font-weight: 500;
+                                            line-height: 15px;
+                                            padding-top: 12px;
+                                            text-align: center;
+                                        }
+                                    }
+                                    h2 {
+                                        color: #2c4e86;
+                                        font-family: "Muli", sans-serif;
+                                        font-size: 19px !important;
+                                        font-weight: 600;
+                                        margin: 0;
+                                        padding-bottom: 10px;
+                                        padding-top: 0px;
+                                    }
+                                    &.text-alg {
+                                        p {
+                                            color: #999 !important;
+                                            float: left;
+                                            width: 100%;
+                                            font-family: "Muli", sans-serif;
+                                            font-size: 15px !important;
+                                            font-weight: 600;
+                                            padding-bottom: 0 !important;
+                                        }
+                                        b {
+                                            color: red !important;
+                                            float: left;
+                                            font-size: 20px !important;
+                                            font-weight: 600;
+                                            padding: 8px 0px;
+                                            span {
+                                                color: #444 !important;
+                                                font-family: "Muli", sans-serif;
+                                                font-size: 14px !important;
+                                                font-weight: 400;
+                                                strong {
+                                                    color: #777 !important;
+                                                    font-family: "Muli", sans-serif;
+                                                    font-size: 15px !important;
+                                                    font-weight: 400;
+                                                    text-decoration: line-through;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            ion-col {
+                                &.btn-padd {
+                                    padding: 0px 10px;
+                                    .btn-warnings {
+                                        background: #2c4e86 !important;
+                                        height: 35px;
+                                        font-size: 15px;
+                                        color: #fff;
+                                        border-radius: 30px;
+                                        width: 45%;
+                                        font-weight: 600;
+                                        float: left;
+                                        text-transform: capitalize;
+                                        font-family: 'Muli', sans-serif;
+                                    }
+                                    .instant-bt {
+                                        float: right;
+                                        height: 35px;
+                                        background: #ef7f1b !important;
+                                        width: 45%;
+                                        font-size: 15px;
+                                        color: #fff;
+                                        border-radius: 30px;
+                                        font-weight: 600;
+                                        margin-left: 5px;
+                                        text-transform: capitalize;
+                                        font-family: 'Muli', sans-serif;
+                                    }
+                                    .instant-btn {
+                                        float: right;
+                                        height: 35px;
+                                        background: #025FA9 !important;
+                                        width: 45%;
+                                        font-size: 15px;
+                                        color: #fff;
+                                        border-radius: 20px;
+                                        font-weight: 600;
+                                        margin-left: 5px;
+                                        text-transform: capitalize;
+                                        font-family: 'Muli', sans-serif;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-.text-bolder{
-	font-weight:600 !important;
+.text-bolder {
+    font-weight: 600 !important;
 }
-.color-777{
-	color:#777 !important;
+
+.color-777 {
+    color: #777 !important;
 }
+.ios{
+    page-subcategory-list {
+         top: 8px !important;
+    }   
 }
