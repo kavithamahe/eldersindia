@@ -50,7 +50,7 @@ additional_service_cost:any;
 reqstatus:any;
 paymentType:any;
 imageUrl:any;
-  constructor(public navCtrl: NavController,public loadingCtrl: LoadingController,public viewCtrl: ViewController,public storage:Storage, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,public blogListService:BlogListService,public loadingCtrl: LoadingController,public viewCtrl: ViewController,public storage:Storage, public navParams: NavParams) {
   	 
     if(navParams.get("service_type") != undefined){
   		this.service_type = navParams.get("service_type");
@@ -289,7 +289,7 @@ RazorpayCheckout.open(recurringOption, successCallback, cancelCallback);
         }
       }
     };
-
+let toaster = this.blogListService;
 let nav = this.navCtrl;
 let loading = this.loadingCtrl.create({content: 'Please wait...!'});
  var successCallback = function(payment_id) {
@@ -312,8 +312,8 @@ xmlhttp.onload = function () {
     }
 
 var cancelCallback = function(error) {
-  nav.pop();
-  // alert(error.description + ' (Error '+error.code+')')
+  toaster.showToaster(error.description);
+ nav.pop();
 }
 
 RazorpayCheckout.on('payment.success', successCallback);

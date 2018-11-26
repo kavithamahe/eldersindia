@@ -51,39 +51,45 @@
   <br />
   <ion-card class="job-detailsview" *ngFor="let enquiries of enquiriesList">
     <ion-grid class="package-needs">
+    <ion-row>
+        <ion-col col-12 text-wrap>
+          <b>Token </b>
+          <p>{{enquiries.enquiry_token}}</p>
+        </ion-col>
+      </ion-row>
       <ion-row>
         <ion-col col-12 text-wrap>
-          <b><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> Enquiry Date </b>
+          <b>Enquiry Date </b>
           <p>{{enquiries.preferred_datetime}}</p>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-12 text-wrap>
-          <b><ion-icon ios="ios-person" md="md-person"></ion-icon> Name</b>
+          <b>Name</b>
           <p>{{enquiries.name}}</p>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-12 text-wrap>
-          <b><ion-icon ios="ios-call" md="md-call"></ion-icon> Contact Number </b>
+          <b>Contact Number </b>
           <p>{{enquiries.contact_number}}</p>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-12 text-wrap>
-          <b><ion-icon ios="ios-filing" md="md-filing"></ion-icon> Category </b>
+          <b>Category </b>
           <p>{{enquiries.category_name}}</p>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-12 text-wrap>
-          <b><ion-icon ios="ios-cog" md="md-cog"></ion-icon> Service </b>
+          <b>Service </b>
           <p>{{enquiries.service_name}}</p>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-12 text-wrap>
-          <b><ion-icon ios="ios-people" md="md-people"></ion-icon> Vendor</b>
+          <b>Vendor</b>
           <p>{{enquiries.vendor_name}}</p>
         </ion-col>
       </ion-row>

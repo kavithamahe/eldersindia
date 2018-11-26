@@ -28,6 +28,7 @@ messages:any;
 token:string='';
 imageUrl:string;
 allConnectionsInfo:any=[];
+myNewList:any=[];
 receivedRquestInfo:any=[];
 sentRquestInfo:any=[];
 addConnectionInfo:any=[];
@@ -59,6 +60,7 @@ searchadd:any="";
 error:any;
 check:any;
 scrollTop:boolean = false;
+result:any=[];
    constructor(private popoverCtrl: PopoverController,public platform: Platform,public navCtrl: NavController, public actionsheetCtrl: ActionSheetController,public navParams: NavParams,public storage:Storage,public connectionsService:ConnectionsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.getconnections="myConnections";
     this.connectionsaction ="all";
@@ -96,6 +98,8 @@ scrollTop:boolean = false;
      (allConnections) => {
      // setInterval(()=> {
         this.allConnectionsInfo=allConnections.result.info.list.data;  
+        var filtered =  _.uniqBy(this.allConnectionsInfo, 'id');
+        this.allConnectionsInfo = filtered;
       this.orgAllConnectionsInfo=allConnections.result.info.list.data;
       this.nextPageURL1=allConnections.result.info.list.next_page_url; 
       console.log(this.nextPageURL1);
@@ -122,6 +126,8 @@ scrollTop:boolean = false;
     this.connectionsService.receivedRquest().subscribe(
      (receivedRquest) => {
       this.receivedRquestInfo=receivedRquest.result.info.list.data;
+      var filtered =  _.uniqBy(this.receivedRquestInfo, 'id');
+        this.receivedRquestInfo = filtered; 
       this.orgReceivedRquestInfo=receivedRquest.result.info.list.data; 
       this.nextPageURL2=receivedRquest.result.info.list.next_page_url;  
        loader.dismiss();   
@@ -149,6 +155,8 @@ scrollTop:boolean = false;
     this.connectionsService.sentRquest().subscribe(
      (sentRquest) => {
       this.sentRquestInfo=sentRquest.result.info.list.data;
+       var filtered =  _.uniqBy(this.sentRquestInfo, 'id');
+        this.sentRquestInfo = filtered; 
       this.nextPageURL4=sentRquest.result.info.list.next_page_url;     
       loader.dismiss();
     },
@@ -172,6 +180,8 @@ scrollTop:boolean = false;
     this.connectionsService.getAllConnectionList().subscribe(
      (addConnectionsList) => {
       this.addConnectionInfo=addConnectionsList.result.info.data;
+      var filtered =  _.uniqBy(this.addConnectionInfo, 'id');
+        this.addConnectionInfo = filtered;
       this.nextPageURL3=addConnectionsList.result.info.next_page_url;
       loader.dismiss();
         },
@@ -242,6 +252,8 @@ scrollTop:boolean = false;
    this.searchText = searchEvent;
       this.connectionsService.searchConnection(this.searchText).subscribe(searchConnection => {
         this.allConnectionsInfo= searchConnection.result.info.list.data;
+        var filtered =  _.uniqBy(this.allConnectionsInfo, 'id');
+        this.allConnectionsInfo = filtered;
       },
       (err) => { 
         this.allConnectionsInfo = [];
@@ -260,6 +272,8 @@ scrollTop:boolean = false;
      this.searchsend=searchEvent;
       this.connectionsService.sendsearchConnection(this.searchsend).subscribe(searchConnection => {
         this.sentRquestInfo= searchConnection.result.info.list.data;
+        var filtered =  _.uniqBy(this.sentRquestInfo, 'id');
+        this.sentRquestInfo = filtered; 
       },
        (err) => { 
         this.sentRquestInfo = [];
@@ -280,6 +294,8 @@ scrollTop:boolean = false;
      this.searchrec = searchEvent;
       this.connectionsService.receivedsearchConnection(this.searchrec).subscribe(searchConnection => {
         this.receivedRquestInfo= searchConnection.result.info.list.data;
+        var filtered =  _.uniqBy(this.receivedRquestInfo, 'id');
+        this.receivedRquestInfo = filtered; 
       },
       (err) => { 
         this.receivedRquestInfo = [];
@@ -298,6 +314,8 @@ scrollTop:boolean = false;
     this.searchadd=Event;
       this.connectionsService.addsearchConnection(this.searchadd).subscribe(searchConnections => {
         this.addConnectionInfo= searchConnections.result.info.data;
+         var filtered =  _.uniqBy(this.addConnectionInfo, 'id');
+        this.addConnectionInfo = filtered;
         if(this.addConnectionInfo == ""){
           this.addConnectionsList();
         }
@@ -355,7 +373,8 @@ scrollTop:boolean = false;
      this.connectionsService.receivedConnectionScroll(this.nextPageURL2,this.searchrec).subscribe(
      (receivedConnectionScroll) => {
       this.receivedConnectionScrollLists=receivedConnectionScroll.result.info.list.data;  
-    
+      var filtered =  _.uniqBy(this.receivedConnectionScrollLists, 'id');
+        this.receivedConnectionScrollLists = filtered; 
       for (let i = 0; i < Object.keys(this.receivedConnectionScrollLists).length; i++) {        
         this.receivedRquestInfo.push(this.receivedConnectionScrollLists[i]);
         }
@@ -409,7 +428,9 @@ scrollTop:boolean = false;
    
      this.connectionsService.allConnectionScroll(this.nextPageURL1,this.searchText).subscribe(
      (allConnectionScroll) => {
-      this.allConnectionScrollLists=allConnectionScroll.result.info.list.data;  
+      this.allConnectionScrollLists=allConnectionScroll.result.info.list.data; 
+      var filtered =  _.uniqBy(this.allConnectionScrollLists, 'id');
+        this.allConnectionScrollLists = filtered; 
       
       for (let i = 0; i < Object.keys(this.allConnectionScrollLists).length; i++) {
         this.allConnectionsInfo.push(this.allConnectionScrollLists[i]);
@@ -448,7 +469,8 @@ scrollTop:boolean = false;
      this.connectionsService.sentRequestScroll(this.nextPageURL4,this.searchsend).subscribe(
      (sentRequestScroll) => {
       this.allConnectionScrollLists=sentRequestScroll.result.info.list.data;  
-  
+    var filtered =  _.uniqBy(this.allConnectionScrollLists, 'id');
+        this.allConnectionScrollLists = filtered; 
       for (let i = 0; i < Object.keys(this.allConnectionScrollLists).length; i++) {
         this.sentRquestInfo.push(this.allConnectionScrollLists[i]);
         }

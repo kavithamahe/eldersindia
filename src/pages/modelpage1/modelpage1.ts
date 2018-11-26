@@ -151,12 +151,13 @@ export class Modelpage1PagePage {
     console.log('ionViewDidLoad Modelpage1PagePage');
   }
    applyCoupan(serviceType){
+    console.log(this.coupan_code);
     // this.serviceDatas.datetime = moment(this.serviceDatas.datetime).format("DD-MM-YYYY");
       if(this.serviceDatas.datetime == "Invalid date"){
       this.serviceDatas.datetime = "";
     }
     if(serviceType == "One time"){
-   let payment_data= {"data":{"category_id":this.category_id,"sub_category_id":this.sub_category_id,"service_id":this.service_ids,
+   let payment_data= {"info":{"category_id":this.category_id,"sub_category_id":this.sub_category_id,"service_id":this.service_ids,
     "category":this.category,"subcategory":this.subcategory,
     "service":this.service,"location_id":this.location_id,"discount":"",
     "pay_method":"","serviceType":this.serviceType,"coupon_code_discount_cost":0,
@@ -188,22 +189,31 @@ export class Modelpage1PagePage {
         loading.dismiss();
         if(err.status===400)
       {
+        this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
         this.coupandiscount = "0";
         this.providerService.showToast(JSON.parse(err._body).error);
       }
       else if(err.status === 401){
+        this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
         this.coupandiscount = "0";
         this.providerService.showToast(JSON.parse(err._body).error);
       }
       else
       {
+        this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
         this.coupandiscount = "0";
         this.providerService.showToast("Try again later");
       }
             })
   }
   else{
-     let payment_data= {"data":{"category_id":this.category_id,"sub_category_id":this.sub_category_id,"service_id":this.service_ids,
+     let payment_data= {"info":{"category_id":this.category_id,"sub_category_id":this.sub_category_id,"service_id":this.service_ids,
     "category":this.category,"subcategory":this.subcategory,
     "service":this.service,"location_id":this.location_id,"discount":"",
     "pay_method":"","serviceType":this.serviceType,"coupon_code_discount_cost":0,
@@ -236,15 +246,24 @@ export class Modelpage1PagePage {
         if(err.status===400)
       {
         this.coupandiscount = "0";
+        this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
         this.providerService.showToast(JSON.parse(err._body).error);
       }
       else if(err.status === 401){
+        this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
         this.coupandiscount = "0";
         this.providerService.showToast(JSON.parse(err._body).error);
       }
       else
       {
         this.coupandiscount = "0";
+        this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
         this.providerService.showToast("Try again later");
       }
             })

@@ -226,6 +226,7 @@ imageUrl:any;
   this.servicecost=navParams.get("servicecost");
   this.service_cost=this.servicecost*100;
   this.coupon_id=navParams.get("coupan_id");
+  console.log(this.coupon_id);
   localStorage.setItem('coupon_id', this.coupon_id);
   this.coupan_code = navParams.get("coupan_code");
   this.discounted_cost = navParams.get("discounted_cost");
@@ -271,7 +272,7 @@ localStorage.setItem('key', this.token);
    });
   if(this.datCount == undefined || this.datCount == ""){
            if(this.get_custome_deliever_amount != 0 || this.getCustomerBalanceAmount != 0 || this.get_custome_service_cancel_amount != 0){
-            if(this.coupon_id != undefined){
+            if(this.coupon_id){
               this.service_costss=(this.final_service_cost* 100).toFixed(0);
               console.log("1"+this.service_costss);
              localStorage.setItem('service_costss', this.service_costss);
@@ -284,7 +285,7 @@ localStorage.setItem('key', this.token);
            
            }
            else{
-        if(this.coupon_id != undefined){
+        if(this.coupon_id){
               this.service_costss=(this.final_service_cost* 100).toFixed(0);
               console.log(this.service_costss);
              localStorage.setItem('service_costss', this.service_costss);
@@ -298,7 +299,7 @@ localStorage.setItem('key', this.token);
    }  
    else{
            if(this.get_custome_deliever_amount != 0 || this.getCustomerBalanceAmount != 0 || this.get_custome_service_cancel_amount != 0){
-            if(this.coupon_id != undefined){
+            if(this.coupon_id){
               this.service_costss=(this.final_service_cost* 100).toFixed(0);
              localStorage.setItem('service_costss', this.service_costss);
             }
@@ -310,7 +311,7 @@ localStorage.setItem('key', this.token);
             
            }
            else{
-             if(this.coupon_id != undefined){
+             if(this.coupon_id){
               this.service_costss=(this.final_service_cost* 100).toFixed(0);
              localStorage.setItem('service_costss', this.service_costss);
            }
@@ -466,7 +467,7 @@ recreationRequestSubmitbeforePayment(){
     if(this.subcategory == "Emergency Medical and Non-medical"){
     var options = {
       description: this.serviceTitle,
-      image: this.imageUrl + "assets/img/Elderlogo.png",
+      image: "https://qa.eldersindia.com/assets/img/Elderlogo.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costss,
@@ -534,7 +535,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
    else{
     var options = {
       description: this.serviceTitle,
-      image: this.imageUrl + "assets/img/Elderlogo.png",
+      image: "https://qa.eldersindia.com/assets/img/Elderlogo.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costss,
@@ -602,7 +603,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     console.log(this.service_costss);
     var options = { 
       description: this.serviceTitle,
-      image: this.imageUrl + "assets/img/Elderlogo.png",
+      image: "https://qa.eldersindia.com/assets/img/Elderlogo.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costss,

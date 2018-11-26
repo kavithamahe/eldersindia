@@ -17,19 +17,33 @@
 <ion-content class="content-intop" class="profileWall">
 	<div class="cont-conn">
 		<ion-row>
-			<ion-col col-3>
-				<ion-avatar (click)="profileSetting(communityProfileData?.id)" item-left class="image-profile" width-30>
-					<img [src]="imageUrl+communityProfileData?.avatar" />
+			<ion-item>
+				<ion-avatar (click)="profileSetting(communityProfileData?.id)"  style="padding-left: 135px;">
+					<img [src]="imageUrl+communityProfileData?.avatar" style="width: 60px; height: 60px; text-align: center;"/>
 				</ion-avatar>
-			</ion-col>
+				<br>
 
-			<ion-col text-capitalize class="name-conne" col-9>
+				<p style="padding-left: 125px; color: #019746;" *ngIf="(status === 3 && (communityProfileData?.id != my_id))">
+				<button ion-button style="border-radius: 30px; background-color: #019746;" (click)="connectMember(communityProfileData)">connect</button>
+				</p>
+				<p style="padding-left: 110px;" *ngIf="status === 0 && (communityProfileData?.id != my_id)">
+					<button ion-button style="border-radius: 30px; background-color: #ef7f16;">Request Sent</button>
+				</p>
+				<p style="padding-left: 110px;" *ngIf="status === 2 && (communityProfileData?.id != my_id)">
+					<button ion-button style="border-radius: 30px; background-color: #ef7f16;">Request Sent</button>
+				</p>
+				
+				<p style="padding-left: 80px;" *ngIf="status === 1 && (communityProfileData?.id != my_id)">
+					<button ion-button style="border-radius: 30px; background-color: #ef7f16;">connected</button>
+					<button ion-button style="border-radius: 30px; background-color: #019746;" (click)="messageModel(communityProfileData)">message</button>
+				</p>
+			</ion-item>
+
+			<!-- <ion-col text-capitalize class="name-conne">
 				<h2 *ngIf="communityProfileData?.id != my_id">{{communityProfileData?.name}} {{communityProfileData?.last_name}}</h2>
 				<h2 *ngIf="communityProfileData?.id == my_id">You</h2>
 				<p *ngIf="(status === 3 && (communityProfileData?.id != my_id))">
-					<button ion-button (click)="connectMember(communityProfileData)">
-						<i class="fa fa-plug" aria-hidden="true"></i>
-					</button>
+					<ion-badge (click)="connectMember(communityProfileData)">connect</ion-badge>
 				</p>
 				<p *ngIf="status === 0 && (communityProfileData?.id != my_id)">
 					<button ion-button disabled="true">
@@ -48,10 +62,10 @@
 				</p>
 				<p *ngIf="status === 1 && (communityProfileData?.id != my_id)">
 					<button ion-button (click)="messageModel(communityProfileData)">
-						<i class="fa fa-commenting-o"></i>
+						<ion-badge (click)="messageModel(communityProfileData)">message</ion-badge>
 					</button>
 				</p>
-			</ion-col>
+			</ion-col> -->
 		</ion-row>
 		<br/>
 		<ion-card class="conn-seg">

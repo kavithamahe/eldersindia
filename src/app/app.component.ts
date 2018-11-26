@@ -9,7 +9,8 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Network } from '@ionic-native/network';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { Crashlytics } from '@ionic-native/fabric';
+import { LocalNotifications, Geolocation } from 'ionic-native';
+// import { Crashlytics } from '@ionic-native/fabric';
 
 
 // import the Menu's pages
@@ -78,6 +79,8 @@ export class MyApp {
   emailId:any='';
   password:any='';
    alert:any;
+   lat:any;
+   long:any;
   // make HelloIonicPage the root (or first) page
 
 //-------userbased login-------------//
@@ -108,7 +111,7 @@ export class MyApp {
     private push: Push,
     public events: Events,
     public networkProvider: NetworkProvider,
-    private crashlytics: Crashlytics,
+    // private crashlytics: Crashlytics,
     private ga: GoogleAnalytics
   ) {
 
@@ -353,6 +356,13 @@ export class MyApp {
   initializeApp() {
 
     this.platform.ready().then(() => {
+      Geolocation.getCurrentPosition().then((position) => {
+      this.lat=position.coords.latitude;
+      this.long=position.coords.longitude;
+      console.log(this.lat);
+      this.storage.set('lat', this.lat);
+      this.storage.set('long', this.long);
+    });
       StatusBar.styleDefault();
        if (this.platform.is('android')) {
                 StatusBar.overlaysWebView(false);

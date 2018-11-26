@@ -162,7 +162,7 @@ coupandiscount:any;
   }
   applyCoupan(){
 
-    let payment_data={"data":{"coupon_code_discount_cost":0,
+    let payment_data={"info":{"coupon_code_discount_cost":0,
     "final_service_cost_after_coupon_code_discount":0,"vendor_id":this.vendor_id,
     "packId":this.packId,"type":"package","amount":this.package_amount,"coupen_code":this.coupan_code,
     "dependentid":this.selectedConnections}}
@@ -182,13 +182,25 @@ coupandiscount:any;
         loading.dismiss();
         if(err.status===400)
       {
+        this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
+        this.coupandiscount = "0";
         this.providerService.showToast(JSON.parse(err._body).error);
       }
       else if(err.status === 401){
+         this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
+        this.coupandiscount = "0";
         this.providerService.showToast(JSON.parse(err._body).error);
       }
       else
       {
+         this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
+        this.coupandiscount = "0";
         this.providerService.showToast("Try again later");
       }
             })

@@ -165,19 +165,12 @@ export class DashboardPage {
       this.storage.set('long', this.long);
 
     this.urls = 'https://www.google.com/maps/place/'+this.lat+ ',' + this.long;
-
-
-    });
+});
   }
+  urlss:any;
      shareLocation()
   {
-      Geolocation.getCurrentPosition().then((position) => {
-      this.lat=position.coords.latitude;
-      this.long=position.coords.longitude;
-      this.storage.set('lat', this.lat);
-      this.storage.set('long', this.long);
-
-    this.urls = 'https://www.google.com/maps/place/'+this.lat+ ',' + this.long;
+    console.log(this.urls);
       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
    this.providerService.elderEmergencySms(this.urls,this.call_sponsor,this.sponsor_name,this.elder_name,this.elder_lastname)
@@ -190,7 +183,7 @@ export class DashboardPage {
       this.providerService.showErrorToast(err);
       })
 
-    });
+ 
 
   }
   // ionViewWillLeave() {

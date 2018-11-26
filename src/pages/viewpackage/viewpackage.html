@@ -56,9 +56,17 @@
       <ion-row>
         <ion-col col-12>
           <b>
-            <ion-icon ios="ios-cash" md="md-cash"></ion-icon>Amount</b>
+            <ion-icon ios="ios-cash" md="md-cash"></ion-icon>Package Cost</b>
           <p>
-            <i class="fa fa-inr" aria-hidden="true"></i>{{packageData?.package_amount}}</p>
+            <i class="fa fa-inr" aria-hidden="true"></i>{{packageData?.package_amount | number : '1.2-2'}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <b>
+            <ion-icon ios="ios-cash" md="md-cash"></ion-icon>Paid Amount</b>
+          <p>
+            <i class="fa fa-inr" aria-hidden="true"></i>{{packageData?.paid_amount | number : '1.2-2'}}</p>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -87,12 +95,26 @@
         </ion-col>
       </ion-row>
       <ion-row>
+        <ion-col col-12>
+          <b>
+            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>Expiry date</b>
+          <p>{{expired_date}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
         <ion-col class="statusBar" col-12>
           <b class="statusTitle">
             <ion-icon ios="ios-help-buoy" md="md-help-buoy"></ion-icon>Payment Status</b>
           <span class="statusColor">
             <ion-badge *ngIf="packageData?.paumenry_payment_status=='captured'" class="active">Paid</ion-badge>
           </span>
+        </ion-col>
+      </ion-row>
+       <ion-row *ngIf="packageData?.coupon_offer">
+        <ion-col col-12>
+          <b>
+            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>Coupon Discount</b>
+          <p><i class="fa fa-inr" aria-hidden="true"></i>{{packageData?.coupon_offer | number : '1.2-2'}}</p>
         </ion-col>
       </ion-row>
     </ion-grid>

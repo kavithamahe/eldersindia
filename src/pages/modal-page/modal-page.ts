@@ -135,9 +135,14 @@ export class ModalContentPage {
   totalpayableamountcancel:any;
   servicetypestatus:any;
   totalpayableamounts:any;
+  dates:any;
+  datess:any;
+  status:any;
   constructor(platform: Platform,public blogListService:BlogListService,public alertCtrl: AlertController,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {   
      this.date = new Date().toISOString();
+     this.dates = new Date().toISOString();
+     this.datess = new Date().toISOString();
      this.startDate = new Date().toISOString();
      this.endDate = new Date().toISOString();
      this.dependentLists = params.get("dependentList");
@@ -169,6 +174,7 @@ export class ModalContentPage {
       else{
         this.recurringType = this.params.get("vendor").recurring;
       }
+      this.status = this.params.get("status");
       if(this.params.get("status") == "1"){
         this.vendorr = this.params.get("vendor").id;
         this.vendor_id = this.params.get("vendor").id;

@@ -12,7 +12,7 @@ import { DatePipe } from '@angular/common';
 import { Network } from '@ionic-native/network';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Device } from "@ionic-native/device";
-import { Crashlytics } from '@ionic-native/fabric';
+// import { Crashlytics } from '@ionic-native/fabric';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 // import { InAppBrowser } from 'ionic-native';
@@ -274,7 +274,7 @@ import { NetworkProvider } from '../providers/network/network';
     SafemePagePage,
     VerifyotpPagePage
   ],
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},FileTransfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics,Crashlytics, 
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},FileTransfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics, 
     NetworkProvider] // Add GithubUsers provider
 
 

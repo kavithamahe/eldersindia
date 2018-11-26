@@ -135,6 +135,9 @@ template_id:any;
   final_service_cost:any;
   coupandiscount:any;
   gender:any;
+  elderDetailsname:any;
+  elderDetailsage:any;
+  elderDetailslastname:any;
   constructor(public storage:Storage,public alertCtrl: AlertController,private device: Device,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder,public blogListService:BlogListService) {
     this.date = new Date().toISOString();
@@ -342,7 +345,7 @@ template_id:any;
     else{
       this.servicecost = this.schedule_cost;
          }
-   let payment_data=  {"data":{"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
+   let payment_data=  {"info":{"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
     "start_date":start_date,"subcategory":subcategory,"service_id":service_id,
     "location_id":this.location_id,"vendor_id":this.vendor_id,"discount":"","pay_method":"",
     "coupon_code_discount_cost":0,"final_service_cost_after_coupon_code_discount":0,
@@ -374,15 +377,24 @@ template_id:any;
         loading.dismiss();
         if(err.status===400)
       {
+        this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
         this.coupandiscount = "0";
         this._provider.showToast(JSON.parse(err._body).error);
       }
       else if(err.status === 401){
+        this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
         this.coupandiscount = "0";
         this._provider.showToast(JSON.parse(err._body).error);
       }
       else
       {
+        this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
         this.coupandiscount = "0";
         this._provider.showToast("Try again later");
       }
@@ -435,7 +447,7 @@ template_id:any;
       this.servicecost = this.schedule_cost;
          }
          
-   let payment_data=  {"data":{"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
+   let payment_data=  {"info":{"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
     "start_date":start_date,"subcategory":subcategory,"service_id":service_id,
     "location_id":this.location_id,"vendor_id":this.vendor_id,"discount":"","pay_method":"",
     "coupon_code_discount_cost":0,"final_service_cost_after_coupon_code_discount":0,
@@ -468,15 +480,24 @@ template_id:any;
         loading.dismiss();
         if(err.status===400)
       {
+        this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
         this.coupandiscount = "0";
         this._provider.showToast(JSON.parse(err._body).error);
       }
       else if(err.status === 401){
+        this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
         this.coupandiscount = "0";
         this._provider.showToast(JSON.parse(err._body).error);
       }
       else
       {
+        this.coupon_id = "";
+        this.discounted_cost = "";
+        this.final_service_cost = "";
         this.coupandiscount = "0";
         this._provider.showToast("Try again later");
       }
@@ -878,6 +899,9 @@ template_id:any;
   }
 
   confirmationDetails(){
+    this.elderDetailsname = localStorage.getItem("elderDetailsname");
+    this.elderDetailsage = localStorage.getItem("elderDetailsage");
+    this.elderDetailslastname = localStorage.getItem("elderDetailslastname");
     let no_people = this.noofpeople;
     if(this.noofpeople == 1 && this.user_type == 'sponsor'){
         if(this.elder_id == undefined){
@@ -933,6 +957,12 @@ template_id:any;
     .subscribe(
         data =>{
                  this.elderDetails = data.result;
+                 this.elderDetailsname = this.elderDetails.name;
+                 this.elderDetailsage = this.elderDetails.age;
+                 this.elderDetailslastname = this.elderDetails.last_name;
+                 localStorage.setItem('elderDetailsname', this.elderDetailsname);
+                 localStorage.setItem('elderDetailsage', this.elderDetailsage);
+                 localStorage.setItem('elderDetailslastname', this.elderDetailslastname);
                  this.gender = this.elderDetails.gender
                  // this.mobile_imei = this.elderDetails.mobile_imei;
                 },

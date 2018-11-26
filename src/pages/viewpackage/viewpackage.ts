@@ -21,6 +21,7 @@ export class ViewpackagePagePage {
 	rootUrl:any;
 	packageData:any;
   createt_at:any;
+  expired_date:any;
   constructor(public navCtrl: NavController,public viewCtrl: ViewController,public storage:Storage,public toastCtrl: ToastController,public loadingCtrl: LoadingController, public navParams: NavParams,public blogListService:BlogListService) {
   	 this.storage.ready().then(() => {      
     	storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
@@ -38,6 +39,7 @@ export class ViewpackagePagePage {
       .subscribe(data =>{
         this.packageData = data.result; 
         this.createt_at = moment(data.result.createt_at).format("DD-MM-YYYY HH:mm:ss");  
+        this.expired_date = moment(data.result.expired_date).format("DD-MM-YYYY HH:mm:ss");  
         loading.dismiss();
     },
     err =>{
