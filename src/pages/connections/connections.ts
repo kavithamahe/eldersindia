@@ -8,6 +8,8 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { CommunityprofilePage } from '../../pages/communityprofile/communityprofile';
 import { ConnectionsService } from '../../providers/connections-service';
 
+import * as _ from "lodash"
+
 /*
   Generated class for the Connections page.
 

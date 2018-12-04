@@ -109,6 +109,7 @@ final_service_cost:any;
 discounted_cost:any;
 coupan_code:any;
 imageUrl:any;
+wallet_value:any;
   constructor(public platform:Platform,private alertCtrl: AlertController,public loadingCtrl: LoadingController,private device: Device,public viewCtrl: ViewController,public navParams: NavParams,public storage:Storage,
     public blogListService:BlogListService,public _provider:ServiceProvider,public navCtrl: NavController,private http: Http) {
   
@@ -226,8 +227,9 @@ imageUrl:any;
   this.servicecost=navParams.get("servicecost");
   this.service_cost=this.servicecost*100;
   this.coupon_id=navParams.get("coupan_id");
-  console.log(this.coupon_id);
   localStorage.setItem('coupon_id', this.coupon_id);
+  this.wallet_value=navParams.get("wallet_value");
+  localStorage.setItem('wallet_value', this.wallet_value);
   this.coupan_code = navParams.get("coupan_code");
   this.discounted_cost = navParams.get("discounted_cost");
   localStorage.setItem('coupon_offer', this.discounted_cost);
@@ -317,7 +319,6 @@ localStorage.setItem('key', this.token);
            }
            else{
             this.service_costss=this.service_cost;
-             console.log(this.service_costss);
              localStorage.setItem('service_costss', this.service_costss);
            }
              
@@ -404,7 +405,7 @@ recreationRequestSubmitbeforePayment(){
      this.paymenttype,paymentflag,this.discounts,this.totalservice_costss,this.discountcost,this.afterdiscount_one_service,this.servicediscountcost_one_service,
      this.discountpartial,this.base_cost,this.servicediscost,this.getCustomerBalanceAmount,this.get_custome_amount,this.get_custome_deliever_amount,
      this.get_custome_service_cancel_amount,this.total_cost,this.total_service_cost,this.coupon_id,this.coupan_code,
-     this.discounted_cost,this.final_service_cost).subscribe(     
+     this.discounted_cost,this.final_service_cost,this.wallet_value).subscribe(     
       (loginuser) => {
         this.udf3= loginuser.result.serviceType;
         this.udf2 = loginuser.result.service_request_id;
@@ -436,7 +437,7 @@ recreationRequestSubmitbeforePayment(){
      this.to_date,this.to_time,this.package_id,this.preferred_time,this.quantity,
      this.location_id,this.lead_time,this.vendor_id,paymentflag,this.base_cost,this.getCustomerBalanceAmount,this.get_custome_amount,this.get_custome_deliever_amount,
      this.get_custome_service_cancel_amount,this.total_cost,this.total_service_cost,this.coupon_id,this.coupan_code,
-     this.discounted_cost,this.final_service_cost).subscribe(     
+     this.discounted_cost,this.final_service_cost,this.wallet_value).subscribe(     
       (loginuser) => {
         this.udf3= loginuser.result.serviceType;
         this.udf2 = loginuser.result.service_request_id;
@@ -508,7 +509,7 @@ xmlhttp.open("POST", url,true);
 xmlhttp.setRequestHeader("Content-Type", "application/json");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
 xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss"),
-"coupon_id":localStorage.getItem("coupon_id"),"coupon_offer":localStorage.getItem("coupon_offer")}));
+"coupon_id":localStorage.getItem("coupon_id"),"coupon_offer":localStorage.getItem("coupon_offer"),"wallet_value":localStorage.getItem("wallet_value")}));
 
 xmlhttp.onload = function () {
   loading.dismiss();
@@ -576,7 +577,7 @@ xmlhttp.open("POST", url,true);
 xmlhttp.setRequestHeader("Content-Type", "application/json");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
 xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss"),
-"coupon_id":localStorage.getItem("coupon_id"),"coupon_offer":localStorage.getItem("coupon_offer")}));
+"coupon_id":localStorage.getItem("coupon_id"),"coupon_offer":localStorage.getItem("coupon_offer"),"wallet_value":localStorage.getItem("wallet_value")}));
 
 xmlhttp.onload = function () {
   loading.dismiss();
@@ -642,7 +643,7 @@ xmlhttp.open("POST", url,true);
 xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
 xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss"),
-"coupon_id":localStorage.getItem("coupon_id"),"coupon_offer":localStorage.getItem("coupon_offer")}));
+"coupon_id":localStorage.getItem("coupon_id"),"coupon_offer":localStorage.getItem("coupon_offer"),"wallet_value":localStorage.getItem("wallet_value")}));
 
 xmlhttp.onload = function () {
   loading.dismiss();

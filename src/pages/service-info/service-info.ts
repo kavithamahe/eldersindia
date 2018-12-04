@@ -79,6 +79,17 @@ businessHoursOption:any;
 is_recreation_config:any;
 template_id:any;
 package:any;
+hoteltype:any;
+payingtax:any;
+getHotelType:any=[];
+getPersonPerHotel:any=[];
+getHotelCost:any;
+people_count:any;
+tourslabel:any =[];
+tourstotal_peoples:any = [];
+packageCost:boolean = false;
+tourService_id:any;
+price_range:any;
 // @ViewChild('ghbslides') ghbslides: any;
 
 
@@ -87,6 +98,8 @@ package:any;
       this.subCategoryId = navParams.get("subCategoryId");
       this.locationId = navParams.get("location_id");
       this.template_id = navParams.get("vendor").template_id;
+      this.tourService_id = navParams.get("vendor").tourService_id;
+      this.price_range = navParams.get("vendor").price_range;
       this.is_recreation_config = navParams.get("vendor").is_recreation_config;
       this.one_time = navParams.get("one_time");
       this.recurring = navParams.get("recurring");
@@ -136,8 +149,43 @@ package:any;
       this.loadServiceInformation(servieListData);
       })
     });
+      if(this.template_id == 9){
+        this.hotelType();
+      }
   }
 
+  hotelType(){
+     this.providerService.gethotelType(this.tourService_id)
+      .subscribe(data =>{ 
+          this.getHotelType = data.result.getHotelType;
+          this.storage.set('getHotelType', this.getHotelType);
+    })
+  }
+  selecthotel(hoteltype){
+     this.providerService.getselecthotel(hoteltype,this.tourService_id)
+      .subscribe(data =>{ 
+          this.getPersonPerHotel = data.result.getHotelPersons;
+          this.storage.set('getPersonPerHotel', this.getPersonPerHotel);
+          this.storage.set('hoteltype', hoteltype);
+    })
+  }
+   payingTax(payingtax){
+    this.packageCost = true;
+     this.providerService.getpayingTax(payingtax,this.hoteltype,this.tourService_id)
+      .subscribe(data =>{ 
+          this.getHotelCost = data.result.getHotelCost;
+          this.people_count = data.result.people_count;
+          this.storage.set('getHotelCost', this.getHotelCost);
+          this.storage.set('payingtax', payingtax);
+           this.storage.set('people_count', this.people_count);
+            this.tourslabel = [];
+    for(var i=1;i<=this.people_count;i++) {          
+     this.tourslabel.push(i);
+  }
+  this.tourstotal_peoples =this.tourslabel;
+  this.storage.set('tourstotal_peoples', this.tourstotal_peoples);
+    })
+  }
   openUrl() {
         this.platform.ready().then(() => {
             let browser = new InAppBrowser(this.website,'_blank');
@@ -195,6 +243,10 @@ contactNow(){
 }
 bookNow(){
   this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNow":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
+    "template_id":this.template_id});    
+}
+bookNowTours(){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNowTours":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
     "template_id":this.template_id});    
 }
 preBook(){
@@ -284,7 +336,7 @@ recreationServices(){
   toggleRequestService(){
      if((this.vendorList.dependentLists.length<=0) && this.userType == 'sponsor')
       {
-        this.showToast("There is no dependent. You can not apply job!");      
+        this.showToast("There is no dependent. Please Add Dependent");      
       
       }else{
       

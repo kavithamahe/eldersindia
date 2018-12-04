@@ -50,6 +50,9 @@ additional_service_cost:any;
 reqstatus:any;
 paymentType:any;
 imageUrl:any;
+wallet_value:any;
+coupan_offer:any;
+coupon_id:any;
   constructor(public navCtrl: NavController,public blogListService:BlogListService,public loadingCtrl: LoadingController,public viewCtrl: ViewController,public storage:Storage, public navParams: NavParams) {
   	 
     if(navParams.get("service_type") != undefined){
@@ -89,6 +92,12 @@ imageUrl:any;
   	this.packId=navParams.get("packId");
   	this.vendor_id=navParams.get("vendor_id");
   	this.package_validity=navParams.get("package_validity");
+    this.wallet_value=navParams.get("wallet_value");
+    localStorage.setItem('wallet_value', this.wallet_value);
+    this.coupon_id = navParams.get("coupon_id");
+    localStorage.setItem('coupon_id', this.coupon_id);
+    this.coupan_offer = navParams.get("coupan_offer");
+    localStorage.setItem('coupan_offer', this.coupan_offer);
   	this.selectedConnections=navParams.get("selectedConnections");
      storage.get('user_type').then((user_type) => { this.userType=user_type;});
       storage.get('user_type_id').then((user_type_id) => { this.user_id=user_type_id;
@@ -301,7 +310,7 @@ xmlhttp.open("POST", url,true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
-xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("package_amounts")}));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("package_amounts"),"coupon_id":localStorage.getItem("coupon_id"),"coupon_offer":localStorage.getItem("coupon_offer"),"wallet_value":localStorage.getItem("wallet_value")}));
 
 xmlhttp.onload = function () {
   loading.dismiss();

@@ -39,6 +39,7 @@ coupon_id:any;
 discounted_cost:any;
 final_service_cost:any;
 coupandiscount:any;
+wallet_value:any;
   constructor(public navParams: NavParams,public modalCtrl: ModalController,public providerService: ServiceProvider,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
 
   // constructor(public navParams: NavParams,public navCtrl: NavController,public toastCtrl: ToastController,public viewCtrl: ViewController,public storage:Storage,public loadingCtrl: LoadingController,public blogListService:BlogListService) {
@@ -104,7 +105,7 @@ coupandiscount:any;
         this.package_amount = this.package_amount;
       }
      this.navCtrl.push(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
-      "package_amount":this.package_amount});
+      "package_amount":this.package_amount,"wallet_value":this.wallet_value,"coupon_id":this.coupon_id,"coupan_offer":this.discounted_cost});
       this.dismiss();
     }
   }
@@ -148,7 +149,7 @@ coupandiscount:any;
       }
       if(this.packageAvailstatus == 0){
           this.navCtrl.push(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
-      "package_amount":this.package_amount});
+      "package_amount":this.package_amount,"wallet_value":this.wallet_value,"coupon_id":this.coupon_id,"coupan_offer":this.discounted_cost});
      this.dismiss();
       }
     else{
@@ -175,6 +176,7 @@ coupandiscount:any;
         this.coupon_id = data.result.coupon_id;
         this.discounted_cost = data.result.discounted_cost;
         this.final_service_cost = data.result.final_service_cost;
+        this.wallet_value = data.result.wallet_value;
         this.coupandiscount = "1";
         loading.dismiss();
               },

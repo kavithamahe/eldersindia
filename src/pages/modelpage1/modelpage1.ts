@@ -77,6 +77,7 @@ export class Modelpage1PagePage {
   coupon_id:any;
   discounted_cost:any;
   coupandiscount :any;
+  wallet_value:any;
   constructor(public modalCtrl: ModalController,public nav: NavController,public navParams: NavParams, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {
     this.recurringType = navParams.get("recurringType");
@@ -182,6 +183,7 @@ export class Modelpage1PagePage {
         this.coupon_id = data.result.coupon_id;
         this.discounted_cost = data.result.discounted_cost;
         this.final_service_cost = data.result.final_service_cost;
+        this.wallet_value = data.result.wallet_value;
         this.coupandiscount = "1";
         loading.dismiss();
               },
@@ -238,6 +240,7 @@ export class Modelpage1PagePage {
         this.coupon_id = data.result.coupon_id;
         this.discounted_cost = data.result.discounted_cost;
         this.final_service_cost = data.result.final_service_cost;
+        this.wallet_value = data.result.wallet_value;
         this.coupandiscount = "1";
         loading.dismiss();
               },
@@ -294,7 +297,7 @@ submitRequest(){
   "getCustomerBalanceAmount":this.serviceDatas.getCustomerBalanceAmount,"get_custome_amount_actual":0,"get_custome_amount":this.serviceDatas.get_custome_amount,
   "total_cost":this.serviceDatas.total_cost,"get_custome_deliever_amount":this.serviceDatas.get_custome_deliever_amount,"total_service_cost":this.serviceDatas.total_service_cost,
   "get_custome_service_cancel_amount":this.serviceDatas.get_custome_service_cancel_amount,"dependentid":this.serviceDatas.dependentId,"servicecost":this.serviceDatas.servicecosts,
-  "coupen_code":this.coupan_code,"vendor_id":this.vendor_id,"type":"service","coupon_id":this.coupon_id,
+  "coupen_code":this.coupan_code,"wallet_value":this.wallet_value,"vendor_id":this.vendor_id,"type":"service","coupon_id":this.coupon_id,
   "lead_time":this.lead_time,"selected_dates":this.serviceDatas.selected_dates,"exclude_days":this.serviceDatas.exclude_days}
        let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
@@ -348,7 +351,7 @@ submitRequest(){
       sub_category_id:this.sub_category_id,subcategory:this.subcategory,datCount:this.datCount,paymenttype:this.paymenttype,
       location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id,discounts:this.discounts,totalservice_costss:this.totalservice_costss,afterdiscount_one_service:this.afterdiscount_one_service,
       paidPayment:this.paidPayment,servicediscountcost_one_service:this.servicediscountcost_one_service,discountpartial:this.discountpartial,requestService:this.requestService,coupan_id:this.coupon_id,
-      coupan_code:this.coupan_code,discounted_cost:this.discounted_cost,final_service_cost:this.final_service_cost});
+      coupan_code:this.coupan_code,discounted_cost:this.discounted_cost,final_service_cost:this.final_service_cost,wallet_value:this.wallet_value});
     
      }
      else{
@@ -356,7 +359,7 @@ submitRequest(){
       category:this.category,category_id:this.category_id,service:this.service,service_ids:this.service_ids,
       sub_category_id:this.sub_category_id,subcategory:this.subcategory,
       location_id:this.location_id,lead_time:this.lead_time,vendor_id:this.vendor_id,requestService:this.requestService,coupan_id:this.coupon_id,
-      coupan_code:this.coupan_code,discounted_cost:this.discounted_cost,final_service_cost:this.final_service_cost});
+      coupan_code:this.coupan_code,discounted_cost:this.discounted_cost,final_service_cost:this.final_service_cost,wallet_value:this.wallet_value});
    
      }
 }
@@ -366,7 +369,7 @@ edit(){
   this.viewCtrl.dismiss(seviceCheck);
 }
  paylater(){
-  let coupanDetails= {"coupon_id":this.coupon_id,"coupan_code":this.coupan_code,"discounted_cost":this.discounted_cost,"final_service_cost":this.final_service_cost}
+  let coupanDetails= {"coupon_id":this.coupon_id,"coupan_code":this.coupan_code,"discounted_cost":this.discounted_cost,"final_service_cost":this.final_service_cost,"wallet_value":this.wallet_value}
       var obj = Object.assign(this.serviceDatas, coupanDetails);
       this.viewCtrl.dismiss(obj);
   }

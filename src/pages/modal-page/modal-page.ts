@@ -619,7 +619,7 @@ export class ModalContentPage {
        "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
        "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
      "package_id":service_request_data.package_id,"instant":"","paymentflag":1,"total_service_cost":this.initialservicecost,"total_cost":service_request_data.servicecost,"service_cost_travel":this.initialservicecost,"getCustomerBalanceAmount":"","get_custome_amount":"","get_custome_deliever_amount":"",
-     "get_custome_service_cancel_amount":"","coupen_code":service_request_data.coupan_code,"coupon_code_discount_cost":service_request_data.discounted_cost,"coupon_id":service_request_data.coupon_id,
+     "get_custome_service_cancel_amount":"","coupen_code":service_request_data.coupan_code,"wallet_value":service_request_data.wallet_value,"coupon_code_discount_cost":service_request_data.discounted_cost,"coupon_id":service_request_data.coupon_id,
      "final_service_cost_after_coupon_code_discount":service_request_data.final_service_cost}
       this.providerService.webServiceCall(`serviceRequestSubmitbeforePayLater`,requestServiceData)
        .subscribe( 
@@ -653,7 +653,7 @@ export class ModalContentPage {
        "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
        "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,"to_date":service_request_data.to_date,"to_time":service_request_data.to_time,
      "package_id":service_request_data.package_id,"instant":"","paymentflag":1,"total_service_cost":this.initialservicecost,"total_cost":service_request_data.servicecost,"service_cost_travel":this.initialservicecost,"getCustomerBalanceAmount":"","get_custome_amount":"","get_custome_deliever_amount":"",
-     "get_custome_service_cancel_amount":"","coupen_code":service_request_data.coupan_code,"coupon_code_discount_cost":service_request_data.discounted_cost,"coupon_id":service_request_data.coupon_id,
+     "get_custome_service_cancel_amount":"","coupen_code":service_request_data.coupan_code,"wallet_value":service_request_data.wallet_value,"coupon_code_discount_cost":service_request_data.discounted_cost,"coupon_id":service_request_data.coupon_id,
      "final_service_cost_after_coupon_code_discount":service_request_data.final_service_cost}
       this.providerService.webServiceCall(`serviceRequestSubmitbeforePayLater`,requestServiceData)
        .subscribe( 

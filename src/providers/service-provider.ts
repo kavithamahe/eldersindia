@@ -48,6 +48,21 @@ serviceInit(token){
     console.log("token intialized",token);
     console.log("root url: ",this.rootUrl);   
 }
+gethotelType(service_id){
+  let _request= {"service_id":service_id};
+    return this.http.post(this.rootUrl+'getHotelType',_request,this.head)
+      .map(res => res.json());
+}
+getselecthotel(hoteltype,service_id){
+  let _request= {"service_id":service_id,"hotel_id":hoteltype};
+    return this.http.post(this.rootUrl+'getPersonPerHotel',_request,this.head)
+      .map(res => res.json());
+}
+getpayingTax(payingTax,hoteltype,service_id){
+  let _request= {"service_id":service_id,"hotel_id":hoteltype,"paying_member":payingTax};
+    return this.http.post(this.rootUrl+'getHotelCost',_request,this.head)
+      .map(res => res.json());
+}
 getCustomerserviceamount(){
    let _request= {};
     return this.http.post(this.rootUrl+'getCustomerserviceamount',_request,this.head)

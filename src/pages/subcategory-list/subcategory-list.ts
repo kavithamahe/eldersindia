@@ -145,7 +145,7 @@ loadSubcategoryList(subCategory_id,location_id){
 
                             if((Object.keys(this.dependentLists).length<=0) && this.userType == 'sponsor')
                             {
-                            this.showToaster("There is no dependent. You can not apply job!.");
+                            this.showToaster("There is no dependent. Please Add Dependent.");
                             this.dependentLen=false;
                             }
                             loading.dismiss();
@@ -157,15 +157,15 @@ loadSubcategoryList(subCategory_id,location_id){
             }
 
 bookNow(schedule_cost,service_cost,id,template_id){
-  console.log(this.template_id);
   this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNow":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id});    
 }
+bookNowTour(schedule_cost,service_cost,id,template_id){
+    this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNowTours":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id});    
+}
 emergencybook(schedule_cost,service_cost,id,template_id){
-  console.log(this.template_id);
   this.navCtrl.push(ServiceModalPage,{service:"Schedule","emergencybook":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id});    
 }
 transportationdriver(schedule_cost,service_cost,id,template_id){
-  console.log(this.template_id);
   this.navCtrl.push(ServiceModalPage,{service:"Schedule","transportationdriver":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id});    
 }
 transportationcab(schedule_cost,service_cost,id,template_id){

@@ -20,7 +20,7 @@
       <ion-row>
         <ion-col col-4 (click)="serviceInfomore(service_list)">
           <ion-thumbnail item-center class="img-center">
-            <img [src]="logoUrl+service_list?.logo">
+            <img [src]="logoUrl+service_list?.logo" />
 					</ion-thumbnail>
 					
           <span class="off-price" *ngIf="service_list.discount_rate != 0 && service_list.template_id != '5'">
@@ -31,9 +31,11 @@
 
         <ion-col col-8 class="text-alg">
           <h2 (click)="serviceInfo(service_list)">{{service_list.name}}</h2>
-          <p>{{service_list.vendor_name}}</p>        
+          <p>{{service_list.vendor_name}}</p>    
+          <p *ngIf="service_list?.template_id == '9' && service_list.package_active_status == '1'">Cost :<span style = "color: #E91E63;">
+              <i class="fa fa-inr" aria-hidden="true"></i>{{service_list.price_range}}</span></p>        
 
-          <b *ngIf="service_list.service_cost != 0">
+          <b *ngIf="service_list.service_cost != 0 && service_list?.template_id != '9'" >
             <i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{(service_list.service_cost - service_list.percentage_cost) | number : '1.2-2'}}
             <span *ngIf="service_list.discount_rate != 0">/&nbsp;
               <i class="fa fa-inr" aria-hidden="true"></i>
@@ -44,8 +46,8 @@
           </b>
 
           <p *ngIf="service_list.lead_time != '00:00' && service_list.lead_time != '01:00' && service_list.template_id == 1" [hidden]="!service_list?.lead_time">Minimum {{service_list.lead_time}} hour(s) to serve you</p>
-          <p *ngIf="service_list?.template_id == '2' && service_list?.balanceRecreationService <= 5 && service_list?.balanceRecreationService >= 1">Almost full. Only {{service_list?.balanceRecreationService}} available!!!</p>
-          <p *ngIf="service_list?.template_id == '2' && service_list.balanceRecreationService <= 0">Sold out!!!</p>
+          <p *ngIf="(service_list?.template_id == '2' || service_list?.template_id == '9') && service_list?.balanceRecreationService <= 5 && service_list?.balanceRecreationService >= 1">Almost full. Only {{service_list?.balanceRecreationService}} available!!!</p>
+          <p *ngIf="(service_list?.template_id == '2' || service_list?.template_id == '9') && service_list.balanceRecreationService <= 0">Sold out!!!</p>
 
           <p *ngIf="dependentLen && booking_status == '0' && service_list?.template_id == '7'">
             <span class="text-bolder color-777">Working Days : </span>{{service_list.businessFromDayName}} - {{service_list.businessToDayName}}</p>
@@ -61,11 +63,11 @@
         </ion-col>
       </ion-row>
       <ion-col class="btn-padd">
-        <button class="btn-warnings" *ngIf="dependentLen && service_list.template_id != '2' && service_list.template_id != '4' && service_list.template_id != '3' && service_list.template_id != '5' && service_list.template_id != '6' && service_list.template_id != '7' && service_list.template_id != '8'"
+        <button class="btn-warnings" *ngIf="dependentLen && service_list.template_id != '2' && service_list.template_id != '4' && service_list.template_id != '3' && service_list.template_id != '5' && service_list.template_id != '6' && service_list.template_id != '7' && service_list.template_id != '8'  && service_list.template_id != '9'"
           (click)="openModal('scheduleModal',service_list)" (press)="pressevent('scheduleModal',service_list)">Avail Services</button>
         <button class="btn-warnings" *ngIf="dependentLen && service_list.template_id == 2 && service_list.package_active_status == '1' && service_list.template_id != '8'"
           (click)="bookNow(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list?.template_id)">Book Now</button>
-        <button class="btn-warnings" *ngIf="dependentLen && service_list.template_id == '2' && service_list.package_active_status == '0' && service_list.template_id != '8'">Booking Closed</button>
+        <button class="btn-warnings" *ngIf="dependentLen && (service_list.template_id == '2' || service_list.template_id == '9') && service_list.package_active_status == '0' && service_list.template_id != '8'">Booking Closed</button>
         <button class="btn-warnings" *ngIf="dependentLen && service_list.template_id == '3' && booking_status == '2' && service_list.template_id != '8'" (click)="preBook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id)">Pre Book</button>
         <button class="btn-warnings" *ngIf="dependentLen && service_list.template_id == '3' && booking_status == '1' && service_list.template_id != '8'" (click)="preBook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id)">Book Now</button>
         <button class="btn-warnings" *ngIf="service_list.is_recreation_config == 1 && service_list.booking_status == 0 && service_list.template_id != 2 && service_list.template_id != 7 && service_list.template_id == 6 && service_list.template_id != '8'"
@@ -80,6 +82,9 @@
 
           <button class="btn-warnings" *ngIf="service_list.is_recreation_config == 1 && service_list.booking_status == 0 && service_list.template_id != 2 && service_list.template_id != 7 && service_list.template_id == 3 && service_list.template_id != '8'"
            (click)="preBook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id)">Book Now</button>
+
+            <button class="btn-warnings" *ngIf="service_list.template_id == 9 && service_list.package_active_status == '1' && service_list.template_id != '8'"
+           (click)="bookNowTour(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list?.template_id)">Book Now</button>
            <button class="btn-warnings" *ngIf="service_list.template_id == '8'"
            (click)="contactNow(service_list.id)">Contact Now</button>
 

@@ -16,9 +16,351 @@
 
 
 <ion-content class="content-intop">
-        <!-- ............................recreation....................... -->
   <div *ngIf="showScheduleDetails" class="offered-servicelist">
     <ion-card class="contact-list">
+    <!-- ...................tours and travels.................... -->
+<div *ngIf="booknowtours && template_id == '9'">
+        <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Name</ion-label>
+        <ion-item class="sel-label">
+          <ion-input type="text" value="{{name}}" disabled></ion-input>
+        </ion-item>
+        <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Email</ion-label>
+        <ion-item class="sel-label">
+          <ion-input type="text" value="{{email}}" disabled></ion-input>
+        </ion-item>
+        <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Mobile</ion-label>
+        <ion-item class="sel-label">
+          <ion-input type="text" value="{{phone}}" disabled></ion-input>
+        </ion-item>
+           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Hotel Type</ion-label>
+        <ion-item class="sel-label">
+          <ion-label>Hotel Type</ion-label>
+          <ion-select [(ngModel)]="hoteltype" (ionChange)="selecthotel(hoteltype)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+            <ion-option *ngFor="let type of getHotelType" value={{type.id}}>{{type.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Select Paying Pax</ion-label>
+        <ion-item class="sel-label">
+          <ion-label>Paying Pax</ion-label>
+          <ion-select [(ngModel)]="payingtax" (ionChange)="payingTax(payingtax)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+            <ion-option *ngFor="let types of getPersonPerHotel" value={{types.id}}>{{types.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">No of People</ion-label>
+        <ion-item class="sel-label">
+          <ion-label>No of People</ion-label>
+          <ion-select [(ngModel)]="noofpeopletravel" (ionChange)="selecetPeopleTours(noofpeopletravel)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+            <ion-option *ngFor="let people of tourstotal_peoples" value={{people}}>{{people}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <br>
+          <ion-row *ngIf = "packageCost">
+          <p class="service-conts">
+            <span class="token-primaryss">Package Cost :</span>
+            <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getHotelCost | number : '1.2-2'}}
+          </p>
+        </ion-row>
+        <ion-list>
+          <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Alternative Contact Number</ion-label>
+          <ion-item class="sel-label">
+            <ion-input type="text" value="" [(ngModel)]="altercontact"></ion-input>
+          </ion-item>
+        </ion-list>
+        <br/>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-1 class="check-bx" class="one-timereq">
+              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>
+            </ion-col>
+            <ion-col col-11 (click)="openTerms()" style="margin:0px;">
+              <ion-label class="margin_0">
+                <a>I agree with the terms and conditions</a>
+              </ion-label>
+            </ion-col>
+        <small *ngIf="checkTerms">
+          <p class="err-reds shake">Kindly agree to the terms and conditions</p>
+        </small>
+          </ion-row>
+        </ion-grid>
+        <br/>
+        <ion-row>
+          <ion-col>
+            <button class="btn-warnings" color="primary" (click)="canceltours()">Cancel</button>
+
+            <button class="instant-bt" (click)="bookDetailsTours()">Next</button>
+          </ion-col>
+        </ion-row>
+      </div>
+         <div *ngIf="booknownexttours">
+        <ion-list *ngIf="user_type == 'sponsor'">
+          <!--   <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label> -->
+          <ion-item class="sel-label">
+            <ion-label class="selectDepent" class="required">Select Dependent</ion-label>
+            <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+              <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name }}
+              </ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+
+        <ion-list *ngIf="user_type == 'sponsor' && eldershow">
+          <ion-row>
+            <ion-col width-60>
+              <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Name</ion-label>
+              <ion-item class="sel-label">
+                <ion-input type="text" value="{{elderDetailsname}} {{elderDetailslastname}}" disabled></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col width-40>
+              <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Age</ion-label>
+              <ion-item class="sel-label">
+                <ion-input type="text" value="{{elderDetailsage}}" disabled></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+        </ion-list>
+        <ion-list *ngIf="user_type == 'elder'">
+          <ion-row>
+            <ion-col width-60>
+              <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Name</ion-label>
+              <ion-item class="sel-label">
+                <ion-input type="text" value="{{name}} {{lastname}}" disabled></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col width-40>
+              <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Age</ion-label>
+              <ion-item class="sel-label">
+                <ion-input type="text" value="{{elderage}}" disabled></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+        </ion-list>
+        <ion-list *ngFor="let people of tourstotal;let i=index">
+          <ion-row>
+            <ion-col width-60>
+              <ion-item class="sel-label">
+                <ion-input type="text" [(ngModel)]="elder_name[i]"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col width-40>
+              <ion-item class="sel-label">
+                <ion-input type="text" [(ngModel)]="elder_age[i]" type="number"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+        </ion-list>
+        <br/>
+        <ion-row>
+          <ion-col>
+            <button class="btn-warnings" color="primary" (click)="cancelconfirmationtravel()">Cancel</button>
+
+            <button class="instant-bt" (click)="confirmationDetailstravel()">Next</button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div *ngIf="confirmationDetailtours">
+
+        <div class="ion-searchbar">
+          <ion-row>
+            <ion-col col-10>
+             <ion-item>
+              <ion-input type="text" text-uppercase placeholder="Coupon code" [(ngModel)] = "coupan_code">
+             </ion-input>
+             </ion-item>
+            </ion-col>
+            <ion-col col-2 class="btn-go">
+              <button (click) = "applyCoupan(vendorList?.requestServices.category_id,
+        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)" ion-button small class="go-btn">Apply</button>
+            </ion-col>
+          </ion-row>
+          </div>
+        <ion-row>
+          <p class="service-conts">
+            <span class="token-primaryss">Schedule Date : </span>{{vendorList?.requestServices.start_date}}
+          </p>
+        </ion-row>
+        <ion-row>
+          <p class="service-conts">
+            <span class="token-primaryss">Participants : </span>{{noofpeopletravel}}
+          </p>
+        </ion-row>
+        <ion-row>
+          <p class="service-conts">
+            <span class="token-primaryss">Residence Cost : </span>
+            <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getHotelCost | number : '1.2-2'}}
+          </p>
+        </ion-row>
+        <ion-row>
+          <p class="service-conts">
+            <span class="token-primaryss">Total Cost : </span>
+            <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getHotelCost | number : '1.2-2'}}
+          </p>
+        </ion-row>
+        <ion-row *ngIf = "coupandiscount == '1'">
+          <p class="service-conts">
+            <span class="token-primaryss">Coupon discounted amount : </span>
+            <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{discounted_cost | number : '1.2-2'}}
+          </p>
+        </ion-row>
+        <ion-row *ngIf = "coupandiscount == '1'">
+          <p class="service-conts">
+            <span class="token-primaryss">Final Payable amount : </span>
+            <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(getHotelCost) - getCustomerBalanceAmount + get_custome_deliever_amount + get_custome_service_cancel_amount - discounted_cost | number : '1.2-2'}}
+          </p>
+        </ion-row>
+
+         <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
+              <ion-item text-wrap>
+               <p class="service-conts">
+                <span class="token-primaryss">Previous refund amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getCustomerBalanceAmount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item>
+              <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(getHotelCost -  getCustomerBalanceAmount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+        </div>
+          <div *ngIf="get_custome_deliever_amount!=0 && get_custome_service_cancel_amount ==0 && getCustomerBalanceAmount ==0 ">
+           <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service due amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_deliever_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            <ion-item>
+              <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(getHotelCost +  get_custome_deliever_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+           </div>
+
+            <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount == 0 && get_custome_deliever_amount == 0">
+            <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service cancel amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_service_cancel_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(getHotelCost +  get_custome_service_cancel_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+           </div>
+
+              <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount == 0 && get_custome_deliever_amount != 0">
+               <ion-item text-wrap>
+               <p class="service-conts">
+                <span class="token-primaryss">Previous service cancel amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_service_cancel_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service due amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_deliever_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            <ion-item>
+              <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(getHotelCost + get_custome_service_cancel_amount + get_custome_deliever_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            </div>
+              <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount == 0">
+                <ion-item text-wrap>
+               <p class="service-conts">
+                <span class="token-primaryss">Previous refund amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getCustomerBalanceAmount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service cancel amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_service_cancel_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item>
+               <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{((getHotelCost - getCustomerBalanceAmount) + get_custome_service_cancel_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+          </div>
+          <div *ngIf="get_custome_service_cancel_amount==0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount != 0">
+             <ion-item text-wrap>
+             <p class="service-conts">
+                <span class="token-primaryss">Previous refund amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getCustomerBalanceAmount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item text-wrap>
+             <p class="service-conts">
+                <span class="token-primaryss">Previous service due amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_deliever_amount | number : '1.2-2'}}
+              </p>
+              </ion-item>
+               <ion-item>
+               <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{((getHotelCost - getCustomerBalanceAmount) + get_custome_deliever_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+                </div>
+                  <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount != 0">
+                  <ion-item text-wrap>
+                  <p class="service-conts">
+                <span class="token-primaryss">Previous refund amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getCustomerBalanceAmount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service cancel amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_service_cancel_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service due amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_deliever_amount | number : '1.2-2'}}
+              </p>
+              </ion-item>
+               <ion-item>
+                <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{((getHotelCost - getCustomerBalanceAmount) + get_custome_service_cancel_amount + get_custome_deliever_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+           </div>
+
+        <br/>
+        <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button class="btn-warnings" color="primary" (click)="cancelpaytours()">Cancel</button>
+            <button  *ngIf="final_service_cost != '0'" class="instant-bt" (click)="payNowTours(vendorList?.requestServices.category_id,
+        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)">Pay Now</button>
+        <button *ngIf="final_service_cost == '0'" class="instant-bt" (click)="submitRequest(vendorList?.requestServices.category_id,
+        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)">Book Now</button>
+          </ion-col>
+        </ion-row>
+        </ion-grid>
+      </div>
+
+    <!-- ...........................tours and travels............................ -->
+
+    <!-- ........................recreation................................. -->
       <div *ngIf="booknow && template_id == '2'">
         <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Contact Name</ion-label>
         <ion-item class="sel-label">
