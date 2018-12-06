@@ -56,6 +56,12 @@ export class ServiceprovidersPage {
     this.providerService.webServiceCall(`getCategory`,{"location":""})
       .subscribe(data =>{
       this.services = data.result.info.category;
+      var dataList=data.result.info.category;
+        for(let data of dataList) {
+          var str = data.icon;
+          data.icon = str.replace("fas" ,"fa").replace("far" ,"fa").replace("fa fa-briefcase-medical","fa fa-briefcase");
+           }
+        this.services = dataList;
       loading.dismiss();
     },
     err =>{

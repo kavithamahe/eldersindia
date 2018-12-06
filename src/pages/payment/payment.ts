@@ -465,6 +465,12 @@ recreationRequestSubmitbeforePayment(){
   }
 
   payRecreation(){
+    if(this.coupon_id == undefined){
+    this.storage.remove("coupon_id");
+    this.storage.remove("coupon_offer");
+    this.storage.remove("wallet_value");
+
+  }
     if(this.subcategory == "Emergency Medical and Non-medical"){
     var options = {
       description: this.serviceTitle,
@@ -601,7 +607,12 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
    }
   }
   pay() {
-    console.log(this.service_costss);
+       if(this.coupon_id == undefined){
+    this.storage.remove("coupon_id");
+    this.storage.remove("coupon_offer");
+    this.storage.remove("wallet_value");
+
+  }
     var options = { 
       description: this.serviceTitle,
       image: "https://qa.eldersindia.com/assets/img/Elderlogo.png",

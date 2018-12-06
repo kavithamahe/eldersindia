@@ -250,6 +250,7 @@ template_id:any;
           storage.get('getHotelType').then((getHotelType) => { this.getHotelType=getHotelType;
             storage.get('hoteltype').then((hoteltype) => { this.hoteltype=hoteltype;})
               storage.get('payingtax').then((payingtax) => { this.payingtax=payingtax;})
+              storage.get('people_count').then((people_count) => { this.people_count=people_count;})
               storage.get('getHotelCost').then((getHotelCost) => { this.getHotelCost=getHotelCost;
                 if(this.getHotelCost){
                   this.packageCost = true;
@@ -324,7 +325,7 @@ template_id:any;
           this.getHotelCost = data.result.getHotelCost;
           this.people_count = data.result.people_count;
             this.tourslabel = [];
-    for(var i=1;i<=this.people_count;i++) {          
+    for(var i=1;i<=this.people_count - 1;i++) {          
      this.tourslabel.push(i);
   }
   this.tourstotal_peoples =this.tourslabel;
@@ -342,7 +343,7 @@ template_id:any;
    this.navCtrl.pop();
   }
   bookDetailsTours(){
-    if(this.noofpeopletravel == undefined && this.hoteltype == undefined && this.payingtax == undefined){
+    if(this.hoteltype == undefined && this.payingtax == undefined){
       this._provider.showToast("Please select the details");
    }
     else{
@@ -366,8 +367,8 @@ template_id:any;
     this.elderDetailsname = localStorage.getItem("elderDetailsname");
     this.elderDetailsage = localStorage.getItem("elderDetailsage");
     this.elderDetailslastname = localStorage.getItem("elderDetailslastname");
-    let no_people = this.noofpeopletravel;
-    if(this.noofpeopletravel == 1 && this.user_type == 'sponsor'){
+    let no_people = this.people_count;
+    if(this.people_count == 1 && this.user_type == 'sponsor'){
         if(this.elder_id == undefined){
       this._provider.showToast("Please Enter all the Details");
     }
@@ -376,14 +377,14 @@ template_id:any;
     this.confirmationDetailtours = true;
     }
     }
-    else if(this.noofpeopletravel == 1 && this.user_type == 'elder'){
+    else if(this.people_count == 1 && this.user_type == 'elder'){
         this.booknownexttours = false;
     this.confirmationDetailtours = true;
 
  }
     else{
       if(this.user_type == 'sponsor'){
-            if(this.elder_id != undefined && this.elder_name.length == this.tourstotal.length && this.elder_age.length == this.tourstotal.length){
+            if(this.elder_id != undefined && this.elder_name.length == this.tourstotal_peoples.length && this.elder_age.length == this.tourstotal_peoples.length){
     this.booknownexttours = false;
     this.confirmationDetailtours = true;
       
@@ -393,7 +394,7 @@ template_id:any;
     }
       }
       else{
-          if(this.elder_name.length == this.tourstotal.length && this.elder_age.length == this.tourstotal.length){
+          if(this.elder_name.length == this.tourstotal_peoples.length && this.elder_age.length == this.tourstotal_peoples.length){
     this.booknownexttours = false;
     this.confirmationDetailtours = true;
       
@@ -424,7 +425,7 @@ template_id:any;
     this.elder_id = this.user_id;
   }
  let people = [];
- for(let i=0;i< this.noofpeopletravel - 1;i++) {
+ for(let i=0;i< this.people_count - 1;i++) {
   
   var obj = {"elder_name":this.elder_name[i],"elder_age":this.elder_age[i]}
   people.push(obj);
@@ -544,8 +545,8 @@ template_id:any;
     "transportation_to":"","automation_time":"","automation_date":"","transportReqType":"",
     "weelchairType":"","mobile_imei":"","coupen_code":this.coupan_code,"getPersonHotelCost":this.getHotelCost,"dependentid":this.elder_id,
     "gender":"1","lead_time":this.vendorList.vendorDetails.businessLeadTime,"selected_dates":[],"exclude_days":[],"Category_name":category,
-    "serviceType":"One time","book":{"name":this.name,"mobile":this.phone,"mail":this.email,"book_peoples":this.noofpeopletravel,
-    "book_paying_pax":this.payingtax,"hotelType":this.hoteltype,people},"total_peoples":this.noofpeopletravel}
+    "serviceType":"One time","book":{"name":this.name,"mobile":this.phone,"mail":this.email,"book_peoples":this.people_count,
+    "book_paying_pax":this.payingtax,"hotelType":this.hoteltype,people},"total_peoples":this.people_count}
 
 
        let loading = this.loadingCtrl.create({content: 'Please wait...!'});

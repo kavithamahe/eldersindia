@@ -166,13 +166,13 @@ setCategory(category){
       .map(res =>res.json());
 }
 
-communityDetail(id1){
-return this.http.post(`${this.getCommunityPostsUrl }getCommunityDetail`,{"info": {"community": id1, "uid": this.user_id}}
-,this.options)
+communityDetail(id1: any){
+  let body = {"info": {"community": id1, "uid": this.user_id}}; 
+return this.http.post(`${this.getCommunityPostsUrl }getCommunityDetail`,body,this.options)
      .map(res => res.json());
 }
 joinCommunity(id){
-  this.join ={"info":{"uid":this.user_id,"community":id}}
+  this.join ={"info":{"uid":this.user_id,"community":id,"status":2}}
    return this.http.post(`${this.getCommunityPostsUrl }joinCommunity`,this.join,this.options)
       .map(res =>res.json());
 

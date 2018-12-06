@@ -12,11 +12,14 @@ import { ManagePage } from '../../pages/manage/manage';
 import moment from 'moment';
 
 @Component({
+
   selector: 'page-elders',
   templateUrl: 'elders.html',
   providers:[CommunityServices]
 })
+
 export class EldersPage {
+
   headers:any;
   options:any;
 authForm : FormGroup;
@@ -565,16 +568,25 @@ getareaof_interest(){
     }
   // }
 }
+getTagsList(ev){
+  this.getElderSkills();
+}
   getElderSkills(){
+if(this.functionality !="edit" && this.functionality !="profileEdit"){
+   for(let data of this.skill_set){  
+        data.skill = data.display;
+      }
+}
+   
      if(this.functionality !="edit" && this.functionality !="profileEdit"){
       for(let i=0;i<this.skill_set.length;i++){
-        console.log(this.skill_set);
-        this.elder_skills.push({"skill":this.skill_set[i]})  
+        this.elder_skills.push({"skill":this.skill_set[i].skill})  
       }
     }else{
 
       for(let i=0;i<this.skill_set.length;i++){
         this.elder_skills.push({"elder_id":this.elder_id,"skill":this.skill_set[i]})  
+
       }
     }
   }
@@ -1053,6 +1065,7 @@ getareaof_interest(){
                loader.dismiss();
               },
            err =>{
+            this.nav.setRoot(ManagePage);
               this.communityServices.showErrorToast(err);
               loader.dismiss();
               })

@@ -7,6 +7,9 @@ import {IonTagsInputModule} from "ionic-tags-input";
 import { MyApp } from './app.component';
 import { TruncateModule } from 'ng2-truncate';
 // import {RlTagInputModule} from 'angular2-tag-input';
+import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { Ng2CompleterModule } from "ng2-completer";
 import { DatePipe } from '@angular/common';
 import { Network } from '@ionic-native/network';
@@ -75,8 +78,8 @@ import { RecurringcancelPagePage } from '../pages/recurringcancel/recurringcance
 import { EnquiriesPagePage } from '../pages/enquiries/enquiries';
 import { ViewenquiryPagePage } from '../pages/viewenquiry/viewenquiry';
 import { SafemePagePage } from '../pages/safeme/safeme';
+import { CancelrequestsPage } from '../pages/cancelrequests/cancelrequests';
 
-// Kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
 import { CommunityPage } from '../pages/community/community';
 
@@ -96,7 +99,6 @@ import { ManagePage } from '../pages/manage/manage';
 import { EldersPage } from '../pages/elders/elders';
 import { CommunityServices } from '../providers/community-services';
 
-//Sam
 import { SubCategoryPage } from '../pages/sub-category/sub-category';
 import { SubcategoryListPage } from '../pages/subcategory-list/subcategory-list';
 import { InstantRequestModalPage } from '../pages/subcategory-list/subcategory-list';
@@ -189,7 +191,8 @@ import { NetworkProvider } from '../providers/network/network';
     EnquiriesPagePage,
     ViewenquiryPagePage,
     SafemePagePage,
-    VerifyotpPagePage
+    VerifyotpPagePage,
+    CancelrequestsPage
   ],
   imports: [
     IonicStorageModule.forRoot({}),
@@ -197,7 +200,8 @@ import { NetworkProvider } from '../providers/network/network';
     IonTagsInputModule,
     HttpModule,
     TruncateModule,
-    // RlTagInputModule,
+    TagInputModule,
+    BrowserAnimationsModule,
     Ionic2RatingModule,
     Ng2CompleterModule,
     BrowserModule,
@@ -272,7 +276,8 @@ import { NetworkProvider } from '../providers/network/network';
     EnquiriesPagePage,
     ViewenquiryPagePage,
     SafemePagePage,
-    VerifyotpPagePage
+    VerifyotpPagePage,
+    CancelrequestsPage
   ],
      providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},FileTransfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics, 
     NetworkProvider] // Add GithubUsers provider

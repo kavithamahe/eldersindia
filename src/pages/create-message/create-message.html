@@ -22,7 +22,7 @@
     <ion-card class="login-detalis">
       <ion-list class="create-message">
         <ion-item>
-          <ion-searchbar [(ngModel)]="toAddress" formControlName="toAddress" (ionInput)="setFilteredItems()"  placeholder="To * " (focus)="hiddeEorr()"></ion-searchbar>
+          <ion-searchbar [(ngModel)]="toAddress" formControlName="toAddress" (ionInput)="setFilteredItems()"  placeholder="To" (focus)="hiddeEorr()"></ion-searchbar>
            <ion-list *ngIf="!searchFlag" class="animated slideInUp search-location">
         <ion-item>
             <button ion-item *ngFor = "let item of getFriendsListobj" (click)="selectedItem(item)"> {{item.friend_name}} </button>
@@ -32,11 +32,11 @@
       <!--   <p *ngIf="!messageForm.controls.toAddress.valid && (messageForm.controls.toAddress.dirty || submitAttempt)" class="err-reds shake">Please enter the to address</p> -->
         <p *ngIf="customErr" class="err-reds">Please select valid to address</p>
         <ion-item>
-          <ion-input type="text" class="subject-area" placeholder="Subject *" formControlName="subject" [(ngModel)]="subject"></ion-input>
+          <ion-input type="text" class="subject-area" placeholder="Subject" formControlName="subject" [(ngModel)]="subject"></ion-input>
         </ion-item>
         <p *ngIf="!messageForm.controls.subject.valid && (messageForm.controls.subject.dirty || submitAttempt)" class="err-reds shake">Please enter the subject</p>
         <ion-item>
-          <ion-textarea placeholder="Message *" formControlName="message" [(ngModel)]="message">
+          <ion-textarea placeholder="Message" formControlName="message" [(ngModel)]="message">
           </ion-textarea>
         </ion-item>
         <br />

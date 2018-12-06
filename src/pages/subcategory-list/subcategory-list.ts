@@ -75,6 +75,11 @@ export class SubcategoryListPage {
         this.flagId = "1";
       }
     }
+    storage.remove("payingtax");
+    storage.remove("hoteltype");
+    storage.remove("getHotelType");
+    storage.remove("getHotelCost");
+    storage.remove("people_count");
     
       // this.userType = "elder";
       

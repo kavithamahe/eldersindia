@@ -1,0 +1,43 @@
+page-cancelrequests {
+	.job-detailsview{
+			padding-left:10px;
+            border-radius: 4px;
+			box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+			padding: 5px 0;
+			
+            }
+		.discountCost {
+        color: #E91E63;
+    }
+      .view-serv{
+                            text-align: right;
+                            .services{
+                                background: #ef7f16;
+                                padding: 9px 25px 9px 25px;
+                                font-weight: 500;
+                                font-size: 16px;
+                                margin: 9px 5px 8px 0px;
+                                border-radius: 30px;
+                                box-shadow: 0px 5px 20px rgba(44, 78, 134,0.2);
+							}
+							.services-delete{
+								background: #ff0000;
+                                padding: 9px 25px 9px 25px;
+                                font-weight: 500;
+                                font-size: 16px;
+                                margin: 9px 5px 8px 0px;
+                                border-radius: 30px;
+                                box-shadow: 0px 5px 20px rgba(44, 78, 134,0.2);
+							}
+							.services-view{
+								background: #42436a;
+                                padding: 9px 25px 9px 25px;
+                                font-weight: 500;
+                                font-size: 16px;
+                                margin: 9px 5px 8px 0px;
+                                border-radius: 30px;
+                                box-shadow: 0px 5px 20px rgba(44, 78, 134,0.2)
+							}
+						}
+
+}

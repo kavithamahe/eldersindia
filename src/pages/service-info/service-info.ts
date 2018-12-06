@@ -179,7 +179,7 @@ price_range:any;
           this.storage.set('payingtax', payingtax);
            this.storage.set('people_count', this.people_count);
             this.tourslabel = [];
-    for(var i=1;i<=this.people_count;i++) {          
+    for(var i=1;i<=this.people_count - 1;i++) {          
      this.tourslabel.push(i);
   }
   this.tourstotal_peoples =this.tourslabel;
