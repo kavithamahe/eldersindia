@@ -153,13 +153,12 @@ template_id:any;
   confirmationDetailtours:boolean =false;
   tourstotal:any=[];
   packageCost:boolean = false;
+  scheduled_date:any;
   constructor(public storage:Storage,public alertCtrl: AlertController,private device: Device,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder,public blogListService:BlogListService) {
     this.date = new Date().toISOString();
-     console.log("Device UUID is: " + this.device.uuid); 
     this.vendorList = navParams.get("vendorList");
     this.template_id = navParams.get("template_id");
-    console.log(this.template_id);
     this.storage.ready().then(() => {
       storage.get('token').then((token) => { this.token=token;
       localStorage.setItem('key', this.token);
@@ -270,6 +269,7 @@ template_id:any;
       this.balanceRecreationService = navParams.get("balanceRecreationService");
       this.title = this.vendorList.vendorDetails.service;
       this.package_active_status = this.vendorList.vendorDetails.package_active_status;
+      this.scheduled_date = moment(this.vendorList.requestServices.start_date).format("DD-MM-YYYY");
       this.pre_book_percentage = this.vendorList.requestServices.pre_book_percentage;
       this.vendor_id=navParams.get("vendor_id");
       this.booking_status = navParams.get("booking_status");
@@ -411,12 +411,7 @@ template_id:any;
     this.booknownexttours = true;
   }
   payNowTours(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
-  if(this.coupon_id == undefined){
-    this.storage.remove("coupon_id");
-    this.storage.remove("coupon_offer");
-    this.storage.remove("wallet_value");
-
-  }
+ 
      if(this.user_type == 'sponsor')
   {
     this.elder_id = this.elder_id;
@@ -587,7 +582,32 @@ template_id:any;
     };
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
+if(this.coupon_id == undefined){
  var successCallback = function(payment_id) {
+  loading.present();
+      // ajaxCallCheck(payment_id);
+
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
+  var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
+
+xmlhttp.onload = function () {
+loading.dismiss();
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+  // navCtrl.setRoot(ServicerequestPage);
+
+  nav.presentConfirm(result);
+
+  }
+    }
+}
+else{
+   var successCallback = function(payment_id) {
   loading.present();
       // ajaxCallCheck(payment_id);
 
@@ -610,7 +630,7 @@ loading.dismiss();
 
   }
     }
-
+}
 var cancelCallback = function(error) {
   nav.showToaster(error.description);
   loading.dismiss();
@@ -632,7 +652,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       }
       else
       {
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
         // this.navCtrl.pop();
       }
             })
@@ -761,7 +781,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
       }
             })
   }
@@ -866,7 +886,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
       }
             })
   }
@@ -901,7 +921,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
         }
         else
         {
-          this._provider.showToast("Try again later");
+          this._provider.showToast("Something went wrong");
         }
               })
     }
@@ -1340,7 +1360,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
         }
         else
         {
-          this._provider.showToast("Try again later");
+          this._provider.showToast("Something went wrong");
         }
               })
   }
@@ -1400,7 +1420,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       }
       else
       {
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
         this.navCtrl.pop();
       }
             })
@@ -1452,7 +1472,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       }
       else
       {
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
         this.navCtrl.pop();
       }
             })
@@ -1460,12 +1480,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
   //  this.dismiss();
  }
  homeautomationpaynow(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
-   if(this.coupon_id == undefined){
-    this.storage.remove("coupon_id");
-    this.storage.remove("coupon_offer");
-    this.storage.remove("wallet_value");
-
-  }
+ 
    this.date= moment(this.date).format("DD-MM-YYYY");
     if(this.user_type == 'sponsor')
   {
@@ -1620,7 +1635,33 @@ let paymentData = {"package_id":"","serviceType":"One time","service_cost":this.
     };
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
+if(this.coupon_id == undefined){
  var successCallback = function(payment_id) {
+  loading.present();
+      // ajaxCallCheck(payment_id);
+
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
+  var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
+
+xmlhttp.onload = function () {
+loading.dismiss();
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+  // navCtrl.setRoot(ServicerequestPage);
+
+  nav.presentConfirm(result);
+
+  }
+      
+    }
+    }
+else{
+   var successCallback = function(payment_id) {
   loading.present();
       // ajaxCallCheck(payment_id);
 
@@ -1643,9 +1684,8 @@ loading.dismiss();
 
   }
       
-     
     }
-
+}
 var cancelCallback = function(error) {
   nav.showToaster(error.description);
   loading.dismiss();
@@ -1669,7 +1709,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       }
       else
       {
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
         // this.navCtrl.pop();
       }
             })
@@ -1720,17 +1760,12 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       }
       else
       {
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
       }
             })
 }
  emergencypaynow(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
-   if(this.coupon_id == undefined){
-    this.storage.remove("coupon_id");
-    this.storage.remove("coupon_offer");
-    this.storage.remove("wallet_value");
 
-  }
   if(this.user_type == 'sponsor')
   {
     this.elder_id = this.elder_id;
@@ -1904,7 +1939,34 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     };
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
+if(this.coupon_id == undefined){
  var successCallback = function(payment_id) {
+  loading.present();
+      // ajaxCallCheck(payment_id);
+
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
+   var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
+
+xmlhttp.onload = function () {
+  loading.dismiss();
+
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+  // navCtrl.setRoot(ServicerequestPage);
+
+  nav.presentConfirm(result);
+
+  }
+    }  
+     
+    }
+    else{
+       var successCallback = function(payment_id) {
   loading.present();
       // ajaxCallCheck(payment_id);
 
@@ -1927,8 +1989,7 @@ xmlhttp.onload = function () {
   nav.presentConfirm(result);
 
   }
-      
-     
+    }  
     }
 
 var cancelCallback = function(error) {
@@ -1954,7 +2015,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       }
       else
       {
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
         // this.navCtrl.pop();
       }
             })
@@ -1962,12 +2023,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
 }
 
 wearablespaynow(prebook_cost,category_id,service_id,sub_category_id,category,service,subcategory,start_date){
-   if(this.coupon_id == undefined){
-    this.storage.remove("coupon_id");
-    this.storage.remove("coupon_offer");
-    this.storage.remove("wallet_value");
-
-  }
+  
     if(this.user_type == 'sponsor')
   {
     this.elder_id = this.elder_id;
@@ -2141,7 +2197,33 @@ wearablespaynow(prebook_cost,category_id,service_id,sub_category_id,category,ser
     };
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
+if(this.coupon_id == undefined){
  var successCallback = function(payment_id) {
+  loading.present();
+      // ajaxCallCheck(payment_id);
+
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
+  var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
+
+xmlhttp.onload = function () {
+loading.dismiss();
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+  // navCtrl.setRoot(ServicerequestPage);
+
+  nav.presentConfirm(result);
+
+  }
+    }  
+     
+    }
+else{
+   var successCallback = function(payment_id) {
   loading.present();
       // ajaxCallCheck(payment_id);
 
@@ -2163,10 +2245,8 @@ loading.dismiss();
   nav.presentConfirm(result);
 
   }
-      
-     
-    }
-
+    } 
+}
 var cancelCallback = function(error) {
   nav.showToaster(error.description);
   loading.dismiss();
@@ -2190,7 +2270,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       }
       else
       {
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
         // this.navCtrl.pop();
       }
             })
@@ -2244,17 +2324,12 @@ submitRequestwearable(prebook_cost,category_id,service_id,sub_category_id,catego
       }
       else
       {
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
       }
             })
 }
  payNow(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
-  if(this.coupon_id == undefined){
-    localStorage.remove("coupon_id");
-    localStorage.remove("coupon_offer");
-    localStorage.remove("wallet_value");
 
-  }
   if(this.user_type == 'sponsor')
   {
     this.elder_id = this.elder_id;
@@ -2423,7 +2498,32 @@ submitRequestwearable(prebook_cost,category_id,service_id,sub_category_id,catego
     };
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
+if(this.coupon_id == undefined){
  var successCallback = function(payment_id) {
+  loading.present();
+      // ajaxCallCheck(payment_id);
+
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
+  var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
+
+xmlhttp.onload = function () {
+loading.dismiss();
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+  // navCtrl.setRoot(ServicerequestPage);
+
+  nav.presentConfirm(result);
+
+  }
+    }
+}
+else{
+  var successCallback = function(payment_id) {
   loading.present();
       // ajaxCallCheck(payment_id);
 
@@ -2446,7 +2546,7 @@ loading.dismiss();
 
   }
     }
-
+}
 var cancelCallback = function(error) {
   nav.showToaster(error.description);
   loading.dismiss();
@@ -2468,7 +2568,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       }
       else
       {
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
         // this.navCtrl.pop();
       }
             })
@@ -2517,7 +2617,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       }
       else
       {
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
       }
             })
 }

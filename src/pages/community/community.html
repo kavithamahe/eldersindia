@@ -72,7 +72,7 @@
 		<h2 class="wel-comemem">Update Status</h2>
 		<ion-item>
 			<textarea [(ngModel)]="post" type="text" placeholder="Whats on your mind?">
-				</textarea>
+			</textarea>
 		</ion-item>
 		<div class="posted-video-img">
 			<ion-row class="postVideoImage">
@@ -166,7 +166,7 @@
 					<p (click)="openUrl(user.metalink_url)">{{user.metalink_title}}</p>
 				</ion-card-content>
 				<ion-card-content class="video-updates" [hidden]="!user?.metalink_description">
-					<p (click)="openUrl(user.metalink_url)">{{user.metalink_description | words : 30 : '...'}}</p>
+				<p (click)="openUrl(user.metalink_url)">{{user.metalink_description | words : 30 : '...'}}</p>
 				</ion-card-content>
 			</div>
 			<div class="comment-liks">

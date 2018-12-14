@@ -96,23 +96,16 @@ rootUrl:any;
     return this.http.post(this.rootUrl+'getRemarks',_request,this.options)
       .map(res => res.json()); 
   }
- 
-    cancelRequests(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,service_remaing_cost,final_payable_amount) 
+
+
+    cancelRequest(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id,
+      balanceamount_to_pay,deductionamounts,payable_amount,cancel_services) 
   {
   
    let _request= {"status":3,"id":serviceId,"comments":title,"razorpay_payment_id":txnid,"service_type":service_type,
-   "dedaction_amount":cancelCharges,"paid_amount":paid_amount,"utilized_service_cost":utilized_service_cost,"recurring_req_id":recurring_request_id,"reduction_percentage":percentage,
-   "payable_amount":final_payable_amount,"service_remaing_cost":service_remaing_cost};
-    return this.http.post(this.rootUrl+'razorPaymentResponseforCancel',_request,this.options)
-      .map(res => res.json()); 
-  }
-    cancelRequest(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id) 
-  {
-  
-   let _request= {"status":3,"id":serviceId,"comments":title,"razorpay_payment_id":txnid,"service_type":service_type,
-   "dedaction_amount":cancelCharges,"paid_amount":paid_amount,"utilized_service_cost":utilized_service_cost,"recurring_req_id":recurring_request_id,"reduction_percentage":percentage,
-   "service_cancel_amount":dedaction_service_cost,"service_remaing_cost":service_remaing_cost,"balanceamount_to_pay":service_remaing_cost,
-   "cancel_services":req_count,"package_id":package_id,"payable_amount":service_remaing_cost };
+   "dedaction_amount":deductionamounts,"paid_amount":paid_amount,"utilized_service_cost":utilized_service_cost,"recurring_req_id":recurring_request_id,"reduction_percentage":percentage,
+   "service_cancel_amount":dedaction_service_cost,"service_remaing_cost":service_remaing_cost,"balanceamount_to_pay":balanceamount_to_pay,
+   "cancel_services":cancel_services,"package_id":package_id,"payable_amount":payable_amount };
     return this.http.post(this.rootUrl+'razorPaymentResponseforCancel',_request,this.options)
       .map(res => res.json()); 
   }

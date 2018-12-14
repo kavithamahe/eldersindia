@@ -15,7 +15,6 @@ import moment from 'moment';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-
 @Component({
   selector: 'page-singleblog',
   templateUrl: 'singleblog.html',
@@ -29,7 +28,7 @@ token:string;
 imageUrl:string;
 commandObj:any;
 comment:any;
-showComment:any;
+showComment:boolean = false;
 viewCommentsList:any;
 user_id:any;
 Reply:any;
@@ -63,7 +62,6 @@ created_at:any;
   }
   public leaveComment()
   {
-    console.log(document.getElementById('commentsView'));
    if(this.showComment)
     {
       if(document.getElementById('commentsView') != null){
@@ -91,7 +89,7 @@ created_at:any;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       });
@@ -136,7 +134,7 @@ created_at:any;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
          loader.dismiss();
       }
@@ -159,7 +157,7 @@ created_at:any;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
          loader.dismiss();
       }
@@ -190,7 +188,7 @@ created_at:any;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       }
@@ -210,7 +208,7 @@ created_at:any;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       }
     );
@@ -264,7 +262,7 @@ created_at:any;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       }

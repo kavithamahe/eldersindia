@@ -89,7 +89,7 @@ this.onInit();
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
          this.loader.dismiss();
       }
@@ -136,7 +136,7 @@ getItems(searchEvent){
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       }
     );
@@ -202,7 +202,7 @@ getItems(searchEvent){
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       }
     );

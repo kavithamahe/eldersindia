@@ -56,6 +56,7 @@ import { NetworkProvider } from '../providers/network/network';
 
 import { Storage } from '@ionic/storage';
 declare var Connection: any;
+declare var google;
 
 @Component({//selector:'my-theme',
   templateUrl: 'app.html'

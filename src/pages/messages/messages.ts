@@ -164,7 +164,7 @@ sentlogDeleteStudents(viewType){
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
            this.emptyRecord = "No Records Found"
         }
         loader.dismiss();
@@ -213,7 +213,7 @@ sentlogDeleteStudents(viewType){
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
           this.emptyRecord = "No Records Found"
         }
         loader.dismiss();
@@ -280,7 +280,7 @@ sentlogDeleteStudents(viewType){
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       }
     );
@@ -319,7 +319,7 @@ sentlogDeleteStudents(viewType){
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       }
     );
@@ -367,7 +367,7 @@ sentlogDeleteStudents(viewType){
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       }

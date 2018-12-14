@@ -186,7 +186,7 @@
               </ion-chip>
             </a>
             <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3) && (service?.vendor_status!=5))" (click)="showConfirmcancel(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid,service?.id,service?.service_cost,service?.recurring_request_id,service?.req_count,service?.package_id,service?.Paymentstatus,service?.paid_amount,
-              service?.sr_token,service?.coupon_id,service?.pending_service_amount)">
+              service?.sr_token,service?.coupon_id,service?.pending_service_amount,service?.vendor_name)">
               Cancel
             </a>
           </div>
@@ -249,7 +249,7 @@
         </button>
       </ion-col>
     </ion-row>
-    <ion-card *ngIf="(i==showRemark)">
+    <ion-card *ngIf="(i==showRemark)" autofocus>
       <ion-list class="show-hiden">
         <div class="rating-left">
           <h2>Rating</h2>

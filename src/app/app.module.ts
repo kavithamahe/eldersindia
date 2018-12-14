@@ -6,7 +6,6 @@ import { IonicStorageModule  } from '@ionic/storage';
 import {IonTagsInputModule} from "ionic-tags-input";
 import { MyApp } from './app.component';
 import { TruncateModule } from 'ng2-truncate';
-// import {RlTagInputModule} from 'angular2-tag-input';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -15,10 +14,7 @@ import { DatePipe } from '@angular/common';
 import { Network } from '@ionic-native/network';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Device } from "@ionic-native/device";
-// import { Crashlytics } from '@ionic-native/fabric';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
-
-// import { InAppBrowser } from 'ionic-native';
 
 
 import {BrowserModule} from '@angular/platform-browser';
@@ -33,7 +29,6 @@ import {MomentModule} from 'angular2-moment';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
-// import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { LoginPage } from '../pages/login/login';
 import { AppConfig } from '../providers/app-config';
@@ -53,7 +48,6 @@ import { PackagepaymentPagePage } from '../pages/packagepayment/packagepayment';
 import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
 import { VerifyotpPagePage } from '../pages/verifyotp/verifyotp';
 
-//packages related pages
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
 import {PackageDetailPagePage } from '../pages/package-detail/package-detail';
 
@@ -119,7 +113,6 @@ import { ServiceProvider } from '../providers/service-provider';
 import { BlogListService } from '../providers/blog-list-service';
 import { NetworkProvider } from '../providers/network/network';
 
-// import { Externallinks } from '../providers/externallinks';
 
 
  
@@ -197,9 +190,9 @@ import { NetworkProvider } from '../providers/network/network';
   imports: [
     IonicStorageModule.forRoot({}),
     IonicModule.forRoot(MyApp,AppConfig),
-    IonTagsInputModule,
     HttpModule,
     TruncateModule,
+    IonTagsInputModule,
     TagInputModule,
     BrowserAnimationsModule,
     Ionic2RatingModule,

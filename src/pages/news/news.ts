@@ -67,7 +67,7 @@ scrollTop:boolean = false;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
           this.emptyRecord = "No Records Found"
         }
         loader.dismiss();
@@ -140,7 +140,7 @@ scrollTop:boolean = false;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       }
     );

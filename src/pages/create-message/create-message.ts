@@ -126,7 +126,7 @@ searchFlag : Boolean = true;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       }
@@ -191,7 +191,7 @@ searchFlag : Boolean = true;
          }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       }
@@ -237,7 +237,7 @@ fileChange(event) {
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       });
       

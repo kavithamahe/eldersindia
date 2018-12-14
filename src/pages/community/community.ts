@@ -86,7 +86,6 @@ export class CommunityPage {
     this.content.scrollToBottom();
   }
     doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
     this.storage.ready().then(() => {
       this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       this.storage.get('token').then((token) => { this.token=token; 
@@ -232,7 +231,7 @@ showConfirm(id){
        buttons: [
         {
           text: 'Cancel',
-         },
+        },
         {
           text: 'Ok',
           handler: () => {
@@ -659,7 +658,7 @@ if(this.selectedConnections != undefined){
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       });

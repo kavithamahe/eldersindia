@@ -98,7 +98,7 @@ community:boolean=false;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       });

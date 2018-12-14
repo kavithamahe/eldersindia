@@ -180,7 +180,7 @@
           </div>
         <ion-row>
           <p class="service-conts">
-            <span class="token-primaryss">Schedule Date : </span>{{vendorList?.requestServices.start_date}}
+            <span class="token-primaryss">Schedule Date : </span>{{scheduled_date}}
           </p>
         </ion-row>
         <ion-row>
@@ -505,7 +505,7 @@
           </div>
         <ion-row>
           <p class="service-conts">
-            <span class="token-primaryss">Schedule Date : </span>{{vendorList?.requestServices.start_date}}
+            <span class="token-primaryss">Schedule Date : </span>{{scheduled_date}}
           </p>
         </ion-row>
         <ion-row>
@@ -2275,52 +2275,3 @@
     display: inline-block;
   }
 </style>
-<!--
-    ============= moved on line number 19 t0 962 ===========
-  <ion-item text-wrap *ngIf = "schedule">
-              <ion-row>
-                  <p *ngIf = "vendorList?.requestServices.category != 'Safety and security'" class="service-conts"><span class="token-primaryss">Schedule : </span>{{vendorList?.requestServices.start_date}} to {{vendorList?.requestServices.end_date}}
-                  </p>
-                 </ion-row>
-                 <ion-row class="textlg" *ngIf = "schedule_cost != 0 && vendorList?.requestServices.subcategory != 'Transportation Driver Service'">
-              <p class="service-conts"><span class="token-primaryss">Cost : </span><b><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{schedule_cost}} <span *ngIf="service_cost != schedule_cost">/&nbsp;
-                <i class="fa fa-inr" aria-hidden="true"></i><strong>{{service_cost}}</strong></span> </b></p>
-                
-                   </ion-row>
-                   <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory
-                     != 'Home modification' && vendorList?.requestServices.subcategory
-                     != 'Home Modification' && vendorList?.requestServices.subcategory
-                     != 'Home automation' && vendorList?.requestServices.subcategory
-                     != 'Home Automation' && vendorList?.requestServices.subcategory
-                     != 'Home Automation' && vendorList?.requestServices.subcategory
-                     != 'Transportation Driver Service' && vendorList?.requestServices.subcategory != 'Transportation Cab'">
-                    <p class="service-conts"><span class="token-primaryss">Valid For {{vendorList?.vendorDetails.package_validity}}</span></p>
-                   </ion-row>
-                     <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'">
-                    <p class="service-conts"><span class="token-primaryss">Working Days : {{vendorList?.vendorDetails.businessFromDayName}} - {{vendorList?.vendorDetails.businessToDayName}}</span></p>
-                   </ion-row>
-                    <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'">
-                    <p class="service-conts"><span class="token-primaryss">Working Time : {{vendorList?.vendorDetails.businessFromTime}} - {{vendorList?.vendorDetails.businessToTime}}</span></p>
-                   </ion-row>
-                    <ion-row *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'">
-                    <p class="service-conts"><span class="token-primaryss">{{vendorList?.vendorDetails.businessLeadTime}} hour(s)</span></p>
-                   </ion-row>
-       
-          </ion-item>
-          <br>
-          <ion-item *ngIf = "schedule" text-wrap>
-              <button class="instant-bt" *ngIf="package_active_status == '1' && vendorList?.requestServices.category == 'Recreation'" (click)="bookNow()">Book Now</button>
-              <button class="instant-bt" *ngIf="package_active_status == '0' && vendorList?.requestServices.category == 'Recreation'">Booking Closed
-              </button>
-                  <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '2' && vendorList?.requestServices.category == 'Safety and security'" (click)="preBook()">Pre Book</button>
-                  <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '1' && vendorList?.requestServices.category == 'Safety and security'" (click)="preBook()">Book Now</button>
-                  <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory != 'Home modification' && vendorList?.requestServices.subcategory
-                     != 'Home Modification' && vendorList?.requestServices.subcategory
-                     != 'Home automation' && vendorList?.requestServices.subcategory
-                     != 'Home Automation' && vendorList?.requestServices.subcategory
-                      != 'Home Automation' && vendorList?.requestServices.subcategory != 'Transportation Driver Service' && vendorList?.requestServices.subcategory != 'Transportation Cab'" (click)="emergencybook()">Book Now</button>
-                      <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Transportation Driver Service'" (click)="transportationdriver()">Book Now</button>
-                      <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Transportation Cab'" (click)="transportationcab()">Book Now</button>
-                      <button class="instant-bt" *ngIf="vendorList?.requestServices.booking_status == '0' && vendorList?.requestServices.category == 'Safety and security' && vendorList?.requestServices.subcategory == 'Home modification' || vendorList?.requestServices.subcategory == 'Home Modification' || vendorList?.requestServices.subcategory == 'Home automation' || vendorList?.requestServices.subcategory == 'Home Automation' || vendorList?.requestServices.subcategory == 'Home Automation'" (click)="homemodify()">Schedule Assessment</button>
-            <button  class="instant-btn" (click)="contactNow()">Contact Now</button>
-            </ion-item> -->

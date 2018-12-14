@@ -251,9 +251,7 @@ xmlhttp.onload = function () {
  var result=users.result;
   nav.setRoot(ServicerequestPage,{"status":"1","result":result});
   }
-     
-
-    }
+ }
 
 var cancelCallback = function(error) {
   nav.setRoot(ServicerequestPage);
@@ -265,8 +263,10 @@ RazorpayCheckout.on('payment.cancel', cancelCallback);
 RazorpayCheckout.open(recurringOption, successCallback, cancelCallback);
 }
    pay() {
+
     console.log(this.elderId);
    	if(this.sr_token == undefined){
+ 
     var options = {
       description: 'Razorpay',
       image: this.imageUrl + "assets/img/Elderlogo.png",
@@ -300,7 +300,29 @@ RazorpayCheckout.open(recurringOption, successCallback, cancelCallback);
     };
 let toaster = this.blogListService;
 let nav = this.navCtrl;
+if(this.coupon_id == undefined){
 let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+ var successCallback = function(payment_id) {
+    
+loading.present();
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponseforPackage";
+   var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("package_amounts")}));
+
+xmlhttp.onload = function () {
+  loading.dismiss();
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+  nav.setRoot(PackageRequestPagePage,{"status":"1","result":result});
+  } 
+    }
+}
+else{
+  let loading = this.loadingCtrl.create({content: 'Please wait...!'});
  var successCallback = function(payment_id) {
     
 loading.present();
@@ -319,7 +341,7 @@ xmlhttp.onload = function () {
   nav.setRoot(PackageRequestPagePage,{"status":"1","result":result});
   } 
     }
-
+}
 var cancelCallback = function(error) {
   toaster.showToaster(error.description);
  nav.pop();

@@ -9,6 +9,8 @@ import {FormBuilder,FormGroup,Validators,FormArray} from '@angular/forms';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 
+import { JobboardPage } from '../../pages/jobboard/jobboard';
+
 
 /*
   Generated class for the JobDependent page.
@@ -36,8 +38,12 @@ user_type:any;
 submitAttempt:any;
 jobId:any;
 dependentstatus:any=0;
+appliedjobs:any;
+is_applied:any;
   constructor(public formBuilder: FormBuilder,private filePath: FilePath,private fileChooser: FileChooser,public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.jobId=navParams.get("jobId");
+  this.is_applied=navParams.get("is_applied");
+  this.appliedjobs=navParams.get("appliedjobs");
   this.storage.ready().then(() => {
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
     storage.get('user_type').then((user_type) => { this.user_type=user_type;});
@@ -76,7 +82,7 @@ dependentstatus:any=0;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
          loader.dismiss();
       }
@@ -115,7 +121,7 @@ dependentstatus:any=0;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       });
       
@@ -131,7 +137,7 @@ dependentstatus:any=0;
    toast.present();
   }
 dismiss() { 
-  let data={'dependent':''};
+  let data={'jobId':this.jobId,"appliedjobs":this.appliedjobs,"is_applied":this.is_applied};
    this.viewCtrl.dismiss(data);
  }
  cancelDependent(){
@@ -169,7 +175,7 @@ dismiss() {
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
          loader.dismiss();
       }
@@ -187,7 +193,7 @@ dismiss() {
         this.jobBoardService.applyjobelder(this.user_type_id,this.user_id,this.jobId,this.file_name,
         this.file_path).subscribe((applyjob) => {
           this.showToaster(applyjob.result);
-          this.navCtrl.pop();
+          this.dismiss();
            loader.dismiss();
         },
       (err) => { 
@@ -197,7 +203,7 @@ dismiss() {
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
          loader.dismiss();
       }

@@ -73,7 +73,6 @@ export class DashboardPage {
   id:any;
   safehelpdetails:any=[];
   constructor(private nativeAudio: NativeAudio,public nativeGeocoder:NativeGeocoder,private device: Device,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
-    console.log("Device UUID is: " + this.device.uuid);
     storage.get('Cctv_camera').then((Cctv_camera) => { this.Cctv_camera=Cctv_camera; })
   	storage.get('elder_mobile_imei').then((elder_mobile_imei) => { this.elder_mobile_imei=elder_mobile_imei; })
     
@@ -90,6 +89,8 @@ export class DashboardPage {
       storage.get('user_type').then((user_type) => { this.user_type=user_type; })
        this.storage.get('name').then((name) => { this.elder_name=name;})
        this.storage.get('lastname').then((lastname) => { this.elder_lastname=lastname;})
+        this.storage.get('lat').then((lat) => { this.lat=lat;  })
+       this.storage.get('long').then((long) => { this.long=long;  })
        storage.get('call_sponsor').then((call_sponsor) => { this.call_sponsor=call_sponsor; 
        console.log(this.call_sponsor); })
        this.storage.get('sponsor_avatar').then((sponsor_avatar) => { this.sponsor_avatar=sponsor_avatar; })
@@ -136,6 +137,8 @@ export class DashboardPage {
         this.checksafehelpStatus(this.id);
         })
       this.storage.get('hospital').then((hospital) => { this.hospital=hospital;  })
+      this.storage.get('lat').then((lat) => { this.lat=lat;  })
+      this.storage.get('long').then((long) => { this.long=long;  })
            this.storage.get('token').then((token) => { this.token=token; 
        this.headers = new Headers();
       this.headers.append('Content-Type', 'application/json');
@@ -153,27 +156,31 @@ export class DashboardPage {
         this.helpme_status = this.safehelpdetails.helpme_status;
     },
     err =>{
-      this.providerService.showErrorToast(err);
+      // this.providerService.showErrorToast(err);
       })
     }
-  
+   ngAfterViewInit(){
+this.map();
+  }
   map(){
-      Geolocation.getCurrentPosition().then((position) => {
-      this.lat=position.coords.latitude;
-      this.long=position.coords.longitude;
-      this.storage.set('lat', this.lat);
-      this.storage.set('long', this.long);
+    this.platform.ready().then(()=>{
+//       Geolocation.getCurrentPosition().then((position) => {
+//       this.lat=position.coords.latitude;
+//       this.long=position.coords.longitude;
+//       this.storage.set('lat', this.lat);
+//       this.storage.set('long', this.long);
 
-    this.urls = 'https://www.google.com/maps/place/'+this.lat+ ',' + this.long;
-});
+//     this.urls = 'https://www.google.com/maps/place/'+this.lat+ ',' + this.long;
+// });
+    })
   }
   urlss:any;
      shareLocation()
   {
-    console.log(this.urls);
+    this.urlss = 'https://www.google.com/maps/place/'+this.lat+ ',' + this.long;
       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
-   this.providerService.elderEmergencySms(this.urls,this.call_sponsor,this.sponsor_name,this.elder_name,this.elder_lastname)
+   this.providerService.elderEmergencySms(this.urlss,this.call_sponsor,this.sponsor_name,this.elder_name,this.elder_lastname)
       .subscribe(data =>{
       this.providerService.showToast(data.result);
       loading.dismiss();
@@ -182,8 +189,6 @@ export class DashboardPage {
       loading.dismiss();
       this.providerService.showErrorToast(err);
       })
-
- 
 
   }
   // ionViewWillLeave() {

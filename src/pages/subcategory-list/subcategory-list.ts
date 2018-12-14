@@ -150,7 +150,7 @@ loadSubcategoryList(subCategory_id,location_id){
 
                             if((Object.keys(this.dependentLists).length<=0) && this.userType == 'sponsor')
                             {
-                            this.showToaster("There is no dependent. Please Add Dependent.");
+                            this.showToaster("Please Add Dependent.");
                             this.dependentLen=false;
                             }
                             loading.dismiss();
@@ -194,10 +194,12 @@ pressinstant(vendorData){
   this.instantRequest(vendorData);
 }
   instantRequest(vendorData) {
+    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    loading.present();
       this.providerService.getServicedependentlist(vendorData.id)
       .subscribe(data =>{ 
         this.get_Servicedependentlist = data.result;
-        console.log(this.get_Servicedependentlist);
+        loading.dismiss();
              if(this.get_Servicedependentlist !=  0){
       this.providerService.showToast("You have not paid previous availed service,please pay and request new services");
     }
@@ -260,6 +262,7 @@ pressevent(modalPage,vendorData){
     
     this.modal.present();
     }else{
+      console.log(vendorData);
       this.navCtrl.push(ModalContentPage,{dependentList:this.dependentLists,lead_time:vendorData.lead_time,vendor:vendorData,location_id:this.location_id,serviceData:this.serviceData,serviceTitle:this.serviceTitle});
 
     }
@@ -275,6 +278,7 @@ pressevent(modalPage,vendorData){
     this.navCtrl.setRoot(DashboardPage);
   }
   serviceRequestCall(service_request_data,vendorId){
+    console.log(service_request_data.dependentId);
     if(service_request_data != "1"){
       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
@@ -309,7 +313,7 @@ pressevent(modalPage,vendorData){
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
          loading.dismiss();
       });
@@ -342,7 +346,7 @@ pressevent(modalPage,vendorData){
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
          loading.dismiss();
       });
@@ -484,7 +488,6 @@ export class InstantRequestModalPage {
       this.lead_time = "01:00";
       console.log(this.lead_time);
     }
-    console.log(this.lead_time);
     let dependent_model = this.dependentData;
     let d = new Date();
     let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +

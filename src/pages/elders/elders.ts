@@ -11,6 +11,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ManagePage } from '../../pages/manage/manage';
 import moment from 'moment';
 
+
 @Component({
 
   selector: 'page-elders',
@@ -127,6 +128,7 @@ mytype:string ="password";
   other:any;
   avatar1:any="";
   docss:any;
+  date:any
   
 //-----------------------END-------------------//
 
@@ -154,7 +156,7 @@ mytype:string ="password";
           this.loadForm(navParams.get('profileData'));
         }else{
           this.title = "Elder Onboarding";
-          // this.elder_dob = new Date().toISOString();
+          this.date = new Date().toISOString();
         }
       })
       
@@ -572,15 +574,18 @@ getTagsList(ev){
   this.getElderSkills();
 }
   getElderSkills(){
-if(this.functionality !="edit" && this.functionality !="profileEdit"){
-   for(let data of this.skill_set){  
-        data.skill = data.display;
-      }
-}
+    console.log(this.skill_set);
+// if(this.functionality !="edit" && this.functionality !="profileEdit"){
+//    for(let data of this.skill_set){  
+//         data.skill = data.display;
+//       }
+// }
+// console.log(this.skill_set);
    
      if(this.functionality !="edit" && this.functionality !="profileEdit"){
       for(let i=0;i<this.skill_set.length;i++){
-        this.elder_skills.push({"skill":this.skill_set[i].skill})  
+        this.elder_skills.push({"skill":this.skill_set[i]})
+        // this.elder_skills.push({"skill":this.skill_set[i].skill})  
       }
     }else{
 
@@ -663,7 +668,7 @@ if(this.functionality !="edit" && this.functionality !="profileEdit"){
         }
         else
         {
-          this.communityServices.showToast("Try again later");
+          this.communityServices.showToast("Something went wrong");
         }
       });
       
@@ -793,12 +798,16 @@ if(this.functionality !="edit" && this.functionality !="profileEdit"){
 
     this.getElderEducation();
     this.education_data = this.elder_education;
-           let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+      if(this.file_name == ""){
+              this.communityServices.showToast("Please Select the file");
+             }
+             else{
+                let loader = this.loadingCtrl.create({ content: "Please wait..." });     
             loader.present();
             if(this.file_path == undefined){
               this.file_path = this.docss;
             }
-             console.log(this.elder_dob);
+
             this.communityServices.editSubmit({"info": [{
         "id":this.elder_id,
         "area_interest":this.area_of_interest_data,
@@ -866,6 +875,8 @@ if(this.functionality !="edit" && this.functionality !="profileEdit"){
                     this.communityServices.showErrorToast(err);
                     loader.dismiss();
               })
+             }
+         
              
             }
             }
@@ -992,10 +1003,7 @@ if(this.functionality !="edit" && this.functionality !="profileEdit"){
       this.communityServices.showToast("Please Enter The Required Details");
     }
     else{
-      console.log(this.elder_dob);
-      console.log(this.elder_dob);
        this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
-       console.log(this.elder_dob + "this");
       this.submitAttempt = false;
       this.getElderSkills();
     this.skill_data= this.elder_skills;
@@ -1013,6 +1021,10 @@ if(this.functionality !="edit" && this.functionality !="profileEdit"){
 
     this.getElderEducation();
     this.education_data = this.elder_education;
+      if(this.file_name == ""){
+              this.communityServices.showToast("Please Select the file");
+             }
+             else{
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     console.log(this.skill_data);
@@ -1069,6 +1081,7 @@ if(this.functionality !="edit" && this.functionality !="profileEdit"){
               this.communityServices.showErrorToast(err);
               loader.dismiss();
               })
+                      }
     
      }
         }  

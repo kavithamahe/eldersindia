@@ -203,7 +203,7 @@ wallet_value:any;
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
-        this.providerService.showToast("Try again later");
+        this.providerService.showToast("Something went wrong");
       }
             })
   }

@@ -177,7 +177,8 @@ export class ModalContentPage {
       this.status = this.params.get("status");
       if(this.params.get("status") == "1"){
         this.vendorr = this.params.get("vendor").id;
-        this.vendor_id = this.params.get("vendor").id;
+        this.vendor_id = this.params.get("vendor_id");
+        console.log(this.vendor_id);
         this.getpackageInfo(this.vendor_id);
         this.getServicedependentlistsInfo(this.vendor_id);
       }
@@ -186,7 +187,10 @@ export class ModalContentPage {
       this.percentage_cost = this.params.get("vendor").percentage_cost;
       this.initialservicecost = this.service_cost - this.percentage_cost;
       this.servicecost=this.initialservicecost;
-      this.vendor_id = this.params.get("vendor").vendor_id;
+      if(this.params.get("status") != "1"){
+        this.vendor_id = this.params.get("vendor").vendor_id;
+      }
+      
       this.name = this.params.get("vendor").name;
     }
     this.modalForm = formBuilder.group({
@@ -260,9 +264,12 @@ export class ModalContentPage {
     })
     }
     getServicedependentlistsInfo(vendor_id){
+      let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    loading.present();
       this.providerService.getServicedependentlist(vendor_id)
       .subscribe(data =>{ 
         this.get_Servicedependentlist = data.result;
+        loading.dismiss();
     })
     }
     getServicedependentlists(){
@@ -567,6 +574,7 @@ export class ModalContentPage {
 
    }
    packageinfo(){
+    console.log(this.vendor_id);
     this.getCustomerBalanceAmountsSponsor();
     this.providerService.packageListsInfo(this.location_id,this.service_id,this.authForm.value.dependents,this.vendor_id)
       .subscribe(data =>{ 
@@ -637,7 +645,7 @@ export class ModalContentPage {
         }
         else
         {
-          this.providerService.showToast("Try again later");
+          this.providerService.showToast("Something went wrong");
         }
          loading.dismiss();
       }); 
@@ -671,7 +679,7 @@ export class ModalContentPage {
         }
         else
         {
-          this.providerService.showToast("Try again later");
+          this.providerService.showToast("Something went wrong");
         }
          loading.dismiss();
       }); 

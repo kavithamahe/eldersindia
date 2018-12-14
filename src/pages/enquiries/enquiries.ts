@@ -136,7 +136,7 @@ packagetransId:boolean = false;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       }
     );
@@ -183,7 +183,7 @@ deleteEnquiery(id){
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       })
 }

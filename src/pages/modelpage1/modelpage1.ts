@@ -210,7 +210,7 @@ export class Modelpage1PagePage {
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
-        this.providerService.showToast("Try again later");
+        this.providerService.showToast("Something went wrong");
       }
             })
   }
@@ -229,7 +229,7 @@ export class Modelpage1PagePage {
     "total_service_cost":this.serviceDatas.total_service_cost,"get_custome_service_cancel_amount":this.serviceDatas.get_custome_service_cancel_amount,"dependentid":this.serviceDatas.dependentId,
     "servicecost":this.serviceDatas.servicecosts,"datCount":this.datCount,"payment_type":"full_payment","discountcost12":null,
     "discountcost2":null,"servicediscost2":null,"servicediscountcost12":"NaN",
-    "servicediscountcost13":"NaN","servicediscountcost14":"NaN","discountcost1":"",
+    "servicediscountcost13":"NaN","servicediscountcost14":"NaN","discountcost1":"","selected_dates":this.serviceDatas.selected_dates,
     "discountcost":this.serviceDatas.discountcost,"servicediscountcost":this.serviceDatas.total_cost,"servicediscost":this.serviceDatas.total_cost,
     "coupen_code":this.coupan_code,"vendor_id":this.vendor_id,"type":"service"}}
         let loading = this.loadingCtrl.create({content: 'Please wait...!'});
@@ -267,7 +267,7 @@ export class Modelpage1PagePage {
         this.coupon_id = "";
         this.discounted_cost = "";
         this.final_service_cost = "";
-        this.providerService.showToast("Try again later");
+        this.providerService.showToast("Something went wrong");
       }
             })
   }
@@ -288,7 +288,7 @@ submitRequest(){
   let data={"category_id":this.category_id,"sub_category_id":this.sub_category_id,"service_id":this.service_ids,
   "category":this.category,"subcategory":this.subcategory,
   "service":this.service,"location_id":this.location_id,"discount":"","pay_method":"",
-  "serviceType":this.serviceType,"coupon_code_discount_cost":this.discounted_cost,
+  "serviceType":this.serviceType,"coupon_code_discount_cost":this.discounted_cost,"datCount":this.datCount,
   "final_service_cost_after_coupon_code_discount":this.final_service_cost,"service_name":this.service,
   "paymentflag":1,"service_cost":this.serviceDatas.total_service_cost,"service_cost_travel":this.serviceDatas.total_service_cost,"base_cost":this.serviceDatas.base_cost,
   "from_date":this.serviceDatas.from_date,"to_date":this.serviceDatas.to_date,"time_slot":this.serviceDatas.time_slot,"from_time":this.serviceDatas.from_time,"to_time":this.serviceDatas.to_time,
@@ -320,7 +320,7 @@ submitRequest(){
       }
       else
       {
-        this.providerService.showToast("Try again later");
+        this.providerService.showToast("Something went wrong");
       }
             })
 }

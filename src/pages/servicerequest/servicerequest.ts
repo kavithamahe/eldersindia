@@ -72,6 +72,7 @@ actual_service_cost:any;
 dedaction_amount:any;
 service_refund_amount:any;
 refund_amount:any;
+payableamount:any;
   constructor(public alertCtrl: AlertController,public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.paystatus = navParams.get("status");
     this.results = navParams.get("result");
@@ -138,7 +139,7 @@ refund_amount:any;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       }
     ); 
@@ -181,7 +182,7 @@ toggleDetails(service) {
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       }
@@ -235,7 +236,7 @@ toggleDetails(service) {
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       }
@@ -274,7 +275,7 @@ toggleDetails(service) {
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       }
@@ -304,7 +305,7 @@ toggleDetails(service) {
   }
    showConfirmcancel(serviceId,hours,service_id,sub_category_id,status,servicediscountcost_one_service,
     service_type,txnid,id,service_cost,recurring_request_id,req_count,package_id,Paymentstatus,
-    paid_amount,sr_token,coupon_id,pending_service_amount){
+    paid_amount,sr_token,coupon_id,pending_service_amount,vendor_name){
    
           if(hours == undefined){
         hours = "";
@@ -312,6 +313,8 @@ toggleDetails(service) {
       if(service_type == "Recurring"){
         this.totalcostofrecurring = service_cost * req_count;
         // this.totalcostofrecurring = paid_amount;
+        let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
     this.serviceRequest.getcancelRecurringPolicyConfig(hours,service_id,sub_category_id,status,service_type,recurring_request_id,req_count,id).subscribe(
      (cancelRequest) => {
       this.result = cancelRequest.result;
@@ -323,6 +326,7 @@ toggleDetails(service) {
       this.balanceamount_to_pay = this.result.balanceamount_to_pay;
       this.actual_service_cost = this.result.actual_service_cost;
       this.refund_amount = this.result.refund_amount;
+      loader.dismiss();
        if(this.paid_amount > this.utilized_service_cost){
           this.cancelCharges = service_cost * (this.percentage/100);
           if(this.service_remaing_cost > this.cancelCharges){
@@ -356,28 +360,41 @@ toggleDetails(service) {
         this.dedaction_service_cost = parseFloat(this.paid_amount).toFixed(2);
 
         }
-      // this.deduction_amount=servicediscountcost_one_service * (this.result / 100);
-      // this.dedaction_service_cost = servicediscountcost_one_service - this.deduction_amount;
-      // var number = parseFloat(this.dedaction_service_cost).toFixed(2);
-      this.navCtrl.push(CancelrequestsPage);
+          if(this.prompt){ 
+                    this.prompt.dismiss();
+                    this.prompt =null;     
+                  }
+          else{
+            this.navCtrl.push(CancelrequestsPage,{"serviceId":serviceId,"service_cost":service_cost,"result":this.result,
+              "service_type":service_type,"status":status,"txnid":txnid,"percentage":this.percentage,
+              "totalcostofrecurring":this.totalcostofrecurring,"req_count":req_count,"paid_amount":this.paid_amount,
+              "utilized_service_cost":this.utilized_service_cost,"recurring_request_id":recurring_request_id,"cancelCharges":this.cancelCharges,
+              "dedaction_service_cost":this.dedaction_service_cost,"service_remaing_cost":this.service_remaing_cost,"final_payable_amount":this.final_payable_amount,
+              "package_id":package_id,"sr_token":sr_token,"cancel_services":this.cancel_services,"balanceamount_to_pay":this.balanceamount_to_pay,
+              "service_refund_amount":this.service_refund_amount,"actual_service_cost":this.actual_service_cost,"vendor_name":vendor_name,"refund_amount":this.refund_amount});
+    }
     },
     (err) => { 
+      loader.dismiss();
         if(err.status===401)
         {
         this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       });
   }
   else{
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
     this.serviceRequest.getcancelPolicyConfig(hours,service_id,sub_category_id,status,id,service_type).subscribe(
      (cancelRequest) => {
       this.result = cancelRequest.result;  
       this.percentage = this.result.percentage;
       this.payment_status = this.result.payment_status;
+      loader.dismiss();
       if(this.payment_status == "payment_processing" || coupon_id != null){
         this.deductionamount = service_cost * this.percentage/100;
         this.servicecancelamount = service_cost - this.deductionamount;
@@ -390,251 +407,143 @@ toggleDetails(service) {
       
      this.navCtrl.push(CancelrequestsPage,{"serviceId":serviceId,"service_cost":service_cost,"result":this.result,"service_type":service_type,"status":status,"txnid":txnid,
       "percentage":this.percentage,"payment_status":this.payment_status,"deductionamount":this.deductionamount,"servicecancelamount":this.servicecancelamount,"package_id":package_id,
-      "Paymentstatus":Paymentstatus,"paid_amount":paid_amount,"sr_token":sr_token,"coupon_id":coupon_id,"pending_service_amount":pending_service_amount});
+      "Paymentstatus":Paymentstatus,"paid_amount":paid_amount,"sr_token":sr_token,"coupon_id":coupon_id,"pending_service_amount":pending_service_amount,"vendor_name":vendor_name});
     },
     (err) => { 
+      loader.dismiss();
         if(err.status===401)
         {
           this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       });
   }
    }
-    showConfirm(serviceId,hours,service_id,sub_category_id,status,servicediscountcost_one_service,service_type,txnid,id,service_cost,recurring_request_id,req_count,package_id,Paymentstatus,paid_amount,sr_token,coupon_id,pending_service_amount){
+  //   showConfirm(serviceId,hours,service_id,sub_category_id,status,servicediscountcost_one_service,service_type,txnid,id,service_cost,recurring_request_id,req_count,package_id,Paymentstatus,paid_amount,sr_token,coupon_id,pending_service_amount,vendor_name){
    
-      if(hours == undefined){
-        hours = "";
-      }
-      if(service_type == "Recurring"){
-        this.totalcostofrecurring = service_cost * req_count;
-        // this.totalcostofrecurring = paid_amount;
-    this.serviceRequest.getcancelRecurringPolicyConfig(hours,service_id,sub_category_id,status,service_type,recurring_request_id,req_count,id).subscribe(
-     (cancelRequest) => {
-      this.result = cancelRequest.result;
-      this.percentage = this.result.percentage;
-      this.paid_amount = this.result.paid_amount;
-      this.service_remaing_cost = this.result.service_remaing_cost;
-      this.utilized_service_cost = this.result.utilized_service_cost;
-      this.cancel_services = this.result.cancel_services;
-      this.balanceamount_to_pay = this.result.balanceamount_to_pay;
-      this.actual_service_cost = this.result.actual_service_cost;
-      this.refund_amount = this.result.refund_amount;
-       if(this.paid_amount > this.utilized_service_cost){
-          this.cancelCharges = service_cost * (this.percentage/100);
-          if(this.service_remaing_cost > this.cancelCharges){
-           this.dedaction_service_cost = this.service_remaing_cost - this.cancelCharges;
-          }else{
+  //     if(hours == undefined){
+  //       hours = "";
+  //     }
+  //     if(service_type == "Recurring"){
+  //       this.totalcostofrecurring = service_cost * req_count;
+  //       // this.totalcostofrecurring = paid_amount;
+  //   this.serviceRequest.getcancelRecurringPolicyConfig(hours,service_id,sub_category_id,status,service_type,recurring_request_id,req_count,id).subscribe(
+  //    (cancelRequest) => {
+  //     this.result = cancelRequest.result;
+  //     this.percentage = this.result.percentage;
+  //     this.paid_amount = this.result.paid_amount;
+  //     this.service_remaing_cost = this.result.service_remaing_cost;
+  //     this.utilized_service_cost = this.result.utilized_service_cost;
+  //     this.cancel_services = this.result.cancel_services;
+  //     this.balanceamount_to_pay = this.result.balanceamount_to_pay;
+  //     this.actual_service_cost = this.result.actual_service_cost;
+  //     this.refund_amount = this.result.refund_amount;
+  //      if(this.paid_amount > this.utilized_service_cost){
+  //         this.cancelCharges = service_cost * (this.percentage/100);
+  //         if(this.service_remaing_cost > this.cancelCharges){
+  //          this.dedaction_service_cost = this.service_remaing_cost - this.cancelCharges;
+  //         }else{
             
-          }
-        }
-          else if(this.paid_amount == this.utilized_service_cost){
-          this.cancelCharges = service_cost*(this.percentage/100);
-         }else{
-          this.cancelCharges = service_cost*(this.percentage/100);
-          this.new_service_amount = this.utilized_service_cost + this.cancelCharges;
-         this.final_payable_amount = (this.new_service_amount - this.paid_amount).toFixed(2);
-         }  
-            if(this.percentage !='hours expired'){
-             if(this.balanceamount_to_pay !=0 && this.cancel_services!=1){
+  //         }
+  //       }
+  //         else if(this.paid_amount == this.utilized_service_cost){
+  //         this.cancelCharges = service_cost*(this.percentage/100);
+  //        }else{
+  //         this.cancelCharges = service_cost*(this.percentage/100);
+  //         this.new_service_amount = this.utilized_service_cost + this.cancelCharges;
+  //        this.final_payable_amount = (this.new_service_amount - this.paid_amount).toFixed(2);
+  //        }  
+  //           if(this.percentage !='hours expired'){
+  //            if(this.balanceamount_to_pay !=0 && this.cancel_services!=1){
 
-                this.dedaction_amount = Math.floor(this.actual_service_cost*(this.percentage/100)).toFixed(2);    
-                this.final_payable_amount = parseFloat(this.balanceamount_to_pay) + parseFloat(this.dedaction_amount);
-             }
-             else if(this.cancel_services == 1){
-                this.dedaction_amount = Math.floor(this.actual_service_cost*(this.percentage/100)).toFixed(2);    
-                this.service_refund_amount = parseFloat(this.refund_amount) - parseFloat(this.dedaction_amount);
-             }
+  //               this.dedaction_amount = Math.floor(this.actual_service_cost*(this.percentage/100)).toFixed(2);    
+  //               this.final_payable_amount = parseFloat(this.balanceamount_to_pay) + parseFloat(this.dedaction_amount);
+  //            }
+  //            else if(this.cancel_services == 1){
+  //               this.dedaction_amount = Math.floor(this.actual_service_cost*(this.percentage/100)).toFixed(2);    
+  //               this.service_refund_amount = parseFloat(this.refund_amount) - parseFloat(this.dedaction_amount);
+  //            }
 
 
-        }else{
+  //       }else{
 
-          this.final_payable_amount = (this.new_service_amount - this.paid_amount).toFixed(2);
-        this.dedaction_service_cost = parseFloat(this.paid_amount).toFixed(2);
+  //         this.final_payable_amount = (this.new_service_amount - this.paid_amount).toFixed(2);
+  //       this.dedaction_service_cost = parseFloat(this.paid_amount).toFixed(2);
 
-        }
-      // this.deduction_amount=servicediscountcost_one_service * (this.result / 100);
-      // this.dedaction_service_cost = servicediscountcost_one_service - this.deduction_amount;
-      // var number = parseFloat(this.dedaction_service_cost).toFixed(2);
-       if(this.prompt){ 
-                    this.prompt.dismiss();
-                    this.prompt =null;     
-                  }
-          else{
-      this.showConfirms(serviceId,service_cost,this.result,service_type,status,txnid,this.percentage,this.totalcostofrecurring,req_count,this.paid_amount,this.utilized_service_cost,recurring_request_id,this.cancelCharges,this.dedaction_service_cost,this.service_remaing_cost,this.final_payable_amount,package_id,sr_token,this.cancel_services,this.balanceamount_to_pay,this.service_refund_amount,this.actual_service_cost); 
-    }
-    },
-    (err) => { 
-        if(err.status===401)
-        {
-        this.showToaster(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-        }
-      });
-  }
-  else{
-    this.serviceRequest.getcancelPolicyConfig(hours,service_id,sub_category_id,status,id,service_type).subscribe(
-     (cancelRequest) => {
-      this.result = cancelRequest.result;  
-      this.percentage = this.result.percentage;
-      this.payment_status = this.result.payment_status;
-      if(this.payment_status == "payment_processing" || coupon_id != null){
-        this.deductionamount = service_cost * this.percentage/100;
-        this.servicecancelamount = service_cost - this.deductionamount;
-        console.log(this.servicecancelamount);
-      }
-      else{
-        this.deductionamount = paid_amount * this.percentage/100;
-        this.servicecancelamount = paid_amount - this.deductionamount;
-      }
+  //       }
+  //     // this.deduction_amount=servicediscountcost_one_service * (this.result / 100);
+  //     // this.dedaction_service_cost = servicediscountcost_one_service - this.deduction_amount;
+  //     // var number = parseFloat(this.dedaction_service_cost).toFixed(2);
+  //      if(this.prompt){ 
+  //                   this.prompt.dismiss();
+  //                   this.prompt =null;     
+  //                 }
+  //         else{
+  //     this.showConfirms(serviceId,service_cost,this.result,service_type,status,txnid,this.percentage,this.totalcostofrecurring,req_count,this.paid_amount,this.utilized_service_cost,recurring_request_id,this.cancelCharges,this.dedaction_service_cost,this.service_remaing_cost,this.final_payable_amount,package_id,sr_token,this.cancel_services,this.balanceamount_to_pay,this.service_refund_amount,this.actual_service_cost,vendor_name,this.refund_amount); 
+  //   }
+  //   },
+  //   (err) => { 
+  //       if(err.status===401)
+  //       {
+  //       this.showToaster(JSON.parse(err._body).error);
+  //       }
+  //       else
+  //       {
+  //         this.showToaster("Try again later");
+  //       }
+  //     });
+  // }
+  // else{
+  //   this.serviceRequest.getcancelPolicyConfig(hours,service_id,sub_category_id,status,id,service_type).subscribe(
+  //    (cancelRequest) => {
+  //     this.result = cancelRequest.result;  
+  //     this.percentage = this.result.percentage;
+  //     this.payment_status = this.result.payment_status;
+  //     if(this.payment_status == "payment_processing" || coupon_id != null){
+  //       this.deductionamount = service_cost * this.percentage/100;
+  //       this.servicecancelamount = service_cost - this.deductionamount;
+  //       console.log(this.servicecancelamount);
+  //     }
+  //     else{
+  //       this.deductionamount = paid_amount * this.percentage/100;
+  //       this.servicecancelamount = paid_amount - this.deductionamount;
+  //     }
       
-       if(this.prompt){ 
-                    this.prompt.dismiss();
-                    this.prompt =null;     
-                  }
-      else{
-      this.showOnetime(serviceId,service_cost,this.result,service_type,status,txnid,this.percentage,this.payment_status,this.deductionamount,this.servicecancelamount,package_id,Paymentstatus,paid_amount,sr_token,coupon_id,pending_service_amount); 
-    }
-    },
-    (err) => { 
-        if(err.status===401)
-        {
-          this.showToaster(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-        }
-      });
-  }
-  }
-  showConfirms(serviceId,service_cost,result,service_type,status,txnid,percentage,totalcostofrecurring,req_count,paid_amount,utilized_service_cost,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,final_payable_amount,package_id,sr_token,cancel_services,balanceamount_to_pay,service_refund_amount,
-    actual_service_cost){
-    if(cancel_services > 1){
-        this.prompt = this.alertCtrl.create({
-      title: sr_token,
-      message: "Total services requests :"+ req_count +
-      " and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ parseFloat(actual_service_cost).toFixed(2) +
-      " and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+utilized_service_cost+
-      " and Total Paid Amount : <i class='fa fa-rupee'></i>"+ Math.floor(paid_amount).toFixed(2)+
-      " and Cancellation fee : <i class='fa fa-rupee'></i>"+(Math.floor(paid_amount*percentage/100)/req_count).toFixed(2)+
-      " and Balance amount : <i class='fa fa-rupee'></i>"+ parseFloat(balanceamount_to_pay).toFixed(2) +
-      " and service cancellation percentage : "+ percentage + "% ",
-
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Comments'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-          }
-        },
-        {
-          text: 'Confirm',
-          handler: data => {
-            if(data.title == ""){
-              this.showToaster("Please enter the reason");
-               return false;
-            }
-            else{
-           this.cancelRequest(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id);
-          }
-          }
-        }
-      ]
-    });
-    this.prompt.present();
-    }
-     else if(balanceamount_to_pay!=0 && cancel_services!=1 && percentage!='hours expired'){
-        this.prompt = this.alertCtrl.create({
-      title: sr_token,
-      message: "Total services requests :"+ req_count +
-      " and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ parseFloat(actual_service_cost).toFixed(2) +
-      " and Total Paid Amount : <i class='fa fa-rupee'></i>"+ Math.floor(paid_amount).toFixed(2)+
-      " and Cancellation fee : <i class='fa fa-rupee'></i>"+ Math.floor(totalcostofrecurring*percentage/100).toFixed(2)+
-      " and Balance amount : <i class='fa fa-rupee'></i>"+ parseFloat(balanceamount_to_pay).toFixed(2) +
-      " and service cancellation percentage : "+ percentage + "% ",
-
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Comments'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-          }
-        },
-        {
-          text: 'Confirm',
-          handler: data => {
-            if(data.title == ""){
-              this.showToaster("Please enter the reason");
-               return false;
-            }
-            else{
-           this.cancelRequest(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id);
-          }
-          }
-        }
-      ]
-    });
-    this.prompt.present();
-     }
-     else if(cancel_services==1){
-      this.prompt = this.alertCtrl.create({
-      title: sr_token,
-      message: "Total services requests :"+ req_count +
-      " and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ parseFloat(actual_service_cost).toFixed(2) +
-      " and Total Paid Amount : <i class='fa fa-rupee'></i>"+ Math.floor(paid_amount).toFixed(2)+
-      " and Cancellation fee : <i class='fa fa-rupee'></i>"+ Math.floor(totalcostofrecurring*percentage/100).toFixed(2)+
-      " and Refund on cancellation : <i class='fa fa-rupee'></i>"+ Math.floor(service_refund_amount).toFixed(2)+
-      " and service cancellation percentage : "+ percentage + "% ",
-
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Comments'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-          }
-        },
-        {
-          text: 'Confirm',
-          handler: data => {
-            if(data.title == ""){
-              this.showToaster("Please enter the reason");
-               return false;
-            }
-            else{
-           this.cancelRequest(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id);
-          }
-          }
-        }
-      ]
-    });
-    this.prompt.present();
-    
-
-  // this.prompt = this.alertCtrl.create({
+  //      if(this.prompt){ 
+  //                   this.prompt.dismiss();
+  //                   this.prompt =null;     
+  //                 }
+  //     else{
+  //     this.showOnetime(serviceId,service_cost,this.result,service_type,status,txnid,this.percentage,this.payment_status,this.deductionamount,this.servicecancelamount,package_id,Paymentstatus,paid_amount,sr_token,coupon_id,pending_service_amount); 
+  //   }
+  //   },
+  //   (err) => { 
+  //       if(err.status===401)
+  //       {
+  //         this.showToaster(JSON.parse(err._body).error);
+  //       }
+  //       else
+  //       {
+  //         this.showToaster("Try again later");
+  //       }
+  //     });
+  // }
+  // }
+  // showConfirms(serviceId,service_cost,result,service_type,status,txnid,percentage,totalcostofrecurring,req_count,paid_amount,utilized_service_cost,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,final_payable_amount,package_id,sr_token,cancel_services,balanceamount_to_pay,service_refund_amount,
+  //   actual_service_cost,vendor_name,refund_amount){
+  //   if(cancel_services > 1 && package_id != 1){
+  //       this.prompt = this.alertCtrl.create({
   //     title: sr_token,
-  //     message: "Total services requests :"+ req_count +" and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ Math.floor(totalcostofrecurring).toFixed(2)+" and Total Paid Amount : <i class='fa fa-rupee'></i>"+ Math.floor(paid_amount).toFixed(2)+" and Cancellation fee : <i class='fa fa-rupee'></i>"+ Math.floor(totalcostofrecurring*percentage/100).toFixed(2)+" and Balance amount : <i class='fa fa-rupee'></i>"+ Math.floor(totalcostofrecurring + (totalcostofrecurring*percentage/100)).toFixed(2)+" and service cancellation percentage : "+ percentage + "% ",
+  //     message: "Total services requests :"+ req_count +
+  //     " and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ parseFloat(actual_service_cost).toFixed(2) +
+  //     " and Cost of remaining SRs : <i class='fa fa-rupee'></i>"+utilized_service_cost+
+  //     " and Total Paid Amount : <i class='fa fa-rupee'></i>"+ Math.floor(paid_amount).toFixed(2)+
+  //     " and Cancellation fee : <i class='fa fa-rupee'></i>"+(Math.floor(paid_amount*percentage/100)/req_count).toFixed(2)+
+  //     // " and Balance amount : <i class='fa fa-rupee'></i>"+ parseFloat(balanceamount_to_pay).toFixed(2) +
+  //     " and service cancellation percentage : "+ percentage + "% ",
 
   //     inputs: [
   //       {
@@ -656,265 +565,355 @@ toggleDetails(service) {
   //              return false;
   //           }
   //           else{
-  //          this.cancelRequest(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id);
+  //          this.cancelRequest(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id,balanceamount_to_pay,((paid_amount*percentage/100)/req_count),cancel_services);
   //         }
   //         }
   //       }
   //     ]
   //   });
   //   this.prompt.present();
-    }
-  }
-  showOnetime(serviceId,service_cost,result,service_type,status,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id,Paymentstatus,paid_amount,sr_token,coupon_id,pending_service_amount){
-    console.log(pending_service_amount);
-   if(percentage == "hours expired"){
-        this.prompt = this.alertCtrl.create({
-      title: sr_token,
-      // message: "Service cost : <i class='fa fa-rupee'></i>"+ parseFloat(pending_service_amount).toFixed(2) +"<br> and Service cancellation percentage :"+ percentage +" % ",
-      message: "Token Id : "+ sr_token ,
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Comments'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-          }
-        },
-        {
-          text: 'Confirm',
-          handler: data => {
-            if(data.title == ""){
-              this.showToaster("Please enter the reason");
-               return false;
-            }
-            else{
-              this.updateServiceReceiveStatus(data.title,serviceId,service_type);
-            // this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id);
-          }
-          }
-        }
-      ]
-    });
-    this.prompt.present();
-   }
-   else{
-    if(Paymentstatus == null){
-    if(pending_service_amount == 0){
-       this.prompt = this.alertCtrl.create({
-      title: sr_token,
-      // message: "Service cost : <i class='fa fa-rupee'></i>"+ parseFloat(pending_service_amount).toFixed(2) +"<br> and Service cancellation percentage :"+ percentage +" % ",
-      message: "Token Id : "+ sr_token ,
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Comments'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-          }
-        },
-        {
-          text: 'Confirm',
-          handler: data => {
-            if(data.title == ""){
-              this.showToaster("Please enter the reason");
-               return false;
-            }
-            else{
-              this.updateServiceReceiveStatus(data.title,serviceId,service_type);
-            // this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id);
-          }
-          }
-        }
-      ]
-    });
-    this.prompt.present();
-    }
-    else{
-       this.prompt = this.alertCtrl.create({
-      title: sr_token,
-      message: "Service cost : <i class='fa fa-rupee'></i>"+ parseFloat(pending_service_amount).toFixed(2) +"<br> and Service cancellation percentage :"+ percentage +" % ",
-      // message: "Token Id : "+ sr_token ,
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Comments'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-          }
-        },
-        {
-          text: 'Confirm',
-          handler: data => {
-            if(data.title == ""){
-              this.showToaster("Please enter the reason");
-               return false;
-            }
-            else{
-              // this.updateServiceReceiveStatus(data.title,serviceId,service_type);
-            this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id);
-          }
-          }
-        }
-      ]
-    });
-    this.prompt.present();
-    }
-       
-  }
-  else{
-    if(coupon_id == null){
-      let percentages = ((100 - percentage));
-      console.log(percentages);
-       this.prompt = this.alertCtrl.create({
-      title: sr_token,
-      // message: "Service cost :  <i class='fa fa-rupee'></i>"+ parseFloat(paid_amount).toFixed(2) +"<br> and Service cancellation percentage :"+ percentage +" % and Service cancellation deduction : <i class='fa fa-rupee'></i>"+ parseFloat(deductionamount).toFixed(2)+" and Service refund amount : <i class='fa fa-rupee'></i>"+ parseFloat(servicecancelamount).toFixed(2)+" ",
-      message: "Service cost :  <i class='fa fa-rupee'></i>"+ parseFloat(paid_amount).toFixed(2) +"<br> and Service cancellation percentage :"+ percentage +" and Service refund amount : <i class='fa fa-rupee'></i>"+ Math.floor(paid_amount * percentages/100).toFixed(2) +" ",
+  //   }
+  //    else if(balanceamount_to_pay!=0 && cancel_services!=1 && percentage!='hours expired' && package_id != 1){
+  //       this.prompt = this.alertCtrl.create({
+  //     title: sr_token,
+  //     message: "Total services requests :"+ req_count +
+  //     " and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ parseFloat(actual_service_cost).toFixed(2) +
+  //     " and Total Paid Amount : <i class='fa fa-rupee'></i>"+ Math.floor(paid_amount).toFixed(2)+
+  //     " and Cancellation fee : <i class='fa fa-rupee'></i>"+ Math.floor(totalcostofrecurring*percentage/100).toFixed(2)+
+  //     " and Balance amount : <i class='fa fa-rupee'></i>"+ parseFloat(balanceamount_to_pay).toFixed(2) +
+  //     " and service cancellation percentage : "+ percentage + "% ",
 
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Comments'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-          }
-        },
-        {
-          text: 'Confirm',
-          handler: data => {
-            if(data.title == ""){
-              this.showToaster("Please enter the reason");
-               return false;
-            }
-            else{
-            this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,(paid_amount -(paid_amount * this.percentage/100)),Math.floor(paid_amount * this.percentage/100).toFixed(2),package_id);
-          }
-          }
-        }
-      ]
-    });
-    this.prompt.present();
-    }
-    else{
-      this.percentage = (100 - percentage);
-      console.log(this.percentage);
-       this.prompt = this.alertCtrl.create({
-      title: sr_token,
-      message: "Service cost :  <i class='fa fa-rupee'></i>"+ parseFloat(paid_amount).toFixed(2) +"<br> and Service cancellation percentage :"+ percentage +" and Service refund amount : <i class='fa fa-rupee'></i>"+ Math.floor(paid_amount * this.percentage/100).toFixed(2)+" ",
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Comments'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-          }
-        },
-        {
-          text: 'Confirm',
-          handler: data => {
-            if(data.title == ""){
-              this.showToaster("Please enter the reason");
-               return false;
-            }
-            else{
-            this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,(paid_amount -(paid_amount * this.percentage/100)),Math.floor(paid_amount * this.percentage/100).toFixed(2),package_id);
-          }
-          }
-        }
-      ]
-    });
-    this.prompt.present();
-    } 
-  }
-   }
+  //     inputs: [
+  //       {
+  //         name: 'title',
+  //         placeholder: 'Comments'
+  //       },
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         handler: data => {
+  //         }
+  //       },
+  //       {
+  //         text: 'Confirm',
+  //         handler: data => {
+  //           if(data.title == ""){
+  //             this.showToaster("Please enter the reason");
+  //              return false;
+  //           }
+  //           else{
+  //          this.cancelRequest(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id,balanceamount_to_pay,totalcostofrecurring*percentage/100,cancel_services);
+  //         }
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   this.prompt.present();
+  //    }
+  //    else if(cancel_services==1 && package_id != 1){
+  //     this.prompt = this.alertCtrl.create({
+  //     title: sr_token,
+  //     message: "Total services requests :"+ req_count +
+  //     " and Total cost of the recurring : <i class='fa fa-rupee'></i>"+ parseFloat(actual_service_cost).toFixed(2) +
+  //     " and Total Paid Amount : <i class='fa fa-rupee'></i>"+ Math.floor(paid_amount).toFixed(2)+
+  //     " and Cancellation fee : <i class='fa fa-rupee'></i>"+ Math.floor((paid_amount*percentage/100)/req_count).toFixed(2)+
+  //     " and Refund on cancellation : <i class='fa fa-rupee'></i>"+ Math.floor(refund_amount - ((paid_amount*percentage/100)/req_count)).toFixed(2)+
+  //     " and service cancellation percentage : "+ percentage + "% ",
+
+  //     inputs: [
+  //       {
+  //         name: 'title',
+  //         placeholder: 'Comments'
+  //       },
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         handler: data => {
+  //         }
+  //       },
+  //       {
+  //         text: 'Confirm',
+  //         handler: data => {
+  //           if(data.title == ""){
+  //             this.showToaster("Please enter the reason");
+  //              return false;
+  //           }
+  //           else{
+  //          this.cancelRequest(data.title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id,balanceamount_to_pay,((paid_amount*percentage/100)/req_count),cancel_services);
+  //         }
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   this.prompt.present();
+    
+  //   }
+  //   else if(package_id == 1){
+  //       this.prompt = this.alertCtrl.create({
+  //     title: sr_token,
+  //     message: "Service provider name :"+ vendor_name +"",
+
+  //     inputs: [
+  //       {
+  //         name: 'title',
+  //         placeholder: 'Comments'
+  //       },
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         handler: data => {
+  //         }
+  //       },
+  //       {
+  //         text: 'Confirm',
+  //         handler: data => {
+  //           if(data.title == ""){
+  //             this.showToaster("Please enter the reason");
+  //              return false;
+  //           }
+  //           else{
+  //          this.updateServiceReceiveStatus(data.title,serviceId,service_type);
+  //         }
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   this.prompt.present();
+  //   }
+  // }
+  // showOnetime(serviceId,service_cost,result,service_type,status,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id,Paymentstatus,paid_amount,sr_token,coupon_id,pending_service_amount){
+  //   console.log(pending_service_amount);
+  //  if(percentage == "hours expired"){
+  //       this.prompt = this.alertCtrl.create({
+  //     title: sr_token,
+  //     // message: "Service cost : <i class='fa fa-rupee'></i>"+ parseFloat(pending_service_amount).toFixed(2) +"<br> and Service cancellation percentage :"+ percentage +" % ",
+  //     message: "Token Id : "+ sr_token ,
+  //     inputs: [
+  //       {
+  //         name: 'title',
+  //         placeholder: 'Comments'
+  //       },
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         handler: data => {
+  //         }
+  //       },
+  //       {
+  //         text: 'Confirm',
+  //         handler: data => {
+  //           if(data.title == ""){
+  //             this.showToaster("Please enter the reason");
+  //              return false;
+  //           }
+  //           else{
+  //             this.updateServiceReceiveStatus(data.title,serviceId,service_type);
+  //           // this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id);
+  //         }
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   this.prompt.present();
+  //  }
+  //  else{
+  //   if(Paymentstatus == null){
+  //   if(pending_service_amount == 0){
+  //      this.prompt = this.alertCtrl.create({
+  //     title: sr_token,
+  //     // message: "Service cost : <i class='fa fa-rupee'></i>"+ parseFloat(pending_service_amount).toFixed(2) +"<br> and Service cancellation percentage :"+ percentage +" % ",
+  //     message: "Token Id : "+ sr_token ,
+  //     inputs: [
+  //       {
+  //         name: 'title',
+  //         placeholder: 'Comments'
+  //       },
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         handler: data => {
+  //         }
+  //       },
+  //       {
+  //         text: 'Confirm',
+  //         handler: data => {
+  //           if(data.title == ""){
+  //             this.showToaster("Please enter the reason");
+  //              return false;
+  //           }
+  //           else{
+  //             this.updateServiceReceiveStatus(data.title,serviceId,service_type);
+  //           // this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id);
+  //         }
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   this.prompt.present();
+  //   }
+  //   else{
+  //      this.prompt = this.alertCtrl.create({
+  //     title: sr_token,
+  //     message: "Service cost : <i class='fa fa-rupee'></i>"+ parseFloat(pending_service_amount).toFixed(2) +"<br> and Service cancellation percentage :"+ percentage +" % ",
+  //     // message: "Token Id : "+ sr_token ,
+  //     inputs: [
+  //       {
+  //         name: 'title',
+  //         placeholder: 'Comments'
+  //       },
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         handler: data => {
+  //         }
+  //       },
+  //       {
+  //         text: 'Confirm',
+  //         handler: data => {
+  //           if(data.title == ""){
+  //             this.showToaster("Please enter the reason");
+  //              return false;
+  //           }
+  //           else{
+  //             // this.updateServiceReceiveStatus(data.title,serviceId,service_type);
+  //           this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id);
+  //         }
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   this.prompt.present();
+  //   }
+       
+  // }
+  // else{
+  //   if(coupon_id == null){
+  //     let percentages = ((100 - percentage));
+  //     console.log(percentages);
+  //      this.prompt = this.alertCtrl.create({
+  //     title: sr_token,
+  //     // message: "Service cost :  <i class='fa fa-rupee'></i>"+ parseFloat(paid_amount).toFixed(2) +"<br> and Service cancellation percentage :"+ percentage +" % and Service cancellation deduction : <i class='fa fa-rupee'></i>"+ parseFloat(deductionamount).toFixed(2)+" and Service refund amount : <i class='fa fa-rupee'></i>"+ parseFloat(servicecancelamount).toFixed(2)+" ",
+  //     message: "Service cost :  <i class='fa fa-rupee'></i>"+ parseFloat(paid_amount).toFixed(2) +"<br> and Service cancellation percentage :"+ percentage +" and Service refund amount : <i class='fa fa-rupee'></i>"+ Math.floor(paid_amount * percentages/100).toFixed(2) +" ",
+
+  //     inputs: [
+  //       {
+  //         name: 'title',
+  //         placeholder: 'Comments'
+  //       },
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         handler: data => {
+  //         }
+  //       },
+  //       {
+  //         text: 'Confirm',
+  //         handler: data => {
+  //           if(data.title == ""){
+  //             this.showToaster("Please enter the reason");
+  //              return false;
+  //           }
+  //           else{
+  //           this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,(paid_amount -(paid_amount * this.percentage/100)),Math.floor(paid_amount * this.percentage/100).toFixed(2),package_id);
+  //         }
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   this.prompt.present();
+  //   }
+  //   else{
+  //     this.percentage = (100 - percentage);
+  //     console.log(this.percentage);
+  //      this.prompt = this.alertCtrl.create({
+  //     title: sr_token,
+  //     message: "Service cost :  <i class='fa fa-rupee'></i>"+ parseFloat(paid_amount).toFixed(2) +"<br> and Service cancellation percentage :"+ percentage +" and Service refund amount : <i class='fa fa-rupee'></i>"+ Math.floor(paid_amount * this.percentage/100).toFixed(2)+" ",
+  //     inputs: [
+  //       {
+  //         name: 'title',
+  //         placeholder: 'Comments'
+  //       },
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         handler: data => {
+  //         }
+  //       },
+  //       {
+  //         text: 'Confirm',
+  //         handler: data => {
+  //           if(data.title == ""){
+  //             this.showToaster("Please enter the reason");
+  //              return false;
+  //           }
+  //           else{
+  //           this.razorPaymentResponseforCancel(data.title,serviceId,service_type,txnid,percentage,payment_status,(paid_amount -(paid_amount * this.percentage/100)),Math.floor(paid_amount * this.percentage/100).toFixed(2),package_id);
+  //         }
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   this.prompt.present();
+  //   } 
+  // }
+  //  }
   
     
-  }
-  updateServiceReceiveStatus(title,serviceId,service_type){
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-    this.serviceRequest.updateServiceReceiveStatus(title,serviceId,service_type).subscribe(
-     (cancelRequest) => { 
-      this.showToaster(cancelRequest.result); 
-      loader.dismiss(); 
-      this.onInit();   
-    },
-    (err) => { 
-        if(err.status===401)
-        {
-          this.showToaster(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-        }
-        loader.dismiss();
-      });
-  }
- cancelRequests(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,service_remaing_cost,final_payable_amount){
-   let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-    this.serviceRequest.cancelRequests(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,service_remaing_cost,final_payable_amount).subscribe(
-     (cancelRequest) => {
-      this.getRemarksList=cancelRequest.result;   
-      this.showToaster(cancelRequest.result); 
-      loader.dismiss(); 
-      this.onInit();   
-    },
-    (err) => { 
-        if(err.status===401)
-        { 
-         this.showToaster(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-        }
-        loader.dismiss();
-      });
- }
-  public cancelRequest(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id)
-  {
-    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();
-    this.serviceRequest.cancelRequest(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id).subscribe(
-     (cancelRequest) => {
-      this.getRemarksList=cancelRequest.result;   
-      this.showToaster(cancelRequest.result); 
-      loader.dismiss(); 
-      this.onInit();   
-    },
-    (err) => { 
-        if(err.status===401)
-        {
-         this.showToaster(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Try again later");
-        }
-        loader.dismiss();
-      });
-  }
+  // }
+  // updateServiceReceiveStatus(title,serviceId,service_type){
+  //   let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+  //   loader.present();
+  //   this.serviceRequest.updateServiceReceiveStatus(title,serviceId,service_type).subscribe(
+  //    (cancelRequest) => { 
+  //     this.showToaster(cancelRequest.result); 
+  //     loader.dismiss(); 
+  //     this.onInit();   
+  //   },
+  //   (err) => { 
+  //       if(err.status===401)
+  //       {
+  //         this.showToaster(JSON.parse(err._body).error);
+  //       }
+  //       else
+  //       {
+  //         this.showToaster("Try again later");
+  //       }
+  //       loader.dismiss();
+  //     });
+  // }
+ 
+  // public cancelRequest(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id,balanceamount_to_pay,deductionamounts,cancel_services)
+  // {
+  //   let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+  //   loader.present();
+  //   this.payableamount = (balanceamount_to_pay + deductionamounts);
+  //   this.serviceRequest.cancelRequest(title,serviceId,service_type,txnid,paid_amount,utilized_service_cost,percentage,recurring_request_id,cancelCharges,dedaction_service_cost,service_remaing_cost,req_count,package_id,balanceamount_to_pay,deductionamounts,this.payableamount,cancel_services).subscribe(
+  //    (cancelRequest) => {
+  //     this.getRemarksList=cancelRequest.result;   
+  //     this.showToaster(cancelRequest.result); 
+  //     loader.dismiss(); 
+  //     this.onInit();   
+  //   },
+  //   (err) => { 
+  //       if(err.status===401)
+  //       {
+  //        this.showToaster(JSON.parse(err._body).error);
+  //       }
+  //       else
+  //       {
+  //         this.showToaster("Try again later");
+  //       }
+  //       loader.dismiss();
+  //     });
+  // }
   public razorPaymentResponseforCancel(title,serviceId,service_type,txnid,percentage,payment_status,deductionamount,servicecancelamount,package_id)
   {
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -933,7 +932,7 @@ toggleDetails(service) {
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       });
@@ -1005,7 +1004,7 @@ toggleDetails(service) {
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       }
@@ -1067,7 +1066,7 @@ toggleDetails(service) {
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       }
     );

@@ -75,9 +75,11 @@
                 (authForm.controls.elder_number.dirty)">
         </ion-input>
       </ion-item>
+       <ion-item *ngIf="!authForm.controls.elder_number.valid  && (authForm.controls.elder_number.dirty || submitAttempt)">
       <small *ngIf="!authForm.controls.elder_number.valid  && (authForm.controls.elder_number.dirty || submitAttempt)">
         <p class="valid err-reds shake">Please enter valid mobile number</p>
       </small>
+      </ion-item>
         <ion-label class="label-tittle">Mobile IMEI number</ion-label>
                <ion-item>
       
@@ -87,7 +89,7 @@
       </ion-item>
       <ion-label class="label-tittle required">Date of birth</ion-label>
       <ion-item>
-        <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" [(ngModel)]="elder_dob" formControlName="elder_dob"
+        <ion-datetime class="select-brd" style="font-size:17px;" displayFormat="MMM DD, YYYY" [(ngModel)]="elder_dob" formControlName="elder_dob" min="1900-10-31" max={{date}}
           placeholder="Date of birth" [class.invalid]="!authForm.controls.elder_dob.valid && (authForm.controls.elder_dob.dirty)"></ion-datetime>
       </ion-item>
 
@@ -122,9 +124,11 @@
           </ion-option>
         </ion-select>
       </ion-item>
+      <ion-item *ngIf="!authForm.controls.elder_location.valid  && (authForm.controls.elder_location.dirty || submitAttempt)">
       <small *ngIf="!authForm.controls.elder_location.valid  && (authForm.controls.elder_location.dirty || submitAttempt)">
         <p class="valid err-reds shake">Please select the location</p>
       </small>
+      </ion-item>
       <br />
       <div>
         <ion-row>
@@ -273,8 +277,10 @@
         
           </div> -->
            <div class="tag-skill_set">
-            <tag-input [(ngModel)]="skill_set" formControlName="skill_set" placeholder="Enter skills..">
+            <tag-input [(ngModel)]="skill_set" [separatorKeyCodes]='[9, 188]' formControlName="skill_set" placeholder="Enter skills.." 
+                   [editable]='true' [addOnPaste]='true' [modelAsStrings]="true">
             </tag-input>
+            <p>Use Go to add more tags.</p>
             </div>
         <!--   <small *ngIf="!myForm.controls.skill_set.valid  && (myForm.controls.skill_set.dirty || submitAttempt)">
             <p class="valid err-reds shake">This field is required.</p>
@@ -427,17 +433,7 @@
             </div>
           </div>
         </div>
-        <br>
-         <ion-label *ngIf="job_interest" class="label-tittle required">Skills</ion-label>
-         <!--  <div class="tag-skill_set" *ngIf="job_interest">
-            <ion-tags-input [(ngModel)]="skill_set" placeholder="Enter skills.." 
-            (keyup.enter)="getTagsList($event)" formControlName="skill_set"></ion-tags-input>
-        
-          </div> -->
-           <div class="tag-skill_set" *ngIf="job_interest">
-            <tag-input [(ngModel)]="skill_set" formControlName="skill_set" placeholder="Enter skills..">
-            </tag-input>
-            </div>
+     
            <br />
         <div *ngIf="functionality == 'profileEdit'">
           <ion-row>

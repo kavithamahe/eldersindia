@@ -350,7 +350,7 @@ safetyRequestSubmitbeforePayment(){
       }
       else
       {
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
         this.navCtrl.pop();
       }
             })
@@ -375,7 +375,7 @@ recreationRequestSubmitbeforePayment(){
       }
       else
       {
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
         this.navCtrl.pop();
       }
             })
@@ -421,7 +421,7 @@ recreationRequestSubmitbeforePayment(){
       }
       else
       {
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
         this.navCtrl.pop();
       }
             })
@@ -453,7 +453,7 @@ recreationRequestSubmitbeforePayment(){
       }
       else
       {
-        this._provider.showToast("Try again later");
+        this._provider.showToast("Something went wrong");
         this.navCtrl.pop();
       }
             })
@@ -465,12 +465,8 @@ recreationRequestSubmitbeforePayment(){
   }
 
   payRecreation(){
-    if(this.coupon_id == undefined){
-    this.storage.remove("coupon_id");
-    this.storage.remove("coupon_offer");
-    this.storage.remove("wallet_value");
 
-  }
+   
     if(this.subcategory == "Emergency Medical and Non-medical"){
     var options = {
       description: this.serviceTitle,
@@ -504,7 +500,35 @@ recreationRequestSubmitbeforePayment(){
 
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
- var successCallback = function(payment_id) {
+if(this.coupon_id == undefined){
+   var successCallback = function(payment_id) {
+  loading.present();
+      // ajaxCallCheck(payment_id);
+
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
+   var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
+
+xmlhttp.onload = function () {
+  loading.dismiss();
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+  // navCtrl.setRoot(ServicerequestPage);
+
+  nav.presentConfirm(result);
+
+  }
+      
+     
+    }
+
+}
+else{
+   var successCallback = function(payment_id) {
   loading.present();
       // ajaxCallCheck(payment_id);
 
@@ -529,6 +553,8 @@ xmlhttp.onload = function () {
       
      
     }
+}
+
 
 var cancelCallback = function(error) {
   nav.showToaster(error.description);
@@ -572,7 +598,32 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
 
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
- var successCallback = function(payment_id) {
+if(this.coupon_id == undefined){
+   var successCallback = function(payment_id) {
+  loading.present();
+      // ajaxCallCheck(payment_id);
+
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
+   var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
+
+xmlhttp.onload = function () {
+  loading.dismiss();
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+  // navCtrl.setRoot(ServicerequestPage);
+   
+  nav.presentConfirm(result);
+
+  }
+    }
+}
+else{
+   var successCallback = function(payment_id) {
   loading.present();
       // ajaxCallCheck(payment_id);
 
@@ -595,6 +646,8 @@ xmlhttp.onload = function () {
 
   }
     }
+}
+
 
 var cancelCallback = function(error) {
   nav.showToaster(error.description);
@@ -607,10 +660,17 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
    }
   }
   pay() {
+    console.log(this.coupon_id);
        if(this.coupon_id == undefined){
     this.storage.remove("coupon_id");
     this.storage.remove("coupon_offer");
     this.storage.remove("wallet_value");
+    this.coupon_id = null;
+    this.discounted_cost = null;
+    this.wallet_value =null;
+    localStorage.setItem('coupon_id', this.coupon_id);
+    localStorage.setItem('coupon_offer', this.discounted_cost);
+    localStorage.setItem('wallet_value', this.wallet_value);
 
   }
     var options = { 
@@ -643,7 +703,33 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
 
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
- var successCallback = function(payment_id) {
+if(this.coupon_id == undefined){
+   var successCallback = function(payment_id) {
+
+  loading.present();
+
+  var url  = localStorage.getItem("rootUrl")+"razorPaymentResponse";
+   var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", url,true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount":localStorage.getItem("get_custome_deliever_amount"),"service_cost":  localStorage.getItem("service_costss")}));
+
+xmlhttp.onload = function () {
+  loading.dismiss();
+  var users = JSON.parse(xmlhttp.responseText);
+ var result=users.result;
+
+  // navCtrl.setRoot(ServicerequestPage);
+ nav.presentConfirm(result);
+
+  }
+       
+    }
+}
+else{
+   var successCallback = function(payment_id) {
 
   loading.present();
 
@@ -667,6 +753,8 @@ xmlhttp.onload = function () {
   }
        
     }
+}
+
 
 var cancelCallback = function(error) {
   nav.showToaster(error.description);

@@ -236,7 +236,7 @@ confirmationToast(message) {
       this.showToast(JSON.parse(error._body).result);  
       }
       else{
-       this.showToast("Please try again later..!");   
+       this.showToast("Something went wrong");   
       }
   }
  

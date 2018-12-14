@@ -42,7 +42,6 @@ logo:any;
   constructor(public platform: Platform,public navCtrl: NavController, public navParams: NavParams, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public jobBoardService:JobBoardService,public modalCtrl: ModalController) {
   	this.jobId=navParams.get("jobId");
     this.is_applied=navParams.get("status");
-    console.log(this.is_applied);
     this.appliedjobs=navParams.get("appliedjobs");
     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -77,7 +76,7 @@ logo:any;
          }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       }
@@ -108,7 +107,7 @@ logo:any;
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
         loader.dismiss();
       }
@@ -121,7 +120,15 @@ pressevent(jobId){
    public applyJob(jobId)
   {
  
-      let modal = this.modalCtrl.create(JobDependentPage,{"jobId":jobId});
+      let modal = this.modalCtrl.create(JobDependentPage,{"jobId":jobId,"is_applied":this.is_applied,"appliedjobs":this.appliedjobs});
+      modal.onDidDismiss(data => {
+     this.jobId=data.jobId;
+     this.appliedjobs=data.appliedjobs;
+     this.is_applied = data.is_applied;
+     if(this.jobId){
+      this.onInit();
+     }
+     });
     modal.present();
     
    
@@ -140,7 +147,7 @@ pressevent(jobId){
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       });
   }

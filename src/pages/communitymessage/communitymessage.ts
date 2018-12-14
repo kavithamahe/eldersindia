@@ -110,7 +110,7 @@ fileChange(event) {
         }
         else
         {
-          this.communityServices.showToast("Try again later");
+          this.communityServices.showToast("Something went wrong");
         }
       });
       

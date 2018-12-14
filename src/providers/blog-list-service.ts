@@ -293,7 +293,7 @@ getPackageRequestById(rootUrl,packageId){
       this.showToast(JSON.parse(error._body).error);
     }
     else{
-      this.showToast("Please try again later");
+      this.showToast("Something went wrong");
     }
   }
   showToast(messageData){

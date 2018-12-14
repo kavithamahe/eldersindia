@@ -1,12 +1,9 @@
 import {Component} from '@angular/core'
-// {BrowserModule} from '@angular/platform-browser'
-// import { Device, LocalNotifications } from 'ionic-native';
 import { Platform, NavController,LoadingController,ModalController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { SubCategoryPage } from '../sub-category/sub-category';
 import { ServiceProvider } from '../../providers/service-provider';
-// import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { PackageDetailPagePage } from '../../pages/package-detail/package-detail';
 /*
@@ -22,7 +19,7 @@ import { PackageDetailPagePage } from '../../pages/package-detail/package-detail
 export class ServiceprovidersPage {
  services:any = [];
    passwordCode:any;
-    imageUrl:any;
+   imageUrl:any;
    mailID:any;
    newPassword:any;
    token:any;

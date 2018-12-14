@@ -122,7 +122,7 @@ category_id:any;
       this.emptyRecord = "We are in the process of identifying partners in this category for this location!"
       }}
       else{
-       this.providerService.showToast("Please try again later..!");  
+       this.providerService.showToast("Something went wrong");  
         
       }
       loading.dismiss();
@@ -149,7 +149,7 @@ loadSubCategory(location){
       this.emptyRecord = "We are in the process of identifying partners in this category for this location!"
       }}
       else{
-       this.providerService.showToast("Please try again later..!");  
+       this.providerService.showToast("Something went wrong");  
         
       }
       loading.dismiss();

@@ -27,7 +27,7 @@
   </ion-list>
   <ion-row>
   <ion-col class="sele-file">
-    <ion-label class="required">Attachment</ion-label>
+    <ion-label class="required">Attach Resume</ion-label>
     <input type="file" (change)="fileChange($event)" class="custom-file-input" placeholder="Upload file">
     <p>
       <b>Example</b> : docx,pdf,odt,txt</p>
@@ -37,7 +37,8 @@
   <ion-row>
     <ion-col>
       <button ion-button class="instant-bt" (click)="submitDependent($event)" *ngIf="dependentstatus == 0">Apply</button>
-      <button ion-button class="instant-bt" ion-button item-right small *ngIf="dependentstatus == 1">Applied</button>
+      <button ion-button class="instant-bt" ion-button item-right small *ngIf="dependentstatus == 1">Applied
+      </button>
       <button ion-button class="btn-warnings" color="primary" (click)="cancelDependent()">Cancel</button>
     </ion-col>
   </ion-row>

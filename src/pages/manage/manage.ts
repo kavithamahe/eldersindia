@@ -7,7 +7,6 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 
 import { CommunityServices } from '../../providers/community-services';
 
-
 @Component({
  
   selector: 'page-manage',

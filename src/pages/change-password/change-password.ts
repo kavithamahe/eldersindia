@@ -136,7 +136,7 @@ pressevent(){
       this.service.showToast(JSON.parse(error._body).error);  
       }
       else{
-       this.service.showToast("Please try again later..!");   
+       this.service.showToast("Something went wrong");   
       }
        loader.dismiss();    
       })

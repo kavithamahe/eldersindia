@@ -334,9 +334,10 @@ recreationServices(){
     this.toggleRequestService();
    }
   toggleRequestService(){
+    console.log(this.vendor_id);
      if((this.vendorList.dependentLists.length<=0) && this.userType == 'sponsor')
       {
-        this.showToast("There is no dependent. Please Add Dependent");      
+        this.showToast("Please Add Dependent");      
       
       }else{
       

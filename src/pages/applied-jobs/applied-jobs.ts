@@ -38,8 +38,7 @@ scrollTop:boolean = false;
    constructor(public navCtrl: NavController, public navParams: NavParams,public jobBoardService:JobBoardService, public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     
   this.storage.ready().then(() => {
-      storage.get('usermenu').then((val) => { this.usermenu=val;
-    console.log(this.usermenu);});
+      storage.get('usermenu').then((val) => { this.usermenu=val;});
     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('token').then((token) => { this.token=token; 
         this.onInit();
@@ -92,7 +91,7 @@ scrollToTop() {
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
           this.emptyRecord = "No Records Found"
         }
         this.loader.dismiss();
@@ -156,11 +155,11 @@ scrollToTop() {
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {
-          this.showToaster("Try again later");
+          this.showToaster("Something went wrong");
         }
       }
     );

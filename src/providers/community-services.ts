@@ -123,7 +123,7 @@ sendMessage(id,subject,message,name,file23){
       this.showToast(JSON.parse(error._body).error);
     }
     else{
-      this.showToast("Please try again later");
+      this.showToast("Something went wrong");
     }
   }
 
