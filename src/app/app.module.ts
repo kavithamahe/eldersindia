@@ -2,12 +2,14 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
 
+
 import { IonicStorageModule  } from '@ionic/storage';
 import {IonTagsInputModule} from "ionic-tags-input";
 import { MyApp } from './app.component';
 import { TruncateModule } from 'ng2-truncate';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { File } from '@ionic-native/file';
 
 import { Ng2CompleterModule } from "ng2-completer";
 import { DatePipe } from '@angular/common';
@@ -29,6 +31,8 @@ import {MomentModule} from 'angular2-moment';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FileOpener } from '@ionic-native/file-opener';
+
 
 import { LoginPage } from '../pages/login/login';
 import { AppConfig } from '../providers/app-config';
@@ -113,6 +117,7 @@ import { ServiceProvider } from '../providers/service-provider';
 import { BlogListService } from '../providers/blog-list-service';
 import { NetworkProvider } from '../providers/network/network';
 
+import { HttpClientModule } from '@angular/common/http';
 
 
  
@@ -199,7 +204,8 @@ import { NetworkProvider } from '../providers/network/network';
     Ng2CompleterModule,
     BrowserModule,
     Ng2EmojiModule,
-    MomentModule
+    MomentModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -272,7 +278,7 @@ import { NetworkProvider } from '../providers/network/network';
     VerifyotpPagePage,
     CancelrequestsPage
   ],
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},FileTransfer,FileChooser,FilePath,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics, 
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},FileTransfer,FileChooser,FilePath,File,FileOpener,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics, 
     NetworkProvider] // Add GithubUsers provider
 
 

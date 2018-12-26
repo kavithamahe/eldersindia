@@ -93,12 +93,12 @@
 							</ion-col>
 						</ion-row>
 						<ion-row class="reply-hei">
-							<ion-col *ngIf="reply.likes == 1">
+							<ion-col *ngIf="reply.likes == 0 || reply.likes == null">
 								<button ion-button clear (click)="sendInlineLikes(reply.comments_replay_id,reply.com_post_cmt_id,post_id)">
 									<p class="reply-comm">Like</p>
 								</button>
 							</ion-col>
-							<ion-col *ngIf="reply.likes == 0 || reply.likes == null">
+							<ion-col *ngIf="reply.likes == 0">
 								<button ion-button clear (click)="sendInlineLikes(reply.comments_replay_id,reply.com_post_cmt_id,post_id)">
 									<p class="reply-comm" style="color:#3b5998;">&nbsp;
 										<i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;Liked</p>

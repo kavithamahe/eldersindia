@@ -101,14 +101,24 @@ resumeupload(formData, options){
        return this.http.post(`${this.getCommunityPostsUrl }sendMessage`, send,this.options).map(res => res.json());
 
   }
-sendMessage(id,subject,message,name,file23){
-    this.send = {"message":{"attachments":[{"file_name":name,"file_path":file23}],"to":{"title":"","description":"","image":"","originalObject":{"id":id,"avatar":"","email":"","user_type":"","friend_name":""}},"subject":subject,"message":message,
+sendMessage(id,subject,message,name,file23,member_name){
+    this.send = {"message":{"attachments":[{"file_name":name,"file_path":file23}],"to":{"title":member_name,"originalObject":{"id":id}},"subject":subject,"message":message,
     
 }}
 
    return this.http.post(`${this.getCommunityPostsUrl }sendMessage`,this.send,this.options)
       .map(res =>res.json());
 }
+  rejectUser(connectionId) {  
+   let _request= {"conn_req__id":connectionId,"approve_status":2};
+    return this.http.post(`${this.getCommunityPostsUrl }sendResponse`,_request,this.options)
+      .map(res => res.json()); 
+  }
+   acceptUser(connectionId) {  
+   let _request= {"conn_req__id":connectionId,"approve_status":1};
+    return this.http.post(`${this.getCommunityPostsUrl }sendResponse`,_request,this.options)
+      .map(res => res.json()); 
+  }
   showToast(messageData){
     let toast = this.toastCtrl.create({
         message: messageData,

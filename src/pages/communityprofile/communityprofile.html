@@ -23,49 +23,30 @@
 				</ion-avatar>
 				<br>
 
-				<p style="padding-left: 125px; color: #019746;" *ngIf="(status === 3 && (communityProfileData?.id != my_id))">
+				<p style="padding-left: 125px; color: #019746;" *ngIf="(status == 3 && (communityProfileData?.id != my_id))">
 				<button ion-button style="border-radius: 30px; background-color: #019746;" (click)="connectMember(communityProfileData)">connect</button>
 				</p>
-				<p style="padding-left: 110px;" *ngIf="status === 0 && (communityProfileData?.id != my_id)">
+				<p style="padding-left: 110px;" *ngIf="status == 0 && status_flag == 'sent' && (communityProfileData?.id != my_id)">
 					<button ion-button style="border-radius: 30px; background-color: #ef7f16;">Request Sent</button>
 				</p>
-				<p style="padding-left: 110px;" *ngIf="status === 2 && (communityProfileData?.id != my_id)">
-					<button ion-button style="border-radius: 30px; background-color: #ef7f16;">Request Sent</button>
+				<p style="padding-left: 130px;" *ngIf="status == 2 && status_flag == 'rejected' && (communityProfileData?.id != my_id)">
+					<button ion-button style="border-radius: 30px; background-color: #ef7f16;">Rejected</button>
 				</p>
 				
-				<p style="padding-left: 80px;" *ngIf="status === 1 && (communityProfileData?.id != my_id)">
-					<button ion-button style="border-radius: 30px; background-color: #ef7f16;">connected</button>
-					<button ion-button style="border-radius: 30px; background-color: #019746;" (click)="messageModel(communityProfileData)">message</button>
+				<p style="padding-left: 90px;" *ngIf="status === 1 && (communityProfileData?.id != my_id)">
+					<button ion-button style="border-radius: 30px; background-color: #ef7f16;" 
+					(click)="reject(communityProfileData)">Reject</button>
+					<button ion-button style="border-radius: 30px; background-color: #019746;" 
+					(click)="messageModel(communityProfileData)">message</button>
+				</p>
+				<p style="padding-left: 80px;" *ngIf="status == 0 && status_flag == 'received' && (communityProfileData?.id != my_id)">
+					<button ion-button style="border-radius: 30px; background-color: #ef7f16;" 
+					(click)="reject(communityProfileData)">Reject</button>
+					<button ion-button style="border-radius: 30px; background-color: #019746;" 
+					(click)="messageModel(communityProfileData)">message</button>
 				</p>
 			</ion-item>
 
-			<!-- <ion-col text-capitalize class="name-conne">
-				<h2 *ngIf="communityProfileData?.id != my_id">{{communityProfileData?.name}} {{communityProfileData?.last_name}}</h2>
-				<h2 *ngIf="communityProfileData?.id == my_id">You</h2>
-				<p *ngIf="(status === 3 && (communityProfileData?.id != my_id))">
-					<ion-badge (click)="connectMember(communityProfileData)">connect</ion-badge>
-				</p>
-				<p *ngIf="status === 0 && (communityProfileData?.id != my_id)">
-					<button ion-button disabled="true">
-						<i class="fa fa-paper-plane-o"></i>
-					</button>
-				</p>
-				<p *ngIf="status === 2 && (communityProfileData?.id != my_id)">
-					<button ion-button disabled="true">
-						<i class="fa fa-paper-plane-o"></i>
-					</button>
-				</p>
-				<p *ngIf="status === 1 && (communityProfileData?.id != my_id)">
-					<button ion-button disabled="true">
-						<i class="fa fa-share-alt"></i>
-					</button>
-				</p>
-				<p *ngIf="status === 1 && (communityProfileData?.id != my_id)">
-					<button ion-button (click)="messageModel(communityProfileData)">
-						<ion-badge (click)="messageModel(communityProfileData)">message</ion-badge>
-					</button>
-				</p>
-			</ion-col> -->
 		</ion-row>
 		<br/>
 		<ion-card class="conn-seg">

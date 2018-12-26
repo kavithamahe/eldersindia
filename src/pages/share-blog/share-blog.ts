@@ -59,9 +59,14 @@ community:boolean=false;
   })
  }
   friendslist(searchValue){
-    this.selectedCommunity ="";
-    this.community=false;
-     this.friends=!searchValue;
+    if(this.connectionInfo.length == 0){
+      this.showToaster("There is no connections");
+    }
+    else{
+       this.selectedCommunity ="";
+       this.community=false;
+       this.friends=!searchValue;
+    }
    }
    communitylistsss(searchValues){
     this.selectedConnections = "";
@@ -69,7 +74,6 @@ community:boolean=false;
      this.community=!searchValues;
    }
  shareBlogToFriends(){ 
-  console.log(this.selectedCommunity);
  if(this.selectedConnections != undefined || this.selectedCommunity != undefined){
  this.friendsId={};
  for (var i = 0; i < this.selectedConnections.length; i++) {
@@ -84,11 +88,8 @@ community:boolean=false;
       this.blogListService.shareBlog(this.BlogId,this.friendsId,this.description,this.selectedCommunity).subscribe(connections => {
       
         loader.dismiss();
-
         this.showToaster(connections.result);
         this.navCtrl.setRoot(BlogsPage);
-        //let modal = this.modalCtrl.create(ShareBlogPagePage,{blogID:id});
-       // modal.close();
 
      },
     (err) => { 

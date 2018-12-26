@@ -69,6 +69,8 @@ export class CommunityprofilePage {
     submitAttempt:any;
     message:any;
     tabBarElement: any;
+    status_flag:any;
+    cone_id:any;
   constructor(public nav: NavController, public actionsheetCtrl: ActionSheetController,public platform: Platform, public storage:Storage,public formBuilder: FormBuilder,public popoverCtrl: PopoverController, public viewCtrl: ViewController,public sanitizer: DomSanitizer,public modalCtrl: ModalController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
        this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
         this.isAndroid = platform.is('android');
@@ -173,6 +175,24 @@ showConfirm(id){
 
     let modal = this.modalCtrl.create(CommunitymessagePage,{member_data:member});
     modal.present();
+  }
+  reject(user){
+          this.communityServices.rejectUser(this.cone_id).subscribe(users => {
+       this.communityServices.showToast(users.result);
+       this.memberProfile(user.id);
+      },
+   err =>{
+    this.communityServices.showErrorToast(err);
+  })
+  }
+  accept(user){
+      this.communityServices.rejectUser(this.cone_id).subscribe(users => {
+       this.communityServices.showToast(users.result);
+       this.memberProfile(user.id);
+      },
+   err =>{
+    this.communityServices.showErrorToast(err);
+  })
   }
     profileSetting(member) {
 
@@ -279,6 +299,8 @@ goBackToProfile(profile_id){
       this.communityServices.memberProfileData(member_id).subscribe(users => {
       this.communityProfileData = users.result.info.profile_details;
       this.status = users.result.info.approve_status.status;
+      this.status_flag = users.result.info.approve_status.status_flag;
+      this.cone_id = users.result.info.approve_status.id;
       this.user_id = this.communityProfileData.id;
   },
    err =>{

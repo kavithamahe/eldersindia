@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ToastController,AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController,AlertController,Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { BlogListService } from '../../providers/blog-list-service';
@@ -33,7 +33,7 @@ searchCategory:any = "";
 searchstatus:any="";
 create_blog:any;
 
-  constructor(public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
+  constructor(public alertCtrl: AlertController,public platform:Platform,public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public blogListService:BlogListService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
   this.viewblog="view_blog";
   this.create_blog = navParams.get("create_blog");
   if(this.create_blog == "1"){

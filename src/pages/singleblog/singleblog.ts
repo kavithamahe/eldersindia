@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,ActionSheetController,ModalController,LoadingController,ToastController,Platform } from 'ionic-angular';
-//import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
@@ -40,9 +39,13 @@ submitAttempt: boolean = false;
 communitylist:any=[];
 allow_comment:any;
 created_at:any;
+connectionInfo:any=[];
+rootUrl:any;
  
   constructor(public formBuilder: FormBuilder,public modalCtrl: ModalController, public navCtrl: NavController,public platform: Platform,public actionsheetCtrl: ActionSheetController, public navParams: NavParams,public blogListService:BlogListService,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.storage.ready().then(() => {
+        storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
+      });
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       storage.get('id').then((id) => { this.user_id=id;});
       storage.get('token').then((token) => { this.token=token; 
@@ -95,9 +98,8 @@ created_at:any;
       });
   }
   shareblog(id){ 
-     let modal = this.modalCtrl.create(ShareBlogPagePage,{blogID:id,communitylists:this.communitylist});
+        let modal = this.modalCtrl.create(ShareBlogPagePage,{blogID:id,communitylists:this.communitylist});
     modal.present();
-     
   }
   openMenu(id) {
     let actionSheet = this.actionsheetCtrl.create({
@@ -225,6 +227,7 @@ created_at:any;
    toast.present();
   }
    viewReply(event){
+     this.reply_comment="";
       this.replyPost=null;
     if(this.showReply==event){
         this.showReply=null;
@@ -234,6 +237,10 @@ created_at:any;
     }
  }
  replyblogPost(event){
+  console.log(event);
+  console.log(this.showReply);
+   console.log(this.replyPost);
+   this.reply_comment="";
    this.showReply=null;
     if(this.replyPost==event){
         this.replyPost=null;

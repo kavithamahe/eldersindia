@@ -1,4 +1,79 @@
 page-singleblog {
+    .comm-posted{
+            padding: 10px;
+            margin:0;
+            .listed-comments {
+                box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.12);
+                border-radius: 5px;
+                width: 100%;
+                margin: 0;
+                ion-item{
+                    .item-inner{
+                        padding: 0;
+                        border-bottom:1px dotted #ccc;
+                        .input-wrapper{
+                            ion-label{
+                                margin: 0;
+                                ion-col{
+                                    ion-avatar{
+                                        margin: 0;
+                                    }
+                                    button{
+                                        padding: 0;
+                                        font-size: 20px;
+                                        margin: 0;
+                                        text-align:center;
+                                       
+                                    }
+                                    &.replyName{
+                                        h2{
+                                            font-size: 18px;
+                                            font-weight: 500;
+                                            color:#42436a;
+                                        }
+                                        h2{
+                                            font-size: 15px;
+                                            font-weight: 500;
+                                            color:#42436a;
+                                        }
+                                        p{
+                                            color:#999;
+                                            font-size: 14px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                ion-card-content{
+                    padding: 15px;
+                }
+                .comment-liks{
+                    border-top:1px dotted #eee;
+                    ion-row{
+                        ion-col{
+                            button{
+                                color:#999;
+                                text-transform: capitalize;
+                            }
+                        }
+                    }
+                }
+                .rply-com{
+                    background-color: #f2f3f3;
+                    border: 5px solid #fff;
+                    ion-row{
+                        ion-textarea{
+                            width: 100%;
+                            textarea{
+                                margin: 7px 8px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     .blogDetails{
         background: #fff;
         .blogDetailImage{

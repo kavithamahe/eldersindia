@@ -46,10 +46,10 @@
       <ion-label>Lead Time:{{lead_time}} hour(s)
       </ion-label>
 
-      <ion-label *ngIf="flag ==1">Select Package</ion-label>
-      <ion-item *ngIf="flag ==1" class="one-timereq" text-wrap>
-        <ion-label></ion-label>
-        <ion-select class="select-brds" placeholder="Select Package" [(ngModel)]="package" [ngModelOptions]="{standalone: true}">
+      <!-- <ion-label *ngIf="flag ==1">Select Package</ion-label> -->
+      <ion-item *ngIf="flag ==1" class="sel-label" text-wrap>
+        <ion-label class="selectDepent">Package</ion-label>
+        <ion-select [(ngModel)]="package" [ngModelOptions]="{standalone: true}" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
           <ion-option *ngFor="let package of packageLists" [value]='package'>{{package.package_validity.package_info}}
           </ion-option>
         </ion-select>

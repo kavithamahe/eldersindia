@@ -100,15 +100,9 @@
           <p>
             <i class="fa fa-rupee"></i>&nbsp;{{recurring.paid_amount | number : '1.2-2'}}
           </p>
-          <!-- <p *ngIf="recurring.payment_method=='partial_payment'"><i class="fa fa-rupee">{{recurring.servicediscountcost_one_service}}</i></p>  
-          <p *ngIf="recurring.payment_method==''"><i class="fa fa-rupee">0</i></p> 
-          <p *ngIf="recurring.payment_method=='full_payment'"><i class="fa fa-rupee">{{recurring.servicediscountcost_one_service}}</i></p> -->
         </ion-col>
       </ion-row>
       <ion-row>
-        <!-- <ion-col col-12>  
-        <b>Balance amount </b><p *ngIf="recurring.remainingamount != null"><i class="fa fa-rupee">{{recurring.remainingamount}}</i></p>  
-        </ion-col> -->
         <ion-col class="column-border" col-12>
           <b>Payment Status</b><span>-</span>
           <p>

@@ -73,7 +73,7 @@ export class CommunitymessagePage {
   		this.submitAttempt = false;
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
       loader.present();
-      this.communityServices.sendMessage(this.member_id,this.authForm.value.subject,this.authForm.value.message,this.file_name,this.file_path).subscribe(users => {
+      this.communityServices.sendMessage(this.member_id,this.authForm.value.subject,this.authForm.value.message,this.file_name,this.file_path,this.member_name).subscribe(users => {
        this.communityServices.showToast(users.result.info);
        this.authForm.reset();
        loader.dismiss(); 

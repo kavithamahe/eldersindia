@@ -111,6 +111,7 @@ result:any=[];
     (err) => { 
         if(err.status===401)
         {
+          this.allConnectionsInfo = [];
           this.showToaster(JSON.parse(err._body).error);
         }
         else
@@ -163,8 +164,10 @@ result:any=[];
       loader.dismiss();
     },
     (err) => { 
+
         if(err.status===401)
         {
+          this.sentRquestInfo =[];
           this.showToaster(JSON.parse(err._body).error);
         }
         else
@@ -208,7 +211,8 @@ result:any=[];
     this.connectionsService.connectionStatus(connectionId,status).subscribe(
      (connectionStatus) => {
       this.showToaster(connectionStatus.result);
-      this.receivedRquest();  
+      this.onInit();  
+      this.connectionsaction = "all";
       loader.dismiss(); 
     },
     (err) => { 
@@ -232,7 +236,8 @@ result:any=[];
     this.connectionsService.cancelMember(connectionId).subscribe(
      (connectionStatus) => {
       this.showToaster(connectionStatus.result);
-      this.sentRquest();  
+      this.sentRquest();
+      this.connectionsaction = "sent";  
       loader.dismiss(); 
     },
     (err) => { 

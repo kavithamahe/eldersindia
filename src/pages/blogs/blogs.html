@@ -78,8 +78,6 @@
           </ion-col>
         </ion-row>
       </ion-card>
-
-
       <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
       </ion-infinite-scroll>
@@ -145,10 +143,12 @@
         <p *ngIf="manageBlog?.description != ''" class="service-cont" innerHTML="{{manageBlog?.description | words:40}}"></p>
         <!-- </ion-item> -->
         <ion-row class="edit-blogs">
-          <ion-col>
+          <ion-col col-6 text-left>
             <button (click)="editBlog(manageBlog?.id,'edit')" class="edits">
               <i class="fa fa-pencil-square-o"></i>&nbsp; Edit
             </button>
+          </ion-col>
+          <ion-col col-6 text-right>
             <button (click)="deleteBlog(manageBlog?.id)" class="delets">
               <i class="fa fa-trash-o"></i>&nbsp;Delete
             </button>

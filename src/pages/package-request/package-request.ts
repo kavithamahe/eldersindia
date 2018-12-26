@@ -230,7 +230,7 @@ Service Provider Name
 Email
 </ion-item>
 <ion-item (click)="requests('id')">
-Transaction Id
+Package Name
 </ion-item>
 </ion-list>
   `

@@ -41,7 +41,7 @@
     <p [innerHTML]="singleBlogInfo?.description"></p>
   </ion-card-content>
 
-  <ion-row class="Comment-titile" (click)="leaveComment()" *ngIf="allow_comment == '1'">
+  <ion-row class="Comment-titile" *ngIf="allow_comment == '1'">
     <ion-col>
       <button ion-button class="cmts" icon-left clear small>
         <ion-icon name="text"></ion-icon>
@@ -50,35 +50,102 @@
     </ion-col>
   </ion-row>
 
-  <ion-list [hidden]="showComment">  
   <ion-list *ngIf="allow_comment == '1'" class="comment-area">
-    <ion-item *ngFor="let viewComments of viewCommentsList; let i=index">
-      <ion-row>
-        <ion-col col-2 (click)="CommunityUserWall(viewComments?.user_id)">
+  
+
+  <ion-list *ngFor="let viewComments of viewCommentsList; let i=index" class="comm-posted">
+    <ion-card class="listed-comments">
+      <ion-item>
+        <ion-row>
+          <ion-col col-2 (click)="CommunityUserWall(viewComments?.user_id)">
           <ion-avatar item-left>
             <img src="{{imageUrl+viewComments?.avatar}}" [hidden]="!viewComments?.avatar">
           </ion-avatar>
-        </ion-col>
-        <ion-col col-10 class="blogs-tittle">
-          <ion-item text-wrap style="padding-left:0px;">
-            <h2 (click)="CommunityUserWall(viewComments?.user_id)">{{viewComments?.user_name}}
+          </ion-col>
+          <ion-col col-10 class="replyName">
+            <h2 class="cmmpost" (click)="CommunityUserWall(viewComments?.user_id)">{{viewComments?.user_name}}
             </h2>
-            <small class="timedate"><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>&nbsp;{{viewComments?.created_at}}</small>
-            <p item-text-wrap class="page-down">{{viewComments?.comment}}</p>
-          </ion-item>
-          <ion-item class="reply-deletd">
-            <button ion-button (click)="viewReply(i)" clear>
-              <i class="fa fa-reply" aria-hidden="true"></i>&nbsp; Reply
-            </button>
-            <button ion-button clear end class="delete-btn" *ngIf="user_id==viewComments?.user_id" (click)="deleteComment(viewComments?.id)">
-              <i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Delete
-            </button>
-          </ion-item>
-        </ion-col>
+            <p class="time-datem" [hidden]="!viewComments?.created_at">
+              <i class="fa fa-clock-o"></i>
+              {{viewComments?.created_at}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-card-content>
+        <p item-text-wrap class="feed-post">{{viewComments?.comment}}</p>
+      </ion-card-content>
+      <div class="comment-liks">
+        <ion-row>
 
-      </ion-row>
+          <ion-col style="padding:0px;">
+            <button ion-button clear (click)="viewReply(i)">
+              <p class="liks-comments">
+                <i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply</p>
+            </button>
+          </ion-col>
+          <ion-col style="padding:0px;">
+            <button  *ngIf="user_id==viewComments?.user_id" ion-button item-right clear (click)="deleteComment(viewComments?.id)">
+              <p class="liks-comments">
+                <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Delete </p>
+            </button>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div>
+        <ion-list *ngFor="let reply of viewComments.comment_reply; let j=index" class="reply-shows">
+          <ion-item text-wrap>
+            <ion-row>
+              <ion-col col-2>
+                <ion-avatar item-left (click)="CommunityUserWall(reply?.uid_from)">
+                    <img src="{{imageUrl+reply?.profile_image}}" [hidden]="!reply?.profile_image">
+                </ion-avatar>
+              </ion-col>
+              <ion-col col-10 class="replyName">
+                <h2 (click)="CommunityUserWall(reply?.uid_from)">{{reply.name_from}}-{{reply.name_to}}</h2>
+                <p class="time-datem" [hidden]="!reply?.created_at">
+                  <i class="fa fa-clock-o"></i>
+                  {{reply.created_at}}
+                </p>
+                <h4 text-wrap>{{reply.comments_replay}}</h4>
+              </ion-col>
+            </ion-row>
+            <ion-row class="reply-hei">
 
-      <div class="replyTextinput" *ngIf="i==showReply">
+              <ion-col>
+                <button ion-button clear (click)="replyblogPost(j)">
+                  <p class="reply-comm" style="color:#3b5998;">&nbsp;
+                   <i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply</p>
+                </button>
+
+              </ion-col>
+              <ion-col>
+                <button ion-button clear *ngIf="user_id==reply?.uid_to" (click)="deletereplyComment(reply?.comments_replay_id)">
+                  <p class="reply-comm">
+                     <i class="fa fa-trash" _ngcontent-uuk-81="" aria-hidden="true"></i>&nbsp;Delete</p>
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+
+          <div *ngIf="j==replyPost" class="rply-com">
+            <ion-grid>
+                  <ion-row>
+                    <ion-col col-10>
+                        <ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important;" placeholder="write a reply.." autofocus></ion-textarea>
+                      </ion-col>
+                      <ion-col col-2>
+                        <button (click)="postReply(viewComments.id,user_id)" class="orange-reply">
+                          <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                        </button>
+                      </ion-col>
+                    </ion-row>
+              </ion-grid>  
+          </div>
+        </ion-list>
+      </div>
+     <div class="replyTextinput" *ngIf="i==showReply">
 
         <ion-grid>
           <ion-row>
@@ -93,53 +160,9 @@
           </ion-row>
         </ion-grid>
       </div>
+    </ion-card>
+  </ion-list>
 
-      <ion-list class="subReplyarea" *ngFor="let reply of viewComments.comment_reply; let j=index">
-        <ion-row>
-          <ion-col offset-1>
-            <ion-item item-text-wrap class="reply-reply">
-              <ion-row>
-                  <ion-col col-2>
-                      <ion-avatar item-left (click)="CommunityUserWall(reply?.uid_from)">
-                          <img src="{{imageUrl+reply?.profile_image}}" [hidden]="!reply?.profile_image">
-                        </ion-avatar>
-                  </ion-col>
-                  <ion-col col-10 class="blogs-tittle">
-                    <ion-item>
-                      <h2 (click)="CommunityUserWall(reply?.uid_from)">{{reply.name_from}}-{{reply.name_to}}</h2>
-                      <small class="timedate"><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>&nbsp;{{reply.created_at}}</small>
-                      <p item-text-wrap>{{reply.comments_replay}}</p>
-                    </ion-item>
-                  </ion-col>
-              </ion-row>        
-              <ion-item class="reply-deletd">
-                <button (click)="replyblogPost(j)" clear>
-                  <i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Reply</button>
-                <button icon-right clear end *ngIf="user_id==reply?.uid_to" (click)="deletereplyComment(reply?.comments_replay_id)">
-                  <i class="fa fa-trash" _ngcontent-uuk-81="" aria-hidden="true"></i>&nbsp;Delete</button>
-                </ion-item>
-            </ion-item>
-
-            <div class="replyTextinput" *ngIf="j==replyPost">
-              <ion-grid>
-                  <ion-row>
-                      <ion-col col-10>
-                        <ion-textarea [(ngModel)]="reply_comment" style="margin:0px !important;" placeholder="write a reply.."></ion-textarea>
-                      </ion-col>
-                      <ion-col col-2>
-                        <button (click)="postReply(viewComments.id,user_id)" class="orange-reply">
-                          <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                        </button>
-                      </ion-col>
-                    </ion-row>
-              </ion-grid>             
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-list>
-
-
-    </ion-item>
     <ion-row class="Comment-titile2" (click)="leaveComment()">
         <ion-col>
           <button ion-button class="cmts" icon-left clear small autofocus>
@@ -162,6 +185,5 @@
     </div>
 
   </ion-list>
-</ion-list>
 
 </ion-content>

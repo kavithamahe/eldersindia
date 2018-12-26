@@ -45,7 +45,7 @@
   <div class="ion-searchbar" *ngIf = "packagetransId">
     <ion-row>
       <ion-col col-10>
-        <ion-searchbar placeholder="Transaction Id" [(ngModel)]="searchid" (keyup.enter)="searchids(searchid)"></ion-searchbar>
+        <ion-searchbar placeholder="Package Name" [(ngModel)]="searchid" (keyup.enter)="searchids(searchid)"></ion-searchbar>
       </ion-col>
       <ion-col col-2 class="btn-go">
         <button (click)="searchids(searchid)" ion-button small class="go-btn">Go</button>

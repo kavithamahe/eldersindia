@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Http,Headers,RequestOptions } from '@angular/http';
+import { Http,Headers,RequestOptions,ResponseContentType,Response } from '@angular/http';
 import { Storage } from '@ionic/storage';
+
 import 'rxjs/add/operator/map';
+
+import { HttpClient, HttpHeaders   } from '@angular/common/http';
+import { Observable } from "rxjs/Observable";
+import "rxjs/Rx";
+
 
 /*
   Generated class for the ServiceRequestService provider.
@@ -15,7 +21,8 @@ headers;
 token:string;
 options:any;
 rootUrl:any;
-  constructor(public http: Http,public storage:Storage) {
+optionss:any;
+  constructor(public http: Http,public storage:Storage, private httpClient: HttpClient) {
    this.storage.ready().then(() => {
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();
@@ -33,6 +40,23 @@ rootUrl:any;
    let _request= {"info":{"list":true,"sort":sort,"searchValue":searchText,"status":status,"token":""}};
     return this.http.post(this.rootUrl+'serviceRequestList',_request,this.options)
       .map(res => res.json()); 
+  }
+
+invoiceFromUser(sr_token,is_recreation_config): Observable<any> {
+
+    let body= {"id":sr_token,"recreation": is_recreation_config};
+
+    let headers = new Headers();
+    headers.append('Access-Control-Allow-Origin' , '*');
+    headers.append("Content-Type", "application/json");
+    headers.append('Authorization', "Bearer " + this.token);
+
+    let options = new RequestOptions({ headers: headers, responseType: ResponseContentType.Blob });
+    return this.http.post(this.rootUrl+'invoiceFromUser', body, options)
+      .map((res: Response) => <any>res )
+      .catch((error: any) =>
+        Observable.throw(error.json().error || "Server error")
+      );
   }
   getcancelRecurringPolicyConfig(hours,service_id,sub_category_id,status,service_type,recurring_request_id,req_count,id){
     let _request= {"hour":hours,"service_id":service_id,"service_type":service_type,"status":status,"sub_category_id":sub_category_id,

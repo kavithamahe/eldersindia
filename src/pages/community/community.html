@@ -30,9 +30,7 @@
 		<ion-item>
 			<ion-row *ngIf="!communityDetailData?.isJoined">
 				<ion-col>
-					<button ion-button style=" float:right;" (click)="joinCommunity(communityDetailData?.id)" class="post">
-						<ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
-						Join</button>
+					<button ion-button style=" float:right;" (click)="joinCommunity(communityDetailData?.id)" class="post"><ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>Join</button>
 				</ion-col>
 			</ion-row>
 			<ion-row class="mem-title">

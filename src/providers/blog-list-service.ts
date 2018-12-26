@@ -159,13 +159,13 @@ viewrecurring(sr_token)
       .map(res => res.json()); 
   }
 getPackageRequest(Url,searchText,searchemail,searchid,packstatus){
-       let _request= {info: {"list": true, "search": "","elder_name":"","elder_email":searchemail,"txnid":searchid, "status": packstatus,"paymentStatus":"","reqType":"","token": null,"vendor_name":searchText}};
+       let _request= {info: {"list": true, "search": "","elder_name":"","elder_email":searchemail,"txnid":"","pack_name":searchid,"status": packstatus,"paymentStatus":"","reqType":"","token": null,"vendor_name":searchText}};
     return this.http.post(Url+`getPackageRequest`,_request,this.options)
       .map(res => res.json()); 
 }
 eventscrolls(nextPageURL,searchText,searchemail,searchid,packstatus) 
    {  
-   let _request= {info: {"list": true, "search": "","elder_name":searchText,"elder_email":searchemail,"txnid":searchid,"status": packstatus, "token": null}};
+   let _request= {info: {"list": true, "search": "","elder_name":searchText,"elder_email":searchemail,"txnid":"","pack_name":searchid,"status": packstatus, "token": null}};
 
     return this.http.post(nextPageURL,_request,this.options)
       .map(res => res.json()); 
