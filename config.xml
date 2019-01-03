@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ionicframework.elderindia" version="1.11" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ionicframework.elderindia" version="1.19" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Eldersindia</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -141,9 +141,9 @@
         <variable name="FABRIC_API_KEY" value="84fa2a4ac399de4e24d2b8b08c5780e7839ce478" />
         <variable name="FABRIC_API_SECRET" value="5ffb124e9dddb01e16edfd71cffda842def414e623fa31be26dda531063a3c95" />
     </plugin>
-    <plugin name="cordova-plugin-google-analytics" spec="^1.8.6">
-        <variable name="GMS_VERSION" value="11.0.1" />
-    </plugin>
     <plugin name="cordova-plugin-file-opener2" spec="^2.1.0" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
+    <plugin name="cordova-plugin-google-analytics" spec="^1.8.6">
+        <variable name="GMS_VERSION" value="16.0.3" />
+    </plugin>
 </widget>

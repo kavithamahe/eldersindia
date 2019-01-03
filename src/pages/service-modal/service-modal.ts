@@ -154,11 +154,14 @@ template_id:any;
   tourstotal:any=[];
   packageCost:boolean = false;
   scheduled_date:any;
+  discount_rate:any;
+  getHotelCosts:any;
   constructor(public storage:Storage,public alertCtrl: AlertController,private device: Device,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder,public blogListService:BlogListService) {
     this.date = new Date().toISOString();
     this.vendorList = navParams.get("vendorList");
     this.template_id = navParams.get("template_id");
+    this.discount_rate = navParams.get("discount_rate");
     this.storage.ready().then(() => {
       storage.get('token').then((token) => { this.token=token;
       localStorage.setItem('key', this.token);
@@ -251,6 +254,7 @@ template_id:any;
               storage.get('payingtax').then((payingtax) => { this.payingtax=payingtax;})
               storage.get('people_count').then((people_count) => { this.people_count=people_count;})
               storage.get('getHotelCost').then((getHotelCost) => { this.getHotelCost=getHotelCost;
+                storage.get('getHotelCosts').then((getHotelCosts) => { this.getHotelCosts=getHotelCosts;
                 if(this.getHotelCost){
                   this.packageCost = true;
                 }})
@@ -258,6 +262,7 @@ template_id:any;
           storage.get('tourstotal_peoples').then((tourstotal_peoples) => { this.tourstotal_peoples=tourstotal_peoples;})
           });
           });
+            });
 
        }
 
@@ -322,7 +327,8 @@ template_id:any;
     this.packageCost = true;
      this._provider.getpayingTax(payingTax,this.hoteltype,this.vendorList.requestServices.service_id)
       .subscribe(data =>{ 
-          this.getHotelCost = data.result.getHotelCost;
+          this.getHotelCosts = data.result.getHotelCost;
+          this.getHotelCost = (this.getHotelCosts - (this.getHotelCosts * (this.discount_rate/100)));
           this.people_count = data.result.people_count;
             this.tourslabel = [];
     for(var i=1;i<=this.people_count - 1;i++) {          
@@ -530,7 +536,7 @@ template_id:any;
     "start_date":start_date,"subcategory":subcategory,"service_id":service_id,
     "location_id":this.location_id,"vendor_id":this.vendor_id,"discount":"","pay_method":"","coupon_code_discount_cost":this.discounted_cost,
     "final_service_cost_after_coupon_code_discount":this.final_service_cost,"wallet_value":this.wallet_value,"coupon_id":this.coupon_id,
-    "service_name":service,"paymentflag":1,"service_cost":0,
+    "service_name":service,"paymentflag":1,"service_cost":0,"corporateDiscount":this.discount_rate,"getPersonHotelCost":this.getHotelCost,"getPersonHotelCostTotal":this.getHotelCosts,
     "service_cost_travel":0,"base_cost":0,"from_date":"","to_date":"","time_slot":"",
     "from_time":"","to_time":"","durations":"","problem":"","datetime":start_date,
     "mobile":"","preferred_time":"01:00 AM - 02:00 AM","package_id":"","quantity":"",
@@ -538,7 +544,7 @@ template_id:any;
     "total_cost":0,"get_custome_deliever_amount":0,"total_service_cost":0,
     "get_custome_service_cancel_amount":0,"driver_time_slot":"","transportation_from":"",
     "transportation_to":"","automation_time":"","automation_date":"","transportReqType":"",
-    "weelchairType":"","mobile_imei":"","coupen_code":this.coupan_code,"getPersonHotelCost":this.getHotelCost,"dependentid":this.elder_id,
+    "weelchairType":"","mobile_imei":"","coupen_code":this.coupan_code,"dependentid":this.elder_id,
     "gender":"1","lead_time":this.vendorList.vendorDetails.businessLeadTime,"selected_dates":[],"exclude_days":[],"Category_name":category,
     "serviceType":"One time","book":{"name":this.name,"mobile":this.phone,"mail":this.email,"book_peoples":this.people_count,
     "book_paying_pax":this.payingtax,"hotelType":this.hoteltype,people},"total_peoples":this.people_count}
@@ -731,8 +737,8 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
    let payment_data=  {"info":{"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
     "start_date":start_date,"subcategory":subcategory,"service_id":service_id,
     "location_id":this.location_id,"vendor_id":this.vendor_id,"discount":"","pay_method":"",
-    "coupon_code_discount_cost":0,"final_service_cost_after_coupon_code_discount":0,
-    "service_name":service,"paymentflag":1,"service_cost":this.servicecost,
+    "coupon_code_discount_cost":0,"final_service_cost_after_coupon_code_discount":0,"corporateDiscount":this.discount_rate,
+    "service_name":service,"paymentflag":1,"service_cost":this.servicecost,"getPersonHotelCost":this.getHotelCost,"getPersonHotelCostTotal":this.getHotelCosts,
     "service_cost_travel":this.servicecost,"base_cost":this.service_cost,"from_date":"","to_date":"",
     "time_slot":"","from_time":"","to_time":"","durations":"","problem":"",
     "datetime":"","mobile":"","preferred_time":"","package_id":"","quantity":"","prebook_percentage":this.pre_book_percentage,"prebook_status":this.vendorList.requestServices.booking_status,
@@ -834,7 +840,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
          
    let payment_data=  {"info":{"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
     "start_date":start_date,"subcategory":subcategory,"service_id":service_id,
-    "location_id":this.location_id,"vendor_id":this.vendor_id,"discount":"","pay_method":"",
+    "location_id":this.location_id,"vendor_id":this.vendor_id,"discount":"","pay_method":"","corporateDiscount":this.discount_rate,
     "coupon_code_discount_cost":0,"final_service_cost_after_coupon_code_discount":0,
     "service_name":service,"paymentflag":1,"service_cost":prebook_cost,
     "service_cost_travel":this.servicecost,"base_cost":this.service_cost,"from_date":"","to_date":"",

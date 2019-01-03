@@ -33,7 +33,7 @@
     "@ionic-native/file-path": "^4.14.0",
     "@ionic-native/file-transfer": "^4.14.0",
     "@ionic-native/geolocation": "^4.14.0",
-    "@ionic-native/google-analytics": "^4.16.0",
+    "@ionic-native/google-analytics": "^4.18.0",
     "@ionic-native/in-app-browser": "^4.14.0",
     "@ionic-native/native-audio": "^4.14.0",
     "@ionic-native/native-geocoder": "^4.14.0",
@@ -49,7 +49,6 @@
     "angular2-tag-input": "^1.2.3",
     "call-number": "^1.0.1",
     "com.razorpay.cordova": "git+https://github.com/razorpay/razorpay-cordova.git",
-    "cordova-android": "~6.3.0",
     "cordova-browser": "~5.0.4",
     "cordova-fabric-plugin": "^1.1.14-dev",
     "cordova-ios": "~4.5.5",
@@ -96,7 +95,8 @@
     "phonegap-plugin-push": "^1.11.1",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.26"
+    "zone.js": "0.8.26",
+    "cordova-android": "~6.3.0"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.2.0",
@@ -135,11 +135,11 @@
         "FABRIC_API_KEY": "84fa2a4ac399de4e24d2b8b08c5780e7839ce478",
         "FABRIC_API_SECRET": "5ffb124e9dddb01e16edfd71cffda842def414e623fa31be26dda531063a3c95"
       },
-      "cordova-plugin-google-analytics": {
-        "GMS_VERSION": "11.0.1"
-      },
       "cordova-plugin-file-opener2": {},
-      "cordova-plugin-file": {}
+      "cordova-plugin-file": {},
+      "cordova-plugin-google-analytics": {
+        "GMS_VERSION": "16.0.3"
+      }
     },
     "platforms": [
       "browser",

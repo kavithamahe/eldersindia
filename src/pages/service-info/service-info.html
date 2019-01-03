@@ -155,6 +155,11 @@
         <b class="cost-value price-red">
           <i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{getHotelCost | number : '1.2-2'}}
         </b>
+         <span *ngIf="discount_rate != 0">/&nbsp;
+              <i class="fa fa-inr" aria-hidden="true"></i>
+              <strong style="text-decoration: line-through;">{{getHotelCosts | number : '1.2-2'}}
+              </strong></span>
+              <span class="token-primaryss">{{discount_rate}}% off</span>
       </p>
 
     </ion-row> 

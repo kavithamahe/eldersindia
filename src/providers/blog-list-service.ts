@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http,Headers,RequestOptions } from '@angular/http';
+import { Http,Headers,RequestOptions,ResponseContentType,Response } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { ToastController ,AlertController} from 'ionic-angular';
+import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 /*
   Generated class for the BlogListService provider.
@@ -59,6 +60,23 @@ Url:any;
     let _request= {"search": searchText,"sort":sort};
     return this.http.post(rootUrl+'getRecurringServiceList',_request,this.options)
       .map(res => res.json());
+  }
+
+invoiceFromUser(req_id,id): Observable<any> {
+
+    let body= {"req_id":req_id,"pack_id": id,"service_type":"package"};
+
+    let headers = new Headers();
+    headers.append('Access-Control-Allow-Origin' , '*');
+    headers.append("Content-Type", "application/json");
+    headers.append('Authorization', "Bearer " + this.token);
+
+    let options = new RequestOptions({ headers: headers, responseType: ResponseContentType.Blob });
+    return this.http.post(this.rootUrl+'invoiceFromUser', body, options)
+      .map((res: Response) => <any>res )
+      .catch((error: any) =>
+        Observable.throw(error.json().error || "Server error")
+      );
   }
   serviceRequestSubmitbeforePayment(rootUrl,servicecost,
       category,category_id,service,service_ids,sub_category_id,

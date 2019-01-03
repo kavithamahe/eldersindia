@@ -77,18 +77,17 @@ updated_at:any;
       this.updated_at = moment(viewServiceRequest.result.updated_at).format("DD-MM-YYYY HH:mm:ss");
       this.paidamount1 = (parseFloat(this.viewServiceRequestInfo.service_cost) - parseFloat(this.viewServiceRequestInfo.additional_service_cost));
       this.paidamount2 = (parseFloat(this.viewServiceRequestInfo.service_cost) + parseFloat(this.viewServiceRequestInfo.additional_service_cost));
-      this.paidamount3 = (parseFloat(this.viewServiceRequestInfo.service_cost) - parseFloat(this.viewServiceRequestInfo.service_balance_amount));
+      this.paidamount3 = (this.viewServiceRequestInfo.service_cost - parseFloat(this.viewServiceRequestInfo.service_balance_amount) + parseFloat(this.viewServiceRequestInfo.additional_service_cost));
       this.paidamount4 = (parseFloat(this.viewServiceRequestInfo.service_cost) - parseFloat(this.viewServiceRequestInfo.additional_service_cost));
       this.prebookcost = (parseFloat(this.viewServiceRequestInfo.service_cost) - parseFloat(this.viewServiceRequestInfo.additional_service_cost));
       this.emergencyContact = this.viewServiceRequestInfo.emergencyContact;
-      console.log(this.emergencyContact);
       this.preffer= viewServiceRequest.enquiry_date;
       loader.dismiss();   
     },
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {

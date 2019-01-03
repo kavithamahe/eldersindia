@@ -101,14 +101,19 @@
       <br/>
       <ion-row>
 
-        <ion-col class="view-serv" text-left col-6>
+        <ion-col class="view-serv" text-left col-5>
           <ion-badge *ngIf="package?.req_status != 2 && package.expired_status != 'Expired'" (press)="pressservices(package?.id,package?.location_id,package?.elder_id,package.req_status)"
             (click)="getServicesForByElders(package?.id,package?.location_id,package?.elder_id,package.req_status)" class="services">
             <i class="fa fa-check-square-o" aria-hidden="true"></i> Services</ion-badge>
-     </ion-col>
-      <ion-col class="view-serv" col-6>
+        </ion-col>
+        <ion-col class="view-serv" col-5>
           <ion-badge (click)="getPackageRequestBy(package?.req_id)" (press)="pressview(package?.req_id)" class="services-view">
             <i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
+        </ion-col>
+         <ion-col #downloadBlob (click)="downloadBlobToPDF(package?.req_id,package?.id)" class="view-serv" col-2>
+            <ion-chip>
+                <ion-icon name="cash" class="text-center" color="primary"></ion-icon>
+              </ion-chip>
         </ion-col>
 
       </ion-row>

@@ -53,6 +53,7 @@ payableamount:any;
 deductionamounts:any;
 recurringrefund:any;
 service_remaing_cost:any;
+is_recreation_config:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController,public loadingCtrl: LoadingController,public serviceRequest:ServiceRequestService) {
       this.service_type = navParams.get("service_type");
@@ -71,6 +72,7 @@ service_remaing_cost:any;
       this.sr_token = navParams.get("sr_token");
       this.coupon_id = navParams.get("coupon_id");
       this.vendor_name = navParams.get("vendor_name");
+      this.is_recreation_config = navParams.get("is_recreation_config");
       this.pending_service_amount = navParams.get("pending_service_amount");
       if(this.percentage == "hours expired"){
         this.percentage = "0";
@@ -99,6 +101,7 @@ service_remaing_cost:any;
       this.refund_amounts = navParams.get("refund_amount");
       this.serviceId = navParams.get("serviceId");
       this.service_cost = navParams.get("service_cost");
+      this.is_recreation_config = navParams.get("is_recreation_config");
       this.result = navParams.get("result");
       this.percentage = navParams.get("percentage");
         if(this.percentage == "hours expired"){
@@ -128,10 +131,16 @@ service_remaing_cost:any;
   }
    public delete()
   {
-    if(this.comments == undefined || this.comments == ""){
+    if(this.is_recreation_config == 1){
+      this.deletezerocost();
+    }
+    else{
+        if(this.comments == undefined || this.comments == ""){
       this.showToaster("Please Enter The Reason");
     }
     else{
+      this.deductionamount = this.deductionamount.toString();
+      this.servicecancelamount = this.servicecancelamount.toString();
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     this.serviceRequest.razorPaymentResponseforCancel(this.comments,this.serviceId,this.service_type,this.txnid,this.percentage,
@@ -153,18 +162,18 @@ service_remaing_cost:any;
         loader.dismiss();
       });
     }
-    
+    }
+  
   }
 
     deletezerocost(){
-      console.log(this.comments);
        if(this.comments == undefined || this.comments == ""){
       this.showToaster("Please Enter The Reason");
     }
     else{
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.serviceRequest.updateServiceReceiveStatus(this.comments,this.serviceId,this.service_type).subscribe(
+    this.serviceRequest.updateServiceReceiveStatus(this.comments,this.serviceId,this.service_type,this.is_recreation_config).subscribe(
      (cancelRequest) => { 
       this.showToaster(cancelRequest.result); 
       loader.dismiss(); 

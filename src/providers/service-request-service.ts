@@ -140,8 +140,8 @@ invoiceFromUser(sr_token,is_recreation_config): Observable<any> {
     return this.http.post(this.rootUrl+'razorPaymentResponseforCancel',_request,this.options)
       .map(res => res.json());
   }
-   updateServiceReceiveStatus(title,serviceId,service_type){
-     let _request= {"info":{"status":3,"id":serviceId,"comments":title,"service_type":service_type}};
+   updateServiceReceiveStatus(title,serviceId,service_type,is_recreation_config){
+     let _request= {"info":{"status":3,"id":serviceId,"comments":title,"service_type":service_type,"recreation":is_recreation_config,"recurring_id":""}};
     return this.http.post(this.rootUrl+'updateServiceReceiveStatus',_request,this.options)
       .map(res => res.json());
   }

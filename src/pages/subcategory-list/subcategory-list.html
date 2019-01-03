@@ -66,25 +66,26 @@
         <button class="btn-warnings" *ngIf="dependentLen && service_list.template_id != '2' && service_list.template_id != '4' && service_list.template_id != '3' && service_list.template_id != '5' && service_list.template_id != '6' && service_list.template_id != '7' && service_list.template_id != '8'  && service_list.template_id != '9'"
           (click)="openModal('scheduleModal',service_list)" (press)="pressevent('scheduleModal',service_list)">Avail Services</button>
         <button class="btn-warnings" *ngIf="dependentLen && service_list.template_id == 2 && service_list.package_active_status == '1' && service_list.template_id != '8'"
-          (click)="bookNow(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list?.template_id)">Book Now</button>
+          (click)="bookNow(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list?.template_id,service_list?.discount_rate)">Book Now</button>
         <button class="btn-warnings" *ngIf="dependentLen && (service_list.template_id == '2' || service_list.template_id == '9') && service_list.package_active_status == '0' && service_list.template_id != '8'">Booking Closed</button>
-        <button class="btn-warnings" *ngIf="dependentLen && service_list.template_id == '3' && booking_status == '2' && service_list.template_id != '8'" (click)="preBook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id)">Pre Book</button>
-        <button class="btn-warnings" *ngIf="dependentLen && service_list.template_id == '3' && booking_status == '1' && service_list.template_id != '8'" (click)="preBook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id)">Book Now</button>
+        <button class="btn-warnings" *ngIf="dependentLen && service_list.template_id == '3' && booking_status == '2' && service_list.template_id != '8'" (click)="preBook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id,service_list?.discount_rate)">Pre Book</button>
+      <button class="btn-warnings" *ngIf="dependentLen && service_list.template_id == '3' && booking_status == '1' && service_list.template_id != '8'" 
+        (click)="preBook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id,service_list?.discount_rate)">Book Now</button>
         <button class="btn-warnings" *ngIf="service_list.is_recreation_config == 1 && service_list.booking_status == 0 && service_list.template_id != 2 && service_list.template_id != 7 && service_list.template_id == 6 && service_list.template_id != '8'"
-          (click)="transportationdriver(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id)">Book Now</button>
+          (click)="transportationdriver(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id,service_list?.discount_rate)">Book Now</button>
         <button class="btn-warnings" *ngIf="service_list.is_recreation_config == 1 && service_list.booking_status == 0 && service_list.template_id != 2 && service_list.template_id != 7 && service_list.template_id == 5 && service_list.template_id != '8'"
-          (click)="transportationcab(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id)">Book Now</button>
+          (click)="transportationcab(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id,service_list?.discount_rate)">Book Now</button>
 
         <button class="btn-warnings" *ngIf="dependentLen  && booking_status == '0' &&  service_list.is_recreation_config == '1' && service_list.template_id != '7' && service_list.template_id == '4' && service_list.template_id != '8'"
-          (click)="emergencybook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id)">Book Now</button>
+          (click)="emergencybook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id,service_list?.discount_rate)">Book Now</button>
         <button class="btn-warnings" *ngIf="service_list.is_recreation_config == 1 && service_list.booking_status == 0 && service_list.template_id != 2 && service_list.template_id == 7 && service_list.template_id != '8'"
-          (click)="homemodify(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id)">Schedule Assessment</button>
+          (click)="homemodify(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id,service_list?.discount_rate)">Schedule Assessment</button>
 
           <button class="btn-warnings" *ngIf="service_list.is_recreation_config == 1 && service_list.booking_status == 0 && service_list.template_id != 2 && service_list.template_id != 7 && service_list.template_id == 3 && service_list.template_id != '8'"
-           (click)="preBook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id)">Book Now</button>
+           (click)="preBook(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list.template_id,service_list?.discount_rate)">Book Now</button>
 
             <button class="btn-warnings" *ngIf="service_list.template_id == 9 && service_list.package_active_status == '1' && service_list.template_id != '8'"
-           (click)="bookNowTour(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list?.template_id)">Book Now</button>
+           (click)="bookNowTour(service_list.service_cost - service_list.percentage_cost,service_list.service_cost,service_list.id,service_list?.template_id,service_list?.discount_rate)">Book Now</button>
            <button class="btn-warnings" *ngIf="service_list.template_id == '8'"
            (click)="contactNow(service_list.id)">Contact Now</button>
 

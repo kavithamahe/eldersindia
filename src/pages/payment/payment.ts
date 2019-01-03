@@ -225,7 +225,7 @@ wallet_value:any;
     this.discountpartial = navParams.get("discountpartial");
 
   this.servicecost=navParams.get("servicecost");
-  this.service_cost=this.servicecost*100;
+  this.service_cost=(this.servicecost*100).toFixed(0);;
   this.coupon_id=navParams.get("coupan_id");
   localStorage.setItem('coupon_id', this.coupon_id);
   this.wallet_value=navParams.get("wallet_value");

@@ -1,5 +1,8 @@
 import { Component,ViewChild } from '@angular/core';
 import { Content } from 'ionic-angular';
+import { FileOpener } from '@ionic-native/file-opener';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 import { NavController, NavParams,ModalController,LoadingController,ToastController,PopoverController,ViewController } from 'ionic-angular';
 import { BlogListService } from '../../providers/blog-list-service';
 import { Storage } from '@ionic/storage';
@@ -7,6 +10,9 @@ import { ViewpackagePagePage } from '../../pages/viewpackage/viewpackage';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import {ElderservicePagePage } from '../../pages/elderservice/elderservice';
 import moment from 'moment';
+
+
+declare var cordova: any;
 /*
   Generated class for the PackageRequestPage page.
 
@@ -41,7 +47,7 @@ searchaction:any;
 packageName:boolean = false;
 packageEmail:boolean = false;
 packagetransId:boolean = false;
-  constructor(public navCtrl: NavController,private popoverCtrl: PopoverController,public modalCtrl: ModalController,public toastCtrl: ToastController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams, public blogListService:BlogListService) {
+  constructor(public fileOpener :FileOpener,private transfer: FileTransfer,private file: File,public navCtrl: NavController,private popoverCtrl: PopoverController,public modalCtrl: ModalController,public toastCtrl: ToastController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams, public blogListService:BlogListService) {
       this.paystatus = navParams.get("status");
        this.results = navParams.get("result");
     if(this.paystatus == "1"){
@@ -107,6 +113,53 @@ doInfinite(infiniteScroll) {
       infiniteScroll.complete();
     }, 500);
   }
+     downloadBlobToPDF(req_id,id) { 
+        let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+      loader.present();
+      this.blogListService.invoiceFromUser(req_id,id).subscribe(
+    res => {
+      const blob = res.blob();
+      const file = new Blob([blob], {type:'application/pdf'});
+      const filename = 'invoice' + Date.now() + '.pdf';
+  //     importedSaveAs(file, filename);
+   loader.dismiss(); 
+
+    var blobs = new Blob([blob], {type:'application/pdf'});
+    console.log(blobs);
+   
+  let filePath =  this.file.externalApplicationStorageDirectory;
+
+    //Write the file
+    this.file.writeFile(filePath, filename, blobs, { replace: true }).then((fileEntry) => {
+        
+          this.fileOpener.open(fileEntry.nativeURL, 'application/pdf')
+            .then(() => {console.log(fileEntry.nativeURL);
+              let url = fileEntry.nativeURL;
+              console.log(url);
+               const fileTransfer: FileTransferObject = this.transfer.create();
+
+         var targetPath = cordova.file.externalRootDirectory + filename;
+
+      cordova.plugins.DownloadManager.download(url,targetPath);
+        fileTransfer.download(url, targetPath,  true ).then((entry) => {
+         this.showToaster("Downloaded Succesfully"); 
+        },
+         (error) => {
+          console.log("error");
+        }); 
+            })
+            .catch(err => console.error('Error openening file: ' + err));
+        })
+          .catch((err) => {
+            console.error("Error creating file: " + err);
+            throw err;  
+          });
+ 
+
+  
+   })  
+   
+}
   packagescroll()
   {
     this.scrollTop = true;

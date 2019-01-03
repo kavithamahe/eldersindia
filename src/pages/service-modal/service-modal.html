@@ -46,18 +46,16 @@
             <ion-option *ngFor="let types of getPersonPerHotel" value={{types.id}}>{{types.name}}</ion-option>
           </ion-select>
         </ion-item>
-       <!--  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">No of People</ion-label>
-        <ion-item class="sel-label">
-          <ion-label>No of People</ion-label>
-          <ion-select [(ngModel)]="noofpeopletravel" (ionChange)="selecetPeopleTours(noofpeopletravel)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
-            <ion-option *ngFor="let people of tourstotal_peoples" value={{people}}>{{people}}</ion-option>
-          </ion-select>
-        </ion-item> -->
         <br>
           <ion-row *ngIf = "packageCost">
           <p class="service-conts">
             <span class="token-primaryss">Package Cost :</span>
             <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getHotelCost | number : '1.2-2'}}
+             <span *ngIf="discount_rate != 0">/&nbsp;
+              <i class="fa fa-inr" aria-hidden="true"></i>
+              <strong style="text-decoration: line-through;">{{getHotelCosts | number : '1.2-2'}}
+              </strong></span>
+              <span class="token-primaryss">{{discount_rate}}% off</span>
           </p>
         </ion-row>
         <ion-list>
