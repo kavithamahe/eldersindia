@@ -204,19 +204,25 @@
             </p>
           </div>
           <!-- <div> -->
-            <ion-col *ngIf="service.pack_id!='' && service.vendor_status == 5 && service.additional_service_cost==0">
-              <button class="make-rate" *ngIf="service.vendor_status == 5 && service.additional_service_cost==0" (click)="enableRemark(i)">
+            <ion-col *ngIf="service.Paymentstatus=='captured' && service.pack_id==''">
+              <button class="make-rate" *ngIf="service.vendor_status == 5 && (service.additional_service_cost==0 || service.additional_service_cost_status=='success')" (click)="enableRemark(i)">
                 Mark as Complete
               </button>
             </ion-col>
-            <ion-col *ngIf="service.Paymentstatus=='captured' && service.pack_id=='' && service.vendor_status == 5 && (service.additional_service_cost==0 || service.additional_service_cost_status=='success')">
-              <button class="make-rate" *ngIf="service.vendor_status == 5 && (service.additional_service_cost==0 || service.additional_service_cost_status=='success')"
+            <ion-col *ngIf="service.pack_id!=''">
+              <button class="make-rate" *ngIf="service.vendor_status == 5 && service.additional_service_cost==0"
                 (click)="enableRemark(i)">
                 Mark as Complete
               </button>
             </ion-col>
-            <ion-col *ngIf="service.pack_id!='' && service.vendor_status == 5 && (service.additional_service_cost!=0 && service.additional_service_cost_status=='success')">
-              <button class="make-rate" *ngIf="service.vendor_status == 5 && (service.additional_service_cost!=0 && service.additional_service_cost_status=='success')"
+            <ion-col *ngIf="service.pack_id!=''">
+              <button class="make-rate" *ngIf="service.vendor_status == 5 && (service.additional_service_cost!=0 && service.additional_service_cost!=0.00 && service.additional_service_cost_status=='success')"
+                (click)="enableRemark(i)">
+                Mark as Complete
+              </button>
+            </ion-col>
+              <ion-col *ngIf="(service.pack_id=='' || service.pack_id==0) && (service.Paymentstatus==null || service.Paymentstatus=='')">
+              <button class="make-rate" *ngIf="service.vendor_status == 5 && (service.additional_service_cost!=0 && service.additional_service_cost!=0.00 && service.additional_service_cost_status=='success')"
                 (click)="enableRemark(i)">
                 Mark as Complete
               </button>
@@ -225,7 +231,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-card *ngIf="service.showDetails" class="padd-both-15">
+      <ion-card *ngIf="service.showDetails" class="padd-both-15" autofocus>
         <ion-grid>
           <ion-row>
             <ion-col col-8>

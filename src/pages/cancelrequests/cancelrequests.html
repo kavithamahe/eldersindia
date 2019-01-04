@@ -25,7 +25,7 @@
               <i class="fa fa-inr" aria-hidden="true"></i>{{paid_amount | number : '1.2-2'}}</span>
           </h5>
      </ion-item>
-     <ion-item text-wrap style="padding-left:10px;">
+     <ion-item text-wrap style="padding-left:10px;" *ngIf = "is_recreation_config != 1">
           <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Cancellation percentage :
             <span class="discountCost">
              {{percentage}} %</span>
@@ -65,7 +65,7 @@
               <i class="fa fa-inr" aria-hidden="true"></i>{{paid_amount | number : '1.2-2'}}</span>
           </h5>
      </ion-item>
-     <ion-item text-wrap style="padding-left:10px;">
+     <ion-item text-wrap style="padding-left:10px;" *ngIf = "is_recreation_config != 1">
           <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Cancellation percentage :
             <span class="discountCost">
              {{percentage}} %</span>
@@ -105,7 +105,7 @@
               <i class="fa fa-inr" aria-hidden="true"></i>{{pending_service_amount | number : '1.2-2'}}</span>
           </h5>
      </ion-item>
-     <ion-item text-wrap style="padding-left:10px;">
+     <ion-item text-wrap style="padding-left:10px;" *ngIf = "is_recreation_config != 1">
           <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Cancellation percentage :
             <span class="discountCost">
              {{percentage}} %</span>
@@ -139,7 +139,7 @@
               <i class="fa fa-inr" aria-hidden="true"></i>{{pending_service_amount | number : '1.2-2'}}</span>
           </h5>
      </ion-item>
-     <ion-item text-wrap style="padding-left:10px;">
+     <ion-item text-wrap style="padding-left:10px;" *ngIf = "is_recreation_config != 1">
           <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Cancellation percentage :
             <span class="discountCost">
              {{percentage}} %</span>
@@ -222,13 +222,13 @@
               <i class="fa fa-inr" aria-hidden="true"></i>{{paid_amount | number : '1.2-2'}}</span>
           </h5>
      </ion-item>
-      <ion-item text-wrap style="padding-left:10px;">
+      <ion-item text-wrap style="padding-left:10px;" *ngIf = "is_recreation_config != 1">
           <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Cancellation fee :
             <span class="discountCost">
               <i class="fa fa-inr" aria-hidden="true"></i>{{cancellationfees | number : '1.2-2'}}</span>
           </h5>
      </ion-item>
-      <ion-item text-wrap style="padding-left:10px;">
+      <ion-item text-wrap style="padding-left:10px;" *ngIf = "is_recreation_config != 1">
           <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Cancellation percentage :
             <span class="discountCost">{{percentage}} %</span>
           </h5>

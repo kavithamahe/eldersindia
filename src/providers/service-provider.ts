@@ -101,9 +101,13 @@ getCustomerBalanceAmountsSponsor(elder_id){
       .map(res => res.json());
 }
 getServicedependentlist(vendor_id){
-   console.log(this.head);
    let _request= {"vendor_id":vendor_id};
     return this.http.post(this.rootUrl+'getServicedependentlist',_request,this.head)
+      .map(res => res.json());
+}
+getCancelpolicyByVendor(vendor_id){
+ let _request= {"vendor_id":vendor_id};
+    return this.http.post(this.rootUrl+'getCancelpolicyByVendor',_request,this.head)
       .map(res => res.json());
 }
 sendotp(){

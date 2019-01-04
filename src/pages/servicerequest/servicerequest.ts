@@ -191,7 +191,7 @@ console.log(fileEntry);
     this.content.scrollToBottom();
   }
   getparticipants(service){
-        this.serviceRequest.travelServiceMemberList(service.id).subscribe(
+    this.serviceRequest.travelServiceMemberList(service.id).subscribe(
      (serviceRequest) => {
       this.get_participants=serviceRequest.result;
       this.toggleDetails(service);

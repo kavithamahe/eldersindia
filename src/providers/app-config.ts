@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AppConfig {
-  imageUrl="http://192.168.1.21:8000/";
+  imageUrl="https://qa.eldersindia.com/";
   rooturl=this.imageUrl+"api/";
 
   constructor(public http: Http) {

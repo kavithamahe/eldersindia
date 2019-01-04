@@ -1,6 +1,7 @@
 import { Component  } from '@angular/core';
-import { NavController,ViewController, NavParams, ModalController,AlertController,LoadingController } from 'ionic-angular';
+import { NavController,ViewController, NavParams, ModalController,AlertController,LoadingController,Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { InAppBrowser } from 'ionic-native';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Device } from "@ionic-native/device";
 
@@ -12,7 +13,6 @@ import {
   FormArray
 } from "@angular/forms";
 import moment from 'moment';
-import { TermsModalPage } from '../../pages/terms-modal/terms-modal';
 import { GetpackagePagePage } from  '../../pages/getpackage/getpackage';
 import { SubcategoryListPage } from '../subcategory-list/subcategory-list';
 import { ServiceProvider } from '../../providers/service-provider';
@@ -156,7 +156,8 @@ template_id:any;
   scheduled_date:any;
   discount_rate:any;
   getHotelCosts:any;
-  constructor(public storage:Storage,public alertCtrl: AlertController,private device: Device,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
+  getvendor_cancelpolicy:any=[];
+  constructor(public platform: Platform,public storage:Storage,public alertCtrl: AlertController,private device: Device,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder,public blogListService:BlogListService) {
     this.date = new Date().toISOString();
     this.vendorList = navParams.get("vendorList");
@@ -309,6 +310,7 @@ template_id:any;
       this.getServicecancelamounts();
       this.getCustomerBalanceAmounts();
       this.getServicedependentlists();
+      this.getCancelpolicyByVendor();
   }
 
   hotelType(){
@@ -693,6 +695,13 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       this._provider.getServicedependentlist(this.vendor_id)
       .subscribe(data =>{ 
         this.get_Servicedependentlist = data.result;
+    })
+    }
+        getCancelpolicyByVendor(){
+          console.log(this.vendor_id);
+          this._provider.getCancelpolicyByVendor(this.vendor_id)
+      .subscribe(data =>{ 
+        this.getvendor_cancelpolicy = data.result.conditionsLink;
     })
     }
      applyCoupan(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
@@ -1257,15 +1266,10 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
      }
    }
   openTerms(){
-     let termsModal = this.modalCtrl.create(TermsModalPage);
-     termsModal.present();
-     termsModal.onDidDismiss(data=>{
-       if(data == "dismiss"){
-        console.log(" Terms modal dismissed..!");
-      }else{
-       this.terms = JSON.parse(data);
-      }
-     })
+     this.platform.ready().then(() => {
+            let browser = new InAppBrowser(this.getvendor_cancelpolicy,'_blank');
+
+        });
    }
    showConfirm() {
     const confirm = this.alertCtrl.create({

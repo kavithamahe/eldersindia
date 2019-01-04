@@ -237,9 +237,6 @@ rootUrl:any;
     }
  }
  replyblogPost(event){
-  console.log(event);
-  console.log(this.showReply);
-   console.log(this.replyPost);
    this.reply_comment="";
    this.showReply=null;
     if(this.replyPost==event){

@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController,LoadingController,ModalController,NavController,AlertController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-//import {DatePicker} from 'ionic-native';
+import { InAppBrowser } from 'ionic-native';
 import {Platform} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-// import { Calendar } from '@ionic-native/calendar';
 
 import moment from 'moment';
 
 import { ServiceProvider } from '../../providers/service-provider';
 import { BlogListService } from '../../providers/blog-list-service';
 
-import { TermsModalPage } from '../../pages/terms-modal/terms-modal';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
  import { Modelpage1PagePage } from '../../pages/modelpage1/modelpage1';
  import { PaymentPage } from '../../pages/payment/payment';
@@ -26,7 +24,6 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
 @Component({
   selector: 'page-modal-page',
   templateUrl: 'modal-page.html',
-  providers:[TermsModalPage]
 })
 export class ModalContentPage {
  
@@ -138,7 +135,8 @@ export class ModalContentPage {
   dates:any;
   datess:any;
   status:any;
-  constructor(platform: Platform,public blogListService:BlogListService,public alertCtrl: AlertController,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
+  getvendor_cancelpolicy:any=[];
+  constructor(public platform: Platform,public blogListService:BlogListService,public alertCtrl: AlertController,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {   
      this.date = new Date().toISOString();
      this.dates = new Date().toISOString();
@@ -181,6 +179,7 @@ export class ModalContentPage {
         console.log(this.vendor_id);
         this.getpackageInfo(this.vendor_id);
         this.getServicedependentlistsInfo(this.vendor_id);
+        this.getCancelpolicyByVendor(this.vendor_id);
       }
       this.vendor = this.params.get("vendor").name;
       this.service_cost = this.params.get("vendor").service_cost;
@@ -228,6 +227,7 @@ export class ModalContentPage {
       this.getCustomerBalanceAmounts();
       if(this.params.get("status") != "1"){
       this.getServicedependentlists();
+      this.getCancelpolicyByVendors();
     }
 
    }
@@ -276,6 +276,18 @@ export class ModalContentPage {
       this.providerService.getServicedependentlist(this.vendor_id)
       .subscribe(data =>{ 
         this.get_Servicedependentlist = data.result;
+    })
+    }
+    getCancelpolicyByVendors(){
+          this.providerService.getCancelpolicyByVendor(this.vendor_id)
+      .subscribe(data =>{ 
+        this.getvendor_cancelpolicy = data.result.conditionsLink;
+    })
+    }
+     getCancelpolicyByVendor(vendor_id){
+          this.providerService.getCancelpolicyByVendor(vendor_id)
+      .subscribe(data =>{ 
+        this.getvendor_cancelpolicy = data.result.conditionsLink;
     })
     }
    termsChanged(){
@@ -471,15 +483,10 @@ export class ModalContentPage {
     this.dayCalculation();
   }
    openTerms(){
-     let termsModal = this.modalCtrl.create(TermsModalPage);
-     termsModal.present();
-     termsModal.onDidDismiss(data=>{
-       if(data == "dismiss"){
-        console.log(" Terms modal dismissed..!");
-      }else{
-       this.terms = JSON.parse(data);
-      }
-     })
+      this.platform.ready().then(() => {
+            let browser = new InAppBrowser(this.getvendor_cancelpolicy,'_blank');
+
+        });
    }
   
    fullpaymentinfo(){

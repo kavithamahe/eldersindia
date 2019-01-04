@@ -32,6 +32,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { FileOpener } from '@ionic-native/file-opener';
+import { InAppBrowser } from 'ionic-native';
 
 
 import { LoginPage } from '../pages/login/login';
