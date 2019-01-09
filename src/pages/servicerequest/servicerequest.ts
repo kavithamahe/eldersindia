@@ -157,7 +157,18 @@ console.log(fileEntry);
  
 
   
-   })  
+   },
+    (err) => { 
+      loader.dismiss(); 
+        if(err.status===401)
+        {
+          this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Something went wrong");
+        }
+      })  
    
 }
 
@@ -208,7 +219,7 @@ console.log(fileEntry);
       }
     ); 
   }
-toggleDetails(service) {
+  toggleDetails(service) {
     if (service.showDetails) {
         service.showDetails = false;
     } else {

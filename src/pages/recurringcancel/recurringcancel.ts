@@ -38,6 +38,7 @@ service_costs:any;
 paid_amount:any;
 balance_amount:any;
 total_amount:any;
+service_cost_total:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,public blogListService: BlogListService,public loadingCtrl: LoadingController,public storage:Storage,) {
   		this.storage.ready().then(() => {
   		storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
@@ -69,6 +70,7 @@ total_amount:any;
         this.paid_amount = this.dedction_amounts.paid_amount;
         this.service_costs = this.dedction_amounts.service_cost;
         this.total_amount = this.dedction_amounts.total_amount;
+        this.service_cost_total = this.dedction_amounts.service_cost_total;
         loading.dismiss();
     },
     err =>{

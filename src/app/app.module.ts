@@ -10,6 +10,7 @@ import { TruncateModule } from 'ng2-truncate';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { File } from '@ionic-native/file';
+import * as Sentry from 'sentry-cordova';
 
 import { Ng2CompleterModule } from "ng2-completer";
 import { DatePipe } from '@angular/common';
@@ -120,7 +121,18 @@ import { NetworkProvider } from '../providers/network/network';
 
 import { HttpClientModule } from '@angular/common/http';
 
+// Sentry.init({ dsn: 'https://c70968390e6645c4a30b0aa7462b8fc3@monitor.eldersindia.com/7' });
 
+// export class SentryIonicErrorHandler extends IonicErrorHandler {
+//   handleError(error) {
+//     super.handleError(error);
+//     try {
+//       Sentry.captureException(error.originalError || error);
+//     } catch (e) {
+//       console.error(e);
+//     }
+//   }
+// }
  
 @NgModule({
   declarations: [

@@ -71,7 +71,7 @@
 
       <!--============== One Time ===================== -->
       <div *ngIf="searchButton">
-        <div class="discountCost">
+        <div class="discountCost" *ngIf = "!package">
           <ion-item>
             <ion-label><b>Service Cost</b>:&nbsp;
               <span><i class="fa fa-rupee"></i>{{initialservicecost | number : '1.2-2'}}</span>
@@ -90,6 +90,18 @@
               </ion-label>
             </ion-item>
         </div>
+         <div *ngIf="get_custome_amount!=0 && getCustomerBalanceAmount ==0 && get_custome_deliever_amount == 0">
+           <ion-item text-wrap>
+              <ion-label><b>Previous service due amount</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{get_custome_amount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label><b>Total amount payable</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{(initialservicecost +  get_custome_amount) | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+           </div>
           <div *ngIf="get_custome_deliever_amount!=0 && get_custome_service_cancel_amount ==0 && getCustomerBalanceAmount ==0 ">
            <ion-item text-wrap>
               <ion-label><b>Previous service due amount</b>:&nbsp;
@@ -332,7 +344,7 @@
             <ion-option [value]="6">Saturday</ion-option>
           </ion-select>
         </ion-item>
-        <div class="discountCost">
+        <div class="discountCost" *ngIf = "!package">
           <ion-item *ngIf="servicecosts != undefined">
 
             <ion-label>
@@ -366,6 +378,18 @@
               </ion-label>
             </ion-item>
         </div>
+         <div *ngIf="get_custome_amount!=0 && getCustomerBalanceAmount ==0 && get_custome_deliever_amount == 0">
+           <ion-item text-wrap>
+              <ion-label><b>Previous service due amount</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{get_custome_amount | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label><b>Total amount payable</b>:&nbsp;
+                <span><i class="fa fa-rupee"></i>{{(servicecost +  get_custome_amount) | number : '1.2-2'}}</span>
+              </ion-label>
+            </ion-item>
+           </div>
           <div *ngIf="get_custome_deliever_amount!=0 && get_custome_service_cancel_amount ==0 && getCustomerBalanceAmount ==0 ">
            <ion-item text-wrap>
               <ion-label><b>Previous service due amount</b>:&nbsp;
@@ -374,7 +398,7 @@
             </ion-item>
             <ion-item>
               <ion-label><b>Total amount payable</b>:&nbsp;
-                <span><i class="fa fa-rupee"></i>{{(initialservicecost +  get_custome_deliever_amount) | number : '1.2-2'}}</span>
+                <span><i class="fa fa-rupee"></i>{{(servicecost +  get_custome_deliever_amount) | number : '1.2-2'}}</span>
               </ion-label>
             </ion-item>
            </div>

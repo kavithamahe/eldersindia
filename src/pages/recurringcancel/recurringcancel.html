@@ -21,11 +21,11 @@
 	   <h2>Are you sure you want to delete this recurring service !</h2>
 	</ion-item>
 	<ion-item>
-	<h1>Total service amount:<i class="fa fa-rupee"></i>{{service_costs | number : '1.2-2'}}</h1>
+	<h1>Total service amount:<i class="fa fa-rupee"></i>{{service_cost_total | number : '1.2-2'}}</h1>
 	<h1>Paid amount:<i class="fa fa-rupee"></i>{{paid_amount | number : '1.2-2'}}</h1>
 	<h1>Cancellation fee:<i class="fa fa-rupee"></i>{{dedction_amount | number : '1.2-2'}}</h1>
 	<h1 *ngIf="paid_amount > total_amount">Refundable Amount:<i class="fa fa-rupee"></i>{{refund_amount | number : '1.2-2'}}</h1>
-	<h1 *ngIf="total_amount > paid_amount">Balance Amount:<i class="fa fa-rupee"></i>{{balance_amount | number : '1.2-2'}}</h1>
+	<h1 *ngIf="total_amount > paid_amount && paid_amount">Balance Amount:<i class="fa fa-rupee"></i>{{balance_amount | number : '1.2-2'}}</h1>
 	</ion-item>
 	<ion-item>
 	<ion-input type="text" placeholder="comments...." [(ngModel)]="comments">

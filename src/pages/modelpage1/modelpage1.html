@@ -68,7 +68,7 @@
               <strong class="service-name" *ngIf="timeslot != '' ">{{timeslot}}</strong>
             </p>
           </ion-item>
-           <ion-item text-wrap *ngIf="serviceType != 'One time'">
+           <ion-item text-wrap *ngIf="serviceType != 'One time' && packageListsvalue == undefined">
           <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; text-align: center;">Service Cost :
             <span class="discountCost">
               <i class="fa fa-inr" aria-hidden="true"></i>{{recurring_cost | number : '1.2-2'}}</span>
@@ -97,14 +97,7 @@
           </div>
         </ion-list>
         </ion-card>
-
-	 
-
-
 </ion-content>
-
-
-
 
 
 <ion-footer>

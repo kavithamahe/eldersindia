@@ -237,6 +237,7 @@ export class ModalContentPage {
       .subscribe(data =>{ 
           this.get_custome_amount = parseFloat(data.result);
           this.totalpayableamountservice = parseInt(this.initialservicecost) + parseInt(this.get_custome_amount);
+    console.log(this.totalpayableamountservice);
     })
     }
      getCustomerDeliverStatusAmounts(){
@@ -702,7 +703,9 @@ export class ModalContentPage {
     if(this.getCustomerBalanceAmount!=0 && this.get_custome_service_cancel_amount ==0 && this.get_custome_deliever_amount == 0){
       this.servicecost = (this.initialservicecost - this.getCustomerBalanceAmount);
     }
-   
+    else if(this.get_custome_amount!=0 && this.getCustomerBalanceAmount ==0 && this.get_custome_deliever_amount ==0){
+      this.servicecost = (this.initialservicecost + this.get_custome_amount);
+    }
     else if(this.get_custome_deliever_amount!=0 && this.get_custome_service_cancel_amount ==0 && this.getCustomerBalanceAmount ==0){
       this.servicecost = (this.initialservicecost + this.get_custome_deliever_amount);
     }
@@ -731,9 +734,11 @@ export class ModalContentPage {
     }
   }
   else{
-    console.log("service_status re");
       if(this.getCustomerBalanceAmount!=0 && this.get_custome_service_cancel_amount ==0 && this.get_custome_deliever_amount == 0){
       this.finalcost = (this.finalcost - this.getCustomerBalanceAmount);
+    }
+    else if(this.get_custome_amount!=0 && this.getCustomerBalanceAmount ==0 && this.get_custome_deliever_amount ==0){
+      this.servicecost = (this.finalcost + this.get_custome_amount);
     }
     
     else if(this.get_custome_deliever_amount!=0 && this.get_custome_service_cancel_amount ==0 && this.getCustomerBalanceAmount ==0){

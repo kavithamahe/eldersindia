@@ -332,7 +332,7 @@ export class MyApp {
     });
     
   }
- 
+
   showToaster(message)
   {
    let toast = this.toastCtrl.create({
