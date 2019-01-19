@@ -1095,6 +1095,7 @@ console.log(fileEntry);
     alert.present();
   }
   doInfinite(infiniteScroll) {
+    console.log(this.serviceRequestInfo.length);
     console.log("kavitha");
     setTimeout(() => {      
       if(this.nextPageURL!=null && this.nextPageURL!='')

@@ -83,7 +83,6 @@ export class Modelpage1PagePage {
     this.recurringType = navParams.get("recurringType");
     this.requestService = navParams.get("requestService");
     this.serviceDatas =  navParams.get("serviceDatas");
-    console.log(this.serviceDatas);
     this.getCustomerBalanceAmount = this.serviceDatas.getCustomerBalanceAmount;
     this.get_custome_amount = this.serviceDatas.get_custome_amount;
     this.get_custome_deliever_amount = this.serviceDatas.get_custome_deliever_amount;
@@ -94,10 +93,12 @@ export class Modelpage1PagePage {
     this.servicediscountcost = this.serviceDatas.servicediscountcost;
     this.discountcost = this.serviceDatas.discountcost;
     this.serviceType = this.serviceDatas.serviceType;
-    this.datetime = this.serviceDatas.datetime;
+    this.datetime = moment(this.serviceDatas.datetime).format("DD-MM-YYYY");
     this.preferred_time = this.serviceDatas.preferred_time;
-    this.fromdate = this.serviceDatas.from_date;
-    this.todate = this.serviceDatas.to_date;
+    if(this.serviceDatas.from_date != "Invalid date" && this.serviceDatas.from_date != ""){
+    this.fromdate = moment(this.serviceDatas.from_date).format("DD-MM-YYYY");
+    this.todate = moment(this.serviceDatas.to_date).format("DD-MM-YYYY");
+  }
     this.fromtime = this.serviceDatas.from_time;
     this.totime = this.serviceDatas.to_time;
     this.timeslot = this.serviceDatas.time_slot;
@@ -126,7 +127,6 @@ export class Modelpage1PagePage {
     this.discountpartial = this.paydata.discountpartial;
     this.servicediscountcost_one_service = this.paydata.servicediscountcost_one_service;
     this.serviceData =  navParams.get("serviceDatas");
-    console.log(this.serviceData);
 
     if(this.serviceType == "One time"){
       this.servicecost =this.serviceDatas.servicecost;
@@ -152,8 +152,6 @@ export class Modelpage1PagePage {
     console.log('ionViewDidLoad Modelpage1PagePage');
   }
    applyCoupan(serviceType){
-    console.log(this.coupan_code);
-    // this.serviceDatas.datetime = moment(this.serviceDatas.datetime).format("DD-MM-YYYY");
       if(this.serviceDatas.datetime == "Invalid date"){
       this.serviceDatas.datetime = "";
     }

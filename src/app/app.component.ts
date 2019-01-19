@@ -1,6 +1,6 @@
 import { Component, ViewChild} from '@angular/core';
 
-import { Platform, MenuController, Nav, AlertController,ToastController,LoadingController,Events  } from 'ionic-angular';
+import { Platform, MenuController, Nav, AlertController,ToastController,LoadingController,Events ,IonicApp } from 'ionic-angular';
 
 //import { Diagnostic } from 'ionic-native';
 import { CameraPreview, CameraPreviewRect, Diagnostic,StatusBar, Splashscreen} from 'ionic-native';
@@ -113,7 +113,9 @@ export class MyApp {
     public events: Events,
     public networkProvider: NetworkProvider,
     // private crashlytics: Crashlytics,
-    private ga: GoogleAnalytics
+    private ga: GoogleAnalytics,
+      public ionicApp: IonicApp
+
   ) {
 
             this.platform.ready().then(() => {
@@ -379,10 +381,17 @@ export class MyApp {
       }, 100);
       
    this.platform.registerBackButtonAction(() => {
+      let activePortal = this.ionicApp._loadingPortal.getActive() || // Close If Any Loader Active
+              this.ionicApp._modalPortal.getActive() ||  // Close If Any Modal Active
+              this.ionicApp._overlayPortal.getActive(); // Close If Any Overlay Active
 
-                if(this.nav.canGoBack()){
+              if (activePortal) {
+                  activePortal.dismiss();
+              }
+               else if(this.nav.canGoBack()){
                   this.nav.pop();
-                }else{
+                }
+                else{
                   if(this.alert){ 
                     this.alert.dismiss();
                     this.alert =null;     
@@ -394,6 +403,7 @@ export class MyApp {
                       this.nav.setRoot(DashboardPage);
                     }
                    }
+                 
                 }
               });
     });

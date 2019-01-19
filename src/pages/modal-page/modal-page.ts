@@ -274,16 +274,20 @@ export class ModalContentPage {
     })
     }
     getServicedependentlists(){
+      if(this.vendor_id){
       this.providerService.getServicedependentlist(this.vendor_id)
       .subscribe(data =>{ 
         this.get_Servicedependentlist = data.result;
     })
     }
+    }
     getCancelpolicyByVendors(){
+      if(this.vendor_id){
           this.providerService.getCancelpolicyByVendor(this.vendor_id)
       .subscribe(data =>{ 
         this.getvendor_cancelpolicy = data.result.conditionsLink;
     })
+    }
     }
      getCancelpolicyByVendor(vendor_id){
           this.providerService.getCancelpolicyByVendor(vendor_id)
@@ -435,7 +439,6 @@ export class ModalContentPage {
      this.getRecurringDiscount(this.datCount);
   }
     getpackageInfo(vendor_id){
-      console.log(vendor_id);
     this.providerService.packageListsInfo(this.location_id,this.service_ids,this.dependents_id,vendor_id)
       .subscribe(data =>{                                                                             
         this.packageLists=data.result.info.lists;
@@ -448,7 +451,8 @@ export class ModalContentPage {
     
    }
    getpackageInfoList(){
-      this.providerService.packageListsInfo(this.location_id,this.service_ids,this.dependents_id,this.vendor_id)
+    if(this.vendor_id){
+          this.providerService.packageListsInfo(this.location_id,this.service_ids,this.dependents_id,this.vendor_id)
       .subscribe(data =>{                                                                             
         this.packageLists=data.result.info.lists;
         this.flag = "1";
@@ -457,6 +461,7 @@ export class ModalContentPage {
     err =>{
          this.flag = "0";
     }) 
+    }
    }
   getRecurringDiscount(datCount){
      this.providerService.getRecurringDiscount(datCount)
@@ -582,7 +587,7 @@ export class ModalContentPage {
 
    }
    packageinfo(){
-    console.log(this.vendor_id);
+    if(this.vendor_id){
     this.getCustomerBalanceAmountsSponsor();
     this.providerService.packageListsInfo(this.location_id,this.service_id,this.authForm.value.dependents,this.vendor_id)
       .subscribe(data =>{ 
@@ -596,6 +601,7 @@ export class ModalContentPage {
         //this.packageLists='';
         this.flag="0";
     },)
+    }
    }
 
 

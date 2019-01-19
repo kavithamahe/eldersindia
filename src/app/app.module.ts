@@ -121,18 +121,18 @@ import { NetworkProvider } from '../providers/network/network';
 
 import { HttpClientModule } from '@angular/common/http';
 
-// Sentry.init({ dsn: 'https://c70968390e6645c4a30b0aa7462b8fc3@monitor.eldersindia.com/7' });
+Sentry.init({ dsn: 'https://c70968390e6645c4a30b0aa7462b8fc3@monitor.eldersindia.com/7' });
 
-// export class SentryIonicErrorHandler extends IonicErrorHandler {
-//   handleError(error) {
-//     super.handleError(error);
-//     try {
-//       Sentry.captureException(error.originalError || error);
-//     } catch (e) {
-//       console.error(e);
-//     }
-//   }
-// }
+export class SentryIonicErrorHandler extends IonicErrorHandler {
+  handleError(error) {
+    super.handleError(error);
+    try {
+      Sentry.captureException(error.originalError || error);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+}
  
 @NgModule({
   declarations: [
@@ -291,7 +291,7 @@ import { HttpClientModule } from '@angular/common/http';
     VerifyotpPagePage,
     CancelrequestsPage
   ],
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},FileTransfer,FileChooser,FilePath,File,FileOpener,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics, 
+     providers: [{provide: ErrorHandler, useClass: SentryIonicErrorHandler},FileTransfer,FileChooser,FilePath,File,FileOpener,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics, 
     NetworkProvider] // Add GithubUsers provider
 
 
