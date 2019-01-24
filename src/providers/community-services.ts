@@ -104,7 +104,7 @@ resumeupload(formData, options){
 sendMessage(id,subject,message,name,file23,member_name){
     this.send = {"message":{"attachments":[{"file_name":name,"file_path":file23}],"to":{"title":member_name,"originalObject":{"id":id}},"subject":subject,"message":message,
     
-}}
+           }}
 
    return this.http.post(`${this.getCommunityPostsUrl }sendMessage`,this.send,this.options)
       .map(res =>res.json());

@@ -44,8 +44,6 @@ created_at:any;
       storage.get('token').then((token) => { this.token=token; 
       this.posts = navParams.get("posts");
       this.post_comments = this.posts.comments;
-      console.log(this.post_comments);
-        // this.created_at = moment(this.post_comments.created_at).format("DD MMM YYYY HH:mm:ss");
         this.post_likes = this.posts.comments.likes;
         this.post_id = this.posts.id;
         this.post_profile_id = this.posts.profile_id;

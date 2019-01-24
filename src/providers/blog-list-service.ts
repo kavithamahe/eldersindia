@@ -151,6 +151,16 @@ serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id
     return this.http.post(rootUrl+'getBulkRecurringService',_request,this.options)
       .map(res => res.json());
   }
+  getCompleteBulkRecurringService(rootUrl,recurring){
+     let _request= {"id": recurring};
+    return this.http.post(rootUrl+'getCompleteBulkRecurringService',_request,this.options)
+      .map(res => res.json());
+  }
+  completeBulkRecurringService(rootUrl,recurring,rating,other,remarks){
+     let _request= {"id": recurring,"other_comment":other,"rating":rating,"remark":remarks};
+    return this.http.post(rootUrl+'completeBulkRecurringService',_request,this.options)
+      .map(res => res.json());
+  }
   deleterecurringrequest(rootUrl,recurring,dedction_amount,refund_amount,remaining_amount,paid_amount,balance_amount,total_amount){
     let _request= {"id":recurring,"dedction_amount":dedction_amount,"refund_amount":refund_amount,"remaining_amount":remaining_amount,
     "total_amount":total_amount,"balance_amount":balance_amount,"paid_amount":paid_amount};

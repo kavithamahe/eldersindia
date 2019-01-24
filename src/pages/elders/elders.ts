@@ -640,7 +640,7 @@ getTagsList(ev){
        }
   }
  fileChange(event) {
-   let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+   let loader = this.loadingCtrl.create({ content: "Please wait..." });      
     loader.present();
     let fileList: FileList = event.target.files;
     if(fileList.length > 0) {

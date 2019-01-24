@@ -63,6 +63,9 @@ error:any;
 check:any;
 scrollTop:boolean = false;
 result:any=[];
+connectionsCount:any;
+receivedconnectionsCount:any;
+sendconnectionsCount:any;
    constructor(private popoverCtrl: PopoverController,public platform: Platform,public navCtrl: NavController, public actionsheetCtrl: ActionSheetController,public navParams: NavParams,public storage:Storage,public connectionsService:ConnectionsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.getconnections="myConnections";
     this.connectionsaction ="all";
@@ -99,12 +102,12 @@ result:any=[];
      this.connectionsService.allConnections().subscribe(
      (allConnections) => {
      // setInterval(()=> {
-        this.allConnectionsInfo=allConnections.result.info.list.data;  
+        this.allConnectionsInfo = allConnections.result.info.list.data;  
+        this.connectionsCount = allConnections.result.info.connectionsCount;
         var filtered =  _.uniqBy(this.allConnectionsInfo, 'id');
         this.allConnectionsInfo = filtered;
       this.orgAllConnectionsInfo=allConnections.result.info.list.data;
       this.nextPageURL1=allConnections.result.info.list.next_page_url; 
-      console.log(this.nextPageURL1);
        //},5000); 
      loader.dismiss();       
     },
@@ -129,6 +132,7 @@ result:any=[];
     this.connectionsService.receivedRquest().subscribe(
      (receivedRquest) => {
       this.receivedRquestInfo=receivedRquest.result.info.list.data;
+      this.receivedconnectionsCount = receivedRquest.result.info.connectionsCount;
       var filtered =  _.uniqBy(this.receivedRquestInfo, 'id');
         this.receivedRquestInfo = filtered; 
       this.orgReceivedRquestInfo=receivedRquest.result.info.list.data; 
@@ -158,6 +162,7 @@ result:any=[];
     this.connectionsService.sentRquest().subscribe(
      (sentRquest) => {
       this.sentRquestInfo=sentRquest.result.info.list.data;
+      this.sendconnectionsCount = sentRquest.result.info.connectionsCount;
        var filtered =  _.uniqBy(this.sentRquestInfo, 'id');
         this.sentRquestInfo = filtered; 
       this.nextPageURL4=sentRquest.result.info.list.next_page_url;     
@@ -497,7 +502,8 @@ result:any=[];
     );
   }
   presentPopover(ev) {
-    let popover = this.popoverCtrl.create(PopoverPage, {
+    let popover = this.popoverCtrl.create(PopoverPage, {"connectionsCount":this.connectionsCount,
+      "receivedconnectionsCount":this.receivedconnectionsCount,"sendconnectionsCount":this.sendconnectionsCount
     });
     popover.present({
       ev: ev
@@ -530,21 +536,27 @@ result:any=[];
 @Component({
   template: `<ion-list class='send-req'>
 <ion-item (click)="requests('all')">
-All Requests
+All Requests <ion-badge item-end>{{connectionsCount}}</ion-badge>
 </ion-item>
 <ion-item (click)="requests('received')">
-Received Requests
+Received Requests <ion-badge item-end>{{receivedconnectionsCount}}</ion-badge>
 </ion-item>
 <ion-item (click)="requests('sent')">
-Sent Requests
+Sent Requests <ion-badge item-end>{{sendconnectionsCount}}</ion-badge>
 </ion-item>
 </ion-list>
   `
 })
 export class PopoverPage {
   connectionsaction:any;
-  constructor(private viewCtrl: ViewController) {
+  connectionsCount:any;
+  receivedconnectionsCount:any;
+  sendconnectionsCount:any;
+  constructor(private viewCtrl: ViewController,public navParams: NavParams) {
    this.connectionsaction = "all";
+   this.connectionsCount = navParams.get("connectionsCount");
+   this.receivedconnectionsCount = navParams.get("receivedconnectionsCount");
+   this.sendconnectionsCount = navParams.get("sendconnectionsCount");
    }
  requests(data){
    this.connectionsaction=data;

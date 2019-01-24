@@ -1,8 +1,12 @@
 import { Component,ViewChild } from '@angular/core';
 import { Content } from 'ionic-angular';
-import { NavController, NavParams,LoadingController,ToastController,ModalController } from 'ionic-angular';
+import { NavController, NavParams,LoadingController,ToastController,ModalController,Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CallNumber } from 'ionic-native';
+import { FileOpener } from '@ionic-native/file-opener';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import {saveAs as importedSaveAs} from "file-saver";
 
 
 import { DashboardPage } from '../../pages/dashboard/dashboard';
@@ -11,8 +15,9 @@ import { RecurringcancelPagePage } from '../../pages/recurringcancel/recurringca
 import { PackagepaymentPagePage } from '../../pages/packagepayment/packagepayment';
 
 import { BlogListService } from '../../providers/blog-list-service';
+import { ServiceRequestService } from '../../providers/service-request-service';
 import moment from 'moment';
-
+declare var cordova: any;
 /*
   Generated class for the RecurringPage page.
 
@@ -23,7 +28,7 @@ import moment from 'moment';
 @Component({
   selector: 'page-recurring',
   templateUrl: 'recurring.html',
-  providers:[BlogListService]
+  providers:[BlogListService,ServiceRequestService]
 })
 export class RecurringPagePage {
   @ViewChild(Content) content: Content;
@@ -37,7 +42,7 @@ sortby:any="";
 sr_token:any;
 updated_at:any;
 scrollTop:boolean = false;
-  constructor(public navCtrl: NavController,public modalCtrl: ModalController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
+  constructor(public fileOpener :FileOpener,private transfer: FileTransfer,public platform:Platform,public serviceRequest:ServiceRequestService,private file: File,public navCtrl: NavController,public modalCtrl: ModalController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
   if(this.navParams.get("sr_token")){
       this.searchText =this.navParams.get("sr_token");
    
@@ -80,6 +85,60 @@ scrollTop:boolean = false;
         });
    toast.present();
   }
+     downloadBlobToPDF(recurring) { 
+        let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+      loader.present();
+      let recreation = "0";
+      this.serviceRequest.invoiceFromUser(recurring.recurring_request_id,recreation).subscribe(
+    res => {
+      const blob = res.blob();
+      const file = new Blob([blob], {type:'application/pdf'});
+      const filename = 'invoice' + Date.now() + '.pdf';
+  //     importedSaveAs(file, filename);
+   loader.dismiss(); 
+
+    var blobs = new Blob([blob], {type:'application/pdf'});
+   
+  let filePath =  this.file.externalApplicationStorageDirectory;
+
+    //Write the file
+    this.file.writeFile(filePath, filename, blobs, { replace: true }).then((fileEntry) => {
+          this.fileOpener.open(fileEntry.nativeURL, 'application/pdf')
+            .then(() => {
+              let url = fileEntry.nativeURL;
+               const fileTransfer: FileTransferObject = this.transfer.create();
+
+         var targetPath = cordova.file.externalRootDirectory + filename;
+
+      cordova.plugins.DownloadManager.download(url,targetPath);
+        fileTransfer.download(url, targetPath,  true ).then((entry) => {
+         this.showToaster("Downloaded Succesfully"); 
+        },
+         (error) => {
+          console.log("error");
+        }); 
+            })
+            .catch(err => console.error('Error openening file: ' + err));
+        })
+          .catch((err) => {
+            console.error("Error creating file: " + err);
+            throw err;  
+          });
+   },
+    (err) => { 
+      loader.dismiss(); 
+        if(err.status===401)
+        {
+          this.showToaster(JSON.parse(err._body).error);
+        }
+        else
+        {
+          this.showToaster("Something went wrong");
+        }
+      })  
+   
+}
+
    paynow(service_cost,service_id,recurring_request_id){
     let service_type = "Recurring";
     this.navCtrl.push(PackagepaymentPagePage,{"service_type":service_type,"service_cost":service_cost,"service_id":service_id,"recurring_request_id":recurring_request_id,"reqstatus":"2"});
@@ -100,7 +159,6 @@ scrollTop:boolean = false;
       var str = data.sr_token;
          data.sr_tokenend = str.replace("-1" ,"");
       data.remainingamount = parseFloat(data.remaining_amount).toFixed(2);
-      console.log(data.updated_at);
       data.updated_at = moment(data.updated_at).format("DD-MM-YYYY HH:mm:ss");
     }
         this.recurringRequest = dataList;
@@ -163,9 +221,10 @@ scrollTop:boolean = false;
      
   }
   deleteviewrecurring(recurring){
-    this.navCtrl.push(RecurringcancelPagePage,{recurringview:recurring});
-    // let modal = this.modalCtrl.create(RecurringcancelPagePage,{recurringview:recurring});
-    // modal.present();
+    this.navCtrl.push(RecurringcancelPagePage,{recurringview:recurring,"bulkcomplete":"0"});
+    }
+    completebulkrecurring(recurring){
+    this.navCtrl.push(RecurringcancelPagePage,{"recurringview":recurring,"bulkcomplete":"1"});
     }
   viewrecurring(recurring){
     this.navCtrl.push(RecurringviewPagePage,{recurringview:recurring});

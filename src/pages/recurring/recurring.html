@@ -107,8 +107,8 @@
           <b>Payment Status</b><span>-</span>
           <p>
             <button ion-button clear *ngIf="recurring.payUmny_payment_status=='captured'  && recurring.remaining_amount!=0 && recurring.package_id ==''"
-              (click)="paynow(recurring.remainingamount,recurring.recurring_request_id,recurring.recurring_request_id)" class="pay-btn">Pay Now</button>
-            <button ion-button clear *ngIf="recurring.payUmny_payment_status!='captured' && recurring.package_id==''" (click)="paynow(recurring.remainingamount,recurring.recurring_request_id,recurring.recurring_request_id)" class="pay-btn">Pay Now</button>
+              (click)="paynow(recurring.remainingamount,recurring.recurring_request_id,recurring.recurring_request_id)" class="pay-btn">Pay <i class="fa fa-rupee"></i>{{recurring.remainingamount}}</button>
+            <button ion-button clear *ngIf="recurring.payUmny_payment_status!='captured' && recurring.package_id==''" (click)="paynow(recurring.remainingamount,recurring.recurring_request_id,recurring.recurring_request_id)" class="pay-btn">Pay <i class="fa fa-rupee"></i>{{recurring.remainingamount}}</button>
             <button ion-button clear *ngIf="(recurring.payUmny_payment_status=='captured' && recurring.payment_method=='full_payment' && recurring.remaining_amount==0) || recurring.package_id !=''" class="paid-btn">Paid
             </button>
           </p>
@@ -121,14 +121,35 @@
           <p>{{recurring.updated_at}}</p>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col class="view-serv" col-6 text-left>
+      <ion-row *ngIf = "recurring.invoice_status == 0">
+        <ion-col class="view-serv" col-4 text-left>
           <ion-badge (click)="viewrecurring(recurring)" class="services-view">
             <i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
             </ion-col>
-          <ion-col class="view-serv" col-6>
+             <ion-col class="view-serv" col-4 *ngIf = "recurring.complete_status && recurring.allowBulkClosure == 1">
+          <ion-badge class="dele" *ngIf="recurring?.cancel_status != 0" (click)="completebulkrecurring(recurring)" class="services-delete">
+            <i class="fa fa-trash" aria-hidden="true"></i> comp</ion-badge>
+        </ion-col>
+          <ion-col class="view-serv" col-4>
           <ion-badge class="dele" *ngIf="recurring?.cancel_status != 0" (click)="deleteviewrecurring(recurring)" class="services-delete">
             <i class="fa fa-trash" aria-hidden="true"></i> Delete</ion-badge>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf = "recurring.invoice_status != 0">
+        <ion-col class="view-serv" col-4 text-left>
+          <ion-badge (click)="viewrecurring(recurring)" class="services-view">
+            <i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
+            </ion-col>
+          <ion-col class="view-serv" col-4>
+          <ion-badge class="dele" *ngIf="recurring?.cancel_status != 0" (click)="deleteviewrecurring(recurring)" class="services-delete">
+            <i class="fa fa-trash" aria-hidden="true"></i> Delete</ion-badge>
+          </ion-col>
+          <ion-col class="view-servs" col-4 *ngIf = "recurring.invoice_status != 0">
+           <a #downloadBlob (click)="downloadBlobToPDF(recurring)">
+              <ion-chip class="call-btn">
+                <ion-icon name="cash" class="text-center" color="primary"></ion-icon>
+              </ion-chip>
+            </a>
         </ion-col>
       </ion-row>
     </ion-grid>

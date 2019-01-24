@@ -12,7 +12,7 @@
 
 
 <ion-content class="login-pages">
-<ion-card class="liste-view">
+<ion-card class="liste-view" *ngIf = "!bulkcomplete">
 	<ion-item text-wrap>
 	   <h1>You are cancelling the following services</h1>
 	   <div *ngFor="let recurring of recurringRequest">
@@ -23,6 +23,7 @@
 	<ion-item>
 	<h1>Total service amount:<i class="fa fa-rupee"></i>{{service_cost_total | number : '1.2-2'}}</h1>
 	<h1>Paid amount:<i class="fa fa-rupee"></i>{{paid_amount | number : '1.2-2'}}</h1>
+	<h1 *ngIf="previous_service_pending_cost">Previous service due:<i class="fa fa-rupee"></i>{{previous_service_pending_cost | number : '1.2-2'}}</h1>
 	<h1>Cancellation fee:<i class="fa fa-rupee"></i>{{dedction_amount | number : '1.2-2'}}</h1>
 	<h1 *ngIf="paid_amount > total_amount">Refundable Amount:<i class="fa fa-rupee"></i>{{refund_amount | number : '1.2-2'}}</h1>
 	<h1 *ngIf="total_amount > paid_amount && paid_amount">Balance Amount:<i class="fa fa-rupee"></i>{{balance_amount | number : '1.2-2'}}</h1>
@@ -32,13 +33,61 @@
 	</ion-input>
 	</ion-item>
 	  <ion-row>
+  	<ion-col class="view-serv">
+		<ion-badge (click)="cancel()" class="services-del">No</ion-badge>
+		<ion-badge class="dele" (click)="delete()" class="services">Yes</ion-badge>
+	</ion-col>
+   </ion-row>
+	</ion-card>
+
+	<ion-card class="liste-view" *ngIf = "bulkcomplete">
+	<ion-item text-wrap>
+	   <h1>You are complete the following services</h1>
+	   <div *ngFor="let recurring of getCompleteBulk">
+	   			<ion-badge>{{recurring.sr_token}}</ion-badge>
+	   	</div><br><br>
+	   	<div *ngIf = "reamining_cost != 0 && reamining_cost != null">
+	   	<h1>You have to pay {{reamining_cost}} for complete the above service(s).</h1>
+	   	</div>
+	   	 <ion-row *ngIf = "reamining_cost != 0 && reamining_cost != null">
+	    <ion-col class="view-serv">
+		<ion-badge (click)="payserviceamount()" class="services-del">Pay Now</ion-badge>
+		</ion-col>
+		</ion-row>
+        <div class="rating-left">
+          <h2>Rating</h2>
+        </div>
+        <div class="rating-left">
+          <h3 class="rating-clr paa-ff">
+            <rating [(ngModel)]="rating" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"
+              nullable="false"></rating>
+          </h3>
+        </div>
+  
+        <ion-item>
+          <ion-textarea class="pack-select" autosize placeholder="say something about your service experience.." [(ngModel)]="other"
+            class="remarks-listed">
+          </ion-textarea>
+        </ion-item>
+
+	</ion-item>
+        <ion-card class="pack-select">
+          <ion-item text-wrap>
+            <ion-label>Remarks</ion-label>
+            <ion-select [(ngModel)]="remarks">
+              <ion-option *ngFor="let remarkList of getRemarksList" value="{{remarkList.id}}">{{remarkList.remarks}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-card>
+	  <ion-row>
   <ion-col class="view-serv">
 <ion-badge (click)="cancel()" class="services-del">No</ion-badge>
-<ion-badge class="dele" (click)="delete()" class="services">Yes</ion-badge>
+<ion-badge class="dele" (click)="completebulkservice()" class="services">Yes</ion-badge>
 	</ion-col>
    </ion-row>
 
 	</ion-card>
+
 	
 
 </ion-content>

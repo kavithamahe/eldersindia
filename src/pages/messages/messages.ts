@@ -120,7 +120,7 @@ selected:any;
       }
       return check;
     }
-  logDeleteStudents(viewType) {
+  logDeleteStudents(viewType) { 
     this.hidedelete = false;
       this.messagesService.deleteBulkMessages(this.selectedContacts,viewType).subscribe(
      (deleteMessage) => {

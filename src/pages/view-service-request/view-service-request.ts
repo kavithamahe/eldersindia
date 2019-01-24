@@ -36,6 +36,7 @@ paidamount3:any;
 paidamount4:any;
 prebookcost:any;
 updated_at:any;
+cancelled_date:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -75,6 +76,7 @@ updated_at:any;
      (viewServiceRequest) => {
       this.viewServiceRequestInfo=viewServiceRequest.result;
       this.updated_at = moment(viewServiceRequest.result.updated_at).format("DD-MM-YYYY HH:mm:ss");
+      this.cancelled_date = moment(viewServiceRequest.result.cancelled_date).format("DD-MM-YYYY HH:mm:ss");
       this.paidamount1 = (parseFloat(this.viewServiceRequestInfo.service_cost) - parseFloat(this.viewServiceRequestInfo.additional_service_cost));
       this.paidamount2 = (parseFloat(this.viewServiceRequestInfo.service_cost) + parseFloat(this.viewServiceRequestInfo.additional_service_cost));
       this.paidamount3 = (this.viewServiceRequestInfo.service_cost - parseFloat(this.viewServiceRequestInfo.service_balance_amount) + parseFloat(this.viewServiceRequestInfo.additional_service_cost));

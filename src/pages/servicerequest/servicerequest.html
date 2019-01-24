@@ -151,16 +151,16 @@
               </ion-badge>
             </p>
 
-            <p *ngIf="service?.Paymentstatus=='captured'  && service?.payment_method=='' && service?.additional_service_cost!='0' && service?.additional_service_cost != '0.00' && service?.additional_service_cost_status=='0' && (service?.status=='5' || service?.sub_category_name =='Wearables' ) && service?.package_id==''">
+            <p *ngIf="service?.Paymentstatus=='captured'  && service?.payment_method=='' && service?.additional_service_cost!='0' && service?.additional_service_cost != '0.00' && service?.additional_service_cost_status=='0' && (service?.status=='5' || service?.template_id == '3' ) && service?.package_id==''">
               <ion-badge (click)="payOptionforAdditionalServiceCost(service.sr_token,service.id,service?.additional_service_cost,service?.payment_status,service?.service_type)">Pay Now <i class="fa fa-rupee"></i> {{service?.additional_service_cost}}
               </ion-badge>
             </p>
 
-            <p *ngIf="service?.Paymentstatus!='captured' && service?.service_cost == 0 && service?.payment_status == 'payment_processing' && service?.payment_method=='' && service?.additional_service_cost!='0' && service?.additional_service_cost != '0.00' && service?.additional_service_cost_status=='0' && (service?.status=='3' || service?.status=='5' || service?.sub_category_name =='Wearables' ) && service?.package_id==''">
+            <p *ngIf="service?.Paymentstatus!='captured' && service?.service_cost == 0 && service?.payment_status == 'payment_processing' && service?.payment_method=='' && service?.additional_service_cost!='0' && service?.additional_service_cost != '0.00' && service?.additional_service_cost_status=='0' && (service?.status=='3' || service?.status=='5' || service?.template_id =='3' ) && service?.package_id==''">
               <ion-badge (click)="payOptionforAdditionalServiceCost(service.sr_token,service.id,service?.additional_service_cost,service?.payment_status,service?.service_type)" >Pay Now <i class="fa fa-rupee">{{service?.additional_service_cost }}</i></ion-badge>
             </p>
 
-               <p *ngIf=" service?.is_recurring_service != 1 && service?.Paymentstatus!='captured' && service?.service_cost != 0 && service?.service_cost != 0.00 && service?.payment_status == 'payment_processing' && service?.payment_method==''  && service?.additional_service_cost_status=='0' && (service?.status=='3' || service?.sub_category_name =='Wearables' ) && service?.package_id==''">
+               <p *ngIf=" service?.is_recurring_service != 1 && service?.Paymentstatus!='captured' && service?.service_cost != 0 && service?.service_cost != 0.00 && service?.payment_status == 'payment_processing' && service?.payment_method==''  && service?.additional_service_cost_status=='0' && (service?.status=='3' || service?.template_id =='3' ) && service?.package_id==''">
 
               <ion-badge *ngIf="(service?.pending_service_amount) + (service?.additional_service_cost) - (service?.prev_service_amount_balance) != 0" (click)="payOptionforpendingPayment(service.sr_token,service.pending_service_amount,service?.id,service?.additional_service_cost,service?.payment_status,service?.prev_service_amount_balance,'cancel')">Pay Now <i class="fa fa-rupee"></i> {{service?.pendingserviceamount + service?.additionalservicecost -service?.prevserviceamountbalance}}</ion-badge>
               </p>

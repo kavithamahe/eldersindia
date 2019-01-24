@@ -79,7 +79,7 @@ is_recreation_config:any;
       }
         let percentages = ((100 - this.percentage));
       this.refund_amount = (this.paid_amount * percentages/100);
-
+ 
       }
     else{
        this.txnid = navParams.get("txnid");
@@ -110,7 +110,7 @@ is_recreation_config:any;
 
       this.recurringrefund=(this.refund_amounts - ((this.paid_amount * this.percentage/100)/this.req_count));
           if(this.cancel_services > 1 && this.package_id != 1){
-    this.cancellationfees = ((this.paid_amount * this.percentage/100)/this.req_count);
+    this.cancellationfees = ((this.actual_service_cost * this.percentage/100)/this.req_count);
     }
     if(this.cancel_services ==1 && this.package_id != 1){
     this.cancellationfees = ((this.paid_amount * this.percentage/100)/this.req_count);
@@ -202,7 +202,7 @@ is_recreation_config:any;
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     if(this.cancel_services > 1 && this.package_id != 1){
-    this.deductionamounts = ((this.paid_amount * this.percentage/100)/this.req_count);
+    this.deductionamounts = ((this.actual_service_cost * this.percentage/100)/this.req_count);
     }
     if(this.cancel_services==1 && this.package_id != 1){
     this.deductionamounts = ((this.paid_amount * this.percentage/100)/this.req_count);

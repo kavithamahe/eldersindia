@@ -121,7 +121,7 @@ import { NetworkProvider } from '../providers/network/network';
 
 import { HttpClientModule } from '@angular/common/http';
 
-Sentry.init({ dsn: 'https://c70968390e6645c4a30b0aa7462b8fc3@monitor.eldersindia.com/7' });
+// Sentry.init({ dsn: 'https://c70968390e6645c4a30b0aa7462b8fc3@monitor.eldersindia.com/7'});
 
 export class SentryIonicErrorHandler extends IonicErrorHandler {
   handleError(error) {
@@ -132,6 +132,7 @@ export class SentryIonicErrorHandler extends IonicErrorHandler {
       console.error(e);
     }
   }
+
 }
  
 @NgModule({

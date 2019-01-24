@@ -19,13 +19,15 @@
     <ion-list>
       <ion-item (tap)="toggle('privacy_profile')">
         <ion-label>
-          <i class="fa fa-user" aria-hidden="true"></i>&nbsp;Profile</ion-label>
-        <ion-toggle [(ngModel)]="privacy_profile" ion-toggle-text></ion-toggle>
+          <i class="fa fa-user" aria-hidden="true"></i>&nbsp;Profile</ion-label><ion-label *ngIf="privacy_profile == true" style="text-align: right;">yes</ion-label>
+          <ion-label *ngIf="privacy_profile == false" style="text-align: right;">No</ion-label>
+        <ion-toggle [(ngModel)]="privacy_profile" ion-toggle-text (ionChange)="notify()"></ion-toggle>
       </ion-item>
       <ion-item (tap)="toggle('privacy_email')" *ngIf="privacy_profile == true">
         <ion-label>
           <i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;Email
-        </ion-label>
+        </ion-label><ion-label *ngIf="privacy_email == true" style="text-align: right;">yes</ion-label>
+          <ion-label *ngIf="privacy_email == false" style="text-align: right;">No</ion-label>
         <ion-toggle [(ngModel)]="privacy_email" ion-toggle-text>
           <b>{{ privacy_email || false }}</b>
         </ion-toggle>
@@ -34,23 +36,31 @@
       <ion-item (tap)="toggle('privacy_mobile')" *ngIf="privacy_profile == true">
         <ion-label>
           <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Mobile</ion-label>
+          <ion-label *ngIf="privacy_mobile == true" style="text-align: right;">yes</ion-label>
+          <ion-label *ngIf="privacy_mobile == false" style="text-align: right;">No</ion-label>
         <ion-toggle [(ngModel)]="privacy_mobile"></ion-toggle>
       </ion-item>
 
       <ion-item (tap)="toggle('privacy_location')" *ngIf="privacy_profile == true">
         <ion-label>
           <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;Location</ion-label>
+          <ion-label *ngIf="privacy_location == true" style="text-align: right;">yes</ion-label>
+          <ion-label *ngIf="privacy_location == false" style="text-align: right;">No</ion-label>
         <ion-toggle [(ngModel)]="privacy_location"></ion-toggle>
       </ion-item>
 
       <ion-item (tap)="toggle('privacy_birthday')" *ngIf="privacy_profile == true">
         <ion-label>
           <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;Birthday</ion-label>
+          <ion-label *ngIf="privacy_birthday == true" style="text-align: right;">yes</ion-label>
+          <ion-label *ngIf="privacy_birthday == false" style="text-align: right;">No</ion-label>
         <ion-toggle [(ngModel)]="privacy_birthday"></ion-toggle>
       </ion-item>
       <ion-item (tap)="toggle('privacy_connection')">
         <ion-label>
           <i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Connections</ion-label>
+          <ion-label *ngIf="privacy_connection == true" style="text-align: right;">yes</ion-label>
+          <ion-label *ngIf="privacy_connection == false" style="text-align: right;">No</ion-label>
         <ion-toggle [(ngModel)]="privacy_connection"></ion-toggle>
       </ion-item>
 

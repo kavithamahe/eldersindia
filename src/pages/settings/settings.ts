@@ -26,7 +26,7 @@ export class SettingsPage {
 	privacy_birthday:any;
 	privacy_avatar:any;
   privacy_connection:any;
-  privacy_profile:any;
+  privacy_profile:boolean;
 	status:any;
 	user_uid:any;
 	user_id:any;
@@ -62,7 +62,9 @@ export class SettingsPage {
     }
     
   }
-
+notify() {
+  console.log("Toggled: "+ this.privacy_profile); 
+}
   change(){
     console.log("record count updated");
   }

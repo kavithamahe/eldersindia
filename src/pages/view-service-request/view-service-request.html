@@ -175,13 +175,18 @@
   <span>Wheelchair Type</span><p>{{viewServiceRequestInfo?.weelchair_type}}</p>
    </ion-col>
   </ion-row>
- 
-   <ion-row *ngIf = "viewServiceRequestInfo?.status ==3">   
+   <ion-row *ngIf = "viewServiceRequestInfo?.package_id == '' || viewServiceRequestInfo?.package_id == null">   
     <ion-col width-100 class="child_menu">
-  <span>Cancelled date</span><p>{{viewServiceRequestInfo?.cancelled_date}}</p>
+  <span>Payment Status</span><p *ngIf = "viewServiceRequestInfo?.payUmny_payment_status == 'captured'">Paid</p>
+  <p *ngIf = "viewServiceRequestInfo?.payUmny_payment_status != 'captured'">Not Paid</p>
    </ion-col>
   </ion-row>
-     <ion-row *ngIf = "viewServiceRequestInfo?.status ==3 && viewServiceRequestInfo?.pending_service_amount != 0">   
+   <ion-row *ngIf = "viewServiceRequestInfo?.status ==3 ">   
+    <ion-col width-100 class="child_menu">
+  <span>Cancelled date</span><p>{{cancelled_date}}</p>
+   </ion-col>
+  </ion-row>
+    <ion-row *ngIf = "viewServiceRequestInfo?.status ==3 && viewServiceRequestInfo?.pending_service_amount != 0">   
     <ion-col width-100 class="child_menu">
   <span>Cancellation fee</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.pending_service_amount | number : '1.2-2'}}</p>
    </ion-col>
