@@ -44,6 +44,8 @@ senddelete: boolean = false;
 selected:any;
  selectedContacts: any=[];
  sendselectedContacts: any=[];
+ currentCompany:any;
+ multirow:any=[];
    constructor(public navCtrl: NavController,public alertCtrl: AlertController, public navParams: NavParams,platform: Platform,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.isAndroid = platform.is('android');
     if(navParams.get("viewType")!='' && navParams.get("viewType")!=null)
@@ -81,12 +83,11 @@ selected:any;
 
        if(this.isInArray(id)){
          let index = this.selectedContacts.indexOf(id);
-
          this.selectedContacts.splice(index,1);
          this.selected = false;
        }else{
           this.selectedContacts.push(id);
-               this.hidedelete = true;
+          this.hidedelete = true;
        }
     }
 
@@ -99,6 +100,15 @@ selected:any;
       }
       return check;
     }
+      setClickedRow(index){
+        if(this.multirow[index]){
+          this.multirow[index] = "";
+        }
+        else{
+          this.multirow[index] = index;
+        }
+           
+        }
    deletesendMultipel(id) {
    
        if(this.isInArraySend(id)){
@@ -134,7 +144,7 @@ sentlogDeleteStudents(viewType){
   this.messagesService.deleteBulkMessages(this.sendselectedContacts,viewType).subscribe(
      (deleteMessage) => {
        this.showToaster(deleteMessage.result);
-   this.sent();
+       this.sent();
     });
 }
   public onInit()
@@ -153,6 +163,7 @@ sentlogDeleteStudents(viewType){
         this.inboxInfo = dataList;
       this.status=this.inboxInfo.read_status;
       this.nextPageURL1=inbox.result.next_page_url;  
+
       loader.dismiss();    
     },
     (err) => { 
@@ -171,6 +182,7 @@ sentlogDeleteStudents(viewType){
       }
     );
   }
+ 
    public getItems(inbox){
 
     

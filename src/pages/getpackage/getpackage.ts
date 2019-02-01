@@ -98,20 +98,31 @@ wallet_value:any;
   })
     }
       else{
-           if(this.coupandiscount == "1"){
+           if(this.coupandiscount == "1" && this.final_service_cost != 0){
         this.package_amount = this.final_service_cost;
       }
       else{
         this.package_amount = this.package_amount;
       }
+      if(this.final_service_cost == 0){
+           this.blogListService.zeroavailpackage(this.packId,this.location_id,this.wallet_value,this.coupon_id,
+            this.package_amount,this.discounted_cost,this.selectedConnections,this.final_service_cost).subscribe(
+     (availpackage) => {
+       this.blogListService.showToast(availpackage.result);
+      })
+          this.dismiss();
+        }
+        else{
      this.navCtrl.push(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
       "package_amount":this.package_amount,"wallet_value":this.wallet_value,"coupon_id":this.coupon_id,"coupan_offer":this.discounted_cost});
       this.dismiss();
+    }
     }
   }
   }
 
     getPackage(){
+      console.log(this.coupon_id);
        this.blogListService.packageAvailAlert(this.selectedConnections,this.packId,this.service_quantity,this.location_id).subscribe(connections => {
         this.packageAvailstatus=connections.status;
         this.packageAvailresult = connections.result;
@@ -141,16 +152,26 @@ wallet_value:any;
   })
     }
     else{
-      if(this.coupandiscount == "1"){
+      if(this.coupandiscount == "1" && this.final_service_cost != 0){
         this.package_amount = this.final_service_cost;
       }
       else{
         this.package_amount = this.package_amount;
       }
       if(this.packageAvailstatus == 0){
-          this.navCtrl.push(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
+        if(this.final_service_cost == 0){
+           this.blogListService.zeroavailpackage(this.packId,this.location_id,this.wallet_value,this.coupon_id,
+            this.package_amount,this.discounted_cost,this.selectedConnections,this.final_service_cost).subscribe(
+     (availpackage) => {
+       this.blogListService.showToast(availpackage.result);
+      })
+          this.dismiss();
+        }
+        else{
+           this.navCtrl.push(PackagepaymentPagePage,{"packId":this.packId,"vendor_id":this.vendor_id,"package_validity":this.package_validity,"selectedConnections":this.selectedConnections,
       "package_amount":this.package_amount,"wallet_value":this.wallet_value,"coupon_id":this.coupon_id,"coupan_offer":this.discounted_cost});
      this.dismiss();
+   } 
       }
     else{
       this.blogListService.showToast(this.packageAvailresult);

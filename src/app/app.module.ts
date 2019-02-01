@@ -26,7 +26,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
 
 import { Geolocation } from 'ionic-native';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
-import { Diagnostic } from 'ionic-native';
+// import { Diagnostic } from 'ionic-native';
 import { CameraPreview } from 'ionic-native';
 import {MomentModule} from 'angular2-moment';
 import { FileChooser } from '@ionic-native/file-chooser';
@@ -292,7 +292,7 @@ export class SentryIonicErrorHandler extends IonicErrorHandler {
     VerifyotpPagePage,
     CancelrequestsPage
   ],
-     providers: [{provide: ErrorHandler, useClass: SentryIonicErrorHandler},FileTransfer,FileChooser,FilePath,File,FileOpener,Diagnostic,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics, 
+     providers: [{provide: ErrorHandler, useClass: SentryIonicErrorHandler},FileTransfer,FileChooser,FilePath,File,FileOpener,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics, 
     NetworkProvider] // Add GithubUsers provider
 
 

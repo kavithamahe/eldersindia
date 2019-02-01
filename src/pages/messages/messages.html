@@ -60,14 +60,14 @@
         </div>
       </div>
       <div class="message-list">
-        <ion-list *ngFor="let inbox of inboxInfo">
+        <ion-list *ngFor="let inbox of inboxInfo ; let i = index " (press)="setClickedRow(i)">
           <ion-item-sliding class="inbox-sends">
             <ion-item (press)="clickedAvatar(inbox.id)" [class]="isInArray(inbox.id) ? 'selected' : 'not-selected'" (click)="viewMessages(inbox?.id,'inbox')">
               <ion-card>
-                <ion-row>
+                <ion-row  [class.active]="i == multirow[i]">
                   <ion-col style="max-width: 20%;" width-40>
                     <ion-avatar item-left>
-                      <img src="{{imageUrl+inbox?.avatar}}">
+                      <img src="{{imageUrl+inbox?.avatar}}" />
                     </ion-avatar>
                   </ion-col>
                   <ion-col width-60 class="send-box-content">
@@ -185,3 +185,9 @@
     </ion-list>
   </div>
 </ion-content>
+
+<style>
+             .active {
+  background:rgba(221, 221, 221, 0.6);
+}
+</style>

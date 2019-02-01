@@ -110,8 +110,8 @@
           <ion-badge (click)="getPackageRequestBy(package?.req_id)" (press)="pressview(package?.req_id)" class="services-view">
             <i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
         </ion-col>
-         <ion-col #downloadBlob (click)="downloadBlobToPDF(package?.req_id,package?.id)" class="view-serv" col-2>
-            <ion-chip>
+         <ion-col style="padding-top: 13px;" #downloadBlob (click)="downloadBlobToPDF(package?.req_id,package?.id)" col-2>
+            <ion-chip >
                 <ion-icon name="cash" class="text-center" color="primary"></ion-icon>
               </ion-chip>
         </ion-col>

@@ -306,6 +306,12 @@ getPackageRequestById(rootUrl,packageId){
     return this.http.post(this.rootUrl+'packageAvailAlert',_request,this.options)
       .map(res => res.json()); 
       }
+  zeroavailpackage(packId,location_id,wallet_value,coupon_id,package_amount,discounted_cost,selectedConnections,final_service_cost){
+    let _request= {"coupon_code_discount_cost": discounted_cost, "final_service_cost_after_coupon_code_discount": final_service_cost,"coupon_id":coupon_id,"location_id":location_id,
+    "dependent_id":selectedConnections,"coupon_offer":discounted_cost,"pack_amount":package_amount,"pack_id":packId,"wallet_value":wallet_value};
+    return this.http.post(this.rootUrl+'availPackage',_request,this.options)
+      .map(res => res.json()); 
+    }
    getPackage(selectedConnections,packId,location_id){
     let _request= {"pack_id": packId, "dependent_id": selectedConnections,"location_id":location_id};
     return this.http.post(this.rootUrl+'availPackage',_request,this.options)

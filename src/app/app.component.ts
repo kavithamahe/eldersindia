@@ -2,15 +2,13 @@ import { Component, ViewChild} from '@angular/core';
 
 import { Platform, MenuController, Nav, AlertController,ToastController,LoadingController,Events ,IonicApp } from 'ionic-angular';
 
-//import { Diagnostic } from 'ionic-native';
-import { CameraPreview, CameraPreviewRect, Diagnostic,StatusBar, Splashscreen} from 'ionic-native';
+import { CameraPreview, CameraPreviewRect, StatusBar, Splashscreen} from 'ionic-native';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Network } from '@ionic-native/network';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { LocalNotifications, Geolocation } from 'ionic-native';
-// import { Crashlytics } from '@ionic-native/fabric';
 
 
 // import the Menu's pages
@@ -119,6 +117,20 @@ export class MyApp {
   ) {
 
             this.platform.ready().then(() => {
+
+                this.network.onConnect().subscribe(data => {
+          console.log("ONCONNECT ")
+          console.log(data)
+          // this._commonProvider.setLocal("network_status",data.type);
+
+
+        }, error => console.error(error));
+
+        this.network.onDisconnect().subscribe(data => {
+          console.log("ONDISCONNECT ")
+          console.log(data)
+          // this._commonProvider.setLocal("network_status",data.type);
+        }, error => console.error(error));
 
               this.networkProvider.initializeNetworkEvents();
 
@@ -445,28 +457,28 @@ export class MyApp {
             toast.present();
           }
     checkPermissions() {
-    Diagnostic.isCameraAuthorized().then((authorized) => {
-    if(authorized)
+    // Diagnostic.isCameraAuthorized().then((authorized) => {
+    // if(authorized)
 
         this.initializePreview();
-    else {
-        Diagnostic.requestCameraAuthorization().then((status) => {
-            if(status == Diagnostic.permissionStatus.GRANTED)
-                this.initializePreview();
-            else {
-                // Permissions not granted
-                // Therefore, create and present toast
-                this.toastCtrl.create(
-                    {
-                        message: "Cannot access camera", 
-                        position: "bottom",
-                        duration: 5000
-                    }
-                ).present();
-            }
-        });
-    }
-});
+//     else {
+//         Diagnostic.requestCameraAuthorization().then((status) => {
+//             if(status == Diagnostic.permissionStatus.GRANTED)
+//                 this.initializePreview();
+//             else {
+//                 // Permissions not granted
+//                 // Therefore, create and present toast
+//                 this.toastCtrl.create(
+//                     {
+//                         message: "Cannot access camera", 
+//                         position: "bottom",
+//                         duration: 5000
+//                     }
+//                 ).present();
+//             }
+//         });
+//     }
+// });
 }
 initializePreview() {
     let previewRect: CameraPreviewRect = {

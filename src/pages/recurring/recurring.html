@@ -122,27 +122,32 @@
         </ion-col>
       </ion-row>
       <ion-row *ngIf = "recurring.invoice_status == 0">
-        <ion-col class="view-serv" col-4 text-left>
-          <ion-badge (click)="viewrecurring(recurring)" class="services-view">
-            <i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
+        <ion-col col-4>
+          <ion-badge style="padding-top: 5px; padding-right: 10px; padding-bottom: 5px;
+           padding-left: 10px; background-color: #025fa9;" (click)="viewrecurring(recurring)" class="services-view">
+            View</ion-badge>
             </ion-col>
-             <ion-col class="view-serv" col-4 *ngIf = "recurring.complete_status && recurring.allowBulkClosure == 1">
-          <ion-badge class="dele" *ngIf="recurring?.cancel_status != 0" (click)="completebulkrecurring(recurring)" class="services-delete">
-            <i class="fa fa-trash" aria-hidden="true"></i> comp</ion-badge>
-        </ion-col>
-          <ion-col class="view-serv" col-4>
-          <ion-badge class="dele" *ngIf="recurring?.cancel_status != 0" (click)="deleteviewrecurring(recurring)" class="services-delete">
-            <i class="fa fa-trash" aria-hidden="true"></i> Delete</ion-badge>
+          <ion-col col-4 *ngIf = "recurring.complete_status && recurring.allowBulkClosure == 1">
+          <ion-badge style="padding-top: 5px; padding-right: 10px; padding-bottom: 5px;
+           padding-left: 10px; background-color: #5cb85c;" *ngIf="recurring?.cancel_status != 0" (click)="completebulkrecurring(recurring)" class="services-delete">
+          complete</ion-badge>
+          </ion-col>
+          <ion-col col-4>
+          <ion-badge style="padding-top: 5px; padding-right: 10px; padding-bottom: 5px;
+           padding-left: 10px; background-color: #f44336;" *ngIf="recurring?.cancel_status != 0" (click)="deleteviewrecurring(recurring)" class="services-delete">
+          cancel</ion-badge>
         </ion-col>
       </ion-row>
       <ion-row *ngIf = "recurring.invoice_status != 0">
-        <ion-col class="view-serv" col-4 text-left>
-          <ion-badge (click)="viewrecurring(recurring)" class="services-view">
-            <i class="fa fa-eye" aria-hidden="true"></i> View</ion-badge>
+          <ion-col col-4 text-left>
+          <ion-badge style="padding-top: 5px; padding-right: 10px; padding-bottom: 5px;
+           padding-left: 10px; background-color: #025fa9;" (click)="viewrecurring(recurring)" class="services-view">
+           View</ion-badge>
             </ion-col>
-          <ion-col class="view-serv" col-4>
-          <ion-badge class="dele" *ngIf="recurring?.cancel_status != 0" (click)="deleteviewrecurring(recurring)" class="services-delete">
-            <i class="fa fa-trash" aria-hidden="true"></i> Delete</ion-badge>
+          <ion-col col-4>
+          <ion-badge style="padding-top: 5px; padding-right: 10px; padding-bottom: 5px;
+           padding-left: 10px; background-color: #f44336;" class="dele" *ngIf="recurring?.cancel_status != 0" (click)="deleteviewrecurring(recurring)" class="services-delete">
+            cancel</ion-badge>
           </ion-col>
           <ion-col class="view-servs" col-4 *ngIf = "recurring.invoice_status != 0">
            <a #downloadBlob (click)="downloadBlobToPDF(recurring)">

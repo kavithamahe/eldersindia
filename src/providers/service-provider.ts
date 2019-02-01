@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http,Headers,RequestOptions } from '@angular/http';
-import {ToastController} from 'ionic-angular';
+import {ToastController,AlertController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { AppConfig } from '../providers/app-config';
 import 'rxjs/Rx';
@@ -21,7 +21,7 @@ body: any;
 token:any; 
 rootUrl:any;
 
-  constructor(public app:AppConfig, public http: Http, public storage:Storage,public toastCtrl:ToastController) {
+  constructor(public app:AppConfig, public http: Http, public storage:Storage,public toastCtrl:ToastController,private alertCtrl: AlertController) {
     this.storage.ready().then(() => {
       storage.get('token').then((token) => { this.token=token;
       this.headers = new Headers();
@@ -243,6 +243,22 @@ confirmationToast(message) {
        this.showToast("Something went wrong");   
       }
   }
+     presentConfirm(messageData) {
+  let alert = this.alertCtrl.create({
+    title: 'Response',
+    message: messageData,
+    buttons: [
+    
+      {
+        text: 'Ok',
+        handler: () => {
+          console.log('Buy clicked');
+        }
+      }
+    ]
+  });
+  alert.present();
+}
  
 }
 

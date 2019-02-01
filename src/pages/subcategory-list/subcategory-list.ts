@@ -301,7 +301,8 @@ pressevent(modalPage,vendorData){
     this.providerService.webServiceCall(`serviceRequestSubmitbeforePayLater`,requestServiceData)
        .subscribe( 
         data =>{
-                 this.providerService.showToast(data.result);
+                this.providerService.presentConfirm(data.result);
+                 // this.providerService.showToast(data.result);
                   if(this.scheduleModal != "instant"){
                  this.navCtrl.setRoot(ServicerequestPage);
                }
@@ -334,7 +335,8 @@ pressevent(modalPage,vendorData){
     this.providerService.webServiceCall(`serviceRequestSubmitbeforePayLater`,requestServiceData)
        .subscribe(
         data =>{
-                 this.providerService.showToast(data.result);
+                 // this.providerService.showToast(data.result);
+                 this.providerService.presentConfirm(data.result);
                   if(this.scheduleModal != "instant"){
                  this.navCtrl.setRoot(ServicerequestPage);
                }
