@@ -26,17 +26,32 @@
 <br/>
 <ion-card class="req-viewlist" >
  
-
+   <ion-row>
+  <ion-col width-100 class="child_menu">
+  <span>Sponsor Name</span>
+   <p>{{viewServiceRequestInfo?.sponsor_name}} {{viewServiceRequestInfo?.sponsor_last_name}}</p>
+   </ion-col>
+  </ion-row>
+   <ion-row>
+  <ion-col width-100 class="child_menu">
+  <span>Dependent Name</span>
+   <p>{{viewServiceRequestInfo?.eo_name}} {{viewServiceRequestInfo?.eo_last_name}}</p>
+   </ion-col>
+  </ion-row>
   <ion-row>
-  
-    <ion-col width-100 class="child_menu">
+  <ion-col width-100 class="child_menu">
 	<span>Service Provider Name</span>
    <p>{{viewServiceRequestInfo?.vendor_name}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>
-   
-    <ion-col width-100 class="child_menu">
+   <ion-row *ngIf = "viewServiceRequestInfo?.enquiry_about">
+  <ion-col width-100 class="child_menu">
+  <span>Enquiry about</span>
+   <p>{{viewServiceRequestInfo?.enquiry_about}}</p>
+   </ion-col>
+  </ion-row>
+  <ion-row *ngIf = "viewServiceRequestInfo?.contact_number">
+   <ion-col width-100 class="child_menu">
 	<span>Contact Number</span>
    <p>{{viewServiceRequestInfo?.contact_number}}</p>
    </ion-col>
@@ -70,17 +85,21 @@
    </ion-col>
   </ion-row>
    <ion-row *ngIf ="viewServiceRequestInfo?.package_name != undefined">
-   
-    <ion-col width-100 class="child_menu">
+   <ion-col width-100 class="child_menu">
   <span>Package Name</span>
    <p>{{viewServiceRequestInfo?.package_name}}</p>
    </ion-col>
   </ion-row>
   <ion-row>
-  
-    <ion-col width-100 class="child_menu">
+  <ion-col width-100 class="child_menu">
 	<span>Location</span>
    <p>{{viewServiceRequestInfo?.location_name}}</p>
+   </ion-col>
+  </ion-row>
+  <ion-row *ngIf = "viewServiceRequestInfo?.helpline_mobile">
+  <ion-col width-100 class="child_menu" >
+  <span>Service provider helpline</span>
+   <p>{{viewServiceRequestInfo?.helpline_mobile}}</p>
    </ion-col>
   </ion-row>
 
@@ -181,6 +200,18 @@
   <p *ngIf = "viewServiceRequestInfo?.payUmny_payment_status != 'captured'">Not Paid</p>
    </ion-col>
   </ion-row>
+    <ion-row *ngIf = "viewServiceRequestInfo?.remarks">
+  <ion-col width-100 class="child_menu">
+  <span>Remarks</span>
+   <p>{{viewServiceRequestInfo?.remarks}}</p>
+   </ion-col>
+  </ion-row>
+   <ion-row *ngIf = "viewServiceRequestInfo?.rating">
+  <ion-col width-100 class="child_menu">
+  <span>Rating</span>
+   <p>{{viewServiceRequestInfo?.rating}}</p>
+   </ion-col>
+  </ion-row>
    <ion-row *ngIf = "viewServiceRequestInfo?.status ==3 ">   
     <ion-col width-100 class="child_menu">
   <span>Cancelled date</span><p>{{cancelled_date}}</p>
@@ -206,18 +237,23 @@
   <span>Discount By Coupon Code</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.coupon_offer | number : '1.2-2'}}</p>
    </ion-col>
   </ion-row>
-   <ion-row *ngIf="viewServiceRequestInfo?.comments != null && viewServiceRequestInfo?.comments != ''">   
+   <ion-row *ngIf="viewServiceRequestInfo?.comments">   
     <ion-col width-100 class="child_menu">
   <span>Comments</span>
    <p>{{viewServiceRequestInfo?.comments}}</p>
    </ion-col>
   </ion-row>
+   <ion-row *ngIf="viewServiceRequestInfo?.other_remarks">   
+    <ion-col width-100 class="child_menu">
+    <span>Comments</span>
+    <p>{{viewServiceRequestInfo?.other_remarks}}</p>
+    </ion-col>
+   </ion-row>
 
   <div *ngIf="emergencyContact">
    <ion-row *ngIf="emergencyContact.length > 0">
    <ion-col width-100 class="child_menu">
-  <span>Emergency Contact Details</span>
-  
+   <span>Emergency Contact Details</span>
    </ion-col>
 </ion-row>
 <ion-row *ngIf="emergencyContact.length > 0">

@@ -32,7 +32,7 @@
       <ion-select [(ngModel)]="status" (ionChange)="onInitstatus()">
         <!--   <ion-option>All
      </ion-option>  -->
-     <ion-option value="">Select...</ion-option>
+        <ion-option value="">Select...</ion-option>
         <ion-option *ngFor="let status of servicestatus" value="{{status?.id}}">{{status?.label}}</ion-option>
       </ion-select>
     </ion-item>
@@ -286,17 +286,18 @@
           </ion-textarea>
         </ion-item>
 
-        <button (click)="submitRemark(service?.id)" class="remarks-sb">Submit</button>
+        <button 
+        (click)="submitRemark(service?.id,service?.service_type,service?.sr_token,service?.recurring_request_id)" class="remarks-sb">Submit</button>
 
       </ion-list>
     </ion-card>
 
   </ion-card>
-<!--   <ion-fab right bottom *ngIf="serviceRequestInfo.length != 0 && scrollTop">
+  <ion-fab right bottom *ngIf="serviceRequestInfo.length != 0 && scrollTop">
     <button ion-fab mini (click)="scrollToTop()">
       <ion-icon name="arrow-dropup"></ion-icon>
     </button>
-  </ion-fab> -->
+  </ion-fab>
     <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>

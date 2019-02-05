@@ -100,10 +100,11 @@ invoiceFromUser(sr_token,is_recreation_config): Observable<any> {
       .map(res => res.json()); 
   }
   
-  submitRemark(serviceId,rating,remarks,other) 
+  submitRemark(serviceId,rating,remarks,other,service_type,sr_token,recurring_request_id) 
   {
   
-   let _request= {info: {"starvalue": rating, "remarks": remarks, "id": serviceId,"other":other,"status": 2}};
+   let _request= {info: {"starvalue": rating, "remarks": remarks, "id": serviceId,"other":other,"status": 2,
+  "recurring_id":recurring_request_id,"service_type":service_type,"service_token":sr_token}};
     return this.http.post(this.rootUrl+'updateServiceReceiveStatus',_request,this.options)
       .map(res => res.json()); 
   }
@@ -116,8 +117,8 @@ invoiceFromUser(sr_token,is_recreation_config): Observable<any> {
   getRemarks() 
   {
   
-   let _request= {"info":{"list":true,"searchValue":"","status":""}};
-    return this.http.post(this.rootUrl+'getRemarks',_request,this.options)
+   let _request= {};
+    return this.http.post(this.rootUrl+'getRemarks?page=1',_request,this.options)
       .map(res => res.json()); 
   }
 

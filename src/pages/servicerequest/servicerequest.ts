@@ -196,7 +196,7 @@ console.log(fileEntry);
     }, 2000);
   }
     scrollToTop() {
-    this.content.scrollToTop();
+    this.content.scrollToTop(300);
   }
   scrollToBottom(){
     this.content.scrollToBottom();
@@ -549,7 +549,7 @@ console.log(fileEntry);
      this.showRemark=eventId;
    }
   }
-  submitRemark(serviceId)
+  submitRemark(serviceId,service_type,sr_token,recurring_request_id)
   {
     if(this.rating==0 && this.remarks=='')
     {
@@ -564,10 +564,10 @@ console.log(fileEntry);
     this.showAlert('Please enter remarks');
     }
     else
-    {
+    { 
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.serviceRequest.submitRemark(serviceId,this.rating,this.remarks,this.other).subscribe(
+    this.serviceRequest.submitRemark(serviceId,this.rating,this.remarks,this.other,service_type,sr_token,recurring_request_id).subscribe(
      (submitRemark) => {      
       this.showToaster(submitRemark.result);  
       this.remarks='';

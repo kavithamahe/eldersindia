@@ -11,6 +11,7 @@ import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { File } from '@ionic-native/file';
 import * as Sentry from 'sentry-cordova';
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 
 import { Ng2CompleterModule } from "ng2-completer";
 import { DatePipe } from '@angular/common';
@@ -93,6 +94,7 @@ import { CommunitymembersPage } from '../pages/communitymembers/communitymembers
 import { PopoverPage } from '../pages/connections/connections';
 import { PackagePopoverPage } from '../pages/package-request/package-request';
 import { EnquiryPopoverPage } from '../pages/enquiries/enquiries';
+import { OfflinePage } from '../pages/offline/offline';
 
 import { ManagePage } from '../pages/manage/manage';
 
@@ -204,7 +206,8 @@ export class SentryIonicErrorHandler extends IonicErrorHandler {
     ViewenquiryPagePage,
     SafemePagePage,
     VerifyotpPagePage,
-    CancelrequestsPage
+    CancelrequestsPage,
+    OfflinePage
   ],
   imports: [
     IonicStorageModule.forRoot({}),
@@ -290,9 +293,10 @@ export class SentryIonicErrorHandler extends IonicErrorHandler {
     ViewenquiryPagePage,
     SafemePagePage,
     VerifyotpPagePage,
-    CancelrequestsPage
+    CancelrequestsPage,
+    OfflinePage
   ],
-     providers: [{provide: ErrorHandler, useClass: SentryIonicErrorHandler},FileTransfer,FileChooser,FilePath,File,FileOpener,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics, 
+     providers: [{provide: ErrorHandler, useClass: SentryIonicErrorHandler},FileTransfer,FileChooser,FilePath,File,FileOpener,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics,StreamingMedia, 
     NetworkProvider] // Add GithubUsers provider
 
 

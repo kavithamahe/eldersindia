@@ -7,8 +7,7 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Network } from '@ionic-native/network';
-import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { LocalNotifications, Geolocation } from 'ionic-native';
+import { Geolocation } from 'ionic-native';
 
 
 // import the Menu's pages
@@ -29,13 +28,13 @@ import { RecurringPagePage } from '../pages/recurring/recurring';
 import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
 import { EnquiriesPagePage } from '../pages/enquiries/enquiries';
 import { SafemePagePage } from '../pages/safeme/safeme';
+import { OfflinePage } from '../pages/offline/offline';
 
 // kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
 import { CommunityPage } from '../pages/community/community';
 import { CommunityprofilePage } from '../pages/communityprofile/communityprofile';
 import { ManagePage } from '../pages/manage/manage';
-import { BlogtabsPage } from '../pages/blogtabs/blogtabs';
 import { BlogsPage } from '../pages/blogs/blogs';
 
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
@@ -53,8 +52,6 @@ import { NetworkProvider } from '../providers/network/network';
 
 
 import { Storage } from '@ionic/storage';
-declare var Connection: any;
-declare var google;
 
 @Component({//selector:'my-theme',
   templateUrl: 'app.html'
@@ -91,6 +88,7 @@ export class MyApp {
   rootPage: any;
 
   user_type:any='';
+  network_type:any;
 
   pages: Array<{myIcon:string, title: string, component: any}>;
   pages2: Array<{myIcon:string, title: string, component: any}>;
@@ -106,44 +104,21 @@ export class MyApp {
     public loadingCtrl: LoadingController,
     public community_service:CommunityServices,
     public storage:Storage,
-    private network: Network,
     private push: Push,
     public events: Events,
     public networkProvider: NetworkProvider,
-    // private crashlytics: Crashlytics,
     private ga: GoogleAnalytics,
-      public ionicApp: IonicApp
+    public ionicApp: IonicApp
 
   ) {
 
-            this.platform.ready().then(() => {
-
-                this.network.onConnect().subscribe(data => {
-          console.log("ONCONNECT ")
-          console.log(data)
-          // this._commonProvider.setLocal("network_status",data.type);
-
-
-        }, error => console.error(error));
-
-        this.network.onDisconnect().subscribe(data => {
-          console.log("ONDISCONNECT ")
-          console.log(data)
-          // this._commonProvider.setLocal("network_status",data.type);
-        }, error => console.error(error));
-
-              this.networkProvider.initializeNetworkEvents();
+          this.platform.ready().then(() => {
+          this.networkProvider.initializeNetworkEvents();
 
             // Offline event
           this.events.subscribe('network:offline', () => {
               alert("You are in offline,please switch on your network");    
           });
-
-          // // Online event
-          // this.events.subscribe('network:online', () => {
-          //     alert('network:online ==> '+this.network.type);  
-          //      this.showToaster(this.network.type);      
-          // });
 
             });
    this.ga.startTrackerWithId('UA-123161000-5')
@@ -153,8 +128,10 @@ export class MyApp {
      // Tracker is ready
      // You can now track pages or set additional information such as AppVersion or UserId
    })
-   .catch(e => console.log('Error starting GoogleAnalytics', e));
 
+   .catch(e => console.log('Error starting GoogleAnalytics', e));
+   // storage.get('network_type').then((network_type) => { this.network_type=network_type;
+   //  if(this.network_type == "online"){
     this.storage.ready().then(() => {
     storage.get('user_type').then((userType)=>{
     this.user_type = userType;  
@@ -282,7 +259,14 @@ export class MyApp {
       this.rootPage = LoginPage;
      }
      })
-   }); 
+   });
+    // }
+   //  else{
+   //    this.rootPage = OfflinePage;
+   //  }
+   // })
+
+ 
 
 // set our app's pages on user based
 

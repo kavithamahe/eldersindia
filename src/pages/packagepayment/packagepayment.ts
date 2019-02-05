@@ -141,7 +141,7 @@ coupon_id:any;
     console.log(this.service_type);
      var optionss = {
       description: "Payment made for "+this.sr_token+"",
-      image: this.imageUrl + "assets/img/Elderlogo.png",
+      image: "assets/img/icon.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costadd,
@@ -156,7 +156,7 @@ coupon_id:any;
        "service_id":this.service_id,
        "amount":this.service_costadd,
        "email": this.email,
-        "service_type":this.service_type,
+       "service_type":this.service_type,
        // "payment_status":this.payment_status
       },
       theme: {
@@ -206,7 +206,7 @@ paypartial(){
   console.log(this.service_id);
 	 var recurringOption = {
       description: "Payment made for SR"+this.recurring_request_id+"",
-      image: this.imageUrl + "assets/img/Elderlogo.png",
+      image: "assets/img/icon.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costss,
@@ -269,7 +269,7 @@ RazorpayCheckout.open(recurringOption, successCallback, cancelCallback);
  
     var options = {
       description: 'Razorpay',
-      image: this.imageUrl + "assets/img/Elderlogo.png",
+      image: "assets/img/icon.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.package_amounts,
@@ -306,7 +306,7 @@ let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     
 loading.present();
   var url  = localStorage.getItem("rootUrl")+"razorPaymentResponseforPackage";
-   var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+  var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", url,true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -354,7 +354,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
 else{
 	  var optionss = {
       description: "Payment made for "+this.sr_token+"",
-      image: this.imageUrl + "assets/img/Elderlogo.png",
+      image: "assets/img/icon.png",
       currency: 'INR',
       key: 'rzp_test_53tdpMxkK8bFKw',
       amount: this.service_costs,

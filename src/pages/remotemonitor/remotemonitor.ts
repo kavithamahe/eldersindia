@@ -50,6 +50,7 @@ urls:any;
        this.storage.set('usernames',usernames);
        this.storage.set('passwords',passwords);
        this.storage.set('urls',remoteurl);
+       // http://camview.12345@eldercam1.dlinkddns.com:8033/mjeg.cgi?
        this.storage.set('Cctv_camera',"http://"+usernames+":"+passwords+"@"+remoteurl+"" );
     });
      if(this.username != undefined && this.password != undefined && this.url != undefined){

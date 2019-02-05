@@ -129,7 +129,7 @@
             </ion-col>
           <ion-col col-4 *ngIf = "recurring.complete_status && recurring.allowBulkClosure == 1">
           <ion-badge style="padding-top: 5px; padding-right: 10px; padding-bottom: 5px;
-           padding-left: 10px; background-color: #5cb85c;" *ngIf="recurring?.cancel_status != 0" (click)="completebulkrecurring(recurring)" class="services-delete">
+           padding-left: 10px; background-color: #5cb85c;" (click)="completebulkrecurring(recurring)" class="services-delete">
           complete</ion-badge>
           </ion-col>
           <ion-col col-4>
@@ -138,7 +138,7 @@
           cancel</ion-badge>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf = "recurring.invoice_status != 0">
+      <ion-row *ngIf = "recurring.invoice_status == 1">
           <ion-col col-4 text-left>
           <ion-badge style="padding-top: 5px; padding-right: 10px; padding-bottom: 5px;
            padding-left: 10px; background-color: #025fa9;" (click)="viewrecurring(recurring)" class="services-view">
@@ -149,7 +149,7 @@
            padding-left: 10px; background-color: #f44336;" class="dele" *ngIf="recurring?.cancel_status != 0" (click)="deleteviewrecurring(recurring)" class="services-delete">
             cancel</ion-badge>
           </ion-col>
-          <ion-col class="view-servs" col-4 *ngIf = "recurring.invoice_status != 0">
+          <ion-col class="view-servs" col-4 *ngIf = "recurring.invoice_status == 1">
            <a #downloadBlob (click)="downloadBlobToPDF(recurring)">
               <ion-chip class="call-btn">
                 <ion-icon name="cash" class="text-center" color="primary"></ion-icon>

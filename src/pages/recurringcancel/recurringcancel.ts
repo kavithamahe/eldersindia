@@ -49,6 +49,7 @@ getRemarksList:any=[];
 remarks:any;
 other:any;
 rating:any;
+amount_received:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,public blogListService: BlogListService,public loadingCtrl: LoadingController,public storage:Storage,public serviceRequest:ServiceRequestService) {
   		this.storage.ready().then(() => {
   		storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
@@ -117,6 +118,7 @@ rating:any;
         this.service_costs = this.dedction_amounts.service_cost;
         this.total_amount = this.dedction_amounts.total_amount;
         this.service_cost_total = this.dedction_amounts.service_cost_total;
+        this.amount_received = this.dedction_amounts.amount_received;
         this.previous_service_pending_cost = this.dedction_amounts.previous_service_pending_cost;
         loading.dismiss();
     },
