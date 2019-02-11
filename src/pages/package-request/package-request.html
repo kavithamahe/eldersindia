@@ -35,7 +35,8 @@
   <div class="ion-searchbar" *ngIf = "packageEmail">
     <ion-row>
       <ion-col col-10>
-        <ion-searchbar placeholder="Email" [(ngModel)]="searchemail" (keyup.enter)="searchemails(searchemail)"></ion-searchbar>
+        <ion-searchbar placeholder="Email" [(ngModel)]="searchemail" (keyup.enter)="searchemails(searchemail)">
+        </ion-searchbar>
       </ion-col>
       <ion-col col-2 class="btn-go">
         <button (click)="searchemails(searchemail)" ion-button small class="go-btn">Go</button>

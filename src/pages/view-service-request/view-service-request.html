@@ -56,6 +56,18 @@
    <p>{{viewServiceRequestInfo?.contact_number}}</p>
    </ion-col>
   </ion-row>
+     <ion-row *ngIf = "viewServiceRequestInfo?.scheduled_at && (viewServiceRequestInfo?.status==4 || viewServiceRequestInfo?.status==5 || viewServiceRequestInfo?.status==2)">
+   <ion-col width-100 class="child_menu">
+  <span>Scheduled date & time</span>
+   <p>{{scheduled_at}}</p>
+   </ion-col>
+  </ion-row>
+    <ion-row *ngIf = "viewServiceRequestInfo?.servicer_name && (viewServiceRequestInfo?.status==4 || viewServiceRequestInfo?.status==5 || viewServiceRequestInfo?.status==2)">
+   <ion-col width-100 class="child_menu">
+  <span>Service allocated to</span>
+   <p>{{viewServiceRequestInfo?.servicer_name}}</p>
+   </ion-col>
+  </ion-row>
   <!-- <ion-row>
    
     <ion-col width-100 class="child_menu">

@@ -37,6 +37,7 @@ paidamount4:any;
 prebookcost:any;
 updated_at:any;
 cancelled_date:any;
+scheduled_at:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -83,6 +84,7 @@ cancelled_date:any;
       this.paidamount4 = (parseFloat(this.viewServiceRequestInfo.service_cost) - parseFloat(this.viewServiceRequestInfo.additional_service_cost));
       this.prebookcost = (parseFloat(this.viewServiceRequestInfo.service_cost) - parseFloat(this.viewServiceRequestInfo.additional_service_cost));
       this.emergencyContact = this.viewServiceRequestInfo.emergencyContact;
+      this.scheduled_at = moment(viewServiceRequest.result.scheduled_at).format("DD-MM-YYYY HH:mm:ss");
       this.preffer= viewServiceRequest.enquiry_date;
       loader.dismiss();   
     },

@@ -1095,8 +1095,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
   }
   drivernext(){
      if(this.user_type == 'sponsor'){
-      if(this.elder_id != undefined && this.date != undefined && this.time != undefined 
-        && this.hours != undefined && this.pickup != undefined){
+      if(this.elder_id != undefined && this.elder_id != "" && this.date != undefined && this.date != "" && this.time != undefined && this.time != "" && this.hours != undefined && this.hours != "" && this.pickup != undefined && this.pickup != ""){
         if(this.terms != undefined){
         this.confirmdriver = true;
         this.transportdriver = false;
@@ -1110,7 +1109,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       }
     }
     else{
-      if(this.date != undefined && this.time != undefined && this.hours != undefined && this.pickup != undefined){
+      if(this.date != undefined && this.date != "" && this.time != undefined && this.time != "" && this.hours != undefined && this.hours != "" && this.pickup != undefined && this.pickup != ""){
          if(this.terms != undefined){
         this.confirmdriver = true;
         this.transportdriver = false;
@@ -1137,10 +1136,12 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     this.navCtrl.pop();
   }
   cabnext(){
+    console.log(this.pickup);
     if(this.user_type == 'sponsor'){
       if(this.vendorList.vendorDetails.transport_type == '2'){
-         if(this.elder_id != undefined && this.date != undefined && this.time != undefined 
-        && this.typeofservice != undefined && this.weelchair != undefined && this.pickup != undefined && this.drop != undefined){
+         if(this.elder_id != undefined && this.elder_id != "" && this.date != undefined && this.date != "" && this.time != undefined && this.time != ""
+        && this.typeofservice != undefined && this.typeofservice != "" && this.weelchair != undefined && this.weelchair != "" && this.pickup != undefined && this.pickup != "" && this.drop != undefined 
+        && this.drop != ""){
           if(this.terms != undefined){
              this.confirmcab = true;
             this.transportcab = false;
@@ -1155,8 +1156,9 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       }
       }
       else{
-         if(this.elder_id != undefined && this.date != undefined && this.time != undefined 
-        && this.typeofservice != undefined && this.pickup != undefined && this.drop != undefined){
+         if(this.elder_id != undefined && this.elder_id != "" && this.date != undefined && this.date != "" && this.time != undefined && this.time != ""
+        && this.typeofservice != undefined && this.typeofservice != "" && this.pickup != undefined && this.pickup != "" && this.drop != undefined 
+        && this.drop != ""){
         if(this.terms != undefined){
         this.confirmcab = true;
         this.transportcab = false;
@@ -1173,8 +1175,9 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     }
     else{
       if(this.vendorList.vendorDetails.transport_type == '2'){
-         if(this.date != undefined && this.time != undefined && this.typeofservice != undefined && 
-        this.weelchair != undefined && this.pickup != undefined && this.drop != undefined){
+         if(this.date != undefined && this.date != "" && this.time != undefined && this.time != ""
+        && this.typeofservice != undefined && this.typeofservice != "" && this.weelchair != undefined && this.weelchair != "" && this.pickup != undefined && this.pickup != "" && this.drop != undefined 
+        && this.drop != ""){
         if(this.terms != undefined){
         this.confirmcab = true;
         this.transportcab = false;
@@ -1188,7 +1191,9 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       }
       }
       else{
-         if(this.date != undefined && this.time != undefined && this.typeofservice != undefined && this.pickup != undefined && this.drop != undefined){
+         if(this.date != undefined && this.date != "" && this.time != undefined && this.time != ""
+        && this.typeofservice != undefined && this.typeofservice != "" && this.pickup != undefined && this.pickup != "" && this.drop != undefined 
+        && this.drop != ""){
        if(this.terms != undefined){
         this.confirmcab = true;
         this.transportcab = false;

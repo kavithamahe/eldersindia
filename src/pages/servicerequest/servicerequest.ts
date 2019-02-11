@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component,ViewChild,ElementRef } from '@angular/core';
 import { Content } from 'ionic-angular';
 import { NavController, NavParams, LoadingController,ToastController,AlertController,ModalController,Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -20,6 +20,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
  import moment from 'moment';
 
 declare var cordova: any;
+
 
 
 /*
@@ -195,7 +196,7 @@ console.log(fileEntry);
       refresher.complete();
     }, 2000);
   }
-    scrollToTop() {
+  scrollToTop() {
     this.content.scrollToTop(300);
   }
   scrollToBottom(){
@@ -364,7 +365,7 @@ console.log(fileEntry);
   {
     this.serviceRequest.getRemarks().subscribe(
      (getRemarks) => {
-      this.getRemarksList=getRemarks.result.info.remark.data;       
+      this.getRemarksList=getRemarks.result.info.remark;       
     },
     (err) => { 
         if(err.status===401)
@@ -377,7 +378,7 @@ console.log(fileEntry);
   }
    showConfirmcancel(serviceId,hours,service_id,sub_category_id,status,servicediscountcost_one_service,
     service_type,txnid,id,service_cost,recurring_request_id,req_count,package_id,Paymentstatus,
-    paid_amount,sr_token,coupon_id,pending_service_amount,vendor_name,is_recreation_config){
+    paid_amount,sr_token,coupon_id,pending_service_amount,vendor_name,is_recreation_config,payment_status){
    
           if(hours == undefined){
         hours = "";
@@ -399,10 +400,36 @@ console.log(fileEntry);
       this.actual_service_cost = this.result.actual_service_cost;
       this.refund_amount = this.result.refund_amount;
       loader.dismiss();
+
+      //   if(this.percentage !='hours expired'){
+      //    if(this.paid_amount > this.utilized_service_cost){
+      //     this.dedaction_amount = service_cost * (this.percentage/100).toFixed(2);
+      //     console.log(this.dedaction_amount);
+      //     if(this.service_remaing_cost > this.dedaction_amount){
+      //       this.dedaction_service_cost = parseFloat(this.service_remaing_cost - this.dedaction_amount).toFixed(2);
+      //     console.log(this.dedaction_service_cost);
+      //     }else{
+            
+      //     }
+      //    }else if(this.paid_amount == this.utilized_service_cost){
+      //     this.dedaction_amount = service_cost * (this.percentage/100).toFixed(2);
+      //    }else{
+      //     this.dedaction_amount   = service_cost * (this.reduction_percentage/100).toFixed(2);
+      //     this.new_service_amount = this.utilized_service_cost + this.dedaction_amount;
+      //     this.final_payable_amount = (this.new_service_amount - this.paid_amount).toFixed(2);
+      //     // this.service_type = response.data.result.service_type;
+      //    }  
+      // }else{
+      //   this.final_payable_amount = (this.new_service_amount - this.paid_amount).toFixed(2);
+      //   this.dedaction_service_cost = parseFloat(this.paid_amount).toFixed(2);
+      //   console.log(this.dedaction_service_cost);
+      // }
+
        if(this.paid_amount > this.utilized_service_cost){
           this.cancelCharges = service_cost * (this.percentage/100);
           if(this.service_remaing_cost > this.cancelCharges){
            this.dedaction_service_cost = this.service_remaing_cost - this.cancelCharges;
+           console.log(this.dedaction_service_cost);
           }else{
             
           }
@@ -412,11 +439,10 @@ console.log(fileEntry);
          }else{
           this.cancelCharges = service_cost*(this.percentage/100);
           this.new_service_amount = this.utilized_service_cost + this.cancelCharges;
-         this.final_payable_amount = (this.new_service_amount - this.paid_amount).toFixed(2);
+          this.final_payable_amount = (this.new_service_amount - this.paid_amount).toFixed(2);
          }  
-            if(this.percentage !='hours expired'){
+            if(this.percentage != 'hours expired'){
              if(this.balanceamount_to_pay !=0 && this.cancel_services!=1){
-
                 this.dedaction_amount = Math.floor(this.actual_service_cost*(this.percentage/100)).toFixed(2);    
                 this.final_payable_amount = parseFloat(this.balanceamount_to_pay) + parseFloat(this.dedaction_amount);
              }
@@ -424,17 +450,14 @@ console.log(fileEntry);
                 this.dedaction_amount = Math.floor(this.actual_service_cost*(this.percentage/100)).toFixed(2);    
                 this.service_refund_amount = parseFloat(this.refund_amount) - parseFloat(this.dedaction_amount);
              }
-
-
         }else{
 
           this.final_payable_amount = (this.new_service_amount - this.paid_amount).toFixed(2);
         this.dedaction_service_cost = parseFloat(this.paid_amount).toFixed(2);
-
         }
           if(this.prompt){ 
                     this.prompt.dismiss();
-                    this.prompt =null;     
+                    this.prompt = null;     
                   }
           else{
             this.navCtrl.push(CancelrequestsPage,{"serviceId":serviceId,"service_cost":service_cost,"result":this.result,
@@ -443,14 +466,15 @@ console.log(fileEntry);
               "utilized_service_cost":this.utilized_service_cost,"recurring_request_id":recurring_request_id,"cancelCharges":this.cancelCharges,
               "dedaction_service_cost":this.dedaction_service_cost,"service_remaing_cost":this.service_remaing_cost,"final_payable_amount":this.final_payable_amount,
               "package_id":package_id,"sr_token":sr_token,"cancel_services":this.cancel_services,"balanceamount_to_pay":this.balanceamount_to_pay,
-              "service_refund_amount":this.service_refund_amount,"actual_service_cost":this.actual_service_cost,"vendor_name":vendor_name,"refund_amount":this.refund_amount,"is_recreation_config":is_recreation_config});
+              "service_refund_amount":this.service_refund_amount,"actual_service_cost":this.actual_service_cost,"vendor_name":vendor_name,
+              "refund_amount":this.refund_amount,"is_recreation_config":is_recreation_config,"payment_status":payment_status});
     }
     },
     (err) => { 
       loader.dismiss();
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+           this.showToaster(JSON.parse(err._body).error);
         }
         else
         {

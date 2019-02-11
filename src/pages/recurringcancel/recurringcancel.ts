@@ -140,7 +140,7 @@ amount_received:any;
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
     this.blogListService.deleterecurringrequest(this.rootUrl,this.recurring_request_id,this.dedction_amount,this.refund_amount,
-      this.remaining_amount,this.paid_amount,this.balance_amount,this.total_amount)
+      this.remaining_amount,this.paid_amount,this.balance_amount,this.total_amount,this.service_costs)
       .subscribe(data =>{ 
       	this.blogListService.showToast(data.result);
       	this.navCtrl.setRoot(RecurringPagePage);

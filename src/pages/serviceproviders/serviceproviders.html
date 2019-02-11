@@ -16,8 +16,12 @@
 </ion-header>
 <ion-content class="content-intop has-header">
   <ion-card class="pack-listed">
-    <button *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full (click)="subCategory(service)" class="myblock service-bg{{i}}">
-    <i class="{{service.icon}}" aria-hidden="true"></i> <i *ngIf="!service.icon" class="fa fa-bolt" aria-hidden="true"></i>
+    <button *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full 
+    (click)="subCategory(service)" class="myblock service-bg{{i}}">
+    <i class="{{service.icon}}" aria-hidden="true" *ngIf = "service.icon"></i>
+      <ion-thumbnail slot="start" *ngIf = "!service.icon">
+      <ion-img [src]="service.icon_image"></ion-img>
+    </ion-thumbnail>
     <p>{{service.service}}</p>
     </button>
   </ion-card>

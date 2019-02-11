@@ -54,6 +54,7 @@ deductionamounts:any;
 recurringrefund:any;
 service_remaing_cost:any;
 is_recreation_config:any;
+refund_amountsrecurring:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController,public loadingCtrl: LoadingController,public serviceRequest:ServiceRequestService) {
       this.service_type = navParams.get("service_type");
@@ -90,6 +91,7 @@ is_recreation_config:any;
       this.recurring_request_id = navParams.get("recurring_request_id");
       this.cancelCharges = navParams.get("cancelCharges");
       this.dedaction_service_cost = navParams.get("dedaction_service_cost");
+      console.log(this.dedaction_service_cost);
       this.package_id = navParams.get("package_id");
       this.sr_token = navParams.get("sr_token");
       this.service_remaing_cost = navParams.get("service_remaing_cost");
@@ -104,10 +106,11 @@ is_recreation_config:any;
       this.is_recreation_config = navParams.get("is_recreation_config");
       this.result = navParams.get("result");
       this.percentage = navParams.get("percentage");
+      this.payment_status = navParams.get("payment_status");
         if(this.percentage == "hours expired"){
         this.percentage = "0";
       }
-
+      this.refund_amountsrecurring = (this.dedaction_service_cost * this.percentage/100);
       this.recurringrefund=(this.refund_amounts - ((this.paid_amount * this.percentage/100)/this.req_count));
           if(this.cancel_services > 1 && this.package_id != 1){
     this.cancellationfees = ((this.actual_service_cost * this.percentage/100)/this.req_count);
@@ -213,7 +216,7 @@ is_recreation_config:any;
     
     this.payableamount = (this.balanceamount_to_pay + this.deductionamounts);
     this.serviceRequest.cancelRequest(this.comments,this.serviceId,this.service_type,this.txnid,this.paid_amount,
-      this.utilized_service_cost,this.percentage,this.recurring_request_id,this.cancelCharges,this.dedaction_service_cost,
+      this.utilized_service_cost,this.percentage,this.recurring_request_id,this.cancelCharges,this.refund_amountsrecurring,
       this.service_remaing_cost,this.req_count,this.package_id,this.balanceamount_to_pay,this.deductionamounts,this.payableamount,
       this.cancel_services).subscribe(
      (cancelRequest) => {  

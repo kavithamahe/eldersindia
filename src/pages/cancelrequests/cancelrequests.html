@@ -233,6 +233,12 @@
             <span class="discountCost">{{percentage}} %</span>
           </h5>
      </ion-item>
+   <!--     <ion-item text-wrap style="padding-left:10px;" *ngIf = "payment_status=='payment_success'">
+          <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Service refund amount :
+            <span class="discountCost">
+              <i class="fa fa-inr" aria-hidden="true"></i>{{refund_amountsrecurring | number : '1.2-2'}}</span>
+          </h5>
+     </ion-item> -->
      <ion-label style="padding-left:10px;" class = "required">Comments</ion-label>
       <ion-item style = "border: 2px solid #f2f2f2; border-radius: 15px;">
       <ion-input type="text" placeholder="Reason for Cancelling?" [(ngModel)] = "comments">

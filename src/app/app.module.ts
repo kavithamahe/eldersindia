@@ -10,8 +10,7 @@ import { TruncateModule } from 'ng2-truncate';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { File } from '@ionic-native/file';
-import * as Sentry from 'sentry-cordova';
-import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
+// import * as Sentry from 'sentry-cordova';
 
 import { Ng2CompleterModule } from "ng2-completer";
 import { DatePipe } from '@angular/common';
@@ -94,7 +93,6 @@ import { CommunitymembersPage } from '../pages/communitymembers/communitymembers
 import { PopoverPage } from '../pages/connections/connections';
 import { PackagePopoverPage } from '../pages/package-request/package-request';
 import { EnquiryPopoverPage } from '../pages/enquiries/enquiries';
-import { OfflinePage } from '../pages/offline/offline';
 
 import { ManagePage } from '../pages/manage/manage';
 
@@ -125,17 +123,17 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Sentry.init({ dsn: 'https://c70968390e6645c4a30b0aa7462b8fc3@monitor.eldersindia.com/7'});
 
-export class SentryIonicErrorHandler extends IonicErrorHandler {
-  handleError(error) {
-    super.handleError(error);
-    try {
-      Sentry.captureException(error.originalError || error);
-    } catch (e) {
-      console.error(e);
-    }
-  }
+// export class SentryIonicErrorHandler extends IonicErrorHandler {
+//   handleError(error) {
+//     super.handleError(error);
+//     try {
+//       Sentry.captureException(error.originalError || error);
+//     } catch (e) {
+//       console.error(e);
+//     }
+//   }
 
-}
+// }
  
 @NgModule({
   declarations: [
@@ -206,8 +204,7 @@ export class SentryIonicErrorHandler extends IonicErrorHandler {
     ViewenquiryPagePage,
     SafemePagePage,
     VerifyotpPagePage,
-    CancelrequestsPage,
-    OfflinePage
+    CancelrequestsPage
   ],
   imports: [
     IonicStorageModule.forRoot({}),
@@ -294,9 +291,8 @@ export class SentryIonicErrorHandler extends IonicErrorHandler {
     SafemePagePage,
     VerifyotpPagePage,
     CancelrequestsPage,
-    OfflinePage
   ],
-     providers: [{provide: ErrorHandler, useClass: SentryIonicErrorHandler},FileTransfer,FileChooser,FilePath,File,FileOpener,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics,StreamingMedia, 
+     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},FileTransfer,FileChooser,FilePath,File,FileOpener,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics, 
     NetworkProvider] // Add GithubUsers provider
 
 

@@ -28,7 +28,6 @@ import { RecurringPagePage } from '../pages/recurring/recurring';
 import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
 import { EnquiriesPagePage } from '../pages/enquiries/enquiries';
 import { SafemePagePage } from '../pages/safeme/safeme';
-import { OfflinePage } from '../pages/offline/offline';
 
 // kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';

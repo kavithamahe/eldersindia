@@ -53,7 +53,7 @@
         <i class="fa fa-envelope-o"></i>&nbsp;{{profileData?.email}}</p>
       <p *ngIf="user_type !='sponsor' ">
         <i class="fa fa-map-marker"></i>&nbsp;{{profileData?.address}}</p>
-         <p *ngIf="profileData?.available_account_balance != null && profileData?.available_account_balance != ''">Available Balance: <i class="fa fa-rupee"></i>&nbsp;{{profileData?.available_account_balance}}</p>
+         <p *ngIf = "profileData?.available_account_balance">Available Balance: <i class="fa fa-rupee"></i>{{profileData?.available_account_balance}}</p>
     </div>
   </div>
 </ion-content>

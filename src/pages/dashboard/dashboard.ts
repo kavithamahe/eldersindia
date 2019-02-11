@@ -8,7 +8,6 @@ import { LocalNotifications, Geolocation } from 'ionic-native';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { InAppBrowser } from 'ionic-native';
 import { Device } from "@ionic-native/device";
-import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 
 import { ServiceProvider } from '../../providers/service-provider';
 import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
@@ -73,7 +72,7 @@ export class DashboardPage {
   sponsor_id:any;
   id:any;
   safehelpdetails:any=[];
-  constructor(private nativeAudio: NativeAudio,private streamingMedia: StreamingMedia,public nativeGeocoder:NativeGeocoder,private device: Device,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
+  constructor(private nativeAudio: NativeAudio,public nativeGeocoder:NativeGeocoder,private device: Device,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
     storage.get('Cctv_camera').then((Cctv_camera) => { this.Cctv_camera=Cctv_camera; })
   	storage.get('elder_mobile_imei').then((elder_mobile_imei) => { this.elder_mobile_imei=elder_mobile_imei; })
     
