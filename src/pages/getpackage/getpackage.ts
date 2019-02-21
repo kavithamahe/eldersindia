@@ -68,8 +68,9 @@ wallet_value:any;
   }
  packageAvail(){
          this.blogListService.packageAvailAlert(this.selectedConnections,this.packId,this.service_quantity,this.location_id).subscribe(connections => {
-        this.packageAvailstatus=connections.status;
+        this.packageAvailstatus = connections.status;
         this.packageAvailresult = connections.result;
+        this.blogListService.showToast(this.packageAvailresult);
      },
    err =>{
       this.blogListService.showErrorToast(err);
@@ -122,7 +123,6 @@ wallet_value:any;
   }
 
     getPackage(){
-      console.log(this.coupon_id);
        this.blogListService.packageAvailAlert(this.selectedConnections,this.packId,this.service_quantity,this.location_id).subscribe(connections => {
         this.packageAvailstatus=connections.status;
         this.packageAvailresult = connections.result;

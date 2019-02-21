@@ -196,7 +196,7 @@ files:any;
   
   //let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     //loader.present();    
-      this.communityServices.getConnections(this.user_id).subscribe(connections => {
+      this.communityServices.getConnections(this.community_id).subscribe(connections => {
         this.connectionInfo=connections.result;
        // loader.dismiss();
      },
@@ -274,7 +274,7 @@ toggleContent(){
       let url2 = url1.replace("http://www.dailymotion.com/video/", "http://www.dailymotion.com/embed/video/");
    
       let url = url2.replace("https://vimeo.com/","https:\/\/player.vimeo.com\/video\/");
-      return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+      return this.sanitizer.bypassSecurityTrustResourceUrl(oldURL);
     }
     else{
       return null;
@@ -283,9 +283,7 @@ toggleContent(){
   showComment(post){
     this.nav.push(CommunitycommentsPage, { posts: post });
   }
-
-
-  addDetails(event){
+ addDetails(event){
     this.comment="";
     if(this.showblock==event){
         this.showblock=null;

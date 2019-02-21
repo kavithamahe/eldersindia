@@ -45,7 +45,6 @@ scrollTop:boolean = false;
   constructor(public fileOpener :FileOpener,private transfer: FileTransfer,public platform:Platform,public serviceRequest:ServiceRequestService,private file: File,public navCtrl: NavController,public modalCtrl: ModalController,public blogListService: BlogListService,public toastCtrl: ToastController,public storage:Storage, public navParams: NavParams,public loadingCtrl: LoadingController) {
   if(this.navParams.get("sr_token")){
       this.searchText =this.navParams.get("sr_token");
-   
   }
     
     this.storage.ready().then(() => {  
@@ -70,7 +69,7 @@ scrollTop:boolean = false;
     this.getrecurringRequest();
    }
   }
-   scrollToTop() {
+  scrollToTop() {
     this.content.scrollToTop();
   }
   scrollToBottom(){

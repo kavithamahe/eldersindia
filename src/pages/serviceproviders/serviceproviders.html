@@ -20,7 +20,7 @@
     (click)="subCategory(service)" class="myblock service-bg{{i}}">
     <i class="{{service.icon}}" aria-hidden="true" *ngIf = "service.icon"></i>
       <ion-thumbnail slot="start" *ngIf = "!service.icon">
-      <ion-img [src]="service.icon_image"></ion-img>
+      <img src="{{service.icon_image}}" width="50" height="40" />
     </ion-thumbnail>
     <p>{{service.service}}</p>
     </button>

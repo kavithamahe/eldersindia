@@ -218,6 +218,7 @@ pressinstant(vendorData){
       }
      this.date = new Date().toISOString();
      this.date = moment(this.date).format("DD-MM-YYYY");
+     console.log(this.date);
       this.service_cost = vendorData.service_cost - vendorData.percentage_cost;
       let d = new Date();
     let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
@@ -233,10 +234,10 @@ pressinstant(vendorData){
         var minutes = (+a[0]) * 60 + (+a[1]);
         let getHours=(minutess + minutes)/60;
         let lead_time = (getHours.toString().split(".")[0])+":"+((minutess + minutes)%60);
-
+console.log(this.date);
     let serviceRequestData = {"problem": this.serviceTitle, "datetime": this.date, "dependentId": this.elderId, "mobile_no": "","serviceType":"One time",
 
-    "time_slot":"","from_date":"","from_time":"","preferred_time":"lead_time","to_date":"","to_time":"","instant":"","base_cost":vendorData.service_cost,"service_cost":this.service_cost,
+    "time_slot":"","from_date":"","from_time":"","preferred_time":lead_time,"to_date":"","to_time":"","instant":"","base_cost":vendorData.service_cost,"service_cost":this.service_cost,
     "lead_time":vendorData.lead_time};
 
     
@@ -279,18 +280,17 @@ pressevent(modalPage,vendorData){
     this.navCtrl.setRoot(DashboardPage);
   }
   serviceRequestCall(service_request_data,vendorId){
-    console.log(service_request_data.dependentId);
+    console.log(service_request_data.datetime);
     if(service_request_data != "1"){
       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
    if(this.scheduleModal != "instant"){
-
     let requestServiceData = {"category":this.serviceData.category,"service":this.serviceData.service,
     "category_id":this.serviceData.category_id,"location_id":this.location_id,"vendor_id":vendorId,
      "sub_category_id":this.serviceData.sub_category_id,"datCount":service_request_data.datCount,
       "service_id":this.serviceData.service_id, "problem":service_request_data.problem,
-     "datetime":"","preferred_time":"", "dependentid":service_request_data.dependentId,
-      "mobile":service_request_data.mobile_no,"lead_time":"00:00","base_cost":service_request_data.base_cost,
+     "datetime":service_request_data.datetime,"preferred_time":service_request_data.preferred_time, "dependentid":service_request_data.dependentId,
+      "mobile":service_request_data.mobile_no,"lead_time":service_request_data.lead_time,"base_cost":service_request_data.base_cost,
       "subcategory":this.serviceData.subcategory, "durations":service_request_data.durations,"service_cost":service_request_data.service_cost,
        "exclude_days":service_request_data.exclude_days,"from_date":service_request_data.from_date,"from_time":service_request_data.from_time,"quantity":"",
        "selected_dates":service_request_data.selected_dates,"serviceType":service_request_data.serviceType,"time_slot":service_request_data.time_slot,
@@ -321,6 +321,7 @@ pressevent(modalPage,vendorData){
       });
    }
    else{
+    console.log(service_request_data.datetime);
     let requestServiceData = {"category":this.serviceData.category,"service":this.serviceData.service,
     "category_id":this.serviceData.category_id,"location_id":this.location_id,"vendor_id":vendorId,
      "sub_category_id":this.serviceData.sub_category_id,"base_cost":service_request_data.base_cost,"service_cost":service_request_data.service_cost,

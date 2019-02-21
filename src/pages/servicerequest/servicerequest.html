@@ -167,7 +167,7 @@
 
             <div *ngIf="service.service_type !='Recurring'">
 
-              <p *ngIf="((service?.Paymentstatus=='captured') && service?.payment_method==''  && (service?.additional_service_cost==0 || service?.additional_service_cost=='0.00' || service?.additional_service_cost_status == 'success') && service?.service_type=='One time') || ((service?.service_cost == 0 || service?.service_cost == 0.00) && service?.service_type=='One time')">
+              <p *ngIf="((service?.Paymentstatus=='captured') && service?.payment_method==''  && (service?.additional_service_cost==0 || service?.additional_service_cost=='0.00' || service?.additional_service_cost_status == 'success') && service?.service_type=='One time')">
                 <ion-badge>Paid</ion-badge>
               </p>
 

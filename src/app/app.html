@@ -4,23 +4,32 @@
       <ion-toolbar class="img-log">
         <div text-center>
           <img class="center-image" src="assets/img/Elderlogo.png" style="align-items:center;" />
-
         </div>
       </ion-toolbar>
     </ion-header>
     <ion-content class="left-menus">
-      <ion-list>
-        <button class="side-item-md my-list-item fant-size" ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      <ion-list *ngFor="let p of pages; let i=index">
+        <button class="side-item-md my-list-item fant-size" ion-item detail-none (click)="openPage(p,i)">
           <i style="padding-right:0px; width:20px" class={{p.myIcon}} aria-hidden="true"></i>
           {{p.title}}
+          <i class="fa fa-angle-down pull-right" *ngIf="p.subPages"></i>
         </button>
-          <button class="side-item-md my-list-item fant-size" ion-item>
-          <i class="fa fa-code-fork" aria-hidden="true" style="padding-right:0px; width:20px"></i>
-          App Version 1.25
+        <div style="padding-left: 20px;">
+         <ion-list>
+         <button [hidden]="selectedMenu != i" class="side-item-md my-list-item fant-size" ion-item detail-none *ngFor="let subPage of p.subPages;let i2=index" (click)="openPage(subPage)">
+         <i style="padding-right:0px; width:20px" class={{subPage.myIcon}} aria-hidden="true"></i>
+          {{subPage.title}}
         </button>
+        </ion-list>
+        </div>
       </ion-list>
-      <br/>
-      <br/>
+      <ion-list>
+        <button class="side-item-md my-list-item fant-size" ion-item detail-none>
+          <i class="fa fa-code-fork" aria-hidden="true" style="padding-right:0px; width:20px"></i>
+          App Version 1.28
+        </button>
+        </ion-list>
+    
     </ion-content>
   </ion-menu>
 
@@ -33,16 +42,28 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="left-menus">
-      <ion-list>
-        <button class="side-item-md my-list-item fant-size" ion-item *ngFor="let p2 of pages2" (click)="openPage(p2)">
+      <ion-list *ngFor="let p2 of pages2; let i=index">
+        <button  ion-item detail-none (click)="openPage(p2,i)">
           <i style="padding-right:0px; width:20px" class={{p2.myIcon}} aria-hidden="true"></i>
           {{p2.title}}
+          <i class="fa fa-angle-down pull-right" *ngIf="p2.subPages"></i>
+         </button>
+         <div style="padding-left: 20px;">
+         <ion-list>
+         <button [hidden]="selectedMenu != i" class="side-item-md my-list-item fant-size" ion-item detail-none *ngFor="let subPage of p2.subPages;let i2=index" (click)="openPage(subPage)">
+         <i style="padding-right:0px; width:20px" class={{subPage.myIcon}} aria-hidden="true"></i>
+          {{subPage.title}}
         </button>
-         <button class="side-item-md my-list-item fant-size" ion-item>
+        </ion-list>
+      </div>
+      </ion-list>
+      <ion-list>
+        <button class="side-item-md my-list-item fant-size" ion-item detail-none>
           <i class="fa fa-code-fork" aria-hidden="true" style="padding-right:0px; width:20px"></i>
-          App Version 1.25
+          App Version 1.28
         </button>
       </ion-list>
+    
       <br/>
       <br/>
     </ion-content>

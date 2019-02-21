@@ -9,6 +9,7 @@ import { FileOpener } from '@ionic-native/file-opener';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import {saveAs as importedSaveAs} from "file-saver";
+// import { normalizeURL } from 'ionic-angular';
 
 import { ServiceRequestService } from '../../providers/service-request-service';
 import { ViewServiceRequestPage } from '../../pages/view-service-request/view-service-request';
@@ -95,7 +96,7 @@ private direction: string = "";
       this.showToaster(this.results);
     }
     this.storage.ready().then(() => {
-  	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+  	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;
        storage.get('user_type').then((user_type) => { this.user_type=user_type; 
       console.log(this.user_type); })
       storage.get('token').then((token) => { this.token=token; 
@@ -113,6 +114,7 @@ private direction: string = "";
   		
       this.getRemarks();
       })
+    });
   	});
   }
    downloadBlobToPDF(service) { 
@@ -287,6 +289,8 @@ console.log(fileEntry);
       this.serviceRequestInfo=serviceRequest.result.info.list.data; 
        var dataList=serviceRequest.result.info.list.data;
         for(let data of dataList) {
+          // this.imagePath = normalizeURL(serviceRequest.result.info.list.data);
+          //  return path;
           data.preferred_date = moment(data.preferred_date).format("DD-MM-YYYY");
           data.scheduled_date = moment(data.scheduled_date).format("DD-MM-YYYY");
           data.pendingserviceamount = parseFloat(data.pending_service_amount);
@@ -604,7 +608,7 @@ console.log(fileEntry);
     (err) => { 
         if(err.status===401)
         {
-        this.showToaster(JSON.parse(err._body).error);
+          this.showToaster(JSON.parse(err._body).error);
         }
         else
         {

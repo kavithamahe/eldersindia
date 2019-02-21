@@ -10,7 +10,11 @@
 
 <ion-content class="main-Dashboard">
     <!-- ====== Elders login ====== -->  
-
+<!--   <ion-fab bottom right style="border: 2px solid #004ca8; border-radius: 47px;">
+    <button ion-fab (click)="chateldersindia()" style="background-color: #ffffff;">
+       <img src="assets/img/icon.png" />
+    </button>
+  </ion-fab> -->
     <ion-grid class="dashboard2" *ngIf="user_type=='elder'">
       <ion-row>
         <ion-col *ngIf="safeme_status != '1'" col-6 class="connection dashboard-item" text-center (click)="shareLocation()">

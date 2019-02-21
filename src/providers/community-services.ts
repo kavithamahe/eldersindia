@@ -405,8 +405,8 @@ myprofile(id){
    return this.http.post(`${this.getCommunityPostsUrl }elderOnBoarding`,dependentData,this.options)
     .map(res =>res.json());
   }
-   getConnections(user_id){
-       let _request= {'user_id':user_id};
+   getConnections(community_id){
+       let _request= {'community_id':community_id};
       // console.log(this.rootUrl+'getConnections');
     return this.http.post(`${this.getCommunityPostsUrl }getInviteContacts`,_request,this.options)
       .map(res => res.json()); 

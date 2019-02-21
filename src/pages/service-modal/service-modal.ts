@@ -157,9 +157,13 @@ template_id:any;
   discount_rate:any;
   getHotelCosts:any;
   getvendor_cancelpolicy:any=[];
+  CurrentTime:any;
+  CurrentDate:any;
   constructor(public platform: Platform,public storage:Storage,public alertCtrl: AlertController,private device: Device,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder,public blogListService:BlogListService) {
     this.date = new Date().toISOString();
+    this.CurrentDate = new Date().toISOString(); 
+    this.CurrentTime = new Date().getHours() + ':' + new Date().getMinutes();
     this.vendorList = navParams.get("vendorList");
     this.template_id = navParams.get("template_id");
     this.discount_rate = navParams.get("discount_rate");
@@ -1094,6 +1098,10 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     this.navCtrl.pop();
   }
   drivernext(){
+    if(this.date == this.CurrentDate && this.time <= this.CurrentTime){
+      this._provider.showToast("Please choose valid date and time");
+    }
+    else{
      if(this.user_type == 'sponsor'){
       if(this.elder_id != undefined && this.elder_id != "" && this.date != undefined && this.date != "" && this.time != undefined && this.time != "" && this.hours != undefined && this.hours != "" && this.pickup != undefined && this.pickup != ""){
         if(this.terms != undefined){
@@ -1123,6 +1131,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       }
     }
   }
+  }
   backconfirmdriver(){
     this.confirmdriver = false;
     this.transportdriver = true;
@@ -1136,7 +1145,10 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     this.navCtrl.pop();
   }
   cabnext(){
-    console.log(this.pickup);
+    if(this.date == this.CurrentDate && this.time <= this.CurrentTime){
+      this._provider.showToast("Please choose valid date and time");
+    }
+    else{
     if(this.user_type == 'sponsor'){
       if(this.vendorList.vendorDetails.transport_type == '2'){
          if(this.elder_id != undefined && this.elder_id != "" && this.date != undefined && this.date != "" && this.time != undefined && this.time != ""
@@ -1206,7 +1218,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
         this._provider.showToast("Please Enter all the Details");
       }
       }
-     
+     }
     }
   }
   backconfirmcab(){

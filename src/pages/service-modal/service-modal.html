@@ -1503,7 +1503,143 @@
               <strong class="service-name">{{vendorList.vendorDetails.name}}</strong>
             </p>
           </ion-item>
-          <!--  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Service Cost : <i class="fa fa-inr" aria-hidden="true"></i>{{schedule_cost * hours}}</ion-label> -->
+          <div *ngIf = "schedule_cost">
+          <ion-item text-wrap>
+           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Service Cost : 
+           <i class="fa fa-inr" aria-hidden="true"></i>{{schedule_cost * hours}}</ion-label>
+           </ion-item>
+           </div>
+         <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
+              <ion-item text-wrap>
+               <p class="service-conts">
+                <span class="token-primaryss">Previous refund amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getCustomerBalanceAmount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item>
+              <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{((schedule_cost * hours) -  getCustomerBalanceAmount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+        </div>
+          <div *ngIf="get_custome_deliever_amount!=0 && get_custome_service_cancel_amount ==0 && getCustomerBalanceAmount ==0 ">
+           <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service due amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_deliever_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            <ion-item>
+              <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{((schedule_cost * hours) +  get_custome_deliever_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+           </div>
+
+            <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount == 0 && get_custome_deliever_amount == 0">
+            <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service cancel amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_service_cancel_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{((schedule_cost * hours) +  get_custome_service_cancel_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+           </div>
+
+              <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount == 0 && get_custome_deliever_amount != 0">
+               <ion-item text-wrap>
+               <p class="service-conts">
+                <span class="token-primaryss">Previous service cancel amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_service_cancel_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service due amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_deliever_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            <ion-item>
+              <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{((schedule_cost * hours) + get_custome_service_cancel_amount + get_custome_deliever_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            </div>
+              <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount == 0">
+                <ion-item text-wrap>
+               <p class="service-conts">
+                <span class="token-primaryss">Previous refund amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getCustomerBalanceAmount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service cancel amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_service_cancel_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item>
+               <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(((schedule_cost * hours) - getCustomerBalanceAmount) + get_custome_service_cancel_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+          </div>
+          <div *ngIf="get_custome_service_cancel_amount==0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount != 0">
+             <ion-item text-wrap>
+             <p class="service-conts">
+                <span class="token-primaryss">Previous refund amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getCustomerBalanceAmount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item text-wrap>
+             <p class="service-conts">
+                <span class="token-primaryss">Previous service due amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_deliever_amount | number : '1.2-2'}}
+              </p>
+              </ion-item>
+               <ion-item>
+               <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(((schedule_cost * hours) - getCustomerBalanceAmount) + get_custome_deliever_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+                </div>
+                  <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount != 0">
+                  <ion-item text-wrap>
+                  <p class="service-conts">
+                <span class="token-primaryss">Previous refund amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getCustomerBalanceAmount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service cancel amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_service_cancel_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service due amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_deliever_amount | number : '1.2-2'}}
+              </p>
+              </ion-item>
+               <ion-item>
+                <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(((schedule_cost * hours) - getCustomerBalanceAmount) + get_custome_service_cancel_amount + get_custome_deliever_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+           </div>
+
           <br/>
           <ion-row>
             <ion-col col-6>
@@ -1512,7 +1648,7 @@
               </ion-col>
               <ion-col col-6>
               <button class="instant-btpay" (click)="driverpaynow(vendorList?.requestServices.category_id,
-        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)">Pay Cash</button>
+        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)">Book Now</button>
             </ion-col>
           </ion-row>
         </ion-list>
@@ -1625,7 +1761,141 @@
               <strong class="service-name">{{vendorList.vendorDetails.name}}</strong>
             </p>
           </ion-item>
-          <!-- <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Service Cost : <i class="fa fa-inr" aria-hidden="true"></i>{{schedule_cost * hours}}</ion-label> -->
+           <div>
+          <ion-item text-wrap>
+          <ion-label *ngIf = "schedule_cost" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Service Cost : <i class="fa fa-inr" aria-hidden="true"></i>{{schedule_cost * hours}}</ion-label>
+          </ion-item>
+          </div>
+           <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
+              <ion-item text-wrap>
+               <p class="service-conts">
+                <span class="token-primaryss">Previous refund amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getCustomerBalanceAmount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item>
+              <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{((schedule_cost * hours) -  getCustomerBalanceAmount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+        </div>
+          <div *ngIf="get_custome_deliever_amount!=0 && get_custome_service_cancel_amount ==0 && getCustomerBalanceAmount ==0 ">
+           <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service due amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_deliever_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            <ion-item>
+              <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{((schedule_cost * hours) +  get_custome_deliever_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+           </div>
+
+            <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount == 0 && get_custome_deliever_amount == 0">
+            <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service cancel amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_service_cancel_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{((schedule_cost * hours) +  get_custome_service_cancel_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+           </div>
+
+              <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount == 0 && get_custome_deliever_amount != 0">
+               <ion-item text-wrap>
+               <p class="service-conts">
+                <span class="token-primaryss">Previous service cancel amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_service_cancel_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service due amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_deliever_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            <ion-item>
+              <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{((schedule_cost * hours) + get_custome_service_cancel_amount + get_custome_deliever_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            </div>
+              <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount == 0">
+                <ion-item text-wrap>
+               <p class="service-conts">
+                <span class="token-primaryss">Previous refund amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getCustomerBalanceAmount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+            <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service cancel amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_service_cancel_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item>
+               <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(((schedule_cost * hours) - getCustomerBalanceAmount) + get_custome_service_cancel_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+          </div>
+          <div *ngIf="get_custome_service_cancel_amount==0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount != 0">
+             <ion-item text-wrap>
+             <p class="service-conts">
+                <span class="token-primaryss">Previous refund amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getCustomerBalanceAmount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item text-wrap>
+             <p class="service-conts">
+                <span class="token-primaryss">Previous service due amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_deliever_amount | number : '1.2-2'}}
+              </p>
+              </ion-item>
+               <ion-item>
+               <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(((schedule_cost * hours) - getCustomerBalanceAmount) + get_custome_deliever_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+                </div>
+                  <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount != 0">
+                  <ion-item text-wrap>
+                  <p class="service-conts">
+                <span class="token-primaryss">Previous refund amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getCustomerBalanceAmount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service cancel amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_service_cancel_amount | number : '1.2-2'}}
+              </p>
+            </ion-item>
+             <ion-item text-wrap>
+              <p class="service-conts">
+                <span class="token-primaryss">Previous service due amount : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{get_custome_deliever_amount | number : '1.2-2'}}
+              </p>
+              </ion-item>
+               <ion-item>
+                <p class="service-conts">
+                <span class="token-primaryss">Total amount payable : </span>
+                <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(((schedule_cost * hours) - getCustomerBalanceAmount) + get_custome_service_cancel_amount + get_custome_deliever_amount) | number : '1.2-2'}}
+              </p>
+            </ion-item>
+           </div>
           <br/>
           <ion-row>
             <ion-col col-6>
@@ -1635,7 +1905,7 @@
               </ion-col>
               <ion-col col-6>
               <button class="instant-btpay" (click)="cabpaynow(vendorList?.requestServices.category_id,
-        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)">Pay Cash</button>
+        vendorList?.requestServices.service_id,vendorList?.requestServices.sub_category_id,vendorList?.requestServices.category,vendorList?.requestServices.service,vendorList?.requestServices.subcategory,vendorList?.requestServices.start_date)">Book Now</button>
             </ion-col>
           </ion-row>
         </ion-list>

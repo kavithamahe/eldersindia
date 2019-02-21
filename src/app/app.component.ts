@@ -1,9 +1,10 @@
 import { Component, ViewChild} from '@angular/core';
 
 import { Platform, MenuController, Nav, AlertController,ToastController,LoadingController,Events ,IonicApp } from 'ionic-angular';
-
+import { CallNumber, Vibration} from 'ionic-native';
 import { CameraPreview, CameraPreviewRect, StatusBar, Splashscreen} from 'ionic-native';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { InAppBrowser } from 'ionic-native';
 
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Network } from '@ionic-native/network';
@@ -88,9 +89,11 @@ export class MyApp {
 
   user_type:any='';
   network_type:any;
+  selectedMenu: any;
 
-  pages: Array<{myIcon:string, title: string, component: any}>;
-  pages2: Array<{myIcon:string, title: string, component: any}>;
+  // pages: Array<{myIcon:string, title: string, component: any}>;
+  pages:any;
+  pages2: any;
 
   constructor(
     public platform: Platform,
@@ -276,46 +279,33 @@ export class MyApp {
                   { myIcon:'fa fa-tachometer', title: 'Dashboard', component: DashboardPage },
                   { myIcon:'fa fa-ambulance', title: 'Emergency Call Log', component: SafemePagePage },
                   { myIcon:'fa fa-snowflake-o', title: 'Services', component: ServiceprovidersPage },
-                  { myIcon:'fa fa-file-text', title: 'Enquiries', component: EnquiriesPagePage },
-                  { myIcon:'fa fa-cogs', title: 'My Service Requests', component: ServicerequestPage },
-                  { myIcon:'fa fa-gift', title: 'Package Requests', component: PackageRequestPagePage },
-                  { myIcon:'fa fa-gift', title: 'Recurring Requests', component: RecurringPagePage },
-                  { myIcon:'fa fa-cubes', title: 'Jobs', component: JobboardPage },
-                  { myIcon:'fa fa-th-list', title: 'Applied Jobs', component: AppliedJobsPage },
+                  { myIcon:'fa fa-cogs', title: 'Requests',subPages: [{myIcon:'fa fa-cog',title: 'Service Requests',component:ServicerequestPage},{myIcon:'fa fa-gift',title:'Recurring Requests',component:RecurringPagePage},{myIcon:'fa fa-gift',title:'Package Requests',component:PackageRequestPagePage},{ myIcon:'fa fa-file-text', title: 'Enquiries', component: EnquiriesPagePage }]},
+                  { myIcon:'fa fa-cubes', title: 'Jobs',subPages: [{myIcon:'fa fa-cubes',title: 'Job Board',component:JobboardPage},{myIcon:'fa fa-th-list',title:'Applied Jobs',component:AppliedJobsPage}]},
                   { myIcon:'fa fa-recycle', title: 'Communities', component: CommunitylistPage },
                   { myIcon:'fa fa-sitemap', title: 'Connections', component: ConnectionsPage },
                   { myIcon:'fa fa-envelope', title: 'Messages', component: MessagesPage },
                   { myIcon:'fa fa-rss', title: 'Blogs', component: BlogsPage },
-                  { myIcon:'fa fa-newspaper-o', title: 'News', component: NewsPage },
-                  { myIcon:'fa fa-random', title: 'Events', component: EventsPage },
-                  { myIcon:'fa fa-external-link', title: 'Useful External Links', component: ExternallinksPage },
-                  { myIcon:'fa fa-address-book-o', title: 'Profile', component: MyProfilePage },
-                  { myIcon:'fa fa-unlock-alt', title: 'Change Password', component: ChangePasswordPage },
-                  { myIcon:'fa fa-cog', title: 'Privacy Settings', component: SettingsPage },
+                  { myIcon:'fa fa-newspaper-o', title: 'News & Events',subPages: [{myIcon:'fa fa-newspaper-o',title: 'View News',component:NewsPage},{myIcon:'fa fa-calendar-o',title:'View Events',component:EventsPage},{myIcon:'fa fa-external-link',title:'Useful External Links',component:ExternallinksPage}]},
+                  { myIcon:'fa fa-cog', title: 'Settings',subPages: [{myIcon:'fa fa-address-book-o',title: 'Profile',component:MyProfilePage},{myIcon:'fa fa-unlock-alt',title:'Change Password',component:ChangePasswordPage},{myIcon:'fa fa-cog',title:'Privacy Settings',component:SettingsPage},{ myIcon:'fa fa-camera', title: 'CCTV Settings', component: RemotemonitorPagePage }]},
+                  { myIcon:'fa fa-info', title: 'Contact Us',subPages: [{myIcon:'fa fa-phone',title: '080-47096393',component:'080-47096393'},{myIcon:'fa fa-envelope',title:'support@eldersindia.com',component:"support@eldersindia.com"}]},
+                  { myIcon:'fa fa-comment', title: 'Chat Us', component: "chateldersindia" },
                   { myIcon:'fa fa-sign-out', title: 'Logout', component: LogoutPage },
 
                       );
-      this.pages2.push(
+           this.pages2.push(
                   { myIcon:'fa fa-tachometer', title: 'Dashboard', component: DashboardPage },
                   { myIcon:'fa fa-users', title: 'Manage Dependents', component: ManagePage },
                   { myIcon:'fa fa-cog', title: 'Services', component: ServiceprovidersPage },
-                  { myIcon:'fa fa-file-text', title: 'Enquiries', component: EnquiriesPagePage },
-                  { myIcon:'fa fa-cogs', title: 'My Service Requests', component: ServicerequestPage },
-                  { myIcon:'fa fa-gift', title: 'Package Requests', component: PackageRequestPagePage },
-                  { myIcon:'fa fa-gift', title: 'Recurring Requests', component: RecurringPagePage },
-                  { myIcon:'fa fa-cubes', title: 'Jobs', component: JobboardPage },
-                  { myIcon:'fa fa-th-list', title: 'Applied Jobs', component: AppliedJobsPage },
+                  { myIcon:'fa fa-cogs', title: 'Requests',subPages: [{myIcon:'fa fa-cog',title: 'Service Requests',component:ServicerequestPage},{myIcon:'fa fa-gift',title:'Recurring Requests',component:RecurringPagePage},{myIcon:'fa fa-gift',title:'Package Requests',component:PackageRequestPagePage},{ myIcon:'fa fa-file-text', title: 'Enquiries', component: EnquiriesPagePage }]},
+                  { myIcon:'fa fa-cubes', title: 'Jobs',subPages: [{myIcon:'fa fa-cubes',title: 'Job Board',component:JobboardPage},{myIcon:'fa fa-th-list',title:'Applied Jobs',component:AppliedJobsPage}]},
                   { myIcon:'fa fa-recycle', title: 'Communities', component: CommunitylistPage },
                   { myIcon:'fa fa-sitemap', title: 'Connections', component: ConnectionsPage },
                   { myIcon:'fa fa-envelope', title: 'Messages', component: MessagesPage },
                   { myIcon:'fa fa-rss', title: 'Blogs', component: BlogsPage },
-                  { myIcon:'fa fa-newspaper-o', title: 'News', component: NewsPage },
-                  { myIcon:'fa fa-random', title: 'Events', component: EventsPage },
-                  { myIcon:'fa fa-external-link', title: 'Useful External Links', component: ExternallinksPage },
-                  { myIcon:'fa fa-address-book-o', title: 'Profile', component: MyProfilePage },
-                  { myIcon:'fa fa-unlock-alt', title: 'Change Password', component: ChangePasswordPage },
-                  { myIcon:'fa fa-cog', title: 'Privacy Settings', component: SettingsPage },
-                  { myIcon:'fa fa-camera', title: 'CCTV Settings', component: RemotemonitorPagePage },
+                  { myIcon:'fa fa-newspaper-o', title: 'News & Events',subPages: [{myIcon:'fa fa-newspaper-o',title: 'View News',component:NewsPage},{myIcon:'fa fa-calendar-o',title:'View Events',component:EventsPage},{myIcon:'fa fa-external-link',title:'Useful External Links',component:ExternallinksPage}]},
+                  { myIcon:'fa fa-cog', title: 'Settings',subPages: [{myIcon:'fa fa-address-book-o',title: 'Profile',component:MyProfilePage},{myIcon:'fa fa-unlock-alt',title:'Change Password',component:ChangePasswordPage},{myIcon:'fa fa-cog',title:'Privacy Settings',component:SettingsPage},{ myIcon:'fa fa-camera', title: 'CCTV Settings', component: RemotemonitorPagePage }]},
+                  { myIcon:'fa fa-info', title: 'Contact Us',subPages: [{myIcon:'fa fa-phone',title: '080-47096393',component:'080-47096393'},{myIcon:'fa fa-envelope',title:'support@eldersindia.com',component:"support@eldersindia.com"}]},
+                  { myIcon:'fa fa-comment', title: 'Chat US', component: "chateldersindia" },
                   { myIcon:'fa fa-sign-out', title: 'Logout', component: LogoutPage },
 
                       );
@@ -329,7 +319,6 @@ export class MyApp {
     });
     
   }
-
   showToaster(message)
   {
    let toast = this.toastCtrl.create({
@@ -553,11 +542,44 @@ push.on('error').subscribe(error => console.error('Error with Push plugin', erro
      }
   }
 
-  openPage(page) {
-    // close the menu when clicking a link from the menu
-    this.menu.close();
-    // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
+  openPage(page,index) {
+    // // close the menu when clicking a link from the menu
+    // this.menu.close();
+    // // navigate to the new page if it is not the current page
+    // this.nav.setRoot(page.component);
+    if (page.component) {
+      if(page.component == "080-47096393"){
+         CallNumber.callNumber(page.component, true)
+          .then(() => console.log('Launched dialer!'))
+          .catch(() => console.log('Error launching dialer'));
+        this.menu.close();
+      }
+      else if(page.component == "support@eldersindia.com"){
+          this.platform.ready().then(() => {
+      window.open('mailto:'+page.component,'_system');
+               this.menu.close();
+        });
+        this.menu.close();
+      }
+          else if(page.component == "chateldersindia"){
+          this.platform.ready().then(() => {
+            let browser = new InAppBrowser("https://chat.eldersindia.com/",'_blank',"toolbar=no");
+            this.menu.close();
+
+        });
+        this.menu.close();
+          }
+      else{
+      this.nav.setRoot(page.component);
+      this.menu.close();
+      }
+    } else {
+      if (this.selectedMenu) {
+        this.selectedMenu = 0;
+      } else {
+        this.selectedMenu = index;
+      }
+    }
   }
 }
 

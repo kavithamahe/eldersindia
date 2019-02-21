@@ -91,7 +91,6 @@ refund_amountsrecurring:any;
       this.recurring_request_id = navParams.get("recurring_request_id");
       this.cancelCharges = navParams.get("cancelCharges");
       this.dedaction_service_cost = navParams.get("dedaction_service_cost");
-      console.log(this.dedaction_service_cost);
       this.package_id = navParams.get("package_id");
       this.sr_token = navParams.get("sr_token");
       this.service_remaing_cost = navParams.get("service_remaing_cost");
@@ -107,20 +106,21 @@ refund_amountsrecurring:any;
       this.result = navParams.get("result");
       this.percentage = navParams.get("percentage");
       this.payment_status = navParams.get("payment_status");
-        if(this.percentage == "hours expired"){
+        if(this.percentage == "hours expired"){ 
         this.percentage = "0";
       }
       this.refund_amountsrecurring = (this.dedaction_service_cost * this.percentage/100);
       this.recurringrefund=(this.refund_amounts - ((this.paid_amount * this.percentage/100)/this.req_count));
           if(this.cancel_services > 1 && this.package_id != 1){
     this.cancellationfees = ((this.actual_service_cost * this.percentage/100)/this.req_count);
+    // this.cancellationfees = (this.utilized_service_cost * this.percentage/100);
     }
     if(this.cancel_services ==1 && this.package_id != 1){
     this.cancellationfees = ((this.paid_amount * this.percentage/100)/this.req_count);
   }
-    // if(this.balanceamount_to_pay!=0 && this.cancel_services!=1 && this.percentage!='hours expired' && this.package_id != 1){
-    //   this.cancellationfees = (this.totalcostofrecurring * this.percentage/100);
-    // }
+    if(this.balanceamount_to_pay!=0 && this.cancel_services!=1 && this.percentage!='hours expired' && this.package_id != 1){
+      this.cancellationfees = (this.utilized_service_cost * this.percentage/100);
+    }
     }
 
 

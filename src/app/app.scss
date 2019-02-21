@@ -67,6 +67,9 @@ button {
 
 .left-menus {
     background: #2c4e86;
+    ion-list{
+        margin: 0 !important;
+    }
 }
 
 .left-menus .list-md .item-md {
@@ -77,7 +80,7 @@ button {
 
 .left-menus .list-md .item-block .item-inner {
     border-bottom: 1px solid #2c4e86;
-    padding: 15px 0;
+    padding: 15px 0px 10px;
 }
 
 .left-menus .list-md .item-md .item-inner .input-wrapper .label-md {
