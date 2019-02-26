@@ -563,7 +563,7 @@ push.on('error').subscribe(error => console.error('Error with Push plugin', erro
       }
           else if(page.component == "chateldersindia"){
           this.platform.ready().then(() => {
-            let browser = new InAppBrowser("https://chat.eldersindia.com/",'_blank',"toolbar=no");
+            let browser = new InAppBrowser("https://chat.eldersindia.com/",'_blank');
             this.menu.close();
 
         });

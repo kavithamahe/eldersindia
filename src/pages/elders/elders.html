@@ -277,8 +277,7 @@
         
           </div> -->
            <div class="tag-skill_set">
-            <tag-input [(ngModel)]="skill_set" [separatorKeyCodes]='[9, 188]' formControlName="skill_set" placeholder="Enter skills.." 
-                   [editable]='true' [addOnPaste]='true' [modelAsStrings]="true">
+            <tag-input [(ngModel)]="skill_set" [separatorKeyCodes]='[9, 188]' formControlName="skill_set" placeholder="Enter skills.." [editable]='true' [addOnPaste]='true' [modelAsStrings]="true">
             </tag-input>
             <p>Use Go to add more tags.</p>
             </div>
@@ -301,15 +300,13 @@
                 <div [formGroupName]="i">
                   <ion-item>
                     <ion-label class="sel-label">Industry</ion-label>
-                    <ion-select class="select-brd" [(ngModel)]="experience_industry[i]" placeholder="Industry" formControlName="experience_industry"
-                      [class.invalid]="!myForm.controls.experience_list.
+                    <ion-select class="select-brd" [(ngModel)]="experience_industry[i]" placeholder="Industry" formControlName="experience_industry" [class.invalid]="!myForm.controls.experience_list.
                 controls[i].controls.experience_industry.valid && (myForm.controls.experience_list.
                 controls[i].controls.experience_industry.dirty)">
                       <ion-option *ngFor="let industry of functionalArea" selected="item?.select" value={{industry.id}}>{{industry.name}}
                       </ion-option>
                     </ion-select>
-
-                  </ion-item>
+                </ion-item>
                   <small *ngIf="!myForm.controls.experience_list.
                 controls[i].controls.experience_industry.valid && (myForm.controls.experience_list.
                 controls[i].controls.experience_industry.dirty || submitAttempt)">

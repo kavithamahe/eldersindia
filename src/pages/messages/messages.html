@@ -64,7 +64,7 @@
           <ion-item-sliding class="inbox-sends">
             <ion-item (press)="clickedAvatar(inbox.id)" [class]="isInArray(inbox.id) ? 'selected' : 'not-selected'" (click)="viewMessages(inbox?.id,'inbox')">
               <ion-card>
-                <ion-row  [class.active]="i == multirow[i]">
+                <ion-row [class.active]="i == multirow[i]">
                   <ion-col style="max-width: 20%;" width-40>
                     <ion-avatar item-left>
                       <img src="{{imageUrl+inbox?.avatar}}" />
@@ -138,7 +138,7 @@
                 <ion-row>
                   <ion-col style="max-width: 20%;" width-20>
                     <ion-avatar item-left>
-                      <img src="{{imageUrl+sent?.avatar}}">
+                      <img src="{{imageUrl+sent?.avatar}}" />
                     </ion-avatar>
                   </ion-col>
 
@@ -150,9 +150,8 @@
                       <ion-col *ngIf="sent.attachments != null">
                         <ion-icon name="attach"></ion-icon>
                       </ion-col>
-                      <ion-col  class="width-25" style="text-align-last: end;">
-                        <p>
-                          {{sent?.created_at}}</p>
+                      <ion-col class="width-25" style="text-align-last: end;">
+                        <p>{{sent?.created_at}}</p>
                       </ion-col>
                     </ion-row>
 
