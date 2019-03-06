@@ -28,8 +28,6 @@
       <p class="err-reds" *ngIf="!modalForm.controls.contact.valid  && (modalForm.controls.contact.touched || submitAttempt)">Please Enter the valid number
       </p>
       <form [formGroup]="authForm">
-       <!--  <ion-label *ngIf="userType =='sponsor'" stacked class="label-lb required">Dependant
-        </ion-label> -->
         <ion-item *ngIf="userType =='sponsor'" class="sel-label">
          <ion-label class="selectDepent" class="required">Dependant</ion-label>
           <ion-select formControlName="dependents" (ionChange)="packageinfo()" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">

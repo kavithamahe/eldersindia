@@ -375,7 +375,4 @@ edit(){
     let seviceCheck = "0";
     this.viewCtrl.dismiss(seviceCheck);
   }
-
- 
-
 }

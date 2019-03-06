@@ -11,7 +11,8 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-      <ion-title text-center>Mobile Number Verification</ion-title>
+      <ion-title text-center *ngIf = "!invitefriends">Mobile Number Verification</ion-title>
+      <ion-title text-center *ngIf = "invitefriends">Invite Contacts</ion-title>
     <ion-buttons right>
     <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
@@ -22,7 +23,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding *ngIf = "!invitefriends">
     <ion-label class="required">Enter one time password</ion-label>
 	<ion-item class="otp">
 		<ion-input type="text" placeholder="" [(ngModel)]="otp">
@@ -35,6 +36,25 @@
 	      </button>
 	      <button class="instant-bt" (click)="submit()">Submit</button>
 	    </ion-col>
+    </ion-row>
+
+</ion-content>
+<ion-content padding *ngIf = "invitefriends">
+    <ion-label class="required">To</ion-label>
+  <ion-item class="otp">
+  <ion-label>To</ion-label>
+    <ion-select multiple="true" [(ngModel)]="selectedConnections" [ngModelOptions]="{standalone: true}">
+          <ion-option *ngFor="let name of connectionInfo" [value] = "name">{{name.friend_name}}
+          </ion-option>
+        </ion-select> 
+  </ion-item>
+  <br>
+    <ion-row>
+      <ion-col>
+        <button class="btn-warnings" color="primary" (click)="cancel()">Cancel
+        </button>
+        <button class="instant-bt" (click)="inviteFriends()">Invite</button>
+      </ion-col>
     </ion-row>
 
 </ion-content>

@@ -52,7 +52,6 @@
     "cordova-android": "~6.3.0",
     "cordova-browser": "~5.0.4",
     "cordova-fabric-plugin": "^1.1.14-dev",
-    "cordova-ios": "~4.5.5",
     "cordova-plugin-add-swift-support": "^1.7.1",
     "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-camera-preview": "^0.10.0",
@@ -114,7 +113,6 @@
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-camera": {},
       "mx.ferreyra.callnumber": {},
-      "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
@@ -136,12 +134,13 @@
         "GMS_VERSION": "11.0.1"
       },
       "sentry-cordova": {},
-      "com.moust.cordova.videoplayer": {}
+      "com.moust.cordova.videoplayer": {},
+      "cordova-plugin-whitelist": {}
     },
     "platforms": [
       "browser",
-      "ios",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

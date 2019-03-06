@@ -13,12 +13,7 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
-
 <ion-content class="content-intop PackageRequest">
-  <!--   <ion-fab top right edge>
-    <button ion-fab mini (click)="scrollToBottom()"><ion-icon name="arrow-dropdown"></ion-icon></button>
-  </ion-fab> -->
   <div class="ion-searchbar">
     <ion-row>
       <ion-col col-10>
@@ -89,9 +84,6 @@
           <p *ngIf="recurring.total_service_cost != null">
             <i class="fa fa-rupee"></i>&nbsp;{{recurring.total_service_cost | number : '1.2-2'}}
           </p>
-          <!--  <p *ngIf="recurring.payment_method=='partial_payment'"><i class="fa fa-rupee">{{recurring.discountcost}}</i> </p>
-          <p *ngIf="recurring.payment_method==''"><i class="fa fa-rupee">0</i></p>
-          <p *ngIf="recurring.payment_method=='full_payment'"><i class="fa fa-rupee">{{recurring.servicediscountcost_one_service}}</i> </p> -->
         </ion-col>
       </ion-row>
       <ion-row>

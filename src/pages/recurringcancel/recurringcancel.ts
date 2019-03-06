@@ -8,9 +8,6 @@ import { BlogListService } from '../../providers/blog-list-service';
 import { PackagepaymentPagePage } from '../../pages/packagepayment/packagepayment';
 import { ServiceRequestService } from '../../providers/service-request-service';
 
-
-
-
 /*
   Generated class for the RecurringcancelPage page.
 
@@ -89,9 +86,9 @@ amount_received:any;
   }
     getRemarks()
   {
-       this.serviceRequest.getRemarks().subscribe(
+    this.serviceRequest.getRemarks().subscribe(
      (getRemarks) => {
-      this.getRemarksList=getRemarks.result.info.remark.data;       
+      this.getRemarksList=getRemarks.result.info.remark;       
     },
     (err) => { 
         if(err.status===401)

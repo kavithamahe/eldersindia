@@ -26,10 +26,6 @@
         <p>{{events?.post_date}} To {{events?.end_date}}</p>
         <p>{{events?.author_name }}</p>
         <p><b>{{events?.venue}}</b></p>
-        <!-- <p class="timedate" style="padding-left:3px;" text-capitalize>
-          <i class="fa fa-user" aria-hidden="true"></i> {{events?.author_name }} |
-          <i class="fa fa-calendar" aria-hidden="true"></i> {{events?.post_date}} To {{events?.end_date}}
-          <br/> {{events?.venue}}</p> -->
         <p class="description" [innerHTML]="events?.description | words : 35 : '...'"></p>
       </ion-item>
     </div>

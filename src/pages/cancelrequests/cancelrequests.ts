@@ -4,14 +4,6 @@ import { ServiceRequestService } from '../../providers/service-request-service';
 import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
 
 
-
-/**
- * Generated class for the CancelrequestsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-cancelrequests',
   templateUrl: 'cancelrequests.html',
@@ -102,6 +94,7 @@ refund_amountsrecurring:any;
       this.refund_amounts = navParams.get("refund_amount");
       this.serviceId = navParams.get("serviceId");
       this.service_cost = navParams.get("service_cost");
+      console.log(this.service_cost);
       this.is_recreation_config = navParams.get("is_recreation_config");
       this.result = navParams.get("result");
       this.percentage = navParams.get("percentage");
@@ -112,14 +105,17 @@ refund_amountsrecurring:any;
       this.refund_amountsrecurring = (this.dedaction_service_cost * this.percentage/100);
       this.recurringrefund=(this.refund_amounts - ((this.paid_amount * this.percentage/100)/this.req_count));
           if(this.cancel_services > 1 && this.package_id != 1){
-    this.cancellationfees = ((this.actual_service_cost * this.percentage/100)/this.req_count);
-    // this.cancellationfees = (this.utilized_service_cost * this.percentage/100);
+            console.log("sfsdf");
+    // this.cancellationfees = ((this.actual_service_cost * this.percentage/100)/this.req_count);
+    this.cancellationfees = (this.service_cost * this.percentage/100);
     }
     if(this.cancel_services ==1 && this.package_id != 1){
+      console.log("sfsdf 2");
     this.cancellationfees = ((this.paid_amount * this.percentage/100)/this.req_count);
   }
     if(this.balanceamount_to_pay!=0 && this.cancel_services!=1 && this.percentage!='hours expired' && this.package_id != 1){
-      this.cancellationfees = (this.utilized_service_cost * this.percentage/100);
+       console.log("sfsdf 3");
+      this.cancellationfees = (this.service_cost * this.percentage/100);
     }
     }
 
@@ -205,16 +201,14 @@ refund_amountsrecurring:any;
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     if(this.cancel_services > 1 && this.package_id != 1){
-    this.deductionamounts = ((this.actual_service_cost * this.percentage/100)/this.req_count);
+    this.deductionamounts = (this.service_cost * this.percentage/100);
     }
-    if(this.cancel_services==1 && this.package_id != 1){
+    if(this.cancel_services == 1 && this.package_id != 1){
     this.deductionamounts = ((this.paid_amount * this.percentage/100)/this.req_count);
   }
-    // if(this.balanceamount_to_pay!=0 && this.cancel_services!=1 && this.percentage!='hours expired' && this.package_id != 1){
-    //   this.deductionamounts = (this.totalcostofrecurring * this.percentage/100);
-    // }
     
-    this.payableamount = (this.balanceamount_to_pay + this.deductionamounts);
+    this.payableamount = ((this.paid_amount / this.req_count) - ((this.actual_service_cost - this.paid_amount) + this.deductionamounts));
+    console.log(this.payableamount);
     this.serviceRequest.cancelRequest(this.comments,this.serviceId,this.service_type,this.txnid,this.paid_amount,
       this.utilized_service_cost,this.percentage,this.recurring_request_id,this.cancelCharges,this.refund_amountsrecurring,
       this.service_remaing_cost,this.req_count,this.package_id,this.balanceamount_to_pay,this.deductionamounts,this.payableamount,

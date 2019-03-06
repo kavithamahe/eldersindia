@@ -119,12 +119,10 @@
           <ion-col col-9>
             <h1 item-text-wrap class="service-req" text-capitalize>{{manageBlog?.title}}</h1>
             <h2 item-text-wrap><ion-badge>{{manageBlog?.category_name}}</ion-badge> </h2>
-            <!--   <p *ngIf="(manageBlog?.created_at!='0000-00-00 00:00:00')" class="token-date"><i class="fa fa-calendar"></i> {{manageBlog?.created_at | date :'MMM dd y h:mm a'}}</p> -->
             <p *ngIf="(manageBlog?.created_at!='0000-00-00 00:00:00')" class="token-date">
               <i class="fa fa-calendar"></i> {{manageBlog?.created_at}}</p>
               <div class="blogManageStatus" *ngFor="let status of blogStatus">            
                   <p item-text-wrap *ngIf="manageBlog?.status==status?.id">
-                    <!-- <ion-badge >{{status?.label}}</ion-badge> -->
                     <ion-badge class="warning" *ngIf="status?.id == 0">Pending</ion-badge>
                     <ion-badge class="approved" *ngIf="status?.id == 1">Approved</ion-badge>
                     <ion-badge class="rejected" *ngIf="status?.id == 2">Rejected</ion-badge>
@@ -139,9 +137,7 @@
             </ion-thumbnail>
           </ion-col>
         </ion-row>       
-        <!-- <ion-item text-wrap> -->
         <p *ngIf="manageBlog?.description != ''" class="service-cont" innerHTML="{{manageBlog?.description | words:40}}"></p>
-        <!-- </ion-item> -->
         <ion-row class="edit-blogs">
           <ion-col col-6 text-left>
             <button (click)="editBlog(manageBlog?.id,'edit')" class="edits">
@@ -164,7 +160,6 @@
     </ion-list>
   </div>
 
-  <!-- <p class="error-clr" *ngIf="bloglists?.length==0">{{emptyRecord}}</p> -->
   <ion-fab bottom right>
     <button ion-fab class="top-bttn" (click)="createBlog()">
       <i class="fa fa-plus" aria-hidden="true"></i>

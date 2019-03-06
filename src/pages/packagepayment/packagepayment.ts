@@ -424,6 +424,4 @@ RazorpayCheckout.on('payment.cancel', cancelCallback);
 dismiss(){
       this.viewCtrl.dismiss("dismiss");
   }
-
-
 }

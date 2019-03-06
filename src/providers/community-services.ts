@@ -411,12 +411,10 @@ myprofile(id){
     return this.http.post(`${this.getCommunityPostsUrl }getInviteContacts`,_request,this.options)
       .map(res => res.json()); 
    } 
-   inviteFriends(CommunityId,friendsID){
+   inviteFriends(CommunityId,friendsID,options){
     let _request= {'friends':{'user_id':friendsID},'shareurl':this.getCommunityPostsUrl+'/#/communityDetail/'+CommunityId};
-     //let _request={};
-       console.log(_request);
      
-    return this.http.post(`${this.getCommunityPostsUrl }inivtefriend`,_request,this.options)
+    return this.http.post(`${this.getCommunityPostsUrl }inivtefriend`,_request,options)
       .map(res => res.json()); 
    }  
     

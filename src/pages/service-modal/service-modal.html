@@ -4,17 +4,9 @@
       <ion-title color="primary" class="tittles-md" text-capitalize>
         {{title}}
       </ion-title>
-    <!--   <ion-buttons start item-right class="close-iconss">
-        <button ion-button (click)="dismiss()">
-          <span ion-text color="primary" showWhen="ios">Cancel</span>
-          <ion-icon ios="ios-close-circle-outline" md="md-close-circle"></ion-icon>
-        </button>
-      </ion-buttons> -->
     </ion-toolbar>
   </ion-navbar>
 </ion-header>
-
-
 <ion-content class="content-intop">
   <div *ngIf="showScheduleDetails" class="offered-servicelist">
     <ion-card class="contact-list">
@@ -91,7 +83,6 @@
       </div>
          <div *ngIf="booknownexttours">
         <ion-list *ngIf="user_type == 'sponsor'">
-          <!--   <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label> -->
           <ion-item class="sel-label">
             <ion-label class="selectDepent" class="required">Select Dependent</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
@@ -178,12 +169,12 @@
           </div>
         <ion-row>
           <p class="service-conts">
-            <span class="token-primaryss">Schedule Date : </span>{{scheduled_date}}
+            <span class="token-primaryss">Schedule Date : </span>{{start_date}}
           </p>
         </ion-row>
         <ion-row>
           <p class="service-conts">
-            <span class="token-primaryss">Participants : </span>{{noofpeopletravel}}
+            <span class="token-primaryss">Participants : </span>{{people_count}}
           </p>
         </ion-row>
         <ion-row>
@@ -416,7 +407,6 @@
       </div>
          <div *ngIf="booknownext">
         <ion-list *ngIf="user_type == 'sponsor'">
-          <!--   <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label> -->
           <ion-item class="sel-label">
             <ion-label class="selectDepent" class="required">Select Dependent</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
@@ -503,7 +493,7 @@
           </div>
         <ion-row>
           <p class="service-conts">
-            <span class="token-primaryss">Schedule Date : </span>{{scheduled_date}}
+            <span class="token-primaryss">Schedule Date : </span>{{start_date}}
           </p>
         </ion-row>
         <ion-row>
@@ -693,26 +683,6 @@
             </ion-select>
           </ion-item>
         </ion-list>
-    <!--     <ion-list *ngIf="user_type == 'sponsor'">
-          <ion-row>
-            <ion-col>
-              <ion-label style=" font-size:17px;   line-height:20px; float:left;" class="required">Mobile IMEI Number</ion-label>
-              <ion-item class="sel-label" text-wrap>
-                <ion-input type="text" [(ngModel)]="mobile_imei" value="{{mobile_imei}}"></ion-input>
-              </ion-item>
-            </ion-col>
-            </ion-row>
-            </ion-list>
-            <ion-list *ngIf="user_type != 'sponsor'">
-          <ion-row>
-            <ion-col>
-              <ion-label style=" font-size:17px;   line-height:20px; float:left;" class="required">Mobile IMEI Number</ion-label>
-              <ion-item class="sel-label" text-wrap>
-                <ion-input type="text" [(ngModel)]="mobile_imei" value="{{mobile_imei}}"></ion-input>
-              </ion-item>
-            </ion-col>
-            </ion-row>
-            </ion-list> -->
         <ion-list>
           <ion-row>
             <ion-col width-60>
@@ -1136,7 +1106,6 @@
       <!-- ..........................home automation................... -->
       <div *ngIf="homeschedule">
         <ion-list *ngIf="user_type == 'sponsor'">
-          <!--  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label> -->
           <ion-item class="sel-label">
             <ion-label class="selectDepent" class="required">Select Dependent</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
@@ -1150,7 +1119,6 @@
             min={{date}} max="2070-10-31"></ion-datetime>
         </ion-item>
         <ion-list>
-          <!-- <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Preferred Time</ion-label> -->
           <ion-item class="sel-label">
             <ion-label class="prefe" floating>Preferred Time</ion-label>
             <ion-select class="select-brds" [(ngModel)]="automation_time">
@@ -1412,7 +1380,6 @@
       <!-- ................................transportation services................. -->
       <div *ngIf="transportdriver">
         <ion-list *ngIf="user_type == 'sponsor'">
-          <!--  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label> -->
           <ion-item class="sel-label">
             <ion-label class="selectDepent" class="required">Select Dependent</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
@@ -1432,7 +1399,6 @@
           </ion-item>
         </ion-list>
         <ion-list>
-         <!--  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Hours/Days</ion-label> -->
           <ion-item class="sel-label">
            <ion-label class="selectDepent" class="required">Hours/Days</ion-label>
             <ion-select class="select-brds" [(ngModel)]="hours" *ngIf="vendorList?.vendorDetails.driver_time_slots == '2'">
@@ -1489,7 +1455,6 @@
           </ion-col>
         </ion-row>
       </div>
-      <!-- <ion-card class="contact-list" > -->
       <div class="offered-servicelist" *ngIf="confirmdriver">
         <ion-list>
           <ion-item text-wrap>
@@ -1662,7 +1627,6 @@
 
       <div *ngIf="transportcab">
         <ion-list *ngIf="user_type == 'sponsor'">
-          <!--  <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label> -->
           <ion-item class="sel-label">
             <ion-label class="selectDepent" class="required">Select Dependent</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
@@ -1911,7 +1875,6 @@
         </ion-list>
 
       </div>
-      <!-- </ion-card> -->
       <!-- ............................transcab end.......................... -->
 
 

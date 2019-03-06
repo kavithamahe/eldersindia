@@ -6,8 +6,6 @@ import { BlogListService } from '../../providers/blog-list-service';
  import { PackagepaymentPagePage } from '../../pages/packagepayment/packagepayment';
  import { ServiceProvider } from '../../providers/service-provider';
 
-
-
 /*
   Generated class for the GetpackagePage page.
 

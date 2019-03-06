@@ -12,6 +12,7 @@ import { CommunityprofilePage } from '../communityprofile/communityprofile';
 import { CommunityServices } from '../../providers/community-services';
 import { EmojiPickerPage } from '../../pages/emoji-picker/emoji-picker';
 import { CommunitymembersPage } from '../../pages/communitymembers/communitymembers';
+import { VerifyotpPagePage } from '../../pages/verifyotp/verifyotp';
 
 import { DomSanitizer } from '@angular/platform-browser/';
 import { InAppBrowser } from 'ionic-native';
@@ -212,17 +213,17 @@ files:any;
       this.communityServices.showToast("No Contacts")
     }
     else{
-    let popover = this.popoverCtrl.create(CommunityPopoverPage, {"communityID":id,"user_id":this.user_id
-    });
-    popover.present({
-      ev: ev
-    });
-    popover.onDidDismiss(() => {
-       this.community_id=this.navParams.get("community_id");
-       this.communityList(this.community_id);
-       this.communityDetail(this.community_id);
+    this.nav.push(VerifyotpPagePage, {"communityID":id,"user_id":this.user_id,
+      "community_id":this.community_id,"connectionInfo":this.connectionInfo,"inviteFriends":"1"});
+    // popover.present({
+    //   ev: ev
+    // });
+    // popover.onDidDismiss(() => {
+    //    this.community_id=this.navParams.get("community_id");
+    //    this.communityList(this.community_id);
+    //    this.communityDetail(this.community_id);
    
-    })
+    // })
   }
   }
 showConfirm(id){
@@ -610,6 +611,7 @@ export class CommunityPopoverPage {
   token:any;
   user_id:any;
   user_ids:any;
+  community_id:any;
   constructor(public viewCtrl: ViewController,public navParams: NavParams,public toastCtrl: ToastController,public communityServices: CommunityServices,public loadingCtrl: LoadingController,public storage:Storage) {  
     
      this.storage.ready().then(() => {
@@ -619,51 +621,54 @@ export class CommunityPopoverPage {
       });
       this.storage.get('id').then((id) => { this.user_ids=id; 
       this.user_id=this.navParams.get("user_id");
-      this.getConnections();
+      this.communityId = this.navParams.get("communityId");
+      this.community_id = this.navParams.get("community_id");
+      this.connectionInfo = this.navParams.get("connectionInfo");
+      // this.getConnections(this.community_id);
     })
     });
    }
-  getConnections(){
+ //  getConnections(community_id){
   
-  //let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    //loader.present();    
-      this.communityServices.getConnections(this.user_id).subscribe(connections => {
-        this.connectionInfo=connections.result;
-       // loader.dismiss();
-     },
-   err =>{
-    //loader.dismiss();
-      this.communityServices.showErrorToast(err);
-  })
- }
- inviteFriends(){ 
-if(this.selectedConnections != undefined){
- let loader = this.loadingCtrl.create({ content: "Please wait..." });     
-    loader.present();    
-      this.communityServices.inviteFriends(this.communityId,this.selectedConnections).subscribe(connections => {
-       //this.connectionInfo=connections.result;
+ //  //let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+ //    //loader.present();    
+ //      this.communityServices.getConnections(community_id).subscribe(connections => {
+ //        this.connectionInfo=connections.result;
+ //       // loader.dismiss();
+ //     },
+ //   err =>{
+ //    //loader.dismiss();
+ //      this.communityServices.showErrorToast(err);
+ //  })
+ // }
+//  inviteFriends(){ 
+// if(this.selectedConnections != undefined){
+//  let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+//     loader.present();    
+//       this.communityServices.inviteFriends(this.communityId,this.selectedConnections).subscribe(connections => {
+//        //this.connectionInfo=connections.result;
     
-        loader.dismiss();
+//         loader.dismiss();
 
-        this.showToaster(connections.result);
-        //this.navCtrl.push(BlogsPage);
-        this.viewCtrl.dismiss();
-     },
-    (err) => { 
-        if(err.status===401)
-        {
-        this.showToaster(JSON.parse(err._body).error);
-        }
-        else
-        {
-          this.showToaster("Something went wrong");
-        }
-        loader.dismiss();
-      });
-    }else{
-      this.showToaster("Please Select atleast one");
-    }
- }
+//         this.showToaster(connections.result);
+//         //this.navCtrl.push(BlogsPage);
+//         this.viewCtrl.dismiss();
+//      },
+//     (err) => { 
+//         if(err.status===401)
+//         {
+//         this.showToaster(JSON.parse(err._body).error);
+//         }
+//         else
+//         {
+//           this.showToaster("Something went wrong");
+//         }
+//         loader.dismiss();
+//       });
+//     }else{
+//       this.showToaster("Please Select atleast one");
+//     }
+//  }
   public showToaster(message)
   {
    let toast = this.toastCtrl.create({

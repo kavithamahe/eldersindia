@@ -45,9 +45,7 @@
     <br />
     <div padding *ngIf="!subcategories?.info" text-wrap>
       <p>{{emptyRecord}}</p>
-    </div>
-    <hr />
-
+    </div><hr />
     <h1 class="package-list-show">Packages (
       <span>{{packageCount}}</span>) </h1>
     <ion-card class="slider-card" *ngFor="let package of packages">
@@ -72,9 +70,5 @@
         </ion-list>
       </div>
     </ion-card>
-
-  
-
-  </div>
+</div>
 </ion-content>
-<!------------------ content end ------------------>

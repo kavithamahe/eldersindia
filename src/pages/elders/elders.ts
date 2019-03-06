@@ -479,9 +479,6 @@ imageURL:any;
         });
 
   }
-   // ionViewWillEnter(){
-   //      this.getElderMasterDetails();
-   //    }
 
   addEmergency(){
     
@@ -675,14 +672,12 @@ getTagsList(ev){
     }
 }
  addDependent(){
-  console.log(this.elder_dob);
   if(this.job_interest == true){
     this.job_interest = 1;
   }else{
     this.job_interest = 0;
   }
-  
-    //---------------------------------edited-------------------------------//
+ 
   if(this.avatar1 != ""){
     this.avatar = this.avatar1;
   }else{
@@ -704,7 +699,7 @@ getTagsList(ev){
            if(this.file_path == undefined){
               this.file_path = this.docss;
             }
-        this.getElderSkills();
+    this.getElderSkills();
     this.skill_data= this.elder_skills;
 
     this.getEmergencyNumber();
@@ -778,6 +773,10 @@ getTagsList(ev){
            }
           else
           {
+        if(this.job_interest == true && this.skill_set.length == 0){
+    this.communityServices.showToast("Please add skills or press go button to add the skills");
+  }
+  else{
            this.submitAttempt = false;
          this.getblog_category();
     this.blog_data=this.blog_categoryinterest;
@@ -877,7 +876,7 @@ getTagsList(ev){
               })
              }
          
-             
+             }
             }
             }
             else{
@@ -886,6 +885,7 @@ getTagsList(ev){
            }
           else
           {
+    
           this.submitAttempt = false;
             this.getEmergencyNumber();
             this.emergency_data = this.elder_emergency;
@@ -963,8 +963,8 @@ getTagsList(ev){
                     this.communityServices.showErrorToast(err);
                     loader.dismiss();
               })
-             
-            }
+             }
+            
             }
          
           }else{
@@ -1003,6 +1003,10 @@ getTagsList(ev){
       this.communityServices.showToast("Please Enter The Required Details");
     }
     else{
+          if(this.job_interest == true && this.skill_set.length == 0){
+    this.communityServices.showToast("Please add skills or press go button to add the skills");
+  }
+  else{
        this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
       this.submitAttempt = false;
       this.getElderSkills();
@@ -1082,7 +1086,7 @@ getTagsList(ev){
               loader.dismiss();
               })
                       }
-    
+    }
      }
         }  
         else{
@@ -1091,6 +1095,7 @@ getTagsList(ev){
       this.communityServices.showToast("Please Enter The Required Details");
     }
     else{
+   
        this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
       this.submitAttempt = false;
       this.getblog_category();
@@ -1152,8 +1157,8 @@ getTagsList(ev){
         } 
     
     }
-
-  }
+}
+  
     
     // if(this.functionality =="profileEdit")
     //   {
@@ -1173,40 +1178,3 @@ getTagsList(ev){
 
 
 }
-
-
-
-
-
-
-[{
-"id":"1",
-"sponsor_id":"1",
-"name":"neduncheliyan",
-"avatar":"uploads\/avatar\/1492778687usr3.jpg",
-"relation":"father",
-"gender":"",
-"dob":"13-06-1950",
-"mobile":"9874563211",
-"mobile_verified":"1",
-"email":"neduncheliyan@elderindia.com",
-"email_verified":"1",
-"in_service":"0",
-"location":"3",
-"job_interested":"1",
-"area_interest":"Animation",
-"job_type":"full time",
-"address":"4\/22 Rutland Gate 4th Street, Chennai, Tamil Nadu 600034",
-"city":"",
-"state":"",
-"status":"1",
-"created_at":"2017-04-07 22:59:14",
-"updated_at":"2017-04-21 18:14:47",
-"city_name":"",
-"state_name":"",
-"experience":[{"id":"23","elder_id":"1","functional_id":"5","functional_other":"","year":"5","duration":"APRIL 2001-2017","status":"1","created_at":"2017-04-21 18:14:46","updated_at":"2017-04-21 18:14:46","$hashKey":"object:3907"}],
-"education":[{"id":"23","elder_id":"1","graduation":"BCA","graduation_other":"","specialization":"Maths","specialization_other":"","university":"anna university","status":"1","created_at":"2017-04-21 18:14:46","updated_at":"2017-04-21 18:14:46","$hashKey":"object:3910"}],
-"emergency":[{"id":"27","elder_id":"1","person":"police","mobile":"100","status":"1","created_at":"2017-04-21 18:14:46","updated_at":"2017-04-21 18:14:46","$hashKey":"object:3904"}],
-"skills":[{"id":"68","elder_id":"1","skill":"java","status":"1","created_at":"2017-04-21 18:14:46","updated_at":"2017-04-21 18:14:46"},{"id":"69","elder_id":"1","skill":"php","status":"1","created_at":"2017-04-21 18:14:46","updated_at":"2017-04-21 18:14:46"},{"id":"70","elder_id":"1","skill":"yii","status":"1","created_at":"2017-04-21 18:14:47","updated_at":"2017-04-21 18:14:47"}],
-"avatar1":"uploads\/avatar\/1492778687usr3.jpg"
-}]

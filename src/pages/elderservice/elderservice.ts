@@ -74,5 +74,4 @@ getServicedetails(serviceId,vendor,one_time,recurring,package_amount){
     this.navCtrl.setRoot(DashboardPage);
   }
  
-
 }

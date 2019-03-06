@@ -161,27 +161,27 @@ loadSubcategoryList(subCategory_id,location_id){
                             });
             }
 
-bookNow(schedule_cost,service_cost,id,template_id,discount_rate){
-  this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNow":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id,"discount_rate":discount_rate});    
+bookNow(schedule_cost,service_cost,id,template_id,discount_rate,start_date){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNow":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id,"discount_rate":discount_rate,"start_date":start_date});    
 }
-bookNowTour(schedule_cost,service_cost,id,template_id,discount_rate){
+bookNowTour(schedule_cost,service_cost,id,template_id,discount_rate,tourService_id,start_date){
   console.log(discount_rate);
-    this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNowTours":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id,"discount_rate":discount_rate});    
+    this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNowTours":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id,"discount_rate":discount_rate,"tourService_id":tourService_id,"start_date":start_date});    
 }
-emergencybook(schedule_cost,service_cost,id,template_id,discount_rate){
-  this.navCtrl.push(ServiceModalPage,{service:"Schedule","emergencybook":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id,"discount_rate":discount_rate});    
+emergencybook(schedule_cost,service_cost,id,template_id,discount_rate,start_date){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","emergencybook":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id,"discount_rate":discount_rate,"start_date":start_date});    
 }
-transportationdriver(schedule_cost,service_cost,id,template_id,discount_rate){
-  this.navCtrl.push(ServiceModalPage,{service:"Schedule","transportationdriver":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id,"discount_rate":discount_rate});    
+transportationdriver(schedule_cost,service_cost,id,template_id,discount_rate,start_date){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","transportationdriver":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id,"discount_rate":discount_rate,"start_date":start_date});    
 }
-transportationcab(schedule_cost,service_cost,id,template_id,discount_rate){
-  this.navCtrl.push(ServiceModalPage,{service:"Schedule","transportationcab":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id,"discount_rate":discount_rate});    
+transportationcab(schedule_cost,service_cost,id,template_id,discount_rate,start_date){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","transportationcab":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id,"discount_rate":discount_rate,"start_date":start_date});    
 }
-homemodify(schedule_cost,service_cost,id,template_id,discount_rate){
-  this.navCtrl.push(ServiceModalPage,{service:"Schedule","homemodify":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id,"discount_rate":discount_rate});    
+homemodify(schedule_cost,service_cost,id,template_id,discount_rate,start_date){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","homemodify":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"2","booking_status":this.booking_status,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":id,"template_id":this.template_id,"discount_rate":discount_rate,"start_date":start_date});    
 }
-preBook(schedule_cost,service_cost,id,template_id,discount_rate){
-  this.navCtrl.push(ServiceModalPage,{service:"Schedule","preBook":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"1","booking_status":this.booking_status,"vendor_id":id,"template_id":template_id,"discount_rate":discount_rate});
+preBook(schedule_cost,service_cost,id,template_id,discount_rate,start_date){
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","preBook":"1",vendorList:this.vendorList,schedule_cost:schedule_cost,service_cost:service_cost,location_id:this.location_id,"safecategory":"1","booking_status":this.booking_status,"vendor_id":id,"template_id":template_id,"discount_rate":discount_rate,"start_date":start_date});
 }
 serviceInfomore(vendor){
    let servieListData = {"vendor": vendor, "subCategoryId": this.service_id,status:"1" ,"flag":this.flagId, "location_id": this.location_id,"serviceOffered":this.serviceOffered,"moreinfovendor":"1"};

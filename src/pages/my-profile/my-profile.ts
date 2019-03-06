@@ -38,8 +38,7 @@ base64Image:any;
     // this.user_type = "";
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
-    this.providerService.webServiceCall(`myaccount`,"")
-                        .subscribe(
+    this.providerService.webServiceCall(`myaccount`,"").subscribe(
                           data =>{
                                     this.profileData = data.result.info;
                                     this.avatar = this.profileData.avatar;
@@ -92,64 +91,8 @@ base64Image:any;
   
   showPrompt() {
     this.navCtrl.push(VerifyotpPagePage);
-  //   this.sendotp();
-  //   let prompt = this.alertCtrl.create({
-  //     title: 'Mobile number verification',
-  //     //message: "All reports are strictly confidential. Please describe the reason",
-  //     inputs: [
-  //       {
-  //         name: 'title',
-  //         placeholder: 'Enter one time password'
-  //       },
-  //     ],
-    
-  //     buttons: [
-  //      {
-  //         text: 'Resend OTP',
-  //         handler: data => {
-  //           this.sendotp();
-  //           return false;
-  //           // prompt.present();
-  //         }
-  //       },
-  //       {
-  //         text: 'Submit',
-  //         handler: data => {
-  //             if(data.title == ""){
-  //             this.providerService.showToast("Enter one time password");
-  //              return false;
-  //           }
-  //           else{
-
-  //           // this.verifyotp(data.title);
-  //              this.providerService.verifyotp(data.title).subscribe(otp => {
-  //       this.providerService.showToast(otp.result);
-  //       this.loadMyProfile();
-  //    },
-  //    error =>{
-  //         if(error.status===401){
-  //     this.providerService.showToast(JSON.parse(error._body).error);
-  //     }
-  // })
-  //               // return false;
-  //         }
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   prompt.present();
   }
-  // verifyotp(otp){
-  //    this.providerService.verifyotp(otp).subscribe(otp => {
-  //       this.providerService.showToast(otp.result);
-  //       this.loadMyProfile();
-  //    },
-  //    error =>{
-  //         if(error.status===401){
-  //     this.providerService.showToast(JSON.parse(error._body).error);
-  //     }
-  // })
-  // }
+  
   ionViewWillEnter(){
     this.storage.ready().then(() => {
       this.storage.get('imageurl').then((imageurl) => { this.imageURL=imageurl;});

@@ -159,6 +159,8 @@ template_id:any;
   getvendor_cancelpolicy:any=[];
   CurrentTime:any;
   CurrentDate:any;
+  tourService_id:any;
+  start_date:any;
   constructor(public platform: Platform,public storage:Storage,public alertCtrl: AlertController,private device: Device,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder,public blogListService:BlogListService) {
     this.date = new Date().toISOString();
@@ -166,6 +168,8 @@ template_id:any;
     this.CurrentTime = new Date().getHours() + ':' + new Date().getMinutes();
     this.vendorList = navParams.get("vendorList");
     this.template_id = navParams.get("template_id");
+    this.tourService_id = navParams.get("tourService_id");
+    this.start_date = moment(navParams.get("start_date")).format("DD-MM-YYYY");
     this.discount_rate = navParams.get("discount_rate");
     this.storage.ready().then(() => {
       storage.get('token').then((token) => { this.token=token;
@@ -318,20 +322,28 @@ template_id:any;
   }
 
   hotelType(){
-     this._provider.gethotelType(this.vendorList.requestServices.service_id)
+     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+     this._provider.gethotelType(this.tourService_id)
       .subscribe(data =>{ 
           this.getHotelType = data.result.getHotelType;
+          loader.dismiss();
     })
   }
   selecthotel(hoteltype){
-     this._provider.getselecthotel(hoteltype,this.vendorList.requestServices.service_id)
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+     this._provider.getselecthotel(hoteltype,this.tourService_id)
       .subscribe(data =>{ 
           this.getPersonPerHotel = data.result.getHotelPersons;
+          loader.dismiss();
     })
   }
    payingTax(payingTax){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
     this.packageCost = true;
-     this._provider.getpayingTax(payingTax,this.hoteltype,this.vendorList.requestServices.service_id)
+     this._provider.getpayingTax(payingTax,this.hoteltype,this.tourService_id)
       .subscribe(data =>{ 
           this.getHotelCosts = data.result.getHotelCost;
           this.getHotelCost = (this.getHotelCosts - (this.getHotelCosts * (this.discount_rate/100)));
@@ -341,10 +353,10 @@ template_id:any;
      this.tourslabel.push(i);
   }
   this.tourstotal_peoples =this.tourslabel;
+  loader.dismiss();
     })
   }
    selecetPeopleTours(people){
-    console.log(people);
     this.tourslabel = [];
     for(var i=1;i<= people -1;i++) {          
      this.tourslabel.push(i);
@@ -539,12 +551,12 @@ template_id:any;
     }
 
     let paymentData =  {"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
-    "start_date":start_date,"subcategory":subcategory,"service_id":service_id,
+    "start_date":this.start_date,"subcategory":subcategory,"service_id":service_id,
     "location_id":this.location_id,"vendor_id":this.vendor_id,"discount":"","pay_method":"","coupon_code_discount_cost":this.discounted_cost,
     "final_service_cost_after_coupon_code_discount":this.final_service_cost,"wallet_value":this.wallet_value,"coupon_id":this.coupon_id,
     "service_name":service,"paymentflag":1,"service_cost":0,"corporateDiscount":this.discount_rate,"getPersonHotelCost":this.getHotelCost,"getPersonHotelCostTotal":this.getHotelCosts,
     "service_cost_travel":0,"base_cost":0,"from_date":"","to_date":"","time_slot":"",
-    "from_time":"","to_time":"","durations":"","problem":"","datetime":start_date,
+    "from_time":"","to_time":"","durations":"","problem":"","datetime":this.start_date,
     "mobile":"","preferred_time":"01:00 AM - 02:00 AM","package_id":"","quantity":"",
     "getCustomerBalanceAmount":0,"get_custome_amount_actual":0,"get_custome_amount":0,
     "total_cost":0,"get_custome_deliever_amount":0,"total_service_cost":0,
@@ -1365,6 +1377,8 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
    }
 
   getelderDetails(elderid){
+      let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
     this.eldershow =true;
     let service_data = {"elder_id":elderid};
     this._provider.webServiceCall(`getElderDetails`,service_data)
@@ -1377,10 +1391,12 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
                  localStorage.setItem('elderDetailsname', this.elderDetailsname);
                  localStorage.setItem('elderDetailsage', this.elderDetailsage);
                  localStorage.setItem('elderDetailslastname', this.elderDetailslastname);
-                 this.gender = this.elderDetails.gender
+                 this.gender = this.elderDetails.gender;
+                 loading.dismiss();
                  // this.mobile_imei = this.elderDetails.mobile_imei;
                 },
         err =>{
+          loading.dismiss();
           if(err.status===400)
         {
           this._provider.showToast(JSON.parse(err._body).error);

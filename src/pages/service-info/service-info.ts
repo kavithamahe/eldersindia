@@ -102,8 +102,12 @@ getHotelCosts:any;
       this.template_id = navParams.get("vendor").template_id;
       this.discount_rate = navParams.get("vendor").discount_rate;
       this.tourService_id = navParams.get("vendor").tourService_id;
+      this.start_date = navParams.get("vendor").start_date;
+      this.booking_status = navParams.get("vendor").booking_status;
+      this.package_active_status = navParams.get("vendor").package_active_status;
       this.price_range = navParams.get("vendor").price_range;
       this.is_recreation_config = navParams.get("vendor").is_recreation_config;
+      this.package
       this.one_time = navParams.get("one_time");
       this.recurring = navParams.get("recurring");
       this.vendor_id = navParams.get("vendor").id;    
@@ -158,21 +162,29 @@ getHotelCosts:any;
   }
 
   hotelType(){
+     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
      this.providerService.gethotelType(this.tourService_id)
       .subscribe(data =>{ 
           this.getHotelType = data.result.getHotelType;
           this.storage.set('getHotelType', this.getHotelType);
+          loader.dismiss();
     })
   }
   selecthotel(hoteltype){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
      this.providerService.getselecthotel(hoteltype,this.tourService_id)
       .subscribe(data =>{ 
           this.getPersonPerHotel = data.result.getHotelPersons;
           this.storage.set('getPersonPerHotel', this.getPersonPerHotel);
           this.storage.set('hoteltype', hoteltype);
+          loader.dismiss();
     })
   }
    payingTax(payingtax){
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
     this.packageCost = true;
      this.providerService.getpayingTax(payingtax,this.hoteltype,this.tourService_id)
       .subscribe(data =>{ 
@@ -189,6 +201,7 @@ getHotelCosts:any;
   }
   this.tourstotal_peoples =this.tourslabel;
   this.storage.set('tourstotal_peoples', this.tourstotal_peoples);
+  loader.dismiss();
     })
   }
   openUrl() {
@@ -214,8 +227,8 @@ getHotelCosts:any;
         .subscribe(
           data =>{
                    this.vendorList = data.result.info;
-                   this.booking_status=this.vendorList.requestServices.booking_status;
-                   this.package_active_status = this.vendorList.vendorDetails.package_active_status;
+                   // this.booking_status=this.vendorList.requestServices.booking_status;
+                   // this.package_active_status = this.vendorList.vendorDetails.package_active_status;
                    this.businessFromDayName = this.vendorList.vendorDetails.businessFromDayName;
                    this.businessToDayName = this.vendorList.vendorDetails.businessToDayName;
                    this.businessFromTime = this.vendorList.vendorDetails.businessFromTime;
@@ -225,7 +238,7 @@ getHotelCosts:any;
                    this.package_validity = this.vendorList.vendorDetails.package_validity;
                    this.subcategory = data.result.info.requestServices.subcategory;
                    this.category = data.result.info.requestServices.category;
-                   this.start_date = data.result.info.requestServices.start_date;
+                   // this.start_date = data.result.info.requestServices.start_date;
                    this.end_date = data.result.info.requestServices.end_date;
                    this.packageinfo = this.vendorList.packages;
                    this.serviceData = data.result.info.requestServices;
@@ -248,31 +261,31 @@ contactNow(){
 }
 bookNow(){
   this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNow":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
-    "template_id":this.template_id,"discount_rate":this.discount_rate});    
+    "template_id":this.template_id,"discount_rate":this.discount_rate,"start_date":this.start_date,"tourService_id":this.tourService_id});    
 }
 bookNowTours(){
   this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNowTours":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
-    "template_id":this.template_id,"discount_rate":this.discount_rate});    
+    "template_id":this.template_id,"discount_rate":this.discount_rate,"start_date":this.start_date,"tourService_id":this.tourService_id});    
 }
 preBook(){
    this.navCtrl.push(ServiceModalPage,{service:"Schedule","preBook":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
- "template_id":this.template_id,"discount_rate":this.discount_rate});    
+ "template_id":this.template_id,"discount_rate":this.discount_rate,"start_date":this.start_date});    
 }
 emergencybook(){
   this.navCtrl.push(ServiceModalPage,{service:"Schedule","emergencybook":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
-"template_id":this.template_id,"discount_rate":this.discount_rate});    
+"template_id":this.template_id,"discount_rate":this.discount_rate,"start_date":this.start_date});    
 }
 transportationdriver(){
    this.navCtrl.push(ServiceModalPage,{service:"Schedule","transportationdriver":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
- "template_id":this.template_id,"discount_rate":this.discount_rate});    
+ "template_id":this.template_id,"discount_rate":this.discount_rate,"start_date":this.start_date});    
 }
 transportationcab(){
   this.navCtrl.push(ServiceModalPage,{service:"Schedule","transportationcab":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
-"template_id":this.template_id,"discount_rate":this.discount_rate});   
+"template_id":this.template_id,"discount_rate":this.discount_rate,"start_date":this.start_date});   
 }
 homemodify(){
   this.navCtrl.push(ServiceModalPage,{service:"Schedule","homemodify":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
-"template_id":this.template_id,"discount_rate":this.discount_rate});    
+"template_id":this.template_id,"discount_rate":this.discount_rate,"start_date":this.start_date});    
 }
 pressmodel(){
   this.modal();

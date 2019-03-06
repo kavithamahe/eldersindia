@@ -90,12 +90,6 @@ vendorLogo:any;
       this.dependentId = this.dependents[0].id;
     }
     this.navCtrl.push(GetpackagePagePage,{packID:id,dependents:this.dependents,location_id:this.location_id,package_amount:package_amount,vendor_id:this.vendor_id,package_validity:package_validity,"service_quantity":service_quantity});
-  
-  // openRequestPackage(id,service_quantity){
-  //   if(this.dependents.length == 1){
-  //     this.dependentId = this.dependents[0].id;
-  //   }
-  //   this.navCtrl.push(GetpackagePagePage,{packID:id,dependents:this.dependents,location_id:this.location_id,service_quantity:service_quantity});
 
   }
   dashboardPage(){

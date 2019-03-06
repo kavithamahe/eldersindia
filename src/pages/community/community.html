@@ -151,7 +151,7 @@
 				</ion-card-content>
 				<br>
 				<ion-card-content [hidden]="!user?.post_image">
-					<img [src]="imageUrl+user?.post_image">
+					<img [src]="imageUrl+user?.post_image" />
 				</ion-card-content>
 				<ion-card-content class="video-updates" [hidden]="!user?.post_video">
 					<iframe [src]="cleanURL(user?.post_video)" frameborder="0">

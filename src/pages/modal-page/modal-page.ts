@@ -4,12 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InAppBrowser } from 'ionic-native';
 import {Platform} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
 import moment from 'moment';
-
 import { ServiceProvider } from '../../providers/service-provider';
 import { BlogListService } from '../../providers/blog-list-service';
-
 import { DashboardPage } from '../../pages/dashboard/dashboard';
  import { Modelpage1PagePage } from '../../pages/modelpage1/modelpage1';
  import { PaymentPage } from '../../pages/payment/payment';
@@ -237,7 +234,6 @@ export class ModalContentPage {
       .subscribe(data =>{ 
           this.get_custome_amount = parseFloat(data.result);
           this.totalpayableamountservice = parseInt(this.initialservicecost) + parseInt(this.get_custome_amount);
-    console.log(this.totalpayableamountservice);
     })
     }
      getCustomerDeliverStatusAmounts(){
@@ -245,7 +241,6 @@ export class ModalContentPage {
       .subscribe(data =>{ 
         this.get_custome_deliever_amount = parseFloat(data.result);
         this.totalpayableamount = parseInt(this.initialservicecost) + parseInt(this.get_custome_deliever_amount); 
-        console.log(this.totalpayableamount);
     })
     }
      getServicecancelamounts(){
@@ -260,8 +255,7 @@ export class ModalContentPage {
       .subscribe(data =>{ 
         this.getCustomerBalanceAmount = parseFloat(data.result);
         this.totalpayableamountbalance = parseInt(this.initialservicecost) - parseInt(this.getCustomerBalanceAmount);
-     
-      
+  
     })
     }
     getServicedependentlistsInfo(vendor_id){
@@ -307,7 +301,14 @@ export class ModalContentPage {
 }
 
   onetime(searchValue){
-       if(this.get_Servicedependentlist !=  0){
+      if(this.vendor_id){
+          let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    loading.present();
+      this.providerService.getServicedependentlist(this.vendor_id)
+      .subscribe(data =>{ 
+        this.get_Servicedependentlist = data.result;
+        loading.dismiss();
+              if(this.get_Servicedependentlist !=  0){
       this.providerService.showToast("You have not paid previous availed service,please pay and request new services");
       this.navCtrl.setRoot(ServicerequestPage);
     }
@@ -316,15 +317,24 @@ export class ModalContentPage {
      this.searchButton=!searchValue;
      this.datCount = "";
    }
+    })
+    }
+ 
    }
    recurringtime(searchValues){
-      if(this.get_Servicedependentlist !=  0){
+     if(this.vendor_id){
+      this.providerService.getServicedependentlist(this.vendor_id)
+      .subscribe(data =>{ 
+        this.get_Servicedependentlist = data.result;
+           if(this.get_Servicedependentlist !=  0){
       this.providerService.showToast("You have not paid previous availed service,please pay and request new services");
       this.navCtrl.setRoot(ServicerequestPage);
     }
     else{
     this.searchButton=false;
      this.recurring=!searchValues;
+   }
+      })
    }
    }
    fullpay(full){

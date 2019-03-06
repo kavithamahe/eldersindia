@@ -1,9 +1,4 @@
-<!--
-  Generated template for the CancelrequestsPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>Cancel Requests</ion-title>
@@ -201,7 +196,7 @@
      </ion-item>
      <ion-item text-wrap style="padding-left:10px;">
           <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Total services requests :
-            <span class="discountCost">{{req_count}}</span>
+            <span class="discountCost">{{req_count}}</span> 
           </h5>
      </ion-item>
      <ion-item text-wrap style="padding-left:10px;">
@@ -254,62 +249,6 @@
         </ion-col>
       </ion-row>
      </ion-list>
-<!--       <ion-list *ngIf = "balanceamount_to_pay !=0 && cancel_services !=1 && percentage !='0' && package_id != 1">
-     <ion-item text-wrap style="padding-left:10px;">
-          <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Service request number :
-            <span class="discountCost">
-             {{sr_token}}</span>
-          </h5>
-     </ion-item>
-     <ion-item text-wrap style="padding-left:10px;">
-          <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Total services requests :
-            <span class="discountCost">{{req_count}}</span>
-          </h5>
-     </ion-item>
-     <ion-item text-wrap style="padding-left:10px;">
-          <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Total cost of the recurring :
-            <span class="discountCost"><i class="fa fa-inr" aria-hidden="true"></i>
-             {{actual_service_cost | number : '1.2-2'}} </span>
-          </h5>
-     </ion-item>
-      <ion-item text-wrap style="padding-left:10px;">
-          <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Total Paid Amount :
-            <span class="discountCost">
-              <i class="fa fa-inr" aria-hidden="true"></i>{{paid_amount | number : '1.2-2'}}</span>
-          </h5>
-     </ion-item>
-      <ion-item text-wrap style="padding-left:10px;">
-          <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Cancellation fee :
-            <span class="discountCost">
-              <i class="fa fa-inr" aria-hidden="true"></i>{{cancellationfees | number : '1.2-2'}}</span>
-          </h5>
-     </ion-item>
-      <ion-item text-wrap style="padding-left:10px;">
-          <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Balance Amount :
-            <span class="discountCost">
-              <i class="fa fa-inr" aria-hidden="true"></i>{{balanceamount_to_pay | number : '1.2-2'}}</span>
-          </h5>
-     </ion-item>
-      <ion-item text-wrap style="padding-left:10px;">
-          <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Cancellation percentage :
-            <span class="discountCost">{{percentage}} %</span>
-          </h5>
-     </ion-item>
-     <ion-label style="padding-left:10px;" class = "required">Comments</ion-label>
-      <ion-item style = "border: 2px solid #f2f2f2; border-radius: 15px;">
-      <ion-input type="text" placeholder="Reason for Cancelling?" [(ngModel)] = "comments">
-      </ion-input>
-      </ion-item>
-      <ion-label style="padding-left:10px;">Are you sure you want to cancel this service ?</ion-label>
-         <ion-row>
-        <ion-col class="view-serv" col-6 text-left>
-          <ion-badge (click)="cancel()" class="services-view">Cancel</ion-badge>
-            </ion-col>
-          <ion-col class="view-serv" col-6>
-          <ion-badge class="dele" (click)="cancelRequestrecurring()" class="services-delete"> Confirm</ion-badge>
-        </ion-col>
-      </ion-row>
-     </ion-list> -->
      <ion-list *ngIf = "cancel_services ==1 && package_id != 1">
      <ion-item text-wrap style="padding-left:10px;">
           <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Service request number :

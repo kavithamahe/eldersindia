@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ViewServiceRequest page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
@@ -16,17 +10,13 @@
       <button ion-button icon-only (click)="dashboardPage()">
         <ion-icon name="home"></ion-icon>
       </button>
-    </ion-buttons>
-   
+    </ion-buttons> 
   </ion-navbar>
 </ion-header>
-
-
 <ion-content class="content-intop">
 <br/>
 <ion-card class="req-viewlist" >
- 
-   <ion-row>
+  <ion-row>
   <ion-col width-100 class="child_menu">
   <span>Sponsor Name</span>
    <p>{{viewServiceRequestInfo?.sponsor_name}} {{viewServiceRequestInfo?.sponsor_last_name}}</p>
@@ -68,13 +58,6 @@
    <p>{{viewServiceRequestInfo?.servicer_name}}</p>
    </ion-col>
   </ion-row>
-  <!-- <ion-row>
-   
-    <ion-col width-100 class="child_menu">
-	<span>Enquiry About</span>
-   <p>{{viewServiceRequestInfo?.problem}}</p>
-   </ion-col>
-  </ion-row> -->
   <ion-row>
    
     <ion-col width-100 class="child_menu">
@@ -170,11 +153,6 @@
   <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{paidamount3 | number: '1.2-2'}}</p>
    </ion-col>
   </ion-row>
-  <!--  <ion-row *ngIf = "viewServiceRequestInfo?.refundamount">   
-    <ion-col width-100 class="child_menu">
-  <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.total_paid | number: '1.2-2'}}</p>
-   </ion-col>
-  </ion-row> -->
   <ion-row *ngIf = "viewServiceRequestInfo?.additional_service_cost != 0 && viewServiceRequestInfo?.template_id  == '3'">   
     <ion-col width-100 class="child_menu">
   <span>Pre-book Cost</span><p><i class="fa fa-rupee"></i>{{prebookcost | number : '1.2-2'}}</p>

@@ -113,8 +113,6 @@
 							</ion-col>
 						</ion-row>
 					</ion-item>
-
-
 					<div *ngIf="i==replyBlock" class="rply-com">
 						<ion-row>
 							<ion-col col-8>
@@ -126,10 +124,6 @@
 				     style="font-size: 30px;padding: 10px 0px 0px;" item-right 
 				     (click)="emojiPicker2($event,reply.uid_to,reply.com_post_cmt_id)"></ion-icon>
 			        </ion-col>
-						<!-- 	<ion-col col-2>
-								<p style="margin:5px;" class="message-container" [innerHTML]="':smile:  ' | emojis" (click)="emojiPicker2($event,reply.uid_to,reply.com_post_cmt_id)">
-								</p>
-							</ion-col> -->
 							<ion-col col-2>
 								<div class="send-reqs">
 									<button (click)="sendReply(reply.uid_to,reply.com_post_cmt_id)" ion-button class="secon-sdms">
@@ -151,9 +145,6 @@
 				     <ion-icon name="sad" class="em-icon" 
 				     style="font-size: 30px;padding: 10px 0px 0px;" item-right (click)="emojiPicker2($event,comment.uid_from,comment.comments_id)"></ion-icon>
 			        </ion-col>
-					<!-- <ion-col col-2>
-						<p style="margin:5px;" class="message-container" [innerHTML]="':smile:' | emojis" (click)="emojiPicker2($event,comment.uid_from,comment.comments_id)"></p>
-					</ion-col> -->
 					<ion-col col-2>
 						<div class="send-reqs">
 							<button (click)="sendReply(comment.uid_from,comment.comments_id)" ion-button class="secon-sdms">

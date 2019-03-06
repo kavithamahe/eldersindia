@@ -26,9 +26,6 @@
         <h2 text-capitalize>{{news?.title}}</h2>        
         <p>{{news?.post_date}}</p>
         <p>{{news?.author_name }}</p>
-        <!-- <p class="timedate" text-capitalize>
-          <ion-icon ios="ios-person" md="md-person"></ion-icon> {{news?.author_name }} |
-          <i class="fa fa-calendar" aria-hidden="true"></i> {{news?.post_date}}</p> -->
         <p class="description" [innerHTML]="news?.description | words : 40 : '...'"></p>
       </ion-item>
     </div>

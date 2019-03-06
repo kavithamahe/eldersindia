@@ -36,6 +36,7 @@ export class CommunitylistPage {
   searchTextBox:any='';
   prev_index:any = 0;
     scrollTop:boolean = false;
+    banner:any;
   constructor(public nav: NavController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams,platform: Platform,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
      this.isAndroid = platform.is('android');
      // this.searchData = "";
@@ -75,6 +76,8 @@ export class CommunitylistPage {
       subscribe(mycommunity => {
       this.communitylists = mycommunity.result.info.data;
       this.categoryLists = mycommunity.result.get.communityCategory;
+      this.banner = this.imageUrl + this.communitylists[0].banner;
+      console.log(this.banner);
       this.nextPageURL=mycommunity.result.info.next_page_url;
       loader.dismiss();
   },

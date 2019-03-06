@@ -9,7 +9,6 @@ import { FileOpener } from '@ionic-native/file-opener';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import {saveAs as importedSaveAs} from "file-saver";
-// import { normalizeURL } from 'ionic-angular';
 
 import { ServiceRequestService } from '../../providers/service-request-service';
 import { ViewServiceRequestPage } from '../../pages/view-service-request/view-service-request';
@@ -18,7 +17,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
  import { RecurringPagePage } from '../../pages/recurring/recurring';
  import { CancelrequestsPage } from '../../pages/cancelrequests/cancelrequests';
 
- import moment from 'moment';
+import moment from 'moment';
 
 declare var cordova: any;
 
@@ -109,7 +108,7 @@ private direction: string = "";
         this.onInits();
       }
       else{
-       this.onInit(); 
+        this.onInit(); 
       }
   		
       this.getRemarks();
