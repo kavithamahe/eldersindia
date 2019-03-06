@@ -10,7 +10,6 @@ import { TruncateModule } from 'ng2-truncate';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { File } from '@ionic-native/file';
-import { Base64 } from '@ionic-native/base64';
 // import * as Sentry from 'sentry-cordova';
 
 import { Ng2CompleterModule } from "ng2-completer";
@@ -294,7 +293,7 @@ import { HttpClientModule } from '@angular/common/http';
     CancelrequestsPage,
   ],
      providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},FileTransfer,FileChooser,FilePath,File,FileOpener,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics, 
-    NetworkProvider,Base64] // Add GithubUsers provider
+    NetworkProvider] // Add GithubUsers provider
 
 
 })
