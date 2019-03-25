@@ -46,6 +46,7 @@ selected:any;
  sendselectedContacts: any=[];
  currentCompany:any;
  multirow:any=[];
+ multirowsent:any=[];
    constructor(public navCtrl: NavController,public alertCtrl: AlertController, public navParams: NavParams,platform: Platform,public storage:Storage,public messagesService:MessagesService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.isAndroid = platform.is('android');
     if(navParams.get("viewType")!='' && navParams.get("viewType")!=null)
@@ -106,6 +107,15 @@ selected:any;
         }
         else{
           this.multirow[index] = index;
+        }
+           
+        }
+          setClickedRowsent(index){
+        if(this.multirowsent[index]){
+          this.multirowsent[index] = "";
+        }
+        else{
+          this.multirowsent[index] = index;
         }
            
         }

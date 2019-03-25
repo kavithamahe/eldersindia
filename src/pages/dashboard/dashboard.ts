@@ -18,6 +18,7 @@ import { BlogsPage } from '../../pages/blogs/blogs';
 import { ConnectionsPage } from '../../pages/connections/connections';
 import { MessagesPage } from '../../pages/messages/messages';
 import { RemotemonitorPagePage } from '../../pages/remotemonitor/remotemonitor';
+import { NotificationsPage } from '../../pages/notifications/notifications';
 
 import { SafemePagePage } from '../../pages/safeme/safeme';
 
@@ -72,6 +73,8 @@ export class DashboardPage {
   sponsor_id:any;
   id:any;
   safehelpdetails:any=[];
+  unreadCount:any;
+  get_notification:any=[];
   constructor(private nativeAudio: NativeAudio,public nativeGeocoder:NativeGeocoder,private device: Device,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public platform: Platform,public alertCtrl: AlertController,private geolocation: Geolocation,public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public storage:Storage) {
     storage.get('Cctv_camera').then((Cctv_camera) => { this.Cctv_camera=Cctv_camera; })
   	storage.get('elder_mobile_imei').then((elder_mobile_imei) => { this.elder_mobile_imei=elder_mobile_imei; })
@@ -85,6 +88,7 @@ export class DashboardPage {
       this.head = new RequestOptions({ headers: this.headers });
       this.fetchLocation();
       this.map();
+      this.getNotification();
   })
       storage.get('user_type').then((user_type) => { this.user_type=user_type; })
        this.storage.get('name').then((name) => { this.elder_name=name;})
@@ -146,7 +150,21 @@ export class DashboardPage {
       this.head = new RequestOptions({ headers: this.headers });
       this.fetchLocation();
       this.map();
+      this.getNotification();
   })
+  }
+  getNotification(){
+          this.providerService.getNotifications(this.head)
+      .subscribe(data =>{
+        this.get_notification = data.result.info.list;
+        this.unreadCount = data.result.info.unreadCount;
+    },
+    err =>{
+      // this.providerService.showErrorToast(err);
+      })
+  }
+  getnotificationview(){
+    this.navCtrl.push(NotificationsPage,{"get_notification":this.get_notification});
   }
   checksafehelpStatus(id){
          this.providerService.checksafeHelpStatus(id,this.head)
@@ -177,6 +195,10 @@ this.map();
   urlss:any;
      shareLocation()
   {
+    if(this.lat == undefined || this.lat == "" || this.lat == null){
+      this.providerService.showToast("Please check your gps location on or not and then try again.");
+    }
+    else{
     this.urlss = 'https://www.google.com/maps/place/'+this.lat+ ',' + this.long;
       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
@@ -191,6 +213,7 @@ this.map();
       })
 
   }
+}
   // ionViewWillLeave() {
   //   this.tabBarElement.style.display = 'flex';
   // }

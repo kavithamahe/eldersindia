@@ -5,7 +5,6 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-
     <ion-title text-center>Connections</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="dashboardPage()">
@@ -21,7 +20,7 @@
 </ion-header>
 
 
-<ion-content class="connectionPage">
+<ion-content class="connectionPage" autohide>
 
   <!-- ========== Common Segment ========== -->
   <ion-card class="conn-seg">
@@ -234,7 +233,7 @@
 
   </div>
 
-  <ion-fab bottom right *ngIf="allConnectionsInfo.length != 0 && scrollTop">
+  <ion-fab bottom right #fab>
     <button ion-fab mini (click)="scrollToTop()">
       <ion-icon name="arrow-dropup">
       </ion-icon>

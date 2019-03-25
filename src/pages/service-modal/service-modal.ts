@@ -4,7 +4,6 @@ import { Storage } from '@ionic/storage';
 import { InAppBrowser } from 'ionic-native';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Device } from "@ionic-native/device";
-
 import {
   FormBuilder,
   Validators,
@@ -18,6 +17,7 @@ import { SubcategoryListPage } from '../subcategory-list/subcategory-list';
 import { ServiceProvider } from '../../providers/service-provider';
 import { BlogListService } from '../../providers/blog-list-service';
 import { PaymentPage } from '../payment/payment';
+import { TermsModalPage } from '../../pages/terms-modal/terms-modal';
 
 declare var RazorpayCheckout: any;
 
@@ -161,18 +161,24 @@ template_id:any;
   CurrentDate:any;
   tourService_id:any;
   start_date:any;
+  imageUrl:any;
+  razorkey:any;
+  bookNowToursmore:any;
   constructor(public platform: Platform,public storage:Storage,public alertCtrl: AlertController,private device: Device,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder,public blogListService:BlogListService) {
     this.date = new Date().toISOString();
     this.CurrentDate = new Date().toISOString(); 
     this.CurrentTime = new Date().getHours() + ':' + new Date().getMinutes();
     this.vendorList = navParams.get("vendorList");
+    console.log(this.vendorList);
     this.template_id = navParams.get("template_id");
     this.tourService_id = navParams.get("tourService_id");
     this.start_date = moment(navParams.get("start_date")).format("DD-MM-YYYY");
     this.discount_rate = navParams.get("discount_rate");
+    this.bookNowToursmore = navParams.get("bookNowToursmore");
     this.storage.ready().then(() => {
       storage.get('token').then((token) => { this.token=token;
+        storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
       localStorage.setItem('key', this.token);
       this.headers = new Headers();
       this.headers.append('Content-Type', 'application/json');
@@ -258,6 +264,7 @@ template_id:any;
           this.contact = false;
           this.schedule = false;
           this.hotelType();
+          if(this.bookNowToursmore == "1"){
           storage.get('getHotelType').then((getHotelType) => { this.getHotelType=getHotelType;
             storage.get('hoteltype').then((hoteltype) => { this.hoteltype=hoteltype;})
               storage.get('payingtax').then((payingtax) => { this.payingtax=payingtax;})
@@ -272,7 +279,7 @@ template_id:any;
           });
           });
             });
-
+        }
        }
 
       this.showScheduleDetails = true;	
@@ -287,6 +294,7 @@ template_id:any;
       this.pre_book_percentage = this.vendorList.requestServices.pre_book_percentage;
       this.vendor_id=navParams.get("vendor_id");
       this.booking_status = navParams.get("booking_status");
+      console.log(this.booking_status);
       if(navParams.get("safecategory") == "1"){
         this.showScheduleDetails = false;
          storage.get('user_type').then((user_type) => { this.user_type=user_type; 
@@ -302,7 +310,7 @@ template_id:any;
        
     }
     else if(navParams.get("service") == "recreation_service"){
-        this.showRecreationDetails = true; 
+      this.showRecreationDetails = true; 
       this.title = this.vendorList.vendorDetails.name+" - Recreation Services"; 
       this.location_id = navParams.get("location_id");
       this.availability = navParams.get("availability");
@@ -319,14 +327,29 @@ template_id:any;
       this.getCustomerBalanceAmounts();
       this.getServicedependentlists();
       this.getCancelpolicyByVendor();
+      this.getRazorPaymentsaltKey();
   }
-
+getRazorPaymentsaltKey(){
+      let loader = this.loadingCtrl.create({content: 'Please wait...!'});
+      loader.present();
+  this._provider.webServiceCall(`getRazorPaymentsaltKey`,"")
+  .subscribe(
+      data =>{
+        this.razorkey= data.result.test_key;
+        loader.dismiss();
+              },
+      err =>{
+        loader.dismiss();
+     
+            })
+}
   hotelType(){
      let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
      this._provider.gethotelType(this.tourService_id)
       .subscribe(data =>{ 
           this.getHotelType = data.result.getHotelType;
+          console.log(this.getHotelType);
           loader.dismiss();
     })
   }
@@ -367,7 +390,11 @@ template_id:any;
    this.navCtrl.pop();
   }
   bookDetailsTours(){
-    if(this.hoteltype == undefined && this.payingtax == undefined){
+    if(this.get_Servicedependentlist !=  0){
+      this._provider.showToast("You have not paid previous availed service,please pay and request new services");
+    }
+    else{
+   if(this.hoteltype == undefined && this.payingtax == undefined){
       this._provider.showToast("Please select the details");
    }
     else{
@@ -377,9 +404,10 @@ template_id:any;
       }
         else{
           this._provider.showToast("Please check the terms and conditions");
-        }
-     
+        }  
     }
+    }
+ 
    
   }
 
@@ -445,7 +473,6 @@ template_id:any;
   }
  let people = [];
  for(let i=0;i< this.people_count - 1;i++) {
-  
   var obj = {"elder_name":this.elder_name[i],"elder_age":this.elder_age[i]}
   people.push(obj);
  } 
@@ -580,7 +607,7 @@ template_id:any;
       description: service,
       image: this.url + "assets/img/Elderlogo.png",
       currency: 'INR',
-      key: 'rzp_test_53tdpMxkK8bFKw',
+      key: this.razorkey,
       amount: this.service_costss,
       name: "EldersIndia",
       prefill: {
@@ -606,7 +633,7 @@ template_id:any;
     };
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
-if(this.coupon_id == undefined){
+if(this.coupon_id == undefined || this.coupon_id == ""){
  var successCallback = function(payment_id) {
   loading.present();
       // ajaxCallCheck(payment_id);
@@ -797,6 +824,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
+        this.coupan_code = "";
         this._provider.showToast(JSON.parse(err._body).error);
       }
       else if(err.status === 401){
@@ -804,6 +832,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
+        this.coupan_code = "";
         this._provider.showToast(JSON.parse(err._body).error);
       }
       else
@@ -812,6 +841,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
+        this.coupan_code = "";
         this._provider.showToast("Something went wrong");
       }
             })
@@ -902,6 +932,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
+        this.coupan_code = "";
         this._provider.showToast(JSON.parse(err._body).error);
       }
       else if(err.status === 401){
@@ -909,6 +940,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
+        this.coupan_code = "";
         this._provider.showToast(JSON.parse(err._body).error);
       }
       else
@@ -917,6 +949,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
+        this.coupan_code = "";
         this._provider.showToast("Something went wrong");
       }
             })
@@ -1026,11 +1059,13 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     this.navCtrl.pop();
   }
   emergencyDetails(){
+       if(this.get_Servicedependentlist !=  0){
+      this._provider.showToast("You have not paid previous availed service,please pay and request new services");
+    }
+    else{
      if(this.user_type == 'sponsor' && this.elder_id == undefined){
       this._provider.showToast("Please select the dependent");
     }
-
-
     else{
         let emergencyDetailsname = this.emergency_name.filter(item => item == undefined);
         console.log(emergencyDetailsname.length);
@@ -1049,12 +1084,16 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
   
       }
         }
-     
+     }
   }
   cancelsafe(){
     this.navCtrl.pop();
   }
   sendsafe(){
+      if(this.get_Servicedependentlist !=  0){
+      this._provider.showToast("You have not paid previous availed service,please pay and request new services");
+    }
+    else{
      if(this.user_type == 'sponsor' && this.elder_id == undefined){
       this._provider.showToast("Please select the dependent");
     }
@@ -1067,6 +1106,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       this._provider.showToast("Please check the terms and conditions");
      }
    }
+ }
   }
   homemodify(){
     this.homeschedule = true;
@@ -1077,6 +1117,10 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     this.navCtrl.pop();
   }
   homemodifynext(){
+      if(this.get_Servicedependentlist !=  0){
+      this._provider.showToast("You have not paid previous availed service,please pay and request new services");
+    }
+    else{
     if(this.user_type == 'sponsor'){
       if(this.elder_id != undefined && this.date != undefined && this.automation_time != undefined && this.terms != undefined){
         this.confirmhomemodify = true;
@@ -1095,7 +1139,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
         this._provider.showToast("Please Enter all the Details");
       }
     }
-    
+    }
   }
   backconfirmhome(){
     this.homeschedule = true;
@@ -1110,6 +1154,10 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     this.navCtrl.pop();
   }
   drivernext(){
+      if(this.get_Servicedependentlist !=  0){
+      this._provider.showToast("You have not paid previous availed service,please pay and request new services");
+    }
+    else{
     if(this.date == this.CurrentDate && this.time <= this.CurrentTime){
       this._provider.showToast("Please choose valid date and time");
     }
@@ -1143,6 +1191,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       }
     }
   }
+}
   }
   backconfirmdriver(){
     this.confirmdriver = false;
@@ -1157,6 +1206,10 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     this.navCtrl.pop();
   }
   cabnext(){
+     if(this.get_Servicedependentlist !=  0){
+      this._provider.showToast("You have not paid previous availed service,please pay and request new services");
+    }
+    else{
     if(this.date == this.CurrentDate && this.time <= this.CurrentTime){
       this._provider.showToast("Please choose valid date and time");
     }
@@ -1233,6 +1286,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
      }
     }
   }
+  }
   backconfirmcab(){
     this.confirmcab = false;
     this.transportcab = true;
@@ -1266,6 +1320,10 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     this.schedule = false;
   }
   bookDetails(){
+     if(this.get_Servicedependentlist !=  0){
+      this._provider.showToast("You have not paid previous availed service,please pay and request new services");
+    }
+    else{
     if(this.noofpeople == undefined){
       this._provider.showToast("Please select the number of peoples");
    }
@@ -1283,7 +1341,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
         else{
           this._provider.showToast("Please check the terms and conditions");
         }
-     
+     }
     }
    
   }
@@ -1295,10 +1353,17 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
      }
    }
   openTerms(){
-     this.platform.ready().then(() => {
-            let browser = new InAppBrowser(this.getvendor_cancelpolicy,'_blank');
-
-        });
+     this.navCtrl.push(TermsModalPage,{"vendor_id":this.vendor_id,"terms_and_condition_length":this.vendorList.vendorDetails.terms_and_condition_length,
+      "terms_and_condition":this.vendorList.vendorDetails.terms_and_condition})
+     // this.platform.ready().then(() => {
+     //  if(this.vendorList.vendorDetails.terms_and_condition_length > 1){
+     //     let browser = new InAppBrowser(this.imageUrl + "#/termsandconditionForVendor/" + this.vendor_id,'_blank');
+     //  }
+     //  else if(this.vendorList.vendorDetails.terms_and_condition_length=='' || this.vendorList.vendorDetails.terms_and_condition_length < 1){
+     //     let browser = new InAppBrowser(this.imageUrl + "#/termsandcondition",'_blank');
+     //  }
+     //    });
+      
    }
    showConfirm() {
     const confirm = this.alertCtrl.create({
@@ -1652,7 +1717,7 @@ let paymentData = {"package_id":"","serviceType":"One time","service_cost":this.
       description: service,
       image: this.url + "assets/img/Elderlogo.png",
       currency: 'INR',
-      key: 'rzp_test_53tdpMxkK8bFKw',
+      key: this.razorkey,
       amount: this.service_costss,
       name: "EldersIndia",
       prefill: {
@@ -1678,7 +1743,7 @@ let paymentData = {"package_id":"","serviceType":"One time","service_cost":this.
     };
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
-if(this.coupon_id == undefined){
+if(this.coupon_id == undefined || this.coupon_id == ""){
  var successCallback = function(payment_id) {
   loading.present();
       // ajaxCallCheck(payment_id);
@@ -1956,7 +2021,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
       description: service,
       image: this.url + "assets/img/Elderlogo.png",
       currency: 'INR',
-      key: 'rzp_test_53tdpMxkK8bFKw',
+      key: this.razorkey,
       amount: this.service_costss,
       name: "EldersIndia",
       prefill: {
@@ -1982,7 +2047,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     };
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
-if(this.coupon_id == undefined){
+if(this.coupon_id == undefined || this.coupon_id == ""){
  var successCallback = function(payment_id) {
   loading.present();
       // ajaxCallCheck(payment_id);
@@ -2078,7 +2143,8 @@ wearablespaynow(prebook_cost,category_id,service_id,sub_category_id,category,ser
      this.total_cost = prebook_cost;
   }
   else{
-     this.total_cost = this.total_cost;
+     this.total_cost = this.schedule_cost;
+     console.log(this.total_cost);
    }
 
    if(this.getCustomerBalanceAmount!=0 && this.get_custome_service_cancel_amount ==0 && this.get_custome_deliever_amount == 0){
@@ -2093,7 +2159,7 @@ wearablespaynow(prebook_cost,category_id,service_id,sub_category_id,category,ser
      }
     }
 
-    else if(this.get_custome_deliever_amount!=0 && this.get_custome_service_cancel_amount ==0 && this.getCustomerBalanceAmount ==0){
+    else if(this.get_custome_deliever_amount != 0 && this.get_custome_service_cancel_amount == 0 && this.getCustomerBalanceAmount == 0){
       this.servicecost = (this.total_cost + this.get_custome_deliever_amount);
      if(this.coupandiscount == "1"){
         this.service_costss = (this.final_service_cost * 100).toFixed(0);
@@ -2185,7 +2251,7 @@ wearablespaynow(prebook_cost,category_id,service_id,sub_category_id,category,ser
      }
        localStorage.setItem('service_costss', this.service_costss);
     }
-
+console.log(this.service_costss);
    let paymentData =   {"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
  "start_date":start_date,"subcategory":subcategory,"service_id":service_id,"location_id":this.location_id,
  "paymentflag":1,"service_cost":prebook_cost,"service_cost_travel":this.schedule_cost,"base_cost":this.service_cost,
@@ -2214,7 +2280,7 @@ wearablespaynow(prebook_cost,category_id,service_id,sub_category_id,category,ser
       description: service,
       image: this.url + "assets/img/Elderlogo.png",
       currency: 'INR',
-      key: 'rzp_test_53tdpMxkK8bFKw',
+      key: this.razorkey,
       amount: this.service_costss,
       name: "EldersIndia",
       prefill: {
@@ -2240,7 +2306,7 @@ wearablespaynow(prebook_cost,category_id,service_id,sub_category_id,category,ser
     };
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
-if(this.coupon_id == undefined){
+if(this.coupon_id == undefined || this.coupon_id == ""){
  var successCallback = function(payment_id) {
   loading.present();
       // ajaxCallCheck(payment_id);
@@ -2515,7 +2581,7 @@ submitRequestwearable(prebook_cost,category_id,service_id,sub_category_id,catego
       description: service,
       image: this.url + "assets/img/Elderlogo.png",
       currency: 'INR',
-      key: 'rzp_test_53tdpMxkK8bFKw',
+      key: this.razorkey,
       amount: this.service_costss,
       name: "EldersIndia",
       prefill: {
@@ -2541,7 +2607,7 @@ submitRequestwearable(prebook_cost,category_id,service_id,sub_category_id,catego
     };
 let navCtrl = this.navCtrl;
 let nav = this.blogListService;
-if(this.coupon_id == undefined){
+if(this.coupon_id == undefined || this.coupon_id == ""){
  var successCallback = function(payment_id) {
   loading.present();
       // ajaxCallCheck(payment_id);

@@ -20,7 +20,7 @@
 </ion-header>
 
 
-<ion-content class="content-intop PackageRequest">
+<ion-content class="content-intop PackageRequest" autohide>
 <div>
   <div class="ion-searchbar" *ngIf = "packageName">
     <ion-row>
@@ -120,7 +120,7 @@
       </ion-row>
     </ion-grid>
   </ion-card>
-  <ion-fab bottom right *ngIf="scrollTop">
+  <ion-fab bottom right #fab>
     <button ion-fab mini (click)="scrollToTop()">
       <ion-icon name="arrow-dropup"></ion-icon>
     </button>

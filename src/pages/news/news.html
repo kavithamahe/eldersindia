@@ -13,10 +13,7 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
-
-
-<ion-content class="content-intop NewsListview">
+<ion-content class="content-intop NewsListview" autohide>
   <ion-card *ngFor="let news of newsLists" class="newscard">
     <div (click)="viewNews(news?.id)">
       <div class="newsimage">
@@ -31,7 +28,7 @@
     </div>
   </ion-card>
 
-  <ion-fab bottom right edge class="scroll" *ngIf="scrollTop">
+  <ion-fab bottom right edge class="scroll" #fab>
     <button ion-fab mini (click)="scrollToTop()">
       <ion-icon name="arrow-dropup">
       </ion-icon>

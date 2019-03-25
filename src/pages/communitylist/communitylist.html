@@ -44,12 +44,14 @@
             <div class="Autosearch">
                 <ion-searchbar [(ngModel)]="searchTextBox" (ionInput)="getItems($event)">
                 </ion-searchbar>
-              </div>
+            </div>
           </div>
           <div class="community-div">
-            <ion-card style="position:relative;" *ngFor="let community of communitylists; let i= index" (click)="getPost(community.id)">
+            <ion-card style="position:relative;" *ngFor="let community of communitylists; let i= index" 
+            (click)="getPost(community.id)">
               <div class="community-img">
-                <img [src]="imageUrl+community?.banner" style="width:100%; height:200px;" [hidden]="!community?.banner" />
+              <!-- <img-loader [src]="imageUrl + community?.banner" useImg (load)="onImageLoad($event)"></img-loader> -->
+                <img src="imageUrl+community?.banner" style="width:100%; height:200px;"/>
                 <div class="label-opc">
                   <ion-item text-wrap style="text-align:left !important;" (click)="getPost(community.id)">
                     <p>{{community.community_name}}</p>
@@ -87,8 +89,7 @@
           <div class="community-div">
             <ion-card *ngFor="let community of communitylists" class="community-layout">
               <div class="community-img">
-                <img [src]="imageUrl+community?.banner" style="width:100%; height:200px;" (click)="getPost(community.id)" [hidden]="!community?.banner"
-                />
+                <img src="{{imageUrl}}{{community.banner}}" style="width:100%; height:200px;" (click)="getPost(community.id)"/>
                 <div class="label-opc">
                   <ion-item text-wrap style="text-align:left !important;" (click)="getPost(community.id)">
                     <p>{{community.community_name}}</p>

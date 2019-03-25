@@ -14,7 +14,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="content-intop jobListview">
+<ion-content class="content-intop jobListview" autohide>
   <div class="ion-searchbar">
     <ion-row>
       <ion-col col-10>
@@ -79,7 +79,7 @@
       </ion-row>
     </ion-grid>
   </ion-card>
-  <ion-fab bottom right *ngIf="scrollTop">
+  <ion-fab bottom right #fab>
     <button ion-fab mini (click)="scrollToTop()">
       <ion-icon name="arrow-dropup"></ion-icon>
     </button>

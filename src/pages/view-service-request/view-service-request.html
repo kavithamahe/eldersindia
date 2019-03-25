@@ -40,10 +40,37 @@
    <p>{{viewServiceRequestInfo?.enquiry_about}}</p>
    </ion-col>
   </ion-row>
-  <ion-row *ngIf = "viewServiceRequestInfo?.contact_number">
+   <ion-row>
+   
+    <ion-col width-100 class="child_menu">
+  <span>Category</span>
+   <p>{{viewServiceRequestInfo?.category_name}}</p>
+   </ion-col>
+  </ion-row>
+  <ion-row>
+   
+    <ion-col width-100 class="child_menu">
+  <span>Sub Category</span>
+   <p>{{viewServiceRequestInfo?.sub_category_name}}</p>
+   </ion-col>
+  </ion-row>
+   <ion-row>
+   
+    <ion-col width-100 class="child_menu">
+  <span>Type Of Request</span>
+   <p>{{viewServiceRequestInfo?.service_type}}</p>
+   </ion-col>
+  </ion-row>
+  <ion-row *ngIf = "viewServiceRequestInfo?.servicer_contact_no && (viewServiceRequestInfo?.status==4 || viewServiceRequestInfo?.status==5 || viewServiceRequestInfo?.status==2)">
    <ion-col width-100 class="child_menu">
 	<span>Contact Number</span>
-   <p>{{viewServiceRequestInfo?.contact_number}}</p>
+   <p>{{viewServiceRequestInfo?.servicer_contact_no}}</p>
+   </ion-col>
+  </ion-row>
+  <ion-row *ngIf = "viewServiceRequestInfo?.helpline_mobile">
+  <ion-col width-100 class="child_menu" >
+  <span>Service provider helpline</span>
+   <p>{{viewServiceRequestInfo?.helpline_mobile}}</p>
    </ion-col>
   </ion-row>
      <ion-row *ngIf = "viewServiceRequestInfo?.scheduled_at && (viewServiceRequestInfo?.status==4 || viewServiceRequestInfo?.status==5 || viewServiceRequestInfo?.status==2)">
@@ -58,27 +85,7 @@
    <p>{{viewServiceRequestInfo?.servicer_name}}</p>
    </ion-col>
   </ion-row>
-  <ion-row>
-   
-    <ion-col width-100 class="child_menu">
-	<span>Category</span>
-   <p>{{viewServiceRequestInfo?.category_name}}</p>
-   </ion-col>
-  </ion-row>
-  <ion-row>
-   
-    <ion-col width-100 class="child_menu">
-	<span>Sub Category</span>
-   <p>{{viewServiceRequestInfo?.sub_category_name}}</p>
-   </ion-col>
-  </ion-row>
-   <ion-row>
-   
-    <ion-col width-100 class="child_menu">
-	<span>Type Of Request</span>
-   <p>{{viewServiceRequestInfo?.service_type}}</p>
-   </ion-col>
-  </ion-row>
+ 
    <ion-row *ngIf ="viewServiceRequestInfo?.package_name != undefined">
    <ion-col width-100 class="child_menu">
   <span>Package Name</span>
@@ -91,12 +98,7 @@
    <p>{{viewServiceRequestInfo?.location_name}}</p>
    </ion-col>
   </ion-row>
-  <ion-row *ngIf = "viewServiceRequestInfo?.helpline_mobile">
-  <ion-col width-100 class="child_menu" >
-  <span>Service provider helpline</span>
-   <p>{{viewServiceRequestInfo?.helpline_mobile}}</p>
-   </ion-col>
-  </ion-row>
+  
 
  <ion-row>   
     <ion-col width-100 class="child_menu" *ngIf="(viewServiceRequestInfo?.updated_at!='0000-00-00 00:00:00')">
@@ -104,10 +106,23 @@
    <p>{{updated_at}}</p>
    </ion-col>
   </ion-row>
+
   <ion-row>   
     <ion-col width-100 class="child_menu">
   <span>Service cost</span>
    <p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.service_cost | number : '1.2-2'}}</p>
+   </ion-col>
+  </ion-row>
+    <ion-row *ngIf = "viewServiceRequestInfo?.previous_service_pending_cost > 0">   
+    <ion-col width-100 class="child_menu">
+  <span>Due Amount</span>
+   <p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.previous_service_pending_cost | number : '1.2-2'}}</p>
+   </ion-col>
+  </ion-row>
+    <ion-row *ngIf = "viewServiceRequestInfo?.previous_service_pending_cost < 0">   
+    <ion-col width-100 class="child_menu">
+  <span>Previous service refund Amount</span>
+   <p><i class="fa fa-rupee"></i>{{previous_service_pending_cost | number : '1.2-2'}}</p>
    </ion-col>
   </ion-row>
    <ion-row *ngIf="viewServiceRequestInfo?.payment_status_type =='refunded' && viewServiceRequestInfo?.recurring_paid > 0">   
@@ -119,7 +134,12 @@
   <ion-row *ngIf="viewServiceRequestInfo?.payment_status_type =='refunded'">   
     <ion-col width-100 class="child_menu">
   <span>Refunded amount</span>
-   <p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.refund_amount}}</p>
+   <p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.refund_amount | number : '1.2-2'}}</p>
+   </ion-col>
+  </ion-row>
+   <ion-row *ngIf = "viewServiceRequestInfo?.additional_service_cost != 0 && viewServiceRequestInfo?.template_id  == '3'">   
+    <ion-col width-100 class="child_menu">
+  <span>Pre-book Cost</span><p><i class="fa fa-rupee"></i>{{prebookcost | number : '1.2-2'}}</p>
    </ion-col>
   </ion-row>
    <ion-row *ngIf = "viewServiceRequestInfo?.payment_status_type !='refunded' && viewServiceRequestInfo?.additional_service_cost != 0 && viewServiceRequestInfo?.template_id  == '3' && viewServiceRequestInfo?.additional_service_cost_status == 'success'">   
@@ -127,12 +147,11 @@
   <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.service_cost | number : '1.2-2'}}</p>
    </ion-col>
   </ion-row>
-   <ion-row *ngIf = "viewServiceRequestInfo?.payment_status_type !='refunded' && viewServiceRequestInfo?.additional_service_cost != 0 && viewServiceRequestInfo?.template_id  == '3' && viewServiceRequestInfo?.additional_service_cost_status == 0">   
+   <ion-row *ngIf = "viewServiceRequestInfo?.payment_status_type !='refunded' && viewServiceRequestInfo?.additional_service_cost != 0 && viewServiceRequestInfo?.template_id  == '3' && viewServiceRequestInfo?.additional_service_cost_status == 0 && paidamount1 > 0">   
     <ion-col width-100 class="child_menu">
   <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{paidamount1 | number : '1.2-2'}}</p>
    </ion-col>
   </ion-row>
-
     <ion-row *ngIf = "viewServiceRequestInfo?.payment_status_type !='refunded' && viewServiceRequestInfo?.payment_status=='payment_success'  && viewServiceRequestInfo?.additional_service_cost > 0 && viewServiceRequestInfo?.additional_service_cost_status == 'success'  && viewServiceRequestInfo?.pay_by_cash == 0 && viewServiceRequestInfo?.template_id != '3'">   
     <ion-col width-100 class="child_menu">
   <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{paidamount2 | number : '1.2-2'}}</p>
@@ -153,28 +172,24 @@
   <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{paidamount3 | number: '1.2-2'}}</p>
    </ion-col>
   </ion-row>
-  <ion-row *ngIf = "viewServiceRequestInfo?.additional_service_cost != 0 && viewServiceRequestInfo?.template_id  == '3'">   
-    <ion-col width-100 class="child_menu">
-  <span>Pre-book Cost</span><p><i class="fa fa-rupee"></i>{{prebookcost | number : '1.2-2'}}</p>
-   </ion-col>
-  </ion-row>
+ 
   
-  <ion-row *ngIf = "viewServiceRequestInfo?.additional_service_cost!=0 && viewServiceRequestInfo?.additional_service_cost > 0 && viewServiceRequestInfo?.template_id != 3">   
+  <ion-row *ngIf = "viewServiceRequestInfo?.additional_service_cost != 0 && viewServiceRequestInfo?.additional_service_cost > 0 && viewServiceRequestInfo?.template_id != 3">   
     <ion-col width-100 class="child_menu">
   <span>Additional service cost</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.additional_service_cost | number : '1.2-2'}}</p>
    </ion-col>
   </ion-row>
- <ion-row *ngIf = "viewServiceRequestInfo?.trasnportation_from != null">   
+ <ion-row *ngIf = "viewServiceRequestInfo?.template_id == 5 || viewServiceRequestInfo?.template_id == 6">   
     <ion-col width-100 class="child_menu">
   <span>Pickup Location</span><p>{{viewServiceRequestInfo?.trasnportation_from}}</p>
    </ion-col>
   </ion-row>
-  <ion-row *ngIf = "viewServiceRequestInfo?.trasnportation_to != null">   
+  <ion-row *ngIf = "viewServiceRequestInfo?.template_id == 5">   
     <ion-col width-100 class="child_menu">
   <span>Drop Location</span><p>{{viewServiceRequestInfo?.trasnportation_to}}</p>
    </ion-col>
   </ion-row>
-   <ion-row *ngIf = "viewServiceRequestInfo?.trasnportation_req_type != null">   
+   <ion-row *ngIf = "viewServiceRequestInfo?.trasnportation_req_type != null || viewServiceRequestInfo?.template_id == 5">   
     <ion-col width-100 class="child_menu">
   <span>Transportation Request Type</span><p>{{viewServiceRequestInfo?.trasnportation_req_type}}</p>
    </ion-col>
@@ -207,19 +222,33 @@
   <span>Cancelled date</span><p>{{cancelled_date}}</p>
    </ion-col>
   </ion-row>
-    <ion-row *ngIf = "viewServiceRequestInfo?.status ==3 && viewServiceRequestInfo?.pending_service_amount != 0">   
+    <ion-row *ngIf = "viewServiceRequestInfo?.status == 3 && viewServiceRequestInfo?.payment_status == 'payment_processing' && viewServiceRequestInfo?.pending_service_amount > 0">   
     <ion-col width-100 class="child_menu">
   <span>Cancellation fee</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.pending_service_amount | number : '1.2-2'}}</p>
    </ion-col>
   </ion-row>
-    <ion-row *ngIf="viewServiceRequestInfo?.status ==3 && viewServiceRequestInfo?.ServiceType=='One time' && viewServiceRequestInfo?.payment_status=='payment_success' && viewServiceRequestInfo?.refundamount">   
+   <ion-row  *ngIf = "viewServiceRequestInfo?.status == 3  && viewServiceRequestInfo?.payment_status=='payment_success' && viewServiceRequestInfo?.refundamount && (cancellationfees > 1)">   
+    <ion-col width-100 class="child_menu">
+  <span>Cancellation fee</span>
+  <p *ngIf = "(viewServiceRequestInfo?.coupon_offer == 0 || viewServiceRequestInfo?.coupon_offer == '') && viewServiceRequestInfo?.template_id != 3"><i class="fa fa-rupee"></i>{{cancellationfees1 | number : '1.2-2'}}</p>
+  <p *ngIf = "viewServiceRequestInfo?.coupon_offer > 0 && viewServiceRequestInfo?.template_id != 3"><i class="fa fa-rupee"></i>{{cancellationfees2 | number : '1.2-2'}}</p>
+  <p *ngIf = "(viewServiceRequestInfo?.coupon_offer == 0 || viewServiceRequestInfo?.coupon_offer == '') && viewServiceRequestInfo?.template_id == 3"><i class="fa fa-rupee"></i>{{cancellationfees | number : '1.2-2'}}</p>
+  <p *ngIf = "viewServiceRequestInfo?.coupon_offer > 0 && viewServiceRequestInfo?.template_id == 3"><i class="fa fa-rupee"></i>{{cancellationfees3 | number : '1.2-2'}}</p>
+   </ion-col>
+  </ion-row>
+  <ion-row *ngIf="viewServiceRequestInfo?.status == 3  && viewServiceRequestInfo?.payment_status=='payment_success'">   
+    <ion-col width-100 class="child_menu" *ngIf="viewServiceRequestInfo?.refundamount">
+  <span>Paid Amount</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.total_paid}}</p>
+   </ion-col>
+  </ion-row>
+    <ion-row *ngIf="viewServiceRequestInfo?.status ==3 && viewServiceRequestInfo?.payment_status=='payment_success' && viewServiceRequestInfo?.refundamount">   
     <ion-col width-100 class="child_menu" *ngIf="viewServiceRequestInfo?.refundamount!=0">
-  <span>Refund Amount</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.refundamount}}</p>
+  <span>Refund Amount</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.refundamount | number : '1.2-2'}}</p>
    </ion-col>
   </ion-row>
    <ion-row *ngIf="viewServiceRequestInfo?.refundId">   
     <ion-col width-100 class="child_menu">
-  <span>Refund Id</span><p><i class="fa fa-rupee"></i>{{viewServiceRequestInfo?.refundId}}</p>
+  <span>Refund Id</span><p>{{viewServiceRequestInfo?.refundId}}</p>
    </ion-col>
   </ion-row>
  <ion-row *ngIf="viewServiceRequestInfo?.coupon_offer != null && viewServiceRequestInfo?.coupon_offer != 'undefined'  && viewServiceRequestInfo?.coupon_offer != '' && viewServiceRequestInfo?.coupon_offer != '0'">   

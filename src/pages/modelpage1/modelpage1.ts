@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController,NavParams, ViewController,LoadingController,ModalController} from 'ionic-angular';
+import { NavController,NavParams, ViewController,LoadingController,ModalController,Platform} from 'ionic-angular';
 import { FormBuilder } from '@angular/forms';
-
+import { InAppBrowser } from 'ionic-native';
 import { PaymentPage } from '../../pages/payment/payment';
 import { ServiceProvider } from '../../providers/service-provider';
 import moment from 'moment';
@@ -78,7 +78,7 @@ export class Modelpage1PagePage {
   discounted_cost:any;
   coupandiscount :any;
   wallet_value:any;
-  constructor(public modalCtrl: ModalController,public nav: NavController,public navParams: NavParams, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
+  constructor(public modalCtrl: ModalController,public nav: NavController,public platform: Platform,public navParams: NavParams, public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {
     this.recurringType = navParams.get("recurringType");
     this.requestService = navParams.get("requestService");
@@ -106,9 +106,11 @@ export class Modelpage1PagePage {
     this.paydata = navParams.get("paydata");
     this.fullpays = this.paydata.fullpays;
     this.finalcost = this.paydata.finalcost;
+    console.log(this.finalcost);
     this.datCount = this.paydata.datCount;
     this.service_cost = this.paydata.servicecost;
     this.servicediscost = navParams.get("servicediscountcost");
+    console.log(this.servicediscost);
     this.category = this.paydata.category;
     this.category_id = this.paydata.category_id;
     this.service = this.paydata.service;
@@ -132,20 +134,22 @@ export class Modelpage1PagePage {
       this.servicecost =this.serviceDatas.servicecost;
     }else{
        if(this.get_custome_deliever_amount != 0 || this.getCustomerBalanceAmount != 0 || this.get_custome_service_cancel_amount != 0){
-      this.recurring_cost = this.servicediscost;
+      this.recurring_cost = this.finalcost;
+      console.log(this.recurring_cost);
      }
      else{
-       this.recurring_cost=this.service_cost;
+       this.recurring_cost = this.service_cost;
+       console.log(this.recurring_cost);
      }
 
       this.servicecost =this.serviceDatas.servicecosts;
+      console.log(this.servicecost);
     }
     this.name = navParams.get("name"); 
     this.serviceTitle = navParams.get("serviceTitle"); 
     this.vendor = navParams.get("vendor");
     this.vendor_id = navParams.get("vendor_id");
 
- 
   }
 
   ionViewDidLoad() {
@@ -161,12 +165,12 @@ export class Modelpage1PagePage {
     "service":this.service,"location_id":this.location_id,"discount":"",
     "pay_method":"","serviceType":this.serviceType,"coupon_code_discount_cost":0,
     "final_service_cost_after_coupon_code_discount":0,"service_name":this.service,
-    "paymentflag":1,"service_cost":this.service_cost,"service_cost_travel":this.service_cost,"base_cost":this.serviceDatas.base_cost,
+    "paymentflag":1,"service_cost":this.serviceDatas.total_service_cost,"service_cost_travel":this.serviceDatas.total_service_cost,"base_cost":this.serviceDatas.base_cost,
     "from_date":this.serviceDatas.from_date,"to_date":this.serviceDatas.to_date,"time_slot":this.serviceDatas.time_slot,
     "from_time":"","to_time":"","durations":this.serviceDatas.durations,"problem":"",
     "datetime":this.serviceDatas.datetime,"mobile":"","preferred_time":this.serviceDatas.preferred_time,
     "package_id":"","quantity":"","getCustomerBalanceAmount":this.serviceDatas.getCustomerBalanceAmount,"get_custome_amount_actual":0,
-    "get_custome_amount":this.serviceDatas.get_custome_amount,"total_cost":this.servicecost,"get_custome_deliever_amount":this.serviceDatas.get_custome_deliever_amount,
+    "get_custome_amount":this.serviceDatas.get_custome_amount,"total_cost":this.serviceDatas.total_service_cost,"get_custome_deliever_amount":this.serviceDatas.get_custome_deliever_amount,
     "total_service_cost":this.serviceDatas.total_service_cost,"get_custome_service_cancel_amount":this.serviceDatas.get_custome_service_cancel_amount,"dependentid":this.serviceDatas.dependentId,
     "servicecost":this.serviceDatas.servicecosts,"datCount":this.datCount,"payment_type":"full_payment","discountcost12":null,
     "discountcost2":null,"servicediscost2":null,"servicediscountcost12":"NaN",
@@ -193,6 +197,7 @@ export class Modelpage1PagePage {
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
+        this.coupan_code = "";
         this.providerService.showToast(JSON.parse(err._body).error);
       }
       else if(err.status === 401){
@@ -200,6 +205,7 @@ export class Modelpage1PagePage {
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
+        this.coupan_code = "";
         this.providerService.showToast(JSON.parse(err._body).error);
       }
       else
@@ -208,6 +214,7 @@ export class Modelpage1PagePage {
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
+        this.coupan_code = "";
         this.providerService.showToast("Something went wrong");
       }
             })
@@ -250,6 +257,7 @@ export class Modelpage1PagePage {
         this.coupon_id = "";
         this.discounted_cost = "";
         this.final_service_cost = "";
+        this.coupan_code = "";
         this.providerService.showToast(JSON.parse(err._body).error);
       }
       else if(err.status === 401){
@@ -257,6 +265,7 @@ export class Modelpage1PagePage {
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
+        this.coupan_code = "";
         this.providerService.showToast(JSON.parse(err._body).error);
       }
       else
@@ -265,13 +274,19 @@ export class Modelpage1PagePage {
         this.coupon_id = "";
         this.discounted_cost = "";
         this.final_service_cost = "";
+        this.coupan_code = "";
         this.providerService.showToast("Something went wrong");
       }
             })
   }
     
   }
+ checkRefundPolicy() {
+this.platform.ready().then(() => {
+            let browser = new InAppBrowser("https://www.eldersindia.com/refund-policy/",'_blank');
 
+        });
+}
 submitRequest(){
   // this.serviceDatas.datetime = moment(this.serviceDatas.datetime).format("DD-MM-YYYY");
    if(this.serviceDatas.datetime == "Invalid date"){
@@ -367,12 +382,18 @@ edit(){
   this.viewCtrl.dismiss(seviceCheck);
 }
  paylater(){
+  if(this.get_custome_deliever_amount != 0){
+    this.providerService.showToast("Your previous service due amount not paid");
+  }
+  else{
   let coupanDetails= {"coupon_id":this.coupon_id,"coupan_code":this.coupan_code,"discounted_cost":this.discounted_cost,"final_service_cost":this.final_service_cost,"wallet_value":this.wallet_value}
       var obj = Object.assign(this.serviceDatas, coupanDetails);
       this.viewCtrl.dismiss(obj);
+    }
   }
   dismiss(){
-    let seviceCheck = "0";
-    this.viewCtrl.dismiss(seviceCheck);
+    // let seviceCheck = "0";
+    let paydismiss = "paydismiss";
+    this.viewCtrl.dismiss(paydismiss);
   }
 }

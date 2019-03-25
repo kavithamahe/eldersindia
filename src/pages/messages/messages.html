@@ -131,11 +131,11 @@
       </div>
 
       <div class="message-list">
-        <ion-list *ngFor="let sent of sentInfo">
+        <ion-list *ngFor="let sent of sentInfo; let i = index" (press)="setClickedRowsent(i)">
           <ion-item-sliding class="inbox-sends">
             <ion-item (click)="viewMessages(sent?.id,'sent')" (press)="deletesendMultipel(sent.id)" [class]="isInArraySend(sent.id) ? 'selected' : 'not-selected'">
               <ion-card>
-                <ion-row>
+                <ion-row [class.active]="i == multirowsent[i]">
                   <ion-col style="max-width: 20%;" width-20>
                     <ion-avatar item-left>
                       <img src="{{imageUrl+sent?.avatar}}" />

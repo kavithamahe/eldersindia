@@ -84,7 +84,7 @@
          <div *ngIf="booknownexttours">
         <ion-list *ngIf="user_type == 'sponsor'">
           <ion-item class="sel-label">
-            <ion-label class="selectDepent" class="required">Select Dependent</ion-label>
+            <ion-label class="selectDepent" class="required">Elder</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name }}
               </ion-option>
@@ -408,7 +408,7 @@
          <div *ngIf="booknownext">
         <ion-list *ngIf="user_type == 'sponsor'">
           <ion-item class="sel-label">
-            <ion-label class="selectDepent" class="required">Select Dependent</ion-label>
+            <ion-label class="selectDepent" class="required">Elder</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name }}
               </ion-option>
@@ -677,7 +677,7 @@
       <div *ngIf="vendorList?.requestServices.booking_status == '0' && emergencyhelp">
         <ion-list *ngIf="user_type == 'sponsor'">
           <ion-item class="sel-label">
-            <ion-label class="selectDepent" class="required">Select Dependent</ion-label>
+            <ion-label class="selectDepent" class="required">Elder</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
             </ion-select>
@@ -829,8 +829,8 @@
             <span class="discountCost"><i class="fa fa-inr" aria-hidden="true"></i>{{final_service_cost | number : '1.2-2'}}</span>
           </h5>
          
-          <div *ngIf="booking_status == '1' && vendorList?.requestServices.booking_status == '0'">
-           <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
+          <div *ngIf="vendorList?.requestServices.booking_status == '0'">
+           <div *ngIf="getCustomerBalanceAmount != 0 && get_custome_service_cancel_amount == 0 && get_custome_deliever_amount == 0">
               <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Previous refund amount :
                 <span class="discountCost">
                   <i class="fa fa-inr" aria-hidden="true"></i>{{getCustomerBalanceAmount | number : '1.2-2'}}</span>
@@ -840,7 +840,7 @@
                   <i class="fa fa-inr" aria-hidden="true"></i>{{(schedule_cost -  getCustomerBalanceAmount) | number : '1.2-2'}}</span>
               </h5>
         </div>
-          <div *ngIf="get_custome_deliever_amount!=0 && get_custome_service_cancel_amount ==0 && getCustomerBalanceAmount ==0 ">
+          <div *ngIf="get_custome_deliever_amount != 0 && get_custome_service_cancel_amount == 0 && getCustomerBalanceAmount == 0 ">
              <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Previous service due amount :
                 <span class="discountCost">
                   <i class="fa fa-inr" aria-hidden="true"></i>{{get_custome_deliever_amount | number : '1.2-2'}}</span>
@@ -951,7 +951,7 @@
            </div>
       </ion-item>
 
-           <div *ngIf="booking_status != '1' && vendorList?.requestServices.booking_status != '0'">
+           <div *ngIf="vendorList?.requestServices.booking_status != '0'">
            <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
               <ion-item text-wrap>
                <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Previous refund amount :
@@ -1107,7 +1107,7 @@
       <div *ngIf="homeschedule">
         <ion-list *ngIf="user_type == 'sponsor'">
           <ion-item class="sel-label">
-            <ion-label class="selectDepent" class="required">Select Dependent</ion-label>
+            <ion-label class="selectDepent" class="required">Elder</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
             </ion-select>
@@ -1381,7 +1381,7 @@
       <div *ngIf="transportdriver">
         <ion-list *ngIf="user_type == 'sponsor'">
           <ion-item class="sel-label">
-            <ion-label class="selectDepent" class="required">Select Dependent</ion-label>
+            <ion-label class="selectDepent" class="required">Elder</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
             </ion-select>
@@ -1628,7 +1628,7 @@
       <div *ngIf="transportcab">
         <ion-list *ngIf="user_type == 'sponsor'">
           <ion-item class="sel-label">
-            <ion-label class="selectDepent" class="required">Select Dependent</ion-label>
+            <ion-label class="selectDepent" class="required">Elder</ion-label>
             <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
             </ion-select>
@@ -1726,11 +1726,11 @@
             </p>
           </ion-item>
            <div>
-          <ion-item text-wrap>
+      <!--     <ion-item text-wrap>
           <ion-label *ngIf = "schedule_cost" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Service Cost : <i class="fa fa-inr" aria-hidden="true"></i>{{schedule_cost * hours}}</ion-label>
-          </ion-item>
+          </ion-item> -->
           </div>
-           <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
+        <!--    <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
               <ion-item text-wrap>
                <p class="service-conts">
                 <span class="token-primaryss">Previous refund amount : </span>
@@ -1859,7 +1859,7 @@
                 <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(((schedule_cost * hours) - getCustomerBalanceAmount) + get_custome_service_cancel_amount + get_custome_deliever_amount) | number : '1.2-2'}}
               </p>
             </ion-item>
-           </div>
+           </div> -->
           <br/>
           <ion-row>
             <ion-col col-6>
@@ -1913,7 +1913,7 @@
       <ion-list *ngIf="user_type == 'sponsor'">
         <!-- <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label> -->
         <ion-item class="sel-label">
-          <ion-label class="selectDepent" class="required">Select Dependent</ion-label>
+          <ion-label class="selectDepent" class="required">Elder</ion-label>
           <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
             <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name }}
             </ion-option>
@@ -1967,7 +1967,7 @@
             <strong class="service-name">{{vendorList.vendorDetails.name}}</strong>
           </p>
         </ion-item>
-              <div class="ion-searchbar" *ngIf="booking_status != '1' && vendorList?.requestServices.booking_status != '0'">
+              <div class="ion-searchbar" *ngIf="vendorList?.requestServices.booking_status != '0'">
           <ion-row>
             <ion-col col-10>
              <ion-item>
@@ -1981,7 +1981,7 @@
             </ion-col>
           </ion-row>
           </div>
-         <div class="ion-searchbar" *ngIf="booking_status == '1' || vendorList?.requestServices.booking_status == '0'">
+         <div class="ion-searchbar" *ngIf="vendorList?.requestServices.booking_status == '0'">
           <ion-row>
             <ion-col col-10>
              <ion-item>
@@ -2016,8 +2016,7 @@
               <i class="fa fa-inr" aria-hidden="true"></i>{{final_service_cost | number : '1.2-2'}}</span>
           </h5>
   
-        
-         <div *ngIf="booking_status == '1' && vendorList?.requestServices.booking_status == '0'">
+         <div *ngIf="booking_status == '1' && vendorList?.requestServices.booking_status != '0'">
            <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
               <h5>Previous refund amount :
                   <span class="discountCost">
@@ -2030,7 +2029,7 @@
                   </span>
               </h5>
         </div>
-          <div *ngIf="get_custome_deliever_amount!=0 && get_custome_service_cancel_amount ==0 && getCustomerBalanceAmount ==0 ">
+          <div *ngIf="get_custome_deliever_amount != 0 && get_custome_service_cancel_amount == 0 && getCustomerBalanceAmount == 0 ">
               <h5>Previous service due amount :
                   <span class="discountCost">
                     <i class="fa fa-inr" aria-hidden="true"></i>{{get_custome_deliever_amount | number : '1.2-2'}}
@@ -2055,7 +2054,7 @@
                   </span>
               </h5>
            </div>
-            <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount == 0 && get_custome_deliever_amount != 0">
+            <div *ngIf="get_custome_service_cancel_amount !=0 && getCustomerBalanceAmount == 0 && get_custome_deliever_amount != 0">
                <ion-item text-wrap>
                <h5>Previous service cancel amount :
                   <span class="discountCost">
@@ -2101,7 +2100,7 @@
               </h5>
             </ion-item>
           </div>
-          <div *ngIf="get_custome_service_cancel_amount==0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount != 0">
+          <div *ngIf="get_custome_service_cancel_amount == 0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount != 0">
              <ion-item text-wrap>
               <h5>Previous refund amount :
                   <span class="discountCost">
@@ -2157,7 +2156,7 @@
            </div>
            </ion-item>
            <div *ngIf="booking_status != '1' && vendorList?.requestServices.booking_status != '0'">
-           <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
+           <div *ngIf="getCustomerBalanceAmount !=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
               <ion-item text-wrap>
                 <h5>Previous refund amount :
                   <span class="discountCost">
@@ -2173,7 +2172,7 @@
                 </h5>
             </ion-item>
         </div>
-          <div *ngIf="get_custome_deliever_amount!=0 && get_custome_service_cancel_amount ==0 && getCustomerBalanceAmount ==0 ">
+          <div *ngIf="get_custome_deliever_amount != 0 && get_custome_service_cancel_amount ==0 && getCustomerBalanceAmount == 0 ">
            <ion-item text-wrap>
                 <h5>Previous service due amount :
                   <span class="discountCost">
@@ -2207,7 +2206,7 @@
             </ion-item>
            </div>
 
-              <div *ngIf="get_custome_service_cancel_amount!=0 && getCustomerBalanceAmount == 0 && get_custome_deliever_amount != 0">
+              <div *ngIf="get_custome_service_cancel_amount != 0 && getCustomerBalanceAmount == 0 && get_custome_deliever_amount != 0">
                <ion-item text-wrap>
                 <h5>Previous service cancel amount :
                   <span class="discountCost">
@@ -2253,7 +2252,7 @@
                 </h5>
             </ion-item>
           </div>
-          <div *ngIf="get_custome_service_cancel_amount==0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount != 0">
+          <div *ngIf="get_custome_service_cancel_amount == 0 && getCustomerBalanceAmount != 0 && get_custome_deliever_amount != 0">
              <ion-item text-wrap>
                 <h5>Previous refund amount :
                   <span class="discountCost">
@@ -2472,14 +2471,11 @@
         </div>
         </ion-list>
         <br>
-
-          <ion-list *ngFor="let pack_serve of pack.packages_service; let i=index" class="listed-descr">
+        <ion-list *ngFor="let pack_serve of pack.packages_service; let i=index" class="listed-descr">
             {{pack_serve.name}} {{pack_serve.quantity}} {{pack_serve.common_type.replace('Per', '')}}</ion-list>
-
-
         </ion-col>
       </ion-item>
-    </ion-card>
+    </ion-card> 
   </div>
 
 </ion-content>

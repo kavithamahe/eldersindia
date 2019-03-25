@@ -29,7 +29,7 @@
       </p>
       <form [formGroup]="authForm">
         <ion-item *ngIf="userType =='sponsor'" class="sel-label">
-         <ion-label class="selectDepent" class="required">Dependant</ion-label>
+         <ion-label class="selectDepent" class="required">Select Elder</ion-label>
           <ion-select formControlName="dependents" (ionChange)="packageinfo()" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
             <ion-option *ngFor="let dependent of dependentLists" value={{dependent.id}}>{{dependent.name}} {{dependent.last_name}}
             </ion-option>

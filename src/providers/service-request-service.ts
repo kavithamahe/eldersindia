@@ -128,8 +128,7 @@ invoiceFromUser(sr_token,is_recreation_config): Observable<any> {
   {
   
    let _request= {"status":3,"id":serviceId,"comments":title,"razorpay_payment_id":txnid,"service_type":service_type,
-   "dedaction_amount":deductionamounts,"paid_amount":paid_amount,"utilized_service_cost":utilized_service_cost,"recurring_req_id":recurring_request_id,"reduction_percentage":percentage,
-   "service_cancel_amount":dedaction_service_cost,"service_remaing_cost":service_remaing_cost,"balanceamount_to_pay":balanceamount_to_pay,
+   "dedaction_amount":deductionamounts,"paid_amount":paid_amount,"utilized_service_cost":utilized_service_cost,"recurring_req_id":recurring_request_id,"reduction_percentage":percentage,"service_remaing_cost":service_remaing_cost,"balanceamount_to_pay":balanceamount_to_pay,
    "cancel_services":cancel_services,"package_id":package_id,"payable_amount":payable_amount };
     return this.http.post(this.rootUrl+'razorPaymentResponseforCancel',_request,this.options)
       .map(res => res.json()); 

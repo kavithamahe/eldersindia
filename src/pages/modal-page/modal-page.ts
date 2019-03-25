@@ -11,6 +11,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
  import { Modelpage1PagePage } from '../../pages/modelpage1/modelpage1';
  import { PaymentPage } from '../../pages/payment/payment';
  import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
+ import { TermsModalPage } from '../../pages/terms-modal/terms-modal';
 
 /*
   Generated class for the ModalPage page.
@@ -133,6 +134,9 @@ export class ModalContentPage {
   datess:any;
   status:any;
   getvendor_cancelpolicy:any=[];
+  imageUrl:any;
+  terms_and_condition_length:any;
+  terms_and_condition:any;
   constructor(public platform: Platform,public blogListService:BlogListService,public alertCtrl: AlertController,public modalCtrl: ModalController, public navCtrl: NavController,public formBuilder: FormBuilder, public storage:Storage ,public loadingCtrl: LoadingController,public providerService: ServiceProvider,public params: NavParams,public viewCtrl: ViewController)
    {   
      this.date = new Date().toISOString();
@@ -142,9 +146,11 @@ export class ModalContentPage {
      this.endDate = new Date().toISOString();
      this.dependentLists = params.get("dependentList");
      this.lead_time = params.get("lead_time"); 
+     this.terms_and_condition = params.get("terms_and_condition");
+     this.terms_and_condition_length = params.get("terms_and_condition_length"); 
      this.serviceTitle = params.get("serviceTitle");
      this.location_id = params.get("location_id");
-
+     storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
      if(params.get("serviceData") != undefined){
      this.service_id = this.params.get("serviceData").service_id;
       this.requestService=params.get("serviceData");
@@ -499,10 +505,16 @@ export class ModalContentPage {
     this.dayCalculation();
   }
    openTerms(){
-      this.platform.ready().then(() => {
-            let browser = new InAppBrowser(this.getvendor_cancelpolicy,'_blank');
-
-        });
+    this.navCtrl.push(TermsModalPage,{"vendor_id":this.vendor_id,"terms_and_condition_length":this.terms_and_condition_length,
+      "terms_and_condition":this.terms_and_condition})
+      // this.platform.ready().then(() => {
+      //   if(this.terms_and_condition_length > 1){
+      //    let browser = new InAppBrowser(this.imageUrl + "#/termsandconditionForVendor/" + this.vendor_id,'_blank');
+      // }
+      // else if(this.terms_and_condition_length=='' || this.terms_and_condition_length < 1){
+      //    let browser = new InAppBrowser(this.imageUrl + "#/termsandcondition",'_blank');
+      // }
+      //   });
    }
   
    fullpaymentinfo(){
@@ -752,13 +764,16 @@ export class ModalContentPage {
   else{
       if(this.getCustomerBalanceAmount!=0 && this.get_custome_service_cancel_amount ==0 && this.get_custome_deliever_amount == 0){
       this.finalcost = (this.finalcost - this.getCustomerBalanceAmount);
+      console.log("this.servicecost" + this.finalcost);
     }
     else if(this.get_custome_amount!=0 && this.getCustomerBalanceAmount ==0 && this.get_custome_deliever_amount ==0){
-      this.servicecost = (this.finalcost + this.get_custome_amount);
+      this.finalcost = (this.finalcost + this.get_custome_amount);
+      console.log("this.servicecost" + this.finalcost);
     }
     
     else if(this.get_custome_deliever_amount!=0 && this.get_custome_service_cancel_amount ==0 && this.getCustomerBalanceAmount ==0){
       this.finalcost = (this.finalcost + this.get_custome_deliever_amount);
+      console.log("this.servicecost" + this.finalcost);
     }
     
     else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount == 0){
@@ -779,7 +794,7 @@ export class ModalContentPage {
     }
     
     else if(this.get_custome_service_cancel_amount !=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
-      this.finalcost = ((this.servicecost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+      this.finalcost = ((this.finalcost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
     }
     else{
       this.finalcost = this.finalcost;

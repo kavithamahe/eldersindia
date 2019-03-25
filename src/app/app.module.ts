@@ -1,8 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
-
-
+import {TimeAgoPipe} from 'time-ago-pipe';
 import { IonicStorageModule  } from '@ionic/storage';
 import {IonTagsInputModule} from "ionic-tags-input";
 import { MyApp } from './app.component';
@@ -20,21 +19,21 @@ import { Device } from "@ionic-native/device";
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 
-import {BrowserModule} from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { Ng2EmojiModule } from 'ng2-emoji';
 import { NativeAudio } from '@ionic-native/native-audio';
 
 import { Geolocation } from 'ionic-native';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
-// import { Diagnostic } from 'ionic-native';
 import { CameraPreview } from 'ionic-native';
-import {MomentModule} from 'angular2-moment';
+import { MomentModule } from 'angular2-moment';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { FileOpener } from '@ionic-native/file-opener';
 import { InAppBrowser } from 'ionic-native';
 
+import { AutohideDirective } from '../directives/autohide/autohide';
 
 import { LoginPage } from '../pages/login/login';
 import { AppConfig } from '../providers/app-config';
@@ -53,7 +52,7 @@ import { PaymentPage } from '../pages/payment/payment';
 import { PackagepaymentPagePage } from '../pages/packagepayment/packagepayment';
 import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
 import { VerifyotpPagePage } from '../pages/verifyotp/verifyotp';
-
+import { NotificationsPage } from '../pages/notifications/notifications';
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
 import {PackageDetailPagePage } from '../pages/package-detail/package-detail';
 
@@ -204,7 +203,10 @@ import { HttpClientModule } from '@angular/common/http';
     ViewenquiryPagePage,
     SafemePagePage,
     VerifyotpPagePage,
-    CancelrequestsPage
+    CancelrequestsPage,
+    AutohideDirective,
+    NotificationsPage,
+    TimeAgoPipe
   ],
   imports: [
     IonicStorageModule.forRoot({}),
@@ -291,6 +293,7 @@ import { HttpClientModule } from '@angular/common/http';
     SafemePagePage,
     VerifyotpPagePage,
     CancelrequestsPage,
+    NotificationsPage
   ],
      providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},FileTransfer,FileChooser,FilePath,File,FileOpener,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics, 
     NetworkProvider] // Add GithubUsers provider

@@ -47,23 +47,30 @@ remarks:any;
 other:any;
 rating:any;
 amount_received:any;
+bulkremark:any;
+bulkdelete:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,public blogListService: BlogListService,public loadingCtrl: LoadingController,public storage:Storage,public serviceRequest:ServiceRequestService) {
   		this.storage.ready().then(() => {
   		storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
 	  	this.recurringlist = navParams.get("recurringview");
       this.bulkcomplete = navParams.get("bulkcomplete");
+      this.bulkdelete = navParams.get("bulkdelete");
+      this.bulkremark = navParams.get("bulkremark");
 	  	this.recurring_request_id = this.recurringlist.recurring_request_id;
       this.hours = this.recurringlist.hours;
       this.paid_cost = this.recurringlist.paid_amount;
       this.reamining_cost = this.recurringlist.remaining_amount;
-      console.log(this.reamining_cost);
       this.service_cost = this.recurringlist.service_cost;
       this.status = this.recurringlist.status;
       this.total_service_cost = this.recurringlist.total_service_cost;
-      if(this.bulkcomplete != 1){
+      if(this.bulkcomplete != 1 && this.bulkremark != 1 && this.bulkdelete == 1){
 	  	this.getrecurringRequestdelete();
     }
-      if(this.bulkcomplete == 1){
+    if(this.bulkremark == 1 && this.bulkcomplete != 1 && this.bulkdelete == 0){
+      this.getremarkBulkRecurringService();
+      this.getRemarks();
+    }
+      if(this.bulkcomplete == 1 && this.bulkremark != 1 && this.bulkdelete == 0){
         this.getCompleteBulkRecurringService();
         this.getRemarks();
       }
@@ -75,6 +82,19 @@ amount_received:any;
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
     this.blogListService.getCompleteBulkRecurringService(this.rootUrl,this.recurring_request_id)
+      .subscribe(data =>{ 
+        this.getCompleteBulk = data.result;
+        loading.dismiss();
+    },
+    err =>{
+      this.blogListService.showErrorToast(err);     
+      loading.dismiss();
+    })
+  }
+   getremarkBulkRecurringService(){
+    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    loading.present();
+    this.blogListService.getremarkBulkRecurringService(this.rootUrl,this.recurring_request_id)
       .subscribe(data =>{ 
         this.getCompleteBulk = data.result;
         loading.dismiss();
@@ -149,6 +169,7 @@ amount_received:any;
     })
   }
   completebulkservice(){
+    if(this.bulkcomplete == 1){
     if(this.reamining_cost != 0 || this.reamining_cost == null){
       this.blogListService.showToast("You cannot complete the above services");
     }
@@ -166,7 +187,26 @@ amount_received:any;
       loading.dismiss();
     })
     }
-
+  }
+  else if(this.bulkremark == 1){
+    if(this.reamining_cost != 0 || this.reamining_cost == null){
+      this.blogListService.showToast("You cannot complete the above services");
+    }
+    else{
+          let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    loading.present();
+    this.blogListService.bulkratingRecurringService(this.rootUrl,this.recurring_request_id,this.rating,this.other,this.remarks)
+      .subscribe(data =>{ 
+        this.blogListService.showToast(data.result);
+        this.navCtrl.setRoot(RecurringPagePage);
+        loading.dismiss();
+    },
+    err =>{
+      this.blogListService.showErrorToast(err);     
+      loading.dismiss();
+    })
+    }
+  }
   }
   payserviceamount(){
     let service_type = "Recurring";

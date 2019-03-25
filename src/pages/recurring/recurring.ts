@@ -220,10 +220,13 @@ scrollTop:boolean = false;
      
   }
   deleteviewrecurring(recurring){
-    this.navCtrl.push(RecurringcancelPagePage,{recurringview:recurring,"bulkcomplete":"0"});
+    this.navCtrl.push(RecurringcancelPagePage,{recurringview:recurring,"bulkcomplete":"0","bulkremark":"0","bulkdelete":"1"});
     }
     completebulkrecurring(recurring){
-    this.navCtrl.push(RecurringcancelPagePage,{"recurringview":recurring,"bulkcomplete":"1"});
+    this.navCtrl.push(RecurringcancelPagePage,{"recurringview":recurring,"bulkcomplete":"1","bulkremark":"0","bulkdelete":"0"});
+    }
+    completeremarkrecurring(recurring){
+      this.navCtrl.push(RecurringcancelPagePage,{"recurringview":recurring,"bulkremark":"1","bulkcomplete":"0","bulkdelete":"0"});
     }
   viewrecurring(recurring){
     this.navCtrl.push(RecurringviewPagePage,{recurringview:recurring});

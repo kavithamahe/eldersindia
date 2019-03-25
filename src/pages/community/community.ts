@@ -61,6 +61,7 @@ export class CommunityPage {
     connectionInfo:any=[];
      alert:any;
      scrollTop:boolean = false;
+     avatar:any;
   constructor(public platform: Platform,public popoverCtrl: PopoverController, public actionsheetCtrl: ActionSheetController,public modal: ModalController, public formBuilder: FormBuilder,public sanitizer: DomSanitizer,public storage:Storage, public nav: NavController,public alertCtrl: AlertController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public communityServices: CommunityServices) {
     this.nav=nav;
 
@@ -374,6 +375,8 @@ toggleContent(){
         for(let data of dataList) {
           data.created_at = moment(data.created_at).format("DD MMM YYYY HH:mm:ss");
            }
+           this.avatar = this.imageUrl+this.users[0].avatar;
+           console.log(this.avatar);
         this.users = dataList;
        this.nextPageURL=users.result.info.lists.next_page_url;
 

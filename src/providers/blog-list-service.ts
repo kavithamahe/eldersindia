@@ -81,21 +81,36 @@ invoiceFromUser(req_id,id): Observable<any> {
   serviceRequestSubmitbeforePayment(rootUrl,servicecost,
       category,category_id,service,service_ids,sub_category_id,
      subcategory,datetime,dependentId,durations,exclude_days,
-    from_date,from_time,serviceType,selected_dates,time_slot,
+    from_date,from_time,serviceType,selected_dates,time_slot, 
      to_date,to_time,package_id,preferred_time,quantity,
      location_id,lead_time,vendor_id,datCount,service_costs,servicediscountcostss,paymenttype,paymentflag,discounts,totalservice_costss,discountcost,
      afterdiscount_one_service,servicediscountcost_one_service,discountpartial,base_cost,servicediscost,getCustomerBalanceAmount,get_custome_amount,get_custome_deliever_amount,
      get_custome_service_cancel_amount,total_cost,total_service_cost,coupon_id,coupan_code,discounted_cost,final_service_cost,wallet_value){
+    if(final_service_cost == null || final_service_cost == "" || final_service_cost == undefined){
+  final_service_cost = 0;
+}
+if(discounted_cost == null || discounted_cost == "" || discounted_cost == undefined){
+  discounted_cost = 0;
+}
+if(wallet_value == null || wallet_value == "" || wallet_value == undefined){
+  wallet_value = 0;
+}
+if(discounts == null || discounts == undefined){
+  discounts = "";
+}
+if(get_custome_amount == null || get_custome_amount == "" || get_custome_amount == undefined){
+  get_custome_amount = 0;
+}
     let _request= {"Category_name":category,"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
 dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
 from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
 "quantity":quantity,"selected_dates":selected_dates,"service":service,"serviceType":
-serviceType,"service_cost":total_service_cost,"service_cost_travel":total_service_cost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
-,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id,"datCount":datCount,"servicecost":service_costs,"servicediscountcost":servicediscountcostss,"servicediscost":servicediscost,
+serviceType,"service_cost":base_cost,"service_cost_travel":base_cost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
+,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id,"datCount":datCount,"servicecost":service_costs,"servicediscountcost":servicediscountcostss,"servicediscost":servicediscountcostss,
 "problem":"","pay_method":paymenttype,"mobile":"","paymentflag":paymentflag,"afterdiscount":totalservice_costss,
 "discount":discounts,"discountcost":discountcost,"payment_type":paymenttype,"afterdiscount_one_service":afterdiscount_one_service,"servicediscountcost_one_service":servicediscountcost_one_service,
 "discountpartial":discountpartial,"base_cost":base_cost,"getCustomerBalanceAmount":getCustomerBalanceAmount,
-"get_custome_amount":get_custome_amount,"get_custome_deliever_amount":get_custome_deliever_amount,"get_custome_service_cancel_amount":get_custome_service_cancel_amount,"total_cost":total_cost,
+"get_custome_amount":get_custome_amount,"get_custome_deliever_amount":get_custome_deliever_amount,"get_custome_service_cancel_amount":get_custome_service_cancel_amount,"total_cost":servicediscost,
 "total_service_cost":total_service_cost,"coupen_code":coupan_code,"coupon_code_discount_cost":discounted_cost,"coupon_id":coupon_id,"final_service_cost_after_coupon_code_discount":final_service_cost,
 "wallet_value":wallet_value};
     return this.http.post(rootUrl+'serviceRequestSubmitbeforePayment',_request,this.options)
@@ -107,16 +122,41 @@ serviceType,"service_cost":total_service_cost,"service_cost_travel":total_servic
     from_date,from_time,serviceType,selected_dates,time_slot,
      to_date,to_time,package_id,preferred_time,quantity,
      location_id,lead_time,vendor_id,paymentflag,base_cost,getCustomerBalanceAmount,get_custome_amount,get_custome_deliever_amount,
-     get_custome_service_cancel_amount,total_cost,total_service_cost,coupon_id,coupan_code,discounted_cost,final_service_cost,wallet_value){
-    let _request= {"Category_name":category,"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
+     get_custome_service_cancel_amount,total_cost,total_service_cost,coupon_id,coupan_code,discounted_cost,final_service_cost,wallet_value,discounts){
+//     let _request= {"Category_name":category,"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
+// dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
+// from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
+// "quantity":quantity,"selected_dates":selected_dates,"service":service,"serviceType":
+// serviceType,"service_cost":servicecost,"service_cost_travel":base_cost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
+// ,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id,"paymentflag":paymentflag,"base_cost":base_cost,"getCustomerBalanceAmount":getCustomerBalanceAmount,
+// "get_custome_amount":get_custome_amount,"get_custome_deliever_amount":get_custome_deliever_amount,"get_custome_service_cancel_amount":get_custome_service_cancel_amount,
+// "total_cost":total_cost,"total_service_cost":total_service_cost,"coupen_code":coupan_code,"coupon_code_discount_cost":discounted_cost,"coupon_id":coupon_id,"final_service_cost_after_coupon_code_discount":final_service_cost,
+// "wallet_value":wallet_value};
+if(final_service_cost == null || final_service_cost == "" || final_service_cost == undefined){
+  final_service_cost = 0;
+}
+if(discounted_cost == null || discounted_cost == "" || discounted_cost == undefined){
+  discounted_cost = 0;
+}
+if(wallet_value == null || wallet_value == "" || wallet_value == undefined){
+  wallet_value = 0;
+}
+if(discounts == null || discounts == undefined || discounts == undefined){
+  discounts = "";
+}
+if(get_custome_amount == null || get_custome_amount == "" || get_custome_amount == undefined){
+  get_custome_amount = 0;
+}
+
+   let _request= {"Category_name":category,"category":category,"category_id":category_id,"datetime":datetime,"dependentid":
 dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
 from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
 "quantity":quantity,"selected_dates":selected_dates,"service":service,"serviceType":
-serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
+serviceType,"service_cost":base_cost,"service_cost_travel":base_cost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
 ,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id,"paymentflag":paymentflag,"base_cost":base_cost,"getCustomerBalanceAmount":getCustomerBalanceAmount,
 "get_custome_amount":get_custome_amount,"get_custome_deliever_amount":get_custome_deliever_amount,"get_custome_service_cancel_amount":get_custome_service_cancel_amount,
-"total_cost":total_cost,"total_service_cost":total_service_cost,"coupen_code":coupan_code,"coupon_code_discount_cost":discounted_cost,"coupon_id":coupon_id,"final_service_cost_after_coupon_code_discount":final_service_cost,
-"wallet_value":wallet_value};
+"total_cost":base_cost,"total_service_cost":total_service_cost,"coupen_code":coupan_code,"coupon_code_discount_cost":discounted_cost,"coupon_id":coupon_id,"final_service_cost_after_coupon_code_discount":final_service_cost,
+"wallet_value":wallet_value,"service_name":service};
     return this.http.post(rootUrl+'serviceRequestSubmitbeforePayment',_request,this.options)
       .map(res => res.json());
   }
@@ -156,9 +196,19 @@ serviceType,"service_cost":servicecost,"service_id":service_ids,"sub_category_id
     return this.http.post(rootUrl+'getCompleteBulkRecurringService',_request,this.options)
       .map(res => res.json());
   }
+  getremarkBulkRecurringService(rootUrl,recurring){
+     let _request= {"id": recurring};
+    return this.http.post(rootUrl+'getbulkRatingRecurringService',_request,this.options)
+      .map(res => res.json());
+  }
   completeBulkRecurringService(rootUrl,recurring,rating,other,remarks){
      let _request= {"id": recurring,"other_comment":other,"rating":rating,"remark":remarks};
     return this.http.post(rootUrl+'completeBulkRecurringService',_request,this.options)
+      .map(res => res.json());
+  }
+  bulkratingRecurringService(rootUrl,recurring,rating,other,remarks){
+     let _request= {"id": recurring,"other_comment":other,"rating":rating,"remark":remarks};
+    return this.http.post(rootUrl+'bulkRating',_request,this.options)
       .map(res => res.json());
   }
   deleterecurringrequest(rootUrl,recurring,dedction_amount,refund_amount,remaining_amount,paid_amount,balance_amount,total_amount,service_costs){

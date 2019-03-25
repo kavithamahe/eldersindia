@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { NavController, NavParams,LoadingController,ToastController,ViewController,PopoverController,AlertController  } from 'ionic-angular';
-
+import { Content } from 'ionic-angular';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ViewenquiryPagePage } from '../../pages/viewenquiry/viewenquiry';
 
@@ -19,6 +19,7 @@ import moment from 'moment';
   templateUrl: 'enquiries.html'
 })
 export class EnquiriesPagePage {
+  @ViewChild(Content) content: Content;
 nextPageURL:any='';
 serviceRequestScrollLists:any=[];
 enquiriesList:any=[];
@@ -56,6 +57,9 @@ packagetransId:boolean = false;
     err =>{
       this._provider.showErrorToast(err);     
     })
+  }
+   scrollToTop() {
+    this.content.scrollToTop();
   }
    getvendorList(){
     let service_data = {};

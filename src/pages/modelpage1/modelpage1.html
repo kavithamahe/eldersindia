@@ -56,6 +56,9 @@
           <ion-item class="btn-go" style="text-align: center;">
           <button (click)="edit()"  style="background-color: #4978a9 !important;" ion-button round class="go-btn">Click here to edit</button>
           </ion-item>
+           <ion-item class="btn-go" style="text-align: center;">
+          <button (click)="checkRefundPolicy()"  style="background-color: #4978a9 !important;" ion-button round class="go-btn">Check Refund Policy</button>
+          </ion-item>
         </ion-list>
 
           <ion-list *ngIf="serviceType != 'One time'">
@@ -95,6 +98,9 @@
             </ion-col>
           </ion-row>
           </div>
+           <ion-item class="btn-go" style="text-align: center;">
+          <button (click)="checkRefundPolicy()"  style="background-color: #4978a9 !important;" ion-button round class="go-btn">Check Refund Policy</button>
+          </ion-item>
         </ion-list>
         </ion-card>
 </ion-content>

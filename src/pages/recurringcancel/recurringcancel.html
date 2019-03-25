@@ -12,13 +12,13 @@
 
 
 <ion-content class="login-pages">
-<ion-card class="liste-view" *ngIf = "bulkcomplete == '0'">
+<ion-card class="liste-view" *ngIf = "bulkcomplete == '0' && bulkremark == '0'">
 	<ion-item text-wrap>
 	   <h1>You are cancelling the following services</h1>
 	   <div *ngFor="let recurring of recurringRequest">
 	   			<ion-badge>{{recurring.sr_token}}</ion-badge>
 	   	</div>
-	   <h2>Are you sure you want to delete this recurring service !</h2>
+	   <h2>Are you sure you want to cancel this recurring service !</h2>
 	</ion-item>
 	<ion-item>
 	<h1>Total service amount:<i class="fa fa-rupee"></i>{{service_cost_total | number : '1.2-2'}}</h1>
@@ -40,7 +40,7 @@
    </ion-row>
    </ion-card>
 
-	<ion-card class="liste-view" *ngIf = "bulkcomplete == '1'">
+	<ion-card class="liste-view" *ngIf = "bulkcomplete == '1' || bulkremark == '1'">
 	<ion-item text-wrap>
 	   <h1>You are complete the following services</h1>
 	   <div *ngFor="let recurring of getCompleteBulk">

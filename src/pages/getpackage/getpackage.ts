@@ -207,6 +207,7 @@ wallet_value:any;
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
+        this.coupan_code = "";
         this.providerService.showToast(JSON.parse(err._body).error);
       }
       else if(err.status === 401){
@@ -214,6 +215,7 @@ wallet_value:any;
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
+        this.coupan_code = "";
         this.providerService.showToast(JSON.parse(err._body).error);
       }
       else
@@ -222,6 +224,7 @@ wallet_value:any;
         this.discounted_cost = "";
         this.final_service_cost = "";
         this.coupandiscount = "0";
+        this.coupan_code = "";
         this.providerService.showToast("Something went wrong");
       }
             })

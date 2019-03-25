@@ -13,7 +13,7 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content class="content-intop">  
+<ion-content class="content-intop" autohide>  
   <div class="ion-searchbar">
     <ion-row>
       <ion-col col-10>
@@ -176,7 +176,7 @@
               </ion-chip>
             </a>
             <a class="req-cancel" *ngIf="((service?.vendor_status!=2)&&(service?.vendor_status!=3) && (service?.vendor_status!=5))" (click)="showConfirmcancel(service?.id,service?.hours,service?.service_id,service?.sub_category_id,service?.status,service?.servicediscountcost_one_service,service?.service_type,service?.txnid,service?.id,service?.service_cost,service?.recurring_request_id,service?.req_count,service?.package_id,service?.Paymentstatus,service?.paid_amount,
-              service?.sr_token,service?.coupon_id,service?.pending_service_amount,service?.vendor_name,service?.is_recreation_config,service?.payment_status)">
+              service?.sr_token,service?.coupon_id,service?.pending_service_amount,service?.vendor_name,service?.is_recreation_config,service?.payment_status,service?.coupon_offer)">
               Cancel
             </a>
           </div>
@@ -273,7 +273,7 @@
     </ion-card>
 
   </ion-card>
-  <ion-fab right bottom *ngIf="serviceRequestInfo.length != 0 && scrollTop">
+  <ion-fab right bottom #fab>
     <button ion-fab mini (click)="scrollToTop()">
       <ion-icon name="arrow-dropup"></ion-icon>
     </button>

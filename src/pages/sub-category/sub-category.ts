@@ -34,6 +34,8 @@ servicelocationid:any;
 term:any = "";
 recreation_config:any;
 category_id:any;
+getPackageTags:any=[];
+packagess:any=[];
 		// subcategories: Array<{title: string, lists: any, color: string}>;
 
   constructor(public platform: Platform,public storage:Storage, public loadingCtrl: LoadingController, public navCtrl: NavController, public navPara: NavParams,public providerService: ServiceProvider) {
@@ -58,7 +60,7 @@ category_id:any;
             //   console.log("this.serviceLocation3",this.serviceLocation);
             // }
           } 
-                   
+          this.getpackageTags();
           this.loadSubCategory(this.serviceLocation);      
           this.loadPackages(this.serviceLocation,this.category_id);    
       });
@@ -83,19 +85,44 @@ category_id:any;
     this.providerService.webServiceCall(`getPackage`,{"locationId":location,"categoryId":this.category_id})
       .subscribe(data =>{
        this.packages =  data.result;
+       this.packagess = data.result;
        this.packageCount = this.packages.length;
     },
     err =>{
-
-      this.providerService.showErrorToast(err);
-      console.log("Response for get service offered: "+err);
-        
+      this.providerService.showErrorToast(err);        
     }) 
+  }
+  getpackageall(){
+     this.providerService.webServiceCall(`getPackage`,{"locationId":this.serviceLocation,"categoryId":this.category_id})
+      .subscribe(data =>{
+       this.packages =  data.result;
+       this.packagess = data.result;
+       this.packageCount = this.packages.length;
+    },
+    err =>{
+      this.providerService.showErrorToast(err);        
+    }) 
+  }
+    getpackageTags(){
+    this.providerService.webServiceCall(`getPackageTags`,"")
+      .subscribe(data =>{
+       this.getPackageTags =  data.result.info;
+    },
+    err =>{
+      this.providerService.showErrorToast(err);        
+    }) 
+  }
+  searchpackageTags(package_tags){
+      if (package_tags && package_tags.trim() != '') {
+      this.packages = this.packagess.filter((item) => {
+        return (item.tags.indexOf(package_tags) > -1);
+      })
+    }
   }
    viewPackage(vendor_id,pack_id){
     this.navCtrl.push(PackageDetailPagePage,{"vendor_id":vendor_id,'location_id':this.serviceLocation,"pack_id":pack_id});
   }
-     public getItems(term){
+   public getItems(term){
 
     this.term = term;
     this.loadsSubCategory(this.term);

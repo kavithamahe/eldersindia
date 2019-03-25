@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 import { Camera } from 'ionic-native';
 
 import { ServiceProvider } from '../../providers/service-provider';
-import {FormBuilder,FormGroup,Validators,FormArray} from '@angular/forms';
+import {FormBuilder,FormGroup,Validators,FormArray,FormControl } from '@angular/forms';
 import { CommunityServices } from '../../providers/community-services';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { ManagePage } from '../../pages/manage/manage';
@@ -134,7 +134,7 @@ mytype:string ="password";
 
   constructor(public providerService:ServiceProvider, public nav: NavController, public storage:Storage, public formBuilder: FormBuilder, public navParams: NavParams, public communityServices: CommunityServices,public loadingCtrl: LoadingController ) {
     
-      this.storage.ready().then(() => {
+     this.storage.ready().then(() => {
       storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
 
       storage.get('user_type_id').then((id) => { this.sponsor_id=id;});
@@ -165,7 +165,6 @@ mytype:string ="password";
      
         
   if(navParams.get("fuctionality") !="profileEdit"){
-    
         this.authForm = formBuilder.group({
         elder_relation : ['', Validators.compose([Validators.required])],
         gender : ['', Validators.compose([Validators.required])],
@@ -1007,7 +1006,7 @@ getTagsList(ev){
     this.communityServices.showToast("Please add skills or press go button to add the skills");
   }
   else{
-       this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
+      
       this.submitAttempt = false;
       this.getElderSkills();
     this.skill_data= this.elder_skills;
@@ -1025,10 +1024,11 @@ getTagsList(ev){
 
     this.getElderEducation();
     this.education_data = this.elder_education;
-      if(this.file_name == ""){
+      if(this.file_name == "" || this.file_name == undefined || this.file_name == null){
               this.communityServices.showToast("Please Select the file");
              }
              else{
+               this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     console.log(this.skill_data);
@@ -1081,8 +1081,14 @@ getTagsList(ev){
                loader.dismiss();
               },
            err =>{
-            this.nav.setRoot(ManagePage);
-              this.communityServices.showErrorToast(err);
+            if(err.status===422)
+                {
+                  this.communityServices.showToast(JSON.parse(err._body).error);
+                }
+                else{
+                  this.communityServices.showErrorToast(err);
+                }
+            
               loader.dismiss();
               })
                       }
@@ -1095,12 +1101,16 @@ getTagsList(ev){
       this.communityServices.showToast("Please Enter The Required Details");
     }
     else{
-   
-       this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
+      console.log(this.elder_email);
+      if((this.elder_email == undefined || this.elder_email == "" || this.elder_email == null)  
+        && (this.elder_password == undefined || this.elder_password == "" || this.elder_password == null)){
+         this.communityServices.showToast("Please fill the login details");
+      }
+    else{
+        this.elder_dob= moment(this.elder_dob).format("DD-MM-YYYY");
       this.submitAttempt = false;
       this.getblog_category();
     this.blog_data=this.blog_categoryinterest;
-    console.log(this.blog_data);
       this.getEmergencyNumber();
       this.emergency_data = this.elder_emergency;
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -1148,9 +1158,17 @@ getTagsList(ev){
                loader.dismiss();
               },
            err =>{
-              this.communityServices.showErrorToast(err);
+               if(err.status===422)
+                {
+                  this.communityServices.showToast(JSON.parse(err._body).error);
+                }
+                else{
+                  this.communityServices.showErrorToast(err);
+                }
+            
               loader.dismiss();
               })
+      }
     
      }
     

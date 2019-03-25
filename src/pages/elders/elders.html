@@ -444,7 +444,7 @@
           </ion-row>
         </div>
         <br />
-        <div *ngIf="functionality == 'add'">
+        <div *ngIf="functionality == 'add' && job_interest">
           <ion-row>
             <ion-col class="title-depen">
               <div class="EldersTitle">
@@ -471,8 +471,31 @@
             <p class="valid err-reds shake">This field is required.</p>
           </small>
         </div>
+       <div *ngIf="functionality == 'add' && !job_interest">
+          <ion-row>
+            <ion-col class="title-depen">
+              <div class="EldersTitle">
+                <h3>Login detailss</h3>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-label class="label-tittle required">Email address</ion-label>
+          <ion-item>
+            <ion-input [(ngModel)]="elder_email" pattern="[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$" id="email" type="email" ngModel #emailref="ngModel" placeholder="Email address" value={{elder_email}} [ngModelOptions]="{standalone: true}" autocapitalize="off">
+            </ion-input>
+          </ion-item>
+          <small *ngIf="emailref.errors &&(emailref.touched || emailref.dirty)" class ="aler alert-danger">
+            <p [hidden]="!emailref.errors?.pattern" class="valid err-reds shake">This field is required.</p>
+          </small>
+          <ion-label class="label-tittle required">Password</ion-label>
+          <ion-item>
+            <ion-input [(ngModel)]="elder_password" 
+              type="{{mytype}}" placeholder="Password" [ngModelOptions]="{standalone: true}">
+            </ion-input>
+          </ion-item>
+        </div>
       </form>
-      
+
       <br />
       <div *ngIf="functionality == 'edit'">
         <ion-row>

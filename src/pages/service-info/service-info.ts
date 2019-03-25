@@ -92,6 +92,8 @@ tourService_id:any;
 price_range:any;
 discount_rate:any;
 getHotelCosts:any;
+terms_and_condition_length:any;
+terms_and_condition:any;
 // @ViewChild('ghbslides') ghbslides: any;
 
 
@@ -100,6 +102,8 @@ getHotelCosts:any;
       this.subCategoryId = navParams.get("subCategoryId");
       this.locationId = navParams.get("location_id");
       this.template_id = navParams.get("vendor").template_id;
+      this.terms_and_condition_length = navParams.get("vendor").terms_and_condition_length;
+      this.terms_and_condition = navParams.get("vendor").terms_and_condition;
       this.discount_rate = navParams.get("vendor").discount_rate;
       this.tourService_id = navParams.get("vendor").tourService_id;
       this.start_date = navParams.get("vendor").start_date;
@@ -264,7 +268,7 @@ bookNow(){
     "template_id":this.template_id,"discount_rate":this.discount_rate,"start_date":this.start_date,"tourService_id":this.tourService_id});    
 }
 bookNowTours(){
-  this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNowTours":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
+  this.navCtrl.push(ServiceModalPage,{service:"Schedule","bookNowTours":"1","bookNowToursmore":"1",vendorList:this.vendorList,schedule_cost:this.schedule_cost,service_cost:this.service_cost,location_id:this.locationId,"availability":this.availability,"balanceRecreationService":this.balanceRecreationService,"vendor_id":this.vendor_id,"booking_status":this.booking_status,
     "template_id":this.template_id,"discount_rate":this.discount_rate,"start_date":this.start_date,"tourService_id":this.tourService_id});    
 }
 preBook(){
@@ -360,7 +364,7 @@ recreationServices(){
       }else{
       
   this.navCtrl.push(ModalContentPage,{serviceData:this.serviceData,dependentList:this.vendorList.dependentLists,lead_time:this.lead_time,vendor: this.vendor,vendorservice_cost:this.service_cost,one_time:this.one_time,recurring:this.recurring,status:"1",vendor_id:this.vendor_id,dependentLists:this.dependentLists,
-      serviceids:this.serviceids,location_id:this.locationId,package_amount:this.package_amount,servicetypestatus:"2"});    
+      serviceids:this.serviceids,location_id:this.locationId,package_amount:this.package_amount,servicetypestatus:"2",terms_and_condition_length:this.terms_and_condition_length,terms_and_condition:this.terms_and_condition});    
     // service_modal.present();
     // service_modal.onDidDismiss(data =>{
     //   if(data == "dismiss"){

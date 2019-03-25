@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+	 <ion-title text-center text-capitalize>Notifications</ion-title>    
+    <ion-buttons right>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons> 
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+   <ion-card *ngFor="let sent of get_notification" class="joblistcard" [class.active]="sent?.read_status == 0">
+    <ion-grid (click)="viewNotifications(sent?.notify_type,sent?.id)" >
+      <ion-row text-wrap>
+        <ion-col width-100 text-wrap>
+          <h4 style="color: #337ab7;">{{sent?.name}} {{sent?.last_name}}
+                        <span *ngIf = "sent?.notify_type == 'request_received'">sent to you friend request</span>
+                        <span *ngIf = "sent?.notify_type == 'avail_package'">availed the package requests for you on {{sent?.package_name}}</span>
+                        <span *ngIf = "sent?.notify_type == 'request_accept'">accepted your friend request</span>
+                        <span *ngIf = "sent?.notify_type == 'sr_delivered'">delivered your service request #{{sent?.dr_sr_token}}</span>
+                        <span *ngIf = "sent?.notify_type == 'sr_request' && sent?.service_type != 'Recurring'">has raised new request #{{sent?.req_sr_token}}</span>
+                        <span *ngIf = "sent?.notify_type == 'sr_request' && sent?.service_type == 'Recurring'">has raised new request #{{sent?.req_sr_token}}</span>
+                        <span *ngIf = "sent?.notify_type == 'bulk_accept'">accept your recurring request #{{sent?.dr_sr_token}}</span>
+                         <span *ngIf = "sent?.notify_type == 'sr_scheduled'">scheduled your service request #{{sent?.schedule_sr_token}}</span>
+                          <span *ngIf = "sent?.notify_type == 'bulk_cancel'">cancelled the {{sent?.cancel_count}} requests from your recurring request #{{sent?.dr_sr_token}}</span>
+                          <span *ngIf = "sent?.notify_type == 'sr_cancelled'">cancelled your service request #{{sent?.can_sr_token}}</span>
+                          <span *ngIf = "sent?.notify_type == 'recreation_request'">has raised a new request  #{{sent?.service_pack_tocken}}</span>
+                          
+          </h4>
+          <ion-grid class="jobStatus">
+            <ion-row>
+              <ion-col width-50>
+                <p><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;{{sent?.created_at | timeAgo}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>        
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>
+<style>
+.active {
+  background:rgba(221, 221, 221, 0.6);
+}
+</style>

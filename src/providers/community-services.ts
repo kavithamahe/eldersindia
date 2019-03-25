@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http';
-//import { Observable } from 'rxjs/Rx';
+// import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 import { AppConfig } from '../providers/app-config';
@@ -40,6 +40,7 @@ export class CommunityServices {
     storage.get('token').then((token) => { this.token=token;
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
+    this.headers.append('Access-Control-Allow-Origin' , '*');
     this.headers.append('Authorization', 'Bearer ' + this.token);
     this.options = new RequestOptions({ headers: this.headers });
     })    

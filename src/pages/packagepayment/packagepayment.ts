@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { BlogListService } from '../../providers/blog-list-service';
+import { ServiceProvider } from '../../providers/service-provider';
 import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
 import {PackageRequestPagePage } from '../../pages/package-request/package-request';
 
@@ -53,7 +54,8 @@ imageUrl:any;
 wallet_value:any;
 coupan_offer:any;
 coupon_id:any;
-  constructor(public navCtrl: NavController,public blogListService:BlogListService,public loadingCtrl: LoadingController,public viewCtrl: ViewController,public storage:Storage, public navParams: NavParams) {
+razorkey:any;
+  constructor(public navCtrl: NavController,public blogListService:BlogListService,public _provider:ServiceProvider,public loadingCtrl: LoadingController,public viewCtrl: ViewController,public storage:Storage, public navParams: NavParams) {
   	 
     if(navParams.get("service_type") != undefined){
   		this.service_type = navParams.get("service_type");
@@ -93,10 +95,19 @@ coupon_id:any;
   	this.vendor_id=navParams.get("vendor_id");
   	this.package_validity=navParams.get("package_validity");
     this.wallet_value=navParams.get("wallet_value");
+    if(this.wallet_value == undefined || this.wallet_value == null || this.wallet_value == ""){
+    this.wallet_value = 0;
+    }
     localStorage.setItem('wallet_value', this.wallet_value);
     this.coupon_id = navParams.get("coupon_id");
+    if(this.coupon_id == undefined || this.coupon_id == null || this.coupon_id == ""){
+    this.coupon_id = 0;
+    }
     localStorage.setItem('coupon_id', this.coupon_id);
     this.coupan_offer = navParams.get("coupan_offer");
+     if(this.coupan_offer == undefined || this.coupan_offer == null || this.coupan_offer == ""){
+    this.coupan_offer = 0;
+  }
     localStorage.setItem('coupan_offer', this.coupan_offer);
   	this.selectedConnections=navParams.get("selectedConnections");
      storage.get('user_type').then((user_type) => { this.userType=user_type;});
@@ -132,8 +143,22 @@ coupon_id:any;
      storage.get('email').then((email) => { this.email=email; })
      storage.get('phone').then((phone) => { this.phone=phone; })
    });
+    this.getRazorPaymentsaltKey();
   }
-
+getRazorPaymentsaltKey(){
+      let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+      loading.present();
+  this._provider.webServiceCall(`getRazorPaymentsaltKey`,"")
+  .subscribe(
+      data =>{
+          this.razorkey= data.result.test_key;
+        loading.dismiss();
+              },
+      err =>{
+        loading.dismiss();
+     
+            })
+}
   ionViewDidLoad() {
     console.log('ionViewDidLoad PackagepaymentPagePage');
   }
@@ -143,7 +168,7 @@ coupon_id:any;
       description: "Payment made for "+this.sr_token+"",
       image: "assets/img/icon.png",
       currency: 'INR',
-      key: 'rzp_test_53tdpMxkK8bFKw',
+      key: this.razorkey,
       amount: this.service_costadd,
       name: "EldersIndia",
       prefill: {
@@ -208,7 +233,7 @@ paypartial(){
       description: "Payment made for SR"+this.recurring_request_id+"",
       image: "assets/img/icon.png",
       currency: 'INR',
-      key: 'rzp_test_53tdpMxkK8bFKw',
+      key: this.razorkey,
       amount: this.service_costss,
       name: "EldersIndia",
       prefill: {
@@ -271,7 +296,7 @@ RazorpayCheckout.open(recurringOption, successCallback, cancelCallback);
       description: 'Razorpay',
       image: "assets/img/icon.png",
       currency: 'INR',
-      key: 'rzp_test_53tdpMxkK8bFKw',
+      key: this.razorkey,
       amount: this.package_amounts,
       name: "EldersIndia",
       prefill: {
@@ -300,7 +325,7 @@ RazorpayCheckout.open(recurringOption, successCallback, cancelCallback);
     };
 let toaster = this.blogListService;
 let nav = this.navCtrl;
-if(this.coupon_id == undefined){
+if(this.coupon_id == undefined || this.coupon_id == 0){
 let loading = this.loadingCtrl.create({content: 'Please wait...!'});
  var successCallback = function(payment_id) {
     
@@ -311,7 +336,7 @@ xmlhttp.open("POST", url,true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp.setRequestHeader("Authorization", "Bearer "+ localStorage.getItem("key"));
-xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("package_amounts")}));
+xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"amount":  localStorage.getItem("package_amounts"),"coupon_offer":localStorage.getItem("coupon_offer"),"wallet_value":localStorage.getItem("wallet_value")}));
 
 xmlhttp.onload = function () {
   loading.dismiss();
@@ -356,7 +381,7 @@ else{
       description: "Payment made for "+this.sr_token+"",
       image: "assets/img/icon.png",
       currency: 'INR',
-      key: 'rzp_test_53tdpMxkK8bFKw',
+      key: this.razorkey,
       amount: this.service_costs,
       name: "EldersIndia",
       prefill: {

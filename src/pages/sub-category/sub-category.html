@@ -46,10 +46,16 @@
     <div padding *ngIf="!subcategories?.info" text-wrap>
       <p>{{emptyRecord}}</p>
     </div><hr />
-    <h1 class="package-list-show">Packages (
-      <span>{{packageCount}}</span>) </h1>
+    <ion-item text-wrap *ngIf = "packageCount > 0">
+    <ion-badge (click)="getpackageall()">All</ion-badge>
+    <ion-col *ngFor = "let tags of getPackageTags" text-wrap>
+     <ion-badge (click)="searchpackageTags(tags.package_tags)">{{tags.package_tags}}</ion-badge>
+     </ion-col>
+     </ion-item>
+   <!--  <h1 class="package-list-show">Packages (
+      <span>{{packageCount}}</span>) </h1> -->
     <ion-card class="slider-card" *ngFor="let package of packages">
-      <div class="slides slideroption">
+      <div class="slides slideroption" text-wrap>
         <ion-list (click)="viewPackage(package.vendor_id,package.id)" class="slide-border">
           <ion-item>
             <ion-row>

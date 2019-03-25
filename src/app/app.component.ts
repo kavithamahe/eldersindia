@@ -5,12 +5,12 @@ import { CallNumber, Vibration} from 'ionic-native';
 import { CameraPreview, CameraPreviewRect, StatusBar, Splashscreen} from 'ionic-native';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { InAppBrowser } from 'ionic-native';
+// import { Diagnostic } from '@ionic-native';
+
 
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Network } from '@ionic-native/network';
 import { Geolocation } from 'ionic-native';
-
-
 // import the Menu's pages
 import { LoginPage } from '../pages/login/login';
 import { DashboardPage } from '../pages/dashboard/dashboard';
@@ -113,8 +113,8 @@ export class MyApp {
     public ionicApp: IonicApp
 
   ) {
+     this.platform.ready().then(() => {
 
-          this.platform.ready().then(() => {
           this.networkProvider.initializeNetworkEvents();
 
             // Offline event
@@ -288,13 +288,13 @@ export class MyApp {
                   { myIcon:'fa fa-newspaper-o', title: 'News & Events',subPages: [{myIcon:'fa fa-newspaper-o',title: 'View News',component:NewsPage},{myIcon:'fa fa-calendar-o',title:'View Events',component:EventsPage},{myIcon:'fa fa-external-link',title:'Useful External Links',component:ExternallinksPage}]},
                   { myIcon:'fa fa-cog', title: 'Settings',subPages: [{myIcon:'fa fa-address-book-o',title: 'Profile',component:MyProfilePage},{myIcon:'fa fa-unlock-alt',title:'Change Password',component:ChangePasswordPage},{myIcon:'fa fa-cog',title:'Privacy Settings',component:SettingsPage},{ myIcon:'fa fa-camera', title: 'CCTV Settings', component: RemotemonitorPagePage }]},
                   { myIcon:'fa fa-info', title: 'Contact Us',subPages: [{myIcon:'fa fa-phone',title: '080-47096393',component:'080-47096393'},{myIcon:'fa fa-envelope',title:'support@eldersindia.com',component:"support@eldersindia.com"}]},
-                  { myIcon:'fa fa-comment', title: 'Chat Us', component: "chateldersindia" },
+                  { myIcon:'fa fa-comment', title: 'Chat with us', component: "chateldersindia" },
                   { myIcon:'fa fa-sign-out', title: 'Logout', component: LogoutPage },
 
                       );
            this.pages2.push(
                   { myIcon:'fa fa-tachometer', title: 'Dashboard', component: DashboardPage },
-                  { myIcon:'fa fa-users', title: 'Manage Dependents', component: ManagePage },
+                  { myIcon:'fa fa-users', title: 'Manage Elders', component: ManagePage },
                   { myIcon:'fa fa-cog', title: 'Services', component: ServiceprovidersPage },
                   { myIcon:'fa fa-cogs', title: 'Requests',subPages: [{myIcon:'fa fa-cog',title: 'Service Requests',component:ServicerequestPage},{myIcon:'fa fa-gift',title:'Recurring Requests',component:RecurringPagePage},{myIcon:'fa fa-gift',title:'Package Requests',component:PackageRequestPagePage},{ myIcon:'fa fa-file-text', title: 'Enquiries', component: EnquiriesPagePage }]},
                   { myIcon:'fa fa-cubes', title: 'Jobs',subPages: [{myIcon:'fa fa-cubes',title: 'Job Board',component:JobboardPage},{myIcon:'fa fa-th-list',title:'Applied Jobs',component:AppliedJobsPage}]},
@@ -305,7 +305,7 @@ export class MyApp {
                   { myIcon:'fa fa-newspaper-o', title: 'News & Events',subPages: [{myIcon:'fa fa-newspaper-o',title: 'View News',component:NewsPage},{myIcon:'fa fa-calendar-o',title:'View Events',component:EventsPage},{myIcon:'fa fa-external-link',title:'Useful External Links',component:ExternallinksPage}]},
                   { myIcon:'fa fa-cog', title: 'Settings',subPages: [{myIcon:'fa fa-address-book-o',title: 'Profile',component:MyProfilePage},{myIcon:'fa fa-unlock-alt',title:'Change Password',component:ChangePasswordPage},{myIcon:'fa fa-cog',title:'Privacy Settings',component:SettingsPage},{ myIcon:'fa fa-camera', title: 'CCTV Settings', component: RemotemonitorPagePage }]},
                   { myIcon:'fa fa-info', title: 'Contact Us',subPages: [{myIcon:'fa fa-phone',title: '080-47096393',component:'080-47096393'},{myIcon:'fa fa-envelope',title:'support@eldersindia.com',component:"support@eldersindia.com"}]},
-                  { myIcon:'fa fa-comment', title: 'Chat US', component: "chateldersindia" },
+                  { myIcon:'fa fa-comment', title: 'Chat with us', component: "chateldersindia" },
                   { myIcon:'fa fa-sign-out', title: 'Logout', component: LogoutPage },
 
                       );
@@ -313,12 +313,29 @@ export class MyApp {
     this.initializeApp();
     // alert("switch-ON GPS to get current Location.");
     this.checkPermissions();
+    // this.checkLocation();
     this.initializePreview();
     platform.ready().then(() => {
       this.initPushNotification();
     });
     
   }
+//   checkLocation()
+// {
+// this.platform.ready().then((readySource) => {
+
+// Diagnostic.isLocationEnabled().then(
+// (isAvailable) => {
+// console.log('Is available? ' + isAvailable);
+// alert('Is available? ' + isAvailable);
+// }).catch( (e) => {
+// console.log(e);
+// alert(JSON.stringify(e));
+// });
+
+
+// });
+// }
   showToaster(message)
   {
    let toast = this.toastCtrl.create({

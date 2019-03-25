@@ -153,6 +153,15 @@ checksafeHelpStatus(id,head){
     return this.http.post(this.rootUrl+'checksafeHelpStatus',_request,head)
       .map(res => res.json());
 }
+getNotifications(head){
+  let _request= {"info":"header"};
+    return this.http.post(this.rootUrl+'getNotifications',_request,head)
+      .map(res => res.json());
+}
+sendNotifyReadStatus(id){
+   let _request= {"notify_id":id};
+    return this.http.post(this.rootUrl+'sendNotifyReadStatus',_request,this.head);
+}
 webServiceCall(serviceName,bodyData){
       this.headers = new Headers();
       this.headers.append('Content-Type', 'application/json');

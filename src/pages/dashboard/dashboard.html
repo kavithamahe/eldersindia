@@ -3,6 +3,11 @@
     <ion-title>Dashboard</ion-title>
     <button ion-button menuToggle left class="menu">
       <ion-icon name="menu"></ion-icon>
+    </button> 
+    <button id="notification-button" ion-button clear (click)="getnotificationview()">
+        <ion-icon name="notifications">
+          <ion-badge *ngIf= "unreadCount" id="notifications-badge" color="danger">{{unreadCount}}</ion-badge>
+        </ion-icon>              
     </button>
   </ion-navbar>
 </ion-header>

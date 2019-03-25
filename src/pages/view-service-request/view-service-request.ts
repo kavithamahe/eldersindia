@@ -38,6 +38,11 @@ prebookcost:any;
 updated_at:any;
 cancelled_date:any;
 scheduled_at:any;
+cancellationfees:any;
+cancellationfees1:any;
+cancellationfees2:any;
+cancellationfees3:any;
+previous_service_pending_cost:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController,public serviceRequest:ServiceRequestService) {
   	this.storage.ready().then(() => {
   	  storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -86,6 +91,17 @@ scheduled_at:any;
       this.emergencyContact = this.viewServiceRequestInfo.emergencyContact;
       this.scheduled_at = moment(viewServiceRequest.result.scheduled_at).format("DD-MM-YYYY HH:mm:ss");
       this.preffer= viewServiceRequest.enquiry_date;
+      this.cancellationfees = (parseFloat(this.viewServiceRequestInfo.total_paid) - parseFloat(this.viewServiceRequestInfo.refundamount));
+      this.cancellationfees1 = (parseFloat(this.viewServiceRequestInfo.service_cost) - parseFloat(this.viewServiceRequestInfo.refundamount));
+      this.cancellationfees2 = (parseFloat(this.viewServiceRequestInfo.service_cost) - parseFloat(this.viewServiceRequestInfo.refundamount) - parseFloat(this.viewServiceRequestInfo.coupon_offer));
+      this.cancellationfees3 = (parseFloat(this.viewServiceRequestInfo.total_paid) - parseFloat(this.viewServiceRequestInfo.refundamount) - parseFloat(this.viewServiceRequestInfo.coupon_offer));
+  
+      var str = this.viewServiceRequestInfo.previous_service_pending_cost;
+      console.log(str);
+        var stringForm = str.toString();
+        var stringForms = stringForm.replace("-" ,"");
+        this.previous_service_pending_cost = +stringForms;
+    console.log(this.previous_service_pending_cost);
       loader.dismiss();   
     },
     (err) => { 

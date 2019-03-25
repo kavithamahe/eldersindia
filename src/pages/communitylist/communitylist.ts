@@ -37,7 +37,8 @@ export class CommunitylistPage {
   prev_index:any = 0;
     scrollTop:boolean = false;
     banner:any;
-  constructor(public nav: NavController,public storage:Storage,public loadingCtrl: LoadingController, public navParams: NavParams,platform: Platform,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
+    banners:any;
+  constructor(public nav: NavController,public storage:Storage,public loadingCtrl: LoadingController,public navParams: NavParams,platform: Platform,public toastCtrl: ToastController, public communityServices: CommunityServices ) {
      this.isAndroid = platform.is('android');
      // this.searchData = "";
    }
@@ -52,7 +53,7 @@ export class CommunitylistPage {
     let currentIndex = this.prev_index;
     if(currentIndex == 1){
       this.community = "my_community";
-       this.myCommunity("");
+      this.myCommunity("");
     }else{
       this.community = "other_community";
       this.otherCommunity("");
@@ -74,10 +75,23 @@ export class CommunitylistPage {
     this.categoryLists=[];
       this.communityServices.myCommunity(searchData).
       subscribe(mycommunity => {
-      this.communitylists = mycommunity.result.info.data;
+        setTimeout(()  =>{
+          this.communitylists = mycommunity.result.info.data;
+        },1000)
+      
+      // var dataList = this.communitylists;
+      // for(let data of dataList) {
+      // var str = data.banner;
+      //   data.banner = str.replace(" " ,"%20");
+      // }
+
       this.categoryLists = mycommunity.result.get.communityCategory;
-      this.banner = this.imageUrl + this.communitylists[0].banner;
-      console.log(this.banner);
+     
+      // this.banner = "https://www.claritaz.com/images/BizSpark-1.jpg";
+      // console.log(this.banner);
+      // console.log("this.banner");
+      // console.log(this.banner);
+      
       this.nextPageURL=mycommunity.result.info.next_page_url;
       loader.dismiss();
   },
@@ -97,7 +111,13 @@ export class CommunitylistPage {
       this.categoryLists=[];
       this.communityServices.recommendedCommunity(data).
       subscribe(mycommunity => {
-      this.communitylists = mycommunity.result.info.data;
+      this.communitylists = mycommunity.result.info.data;  
+      var dataList = this.communitylists;
+      for(let data of dataList) {
+      // this.banners = this.imageUrl+this.communitylists[0].banner;   
+      var str = data.banner;
+        data.banner = str.replace(" " ,"%20");
+      }
       if(this.communitylists.length == 0){
         this.communityServices.showToast("No record found")
       }
@@ -188,7 +208,7 @@ ionViewWillEnter (){
 
   this.storage.ready().then(() => {
 
-      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
+      this.storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;;
       this.storage.get('id').then((id) => { this.id=id; })
       this.storage.get('token').then((token) => { this.token=token;
       if(this.community == "my_community"){
@@ -199,6 +219,7 @@ ionViewWillEnter (){
       }
       })
     });
+      })
 }
 
 }

@@ -20,7 +20,7 @@
 </ion-header>
 
 
-<ion-content class="content-intop enquireySection">
+<ion-content class="content-intop enquireySection" autohide>
   <div class="ion-searchbar" *ngIf = "packageName">
     <ion-row>
       <ion-col col-10>
@@ -109,6 +109,11 @@
   <div *ngIf="error">
     <p style="text-align: center;">{{error}}</p>
   </div>
+   <ion-fab bottom right edge class="scroll" #fab>
+    <button ion-fab mini (click)="scrollToTop()">
+      <ion-icon name="arrow-dropup"></ion-icon>
+    </button>
+  </ion-fab>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

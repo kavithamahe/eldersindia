@@ -381,7 +381,7 @@ console.log(fileEntry);
   }
    showConfirmcancel(serviceId,hours,service_id,sub_category_id,status,servicediscountcost_one_service,
     service_type,txnid,id,service_cost,recurring_request_id,req_count,package_id,Paymentstatus,
-    paid_amount,sr_token,coupon_id,pending_service_amount,vendor_name,is_recreation_config,payment_status){
+    paid_amount,sr_token,coupon_id,pending_service_amount,vendor_name,is_recreation_config,payment_status,coupon_offer){
    
           if(hours == undefined){
         hours = "";
@@ -470,7 +470,7 @@ console.log(fileEntry);
               "dedaction_service_cost":this.dedaction_service_cost,"service_remaing_cost":this.service_remaing_cost,"final_payable_amount":this.final_payable_amount,
               "package_id":package_id,"sr_token":sr_token,"cancel_services":this.cancel_services,"balanceamount_to_pay":this.balanceamount_to_pay,
               "service_refund_amount":this.service_refund_amount,"actual_service_cost":this.actual_service_cost,"vendor_name":vendor_name,
-              "refund_amount":this.refund_amount,"is_recreation_config":is_recreation_config,"payment_status":payment_status});
+              "refund_amount":this.refund_amount,"is_recreation_config":is_recreation_config,"payment_status":payment_status,"coupon_offer":coupon_offer});
     }
     },
     (err) => { 
@@ -505,7 +505,7 @@ console.log(fileEntry);
       
      this.navCtrl.push(CancelrequestsPage,{"serviceId":serviceId,"service_cost":service_cost,"result":this.result,"service_type":service_type,"status":status,"txnid":txnid,
       "percentage":this.percentage,"payment_status":this.payment_status,"deductionamount":this.deductionamount,"servicecancelamount":this.servicecancelamount,"package_id":package_id,
-      "Paymentstatus":Paymentstatus,"paid_amount":paid_amount,"sr_token":sr_token,"coupon_id":coupon_id,"pending_service_amount":pending_service_amount,"vendor_name":vendor_name,"is_recreation_config":is_recreation_config});
+      "Paymentstatus":Paymentstatus,"paid_amount":paid_amount,"sr_token":sr_token,"coupon_id":coupon_id,"pending_service_amount":pending_service_amount,"vendor_name":vendor_name,"is_recreation_config":is_recreation_config,"coupon_offer":coupon_offer});
     },
     (err) => { 
       loader.dismiss();
