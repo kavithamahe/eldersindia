@@ -41,7 +41,7 @@ allow_comment:any;
 created_at:any;
 connectionInfo:any=[];
 rootUrl:any;
- 
+getTags:any=[];
   constructor(public formBuilder: FormBuilder,public modalCtrl: ModalController, public navCtrl: NavController,public platform: Platform,public actionsheetCtrl: ActionSheetController, public navParams: NavParams,public blogListService:BlogListService,public storage:Storage,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
     this.storage.ready().then(() => {
         storage.get('rooturl').then((rooturl) => { this.rootUrl=rooturl; 
@@ -81,7 +81,8 @@ rootUrl:any;
     loader.present();
     this.blogListService.singleBlog(blogId).subscribe(
      (singleBlog) => {
-      this.singleBlogInfo=singleBlog.result.details;  
+      this.singleBlogInfo=singleBlog.result.details;
+      this.getTags = singleBlog.result.tags;
       this.communitylist=singleBlog.result.community_list;
       loader.dismiss();   
     },

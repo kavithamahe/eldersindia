@@ -44,7 +44,7 @@
   <ion-item class="otp">
   <ion-label>To</ion-label>
     <ion-select multiple="true" [(ngModel)]="selectedConnections" [ngModelOptions]="{standalone: true}">
-          <ion-option *ngFor="let name of connectionInfo" [value] = "name">{{name.friend_name}}
+          <ion-option *ngFor="let name of connectionInfo" [value] = "name">{{name.friend_name}} {{name.last_name}}
           </ion-option>
         </ion-select> 
   </ion-item>

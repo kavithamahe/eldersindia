@@ -27,16 +27,16 @@ export class SafemePagePage {
   apilog_list:any =[];
   api_data:any;
   vendor_id:any;
-
+  sponsorid:any;
 
   constructor(public navCtrl: NavController, private device: Device,public loadingCtrl: LoadingController,public navParams: NavParams,public storage:Storage,public providerService: ServiceProvider) {
           console.log("Device UUID is: " + this.device.uuid);
           storage.get('user_type_id').then((user_type_id) => { this.user_type_id=user_type_id; 
-          storage.get('user_type').then((user_type) => { this.user_type=user_type; 
+          storage.get('user_type').then((user_type) => { this.user_type=user_type;
+          storage.get('sponsor_id').then((sponsor_id) => { this.sponsorid=sponsor_id;}) 
        this.apiLogList(this.user_type_id);
         })
-
-          })
+        })
           this.api_data = navParams.get("apiData");
           console.log(this.api_data);
           storage.get('vendor_id').then((vendor_id) => { this.vendor_id=vendor_id;})
@@ -58,7 +58,7 @@ apiLogList(user_type_id){
     this.sponsor_id = user_type_id;
     this.elder_id = "";
   }
-        let servieListData = {"elder_id":this.elder_id,"sponsor_id":this.sponsor_id};
+        let servieListData = {"info":{"elder_id":this.elder_id,"sponsor_id":this.sponsor_id}};
       this.providerService.webServiceCall(`apiLogsList`,servieListData)
         .subscribe(
           data =>{
@@ -68,18 +68,20 @@ apiLogList(user_type_id){
                    this.providerService.showErrorToast(err);
                 })
 }
-close(call_id,api_name){
-   let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+close(call_id,api_name,imei_number){
+      let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
-  let servieListData = {"call_id":call_id,"vendor_id":this.vendor_id,"sponsor_id":50,"elder_id":this.user_type_id,"imei":"4b2a7a2cf63d35ee","requestName":api_name};
+      let servieListData = {"call_id":call_id,"vendor_id":this.vendor_id,"sponsor_id":this.sponsorid,"elder_id":this.user_type_id,"imei":imei_number,"requestName":api_name};
       this.providerService.webServiceCall(`getApiIntegrationCancel`,servieListData)
         .subscribe(
           data =>{
                 this.apiLogList(this.user_type_id);
-                if(data.success_msg != ""){
-                  this.providerService.showToast(data.success_msg);
+                if(data.result.success_msg != ""){
+                  this.providerService.showToast(data.result.success_msg);
                 }
-                this.providerService.showToast(data.error_msg);
+                else{
+                   this.providerService.showToast(data.result.error_msg);
+                 }
                 loading.dismiss();
                   },
           err =>{

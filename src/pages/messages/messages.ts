@@ -101,7 +101,7 @@ selected:any;
       }
       return check;
     }
-      setClickedRow(index){
+      setClickedRow(index){ 
         if(this.multirow[index]){
           this.multirow[index] = "";
         }

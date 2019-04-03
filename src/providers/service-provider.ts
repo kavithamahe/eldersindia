@@ -115,10 +115,10 @@ sendotp(){
     return this.http.post(this.rootUrl+'sendOtp',_request,this.head)
       .map(res => res.json());
 }
-elderEmergencySms(url,call_sponsor,sponsor_name,elder_name,elder_lastname){
+elderEmergencySms(url,call_sponsor,sponsor_name,elder_name,elder_lastname,head){
   console.log(this.head);
   let _request= {"url":url,"sponsor_number":call_sponsor,"sponsor_name":sponsor_name,"elder_name":elder_name,"elder_lastname":elder_lastname};
-    return this.http.post(this.rootUrl+'elderEmergencySms',_request,this.head)
+    return this.http.post(this.rootUrl+'elderEmergencySms',_request,head)
       .map(res => res.json());
 }
 verifyotp(otp){

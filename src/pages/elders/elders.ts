@@ -468,19 +468,16 @@ imageURL:any;
                     this.communityServices.showErrorToast(err);
                     loader.dismiss();
                   })
-       
-
-   }
+       }
   selectsubcategory(servicecategory){
   this.communityServices.selectsubcategory(servicecategory).subscribe( 
       (servicecategoryinfo) => {
           this.servicesubcategory=servicecategoryinfo.result;
         });
-
-  }
+}
 
   addEmergency(){
-    
+  
     const control = <FormArray>this.authForm.controls['emergency_list'];
         control.push(this.emergencyAddress());
 

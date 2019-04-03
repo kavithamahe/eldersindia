@@ -25,6 +25,7 @@
                         <span *ngIf = "sent?.notify_type == 'avail_package'">availed the package requests for you on {{sent?.package_name}}</span>
                         <span *ngIf = "sent?.notify_type == 'request_accept'">accepted your friend request</span>
                         <span *ngIf = "sent?.notify_type == 'sr_delivered'">delivered your service request #{{sent?.dr_sr_token}}</span>
+                        <span *ngIf = "sent?.notify_type == 'sr_completed'">completed your service request #{{sent?.com_sr_token}}</span>
                         <span *ngIf = "sent?.notify_type == 'sr_request' && sent?.service_type != 'Recurring'">has raised new request #{{sent?.req_sr_token}}</span>
                         <span *ngIf = "sent?.notify_type == 'sr_request' && sent?.service_type == 'Recurring'">has raised new request #{{sent?.req_sr_token}}</span>
                         <span *ngIf = "sent?.notify_type == 'bulk_accept'">accept your recurring request #{{sent?.dr_sr_token}}</span>
@@ -32,6 +33,9 @@
                           <span *ngIf = "sent?.notify_type == 'bulk_cancel'">cancelled the {{sent?.cancel_count}} requests from your recurring request #{{sent?.dr_sr_token}}</span>
                           <span *ngIf = "sent?.notify_type == 'sr_cancelled'">cancelled your service request #{{sent?.can_sr_token}}</span>
                           <span *ngIf = "sent?.notify_type == 'recreation_request'">has raised a new request  #{{sent?.service_pack_tocken}}</span>
+                          <span *ngIf = "sent?.notify_type == 'comments'">commented a photo you shared</span>
+                          <span *ngIf = "sent?.notify_type == 'likes'">like a photo {{sent?.community_name}} shared</span>
+                          <span *ngIf = "sent?.notify_type == 'blog_approve'">Your {{sent?.approve_title}} blog has been approved</span>
                           
           </h4>
           <ion-grid class="jobStatus">

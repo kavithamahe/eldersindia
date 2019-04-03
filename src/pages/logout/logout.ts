@@ -20,6 +20,8 @@ usernames:any;
 passwords:any;
 urls:any;
 service_location:any;
+long:any;
+lat:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage) {    
   	this.storage.get('Cctv_camera').then((Cctv_camera) => { this.Cctv_camera=Cctv_camera;
  this.storage.set('Cctv_camera',this.Cctv_camera);
@@ -32,6 +34,10 @@ service_location:any;
     this.storage.set('passwords',this.passwords); })
     storage.get('urls').then((urls) => { this.urls=urls;
     this.storage.set('urls',this.urls); })
+    storage.get('lat').then((lat) => { this.lat=lat;
+    this.storage.set('lat',this.lat); })
+     storage.get('long').then((long) => { this.long=long;
+    this.storage.set('long',this.long); })
     this.storage.clear();
     this.storage.ready().then(() => {
      this.storage.clear();

@@ -112,10 +112,10 @@ export class DashboardPage {
       // storage.get('safeme_status').then((safeme_status) => { this.safeme_status=safeme_status;  })
       // storage.get('helpme_status').then((helpme_status) => { this.helpme_status=helpme_status;  })
       storage.get('vendor_id').then((vendor_id) => { this.vendor_id=vendor_id;  })
-      // storage.get('lat').then((lat) => { this.lat=lat; 
-      // console.log(this.lat); })
-      //  storage.get('long').then((long) => { this.long=long; 
-      // console.log(this.long); })
+      storage.get('lat').then((lat) => { this.lat=lat; 
+      console.log(this.lat); })
+       storage.get('long').then((long) => { this.long=long; 
+      console.log(this.long); })
   });
     
   }
@@ -195,6 +195,7 @@ this.map();
   urlss:any;
      shareLocation()
   {
+    console.log(this.lat);
     if(this.lat == undefined || this.lat == "" || this.lat == null){
       this.providerService.showToast("Please check your gps location on or not and then try again.");
     }
@@ -202,7 +203,7 @@ this.map();
     this.urlss = 'https://www.google.com/maps/place/'+this.lat+ ',' + this.long;
       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
-   this.providerService.elderEmergencySms(this.urlss,this.call_sponsor,this.sponsor_name,this.elder_name,this.elder_lastname)
+   this.providerService.elderEmergencySms(this.urlss,this.call_sponsor,this.sponsor_name,this.elder_name,this.elder_lastname,this.head)
       .subscribe(data =>{
       this.providerService.showToast(data.result);
       loading.dismiss();
@@ -214,9 +215,6 @@ this.map();
 
   }
 }
-  // ionViewWillLeave() {
-  //   this.tabBarElement.style.display = 'flex';
-  // }
    fetchLocation(){
     if (!this.platform.is('cordova')) {
       console.warn("Location not initialized. Cordova is not available - Run in physical device");

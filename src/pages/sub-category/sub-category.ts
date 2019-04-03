@@ -36,10 +36,13 @@ recreation_config:any;
 category_id:any;
 getPackageTags:any=[];
 packagess:any=[];
+selectedRow : Number;
+alltags:boolean = false;
 		// subcategories: Array<{title: string, lists: any, color: string}>;
 
   constructor(public platform: Platform,public storage:Storage, public loadingCtrl: LoadingController, public navCtrl: NavController, public navPara: NavParams,public providerService: ServiceProvider) {
     // this.loadLocations();
+    this.alltags = true;
      this.subCategoryTitle = navPara.get("subcategory").service;
      this.category_id = navPara.get("subcategory").id;
     this.locations= navPara.get("locations");
@@ -69,7 +72,10 @@ packagess:any=[];
     loading.present();
     loading.dismiss();
   }	
-
+    setClickedRow(index){
+      this.selectedRow = index;
+      this.alltags = false;
+    }
     loadPackagesByLocationID(locationId){
     this.providerService.webServiceCall(`getPackage`,{"locationId":locationId,"categoryId":this.category_id})
       .subscribe(data =>{
@@ -95,6 +101,7 @@ packagess:any=[];
   getpackageall(){
      this.providerService.webServiceCall(`getPackage`,{"locationId":this.serviceLocation,"categoryId":this.category_id})
       .subscribe(data =>{
+        this.alltags = true;
        this.packages =  data.result;
        this.packagess = data.result;
        this.packageCount = this.packages.length;
@@ -115,6 +122,7 @@ packagess:any=[];
   searchpackageTags(package_tags){
       if (package_tags && package_tags.trim() != '') {
       this.packages = this.packagess.filter((item) => {
+        console.log(this.packages.length);
         return (item.tags.indexOf(package_tags) > -1);
       })
     }
@@ -123,7 +131,6 @@ packagess:any=[];
     this.navCtrl.push(PackageDetailPagePage,{"vendor_id":vendor_id,'location_id':this.serviceLocation,"pack_id":pack_id});
   }
    public getItems(term){
-
     this.term = term;
     this.loadsSubCategory(this.term);
   }

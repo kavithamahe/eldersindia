@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { Platform,NavController, NavParams,AlertController, LoadingController, ModalController, ToastController,MenuController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { LocalNotifications } from 'ionic-native';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
-
+import { LocalNotifications, Geolocation } from 'ionic-native';
 import { Login } from '../../models/login';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 
@@ -22,7 +21,7 @@ import { CommunityServices } from '../../providers/community-services';
 */
 
 @Component({
-	selector: 'page-login',
+	 selector: 'page-login',
    templateUrl: 'login.html',
    providers:[CommunityServices],
 })
@@ -44,6 +43,8 @@ export class LoginPage {
   sponsor_name:any;
   sponsor_id:any;
   sponsor_last:any;
+  lat:any;
+  long:any;
   
   constructor(public menuCtrl: MenuController,public community_service:CommunityServices, public service:ServiceProvider, public formBuilder: FormBuilder,public alertCtrl: AlertController, public modalCtrl:ModalController,public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public loginUser: LoginUser,public loadingCtrl: LoadingController,public toastCtrl: ToastController, public storage:Storage,public appConfig:AppConfig) {
  
@@ -59,6 +60,7 @@ export class LoginPage {
     //this.fetchLocation();
     // this.checkPermissions();
     // this.initializePreview();
+    
 
   }
  
@@ -184,7 +186,14 @@ export class LoginPage {
          this.storage.set('rooturl',this.appConfig.setrooturl());
          this.storage.set('islogin',1);
          this.enableUserTypeMenu(loginuser['details']['user_type']);
-       
+          Geolocation.getCurrentPosition().then((position) => {
+      this.lat=position.coords.latitude;
+      this.long=position.coords.longitude;
+      console.log(this.lat);
+      this.storage.set('lat', this.lat);
+      this.storage.set('long', this.long);
+    });
+
           
        })
       

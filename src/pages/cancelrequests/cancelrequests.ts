@@ -81,8 +81,8 @@ coupon_offer:any;
         this.refund_amount = (this.paid_amount * percentages/100);
       }
       else{
-        this.cancellation_charges = (this.service_cost * this.percentage/100);
-        this.refund_amount = (this.service_cost * percentages/100);
+        this.cancellation_charges = (this.paid_amount * this.percentage/100);
+        this.refund_amount = (this.paid_amount * percentages/100);
       }
  
       }
@@ -116,8 +116,6 @@ coupon_offer:any;
         this.percentage = "0";
       }
            if(this.cancel_services > 1 && this.package_id != 1 && this.balanceamount_to_pay ==0){
-            console.log("sfsdf");
-    // this.cancellationfees = ((this.actual_service_cost * this.percentage/100)/this.req_count);
     this.cancellationfees = (this.actual_service_cost * this.percentage/100);
     this.refund_amountsrecurring = ((this.actual_service_cost / this.cancel_services) - (this.service_cost * this.percentage/100));
       this.recurringrefund=(this.refund_amounts - ((this.paid_amount * this.percentage/100)/this.cancel_services));

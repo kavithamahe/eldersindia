@@ -674,10 +674,17 @@ xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount
 xmlhttp.onload = function () {
 loading.dismiss();
   var users = JSON.parse(xmlhttp.responseText);
+  var error = users.error;
  var result=users.result;
-  // navCtrl.setRoot(ServicerequestPage);
 
-  nav.presentConfirm(result);
+  // navCtrl.setRoot(ServicerequestPage);
+  if(result){
+     nav.presentConfirm(result);
+  }
+   if(error){
+     nav.presentConfirm(error);
+  }
+
 
   }
     }
@@ -1785,10 +1792,16 @@ xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount
 xmlhttp.onload = function () {
 loading.dismiss();
   var users = JSON.parse(xmlhttp.responseText);
+  var error = users.error;
  var result=users.result;
-  // navCtrl.setRoot(ServicerequestPage);
 
-  nav.presentConfirm(result);
+  // navCtrl.setRoot(ServicerequestPage);
+  if(result){
+     nav.presentConfirm(result);
+  }
+   if(error){
+     nav.presentConfirm(error);
+  }
 
   }
       
@@ -2091,10 +2104,16 @@ xmlhttp.onload = function () {
   loading.dismiss();
 
   var users = JSON.parse(xmlhttp.responseText);
+  var error = users.error;
  var result=users.result;
-  // navCtrl.setRoot(ServicerequestPage);
 
-  nav.presentConfirm(result);
+  // navCtrl.setRoot(ServicerequestPage);
+  if(result){
+     nav.presentConfirm(result);
+  }
+   if(error){
+     nav.presentConfirm(error);
+  }
 
   }
     }  
@@ -2348,10 +2367,16 @@ xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount
 xmlhttp.onload = function () {
 loading.dismiss();
   var users = JSON.parse(xmlhttp.responseText);
+   var error = users.error;
  var result=users.result;
-  // navCtrl.setRoot(ServicerequestPage);
 
-  nav.presentConfirm(result);
+  // navCtrl.setRoot(ServicerequestPage);
+  if(result){
+     nav.presentConfirm(result);
+  }
+   if(error){
+     nav.presentConfirm(error);
+  }
 
   }
     } 
@@ -2648,10 +2673,16 @@ xmlhttp.send(JSON.stringify({ "razorpay_payment_id": payment_id,"prev_due_amount
 xmlhttp.onload = function () {
 loading.dismiss();
   var users = JSON.parse(xmlhttp.responseText);
+   var error = users.error;
  var result=users.result;
-  // navCtrl.setRoot(ServicerequestPage);
 
-  nav.presentConfirm(result);
+  // navCtrl.setRoot(ServicerequestPage);
+  if(result){
+     nav.presentConfirm(result);
+  }
+   if(error){
+     nav.presentConfirm(error);
+  }
 
   }
     }

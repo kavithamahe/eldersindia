@@ -246,9 +246,9 @@ console.log(fileEntry);
           this.paynowCosts = (parseFloat(data.pending_service_amount) + parseFloat(data.additional_service_cost) - parseFloat(data.prev_service_amount_balance));
         }
         this.serviceRequestInfo = dataList;
-      this.vendorStatus=serviceRequest.result.info.status;
-       this.servicestatus=serviceRequest.result.info.status;
-      this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
+        this.vendorStatus=serviceRequest.result.info.status;
+        this.servicestatus=serviceRequest.result.info.status;
+        this.nextPageURL=serviceRequest.result.info.list.next_page_url;  
       loader.dismiss();    
     },
     (err) => { 

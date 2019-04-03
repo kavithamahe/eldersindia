@@ -6,6 +6,8 @@ import { ConnectionsPage } from '../../pages/connections/connections';
 import { ServicerequestPage } from '../../pages/servicerequest/servicerequest';
 import { ServiceProvider } from '../../providers/service-provider';
 import {PackageRequestPagePage } from '../../pages/package-request/package-request';
+import { BlogsPage } from '../../pages/blogs/blogs';
+import { CommunitylistPage } from '../../pages/communitylist/communitylist';
 
 /**
  * Generated class for the NotificationsPage page.
@@ -46,6 +48,12 @@ multirowsent:any=[];
   	else if(notify_type == "avail_package"){
   		this.navCtrl.setRoot(PackageRequestPagePage);
   	}
+    else if(notify_type == "blog_approve"){
+      this.navCtrl.setRoot(BlogsPage);
+    }
+    else if(notify_type == "comments" || notify_type == "likes"){
+      this.navCtrl.setRoot(CommunitylistPage);
+    }
     else{
       this.navCtrl.setRoot(ServicerequestPage);
     }

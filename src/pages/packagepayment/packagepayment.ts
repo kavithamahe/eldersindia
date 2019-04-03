@@ -166,7 +166,7 @@ getRazorPaymentsaltKey(){
     console.log(this.service_type);
      var optionss = {
       description: "Payment made for "+this.sr_token+"",
-      image: "assets/img/icon.png",
+      image: this.imageUrl + "assets/img/Elderlogo.png",
       currency: 'INR',
       key: this.razorkey,
       amount: this.service_costadd,
@@ -231,7 +231,7 @@ paypartial(){
   console.log(this.service_id);
 	 var recurringOption = {
       description: "Payment made for SR"+this.recurring_request_id+"",
-      image: "assets/img/icon.png",
+      image: this.imageUrl + "assets/img/Elderlogo.png",
       currency: 'INR',
       key: this.razorkey,
       amount: this.service_costss,
@@ -294,7 +294,7 @@ RazorpayCheckout.open(recurringOption, successCallback, cancelCallback);
  
     var options = {
       description: 'Razorpay',
-      image: "assets/img/icon.png",
+      image: this.imageUrl + "assets/img/Elderlogo.png",
       currency: 'INR',
       key: this.razorkey,
       amount: this.package_amounts,
@@ -379,7 +379,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
 else{
 	  var optionss = {
       description: "Payment made for "+this.sr_token+"",
-      image: "assets/img/icon.png",
+      image: this.imageUrl + "assets/img/Elderlogo.png",
       currency: 'INR',
       key: this.razorkey,
       amount: this.service_costs,

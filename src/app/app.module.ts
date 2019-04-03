@@ -82,7 +82,6 @@ import { CancelrequestsPage } from '../pages/cancelrequests/cancelrequests';
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
 import { CommunityPage } from '../pages/community/community';
 
-import { CommunityPopoverPage } from '../pages/community/community';
 import { CommunityprofilePage } from '../pages/communityprofile/communityprofile';
 import { CommunitymessagePage } from '../pages/communitymessage/communitymessage';
 import { CommunitycommentsPage } from '../pages/communitycomments/communitycomments';
@@ -142,7 +141,6 @@ import { HttpClientModule } from '@angular/common/http';
     ConnectionsPage,
     CommunitylistPage,
     CommunityPage,
-    CommunityPopoverPage,
     CommunityprofilePage,
     CommunitymessagePage,
     CommunitycommentsPage,
@@ -243,7 +241,6 @@ import { HttpClientModule } from '@angular/common/http';
     ShareBlogPagePage,
     GetpackagePagePage,
     CommunityPage,
-    CommunityPopoverPage,
     ElderservicePagePage,
     PaymentPage,
     ManagePage,

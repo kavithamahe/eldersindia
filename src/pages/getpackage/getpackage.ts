@@ -104,9 +104,12 @@ wallet_value:any;
         this.package_amount = this.package_amount;
       }
       if(this.final_service_cost == 0){
+         let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();   
            this.blogListService.zeroavailpackage(this.packId,this.location_id,this.wallet_value,this.coupon_id,
             this.package_amount,this.discounted_cost,this.selectedConnections,this.final_service_cost).subscribe(
      (availpackage) => {
+      loader.dismiss();
        this.blogListService.showToast(availpackage.result);
       })
           this.dismiss();
@@ -158,10 +161,13 @@ wallet_value:any;
       }
       if(this.packageAvailstatus == 0){
         if(this.final_service_cost == 0){
+           let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();  
            this.blogListService.zeroavailpackage(this.packId,this.location_id,this.wallet_value,this.coupon_id,
             this.package_amount,this.discounted_cost,this.selectedConnections,this.final_service_cost).subscribe(
      (availpackage) => {
        this.blogListService.showToast(availpackage.result);
+       loader.dismiss();
       })
           this.dismiss();
         }

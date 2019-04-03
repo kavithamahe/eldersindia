@@ -121,7 +121,7 @@ razorkey:any;
     this.service_name = this.paymentData.service_name;
     this.service_cost = this.paymentData.service_cost * 100;
     this.service_costs = this.service_cost;
-    this.service_costss=(this.paymentData.service_cost * 100).toFixed(0);
+    this.service_costss=(this.paymentData.service_cost * 100).toFixed(2);
     localStorage.setItem('service_costss', this.service_costss);
     this.storage.ready().then(() => {
        storage.get('imageurl').then((imageurl) => { this.imageUrl=imageurl;});
@@ -494,7 +494,7 @@ recreationRequestSubmitbeforePayment(){
     if(this.subcategory == "Emergency Medical and Non-medical"){
     var options = {
       description: this.serviceTitle,
-      image: "https://qa.eldersindia.com/assets/img/Elderlogo.png",
+      image: this.imageUrl + "assets/img/Elderlogo.png",
       currency: 'INR',
       key: this.razorkey,
       amount: this.service_costss,
@@ -605,7 +605,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
    else{
     var options = {
       description: this.serviceTitle,
-      image: "https://qa.eldersindia.com/assets/img/Elderlogo.png",
+      image: this.imageUrl + "assets/img/Elderlogo.png",
       currency: 'INR',
       key: this.razorkey,
       amount: this.service_costss,
@@ -725,7 +725,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
   // }
     var options = { 
       description: this.serviceTitle,
-      image: "https://qa.eldersindia.com/assets/img/Elderlogo.png",
+      image: this.imageUrl + "assets/img/Elderlogo.png",
       currency: 'INR',
       key: this.razorkey,
       amount: this.service_costss,

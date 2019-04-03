@@ -28,19 +28,29 @@
           <ion-col>
             <i class="fa fa-calendar" aria-hidden="true"></i> {{created_at}}</ion-col>
         </ion-row>
-        <ion-row>
+         <ion-row>
          <ion-col>
             {{singleBlogInfo?.category_name }}</ion-col>
           <ion-col class="shareBlog" (click)="shareblog(singleBlogInfo?.id)">
             <i class="fa fa-share-alt" aria-hidden="true" (click)="shareblog(singleBlogInfo?.id)"></i> Share Blog</ion-col>
         </ion-row>
+        <ion-row>
+          <ion-col>
+            <p [innerHTML]="singleBlogInfo?.highlights"></p>
+          </ion-col>
+        </ion-row>
+       
       </ion-item>
     </ion-col>
   </ion-row>
   <ion-card-content>
     <p [innerHTML]="singleBlogInfo?.description"></p>
   </ion-card-content>
-
+   <ion-item text-wrap>
+    <ion-col *ngFor = "let tags of getTags" text-wrap>
+     <ion-badge>{{tags.name}}</ion-badge>
+     </ion-col>
+     </ion-item>
   <ion-row class="Comment-titile" *ngIf="allow_comment == '1'">
     <ion-col>
       <button ion-button class="cmts" icon-left clear small>

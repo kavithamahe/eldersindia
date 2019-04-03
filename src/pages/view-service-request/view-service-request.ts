@@ -80,6 +80,7 @@ previous_service_pending_cost:any;
     loader.present();
     this.serviceRequest.viewServiceRequest(this.serviceRequestId).subscribe(
      (viewServiceRequest) => {
+      loader.dismiss(); 
       this.viewServiceRequestInfo=viewServiceRequest.result;
       this.updated_at = moment(viewServiceRequest.result.updated_at).format("DD-MM-YYYY HH:mm:ss");
       this.cancelled_date = moment(viewServiceRequest.result.cancelled_date).format("DD-MM-YYYY HH:mm:ss");
@@ -97,12 +98,11 @@ previous_service_pending_cost:any;
       this.cancellationfees3 = (parseFloat(this.viewServiceRequestInfo.total_paid) - parseFloat(this.viewServiceRequestInfo.refundamount) - parseFloat(this.viewServiceRequestInfo.coupon_offer));
   
       var str = this.viewServiceRequestInfo.previous_service_pending_cost;
-      console.log(str);
+      if(str != null){
         var stringForm = str.toString();
         var stringForms = stringForm.replace("-" ,"");
         this.previous_service_pending_cost = +stringForms;
-    console.log(this.previous_service_pending_cost);
-      loader.dismiss();   
+      } 
     },
     (err) => { 
         if(err.status===401)

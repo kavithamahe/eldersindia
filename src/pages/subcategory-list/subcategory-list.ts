@@ -57,6 +57,7 @@ export class SubcategoryListPage {
   recreation_config:any;
   terms_and_condition_length:any;
   terms_and_condition:any;
+  get_custome_deliever_amount:any;
   constructor( public loadingCtrl: LoadingController, public providerService: ServiceProvider, public navCtrl: NavController, public altCtrl:AlertController, public navParams: NavParams,public toastCtrl: ToastController,public modalCtrl: ModalController, public mp:ModalContentPage, public storage:Storage) {
     this.date = new Date().toISOString();
     this.paystatus = navParams.get("status");
@@ -197,23 +198,33 @@ serviceInfomore(vendor){
     let servieListData = {"vendor": vendor, "subCategoryId": this.service_id,status:"1" ,"flag":this.flagId, "location_id": this.location_id,"serviceOffered":this.serviceOffered};
     this.navCtrl.push(ServiceInfoPage,servieListData);
   }
-pressinstant(vendorData){
-  this.instantRequest(vendorData);
-}
   instantRequest(vendorData) {
-    let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    loading.present();
+       this.providerService.getCustomerDeliverStatusAmount()
+      .subscribe(data =>{ 
+        this.get_custome_deliever_amount = parseFloat(data.result);
+        loading.dismiss();
+           if(this.get_custome_deliever_amount !=  0){
+      this.providerService.showToast("Your previous service due amount not paid");
+    }
+    else{
+     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
       this.providerService.getServicedependentlist(vendorData.id)
       .subscribe(data =>{ 
         this.get_Servicedependentlist = data.result;
         loading.dismiss();
-             if(this.get_Servicedependentlist !=  0){
+    if(this.get_Servicedependentlist !=  0){
       this.providerService.showToast("You have not paid previous availed service,please pay and request new services");
     }
     else{
       this.instant_request(vendorData);
     }
     })
+    }
+  })
+    
    
   }
   instant_request(vendorData){
