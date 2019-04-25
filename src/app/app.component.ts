@@ -29,6 +29,7 @@ import { RecurringPagePage } from '../pages/recurring/recurring';
 import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
 import { EnquiriesPagePage } from '../pages/enquiries/enquiries';
 import { SafemePagePage } from '../pages/safeme/safeme';
+import { NotificationPage } from '../pages/notification/notification';
 
 // kavitha
 import { CommunitylistPage } from '../pages/communitylist/communitylist';
@@ -303,7 +304,7 @@ export class MyApp {
                   { myIcon:'fa fa-envelope', title: 'Messages', component: MessagesPage },
                   { myIcon:'fa fa-rss', title: 'Blogs', component: BlogsPage },
                   { myIcon:'fa fa-newspaper-o', title: 'News & Events',subPages: [{myIcon:'fa fa-newspaper-o',title: 'View News',component:NewsPage},{myIcon:'fa fa-calendar-o',title:'View Events',component:EventsPage},{myIcon:'fa fa-external-link',title:'Useful External Links',component:ExternallinksPage}]},
-                  { myIcon:'fa fa-cog', title: 'Settings',subPages: [{myIcon:'fa fa-address-book-o',title: 'Profile',component:MyProfilePage},{myIcon:'fa fa-unlock-alt',title:'Change Password',component:ChangePasswordPage},{myIcon:'fa fa-cog',title:'Privacy Settings',component:SettingsPage},{ myIcon:'fa fa-camera', title: 'CCTV Settings', component: RemotemonitorPagePage }]},
+                  { myIcon:'fa fa-cog', title: 'Settings',subPages: [{myIcon:'fa fa-address-book-o',title: 'Profile',component:MyProfilePage},{myIcon:'fa fa-bell icon_size',title: 'Notification',component:NotificationPage},{myIcon:'fa fa-unlock-alt',title:'Change Password',component:ChangePasswordPage},{myIcon:'fa fa-cog',title:'Privacy Settings',component:SettingsPage},{ myIcon:'fa fa-camera', title: 'CCTV Settings', component: RemotemonitorPagePage }]},
                   { myIcon:'fa fa-info', title: 'Contact Us',subPages: [{myIcon:'fa fa-phone',title: '080-47096393',component:'080-47096393'},{myIcon:'fa fa-envelope',title:'support@eldersindia.com',component:"support@eldersindia.com"}]},
                   { myIcon:'fa fa-comment', title: 'Chat with us', component: "chateldersindia" },
                   { myIcon:'fa fa-sign-out', title: 'Logout', component: LogoutPage },

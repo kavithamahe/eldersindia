@@ -67,4 +67,15 @@ ion-title {
 }
 
 }
-
+.ios{
+    page-dashboard {
+        #notification-button {             
+            position: relative;
+            width: 42px;
+            top:0px;
+            right: 1px;
+            overflow: visible!important;
+            color: #ffffff;
+        }
+    }   
+}

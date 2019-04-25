@@ -189,18 +189,7 @@
             <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{getHotelCost | number : '1.2-2'}}
           </p>
         </ion-row>
-        <ion-row *ngIf = "coupandiscount == '1'">
-          <p class="service-conts">
-            <span class="token-primaryss">Coupon discounted amount : </span>
-            <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{discounted_cost | number : '1.2-2'}}
-          </p>
-        </ion-row>
-        <ion-row *ngIf = "coupandiscount == '1'">
-          <p class="service-conts">
-            <span class="token-primaryss">Final Payable amount : </span>
-            <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(getHotelCost) - getCustomerBalanceAmount + get_custome_deliever_amount + get_custome_service_cancel_amount - discounted_cost | number : '1.2-2'}}
-          </p>
-        </ion-row>
+     
 
          <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
               <ion-item text-wrap>
@@ -332,7 +321,18 @@
               </p>
             </ion-item>
            </div>
-
+              <ion-row *ngIf = "coupandiscount == '1'">
+          <p class="service-conts">
+            <span class="token-primaryss">Coupon discounted amount : </span>
+            <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{discounted_cost | number : '1.2-2'}}
+          </p>
+        </ion-row>
+        <ion-row *ngIf = "coupandiscount == '1'">
+          <p class="service-conts">
+            <span class="token-primaryss">Final Payable amount : </span>
+            <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(getHotelCost) - getCustomerBalanceAmount + get_custome_deliever_amount + get_custome_service_cancel_amount - discounted_cost | number : '1.2-2'}}
+          </p>
+        </ion-row>
         <br/>
         <ion-grid>
         <ion-row>
@@ -513,18 +513,7 @@
             <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{totalcosts | number : '1.2-2'}}
           </p>
         </ion-row>
-        <ion-row *ngIf = "coupandiscount == '1'">
-          <p class="service-conts">
-            <span class="token-primaryss">Coupon discounted amount : </span>
-            <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{discounted_cost | number : '1.2-2'}}
-          </p>
-        </ion-row>
-        <ion-row *ngIf = "coupandiscount == '1'">
-          <p class="service-conts">
-            <span class="token-primaryss">Final Payable amount : </span>
-            <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(schedule_cost * peoplecount) - getCustomerBalanceAmount + get_custome_deliever_amount + get_custome_service_cancel_amount - discounted_cost | number : '1.2-2'}}
-          </p>
-        </ion-row>
+        
 
          <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
               <ion-item text-wrap>
@@ -656,7 +645,18 @@
               </p>
             </ion-item>
            </div>
-
+           <ion-row *ngIf = "coupandiscount == '1'">
+          <p class="service-conts">
+            <span class="token-primaryss">Coupon discounted amount : </span>
+            <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{discounted_cost | number : '1.2-2'}}
+          </p>
+        </ion-row>
+        <ion-row *ngIf = "coupandiscount == '1'">
+          <p class="service-conts">
+            <span class="token-primaryss">Final Payable amount : </span>
+            <i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{(schedule_cost * peoplecount) - getCustomerBalanceAmount + get_custome_deliever_amount + get_custome_service_cancel_amount - discounted_cost | number : '1.2-2'}}
+          </p>
+        </ion-row>
         <br/>
         <ion-grid>
         <ion-row>
@@ -822,12 +822,7 @@
             <span class="discountCost">
               <i class="fa fa-inr" aria-hidden="true"></i>{{(schedule_cost * (pre_book_percentage /100)) | number : '1.2-2'}}</span>
           </h5>
-           <h5 *ngIf = "coupandiscount == '1'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Coupon discounted amount :
-            <span class="discountCost"><i class="fa fa-inr" aria-hidden="true"></i>{{discounted_cost | number : '1.2-2'}}</span>
-          </h5>
-           <h5 *ngIf = "coupandiscount == '1'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Final Payable amount :
-            <span class="discountCost"><i class="fa fa-inr" aria-hidden="true"></i>{{final_service_cost | number : '1.2-2'}}</span>
-          </h5>
+        
          
           <div *ngIf="vendorList?.requestServices.booking_status == '0'">
            <div *ngIf="getCustomerBalanceAmount != 0 && get_custome_service_cancel_amount == 0 && get_custome_deliever_amount == 0">
@@ -1083,7 +1078,12 @@
             </ion-item>
            </div>
            </div>
-
+              <h5 *ngIf = "coupandiscount == '1'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Coupon discounted amount :
+            <span class="discountCost"><i class="fa fa-inr" aria-hidden="true"></i>{{discounted_cost | number : '1.2-2'}}</span>
+          </h5>
+           <h5 *ngIf = "coupandiscount == '1'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Final Payable amount :
+            <span class="discountCost"><i class="fa fa-inr" aria-hidden="true"></i>{{final_service_cost | number : '1.2-2'}}</span>
+          </h5>
           <br/>
           <ion-grid>
           <ion-row>
@@ -1215,18 +1215,7 @@
               <i class="fa fa-inr" aria-hidden="true"></i>{{schedule_cost | number : '1.2-2'}}</span>
           </h5>
           </ion-item>
-            <ion-item text-wrap *ngIf = "coupandiscount == '1'">
-          <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Coupon discounted amount :
-            <span class="discountCost">
-              <i class="fa fa-inr" aria-hidden="true"></i>{{discounted_cost | number : '1.2-2'}}</span>
-          </h5>
-          </ion-item>
-          <ion-item text-wrap *ngIf = "coupandiscount == '1'">
-          <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Final Payable amount :
-            <span class="discountCost">
-              <i class="fa fa-inr" aria-hidden="true"></i>{{final_service_cost | number : '1.2-2'}}</span>
-          </h5>
-          </ion-item>
+        
        
            <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
               <ion-item text-wrap>
@@ -1358,6 +1347,18 @@
                 </h5>
             </ion-item>
            </div>
+               <ion-item text-wrap *ngIf = "coupandiscount == '1'">
+          <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Coupon discounted amount :
+            <span class="discountCost">
+              <i class="fa fa-inr" aria-hidden="true"></i>{{discounted_cost | number : '1.2-2'}}</span>
+          </h5>
+          </ion-item>
+          <ion-item text-wrap *ngIf = "coupandiscount == '1'">
+          <h5 style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Final Payable amount :
+            <span class="discountCost">
+              <i class="fa fa-inr" aria-hidden="true"></i>{{final_service_cost | number : '1.2-2'}}</span>
+          </h5>
+          </ion-item>
           <br/>
           <ion-grid>
           <ion-row>
@@ -2007,14 +2008,7 @@
           <span class="discountCost">
             <i class="fa fa-inr" aria-hidden="true"></i>{{(schedule_cost * (pre_book_percentage /100)) | number : '1.2-2'}}</span>
         </h5>
-          <h5 *ngIf = "coupandiscount == '1'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Coupon discounted amount :
-            <span class="discountCost">
-              <i class="fa fa-inr" aria-hidden="true"></i>{{discounted_cost | number : '1.2-2'}}</span>
-          </h5>
-          <h5 *ngIf = "coupandiscount == '1'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Final Payable amount :
-            <span class="discountCost">
-              <i class="fa fa-inr" aria-hidden="true"></i>{{final_service_cost | number : '1.2-2'}}</span>
-          </h5>
+      
   
          <div *ngIf="booking_status == '1' && vendorList?.requestServices.booking_status != '0'">
            <div *ngIf="getCustomerBalanceAmount!=0 && get_custome_service_cancel_amount ==0 && get_custome_deliever_amount == 0">
@@ -2306,6 +2300,20 @@
             </ion-item>
           </div>
      </div>
+     <div *ngIf = "coupandiscount == '1'">
+      <ion-item>
+         <h5 *ngIf = "coupandiscount == '1'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Coupon discounted amount :
+            <span class="discountCost">
+              <i class="fa fa-inr" aria-hidden="true"></i>{{discounted_cost | number : '1.2-2'}}</span>
+          </h5>
+          </ion-item>
+           <ion-item>
+          <h5 *ngIf = "coupandiscount == '1'" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Final Payable amount :
+            <span class="discountCost">
+              <i class="fa fa-inr" aria-hidden="true"></i>{{final_service_cost | number : '1.2-2'}}</span>
+          </h5>
+          </ion-item>
+          </div>
         <ion-label *ngIf="booking_status != '1' && vendorList?.requestServices.booking_status != '0'">Are you sure you want to prebook?</ion-label>
         <br/>
         <ion-grid>

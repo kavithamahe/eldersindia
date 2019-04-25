@@ -57,7 +57,7 @@ Url:any;
       .map(res => res.json());
   }
   getrecurringRequest(rootUrl,searchText,sort){
-    let _request= {"search": searchText,"sort":sort};
+    let _request= {"search":searchText,"sort":sort};
     return this.http.post(rootUrl+'getRecurringServiceList',_request,this.options)
       .map(res => res.json());
   }
@@ -217,7 +217,7 @@ serviceType,"service_cost":base_cost,"service_cost_travel":base_cost,"service_id
     return this.http.post(rootUrl+'deleteBulkRecurringService',_request,this.options)
       .map(res => res.json());
   }
-eventsscroll(searchCategory,searchText,nextPageURL) 
+ eventsscroll(searchCategory,searchText,nextPageURL) 
    {  
    let _request= {search: {"title": searchText, "category": searchCategory}};
     return this.http.post(nextPageURL,_request,this.options)

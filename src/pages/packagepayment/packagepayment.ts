@@ -60,7 +60,7 @@ razorkey:any;
     if(navParams.get("service_type") != undefined){
   		this.service_type = navParams.get("service_type");
   		this.service_cost=navParams.get("service_cost");
-  		this.service_costss = (this.service_cost * 100).toFixed(0);
+  		this.service_costss = (this.service_cost * 100);
   		localStorage.setItem('service_costss', this.service_costss);
   		this.service_id = navParams.get("service_id");
       this.recurring_request_id = navParams.get("recurring_request_id");
@@ -73,7 +73,7 @@ razorkey:any;
         this.sr_token=navParams.get("sr_token");
         this.service_type = navParams.get("service_type");
         this.service_cost=navParams.get("service_cost");
-        this.service_costadd = (this.service_cost * 100).toFixed(0);
+        this.service_costadd = (this.service_cost * 100);
         localStorage.setItem('service_costadd', this.service_costadd);
         this.service_id = navParams.get("service_id");
         this.payment_status = navParams.get("payment_status");

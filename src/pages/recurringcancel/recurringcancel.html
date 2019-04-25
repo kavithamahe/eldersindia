@@ -1,6 +1,7 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title text-center text-capitalize>Cancel Request</ion-title> 
+    <ion-title text-center text-capitalize *ngIf = "bulkcomplete == '1' || bulkremark == '1'">Complete Request</ion-title> 
+    <ion-title text-center text-capitalize *ngIf = "bulkcomplete == '0' && bulkremark == '0'">Cancel Request</ion-title> 
     <ion-buttons end>
     <button ion-button icon-only (click)="dismiss()">
         <ion-icon item-right name="ios-close-outline"></ion-icon>

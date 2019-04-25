@@ -272,8 +272,8 @@ console.log(fileEntry);
       if(payment_status == 'payment_success'){
    this.servicecost = pending_service_amount;
   }else{
-    this.servicecost = parseInt(pending_service_amount) + parseInt(additional_service_cost) - parseInt(prev_service_amount_balance);
- 
+    this.servicecost = parseFloat(pending_service_amount) + parseFloat(additional_service_cost) - parseFloat(prev_service_amount_balance);
+  console.log(this.servicecost);
   }
      this.navCtrl.push(PackagepaymentPagePage,{"sr_token":sr_token,"service_cost":this.servicecost,"service_id":id,"payment_status":payment_status,"pending_service_amount":pending_service_amount,"prev_service_amount_balance":prev_service_amount_balance,"additional_service_cost":additional_service_cost,"paymentType":type});
   }
@@ -494,12 +494,12 @@ console.log(fileEntry);
       this.percentage = this.result.percentage;
       this.payment_status = this.result.payment_status;
       loader.dismiss();
-      if(this.payment_status == "payment_processing" || coupon_id != null){
-        this.deductionamount = service_cost * this.percentage/100;
+      if(this.payment_status == "payment_processing"){
+        this.deductionamount = (service_cost * this.percentage/100).toFixed(2);
         this.servicecancelamount = service_cost - this.deductionamount;
       }
       else{
-        this.deductionamount = paid_amount * this.percentage/100;
+        this.deductionamount = (paid_amount * this.percentage/100).toFixed(2);
         this.servicecancelamount = paid_amount - this.deductionamount;
       }
       

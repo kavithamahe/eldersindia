@@ -83,6 +83,7 @@ export class Modelpage1PagePage {
     this.recurringType = navParams.get("recurringType");
     this.requestService = navParams.get("requestService");
     this.serviceDatas =  navParams.get("serviceDatas");
+    console.log(this.serviceDatas);
     this.getCustomerBalanceAmount = this.serviceDatas.getCustomerBalanceAmount;
     this.get_custome_amount = this.serviceDatas.get_custome_amount;
     this.get_custome_deliever_amount = this.serviceDatas.get_custome_deliever_amount;
@@ -165,13 +166,13 @@ export class Modelpage1PagePage {
     "service":this.service,"location_id":this.location_id,"discount":"",
     "pay_method":"","serviceType":this.serviceType,"coupon_code_discount_cost":0,
     "final_service_cost_after_coupon_code_discount":0,"service_name":this.service,
-    "paymentflag":1,"service_cost":this.serviceDatas.total_service_cost,"service_cost_travel":this.serviceDatas.total_service_cost,"base_cost":this.serviceDatas.base_cost,
+    "paymentflag":1,"service_cost":this.serviceDatas.base_cost,"service_cost_travel":this.serviceDatas.base_cost,"base_cost":this.serviceDatas.base_cost,
     "from_date":this.serviceDatas.from_date,"to_date":this.serviceDatas.to_date,"time_slot":this.serviceDatas.time_slot,
     "from_time":"","to_time":"","durations":this.serviceDatas.durations,"problem":"",
     "datetime":this.serviceDatas.datetime,"mobile":"","preferred_time":this.serviceDatas.preferred_time,
     "package_id":"","quantity":"","getCustomerBalanceAmount":this.serviceDatas.getCustomerBalanceAmount,"get_custome_amount_actual":0,
-    "get_custome_amount":this.serviceDatas.get_custome_amount,"total_cost":this.serviceDatas.total_service_cost,"get_custome_deliever_amount":this.serviceDatas.get_custome_deliever_amount,
-    "total_service_cost":this.serviceDatas.total_service_cost,"get_custome_service_cancel_amount":this.serviceDatas.get_custome_service_cancel_amount,"dependentid":this.serviceDatas.dependentId,
+    "get_custome_amount":this.serviceDatas.get_custome_amount,"total_cost":this.serviceDatas.base_cost,"get_custome_deliever_amount":this.serviceDatas.get_custome_deliever_amount,
+    "total_service_cost":this.serviceDatas.total_cost,"get_custome_service_cancel_amount":this.serviceDatas.get_custome_service_cancel_amount,"dependentid":this.serviceDatas.dependentId,
     "servicecost":this.serviceDatas.servicecosts,"datCount":this.datCount,"payment_type":"full_payment","discountcost12":null,
     "discountcost2":null,"servicediscost2":null,"servicediscountcost12":"NaN",
     "servicediscountcost13":"NaN","servicediscountcost14":"NaN","discountcost1":"",

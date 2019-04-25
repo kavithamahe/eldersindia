@@ -99,8 +99,9 @@ getTags:any=[];
       });
   }
   shareblog(id){ 
-        let modal = this.modalCtrl.create(ShareBlogPagePage,{blogID:id,communitylists:this.communitylist});
-    modal.present();
+    this.navCtrl.push(ShareBlogPagePage,{blogID:id,communitylists:this.communitylist});
+    //     let modal = this.modalCtrl.create(ShareBlogPagePage,{blogID:id,communitylists:this.communitylist});
+    // modal.present();
   }
   openMenu(id) {
     let actionSheet = this.actionsheetCtrl.create({

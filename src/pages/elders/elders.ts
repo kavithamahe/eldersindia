@@ -555,7 +555,6 @@ getareaof_interest(){
         this.areaofinterestdata.push({"id":this.area_of_interest[i]})  
       }
     }else{
-
       for(let i=0;i<this.area_of_interest.length;i++){
         this.areaofinterestdata.push({"elder_id":this.elder_id,"id":this.area_of_interest[i]})  
     
@@ -647,11 +646,9 @@ getTagsList(ev){
            this.communityServices.resumeupload( formData, options)
         .subscribe(
      (sendMessage) => { 
-      console.log(sendMessage);
       this.file_name=sendMessage[0].file_name;
       this.file_path=sendMessage[0].file_path;
      loader.dismiss();
-      
     },
     (err) => { 
        loader.dismiss();

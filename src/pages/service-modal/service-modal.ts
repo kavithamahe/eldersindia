@@ -60,7 +60,7 @@ options:any;
   booknow: boolean = false;
   safeConfirm:boolean = false;
   schedule: boolean = true;
-  service_cost: string;
+  service_cost: any;
   schedule_cost: any;
   total_peoples:any=[];
 showScheduleDetails= false;
@@ -755,6 +755,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     })
     }
      applyCoupan(category_id,service_id,sub_category_id,category,service,subcategory,start_date){
+      console.log(this.total_cost);
     if(this.user_type == 'sponsor')
   {
     this.elder_id = this.elder_id;
@@ -764,46 +765,47 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
   }
    
    if(this.getCustomerBalanceAmount!=0 && this.get_custome_service_cancel_amount ==0 && this.get_custome_deliever_amount == 0){
-      this.servicecost = (this.total_cost - this.getCustomerBalanceAmount);
+      this.servicecost = (this.service_cost - this.getCustomerBalanceAmount);
         }
    
     else if(this.get_custome_deliever_amount!=0 && this.get_custome_service_cancel_amount ==0 && this.getCustomerBalanceAmount ==0){
-      this.servicecost = (this.total_cost + this.get_custome_deliever_amount);
+      this.servicecost = (this.service_cost + this.get_custome_deliever_amount);
       }
   
     else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount == 0){
-      this.servicecost = (this.total_cost + this.get_custome_service_cancel_amount);
+      this.servicecost = (this.service_cost + this.get_custome_service_cancel_amount);
       }
   
     else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount == 0 && this.get_custome_deliever_amount != 0){
-      this.servicecost = (this.total_cost + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+      this.servicecost = (this.service_cost + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
        }
    
   else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount == 0){
-      this.servicecost = (this.total_cost + this.getCustomerBalanceAmount + this.get_custome_service_cancel_amount);
+      this.servicecost = (this.service_cost + this.getCustomerBalanceAmount + this.get_custome_service_cancel_amount);
         }
   
     else if(this.get_custome_service_cancel_amount==0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
-      this.servicecost = ((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_deliever_amount);
+      this.servicecost = ((this.service_cost - this.getCustomerBalanceAmount) + this.get_custome_deliever_amount);
         }
     
     else if(this.get_custome_service_cancel_amount!=0 && this.getCustomerBalanceAmount != 0 && this.get_custome_deliever_amount != 0){
-      this.servicecost = ((this.total_cost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
+      this.servicecost = ((this.service_cost - this.getCustomerBalanceAmount) + this.get_custome_service_cancel_amount + this.get_custome_deliever_amount);
        }
     else{
       this.servicecost = this.schedule_cost;
          }
+         console.log(this.servicecost);
    let payment_data=  {"info":{"category_id":category_id,"sub_category_id":sub_category_id,"category":category,
     "start_date":start_date,"subcategory":subcategory,"service_id":service_id,
     "location_id":this.location_id,"vendor_id":this.vendor_id,"discount":"","pay_method":"",
     "coupon_code_discount_cost":0,"final_service_cost_after_coupon_code_discount":0,"corporateDiscount":this.discount_rate,
-    "service_name":service,"paymentflag":1,"service_cost":this.servicecost,"getPersonHotelCost":this.getHotelCost,"getPersonHotelCostTotal":this.getHotelCosts,
-    "service_cost_travel":this.servicecost,"base_cost":this.service_cost,"from_date":"","to_date":"",
+    "service_name":service,"paymentflag":1,"service_cost":this.service_cost,"getPersonHotelCost":this.getHotelCost,"getPersonHotelCostTotal":this.getHotelCosts,
+    "service_cost_travel":this.service_cost,"base_cost":this.service_cost,"from_date":"","to_date":"",
     "time_slot":"","from_time":"","to_time":"","durations":"","problem":"",
     "datetime":"","mobile":"","preferred_time":"","package_id":"","quantity":"","prebook_percentage":this.pre_book_percentage,"prebook_status":this.vendorList.requestServices.booking_status,
-    "getCustomerBalanceAmount":0,"get_custome_amount_actual":0,"get_custome_amount":0,
-    "total_cost":this.servicecost,"get_custome_deliever_amount":0,"total_service_cost":this.servicecost,
-    "get_custome_service_cancel_amount":0,"dependentid":this.elder_id,"mobile_imei":"",
+    "getCustomerBalanceAmount":this.getCustomerBalanceAmount,"get_custome_amount_actual":0,"get_custome_amount":0,
+    "total_cost":this.service_cost,"get_custome_deliever_amount":this.get_custome_deliever_amount,"total_service_cost":this.servicecost,
+    "get_custome_service_cancel_amount":this.get_custome_service_cancel_amount,"dependentid":this.elder_id,"mobile_imei":"",
     "gender":this.gender,"coupen_code":this.coupan_code,"type":"service","coupon_id":"",
     "driver_time_slot":"","transportation_from":"","transportation_to":"",
     "automation_time":"","automation_date":"","transportReqType":"","weelchairType":""}}
@@ -867,7 +869,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
      this.total_cost = prebook_cost;
   }
   else{
-     this.total_cost = this.total_cost;
+     this.total_cost = this.service_cost;
    }
    if(this.getCustomerBalanceAmount!=0 && this.get_custome_service_cancel_amount ==0 && this.get_custome_deliever_amount == 0){
       this.servicecost = (this.total_cost - this.getCustomerBalanceAmount);
@@ -910,7 +912,7 @@ RazorpayCheckout.open(options, successCallback, cancelCallback);
     "datetime":"","mobile":"","preferred_time":"","package_id":"","quantity":"","prebook_percentage":this.pre_book_percentage,
     "prebook_status":this.vendorList.requestServices.booking_status,"service_cost_prebook":prebook_cost,
     "getCustomerBalanceAmount":0,"get_custome_amount_actual":0,"get_custome_amount":0,
-    "total_cost":prebook_cost,"get_custome_deliever_amount":0,"total_service_cost":prebook_cost,
+    "total_cost":prebook_cost,"get_custome_deliever_amount":this.get_custome_deliever_amount,"total_service_cost":prebook_cost,
     "get_custome_service_cancel_amount":0,"dependentid":this.elder_id,"mobile_imei":"",
     "gender":this.gender,"coupen_code":this.coupan_code,"type":"service","coupon_id":"",
     "driver_time_slot":"","transportation_from":"","transportation_to":"",

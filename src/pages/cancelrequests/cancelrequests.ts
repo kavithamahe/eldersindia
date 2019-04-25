@@ -64,6 +64,7 @@ coupon_offer:any;
       this.servicecancelamount = navParams.get("servicecancelamount");
       this.package_id = navParams.get("package_id");
       this.Paymentstatus = navParams.get("Paymentstatus");
+      console.log(this.Paymentstatus);
       this.paid_amount = navParams.get("paid_amount");
       this.sr_token = navParams.get("sr_token");
       this.coupon_id = navParams.get("coupon_id");
@@ -77,10 +78,21 @@ coupon_offer:any;
       }
         let percentages = ((100 - this.percentage));
       if(this.coupon_offer == undefined || this.coupon_offer == null || this.coupon_offer == ""){
+         console.log(this.paid_amount);
+         if(this.paid_amount == null){
+          this.paid_amount = this.service_cost;
+         }
         this.cancellation_charges = (this.paid_amount * this.percentage/100);
         this.refund_amount = (this.paid_amount * percentages/100);
       }
       else{
+        
+         if(this.paid_amount == null){
+          this.paid_amount = this.service_cost;
+         }
+         if(this.Paymentstatus == null){
+          this.paid_amount = (this.service_cost - this.coupon_offer);
+         }
         this.cancellation_charges = (this.paid_amount * this.percentage/100);
         this.refund_amount = (this.paid_amount * percentages/100);
       }
@@ -175,7 +187,7 @@ coupon_offer:any;
     }
     else{
       this.deductionamount = this.deductionamount.toString();
-      this.servicecancelamount = this.servicecancelamount.toString();
+      console.log(this.servicecancelamount);
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();
     this.serviceRequest.razorPaymentResponseforCancel(this.comments,this.serviceId,this.service_type,this.txnid,this.percentage,

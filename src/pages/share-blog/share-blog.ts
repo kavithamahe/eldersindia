@@ -90,7 +90,7 @@ community:boolean=false;
         loader.dismiss();
         this.showToaster(connections.result);
         this.navCtrl.setRoot(BlogsPage);
-
+        this.dismiss();
      },
     (err) => { 
         if(err.status===401)

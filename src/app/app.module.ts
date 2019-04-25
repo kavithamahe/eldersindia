@@ -53,6 +53,7 @@ import { PackagepaymentPagePage } from '../pages/packagepayment/packagepayment';
 import { RemotemonitorPagePage } from '../pages/remotemonitor/remotemonitor';
 import { VerifyotpPagePage } from '../pages/verifyotp/verifyotp';
 import { NotificationsPage } from '../pages/notifications/notifications';
+import { NotificationPage } from '../pages/notification/notification';
 import {PackageRequestPagePage } from '../pages/package-request/package-request';
 import {PackageDetailPagePage } from '../pages/package-detail/package-detail';
 
@@ -204,6 +205,7 @@ import { HttpClientModule } from '@angular/common/http';
     CancelrequestsPage,
     AutohideDirective,
     NotificationsPage,
+    NotificationPage,
     TimeAgoPipe
   ],
   imports: [
@@ -290,7 +292,8 @@ import { HttpClientModule } from '@angular/common/http';
     SafemePagePage,
     VerifyotpPagePage,
     CancelrequestsPage,
-    NotificationsPage
+    NotificationsPage,
+    NotificationPage
   ],
      providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},FileTransfer,FileChooser,FilePath,File,FileOpener,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics, 
     NetworkProvider] // Add GithubUsers provider

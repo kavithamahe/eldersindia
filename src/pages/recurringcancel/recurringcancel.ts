@@ -129,7 +129,8 @@ bulkdelete:any;
         this.dedction_amounts = data.result[0];
         this.refund_amount = this.dedction_amounts.refund_amount;
         this.dedction_amount= this.dedction_amounts.dedction_amount;
-        this.remaining_amount = this.dedction_amounts.remaining_amount;
+        this.remaining_amount = parseFloat(this.dedction_amounts.remaining_amount).toFixed(2);
+        console.log(this.remaining_amount);
         this.balance_amount = this.dedction_amounts.balance_amount;
         this.paid_amount = this.dedction_amounts.paid_amount;
         this.service_costs = this.dedction_amounts.service_cost;
@@ -154,10 +155,11 @@ bulkdelete:any;
     if(this.balance_amount == undefined){
       this.balance_amount = null;
     }
+    console.log(this.remaining_amount);
   	let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
     this.blogListService.deleterecurringrequest(this.rootUrl,this.recurring_request_id,this.dedction_amount,this.refund_amount,
-      this.remaining_amount,this.paid_amount,this.balance_amount,this.total_amount,this.service_costs)
+      this.remaining_amount,this.amount_received,this.balance_amount,this.total_amount,this.service_costs)
       .subscribe(data =>{ 
       	this.blogListService.showToast(data.result);
       	this.navCtrl.setRoot(RecurringPagePage);
@@ -170,11 +172,8 @@ bulkdelete:any;
   }
   completebulkservice(){
     if(this.bulkcomplete == 1){
-    if(this.reamining_cost != 0 || this.reamining_cost == null){
-      this.blogListService.showToast("You cannot complete the above services");
-    }
-    else{
-          let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    if(this.reamining_cost == 0 || this.reamining_cost == null){
+           let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
     this.blogListService.completeBulkRecurringService(this.rootUrl,this.recurring_request_id,this.rating,this.other,this.remarks)
       .subscribe(data =>{ 
@@ -186,14 +185,15 @@ bulkdelete:any;
       this.blogListService.showErrorToast(err);     
       loading.dismiss();
     })
+      
+    }
+    else{
+     this.blogListService.showToast("You cannot complete the above services");
     }
   }
   else if(this.bulkremark == 1){
-    if(this.reamining_cost != 0 || this.reamining_cost == null){
-      this.blogListService.showToast("You cannot complete the above services");
-    }
-    else{
-          let loading = this.loadingCtrl.create({content: 'Please wait...!'});
+    if(this.reamining_cost == 0 || this.reamining_cost == null){
+       let loading = this.loadingCtrl.create({content: 'Please wait...!'});
     loading.present();
     this.blogListService.bulkratingRecurringService(this.rootUrl,this.recurring_request_id,this.rating,this.other,this.remarks)
       .subscribe(data =>{ 
@@ -205,6 +205,10 @@ bulkdelete:any;
       this.blogListService.showErrorToast(err);     
       loading.dismiss();
     })
+      
+    }
+    else{
+         this.blogListService.showToast("You cannot complete the above services");
     }
   }
   }

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+	 <ion-title text-center text-capitalize>Notification Preference</ion-title>    
+    <ion-buttons right>
+      <button ion-button icon-only (click)="dashboardPage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons> 
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="changePassword">
+	<ion-card class="changePassword-card">
+	<ion-list radio-group [(ngModel)]="emailvalue">
+    <ion-item>
+      <ion-label>Corporate Email</ion-label>
+      <ion-radio value="1" checked></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Personal Email</ion-label>
+      <ion-radio value="2"></ion-radio>
+    </ion-item>
+    </ion-list>
+    <ion-list>
+     <ion-item>
+      <button ion-button style="float:right; background-color:#2c4e86" (click)="update()" round>UPDATE</button>
+    </ion-item>
+    </ion-list>
+   </ion-card>
+</ion-content>

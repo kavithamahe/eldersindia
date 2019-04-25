@@ -87,14 +87,14 @@ locations:any;
                       err =>{                       
                             this.providerService.showErrorToast(err);
                             });
-}
+    }
 
   subCategory(subcategory){
     this.navCtrl.push(SubCategoryPage,{"subcategory":subcategory,'locations':this.locations});
   }
 
 
-ionViewDidLoad() {
+  ionViewDidLoad() {
     console.log('ionViewDidLoad DependentsPage');
   }
 

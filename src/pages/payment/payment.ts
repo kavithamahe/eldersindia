@@ -227,7 +227,7 @@ razorkey:any;
     this.discountpartial = navParams.get("discountpartial");
 
   this.servicecost=navParams.get("servicecost");
-  this.service_cost=(this.servicecost*100).toFixed(0);;
+  this.service_cost=(this.servicecost*100).toFixed(0);
   this.coupon_id=navParams.get("coupan_id");
   console.log(this.coupon_id);
   if(this.coupon_id == undefined || this.coupon_id == null || this.coupon_id == ""){

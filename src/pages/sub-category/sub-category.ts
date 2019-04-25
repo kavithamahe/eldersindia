@@ -26,7 +26,7 @@ locations:any;
 emptyRecord:any;
 subCategoryId:any;
 subCategoryTitle:any;
- packageCount;
+packageCount;
 packages:any=[];
 imageUrl:any;
 selectserviceLocation:any;
@@ -122,7 +122,6 @@ alltags:boolean = false;
   searchpackageTags(package_tags){
       if (package_tags && package_tags.trim() != '') {
       this.packages = this.packagess.filter((item) => {
-        console.log(this.packages.length);
         return (item.tags.indexOf(package_tags) > -1);
       })
     }
@@ -203,7 +202,7 @@ locationChanged(){
 
 openSelected(sub_category_Data){
   let serviceOfferedtype = this.navPara.get("subcategory").service;
-let location_id = this.serviceLocation;
+  let location_id = this.serviceLocation;
     let sub_service = sub_category_Data;
     if(this.serviceLocation==""){
       this.providerService.showToast("Please select the location!");
