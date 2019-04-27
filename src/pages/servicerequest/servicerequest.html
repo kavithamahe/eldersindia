@@ -169,7 +169,7 @@
                 <ion-label>Call Now</ion-label>
               </ion-chip>
             </a>
-            <a #downloadBlob *ngIf="service?.vendor_status == 2 && service?.service_type == 'One time'" 
+            <a #downloadBlob *ngIf="service?.vendor_status == 2 && service?.service_type == 'One time' && service?.package_id==0" 
             (click)="downloadBlobToPDF(service)">
               <ion-chip class="call-btn">
                 <ion-icon name="cash" class="text-center" color="primary"></ion-icon>

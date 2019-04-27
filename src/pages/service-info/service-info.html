@@ -23,11 +23,11 @@
       </ion-slide>
     </ion-slides>
   </div>
-  <div *ngIf="vendorList?.banners && vendorList?.banners.length && template_id == '2' || template_id == '4' || template_id == '9' || template_id == '8'">
+  <div *ngIf="vendorList?.banners && vendorList?.banners.length && template_id == '2' || template_id == '4' || template_id == '9' || template_id == '8' || template_id == '5' || template_id == '6' || template_id == '7'">
     <ion-slides *ngIf="vendorList?.banners && vendorList?.banners.length" class="slide_height" initialSlide="0" loop="true" pager="true"
       autoplay="3000">
       <ion-slide *ngFor="let slide of vendorList.banners" style="height:200px;">
-        <img src="{{url}}{{slide.slide}}" class="slide-image" width="100" height="150" />
+        <img src="{{url}}{{slide}}" class="slide-image" width="100" height="150" />
       </ion-slide>
     </ion-slides>
   </div>

@@ -136,10 +136,10 @@
         <variable name="GMS_VERSION" value="11.0.1" />
     </plugin>
     <plugin name="com.moust.cordova.videoplayer" />
-    <plugin name="com.razorpay.cordova" spec="~0.16.1" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="sentry-cordova" spec="^0.12.3" />
+    <plugin name="com.razorpay.cordova" spec="~0.16.1" />
     <engine name="browser" spec="~5.0.4" />
     <engine name="android" spec="~6.3.0" />
-    <engine name="ios" spec="~4.5.5" />
+    <engine name="ios" spec="4.5.5" />
 </widget>

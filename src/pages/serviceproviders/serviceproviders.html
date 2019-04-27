@@ -13,7 +13,7 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content class="content-intop has-header">
+<ion-content class="content-intop has-header" overflow-scroll="true">
   <ion-card class="pack-listed">
     <button *ngFor="let service of services; let i = index"  id = {{service.id}} class="menu1" ion-button full 
     (click)="subCategory(service)" class="myblock service-bg{{i}}">

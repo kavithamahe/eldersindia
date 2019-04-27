@@ -117,11 +117,13 @@ private direction: string = "";
   	});
   }
    downloadBlobToPDF(service) { 
+    console.log("file-transfer created!");
         let loader = this.loadingCtrl.create({ content: "Please wait..." });     
       loader.present();
       this.serviceRequest.invoiceFromUser(service.sr_token,service.is_recreation_config).subscribe(
     res => {
       console.log(res);
+       console.log("File createds!");
       const blob = res.blob();
       const file = new Blob([blob], {type:'application/pdf'});
       const filename = 'invoice' + Date.now() + '.pdf';
@@ -132,6 +134,7 @@ private direction: string = "";
     // console.log(blobs);
    
   let filePath =  this.file.externalApplicationStorageDirectory;
+  // let filePath =  cordova.file.dataDirectory;
 
     //Write the file
     this.file.writeFile(filePath, filename, blobs, { replace: true }).then((fileEntry) => {
@@ -143,6 +146,7 @@ console.log(fileEntry);
               console.log(url);
                const fileTransfer: FileTransferObject = this.transfer.create();
 
+         // var targetPath = cordova.file.externalRootDirectory + filename;
          var targetPath = cordova.file.externalRootDirectory + filename;
 
       cordova.plugins.DownloadManager.download(url,targetPath);
