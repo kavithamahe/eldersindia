@@ -11,14 +11,14 @@
         <ion-label>
             <ion-icon ios="ios-person" md="md-person"></ion-icon>
         </ion-label>
-        <ion-input class="mails-left" name="email" type="text" autocorrect="off" autocapitalize="none" formControlName="email" placeholder="Email"></ion-input>
+        <ion-input class="mails-left" type="text" autocorrect="off" autocapitalize="none" formControlName="email" placeholder="Email"></ion-input>
       </ion-item>
       <p *ngIf="!loginForm.controls.email.valid && (loginForm.controls.email.dirty || submitAttempt)" class="err-reds shake">Please enter email.</p>
       <ion-item>
         <ion-label>
             <ion-icon ios="ios-key" md="md-key"></ion-icon>
         </ion-label>
-        <ion-input name="password" class="mails-left" type="password" formControlName="password" placeholder="Password"></ion-input>
+        <ion-input class="mails-left" type="password" formControlName="password" placeholder="Password"></ion-input>
       </ion-item>
       <p *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)" class="err-reds shake">Please enter password.</p>
     </ion-list>
