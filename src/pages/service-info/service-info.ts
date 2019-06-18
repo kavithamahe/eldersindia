@@ -181,6 +181,7 @@ terms_and_condition:any;
      this.providerService.getselecthotel(hoteltype,this.tourService_id)
       .subscribe(data =>{ 
           this.getPersonPerHotel = data.result.getHotelPersons;
+          this.packageCost = false;
           this.storage.set('getPersonPerHotel', this.getPersonPerHotel);
           this.storage.set('hoteltype', hoteltype);
           loader.dismiss();

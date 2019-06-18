@@ -1,0 +1,77 @@
+//colors
+$color_mariner_approx: #1976d2;
+$color_ebony_clay_approx: #1d2939;
+$color_red_approx: #f40707;
+$white: #fff;
+$white_20: rgba(255, 255, 255, 0.2);
+$color_pickled_bluewood_approx: #2c3e50;
+$color_cinnabar_approx: #e74c3c;
+$color_bright_sun_approx: #f4d03f;
+$color_tenn_approx: #d35400;
+$color_emerald_approx: #58d68d;
+$color_shakespeare_approx: #5dade2;
+$color_cadet_blue_approx: #aeb6bf;
+
+.nav-item {
+	text-align: center;
+	padding-left: 0;
+	padding-right: 0;
+	> a {
+		display: block;
+		padding: 35px 0;
+		color: $color_mariner_approx;
+		text-decoration: none;
+		background: $color_ebony_clay_approx;
+		&.red-bg {
+			background: $color_red_approx;
+			> i {
+				color: $white;
+			}
+		}
+		> p {
+			color: $white;
+			text-transform: uppercase;
+			font-size: 17px;
+		}
+		> i {
+			font-size: 75px;
+			margin-bottom: 20px;
+		}
+		> img {
+			width: 95px;
+			height: 95px;
+			border: 5px solid $white_20;
+		}
+		&:hover {
+			background: $color_pickled_bluewood_approx;
+			> i {
+				color: $white;
+			}
+		}
+	}
+}
+.text-zoom {
+	position: relative;
+	> span {
+		position: absolute;
+		font-size: 10px;
+	}
+}
+.red > i {
+	color: $color_cinnabar_approx;
+}
+.yellow > i {
+	color: $color_bright_sun_approx;
+}
+.orange > i {
+	color: $color_tenn_approx;
+}
+.green > i {
+	color: $color_emerald_approx;
+}
+.aqua > i {
+	color: $color_shakespeare_approx;
+}
+.dark-grey > i {
+	color: $color_cadet_blue_approx;
+}

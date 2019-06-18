@@ -8,6 +8,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="content-intop">
+<form [formGroup]="modalForm">
   <div *ngIf="showScheduleDetails" class="offered-servicelist">
     <ion-card class="contact-list">
     <!-- ...................tours and travels.................... -->
@@ -27,14 +28,14 @@
            <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Hotel Type</ion-label>
         <ion-item class="sel-label">
           <ion-label>Hotel Type</ion-label>
-          <ion-select [(ngModel)]="hoteltype" (ionChange)="selecthotel(hoteltype)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+          <ion-select [(ngModel)]="hoteltype" [ngModelOptions]="{standalone: true}" (ionChange)="selecthotel(hoteltype)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
             <ion-option *ngFor="let type of getHotelType" value={{type.id}}>{{type.name}}</ion-option>
           </ion-select>
         </ion-item>
            <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Select Paying Pax</ion-label>
         <ion-item class="sel-label">
           <ion-label>Paying Pax</ion-label>
-          <ion-select [(ngModel)]="payingtax" (ionChange)="payingTax(payingtax)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+          <ion-select [(ngModel)]="payingtax" [ngModelOptions]="{standalone: true}" (ionChange)="payingTax(payingtax)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
             <ion-option *ngFor="let types of getPersonPerHotel" value={{types.id}}>{{types.name}}</ion-option>
           </ion-select>
         </ion-item>
@@ -53,14 +54,16 @@
         <ion-list>
           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Alternative Contact Number</ion-label>
           <ion-item class="sel-label">
-            <ion-input type="text" value="" [(ngModel)]="altercontact"></ion-input>
+            <ion-input type="number" max="12" value="" [(ngModel)]="altercontact" formControlName="altercontact"></ion-input>
           </ion-item>
+           <p class="err-reds" *ngIf="!modalForm.controls.altercontact.valid  && (modalForm.controls.altercontact.touched || submitAttempt)">Please Enter the valid number
+      </p>
         </ion-list>
         <br/>
         <ion-grid>
           <ion-row>
             <ion-col col-1 class="check-bx" class="one-timereq">
-              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>
+              <ion-checkbox [(ngModel)]="terms" [ngModelOptions]="{standalone: true}" (ionChange)="termsChanged()"></ion-checkbox>
             </ion-col>
             <ion-col col-11 (click)="openTerms()" style="margin:0px;">
               <ion-label class="margin_0">
@@ -85,7 +88,7 @@
         <ion-list *ngIf="user_type == 'sponsor'">
           <ion-item class="sel-label">
             <ion-label class="selectDepent" class="required">Elder</ion-label>
-            <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+            <ion-select [(ngModel)]="elder_id" [ngModelOptions]="{standalone: true}" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name }}
               </ion-option>
             </ion-select>
@@ -130,12 +133,12 @@
           <ion-row>
             <ion-col width-60>
               <ion-item class="sel-label">
-                <ion-input type="text" [(ngModel)]="elder_name[i]"></ion-input>
+                <ion-input type="text" [(ngModel)]="elder_name[i]" [ngModelOptions]="{standalone: true}"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col width-40>
               <ion-item class="sel-label">
-                <ion-input type="text" [(ngModel)]="elder_age[i]" type="number"></ion-input>
+                <ion-input type="text" [(ngModel)]="elder_age[i]" [ngModelOptions]="{standalone: true}"type="number"></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -157,7 +160,8 @@
           <ion-row>
             <ion-col col-10>
              <ion-item>
-              <ion-input type="text" text-uppercase placeholder="Coupon code" [(ngModel)] = "coupan_code">
+              <ion-input type="text" text-uppercase placeholder="Coupon code" [(ngModel)] = "coupan_code" 
+              [ngModelOptions]="{standalone: true}">
              </ion-input>
              </ion-item>
             </ion-col>
@@ -366,7 +370,7 @@
         <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">No of People</ion-label>
         <ion-item class="sel-label">
           <ion-label>No of People</ion-label>
-          <ion-select [(ngModel)]="noofpeople" (ionChange)="selectPeople(noofpeople)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+          <ion-select [(ngModel)]="noofpeople" [ngModelOptions]="{standalone: true}" (ionChange)="selectPeople(noofpeople)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
             <ion-option value="1">1</ion-option>
             <ion-option value="2">2</ion-option>
             <ion-option value="3">3</ion-option>
@@ -377,14 +381,17 @@
         <ion-list>
           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Alternative Contact Number</ion-label>
           <ion-item class="sel-label">
-            <ion-input type="text" value="" [(ngModel)]="altercontact"></ion-input>
+            <ion-input type="number" max="12" value="" [(ngModel)]="altercontact" formControlName="altercontact"></ion-input>
           </ion-item>
+            <p class="err-reds" *ngIf="!modalForm.controls.altercontact.valid  && (modalForm.controls.altercontact.touched || submitAttempt)">Please Enter the valid number
+      </p>
+
         </ion-list>
         <br/>
         <ion-grid>
           <ion-row>
             <ion-col col-1 class="check-bx" class="one-timereq">
-              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>
+              <ion-checkbox [(ngModel)]="terms" [ngModelOptions]="{standalone: true}" (ionChange)="termsChanged()"></ion-checkbox>
             </ion-col>
             <ion-col col-11 (click)="openTerms()" style="margin:0px;">
               <ion-label class="margin_0">
@@ -409,7 +416,7 @@
         <ion-list *ngIf="user_type == 'sponsor'">
           <ion-item class="sel-label">
             <ion-label class="selectDepent" class="required">Elder</ion-label>
-            <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+            <ion-select [(ngModel)]="elder_id" [ngModelOptions]="{standalone: true}" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name }}
               </ion-option>
             </ion-select>
@@ -454,12 +461,12 @@
           <ion-row>
             <ion-col width-60>
               <ion-item class="sel-label">
-                <ion-input type="text" [(ngModel)]="elder_name[i]"></ion-input>
+                <ion-input type="text" [(ngModel)]="elder_name[i]" [ngModelOptions]="{standalone: true}"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col width-40>
               <ion-item class="sel-label">
-                <ion-input type="text" [(ngModel)]="elder_age[i]" type="number"></ion-input>
+                <ion-input type="text" [(ngModel)]="elder_age[i]" [ngModelOptions]="{standalone: true}" type="number"></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -481,7 +488,7 @@
           <ion-row>
             <ion-col col-10>
              <ion-item>
-              <ion-input type="text" text-uppercase placeholder="Coupon code" [(ngModel)] = "coupan_code">
+              <ion-input type="text" text-uppercase placeholder="Coupon code" [(ngModel)] = "coupan_code" [ngModelOptions]="{standalone: true}">
              </ion-input>
              </ion-item>
             </ion-col>
@@ -678,7 +685,8 @@
         <ion-list *ngIf="user_type == 'sponsor'">
           <ion-item class="sel-label">
             <ion-label class="selectDepent" class="required">Elder</ion-label>
-            <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+            <ion-select [(ngModel)]="elder_id" [ngModelOptions]="{standalone: true}" 
+            (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
             </ion-select>
           </ion-item>
@@ -720,13 +728,13 @@
           <ion-row>
             <ion-col width-60>
               <ion-item class="sel-label">
-                <ion-input type="text" [(ngModel)]="emergency_name[i+1]"></ion-input>
+                <ion-input type="text" [(ngModel)]="emergency_name[i+1]" [ngModelOptions]="{standalone: true}"></ion-input>
               </ion-item>
 
             </ion-col>
             <ion-col width-40>
               <ion-item class="sel-label">
-                <ion-input type="text" [(ngModel)]="emergency_mobile[i+1]"></ion-input>
+                <ion-input type="text" [(ngModel)]="emergency_mobile[i+1]" [ngModelOptions]="{standalone: true}"></ion-input>
               </ion-item>
 
             </ion-col>
@@ -749,14 +757,17 @@
         <ion-list>
           <ion-label style=" font-size:17px;line-height:20px; float:left;">Alternative Contact Number</ion-label>
           <ion-item class="sel-label">
-            <ion-input type="text" value="" [(ngModel)]="altercontact"></ion-input>
+            <ion-input type="number" max="12" value="" [(ngModel)]="altercontact" formControlName="altercontact"></ion-input>
           </ion-item>
+            <p class="err-reds" *ngIf="!modalForm.controls.altercontact.valid  && (modalForm.controls.altercontact.touched || submitAttempt)">Please Enter the valid number
+      </p>
+
         </ion-list>
         <br />
         <ion-grid>
           <ion-row>
             <ion-col col-1 class="check-bx" class="one-timereq">
-              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>
+              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()" [ngModelOptions]="{standalone: true}"></ion-checkbox>
             </ion-col>
             <ion-col col-11 (click)="openTerms()" style="margin:0px;">
               <ion-label class="margin_0">
@@ -800,7 +811,7 @@
           <ion-row>
             <ion-col col-10>
              <ion-item>
-              <ion-input type="text" text-uppercase placeholder="Coupon code" [(ngModel)] = "coupan_code">
+              <ion-input type="text" text-uppercase placeholder="Coupon code" [(ngModel)] = "coupan_code" [ngModelOptions]="{standalone: true}">
              </ion-input>
              </ion-item>
             </ion-col>
@@ -1108,20 +1119,20 @@
         <ion-list *ngIf="user_type == 'sponsor'">
           <ion-item class="sel-label">
             <ion-label class="selectDepent" class="required">Elder</ion-label>
-            <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+            <ion-select [(ngModel)]="elder_id" [ngModelOptions]="{standalone: true}" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-list>
         <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Preferred date</ion-label>
         <ion-item class="sel-label">
-          <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" [(ngModel)]="date"
+          <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" [(ngModel)]="date" [ngModelOptions]="{standalone: true}"
             min={{date}} max="2070-10-31"></ion-datetime>
         </ion-item>
         <ion-list>
           <ion-item class="sel-label">
             <ion-label class="prefe" floating>Preferred Time</ion-label>
-            <ion-select class="select-brds" [(ngModel)]="automation_time">
+            <ion-select class="select-brds" [(ngModel)]="automation_time" [ngModelOptions]="{standalone: true}">
               <ion-option value="12.00 AM - 01.00 AM">12.00 AM - 01.00 AM</ion-option>
               <ion-option value="01.00 AM - 02.00 AM">01.00 AM - 02.00 AM</ion-option>
               <ion-option value="02.00 AM - 03.00 AM">02.00 AM - 03.00 AM</ion-option>
@@ -1152,13 +1163,16 @@
         <ion-list>
           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Alternative Contact Number</ion-label>
           <ion-item class="sel-label">
-            <ion-input type="text" value="" [(ngModel)]="altercontact"></ion-input>
+            <ion-input type="number" maxlength="12" value="" [(ngModel)]="altercontact" formControlName="altercontact"></ion-input>
           </ion-item>
+            <p class="err-reds" *ngIf="!modalForm.controls.altercontact.valid  && (modalForm.controls.altercontact.touched || submitAttempt)">Please Enter the valid number
+      </p>
+
         </ion-list>
         <ion-grid>
           <ion-row>
             <ion-col col-1 class="check-bx" class="one-timereq">
-              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>
+              <ion-checkbox [(ngModel)]="terms" [ngModelOptions]="{standalone: true}" (ionChange)="termsChanged()"></ion-checkbox>
             </ion-col>
             <ion-col col-11 (click)="openTerms()" style="margin:0px;">
               <ion-label class="margin_0">
@@ -1198,7 +1212,7 @@
           <ion-row>
             <ion-col col-10>
              <ion-item>
-              <ion-input type="text" text-uppercase placeholder="Coupon code" [(ngModel)] = "coupan_code">
+              <ion-input type="text" text-uppercase placeholder="Coupon code" [(ngModel)] = "coupan_code" [ngModelOptions]="{standalone: true}">
              </ion-input>
              </ion-item>
             </ion-col>
@@ -1383,32 +1397,32 @@
         <ion-list *ngIf="user_type == 'sponsor'">
           <ion-item class="sel-label">
             <ion-label class="selectDepent" class="required">Elder</ion-label>
-            <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+            <ion-select [(ngModel)]="elder_id" [ngModelOptions]="{standalone: true}" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-list>
         <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Preferred date</ion-label>
         <ion-item class="sel-label">
-          <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" [(ngModel)]="date"
+          <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" [(ngModel)]="date" [ngModelOptions]="{standalone: true}"
             min={{date}} max="2070-10-31"></ion-datetime>
         </ion-item>
         <ion-list>
           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Preferred Time</ion-label>
           <ion-item class="sel-label">
-            <ion-datetime class="select-brd" displayFormat="HH:mm" placeholder="Scheduled date" [(ngModel)]="time"></ion-datetime>
+            <ion-datetime class="select-brd" displayFormat="HH:mm" placeholder="Scheduled date" [(ngModel)]="time" [ngModelOptions]="{standalone: true}"></ion-datetime>
           </ion-item>
         </ion-list>
         <ion-list>
           <ion-item class="sel-label">
            <ion-label class="selectDepent" class="required">Hours/Days</ion-label>
-            <ion-select class="select-brds" [(ngModel)]="hours" *ngIf="vendorList?.vendorDetails.driver_time_slots == '2'">
+            <ion-select class="select-brds" [(ngModel)]="hours" *ngIf="vendorList?.vendorDetails.driver_time_slots == '2'" [ngModelOptions]="{standalone: true}">
               <ion-option value="1">1 day</ion-option>
               <ion-option value="2">2 days</ion-option>
               <ion-option value="3">3 days</ion-option>
               <ion-option value="4">4 days</ion-option>
             </ion-select>
-            <ion-select class="select-brds" [(ngModel)]="hours" *ngIf="vendorList?.vendorDetails.driver_time_slots == '1'">
+            <ion-select class="select-brds" [(ngModel)]="hours" [ngModelOptions]="{standalone: true}" *ngIf="vendorList?.vendorDetails.driver_time_slots == '1'">
               <ion-option value="4">4 Hours</ion-option>
               <ion-option value="8">8 Hours</ion-option>
               <ion-option value="12">12 Hours</ion-option>
@@ -1420,19 +1434,22 @@
         <ion-list>
           <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Pickup</ion-label>
           <ion-item class="sel-label">
-            <ion-input type="text" value="" [(ngModel)]="pickup"></ion-input>
+            <ion-input type="text" value="" [(ngModel)]="pickup" [ngModelOptions]="{standalone: true}"></ion-input>
           </ion-item>
         </ion-list>
         <ion-list>
           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Alternative Contact Number</ion-label>
           <ion-item class="sel-label">
-            <ion-input type="text" value="" [(ngModel)]="altercontact"></ion-input>
+            <ion-input type="number" max="12" value="" [(ngModel)]="altercontact" formControlName="altercontact"></ion-input>
           </ion-item>
+            <p class="err-reds" *ngIf="!modalForm.controls.altercontact.valid  && (modalForm.controls.altercontact.touched || submitAttempt)">Please Enter the valid number
+      </p>
+
         </ion-list>
         <ion-grid>
           <ion-row>
             <ion-col col-1 class="check-bx" class="one-timereq">
-              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>
+              <ion-checkbox [(ngModel)]="terms" [ngModelOptions]="{standalone: true}" (ionChange)="termsChanged()"></ion-checkbox>
             </ion-col>
             <ion-col col-11 (click)="openTerms()" style="margin:0px;">
               <ion-label class="margin_0">
@@ -1630,27 +1647,27 @@
         <ion-list *ngIf="user_type == 'sponsor'">
           <ion-item class="sel-label">
             <ion-label class="selectDepent" class="required">Elder</ion-label>
-            <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+            <ion-select [(ngModel)]="elder_id" [ngModelOptions]="{standalone: true}" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
               <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-list>
         <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Preferred date</ion-label>
         <ion-item class="sel-label">
-          <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" [(ngModel)]="date"
+          <ion-datetime class="select-brd" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Scheduled date" [(ngModel)]="date" [ngModelOptions]="{standalone: true}"
             min={{date}} max="2070-10-31"></ion-datetime>
         </ion-item>
         <ion-list>
           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Preferred Time</ion-label>
           <ion-item class="sel-label">
-            <ion-datetime class="select-brd" displayFormat="HH:mm" placeholder="Scheduled date" [(ngModel)]="time"></ion-datetime>
+            <ion-datetime class="select-brd" displayFormat="HH:mm" placeholder="Scheduled date" [(ngModel)]="time" [ngModelOptions]="{standalone: true}"></ion-datetime>
           </ion-item>
         </ion-list>
         <ion-list>
           
           <ion-item class="sel-label">
           <ion-label class="selectDepent" class="required">Type of Service</ion-label>
-            <ion-select class="select-brds" [(ngModel)]="typeofservice">
+            <ion-select class="select-brds" [(ngModel)]="typeofservice" [ngModelOptions]="{standalone: true}">
               <ion-option value="2 Hours">2 Hours</ion-option>
               <ion-option value="4 Hours">4 Hours</ion-option>
               <ion-option value="8 Hours">8 Hours</ion-option>
@@ -1663,7 +1680,7 @@
          
           <ion-item class="sel-label">
            <ion-label class="selectDepent" class="required">WheelChair Type</ion-label>
-            <ion-select class="select-brds" [(ngModel)]="weelchair">
+            <ion-select class="select-brds" [(ngModel)]="weelchair" [ngModelOptions]="{standalone: true}">
               <ion-option value="Swivel wheelchair">Swival wheelchair</ion-option>
               <ion-option value="Ramp Wheelchair">Ramp whellchair</ion-option>
             </ion-select>
@@ -1672,26 +1689,29 @@
         <ion-list>
           <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Pickup</ion-label>
           <ion-item class="sel-label">
-            <ion-input type="text" value="" [(ngModel)]="pickup"></ion-input>
+            <ion-input type="text" value="" [(ngModel)]="pickup" [ngModelOptions]="{standalone: true}"></ion-input>
           </ion-item>
         </ion-list>
         <ion-list>
           <ion-label class="required" style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Drop</ion-label>
           <ion-item class="sel-label">
-            <ion-input type="text" value="" [(ngModel)]="drop"></ion-input>
+            <ion-input type="text" value="" [(ngModel)]="drop" [ngModelOptions]="{standalone: true}"></ion-input>
           </ion-item>
         </ion-list>
         <ion-list>
           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Alternative Contact Number</ion-label>
           <ion-item class="sel-label">
-            <ion-input type="text" value="" [(ngModel)]="altercontact"></ion-input>
+            <ion-input type="number" maxlength="12" value="" [(ngModel)]="altercontact" formControlName="altercontact"></ion-input>
           </ion-item>
+            <p class="err-reds" *ngIf="!modalForm.controls.altercontact.valid  && (modalForm.controls.altercontact.touched || submitAttempt)">Please Enter the valid number
+      </p>
+
         </ion-list>
         <br/>
         <ion-grid>
           <ion-row>
             <ion-col col-1 class="check-bx" class="one-timereq">
-              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>
+              <ion-checkbox [(ngModel)]="terms" [ngModelOptions]="{standalone: true}" (ionChange)="termsChanged()"></ion-checkbox>
             </ion-col>
             <ion-col col-11 (click)="openTerms()" style="margin:0px;">
               <ion-label class="margin_0">
@@ -1894,7 +1914,8 @@
         </ion-item>
         <ion-label class="required contactLabel" style="float:left;">Enter Your Query</ion-label>
         <ion-item class="sel-label">
-          <ion-textarea type="text" placeholder="Type Your Query Here..." [(ngModel)]="queries"></ion-textarea>
+          <ion-textarea type="text" placeholder="Type Your Query Here..." [(ngModel)]="queries" 
+          [ngModelOptions]="{standalone: true}"></ion-textarea>
         </ion-item>
         <br/>
         <ion-row>
@@ -1915,7 +1936,7 @@
         <!-- <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;" class="required">Dependent</ion-label> -->
         <ion-item class="sel-label">
           <ion-label class="selectDepent" class="required">Elder</ion-label>
-          <ion-select [(ngModel)]="elder_id" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
+          <ion-select [(ngModel)]="elder_id" [ngModelOptions]="{standalone: true}" (ionChange)="getelderDetails(elder_id)" style=" width: 100% !important; margin-right:11px !important; text-align:left; font-size:15px;">
             <ion-option *ngFor="let dependent of vendorList.dependentLists" value="{{dependent.id}}">{{dependent.name }}
             </ion-option>
           </ion-select>
@@ -1923,14 +1944,17 @@
         <ion-list>
           <ion-label style=" font-size:17px;  padding-top:10px; line-height:20px; float:left;">Alternative Contact Number</ion-label>
           <ion-item class="sel-label">
-            <ion-input type="text" value="" [(ngModel)]="altercontact"></ion-input>
+            <ion-input type="number" max="12" value="" [(ngModel)]="altercontact" formControlName="altercontact"></ion-input>
           </ion-item>
+            <p class="err-reds" *ngIf="!modalForm.controls.altercontact.valid  && (modalForm.controls.altercontact.touched || submitAttempt)">Please Enter the valid number
+      </p>
+
         </ion-list>
         <br/>
         <ion-grid>
           <ion-row>
             <ion-col col-1 class="check-bx one-timereq">
-              <ion-checkbox [(ngModel)]="terms" (ionChange)="termsChanged()"></ion-checkbox>
+              <ion-checkbox [(ngModel)]="terms" [ngModelOptions]="{standalone: true}" (ionChange)="termsChanged()"></ion-checkbox>
             </ion-col>
             <ion-col col-11 (click)="openTerms()" style="margin:0px;">
               <ion-label class="margin_0">
@@ -1972,7 +1996,7 @@
           <ion-row>
             <ion-col col-10>
              <ion-item>
-              <ion-input type="text" text-uppercase placeholder="Coupon code" [(ngModel)] = "coupan_code">
+              <ion-input type="text" text-uppercase placeholder="Coupon code" [(ngModel)] = "coupan_code" [ngModelOptions]="{standalone: true}">
              </ion-input>
              </ion-item>
             </ion-col>
@@ -1986,7 +2010,7 @@
           <ion-row>
             <ion-col col-10>
              <ion-item>
-              <ion-input type="text" text-uppercase placeholder="Coupon code" [(ngModel)] = "coupan_code">
+              <ion-input type="text" text-uppercase placeholder="Coupon code" [(ngModel)] = "coupan_code" [ngModelOptions]="{standalone: true}">
              </ion-input>
              </ion-item>
             </ion-col>
@@ -2485,7 +2509,7 @@
       </ion-item>
     </ion-card> 
   </div>
-
+</form>
 </ion-content>
 
 <style>

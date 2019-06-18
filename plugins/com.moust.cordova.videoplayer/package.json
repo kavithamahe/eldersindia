@@ -1,0 +1,102 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "https://github.com/moust/cordova-plugin-videoplayer.git",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "https://github.com/moust/cordova-plugin-videoplayer.git",
+        "spec": "git+https://github.com/moust/cordova-plugin-videoplayer.git",
+        "type": "hosted",
+        "hosted": {
+          "type": "github",
+          "ssh": "git@github.com:moust/cordova-plugin-videoplayer.git",
+          "sshUrl": "git+ssh://git@github.com/moust/cordova-plugin-videoplayer.git",
+          "httpsUrl": "git+https://github.com/moust/cordova-plugin-videoplayer.git",
+          "gitUrl": "git://github.com/moust/cordova-plugin-videoplayer.git",
+          "shortcut": "github:moust/cordova-plugin-videoplayer",
+          "directUrl": "https://raw.githubusercontent.com/moust/cordova-plugin-videoplayer/master/package.json"
+        }
+      },
+      "D:\\kavi\\Eldersindia\\Eldersindia"
+    ]
+  ],
+  "_from": "git+https://github.com/moust/cordova-plugin-videoplayer.git#5c83c858ed159d68cce1bf54e31d6caf7e145fbf",
+  "_id": "cordova-plugin-video-player@1.0.1",
+  "_inCache": true,
+  "_location": "/cordova-plugin-video-player",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "https://github.com/moust/cordova-plugin-videoplayer.git",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "https://github.com/moust/cordova-plugin-videoplayer.git",
+    "spec": "git+https://github.com/moust/cordova-plugin-videoplayer.git",
+    "type": "hosted",
+    "hosted": {
+      "type": "github",
+      "ssh": "git@github.com:moust/cordova-plugin-videoplayer.git",
+      "sshUrl": "git+ssh://git@github.com/moust/cordova-plugin-videoplayer.git",
+      "httpsUrl": "git+https://github.com/moust/cordova-plugin-videoplayer.git",
+      "gitUrl": "git://github.com/moust/cordova-plugin-videoplayer.git",
+      "shortcut": "github:moust/cordova-plugin-videoplayer",
+      "directUrl": "https://raw.githubusercontent.com/moust/cordova-plugin-videoplayer/master/package.json"
+    }
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "git+https://github.com/moust/cordova-plugin-videoplayer.git#5c83c858ed159d68cce1bf54e31d6caf7e145fbf",
+  "_shasum": "de07436a34d9c74dc3e69fe201b283e107ac74ed",
+  "_shrinkwrap": null,
+  "_spec": "https://github.com/moust/cordova-plugin-videoplayer.git",
+  "_where": "D:\\kavi\\Eldersindia\\Eldersindia",
+  "author": {
+    "name": "Quentin Aupetit"
+  },
+  "bugs": {
+    "url": "https://github.com/moust/cordova-plugin-videoplayer/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-video-player",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "dependencies": {},
+  "description": "A Codova plugin that simply allows you to immediately play a video in fullscreen mode.",
+  "devDependencies": {},
+  "engines": {
+    "cordovaDependencies": {
+      "2.0.0": {
+        "cordova": ">100"
+      }
+    }
+  },
+  "gitHead": "5c83c858ed159d68cce1bf54e31d6caf7e145fbf",
+  "homepage": "https://github.com/moust/cordova-plugin-videoplayer#readme",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova",
+    "video",
+    "player",
+    "fullscreen"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-video-player",
+  "optionalDependencies": {},
+  "readme": "Video Player plugin for Cordova/PhoneGap\r\n========================================\r\n\r\nA Cordova plugin that simply allows you to immediately play a video in fullscreen mode.\r\n\r\n\r\n# Installation\r\n\r\nThis plugin use the Cordova CLI's plugin command. To install it to your application, simply execute the following (and replace variables).\r\n\r\n```\r\ncordova plugin add cordova-plugin-video-player\r\n```\r\n\r\n\r\n# Using\r\n\r\nJust call the  `play` method with a video file path as argument. The video player will close itself when the video will be completed.\r\n\r\n```\r\nVideoPlayer.play(path, [options], [completeCallback], [errorCallback]);\r\n```\r\n\r\nStop and close a video currently playing without waiting the end.\r\n```\r\nVideoPlayer.close();\r\n```\r\n\r\nThe plugin is able to play file-path or http/rtsp URL.\r\n\r\nYou can optionally add options parameters like volume and calling mode.\r\nYou can also add an success callback function to handle completed playback.\r\nYou can also add an error callback function to handle unexpected playback errors.\r\n\r\n## Example\r\n\r\n```javascript\r\nVideoPlayer.play(\"file:///android_asset/www/movie.mp4\");\r\n```\r\n\r\n```javascript\r\nVideoPlayer.play(\r\n    \"file:///android_asset/www/movie.mp4\",\r\n    {\r\n        volume: 0.5,\r\n        scalingMode: VideoPlayer.SCALING_MODE.SCALE_TO_FIT_WITH_CROPPING\r\n    },\r\n    function () {\r\n        console.log(\"video completed\");\r\n    },\r\n    function (err) {\r\n        console.log(err);\r\n    }\r\n);\r\n```\r\n\r\n## Options\r\n\r\n- `volume`: (Optional) allows you to set the volume on this player. Note that the passed volume value is raw scalars in range 0.0 to 1.0.\r\n\r\n- `scalingMode`: (Optional) allows you to sets video scaling mode.\r\n\r\n    The following constants are the only values available for the `scalingMode` option:\r\n\r\n    - `SCALE_TO_FIT` (default)\r\n    - `SCALE_TO_FIT_WITH_CROPPING`\r\n\r\n    Refer to http://developer.android.com/reference/android/media/MediaPlayer.html#setVideoScalingMode(int) for more details.\r\n\r\n\r\n# Troubleshooting\r\n\r\n**When playing a video for the first time, everything works great. when calling .close() function the video closes great. 2nd time around, the .play() is called the same way as the first time. The video plays fine for the second time. Now when trying to close it before the video ends, the app fatally crash.**\r\n\r\nWhen the \"completed\" event gets fired, make sure you close the video in the \"completed\" event to clear that instance so that if you have another video they don't both play.\r\n\r\n\r\n# Licence MIT\r\n\r\nCopyright 2013 Quentin Aupetit\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\r\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moust/cordova-plugin-videoplayer.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.1"
+}

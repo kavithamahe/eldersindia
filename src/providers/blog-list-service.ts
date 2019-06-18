@@ -105,7 +105,7 @@ if(get_custome_amount == null || get_custome_amount == "" || get_custome_amount 
 dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
 from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
 "quantity":quantity,"selected_dates":selected_dates,"service":service,"serviceType":
-serviceType,"service_cost":base_cost,"service_cost_travel":base_cost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
+serviceType,"service_cost":total_service_cost,"service_cost_travel":total_service_cost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
 ,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id,"datCount":datCount,"servicecost":service_costs,"servicediscountcost":servicediscountcostss,"servicediscost":servicediscountcostss,
 "problem":"","pay_method":paymenttype,"mobile":"","paymentflag":paymentflag,"afterdiscount":totalservice_costss,
 "discount":discounts,"discountcost":discountcost,"payment_type":paymenttype,"afterdiscount_one_service":afterdiscount_one_service,"servicediscountcost_one_service":servicediscountcost_one_service,
@@ -152,10 +152,10 @@ if(get_custome_amount == null || get_custome_amount == "" || get_custome_amount 
 dependentId,"durations":durations,"exclude_days":exclude_days,"from_date":from_date,"from_time":
 from_time,"lead_time":lead_time,"location_id":location_id,"package_id":package_id,"preferred_time":preferred_time,
 "quantity":quantity,"selected_dates":selected_dates,"service":service,"serviceType":
-serviceType,"service_cost":base_cost,"service_cost_travel":base_cost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
+serviceType,"service_cost":total_service_cost,"service_cost_travel":total_service_cost,"service_id":service_ids,"sub_category_id":sub_category_id,"subcategory":subcategory,"time_slot":time_slot
 ,"to_date":to_date,"to_time":to_time,"vendor_id":vendor_id,"paymentflag":paymentflag,"base_cost":base_cost,"getCustomerBalanceAmount":getCustomerBalanceAmount,
 "get_custome_amount":get_custome_amount,"get_custome_deliever_amount":get_custome_deliever_amount,"get_custome_service_cancel_amount":get_custome_service_cancel_amount,
-"total_cost":base_cost,"total_service_cost":total_service_cost,"coupen_code":coupan_code,"coupon_code_discount_cost":discounted_cost,"coupon_id":coupon_id,"final_service_cost_after_coupon_code_discount":final_service_cost,
+"total_cost":total_service_cost,"total_service_cost":total_service_cost,"coupen_code":coupan_code,"coupon_code_discount_cost":discounted_cost,"coupon_id":coupon_id,"final_service_cost_after_coupon_code_discount":final_service_cost,
 "wallet_value":wallet_value,"service_name":service};
     return this.http.post(rootUrl+'serviceRequestSubmitbeforePayment',_request,this.options)
       .map(res => res.json());

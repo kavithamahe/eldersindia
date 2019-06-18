@@ -33,7 +33,6 @@
     "@ionic-native/file-path": "^4.14.0",
     "@ionic-native/file-transfer": "^4.14.0",
     "@ionic-native/geolocation": "^4.14.0",
-    "@ionic-native/google-analytics": "^4.16.0",
     "@ionic-native/in-app-browser": "^4.14.0",
     "@ionic-native/native-audio": "^4.14.0",
     "@ionic-native/native-geocoder": "^4.14.0",
@@ -48,8 +47,8 @@
     "angular2-moment": "^1.9.0",
     "angular2-tag-input": "^1.2.3",
     "call-number": "^1.0.1",
-    "com.razorpay.cordova": "~0.16.1",
-    "cordova-android": "~6.3.0",
+    "com.razorpay.cordova": "1.4.5",
+    "cordova-android": "6.2.0",
     "cordova-browser": "~5.0.4",
     "cordova-ios": "4.5.5",
     "cordova-plugin-add-swift-support": "^1.7.1",
@@ -63,7 +62,6 @@
     "cordova-plugin-filechooser": "^1.0.1",
     "cordova-plugin-filepath": "^1.4.2",
     "cordova-plugin-geolocation": "^4.0.1",
-    "cordova-plugin-google-analytics": "^1.8.6",
     "cordova-plugin-imei": "^1.1.0",
     "cordova-plugin-inappbrowser": "^3.0.0",
     "cordova-plugin-ionic-keyboard": "^2.1.2",
@@ -128,9 +126,6 @@
       "cordova-plugin-file": {},
       "cordova-plugin-downloadmanager": {},
       "cordova-plugin-file-opener2": {},
-      "cordova-plugin-google-analytics": {
-        "GMS_VERSION": "11.0.1"
-      },
       "sentry-cordova": {},
       "com.moust.cordova.videoplayer": {},
       "cordova-plugin-whitelist": {},
@@ -138,8 +133,8 @@
     },
     "platforms": [
       "browser",
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }

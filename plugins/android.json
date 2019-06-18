@@ -1,0 +1,96 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "com.razorpay.cordova": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    }
+  },
+  "dependent_plugins": {
+    "com.moust.cordova.videoplayer": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-add-swift-support": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-camera-preview": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-downloadmanager": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-dreamover-uid": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-file-opener2": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-filechooser": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-filepath": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-imei": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-nativeaudio": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-nativegeocoder": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "mx.ferreyra.callnumber": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "phonegap-plugin-push": {
+      "SENDER_ID": "85075801930",
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    },
+    "sentry-cordova": {
+      "PACKAGE_NAME": "com.tharsha.elderindia"
+    }
+  }
+}

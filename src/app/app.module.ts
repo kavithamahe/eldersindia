@@ -9,14 +9,14 @@ import { TruncateModule } from 'ng2-truncate';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { File } from '@ionic-native/file';
-// import * as Sentry from 'sentry-cordova';
+import * as Sentry from 'sentry-cordova';
 
 import { Ng2CompleterModule } from "ng2-completer";
 import { DatePipe } from '@angular/common';
 import { Network } from '@ionic-native/network';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Device } from "@ionic-native/device";
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
+// import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -120,19 +120,19 @@ import { NetworkProvider } from '../providers/network/network';
 
 import { HttpClientModule } from '@angular/common/http';
 
-// Sentry.init({ dsn: 'https://c70968390e6645c4a30b0aa7462b8fc3@monitor.eldersindia.com/7'});
+Sentry.init({ dsn: 'https://c70968390e6645c4a30b0aa7462b8fc3@monitor.eldersindia.com/7'});
 
-// export class SentryIonicErrorHandler extends IonicErrorHandler {
-//   handleError(error) {
-//     super.handleError(error);
-//     try {
-//       Sentry.captureException(error.originalError || error);
-//     } catch (e) {
-//       console.error(e);
-//     }
-//   }
+export class SentryIonicErrorHandler extends IonicErrorHandler {
+  handleError(error) {
+    super.handleError(error);
+    try {
+      Sentry.captureException(error.originalError || error);
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
-// }
+}
  
 @NgModule({
   declarations: [
@@ -295,7 +295,7 @@ import { HttpClientModule } from '@angular/common/http';
     NotificationsPage,
     NotificationPage
   ],
-     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},FileTransfer,FileChooser,FilePath,File,FileOpener,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device,GoogleAnalytics, 
+     providers: [{provide: ErrorHandler, useClass: SentryIonicErrorHandler},FileTransfer,FileChooser,FilePath,File,FileOpener,CameraPreview,Geolocation,NativeGeocoder,NativeAudio,Network,Push,LoginUser,CommunityServices,ServiceProvider,BlogListService,AppConfig,IonicStorageModule,DatePipe,Device, 
     NetworkProvider] // Add GithubUsers provider
 
 

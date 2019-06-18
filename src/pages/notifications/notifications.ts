@@ -24,6 +24,7 @@ export class NotificationsPage {
 get_notification:any=[];
 imageUrl:any;
 multirowsent:any=[];
+request_type:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public providerService: ServiceProvider) {
   	 this.storage.ready().then(() => {
@@ -43,7 +44,13 @@ multirowsent:any=[];
       .subscribe(data =>{
     })
   	if(notify_type == "request_received" || notify_type == "request_accept"){
-  		this.navCtrl.setRoot(ConnectionsPage);
+      if(notify_type == "request_received"){
+         this.request_type="request";
+      }
+      else{
+         this.request_type="accept";
+      }
+  		this.navCtrl.setRoot(ConnectionsPage,{"request_type":this.request_type});
   	}
   	else if(notify_type == "avail_package"){
   		this.navCtrl.setRoot(PackageRequestPagePage);

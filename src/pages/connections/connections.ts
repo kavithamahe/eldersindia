@@ -25,6 +25,7 @@ export class ConnectionsPage {
 @ViewChild(Content) content: Content;
 @ViewChild(Slides) slides: Slides;
 getconnections:string;
+allgetconnections:string;
 connections:string;  
 messages:any;
 token:string='';
@@ -66,14 +67,18 @@ result:any=[];
 connectionsCount:any;
 receivedconnectionsCount:any;
 sendconnectionsCount:any;
+norecord:any;
+norecordreceived:any;
+norecordsent:any;
    constructor(private popoverCtrl: PopoverController,public platform: Platform,public navCtrl: NavController, public actionsheetCtrl: ActionSheetController,public navParams: NavParams,public storage:Storage,public connectionsService:ConnectionsService,public loadingCtrl: LoadingController,public toastCtrl: ToastController) {
-    this.getconnections="myConnections";
+    
     this.connectionsaction ="all";
-    if(navParams.get("notification")== 'connection_request'){
+    if(navParams.get("notification") == 'connection_request'){
       this.connections = "received";
     }else{
       this.connections="all";  
     }
+
     
     this.messages="inbox";
     this.storage.ready().then(() => {
@@ -83,7 +88,19 @@ sendconnectionsCount:any;
        });
 
       storage.get('token').then((token) => { this.token=token; 
-      this.onInit();
+        console.log(navParams.get("request_type"));
+    if(navParams.get("request_type")== 'request'){
+       this.onInit();
+    this.receivedRquest();
+    this.sentRquest();
+      this.getconnections="myConnections";
+    }else{
+    this.getconnections="myConnections";
+    this.onInit();
+    this.receivedRquest();
+    this.sentRquest();
+    }
+      
 
       })
     });
@@ -94,6 +111,12 @@ sendconnectionsCount:any;
   scrollToBottom(){
     this.content.scrollToBottom();
   }
+  public onInitfirst(){
+    this.getconnections="myConnections";
+    this.onInit();
+    this.receivedRquest();
+    this.sentRquest();
+  }
   public onInit()
   {
 
@@ -103,6 +126,7 @@ sendconnectionsCount:any;
      (allConnections) => {
      // setInterval(()=> {
         this.allConnectionsInfo = allConnections.result.info.list.data;  
+
         this.connectionsCount = allConnections.result.info.connectionsCount;
         var filtered =  _.uniqBy(this.allConnectionsInfo, 'id');
         this.allConnectionsInfo = filtered;
@@ -115,7 +139,8 @@ sendconnectionsCount:any;
         if(err.status===401)
         {
           this.allConnectionsInfo = [];
-          this.showToaster(JSON.parse(err._body).error);
+          // this.showToaster(JSON.parse(err._body).error);
+          this.norecord = JSON.parse(err._body).error;
         }
         else
         {
@@ -132,7 +157,7 @@ sendconnectionsCount:any;
     this.connectionsService.receivedRquest().subscribe(
      (receivedRquest) => {
       this.receivedRquestInfo=receivedRquest.result.info.list.data;
-      this.receivedconnectionsCount = receivedRquest.result.info.connectionsCount;
+      this.receivedconnectionsCount = receivedRquest.result.info.receiveCount;
       var filtered =  _.uniqBy(this.receivedRquestInfo, 'id');
         this.receivedRquestInfo = filtered; 
       this.orgReceivedRquestInfo=receivedRquest.result.info.list.data; 
@@ -144,7 +169,7 @@ sendconnectionsCount:any;
         if(err.status===401)
         {
           this.check = JSON.parse(err._body).error;
-          this.showToaster(JSON.parse(err._body).error);
+          this.norecordreceived = JSON.parse(err._body).error;
           
         }
         else
@@ -165,7 +190,7 @@ sendconnectionsCount:any;
       this.sendconnectionsCount = sentRquest.result.info.connectionsCount;
        var filtered =  _.uniqBy(this.sentRquestInfo, 'id');
         this.sentRquestInfo = filtered; 
-      this.nextPageURL4=sentRquest.result.info.list.next_page_url;     
+      this.nextPageURL4=sentRquest.result.info.list.next_page_url;
       loader.dismiss();
     },
     (err) => { 
@@ -173,7 +198,7 @@ sendconnectionsCount:any;
         if(err.status===401)
         {
           this.sentRquestInfo =[];
-          this.showToaster(JSON.parse(err._body).error);
+          this.norecordsent = JSON.parse(err._body).error;
         }
         else
         {
@@ -210,6 +235,32 @@ sendconnectionsCount:any;
     );    
   }
   public connectionStatus(connectionId,status)
+  {    
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });     
+    loader.present();
+    this.connectionsService.connectionStatus(connectionId,status).subscribe(
+     (connectionStatus) => {
+      this.showToaster(connectionStatus.result);
+      this.receivedRquest();  
+      this.connectionsaction = "all";
+      loader.dismiss(); 
+    },
+    (err) => { 
+        if(err.status===401)
+        {
+        this.error = JSON.parse(err._body).error;
+        this.showToaster(JSON.parse(err._body).error);
+        this.receivedRquest(); 
+        }
+        else
+        {
+          this.showToaster("Something went wrong");
+        }
+        loader.dismiss();
+      }
+    );    
+  }
+    public connectionStatusreject(connectionId,status)
   {    
     let loader = this.loadingCtrl.create({ content: "Please wait..." });     
     loader.present();

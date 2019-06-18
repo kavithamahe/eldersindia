@@ -1,6 +1,8 @@
 import { Component, ViewChild} from '@angular/core';
 
 import { Platform, MenuController, Nav, AlertController,ToastController,LoadingController,Events ,IonicApp } from 'ionic-angular';
+import { App } from 'ionic-angular/components/app/app';
+
 import { CallNumber, Vibration} from 'ionic-native';
 import { CameraPreview, CameraPreviewRect, StatusBar, Splashscreen} from 'ionic-native';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
@@ -8,7 +10,7 @@ import { InAppBrowser } from 'ionic-native';
 // import { Diagnostic } from '@ionic-native';
 
 
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
+// import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Network } from '@ionic-native/network';
 import { Geolocation } from 'ionic-native';
 // import the Menu's pages
@@ -110,8 +112,9 @@ export class MyApp {
     private push: Push,
     public events: Events,
     public networkProvider: NetworkProvider,
-    private ga: GoogleAnalytics,
-    public ionicApp: IonicApp
+    // private ga: GoogleAnalytics,
+    public ionicApp: IonicApp,
+    public app: App
 
   ) {
      this.platform.ready().then(() => {
@@ -124,15 +127,15 @@ export class MyApp {
           });
 
             });
-   this.ga.startTrackerWithId('UA-123161000-5')
-   .then(() => {
-     console.log('Google analytics is ready now');
-      this.ga.trackView('test');
-     // Tracker is ready
-     // You can now track pages or set additional information such as AppVersion or UserId
-   })
+   // this.ga.startTrackerWithId('UA-123161000-5')
+   // .then(() => {
+   //   console.log('Google analytics is ready now');
+   //    this.ga.trackView('test');
+   //   // Tracker is ready
+   //   // You can now track pages or set additional information such as AppVersion or UserId
+   // })
 
-   .catch(e => console.log('Error starting GoogleAnalytics', e));
+   // .catch(e => console.log('Error starting GoogleAnalytics', e));
    // storage.get('network_type').then((network_type) => { this.network_type=network_type;
    //  if(this.network_type == "online"){
     this.storage.ready().then(() => {
@@ -391,7 +394,8 @@ export class MyApp {
                   activePortal.dismiss();
               }
                else if(this.nav.canGoBack()){
-                  this.nav.pop();
+                  // this.nav.pop();
+                  this.app.navPop();
                 }
                 else{
                   if(this.alert){ 
@@ -502,32 +506,32 @@ initializePreview() {
     });
 
 push.on('registration').subscribe((data: any) => {
-   console.log("device Reg ID ->", data.registrationId);
+   // console.log("device Reg ID ->", data.registrationId);
       this.reg_id = data.registrationId ;
-       console.log('device token', this.reg_id)
+       // console.log('device token', this.reg_id)
       this.userLogin.setDeviceID(this.reg_id);
       //TODO - send device token to server
   console.log('Received a registration', data)
 });
 
 push.on('notification').subscribe((data: any) =>{
-  console.log('Received a notification', data)
-    console.log('message', data.message);
-      console.log('data',data);
+  // console.log('Received a notification', data)
+  //   console.log('message', data.message);
+  //     console.log('data',data);
    if (data.additionalData.foreground == true) {
          this.showToaster(data.message);
         
        } else {
    
         this.getPage(data);
-        console.log("Push notification clicked");
+        // console.log("Push notification clicked");
 }
       
   
     // pushObject.on('error', (e) => {
     //   console.log(e.message);
     // });
- console.log('Device registered', data)
+ // console.log('Device registered', data)
 });
 
 push.on('error').subscribe(error => console.error('Error with Push plugin', error));

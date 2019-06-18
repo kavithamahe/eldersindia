@@ -32,6 +32,7 @@ declare var RazorpayCheckout: any;
   templateUrl: 'service-modal.html'
 })
 export class ServiceModalPage {
+  modalForm: FormGroup;
    headers;
 token:string;
 options:any;
@@ -166,6 +167,9 @@ template_id:any;
   bookNowToursmore:any;
   constructor(public platform: Platform,public storage:Storage,public alertCtrl: AlertController,private device: Device,public loadingCtrl: LoadingController,public modalCtrl: ModalController,public _provider:ServiceProvider, public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder,public blogListService:BlogListService) {
+        this.modalForm = formBuilder.group({
+        altercontact: ['',Validators.compose([Validators.maxLength(12), Validators.pattern('[0-9]*')])],
+    });
     this.date = new Date().toISOString();
     this.CurrentDate = new Date().toISOString(); 
     this.CurrentTime = new Date().getHours() + ':' + new Date().getMinutes();
@@ -359,6 +363,7 @@ getRazorPaymentsaltKey(){
      this._provider.getselecthotel(hoteltype,this.tourService_id)
       .subscribe(data =>{ 
           this.getPersonPerHotel = data.result.getHotelPersons;
+          this.packageCost = false;
           loader.dismiss();
     })
   }

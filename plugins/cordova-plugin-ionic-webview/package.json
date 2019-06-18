@@ -1,0 +1,114 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "cordova-plugin-ionic-webview@^2.0.0",
+        "scope": null,
+        "escapedName": "cordova-plugin-ionic-webview",
+        "name": "cordova-plugin-ionic-webview",
+        "rawSpec": "^2.0.0",
+        "spec": ">=2.0.0 <3.0.0",
+        "type": "range"
+      },
+      "D:\\kavi\\Eldersindia\\Eldersindia"
+    ]
+  ],
+  "_from": "cordova-plugin-ionic-webview@>=2.0.0 <3.0.0",
+  "_hasShrinkwrap": false,
+  "_id": "cordova-plugin-ionic-webview@2.1.4",
+  "_inCache": true,
+  "_location": "/cordova-plugin-ionic-webview",
+  "_nodeVersion": "10.9.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/cordova-plugin-ionic-webview_2.1.4_1536845831192_0.556325393848847"
+  },
+  "_npmUser": {
+    "name": "nhyatt",
+    "email": "nick@ionic.io"
+  },
+  "_npmVersion": "6.2.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "cordova-plugin-ionic-webview@^2.0.0",
+    "scope": null,
+    "escapedName": "cordova-plugin-ionic-webview",
+    "name": "cordova-plugin-ionic-webview",
+    "rawSpec": "^2.0.0",
+    "spec": ">=2.0.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-ionic-webview/-/cordova-plugin-ionic-webview-2.1.4.tgz",
+  "_shasum": "e0c87297157537343b31fa1b79fab658635ff76e",
+  "_shrinkwrap": null,
+  "_spec": "cordova-plugin-ionic-webview@^2.0.0",
+  "_where": "D:\\kavi\\Eldersindia\\Eldersindia",
+  "author": {
+    "name": "Ionic Team"
+  },
+  "bugs": {
+    "url": "https://github.com/ionic-team/cordova-plugin-ionic-webview/issues"
+  },
+  "dependencies": {},
+  "description": "The official Ionic's WKWebView Engine Plugin",
+  "devDependencies": {
+    "np": "^3.0.4",
+    "sync-cordova-xml": "^0.4.0"
+  },
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-+nsqWEI2Ak2CuLJe5KGDlNIRDcaDLyK/UfuCnYnRk1UuUSUZoon4dd5BLEikf3YjbxqY7G0gixkkYzvlJTdkrg==",
+    "shasum": "e0c87297157537343b31fa1b79fab658635ff76e",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-ionic-webview/-/cordova-plugin-ionic-webview-2.1.4.tgz",
+    "fileCount": 49,
+    "unpackedSize": 374432,
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJbmmgHCRA9TVsSAnZWagAAkncP/0u2LHdl4gI6kTurPj7X\nqq8LeIcyrHo/aYDUVz0y9vDnRM3IcF+FOw7+cp/kytor0TJZkXxaNligDO+k\nEqRhsozqiVGjgcsQW4uVTIHkyujsdUuGz73hT16Ir8Kvp2WwmAEnkJiCIET4\n47q4WpVZnXpxeTkXnY5IBrhmL6rh+Ds1RFRtbei734wLW1CpBTvvkzfi+BJ2\nGw4szMesHLAj0spBl3i6JG08lGwu3Eob0jmcS9oJSrxIISbLfPj8yS5VaFwE\nxlpErlOTWFNyWdP3xkX6WrqSCaQjSl87V+ciba+qHKulqRGNDCAYMRURqZBN\nabH/Lcp0MW1ReoRNN6dHghmoz7wEgVScBpcVknXSoWsuZWTNNiTw5HVbkj8p\nF9P72f4tz+Te25eU0F9tdzwcqluYxuAd0ZA5BUOzh0fvOTItgRB5lDDfOSGn\nPhWUCvdqt0ZhcUAg/HGh5S8gg9Wz7a3n3bpB7++AvOMXLbogiS7j5ZeFjIpy\n7K1+qAPg6S2oo+vYpu21BPG7ONBGpAGfVIziIWrACtgNVOPyrsZZOksitATz\ntjoXBfA8Y/Ad531sJLR3NjP/HCsqWRqzVMMDwnIqSC+WEMlpEqErSB4tHs24\nPoR7kGYtQ6mavdm5r9GbRCrOaUQdzk5KCaN3OsGIUGn0GFqoWtyEZ532AJcR\nz3rK\r\n=aNtv\r\n-----END PGP SIGNATURE-----\r\n"
+  },
+  "engines": {
+    "cordovaDependencies": {
+      "2.0.0": {
+        "cordova-android": ">=6.4.0",
+        "cordova-ios": ">=4.0.0-dev"
+      }
+    }
+  },
+  "gitHead": "242465ac4b24956c8ee20ab613325cf20e389f22",
+  "homepage": "https://github.com/ionic-team/cordova-plugin-ionic-webview#readme",
+  "keywords": [
+    "cordova",
+    "wkwebview"
+  ],
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "manucorporat",
+      "email": "manu.mtza@gmail.com"
+    },
+    {
+      "name": "maxlynch",
+      "email": "max@ionic.io"
+    },
+    {
+      "name": "nhyatt",
+      "email": "nick@ionic.io"
+    }
+  ],
+  "name": "cordova-plugin-ionic-webview",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionic-team/cordova-plugin-ionic-webview.git"
+  },
+  "scripts": {
+    "deploy": "np --yolo",
+    "sync_plugin_xml": "sync-cordova-xml package.json plugin.xml --output=plugin.xml",
+    "version": "npm run sync_plugin_xml && git add plugin.xml"
+  },
+  "version": "2.1.4"
+}

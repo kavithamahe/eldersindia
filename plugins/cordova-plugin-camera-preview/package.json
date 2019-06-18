@@ -1,0 +1,103 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "cordova-plugin-camera-preview",
+        "scope": null,
+        "escapedName": "cordova-plugin-camera-preview",
+        "name": "cordova-plugin-camera-preview",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "D:\\kavi\\Eldersindia\\Eldersindia"
+    ]
+  ],
+  "_from": "cordova-plugin-camera-preview@latest",
+  "_id": "cordova-plugin-camera-preview@0.10.0",
+  "_inCache": true,
+  "_location": "/cordova-plugin-camera-preview",
+  "_nodeVersion": "9.9.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/cordova-plugin-camera-preview_0.10.0_1528903866222_0.2778650816288999"
+  },
+  "_npmUser": {
+    "name": "westonganger",
+    "email": "weston@westonganger.com"
+  },
+  "_npmVersion": "6.0.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "cordova-plugin-camera-preview",
+    "scope": null,
+    "escapedName": "cordova-plugin-camera-preview",
+    "name": "cordova-plugin-camera-preview",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-camera-preview/-/cordova-plugin-camera-preview-0.10.0.tgz",
+  "_shasum": "8f0bf7ae79bdd99b413bc3a18da4c7b5d3389f27",
+  "_shrinkwrap": null,
+  "_spec": "cordova-plugin-camera-preview",
+  "_where": "D:\\kavi\\Eldersindia\\Eldersindia",
+  "author": {
+    "name": "Weston Ganger",
+    "email": "westonganger@gmail.com",
+    "url": "solidfoundationwebdev.com"
+  },
+  "bugs": {
+    "url": "https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview/issues"
+  },
+  "dependencies": {
+    "cordova": "*"
+  },
+  "description": "Cordova plugin that allows camera interaction from HTML code for showing camera preview below or on top of the HTML.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-J4b5S8iKslHye/7qnUIdWXm8jbFQqfEYnYjaPSnzMdZQ+PKLLAfPVV6F6Z7yEyg/Fn3LnEC9hoOhdFUvnqWfIw==",
+    "shasum": "8f0bf7ae79bdd99b413bc3a18da4c7b5d3389f27",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-camera-preview/-/cordova-plugin-camera-preview-0.10.0.tgz",
+    "fileCount": 26,
+    "unpackedSize": 318385,
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJbITi7CRA9TVsSAnZWagAAI6EP/2aDPQ7HW792Zq1XfTfj\nMoCW2mgA7EF9FaL/tK1pufNfNsPVBfRHdZKmh+xNZzgjDDv1oTnToAb6jis9\njDRy/WHqO4TzLoiEk62aRcYCzPglEp1DN8Esnun2LxmQlDziHz3UH3k66egD\nPgdqPp+1+WNejisWGk/IKwpbtJEbwnDbsY7+EIG6VXfwL7tCfWKcgeojVTX3\nYdvaSSlCoDQMb3CizcLj0t3UNTn6ebY/6kflMROMeG7v5LPggbPiOaRvEgh/\nkblGbbUGl81xgoF0jqXRzWNYvwLHLVdzhUXBiCQrJyuNDiTSa5doR0G3/FP/\n6pT/o+Qg+/aYAnXSyBP0j6q0dKrdd06YCvs3OwhKlsWVeoWn5YTJ7U9qAM1m\nul+sV2976rLODzJwvUJqhl7TqXo8tDw49fa8QabvPfGvJAjdEiUdgIKKdJwJ\nNWi4oJ7dGVSjbZOtT9h+/QQjFeCoovtDyyA88bQhdckFM6CE4EpUFjYzCZt/\nAP7vhllvoCHCFTgsIEiC+Ysxc8HQGrVKK+aK490GtlItFgqw0WCgimLI+dif\nEgyWBRkA8x0F/CLiN/McKL+dZXEvaodkubmdfsLJquu4thYELWgFlSMb4n0O\nGtAINqKoZD7S5Ej5E3yhkIGgClm1XFgSPkZSsZvd7cMqu2d7sYZSiW4Q0yKq\n/W3A\r\n=xVHg\r\n-----END PGP SIGNATURE-----\r\n"
+  },
+  "gitHead": "1f9a5dfdc026255f9ecaf21ef4af32ed46eb1bb0",
+  "homepage": "https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview",
+  "keywords": [
+    "cordova",
+    "phonegap",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "android",
+    "ios",
+    "ionic",
+    "camera",
+    "cam",
+    "camera-preview",
+    "preview"
+  ],
+  "license": "Apache 2.0",
+  "maintainers": [
+    {
+      "name": "westonganger",
+      "email": "westonganger@gmail.com"
+    }
+  ],
+  "name": "cordova-plugin-camera-preview",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview.git"
+  },
+  "typings": "typescript/CameraPreview.d.ts",
+  "version": "0.10.0"
+}

@@ -186,6 +186,10 @@ coupon_offer:any;
       this.showToaster("Please Enter The Reason");
     }
     else{
+      if(this.percentage == 0){
+        this.deletezerocost();
+      }
+      else{
       this.deductionamount = this.deductionamount.toString();
       console.log(this.servicecancelamount);
       let loader = this.loadingCtrl.create({ content: "Please wait..." });     
@@ -208,6 +212,7 @@ coupon_offer:any;
         }
         loader.dismiss();
       });
+    }
     }
     }
   

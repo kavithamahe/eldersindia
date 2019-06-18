@@ -1,0 +1,102 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "cordova-plugin-filepath",
+        "scope": null,
+        "escapedName": "cordova-plugin-filepath",
+        "name": "cordova-plugin-filepath",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "D:\\kavi\\Eldersindia\\Eldersindia"
+    ]
+  ],
+  "_from": "cordova-plugin-filepath@latest",
+  "_id": "cordova-plugin-filepath@1.4.2",
+  "_inCache": true,
+  "_location": "/cordova-plugin-filepath",
+  "_nodeVersion": "8.11.1",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/cordova-plugin-filepath_1.4.2_1532430629004_0.18239868620322408"
+  },
+  "_npmUser": {
+    "name": "chrizc",
+    "email": "chrizc@chrizc.co.uk"
+  },
+  "_npmVersion": "5.6.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "cordova-plugin-filepath",
+    "scope": null,
+    "escapedName": "cordova-plugin-filepath",
+    "name": "cordova-plugin-filepath",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-filepath/-/cordova-plugin-filepath-1.4.2.tgz",
+  "_shasum": "8a1cbfb20f081671e684e81abd3f6763376a36bd",
+  "_shrinkwrap": null,
+  "_spec": "cordova-plugin-filepath",
+  "_where": "D:\\kavi\\Eldersindia\\Eldersindia",
+  "author": {
+    "name": "Ramesh Nair",
+    "email": "ram@hiddentao.com"
+  },
+  "bugs": {
+    "url": "https://github.com/hiddentao/cordova-plugin-filepath/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-filepath",
+    "platforms": [
+      "android"
+    ]
+  },
+  "dependencies": {},
+  "description": "Resolve native file paths from content URLs for Cordova platforms",
+  "devDependencies": {
+    "sync-cordova-xml": "^0.4.0"
+  },
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-6AKL6dIUkY+iOYesP+3/9LC1cxIilDIo0Hdu4tdDNM/ELIxrmxKywTqGy4x76Fv/LIl6l7g8R2tgCbBXTaBvMw==",
+    "shasum": "8a1cbfb20f081671e684e81abd3f6763376a36bd",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-filepath/-/cordova-plugin-filepath-1.4.2.tgz",
+    "fileCount": 7,
+    "unpackedSize": 33295,
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJbVwklCRA9TVsSAnZWagAALd8P/1MYTacG9/FyzUZeuQhE\nJMBPGUm/RC9Tx62ZW7ePs/IbMBXryw9bIBFrTa1MrFIEtOh4wOffQrjOCoMJ\nJ76ckCGtE5EQsxT7FaVwb9izxya7xkmnErrzHOo87uRSx0dlpT5ifA7mI7gg\nODr3q3BLX6fDTVHqYhDpnOfEmL117uJWF3eXKhz7/OAFwmUtriGaW+UWiucF\nOD8Vmg/x6JB2COiuUM6MwA8fMi35pc/52J/yc5kvsHAb9I/UZyVg1BmYPeFP\n4B+ocV2vO9AxujVRdluLNz2xHUVAnlSZ7+PR2CyjsTsFtDsMpX2ElhNrpqFk\nOHuaPN52o8WAnlT8lCxQhXQkww5z1JxhJurTvdQgKY1bE7ff0WFHiqut0CKm\nsBHnoUHGaA+GN97ofBC0xep9T5ZrcC+I16R7qvk9mYmrKn5ucp0tCenwC3rv\nQ+NogSZ6UgpOilH1avpnlX9kAyNKJU1MLKFl5bOLDt4n4nSwqHr3Bp1dT4Xr\nB53jAOeYHkxeZrGVBfDnqq8wDzLII3hW8JkQUaiu1W8ZZZrqsqtka1atoe07\nfXs/tx8lhNHauBMryecal1Bfedyuh6CoDAOOlSYANaF8TurqSfl72hT2+ecy\nnNLmGIcynCXI0tOmqwlTmc4HuoCUTYKRhvEI+RaAw/EBsMXId7eqO9plOBnZ\n2i92\r\n=Pyjo\r\n-----END PGP SIGNATURE-----\r\n"
+  },
+  "gitHead": "e7ce9113a5bdc0f64688a5ed97a5bea950bbf951",
+  "homepage": "https://github.com/hiddentao/cordova-plugin-filepath#readme",
+  "keywords": [
+    "cordova",
+    "file",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "license": "Apache 2.0",
+  "maintainers": [
+    {
+      "name": "chrizc",
+      "email": "chrizc@chrizc.co.uk"
+    }
+  ],
+  "name": "cordova-plugin-filepath",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiddentao/cordova-plugin-filepath.git"
+  },
+  "scripts": {
+    "version": "sync-cordova-xml package.json plugin.xml --output plugin.xml && git add plugin.xml"
+  },
+  "version": "1.4.2"
+}

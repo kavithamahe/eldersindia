@@ -354,6 +354,7 @@ getRazorPaymentsaltKey(){
             })
 }
 safetyRequestSubmitbeforePayment(){
+  console.log(this.paymentData);
     let loading = this.loadingCtrl.create({content: 'Please wait...!'});
       loading.present();
   let payment_data =this.paymentData;
